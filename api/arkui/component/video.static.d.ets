@@ -328,7 +328,6 @@ export declare class VideoController {
  * @interface VideoAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 export declare interface VideoAttribute extends CommonMethod {
     /**
@@ -516,7 +515,6 @@ export declare interface VideoAttribute extends CommonMethod {
  * @returns { VideoAttribute } The attribute of the Video
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 @memo
 @ComponentBuilder
