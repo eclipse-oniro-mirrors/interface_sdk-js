@@ -1774,7 +1774,6 @@ export declare class DrawingRenderingContext {
  * @interface CanvasAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 export declare interface CanvasAttribute extends CommonMethod {
   /**
@@ -1815,7 +1814,6 @@ export declare interface CanvasAttribute extends CommonMethod {
  * @returns { CanvasAttribute } The attribute of the Canvas.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 @memo
 @ComponentBuilder

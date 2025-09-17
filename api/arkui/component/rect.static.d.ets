@@ -116,7 +116,6 @@ export declare interface RoundedRectOptions {
  * @interface RectAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 export declare interface RectAttribute extends CommonShapeMethod {
     /**
@@ -165,7 +164,6 @@ export declare interface RectAttribute extends CommonShapeMethod {
  * @returns { RectAttribute } The attribute of the Rect
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 @memo
 @ComponentBuilder

@@ -57,7 +57,6 @@ export declare interface PathOptions {
  * @interface PathAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 export declare interface PathAttribute extends CommonShapeMethod {
     /**
@@ -88,7 +87,6 @@ export declare interface PathAttribute extends CommonShapeMethod {
  * @returns { PathAttribute } The attribute of the Path.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 20 static
- * @noninterop
  */
 @memo
 @ComponentBuilder
