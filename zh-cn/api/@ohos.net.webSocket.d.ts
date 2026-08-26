@@ -182,6 +182,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     minSupportTlsProtocol?: TlsProtocol;
 
@@ -191,6 +192,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     supportOriginPort?: boolean;
   }
@@ -340,6 +342,7 @@ declare namespace webSocket {
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface WebSocketOpenInfo {
     /**
@@ -348,6 +351,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     status: int;
 
@@ -357,6 +361,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     message: string;
 
@@ -366,6 +371,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     protocol?: string;
  	}
@@ -653,6 +659,16 @@ declare namespace webSocket {
     on(type: 'openInfo', callback: AsyncCallback<WebSocketOpenInfo>): void;
 
     /**
+     * 开启监听WebSocket连接的open info事件。
+     *
+     * @param { Callback<WebSocketOpenInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    onOpenInfo(callback: Callback<WebSocketOpenInfo>): void;
+
+    /**
      * 取消订阅WebSocket的打开信息事件，使用callback异步回调。
      * 
      * > **说明：**
@@ -666,6 +682,16 @@ declare namespace webSocket {
      * @since 26.0.0 dynamic
      */
     off(type: 'openInfo', callback?: AsyncCallback<WebSocketOpenInfo>): void;
+
+    /**
+     * 取消监听WebSocket连接的open info事件。
+     *
+     * @param { Callback<WebSocketOpenInfo> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    offOpenInfo(callback?: Callback<WebSocketOpenInfo>): void;
 
     /**
      * 订阅WebSocket连接的消息事件。
@@ -1387,6 +1413,7 @@ declare namespace webSocket {
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export enum TlsProtocol {
     /**
@@ -1395,6 +1422,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_0 = 0,
 
@@ -1404,6 +1432,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_1 = 1,
 
@@ -1413,6 +1442,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_2 = 2,
 
@@ -1422,6 +1452,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_3 = 3
   }

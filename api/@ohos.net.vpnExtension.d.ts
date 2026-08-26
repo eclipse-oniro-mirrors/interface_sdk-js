@@ -18,6 +18,7 @@
  * @kit NetworkKit
  */
 
+import type { Callback } from './@ohos.base';
 import type connection from './@ohos.net.connection';
 import type _VpnExtensionContext from './application/VpnExtensionContext';
 import type Want from './@ohos.app.ability.Want';
@@ -51,6 +52,7 @@ import type Want from './@ohos.app.ability.Want';
  *
  * @syscap SystemCapability.Communication.NetManager.Vpn
  * @since 11 dynamic
+ * @since 26.0.1 static
  */
 declare namespace vpnExtension {
   /**
@@ -58,6 +60,7 @@ declare namespace vpnExtension {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export type LinkAddress = connection.LinkAddress;
 
@@ -66,6 +69,7 @@ declare namespace vpnExtension {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export type RouteInfo = connection.RouteInfo;
 
@@ -74,6 +78,7 @@ declare namespace vpnExtension {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export type VpnExtensionContext = _VpnExtensionContext;
 
@@ -95,6 +100,7 @@ declare namespace vpnExtension {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function startVpnExtensionAbility(want: Want): Promise<void>;
 
@@ -113,6 +119,7 @@ declare namespace vpnExtension {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function stopVpnExtensionAbility(want: Want): Promise<void>;
 
@@ -131,6 +138,7 @@ declare namespace vpnExtension {
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function setAlwaysOnVpnEnabled(enable: boolean, bundleName: string): Promise<void>;
 
@@ -148,6 +156,7 @@ declare namespace vpnExtension {
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function isAlwaysOnVpnEnabled(bundleName: string): Promise<boolean>;
 
@@ -166,6 +175,7 @@ declare namespace vpnExtension {
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function updateVpnAuthorizedState(bundleName: string): boolean;
   /**
@@ -181,6 +191,7 @@ declare namespace vpnExtension {
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function createVpnConnection(context: VpnExtensionContext): VpnConnection;
 
@@ -191,6 +202,7 @@ declare namespace vpnExtension {
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function createVpnObserver(): VpnObserver;
 
@@ -202,6 +214,7 @@ declare namespace vpnExtension {
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface VpnObserver {
     /**
@@ -220,6 +233,7 @@ declare namespace vpnExtension {
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     onAuthorizationResult(callback: Callback<boolean>): void;
 
@@ -238,6 +252,7 @@ declare namespace vpnExtension {
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     offAuthorizationResult(callback?: Callback<boolean>): void;
   }
@@ -248,6 +263,7 @@ declare namespace vpnExtension {
    *
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface VpnConnection {
 
@@ -259,10 +275,12 @@ declare namespace vpnExtension {
      * > You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)} to destroy the VPN and clear
      * > resources when the VPN is not needed.
-     *
+     * 
+     * @permission ohos.permission.INTERNET
      * @param { VpnConfig } config - VPN configuration.
      * @returns { Promise<int> } Promise used to return the result, which is the file descriptor of the virtual network
      *     interface card (vNIC).
+     * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2200001 - Invalid parameter value.
      * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
@@ -271,6 +289,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 2203002 - VPN exist already, please execute destroy first.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     create(config: VpnConfig): Promise<int>;
     /**
@@ -288,6 +307,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 19900002 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     generateVpnId(): Promise<string>;
 
@@ -306,6 +326,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 2203004 - Invalid socket file descriptor.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     protect(socketFd: int): Promise<void>;
 
@@ -318,6 +339,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 2200003 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     destroy(): Promise<void>;
 
@@ -330,6 +352,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 19900002 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     destroy(vpnId: string): Promise<void>;
 
@@ -340,6 +363,7 @@ declare namespace vpnExtension {
      * @returns { Promise<void>} Promise that returns no value.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 22 dynamic
+     * @since 26.0.1 static
      */
     protectProcessNet(): Promise<void>;
   }
@@ -349,6 +373,7 @@ declare namespace vpnExtension {
    *
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface VpnConfig {
     /**
@@ -356,6 +381,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     vpnId?: string;
   
@@ -365,6 +391,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     addresses: Array<LinkAddress>;
 
@@ -374,6 +401,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     routes?: Array<RouteInfo>;
 
@@ -383,6 +411,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     dnsAddresses?: Array<string>;
 
@@ -391,6 +420,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     searchDomains?: Array<string>;
 
@@ -399,6 +429,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     mtu?: int;
 
@@ -410,6 +441,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     isIPv4Accepted?: boolean;
 
@@ -421,6 +453,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     isIPv6Accepted?: boolean;
 
@@ -430,6 +463,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     isInternal?: boolean;
 
@@ -439,6 +473,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     isBlocking?: boolean;
 
@@ -452,6 +487,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     trustedApplications?: Array<string>;
 
@@ -465,6 +501,7 @@ declare namespace vpnExtension {
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     blockedApplications?: Array<string>;
   }
