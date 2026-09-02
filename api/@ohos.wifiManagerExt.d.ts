@@ -14,27 +14,26 @@
  */
 
 /**
- * @file
+ * @file WLAN Extension
  * @kit ConnectivityKit
  */
 
 import { AsyncCallback, Callback } from './@ohos.base';
 /**
- * Provides extended methods to operate or manage Wi-Fi.
+ * This module provides Wi-Fi extension APIs for non-universal products.
  *
- * <p>The APIs involved in this file are non-general APIs.
- * These extended APIs are only used by some product types, such as routers. 
- * Common products should not use these APIs.</p>
- *
- * @namespace wifiManagerExt
  * @syscap SystemCapability.Communication.WiFi.AP.Extension
  * @since 9 dynamiconly
  */
 declare namespace wifiManagerExt {
 
   /**
-   * Enable Wi-Fi hotspot function.
-   * This method is asynchronous. After the Wi-Fi hotspot is enabled, Wi-Fi may be disabled.
+   * Enables the Wi-Fi hotspot.
+   * 
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 9 and deprecated since API version 10.
+   *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT_EXT
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -46,8 +45,12 @@ declare namespace wifiManagerExt {
   function enableHotspot(): void;
    
   /**
-   * Disable Wi-Fi hotspot function.
-   * If Wi-Fi is enabled after the Wi-Fi hotspot is disabled, Wi-Fi may be re-enabled.
+   * Disables the Wi-Fi hotspot.
+   * 
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 9 and deprecated since API version 10.
+   *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT_EXT
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -59,9 +62,10 @@ declare namespace wifiManagerExt {
   function disableHotspot(): void;
 
   /**
-   * Obtains the supported power Mode.
+   * Obtains the supported power models. This API uses a promise to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<Array<PowerMode>> } Returns a list of application PowerMode.
+   * @returns { Promise<Array<PowerMode>> } Promise used to return the power modes obtained.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -71,9 +75,12 @@ declare namespace wifiManagerExt {
   function getSupportedPowerMode(): Promise<Array<PowerMode>>;
 
   /**
-   * Obtains the supported power Mode.
+   * Obtains the supported power models. This API uses an asynchronous callback to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<Array<PowerMode>> } callback - the callback of model.
+   * @param { AsyncCallback<Array<PowerMode>> } callback - Callback used to return the result. If the operation is
+   *     successful, **err** is **0** and **data** is the power modes obtained. If the operation fails, **err** is not
+   *     **0**.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -83,9 +90,10 @@ declare namespace wifiManagerExt {
   function getSupportedPowerMode(callback: AsyncCallback<Array<PowerMode>>): void;
 
   /**
-   * Obtains the current Wi-Fi power mode.
+   * Obtains the power mode. This API uses a promise to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<PowerMode> } 
+   * @returns { Promise<PowerMode> } Promise used to return the power modes obtained.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -95,9 +103,11 @@ declare namespace wifiManagerExt {
   function getPowerMode(): Promise<PowerMode>;
 
   /**
-   * Obtains the current Wi-Fi power mode.
+   * Obtains the power mode. This API uses an asynchronous callback to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<PowerMode> } callback - the callback of model
+   * @param { AsyncCallback<PowerMode> } callback - Callback used to return the result. If the operation is successful,
+   *     **err** is **0** and **data** is the power mode obtained. If the operation fails, **err** is not **0**.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -107,9 +117,14 @@ declare namespace wifiManagerExt {
   function getPowerMode(callback: AsyncCallback<PowerMode>): void;
 
   /**
-   * Set the current Wi-Fi power mode.
+   * Sets the power mode.
+   * 
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 9 and deprecated since API version 10.
+   *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT_EXT
-   * @param { PowerMode } model --Wi-Fi power mode.
+   * @param { PowerMode } mode - Power mode to set.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -120,33 +135,35 @@ declare namespace wifiManagerExt {
   function setPowerMode(mode: PowerMode): void;
 
   /**
-   * The power Mode enumeration.
-   * 
-   * @enum { number } PowerMode
+   * Enumerates the power modes.
+   *
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 9 dynamiconly
    */
   export enum PowerMode {
-    /** 
-     * Sleeping Mode. 
+    /**
+     * Sleeping Mode.
+     *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 9 dynamiconly
-    */
+     */
     
     SLEEPING = 0,
 
-    /** 
-     * General Mode. 
+    /**
+     * General
+     *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 9 dynamiconly
-     * */
+     */
     GENERAL = 1,
 
-    /** 
-     * Through wall Mode. 
+    /**
+     * Through_wall
+     *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 9 dynamiconly
-     * */
+     */
     THROUGH_WALL = 2,
   }
 }
