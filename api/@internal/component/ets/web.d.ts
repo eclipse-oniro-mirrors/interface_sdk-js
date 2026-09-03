@@ -8395,6 +8395,32 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   verticalScrollBarAccess(verticalScrollBar: boolean): WebAttribute;
 
   /**
+   * Sets the color of the text input caret and selection handles of the **Web** component.
+   *
+   * When this attribute is not explicitly called or is reset, the caret uses the page's CSS `caret-color` result.
+   * If the CSS value is **auto** or not set, the caret uses the built-in default color (currently **#0A59F7**).
+   * Selection handles use the theme colors (light theme **#007DFF** / dark theme **#5291FF**).
+   *
+   * > **NOTE**
+   * >
+   * > - The priority is: a non-zero value set by this API > the `caret-color` CSS property set by the web page >
+   * the built-in default color. A non-zero value set by this API also overrides an explicit CSS color or **transparent**.
+   * >
+   * > - The exact color value **#00000000** is reserved as the reset sentinel. After reset, the CSS `caret-color`
+   * value is used. If the CSS value is **auto** or not set, the built-in default colors are used.
+   *
+   * @param { ResourceColor } value - Color of the text input caret and selection handles.
+   *     <br>When **undefined** or **null** is passed in, this attribute is reset.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @crossplatform [since 26.1.0]
+   * @atomicservice [since 26.1.0]
+   * @since 26.1.0 dynamic
+   */
+  caretColor(value: ResourceColor): WebAttribute;
+
+  /**
    * Triggered when an apple-touch-icon URL is received.
    *
    * @param { function } callback - Callback invoked when an apple-touch-icon URL is received. [since 9 - 11]

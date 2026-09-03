@@ -5685,6 +5685,23 @@ export declare interface WebAttribute extends CommonMethod {
      */
     default verticalScrollBarAccess(verticalScrollBar: boolean | undefined): this;
     /**
+     * 设置Web组件网页文本输入光标及选择手柄的颜色。
+     *
+     * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 `auto` 或未设置时，
+     * 使用内置默认光标颜色。选择手柄使用主题色。
+     *
+     * 优先级为：该API设置的非零值 > 网页设置的 `caret-color` CSS属性 > 内置默认颜色。
+     * 精确颜色值 `#00000000` 保留为重置哨兵值。
+     *
+     * @param { ResourceColor | undefined } value - 网页文本输入光标及选择手柄的颜色。
+     *     传入undefined时重置该属性。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default caretColor(value: ResourceColor | undefined): this;
+    /**
      * Triggered when the application receive the url of an apple-touch-icon.
      *
      * @param { Callback<OnTouchIconUrlReceivedEvent> | undefined } callback The triggered callback when the application receive an new url of an
