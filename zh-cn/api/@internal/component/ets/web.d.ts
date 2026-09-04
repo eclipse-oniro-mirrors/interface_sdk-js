@@ -7695,7 +7695,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * 设置Web组件网页文本输入光标及选择手柄的颜色。
    *
    * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 **auto** 或未设置时，
-   * 使用内置默认光标颜色（当前为 **#0A59F7**）。选择手柄使用主题色（亮色 **#007DFF** / 暗色 **#5291FF**）。
+   * 使用内置默认光标颜色（当前为 **#0A59F7**）。选择手柄使用当前主题默认色。
    *
    * > **说明：**
    * >
@@ -7710,8 +7710,6 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
-   * @atomicservice [since 26.1.0]
    * @since 26.1.0 dynamic
    */
   caretColor(value: ResourceColor): WebAttribute;
