@@ -1198,7 +1198,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want, callback: AsyncCallback<void>): void;
 
   /**
-   * 停止同一应用程序内的服务。使用Promise异步回调。
+   * 停止指定的服务。使用Promise异步回调。
    *
    * @param { Want } want - 停止ServiceExtensionAbility的Want信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
@@ -1223,7 +1223,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want): Promise<void>;
 
   /**
-   * 停止同一应用程序内指定账户的服务。使用callback异步回调。
+   * 停止指定账户的服务。使用callback异步回调。
    *
    * > **说明：**
    * >
@@ -1256,7 +1256,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbilityWithAccount(want: Want, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * 停止同一应用程序内指定账户的服务。使用Promise异步回调。
+   * 停止指定账户的服务。使用Promise异步回调。
    *
    * > **说明：**
    * >
