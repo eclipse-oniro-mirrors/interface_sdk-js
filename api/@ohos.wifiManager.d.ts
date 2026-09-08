@@ -1959,7 +1959,7 @@ declare namespace wifiManager {
    */
   function off(type: 'hotspotStateChange', callback?: Callback<number>): void;
 
-/**
+  /**
    * Unsubscribe Wi-Fi hotspot state change events.
    * All callback functions will be deregistered If there is no specific callback parameter.
    *
@@ -5409,15 +5409,14 @@ declare namespace wifiManager {
    * @since 26.0.0 dynamic&static
    */
   function isWlanSupported(): boolean;
-}
 
 /**
- * Enumerates the P2P service protocol types.
- *
- * @syscap SystemCapability.Communication.WiFi.P2P
- * @stagemodelonly
- * @since 26.1.0 dynamic&static
- */
+   * Enumerates the P2P service protocol types.
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
 enum P2pServiceProtocolType {
   /**
    * All service protocol types.
@@ -5465,14 +5464,14 @@ enum P2pServiceProtocolType {
   SERVICE_TYPE_VENDOR_SPECIFIC = 255
 }
 
-/**
- * Represents the P2P service information.
- *
- * @syscap SystemCapability.Communication.WiFi.P2P
- * @stagemodelonly
- * @since 26.1.0 dynamic&static
- */
-interface WifiP2pServiceInfo {
+  /**
+   * Represents the P2P service information.
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface WifiP2pServiceInfo {
   /**
    * Service name.
    *
@@ -5503,26 +5502,23 @@ interface WifiP2pServiceInfo {
 }
 
   /**
-   * Add a Bonjour (DNS-SD) local P2P service description and register it.
+   * Adds and registers the local P2P service description of DNS-SD (DNS service discovery) to be discovered by the peer
+   * device.
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } instanceName - Instance name, which is used for peer service discovery.
-   *     <br>The maximum length is 63.
-   * @param { string } serviceType - Service type, which is used for peer service discovery.
-   *     This parameter cannot be left blank. The value can be customized. The recommended format
-   *     is "_<ServiceName>._<Protocol>", for example, "_http._tcp".
-   *     <br>The maximum length is 63.
-   * @param { Map<string, string> } txtRecord - TXT record containing key/value pairs.
-   *     The key cannot contain an equal sign (=), and the length of a single record (key.length + value.length).
-   *     must be less than 255 bytes. 
-   *     <br>
-   *     It is recommended that the total size of all keys and values after serialization be kept within 200-400 bytes.
-   *     <br>Exceeding the limit of a single mDNS packet will cause the data to fail
-   *     to be properly broadcast or to be ignored by the peer. There is no limit to the number of key-value pairs.
-   *     The definition format is as follows:
-   *     <a href="http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt">draft-cheshire-dnsext-dns-sd.txt</a>
-   * @param { string } serviceName - Service name used to identify the local service object.
-   *     <br>The maximum length is 63.
+   * @param { string } instanceName - Instance name, which is used for service discovery by the peer device. The value
+   *     contains a maximum of 63 characters.
+   * @param { string } serviceType - Service type, which is used for service discovery by the peer device. The value
+   *     contains a maximum of 63 characters. It cannot be an empty string and can be customized. The recommended format
+   *     is _<ServiceName>._<Protocol>, for example, **_http._tcp**.
+   * @param { Map<string, string> } txtRecord - TXT record containing key-value pairs. A key cannot contain equal signs
+   *     (=). The length of a single record equals to **key.length** + **value.length**, which must be less than 255
+   *     bytes. It is recommended that the total length of all serialized keys and values be 200 to 400 bytes. If the
+   *     length exceeds the limit of a single mDNS packet, the data may fail to be broadcast correctly or be ignored by
+   *     the peer device. There is no limit on the number of key-value pairs. For the format, see
+   *     [draft-cheshire-dnsext-dns-sd-11.txt](http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt).
+   * @param { string } serviceName - Service name, which is used to identify the local service object. The value
+   *     contains a maximum of 63 characters.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
@@ -5535,29 +5531,25 @@ interface WifiP2pServiceInfo {
     txtRecord: Map<string, string>, serviceName: string): void;
 
   /**
-   * Add a UPnP local P2P service description and register it.
+   * Adds and registers the local P2P service description of the UPnP (Universal Plug and Play) service to be discovered
+   * by the peer device.
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } uuid - A string representation of this UUID in the following format.
-   *     as per <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a>.
-   *     <br>
-   *     The standard fixed length is 36 characters, and spaces are not allowed.
-   *     for example, "6859dede-8574-59ab-9332-123456789012"
-   * @param { string } device - UPnP device type, a string representation of this device in the following format,
-   *     as per <a href="http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf">.
-   *     UPnP Device Architecture 1.1</a>
-   *     <br>
-   *     The length depends on the standard definition, and spaces are not allowed. It is usually tens of
-   *     characters, and it is recommended to keep it within 255 characters.
-   *     for example, "urn:schemas-upnp-org:device:MediaServer:1"
-   * @param { Array<string> } services - UPnP service type list,
-   *     a string representation of this service in the following format,
-   *     as per <a href="http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf">.
-   *     UPnP Device Architecture 1.1</a>
-   *     <br>
-   *     The length of each service must not exceed 512 bytes. It is recommended that the Array contain no more.
-   *     for example, ["urn:schemas-upnp-org:service:ContentDirectory:1"]
-   * @param { string } serviceName - Service name used to identify the local service object.
+   * @param { string } uuid - UUID, which is in the form of a string. For details about the format, see
+   *     [RFC 4122](http://www.ietf.org/rfc/rfc4122.txt). The value has a fixed length of 36 characters and cannot
+   *     contain spaces, for example, **6859dede-8574-59ab-9332-123456789012**.
+   * @param { string } device - UPnP device type, which is in the form of a string. For details about the format, see
+   *     [UPnP Device Architecture 1.1](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf). The
+   *     length depends on the protocol definition and cannot contain spaces. The length is generally dozens of
+   *     characters, and it is recommended to keep it within 255 bytes, for example,
+   *     **urn:schemas-upnp-org:device:MediaServer:1**.
+   * @param { Array<string> } services - Array of UPnP service types, which is in the form of a string. For details
+   *     about the format, see
+   *     [UPnP Device Architecture 1.1](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf). The
+   *     length of each element in the array must not exceed 512 bytes, and the array should not contain too many
+   *     elements. An example of this parameter is **urn:schemas-upnp-org:service:ContentDirectory:1**.
+   * @param { string } serviceName - Service name used to identify the local service object. The value contains a
+   *     maximum of 63 characters.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
@@ -5570,11 +5562,12 @@ interface WifiP2pServiceInfo {
     services: Array<string>, serviceName: string): void;
 
   /**
-   * Remove a registered local P2P service added with the {@link addDnsSdLocalP2pService} or {@link addUpnpLocalP2pService
-   * }.
+   * Removes a registered local service that was added through 
+   * [addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService} or 
+   * [addUpnpLocalP2pService]{@link wifiManager.addUpnpLocalP2pService}.
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { WifiP2pServiceInfo } srvInfo - Service description consistent with the registered one.
+   * @param { WifiP2pServiceInfo } srvInfo - Service description consistent with the registered service.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
@@ -5589,7 +5582,7 @@ interface WifiP2pServiceInfo {
    * Queries the local P2P services. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @returns { Promise<Array<WifiP2pServiceInfo>> } promise used to return the registered local P2P service list.
+   * @returns { Promise<Array<WifiP2pServiceInfo>> } Promise used to return the array of registered local P2P services.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
@@ -5598,5 +5591,6 @@ interface WifiP2pServiceInfo {
    * @since 26.1.0 dynamic&static
    */
   function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
+}
 
 export default wifiManager;
