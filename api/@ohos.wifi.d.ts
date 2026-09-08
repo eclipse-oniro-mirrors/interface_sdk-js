@@ -1287,17 +1287,6 @@ declare namespace wifi {
     ipType: IpType;
 
     /**
-     * IP protocol version
-     *
-     * @syscap SystemCapability.Communication.WiFi.STA
-     * @systemapi
-     * @since 20 dynamiconly
-     * @deprecated since 9
-     * @useinstead ohos.wifiManager/wifiManager.WifiDeviceConfig.family
-     */
-    family?: number;
-
-    /**
      * IP config of static
      *
      * @syscap SystemCapability.Communication.WiFi.STA
@@ -2087,7 +2076,7 @@ declare namespace wifi {
     SCANNING,
 
     /**
-     * A Wi-Fi connection is being established.
+     * The Wi-Fi connection is being established.
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 6 dynamiconly
