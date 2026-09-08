@@ -5425,4 +5425,184 @@ declare namespace wifiManager {
   function isWlanSupported(): boolean;
 }
 
+/**
+ * 枚举，P2P服务协议类型。
+ *
+ * @syscap SystemCapability.Communication.WiFi.P2P
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+enum P2pServiceProtocolType {
+  /**
+   * 所有服务协议类型。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  SERVICE_TYPE_ALL = 0,
+
+  /**
+   * Bonjour（DNS-SD）服务发现协议。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  SERVICE_TYPE_BONJOUR = 1,
+
+  /**
+   * UPnP服务发现协议。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  SERVICE_TYPE_UP_NP = 2,
+
+  /**
+   * WS-Discovery服务发现协议。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  SERVICE_TYPE_WS_DISCOVERY = 3,
+
+  /**
+   * 厂商自定义协议。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  SERVICE_TYPE_VENDOR_SPECIFIC = 255
+}
+
+/**
+ * 表示P2P服务信息。
+ *
+ * @syscap SystemCapability.Communication.WiFi.P2P
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+interface WifiP2pServiceInfo {
+  /**
+   * 服务名称。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  serviceName: string;
+
+  /**
+   * 服务协议类型。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  protocolType: P2pServiceProtocolType;
+
+  /**
+   * Wi-Fi协议栈进程（wpa_supplicant）使用的查询字符串列表，单条数据记录的最大大小为1024字节。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  queryList: Array<string>;
+}
+
+  /**
+   * 添加并注册一个DNS-SD（DNS Service Discovery，基于DNS的服务发现）本地P2P服务描述，供对端进行服务发现。
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @param { string } instanceName - 实例名，用于对端服务发现。
+   *     <br>最大长度为63字符。
+   * @param { string } serviceType - 服务类型，用于对端服务发现。不能为空字符串，可自定义，推荐格式为
+   *     "_<ServiceName>._<Protocol>"，例如"_http._tcp"。
+   *     <br>最大长度为63字符。
+   * @param { Map<string, string> } txtRecord - 包含键值对的TXT记录。
+   *     键不能包含等号（=），单条记录长度（key.length + value.length）必须小于255字节。
+   *     <br>
+   *     建议所有键和值序列化后的总大小保持在200–400字节以内。
+   *     <br>超出单个mDNS数据包的限制会导致数据无法正确广播或被对端忽略。键值对数量无限制。
+   *     定义格式见
+   *     <a href="http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt">draft-cheshire-dnsext-dns-sd-11.txt</a>
+   * @param { string } serviceName - 用于标识本地服务对象的服务名称。
+   *     <br>最大长度为63字符。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function addDnsSdLocalP2pService(instanceName: string, serviceType: string,
+    txtRecord: Map<string, string>, serviceName: string): void;
+
+  /**
+   * 添加并注册一个UPnP（Universal Plug and Play，通用即插即用）本地P2P服务描述，供对端进行服务发现。
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @param { string } uuid - 该UUID的字符串表示形式，格式参见
+   *     <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a>。
+   *     <br>
+   *     标准固定长度为36个字符，不允许包含空格，例如"6859dede-8574-59ab-9332-123456789012"。
+   * @param { string } device - UPnP设备类型，字符串表示形式，格式参见
+   *     <a href="http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf">.
+   *     UPnP Device Architecture 1.1</a>
+   *     <br>
+   *     长度取决于标准定义，不允许包含空格，通常为几十个字符，建议保持在255字节以内，
+   *     例如"urn:schemas-upnp-org:device:MediaServer:1"。
+   * @param { Array<string> } services - UPnP服务类型列表，字符串表示形式，格式参见
+   *     <a href="http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf">.
+   *     UPnP Device Architecture 1.1</a>
+   *     <br>
+   *     每个服务的长度不得超过512字节，建议Array中的元素数量不宜过多，
+   *     例如"urn:schemas-upnp-org:service:ContentDirectory:1"。
+   * @param { string } serviceName - 用于标识本地服务对象的服务名称，最大长度为63字符。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function addUpnpLocalP2pService(uuid: string, device: string,
+    services: Array<string>, serviceName: string): void;
+
+  /**
+   * 移除通过{@link addDnsSdLocalP2pService}或{@link addUpnpLocalP2pService}添加的已注册本地服务。
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @param { WifiP2pServiceInfo } srvInfo - 与已注册服务一致的服务描述。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function removeLocalP2pService(srvInfo: WifiP2pServiceInfo): void;
+
+  /**
+   * 查询本地P2P服务，使用Promise异步回调。
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @returns { Promise<Array<WifiP2pServiceInfo>> } Promise对象。用于返回已注册的本地P2P服务列表。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
+
 export default wifiManager;
