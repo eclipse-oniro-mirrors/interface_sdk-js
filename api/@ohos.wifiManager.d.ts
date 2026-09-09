@@ -23,11 +23,6 @@ import { AsyncCallback, Callback } from './@ohos.base';
 /**
  * This module provides basic Wi-Fi functions, peer-to-peer (P2P) functions, and Wi-Fi message notification services. It
  * allows applications to communicate with devices over Wi-Fi.
- * 
- * > **NOTE**
- * >
- * > - This topic describes only the system APIs provided by the module. For details about its public APIs, see 
- * > [@ohos.wifiManager (WLAN)]{@link wifiManager}.
  *
  * @syscap SystemCapability.Communication.WiFi.STA [since 12]
  * @crossplatform [since 12]
@@ -1475,10 +1470,11 @@ declare namespace wifiManager {
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION and
    *     ohos.permission.APPROXIMATELY_LOCATION [since 9 - 9]
    * @permission ohos.permission.GET_WIFI_INFO [since 10]
-   * @param { AsyncCallback<Array<WifiP2pGroupInfo>> } callback - Callback used to return the result. If the operation
-   *     is successful, **err** is **0** and **data** is the group information obtained. If the operation fails, **err**
-   *     is not **0**. If the application has the **ohos.permission.GET_WIFI_PEERS_MAC** permission, **deviceAddress**
-   *     in the return value is a real device address; otherwise, **deviceAddress** is a random device address.
+    * @param { AsyncCallback<Array<WifiP2pGroupInfo>> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the group information obtained. Otherwise, **err** contains the
+    *     error information and **data** is unavailable. If the application has the
+    *     **ohos.permission.GET_WIFI_PEERS_MAC** permission, **deviceAddress** in the return value is a real device
+    *     address; otherwise, **deviceAddress** is a random device address.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -1768,7 +1764,7 @@ declare namespace wifiManager {
 
   /**
    * Subscribes to Wi-Fi stream changes. When the service exits, call 
-   * **off(type: 'streamChange', callback?: Callback&amp;lt;number&amp;gt;)** to unregister the callback registered. 
+   * **off(type: 'streamChange', callback?: Callback<number>)** to unregister the callback registered. 
    * This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.MANAGE_WIFI_CONNECTION
@@ -1805,12 +1801,12 @@ declare namespace wifiManager {
   function onStreamChange(callback: Callback<int>): void;
 
   /**
-   * Unsubscribes from Wi-Fi stream changes. This API uses an asynchronous callback to return the result.
-   *
-   * @permission ohos.permission.MANAGE_WIFI_CONNECTION
-   * @param { 'streamChange' } type - Event type, which has a fixed value of **streamChange**.
-   * @param { Callback<number> } [callback] - Callback used to return the status change. **0**: No stream. **1**:
-   *     Downward. **2**: Upward. **3**: Bidirectional.
+    * Unsubscribes from Wi-Fi stream changes.
+    *
+    * @permission ohos.permission.MANAGE_WIFI_CONNECTION
+    * @param { 'streamChange' } type - Event type, which has a fixed value of **streamChange**.
+    * @param { Callback<number> } [callback] - Callback to unregister. It must be the same as the callback passed in
+    *     **on()**. If this parameter is not specified, all callbacks of this event are unregistered.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1841,7 +1837,7 @@ declare namespace wifiManager {
 
   /**
    * Subscribes to Wi-Fi device configuration changes. When the service exits, call off(type: 'deviceConfigChange', 
-   * callback?: Callback&amp;lt;number&amp;gt;) to unregister the callback registered. This API uses an asynchronous 
+   * callback?: Callback<number>) to unregister the callback registered. This API uses an asynchronous 
    * callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
@@ -1877,12 +1873,12 @@ declare namespace wifiManager {
   function onDeviceConfigChange(callback: Callback<int>): void;
 
   /**
-   * Unsubscribes from Wi-Fi device configuration changes. This API uses an asynchronous callback to return the result.
-   *
-   * @permission ohos.permission.GET_WIFI_INFO
-   * @param { 'deviceConfigChange' } type - Event type, which has a fixed value of **deviceConfigChange**.
-   * @param { Callback<number> } [callback] - Callback for device configuration changes.
-   *     <br>**0**: Configuration is added. **1**: Configuration is modified. **2**: Configuration is deleted.
+    * Unsubscribes from Wi-Fi device configuration changes.
+    *
+    * @permission ohos.permission.GET_WIFI_INFO
+    * @param { 'deviceConfigChange' } type - Event type, which has a fixed value of **deviceConfigChange**.
+    * @param { Callback<number> } [callback] - Callback to unregister. It must be the same as the callback passed in
+    *     **on()**. If this parameter is not specified, all callbacks of this event are unregistered.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1975,7 +1971,7 @@ declare namespace wifiManager {
 
   /**
    * Subscribes to the event of an STA joining a Wi-Fi hotspot. When the service exits, call 
-   * **off(type: 'hotspotStaJoin', callback?: Callback&amp;lt;StationInfo&amp;gt;)** to unregister the callback 
+   * **off(type: 'hotspotStaJoin', callback?: Callback<StationInfo>)** to unregister the callback 
    * registered. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
@@ -2009,12 +2005,12 @@ declare namespace wifiManager {
   function onHotspotStaJoin(callback: Callback<StationInfo>): void;
 
   /**
-   * Unsubscribes from the connection of an STA to a Wi-Fi hotspot. This API uses an asynchronous callback to return the
-   * result.
-   *
-   * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @param { 'hotspotStaJoin' } type - Event type, which has a fixed value of **hotspotStaJoin**.
-   * @param { Callback<StationInfo> } [callback] - Callback used to return the status change.
+    * Unsubscribes from the connection of an STA to a Wi-Fi hotspot.
+    *
+    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
+    * @param { 'hotspotStaJoin' } type - Event type, which has a fixed value of **hotspotStaJoin**.
+    * @param { Callback<StationInfo> } [callback] - Callback to unregister. It must be the same as the callback passed
+    *     in **on()**. If this parameter is not specified, all callbacks of this event are unregistered.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -2045,7 +2041,7 @@ declare namespace wifiManager {
 
   /**
    * Subscribes to the event of an STA leaving a Wi-Fi hotspot. When the service exits, call 
-   * **off(type: 'hotspotStaLeave', callback?: Callback&amp;lt;StationInfo&amp;gt;)** to unregister the callback 
+   * **off(type: 'hotspotStaLeave', callback?: Callback<StationInfo>)** to unregister the callback 
    * registered. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
@@ -2079,12 +2075,12 @@ declare namespace wifiManager {
   function onHotspotStaLeave(callback: Callback<StationInfo>): void;
 
   /**
-   * Unsubscribes from the disconnection of a STA from a Wi-Fi hotspot. This API uses an asynchronous callback to return
-   * the result.
-   *
-   * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @param { 'hotspotStaLeave' } type - Event type, which has a fixed value of **hotspotStaLeave**.
-   * @param { Callback<StationInfo> } [callback] - Callback used to return the event.
+    * Unsubscribes from the disconnection of a STA from a Wi-Fi hotspot.
+    *
+    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
+    * @param { 'hotspotStaLeave' } type - Event type, which has a fixed value of **hotspotStaLeave**.
+    * @param { Callback<StationInfo> } [callback] - Callback to unregister. It must be the same as the callback passed
+    *     in **on()**. If this parameter is not specified, all callbacks of this event are unregistered.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.

@@ -101,9 +101,9 @@ declare namespace wifi {
    * Obtains the scan result. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO and (ohos.permission.GET_WIFI_PEERS_MAC or ohos.permission.LOCATION)
-   * @param { AsyncCallback<Array<WifiScanInfo>> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the detected hotspots. Otherwise, **err** is a non-zero value and
-   *     **data** is empty.
+    * @param { AsyncCallback<Array<WifiScanInfo>> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the detected hotspots. Otherwise, **err** contains the error
+    *     information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 6 dynamiconly
    * @deprecated since 9
@@ -162,9 +162,9 @@ declare namespace wifi {
    *
    * @permission ohos.permission.SET_WIFI_INFO
    * @param { WifiDeviceConfig } config - Wi-Fi configuration information.
-   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
-   *     **error** is **0** and **data** is **true**. If the operation fails, **data** is **false** and **error** is not
-   *     **0**.
+    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation succeeds,
+    *     **err** is **null** and **data** indicates whether the operation is successful. Otherwise, **err** contains
+    *     the error information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -191,9 +191,9 @@ declare namespace wifi {
    *
    * @permission ohos.permission.SET_WIFI_INFO
    * @param { WifiDeviceConfig } config - Wi-Fi configuration information.
-   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
-   *     **error** is **0** and **data** is **true**. If the operation fails, **data** is **false** and **error** is not
-   *     **0**.
+    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation succeeds,
+    *     **err** is **null** and **data** indicates whether the operation is successful. Otherwise, **err** contains
+    *     the error information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -244,7 +244,7 @@ declare namespace wifi {
   function disconnect(): boolean;
 
   /**
-   * Queries the Wi-Fi signal strength.
+    * Calculates the Wi-Fi signal level based on the RSSI and frequency band.
    *
    * @permission ohos.permission.GET_WIFI_INFO
    * @param { number } rssi - RSSI of the hotspot, in dBm.
@@ -258,10 +258,10 @@ declare namespace wifi {
   function getSignalLevel(rssi: number, band: number): number;
 
   /**
-   * Obtains Wi-Fi connection information. This API uses an asynchronous callback to return the result.
-   *
-   * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<WifiLinkedInfo> } Promise used to return the Wi-Fi connection information.
+    * Obtains Wi-Fi connection information. This API uses a promise to return the result.
+    *
+    * @permission ohos.permission.GET_WIFI_INFO
+    * @returns { Promise<WifiLinkedInfo> } Promise used to return the Wi-Fi connection information.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 6 dynamiconly
    * @deprecated since 9
@@ -273,9 +273,9 @@ declare namespace wifi {
    * Obtains Wi-Fi connection information. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<WifiLinkedInfo> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the Wi-Fi connection information obtained. If the operation fails,
-   *     **err** is not **0**.
+    * @param { AsyncCallback<WifiLinkedInfo> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the Wi-Fi connection information obtained. Otherwise, **err**
+    *     contains the error information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 6 dynamiconly
    * @deprecated since 9
@@ -587,9 +587,9 @@ declare namespace wifi {
    * Obtains P2P connection information. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<WifiP2pLinkedInfo> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the P2P link information. If the operation fails, **err** is not
-   *     **0**.
+    * @param { AsyncCallback<WifiP2pLinkedInfo> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the P2P link information. Otherwise, **err** contains the error
+    *     information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -613,9 +613,9 @@ declare namespace wifi {
    * Obtains the current P2P group information. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION
-   * @param { AsyncCallback<WifiP2pGroupInfo> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the group information obtained. If the operation fails, **err** is
-   *     not **0**.
+    * @param { AsyncCallback<WifiP2pGroupInfo> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the group information obtained. Otherwise, **err** contains the
+    *     error information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -639,9 +639,9 @@ declare namespace wifi {
    * Obtains the P2P peer device list. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION
-   * @param { AsyncCallback<WifiP2pDevice[]> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the peer device list obtained. If the operation fails, **err** is
-   *     not **0**.
+    * @param { AsyncCallback<WifiP2pDevice[]> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the peer device list obtained. Otherwise, **err** contains the
+    *     error information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -2518,7 +2518,7 @@ declare namespace wifi {
     GO_BAND_AUTO = 0,
 
     /**
-     * 2 GHz.
+     * 2.4 GHz.
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @since 8 dynamiconly

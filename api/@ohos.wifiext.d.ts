@@ -72,9 +72,9 @@ declare namespace wifiext {
    * Obtains the supported power models. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<Array<PowerModel>> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the power models obtained. If the operation fails, **err** is not
-   *     **0**.
+    * @param { AsyncCallback<Array<PowerModel>> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the power models obtained. Otherwise, **err** contains the error
+    *     information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -83,10 +83,10 @@ declare namespace wifiext {
   function getSupportedPowerModel(callback: AsyncCallback<Array<PowerModel>>): void;
 
   /**
-   * Obtains the power model. This API uses a promise to return the result.
-   *
-   * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<PowerModel> } Promise used to return the power models obtained.
+    * Obtains the current power model. This API uses a promise to return the result.
+    *
+    * @permission ohos.permission.GET_WIFI_INFO
+    * @returns { Promise<PowerModel> } Promise used to return the current power model obtained.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -95,11 +95,12 @@ declare namespace wifiext {
   function getPowerModel(): Promise<PowerModel>;
 
   /**
-   * Obtains the power model. This API uses an asynchronous callback to return the result.
+    * Obtains the current power model. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<PowerModel> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **0** and **data** is the power model obtained. If the operation fails, **err** is not **0**.
+    * @param { AsyncCallback<PowerModel> } callback - Callback used to return the result. If the operation succeeds,
+    *     **err** is **null** and **data** is the current power model obtained. Otherwise, **err** contains the error
+    *     information and **data** is unavailable.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -130,7 +131,7 @@ declare namespace wifiext {
    */
   export enum PowerModel {
     /**
-     * Sleeping
+     * Sleeping mode.
      *
      * @syscap SystemCapability.Communication.WiFi.AP.Extension
      * @since 8 dynamiconly
@@ -140,7 +141,7 @@ declare namespace wifiext {
     SLEEPING = 0,
 
     /**
-     * General
+     * General mode.
      *
      * @syscap SystemCapability.Communication.WiFi.AP.Extension
      * @since 8 dynamiconly
@@ -150,7 +151,7 @@ declare namespace wifiext {
     GENERAL = 1,
 
     /**
-     * Through_wall
+     * Through-wall mode.
      *
      * @syscap SystemCapability.Communication.WiFi.AP.Extension
      * @since 8 dynamiconly

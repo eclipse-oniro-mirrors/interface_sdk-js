@@ -62,7 +62,7 @@ declare namespace wifiManagerExt {
   function disableHotspot(): void;
 
   /**
-   * Obtains the supported power models. This API uses a promise to return the result.
+    * Obtains the supported power modes. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
    * @returns { Promise<Array<PowerMode>> } Promise used to return the power modes obtained.
@@ -75,12 +75,12 @@ declare namespace wifiManagerExt {
   function getSupportedPowerMode(): Promise<Array<PowerMode>>;
 
   /**
-   * Obtains the supported power models. This API uses an asynchronous callback to return the result.
+    * Obtains the supported power modes. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<Array<PowerMode>> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **0** and **data** is the power modes obtained. If the operation fails, **err** is not
-   *     **0**.
+    * @param { AsyncCallback<Array<PowerMode>> } callback - Callback used to return the result. If the operation
+    *     succeeds, **err** is **null** and **data** is the power modes obtained. Otherwise, **err** contains the error
+    *     information and **data** is unavailable.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -90,10 +90,10 @@ declare namespace wifiManagerExt {
   function getSupportedPowerMode(callback: AsyncCallback<Array<PowerMode>>): void;
 
   /**
-   * Obtains the power mode. This API uses a promise to return the result.
-   *
-   * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<PowerMode> } Promise used to return the power modes obtained.
+    * Obtains the current power mode. This API uses a promise to return the result.
+    *
+    * @permission ohos.permission.GET_WIFI_INFO
+    * @returns { Promise<PowerMode> } Promise used to return the current power mode obtained.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -103,11 +103,12 @@ declare namespace wifiManagerExt {
   function getPowerMode(): Promise<PowerMode>;
 
   /**
-   * Obtains the power mode. This API uses an asynchronous callback to return the result.
+    * Obtains the current power mode. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<PowerMode> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **0** and **data** is the power mode obtained. If the operation fails, **err** is not **0**.
+    * @param { AsyncCallback<PowerMode> } callback - Callback used to return the result. If the operation succeeds,
+    *     **err** is **null** and **data** is the current power mode obtained. Otherwise, **err** contains the error
+    *     information and **data** is unavailable.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -142,16 +143,16 @@ declare namespace wifiManagerExt {
    */
   export enum PowerMode {
     /**
-     * Sleeping Mode.
+     * Sleeping mode.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 9 dynamiconly
      */
-    
+
     SLEEPING = 0,
 
     /**
-     * General
+     * General mode.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 9 dynamiconly
@@ -159,7 +160,7 @@ declare namespace wifiManagerExt {
     GENERAL = 1,
 
     /**
-     * Through_wall
+     * Through-wall mode.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 9 dynamiconly
