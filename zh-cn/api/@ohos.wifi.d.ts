@@ -2700,7 +2700,7 @@ declare namespace wifi {
     GO_BAND_AUTO = 0,
 
     /**
-     * 2GHz。
+     * 2.4GHz。
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @since 8 dynamiconly
