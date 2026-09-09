@@ -22,7 +22,7 @@ import image from '../../@ohos.multimedia.image';
 import { CommonMethod, Callback, TouchEvent, MouseEvent, NestedScrollOptions, KeyEvent, HapticFeedbackMode } from './common';
 import { CustomBuilder } from './builder';
 import { Resource } from '../../global/resource';
-import { Position, ResourceStr, VoidCallback } from './units';
+import { Position, ResourceColor, ResourceStr, VoidCallback } from './units';
 import { MenuType, EditMenuOptions, TextDataDetectorConfig } from './textCommon';
 import { CopyOptions, NestedScrollMode } from './enums';
 import { PreviewMenuOptions } from './richEditor';
