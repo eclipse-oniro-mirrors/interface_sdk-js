@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Image
  * @kit ImageKit
  */
 
