@@ -4377,6 +4377,17 @@ export declare class UIContext {
   getWindowHeightBreakpoint(): HeightBreakpoint;
 
   /**
+   * Checks whether the window information has been initialized.
+   *
+   * @returns { boolean } Returns **true** if valid window width and height information has been initialized,
+   *     returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  isWindowInfoInitialized(): boolean;
+
+  /**
    * Open the BindSheet.
    *
    * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
