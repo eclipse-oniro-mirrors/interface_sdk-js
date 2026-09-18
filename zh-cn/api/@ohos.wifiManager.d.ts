@@ -3283,7 +3283,7 @@ declare namespace wifiManager {
     ipType?: IpType;
 
     /**
-     * Static IP family: 0 - IPv4, 1 - Ipv6.
+     * 静态IP家族: 0 - IPv4, 1 - Ipv6.
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
@@ -3305,7 +3305,7 @@ declare namespace wifiManager {
     staticIp?: IpConfig;
 
     /**
-     * IPv6 config of static
+     * 静态IPv6配置
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
