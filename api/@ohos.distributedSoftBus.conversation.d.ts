@@ -25,14 +25,10 @@
  * a session channel. This module is applicable to scenarios that require cross-device collaboration and multi-device
  * data transfer, simplifying the development of cross-device interaction.
  *
- * > **NOTE**
- * >
- * > The APIs provided by this module are system APIs and can be used only in the stage model.
- *
  * @syscap SystemCapability.Communication.SoftBus.Core
  * @systemapi
  * @stagemodelonly
- * @since 26.1.0 dynamic&static
+ * @since 26.0.1 dynamic&static
  */
 declare namespace conversation {
 
@@ -43,7 +39,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface DeviceNodeInfo {
     /**
@@ -53,7 +49,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     networkId: string;
 
@@ -63,7 +59,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     deviceName: string;
 
@@ -75,7 +71,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     deviceTypeId: int;
 
@@ -86,7 +82,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     nearby: boolean;
 
@@ -98,7 +94,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     udid: string;
   }
@@ -113,7 +109,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   type DataCallback = (deviceId: string, msg: ArrayBuffer) => void;
 
@@ -131,7 +127,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getTrustedDevices(): DeviceNodeInfo[];
 
@@ -171,7 +167,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function postConversationData(
     deviceId: string,
@@ -210,7 +206,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function registerConversationListener(
     bundleName: string,
@@ -244,7 +240,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function unregisterConversationListener(bundleName: string, abilityName: string): void;
 }

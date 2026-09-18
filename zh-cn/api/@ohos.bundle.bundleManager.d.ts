@@ -197,14 +197,11 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * 用于获取仅包含有桌面图标的应用的bundleInfo。它仅在
-     * [getAllBundleInfo]{@link bundleManager.getAllBundleInfo(bundleFlags: int, userId: int, callback: AsyncCallback<Array<BundleInfo>>)}
-     * 接口中生效。 
-     * 
-     * **系统API：** 该标记仅支持在系统API中使用。
+     * 用于获取仅包含有桌面图标的应用的bundleInfo。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
-     * @systemapi
+     * @systemapi [since 12 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -1523,7 +1520,7 @@ declare namespace bundleManager {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum DeviceModeDistributionPolicy {
     /**
@@ -1532,7 +1529,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     UNSPECIFIED = 0,
     /**
@@ -1541,7 +1538,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     MAIN_ONLY = 1,
     /**
@@ -1550,7 +1547,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     SUB_ONLY = 2,
     /**
@@ -1559,7 +1556,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     UNIVERSAL_IDENTICAL_PACKAGE = 3,
     /**
@@ -1568,7 +1565,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     UNIVERSAL_DIFFERENT_PACKAGE = 4,
     /**
@@ -1577,7 +1574,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     PARTIAL_COMPATIBLE_IDENTICAL_PACKAGE = 5,
     /**
@@ -1586,7 +1583,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     PARTIAL_COMPATIBLE_DIFFERENT_PACKAGE = 6,
     /**
@@ -1595,7 +1592,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     FULL_COMPATIBLE_IDENTICAL_PACKAGE = 7,
     /**
@@ -1604,7 +1601,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     FULL_COMPATIBLE_DIFFERENT_PACKAGE = 8,
   }
@@ -4377,7 +4374,7 @@ declare namespace bundleManager {
    * > 入参不能为空。所有值必须在的枚举值范围内。
    * > DeviceModeDistributePolicy，以及所有不同套餐的策略（通用差分包、部分兼容差分包和全兼容差分包）必须包含。
    *
-   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.SWITCH_MULTI_MODE_BUNDLE
    * @param { Array<DeviceModeDistributionPolicy> } policies - DeviceModeDistributionPolicy值的数组。
    * @returns { Promise<void> } Promise 对象，无返回值。
    * @throws { BusinessError } 201 - Permission denied.
@@ -4393,7 +4390,7 @@ declare namespace bundleManager {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function filterBundleListByDeviceModeDistributionPolicies(
     policies: Array<DeviceModeDistributionPolicy>

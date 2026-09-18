@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Cloud Disk Management
  * @kit CoreFileKit
  */
 
@@ -116,6 +116,18 @@ declare namespace cloudDiskManager {
      * @since 23 static
      */
     customAlias?: string;
+
+    /**
+     * Whether the synchronization root supports placeholders.
+     * Value constraint: true indicates that the synchronization root supports placeholders. false indicates that the
+     * synchronization root does not support placeholders. Default value: false.
+     *
+     * @syscap SystemCapability.FileManagement.CloudDiskManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isSupportPlaceHolder?: boolean;
   }
 
   /**

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Deferred Task Scheduling
  * @kit BackgroundTasksKit
  */
 
@@ -641,7 +641,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export interface FrequencyInfo {
     /**
@@ -651,7 +651,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     uid: int;
     /**
@@ -661,7 +661,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     workId: int;
     /**
@@ -671,7 +671,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     interval: int;
   }
@@ -683,12 +683,12 @@ declare namespace workScheduler {
    * @param { FrequencyInfo } info - Execution frequency information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 9700003 - System service operation failed. The work scheduler service is unavailable.
+   * @throws { BusinessError } 9700003 - System service operation failed.
    * @throws { BusinessError } 9700006 - Failed to check the execution frequency parameters.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   function setExecFrequency(info: FrequencyInfo): void;
 
@@ -700,12 +700,12 @@ declare namespace workScheduler {
    *     <br>The value should be an integer.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 9700003 - System service operation failed. The work scheduler service is unavailable.
+   * @throws { BusinessError } 9700003 - System service operation failed.
    * @throws { BusinessError } 9700006 - Failed to check the execution frequency parameters.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   function resetExecFrequency(uid: int): void;
 }

@@ -412,7 +412,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     haloBloom(tintColor: Color, bloomFactor: double, glowExposure: double): Filter;
 
@@ -435,7 +435,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     spinBlur(center: common2D.Point, angle: double, samples: int): Filter;
   }
@@ -994,7 +994,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface WarpedRingParam {
 
@@ -1006,7 +1006,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     radius: double;
 
@@ -1018,7 +1018,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     baseHalfWidth: double;
 
@@ -1030,7 +1030,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     widthVariation: double;
 
@@ -1043,7 +1043,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rotateAngle: double;
 
@@ -1055,7 +1055,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rotate3DProgress: double;
 
@@ -1066,7 +1066,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     noiseEvolution: double;
   }
@@ -1089,7 +1089,7 @@ declare namespace uiEffect {
    * @unionmember { BrightnessBlender } 提亮混合器
    * @unionmember { HdrBrightnessBlender } 支持HDR的提亮混合器 [since 20]
    * @unionmember { HdrDarkenBlender } 支持HDR的压暗混合器 [since 26.0.0]
-   * @unionmember { ColorfulBrightnessBlender } 具有彩色提亮压暗效果的混合器 [since 26.1.0]
+    * @unionmember { ColorfulBrightnessBlender } 具有提亮压暗效果的混合器（保持色相） [since 26.2.0]
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
@@ -1240,7 +1240,8 @@ declare namespace uiEffect {
 
     /**
      * 将RGB颜色转换为灰度值。灰度转换公式的权重可随当前色域自动调整，不同色域下使用不同的权重计算方式；适用于sRGB等标准色域场景。
-     * 当需要根据特定色域或视觉效果自定义灰度转换权重时传入此参数。三个分量均无边界限制。默认值为标准灰度权重[0.299, 0.587, 0.114]。
+     * 当需要根据特定色域或视觉效果自定义灰度转换权重时传入此参数。三个分量均无边界限制。
+     * 默认值为标准灰度权重[0.299, 0.587, 0.114]。
      *
      * @property { ?[double, double, double] }
      * @default [0.299, 0.587, 0.114]
@@ -1253,18 +1254,20 @@ declare namespace uiEffect {
   }
 
   /**
-   * ColorfulBrightnessBlenderOptions的参数列表，用于配置彩色提亮压暗效果的各项属性，
-   * 包括前景压暗权重、提亮压暗强度、亮度差阈值和hdr开关参数。
+   * 基于保持色相的提亮压暗混合器的可选增强配置项，作为createColorfulBrightnessBlender的options参数传入。
+   * 它在常规参数BrightnessBlenderParam之外，可进一步针对提亮或压暗方向、色彩增强强度、输入色彩影响度、
+   * 与背景的对比度以及HDR开关进行精细调整，不传时各项采用默认值。
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   interface ColorfulBrightnessBlenderOptions {
     /**
-     * 前景颜色压暗权重。为1的时候，颜色倾向比原始颜色暗；为0的时候，颜色倾向比原始颜色亮。
+     * 前景压暗权重，控制提亮压暗的方向与强度。取0时提亮前景，前景倾向亮于背景以保证可读性；
+     * 取1时压暗前景，前景倾向暗于背景；0到1之间为提亮与压暗的过渡。默认值为1。
      * 取值范围为[0, 1]，超出边界会在实现时自动截断。
      *
      * @default 1
@@ -1272,12 +1275,13 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     darkenWeight?: double;
 
     /**
-     * 提亮压暗效果强度。
+     * 色彩增强强度，控制对前景饱和度的增强程度。取0时不额外增强饱和度，前景保持原始饱和度；
+     * 值越大饱和度增强越明显，取1时增强到最大、色彩最鲜艳。默认值为0。
      * 取值范围为[0, 1]，超出边界会在实现时自动截断。
      *
      * @default 0
@@ -1285,12 +1289,13 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     vibrancyStrength?: double;
 
     /**
-     * 保证可读性的亮度差阈值。
+     * 保证可读性的亮度差阈值，用于约束前景与背景之间的亮度差以保持足够对比度。
+     * 取0时不强制额外亮度差，可读性约束最弱；值越大强制的亮度差越大、对比度越强；取1时强制最大亮度差。默认值为0。
      * 取值范围为[0, 1]，超出边界会在实现时自动截断。
      *
      * @default 0
@@ -1298,53 +1303,70 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     lumaDiff?: double;
 
     /**
-     * 是否主动开启hdr。关闭时也可能在前景或背景为hdr时被动触发hdr。
+     * 是否主动开启HDR。取true时主动开启HDR，结果亮度可超出SDR范围（>1.0），在HDR设备上呈现更高亮度，适合HDR内容；
+     * 取false时不主动开启HDR，结果限制在SDR范围（≤1.0），但当前景或背景本身为HDR时仍可能被动触发HDR。默认值为false。
      *
-     * @default true
+     * @default false
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     hdrEnabled?: boolean;
+
+    /**
+     * 输入色彩影响度，控制输入色参与提亮压暗计算的程度。取1时输入色完全参与计算，输出结果保留输入色的色彩倾向；
+     * 取0时输入色不参与计算，输出结果不受输入色的影响，直接基于背景颜色做提亮压暗；0到1之间为两者的插值过渡。默认值为1。
+     * 取值范围为[0, 1]，超出边界会在实现时自动截断。
+     *
+     * @default 1
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form
+     * @since 26.2.0 dynamiconly
+     */
+    tintedColorPercent?: double;
   }
 
   /**
-   * 彩色提亮压暗混合器，用于将提亮效果添加到指定的组件上。
+   * 基于保持色相的提亮压暗混合器，用于将该提亮压暗效果添加到指定的组件上。
+   * 该效果在对前景提亮或压暗时通过逐通道重建保持色相、并可增强饱和度，避免普通提亮压暗的去色问题；
+   * 同时依据亮度差阈值保证前景与背景的对比度。
    * 在调用ColorfulBrightnessBlender前，需要先通过createColorfulBrightnessBlender创建一个ColorfulBrightnessBlender实例。
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   interface ColorfulBrightnessBlender {
     /**
-     * 实现彩色提亮压暗效果的常规参数，具体可参考BrightnessBlenderParam。
+     * 提亮压暗的常规参数，用于配置亮度映射、饱和度曲线等基础属性。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     brightnessBlenderParam: BrightnessBlenderParam;
 
     /**
-     * 实现彩色提亮压暗效果的增强参数，具体可参考ColorfulBrightnessBlenderOptions。
+     * 提亮压暗的增强参数，用于控制提亮压暗方向、色彩增强强度、可读性阈值及HDR开关。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     options?: ColorfulBrightnessBlenderOptions;
   }
@@ -1406,7 +1428,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum PrismShapeType {
   
@@ -1416,7 +1438,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ROUNDED_RECT = 0,
 
@@ -1426,7 +1448,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ELLIPSE = 1
   }
@@ -1437,7 +1459,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface SweepRefractionParam {
 
@@ -1449,7 +1471,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     maskRadius: double;
 
@@ -1460,7 +1482,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     edgeThickness: double;
 
@@ -1471,7 +1493,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     refractAmount: double;
 
@@ -1482,7 +1504,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rippleWidth: double;
 
@@ -1493,7 +1515,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepOffset: double;
 
@@ -1504,7 +1526,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     chromaDelta: double;
   }
@@ -1515,7 +1537,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface SweepRefractionMaskOptions {
 
@@ -1526,7 +1548,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     shapeType?: PrismShapeType;
 
@@ -1539,7 +1561,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     cornerRadius?: double;
 
@@ -1552,7 +1574,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prismWidth?: double;
 
@@ -1565,7 +1587,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prismHeight?: double;
 
@@ -1578,7 +1600,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepCenterX?: double;
 
@@ -1591,7 +1613,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepCenterY?: double;
   }
@@ -1733,7 +1755,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createSweepRefractionMask(param: SweepRefractionParam,
       options?: SweepRefractionMaskOptions): Mask;
@@ -1746,7 +1768,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createWarpedRingMask(ringParam: WarpedRingParam): Mask;
 
@@ -1771,7 +1793,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createFractalGlassMask(glassNum: int, glassStrength: double, glassSoftness: double,
       isSymmetric: boolean, refractMask?: image.PixelMap): Mask;
@@ -1792,7 +1814,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createBinocularMask(radiusX: double, radiusY: double, gap: double, softness: double): Mask;
   }
@@ -1867,16 +1889,17 @@ declare namespace uiEffect {
     grayscaleFactor?: [double, double, double]): HdrDarkenBlender;
 
   /**
-   * 创建ColorfulBrightnessBlender实例用于给组件添加彩色提亮压暗效果。
+   * 创建ColorfulBrightnessBlender实例，用于给组件添加基于保持色相的提亮压暗效果。
+   * 该效果在对前景提亮或压暗时通过逐通道重建保持色相、并可增强饱和度，避免普通提亮压暗的去色问题。
    *
-   * @param { BrightnessBlenderParam } brightnessBlenderParam - 实现彩色提亮压暗效果的常规参数。
-   * @param { ColorfulBrightnessBlenderOptions } [options] - 实现彩色提亮压暗效果的增强参数。
-   * @returns { ColorfulBrightnessBlender } 返回具有彩色提亮压暗效果的混合器。
+   * @param { BrightnessBlenderParam } brightnessBlenderParam - 提亮压暗的常规参数，用于配置亮度映射、饱和度曲线等基础属性。
+   * @param { ColorfulBrightnessBlenderOptions } [options] - 提亮压暗的增强参数，用于控制提亮压暗方向、色彩增强强度、可读性阈值及HDR开关。
+   * @returns { ColorfulBrightnessBlender } 返回基于保持色相的提亮压暗混合器。
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   function createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
     options?: ColorfulBrightnessBlenderOptions): ColorfulBrightnessBlender;

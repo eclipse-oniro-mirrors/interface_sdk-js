@@ -14,7 +14,7 @@
  */
 
 /**
- * @file AutoDeviceSwitch
+ * @file Camera Management
  * @kit CameraKit
  */
 
@@ -111,7 +111,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
   */
   enum CameraSharedStatus {
     /**
@@ -120,7 +120,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     CAMERA_STATUS_SHARED = 0,
  
@@ -130,7 +130,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     CAMERA_STATUS_UNSHARED = 1
   }
@@ -680,6 +680,46 @@ declare namespace camera {
   }
 
   /**
+   * RGB bias values.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface RGBBias {
+    /**
+     * The red bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    redBias: double;
+
+    /**
+     * The green bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    greenBias: double;
+
+    /**
+     * The blue bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    blueBias: double;
+  }
+
+  /**
    * **CameraManager** implements camera management. Before calling any API in **CameraManager**, you must use 
    * [getCameraManager]{@link camera.getCameraManager} to obtain a **CameraManager** instance.
    *
@@ -1104,7 +1144,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onCameraSharedStatus(callback: Callback<CameraSharedStatusInfo>): void;
 
@@ -1140,7 +1180,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offCameraSharedStatus(callback?: Callback<CameraSharedStatusInfo>): void;
 
@@ -1706,7 +1746,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
   */
   interface CameraSharedStatusInfo {
     /**
@@ -1715,7 +1755,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     camera: CameraDevice;
  
@@ -1725,7 +1765,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     sharedStatus: CameraSharedStatus;
   }
@@ -4232,21 +4272,6 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getColorTintRange(): Array<int>;
-
-    /**
-      * Checks whether the RGB gain is supported.
-      *
-      * @returns { boolean } Check result for the support of the RGB gain. **true** if supported, **false**
-      *     otherwise. If the operation fails, an error code defined in
-      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
-      * @throws { BusinessError } 202 - Not System Application.
-      * @throws { BusinessError } 7400103 - Session not config.
-      * @syscap SystemCapability.Multimedia.Camera.Core
-      * @systemapi
-      * @stagemodelonly
-      * @since 26.1.0 dynamic&static
-      */
-     isWhiteBalanceGainsSupported(): boolean;
   }
 
   /**
@@ -4354,32 +4379,6 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getColorTint(): int;
-
-    /**
-     * Gets RGB white balance gain values.
-     *
-     * @returns { WhiteBalanceGains } The current RGB white balance gain values.
-     * @throws { BusinessError } 202 - Not System Application.
-     * @throws { BusinessError } 7400103 - Session not config.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    getWhiteBalanceGains(): WhiteBalanceGains;
-
-    /**
-     * Sets RGB white balance gain values.
-     *
-     * @param { WhiteBalanceGains } gains - RGB white balance gain values.
-     * @throws { BusinessError } 202 - Not System Application.
-     * @throws { BusinessError } 7400103 - Session not config.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    setWhiteBalanceGains(gains: WhiteBalanceGains): void;
   }
 
   /**
@@ -7064,7 +7063,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum CameraImagingMode {
     /**
@@ -7073,7 +7072,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTO = 0,
 
@@ -7083,7 +7082,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     RGB = 1,
 
@@ -7093,7 +7092,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     IR = 2
   }
@@ -7104,7 +7103,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface ImagingModeQuery {
     /**
@@ -7117,7 +7116,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     isImagingModeSupported(mode: CameraImagingMode): boolean;
   }
@@ -7128,7 +7127,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface ImagingMode extends ImagingModeQuery {
     /**
@@ -7140,7 +7139,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getImagingMode(): CameraImagingMode;
 
@@ -7153,7 +7152,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     setImagingMode(mode: CameraImagingMode): void;
   }
@@ -7167,7 +7166,7 @@ declare namespace camera {
    * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion,
    *     DepthFusion [since 14]
    * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion,
-   *     DepthFusion, ImagingMode [since 26.1.0]
+   *     DepthFusion, ImagingMode [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 11 dynamic
@@ -7212,11 +7211,11 @@ declare namespace camera {
    * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
    * [Zoom]{@link camera.Zoom}, [ColorManagement]{@link camera.ColorManagement}, 
    * [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, [Macro]{@link camera.Macro}, 
-   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md), 
-   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md), 
-   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md), 
-   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md), and 
-   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md).
+   * [ManualExposure]{@link camera.ManualExposure}, 
+   * [ManualFocus]{@link camera.ManualFocus}, 
+   * [ManualIso]{@link camera.ManualIso}, 
+   * [OIS]{@link camera.OIS}, and 
+   * [Aperture]{@link camera.Aperture}.
    * 
    * It implements a photo session, which provides operations on the flash, exposure, white balance, focus, zoom, color 
    * space, macro mode, manual exposure, manual focus, manual ISO setting, optical image stabilization (OIS), and 
@@ -7815,7 +7814,7 @@ declare namespace camera {
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation,
    *     EffectSuggestion [since 18]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation,
-   *     EffectSuggestion, ImagingMode [since 26.1.0]
+   *     EffectSuggestion, ImagingMode [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 11 dynamic
@@ -7860,11 +7859,11 @@ declare namespace camera {
    * [Zoom]{@link camera.Zoom}, [Stabilization]{@link camera.Stabilization}, 
    * [ColorManagement]{@link camera.ColorManagement}, [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, 
    * [Macro]{@link camera.Macro}, [ControlCenter]{@link camera.ControlCenter}, 
-   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md), 
-   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md), 
-   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md), 
-   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md), and 
-   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md).
+   * [ManualExposure]{@link camera.ManualExposure}, 
+   * [ManualFocus]{@link camera.ManualFocus}, 
+   * [ManualIso]{@link camera.ManualIso}, 
+   * [OIS]{@link camera.OIS}, and 
+   * [Aperture]{@link camera.Aperture}.
    * 
    * It implements a video session, which provides operations on the flash, exposure, white balance, focus, zoom, video 
    * stabilization, color space, macro mode and controller, manual exposure, manual focus, manual ISO, optical image 
@@ -7881,6 +7880,8 @@ declare namespace camera {
    *     AutoDeviceSwitch, Macro [since 20 - 24]
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
    *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0]
+   * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
+   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture, ColorControls [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -7888,7 +7889,7 @@ declare namespace camera {
    */
   interface VideoSession extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization,
     ColorManagement, ControlCenter, AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS,
-    Aperture {
+    Aperture, ColorControls {
     /**
      * Checks whether this session supports a preconfigured resolution.
      *
@@ -8590,7 +8591,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onApertureInfoChange(callback: Callback<ApertureInfo>): void;
 
@@ -8602,49 +8603,64 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offApertureInfoChange(callback?: Callback<ApertureInfo>): void;
-  }
 
-  /**
-   * RGB white balance gain values.
-   *
-   * @syscap SystemCapability.Multimedia.Camera.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  interface WhiteBalanceGains {  
     /**
-     * The red gain component of the white balance value.
+     * Checks whether the color cube is supported.
      *
+     * @returns { boolean } Check result for the support of the color cube. **true** if supported, **false**
+     *     is otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    redGain: double;
+    isColorCubeSupported(): boolean;
 
     /**
-     * The green gain component of the white balance value.
+     * Gets color cube dimension.
      *
+     * @returns { int } color cube dimension.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    greenGain: double;
+    getSupportedCubeDimension(): int;
 
     /**
-     * The blue gain component of the white balance value.
+     * Enable the color cube.
      *
+     * Before the setting, call [isColorCubeSupported] {@link camera.VideoSession.isColorCubeSupported} to check whether
+     * the device supports the color cube.
+     * 
+     * @param { Uint8Array } lutData - The cube texture data to use as a color lookup table.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    blueGain: double;
+    enableColorCube(lutData: Uint8Array): void;
+
+    /**
+     * Disable the color cube.
+     *
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    disableColorCube(): void;
   }
 
   /**
@@ -9055,6 +9071,108 @@ declare namespace camera {
      * @since 23 static
      */
     setPhysicalAperture(aperture: double): void;
+  }
+
+  /**
+   * Color controls query object.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControlsQuery {
+    /**
+     * Checks whether the saturation is supported.
+     *
+     * @returns { boolean } Check result for the support of the saturation. **true** is supported, **false** is
+     *     otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isSaturationSupported(): boolean;
+
+    /**
+     * Checks whether the RGB bias is supported.
+     *
+     * @returns { boolean } Check result for the support of the RGB bias. **true** is supported, **false** is
+     *     otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isRGBBiasSupported(): boolean;
+  }
+
+  /**
+   * Implements color controls. It inherits from [ColorControlsQuery]{@link camera.ColorControlsQuery}.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControls extends ColorControlsQuery {
+    /**
+     * Gets the amount of saturation.
+     *
+     * @returns { double } The current saturation.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSaturation(): double;
+
+    /**
+     * Sets the amount of saturation. Before the setting, call
+     *     [isSaturationSupported]{@link camera.ColorControlsQuery.isSaturationSupported} to check
+     *     whether saturation adjustment is supported by the current device.
+     *
+     * @param { double } val - The amount of saturation to apply.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setSaturation(val: double): void;
+
+    /**
+     * Gets RGB bias value.
+     *
+     * @returns { double } The current RGB bias value.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getRGBBias(): RGBBias;
+
+    /**
+     * Sets RGB bias value.
+     *
+     * @param { double } bias - RGB bias value.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRGBBias(bias: RGBBias): void;
   }
 
   /**

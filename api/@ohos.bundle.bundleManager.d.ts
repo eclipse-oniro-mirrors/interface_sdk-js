@@ -45,8 +45,8 @@ import { AbilityInfo as _AbilityInfo, WindowSize as _WindowSize } from './bundle
 import { AppProvisionInfo as _AppProvisionInfo, Validity as _Validity } from './bundleManager/AppProvisionInfo';
 import { BundleInfo as _BundleInfo, UsedScene as _UsedScene, ReqPermissionDetail as _ReqPermissionDetail,
   SignatureInfo as _SignatureInfo, AppCloneIdentity as _AppCloneIdentity, DynamicIconInfo as _DynamicIconInfo,
-  BundleOptions as _BundleOptions, AlternateIconInfo as _AlternateIconInfo,
-  AppClonePreference as _AppClonePreference } from './bundleManager/BundleInfo';
+  BundleOptions as _BundleOptions, AlternateIconInfo as _AlternateIconInfo, AppClonePreference as _AppClonePreference,
+  BundleExtensionPolicyInfo as _BundleExtensionPolicyInfo} from './bundleManager/BundleInfo';
 import { HapModuleInfo as _HapModuleInfo, PreloadItem as _PreloadItem, Dependency as _Dependency,
   RouterItem as _RouterItem, DataItem as _DataItem } from './bundleManager/HapModuleInfo';
 import { ExtensionAbilityInfo as _ExtensionAbilityInfo } from './bundleManager/ExtensionAbilityInfo';
@@ -219,15 +219,11 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * Used to obtain the bundle information of the application that has only a home screen icon. It is valid only in
-     * the
-     * [getAllBundleInfo]{@link bundleManager.getAllBundleInfo(bundleFlags: int, userId: int, callback: AsyncCallback<Array<BundleInfo>>)}
-     * API.
-     *
-     * **System API**: This flag can be used only in system APIs.
+     * Used to obtain the bundle information of the application that has only a home screen icon.
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
-     * @systemapi
+     * @systemapi [since 12 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -310,6 +306,24 @@ declare namespace bundleManager {
      * @since 26.0.0 dynamic&static
      */
     GET_BUNDLE_INFO_WITH_SANDBOX_CLONE = 0x00100000,
+    /**
+     * Used to obtain the bundle information of an application installed by any device.
+     * It is valid only in the
+     * [getAllAppCloneBundleInfo]{@link bundleManager.getAllAppCloneBundleInfo}
+     * and
+     * [getAllBundleInfo]{@link bundleManager.getAllBundleInfo}
+     * and
+     * [getAllBundleInfoInstances]{@link bundleManager.getAllBundleInfoInstances}
+     * APIs.
+     *
+     * **System API**: This flag can be used only in system APIs.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    GET_BUNDLE_INFO_OF_ALL_DEVICE_MODE = 0x00200000,
   }
 
   /**
@@ -1559,7 +1573,7 @@ declare namespace bundleManager {
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi [since 23 - 26.0.0]
-   * @publicapi [since 26.1.0]
+   * @publicapi [since 26.0.1]
    * @since 23 dynamic&static
    */
   export enum BundleInstallStatus {
@@ -1568,7 +1582,7 @@ declare namespace bundleManager {
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 23 - 26.0.0]
-     * @publicapi [since 26.1.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_NOT_EXIST = 1,
@@ -1578,7 +1592,7 @@ declare namespace bundleManager {
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 23 - 26.0.0]
-     * @publicapi [since 26.1.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_INSTALLING = 2,
@@ -1588,7 +1602,7 @@ declare namespace bundleManager {
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 23 - 26.0.0]
-     * @publicapi [since 26.1.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_INSTALLED = 3
@@ -1635,22 +1649,51 @@ declare namespace bundleManager {
   }
 
   /**
+   * Each bit of this ApplicationReservedFlag value identifies relevant information.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  export enum ApplicationReservedFlag {  
+    /**
+     * Indicates that the application is an encrypted application.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ENCRYPTED_APPLICATION = 0x00000001,
+    /**
+     * Indicates that the encrypted key for the application exists.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ENCRYPTED_KEY_EXISTED = 0x00000002
+  }
+
+  /**
    * Define the enumeration of device mode distribution policies, which is used to specify how an application
    * is distributed on a device.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
-  enum DeviceModeDistributionPolicy {
+  export enum DeviceModeDistributionPolicy {
     /**
      * Unspecified device mode distribution policy.
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     UNSPECIFIED = 0,
     /**
@@ -1659,7 +1702,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     MAIN_ONLY = 1,
     /**
@@ -1668,7 +1711,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     SUB_ONLY = 2,
     /**
@@ -1677,7 +1720,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     UNIVERSAL_IDENTICAL_PACKAGE = 3,
     /**
@@ -1686,7 +1729,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     UNIVERSAL_DIFFERENT_PACKAGE = 4,
     /**
@@ -1695,7 +1738,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     PARTIAL_COMPATIBLE_IDENTICAL_PACKAGE = 5,
     /**
@@ -1704,7 +1747,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     PARTIAL_COMPATIBLE_DIFFERENT_PACKAGE = 6,
     /**
@@ -1713,7 +1756,7 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     FULL_COMPATIBLE_IDENTICAL_PACKAGE = 7,
     /**
@@ -1722,9 +1765,38 @@ declare namespace bundleManager {
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     FULL_COMPATIBLE_DIFFERENT_PACKAGE = 8
+  }
+
+  /**
+   * App sandbox policy for dual-mode (2in1/tablet) scenarios.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  export enum AppSandboxPolicy {
+    /**
+     * Shared sandbox (default)
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SHARED_SANDBOX = 0,
+    /**
+     * Isolated sandbox
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ISOLATED_SANDBOX = 1
   }
 
   /**
@@ -1998,6 +2070,24 @@ declare namespace bundleManager {
    * @since 23 static
    */
   function getAllBundleInfo(bundleFlags: int, userId?: int): Promise<Array<BundleInfo>>;
+
+  /**
+   * Obtains all the bundle information in the system based on the given bundle name and bundle flags.
+   * This API uses a type of promise to return the result.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - Bundle name.
+   * @param { int } bundleFlags - Type of the bundle information to obtain.
+   * @returns { Promise<Array<BundleInfo>> } Promise used to return an array of bundle information.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getAllBundleInfoInstances(bundleName: string, bundleFlags: int): Promise<Array<BundleInfo>>;
 
   /**
    * Obtains all the application information in the system based on the given application flags. This API uses an
@@ -3675,6 +3765,48 @@ declare namespace bundleManager {
 
   /**
    * Obtains the [provision]{@link bundleManager/AppProvisionInfo} configuration file information of all applications
+   * based in the device on the given user ID. This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.GET_INSTALLED_BUNDLE_LIST or
+   *     (ohos.permission.GET_INSTALLED_BUNDLE_LIST and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS)
+   * @param { int } userId - User ID on the device.
+   *     <br>The value should be an integer.
+   * @returns { Promise<Array<AppProvisionInfo>> } Promise used to return the provision profile obtained.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 17700004 - The specified user id is not found.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getAllAppProvisionInfoInDevice(userId: int): Promise<Array<AppProvisionInfo>>;
+
+  /**
+   * Obtains the provision profile based in device on the given bundle name and user ID. 
+   * This API uses a promise to return the result.
+   *
+   * No permission is required for obtaining the caller's own information.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED or
+   *     (ohos.permission.GET_BUNDLE_INFO_PRIVILEGED and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS)
+   * @param { string } bundleName - Bundle name.
+   * @param { int } userId - User ID on the device.
+   *     <br>The value should be an integer.
+   * @returns { Promise<Array<AppProvisionInfo>> } Promise used to return the provision profile obtained.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
+   * @throws { BusinessError } 17700004 - The specified user ID is not found.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getAppProvisionInfoInDevice(bundleName: string, userId: int): Promise<Array<AppProvisionInfo>>;
+
+  /**
+   * Obtains the [provision]{@link bundleManager/AppProvisionInfo} configuration file information of all applications
    * based on the given user ID. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED or
@@ -4204,6 +4336,26 @@ declare namespace bundleManager {
   function setAdditionalInfo(bundleName: string, additionalInfo: string): void;
 
   /**
+   * Sets additional information for a specified application instance. This API can be called only by AppGallery.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - Bundle name.
+   * @param { string } additionalInfo - Additional information to set.
+   * @param { int } appIndex - Index of the application mode.The value must be equal to 0 or 10000.
+   *     <br>The value should be an integer.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
+   * @throws { BusinessError } 17700053 - The caller is not AppGallery.
+   * @throws { BusinessError } 17700061 - AppIndex not in valid range.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function setAdditionalInfoByIndex(bundleName: string, additionalInfo: string, appIndex: int): void;
+
+  /**
    * Deletes an .abc file based on the specified file path. This API uses a promise to return the result.
    *
    * @permission ohos.permission.RUN_DYN_CODE
@@ -4600,7 +4752,7 @@ declare namespace bundleManager {
    * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API. [since 23 - 26.0.0]
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi [since 23 - 26.0.0]
-   * @publicapi [since 26.1.0]
+   * @publicapi [since 26.0.1]
    * @since 23 dynamic&static
    */
   function getBundleInstallStatus(bundleName: string): BundleInstallStatus;
@@ -4696,7 +4848,7 @@ declare namespace bundleManager {
    * > (UNIVERSAL_DIFFERENT_PACKAGE, PARTIAL_COMPATIBLE_DIFFERENT_PACKAGE, and FULL_COMPATIBLE_DIFFERENT_PACKAGE)
    * > must be included.
    *
-   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.SWITCH_MULTI_MODE_BUNDLE
    * @param { Array<DeviceModeDistributionPolicy> } policies - Array of DeviceModeDistributionPolicy values.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
@@ -4712,10 +4864,31 @@ declare namespace bundleManager {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function filterBundleListByDeviceModeDistributionPolicies(
     policies: Array<DeviceModeDistributionPolicy>): Promise<void>;
+
+  /**
+   * Obtains the bundle extension policy information of a specified application.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED or
+   *     (ohos.permission.GET_BUNDLE_INFO_PRIVILEGED and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS)
+   * @param { string } bundleName - Bundle name of the application.
+   * @param { int } userId - User ID, which can be obtained by calling getOsAccountLocalId. The value
+   *     is greater than or equal to 0.
+   *     <br>The value should be an integer.
+   * @returns { BundleExtensionPolicyInfo } The bundle extension policy information.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. Non-system APP calling system API.
+   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
+   * @throws { BusinessError } 17700004 - The specified user ID is not found.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getBundleExtensionPolicyInfo(bundleName: string, userId: int): BundleExtensionPolicyInfo;
 
   /**
    * Defines the application information.
@@ -5209,6 +5382,26 @@ declare namespace bundleManager {
    * @since 26.0.0 static
    */
   export type AlternateIconInfo = _AlternateIconInfo;
+
+  /**
+   * Describes the bundle extension policy information.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  export type BundleExtensionPolicyInfo = _BundleInfo.BundleExtensionPolicyInfo;
+ 
+  /**
+   * Describes the bundle extension policy information.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  export type BundleExtensionPolicyInfo = _BundleExtensionPolicyInfo;
 }
 
 export default bundleManager;

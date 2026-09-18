@@ -23,28 +23,6 @@ import lang from './@arkts.lang'
 /*** endif */
 
 /**
- * The built-in Array type.
- *
- * @syscap SystemCapability.Utils.Lang
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamiconly
- */
-type BuiltinArray<T> = Array<T>;
-
-/**
- * The built-in Map type.
- *
- * @syscap SystemCapability.Utils.Lang
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamiconly
- */
-type BuiltinMap<K, V> = Map<K, V>;
-
-/**
  * The collections module provides ArkTS containers for efficient data transfer in concurrency scenarios. The ArkTS
  * containers provide similar functionalities as their JavaScript counterparts, except that their properties cannot be
  * added or updated through `.` or `[]`.
@@ -197,7 +175,7 @@ declare namespace collections {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   type ArrayElementPredicateFn<ElementType> = (value: ElementType) => boolean;
 
@@ -712,13 +690,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     containsAll(elements: Array<T>): boolean;
     /**
-     * Checks whether all elements in a specified built-in Array are contained in this ArkTS Array.
+     * Checks whether all elements in a specified JavaScript built-in Array are contained in this ArkTS Array.
      *
-     * @param { BuiltinArray<T> } elements - Built-in Array whose elements are to be checked.
+     * @param { readonly T[] } elements - JavaScript built-in Array whose elements are to be checked.
      * @returns { boolean } Check result. The value **true** is returned if all elements are contained in this ArkTS
      *     array; otherwise, **false** is returned.
      * @throws { BusinessError } 10200011 - The containsAll method cannot be bound.
@@ -727,9 +705,9 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    containsAll(elements: BuiltinArray<T>): boolean;
+    containsAll(elements: readonly T[]): boolean;
     /**
      * Retains only the elements in this ArkTS Array that are contained in the specified ArkTS Array.
      *
@@ -742,13 +720,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     retainAll(elements: Array<T>): boolean;
     /**
-     * Retains only the elements in this ArkTS Array that are contained in the specified built-in Array.
+     * Retains only the elements in this ArkTS Array that are contained in the specified JavaScript built-in Array.
      *
-     * @param { BuiltinArray<T> } elements - Built-in Array whose elements are to be retained.
+     * @param { readonly T[] } elements - JavaScript built-in Array whose elements are to be retained.
      * @returns { boolean } Operation result. The value **true** is returned if any elements are removed from this ArkTS
      *     array; otherwise, **false** is returned.
      * @throws { BusinessError } 10200011 - The retainAll method cannot be bound.
@@ -757,9 +735,9 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    retainAll(elements: BuiltinArray<T>): boolean;
+    retainAll(elements: readonly T[]): boolean;
     /**
      * Retains only the elements in this ArkTS Array that satisfy the specified predicate.
      *
@@ -772,7 +750,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     retainAll(predicate: ArrayElementPredicateFn<T>): boolean;
     /**
@@ -1196,7 +1174,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     containsValue(value: V): boolean;
     /**
@@ -1230,7 +1208,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remove(key: K): V | undefined;
     /**
@@ -1291,7 +1269,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     put(key: K, value: V): V | undefined;
     /**
@@ -1304,22 +1282,22 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     putAll(from: Map<K, V>): void;
     /**
-     * Updates this ArkTS map with key-value pairs from the specified built-in Map.
+     * Updates this ArkTS map with key-value pairs from the specified JavaScript built-in Map.
      *
-     * @param { BuiltinMap<K, V> } from - Built-in Map that provides key-value pairs.
+     * @param { ReadonlyMap<K, V> } from - JavaScript built-in Map that provides key-value pairs.
      * @throws { BusinessError } 10200011 - The putAll method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification exception
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    putAll(from: BuiltinMap<K, V>): void;
+    putAll(from: ReadonlyMap<K, V>): void;
     /**
      * Adds or updates a key-value pair to this ArkTS map.
      *

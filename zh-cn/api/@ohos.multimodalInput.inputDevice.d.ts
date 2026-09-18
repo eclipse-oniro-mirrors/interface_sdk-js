@@ -197,7 +197,7 @@ declare namespace inputDevice {
    * 取消监听输入设备的热插拔事件。在应用退出前调用，取消监听。使用callback异步回调。
    *
    * @param { 'change' } type - 输入设备的事件类型，固定值为'change'。
-   * @param { Callback<DeviceListener> } listener - 取消监听的回调函数，缺省时取消所有输入设备热插拔事件的监听。
+   * @param { Callback<DeviceListener> } [listener] - 取消监听的回调函数，缺省时取消所有输入设备热插拔事件的监听。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
@@ -407,7 +407,8 @@ declare namespace inputDevice {
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputDevice
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @readonly
+     * @since 26.0.1 dynamic&static
      */
     displayId?: int;
   }
@@ -614,7 +615,7 @@ declare namespace inputDevice {
    * 设置键盘按键的重复时延，使用callback异步回调。
    *
    * @param { int } delay - 键盘按键的重复时延，默认值500ms，调节范围[300ms, 1000ms]。
-   * @param { AsyncCallback<void> } callback - 回调函数。当设置键盘按键重复时延成功，err为undefined，否则为错误对象。
+   * @param { AsyncCallback<void> } callback - 回调函数。当设置键盘按键重复延迟时间成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 202 - SystemAPI permission error.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
@@ -825,7 +826,7 @@ declare namespace inputDevice {
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function bindToDisplay(inputDeviceId: int, displayId: int): Promise<void>;
 }

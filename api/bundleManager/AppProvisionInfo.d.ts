@@ -167,6 +167,46 @@ export interface AppProvisionInfo {
    * @since 23 dynamic&static
    */
   readonly bundleName?: string;
+
+  /**
+   * ServiceCapabilities of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appServiceCapabilities?: string;
+
+  /**
+   * Index of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appIndex?: int;
+
+  /**
+   * Specified distribution type of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly specifiedDistributionType?: string;
+
+  /**
+   * Additional of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly additionalInfo?: string;
 }
 
 /**

@@ -5411,71 +5411,90 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
-enum P2pServiceProtocolType {
-  /**
-   * All service protocol types.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  SERVICE_TYPE_ALL = 0,
+  enum P2pServiceProtocolType {
+    /**
+     * All service protocol types.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SERVICE_TYPE_ALL = 0,
 
-  /**
-   * Bonjour (DNS-SD) service discovery protocol.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  SERVICE_TYPE_BONJOUR = 1,
+    /**
+     * Bonjour（DNS-SD）service discovery protocol.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SERVICE_TYPE_BONJOUR = 1,
 
-  /**
-   * UPnP service discovery protocol.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  SERVICE_TYPE_UP_NP = 2,
+    /**
+     * UPnP service discovery protocol.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SERVICE_TYPE_UP_NP = 2,
 
-  /**
-   * WS-Discovery service discovery protocol.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  SERVICE_TYPE_WS_DISCOVERY = 3,
+    /**
+     * WS-Discovery service discovery protocol.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SERVICE_TYPE_WS_DISCOVERY = 3,
 
-  /**
-   * Vendor-specific protocol.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  SERVICE_TYPE_VENDOR_SPECIFIC = 255
-}
+    /**
+     * Vendor-specific protocol.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SERVICE_TYPE_VENDOR_SPECIFIC = 255
+  }
 
   /**
    * Represents the P2P service information.
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface WifiP2pServiceInfo {
-  /**
-   * Service name.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  serviceName: string;
+    /**
+     * Service name. Refer to the {@link addDnsSdLocalP2pService} or {@link addUpnpLocalP2pService} functions. 
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    serviceName: string;
+
+    /**
+     * Service protocol type.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    protocolType: P2pServiceProtocolType;
+
+    /**
+     * Query string list consumed by wpa_supplicant. The maximum size of a single data record is 1024.
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    queryList: Array<string>;
+  }
 
   /**
    * Service protocol type.
@@ -5521,7 +5540,7 @@ enum P2pServiceProtocolType {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function addDnsSdLocalP2pService(instanceName: string, serviceType: string,
     txtRecord: Map<string, string>, serviceName: string): void;
@@ -5552,7 +5571,7 @@ enum P2pServiceProtocolType {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function addUpnpLocalP2pService(uuid: string, device: string,
     services: Array<string>, serviceName: string): void;
@@ -5570,7 +5589,7 @@ enum P2pServiceProtocolType {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function removeLocalP2pService(srvInfo: WifiP2pServiceInfo): void;
 
@@ -5584,7 +5603,7 @@ enum P2pServiceProtocolType {
    * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
 }

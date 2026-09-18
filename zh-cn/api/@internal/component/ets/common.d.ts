@@ -189,98 +189,45 @@ declare interface ReusableOptions {
 }
 
 /**
- * Define the ratio of characters entered by the the percentage of InputCounterOptions.
+ * 计数器的配置项。
  *
- * @interface InputCounterOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @since 11
- */
-/**
- * Define the ratio of characters entered by the the percentage of InputCounterOptions.
- *
- * @interface InputCounterOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 12 dynamic
+ * @atomicservice [since 12]
+ * @since 11 dynamic
  */
 declare interface InputCounterOptions {
-
   /**
-   * It is the numerator bit of the percentage and used as a threshold. If the number of characters input
-   * reaches the maximum number of characters multiplied by this threshold, the counter is displayed.
-   * @type { ?number }
+   * 可输入字符数占最大字符限制的百分比值。字符计数器显示的样式为当前输入字符数/最大字符数。当输入字符数大于最大字符数乘百分比值时，显示字符计数器。有效值区间为[1,100]，数值为小数时，向下取整，
+   * 如果设置的number超出有效值区间内，不显示字符计数器。设置为undefined时，显示字符计数器，但此参数不生效。
+   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * It is the numerator bit of the percentage and used as a threshold. If the number of characters input
-   * reaches the maximum number of characters multiplied by this threshold, the counter is displayed.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>Threshold percentage for displaying the character counter.
-   * <br>The character counter is displayed when the number of characters that have been entered is greater than
-   * the maximum number of characters multiplied by the threshold percentage value.
-   * <br>When displayed, the character counter is in the following format:
-   * <br>Number of characters that have been entered/Maximum number of characters allowed.
-   * <br>It is visible when the number of characters entered is greater than
-   * the character limit multiplied by the threshold percentage value.
-   * <br>Value range: [1, 100]
-   * <br>If the value is not an integer, it is rounded down to the nearest integer.
-   * <br>If the value exceeds the valid value range, the character counter is not displayed.
-   * <br>If the value is <em>undefined</em>, the character counter is displayed, but this parameter has no effect.
-   * </p>
-   *
-   * @type { ?number }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   thresholdPercentage?: number;
 
   /**
-   * If the current input character count reaches the maximum character count and users want to exceed the
-   * normal input, the border will turn red. If this parameter is true, the red border displayed.
-   * @type { ?boolean }
+   * 如果用户设置计数器时不设置InputCounterOptions，那么当前输入字符数达到最大字符数时，边框和计数器下标将变为红色。如果用户设置显示字符计数器同时thresholdPercentage参数数值在有效区间内，那么当输入
+   * 字符数超过最大字符数时，边框和计数器下标将变成红色。如果此参数为true，则显示红色边框，参数为false则不显示。<br>默认值：true。
+   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * If the current input character count reaches the maximum character count and users want to exceed the
-   * normal input, the border will turn red. If this parameter is true, the red border displayed.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>Whether to highlight the text box border and character counter subscript in red.
-   * <br>If options is not set, the text box border and character counter subscript turn red
-   * <br>when the number of characters entered reaches the limit.
-   * <br>If the character counter is displayed and thresholdPercentage is set to a valid value,
-   * the text box border and character counter subscript turn red when the number of entered characters exceeds the limit.
-   * <br>The value true (default) means to highlight the text box border and character counter subscript in red.
-   * </p>
-   *
-   * @type { ?boolean }
-   * @default true
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   highlightBorder?: boolean;
 
   /**
-   * It is the color of counter when textField hasn't wanted to exceed the maximum character count.
-   * @type { ?ColorMetrics }
+   * 设置组件中字符计数器的文本颜色。当用户输入字符数大于最大字符数乘百分比值时，计数器会显示当前输入的字符数，并且计数器的文本颜色为counterTextColor指定的颜色。如果不设置counterTextColor，则计数器的文本
+   * 颜色为默认颜色，默认颜色为灰色。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -290,8 +237,13 @@ declare interface InputCounterOptions {
   counterTextColor?: ColorMetrics;
 
   /**
-   * It is the color of counter when textField wants to exceed the maximum character count.
-   * @type { ?ColorMetrics }
+   * 设置组件中字符计数器在溢出时的文本颜色。当用户输入的字符数超过计数器最大长度时，计数器的文本颜色和边框的颜色会切换为counterTextOverflowColor指定的颜色，以提醒用户输入已超出限制。如果不设置counterTe
+   * xtOverflowColor，则计数器和边框在溢出时的文本颜色为默认颜色，默认颜色为红色。
+   *
+   * **说明：**
+   *
+   * 当设置了[InputCounterOptions]{@link InputCounterOptions}的highlightBorder属性时，边框颜色才会被同步更改。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -302,9 +254,8 @@ declare interface InputCounterOptions {
 }
 
 /**
- * Defines the options of decoration.
+ * 文本装饰线的配置项。
  *
- * @interface TextDecorationOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -312,11 +263,9 @@ declare interface InputCounterOptions {
  * @since 12 dynamic
  */
 declare interface TextDecorationOptions {
-
   /**
-   * The decoration type.
+   * 设置文本装饰线类型。
    *
-   * @type { TextDecorationType }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -326,9 +275,8 @@ declare interface TextDecorationOptions {
   type: TextDecorationType;
 
   /**
-   * Sets the color of decoration.
+   * 设置文本装饰线颜色。<br>默认值：Color.Black。
    *
-   * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -338,9 +286,8 @@ declare interface TextDecorationOptions {
   color?: ResourceColor;
 
   /**
-   * The style value of decoration.
+   * 设置文本装饰线样式。<br>默认值：TextDecorationStyle.SOLID。
    *
-   * @type { ?TextDecorationStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -350,9 +297,8 @@ declare interface TextDecorationOptions {
   style?: TextDecorationStyle;
 
   /**
-   * 装饰线粗细。
+   * 设置文本装饰线的粗细缩放比例。<br>默认值：1.0 <br>取值范围：[0, +∞) <br>**说明：** 负值按默认值处理。
    *
-   * @type { ?number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -943,7 +889,7 @@ declare class ReadonlyEnvKey {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -954,7 +900,7 @@ declare class ReadonlyEnvKey {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -965,7 +911,7 @@ declare class ReadonlyEnvKey {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -976,7 +922,7 @@ declare class ReadonlyEnvKey {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -1068,7 +1014,7 @@ declare function Env<T>(key: SystemEnvKey<T> | SystemProperties): PropertyDecora
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 22 dynamic
  */
@@ -1096,7 +1042,7 @@ declare enum SystemProperties {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -1114,7 +1060,7 @@ declare enum SystemProperties {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -1132,7 +1078,7 @@ declare enum SystemProperties {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -1150,7 +1096,7 @@ declare enum SystemProperties {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -3704,9 +3650,10 @@ declare enum AccessibilityRoleType {
 }
 
 /**
- * Defines the callback type used in accessibility focus. The value of isFocus indicates whether the current component is focused
+ * 定义onAccessibilityFocus中使用的回调类型。
+ *
  * @typedef {function} AccessibilityFocusCallback
- * @param {boolean} isFocus - if component is focused,isFocus will be true. else isFocus is false.
+ * @param { boolean } isFocus - 用于表示组件是否获焦。<br>true：当前组件获焦。<br>false：当前组件失焦。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3798,11 +3745,11 @@ declare enum AccessibilityActionInterceptResult {
 }
 
 /**
- * 定义在可访问性操作拦截中使用的回调类型。
- * action的值表示可访问性动作类型。
+ * 定义onAccessibilityActionIntercept中使用的回调类型。
+ *
  * @typedef { function } AccessibilityActionInterceptCallback
- * @param { AccessibilityAction } action - 可访问性操作类型的枚举。
- * @returns { AccessibilityActionInterceptResult } 继续执行操作、中断操作或事件冒泡的结果
+ * @param { AccessibilityAction } action - 当前触发的无障碍控制操作类型。
+ * @returns { AccessibilityActionInterceptResult } 无障碍控制操作拦截结果，用于决定是否拦截当前组件的无障碍控制操作及后续处理方式。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -12412,7 +12359,7 @@ declare interface DragEvent {
   /**
    * 获取当前拖拽的x轴方向拖动速度。
    *
-   * @returns { number } 当前拖拽的x轴方向拖动速度。坐标轴原点为屏幕左上角，单位为vp，分正负方向速度，从左往右为正，反之为负。
+   * @returns { number } 当前拖拽的x轴方向拖动速度。坐标轴原点为屏幕左上角，单位为vp/s，分正负方向速度，从左往右为正，反之为负。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12424,7 +12371,7 @@ declare interface DragEvent {
   /**
    * 获取当前拖拽的y轴方向拖动速度。
    *
-   * @returns { number } 当前拖拽的y轴方向拖动速度。坐标轴原点为屏幕左上角，单位为vp，分正负方向速度，从上往下为正，反之为负。
+   * @returns { number } 当前拖拽的y轴方向拖动速度。坐标轴原点为屏幕左上角，单位为vp/s，分正负方向速度，从上往下为正，反之为负。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12436,7 +12383,7 @@ declare interface DragEvent {
   /**
    * 获取当前拖拽的主方向拖动速度。
    *
-   * @returns { number } 当前拖拽的主方向拖动速度。为xy轴方向速度的平方和的算术平方根，单位为vp。
+   * @returns { number } 当前拖拽的主方向拖动速度。为xy轴方向速度的平方和的算术平方根，单位为vp/s。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14314,23 +14261,13 @@ declare interface StateStyles {
 }
 
 /**
- * Defines the options of popup message.
- *
- * @interface PopupMessageOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @since 10
- */
-/**
  * 气泡文本的样式。
  *
- * @interface PopupMessageOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 declare interface PopupMessageOptions {
 
@@ -14439,7 +14376,6 @@ declare enum DismissReason {
 /**
  * 气泡关闭的信息。
  *
- * @interface DismissPopupAction
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -15240,7 +15176,11 @@ declare interface TipsOptions {
   arrowPointPosition?: ArrowPointPosition;
 
   /**
-   * The width of the arrow.
+   * 设置气泡箭头宽度。若所设置的宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
+   * 默认值：16
+   * 单位：vp
+   * 说明：
+   * 不支持设置百分比。
    *
    * @type { ?Dimension }
    * @default 16.0_vp.
@@ -15253,7 +15193,11 @@ declare interface TipsOptions {
   arrowWidth?: Dimension;
 
   /**
-   * The height of the arrow.
+   * 设置气泡箭头高度。
+   * 默认值：8
+   * 单位：vp
+   * 说明：
+   * 不支持设置百分比。
    *
    * @type { ?Dimension }
    * @default 8.0_vp.
@@ -18197,6 +18141,15 @@ declare class TouchResult {
 
 /**
  * 深度空间中的三维向量。
+ * 用于为组件设置空间效果参数。
+ *
+ * > **说明：**
+ * >
+ * > - 空间效果仅作用于[DepthComponent](./ts-basic-components-depthcomponent-sys.md)的子组件，且仅当DepthComponent相关参数设置正确才能生效。
+ * >
+ * > - 空间效果不支持[Web](../../../web/web-component-overview.md)、[XComponent](./ts-basic-components-xcomponent.md)、[RichEditor](./ts-basic-components-richeditor.md)、[RichText](./ts-basic-components-richtext.md)、[Video](./ts-media-components-video.md)、[Component3D](./ts-basic-components-component3d.md)、[EmbeddedComponent](./ts-container-embedded-component.md)组件。
+ * >
+ * > - 本模块为系统接口。
  *
  * @interface DepthVector3
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18246,6 +18199,15 @@ declare interface DepthVector3 {
 
 /**
  * 深度空间中的4D向量。
+ * 用于为组件设置空间效果参数。
+ *
+ * > **说明：**
+ * >
+ * > - 空间效果仅作用于[DepthComponent](./ts-basic-components-depthcomponent-sys.md)的子组件，且仅当DepthComponent相关参数设置正确才能生效。
+ * >
+ * > - 空间效果不支持[Web](../../../web/web-component-overview.md)、[XComponent](./ts-basic-components-xcomponent.md)、[RichEditor](./ts-basic-components-richeditor.md)、[RichText](./ts-basic-components-richtext.md)、[Video](./ts-media-components-video.md)、[Component3D](./ts-basic-components-component3d.md)、[EmbeddedComponent](./ts-container-embedded-component.md)组件。
+ * >
+ * > - 本模块为系统接口。
  *
  * @interface DepthVector4
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18310,6 +18272,15 @@ declare interface DepthVector4 {
 
 /**
  * 深度空间中的RGB颜色。
+ * 用于为组件设置空间效果参数。
+ *
+ * > **说明：**
+ * >
+ * > - 空间效果仅作用于[DepthComponent](./ts-basic-components-depthcomponent-sys.md)的子组件，且仅当DepthComponent相关参数设置正确才能生效。
+ * >
+ * > - 空间效果不支持[Web](../../../web/web-component-overview.md)、[XComponent](./ts-basic-components-xcomponent.md)、[RichEditor](./ts-basic-components-richeditor.md)、[RichText](./ts-basic-components-richtext.md)、[Video](./ts-media-components-video.md)、[Component3D](./ts-basic-components-component3d.md)、[EmbeddedComponent](./ts-container-embedded-component.md)组件。
+ * >
+ * > - 本模块为系统接口。
  *
  * @interface DepthColorRGB
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18360,6 +18331,15 @@ declare interface DepthColorRGB {
 
 /**
  * 三维空间中的空间角位置。
+ * 用于为组件设置空间效果参数。
+ *
+ * > **说明：**
+ * >
+ * > - 空间效果仅作用于[DepthComponent](./ts-basic-components-depthcomponent-sys.md)的子组件，且仅当DepthComponent相关参数设置正确才能生效。
+ * >
+ * > - 空间效果不支持[Web](../../../web/web-component-overview.md)、[XComponent](./ts-basic-components-xcomponent.md)、[RichEditor](./ts-basic-components-richeditor.md)、[RichText](./ts-basic-components-richtext.md)、[Video](./ts-media-components-video.md)、[Component3D](./ts-basic-components-component3d.md)、[EmbeddedComponent](./ts-container-embedded-component.md)组件。
+ * >
+ * > - 本模块为系统接口。
  *
  * @interface SpatialPosition
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18421,6 +18401,15 @@ declare interface SpatialPosition {
 
 /**
  * 空间效果选项。
+ * 用于为组件设置空间效果参数。
+ *
+ * > **说明：**
+ * >
+ * > - 空间效果仅作用于[DepthComponent](./ts-basic-components-depthcomponent-sys.md)的子组件，且仅当DepthComponent相关参数设置正确才能生效。
+ * >
+ * > - 空间效果不支持[Web](../../../web/web-component-overview.md)、[XComponent](./ts-basic-components-xcomponent.md)、[RichEditor](./ts-basic-components-richeditor.md)、[RichText](./ts-basic-components-richtext.md)、[Video](./ts-media-components-video.md)、[Component3D](./ts-basic-components-component3d.md)、[EmbeddedComponent](./ts-container-embedded-component.md)组件。
+ * >
+ * > - 本模块为系统接口。
  *
  * @interface SpatialEffectParams
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -19137,9 +19126,8 @@ declare enum DraggingSizeChangeEffect {
 }
 
 /**
- * Define the menu pop-up policy
+ * 菜单弹出的策略。
  *
- * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -19147,9 +19135,8 @@ declare enum DraggingSizeChangeEffect {
  * @since 12 dynamic
  */
 declare enum MenuPolicy {
-
   /**
-   * Default value. The default logic of whether to pop up a menu depends on the scene.
+   * 按照底层默认逻辑决定是否弹出菜单。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19160,7 +19147,7 @@ declare enum MenuPolicy {
   DEFAULT = 0,
 
   /**
-   * Hide pop up menu.
+   * 始终不弹出菜单。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19171,7 +19158,7 @@ declare enum MenuPolicy {
   HIDE = 1,
 
   /**
-   * Show pop up menu.
+   * 始终弹出菜单。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19898,24 +19885,23 @@ declare class CommonMethod<T> {
    * >
    * > - 组件延伸到避让区时，在避让区的事件如点击事件等可能会被系统拦截，优先给状态栏等系统组件响应。
    * >
-   * > -
-   * 滚动类容器内的组件不建议设置expandSafeArea属性，如果设置，需要按照组件嵌套关系，将当前节点到滚动类祖先容器间所有直接节点设置expandSafeArea属性，否则expandSafeArea属性在滚动后可能会失效，写
-   * 法参考[示例7](#示例7滚动类容器扩展安全区)。
+   * > - 滚动类容器内的组件不建议设置expandSafeArea属性，如果设置，需要按照组件嵌套关系，将当前节点到滚动类祖先容器间所有直接节点设置expandSafeArea属性，
+   * 否则expandSafeArea属性在滚动后可能会失效，写法参考[示例7](#示例7滚动类容器扩展安全区)。
    * >
    * > - expandSafeArea属性仅作用于当前组件，不会向父组件或子组件传递，因此使用过程中，所有相关组件均需配置。
    * >
-   * > -
-   * 同时设置expandSafeArea和position属性时，position属性会优先生效，expandSafeArea属性会后生效。对于未设置position、offset等绘制属性的组件，如果其边界未与避让区重叠，设置exp
-   * andSafeArea属性将不生效，如弹窗和半模态组件。
+   * > - 同时设置expandSafeArea和position属性时，position属性会优先生效，expandSafeArea属性会后生效。
+   * 对于未设置position、offset等绘制属性的组件，如果其边界未与避让区重叠，设置expandSafeArea属性将不生效，如弹窗和半模态组件。
    * >
    * > - 对于expandSafeArea属性无法生效的场景，若要将组件部署在避让区，需要手动调整组件的坐标。
    *
-   * @param { Array<SafeAreaType> } types - 配置扩展安全区域的类型。未添加Metadata配置项时，页面不避让挖孔，CUTOUT类型不生效。
-   *     <br>默认值： [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD]。
-   *     <br>非法值：按默认值处理。
-   * @param { Array<SafeAreaEdge> } edges - 配置扩展安全区域的边缘。
-   *     <br>默认值： [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]。
-   *     <br>非法值：按默认值处理。扩展至所有避让区域。
+   * @param { Array<SafeAreaType> } types - 配置扩展安全区域的类型。默认值包含SafeAreaType.CUTOUT，
+   * 但未添加[Metadata](docroot:../../apis-ability-kit/js-apis-bundleManager-metadata.md)配置项时，页面不避让挖孔，CUTOUT类型不生效。
+   * <br>默认值：[SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD] 
+   * <br>非法值：按默认值处理。
+   * @param { Array<SafeAreaEdge> } edges - 配置扩展安全区域的边缘，默认扩展至所有避让区域。
+   * <br>默认值：[SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]。
+   * <br>非法值：按默认值处理。
    * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20080,8 +20066,9 @@ declare class CommonMethod<T> {
    * >
    * > - 从API version 20开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    *
-   * @param { function } event - 触摸事件信息。value的值为包含子节点信息的数组。
-   * @returns { T } 返回当前组件。
+   * @param { function } event - 自定义触摸测试的回调函数，用于接收包含子节点触摸测试信息的数组value，
+   * value中仅包含开发者通过id属性设置了id的命名节点的信息，并返回TouchResult以控制子节点的事件分发策略。
+   * @returns { T } 返回当前组件，可用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -21196,11 +21183,11 @@ declare class CommonMethod<T> {
   onHoverMove(event: Callback<HoverEvent>): T;
 
   /**
-   * Trigger a accessibility hover event.
+   * 开启无障碍模式后，单指触摸绑定了该回调且可被无障碍聚焦的组件时，触发该回调。
    *
-   * @param { AccessibilityCallback } callback - A callback instance used when the component is touched after accessibility mode is enabled.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { AccessibilityCallback } callback - 提供开启无障碍模式后的无障碍悬浮回调事件，当单指触摸绑定该回调的可被无障碍识别为可聚焦的组件时触发该回调。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -21209,12 +21196,15 @@ declare class CommonMethod<T> {
   onAccessibilityHover(callback: AccessibilityCallback): T;
 
   /**
-   * prompt for current component and descendants unable to handle accessibility hover event
+   * 当开启朗读类辅助应用（如屏幕朗读器）且手指触摸在组件区域，同时该组件及子组件全部没有被无障碍悬浮识别为可聚焦时，会触发该回调，并通过回调参数返回该触摸事件对应的TouchEvent。仅支持手指触摸。
+   * 不支持触摸位置位于以下组件区域内的场景，包括UIExtension、Web、FormComponent、XComponent，以及与第三方UI框架对接的场景。在上述场景下，该回调接口无法生效。
+   * 组件无法被无障碍悬浮识别为可聚焦的主要原因包括，组件的无障碍重要性accessibilityLevel为"no"或者"no-hide-descendants"；
+   * 组件无文本且未配置无障碍文本accessibilityText，同时不支持点击或长按操作。
    *
-   * @param { AccessibilityTransparentCallback } callback - A callback instance used when current component and
-   * descendants not handled accessibility hover event
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { AccessibilityTransparentCallback } callback - 提供开启朗读类辅助应用后未能被无障碍悬浮响应的触摸事件。
+   *         当手指触摸在组件区域，且该组件及子组件全部没有被无障碍悬浮识别为可聚焦时，触发该回调。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -23559,7 +23549,8 @@ declare class CommonMethod<T> {
    *
    * > **说明：**
    * >
-   * > - overlay会将浮层组件覆盖在所绑定的组件上方，阻塞用户对浮层下方组件的所有交互操作。
+   * > - overlay会将浮层组件覆盖在所绑定的组件上方，阻塞用户对浮层下方组件的所有交互操作。若需用户可操作下方组件，应在浮层builder的最外层组件上配置`.hitTestBehavior(HitTestMode.Transparent)`。
+   * 此配置在通过浮层实现水印时尤其重要，因为水印显示不应妨碍用户对下层组件的操作。
    * > - 多次调用overlay接口时，如果同时传入string类型和
    * > [CustomBuilder]{@link CustomBuilder}类型，或者同时传入string类型和
    * > [ComponentContent]{@link ComponentContent}类型，浮层内容会叠加显示。
@@ -23579,9 +23570,10 @@ declare class CommonMethod<T> {
    *     **ComponentContent** is recommended. [since 10 - 11]
    * @param { string | CustomBuilder | ComponentContent } value - 遮罩文本内容或自定义组件构造函数。<br/>**说明：**<br/>自定义组件作为浮层时，不支持键盘走焦到自
    *     定义组件中。通过CustomBuilder设置浮层时，浮层中的内容会在页面刷新时销毁并重新创建，存在一定的性能损耗，页面频繁刷新的场景推荐使用ComponentContent方式设置浮层。 [since 12]
-   * @param { OverlayOptions } [options] - 浮层的定位。<br/>**说明：**<br/>API version 12之前，options: <br/>{<br/>align?: 
+   * @param { OverlayOptions } [options] - 浮层的定位。当需要自定义浮层相对于组件的方位或偏移量时传入该参数；不传入时，浮层默认按照`align`的默认值`TopStart`定位，
+   * 并使用默认偏移量`offset: { x: 0, y: 0 }`，显示在组件左上角。<br/>**说明：**<br/>API version 12之前，options: <br/>{<br/>align?: 
    *     [Alignment]{@link Alignment}, <br/>offset?: {x?: number, y?: number}<br/>} [since 12]
-   * @returns { T } 返回当前组件。
+   * @returns { T } 返回当前组件，可用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -23591,11 +23583,12 @@ declare class CommonMethod<T> {
   overlay(value: string | CustomBuilder | ComponentContent, options?: OverlayOptions): T;
 
   /**
-   * Config toolbar for current component.
+   * 为绑定该属性的组件，在窗口顶部标题栏相应分栏创建由ToolBarItem构成的工具栏，分栏位置由绑定该属性的组件所在分栏决定。CustomBuilder必须由ToolBarItem构成，该工具栏才能生效。
+   * 适用于在分栏导航场景下，需要在标题栏区域集成快捷操作入口（如收藏、分享、编辑等操作按钮）的应用。
    *
-   * @param { CustomBuilder } value
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { CustomBuilder } value - 为当前组件配置CustomBuilder类型的自定义工具栏。CustomBuilder必须由ToolBarItem构成，该工具栏才能生效。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 20 dynamic
@@ -24051,11 +24044,12 @@ declare class CommonMethod<T> {
    * @test
    */
   /**
-   * 控件标识，开发者可以通过标识来区分不同控件
+   * 组件的唯一标识，唯一性由使用者保证。
+   * 此接口仅用于对应用的测试。与id同时使用时，后赋值的属性会覆盖先赋值的属性，建议仅设置id。
    *
-   * @param { string } value
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { string } value - 组件的唯一标识，唯一性由使用者保证。与id同时使用时，后赋值的属性会覆盖先赋值的属性，建议仅设置id。
+   * @returns { T } 返回当前组件，用于链式调用。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -24065,7 +24059,7 @@ declare class CommonMethod<T> {
   key(value: string): T;
 
   /**
-   * Id. User can set an id to the component to identify it.
+   * 组件的id，开发者可以为组件设置id来标识该组件。
    *
    * @param { string } value
    * @returns { T }
@@ -24074,7 +24068,7 @@ declare class CommonMethod<T> {
    * @since 8
    */
   /**
-   * Id. User can set an id to the component to identify it.
+   * 组件的id，开发者可以为组件设置id来标识该组件。
    *
    * @param { string } value
    * @returns { T }
@@ -24084,7 +24078,7 @@ declare class CommonMethod<T> {
    * @since 9
    */
   /**
-   * Id. User can set an id to the component to identify it.
+   * 组件的id，开发者可以为组件设置id来标识该组件。
    *
    * @param { string } value
    * @returns { T }
@@ -24095,11 +24089,11 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Id. User can set an id to the component to identify it.
+   * 组件的唯一标识，唯一性由使用者保证。若同一个组件设置了多个id，最后设置的生效。当未设置id时，组件默认id为空。与key同时使用时，后赋值的属性会覆盖先赋值的属性。
    *
-   * @param { string } value
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { string } value - 组件的唯一标识，唯一性由使用者保证。与key同时使用时，后赋值的属性会覆盖先赋值的属性。
+   * @returns { T } 返回当前组件，用于链式调用。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform
    * @form
@@ -24628,6 +24622,15 @@ declare class CommonMethod<T> {
 
   /**
    * 将空间效果应用于组件。
+   * 用于为组件设置空间效果参数。
+   *
+   * > **说明：**
+   * >
+   * > - 空间效果仅作用于[DepthComponent](./ts-basic-components-depthcomponent-sys.md)的子组件，且仅当DepthComponent相关参数设置正确才能生效。
+   * >
+   * > - 空间效果不支持[Web](../../../web/web-component-overview.md)、[XComponent](./ts-basic-components-xcomponent.md)、[RichEditor](./ts-basic-components-richeditor.md)、[RichText](./ts-basic-components-richtext.md)、[Video](./ts-media-components-video.md)、[Component3D](./ts-basic-components-component3d.md)、[EmbeddedComponent](./ts-container-embedded-component.md)组件。
+   * >
+   * > - 本模块为系统接口。
    *
    * @param { SpatialEffectParams | undefined } params - 空间效果参数。
    * @returns { T }
@@ -24706,9 +24709,9 @@ declare class CommonMethod<T> {
   keyboardShortcut(value: string | FunctionKey, keys: Array<ModifierKey>, action?: () => void): T;
 
   /**
-   * Sets whether to enable accessibility grouping.
+   * 设置是否启用无障碍分组。
    *
-   * @param { boolean } value - set group with accessibility, default value is false.
+   * @param { boolean } value - 设置无障碍分组，默认值为false。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24716,9 +24719,9 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Sets whether to enable accessibility grouping.
+   * 设置是否启用无障碍分组。
    *
-   * @param { boolean } value - set group with accessibility, default value is false.
+   * @param { boolean } value - 设置无障碍分组，默认值为false。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24727,16 +24730,20 @@ declare class CommonMethod<T> {
    * @since 11
    */
   /**
-   * Sets whether to enable accessibility grouping.
+   * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
+   * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
+   * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
+   * 当子组件accessibilityLevel设置为"yes"时则不受accessibilityGroup约束，在满足屏幕朗读其他规则下，子组件可聚焦。
+   * 通过accessibilityPreferred启用优先拼接无障碍文本进行朗读后，将优先拼接其子组件的无障碍文本属性作为组件的合并文本。
+   * 若某一子组件未设置无障碍文本，则继续拼接该子组件的通用文本属性，若该子组件没有通用文本属性，则忽略该子组件不进行拼接。
+   * 从API version 23开始，通过accessibilityOptions中的相关配置项（stateControllerRoleType或stateControllerId、
+   * actionControllerRoleType或actionControllerId），可以指定一个特定子组件，由该子组件的状态信息和点击事件来接管当前聚合组件的无障碍能力。
    *
-   * <p><strong>NOTE</strong>
-   * <br>Whether to enable accessibility grouping. When accessibility grouping is enabled,
-   * <br>the component and all its children are treated as a single selectable unit, and the accessibility
-   * <br>service will no longer focus on the individual child components.</p>
-   *
-   * @param { boolean } value - set group with accessibility, default value is false.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { boolean } value - 无障碍分组，设置为true时表示该组件及其所有子组件为一整个可以选中的组件，无障碍服务将不再关注其子组件内容，会合并子组件的文本与无障碍信息，并将其发送至无障碍服务；
+   *         设置为false表示不启用无障碍分组。
+   *     默认值：false
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24746,23 +24753,24 @@ declare class CommonMethod<T> {
   accessibilityGroup(value: boolean): T;
 
   /**
-   * Sets whether to enable accessibility grouping.
+   * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
+   * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
+   * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
+   * 当子组件accessibilityLevel设置为"yes"时则不受accessibilityGroup约束，在满足屏幕朗读其他规则下，子组件可聚焦。
+   * 通过accessibilityPreferred启用优先拼接无障碍文本进行朗读后，将优先拼接其子组件的无障碍文本属性作为组件的合并文本。
+   * 若某一子组件未设置无障碍文本，则继续拼接该子组件的通用文本属性，若该子组件没有通用文本属性，则忽略该子组件不进行拼接。
+   * 从API version 23开始，通过accessibilityOptions中的相关配置项（stateControllerRoleType或stateControllerId、
+   * actionControllerRoleType或actionControllerId），可以指定一个特定子组件，由该子组件的状态信息和点击事件来接管当前聚合组件的无障碍能力。
    *
-   * <p><strong>NOTE</strong>
-   * <br>If accessibility grouping is enabled and the component does not contain a universal text attribute
-   * <br>or an accessibility text attribute, the system will concatenate the universal text attributes of
-   * <br>its child components to form a merged text for the component. If a child component lacks a universal
-   * <br>text attribute, it will be ignored in the concatenation process.
-   *
-   * <br>When accessibilityPreferred is set to true, the system will prioritize concatenating the accessibility
-   * <br>text attributes of the child components to form the merged text. If a child component lacks an
-   * <br>accessibility text attribute, the system will continue to concatenate its universal text attribute.
-   * <br>If a child component lacks both, it will be ignored.</p>
-   *
-   * @param { boolean } isGroup - set group with accessibility, default value is false.
-   * @param { AccessibilityOptions } accessibilityOptions - accessibilityOptions for accessibility, default value is false.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { boolean } isGroup - 无障碍分组，设置为true时表示该组件及其所有子组件为一整个可以选中的组件，无障碍服务将不再关注其子组件内容，会合并子组件的文本与无障碍信息，并将其发送至无障碍服务；
+   *         设置为false表示不启用无障碍分组。
+   *     默认值：false
+   * @param { AccessibilityOptions } accessibilityOptions - 无障碍分组的配置选项对象，包含以下属性：<br/>
+   *         - accessibilityPreferred：设置为true时，使应用优先拼接无障碍文本进行朗读；设置为false时，应用进行屏幕朗读时不会优先使用无障碍文本。
+   *     - stateControllerRoleType或stateControllerId：从API version 23开始支持，指定一个特定子组件，使用该子组件的状态信息作为当前聚合组件的无障碍状态。
+   *     - actionControllerRoleType或actionControllerId：从API version 23开始支持，指定一个特定子组件，使用该子组件的点击事件作为当前聚合组件的无障碍操作。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24772,9 +24780,9 @@ declare class CommonMethod<T> {
   accessibilityGroup(isGroup: boolean, accessibilityOptions: AccessibilityOptions): T;
 
   /**
-   * Sets the accessibility text.
+   * 设置无障碍文本。
    *
-   * @param { string } value - set accessibility text, default value is "".
+   * @param { string } value - 设置无障碍文本，默认值为""。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24782,9 +24790,9 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Sets the accessibility text.
+   * 设置无障碍文本。
    *
-   * @param { string } value - set accessibility text, default value is "".
+   * @param { string } value - 设置无障碍文本，默认值为""。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24793,13 +24801,15 @@ declare class CommonMethod<T> {
    * @since 11
    */
   /**
-   * Sets the accessibility text.
-   * When a component does not contain a text attribute, you can use this API to set an accessibility
-   * text attribute, so that accessibility services can announce the specified content for the component.
+   * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
    *
-   * @param { string } value - set accessibility text, default value is "".
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { string } value - 无障碍文本，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。
+   *         为了解决此场景，开发人员可为不包含文字信息的组件设置无障碍文本，当屏幕朗读选中此组件时播报无障碍文本的内容，帮助屏幕朗读的使用者清楚地知道自己选中了什么组件。
+   *     默认值：“”<br/>**说明：**<br/>若组件既拥有文本属性，又拥有无障碍文本属性，则组件被选中时，仅播报无障碍文本内容。
+   *     若组件设置了无障碍分组属性为true，但是既没有无障碍文本属性，也没有文本属性，会对其子节点的组件进行文本拼接（深度优先）。
+   *     不对无障碍文本属性进行拼接，如需优先拼接无障碍文本，则需设置accessibilityGroup的accessibilityPreferred。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24809,10 +24819,12 @@ declare class CommonMethod<T> {
   accessibilityText(value: string): T;
 
   /**
-   * 指定屏幕朗读扫动走焦过程中组件的下一个焦点。
-   * @param { string } nextId - 下一个被指定聚焦组件的[唯一标识id]{@link CommonMethod#id}。若唯一标识id无对应组件，则设置的accessibilityNextFocusId不存在，设置无效。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 指定屏幕朗读扫动走焦过程中组件的下一个焦点，并支持配置详细参数。
+   * 通过AccessibilityNextFocusParams参数，可以配置是否在无障碍下一个焦点处理过程中查找后代节点中的焦点。
+   *
+   * @param { string } nextId - 下一个被指定聚焦组件的唯一标识id。若唯一标识id无对应组件，则设置的accessibilityNextFocusId不存在，设置无效。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24822,10 +24834,11 @@ declare class CommonMethod<T> {
   accessibilityNextFocusId(nextId: string): T;
 
   /**
-   * 为页面设置屏幕朗读初始焦点。
-   * @param { boolean } focus - 为页面设置屏幕朗读初始焦点。值为true则表示该组件为当前页默认首焦点，值为false或其他值无效。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 为页面设置屏幕朗读初始焦点。屏幕朗读首次进入当前页面时，会将焦点定位到设置为true的组件，便于开发者引导用户优先关注页面核心内容。
+   *
+   * @param { boolean } focus - 为页面设置屏幕朗读初始焦点。值为true则表示该组件为当前页默认首焦点，值为false则不设置该组件为默认首焦点。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24836,9 +24849,12 @@ declare class CommonMethod<T> {
 
   /**
    * 设置当前组件和宿主应用为同page模式。
+   * 针对跨进程嵌入式显示的组件，例如EmbeddedComponent，其子树场景中出现的跳焦问题，可通过设置accessibilityUseSamePage属性解决。
+   * 因跨进程嵌入式显示的组件启动进程的页面变化事件与宿主页面变化事件发送时序不一致，可能导致焦点从当前组件移至另一组件，此现象称为“跳焦”。
+   *
    * @param { AccessibilitySamePageMode } pageMode - 当前跨进程嵌入式显示的组件和宿主应用的同page模式。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24849,13 +24865,13 @@ declare class CommonMethod<T> {
 
   /**
    * 设置无障碍节点是否支持屏幕朗读滚动操作。当屏幕朗读在扫动走焦时，若容器内当前页面无可聚焦的组件，会发起一次自动滚动操作。
-   * @param { boolean } isTriggerable - 用于表示组件是否支持该能力。
-   *     <br>**true**：屏幕朗读焦点切换而容器内当前页面无可聚焦的组件时，需要自动滚动操作。
-   *     <br>**false**：屏幕朗读焦点切换而容器内当前页面无可聚焦的组件时，不需要自动滚动操作。
-   *     <br>**undefined**：还原默认值。
-   *     <br>默认值：**true**
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   *
+   * @param { boolean } isTriggerable - 用于表示组件是否支持该能力。<br/>支持的值为：<br/>true：屏幕朗读焦点切换而容器内当前页面无可聚焦的组件时，需要自动滚动操作。
+   *     false：屏幕朗读焦点切换而容器内当前页面无可聚焦的组件时，不需要自动滚动操作。<br/>undefined：还原默认值。<br/>默认值：true。<br/>**说明：**
+   *     1. 该属性不影响原先无障碍节点属性ElementAttributeValues中的scrollable。<br/>2. 组件在屏幕朗读下的滚动逻辑由屏幕朗读根据该属性和组件是否支持scroll来决定。
+   *     3. 该属性为通用属性，所有基础组件均可配置。建议配置的滚动组件类型，如List、Grid、Scroll、WaterFlow等。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24865,16 +24881,15 @@ declare class CommonMethod<T> {
   accessibilityScrollTriggerable(isTriggerable: boolean): T;
 
   /**
-   * Sets the accessibility text.
-   * <p><strong>NOTE</strong>
-   * If a component has both text content and accessibility text, only the accessibility text is announced.
-   * <br>If a component is grouped for accessibility purposes but lacks both text content and accessibility
-   * <br>text, the screen reader will concatenate text from its child components (depth-first traversal).
-   * <br>To prioritize accessibility text concatenation, set accessibilityPreferred in accessibilityGroup.
-   * </p>
-   * @param { Resource } text - set accessibility text
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
+   *
+   * @param { Resource } text - 无障碍文本引用资源，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。
+   *         为了解决此场景，开发人员可为不包含文字信息的组件设置无障碍文本，当屏幕朗读选中此组件时播报无障碍文本的内容，帮助屏幕朗读的使用者清楚地知道自己选中了什么组件。
+   *     **说明：**<br/>若组件既拥有文本属性，又拥有无障碍文本属性，则组件被选中时，仅播报无障碍文本内容。
+   *     若组件设置了无障碍分组属性为true，但是既没有无障碍文本属性，也没有文本属性，会对其子节点的组件进行文本拼接（深度优先）。
+   *     不对无障碍文本属性进行拼接，如需优先拼接无障碍文本，则需设置accessibilityGroup的accessibilityPreferred。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24884,10 +24899,11 @@ declare class CommonMethod<T> {
   accessibilityText(text: Resource): T;
 
   /**
-   * 设置无障碍组件类型，特定组件类型有特定的朗读方式，可以根据应用诉求，修改组件类型，用于控制无障碍模式下对组件的朗读方式和朗读内容。
-   * @param { AccessibilityRoleType } role - 屏幕朗读播报的组件类型，如按钮、图表。具体类型可由开发者自定义。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 设置无障碍组件类型，不同组件类型有对应的朗读方式，可以根据应用诉求，修改组件类型，用于控制无障碍模式下对组件的朗读方式和朗读内容。
+   *
+   * @param { AccessibilityRoleType } role - 屏幕朗读播报的组件类型，如按钮、图表。具体类型可由开发者根据需要选择。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24897,10 +24913,11 @@ declare class CommonMethod<T> {
   accessibilityRole(role: AccessibilityRoleType): T;
 
   /**
-   * Register accessibility focus callback,when the component is focused or out of focus,the callback will be executed
-   * @param { AccessibilityFocusCallback } callback - accessibility focus callback function
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 该接口在无障碍模式下，设置无障碍节点获焦、失焦状态的回调函数。当无障碍焦点移入或移出当前组件，导致获焦、失焦状态发生变化时，触发回调函数。
+   *
+   * @param { AccessibilityFocusCallback } callback - 在无障碍模式下，当组件获焦、失焦状态发生变化时，向注册方通知当前状态。入参设置为undefined时，取消回调注册。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24910,11 +24927,12 @@ declare class CommonMethod<T> {
   onAccessibilityFocus(callback: AccessibilityFocusCallback): T;
 
   /**
-   * 注册可访问性操作拦截回调，
-   * 当要执行可访问性操作时，将执行回调
-   * @param { AccessibilityActionInterceptCallback } callback - 可访问性操作拦截回调函数
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 该接口在无障碍模式下，可在无障碍控制操作触发前通知注册的回调函数，由注册方决定是否拦截该次无障碍控制操作。对不支持点击操作的组件，即使注册该回调也不会被触发。
+   *
+   * @param { AccessibilityActionInterceptCallback } callback - 在无障碍模式且组件支持点击的前提下，在无障碍控制操作触发前通知注册方该次无障碍控制操作，
+   *         由注册方决定是否拦截该操作。未开启无障碍模式或组件不支持点击时，回调均不会触发。<br> 入参设置为undefined时，取消回调注册。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24924,11 +24942,11 @@ declare class CommonMethod<T> {
   onAccessibilityActionIntercept(callback: AccessibilityActionInterceptCallback): T;
 
   /**
-   * 设置组件的文本提示信息，供无障碍辅助应用查询。
+   * 设置组件的文本提示信息，仅在与车机交互的场景下供车机的无障碍服务监听并响应。
    *
-   * @param { string } value - 组件的文本提示信息，供无障碍辅助应用查询。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { string } value - 组件的文本提示信息，仅在与车机交互的场景下供车机的无障碍服务监听并响应。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24938,12 +24956,12 @@ declare class CommonMethod<T> {
   accessibilityTextHint(value: string): T;
 
   /**
-   * 设置无障碍说明。该属性用于为用户进一步说明当前组件，开发人员可为组件设置相对较详细的解释文本，帮助用户理解将要执行的操作。
+   * 设置无障碍说明，支持通过Resource引用资源文件。该属性用于为用户进一步说明当前组件，开发人员可为组件设置相对较详细的解释文本，帮助用户理解将要执行的操作。
    *
    * @param { string } value - 无障碍说明，用于为用户进一步说明当前组件，开发人员可为组件的该属性设置相对较详细的解释文本，帮助用户理解将要执行的操作。如帮助用户理解将要执行的操作可能导致什么后果，尤其是当这些后果无法从组件本身属性与无障碍文本中了解到时。若组件既拥有文本属性又拥有无障碍说明属性，则组件被选中时，先播报组件的文本属性，再播报无障碍说明属性的内容。
-   *     <br>默认值：**""**
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   *     默认值：“”
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form [since 12]
@@ -24954,15 +24972,11 @@ declare class CommonMethod<T> {
 
   /**
    * 设置无障碍说明，支持通过Resource引用资源文件。该属性用于为用户进一步说明当前组件，开发人员可为组件设置相对较详细的解释文本，帮助用户理解将要执行的操作。
-   * <p><strong>NOTE</strong>:
-   * <br>Reference resource of the accessibility description. You can specify further explanation
-   * <br>of the current component, for example, possible operation consequences, especially those that
-   * <br>cannot be learned from component attributes and accessibility text. If a component contains
-   * <br>both text information and the accessibility description, the text is read first and then the
-   * <br>accessibility description, when the component is selected.</p>
-   * @param { Resource } description - set description of accessibility
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   *
+   * @param { Resource } description - 无障碍说明引用资源，用于为用户进一步说明当前组件，开发人员可为组件的该属性设置相对较详细的解释文本，帮助用户理解将要执行的操作。
+   *         如帮助用户理解将要执行的操作可能导致什么后果，尤其是当这些后果无法从组件本身属性与无障碍文本中了解到时。若组件既拥有文本属性又拥有无障碍说明属性，则组件被选中时，先播报组件的文本属性，再播报无障碍说明属性的内容。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -24972,10 +24986,9 @@ declare class CommonMethod<T> {
   accessibilityDescription(description: Resource): T;
 
   /**
-   * Sets the accessibility level.
-   * This property determines whether the component can be recognized by accessibility services.
+   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
    *
-   * @param { string } value - set accessibility level, default value is auto.
+   * @param { string } value - 设置无障碍重要性，默认值为auto。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24983,10 +24996,9 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Sets the accessibility level.
-   * This property determines whether the component can be recognized by accessibility services.
+   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
    *
-   * @param { string } value - set accessibility level, default value is auto.
+   * @param { string } value - 设置无障碍重要性，默认值为auto。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24995,25 +25007,17 @@ declare class CommonMethod<T> {
    * @since 11
    */
   /**
-   * Sets the accessibility level.
-   * This property determines whether the component can be recognized by accessibility services.
-   * <p>
-   * Accessibility level, which is used to decide whether a component can be identified by the accessibility service.
-   * <br>The options are as follows:
-   * <br>"auto": The component's recognizability is determined by the accessibility grouping service and ArkUI.
-   * <br>"yes": The component can be recognized by accessibility services.
-   * <br>"no": The component cannot be recognized by accessibility services.
-   * <br>"no-hide-descendants": Neither the component nor its child components can be recognized by accessibility services.
-   * <strong>NOTE</strong>
-   * <br>When accessibilityLevel is set to "auto", the component's recognizability depends on the following factors:
-   * <br>1. The accessibility service internally determines whether the component can be recognized.
-   * <br>2. If the parent component's accessibilityGroup property has isGroup set to true, the accessibility service will
-   * <br>not focus on its child components, making them unrecognizable.
-   * <br>3. If the parent component's accessibilityLevel is set to "no-hide-descendants", the component will not be
-   * <br>recognized by accessibility services.</p>
-   * @param { string } value - set accessibility level, default value is auto.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 设置无障碍重要性。该属性用于控制某个组件是否可被无障碍辅助服务所识别。
+   *
+   * @param { string } value - 无障碍重要性，用于控制某个组件是否可被无障碍辅助服务所识别。<br/>支持的值为：<br/>
+   *         "auto"：当前组件由无障碍辅助服务和ArkUI进行综合判断组件是否可被无障碍辅助服务所识别。
+   *     "yes"：当前组件可被无障碍辅助服务所识别。当父组件启用无障碍分组时，设置为"yes"的子组件不受分组约束，在满足屏幕朗读其他规则下仍可聚焦。<br/>"no"：当前组件不可被无障碍辅助服务所识别。
+   *     "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。<br/>默认值："auto"<br/>**说明：**
+   *     当accessibilityLevel设置成"auto"时，组件是否可被无障碍辅助服务所识别取决于以下多方面因素：<br/>1. 组件是否可被识别由无障碍辅助服务内部判断，自行选择。
+   *     2. 若组件的父组件accessibilityGroup属性中isGroup设置为true，无障碍服务将不再关注其子组件内容，组件不可被无障碍辅助服务所识别。
+   *     3. 若组件的父组件accessibilityLevel属性设置为"no-hide-descendants"，组件不可被无障碍辅助服务所识别。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -25023,11 +25027,13 @@ declare class CommonMethod<T> {
   accessibilityLevel(value: string): T;
 
   /**
-   * 设置无障碍虚拟子节点。对自绘制组件传入一个自定义的CustomBuilder，该CustomBuilder中的组件在后端仅做布局不做显示，辅助应用获取无障碍节点信息时会返回CustomBuilder中的节点信息。
+   * 设置无障碍虚拟子节点。对自绘制组件传入一个CustomBuilder，该CustomBuilder中的组件在后端仅做布局不做显示，辅助应用获取无障碍节点信息时会返回CustomBuilder中的节点信息。
+   * 如使用画布组件Canvas时，可以通过虚拟节点设置相应位置和大小匹配的占位组件，让无障碍服务识别到对应区域的自绘制信息。
    *
-   * @param { CustomBuilder } builder - 无障碍虚拟子节点，使开发者可以对自绘制组件传入一个自定义的CustomBuilder，该CustomBuilder中的组件在后端仅做布局不做显示，辅助应用获取无障碍节点信息时会返回CustomBuilder中的节点信息。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { CustomBuilder } builder - 无障碍虚拟子节点，使开发者可以对自绘制组件传入一个CustomBuilder，该CustomBuilder中的组件在后端仅做布局不做显示，
+   *         辅助应用获取无障碍节点信息时会返回CustomBuilder中的节点信息。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form [since 12]
@@ -25037,15 +25043,17 @@ declare class CommonMethod<T> {
   accessibilityVirtualNode(builder: CustomBuilder): T;
 
   /**
-   * 无障碍节点是否选中的状态维护，用于支持多选的情况使用，表示组件是否被选中。此接口只影响屏幕朗读场景下的组件状态播报信息。
+   * 无障碍节点是否选中的状态维护，用于支持多选，表示组件是否被选中。此接口只影响屏幕朗读场景下的组件状态播报信息。
    *
-   * @param { boolean } isCheck - 用于表示组件是否被选中。
-   *     <br>**true**：当前组件被选中。
-   *     <br>**false**：当前组件未被选中。
-   *     <br>**undefined**：由组件自行确定选中状态。
-   *     <br>默认值：**undefined**
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { boolean } isCheck - 用于表示组件是否被选中。<br/>支持的值为：<br/>true：当前组件被选中。<br/>false：当前组件未被选中。<br/>
+   *         undefined：由组件自行确定选中状态。<br/>默认值：undefined
+   *     **说明：**<br/>1. 使用该接口设置true或false后，会默认修改该组件的checkable属性为true。
+   *     2. accessibilityChecked属性代表组件是多选模式，而accessibilitySelected属性代表组件是单选模式。
+   * 组件不能同时存在两种选择模式，会造成无障碍状态冲突，导致屏幕朗读等无障碍辅助应用无法正确识别选中状态。如使用当前接口设置组件为多选模式（设置为true、false），
+   * 则需要保证未使用accessibilitySelected函数设置属性为true或者false，如果已设置，需使用accessibilitySelected函数设置accessibilitySelected属性为undefined
+   * 模式。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -25055,15 +25063,17 @@ declare class CommonMethod<T> {
   accessibilityChecked(isCheck: boolean): T;
 
   /**
-   * 无障碍节点是否选中的状态维护，用于支持单选的情况使用，表示组件是否被选中。此接口只影响屏幕朗读场景下的组件状态播报信息。
+   * 无障碍节点是否选中的状态维护，用于支持单选，表示组件是否被选中。此接口只影响屏幕朗读场景下的组件状态播报信息。
    *
-   * @param { boolean } isSelect - 用于表示组件是否被选中。
-   *     <br>**true**：当前组件被选中。
-   *     <br>**false**：当前组件未被选中。
-   *     <br>**undefined**：由组件自行确定选中状态。
-   *     <br>默认值：**undefined**
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { boolean } isSelect - 用于表示组件是否被选中。<br/>支持的值为：<br/>true：当前组件被选中。<br/>false：当前组件未被选中。<br/>
+   *         undefined：由组件自行确定选中状态。<br/>默认值：undefined
+   *     **说明：**
+   *     1. accessibilityChecked属性代表组件是多选模式，而accessibilitySelected属性代表组件是单选模式。
+   * 组件不能同时存在两种选择模式，会造成无障碍状态冲突，导致屏幕朗读等无障碍辅助应用无法正确识别选中状态。
+   *     如使用当前接口设置组件为单选模式（true、false），则需要保证未使用accessibilityChecked函数设置属性为true或者false；
+   *     如果已设置，需使用accessibilityChecked函数设置accessibilityChecked属性为undefined模式。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -25191,7 +25201,8 @@ declare class CommonMethod<T> {
   attributeModifier(modifier: AttributeModifier<T>): T;
 
   /**
-   * 动态设置组件绑定的手势。
+   * 动态设置组件绑定的手势，适用于需要根据组件状态或用户操作动态切换手势绑定的场景。
+   * 若在当次手势操作过程中触发了组件上的手势动态切换，该切换效果在当次手势结束（所有手指抬起）后的下一次手势操作中生效。
    *
    * 说明：
    * gestureModifier不支持自定义组件。
@@ -25337,8 +25348,12 @@ declare class CommonMethod<T> {
   /**
    * 给组件绑定自定义事件拦截回调。
    *
-   * @param { Callback<TouchEvent, HitTestMode> } callback - 自定义事件拦截回调。在做触摸测试时回调此函数。
-   *    通过返回值设置组件的HitTestMode。
+   * > **说明：**
+   * >
+   * > - 从API version 20开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   * 
+   * @param { Callback<TouchEvent, HitTestMode> } callback - 自定义事件拦截回调。在做[触摸测试](docroot://ui/arkts-interaction-basic-principles.md#触摸测试)时回调此函数。
+   * 通过返回值设置组件的HitTestMode。使用TouchEvent中的touches属性前，需先校验其是否为空。
    * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -25373,11 +25388,12 @@ declare class CommonMethod<T> {
   onSizeChange(event: SizeChangeCallback): T;
 
   /**
-   * 无障碍焦点绿框的绘制层级设置功能。默认层级是跟随组件。
+   * 设置无障碍焦点绿框的绘制层级。
    *
-   * @param { FocusDrawLevel } drawLevel - 无障碍绘制能力，默认情况下绘制聚焦节点本身。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { FocusDrawLevel } drawLevel - 无障碍焦点绿框的绘制层级，用于控制绿框的绘制位置。默认情况下在聚焦节点层级绘制（即绘制聚焦节点本身）。
+   *         可选值及含义参见FocusDrawLevel枚举，包括在聚焦节点层级绘制和在Z序控制顶层绘制两种模式。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -25520,10 +25536,9 @@ declare class CommonMethod<T> {
   /**
    * 设置组件的状态播报文本，用于屏幕朗读场景下清晰说明组件当前的实时状态。屏幕朗读时会优先播报该状态文本。
    *
-   * @param { string | Resource | undefined } description - 需要播报组件当前状态的语音播报文本。
-   *     <br>设置文本超过1000字符时，截取前1000字符进行播报。
-   *     <br>**undefined**：播报文本默认为空。
-   * @returns { T } 返回调用该接口的组件引用。
+   * @param { string | Resource | undefined } description - 需要播报组件当前状态的语音播报文本。<br/>设置文本超过1000字符时，截取前1000字符进行播报。<br/>
+   *         undefined：播报文本默认为空。
+   * @returns { T } 返回当前对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -25534,12 +25549,12 @@ declare class CommonMethod<T> {
   accessibilityStateDescription(description: string | Resource | undefined): T;
 
   /**
-   * 设置组件的无障碍操作的可选参数，用于限制或修改屏幕朗读等辅助应用发起的操作行为。
+   * 设置组件无障碍操作的可选参数，用于限制或修改屏幕朗读等辅助应用发起的操作行为。
    *
-   * @param { AccessibilityActionOptions | undefined } option - 无障碍操作的参数，用于限制或者修改无障碍操作下的滑动行为。
-   *     <br>AccessibilityActionOptions中的scrollStep用于设置无障碍操作下的滑动步数。
-   *     <br>取值为**undefined**时scrollStep按1处理。
-   * @returns { T } 返回调用该接口的组件引用。
+   * @param { AccessibilityActionOptions | undefined } option - 无障碍操作的参数，用于限制或者修改无障碍操作下的滑动行为。<br/>
+   *         AccessibilityActionOptions中的scrollStep用于设置无障碍操作下的滑动步数。
+   *     取值为undefined时scrollStep按1处理。
+   * @returns { T } 返回当前对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -25551,12 +25566,13 @@ declare class CommonMethod<T> {
 
   /**
    * 指定屏幕朗读扫动走焦过程中组件的下一个焦点，并支持配置详细参数。
-   * <br>通过AccessibilityNextFocusParams参数，可以配置是否在无障碍下一个焦点处理过程中查找后代节点中的焦点。
-   * @param { string } nextId - 下一个被指定聚焦组件的[唯一标识id]{@link CommonMethod#id}。若唯一标识id无对应组件，则设置的accessibilityNextFocusId不存在，设置无效。
-   * @param { AccessibilityNextFocusParams | undefined } nextFocusParams - 无障碍下一个焦点处理的详细参数，用于配置是否在后代节点中查找可聚焦节点。
-   *     <br>取值为**undefined**时，不配置下一个焦点处理的详细参数，不在后代节点中查找焦点。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 通过AccessibilityNextFocusParams参数，可以配置是否在无障碍下一个焦点处理过程中查找后代节点中的焦点。
+   *
+   * @param { string } nextId - 下一个被指定聚焦组件的唯一标识id。若唯一标识id无对应组件，则设置的accessibilityNextFocusId不存在，设置无效。
+   * @param { AccessibilityNextFocusParams | undefined } nextFocusParams - 无障碍下一个焦点处理的详细参数，用于配置是否在后代节点中查找可聚焦节点。<br/>
+   *         取值为undefined时，不配置下一个焦点处理的详细参数，不在后代节点中查找焦点。
+   * @returns { T } 返回当前对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @form
@@ -25585,9 +25601,9 @@ declare class CommonMethod<T> {
    * 设置组件的自定义无障碍操作，支持开发者设置一个自定义actions的数组，用于给组件按操作名进行自定义操作的回调绑定。
    *
    * @param { Array<AccessibilityCustomAction> | undefined } actions - 自定义无障碍操作数组，每个操作包含操作名称和回调，用于给组件按操作名进行自定义操作的回调绑定。
-   *     <br>**说明**：数组长度最大支持16个，超出部分将不生效。
-   *     <br>取值为**undefined**时，不设置自定义操作。
-   * @returns { T } 返回调用方法的组件实例。
+   *         <br/>**说明：**<br/>数组长度最大支持16个，超出部分将不生效。
+   *     取值为undefined时，不设置自定义操作。
+   * @returns { T } 返回当前对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -25598,11 +25614,12 @@ declare class CommonMethod<T> {
   accessibilityCustomActions(actions: Array<AccessibilityCustomAction> | undefined): T;
 
   /**
-   * 设置组件的检查器标签，该标签仅在DevEco Studio上显示。
+   * 设置组件的调测标签。未设置时，组件调测标签默认为空字符串。对同一组件多次调用本接口时，后设置的标签会覆盖先前的标签。
    *
-   * @param { string | undefined } label - 检查器标签。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @param { string | undefined } label - 组件的调测标签，需在整个应用内保持唯一，以便在调测时准确定位和区分节点。对同一组件多次调用本接口时，后设置的标签会覆盖先前的标签。
+   *         传入undefined时清除调测标签，调测标签默认为空字符串。
+   * @returns { T } 返回当前组件，可用于链式调用。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
@@ -27768,91 +27785,52 @@ declare interface RectResult {
 }
 
 /**
- * CaretOffset info.
+ * 光标相对输入框的位置信息。
  *
- * @interface CaretOffset
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @since 11
- */
-/**
- * CaretOffset info.
- *
- * @interface CaretOffset
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 12 dynamic
+ * @atomicservice [since 12]
+ * @since 11 dynamic
  */
 declare interface CaretOffset {
-
   /**
-   * 获取CaretOffset的索引
+   * 光标所在位置的索引值，从0开始计数，取值范围为[0, 文本长度]。
    *
-   * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 11
-   */
-  /**
-   * 获取CaretOffset的索引
-   *
-   * @type { number }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @crossplatform [since 12]
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   index: number;
 
   /**
-   * Get the x of the relative position.
+   * 光标相对输入框的x坐标值，单位px。
    *
-   * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 11
-   */
-  /**
-   * Get the x of the relative position.
-   *
-   * @type { number }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @crossplatform [since 12]
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   x: number;
 
   /**
-   * 获取相对位置的y。
+   * 光标相对输入框的y坐标值，单位px。
    *
-   * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 11
-   */
-  /**
-   * 获取相对位置的y。
-   *
-   * @type { number }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @crossplatform [since 12]
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   y: number;
 }
 
 /**
- * Defines the span options of TextContentController.
+ * 用于设置输入框插入字符时的配置选项。
  *
- * @interface TextContentControllerOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -27860,11 +27838,13 @@ declare interface CaretOffset {
  * @since 15 dynamic
  */
 declare interface TextContentControllerOptions {
-
   /**
-   * the offset that add a text at.
+   * 插入文本的位置，取值范围[0, 文本长度]。超出范围时自动修正到有效边界位置。
    *
-   * @type { ?number }
+   * > **说明：**
+   * >
+   * > 当需要在指定位置（而非末尾）插入文本时传入此参数。不传入时默认插入到文本末尾。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27875,111 +27855,85 @@ declare interface TextContentControllerOptions {
 }
 
 /**
- * TextContentControllerBase
+ * TextInput、TextArea、Search的基础控制器。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @since 10
- */
-/**
- * TextContentControllerBase
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 declare abstract class TextContentControllerBase {
-
   /**
-   * Get the index and relative position of the CaretOffset.
+   * 返回当前光标所在位置信息。
    *
-   * @returns { CaretOffset } index and relative position of the CaretOffset.
+   * > **说明**
+   * >
+   * > - 在当前帧更新光标位置同时调用该接口，该接口不生效。
+   * >
+   * > - 在Search组件中，返回的位置信息是相对Search组件中搜索图标的偏移值。
+   * >
+   * > - 在Search组件中，不输入文本时，返回值中有相对Search组件的位置信息。
+   * >
+   * > - 返回值中的位置信息是光标相对于可编辑组件的位置。
+   * >
+   * > - 当无法获取光标位置时（例如[TextInputController]{@link TextInputController}未与[TextInput]{@link ./text_input}组件绑定时），该接口返回undefined。
+   *
+   * @returns { CaretOffset } 光标相对输入框的位置。
+   *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Get the index and relative position of the CaretOffset.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>If this API is called when the caret position is updated in the current frame, it will not take effect.
-   * <br>For the Search component, the returned position information is the offset of the first character
-   * relative to the search icon in the component.
-   * <br>If no text is entered in the Search component,
-   * the return value contains the position information relative to the component.
-   * <br>The location information in the return value is the location of the caret relative to the editable component.
-   * </p>
-   *
-   * @returns { CaretOffset } index and relative position of the CaretOffset.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   getCaretOffset() : CaretOffset;
 
   /**
-   * Get the start and end positions of the text content.
+   * 获取已编辑文本内容区域相对于组件的位置和大小，返回值的单位为像素。
    *
-   * @returns { RectResult } Text content rect.
+   * > **说明：**
+   * >  
+   * > - 初始不输入文本时，返回值中有相对组件的位置信息，大小为0。
+   * > - 返回值中的位置信息是第一个字符相对于可编辑组件的位置。
+   * > - 在Search组件中，返回的位置信息是相对Search组件中搜索图标的偏移值。
+   * > - 有输入时，返回信息中的宽度是组件编辑区域的固定宽度。
+   * 
+   * @returns { RectResult } 获取已编辑文本内容区域相对组件的位置和大小。
+   *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 10
-   */
-  /**
-   * Get the start and end positions of the text content.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>If no text is entered, the return value contains the position information, but the size is 0.
-   * <br>The position information is the offset of the first character relative to the editable area.
-   * <br>For the Search component, the returned position information is the offset of the first character
-   * relative to the search icon in the component.
-   * <br>If there is input, the width in the return value is the fixed width of the editable area.
-   * </p>
-   *
-   * @returns { RectResult } Text content rect.The unit of the return value is pixel.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   getTextContentRect() : RectResult;
 
   /**
-   * Get the lines number of the text content.
+   * 获取已编辑文本内容的行数。
    *
-   * @returns { number } Text content line count
+   * @returns { number } 已编辑文本内容行数。
+   *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 10
-   */
-  /**
-   * Get the lines number of the text content.
-   * The getTextContentLineCount type is used to obtain the number of lines of the edited text.
-   *
-   * @returns { number } Text content line count
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   getTextContentLineCount() : number;
 
   /**
-   * Add a text.
+   * 在已编辑文本的指定位置插入文本，默认插入至文本末尾。
    *
-   * @param { string } text - text value.
-   * @param { TextContentControllerOptions } [textOperationOptions] - operation info.
-   * @returns { number } caret index
+   * 拖拽文本的状态下不生效。
+   *
+   * > **说明**
+   * >
+   * > `addText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑。预上屏状态由输入法管理，应用层调用`addText`/`deleteText`会破坏输入法的状态管理，因此应避免在预上屏状态下调用`addText`。
+   *
+   * @param { string } text - 插入的文本内容。
+   * @param { TextContentControllerOptions } [textOperationOptions] - 插入文本的配置选项，用于自定义插入位置等参数。当需要在指定位置插入文本时传入此参数，不设置时默认插入文本至末尾。
+   * @returns { number } 插入文本后光标的位置。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27989,22 +27943,26 @@ declare abstract class TextContentControllerBase {
   addText(text: string, textOperationOptions?: TextContentControllerOptions): number;
 
   /**
-   * 设置提示文本的样式。
+   * 删除已编辑文本的指定区域的内容。
    *
-   * @param { StyledString } styledString - 设置提示文本样式的属性字符串
-   *    若传入的入参无效，则本接口不生效
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
-   */
-  setStyledPlaceholder(styledString: StyledString): void;
-
-  /**
-   * Delete text in TextRange.
+   * > **说明**
+   * >
+   * > - 拖拽文本的状态下不生效。
+   * >
+   * > - `deleteText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑，不推荐在预上屏状态下调用。
+   * >
+   * > - 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
    *
-   * @param { TextRange } [range] - range for deleting.
+   * > **与`deleteBackward`的差异**
+   * >
+   * > - `deleteText`支持范围删除，可删除任意指定区域的文本；`deleteBackward`模拟用户删除操作，删除光标前一个字符或已选中文本。
+   * >
+   * > - `deleteText`在预上屏状态下应避免调用，`deleteBackward`在预上屏场景下不支持使用。
+   * >
+   * > - 建议根据删除需求选择：需要删除指定范围文本时使用`deleteText`，需要删除光标前字符时使用`deleteBackward`。
+   *
+   * @param { TextRange } [range] - 删除文本的范围，包括删除文本的起始位置和终止位置。<br>起始位置应小于等于结束位置，否则接口调用无效。起始位置小于0视为0，结束位置大于文本长度视为文本长度。
+   *     <br>未指定删除范围时，默认将删除全部文本。未指定删除文本的起始位置，则默认从下标0开始删除；未指定删除文本的终止位置，则默认以文本末尾作为删除的结束点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28014,9 +27972,10 @@ declare abstract class TextContentControllerBase {
   deleteText(range?: TextRange): void;
 
   /**
-   * Gets the selected range of text content.
+   * 返回当前文本的选择范围。
    *
-   * @returns { TextRange } range for selecting.
+   * @returns { TextRange } 文本当前的选择范围，未选中返回光标位置。
+   *      <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28026,29 +27985,13 @@ declare abstract class TextContentControllerBase {
   getSelection(): TextRange;
 
   /**
-   * Clear the content of preview.
+   * 获取指定范围的文本内容。可用于以下场景：
+   * - 文本编辑器中获取用户选中的文本内容进行处理。
+   * - 内容校验时获取特定范围的文本进行检查。
+   * - 文本处理应用中提取部分文本内容进行分析或转换。
    *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 17 dynamic
-   */
-  /**
-   * Clear the content of preview.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 23 dynamic
-   */
-  clearPreviewText(): void;
-
-  /**
-   * Gets the text content of the selected range.
-   *
-   * @param { TextRange } [range] - selected range.
-   * @returns { string } text content of the selected range.
+   * @param { TextRange } [range] - 获取文本的范围，包括需要获取文本的起始位置和终止位置。<br>未指定范围时，默认将获取全部文本。未指定获取文本的起始位置，则默认从下标0开始；未指定获取文本的终止位置，则默认以文本末尾作为结束点。
+   * @returns { string } 返回指定范围内的文本内容字符串。当指定的起始位置大于终止位置时，返回空字符串。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -28058,7 +28001,63 @@ declare abstract class TextContentControllerBase {
   getText(range?: TextRange): string;
 
   /**
-   * 删除输入框文本末尾字符。
+   * 通知输入法清除当前的预上屏文本内容。
+   *
+   * > **说明：**
+   * >
+   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+   * 
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform [since 23]
+   * @atomicservice
+   * @since 17 dynamic
+   */
+  clearPreviewText(): void;
+
+  /**
+   * 设置属性字符串样式的占位文本，触发绑定或更新。
+   *
+   * > **说明：**
+   * >
+   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+   *
+   * @param { StyledString } styledString - 设置属性字符串样式的Placeholder，其优先级高于纯文本的placeholder属性。<br>Placeholder不支持属性字符串事件手势，超链接跳转。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 22 dynamic
+   */
+  setStyledPlaceholder(styledString: StyledString): void;
+
+  /**
+   * 将起始索引与结束索引传递给与其绑定的输入框（TextInput、TextArea、Search）组件，并将此范围内的文字滚动到可视区域。
+   *
+   * > **说明：**
+   * >
+   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+   *
+   * @param { TextRange } [range] - 滚动到可视区域的文本范围，包括文本起始位置和终止位置。<br>起始位置应小于等于结束位置，否则接口调用无效。起始位置小于0视为0，结束位置大于全文长度视为全文长度。<br>未指定范围时，默认为全部文本。未指定起始位置，默认起始位置
+   *     为0；未指定结束位置，默认结束位置为全文长度。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 23 dynamic
+   */
+  scrollToVisible(range?: TextRange): void;
+
+  /**
+   * 删除基础控制器`controller`绑定的文本输入框内文本光标前的一个字符。如果在调用此功能前已用鼠标或键盘选中了部分文本，则会删除被选中的文本。
+   *
+   * 拖拽文本的状态下不生效。
+   *
+   * `deleteBackward`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑，不支持在预上屏场景下使用。
+   *
+   * > **说明：**
+   * >
+   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28067,19 +28066,6 @@ declare abstract class TextContentControllerBase {
    * @since 23 dynamic
    */
   deleteBackward(): void;
-
-  /**
-   * 将输入框文本滚动到可见区。
-   *
-   * @param { TextRange } [range] - 可见区范围。
-   * 若该参数非法，则本方法不会生效。
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 23 dynamic
-   */
-  scrollToVisible(range?: TextRange): void;
 }
 
 /**
@@ -29741,13 +29727,12 @@ declare interface Callback<T, V = void> {
 declare type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
 
 /**
- * Defines the callback type used in accessibility hover events.
- * The value of isHover indicates whether the touch is hovering over the component.
- * The value of event contains information about AccessibilityHoverEvent.
+ * 提供开启无障碍模式后的无障碍悬浮回调事件类型。
  *
  * @typedef { function } AccessibilityCallback
- * @param { boolean } isHover
- * @param { AccessibilityHoverEvent } event
+ * @param { boolean } isHover - 表示开启无障碍模式后，手指在组件上触发由Touch事件转换成的无障碍悬浮事件，手指进入时为true，退出时为false。
+ * @param { AccessibilityHoverEvent } event - 无障碍悬浮事件对象，用于获取触发无障碍悬浮事件时的详细信息，包括无障碍悬浮动作类型（type）、手指相对于组件/窗口/屏幕的坐标（x、y、
+ *         windowX、windowY、displayX、displayY、globalDisplayX、globalDisplayY）等属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -29757,10 +29742,11 @@ declare type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
 declare type AccessibilityCallback = (isHover: boolean, event: AccessibilityHoverEvent) => void;
 
 /**
- * Defines the callback type used in accessibility hover transparent event.
+ * 提供开启朗读类辅助应用后未能被无障碍悬浮响应的触摸事件回调类型。
  *
  * @typedef { function } AccessibilityTransparentCallback
- * @param { TouchEvent } event - The value of event contains information about original accessibility hover event.
+ * @param { TouchEvent } event - 原始Touch事件对象，用于获取无法被无障碍悬浮识别为可聚焦组件的触摸事件的详细信息，包括触摸点坐标、触摸类型等属性。
+ *         <br>**说明：** TouchEvent对象的触摸事件类型TouchType为四种无障碍悬浮事件类型中的一种，分别为HOVER_ENTER、HOVER_MOVE、HOVER_EXIT和HOVER_CANCEL。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -30162,9 +30148,8 @@ declare interface GestureModifier {
 }
 
 /**
- * Defines the selection options.
+ * setTextSelection选中文字时的配置。
  *
- * @interface SelectionOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -30172,11 +30157,9 @@ declare interface GestureModifier {
  * @since 12 dynamic
  */
 declare interface SelectionOptions {
-
   /**
-   * Menu pop-up policy.
+   * 菜单弹出的策略。默认值：MenuPolicy.DEFAULT。
    *
-   * @type { ?MenuPolicy }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
