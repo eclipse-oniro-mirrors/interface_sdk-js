@@ -5497,26 +5497,6 @@ declare namespace wifiManager {
   }
 
   /**
-   * Service protocol type.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  protocolType: P2pServiceProtocolType;
-
-  /**
-   * Array of query strings used by the Wi-Fi protocol stack process (**wpa_supplicant**). A single data record contains
-   * a maximum of 1024 bytes.
-   *
-   * @syscap SystemCapability.Communication.WiFi.P2P
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  queryList: Array<string>;
-}
-
-  /**
    * Adds and registers the local P2P service description of DNS-SD (DNS service discovery) to be discovered by the peer
    * device.
    *
