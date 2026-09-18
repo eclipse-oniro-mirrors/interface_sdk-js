@@ -4574,6 +4574,46 @@ declare namespace webview {
         getSubframeErrorPageEnabled(): boolean;
 
         /**
+         * Enables or disables automatic reload for error pages.
+         *
+         * When enabled, the Web component automatically retries loading on network errors
+         * using a retry backoff sequence: 1s → 5s → 30s → 1min → 5min → 10min → 30min.
+         * Retries stop after a total of 30 minutes.
+         *
+         * > **NOTE**
+         * >
+         * > - Only network errors trigger auto-reload. The following are excluded:
+         * > certificate errors, SSL (Secure Sockets Layer) protocol errors, authentication errors,
+         * > POST requests, non-HTTP(S) protocols, and errors blocked by the client.
+         * > - Auto-reload does not affect the {@link onOverrideErrorPage} callback.
+         * > - When auto-reload is triggered, the {@link onErrorReceive} callback will be
+         * > invoked again for each retry attempt.
+         *
+         * @param { boolean } enable - Whether to enable automatic reload. The value **true** enables it,
+         *     and **false** disables it.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        enableAutoReload(enable: boolean): void;
+
+        /**
+         * Returns whether automatic reload for error pages is enabled.
+         *
+         * @returns { boolean } Whether automatic reload is enabled. Returns **true** if enabled, **false** otherwise.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        isAutoReloadEnabled(): boolean;
+
+        /**
          * After enable PrivateNetworkAccess feature, ArkWeb will send a CORS preflight request before issuing any
          * sub-resource private network requests to request explicit permission from the target server.
          * After disable PrivateNetworkAccess, ArkWeb will no longer check whether the private network request
