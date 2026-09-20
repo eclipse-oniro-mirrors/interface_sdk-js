@@ -3439,6 +3439,7 @@ declare namespace media {
      * paused state. This API uses a promise to return the result.
      *
      * @returns { Promise<PlaybackInfo> } Promise used to return **PlaybackInfo**.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise. 
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 12 dynamic
      * @since 23 static
@@ -3505,6 +3506,7 @@ declare namespace media {
      * playing, paused, completed, or stopped state. This API uses a promise to return the result.
      *
      * @returns { Promise<PlaybackMetrics> } Promise used to return the playback metrics of the current AVPlayer.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 dynamic&static
      */
@@ -3749,7 +3751,7 @@ declare namespace media {
      * Clears all the items in the player's playlist. Currently playing media will be terminated immediately.
      *
      * @returns { Promise<void> } Promise is used to return the result.
-     * @throws { BusinessError } 5400102 - operation not allowed . Returned via promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned via promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
