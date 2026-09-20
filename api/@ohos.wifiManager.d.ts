@@ -3362,8 +3362,6 @@ declare namespace wifiManager {
     /**
      * Whether automatic connection is allowed. The value **true** indicates that automatic connection is allowed, and 
      * the value **false** indicates the opposite.
-     * 
-     * **System API:** This interface is a system API.
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
@@ -3375,8 +3373,6 @@ declare namespace wifiManager {
     /**
      * Whether the Wi-Fi connection is secure. The value **true** indicates that the Wi-Fi connection is secure, and the
      * value **false** indicates the opposite.
-     * 
-     * **System API:** This interface is a system API.
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
@@ -4222,8 +4218,6 @@ declare namespace wifiManager {
 
     /**
      * Signal-to-noise ratio (SNR), in dB. 
-     * 
-     * **System API**: This interface is a system API.
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
