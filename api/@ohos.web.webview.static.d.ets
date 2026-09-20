@@ -4741,6 +4741,51 @@ declare namespace webview {
          * @since 26.0.0 static
          */
         executeAIPageCommand(command: string): Promise<string>;
+
+        /**
+         * Sets user data for the current navigation entry.
+         *
+         * @param { string } key - Key of the user data.
+         * @param { string } value - Value of the user data.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+         *     <br>2. Incorrect parameter types.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        setNavigationEntryUserData(key: string, value: string): void;
+
+        /**
+         * Obtains the user data of the current navigation entry by key.
+         *
+         * @param { string } key - Key of the user data.
+         * @returns { string } Value of the user data with the specified key.
+         *                    If the key does not exist or the capability is not enabled, an empty string is returned.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+         *     <br>2. Incorrect parameter types.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        getNavigationEntryUserData(key: string): string;
+
+        /**
+         * Removes the user data with the specified key from the current navigation entry.
+         *
+         * @param { string } key - Key of the user data to remove.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+         *     <br>2. Incorrect parameter types.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        removeNavigationEntryUserData(key: string): void;
     }
 
     /**

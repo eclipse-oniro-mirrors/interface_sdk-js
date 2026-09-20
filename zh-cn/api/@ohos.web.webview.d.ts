@@ -6312,6 +6312,54 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     executeAIPageCommand(command: string): Promise<string>;
+    /**
+     * 设置当前导航条目的用户数据。该用户数据与会话中的当前导航条目绑定，在用户导航离开后返回（包括前进/后退导航和页面缓存恢复）时保留。
+     * 使用相同key再次调用本接口会覆盖先前的值。
+     *
+     * > **说明：**
+     * >
+     * > - 用户数据仅存储在内存中，不做持久化。应用或Web引擎重启后，用户数据会被清除。
+     * >
+     * > - 若**key**或**value**为空字符串，本接口不生效。
+     *
+     * @param { string } key - 用户数据的key。若为空字符串，本接口不生效。
+     * @param { string } value - 用户数据的值。若为空字符串，本接口不生效。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     <br>2. Incorrect parameter types.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+    /**
+     * 获取当前导航条目中指定key的用户数据。
+     *
+     * @param { string } key - 用户数据的key。
+     * @returns { string } 指定key的用户数据值。若key不存在或能力未使能，返回空字符串。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     <br>2. Incorrect parameter types.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+    /**
+     * 移除当前导航条目中指定key的用户数据。若key不存在，本接口不生效。
+     *
+     * @param { string } key - 待移除用户数据的key。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     <br>2. Incorrect parameter types.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
   }
 
   /**

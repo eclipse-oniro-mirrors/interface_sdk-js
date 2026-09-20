@@ -4590,6 +4590,50 @@ declare namespace webview {
          * @since 23 static
          */
         stopMicrophone(): void;
+
+        /**
+         * 设置当前导航条目的用户数据。
+         *
+         * @param { string } key - 用户数据的key。
+         * @param { string } value - 用户数据的值。
+         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+         *     <br>2. Incorrect parameter types.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        setNavigationEntryUserData(key: string, value: string): void;
+
+        /**
+         * 获取当前导航条目中指定key的用户数据。
+         *
+         * @param { string } key - 用户数据的key。
+         * @returns { string } 指定key的用户数据值。若key不存在或能力未使能，返回空字符串。
+         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+         *     <br>2. Incorrect parameter types.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        getNavigationEntryUserData(key: string): string;
+
+        /**
+         * 移除当前导航条目中指定key的用户数据。
+         *
+         * @param { string } key - 待移除用户数据的key。
+         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+         *     <br>2. Incorrect parameter types.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        removeNavigationEntryUserData(key: string): void;
     }
 
     /**
