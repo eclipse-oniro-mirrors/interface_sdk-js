@@ -19,6 +19,7 @@
 import type { AsyncCallback, Callback } from './@ohos.base';
 import type common from './@ohos.app.ability.common';
 import type Want from './@ohos.app.ability.Want';
+import window from './@ohos.window';
 /**
  * 数据防泄露（Data Loss Prevention，简称为DLP）是系统级的数据防泄露解决方案，提供跨设备文件的权限管理、加密存储、授权访问等能力。DLP通过加密技术对敏感文件进行保护，生成.dlp格式的加密文件（称为DLP文件）。
  * 当打开DLP文件时，系统会自动创建隔离的DLP沙箱环境，确保文件内容不会泄露到非授权环境。
