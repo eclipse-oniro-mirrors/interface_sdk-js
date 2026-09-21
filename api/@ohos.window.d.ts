@@ -4205,7 +4205,7 @@ declare namespace window {
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum WindowPosition {
     /**
@@ -4214,7 +4214,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     NOT_TOPMOST = -3,
     /**
@@ -4222,7 +4222,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     TOPMOST = -2,
     /**
@@ -4230,7 +4230,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     BOTTOM = -1,
     /**
@@ -4238,7 +4238,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     TOP = 0
   }
@@ -4248,7 +4248,7 @@ declare namespace window {
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface WindowPositionParams {
     /**
@@ -4257,7 +4257,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     windowId: int;
     /**
@@ -4268,7 +4268,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     insertAfter: int;
   }
@@ -4302,7 +4302,7 @@ declare namespace window {
    *     Only main windows are supported.
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function setWindowPosition(list: Array<WindowPositionParams>): Promise<void>;
 
