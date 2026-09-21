@@ -248,7 +248,7 @@ declare namespace inputMethodEngine {
    * The numeric verification code edit box. The value is fixed at 15.
    * The value should be an integer.
    *
-   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @syscap SystemCapability.MiscServices.InputMethodFramework11
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */

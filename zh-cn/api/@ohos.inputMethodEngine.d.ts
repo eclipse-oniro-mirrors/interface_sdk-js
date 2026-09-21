@@ -265,7 +265,7 @@ declare namespace inputMethodEngine {
    * 数字验证码编辑框。固定为15。
    * 取值限定为整数。
    *
-   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @syscap SystemCapability.MiscServices.InputMethodFramework1
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
