@@ -116,7 +116,7 @@ declare namespace huksExternalCrypto {
      * @FaAndStageModel
      * @since 26.0.1
      */
-    HUKS_EXT_CRYPTO_TAG_TIME_OUT = HuksExternalCryptoTagType.HUKS_EXT_CRYPTO_TAG_TYPE_UINT | 200006,
+    HUKS_EXT_CRYPTO_TAG_TIMEOUT = HuksExternalCryptoTagType.HUKS_EXT_CRYPTO_TAG_TYPE_UINT | 200006,
 
     /**
      * 表示获取资源ID所需的信息，格式和内容由厂商自定义。
