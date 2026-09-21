@@ -1764,7 +1764,7 @@ declare namespace window {
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum FocusChangeReason {
     /**
@@ -1772,7 +1772,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     DEFAULT = 0,
     /**
@@ -1780,7 +1780,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     CLICK = 1
   }
@@ -1790,7 +1790,7 @@ declare namespace window {
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface WindowFocusState {
     /**
@@ -1798,7 +1798,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     isFocused: boolean;
     /**
@@ -1806,7 +1806,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     focusChangeReason: FocusChangeReason;
     /**
@@ -1816,7 +1816,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     nextFocusedWindowId?: int;
     /**
@@ -1826,7 +1826,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prevFocusedWindowId?: int;
   }
@@ -9726,7 +9726,7 @@ declare namespace window {
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onWindowFocusStateChange(callback: Callback<WindowFocusState>): void;
 
@@ -9743,7 +9743,7 @@ declare namespace window {
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offWindowFocusStateChange(callback?: Callback<WindowFocusState>): void;
 
