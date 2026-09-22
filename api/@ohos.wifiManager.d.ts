@@ -4185,6 +4185,35 @@ declare namespace wifiManager {
   }
 
   /**
+   * Special Wi-Fi info
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SpecialWifiInfo {
+    /**
+     * The network ID of the connected Wi-Fi
+     * @type { number }
+     * @syscap SystemCapability.Communication.WiFi.STA
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    networkId: number;
+
+    /**
+     * Whether the connected Wi-Fi is CEAIR airplane Wi-Fi
+     * @type { boolean }
+     * @syscap SystemCapability.Communication.WiFi.STA
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isCeairPlaneWifi?: boolean;
+  }
+
+  /**
    * Describes the WAPI pre-shared key Type.
    * @enum { int }
    * @syscap SystemCapability.Communication.WiFi.Core
@@ -5649,6 +5678,22 @@ declare namespace wifiManager {
    * @since 26.0.0 dynamic&static
    */
   function getWifiCapability(capability: WifiCapability): boolean;
+
+  /**
+   * Get special Wi-Fi info
+   *
+   * @permission ohos.permission.GET_WIFI_INFO
+   * @returns { SpecialWifiInfo } Returns the special Wi-Fi info.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - System API is not allowed called by Non-system application.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2501000 - Operation failed.
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getSpecialWifiInfoSync(): SpecialWifiInfo;
 
   /**
    * Query whether Wi-Fi is available
