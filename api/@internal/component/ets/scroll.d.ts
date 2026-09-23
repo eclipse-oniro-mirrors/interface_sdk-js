@@ -677,6 +677,18 @@ declare class Scroller {
    * @since 26.0.0 dynamic
    */
   getFrameNode(): FrameNode | undefined;
+  /**
+   * Obtains the current scroll state of the scrollable component bound to this scroller.
+   *
+   * @returns { ScrollState } Current scroll state.
+   * @throws { BusinessError } 100004 - Controller not bound to a component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  getScrollState(): ScrollState;
 }
 
 /**
