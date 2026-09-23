@@ -23,8 +23,8 @@
  * 
  * > **说明：**
  * 
- * > 如果出现分割线粗细不一或者消失的问题，请参考[组件级像素取整常见问题](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-pixelRoundForComponent.md#常见问题)。
- *
+ * > 如果出现分割线粗细不一或者消失的问题，请参考[组件级像素取整常见问题]{@link pixelRound}。
+ * 
  * ## 子组件
  *
  * 无
@@ -143,8 +143,8 @@ interface DividerInterface {
    * 
    * > **说明：**
    * 
-   * > 如果出现分割线粗细不一或者消失的问题，请参考[组件级像素取整常见问题](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-pixelRoundForComponent.md#常见问题)。
-   *
+   * > 如果出现分割线粗细不一或者消失的问题，请参考[组件级像素取整常见问题]{@link pixelRound}。
+   * 
    * ## 子组件
    * 
    * 无

@@ -539,7 +539,7 @@ declare class Path2D extends CanvasPath {
    * 构造一个空的Path2D对象，支持配置Path2D对象的单位模式。
    *
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
-   * 配置方法同[CanvasRenderingContext2D](docroot://reference/apis-arkui/arkui-ts/ts-canvasrenderingcontext2d.md)。
+   * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。
    * <br>默认值：DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -569,7 +569,7 @@ declare class Path2D extends CanvasPath {
    *
    * @param { Path2D } path - 需要复制的Path2D路径对象，用于基于现有路径创建新的Path2D对象。传入的路径对象不会被修改，新创建的对象将包含该路径的完整副本。 
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
-   * 配置方法同[CanvasRenderingContext2D](docroot://reference/apis-arkui/arkui-ts/ts-canvasrenderingcontext2d.md)。
+   * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。
    * <br>默认值：DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -585,7 +585,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象。
    *
    * @param { string } d - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范](docroot://reference/apis-arkui/arkui-ts/ts-drawing-components-path.md#svg路径描述规范)，异常值按无效值处理。
+   * [SVG路径描述规范]{@link path}，异常值按无效值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -599,9 +599,9 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象，支持配置Path2D对象的单位模式。
    *
    * @param { string } description - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范](docroot://reference/apis-arkui/arkui-ts/ts-drawing-components-path.md#svg路径描述规范)，异常值按无效值处理。
+   * [SVG路径描述规范]{@link path}，异常值按无效值处理。
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
-   * 配置方法同[CanvasRenderingContext2D](docroot://reference/apis-arkui/arkui-ts/ts-canvasrenderingcontext2d.md)。
+   * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。
    * <br>默认值：DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1055,20 +1055,6 @@ declare class ImageData {
    * 创建宽为width，高为height，像素为data的ImageData，如果data未定义，则填充值全为0的一维数组，
    * 支持使用unit配置ImageData对象的单位模式。
    *
-<<<<<<< HEAD
-   * @param { number } width - 矩形区域宽度，默认单位为vp。
-   *    <br>异常值NaN和Infinity按0处理。
-   * @param { number } height - 矩形区域高度，默认单位为vp。
-   *    <br>异常值NaN和Infinity按0处理。
-   * @param { Uint8ClampedArray } data - 一维数组，保存了相应的颜色数据，数据值范围为0到255。
-   *    <br>传入异常值undefined时，data为undefined。
-   *    <br/>默认值：值全为0的一维数组。
-   * @param { LengthMetricsUnit } [unit] - 用来配置ImageData对象的单位模式，配置后无法动态更改，
-   *    配置方法同
-   *    [CanvasRenderingContext2D](docroot://reference/apis-arkui/arkui-ts/ts-canvasrenderingcontext2d.md)。
-   *    <br>异常值undefined、NaN和Infinity按默认值处理。
-   *    <br>默认值：DEFAULT。
-=======
    * @param { number } width - 矩形区域宽度，单位由unit参数决定，默认单位为vp。宽高不超过16384px，最大面积不超过16000px*16000px，超过最大面积则无法正常绘制。
    * 当创建面积超过536870911平方像素时，返回对象的width和height为0，data为undefined。
    * <br>异常值NaN、Infinity、负数和0按0处理。
@@ -1081,7 +1067,6 @@ declare class ImageData {
    * 当需要使用vp单位实现响应式布局或适配不同屏幕密度时传入此参数。
    * <br>异常值undefined、NaN和Infinity按默认值处理。
    * <br>默认值：DEFAULT。
->>>>>>> a0c712f30d (中文sdk修复part 3)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
