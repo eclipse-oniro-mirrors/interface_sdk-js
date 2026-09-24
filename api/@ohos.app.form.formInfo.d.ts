@@ -1013,7 +1013,24 @@ declare namespace formInfo {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    FORM_FONT_WEIGHT_SCALE_KEY = 'ohos.extra.param.key.form_font_weight_scale'
+    FORM_FONT_WEIGHT_SCALE_KEY = 'ohos.extra.param.key.form_font_weight_scale',
+
+    /**
+     * Indicates the key specifying the color mode of the form edit ability,
+     * which is represented as
+     * want: {
+     *   "parameters": {
+     *       FORM_EDIT_COLOR_MODE_KEY: -1
+     *    }
+     * }
+     * Value: -1 for automatic, 0 for dark mode, 1 for light mode.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.form_edit_color_mode'
   }
 
   /**
