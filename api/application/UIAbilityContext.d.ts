@@ -138,7 +138,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version
@@ -191,10 +192,13 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
-   * @throws { BusinessError } 801 - Capability not support. [since 12]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 12]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version
    *     greater than 11. [since 12]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
@@ -244,10 +248,13 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
-   * @throws { BusinessError } 801 - Capability not support. [since 12]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 12]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version
    *     greater than 11. [since 12]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
@@ -300,7 +307,8 @@ declare class UIAbilityContext extends Context {
    * @param { OpenLinkOptions } [options] - Options of the URL.
    * @param { AsyncCallback<AbilityResult> } [callback] - Callback used to return the result.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -342,8 +350,9 @@ declare class UIAbilityContext extends Context {
    * @param { Want } want - Want information about the target UIAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -394,8 +403,9 @@ declare class UIAbilityContext extends Context {
    * @param { StartOptions } options - Parameters used for starting the UIAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -443,8 +453,9 @@ declare class UIAbilityContext extends Context {
    * @param { Want } want - Want information about the target UIAbility.
    * @param { StartOptions } options - Parameters used for starting the UIAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -512,7 +523,8 @@ declare class UIAbilityContext extends Context {
    *     device ID, and parameters (optional). If **'ohos.aafwk.param.callAbilityToForeground'** in **parameters** is set to 
    *     **true**, the UIAbility is brought to the foreground. Otherwise, the UIAbility is brought to the background.
    * @returns { Promise<Caller> } Promise used to return the Caller object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -569,8 +581,9 @@ declare class UIAbilityContext extends Context {
    *     [getCreatedOsAccountsCount]{@link ./../@ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount(callback: AsyncCallback<int>)}
    *     .
    * @returns { Promise<Caller> } Promise used to return the caller object to communicate with.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -617,8 +630,9 @@ declare class UIAbilityContext extends Context {
    *     .
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -671,8 +685,9 @@ declare class UIAbilityContext extends Context {
    * @param { StartOptions } options - Parameters used for starting the UIAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -725,8 +740,9 @@ declare class UIAbilityContext extends Context {
    *     .
    * @param { StartOptions } [options] - Parameters used for starting the UIAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -801,7 +817,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version greater
@@ -866,7 +883,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version greater
@@ -928,7 +946,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version greater
@@ -969,8 +988,9 @@ declare class UIAbilityContext extends Context {
    * @param { AsyncCallback<AbilityResult> } callback - Callback used to return the result. If the API call is successful, 
    *     **code** in **err** is **0** and **data** is the result code and data when the UIAbility is terminated. Otherwise, 
    *     **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1023,8 +1043,9 @@ declare class UIAbilityContext extends Context {
    * @param { StartOptions } options - Parameters used for starting the UIAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1082,8 +1103,9 @@ declare class UIAbilityContext extends Context {
    *     .
    * @param { StartOptions } [options] - Parameters used for starting the UIAbility.
    * @returns { Promise<AbilityResult> } Promise that contains the **AbilityResult** parameter.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1124,8 +1146,9 @@ declare class UIAbilityContext extends Context {
    * @param { Want } want - Want information for starting the ServiceExtensionAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1153,8 +1176,9 @@ declare class UIAbilityContext extends Context {
    *
    * @param { Want } want - Want information for starting the ServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1194,8 +1218,9 @@ declare class UIAbilityContext extends Context {
    *     .
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1233,8 +1258,9 @@ declare class UIAbilityContext extends Context {
    *     [getCreatedOsAccountsCount]{@link ./../@ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount(callback: AsyncCallback<int>)}
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1263,7 +1289,7 @@ declare class UIAbilityContext extends Context {
    * @param { Want } want - Want information for stopping the ServiceExtensionAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1273,7 +1299,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
@@ -1290,7 +1317,7 @@ declare class UIAbilityContext extends Context {
    *
    * @param { Want } want - Want information for stopping the ServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1300,7 +1327,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1325,8 +1353,9 @@ declare class UIAbilityContext extends Context {
    *     .
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1359,8 +1388,9 @@ declare class UIAbilityContext extends Context {
    *     [getCreatedOsAccountsCount]{@link ./../@ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount(callback: AsyncCallback<int>)}
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1507,7 +1537,8 @@ declare class UIAbilityContext extends Context {
    *     or [openLink]{@link UIAbilityContext.openLink}. The value can be obtained from the 
    *     [CALLER_REQUEST_CODE]{@link ./../@ohos.app.ability.wantConstant:wantConstant} field in **want**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -1539,7 +1570,8 @@ declare class UIAbilityContext extends Context {
    * @returns { long } Connection ID. A caller can call 
    *     [disconnectServiceExtensionAbility]{@link UIAbilityContext.disconnectServiceExtensionAbility(connection: long)} with
    *     this ID for disconnection.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1581,8 +1613,9 @@ declare class UIAbilityContext extends Context {
    * @param { ConnectOptions } options - Instance of the callback function after the connection to the 
    *     ServiceExtensionAbility is set up.
    * @returns { long } Result code of the connection.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1691,7 +1724,7 @@ declare class UIAbilityContext extends Context {
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 10]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1710,7 +1743,7 @@ declare class UIAbilityContext extends Context {
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 10]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1824,11 +1857,12 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 14]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000076 - The app instance key is invalid. [since 14]
@@ -1886,11 +1920,12 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 14]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000076 - The app instance key is invalid. [since 14]
@@ -1945,11 +1980,12 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 14]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000076 - The app instance key is invalid. [since 14]
@@ -1995,7 +2031,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2033,7 +2070,8 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2073,7 +2111,8 @@ declare class UIAbilityContext extends Context {
    *     startup fails.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **err** is 
    *     **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -2123,7 +2162,8 @@ declare class UIAbilityContext extends Context {
    * @param { AbilityStartCallback } abilityStartCallback - Callback used to return the detailed error information if the 
    *     startup fails.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -2181,8 +2221,9 @@ declare class UIAbilityContext extends Context {
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -2218,8 +2259,9 @@ declare class UIAbilityContext extends Context {
    *
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -2258,8 +2300,9 @@ declare class UIAbilityContext extends Context {
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @param { int } accountId - The account to request.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed;
    *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
    *     4.The logical screen corresponding to the specified accountId is not in the foreground.
@@ -2344,7 +2387,8 @@ declare class UIAbilityContext extends Context {
    * **System capability**: SystemCapability.Ability.AbilityRuntime.Core
    *
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not support.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000067 - The StartOptions check failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2362,7 +2406,8 @@ declare class UIAbilityContext extends Context {
    * **System capability**: SystemCapability.Ability.AbilityRuntime.Core
    *
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not support.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000067 - The StartOptions check failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2398,10 +2443,12 @@ declare class UIAbilityContext extends Context {
    *
    * @param { Want } want - Mandatory information for starting the UIServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -2435,10 +2482,12 @@ declare class UIAbilityContext extends Context {
    * @param { UIServiceExtensionConnectCallback } callback - Callback for connecting to the UIServiceExtensionAbility.
    * @returns { Promise<UIServiceProxy> } Promise used to return the result, which is a 
    *     [UIServiceProxy]{@link UIServiceProxy:UIServiceProxy} object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -2490,10 +2539,12 @@ declare class UIAbilityContext extends Context {
    * @param { string } label - New icon label. The label cannot be an empty string, and can contain a maximum of 1024 bytes.
    * @param { image.PixelMap } icon - Icon. The recommended icon size is 512 px * 512 px.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2516,8 +2567,10 @@ declare class UIAbilityContext extends Context {
    * @param { string } groupId - The icon aggregation label for UIAbility within the application on the shortcut bar.
    *     The length must not exceed 64 characters.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Window operations encountered failures.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2539,7 +2592,8 @@ declare class UIAbilityContext extends Context {
    * > invalid.
    *
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not support.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000065 - The API can be called only when the ability is running in the foreground.
@@ -2602,7 +2656,8 @@ declare class UIAbilityContext extends Context {
    *     [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -2641,7 +2696,8 @@ declare class UIAbilityContext extends Context {
    *     [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -2683,7 +2739,8 @@ declare class UIAbilityContext extends Context {
    * @returns { long } Connection ID. A caller can call 
    *     [disconnectAppServiceExtensionAbility]{@link UIAbilityContext.disconnectAppServiceExtensionAbility} with this ID for
    *     disconnection.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -2713,7 +2770,8 @@ declare class UIAbilityContext extends Context {
    * @param { long } connection - Connection ID returned by 
    *     [connectAppServiceExtensionAbility]{@link UIAbilityContext.connectAppServiceExtensionAbility}.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2772,7 +2830,8 @@ declare class UIAbilityContext extends Context {
    *     [onAcceptWant]{@link ./../@ohos.app.ability.AbilityStage:AbilityStage.onAcceptWant} callback is not triggered.
    * @param { StartOptions } [options] - Parameters used for starting the UIAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000008 - The crowdtesting application expires.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -2815,7 +2874,8 @@ declare class UIAbilityContext extends Context {
    *
    * @param { Want } want - Want information about the UIAbility to start. The bundle name and ability name are verified.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Connect to system server error.
    * @throws { BusinessError } 16000063 - The target to restart does not belong to the current application or is not a UIAbility.
@@ -2848,7 +2908,8 @@ declare class UIAbilityContext extends Context {
    *     the mission center, and window snapshot in the shortcut bar. The icon must be a square and its size must not
    *     exceed 128 MB. Otherwise, error code 401 is returned.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 16000135 - The main window of this ability not exist.
@@ -2879,8 +2940,9 @@ declare class UIAbilityContext extends Context {
    * @param { ConnectOptions } options - Instance of the callback function after the connection to the 
    *     ServiceExtensionAbility is set up.
    * @returns { long } Result code of the connection.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -2971,7 +3033,8 @@ declare class UIAbilityContext extends Context {
   * @param { string } specifiedFlag - If the launchType of target UIAbility is specified,
   *     you can set specifiedFlag by this param, and system will not call onAcceptWant.
   * @returns { Promise<void> } The promise returned by the function.
-  * @throws { BusinessError } 801 - Capability not supported.
+  * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+  *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
   * @throws { BusinessError } 16000001 - The specified ability does not exist.
   * @throws { BusinessError } 16000008 - The crowdtesting application expires.
   * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.

@@ -50,9 +50,10 @@ declare namespace autoStartupManager {
    * @param { 'systemAutoStartup' } type - Event type. The value is fixed at **systemAutoStartup**, which can be called
    *     only by system applications.
    * @param { AutoStartupCallback } callback - Callback used for registration.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -68,9 +69,10 @@ declare namespace autoStartupManager {
    *
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupCallback } callback - Auto startup callback.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -90,9 +92,10 @@ declare namespace autoStartupManager {
    * @param { 'systemAutoStartup' } type - Event type. The value is fixed at **systemAutoStartup**, which can be called
    *     only by system applications.
    * @param { AutoStartupCallback } [callback] - Callback used for unregistration.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -108,9 +111,10 @@ declare namespace autoStartupManager {
    *
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupCallback } [callback] - Auto startup callback.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -131,9 +135,10 @@ declare namespace autoStartupManager {
    * @param { AutoStartupInfo } info - Information about the target application component.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the setting is successful, **err**
    *     is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -158,9 +163,10 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupInfo } info - Information about the target application component.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -186,9 +192,10 @@ declare namespace autoStartupManager {
    * @param { AutoStartupInfo } info - Information about the target application component.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the cancellation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -212,9 +219,10 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupInfo } info - Information about the target application component.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -241,9 +249,10 @@ declare namespace autoStartupManager {
    *     is obtained, **err** is **undefined** and **data** is
    *     **Array<[AutoStartupInfo]{@link ./application/AutoStartupInfo:AutoStartupInfo}>**; otherwise, **err** is an
    *     error object.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -264,9 +273,10 @@ declare namespace autoStartupManager {
    *
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @returns { Promise<Array<AutoStartupInfo>> } Promise used to return the information obtained.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -286,7 +296,8 @@ declare namespace autoStartupManager {
    *
    * @returns { Promise<boolean> } Promise used to return the auto-startup status. **true** if enabled for automatic
    *     startup at boot time, **false** otherwise.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

@@ -54,8 +54,9 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the target application.
    * @param { AsyncCallback<number> } callback - Callback used to return the result. If the operation is successful, **0** is
    *     returned; otherwise, **-1** is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
@@ -63,7 +64,9 @@ declare namespace uriPermissionManager {
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use.
    * @since 10 dynamic
@@ -99,9 +102,11 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the target application.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, **0** is
    *     returned; otherwise, **-1** is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
@@ -142,8 +147,9 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the target application.
    * @returns { Promise<number> } Promise used to return the result. If the operation is successful, **0** is returned;
    *     otherwise, **-1** is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
@@ -151,7 +157,9 @@ declare namespace uriPermissionManager {
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use.
    * @since 10 dynamic
@@ -182,9 +190,11 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the target application.
    * @returns { Promise<void> } - Promise used to return the result. If the operation is successful, **0** is returned;
    *     otherwise, **-1** is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
@@ -223,8 +233,9 @@ declare namespace uriPermissionManager {
    * @param { int } appCloneIndex - Index of the cloned application. The value range is [0, 1000]. The value **0** indicates
    *     the application itself.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
@@ -233,7 +244,9 @@ declare namespace uriPermissionManager {
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
    * @throws { BusinessError } 16000081 - Failed to obtain the target application information.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use.
    * @since 14 dynamic
@@ -259,14 +272,17 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the application, from which the permission is revoked.
    * @param { AsyncCallback<number> } callback - Callback used to return the result. If the operation is successful, **0** is
    *     returned; otherwise, **-1** is returned.
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000059 - Invalid URI type.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use
    * @since 10 dynamic
@@ -290,8 +306,9 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the application, from which the permission is revoked.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, **0** is
    *     returned; otherwise, **-1** is returned.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -318,14 +335,17 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the target application.
    * @returns { Promise<number> } Promise used to return the result. If the operation is successful, **0** is returned;
    *     otherwise, **-1** is returned.
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000059 - Invalid URI type.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use
    * @since 10 dynamic
@@ -349,8 +369,9 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - Bundle name of the target application.
    * @returns { Promise<void> } - Promise used to return the result. If the operation is successful, **0** is returned;
    *     otherwise, **-1** is returned.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -380,14 +401,16 @@ declare namespace uriPermissionManager {
    * @param { int } appCloneIndex - Index of the cloned application. The value range is [0, 1000]. The value **0** indicates
    *     the application itself.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000081 - Failed to obtain the target application information.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use
    * @since 14 dynamic
@@ -415,8 +438,9 @@ declare namespace uriPermissionManager {
    *     [bundleManager.getApplicationInfo]{@link @ohos.bundle.bundleManager:bundleManager.getApplicationInfo(bundleName: string, appFlags: int, userId: int, callback: AsyncCallback<ApplicationInfo>)}
    *     . The target application must be different from the API caller.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
@@ -454,9 +478,11 @@ declare namespace uriPermissionManager {
    *     [bundleManager.getApplicationInfo]{@link @ohos.bundle.bundleManager:bundleManager.getApplicationInfo(bundleName: string, appFlags: int, userId: int, callback: AsyncCallback<ApplicationInfo>)}
    *     . The target application must be different from the caller application.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
