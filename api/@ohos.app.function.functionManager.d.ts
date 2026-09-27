@@ -121,6 +121,7 @@ declare namespace functionManager {
    * @returns { Promise<Array<FunctionInfo>> } The promise used to return available functions.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   *     "ohos.permission.REGISTER_AGENT_HOOK".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
@@ -142,6 +143,7 @@ declare namespace functionManager {
    * @returns { Promise<InvokeResult> } The promise used to return the result of function invocation.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   *     "ohos.permission.REGISTER_AGENT_HOOK".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.

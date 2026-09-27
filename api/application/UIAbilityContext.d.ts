@@ -1724,7 +1724,7 @@ declare class UIAbilityContext extends Context {
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1743,7 +1743,7 @@ declare class UIAbilityContext extends Context {
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1862,7 +1862,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 14]
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000076 - The app instance key is invalid. [since 14]
@@ -1925,7 +1925,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 14]
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000076 - The app instance key is invalid. [since 14]
@@ -1985,7 +1985,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 14]
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000076 - The app instance key is invalid. [since 14]
