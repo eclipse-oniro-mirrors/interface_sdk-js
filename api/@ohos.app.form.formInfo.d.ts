@@ -1030,7 +1030,7 @@ declare namespace formInfo {
      * @stagemodelonly
      * @since 26.2.0 dynamiconly
      */
-    FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.form_edit_color_mode'
+    FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.key.form_edit_color_mode'
   }
 
   /**
