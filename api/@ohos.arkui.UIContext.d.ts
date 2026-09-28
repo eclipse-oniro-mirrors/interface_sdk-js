@@ -46,6 +46,7 @@ import { MeasureOptions } from './@ohos.measure';
 import type componentSnapshot from './@ohos.arkui.componentSnapshot';
 
 import type dragController from './@ohos.arkui.dragController';
+import { PlaceholderRegister } from './@ohos.arkui.placeholderRegister';
 
 import image from './@ohos.multimedia.image';
 
@@ -5226,6 +5227,17 @@ export class UIContext {
    * @since 11 dynamic
    */
   getUIObserver(): UIObserver;
+  /**
+   * Obtains the **PlaceholderRegister** object of this UI instance.
+   *
+   * @returns { PlaceholderRegister } The scroll placeholder registry of this UI instance.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  getPlaceholderRegister(): PlaceholderRegister;
 
   /**
    * Obtains the OverlayManager object.

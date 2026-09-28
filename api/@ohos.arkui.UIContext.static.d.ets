@@ -28,7 +28,8 @@ import { ClickEvent, ExpectedFrameRateRange, DragItemInfo, AnimateParam, Keyfram
 
 import { InputEventMonitor, InputEventListener } from '@ohos.arkui.component';
 
-import { CustomBuilder, CustomBuilderT } from '@ohos.arkui.component';
+import { CustomBuilder, CustomBuilderT, WrappedBuilder } from '@ohos.arkui.component';
+import { PlaceholderRegister } from '@ohos.arkui.placeholderRegister';
 
 import { GestureEvent, GestureRecognizer } from '@ohos.arkui.component';
 
@@ -3815,6 +3816,15 @@ export declare class UIContext {
    * @since 23 static
    */
   getUIObserver(): UIObserver;
+  /**
+   * Get the scroll placeholder register of this UI instance.
+   *
+   * @returns { PlaceholderRegister } The scroll placeholder registry of this UI instance.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  getPlaceholderRegister(): PlaceholderRegister;
 
   /**
    * Get object OverlayManager.
