@@ -4075,6 +4075,114 @@ declare namespace window {
   function moveMainWindowToTargetDisplay(displayId: long, windowId: int, userId?: int): Promise<void>;
 
   /**
+   * 主窗口z序调整的目标位置枚举。
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum WindowPosition {
+    /**
+     * 非置顶，普通状态。作为独立操作时用于取消主窗口的全局置顶状态，取消全局置顶状态需要
+     * ohos.permission.WINDOW_TOPMOST权限。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    NOT_TOPMOST = -3,
+    /**
+     * 全局置顶。设置该值时需要ohos.permission.WINDOW_TOPMOST权限。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    TOPMOST = -2,
+    /**
+     * 将主窗口置于所有应用主窗口的底部，仅单次调整生效。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    BOTTOM = -1,
+    /**
+     * 将主窗口置于所有应用主窗口的顶部，仅单次调整生效。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    TOP = 0
+  }
+
+  /**
+   * 描述待调整z序的主窗口的位置。
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface WindowPositionParams {
+    /**
+     * 待调整z序的主窗口ID。该窗口必须是当前应用进程中的主窗口。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    windowId: int;
+    /**
+     * 要调整到的位置。若该值大于0，则为另一个主窗口的ID，表示将目标窗口置于该主窗口下方；否则为
+     * [WindowPosition]{@link window.WindowPosition}的哨兵值，用于将窗口置于所有应用主窗口的底部或顶部，
+     * 或切换其全局置顶状态。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    insertAfter: int;
+  }
+
+  /**
+   * 调整当前应用进程中一个或多个主窗口的z序。使用Promise异步回调。
+   *
+   * 支持的调整方式如下：
+   * - 将一个主窗口置于另一个主窗口下方。
+   * - 将一个主窗口置于所有应用窗口的底部。
+   * - 将一个主窗口置于所有应用窗口的顶部。
+   * - 将一个主窗口切换为全局置顶状态或取消全局置顶状态。
+   *
+   * 设置全局置顶状态需要ohos.permission.WINDOW_TOPMOST权限。
+   *
+   * 不支持调整位于[虚拟屏](docroot://displaymanager/display-terminology.md#虚拟屏)上的主窗口的z序。若待调整的窗口或
+   * insertAfter指定的目标主窗口位于虚拟屏上，将抛出1300008错误码。
+   *
+   * @permission ohos.permission.WINDOW_TOPMOST
+   * @param { Array<WindowPositionParams> } list - 待调整的窗口位置选项列表。该列表不能为空，且最大个数不能超过50个。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+   *     1. The window to be adjusted cannot be found: not created, has been destroyed or not belong to current process;
+   *     2. The target main window specified by insertAfter cannot be found: not created, has been destroyed or not
+   *     belong to current process.
+   * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+   * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause: Invalid window type.
+   *     Only main windows are supported.
+   * @throws { BusinessError } 1300008 - The display device is abnormal.
+   * @throws { BusinessError } 1300016 - Parameter error. Possible cause: The windowPositions list
+   *     exceeds the maximum size of 50.
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function setWindowPosition(list: Array<WindowPositionParams>): Promise<void>;
+
+  /**
    * 窗口显示方向类型枚举。<!--Del-->不同枚举值之间的区别可查询
    * [窗口Orientation枚举值8\~10或12和枚举值13\~16的区别(API9)](docroot://faqs/faqs-window-manager.md#窗口orientation枚举值810或12和枚举值1316的区别api9)
    * 。<!--DelEnd-->
