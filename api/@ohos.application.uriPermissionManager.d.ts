@@ -273,7 +273,7 @@ declare namespace uriPermissionManager {
    * @param { AsyncCallback<number> } callback - Callback used to return the result. If the operation is successful, **0** is
    *     returned; otherwise, **-1** is returned.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10 - 11]
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
@@ -336,7 +336,7 @@ declare namespace uriPermissionManager {
    * @returns { Promise<number> } Promise used to return the result. If the operation is successful, **0** is returned;
    *     otherwise, **-1** is returned.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10 - 11]
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;

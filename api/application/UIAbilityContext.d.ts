@@ -139,7 +139,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version
@@ -193,7 +193,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
@@ -249,7 +249,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
@@ -818,7 +818,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version greater
@@ -884,7 +884,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version greater
@@ -947,7 +947,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000018 - Redirection to a third-party application is not allowed in API version greater
@@ -1300,7 +1300,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
@@ -1328,7 +1328,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1858,7 +1858,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
@@ -1921,7 +1921,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
@@ -1981,7 +1981,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
@@ -2032,7 +2032,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2071,7 +2071,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2112,7 +2112,7 @@ declare class UIAbilityContext extends Context {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **err** is 
    *     **undefined**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 11 - 11]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -2163,7 +2163,7 @@ declare class UIAbilityContext extends Context {
    *     startup fails.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 11 - 11]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -2222,7 +2222,7 @@ declare class UIAbilityContext extends Context {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **code** in
    *     **err** is **0**. Otherwise, **err** contains the corresponding error code and error information.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 11 - 11]
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
@@ -2260,7 +2260,7 @@ declare class UIAbilityContext extends Context {
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   *     required to call the API. [since 11 - 11]
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
