@@ -25,6 +25,7 @@
 import type { AsyncCallback } from './@ohos.base';
 import type { Callback } from './@ohos.base';
 import { Resource } from './global/resource';
+import { Rect } from './application/AccessibilityExtensionContext';
 
 /**
  * Enumerates executable actions for accessibility node elements.
@@ -2133,6 +2134,72 @@ declare namespace accessibility {
   function setSeniorModeStateForSelf(state: boolean): Promise<void>;
 
   /**
+   * Obtain the accessibility focus elements within the application. This API uses a promise to return the result.
+   *
+   * @returns { Promise<UIAccessibilityElement | undefined> } Promise used to return the current accessibility focus 
+   *     element within the application; returns undefined if there is no accessibility focus.
+   * @throws { BusinessError } 9300000 - System abnormality.
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getFocusedUIAccessibilityElement(): Promise<UIAccessibilityElement | undefined>;
+
+  /**
+   * Subscribes to accessibility focus change events in the app. This API uses an asynchronous callback to return the 
+   * result.
+   *
+   * @param { Callback<FocusedUIAccessibilityElementChangeInfo> } callback - Callback function. This function is used to
+   *     notify the focus change information when the accessibility focus changes in an application.
+   * @throws { BusinessError } 9300000 - System abnormality.
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onFocusedUIAccessibilityElementChanged(callback: Callback<FocusedUIAccessibilityElementChangeInfo>): void;
+  
+  /**
+   * Unsubscribes from accessibility focus change events in the app. This API uses an asynchronous callback to return 
+   * the result.
+   *
+   * @param { Callback<FocusedUIAccessibilityElementChangeInfo> } [callback] - Callback for accessibility focus change 
+   *     events. It must be the same as the callback used in  
+   *     [accessibility.onFocusedUIAccessibilityElementChanged]{@link accessibility.onFocusedUIAccessibilityElementChanged}.
+   *     If this parameter is not specified, all registered events are unsubscribed.
+   * @throws { BusinessError } 9300000 - System abnormality.
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offFocusedUIAccessibilityElementChanged(callback?: Callback<FocusedUIAccessibilityElementChangeInfo>): void;
+  
+  /**
+   * Accessibility focus change information in an app.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface FocusedUIAccessibilityElementChangeInfo {
+    /**
+     * The accessibility element currently in focus.
+     *
+     * @syscap SystemCapability.BarrierFree.Accessibility.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    focusedElement?: UIAccessibilityElement;
+    /**
+     * The accessibility element previously in focus.
+     *
+     * @syscap SystemCapability.BarrierFree.Accessibility.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    unFocusedElement?: UIAccessibilityElement;
+  }
+
+  /**
    * Manages captions configuration. Before calling any method of **CaptionsManager**, call 
    * [accessibility.getCaptionsManager()]{@link accessibility.getCaptionsManager} to obtain a **CaptionsManager** 
    * instance.
@@ -3144,4 +3211,457 @@ export enum AccessibilitySourceType {
    * @since 26.0.0 dynamic&static
    */
   UPDATED_FROM_ACCESSIBILITY_VIRTUAL_NODE = 3
+}
+
+/**
+ * Accessible node element.
+ *
+ * Obtains the UIAccessibilityElement instance through
+ * [accessibility.getFocusedUIAccessibilityElement]{@link accessibility.getFocusedUIAccessibilityElement}.
+ *
+ * @syscap SystemCapability.BarrierFree.Accessibility.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic&static
+ */
+export declare interface UIAccessibilityElement {
+  /**
+   * Whether the element gains focus for accessibility purposes. The value **true** indicates that the element has 
+   * gained focus, and **false** indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityFocused?: boolean;
+  /**
+   * Whether the element is checkable. The value **true** indicates that the element is checkable, and **false** 
+   * indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly checkable?: boolean;
+  /**
+   * Whether the element is checked. The value **true** indicates that the element is checked, and **false** indicates 
+   * the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly checked?: boolean;
+  /**
+   * Whether the element is clickable. The value **true** indicates that the element is clickable, and **false** 
+   * indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly clickable?: boolean;
+  /**
+   * ID of the component to which the element belongs.
+   * 
+   * Default value: **-1**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly componentId?: long;
+  /**
+   * Type of the component to which the element belongs.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly componentType?: string;
+  /**
+   * Accessibility description of the element. This property can be set by using 
+   * [accessibilityDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityDescription}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityDescription?: string;
+  /**
+   * Whether the element is editable. The value **true** indicates that the element is editable, and **false** indicates
+   * the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly editable?: boolean;
+  /**
+   * The error text displayed when the element is in an incorrect state. This property can be set by using 
+   * [showError]{@link ./@internal/component/ets/text_input:TextInputAttribute.showError}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly error?: string;
+  /**
+   * Whether the element is focusable. The value **true** indicates that the element is focusable, and **false** 
+   * indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly focusable?: boolean;
+  /**
+   * Hint text when there is no input. This property can be set by using 
+   * [placeholder]{@link ./@internal/component/ets/text_input:TextInputOptions.placeholder}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly hintText?: string;
+  /**
+   * Type of the input text. Different values correspond to different input modes: **0** indicates no specific type; 
+   * **1** indicates text; **2** indicates email; **3** indicates date; **4** indicates time; **5** indicates number; 
+   * **6** indicates password; **7** indicates phone number; **8** indicates username; **9** indicates new password.
+   * 
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly inputType?: int;
+  /**
+   * Unique ID of a component. This property can be set by using 
+   * [id]{@link ./@internal/component/ets/common:CommonMethod.id}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly inspectorKey?: string;
+  /**
+   * Whether the element is active. The value **true** indicates that the element is active, and **false** indicates the
+   * opposite.
+   * 
+   * Default value: **true**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isActive?: boolean;
+  /**
+   * Whether the element is enabled. The value **true** indicates that the element is enabled, and **false** indicates 
+   * the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isEnable?: boolean;
+  /**
+   * Whether the element is focused. The value **true** indicates that the element is focused, and **false** indicates 
+   * the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isFocused?: boolean;
+  /**
+   * Whether the element is a password. The value **true** indicates that the element is a password, and **false** 
+   * indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isPassword?: boolean;
+  /**
+   * Whether the element is visible. The value **true** indicates that the element is visible, and **false** indicates 
+   * the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isVisible?: boolean;
+  /**
+   * Whether the element is long-clickable. The value **true** indicates that the element is long-clickable, and 
+   * **false** indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly longClickable?: boolean;
+  /**
+   * Page ID.
+   * 
+   * Default value: **-1**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly pageId?: int;
+  /**
+   * Whether the element supports multi-line text. The value **true** indicates that the element supports multi-line 
+   * text, and **false** indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly pluralLineSupported?: boolean;
+  /**
+   * Area of the element.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly rect?: Rect;
+  /**
+   * Whether the element is scrollable. The value **true** indicates that the element is scrollable, and **false** 
+   * indicates the opposite. When the value conflicts with that of accessibilityScrollable, the value of 
+   * accessibilityScrollable prevails.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly scrollable?: boolean;
+  /**
+   * Whether the element is selected. The value **true** indicates that the element is selected, and **false** indicates
+   * the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly selected?: boolean;
+  /**
+   * Text content of the element.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly text?: string;
+  /**
+   * Maximum text length of the element. Default value: **0**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly textLengthLimit?: int;
+  /**
+   * Maximum value.
+   * 
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly valueMax?: double;
+  /**
+   * Minimum value.
+   * 
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly valueMin?: double;
+  /**
+   * Current value.
+   * 
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly valueNow?: double;
+  /**
+   * Pixel offset of the content area relative to the top coordinate of the scrollable component (such as List and Grid
+   * ), in pixels (px).
+   * 
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly offset?: double;
+  /**
+   * Accessibility text information of the element. This property can be set by using 
+   * [accessibilityText]{@link ./@internal/component/ets/common:CommonMethod.accessibilityText}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityText?: string;
+  /**
+   * Custom accessibility component type. This property can be set by using 
+   * [accessibilityRole]{@link ./@internal/component/ets/common:CommonMethod.accessibilityRole}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly customComponentType?: string;
+  /**
+   * ID of the next component to gain focus. This property can be set by using 
+   * [accessibilityNextFocusId]{@link ./@internal/component/ets/common:CommonMethod.accessibilityNextFocusId}.
+   * 
+   * Default value: **-1**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityNextFocusId?: long;
+  /**
+   * ID of the previous component to gain focus.
+   * 
+   * Default value: **-1**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityPreviousFocusId?: long;
+  /**
+   * Whether the element is scrollable for accessibility purposes. This attribute has a higher priority than scrollable.
+   * That is, when the value of accessibilityScrollable conflicts with that of scrollable, the value of 
+   * accessibilityScrollable prevails.
+   * 
+   * The value **true** indicates that the element is scrollable, and **false** indicates the opposite.
+   * 
+   * Default value: **false**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityScrollable?: boolean;
+  /**
+   * Whether the element is an accessibility group. The value **true** indicates that the element is an accessibility 
+   * group, and **false** indicates the opposite.
+   * 
+   * Default value: **false**.
+   * 
+   * This property can be set by using 
+   * [accessibilityGroup]{@link ./@internal/component/ets/common:CommonMethod.accessibilityGroup}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityGroup?: boolean;
+  /**
+   * Accessibility level of the component.
+   * 
+   * **'auto'**: The accessibility grouping service and ArkUI jointly determine whether the component can be recognized 
+   * by accessibility.
+   * 
+   * **'yes'**: The component can be recognized by accessibility.
+   * 
+   * **'no'**: The component cannot be recognized by accessibility.
+   * 
+   * **'no-hide-descendants'**: The component and all its child components cannot be recognized by accessibility. 
+   * Default value: **'auto'**.
+   * 
+   * This property can be set by using 
+   * [accessibilityLevel]{@link ./@internal/component/ets/common:CommonMethod.accessibilityLevel}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityLevel?: string;
+  /**
+   * Whether the component is visible for accessibility. The value **true** indicates that the component is visible, and
+   * **false** indicates the opposite. Default value: **true**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityVisible?: boolean;
+  /**
+   * Parent element ID of the component. Default value: **-1**.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly parentId?: long;
+  /**
+   * List of child element IDs of the component. Default value: empty array.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly childrenIds?: Array<long>;
+
+  /**
+   * Custom accessibility state announcement text of the element. This property can be set by using 
+   * [accessibilityStateDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityStateDescription}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityStateDescription?: string;
+
+  /**
+   * List of custom actions supported by the element. This property can be set by using 
+   * [accessibilityCustomActions]{@link ./@internal/component/ets/common:CommonMethod.accessibilityCustomActions}.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly customActions?: Array<string>;
 }
