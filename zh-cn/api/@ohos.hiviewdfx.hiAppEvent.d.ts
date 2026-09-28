@@ -1705,6 +1705,20 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     collectMinidump?: boolean;
+
+    /**
+     * 该选项用于配置应用收到崩溃事件回调的时机，是否固定在应用重新启动之后收到事件回调。
+     * true：使能固定在应用重启之后收到事件回调。
+     * false：不使能固定在应用重启之后收到事件回调。
+     * 默认值：false。
+     * 说明：该选项只对onTrigger和onReceive回调生效，应用在同一生命周期内，以最后一次成功调用的使能状态为准。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    publishOnNextLaunch?: boolean;
   }
 
   /**
