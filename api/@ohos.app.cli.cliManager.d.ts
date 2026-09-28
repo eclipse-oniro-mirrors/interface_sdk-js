@@ -506,8 +506,9 @@ declare namespace cliManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
-   *     capabilities. [since 26.0.1]
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: Failed to call the API due to
+   *     limited device capabilities. [since 26.0.1]
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -537,6 +538,7 @@ declare namespace cliManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -562,6 +564,7 @@ declare namespace cliManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -587,6 +590,7 @@ declare namespace cliManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -612,6 +616,7 @@ declare namespace cliManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600033 - Failed to write message to the tool process.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
