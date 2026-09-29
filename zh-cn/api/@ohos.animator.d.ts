@@ -135,9 +135,10 @@ export interface AnimatorOptions {
   /**
    * 动画播放次数。设置为0时不播放，设置为-1时无限次播放，设置大于0时为播放次数。
    * 
-   * **说明：** 使用interpolating-spring曲线时，iterations固定设置为1，其他设置无效。
+   * **说明：** 
+   * 使用interpolating-spring曲线时，iterations固定设置为1，其他设置无效。
    * 
-   * **说明:** 设置为除-1外其他负数视为无效取值，无效取值动画默认播放1次。
+   * 设置为除-1外其他负数视为无效取值，无效取值动画默认播放1次。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -426,27 +427,32 @@ export interface AnimatorResult {
  */
 export default class Animator {
   /**
-   * 创建动画。本模块功能依赖UI的执行上下文，不可在UI上下文不明确的地方使用，推荐通过使用UIContext中的createAnimator接口明确UI上下文。
-   * 
-   * > **说明：**
-   * >
-   * > - 从API version 10开始，可以通过使用[UIContext]{@link @ohos.arkui.UIContext}中的
-   * > [createAnimator]{@link @ohos.arkui.UIContext:UIContext.createAnimator}来明确UI的执行上下文。
+   * 创建animator动画结果对象（AnimatorResult）。与[create]{@link Animator.create(options: AnimatorOptions)}相比，新增对
+   * [SimpleAnimatorOptions]{@link SimpleAnimatorOptions}类型入参的支持。
    *
-   * @param { AnimatorOptions } options - 动画配置选项，用于定义动画的播放时长、插值曲线、延时、填充模式、播放方向、播放次数及插值起止值等参数。
+   * @param { AnimatorOptions | SimpleAnimatorOptions } options - 定义动画选项。AnimatorOptions适用于需要完整自定义所有动画参数的场景；
+   *     SimpleAnimatorOptions适用于仅需指定起点和终点的简易动画场景，其余参数使用默认值。
    * @returns { AnimatorResult } 动画控制对象，可设置动画过程中的回调函数。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameters types.
+   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 6 dynamiconly
-   * @deprecated since 9
-   * @useinstead ohos.animator.create
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 18 dynamic
    */
-  static createAnimator(options: AnimatorOptions): AnimatorResult;
+  static create(options: AnimatorOptions | SimpleAnimatorOptions): AnimatorResult;
 
   /**
    * 创建animator动画结果对象（AnimatorResult）。
    * 
    * > **说明：**
    * >
+   * > - 从API version 9开始支持，从API version 18开始废弃，建议使用
+   * > [createAnimator]{@link @ohos.arkui.UIContext.UIContext#createAnimator}替代。
+   *
    * > - 从API version 10开始，可以通过使用[UIContext]{@link @ohos.arkui.UIContext}中的
    * > [createAnimator]{@link @ohos.arkui.UIContext:UIContext.createAnimator}来明确UI的执行上下文。
    *
@@ -466,23 +472,21 @@ export default class Animator {
   static create(options: AnimatorOptions): AnimatorResult;
 
   /**
-   * 创建animator动画结果对象（AnimatorResult）。与[create]{@link Animator.create(options: AnimatorOptions)}相比，新增对
-   * [SimpleAnimatorOptions]{@link SimpleAnimatorOptions}类型入参的支持。
+   * 创建动画。本模块功能依赖UI的执行上下文，不可在UI上下文不明确的地方使用，推荐通过使用UIContext中的createAnimator接口明确UI上下文。
+   * 
+   * > **说明：**
+   * >
+   * > - 从API version 10开始，可以通过使用[UIContext]{@link @ohos.arkui.UIContext}中的
+   * > [createAnimator]{@link @ohos.arkui.UIContext:UIContext.createAnimator}来明确UI的执行上下文。
    *
-   * @param { AnimatorOptions | SimpleAnimatorOptions } options - 定义动画选项。AnimatorOptions适用于需要完整自定义所有动画参数的场景；
-   *     SimpleAnimatorOptions适用于仅需指定起点和终点的简易动画场景，其余参数使用默认值。
+   * @param { AnimatorOptions } options - 动画配置选项，用于定义动画的播放时长、插值曲线、延时、填充模式、播放方向、播放次数及插值起止值等参数。
    * @returns { AnimatorResult } 动画控制对象，可设置动画过程中的回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 6 dynamiconly
+   * @deprecated since 9
+   * @useinstead ohos.animator.create
    */
-  static create(options: AnimatorOptions | SimpleAnimatorOptions): AnimatorResult;
+  static createAnimator(options: AnimatorOptions): AnimatorResult;
 }
 
 /**
