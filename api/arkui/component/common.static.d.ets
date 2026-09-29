@@ -14960,15 +14960,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
      * in response to arrow key presses when focused but not in active focus state.
-     * When disabled, arrow key presses will not trigger scrolling in this component.
      *
      * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
      *     <br>Default value: true.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @crossplatform
-     * @atomicservice
      * @since 26.2.0 static
      */
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
