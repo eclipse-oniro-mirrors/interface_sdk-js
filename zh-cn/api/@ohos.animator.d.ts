@@ -81,7 +81,7 @@ export interface AnimatorOptions {
   /**
    * 动画延时播放时长，单位毫秒，设置为0时，表示不延时。设置为负数时动画提前播放，如果提前播放的时长大于动画总时长（由duration和iterations参数共同决定），动画直接过渡到终点。 
    * 
-   * 取值范围：[-∞, +∞)
+   * 取值范围：(-∞, +∞)
    * 
    * 默认值：0
    *
@@ -156,7 +156,7 @@ export interface AnimatorOptions {
    * 
    * **说明:** 会影响[onFrame]{@link AnimatorResult.onFrame}回调的入参值。
    * 
-   * 取值范围：[-∞, +∞)
+   * 取值范围：(-∞, +∞)
    * 
    * 默认值：0
    *
@@ -172,7 +172,7 @@ export interface AnimatorOptions {
    * 
    * **说明:** 会影响[onFrame]{@link AnimatorResult.onFrame}回调的入参值。   
    * 
-   * 取值范围：[-∞, +∞)
+   * 取值范围：(-∞, +∞)
    * 
    * 默认值：1
    *

@@ -58,7 +58,7 @@ export interface AnimatorOptions {
    * negative number, the animation starts playing ahead of its scheduled time. If the amount of time by which the 
    * playback is advanced exceeds the total duration of the animation, the animation immediately skips to its end state.
    * 
-   * Value range: [-∞, +∞).
+   * Value range: (-∞, +∞).
    * 
    * Default value: **0**
    *
@@ -138,7 +138,7 @@ export interface AnimatorOptions {
    * Note: This setting affects the input parameter value of the 
    * [onFrame](docroot://reference/apis-arkui/js-apis-animator.md#properties) callback.
    * 
-   * Value range: [-∞, +∞).
+   * Value range: (-∞, +∞).
    * 
    * Default value: **0**
    *
@@ -155,7 +155,7 @@ export interface AnimatorOptions {
    * Note: This setting affects the input parameter value of the 
    * [onFrame](docroot://reference/apis-arkui/js-apis-animator.md#properties) callback.
    * 
-   * Value range: [-∞, +∞).
+   * Value range: (-∞, +∞).
    * 
    * Default value: **1**
    *
