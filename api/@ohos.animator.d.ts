@@ -138,7 +138,7 @@ export interface AnimatorOptions {
    * Note: This setting affects the input parameter value of the 
    * [onFrame](docroot://reference/apis-arkui/js-apis-animator.md#properties) callback.
    * 
-   * Value range: [0, +∞).
+   * Value range: [-∞, +∞).
    * 
    * Default value: **0**
    *

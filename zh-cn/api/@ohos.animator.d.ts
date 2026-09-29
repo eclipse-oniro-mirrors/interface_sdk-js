@@ -156,7 +156,7 @@ export interface AnimatorOptions {
    * 
    * **说明:** 会影响[onFrame]{@link AnimatorResult.onFrame}回调的入参值。
    * 
-   * 取值范围：[0, +∞)
+   * 取值范围：[-∞, +∞)
    * 
    * 默认值：0
    *
