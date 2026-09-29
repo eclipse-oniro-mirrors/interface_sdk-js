@@ -81,6 +81,8 @@ export interface AnimatorOptions {
   /**
    * 动画延时播放时长，单位毫秒，设置为0时，表示不延时。设置为负数时动画提前播放，如果提前播放的时长大于动画总时长（由duration和iterations参数共同决定），动画直接过渡到终点。 
    * 
+   * 取值范围：[-∞, +∞)
+   * 
    * 默认值：0
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -135,6 +137,8 @@ export interface AnimatorOptions {
   /**
    * 动画播放次数。设置为0时不播放，设置为-1时无限次播放，设置大于0时为播放次数。
    * 
+   * 取值范围：大于等于-1的整数。
+   * 
    * **说明：** 
    * 使用interpolating-spring曲线时，iterations固定设置为1，其他设置无效。
    * 
@@ -152,6 +156,8 @@ export interface AnimatorOptions {
    * 
    * **说明:** 会影响[onFrame]{@link AnimatorResult.onFrame}回调的入参值。
    * 
+   * 取值范围：[0, +∞)
+   * 
    * 默认值：0
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -165,6 +171,8 @@ export interface AnimatorOptions {
    * 动画插值终点。
    * 
    * **说明:** 会影响[onFrame]{@link AnimatorResult.onFrame}回调的入参值。   
+   * 
+   * 取值范围：[-∞, +∞)
    * 
    * 默认值：1
    *
