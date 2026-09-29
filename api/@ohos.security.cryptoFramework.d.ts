@@ -750,7 +750,7 @@ declare namespace cryptoFramework {
      *
      * @param { AsyKeySpecItem } itemType - Key parameter type to obtain.
      * @returns { bigint | string | int } Content of the key parameter obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -782,7 +782,7 @@ declare namespace cryptoFramework {
      *     <br>Since API version 26.0.0, RSA keys are supported, with the format values 'PKCS1' and 'PKCS8' supported.
      *     <br>Since API version 26.0.0, ML-DSA and ML-KEM keys are supported, with the format value 'X509' supported.
      * @returns { DataBlob } Private key data in DER encoding.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -805,7 +805,7 @@ declare namespace cryptoFramework {
      *     <br>Since API version 26.0.0, EC keys are supported, with the format values 'PKCS8' or 'EC' supported.
      *     <br>Since API version 26.0.0, ML-DSA and ML-KEM keys are supported, with the format value 'PKCS8' supported.
      * @returns { string } Private key data in PEM encoding.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -828,7 +828,7 @@ declare namespace cryptoFramework {
      *     or **'PKCS1'**.
      * @param { KeyEncodingConfig } config - Parameters used for encrypting private keys.
      * @returns { string } The encrypted private key data in PEM encoding.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -936,7 +936,7 @@ declare namespace cryptoFramework {
      *
      * @param { AsyKeySpecItem } itemType - Key parameter to obtain.
      * @returns { bigint | string | int } Content of the key parameter obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -969,7 +969,7 @@ declare namespace cryptoFramework {
      *     <br>Since API version 26.0.0, RSA keys are supported, with the format values 'PKCS1' and 'X509' supported.
      *     <br>Since API version 26.0.0, ML-DSA and ML-KEM keys are supported, with the format value 'X509' supported.
      * @returns { DataBlob } Public key data in DER encoding.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -992,7 +992,7 @@ declare namespace cryptoFramework {
      *     <br>Since API version 26.0.0, EC, ML-DSA, and ML-KEM keys are supported, with the format value 'X509'
      *     supported.
      * @returns { string } Public key data in PEM encoding.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1112,7 +1112,7 @@ declare namespace cryptoFramework {
      * @param { int } len - Length of the random number to generate, in bytes. The value range is [1, INT_MAX].
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the random number obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1134,7 +1134,7 @@ declare namespace cryptoFramework {
      *
      * @param { int } len - Length of the random number to generate, in bytes. The value range is [1, INT_MAX].
      * @returns { Promise<DataBlob> } Promise used to return the random number generated.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1160,7 +1160,7 @@ declare namespace cryptoFramework {
      *
      * @param { int } len - Length of the random number to generate, in bytes. The value range is [1, INT_MAX].
      * @returns { DataBlob } Returns the generated random number.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1257,7 +1257,7 @@ declare namespace cryptoFramework {
      *
      * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the key pair obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes: Incorrect parameter types;
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Incorrect parameter types;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
@@ -1273,7 +1273,7 @@ declare namespace cryptoFramework {
      * Generates a random key pair using this asymmetric key generator. This API uses a promise to return the result.
      *
      * @returns { Promise<KeyPair> } Promise used to return the asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1297,7 +1297,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @returns { KeyPair } Asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1319,7 +1319,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the asymmetric key pair obtained. Otherwise, **err** is an error
      *     object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1345,7 +1345,7 @@ declare namespace cryptoFramework {
      *     API version 10, **null** is also supported.
      * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the key pair obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1367,7 +1367,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } pubKey - The public key data blob.
      * @param { DataBlob } priKey - The private key data blob.
      * @returns { Promise<KeyPair> } Promise used to return the asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1392,7 +1392,7 @@ declare namespace cryptoFramework {
      *     this parameter to **null**. In versions earlier than API version 10, only **DataBlob** is supported. Since
      *     API version 10, **null** is also supported.
      * @returns { Promise<KeyPair> } Promise used to return the asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1423,7 +1423,7 @@ declare namespace cryptoFramework {
      *     parameter to **null**. Before API version 10, only **DataBlob** is supported. Since API version 10, **null**
      *     can be passed in.
      * @returns { KeyPair } Asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1459,7 +1459,7 @@ declare namespace cryptoFramework {
      *     this parameter to **null**.<br>Note: The public key and private key materials cannot be both null or empty
      *     strings.
      * @returns { Promise<KeyPair> } Promise used to return the asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1498,7 +1498,7 @@ declare namespace cryptoFramework {
      *     strings.
      * @param { string } password - Password used to decrypt the private key.
      * @returns { Promise<KeyPair> } Promise used to return the asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1532,7 +1532,7 @@ declare namespace cryptoFramework {
      *     parameter to **null**.<br>Note: The public key and private key materials cannot be both null or empty
      *     strings.
      * @returns { KeyPair } Asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1567,7 +1567,7 @@ declare namespace cryptoFramework {
      *     parameter to **null**. <br>Note: **pubKey** and **priKey** cannot be **null** at the same time.
      * @param { string } password - Password used to decrypt the private key.
      * @returns { KeyPair } Asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1694,7 +1694,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } key - Data to convert.
      * @param { AsyncCallback<SymKey> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the symmetric key obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1714,7 +1714,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } key - Data to convert.
      * @returns { Promise<SymKey> } Promise used to return the symmetric key generated.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1747,7 +1747,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } key - Data to convert.
      * @returns { SymKey } Symmetric key obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1785,7 +1785,7 @@ declare namespace cryptoFramework {
    *     [Asymmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
    *     .
    * @returns { AsyKeyGenerator } Returns the **AsyKeyGenerator** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -1812,7 +1812,7 @@ declare namespace cryptoFramework {
    *     [Symmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
    *     .
    * @returns { SymKeyGenerator } Returns the **SymKeyGenerator** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -1927,7 +1927,7 @@ declare namespace cryptoFramework {
      * @param { SymKey } key - Symmetric key.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1949,7 +1949,7 @@ declare namespace cryptoFramework {
      *
      * @param { SymKey } key - Symmetric key.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1975,7 +1975,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { SymKey } key - Symmetric key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2001,7 +2001,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } input - Data to pass in.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2027,7 +2027,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } input - Data to pass in.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2057,7 +2057,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { DataBlob } input - Data to pass in.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2114,7 +2114,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @returns { DataBlob } MAC computation result.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2167,7 +2167,7 @@ declare namespace cryptoFramework {
    *     [MAC Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-compute-mac-overview.md)
    *     .
    * @returns { Mac } Returns the **Mac** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2193,7 +2193,7 @@ declare namespace cryptoFramework {
    *     [MAC Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-compute-mac-overview.md)
    *     .
    * @returns { Mac } Returns the **Mac** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2235,7 +2235,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } input - Data to pass in.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2264,7 +2264,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } input - Data to pass in.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2296,7 +2296,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { DataBlob } input - Data to pass in.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2354,7 +2354,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @returns { DataBlob } Message digest generated.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2411,7 +2411,7 @@ declare namespace cryptoFramework {
    *     [Supported Algorithms and Specifications](docroot://security/CryptoArchitectureKit/crypto-generate-message-digest-overview.md#supported-algorithms-and-specifications)
    *     .
    * @returns { Md } Returns the **Md** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2684,7 +2684,7 @@ declare namespace cryptoFramework {
      * @param { ParamsSpec } params - Indicates the algorithm parameters such as IV.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2717,7 +2717,7 @@ declare namespace cryptoFramework {
      *     **ParamsSpec** is supported. Since API version 10, **null** is also supported.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2748,7 +2748,7 @@ declare namespace cryptoFramework {
      * @param { Key } key - Key for encryption or decryption.
      * @param { ParamsSpec } params - Indicates the algorithm parameters such as IV.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2779,7 +2779,7 @@ declare namespace cryptoFramework {
      *     parameters (such as ECB), set this parameter to **null**. Before API version 10, only **ParamsSpec** is
      *     supported. Since API version 10, **null** is also supported.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2814,7 +2814,7 @@ declare namespace cryptoFramework {
      * @param { Key } key - Key for encryption or decryption.
      * @param { ParamsSpec | null } params - Parameters for encryption or decryption. For algorithm modes without
      *     parameters (such as ECB), set this parameter to **null**.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2873,7 +2873,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the data is updated
      *     successfully, **err** is **undefined**, and **data** is the encryption or decryption result obtained.
      *     Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2928,7 +2928,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<DataBlob | null> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined**, and **data** is the encrypted or decrypted data obtained. Otherwise,
      *     **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2983,7 +2983,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } data - Data to encrypt or decrypt. It cannot be null.
      * @returns { Promise<DataBlob> } Promise used to return the **DataBlob** (containing the encrypted or decrypted
      *     data).
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3036,7 +3036,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - Indicates the data to be encrypted or decrypted.
      * @returns { Promise<DataBlob | null> } Promise used to return the encrypted or decrypted data.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3067,7 +3067,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - Data to encrypt or decrypt. It cannot be null.
      * @returns { DataBlob } Encryption/decryption result.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3093,7 +3093,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - Indicates the data to be encrypted or decrypted.
      * @returns { DataBlob | null } ciphertext when encrypted or plaintext when decrypted.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3118,7 +3118,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the encrypted or decrypted data obtained. Otherwise, **err** is an
      *     error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3189,7 +3189,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the encryption or decryption
      *     is successful, **err** is **undefined**, and **data** is the encryption or decryption result obtained.
      *     Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3237,7 +3237,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<DataBlob | null> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined**, and **data** is the encrypted or decrypted data obtained. Otherwise,
      *     **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3259,7 +3259,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - Indicates the data to be finally encrypted or decrypted.
      * @returns { Promise<DataBlob> } Promise used to return the encrypted or decrypted data.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3329,7 +3329,7 @@ declare namespace cryptoFramework {
      *     **null** is also supported.
      * @returns { Promise<DataBlob> } Promise used to return the **DataBlob**, which is the encryption or decryption
      *     result of the remaining data.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3373,7 +3373,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob | null } data - Indicates the data to be finally encrypted or decrypted.
      * @returns { Promise<DataBlob | null> } Promise used to return the encrypted or decrypted data.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3429,7 +3429,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob | null } data - Data to encrypt or decrypt. It can be **null** in symmetric encryption or
      *     decryption, but cannot be {data:Uint8Array(empty)}.
      * @returns { DataBlob } Encrypted or decrypted data.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3456,7 +3456,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob | null } data - Indicates the data to be finally encrypted or decrypted.
      * @returns { DataBlob | null } ciphertext when encrypted or plaintext when decrypted.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3478,7 +3478,7 @@ declare namespace cryptoFramework {
      *
      * @param { CipherSpecItem } itemType - Cipher parameter to set.
      * @param { Uint8Array } itemValue - Value of the parameter to set.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3501,7 +3501,7 @@ declare namespace cryptoFramework {
      *
      * @param { CipherSpecItem } itemType - Cipher parameter to obtain.
      * @returns { string | Uint8Array } Returns the value of the cipher parameter obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3559,7 +3559,7 @@ declare namespace cryptoFramework {
    *     [Asymmetric Key Encryption and Decryption Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-encryption-decryption.md)
    *     .
    * @returns { Cipher } Returns the **Cipher** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -3618,7 +3618,7 @@ declare namespace cryptoFramework {
      * @param { PriKey } priKey - Private key used for the initialization.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3646,7 +3646,7 @@ declare namespace cryptoFramework {
      *
      * @param { PriKey } priKey - Private key used for the initialization.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3678,7 +3678,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { PriKey } priKey - Private key used for the initialization.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3722,7 +3722,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } data - Data to pass in.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3766,7 +3766,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - Data to pass in.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3815,7 +3815,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { DataBlob } data - Data to pass in.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3839,7 +3839,7 @@ declare namespace cryptoFramework {
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined**, and **data** is the signature obtained. Otherwise, **err** is an
      *     error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3862,7 +3862,7 @@ declare namespace cryptoFramework {
      *     supported. Since API version 10, **null** is also supported.
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the signature obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3884,7 +3884,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - The data to be signed.
      * @returns { Promise<DataBlob> } Promise used to return the signature.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3905,7 +3905,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob | null } data - Data to pass in.
      * @returns { Promise<DataBlob> } Promise used to return the signature.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3932,7 +3932,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob | null } data - Data to pass in.
      * @returns { DataBlob } Signature.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3956,7 +3956,7 @@ declare namespace cryptoFramework {
      *
      * @param { SignSpecItem } itemType - Signing parameter to set.
      * @param { int } itemValue - Value of the signing parameter to set.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3979,7 +3979,7 @@ declare namespace cryptoFramework {
      *
      * @param { SignSpecItem } itemType - Indicates the specified parameter type.
      * @param { int | Uint8Array } itemValue - The value of the specified parameter.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4043,7 +4043,7 @@ declare namespace cryptoFramework {
      *
      * @param { SignSpecItem } itemType - Signing parameter to obtain.
      * @returns { string | int } Returns the value of the signing parameter obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4115,7 +4115,7 @@ declare namespace cryptoFramework {
      * @param { PubKey } pubKey - Public key used to initialize the **Verify** instance.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4140,7 +4140,7 @@ declare namespace cryptoFramework {
      *
      * @param { PubKey } pubKey - Public key used to initialize the **Verify** instance.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4169,7 +4169,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { PubKey } pubKey - Public key used to initialize the **Verify** instance.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4216,7 +4216,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } data - Data to pass in.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4261,7 +4261,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } data - Data to pass in.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4310,7 +4310,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { DataBlob } data - Data to pass in.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4333,7 +4333,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } signatureData - The signature data.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** indicates
      *     that the signature verification is successful, and **false** indicates the opposite.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4357,7 +4357,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } signatureData - Signature data.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true**
      *     indicates that the signature verification is successful, and **false** indicates the opposite.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4381,7 +4381,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } signatureData - The signature data.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the signature
      *     verification is successful, and **false** indicates the opposite.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4405,7 +4405,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob } signatureData - Signature data.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the signature
      *     verification is successful, and **false** indicates the opposite.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4433,7 +4433,7 @@ declare namespace cryptoFramework {
      * @param { DataBlob | null } data - Data to pass in.
      * @param { DataBlob } signatureData - Signature data.
      * @returns { boolean } Signature verification result. **true**: passed; **false**: failed.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4458,7 +4458,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } signatureData - Signature data.
      * @returns { Promise<DataBlob | null> } Promise used to return the raw data recovered from the signature.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4488,7 +4488,7 @@ declare namespace cryptoFramework {
      *
      * @param { DataBlob } signatureData - Signature data.
      * @returns { DataBlob | null } Data restored.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4514,7 +4514,7 @@ declare namespace cryptoFramework {
      *
      * @param { SignSpecItem } itemType - Signature verification parameter to set.
      * @param { int } itemValue - Value of the signature verification parameter to set.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4539,7 +4539,7 @@ declare namespace cryptoFramework {
      *
      * @param { SignSpecItem } itemType - Indicates the specified parameter type.
      * @param { int | Uint8Array } itemValue - The value of the specified parameter.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4606,7 +4606,7 @@ declare namespace cryptoFramework {
      *
      * @param { SignSpecItem } itemType - Signature verification parameter to obtain.
      * @returns { string | int } Returns the value of the parameter obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4649,7 +4649,7 @@ declare namespace cryptoFramework {
    *     <br>For details about the supported specifications, see
    *     [Signing and Signature Verification Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-sign-sig-verify-overview.md)
    * @returns { Sign } Returns the **Sign** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -4679,7 +4679,7 @@ declare namespace cryptoFramework {
    *     [Signing and Signature Verification Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-sign-sig-verify-overview.md)
    *     .
    * @returns { Verify } Returns the **Verify** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -4714,7 +4714,7 @@ declare namespace cryptoFramework {
      * @param { PubKey } pubKey - Public key used for key agreement.
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the shared secret obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4737,7 +4737,7 @@ declare namespace cryptoFramework {
      * @param { PriKey } priKey - Private key used for key agreement.
      * @param { PubKey } pubKey - Public key used for key agreement.
      * @returns { Promise<DataBlob> } Promise used to return the shared secret of key agreement.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4765,7 +4765,7 @@ declare namespace cryptoFramework {
      * @param { PriKey } priKey - Private key used for key agreement.
      * @param { PubKey } pubKey - Public key used for key agreement.
      * @returns { DataBlob } Returns the shared secret generated.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -4803,7 +4803,7 @@ declare namespace cryptoFramework {
    *     [Key Agreement Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-key-agreement-overview.md)
    *     .
    * @returns { KeyAgreement } Returns the **KeyAgreement** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -5887,7 +5887,7 @@ declare namespace cryptoFramework {
      *
      * @param { string } curveName - NID of the elliptic curve.
      * @returns { ECCCommonParamsSpec } ECC common parameters generated.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5917,7 +5917,7 @@ declare namespace cryptoFramework {
      * @param { string } curveName - Elliptic curve name, that is, the NID.
      * @param { Uint8Array } encodedPoint - Data of the point on the ECC elliptic curve to convert.
      * @returns { Point } **Point** object obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5940,7 +5940,7 @@ declare namespace cryptoFramework {
      * @param { string } format - Format of the point data to obtain. Currently, the value can be **COMPRESSED** or
      *     **UNCOMPRESSED** only.
      * @returns { Uint8Array } Point data in the specified format.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6160,7 +6160,7 @@ declare namespace cryptoFramework {
      *     ffdhe2048: 255 bits.<br>ffdhe3072: 275 bits.<br>ffdhe4096: 325 bits.<br>ffdhe6144: 375 bits.<br>ffdhe8192:
      *     400 bits.
      * @returns { DHCommonParamsSpec } DH common parameters generated.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6513,7 +6513,7 @@ declare namespace cryptoFramework {
      *
      * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the key pair obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes: Incorrect parameter types;
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Incorrect parameter types;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
@@ -6534,7 +6534,7 @@ declare namespace cryptoFramework {
      * key pair that is consistent with the specified key parameters.
      *
      * @returns { Promise<KeyPair> } Promise used to return the asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6563,7 +6563,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @returns { KeyPair } Asymmetric key pair.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6587,7 +6587,7 @@ declare namespace cryptoFramework {
      *
      * @param { AsyncCallback<PriKey> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the private key obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes: Mandatory parameters are left unspecified.
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Mandatory parameters are left unspecified.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
@@ -6608,7 +6608,7 @@ declare namespace cryptoFramework {
      * the private key from the key pair generated.
      *
      * @returns { Promise<PriKey> } Promise used to return the private key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6637,7 +6637,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @returns { PriKey } Private key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6662,7 +6662,7 @@ declare namespace cryptoFramework {
      *
      * @param { AsyncCallback<PubKey> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the public key obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes: Incorrect parameter types;
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Incorrect parameter types;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
@@ -6683,7 +6683,7 @@ declare namespace cryptoFramework {
      * the specified public key from the key pair generated.
      *
      * @returns { Promise<PubKey> } Promise used to return the public key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6711,7 +6711,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @returns { PubKey } Public key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6746,7 +6746,7 @@ declare namespace cryptoFramework {
    *     [Asymmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
    *     .
    * @returns { AsyKeyGeneratorBySpec } Returns the **AsyKeyGeneratorBySpec** instance created.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -7083,7 +7083,7 @@ declare namespace cryptoFramework {
      * @param { KdfSpec } params - Parameters of the key derivation function.
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the derived key obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7107,7 +7107,7 @@ declare namespace cryptoFramework {
      *
      * @param { KdfSpec } params - Parameters of the key derivation function.
      * @returns { Promise<DataBlob> } Promise used to return the derived key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7136,7 +7136,7 @@ declare namespace cryptoFramework {
      *
      * @param { KdfSpec } params - Parameters of the key derivation function.
      * @returns { DataBlob } The derived key.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7179,7 +7179,7 @@ declare namespace cryptoFramework {
    *     **SCRYPT**, and **X963KDF|SHA256**.<br>For details about the supported specifications, see
    *     [Key Derivation Function Specifications](docroot://security/CryptoArchitectureKit/crypto-key-derivation-overview.md).
    * @returns { Kdf } Returns the **Kdf** instance corresponding to the specified algorithm.
-   * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -7277,7 +7277,7 @@ declare namespace cryptoFramework {
      * @param { string } [mode] - Order of the SM2 parameters in the ciphertext. Currently, only C1C3C2 is supported. If
      *     this parameter is left empty or is an empty string, the default value is used.
      * @returns { DataBlob } SM2 ciphertext in ASN.1 format.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7298,7 +7298,7 @@ declare namespace cryptoFramework {
      * @param { string } [mode] - Order of the SM2 parameters in the ciphertext. Currently, only C1C3C2 is supported. If
      *     this parameter is left empty or is an empty string, the default value is used.
      * @returns { SM2CipherTextSpec } SM2 ciphertext parameters obtained.
-     * @throws { BusinessError } 401 - Invalid parameters. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
