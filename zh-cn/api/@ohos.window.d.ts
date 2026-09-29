@@ -1730,6 +1730,76 @@ declare namespace window {
   }
 
   /**
+   * 窗口焦点状态变化原因枚举。
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum FocusChangeReason {
+    /**
+     * 焦点状态变化由用户点击以外的默认原因引起。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    DEFAULT = 0,
+    /**
+     * 焦点状态变化由用户点击窗口引起。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    CLICK = 1
+  }
+
+  /**
+   * 描述窗口的焦点状态变化信息。
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface WindowFocusState {
+    /**
+     * 窗口是否获焦。窗口获焦时为true，否则为false。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isFocused: boolean;
+    /**
+     * 焦点状态变化的原因。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    focusChangeReason: FocusChangeReason;
+    /**
+     * 下一个获焦窗口的ID。该字段仅在窗口失焦、且下一个获焦窗口与本窗口在同一进程时有效。默认值为undefined。
+     * 该值应为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    nextFocusedWindowId?: int;
+    /**
+     * 上一个获焦窗口的ID。该字段仅在窗口获焦、且上一个获焦窗口与本窗口在同一进程时有效。默认值为undefined。
+     * 该值应为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    prevFocusedWindowId?: int;
+  }
+
+  /**
    * 窗口所在显示设备和窗口自定义的显示密度信息，是与像素单位无关的缩放系数，即显示大小缩放系数。
    *
    * @syscap SystemCapability.Window.SessionManager
@@ -8966,6 +9036,38 @@ declare namespace window {
      * @since 23 static
      */
     offWindowHighlightChange(callback?: Callback<boolean>): void;
+
+    /**
+     * 注册窗口焦点状态变化事件的回调。
+     *
+     * @param { Callback<WindowFocusState> } callback - 回调函数。当窗口焦点状态发生变化时的回调，用于返回窗口的焦点状态变化
+     *     信息，包括窗口是否获焦、变化原因，以及同一进程中相邻获焦窗口的ID。
+     * @throws { BusinessError } 801 - Capability not supported.
+     *     Failed to call the API due to limited device capabilities.
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     *     The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onWindowFocusStateChange(callback: Callback<WindowFocusState>): void;
+
+    /**
+     * 取消注册窗口焦点状态变化事件的回调。
+     *
+     * @param { Callback<WindowFocusState> } [callback] - 回调函数。当窗口焦点状态发生变化时的回调，用于返回窗口的焦点状态
+     *     变化信息。若传入参数，则取消对应的监听；若未传入参数，则取消该事件的所有监听。
+     * @throws { BusinessError } 801 - Capability not supported.
+     *     Failed to call the API due to limited device capabilities.
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     *     The window is not created.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offWindowFocusStateChange(callback?: Callback<WindowFocusState>): void;
 
     /**
      * 绑定模态窗口与目标窗口，成功绑定后，目标窗口不能响应用户操作。同时添加目标窗口销毁监听，使用Promise异步回调。
