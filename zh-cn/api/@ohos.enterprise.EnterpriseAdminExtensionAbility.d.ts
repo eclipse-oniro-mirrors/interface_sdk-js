@@ -360,4 +360,14 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.0.0
    */
   onAdminPolicyChanged(event: common.PolicyChangedEvent): void;
+
+  /**
+   * 挂载外部存储回调。当需要挂载外置存储时，会触发回调。
+   *
+   * @param { common.ExternalStorageDeviceInfo } deviceInfo - 未挂载的外部存储设备信息。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 }
