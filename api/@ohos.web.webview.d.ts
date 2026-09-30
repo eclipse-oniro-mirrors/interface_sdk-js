@@ -9050,6 +9050,10 @@ declare namespace webview {
     /**
      * Type of the media source.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
@@ -9058,6 +9062,10 @@ declare namespace webview {
     /**
      * Address of the media source.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9067,6 +9075,10 @@ declare namespace webview {
     /**
      * Format of the media source, which may be empty. You need to determine the format by yourself.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9135,6 +9147,10 @@ declare namespace webview {
      *
      * For details, see [NativeEmbedDataInfo]{@link NativeEmbedDataInfo}.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9145,6 +9161,10 @@ declare namespace webview {
      * Position information of the surface, used to specify the display position and size of the surface during same-
      * layer rendering.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */

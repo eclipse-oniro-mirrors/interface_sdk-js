@@ -6191,6 +6191,10 @@ declare namespace webview {
         /**
          * 媒体源的类型。
          *
+         * 只读：否
+         *
+         * 可选：否
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
@@ -6198,12 +6202,20 @@ declare namespace webview {
         /**
          * 媒体源地址。
          *
+         * 只读：否
+         *
+         * 可选：否
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         source: string;
         /**
          * 媒体源格式，可能为空，需要开发者自行判断格式。
+         *
+         * 只读：否
+         *
+         * 可选：否
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -6277,12 +6289,20 @@ declare namespace webview {
          *
          * 详见[NativeEmbedDataInfo]{@link ./@internal/component/ets/web:NativeEmbedDataInfo}。
          *
+         * 只读：否
+         *
+         * 可选：否
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         id: string;
         /**
-         * surface的位置信息。
+         * surface的位置信息，用于指定同层渲染时 surface 的显示位置和尺寸。
+         *
+         * 只读：否
+         *
+         * 可选：否
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
