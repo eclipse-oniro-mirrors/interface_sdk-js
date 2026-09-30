@@ -23,7 +23,9 @@ import type unifiedDataChannel from './@ohos.data.unifiedDataChannel';
 
 /**
  * This module provides APIs for initiating drag actions. When receiving a gesture event, such as a touch or long-press
- * event, an application can initiate a drag action and carry drag information therein.
+ * event, an application can initiate a drag action and carry drag information therein. It is suitable for scenarios
+ * where the application needs to independently control the timing of drag initiation, drag preview effects, and drag
+ * data transfer, implementing more flexible custom drag interactions.
  *
  * > **NOTE**
  * >
@@ -133,7 +135,9 @@ declare namespace dragController {
   interface DragAction {
 
     /**
-     * Starts the drag service. This API uses a promise to return the result.
+     * Starts the drag service. This API is suitable for scenarios where a **DragAction** object is created through
+     * **createDragAction** to proactively initiate multi-object drag or customize the drag backdrop. This API uses a
+     * promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 100001 - Internal handling failed.
@@ -146,10 +150,13 @@ declare namespace dragController {
     startDrag(): Promise<void>;
 
     /**
-     * Subscribes to drag state changes.
+     * Subscribes to drag state changes. This API is used to obtain the drag status when proactive drag starts or
+     * ends, and to perform operations such as updating the UI, recording the status, or cleaning up resources.
      *
-     * @param { 'statusChange' } type for status changing
-     * @param { Callback<DragAndDropInfo> } callback with drag event and status information
+     * @param { 'statusChange' } type Event type. The value is fixed at **'statusChange'**, which indicates the drag
+     *     state change event.
+     * @param { Callback<DragAndDropInfo> } callback Callback used to return the drag state in
+     *     [DragAndDropInfo]{@link dragController.DragAndDropInfo}.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform [since 18]
@@ -159,10 +166,13 @@ declare namespace dragController {
     on(type: 'statusChange', callback: Callback<DragAndDropInfo>): void;
 
     /**
-     * Unsubscribes from drag state changes.
+     * Unsubscribes from drag state changes. This API is suitable for scenarios where the listener needs to be released
+     * when the drag ends, the page is destroyed, or the drag status change no longer needs to be responded to.
      *
-     * @param { 'statusChange' } type for status changing
-     * @param { Callback<DragAndDropInfo> } callback with drag event and status information
+     * @param { 'statusChange' } type Event type. The value is fixed at **'statusChange'**, which indicates the drag
+     *     state change event.
+     * @param { Callback<DragAndDropInfo> } callback Callback used to return the drag state in
+     *     [DragAndDropInfo]{@link dragController.DragAndDropInfo}.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform [since 18]
@@ -195,7 +205,8 @@ declare namespace dragController {
     pointerId: number;
 
     /**
-     * Data carried in the dragging process.
+     * Data carried during the drag process. When both this parameter and **dataLoadParams** are set,
+     * **dataLoadParams** takes effect.
      *
      * The default value is null.
      *
@@ -233,7 +244,10 @@ declare namespace dragController {
     touchPoint?: TouchPoint;
 
     /**
-     * Processing mode of the drag preview and the display of the number badge during dragging.
+     * Processing mode of the drag preview backdrop and display of the badge count during the drag process. Pass this
+     * parameter when you need to customize the drag preview backdrop effect or the badge count display mode. If this
+     * parameter is not passed, the system default drag preview backdrop processing mode and badge count display policy
+     * are used.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -355,7 +369,8 @@ declare namespace dragController {
      * **OnDragEnd** callbacks. It can only be used on the object obtained through the
      * [getDragPreview()]{@link @ohos.arkui.UIContext:DragController#getDragPreview} API.
      *
-     * @param { AnimationOptions } options - Animation settings.
+     * @param { AnimationOptions } options - Animation options for the foreground color change, which are used to set
+     *     the animation duration, animation curve, and other effects.
      * @param { function } handler - Callback used to change attributes such as the background mask color.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -389,9 +404,7 @@ declare namespace dragController {
     event: DragEvent;
 
     /**
-     * Additional information about the drag action. Not supported currently.
-     *
-     * The default value is null.
+     * Additional information about the drag event.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -454,7 +467,7 @@ declare namespace dragController {
    * @param { CustomBuilder | DragItemInfo } custom - Object to be dragged.
    * @param { DragInfo } dragInfo - Drag information.
    * @returns { Promise<{ event: DragEvent, extraParams: string }> } Promise used to return the result. [since 10 - 11]
-   * @returns { Promise<DragEventParam> } A Promise with the drag event information. [since 12]
+   * @returns { Promise<DragEventParam> } Promise used to return the result when the drag ends. [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -471,8 +484,12 @@ declare namespace dragController {
   function executeDrag(custom: CustomBuilder | DragItemInfo, dragInfo: DragInfo): Promise<DragEventParam>;
 
   /**
-   * Initiates a drag action, with the object to be dragged and the drag information passed in. This API uses a promise
-   * to return the result.
+   * Creates a drag action object for initiating drag and drop operations. You need to explicitly specify one or more
+   * drag previews, the drag data, and the drag handle point. If a drag operation initiated by an existing drag action
+   * object is not completed, no new object can be created, and calling the API will throw an exception. After the
+   * lifecycle of the drag action object ends, the callback functions registered on this object become invalid.
+   * Therefore, it is necessary to hold this object within a longer scope and replace the old value with a new object
+   * returned by **createDragAction** before each drag initiation.
    *
    * > **NOTE**
    * >
@@ -569,8 +586,9 @@ declare namespace dragController {
   const enum DragSpringLoadingState {
 
     /**
-     * Initial state when a dragged item enters the component boundary and remains stationary for the specified
-     * duration. This state enables preparation operations.
+     * Initial state when a dragged item enters the component boundary and remains stationary for the duration specified
+     * by **stillTimeLimit**. This state enables preparation operations such as data preparation and state recording
+     * required for hover detection.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -783,7 +801,8 @@ declare namespace dragController {
     currentConfig?: DragSpringLoadingConfiguration;
 
     /**
-     * Terminates subsequent hover detection. This API does not trigger CANCEL state notifications, and the application
+     * Terminates subsequent hover detection. This API should be called through the **SpringLoadingContext** object in
+     * the hover detection callback. This API does not trigger the **CANCEL** state notification, and the application
      * needs to perform state cleanup when executing this API.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -802,7 +821,9 @@ declare namespace dragController {
      * subsequent hover detection. Use this API with caution, as different drag data types may require different UX
      * timing.
      *
-     * @param { DragSpringLoadingConfiguration } config - New configuration for hover detection.
+     * @param { DragSpringLoadingConfiguration } config - Hover detection configuration to be updated, which is used
+     *     to dynamically set the stationary time for entering the **BEGIN** state, **UPDATE** notification interval,
+     *     notification count, and end wait time. This takes effect only when the hover detection state is **BEGIN**.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
