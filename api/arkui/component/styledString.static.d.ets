@@ -1619,6 +1619,14 @@ export declare class ImageAttachment {
      * @since 24 static
      */
     readonly sizeInVp?: SizeOptions;
+    /**
+     * Image text tag.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    readonly imageTag?: string;
 }
 /**
  * Defines the ResourceImageAttachmentOptions.
@@ -1694,6 +1702,14 @@ export declare interface ResourceImageAttachmentOptions {
      * @since 24 static
      */
     supportSvg2?: boolean;
+    /**
+     * Image text tag.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    imageTag?: string;
 }
 /**
  * Defines the ImageAttachmentInterface.
@@ -1751,6 +1767,14 @@ export declare interface ImageAttachmentInterface {
      * @since 23 static
      */
     colorFilter?: ColorFilterType;
+    /**
+     * Image text tag.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    imageTag?: string;
 }
 
 /**

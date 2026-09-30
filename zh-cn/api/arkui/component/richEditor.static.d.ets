@@ -1182,7 +1182,16 @@ export declare interface RichEditorImageSpanResult {
         int,
         int
     ];
+    /**
+     * 图片文本标签。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    imageTag?: string;
 }
+
 /**
  * 图片Span信息。
  *
@@ -1396,7 +1405,16 @@ export declare interface RichEditorImageSpanOptions {
      * @since 23 static
      */
     onHover?: OnHoverCallback;
+    /**
+     * 图片文本标签。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    imageTag?: string;
 }
+
 /**
  * 设置builder插入的偏移位置和样式。
  *

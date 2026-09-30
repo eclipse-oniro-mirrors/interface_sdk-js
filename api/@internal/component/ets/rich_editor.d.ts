@@ -1513,6 +1513,17 @@ declare interface RichEditorImageSpanResult {
    * @since 10 dynamic
    */
   offsetInSpan: [number, number];
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
@@ -1804,6 +1815,17 @@ declare interface RichEditorImageSpanOptions {
    * @since 14 dynamic
    */
   onHover?: OnHoverCallback;
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
