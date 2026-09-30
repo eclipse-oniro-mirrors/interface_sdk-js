@@ -972,6 +972,16 @@ declare namespace insightIntentDriver {
      * @since 23 dynamic&static
      */
     readonly subIntentInfoForConfiguration?: SubIntentInfoForConfiguration;
+
+    /**
+     * 表示该意图所需的权限。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    readonly permissions?: string[];
   }
 
   /**

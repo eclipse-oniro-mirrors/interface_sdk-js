@@ -503,6 +503,66 @@ declare namespace insightIntent {
      */
     FUNCTION = 1
   }
+
+  /**
+   * 表示意图执行信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface InsightIntentExecutionInfo {
+    /**
+     * 表示意图名称。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    intentName: string;
+
+    /**
+     * 表示意图实例的唯一ID。该值应为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    instanceId: int;
+
+    /**
+     * 表示意图调用方的应用包名。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerBundleName: string;
+
+    /**
+     * 表示调用方的Token ID。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerTokenId: string;
+
+    /**
+     * 表示调用方的UID。该值应为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerUid: int;
+  }
 }
 
 export default insightIntent;

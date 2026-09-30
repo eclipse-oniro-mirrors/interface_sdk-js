@@ -132,6 +132,22 @@ declare class InsightIntentContext {
    * @since 23 dynamic&static
    */
   setReturnModeForUIExtensionAbility(returnMode: insightIntent.ReturnMode): void;
+
+  /**
+   * 获取意图执行信息。
+   *
+   * @param { int } instanceId - 意图实例ID，来自InsightIntentEntryExecutor.context.instanceId。
+   *     <br>该值应为整数。
+   * @returns { Promise<insightIntent.InsightIntentExecutionInfo> } - Promise对象，用于返回意图执行信息。
+   * @throws { BusinessError } 16000003 - The specified ID does not exist.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
+   *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  getInsightIntentExecutionInfo(instanceId: int): Promise<insightIntent.InsightIntentExecutionInfo>;
 }
 
 export default InsightIntentContext;

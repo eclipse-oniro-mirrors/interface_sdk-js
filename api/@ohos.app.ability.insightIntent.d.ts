@@ -514,6 +514,68 @@ declare namespace insightIntent {
      */
     FUNCTION = 1
   }
+
+  /**
+   * The insight intent execute information.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface InsightIntentExecutionInfo {
+    /**
+     * Intent name.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    intentName: string;
+
+    /**
+     * Unique ID of an intent instance.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    instanceId: int;
+
+    /**
+     * The caller bundle name of the intent.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerBundleName: string;
+
+    /**
+     * Token ID of the caller.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerTokenId: string;
+
+    /**
+     * UID of the caller.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerUid: int;
+  }
 }
 
 export default insightIntent;
