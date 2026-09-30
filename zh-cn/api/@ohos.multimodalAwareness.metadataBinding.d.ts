@@ -14,7 +14,7 @@
   */
 
 /**
- * @file 记忆链接
+ * @file 元数据绑定
  * @kit MultimodalAwarenessKit
  */
 
@@ -22,7 +22,7 @@ import type image from '@ohos.multimedia.image';
 import type { Callback } from './@ohos.base';
  
 /**
- * 本模块提供记忆链接能力调用，用于向图片加入和解析元数据信息，实现信息传递，包括编码内容传递、订阅事件和取消订阅事件。记忆链接允许系统应用获取第三方应用的编码内容，
+ * 本模块提供元数据绑定能力调用，用于向图片加入和解析元数据信息，实现信息传递，包括编码内容传递、订阅事件和取消订阅事件。元数据绑定允许系统应用获取第三方应用的编码内容，
  * <br>支持实时事件监听和回调机制，适用于需要在图片中存储和传递元数据的场景，可用于防伪、版权保护等场景，为开发者提供灵活的信息嵌入和解析机制。
  *
  * @syscap SystemCapability.MultimodalAwareness.MetadataBinding
