@@ -4287,20 +4287,20 @@ declare interface AnimateParam {
    * > **Notes about PlayMode**:
    * >
    * > - **PlayMode.Normal** and **PlayMode.Alternate** are recommended. Under these settings, the first round of the
-   * > > animation is played forwards. If **PlayMode.Reverse** or **PlayMode.AlternateReverse** is used, the first round
+   * > animation is played forwards. If **PlayMode.Reverse** or **PlayMode.AlternateReverse** is used, the first round
    * > of
-   * > > the animation is played backwards. In this case, the animation jumps to the end state and then starts from 
+   * > the animation is played backwards. In this case, the animation jumps to the end state and then starts from 
    * > there.
    * >
    * > - When using **PlayMode.Alternate** or **PlayMode.AlternateReverse**, make sure the final state of the animation 
    * > is
-   * > > the same as the value of the state variable. In other words, make sure the last round of the animation is 
+   * > the same as the value of the state variable. In other words, make sure the last round of the animation is 
    * > played
-   * > > forwards. When **PlayMode.Alternate** is used, **iterations** must be set to an odd number. When
-   * > > **PlayMode.AlternateReverse** is used, **iterations** must be set to an even number.
+   * > forwards. When **PlayMode.Alternate** is used, **iterations** must be set to an odd number. When
+   * > **PlayMode.AlternateReverse** is used, **iterations** must be set to an even number.
    * >
    * > - **PlayMode.Reverse** is not recommended. Under this setting, the animation jumps to the end state at the
-   * > > beginning, and its final state will be different from the value of the state variable.
+   * > beginning, and its final state will be different from the value of the state variable.
    *
    * @default PlayMode.Normal
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4463,12 +4463,12 @@ declare interface MotionPathOptions {
  * > **motionPath** is effective only when **type** is set to **SharedTransitionEffectType.Exchange**.
  * >
  * > When **type** is set to **SharedTransitionEffectType.Exchange**, the effect focuses on smooth transition of the
- * > > position and size of matching shared elements, which can be visually observed through the component's border. The
- * > > transition, however, does not involve content properties, which will abruptly change to the target page's values 
+ * > position and size of matching shared elements, which can be visually observed through the component's border. The
+ * > transition, however, does not involve content properties, which will abruptly change to the target page's values 
  * > at
- * > > the end of the animation. For example, if a **Text** component has different **fontSize** values on two pages, 
+ * > the end of the animation. For example, if a **Text** component has different **fontSize** values on two pages, 
  * > the
- * > > font size will snap to the target page's value once the shared transition animation completes.
+ * > font size will snap to the target page's value once the shared transition animation completes.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -4615,9 +4615,9 @@ declare interface GeometryTransitionOptions {
  * > **NOTE**
  * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
- * > > While historical version information is preserved for anonymous objects, there may be cases where the outer 
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer 
  * > element
- * > > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ * > 's @since version number is higher than inner elements'. This does not affect interface usability.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4706,21 +4706,21 @@ declare interface LinearGradientOptions {
  * > **NOTE**
  * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
- * > > While historical version information is preserved for anonymous objects, there may be cases where the outer 
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer 
  * > element
- * > > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ * > 's @since version number is higher than inner elements'. This does not affect interface usability.
  * 
  * > **NOTE**
  * >
  * > When using the **metricsColors** parameter, take note of the following:
  * >
  * > [ColorMetrics]{@link Graphics:ColorMetrics} represents the fill color, which can be constructed with a specified
- * > > color gamut attribute using the [colorWithSpace]{@link Graphics:ColorMetrics#colorWithSpace} API. **number**
- * > > represents the position of the specified color, with a value range of [0, 1.0]. **0** indicates the start of the
- * > > container where the gradient color is set, and **1.0** indicates the end of the container. To achieve multi-color
- * > > gradients, the **number** parameters in the array should be set in ascending order. If a later number is less 
+ * > color gamut attribute using the [colorWithSpace]{@link Graphics:ColorMetrics#colorWithSpace} API. **number**
+ * > represents the position of the specified color, with a value range of [0, 1.0]. **0** indicates the start of the
+ * > container where the gradient color is set, and **1.0** indicates the end of the container. To achieve multi-color
+ * > gradients, the **number** parameters in the array should be set in ascending order. If a later number is less 
  * > than
- * > > a previous one, it is treated as equal to the previous value.
+ * > a previous one, it is treated as equal to the previous value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4853,20 +4853,20 @@ declare interface SweepGradientOptions {
  * > **NOTE**
  * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
- * > > While historical version information is preserved for anonymous objects, there may be cases where the outer 
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer 
  * > element
- * > > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ * > 's @since version number is higher than inner elements'. This does not affect interface usability.
  * 
  * > **NOTE**
  * >
  * > When using the **colors** parameter, take note of the following:
  * >
  * > [ResourceColor]{@link ResourceColor} indicates the color, and **number** indicates the color's position, which
- * > > ranges from 0 to 1.0: **0** indicates the start of the container, and **1.0** indicates the end of the container.
- * > > To create a gradient with multiple color stops, you are advised to set the **number** values in ascending order. 
+ * > ranges from 0 to 1.0: **0** indicates the start of the container, and **1.0** indicates the end of the container.
+ * > To create a gradient with multiple color stops, you are advised to set the **number** values in ascending order. 
  * > If
- * > > a value of **number** in an array is smaller than that in the previous one, it is considered as equal to the
- * > > previous value.
+ * > a value of **number** in an array is smaller than that in the previous one, it is considered as equal to the
+ * > previous value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -5912,13 +5912,13 @@ declare interface RotateAngleOptions {
  * > **NOTE**
  * >
  * > 1. When set to a value of the **TransitionOptions** type, the **transition** attribute must work with
- * > > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto). The animation duration,
- * > > curve, and delay follow the settings in **animateTo**.
+ * > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto). The animation duration,
+ * > curve, and delay follow the settings in **animateTo**.
  * >
  * > 2. If the value of the **TransitionOptions** type has only **type** specified, the transition effect will take on
- * > > the default opacity. For example, **{type: TransitionType.Insert}** produces the same effect as
- * > > **{type: TransitionType.Insert, opacity: 0}**. If a specific style is specified, the transition effect will not
- * > > take on the default opacity.
+ * > the default opacity. For example, **{type: TransitionType.Insert}** produces the same effect as
+ * > **{type: TransitionType.Insert, opacity: 0}**. If a specific style is specified, the transition effect will not
+ * > take on the default opacity.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7 dynamiconly
@@ -6851,34 +6851,34 @@ declare interface DragItemInfo {
  * > **NOTE**
  * >
  * > - Since API version 10, you can use
- * > > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto) in
- * > > [UIContext]{@link @ohos.arkui.UIContext} to specify the UI execution context.
+ * > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto) in
+ * > [UIContext]{@link @ohos.arkui.UIContext} to specify the UI execution context.
  * >
  * > - Avoid using **animateTo** in **aboutToAppear** or **aboutToDisappear**.
  * >
  * > - When **animateTo** is called in
- * > > [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear), the
- * > > component's build method is not executed yet, and internal components are not created. This means the animation 
+ * > [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear), the
+ * > component's build method is not executed yet, and internal components are not created. This means the animation 
  * > has
- * > > no initial values to work with and will not function as expected.
+ * > no initial values to work with and will not function as expected.
  * >
  * > - During
- * > > [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear), 
+ * > [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear), 
  * > the
- * > > component is being destroyed, so animations should not be used.
+ * > component is being destroyed, so animations should not be used.
  * >
  * > - When a component appears or disappears, you can add animation effects through the [transition]{@link common}
- * > > attribute.
+ * > attribute.
  * >
  * > - For attributes not supported by component transitions, see
- * > > 
+ * > 
  * > [Example 2](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#example-2-enabling-component-disappearance-after-animation-completion)
- * > > and use **animateTo** to implement the component disappearance effect after animation completion.
+ * > and use **animateTo** to implement the component disappearance effect after animation completion.
  * >
  * > - In certain scenarios, using **animateTo** with
- * > > [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2) may
- * > > produce unexpected results. For details, see
- * > > 
+ * > [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2) may
+ * > produce unexpected results. For details, see
+ * > 
  * > [Using animateTo Failed in State Management V2](docroot://ui/state-management/arkts-new-local.md#using-animateto-failed-in-state-management-v2).
  *
  * @param { AnimateParam } value
@@ -11612,9 +11612,9 @@ declare enum DragResult {
  * > **NOTE**
  * >
  * > In the **blendMode** enums, **s** indicates the source pixel, **d** indicates the target pixel, **sa** indicates
- * > > the opacity of the source pixel, **da** indicates the opacity of the target pixel, **r** indicates the pixel 
+ * > the opacity of the source pixel, **da** indicates the opacity of the target pixel, **r** indicates the pixel 
  * > after
- * > > blending, and **ra** indicates the opacity of the pixel after blending.
+ * > blending, and **ra** indicates the opacity of the pixel after blending.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -21654,8 +21654,8 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > - Since API version 12, the following constraints apply when this API is used in service widgets:
-   * > >    1. Click events will not be triggered if the finger is pressed for more than 800 ms.
-   * > >    2. Click events will not be triggered if the finger moves more than 20 px after pressing down.
+   * >    1. Click events will not be triggered if the finger is pressed for more than 800 ms.
+   * >    2. Click events will not be triggered if the finger moves more than 20 px after pressing down.
    * >
    * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
@@ -22097,9 +22097,9 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > - When a single page contains a large number of components with animations, use
-   * > > [renderGroup]{@link CommonMethod#renderGroup(value: boolean)} to minimize frame freezing and improve animation
-   * > > performance. For best practices, see
-   * > > 
+   * > [renderGroup]{@link CommonMethod#renderGroup(value: boolean)} to minimize frame freezing and improve animation
+   * > performance. For best practices, see
+   * > 
    * > [Animation Usage Guide – Using RenderGroup](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-fair-use-animation#section1223162922415).
    * >
    * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
@@ -22310,20 +22310,20 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > - Do not use this API in intra-component transitions, shared element transitions, implicit element transitions,
-   * > > or particle animations. Doing so may cause unexpected results.
+   * > or particle animations. Doing so may cause unexpected results.
    * >
    * > - The **radius** parameter of **motionBlur** must be set to **0** for the initial state. Otherwise, there may be
-   * > > unexpected results during a cold start.
+   * > unexpected results during a cold start.
    * >
    * > - This API must be used together with the **onFinish** parameter of **AnimateParam**. Its **radius** parameter
-   * > > must be set to **0** when the animation ends; otherwise, there may be unexpected results.
+   * > must be set to **0** when the animation ends; otherwise, there may be unexpected results.
    * >
    * > - When using this API, do not frequently change the blur radius of the same component; otherwise, there may be
-   * > > unexpected results. For example, if you frequently click the image in the example, the blur effect may not work
-   * > > sometimes.
+   * > unexpected results. For example, if you frequently click the image in the example, the blur effect may not work
+   * > sometimes.
    * >
    * > - To avoid unexpected results, make sure the coordinates of the motion blur anchor point are the same as those of
-   * > > the animation scaling anchor point.
+   * > the animation scaling anchor point.
    * >
    * > - To avoid unexpected results, set the blur radius to a value less than 1.
    *
@@ -23006,14 +23006,14 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > The drawing content of the component with **excludeFromRenderGroup** set to **true** and its children cannot the
-   * > > component's own boundary range. Otherwise, the displayed content may be clipped. For example, if the child
-   * > > component exceeds the boundary range of the current component due to attributes such as
-   * > > [translate]{@link CommonMethod#translate(value: TranslateOptions)} or
-   * > > [scale]{@link CommonMethod#scale(value: ScaleOptions)}, or the drawing content extend beyond its boundaries
-   * > > because the current component has attributes such as
-   * > > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} and
-   * > > [pixelStretchEffect]{@link CommonMethod#pixelStretchEffect(options: PixelStretchEffectOptions)}, the displayed
-   * > > content may be clipped. In such scenarios, **excludeFromRenderGroup** should not be set to **true**.
+   * > component's own boundary range. Otherwise, the displayed content may be clipped. For example, if the child
+   * > component exceeds the boundary range of the current component due to attributes such as
+   * > [translate]{@link CommonMethod#translate(value: TranslateOptions)} or
+   * > [scale]{@link CommonMethod#scale(value: ScaleOptions)}, or the drawing content extend beyond its boundaries
+   * > because the current component has attributes such as
+   * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} and
+   * > [pixelStretchEffect]{@link CommonMethod#pixelStretchEffect(options: PixelStretchEffectOptions)}, the displayed
+   * > content may be clipped. In such scenarios, **excludeFromRenderGroup** should not be set to **true**.
    *
    * @param { boolean | undefined } exclude - Whether to remove the current component and its child components from the
    *     render group of the ancestor component.
@@ -24873,13 +24873,13 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > Different shapes support different ranges of attributes. A path is one type of shape, along with others like
-   * > > ellipses and rectangles.
+   * > ellipses and rectangles.
    * >
    * > Path shapes do not support setting width and height attributes. For details about the supported attributes, see
-   * > > the specific shape documentation.
+   * > the specific shape documentation.
    * >
    * > The [fill]{@link @ohos.arkui.shape:CommonShapeMethod#fill} attribute of shapes has no effect on the **clipShape**
-   * > > API.
+   * > API.
    *
    * @param { CircleShape | EllipseShape | PathShape | RectShape } value - Shape (which may include position information
    *     ) to clip the current component.
@@ -24902,13 +24902,13 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > Different shapes support different ranges of attributes. A path is one type of shape, along with others like
-   * > > ellipses and rectangles.
+   * > ellipses and rectangles.
    * >
    * > Path shapes do not support setting width and height attributes. For details about the supported attributes, see
-   * > > the specific shape documentation.
+   * > the specific shape documentation.
    * >
    * > The [fill]{@link @ohos.arkui.shape:CommonShapeMethod#fill} attribute of shapes has no effect on the **clipShape**
-   * > > API.
+   * > API.
    *
    * @param { Optional<CircleShape | EllipseShape | PathShape | RectShape> } shape - Shape (which may include position
    *     information) to clip the current component.
@@ -29885,10 +29885,10 @@ declare interface EditModeOptions {
  * >
  * > The brightness (gray scale value) of each pixel in the component background content is calculated using the 
  * > following formula:
- * > >  Y = (0.299R + 0.587G + 0.114B) / 255.0, where **R**, **G**, and **B** represent red, green, and blue channel 
+ * >  Y = (0.299R + 0.587G + 0.114B) / 255.0, where **R**, **G**, and **B** represent red, green, and blue channel 
  * > values of the pixel, respectively, and **Y** is the gray scale value. This formula normalizes the gray scale value 
  * > to a range of 0 to 1.
- * > >  The formula for calculating the increase in brightness for each pixel is as follows: ΔY = -rate * Y + 
+ * >  The formula for calculating the increase in brightness for each pixel is as follows: ΔY = -rate * Y + 
  * > lightUpDegree. For example, when rate = 0.5 and lightUpDegree = 0.5, for a pixel with a gray scale value of 0.2, 
  * > the increase in brightness is -0.5 * 0.2 + 0.5 = 0.4. For a pixel with a gray scale value of 1, the increase in 
  * > brightness is -0.5 * 1 + 0.5 = 0.
