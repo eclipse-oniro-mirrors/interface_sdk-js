@@ -20090,18 +20090,26 @@ declare class CommonMethod<T> {
   constructor();
 
   /**
-   * Sets the width of the component. By default, the width required to fully hold the component content is
-   * used. If a component is wider than its parent, it will overflow.
+   * Sets the width of the component itself. By default, the width required for the content of the child
+   * component is used. If the width of a child component is greater than that of its parent component, the
+   * child component overflows and is displayed outside the parent component.
    * <br>Since API version 10, this API supports the calc calculation feature.
    *
-   * @param { Length } value - Width of the component to set.<br>Unit: vp
-   *     >  **NOTE**
-   *     >
-   *     >  - In the [TextInput](@link TextInput) component, setting **width** to **auto** means that
-   *     >    the width adapts to the width of the text content.
-   *     >
-   *     >  - In the [AlphabetIndexer](@link AlphabetIndexer) component, setting **width** to **auto**
-   *     >    means that the width adapts to the maximum width of index entries.
+   * >  **NOTE**
+   * >
+   * >  - In the [TextInput](./ts-basic-components-textinput.md) component, setting width to **auto** means
+   * >    adapting to the text width.
+   * >
+   * >  - In the [AlphabetIndexer](./ts-container-alphabet-indexer.md) component, setting **width** to
+   * >    **auto** means adapting to the width of the largest index item.
+   * >
+   * >  - In the [Row]{@link Row}, [Column]{@link Column}, and [RelativeContainer]{@link RelativeContainer}
+   * >    components, setting width to auto means adapting to the child components.
+   *
+   * @param { Length } value - Width of the component to set.<br>Unit: vp<br>When a percentage is set, the
+   *     width of the parent container is used as the base value.<br>Exception values: when the parameter is
+   *     **undefined**, the attribute setting does not take effect; for other exception values, the width
+   *     attribute is restored to the default behavior when it is not configured.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20111,11 +20119,14 @@ declare class CommonMethod<T> {
    */
   width(value: Length): T;
   /**
-   * Sets the width of the component or its horizontal layout policy. By default, the component uses the width required
-   * for its content. If a component is wider than its parent, it will overflow.
+   * Sets the width of the component itself or its horizontal layout policy. By default, the width required
+   * for the content of the child component is used. If the width of a child component is greater than that of
+   * its parent component, the child component overflows and is displayed outside the parent component.
+   * <br>Since API version 15, when the parameter is of the **Length** type, this API supports the **calc**
+   * calculation feature.
    *
-   * @param { Length | LayoutPolicy } widthValue - Width of the component to set
-   *     <br>Unit: vp.
+   * @param { Length | LayoutPolicy } widthValue - Width or horizontal layout policy of the component to set.
+   *     <br>Unit: vp<br>When a percentage is set, the width of the parent container is used as the base value.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20127,16 +20138,21 @@ declare class CommonMethod<T> {
   width(widthValue: Length | LayoutPolicy): T;
 
   /**
-   * Sets the height of the component. By default, the height required to fully hold the component content
-   * is used. If a component is higher than its parent, it will overflow.
+   * Sets the height of the component itself. By default, the height required for the content of the child
+   * component is used. If the height of a child component is greater than that of its parent component, the
+   * child component overflows and is displayed outside the parent component.
    * <br>Since API version 10, this API supports the calc calculation feature.
    *
-   * @param { Length } value - Height of the component to set.<br>Unit: vp
-   *     >  **NOTE**
-   *     >
-   *     >  In the [Row](@link Row), [Column](@link Column), and [RelativeContainer](@link RelativeContainer)
-   *     components, setting **width** and **height** to **auto** means that the size adapts to the size of their
-   *     child components.
+   * >  **NOTE**
+   * >
+   * >  In the [Row]{@link Row}, [Column]{@link Column}, and [RelativeContainer]{@link RelativeContainer}
+   * >  components, setting **width** and **height** to **auto** means that the size adapts to the size of their
+   * >  child components.
+   *
+   * @param { Length } value - Component height to set.<br>Unit: vp<br>When a percentage is set, the height
+   *     of the parent container is used as the base value.<br>Abnormal values: If the parameter is
+   *     **undefined**, the attribute setting does not take effect; for other abnormal values, the height
+   *     attribute is restored to the default behavior when it is not configured.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20146,12 +20162,14 @@ declare class CommonMethod<T> {
    */
   height(value: Length): T;
   /**
-   * Sets the height of the component or its vertical layout policy. By default, the
-   * component uses the height required for its content. If a component is higher than
-   * its parent, it will overflow.
+   * Sets the height of the component itself or its vertical layout policy. By default, the height required
+   * for the content of the child component is used. If the height of a child component is greater than that
+   * of its parent component, the child component overflows and is displayed outside the parent component.
+   * <br>Since API version 15, when the parameter is of the Length type, this API supports the calc calculation
+   * feature.
    *
-   * @param { Length | LayoutPolicy } heightValue - Height of the component to set.
-   *     <br>Unit: vp.
+   * @param { Length | LayoutPolicy } heightValue - Component height or vertical layout policy to set.
+   *     <br>Unit: vp<br>When a percentage is set, the height of the parent container is used as the base value.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20198,62 +20216,62 @@ declare class CommonMethod<T> {
   customProperty(name: string, value: Optional<Object>): T;
 
   /**
-   * Expands the safe area.
+   * Controls a component to expand its safe area to achieve an immersive effect.
    *
    * > **NOTE**
    * >
-   * > - When using **expandSafeArea** to expand the drawing of a component, avoid setting fixed width and height values
-   * > (except percentages). If fixed width and height values are set (including **'auto'**), the edges for expanding
-   * the
-   * > safe area can only be **[SafeAreaEdge.TOP, SafeAreaEdge.START]**, and the size of the component remains unchanged
-   * > after safe area expansion.
+   * > - When using **expandSafeArea** to expand the drawing of a component, avoid setting fixed width and height
+   * > values (except percentages). If fixed width and height values or 'auto' are set, the safe area can be expanded
+   * > only upward (SafeAreaEdge.TOP) and toward the start direction (SafeAreaEdge.START, which indicates the left side
+   * > in LTR mode and the right side in RTL mode), and the size of the expanded component remains unchanged.
    * >
-   * > - The safe area does not restrict the layout or size of components inside, nor does it clip the components.
+   * > - The safe area does not restrict the layout and size of internal components, nor does it clip internal
+   * > components.
    * >
-   * > - If the parent container is a scrollable container, the component does not extend after the **expandSafeArea**
-   * > attribute is set, but it can still trigger updates to the extension range of its child nodes that have
-   * > **expandSafeArea** set.
+   * > - When the parent container is a scrollable container, after the **expandSafeArea** attribute is set on a
+   * > component, the component itself does not extend, but it can still trigger the update of the extension range of
+   * > its child nodes on which **expandSafeArea** is set.
    * >
-   * > - When **expandSafeArea()** is set without parameters, default values are applied. When **expandSafeArea([],[])**
-   * > is used with empty arrays, the setting has no effect.
+   * > - When **expandSafeArea()** is set without parameters, the default values are used. When
+   * > **expandSafeArea([],[])** is set, the input parameters are empty arrays, and the **expandSafeArea** attribute
+   * > does not take effect.
    * >
-   * > - Prerequisites for the **expandSafeArea** attribute to take effect:
-   * >   1. When **type** is set to **SafeAreaType.KEYBOARD**, the settings take effect by default. This behaves as the
-   * >      component not avoiding the virtual keyboard.
-   * >   2. When **type** is set to any other value, the settings take effect only if its boundaries overlap with the
-   * >      safe area. For example, if the height of the status bar is 100, the absolute position of the component on
-   * the
-   * >      screen must be 0 <= y <= 100 for the settings to take effect.
+   * > - The conditions for the **expandSafeArea** attribute to take effect on a component are as follows:
+   * >   1. When type is SafeAreaType.KEYBOARD, it takes effect by default, meaning that the component does not avoid
+   * > the keyboard.<br>
+   * >   2. When other types are set, the component can extend under the safe area only when the component boundary
+   * > coincides with the safe area. For example, if the height of the status bar at the top of the device is 100, the
+   * > absolute position of the component on the screen must satisfy 0 <= y <= 100.
    * >
-   * > - When a component extends into a non-safe area, events in the non-safe area (such as click events) may be
-   * > intercepted by the system. Built-in components like the status bar will be given priority to respond to these
-   * > events.
+   * > - When a component extends into a non-safe area, events in the non-safe area, such as click events, may be
+   * > intercepted by the system and preferentially responded to by system components such as the status bar.
    * >
-   * > - Avoid setting the **expandSafeArea** attribute for components within scrollable containers. If you do set it,
-   * > you must apply the **expandSafeArea** attribute to all direct nodes from the current node to the scrollable
-   * > ancestor container, following the component nesting relationship. Otherwise, the **expandSafeArea** attribute may
-   * > become ineffective after scrolling.
+
+ * > - It is not recommended to set the **expandSafeArea** attribute on components in a scrollable
+ * > container. If it is
+   * > set, the **expandSafeArea** attribute must be set on all direct nodes from the current node to the scrollable
+   * > ancestor container according to the component nesting relationship. Otherwise, the **expandSafeArea** attribute
+   * > may become invalid after scrolling.
    * >
-   * > - The **expandSafeArea** attribute only affects the current component and does not propagate to parent or child
-   * > components. Therefore, all relevant components must be configured individually.
+   * > - The **expandSafeArea** attribute takes effect only on the current component and is not passed to parent or
+   * > child components. Therefore, developers must configure this attribute separately for all related components.
    * >
-   * > - When both **expandSafeArea** and **position** attributes are set, the **position** attribute takes effect
-   * first,
-   * > followed by the **expandSafeArea** attribute. For components that do not have **position**, **offset**, or other
-   * > rendering attributes set, such as dialog boxes and sheets, the **expandSafeArea** attribute will not take effect
-   * if
-   * > their boundaries do not overlap with the non-safe area.
+   * > - When both **expandSafeArea** and **position** are set, the **position** attribute takes effect first, and the
+   * > **expandSafeArea** attribute takes effect later. For components on which drawing attributes such as position and
+   * > offset are not set, if their boundaries do not overlap with the non-safe area, setting the **expandSafeArea**
+   * > attribute does not take effect, such as dialog boxes and semi-modal components.
    * >
-   * > - In scenarios where the **expandSafeArea** attribute is ineffective, and you need to place a component in the
-   * > safe area, you will need to manually adjust the component's coordinates.
+   * > - For scenarios where the **expandSafeArea** attribute cannot take effect, to place a component in the non-safe
+   * > area, you need to manually adjust the coordinates of the component.
    *
-   * @param { Array<SafeAreaType> } types - Types of non-safe areas to extend into. For the CUTOUT type to take effect,
-   *     the Metadata item must be added to the configuration file.
-   *     <br>Default value: [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD].
-   *     <br>Invalid values are treated as the default value.
-   * @param { Array<SafeAreaEdge> } edges - Edges for expanding the safe area.
-   *     <br>Default value: [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END].
-   *     <br>Invalid values are treated as the default value. The default value means to extend to all non-safe areas.
+   * @param { Array<SafeAreaType> } types - Types of the safe areas to expand. By default, SafeAreaType.CUTOUT is
+   *     included. However, if the Metadata configuration item is not added, the page does not avoid the
+ *     cutout, and the
+   *     CUTOUT type does not take effect.<br>Default value: [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT,
+   *     SafeAreaType.KEYBOARD]<br>Invalid value: handled by default.
+   * @param { Array<SafeAreaEdge> } edges - Edges of the safe areas to expand. By default, the component expands to
+   *     all avoidance areas.<br>Default value: [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START,
+   *     SafeAreaEdge.END].<br>Invalid value: handled by default.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20264,7 +20282,8 @@ declare class CommonMethod<T> {
   expandSafeArea(types?: Array<SafeAreaType>, edges?: Array<SafeAreaEdge>): T;
 
   /**
-   * Ignores the safe area for component layout.
+   * Safe area when expanding the component layout. The component layout position and size may change, which differs
+   * from the expandSafeArea mechanism (which only expands the drawing area and keeps the layout unchanged).
    *
    * > **NOTE**
    * >
@@ -20283,13 +20302,13 @@ declare class CommonMethod<T> {
    * > attribute (**.expandSafeArea**) are set: **.ignoreLayoutSafeArea** takes effect first, and **.expandSafeArea**
    * > takes effect on the basis of the former.
    *
-   * @param { Array<LayoutSafeAreaType> } [types] - Types of layout safe areas to expand.<br>Default value:
-   *     [LayoutSafeAreaType.SYSTEM] (expands to all safe areas, including the status bar, navigation bar, and
-   *     component-level safe area (safeAreaPadding)). navigation bar, and component-level safe area<br>Invalid values are
-   *     treated as the default value.
-   * @param { Array<LayoutSafeAreaEdge> } [edges] - Edges of the layout safe area to expand, with mirroring capability
-   *     supported.<br>Default value: [LayoutSafeAreaEdge.ALL] (expands all edges of the component).<br>Invalid values are
-   *     treated as the default value.
+   * @param { Array<LayoutSafeAreaType> } [types] - Type of the expanded layout safe area.<br>Default value:
+   *     [LayoutSafeAreaType.SYSTEM], which extends to the system safe area, for example, the status bar, navigation
+   *     bar, punch-hole area, and component-level safe area ([safeAreaPadding]{@link CommonMethod#safeAreaPadding}).
+   *     <br>Invalid value: handled by default.
+   * @param { Array<LayoutSafeAreaEdge> } [edges] - Edges of the expanded layout safe area, with mirroring
+   *     supported.<br>Default value: [LayoutSafeAreaEdge.ALL], which expands all edges of the
+   *     component.<br>Invalid value: handled by default.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20347,13 +20366,13 @@ declare class CommonMethod<T> {
   responseRegionList(regions: Array<ResponseRegion>): T;
 
   /**
-   * Sets the width and height of the component.
+   * Sets the width and height of the component itself. After the setting, the layout and display size of the
+   * component in the parent container are affected.
    * <br>Since API version 10, this API supports the calc calculation feature.
    *
-   * @param { SizeOptions } value - The [SizeOptions]{@link SizeOptions} type is used to set the width and
-   *     height.<br>Exception handling: If the parameter is **undefined**, the attribute setting does not take
-   *     effect. For other invalid values, the **size** attribute reverts to its default behavior when
-   *     unconfigured.<br>Unit: vp
+   * @param { SizeOptions } value - Width and height.<br>Abnormal value: If the parameter is **undefined**,
+   *     the attribute setting does not take effect. For other abnormal values, the **size** attribute is
+   *     restored to the default behavior when it is not configured.<br>Unit: vp
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20364,7 +20383,9 @@ declare class CommonMethod<T> {
   size(value: SizeOptions): T;
 
   /**
-   * Sets the constraint size of the component, which is used to limit the size range during component layout.
+   * Sets the constraint size, which limits the size range during component layout. After the setting, the
+   * width and height of the component are limited to the specified minimum and maximum values. The priority
+   * of **constraintSize** is higher than that of the **width** and **height** attributes.
    * <br>Since API version 10, this API supports the calc calculation feature.
    *
    * **Impact of constraintSize(minWidth/maxWidth/minHeight/maxHeight) on width/height**
@@ -20387,14 +20408,15 @@ declare class CommonMethod<T> {
    * | width, minWidth, and maxWidth| The layout restrictions passed by the parent container are used for layout.|
    * | height, minHeight, and maxHeight| The layout restrictions passed by the parent container are used for layout.|
    *
-   * @param { ConstraintSizeOptions } value - Constraint size of the component to set.
-   *     **constraintSize** takes precedence over **width** and **height**.
-   *     <br>
-   *     Default value: {minWidth: 0, maxWidth: Infinity, minHeight: 0, maxHeight: Infinity}
-   *     <br>Exception handling: For strings beginning with numerals, only the numeric part is parsed.
-   *     Strings not beginning with numerals are parsed as 0. For other invalid values, the
-   *     **constraintSize** attribute reverts to its default behavior when unconfigured.
-   *     <br>Unit: vp.
+   * @param { ConstraintSizeOptions } value - Constraint size. The priority of **constraintSize** is higher
+   *     than that of [width]{@link CommonMethod#width(value: Length)} and
+   *     [height]{@link CommonMethod#height(value: Length)}. For the value result, refer to the impact of the
+   *     **constraintSize** value on width and height.
+   *     <br>Default value:<br>**{<br>minWidth:&nbsp;0,<br>maxWidth:&nbsp;Infinity,<br>minHeight:&nbsp;0,
+   *     <br>maxHeight:&nbsp;Infinity<br>}**<br>Abnormal value: For a string starting with a number, only the
+   *     numeric part is parsed; for a string not starting with a number, it is parsed as 0. For other abnormal
+   *     values, the **constraintSize** attribute is restored to the default behavior when it is not configured.
+   *     <br>Unit: vp
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -20456,25 +20478,26 @@ declare class CommonMethod<T> {
   onChildTouchTest(event: (value: Array<TouchTestInfo>) => TouchResult): T;
 
   /**
-   * Sets the weight of the component during layout. A component with this attribute is allocated space
-   * along the main axis of its parent container ([Row]{@link Row}, [Column]{@link Column}, or [Flex]{@link Flex} based
-   * on its specified weight.
+   * Sets the layout weight of a component so that the component is allocated a size in the main-axis
+   * direction of the parent container ([Row]{@link ./row}/[Column]{@link ./column}/[Flex]{@link ./flex})
+   * according to the weight. It applies to scenarios where the parent container size is determined and
+   * multiple child components need to allocate the remaining space proportionally.
    *
-   * @param { number | string } value - Layout weight of the component.
-   *     <br>When the parent container size is determined:
-   *     <br>Elements without **layoutWeight** or with **layoutWeight** set to **0** take precedence in
-   *     occupying space.
-   *     <br>The remaining space on the main axis is then allocated proportionally among elements with a
-   *     **layoutWeight** value greater than 0, ignoring their own size settings.
-   *     <br>Default value: **0**
-   *     <br>**NOTE**
-   *     <br>This parameter is only effective in
-   *     [Row]{@link Row}, [Column]{@link Column}, and [Flex]{@link Flex} container components.
-   *     <br>The value can be a number greater than or equal to 0 or a string that can be converted to a
-   *     number.
-   *     <br>If any child component in a container has the **layoutWeight** attribute set to a value greater
-   *     than 0, then child components will no longer be laid out based on
-   *     [flexShrink]{@link flexShrink} and [flexGrow]{@link flexGrow}.
+   * @param { number | string } value - When the size of the parent container is determined, child components
+   *     that do not have the **layoutWeight** attribute set or whose effective **layoutWeight** value is **0**
+   *     take priority in occupying space. The space left on the main axis after these child components occupy
+   *     space is called the remaining space on the main axis. Child components that have the **layoutWeight**
+   *     attribute set and whose effective **layoutWeight** value is greater than 0 are allocated sizes from the
+   *     remaining space on the main axis according to their respective weight proportions. During allocation,
+   *     the **width**\/**height** settings of the child components are ignored, but the **minWidth**\/
+   *     **minHeight** constraints are retained.<br>Default value: 0<br>Value range: [0, +∞)<br>When the value
+   *     is out of range: if a value less than 0 is passed in, it is processed as 0.<br>**NOTE**<br>This
+   *     attribute takes effect only in the [Row]{@link ./row}/[Column]{@link ./column}/[Flex]{@link ./flex}
+   *     layout.<br>The optional value is a number greater than or equal to 0, or a string that can be converted
+   *     to a number (integer and decimal formats are supported).<br>If a child component in the container has
+   *     the **layoutWeight** attribute set and the set value is greater than 0, all child components are no
+   *     longer laid out based on [flexShrink]{@link CommonMethod#flexShrink} and
+   *     [flexGrow]{@link CommonMethod#flexGrow}.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -20509,17 +20532,15 @@ declare class CommonMethod<T> {
   chainWeight(chainWeight: ChainWeightOptions): T;
 
   /**
-   * Sets the padding of the component.
+   * Sets the padding attribute of the component. After the setting, extra space is created between the
+   * component content and the border, affecting the layout area of the component's internal content.
    * <br>Since API version 10, this API supports the calc calculation feature.
    *
    * @param { Padding | Length } value - [since 7 - 11]
-   * @param { Padding | Length | LocalizedPadding } value - Padding of the component to set
-   *     <br>
-   *     When the parameter is of the **Length** type, the four paddings take effect.
-   *     <br>Default value: **0**
-   *     <br>Unit: vp
-   *     <br>When **padding** is set to a percentage, the width of the parent container is used as the
-   *     basic value. [since 12].
+   * @param { Padding | Length | LocalizedPadding } value - Padding of the component.<br>When the parameter is
+   *     of the **Length** type, the padding takes effect on all four sides simultaneously.<br>Default value:
+   *     **0** <br>Unit: vp <br> When padding is set to a percentage, the padding on all four sides uses the
+   *     **width** of the parent container as the base value. [since 12].
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20530,27 +20551,36 @@ declare class CommonMethod<T> {
   padding(value: Padding | Length | LocalizedPadding): T;
 
   /**
-   * Sets the safe area padding. This allows the container to add a component-level safe area for its child
-   * components to extend into. This attribute can be dynamically set using
-   * [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * Sets the safe area padding attribute. It allows a container to add a component-level safe area to itself
+   * for child components to extend into, and supports the
+   * [attributeModifier]{@link CommonMethod#attributeModifier} method for dynamically setting attributes.
+   * Unlike padding, **safeAreaPadding** is used to set a component-level safe area for child components to
+   * extend into, while **padding** is used to set the inner padding of the component content area. The two
+   * can be set at the same time and take effect separately.
    *
    * > **NOTE**
-   * > In API version 18, this API can be invoked in attributeModifier.
-   * > When parent and ancestor containers define component-level safe areas, child components can detect and utilize
-   * > these areas, referred to as Accumulated Safe Area Expansion (SAE), which represents the maximum extendable length
-   * > in each direction.
-   * > When ancestor containers have contiguous safeAreaPadding (undivided by margin, border, or padding),
-   * > SAE accumulates recursively outward until no adjacent outer safeAreaPadding exists or the recursion extends
-   * > beyond the page container.
-   * > System-level avoid areas (status bar, navigation bar, notch areas, and more) are treated as the page container's
-   * > inherent safeAreaPadding and participate in SAE calculations.
-   * > For details about the avoid areas, see Safe Area. These component-level safe areas can be leveraged by combining
-   * > with other attributes.
-   * > For example, setting the ignoreLayoutSafeArea attribute on a child component allows it to extend its layout into
-   * > the SAE region.
+   * >
+   * > This API can be called within
+   * > [attributeModifier]{@link CommonMethod#attributeModifier} since API version 18.
+   * >
+   * > When parent and ancestor containers define component-level safe areas, child components can detect and
+   * > utilize these areas, referred to as Accumulated Safe Area Expansion (SAE), which represents the maximum
+   * > extendable length in each direction. When ancestor containers have contiguous **safeAreaPadding**
+   * > (undivided by margin, border, or padding), SAE accumulates recursively outward until no adjacent outer
+   * > **safeAreaPadding** exists or the recursion extends beyond the page container. System-level avoid areas
+   * > (status bar, navigation bar, notch areas, and more) are treated as the page container's inherent
+   * > **safeAreaPadding** and participate in SAE calculations. For details about the avoid areas, see
+   * > [Safe Area](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-expand-safe-area.md).
+   * > These component-level safe areas can be leveraged by combining with other attributes. For example,
+   * > setting the
+   * > [ignoreLayoutSafeArea]
+   * > (docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-expand-safe-area.md#ignorelayoutsafearea20)
+   * > attribute on a child component allows it to extend its layout into the SAE region.
    *
-   * @param { Padding | LengthMetrics | LocalizedPadding } paddingValue - Safe area padding.
-   *     <br>Unit: vp. Default value: **0**.
+   * @param { Padding | LengthMetrics | LocalizedPadding } paddingValue - Safe area padding of the component,
+   *     which is used to create a component-level safe area inside the component for child components to
+   *     extend into.<br>Default value: **0** <br>Unit: vp<br>When **paddingValue** is set to a percentage, the
+   *     top, bottom, left, and right padding all use the width of the parent container as the base value.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20567,17 +20597,18 @@ declare class CommonMethod<T> {
    * <br>Since API version 10, this API supports the calc calculation feature.
    *
    * @param { Margin | Length } value - [since 7 - 11]
-   * @param { Margin | Length | LocalizedMargin } value - Margin of the component to set.
-   *     <br>When the parameter is of the **Length** type, the four margins take effect.
-   *     <br>Default value: **0**
-   *     <br>Unit: vp
-   *     <br>When **margin** is set to a percentage, the width of the parent container is used as the
-   *     basic value. When child components are laid out along the cross axis of the
-   *     [Row]{@link Row}, [Column]{@link Column}, or [Flex]{@link Flex} container, the cross axis
-   *     size of the child components and the margins add up to the total size of the container.
-   *     <br>For example, if the width of the **Column** container is 100, the width of the child component
-   *     is 50, the left margin is 10, and the right margin is 20, then the actual horizontal offset of
-   *     the child component is 10. [since 12]
+   * @param { Margin | Length | LocalizedMargin } value - Margin of the component.<br>When the parameter is
+   *     of the **Length** type, the margins in all four directions take effect at the same time.<br>Default
+   *     value: **0**<br>Unit: vp<br>When **margin** is set as a percentage, the top, bottom, left, and right
+   *     margins all use the width of the parent container as the base value. When laying out in the
+   *     cross-axis direction of [Row]{@link ./row}, [Column]{@link ./column}, and [Flex]{@link ./flex}, the
+   *     space occupied by a child component in the cross-axis direction includes the size of the child
+   *     component itself and the **margin** value.<br>For example, if a **Column** container has a width of
+   *     100, a child component has a width of 50, and the left and right margins are 10 and 20 respectively,
+   *     the sum of the child component width and the left and right margins is 50 + 10 + 20 = 80, which is
+   *     less than the container width of 100. The child component is center-aligned in the cross-axis
+   *     direction, leaving (100 - 80)/2 = 10 of blank space on each of the left and right sides in the
+   *     horizontal direction. [since 12]
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20698,36 +20729,49 @@ declare class CommonMethod<T> {
   backgroundColor(color: Optional<ResourceColor | ColorMetrics>): T;
 
   /**
-   * Sets the pixel rounding policy for the current component in the specified direction.
-   * If a direction is not set, the pixels are rounded to the nearest whole number in that direction.
+   * Specifies the pixel rounding alignment mode of the current component in the specified direction. After this
+   * attribute is set, the boundary coordinates of the component are rounded according to the specified strategy,
+   * thereby avoiding visual anomalies caused by floating-point rendering (such as 1px gaps, overlapping components,
+   * and disappearing dividers). Since API version 12, if a direction is not set, the pixels are rounded to the nearest
+   * whole number in that direction by default.
    *
    * > **NOTE**
    * >
-   * > - In API version 11, this API uses half-pixel alignment (that is, 0-0.25 rounds to 0, 0.25-0.75 rounds to 0.5,
-   * > 0.75-1.0 rounds to 1). Since API version 12, this API rounds pixels to the nearest integers and allows you to
-   * > disable pixel rounding for individual components.
+   * > - In API version 11, this API uses half-pixel alignment (that is, 0~0.25 rounds to 0, 0.25~0.75 rounds to 0.5,
+   * > 0.75~1.0 rounds to 1). This mode reduces the cumulative error that may result from continuous rounding by
+   * > preserving the 0.5 pixel value. Since API version 12, the direction for which no rounding strategy is set uses
+   * > rounding to the nearest whole number by default, and pixel rounding in a specified direction can be disabled
+   * > through PixelRoundCalcPolicy.NO_FORCE_ROUND.
    * >
-   * > - This API can be called within
-   * > [attributeModifier]{@link CommonMethod#attributeModifier}
-   * > since API version 12.
+   * > - Since API version 12, this API can be called in
+   * > [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
-   * In normal calculations, the vertical direction (top and bottom) correspond to the component height, and the
-   * horizontal direction (the starting direction of mirroring is considered "left") correspond to the component width.
-   * For ease of description, these two sets of directions are referred to as top-left and bottom-right.
+   * In normal calculations, the vertical direction (top and bottom) corresponds to the component height. In a
+   * left-to-right layout, start corresponds to the left direction and end corresponds to the right direction; in a
+   * mirrored layout (right-to-left), the correspondence is reversed. The horizontal direction (left and right)
+   * corresponds to the component width. For ease of description, the two groups of directions are referred to as
+   * top-left and bottom-right.
    *
-   * - Calculate the top-left coordinates of the current component: offset of the top-left corner relative to the
+   * - Calculate the top-left coordinates of the current component: the offset of the top-left corner relative to the
    * parent container.
    * - Calculate the bottom-right coordinates of the current component: offset of the top-left corner relative to the
    * parent container plus the size of the component itself.
-   * - Recalculate the size of the current component: bottom-right corner rounded value minus the top-left corner
-   * rounded value.
+   * - Recalculate the size of the current component: rounded bottom-right coordinates minus rounded top-left
+   * coordinates (API version 11 uses half-pixel alignment, and API version 12 uses rounding to the nearest whole
+   * number).
    *
-   * @param { PixelRoundPolicy } value - Rounding policy for the bounds of the component.
+   * @param { PixelRoundPolicy } value - Boundary rounding strategy of the current component.
+   *     [PixelRoundPolicy]{@link PixelRoundPolicy} contains four optional attributes: start, top, end, and bottom,
+   *     which correspond to the front, top, end, and bottom boundaries of the component, respectively. Each attribute
+   *     can be set to a [PixelRoundCalcPolicy]{@link PixelRoundCalcPolicy} enum value. Setting
+   *     PixelRoundCalcPolicy.NO_FORCE_ROUND disables pixel rounding in the corresponding direction. Attributes that
+   *     are not set are rounded by default using the round-half-up rule.
    *     <br>**NOTE**<br>
-   *     This attribute is applicable in scenarios where artifacts occur due to floating-point drawing. The rounding
-   *     result is related not only to the component's width and height but also to its position. Even if the
-   *     component's width and height are set to be the same, due to different floating-point positions described,
-   *     the final width and height of the component may also be different after rounding.
+   *     This attribute is used in scenarios where floating-point drawing causes visual anomalies. Since API version
+   *     12, the round-half-up rounding method is used; API version 11 uses half-pixel alignment. The rounding result
+   *     is related not only to the width and height of the component, but also to its position. Even if the width and
+   *     height set for components are the same, the final width and height of the components after rounding may differ
+   *     because the component positions described by floating-point numbers are different.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -21213,11 +21257,17 @@ declare class CommonMethod<T> {
   opacity(opacity: Optional<number | Resource>): T;
 
   /**
-   * Sets the border. When neither color nor radius is specified, set borderColor and borderRadius after border to
-   * ensure they take effect.
+   * Sets the border.
+   * > **NOTE**
+   * >
+   * > When neither **color** nor **radius** is specified, set borderColor and borderRadius after
+   * > border to ensure they take effect.
    *
-   * @param { BorderOptions } value - - Unified border style.<br>The default value is **0**, indicating that no border is
-   *     displayed.<br>Since API version 9, the parent node's border is displayed above child node content.
+   * @param { BorderOptions } value - Unified border style setting API.<br>The default border width is **0**, that is,
+   *     no border is displayed.<br>The default border corner radius is **0**, that is, no corner radius is
+   *     displayed.<br>The default border color is Color.Black.<br>Since API version 9, the border of the parent node
+   *     is displayed above the content of the child node.<br>When color and radius are not set, to ensure that
+   *     borderColor and borderRadius take effect, set borderColor and borderRadius after border.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -21228,9 +21278,10 @@ declare class CommonMethod<T> {
   border(value: BorderOptions): T;
 
   /**
-   * Border style
+  * Sets the border style.
    *
-   * @param { BorderStyle | EdgeStyles } value - Border style.<br>Default value: **BorderStyle.Solid**.[since 9]
+   * @param { BorderStyle | EdgeStyles } value - Element border style.<br>Default value:
+   *     **BorderStyle.Solid** [since 9]
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -21245,8 +21296,9 @@ declare class CommonMethod<T> {
    *
    * @param { Length } value - [since 7 - 8]
    * @param { Length | EdgeWidths } value - [since 9 - 11]
-   * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - Border width. This parameter cannot be set in
-   *     percentage. [since 12]
+   * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - Sets the border width of the element. Percentage is
+   *     not supported. Default unit: vp.<br>Default value: **0**.<br>**Note:** When the LocalizedEdgeWidths type is
+   *     used, the border width setting differs under different language directions. See Example 2. [since 12]
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -21258,10 +21310,15 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the border color.
+   * > **NOTE**<br>When using border for unified setting of the border and the color parameter is omitted,
+   *     borderColor must be called after border to take effect.
    *
    * @param { ResourceColor } value - [since 7 - 8]
    * @param { ResourceColor | EdgeColors } value - [since 9 - 11]
-   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - Border color.<br>Default value: **Color.Black**
+   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - Sets the border color of the element. After
+   *     setting, the border is displayed in the corresponding color.<br>Default value: **Color.Black**<br>**Note:**
+   *     When using the LocalizedEdgeColors type, the border color settings differ under different language
+   *     directions. See Example 2.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -21273,14 +21330,19 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the border radius.
+   * > **NOTE**<br>When using border for unified setting of the border and the radius parameter is omitted,
+   *     borderRadius must be called after border to take effect.
    *
    * @param { Length } value - [since 7 - 8]
    * @param { Length | BorderRadiuses } value - [since 9 - 11]
-   * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - Radius of the border corners. The value can be
-   *     expressed as a percentage of the component's width. When combined with the [clip]{@link CommonMethod#clip}
-   *     attribute, this setting clips child components to prevent them from extending beyond the component's
-   *     boundaries.
-   *     [since 12]
+   * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - Element border corner radius. Percentage is
+   *     supported, and the percentage is based on the component width. Default unit: vp.<br>Default value: **0**.
+   *     After the corner radius is set, you can use the [clip]{@link CommonMethod#clip} attribute to clip the
+   *     component so that child components do not exceed the component itself.<br>**NOTE**<br>When the
+   *     LocalizedBorderRadiuses type is used, the border corner radius settings differ under different language
+   *     directions. See Also example 2.<br>Set four different corner radii. If a corner radius exceeds half of the
+   *     smaller value between the height and the width, the irregular corner radius is drawn differently by value
+   *     ratio. See example 4 for the effect. [since 12]
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -21292,16 +21354,26 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the border corner radius and the rendering strategy for rounded corners.
-   * NOTE
-   *    1. **RenderStrategy.FAST**: The current component and its child components will be drawn directly
-   *        onto the canvas with rounded corners applied.
-   *    2. **RenderStrategy.OFFSCREEN**: The current component and its child components will first be rendered onto
-   *        an off-screen canvas, then undergo a rounded corner clipping, and finally be drawn onto the main canvas.
-   * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - Radius of the border corners. The value can be
-   *     expressed as a percentage of the component's width. When combined with the clip attribute, this setting clips
-   *     child components to prevent them from extending beyond the component's boundaries.
-   * @param { RenderStrategy } [type] - Rendering strategy for drawing rounded corners.
-   *     <br>Default value: RenderStrategy.FAST.
+   * > **NOTE**<br>When using border for unified setting of the border and the radius parameter is omitted,
+   *     borderRadius must be called after border to take effect.
+   *
+   * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - Set the border corner radius of the
+   *     element. Percentage is supported, and the percentage is based on the component width. Default you can use the
+   *     [clip]{@link CommonMethod#clip} attribute to clip the component so that child components do not exceed the
+   *     component itself.<br> **Note:**
+   *     When using the LocalizedBorderRadiuses type, the border corner radius settings differ under different
+   *     language directions. See also example 2.<br>Set four different corner radius values. If a corner radius
+   *     value exceeds half of the smaller value of the height and width, the irregular corner radius is drawn
+   *     differently by value ratio. See example 4 for the effect.
+   *     <br>Unit: vp.<br>After the corner radius is set. Default value: **0**.
+   * @param { RenderStrategy } [type] - Sets the mode for drawing the corner radius of the component.<br><br>Optional
+   *     values:<br>- **RenderStrategy.FAST**: fast rendering mode,
+   *     suitable for common corner radius scenarios with better performance. If the component contains complex
+   *     visual effects such as blur, using this mode may cause abnormal corner radius clipping.<br>-
+   *     **RenderStrategy.OFFSCREEN**: offscreen rendering mode, suitable for corner radius scenarios with complex
+   *     visual effects such as blur. It can render the corner radius correctly but incurs higher performance
+   *     overhead.
+   *     <br>Default value: **RenderStrategy.FAST**.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
