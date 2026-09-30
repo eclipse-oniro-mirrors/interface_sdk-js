@@ -11587,7 +11587,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   }
 
   /**
-   * XMAGE水印模式：XMAGE水印固定位于图像底部中央，取值为9。
+   * XMAGE水印模式：水印位于图像底部，取值为9。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -11596,7 +11596,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   const XMAGE_WATERMARK_MODE_AT_THE_BOTTOM : int;
 
   /**
-   * XMAGE水印模式：XMAGE水印会自动调整到边界位置，系统根据图像内容选择最适合的边界区域，取值为10。
+   * XMAGE水印模式：水印位于图像边缘，取值为10。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -11641,7 +11641,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   const CAPTURE_MODE_TAIL_LIGHT : int;
 
   /**
-   * 拍摄模式：轻涂鸦模式，取值为10。
+   * 拍摄模式：光绘涂鸦模式，取值为10。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -11668,7 +11668,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   const CAPTURE_MODE_STAR_TRACK : int;
 
   /**
-   * 拍摄模式：广角模式，取值为19。
+   * 拍摄模式：大光圈模式，取值为19。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
