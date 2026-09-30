@@ -23130,26 +23130,16 @@ declare class CommonMethod<T> {
   scale(options: Optional<ScaleOptions>): T;
 
   /**
-   * Default number of occupied columns, indicating the number of occupied grid columns when the number of columns (span) of the corresponding size is not set in the useSizeType attribute.
+   * Default column count, which refers to the grid column count occupied when the useSizeType attribute does not set
+   * the column count (span) for the corresponding size. It must be a non-negative integer. When passing a negative
+   * number or a value exceeding the total column count of GridContainer, use the default value 1.
    *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Default number of occupied columns, indicating the number of occupied grid columns when the number of columns (span) of the corresponding size is not set in the useSizeType attribute.
+   * > **NOTE**
+   * >
+   * > - When calling this attribute, its parent component or ancestor component must be GridContainer.
+   * > - When the grid span attribute is set, the width of the component is determined by the grid layout.
    *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Default number of occupied columns, indicating the number of occupied grid columns when the number of columns (span) of the corresponding size is not set in the useSizeType attribute.
-   *
-   * @param { number } value
+   * @param { number } value - Default column count. Default value: **1**
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23161,34 +23151,29 @@ declare class CommonMethod<T> {
   gridSpan(value: number): T;
 
   /**
-   * The default offset column number indicates the number of offset columns of the current component in the start direction of the parent component when the useSizeType attribute does not set the offset of the corresponding dimension. That is,
-   * the current component is located in the nth column.
+   * Default offset column count, which refers to the number of columns by which the current component is offset along
+   * the Start direction of its parent component when the useSizeType attribute does not set the offset for the
+   * corresponding size. That is, the starting position of the component is offset by n columns relative to the Start
+   * direction of the parent component. It must be a non-negative integer. When passing a negative number, use the
+   * default value 0. When useSizeType sets the offset for the corresponding size, the gridOffset setting does not
+   * take effect.
    *
-   * @param { number } value
+   * > **NOTE**
+   * >
+   * > - When calling this attribute, its parent component or ancestor component must be GridContainer.
+   * > - After this attribute is configured, the layout of the current component in the horizontal direction of the
+   * > parent component no longer follows the original layout mode of the parent component. Instead, the component is
+   * > offset by a certain distance along the Start direction of the parent component.
+   * > - Offset distance = (column width + spacing)* offset column count.
+   * > - Sibling components after the component with the offset (gridOffset) set are laid out relative to this
+   * > component.
+   *
+   * @param { number } value - Default offset column count. Default value: **0**
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * The default offset column number indicates the number of offset columns of the current component in the start direction of the parent component when the useSizeType attribute does not set the offset of the corresponding dimension. That is,
-   * the current component is located in the nth column.
-   *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * The default offset column number indicates the number of offset columns of the current component in the start direction of the parent component when the useSizeType attribute does not set the offset of the corresponding dimension. That is,
-   * the current component is located in the nth column.
-   *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamiconly
+   * @crossplatform [since 10]
+   * @atomicservice [since 11]
+   * @since 7 dynamiconly
    * @deprecated since 14
    * @useinstead grid_col/GridColInterface and grid_row/GridRowInterface
    */
@@ -23488,12 +23473,25 @@ declare class CommonMethod<T> {
   visibility(value: Visibility): T;
 
   /**
-   * Sets the percentage of the parent container's remaining space that is allocated to the component.
+   * Sets the proportion of the component in the remaining space of the parent container. This attribute can be set
+   * only when the component is a child of a Flex, Column, Row, or DynamicLayout container. After it is set, the
+   * component expands according to the ratio to occupy the remaining space of the parent container. When the parent
+   * container is Column or Row, you must set the size along the main axis. When the main axis size
+   * (width/height/size) is not set, Column and Row still follow the default layout behavior and adapt to the child
+   * component size on the main axis, which may affect the remaining space allocation effect of flexGrow. Setting
+   * this attribute triggers a second layout. In scenarios with strict performance requirements, use **layoutWeight**
+   * instead.
    *
-   * @param { number } value - Percentage of the parent container's remaining space that is allocated to the
-   *     component.
-   *     <br>The value must be greater than or equal to 0, <br>. Default value: **0**.
-   *     <br>If this parameter is set to an invalid value, the default value will be used.
+   * @param { number } value - Sets the proportion of the remaining space in the parent container along the main axis
+   *     (horizontal for row layout and vertical for column layout) allocated to the component where this attribute
+   *     resides. The value 0 means the component does not participate in the allocation of remaining space and keeps
+   *     its original size. When the value is greater than 0, the remaining space of the parent container is allocated
+   *     proportionally; the larger the value, the more space is allocated.<br>Value range: [0, +∞)<br>Default value:
+   *     0<br>When the parent container is [Column]{@link Column} or [Row]{@link Row}, you need to set the size along
+   *     the main axis (width/height/size); otherwise, the remaining space allocation effect of flexGrow may be
+   *     affected.<br>[constraintSize]{@link constraintSize} restricts the size range of the component. When the
+   *     component size after flexGrow expansion exceeds the maximum limit of constraintSize, it is constrained by
+   *     constraintSize.<br>When an invalid value is set, this attribute takes the default value.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -23505,23 +23503,31 @@ declare class CommonMethod<T> {
   flexGrow(value: number): T;
 
   /**
-   * Sets the percentage of the parent container's shrink size that is allocated to the component.
-   * When the parent container is [Column]{@link Column} or [Row]{@link Row}, you must set the size along the main axis.
+   * Sets the proportion of the shrink size allocated to the component where this attribute resides when the parent
+   * container runs out of space. This attribute can be set only when the component is a child of a Flex, Column,
+   * Row, or DynamicLayout container. When the parent container is Column or Row, the parent container must set the
+   * size along the main axis (that is, width/height/size) for flexShrink to take effect. When the main axis size
+   * (width/height/size) is not set, Column and Row still follow the default layout behavior and adapt to the child
+   * component size on the main axis, in which case flexShrink does not take effect. Setting this attribute triggers
+   * a second layout. In scenarios with strict performance requirements, use **layoutWeight** instead.
    *
    * When
    * [getInspectorByKey](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-component-id.md#getinspectorbykey9)
-   * is used to obtain the **flexShrink** attribute, if the node does not have **flexShrink** set, the default value of
-   * **1** is returned by default.
+   * is used to obtain the **flexShrink** attribute, if the node does not have **flexShrink** set, the default value
+   * of **1** is returned by default (consistent with the default value of the Flex container, but different from
+   * the default value **0** of the Column and Row containers).
    *
-   * @param { number } value - Percentage of the parent container's shrink size that is allocated to the component
-   *     <br>The value range is all integers, If the parent container is [Column]{@link Column} or [Row]{@link Row}, the
-   *     default value is **0**, and the value range is (0, +∞).
-   *     If the parent container is [Flex]{@link Flex}, the default value is **1**.
-   *     <br>[constraintSize]{@link constraintSize}
-   *     limits the component's size range. For Column and Row components without explicit main axis size
-   *     specified (through width, height, or size), the default layout behavior (adapt-to-fit child components)
-   *     applies, even when constraintSize is configured. In this case, **flexShrink** has no effect.
-   *     <br>If this parameter is set to an invalid value, the default value will be used.
+   * @param { number } value - Sets the proportion of the compressed size allocated to the component to which this
+   *     attribute belongs when the parent container space is insufficient. The value 0 indicates that the component
+   *     does not participate in compression; when the value is greater than 0, compression is performed
+   *     proportionally, and a larger value indicates a larger compression amount.<br>When the parent container is
+   *     [Column]{@link Column} or [Row]{@link Row}, default value: 0, value range: [0, +∞).<br>When the parent
+   *     container is [Flex]{@link Flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
+   *     constraintSize} restricts the size range of the component. Even if [constraintSize]{@link constraintSize}
+   *     is set for [Column]{@link Column} and [Row]{@link Row}, when the main axis size (width/height/size) is not
+   *     set in the parent container, the default layout behavior is still followed, and the component size is
+   *     adapted to the children on the main axis. In this case, flexShrink does not take effect.<br>When an
+   *     exception value is set, this attribute uses the default value.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -23533,16 +23539,22 @@ declare class CommonMethod<T> {
   flexShrink(value: number): T;
 
   /**
-   * Sets the base size of the component.
+   * Sets the base size of a component. This attribute can be set only when the component is a child of a Flex,
+   * Column, Row, or DynamicLayout container. After it is set, the component uses this base size as its initial size
+   * in layout calculation. When the parent container is Column or Row, you must set the size along the main axis.
+   * When the main axis size (width/height/size) is not set, Column and Row still follow the default layout behavior
+   * and adapt to the child component size on the main axis, which may affect the effect of flexBasis.
    *
-   * @param { number | string } value - Base size of the component in the main axis of the parent container (indicating
-   *     that the base size of the component in the main axis is the
-   *     original size of the component). Default value: **'auto'**.
-   *     <br>For the string type, the value must be a string that can be converted into a number (for example,**'10'**),
-   *     a string that includes a length unit (for example, **'10px'**), or the literal string **'auto'**;
-   *     percentage-based strings are not supported.
-   *     <br>For the number type, the value range is (0, +∞), and the unit is vp.
-   *     <br>Invalid values are treated as the default value **'auto'**
+   * @param { number | string } value - Base size of the component on the main axis of the parent container.
+   *     <br>Default value: 'auto' (indicating that the base size of the component on the main axis is the original
+   *     size of the component).
+   *     <br>string type: percentage strings are not allowed. Optional values: a string that can be converted to a
+   *     number (for example, '10'), a string with a length unit (for example, '10px'), or 'auto'. If a string that
+   *     does not meet the requirements is passed in, the default value 'auto' is used.
+   *     <br>number: value range (0, +∞), in vp (virtual pixel).
+   *     <br>When an invalid value is set, this attribute is processed as the default value 'auto'.
+   *     <br>[constraintSize]{@link constraintSize} restricts the size range of the component. When the base size
+   *     set by flexBasis exceeds the restriction range of constraintSize, it is constrained by constraintSize.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23553,12 +23565,19 @@ declare class CommonMethod<T> {
   flexBasis(value: number | string): T;
 
   /**
-   * Sets the alignment mode of the child components along the cross axis of the parent container.
+   * The alignment mode of the child component along the cross axis (the direction perpendicular to the main axis) of
+   * the parent container. After it is set, it overrides the alignItems setting of the parent container. This
+   * attribute is supported only by Flex, Column, Row, DynamicLayout, and GridRow containers.
    *
-   * @param { ItemAlign } value - Alignment mode of the child components along the cross axis of the parent container.
-   *     The setting overwrites the **alignItems** setting of the parent container ([Flex]{@link Flex}, [Column]{@link
-  *     Column}, [Row]{@link Row}, or [GridRow]{@link GridRow}). [GridCol]{@link GridCol} can have the **alignSelf**
-  *     attribute bound to change its own layout along the cross axis.<br>Default value: **ItemAlign.Auto**
+   * @param { ItemAlign } value - Alignment format of the child component on the cross axis of the parent container,
+   *     which overrides the alignItems setting in the [Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row},
+   *     DynamicLayout, and [GridRow]{@link GridRow} layout containers. Use it when a child
+   *     component needs a different alignment from other child components in the parent container (typical scenarios:
+   *     most child components in the parent container are center-aligned, but a specific child component needs top or
+   *     bottom alignment; or a special alignment needs to be specified for a single child
+   *     component).<br>[GridCol]{@link GridCol} can bind the alignSelf attribute to change its own layout in the
+   *     cross axis direction.<br>Default value: ItemAlign.Auto (indicates inheriting the alignment setting of the
+   *     parent container)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23586,22 +23605,31 @@ declare class CommonMethod<T> {
   layoutGravity(alignment: LocalizedAlignment): T;
 
   /**
-   * Sets the display priority for the component in the layout container.
-   * <br>This parameter is only effective in [Row]{@link Row}, [Column]{@link Column}, and
-   * [Flex (single-line)]{@link Flex} container components.
+   * Sets the display priority of the current component in a Row/Column/Flex (single-line) container. The priority is
+   * determined by the integer part of the value, and a larger integer part indicates a higher priority.
+   * <br>Applies to scenarios where child components are dynamically shown or hidden based on the parent container
+   * space in responsive layouts. For example, important content is displayed first and secondary content is hidden
+   * on different screen sizes.
    *
-   * @param { number } value - Display priority of the component in the layout container.
-   *     <br>The value range is all integers. Default value: **1**.
+   * @param { number } value - Sets the display priority of the current component in the layout container. The value
+   *     range is [0, +∞).
+   *     <br>Default value: **1**
    *     <br>**NOTE**<br>
-   *     The digits after the decimal point are not counted in determining the display priority. That is, numbers in
-   *     the [x, x + 1) range are considered to represent the same priority. For example, **1.0** and **1.9**
-   *     represent the same priority.
-   *     <br>If the **displayPriority** value of all child components is not greater than 1, there is no difference in
-   *     priority. When the **displayPriority** value of a child component is greater than 1, a larger value indicates
-   *     higher priority. If the parent container does not have enough space, child components with lower priority are
-   *     hidden. If child components of a certain priority are hidden, those with an even lower priority are also
-   *     hidden.
-   *     <br>The value range is all integers.
+   *     Takes effect only in [Row]{@link Row}/[Column]{@link Column}/[Flex (single-line)]{@link Flex} container
+   *     components.
+   *     <br>Used when the container space is limited and the display order of components needs to be controlled or
+   *     low-priority components need to be hidden (for example, dynamically displaying content based on the available
+   *     space in a Flex container). It is recommended to set the priority based on the importance of the component,
+   *     with a larger value (such as 2-10) for key components and a smaller value (such as 1) for
+   *     secondary components.
+   *     <br>The digits after the decimal point do not affect the priority. All values not greater than 1 have the
+   *     same priority. When the value is greater than 1, the larger the integer part of displayPriority, the higher
+   *     the priority; values within the same integer range have the same priority. For example, **0.5** and **1.0**
+   *     have the same priority (both are not greater than 1); **1.5** and **1.9** have the same priority (both have an
+   *     integer part of 1); **2.0** and **2.9** have the same priority (both have an integer part of 2), and their
+   *     priority is higher than that of 1.x.
+   *     <br>If the parent container has insufficient space, child components with lower priority are hidden. If child
+   *     components at a certain priority level are hidden, all child components with lower priority are also hidden.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -23645,15 +23673,15 @@ declare class CommonMethod<T> {
   sharedTransition(id: string, options?: sharedTransitionOptions): T;
 
   /**
-   * Sets how elements are laid out along the main axis of the container. This attribute supports dynamic configuration
-   * via [attributeModifier]{@link attributeModifier}.
+   * Sets the layout along the main axis within the component's drawing area. This attribute can be dynamically set
+   * using [attributeModifier]{@link attributeModifier}.
    *
-   * @param { Direction } value - How elements are laid out along the main axis of the container.
-   *     If this parameter is set to **auto**, the layout is subject to the system language.
-   *     The setting does not take effect in the **Column** component.
-   *     <br>Default value: **Direction.Auto**.
-   *     If the **direction** attribute receives an **undefined** or **null** input parameter, the system will apply the
-   *     default value
+   * @param { Direction } value - Sets the layout along the main axis within the drawing region of the current
+   *     component.
+   *     <br>When the attribute is set to **auto**, the layout follows the system language direction.
+   *     <br>This attribute does not take effect on the **Column** component.
+   *     <br>Default value: **Direction.Auto**
+   *     <br>When **direction** is **undefined** or **null**, the default value is used.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -23665,11 +23693,12 @@ declare class CommonMethod<T> {
   direction(value: Direction): T;
 
   /**
-   * Sets the alignment mode for child elements within the container's drawing area. This attribute can be dynamically
-   * set using [attributeModifier]{@link attributeModifier}.
+   * Sets the alignment mode for child components within the component's drawing area. This attribute can be
+   * dynamically set using [attributeModifier]{@link attributeModifier}.
    *
-   * @param { Alignment } value - Alignment mode for child elements in container drawing area.
-   *     This setting takes effect only in [Stack]{@link Stack},
+   * @param { Alignment } value - Sets the alignment mode of child components within the drawing region of the
+   *     current component.
+   *     <br>This attribute takes effect only in [Stack]{@link Stack},
    *     [FolderStack]{@link FolderStack},
    *     [Shape]{@link Shape},
    *     [Button]{@link Button},
@@ -23692,20 +23721,18 @@ declare class CommonMethod<T> {
    *     [QRCode]{@link QRCode},
    *     [TextClock]{@link TextClock},
    *     [TextTimer]{@link TextTimer},
-   *     [MenuItem]{@link StMenuItemack},
+   *     [MenuItem]{@link MenuItem},
    *     [Toggle]{@link Toggle},
    *     [Checkbox]{@link Checkbox}, and
    *     [NodeContainer]{@link NodeContainer}.
-   *     For the alignment of the **Marquee**, **Text**, **TextArea**, **TextInput**, **RichEditor**, and **Hyperlink**
-   *     components related to text, see
-   *     [textAlign]{@link TextAttribute#textAlign}.
-   *     If a component does not support the **textAlign** attribute, horizontal text alignment cannot be configured.
+   *     For text-related components **Marquee**, **Text**, **TextArea**, **TextInput**, **RichEditor**, and
+   *     **Hyperlink**, the align result refers to [textAlign]{@link TextAttribute#textAlign}.
+   *     <br>Components that do not support the **textAlign** attribute cannot set horizontal text alignment.
    *     <br>Default value: **Alignment.Center**
    *     <br>**NOTE**<br>
-   *     This attribute supports the mirroring capability only in the [Stack]{@link Stack} component.
-   *     In the **Stack** component, this attribute has the same effect as **alignContent**, which means that it sets
-   *     the
-   *     alignment mode of child components in the container
+   *     This attribute supports mirroring on the [Stack]{@link Stack} component, but not on other components.
+   *     <br>In **Stack**, this attribute has the same effect as **alignContent** and can only set the alignment mode
+   *     of child components within the current component.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23716,11 +23743,11 @@ declare class CommonMethod<T> {
   align(value: Alignment): T;
 
   /**
-   * Sets the alignment mode for child elements within the container's drawing area. The mirroring capability is
+   * Sets the alignment mode for child components within the component's drawing area. The mirroring capability is
    * supported. This attribute can be dynamically set using [attributeModifier]{@link attributeModifier}.
    *
-   * @param { Alignment | LocalizedAlignment } alignment - Alignment mode for child elements in container drawing area.
-   *     The mirroring capability is supported.
+   * @param { Alignment | LocalizedAlignment } alignment - Sets the alignment mode of child components within
+   *     the drawing region of the current component, and adds the mirroring capability.
    *     The [LocalizedAlignment]{@link LocalizedAlignment} type is effective only in the following
    *     components: [Shape]{@link Shape},
    *     [Button]{@link Button},
@@ -23735,22 +23762,23 @@ declare class CommonMethod<T> {
    *     [TextTimer]{@link TextTimer},
    *     [StepperItem]{@link StepperItem},
    *     [MenuItem]{@link MenuItem},
-   *     [Toggle]{@link MenuItem},
+   *     [Toggle]{@link Toggle},
    *     [Checkbox]{@link Checkbox}, and
    *     [ListItem]{@link ListItem}.
-   *     For the above components, mirror switching is effective for all except the
-   *     [ListItem]{@link ListItem}, component, which behaves
-   *     identically to [Alignment]{@link Alignment}. Components where **LocalizedAlignment** is not applicable
-   *     will be rendered in accordance with their default behavior.
-   *     <br>Default value: **Alignment.Center**, **LocalizedAlignment.CENTER**.
-   *     If an invalid value is passed, the default value will be used, indicating center alignment.
+   *     Among them, except that [ListItem]{@link ListItem} behaves the same as [Alignment]{@link Alignment},
+   *     mirroring switching takes effect for all other components; components for which **LocalizedAlignment** has no
+   *     effect are displayed according to their default behavior.
+   *     <br>Default value: **Alignment.Center**, **LocalizedAlignment.CENTER**
+   *     <br>If an invalid value is set, the default value is used, and the component is displayed centered.
    *     <br>**NOTE**<br>
-   *     The [Alignment]{@link Alignment} type does not support the mirroring capability. The
-   *     [LocalizedAlignment]{@link LocalizedAlignment} type supports mirroring based on the layout direction
-   *     (configurable via [direction]{@link direction}) or system language. The **direction** setting takes
-   *     precedence over the system language direction. When **direction** is explicitly set to any value other than
-   *     **auto**, **LocalizedAlignment** mirroring follows the specified direction. If **direction** is set to **auto**
-   *     or not configured, **LocalizedAlignment** mirroring adapts to the system language direction
+   *     The [Alignment]{@link Alignment} type does not support the mirroring capability; the
+   *     [LocalizedAlignment]{@link LocalizedAlignment} type supports the mirroring capability. Select an enum value
+   *     in [LocalizedAlignment]{@link LocalizedAlignment} to implement mirroring switching based on the change of
+   *     [direction]{@link direction} or the system language direction. The priority of **direction** is higher than
+   *     that of the system language direction. When **direction** is set and is not **auto**, the mirroring of
+   *     [LocalizedAlignment]{@link LocalizedAlignment} performs layout according to **direction**; when
+   *     **direction** is set to **auto** or is not set, the mirroring of
+   *     [LocalizedAlignment]{@link LocalizedAlignment} performs layout according to the system language direction.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -23765,29 +23793,39 @@ declare class CommonMethod<T> {
    * Sets the absolute positioning, which determines the position of a child component relative to the content area of
    * the parent component. Dynamic configuration via [attributeModifier]{@link attributeModifier} is supported.
    *
-   * **NOTE**
-   * - This API takes effect after the component's size measurement is complete.
-   * - When the parent container is [Row]{@link Row},
-   * [Column]{@link Column}, or
-   * [Flex]{@link Flex}, the child component with **position** set
-   * does not occupy any space.
-   * - The [Position]{@link position} type uses the upper left corner of the parent's content area as the
-   * reference point. The [Edges]{@link Edges} type uses all four sides of the parent's content area as
-   * reference, where **top**, **left**, **right**, and **bottom** define the margins between the component and
-   * corresponding sides of the parent's content area. The [LocalizedEdges]{@link LocalizedEdges} type
-   * provides the same functionality as Edges while supporting layout mirroring.
-   * - This attribute is applicable to scenarios where the component's position in the parent container is fixed, for
-   * example, where it is pinned to top or floating on the UI.
-   * - This attribute is unavailable for a layout container whose width and height are zero.
-   * - In [RelativeContainer](docroot://reference/apis-arkui/arkui-ts/ts-container-relativecontainer.md), if the child
-   * component has [alignRules]{@link alignRules} set, the **position** attribute will not take effect
+   * > **NOTE**
+   * >
+   * > - The effect of **position** on the position takes effect after the component's size measurement is complete.
+   * > - When the parent component is [Row]{@link Row}, [Column]{@link Column}, or [Flex]{@link Flex}, a child component
+   * with **position** set does not occupy space. In this scenario, if all child components contained in the parent
+   * component have **position** set, the parent component's size cannot be determined by other child components, and
+   * layout measurement is performed based on the size (0, 0).
+   * > - The [Position]{@link Position} type determines the position based on the upper left corner of the parent
+   * component's content area. The [Edges]{@link Edges} type determines the position based on the four edges of the
+   * parent component's content area, where **top**, **left**, **right**, and **bottom** are the distances from each
+   * edge of the component to the corresponding edge of the parent component's content area, and the component's
+   * position relative to the parent component's content area is determined by these distances. The
+   * [LocalizedEdges]{@link LocalizedEdges} type determines the position based on the four edges of the parent
+   * component's content area and supports mirroring mode.
+   * > - This attribute is applicable to scenarios where components such as top-displayed elements and floating buttons
+   * have fixed positions within the parent component.
+   * > - This attribute is not supported on layout components with zero width and height.
+   * > - When the parent component is [RelativeContainer]{@link RelativeContainer} and the child component has the
+   * [alignRules]{@link alignRules} attribute set, the child component's **position** attribute does not take effect.
+   * > - If the parent component of the component where this attribute is located does not have a fixed width and
+   * height, this component performs absolute positioning with reference to the first ancestor component that has a
+   * fixed width and height.
    *
-   * @param { Position } value - [since 7 - 11]
+   * @param { Position } value - Absolute positioning that determines the child component's position relative to the
+   *     parent's content area. The content area of the parent component is calculated by subtracting the
+   *     [border]{@link border}, [padding]{@link padding}, and [safeAreaPadding]{@link safeAreaPadding} values from
+   *     the parent component's total size. This resulting content area defines the available layout space for child
+   *     components. This attribute does not take effect when it is set to an abnormal value. [since 7 - 11]
    * @param { Position | Edges | LocalizedEdges } value - Absolute positioning that determines the child component's
    *     position relative to the parent's content area. The content area of the parent component is calculated by
    *     subtracting the [border]{@link border}, [padding]{@link padding}, and [safeAreaPadding]{@link safeAreaPadding}
    *     values from the parent component's total size. This resulting content area defines the available layout space
-   *     for child components. This attribute does not take effect when it is set to an abnormal value. [since 12].
+   *     for child components. This attribute does not take effect when it is set to an abnormal value. [since 12]
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23801,7 +23839,15 @@ declare class CommonMethod<T> {
    * Sets the anchor for element positioning. This attribute supports dynamic configuration via
    * [attributeModifier]{@link attributeModifier}.
    *
-   * @param { Position } value - [since 7 - 11]
+   * @param { Position } value - Positioning anchor that offsets an element from the position specified by
+   *     [position]{@link position} or [offset]{@link offset}.
+   *     <br>**.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})** has the same effect as
+   *     **.position({x: value1 - value3, y: value2 - value4})**. The same applies to **offset**.
+   *     <br>If **.markAnchor({x: value1, y: value2})** is set separately, the effect is the same as that of
+   *     **.offset({x: -value1, y: -value2})**.
+   *     <br>API version 9 and earlier: The default value is **{x: 0, y: 0}**.
+   *     <br>API version 10: no default value.
+   *     <br>This attribute does not take effect when it is set to an abnormal value. [since 7 - 11]
    * @param { Position | LocalizedPosition } value - Positioning anchor that offsets an element from the position
    *     specified by [position]{@link position} or [offset]{@link offset}
    *     **.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})** has the same effect as
@@ -23826,19 +23872,23 @@ declare class CommonMethod<T> {
    * will not be applied. This attribute supports dynamic configuration via
    * [attributeModifier]{@link attributeModifier}.
    *
-   * @param { Position } value - [since 7 - 11]
-   * @param { Position | Edges | LocalizedEdges } value - Offset of the component relative to its original layout
-   *     position. The **offset** attribute does not affect the layout of the parent container. It adjusts the component
-   *     position only during drawing.
-   *     If of the [Position]{@link Position} type, this parameter sets the offset relative to the upper
-   *     left corner of the component. If of the [Edges]{@link Edges} type, this parameter sets the offset
-   *     relative to the four edges of the component. **{x: x, y: y}** has the same effect as **{left: x, top: y}** and
-   *     **{right: -x, bottom: -y}**. The [LocalizedEdges]{@link LocalizedEdges} type supports the mirror mode:
-   *     **start** is equivalent to **x** with left-to-right scripts and **-x** with right-to-left scripts.
+   * @param { Position } value - Relative offset. The component is offset based on its original layout position.
+   *     The offset attribute does not affect the parent component layout; it only adjusts the position during
+   *     drawing. The Position type is offset based on the top-left corner of the component itself. In API version 9
+   *     and earlier, the default value is {x: 0, y: 0}. Default unit: vp. API version 10: no default value. When the
+   *     value is abnormal, this attribute does not take effect. [since 7 - 11]
+   * @param { Position | Edges | LocalizedEdges } value - Relative offset. The component is offset based on its
+   *     original layout position. The **offset** attribute does not affect the parent component layout; it only
+   *     adjusts the position during drawing.
+   *     <br>The [Position]{@link Position} type is offset based on the top-left corner of the component itself, and
+   *     the [Edges]{@link Edges} type is offset based on the four edges of the component itself. Setting
+   *     **{x: x, y: y}** for the **offset** attribute has the same effect as setting **{left: x, top: y}** and
+   *     **{right: -x, bottom: -y}**. The [LocalizedEdges]{@link LocalizedEdges} type supports mirroring mode: in
+   *     LTR mode, **start** is equivalent to **x**; in RTL mode, **start** is equivalent to **-x**.
    *     <br>API version 9 and earlier: The default value is **{x: 0, y: 0}**.
    *     <br>Default unit: vp
    *     <br>API version 10: no default value.
-   *     <br>This attribute does not take effect when it is set to an abnormal value. [since 12]
+   *     <br>When the value is abnormal, this attribute does not take effect. [since 12]
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23937,21 +23987,29 @@ declare class CommonMethod<T> {
    * width/aspectRatio.
    * <br>- If only **height** and **aspectRatio** are set, the width is calculated using the following formula:
    * height x aspectRatio.
-   * <br>- If **width**, **height**, and **aspectRatio** are all set, the explicitly set height is ignored, and the
-   * effective height is calculated using the following formula: width/aspectRatio.
-   * <br>After the **aspectRatio** attribute is set, the component's width and height will be limited by the size of
-   * the parent component's content area. The priority of [constraintSize]{@link constraintSize} is higher than that
-   * of **aspectRatio**.
+   * <br>- If **width**, **height**, and **aspectRatio** are set at the same time, the height is recalculated as
+   * width/aspectRatio, and the explicitly set height value does not take effect.
+   * <br>Applies to components that need to maintain a fixed aspect ratio, such as image display, video players, and
+   * maintaining proportions in responsive layouts.
+   * <br>After the **aspectRatio** attribute is set, the component's width and height are limited by the size of the
+   * parent component's content area. The maxWidth/maxHeight of [constraintSize]{@link constraintSize} takes precedence
+   * over **aspectRatio**. When the maxWidth/maxHeight constraints set by constraintSize conflict with the aspectRatio
+   * calculation result, the component follows the maxWidth/maxHeight constraints of constraintSize first, in which
+   * case aspectRatio may not take effect.
    *
-   * @param { number } value - Aspect ratio of the component.
-   *     The default value varies by API version.
-   *     <br>API version 9 and earlier: **1.0**
-   *     <br>API version 10: none
+   * @param { number } value - Specifies the aspect ratio of the current component. The value range is (0, +∞).
+   *     <br>In API version 9 and earlier, the default value is **1.0**.
+   *     <br>Since API version 10, there is no default value.
    *     <br>**NOTE**<br>
-   *     This parameter takes effect only when a valid value greater than 0 is specified. For example, if a **Row**
-   *     component has only its width set and does not have any child component, then when **aspectRatio** is not set
-   *     or is set to a negative value, the height of the **Row** component is 0
-   *     <br>The value range is all integers.
+   *     Use it when the aspect ratio of the component needs to be maintained (for example, when displaying images,
+   *     videos, and other content that needs to maintain their ratio).
+   *     <br>This attribute does not take effect when it is set to an invalid value (less than or equal to 0). Since
+   *     API version 10, this attribute does not take effect when no value is set.
+   *     <br>After this attribute is set, the width and height of the component are limited by the size of the parent
+   *     component's content area, and the maxWidth/maxHeight of [constraintSize]{@link constraintSize} take precedence
+   *     over aspectRatio.
+   *     <br>For example, when **Row** has only the width set and no child components, if **aspectRatio** is not set
+   *     or is a negative value, the height is 0.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
