@@ -52,7 +52,6 @@ declare namespace autoStartupManager {
    * @param { AutoStartupCallback } callback - Callback used for registration.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -71,7 +70,6 @@ declare namespace autoStartupManager {
    * @param { AutoStartupCallback } callback - Auto startup callback.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -94,7 +92,6 @@ declare namespace autoStartupManager {
    * @param { AutoStartupCallback } [callback] - Callback used for unregistration.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -113,7 +110,6 @@ declare namespace autoStartupManager {
    * @param { AutoStartupCallback } [callback] - Auto startup callback.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -137,7 +133,6 @@ declare namespace autoStartupManager {
    *     is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -165,7 +160,6 @@ declare namespace autoStartupManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -194,7 +188,6 @@ declare namespace autoStartupManager {
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -221,7 +214,6 @@ declare namespace autoStartupManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -251,7 +243,6 @@ declare namespace autoStartupManager {
    *     error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
@@ -275,7 +266,6 @@ declare namespace autoStartupManager {
    * @returns { Promise<Array<AutoStartupInfo>> } Promise used to return the information obtained.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.MANAGE_APP_BOOT".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.

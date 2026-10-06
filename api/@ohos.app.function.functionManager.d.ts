@@ -121,7 +121,6 @@ declare namespace functionManager {
    * @returns { Promise<Array<FunctionInfo>> } The promise used to return available functions.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
@@ -143,7 +142,6 @@ declare namespace functionManager {
    * @returns { Promise<InvokeResult> } The promise used to return the result of function invocation.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
@@ -171,7 +169,6 @@ declare namespace functionManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600034 - The device is not in developer mode.
    * @throws { BusinessError } 35600035 - A hook is already registered; unregister it first.
@@ -194,7 +191,6 @@ declare namespace functionManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600036 - No hook is registered; nothing to unregister.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
