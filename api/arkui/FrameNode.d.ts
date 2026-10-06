@@ -532,10 +532,7 @@ export class FrameNode {
   /**
    * Dispatches a key event to this FrameNode.
    *
-   * The event is dispatched through the current focus and FocusHub processing path. The
-   * competition strategy is not applicable to key events.
-   *
-   * @param { KeyEvent } event - Key event to dispatch.
+   * @param { KeyEvent } event - Key event to be dispatched.
    * @returns { boolean } Whether the key event is consumed. Returns **true** if the key event is consumed;
    *     returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full

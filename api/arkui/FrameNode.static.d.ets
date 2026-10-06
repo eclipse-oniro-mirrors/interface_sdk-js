@@ -431,8 +431,8 @@ export declare class FrameNode {
    * @param { InputEventType } event - Input event to dispatch.
    * @param { CompetitionStrategy } [competitionStrategy] - Competition strategy for dispatching the event.
    *     By default, the event is dispatched without a competition strategy.
-   * @returns { boolean } Whether the event is successfully dispatched. Returns true if the event is dispatched
-   *     successfully; returns false otherwise.
+   * @returns { boolean } Whether the event is successfully dispatched. Returns **true** if the event is dispatched
+   *     successfully; returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.2.0 static
@@ -442,12 +442,9 @@ export declare class FrameNode {
   /**
    * Dispatches a key event to this FrameNode.
    *
-   * The event is dispatched through the current focus and FocusHub processing path. The
-   * competition strategy is not applicable to key events.
-   *
-   * @param { KeyEvent } event - Key event to dispatch.
-   * @returns { boolean } Whether the key event is consumed. Returns true if the key event is consumed;
-   *     returns false otherwise.
+   * @param { KeyEvent } event - Key event to be dispatched.
+   * @returns { boolean } Whether the key event is consumed. Returns **true** if the key event is consumed;
+   *     returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.2.0 static
