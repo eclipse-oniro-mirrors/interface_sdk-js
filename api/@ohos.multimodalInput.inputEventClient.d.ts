@@ -379,7 +379,8 @@ declare namespace inputEventClient {
    * @returns { Promise<KeyboardController> } Promise used to return the keyboard controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
    * @stagemodelonly
@@ -513,7 +514,8 @@ declare namespace inputEventClient {
    * @returns { Promise<MouseController> } Promise used to return the mouse controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
    * @stagemodelonly
@@ -645,7 +647,8 @@ declare namespace inputEventClient {
    * @returns { Promise<TouchController> } Promise used to return the touch controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
    * @stagemodelonly
