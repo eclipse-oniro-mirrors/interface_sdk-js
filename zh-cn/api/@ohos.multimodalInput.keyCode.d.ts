@@ -1717,8 +1717,11 @@ export declare enum KeyCode {
   KEYCODE_NEXT = 2629,
 
   /**
-   * 多媒体键：播放/暂停。<br>与KEYCODE_MEDIA_PLAY_PAUSE的区别为：<br> KEYCODE_PLAYPAUSE是较早的定义，
-   * KEYCODE_MEDIA_PLAY_PAUSE为现代媒体键设备设计，常见于较新的媒体键设备。
+   * 多媒体键：播放/暂停。
+   *
+   * 与KEYCODE_MEDIA_PLAY_PAUSE的区别为：
+   *
+   * KEYCODE_PLAYPAUSE是较早的定义，KEYCODE_MEDIA_PLAY_PAUSE为现代媒体键设备设计，常见于较新的媒体键设备。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3230,7 +3233,7 @@ export declare enum KeyCode {
   KEYCODE_FINGERPRINT_SLIDE_DOWN = 3234,
 
   /**
-   * 云台单击键。
+   * 云台模式调节键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @stagemodelonly

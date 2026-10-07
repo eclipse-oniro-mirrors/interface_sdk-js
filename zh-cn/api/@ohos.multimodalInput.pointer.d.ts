@@ -788,7 +788,7 @@ declare namespace pointer {
    * [setCursor]{@link @ohos.arkui.UIContext:CursorController#setCursor}。
    *
    * @param { int } windowId - 窗口ID。取值范围为大于等于0的整数。<br>窗口ID合法并且对应窗口存在时，可以设置窗口的鼠标光标样式。<br>窗口ID合法但窗口不存在时，也可以设置鼠标光标样式。<br>设置
-   * 结果可通过[getPointerStyleSync]{@link pointer.getPointerStyleSync}获取。
+   * 结果可通过[getPointerStyleSync]{@link pointer.getPointerStyleSync(windowId: int)}获取。
    * @param { PointerStyle } pointerStyle - 鼠标样式。不能传入DEVELOPER_DEFINED_ICON作为参数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
@@ -833,7 +833,8 @@ declare namespace pointer {
    * 查询指定窗口的鼠标样式类型，如向东箭头、向西箭头、向南箭头、向北箭头等。此接口仅支持获取本应用进程内窗口的鼠标样式类型。
    *
    * @param { int } windowId - 窗口ID。取值范围为大于等于-1的整数，取值为-1时表示全局窗口。<br>窗口ID合法并且对应窗口存在时，返回窗口的鼠标光标样式。<br>窗口ID合法但窗口不存在时，默认返回全局
-   * 鼠标光标样式。<br>如果通过[setPointerStyleSync]{@link pointer.setPointerStyleSync}接口为不存在的窗口设置了鼠标光标样式，使用本接口可以正常获取到该光标样式。
+   * 鼠标光标样式。<br>如果通过[setPointerStyleSync]{@link pointer.setPointerStyleSync(windowId: int, pointerStyle: PointerStyle)}
+   * 接口为不存在的窗口设置了鼠标光标样式，使用本接口可以正常获取到该光标样式。
    * @returns { PointerStyle } 返回鼠标样式类型。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
@@ -922,7 +923,7 @@ declare namespace pointer {
 
   /**
    * 设置鼠标光标颜色，使用callback异步回调。
-   * 
+   *
    * > **说明**：
    * >
    * > 设置和调试时，需连接外部设备，如鼠标、蓝牙等。
@@ -941,7 +942,7 @@ declare namespace pointer {
 
   /**
    * 设置鼠标光标颜色，使用Promise异步回调。
-   * 
+   *
    * > **说明**：
    * >
    * > 设置和调试时，需连接外部设备，如鼠标、蓝牙等。
@@ -960,7 +961,7 @@ declare namespace pointer {
 
   /**
    * 设置鼠标光标颜色，使用同步方式进行设置。
-   * 
+   *
    * > **说明**：
    * >
    * > 设置和调试时，需连接外部设备，如鼠标、蓝牙等。

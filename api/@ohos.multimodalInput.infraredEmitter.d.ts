@@ -81,7 +81,7 @@ declare namespace infraredEmitter {
    *
    * @permission ohos.permission.MANAGE_INPUT_INFRARED_EMITTER
    * @param { long } infraredFrequency - Infrared frequency, in Hz.
-   * @param { Array<long>} pattern - Infrared level signals, in microseconds (μs). The number of level signals ranges
+   * @param { Array<long> } pattern - Infrared level signals, in microseconds (μs). The number of level signals ranges
    *     from 0 to 1024. When the value is 0, the API call does not take effect. The value of each level signal must
    *     be greater than 0.<br/>For example, in the level signal array [100,200,300,400], 100 μs is a high level
    *     signal, 200 μs is a low level signal, 300 μs is a high level signal, and 400 μs is a low level signal.

@@ -832,7 +832,7 @@ declare namespace pointer {
    *     <br>If the window ID is valid and the corresponding window exists, the mouse pointer style of the window can be
    *     set properly.
    *     <br>If the window ID is valid but the window does not exist, the mouse pointer style can also be set properly.
-   *     <br>The result can be obtained through [getPointerStyleSync]{@link pointer.getPointerStyleSync}.
+   *     <br>The result can be obtained through [getPointerStyleSync]{@link pointer.getPointerStyleSync(windowId: int)}.
    * @param { PointerStyle } pointerStyle - Mouse pointer style. DEVELOPER_DEFINED_ICON cannot be passed in as a
    *     parameter.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -904,7 +904,8 @@ declare namespace pointer {
    *     <br>If the window ID is valid but the window does not exist, the global mouse pointer style is returned by
    *     default.
    *     <br>If the mouse pointer style is set for a non-existent window through
-   *     [setPointerStyleSync]{@link pointer.setPointerStyleSync}, this API can obtain the mouse pointer style properly.
+   *     [setPointerStyleSync]{@link pointer.setPointerStyleSync(windowId: int, pointerStyle: PointerStyle)}, this
+   *     API can obtain the mouse pointer style properly.
    * @returns { PointerStyle } Mouse pointer style.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -1749,8 +1750,8 @@ declare namespace pointer {
    * Obtains the touchpad multi-finger swipe switch state. This API uses an asynchronous callback to return the result.
    *
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **state** indicates whether the touchpad multi-finger swipe switch is enabled (
-   *     **true** indicates yes and **false** indicates no; default value: **true**). Otherwise, **err** is an error
+   *     **err** is **undefined**, and **state** indicates whether the touchpad multi-finger swipe switch is enabled
+   *     (**true** indicates yes and **false** indicates no; default value: **true**). Otherwise, **err** is an error
    *     object
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;

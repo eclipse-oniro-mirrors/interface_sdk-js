@@ -14,7 +14,7 @@
  */
 
 /**
- * The **keyEvent** module provides key events reported by a device. It is inherited from 
+ * The **keyEvent** module provides key events reported by a device. It is inherited from
  * [InputEvent]{@link @ohos.multimodalInput.inputEvent:InputEvent}.
  *
  * @file Key Event
