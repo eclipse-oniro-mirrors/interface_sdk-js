@@ -11080,6 +11080,16 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     enablePause?: boolean;
+
+    /**
+     * Specifies whether to enable echo detection and echo cancellation when microphone capture is enabled.
+     * Default value: The default value is false, indicating that echo cancellation is disabled.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    enableAEC?: boolean;
   }
 
   /**

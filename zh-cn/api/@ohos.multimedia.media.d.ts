@@ -10895,6 +10895,16 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     enablePause?: boolean;
+
+    /**
+     * 表示当麦克风采集开启时，是否使能回声检测与回声消除功能。<br>
+     * true表示开启回声消除功能，false表示关闭回声消除功能，默认是false。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    enableAEC?: boolean;
   }
 
   /**
