@@ -171,11 +171,69 @@ declare namespace autoFillManager {
   export function requestAutoSave(context: UIContext, callback?: AutoSaveCallback): void;
 
   /**
+   * 自动填充回调。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic&static
+   */
+  export interface AutoFillCallback {
+    /**
+     * 当自动填充请求成功时，该回调被调用。
+     * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    onSuccess: OnFillSuccessFn;
+
+    /**
+     * 当自动填充请求失败时，该回调被调用。
+     * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    onFailure: OnFillFailureFn;
+  }
+
+  /**
+   * 触发自动保存请求。
+   *
+   * @param { UIContext } context - Indicates the ui context where the save operation will be performed.
+   * @param { SaveRequest } request - Indicates the struct of automatic save request.
+   * @param { AutoSaveCallback } [callback] - Indicates the callback that used to receive the result.
+   * @throws { BusinessError } 16000050 - Internal error.
+   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic&static
+   */
+  export function requestAutoSave(context: UIContext, request: SaveRequest, callback?: AutoSaveCallback): void;
+
+  /**
+   * 触发自动填充请求。
+   *
+   * @param { UIContext } context - Indicates the ui context where the filling operation will be performed.
+   * @param { FillRequest } request - Indicates the struct of automatic filling request.
+   * @param { AutoFillCallback } [callback] - Indicates the callback that used to receive the result.
+   * @throws { BusinessError } 16000050 - Internal error.
+   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic&static
+   */
+  export function requestAutoFill(context: UIContext, request: FillRequest, callback?: AutoFillCallback): void;
+
+  /**
    * 自动填充的视图数据信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    */
   export type ViewData = _ViewData.default;
@@ -184,7 +242,8 @@ declare namespace autoFillManager {
    * 自动填充的视图数据信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @since 23 static
    */
@@ -194,8 +253,10 @@ declare namespace autoFillManager {
    * 自动填充的页面节点信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    */
   export type PageNodeInfo = _PageNodeInfo.default;
@@ -204,7 +265,8 @@ declare namespace autoFillManager {
    * 自动填充的页面节点信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @since 23 static
    */
@@ -234,6 +296,8 @@ declare namespace autoFillManager {
    * 自动填充的请求信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
    * @since 11 dynamic
@@ -244,6 +308,8 @@ declare namespace autoFillManager {
    * 自动填充的请求信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @since 23 static
    */
@@ -253,6 +319,8 @@ declare namespace autoFillManager {
    * 自动保存的请求信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
    * @since 11 dynamic
@@ -263,6 +331,8 @@ declare namespace autoFillManager {
    * 自动保存的请求信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
    * @since 23 static
@@ -350,6 +420,16 @@ declare namespace autoFillManager {
   export type SaveRequestCallback = _SaveRequestCallback;
 
   /**
+   * 填充失败结果接口。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic&static
+   */
+  export type FillFailureResult = _FillFailureResult;
+
+  /**
    * 自定义数据。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
@@ -373,8 +453,10 @@ declare namespace autoFillManager {
    * 用于自动填充的矩形区域。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    */
   export type AutoFillRect = _AutoFillRect.default;
@@ -383,7 +465,8 @@ declare namespace autoFillManager {
    * 用于自动填充的矩形区域。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @since 23 static
    */

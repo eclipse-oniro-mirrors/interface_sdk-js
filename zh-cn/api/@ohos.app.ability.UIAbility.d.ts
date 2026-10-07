@@ -896,6 +896,17 @@ declare class UIAbility extends Ability {
    * @since 23 static
    */
   onCollaborate(wantParam: Record<string, RecordData>): AbilityConstant.CollaborateResult;
+
+  /**
+   * 表示UIAbility是否已被销毁。默认值为**false**。
+   *
+   * 在[onDestroy]{@link UIAbility.onDestroy}回调执行后，该属性被设置为**true**。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  isDestroyed: boolean;
 }
 
 export default UIAbility;

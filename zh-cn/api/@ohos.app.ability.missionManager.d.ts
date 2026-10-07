@@ -562,6 +562,65 @@ declare namespace missionManager {
   function moveMissionsToBackground(missionIds: Array<int>): Promise<Array<int>>;
 
   /**
+   * 注册系统任务状态监听器。
+   *
+   * @permission ohos.permission.MANAGE_MISSIONS
+   * @param { 'missionEvent' } type - 监听的任务名称。固定值：'missionEvent'，表示系统任务状态监听器。
+   * @param { MissionListener } listener - 系统任务监听器。
+   * @returns { long } 监听器的index值，由系统创建，在注册系统任务状态监听时分配，和监听器一一对应。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Mission
+   * @systemapi
+   * @since 9 dynamic
+   * @deprecated since 10
+   * @useinstead missionManager#on(type: 'mission', listener: MissionListener)
+   */
+  function on(type: 'missionEvent', listener: MissionListener): long;
+
+  /**
+   * 解注册任务状态监听器。使用callback异步回调。
+   *
+   * @permission ohos.permission.MANAGE_MISSIONS
+   * @param { 'mission' } type - 取消监听的任务名称。固定值：'mission'，表示系统任务状态监听器。
+   * @param { long } listenerId - 系统任务状态监听器的index值，和监听器一一对应，由on方法返回。
+   * @param { AsyncCallback<void> } callback - 执行结果回调函数，返回任务ID数组。解注册任务状态监听器成功，err为undefined，否则为错误对象。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Mission
+   * @systemapi
+   * @since 9 dynamic
+   * @deprecated since 10
+   * @useinstead missionManager#off(type: 'mission', listenerId: long, callback: AsyncCallback<void>)
+   */
+  function off(type: 'missionEvent', listenerId: long, callback: AsyncCallback<void>): void;
+
+  /**
+   * 解注册任务状态监听。使用Promise异步回调。
+   *
+   * @permission ohos.permission.MANAGE_MISSIONS
+   * @param { 'missionEvent' } type - 取消监听的任务名称。固定值：'missionEvent'，表示系统任务状态监听器。
+   * @param { long } listenerId - 系统任务状态监听器的index值，和监听器一一对应，由on方法返回。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Mission
+   * @systemapi
+   * @since 9 dynamic
+   * @deprecated since 10
+   * @useinstead missionManager#off(type: 'mission', listenerId: long)
+   */
+  function off(type: 'missionEvent', listenerId: long): Promise<void>;
+
+  /**
    * 表示任务的详细信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission

@@ -41,9 +41,18 @@ declare namespace AbilityConstant {
    * @stagemodelonly
    * @atomicservice
    * @since 20 dynamic
-   * @since 23 static
    */
   const REASON_MESSAGE_DESKTOP_SHORTCUT = 'ReasonMessage_DesktopShortcut';
+
+  /**
+   * 通过桌面快捷方式启动。开发者如果从[LaunchParam]{@link AbilityConstant.LaunchParam}的launchReasonMessage属性中获取到该字符串，表示UIAbility是通过点击桌面快
+   * 捷方式启动的。
+   *
+   * @syscap SystemCapability.Ability.AbilityBase
+   * @stagemodelonly
+   * @since 23 static
+   */
+  const REASON_MESSAGE_DESKTOP_SHORTCUT: string;
 
   /**
    * 启动参数，主要包括Ability启动原因以及上次退出原因。Ability启动时由系统自动传入，开发者无需修改。
