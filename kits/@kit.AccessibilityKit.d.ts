@@ -52,7 +52,7 @@ export {
   GesturePoint, Rect, WindowType, accessibility, config, AccessibilityEvent, AccessibilityEventInfo,
   AccessibilityAction, AccessibilityEventType, Parameter,
   FocusRule, FocusCondition, FocusMoveResult, FocusMoveResultCode, InjectActionType, AccessibilityFocusScene,
-  AccessibiltiyVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType,
+  AccessibilityVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType,
   UIRect, UIAccessibilityElement
 };
 /*** endif */
@@ -62,7 +62,7 @@ export {
   AccessibilityElement, AccessibilityExtensionAbility, AccessibilityExtensionContext, FocusDirection, Rect,
   WindowType, accessibility, config, AccessibilityEventInfo, AccessibilityAction, AccessibilityEventType,
   Parameter, FocusRule, FocusCondition, FocusMoveResult, FocusMoveResultCode, InjectActionType, AccessibilityFocusScene,
-  AccessibiltiyVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType,
+  AccessibilityVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType,
   UIRect, UIAccessibilityElement
 };
 /*** endif */
