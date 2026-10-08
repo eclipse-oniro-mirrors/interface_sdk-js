@@ -89,7 +89,7 @@ export interface BackRouterOptions {
   uri?: string;
 
   /**
-   * Data that needs to be passed to the target page during redirection.
+   * Data to be passed to the target page when the page is returned.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Lite
    * @since 7 dynamiconly
@@ -232,7 +232,7 @@ export interface DisableAlertBeforeBackPageOptions {
 }
 
 /**
- * List of routing parameters.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7 dynamiconly
  * @deprecated since 8

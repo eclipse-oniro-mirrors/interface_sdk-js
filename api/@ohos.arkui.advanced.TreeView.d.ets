@@ -39,7 +39,7 @@ export declare enum TreeListenType {
    */
   NODE_CLICK = "NodeClick",
   /**
-   * Listens for add events of nodes.
+   * Listens for the node addition event. Triggered after the **addNode** method is called to add a node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -49,7 +49,7 @@ export declare enum TreeListenType {
    */
   NODE_ADD = "NodeAdd",
   /**
-   * Listens for delete events of nodes.
+   * Listens for the node deletion event. Triggered after the **removeNode** method is called to delete a node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -59,7 +59,7 @@ export declare enum TreeListenType {
    */
   NODE_DELETE = "NodeDelete",
   /**
-   * Listens for modify events of nodes.
+   * Listens for the node modification event. Triggered after the **modifyNode** method is called to modify a node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -69,7 +69,7 @@ export declare enum TreeListenType {
    */
   NODE_MODIFY = "NodeModify",
   /**
-   * Listens for move events of nodes.
+   * Listens for the node move event. Triggered after the node position changes.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -81,8 +81,11 @@ export declare enum TreeListenType {
 }
 
 /**
- * Listener of the tree view component. You can bind it to the **TreeView** component and use it to listen for changes
- * of tree nodes. One listener can be bound to only one **TreeView** component.
+ * Defines a listener for the tree view component, which can be bound to the tree view component to listen for node
+ * changes of the tree. The same listener cannot control multiple tree view components. The listener internally
+ * maintains the mapping between event types and callback functions. When a user performs a node operation on the
+ * TreeView, the TreeView notifies the listener to trigger the corresponding callback function, and the developer can
+ * obtain node information in the callback and perform service processing.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -92,10 +95,13 @@ export declare enum TreeListenType {
  */
 export declare class TreeListener {
   /**
-   * Declare class TreeListener
+   * Registers a listener for tree view node events. After successful registration, the callback function is triggered
+   * when the corresponding event occurs on a node. The same listener cannot control multiple tree view components.
    *
-   * @param { TreeListenType } type - Listening type.
-   * @param { (callbackParam: CallbackParam) => void } callback - Node information.
+   * @param { TreeListenType } type - Type of the listening event, used to specify the listening event to register.
+   * @param { (callbackParam: CallbackParam) => void } callback - Callback invoked when the corresponding listening
+   *     event is triggered. The callback parameter **callbackParam** contains information such as **currentNodeId**,
+   *     **parentNodeId**, and **childIndex**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
@@ -105,10 +111,14 @@ export declare class TreeListener {
   on(type: TreeListenType, callback: (callbackParam: CallbackParam) => void): void;
 
   /**
-   * Declare class TreeListener
+   * Registers a one-time listening for tree view node events. After successful registration, the callback function is
+   * triggered when the corresponding event occurs on a node for the first time, and the listening is automatically
+   * removed after triggering. The same listener cannot control multiple tree view components.
    *
-   * @param { TreeListenType } type - Listening type.
-   * @param { (callbackParam: CallbackParam) => void } callback - Node information.
+   * @param { TreeListenType } type - Type of the listening event, used to specify the listening event to register.
+   * @param { (callbackParam: CallbackParam) => void } callback - Callback invoked when the corresponding listening
+   *     event is triggered. The callback parameter **callbackParam** contains information such as **currentNodeId**,
+   *     **parentNodeId**, and **childIndex**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
@@ -118,10 +128,14 @@ export declare class TreeListener {
   once(type: TreeListenType, callback: (callbackParam: CallbackParam) => void): void;
 
   /**
-   * Registers a one-off listener.
+   * Cancels listening. Listening must be registered before it can be canceled. The same listener cannot control
+   * multiple tree view components.
    *
-   * @param { TreeListenType } type - Listening type.
-   * @param { (callbackParam: CallbackParam) => void } callback - Node information.
+   * @param { TreeListenType } type - Type of the listening event, used to specify the listening event to cancel.
+   * @param { (callbackParam: CallbackParam) => void } callback - Callback invoked when the corresponding listening
+   *     event is triggered. Default value: **undefined**. When this parameter is passed, the listener for the
+   *     corresponding node information is canceled; when not passed, all node information listeners of this type are
+   *     canceled.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
@@ -132,8 +146,9 @@ export declare class TreeListener {
 }
 
 /**
- * Implements a **TreeListenerManager** object, which can be bound to a **TreeView** component to listen for changes of
- * tree nodes. One **TreeListenerManager** object can be bound to only one tree view component.
+ * Defines a listener manager for the tree view component, which can obtain a listener instance and bind it to the tree
+ * view component for managing node listening of the tree. The same listener cannot control multiple tree view
+ * components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -168,17 +183,18 @@ export declare class TreeListenerManager {
 }
 
 /**
- * The **TreeView** component represents a tree view used to display a hierarchical list of items. Each item can contain
- * subitems, which may be expanded or collapsed.
+ * A tree view is a hierarchical list suitable for displaying nested structures. It consists of parent nodes and child
+ * nodes, and supports expanding or collapsing.
  *
- * This component is applicable in productivity applications, such as side navigation bars in notepad, email, and
- * Gallery applications.
+ * The tree view is applicable in the side navigation bar of productivity apps, such as notepad, email, and Gallery.
  *
  * > **NOTE**
  * >
+ * > - This component can be used only in the stage model.
+ * >
  * > - If the **TreeView** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **TreeView** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **TreeView** component.
@@ -192,7 +208,7 @@ export declare class TreeListenerManager {
 @Component
 export declare struct TreeView {
   /**
-   * Node information of the tree view.
+   * Controller of the tree view component, used to control the node information of the tree.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -204,7 +220,7 @@ export declare struct TreeView {
 }
 
 /**
- * Declare CallbackParam
+ * Declare CallbackParam.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -242,9 +258,10 @@ export interface CallbackParam {
   parentNodeId?: number;
 
   /**
-   * Child index.
+   * Index of the child node under the parent node, used to identify the position of the child node in the parent node's
+   * child list.
    *
-   * The value must be greater than or equal to -1.
+   * Value range: greater than or equal to -1, where -1 indicates an invalid index or no child node.
    *
    * Default value: **-1**
    *
@@ -258,7 +275,7 @@ export interface CallbackParam {
 }
 
 /**
- * Declare NodeParam
+ * Declare NodeParam.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -285,10 +302,10 @@ export interface NodeParam {
   /**
    * Current child node ID.
    *
-   * The value must be greater than or equal to -1.
+   * Value range: greater than or equal to -1.
    *
-   * The value cannot be the root node ID or null. Otherwise, an exception is thrown. In addition, duplicate
-   * **currentNodeId** values are not allowed.
+   * Cannot be the root node ID (i.e., cannot be -1) or **null**; otherwise, an exception is thrown. Two identical
+   * **currentNodeId** values cannot be set.
    *
    * Default value: **-1**
    *
@@ -301,11 +318,12 @@ export interface NodeParam {
   currentNodeId?: number;
 
   /**
-   * Whether the node is a directory.
+   * Whether the node is a folder.
    *
-   * Default value: **false**.
+   * Default value: **false**
    *
-   * **true**: The node is a directory. **false**: The node is not a directory.
+   * **true**: a folder that can contain child nodes and supports expand/collapse operations; **false**: not a folder,
+   * i.e., a leaf node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -316,9 +334,9 @@ export interface NodeParam {
   isFolder?: boolean;
 
   /**
-   * Icon.
+   * Icon. If **symbolIconStyle** is also set, **symbolIconStyle** takes precedence.
    *
-   * The default value is an empty string.
+   * Default value: empty string
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -329,9 +347,9 @@ export interface NodeParam {
   icon?: ResourceStr;
 
   /**
-   * Icon of the selected node.
+   * Selected icon. If **symbolSelectedIconStyle** is also set, **symbolSelectedIconStyle** takes precedence.
    *
-   * The default value is an empty string.
+   * Default value: empty string
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -342,9 +360,9 @@ export interface NodeParam {
   selectedIcon?: ResourceStr;
 
   /**
-   * Edit icon.
+   * Edit icon. If **symbolEditIconStyle** is also set, **symbolEditIconStyle** takes precedence.
    *
-   * The default value is an empty string.
+   * Default value: empty string
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -381,9 +399,10 @@ export interface NodeParam {
   secondaryTitle?: ResourceStr;
 
   /**
-   * Right-click child component bound to the node. The child component is decorated with @Builder.
+   * Context menu component bound to the node, displayed when the user right-clicks the node. It must be defined through
+   * the **@Builder** function.
    *
-   * Default value: **() => void**.
+   * Default value: () => void
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -420,7 +439,7 @@ export interface NodeParam {
   symbolIconStyle?: SymbolGlyphModifier;
 
   /**
-   * Symbol icon of the selected node., which has higher priority than **selectedIcon**.
+   * Symbol icon of the selected node, which has higher priority than **selectedIcon**.
    *
    * Default value: **undefined**
    *
@@ -434,8 +453,8 @@ export interface NodeParam {
 }
 
 /**
- * Implements a **TreeController** object, which can be bound to a tree view component to control the node information
- * of the component. One **TreeController** object can be bound to only one tree view component.
+ * A controller for the tree view component, used to control node information of the tree. The same controller instance
+ * cannot control multiple tree view components simultaneously.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -445,7 +464,7 @@ export interface NodeParam {
  */
 export declare class TreeController {
   /**
-   * Removes the selected node.
+   * Deletes the selected node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -467,10 +486,11 @@ export declare class TreeController {
   modifyNode(): void;
 
   /**
-   * Adds a child node to the selected node.
+   * After a node is selected, call this method to add a child node.
    *
-   * @param { NodeParam } nodeParam - Node information.
-   * @returns { TreeController } Controller of the **TreeView** component.
+   * @param { NodeParam } nodeParam - Node information. If this parameter is not passed, a node titled **New Folder**
+   *     will be added under the currently selected node.
+   * @returns { TreeController } Returns the controller instance of the tree view component, supporting chain calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
@@ -480,12 +500,15 @@ export declare class TreeController {
   addNode(nodeParam?: NodeParam): TreeController;
 
   /**
-   * Refreshes the tree view. You can call this API to update the information about the current node.
+   * Updates the display information of the current node by specifying the parent node ID, parent node subtitle, and
+   * current node subtitle.
    *
-   * @param { number } parentId - ID of the parent node.
-   *     <br>The value must be greater than or equal to -1.
-   * @param { ResourceStr } parentSubTitle - Secondary text of the parent node.
-   * @param { ResourceStr } currentSubtitle - Secondary text of the current node.
+   * @param { number } parentId - Parent node ID.<br />The value range is greater than or equal to -1. The root node ID
+   *     is -1. If the value is set to less than -1, it does not take effect.
+   * @param { ResourceStr } parentSubTitle - Subtitle of the parent node. After setting, the subtitle display content of
+   *     the parent node is updated.
+   * @param { ResourceStr } currentSubtitle - Subtitle of the current node. After setting, the subtitle display content
+   *     of the current node is updated.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
@@ -495,7 +518,7 @@ export declare class TreeController {
   refreshNode(parentId: number, parentSubTitle: ResourceStr, currentSubtitle: ResourceStr): void;
 
   /**
-   * Builds a tree view. After a node is added, this API must be called to save the tree information.
+   * Saves the tree information after all nodes are added.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

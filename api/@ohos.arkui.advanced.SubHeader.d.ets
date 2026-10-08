@@ -64,7 +64,7 @@ export declare enum OperationType {
   ICON_GROUP = 2,
 
   /**
-   * Loading animation.
+   * Loading animation. When **operationType** is set to **LOADING**, **operationItem** does not need to be configured.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -76,7 +76,7 @@ export declare enum OperationType {
 }
 
 /**
- * Declare type OperationOption
+ * Declare type OperationOption.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -86,7 +86,8 @@ export declare enum OperationType {
  */
 export declare class OperationOption {
   /**
-   * Text content.
+   * Operation area element content. When **operationType** is **TEXT_ARROW** or **BUTTON**, **value** is the text
+   * content; when **operationType** is **ICON_GROUP**, **value** is the icon resource.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -97,7 +98,7 @@ export declare class OperationOption {
   value: ResourceStr;
 
   /**
-   * Right-side button click event.
+   * Tap event of the right button in the subtitle.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -108,14 +109,14 @@ export declare class OperationOption {
   action?: () => void;
 
   /**
-   * Accessibility text, that is, accessible label name. If a component does not contain text information, it will not
-   * be announced by the screen reader when selected. In this case, the screen reader user cannot know which component
-   * is selected. To solve this problem, you can set accessibility text for components without text information. When
-   * such a component is selected, the screen reader announces the specified accessibility text, informing the user
-   * which component is selected.
+   * Accessibility text attribute of the right button in the subtitle. When a component does not contain a text
+   * attribute, the screen reader does not announce anything when this component is selected, and the user cannot
+   * clearly know which component is currently selected. To address this issue, developers can set accessibility text
+   * for components that do not contain text information. When the screen reader selects this component, it announces
+   * the content of the accessibility text, helping screen reader users clearly know which component they have selected.
    *
-   * Default value: value of the **value** property if the operation type is **TEXT_ARROW** or **BUTTON** and an empty
-   * string otherwise.
+   * Default value: When the type is **TEXT_ARROW** or **BUTTON**, the default value is the value attribute content of
+   * the current item. For other types, the default value is **" "**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -126,12 +127,16 @@ export declare class OperationOption {
   accessibilityText?: ResourceStr;
 
   /**
-   * Accessible description. You can provide comprehensive text explanations to help users understand the operation they
-   * are about to perform and its potential consequences, especially when these cannot be inferred from the component's
-   * attributes and accessibility text alone. If a component contains both text information and the accessible
-   * description, the text is announced first and then the accessible description, when the component is selected.
+   * Accessibility description of the right button in the subtitle. This description is used to explain the current
+   * component to the user in detail. Developers should provide a relatively detailed text description for this
+   * attribute of the component to help users understand the action to be performed and its possible consequences,
+   * especially when these consequences cannot be directly learned from the component's attributes and accessibility
+   * text alone. If a component has both a text attribute and an accessibility description attribute, when the component
+   * is selected, the system first announces the component's text attribute, and then announces the content of the
+   * accessibility description attribute.
    *
-   * Default value: "Loading" when the operation type is **LOADING** and **"Double-tap to activate"** otherwise.
+   * Default value: When the type is **LOADING**, the default value is "Loading". For other types, the default value is
+   * "Single-tap with one finger to execute".
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -142,17 +147,18 @@ export declare class OperationOption {
   accessibilityDescription?: ResourceStr;
 
   /**
-   * Accessibility level. It determines whether the component can be recognized by accessibility services.
+   * Accessibility level of the right button in the subtitle. Used to control whether the current item can be recognized
+   * by accessibility services.
    *
-   * The options are as follows:
+   * Supported values:
    *
-   * **"auto"**: This option is treated as "yes" by the system for this component.
+   * **"auto"**: The current component is converted to "yes".
    *
-   * **"yes"**: The component can be recognized by accessibility services.
+   * **"yes"**: The current component can be recognized by accessibility services.
    *
-   * **"no"**: The component cannot be recognized by accessibility services.
+   * **"no"**: The current component cannot be recognized by accessibility services.
    *
-   * **"no-hide-descendants"**: Neither the component nor its child components can be recognized by accessibility
+   * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by accessibility
    * services.
    *
    * Default value: **"auto"**
@@ -167,11 +173,11 @@ export declare class OperationOption {
   accessibilityLevel?: string;
 
   /**
-   * Whether to receive default focus.
+   * Whether the right button in the subtitle is the default focus.
    *
-   * **true**: Receive default focus.
+   * **true**: The right button in the subtitle is the default focus.
    *
-   * **false**: Do not receive default focus.
+   * **false**: The right button in the subtitle is not the default focus.
    *
    * Default value: **false**
    *
@@ -185,7 +191,10 @@ export declare class OperationOption {
   defaultFocus?: boolean;
 
   /**
-   * Set the id for the operation.
+   * Right button ID in the subtitle. Set this parameter when an ID needs to be set for the right button in the
+   * subtitle. When omitted, this parameter is not set.
+   * indicating that no right button ID is set in the subtitle.
+   * Default value: **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -197,7 +206,7 @@ export declare class OperationOption {
 }
 
 /**
- * Declare type SelectOption
+ * Declare type SelectOption.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -207,7 +216,7 @@ export declare class OperationOption {
  */
 export declare class SelectOptions {
   /**
-   * Options of an item in the drop-down list box.
+   * Dropdown option content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -218,15 +227,15 @@ export declare class SelectOptions {
   options: Array<SelectOption>;
 
   /**
-   * Index of the initially selected item in the drop-down list box.
+   * Index of the initial option in the dropdown menu.
    *
-   * The value must be greater than or equal to -1.
+   * Value range: greater than or equal to -1.
    *
    * The index of the first item is 0.
    *
-   * If this attribute is not set, the default value **-1** is used, indicating that the option is not selected.
+   * When the selected attribute is not set, the default value is -1, and no menu item is selected.
    *
-   * Values less than -1 are treated as no selection.
+   * If the value is set to less than -1, it is treated as no selection.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -237,12 +246,11 @@ export declare class SelectOptions {
   selected?: number;
 
   /**
-   * Text content of the drop-down list button itself.
+   * Text content of the dropdown button itself.
    *
-   * The default value is an empty string.
+   * Default value: empty string.
    *
-   * Note: If the text length exceeds the column width, it will be truncated. The Resource type is supported since API
-   * version 20.
+   * **Note**: Text exceeding the column width will be truncated. Since API version 20, the Resource type is supported.
    *
    * @type { string }. [since 10 - 19]
    * @type { ?ResourceStr }. [since 20]
@@ -255,10 +263,11 @@ export declare class SelectOptions {
   value?: ResourceStr;
 
   /**
-   * Callback invoked when an item in the drop-down list box is selected.
+   * Callback for when an item is selected in the dropdown menu.
    *
-   * - **index**: index of the selected option.
-   * - **value**: value of the selected option.
+   * - index: index of the selected item.
+   *
+   * - value: value of the selected item.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -269,11 +278,11 @@ export declare class SelectOptions {
   onSelect?: (index: number, value?: string) => void;
 
   /**
-   * Whether the drop-down button is the default focus.
+   * Whether the dropdown button is the default focus.
    *
-   * **true**: The drop-down button is the default focus.
+   * **true**: The dropdown button is the default focus.
    *
-   * **false**: The drop-down button is not the default focus.
+   * **false**: The dropdown button is not the default focus.
    *
    * Default value: **false**
    *
@@ -287,7 +296,10 @@ export declare class SelectOptions {
   defaultFocus?: boolean;
 
   /**
-   * Set the id for the select.
+   * Dropdown button ID. Set this parameter when an ID needs to be set for the dropdown button. When omitted, this
+   * parameter is not set.
+   * indicating that no dropdown button ID is set.
+   * Default value: **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -299,7 +311,7 @@ export declare class SelectOptions {
 }
 
 /**
- * Declare type SymbolOptions
+ * Declare type SymbolOptions.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -395,8 +407,11 @@ export declare class SymbolOptions {
 }
 
 /**
- * The **SubHeader** component is positioned at the top of list items or content sections, organizing lists or content
- * into distinct groups. The subheader text summarizes the content within each respective section.
+ * The **SubHeader** component is used at the top of list items or content items to divide the list or content into
+ * sections, with the subtitle name summarizing the content of each section. It supports various style configurations,
+ * including icons, primary and secondary titles, dropdown selectors, and operation buttons, meeting content
+ * partitioning and navigation needs in different scenarios and enhancing the visual hierarchy and user experience of
+ * the UI. It is suitable for list grouping, categorized content display, form partitioning, and other scenarios.
  *
  * > **NOTE**
  * >
@@ -404,7 +419,7 @@ export declare class SymbolOptions {
  * >
  * > - If the **SubHeader** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **SubHeader** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **SubHeader** component.
@@ -419,11 +434,12 @@ export declare class SymbolOptions {
 export declare struct SubHeader {
 
   /**
-   * Icon.
+   * Icon resource.
    *
    * Default value: **undefined**, indicating that no icon is displayed.
    *
-   * The **icon** attribute takes effect only when the **secondaryTitle** attribute is used.
+   * The icon attribute takes effect only when the **secondaryTitle** attribute is used. When the **primaryTitle**,
+   * **secondaryTitle**, and **icon** attributes are used together, the **primaryTitle** attribute does not take effect.
    *
    * @type { ResourceStr }. [since 10 - 17]
    * @type { ?ResourceStr }. [since 18]
@@ -437,8 +453,7 @@ export declare struct SubHeader {
   icon?: ResourceStr;
 
   /**
-   * Icon symbol options. This parameter is available when **icon** is set to a
-   * [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Settings when icon is [SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}.
    *
    * Default value: **undefined**, indicating that no icon is displayed.
    *
@@ -467,7 +482,6 @@ export declare struct SubHeader {
   /**
    * End icon symbol options. This parameter is available when **endIcon** is set to a
    * [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
-   *
    * Default value: **undefined**, indicating that no end icon symbol style is set.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -479,12 +493,12 @@ export declare struct SubHeader {
   endIconSymbolOptions?: SymbolOptions;
 
   /**
-   * Primary title.
+   * Primary title content.
    *
-   * Default value: **undefined**, indicating that no primary title is displayed.
+   * Default value: **undefined**, indicating that no title is displayed.
    *
-   * When the **primaryTitle**, **secondaryTitle**, and **icon** attributes are used simultaneously, the
-   * **primaryTitle** attribute will not take effect.
+   * When the **primaryTitle**, **secondaryTitle**, and **icon** attributes are used together, the **primaryTitle**
+   * attribute does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -496,9 +510,10 @@ export declare struct SubHeader {
   primaryTitle?: ResourceStr;
 
   /**
-   * Secondary title.
+   * Secondary title content.
    *
-   * Default value: **undefined**, indicating that no secondary title is displayed.
+   * Default value: **undefined**, indicating that no secondary title is displayed. When the **primaryTitle**,
+   * **secondaryTitle**, and **icon** attributes are used together, the **primaryTitle** attribute does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -510,9 +525,9 @@ export declare struct SubHeader {
   secondaryTitle?: ResourceStr;
 
   /**
-   * Content and events for selection.
+   * Dropdown box content and events.
    *
-   * Default value: **undefined**, indicating that no drop-down list is displayed.
+   * Default value: **undefined**, indicating that no dropdown box is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -523,7 +538,7 @@ export declare struct SubHeader {
   select?: SelectOptions;
 
   /**
-   * Style of elements in the operation area (right).
+   * Element style of the operation area (right side).
    *
    * Default value: **OperationType.BUTTON**
    *
@@ -537,9 +552,10 @@ export declare struct SubHeader {
   operationType?: OperationType;
 
   /**
-   * Items in the operation area (right).
+   * Settings for the operation area (right side). When **operationType** is **OperationType.ICON_GROUP**, a maximum of
+   * three icon items can be configured.
    *
-   * Default value: **undefined**, indicating that the operation area is not displayed.
+   * Default value: **undefined**, indicating that no operation area is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -550,10 +566,8 @@ export declare struct SubHeader {
   operationItem?: Array<OperationOption>;
 
   /**
-   * Icon symbol options.
-   *
-   * This parameter is available when **operationType** is set to **OperationType.ICON_GROUP** and **operationItem** is
-   * set to an array of [symbol glyphs]{@link ./@internal/component/ets/symbolglyph}.
+   * Settings when **operationType** is **OperationType.ICON_GROUP**, **operationItem** is set with multiple icons, and
+   * the icons are [SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}.
    *
    * Default value: **undefined**, indicating that no symbol icon is set.
    *
@@ -566,9 +580,11 @@ export declare struct SubHeader {
   operationSymbolOptions?: Array<SymbolOptions>;
 
   /**
-   * Text attributes of the primary title, such as the font color, font size, and font weight.
+   * Title text attributes, such as title color, font size, font weight, etc.
    *
-   * Default value: **undefined**, indicating that the default style is used.
+   * Default value: **undefined**, indicating that the system default style is used.
+   *
+   * **Note:** This parameter takes effect only when **primaryTitle** is effective.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -579,9 +595,9 @@ export declare struct SubHeader {
   primaryTitleModifier?: TextModifier;
 
   /**
-   * Text attributes of the secondary title, such as the font color, font size, and font weight.
+   * Secondary title text attributes, such as title color, font size, font weight, etc.
    *
-   * Default value: **undefined**, indicating that the default style is used.
+   * Default value: **undefined**, indicating that the system default style is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -592,7 +608,8 @@ export declare struct SubHeader {
   secondaryTitleModifier?: TextModifier;
 
   /**
-   * Content of the custom title area.
+   * Custom title area content. When **titleBuilder** is used, title parameters such as **primaryTitle**,
+   * **secondaryTitle**, and icon do not take effect.
    *
    * Default value: **undefined**, indicating that no custom title is used.
    *
@@ -606,7 +623,7 @@ export declare struct SubHeader {
   titleBuilder?: () => void;
 
   /**
-   * Margin of the content. Negative numbers are not supported.
+   * Margin of the subtitle. Negative values are not supported.
    *
    * Default value:
    *
@@ -630,13 +647,13 @@ export declare struct SubHeader {
   contentMargin?: LocalizedMargin;
 
   /**
-   * Padding of the content.
+   * Padding of the subtitle. Negative values are not supported.
    *
    * Default value:
    *
-   * If a secondary title, with or without an icon, is displayed on the left:
+   * When the left side contains a secondary title or a secondary title with an icon:
    *
-   * {start: LengthMetrics.vp(12), end: LengthMetrics.vp(12)}
+   * `{start: LengthMetrics.vp(12), end: LengthMetrics.vp(12)}`.
    *
    * @default set different default values according to the width of the subHeader:
    *     <br> When the left area is secondaryTitle or the group of secondaryTitle and icon,
@@ -651,11 +668,10 @@ export declare struct SubHeader {
   contentPadding?: LocalizedPadding;
 
   /**
-   * Customized content to be read in the title.
+   * Custom accessibility reading content for the title.
    *
-   * Default value: **undefined**.
-   *
-   * If the value is **undefined**, the title content displayed by the component is read by default.
+   * Default value: **undefined**, indicating that no custom reading content is set, and the title content displayed on
+   * the component is read by default.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -667,7 +683,9 @@ export declare struct SubHeader {
   titleAccessibilityText?: ResourceStr;
 
   /**
-   * Set the titleId for title.
+   * Title identifier. Use this parameter when an ID needs to be set for the title.
+   * indicating that no title identifier is set.
+   * Default value: **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
