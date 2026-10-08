@@ -283,6 +283,7 @@ declare namespace workScheduler {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameters types;
    *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     2. Failed to apply for memory.
    * @throws { BusinessError } 9700003 - System service operation failed.
@@ -303,6 +304,7 @@ declare namespace workScheduler {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameters types;
    *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     2. Failed to apply for memory.
    * @throws { BusinessError } 9700003 - System service operation failed.
