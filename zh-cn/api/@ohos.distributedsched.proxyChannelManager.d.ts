@@ -58,7 +58,8 @@ declare namespace proxyChannelManager {
    * @param { ChannelInfo } channelInfo - 代理通道的链路类型及对端设备的MAC地址和对端监听服务的UUID信息。
    * @returns { Promise<int> } 打开代理通道成功时resolve，返回代理通道的channelId，取值范围为1~2147483647，channelId的生命周期和代理通道生命周期相同，不关闭代理时，传入相同
    *     入参将返回相同channelId；失败时reject返回错误信息，错误码详见错误码表。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
    *     been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390001 - BR is disabled.
@@ -82,7 +83,8 @@ declare namespace proxyChannelManager {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32390
    *     006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
    *     been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -109,7 +111,8 @@ declare namespace proxyChannelManager {
    *     006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { ArrayBuffer } data - 向对端发送的二进制数据，数据格式由应用层自定义，最大长度为4096字节。超出长度限制时返回错误码32390103。
    * @returns { Promise<void> } 无返回值的Promise的对象。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
    *     been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -138,7 +141,8 @@ declare namespace proxyChannelManager {
    *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } callback - 回调函数，用于接收代理通道的数据。回调参数为[DataInfo]{@link proxyChannelManager.DataInfo}对象，包含
    *     channelId（通道ID）和data（接收到的字节数据）。需先通过openProxyChannel打开代理通道后才能接收数据。多次注册时，仅最后一次注册的生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -161,7 +165,8 @@ declare namespace proxyChannelManager {
    *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的数据接收事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；传入其他回调函数
    *     不会生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -184,7 +189,8 @@ declare namespace proxyChannelManager {
    *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } callback - 回调函数，用于接收代理通道的数据。回调参数为[DataInfo]{@link proxyChannelManager.DataInfo}对象，包含
    *     channelId（通道ID）和data（接收到的字节数据）。需先通过openProxyChannel打开代理通道后才能接收数据。多次注册时，仅最后一次注册的生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -206,7 +212,8 @@ declare namespace proxyChannelManager {
    *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的数据接收事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；传入其他回调函数
    *     不会生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -232,7 +239,8 @@ declare namespace proxyChannelManager {
    * @param { Callback<ChannelStateInfo> } callback - 回调函数，用于接收代理通道的状态变更信息。回调参数为
    *     [ChannelStateInfo]{@link proxyChannelManager.ChannelStateInfo}对象，包含channelId（通道ID）和state（通道连接状态）。需先通过
    *     openProxyChannel打开代理通道后才能接收通道状态。多次注册时，仅最后一次注册的回调函数生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -255,7 +263,8 @@ declare namespace proxyChannelManager {
    *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<ChannelStateInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的通道状态事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；
    *     传入其他回调函数不会生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -280,7 +289,8 @@ declare namespace proxyChannelManager {
    * @param { Callback<ChannelStateInfo> } callback - 回调函数，用于接收代理通道的状态变更信息。回调参数为
    *     [ChannelStateInfo]{@link proxyChannelManager.ChannelStateInfo}对象，包含channelId（通道ID）和state（通道连接状态）。需先通过
    *     openProxyChannel打开代理通道后才能接收通道状态。多次注册时，仅最后一次注册的回调函数生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -302,7 +312,8 @@ declare namespace proxyChannelManager {
    *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<ChannelStateInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的通道状态事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；
    *     传入其他回调函数不会生效。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
