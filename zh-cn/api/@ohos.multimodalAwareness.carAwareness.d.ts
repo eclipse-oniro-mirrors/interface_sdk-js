@@ -20,7 +20,7 @@
 import { Callback } from './@ohos.base';
 
 /**
- * 此模块提供使用汽车感知的功能
+ * 本模块提供车辆感知能力，包括隔空手势交互、实时天气识别、补能状态识别等功能。
  *
  * @syscap SystemCapability.MultimodalAwareness.CarAwareness
  * @stagemodelonly
@@ -29,7 +29,7 @@ import { Callback } from './@ohos.base';
  */
 declare namespace carAwareness {
   /**
-   * 车辆感知功能。
+   * 表示车辆感知支持的能力类型枚举。
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -37,7 +37,7 @@ declare namespace carAwareness {
    */
   enum Capability {
     /**
-     * 隔空手势能力
+     * 隔空手势感知能力，支持识别用户隔空操作屏幕的动作。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -45,7 +45,7 @@ declare namespace carAwareness {
      */
     SPATIAL_MOTION = 'SpatialMotion',
     /**
-     * 指向识别能力
+     * 指向识别能力，支持识别用户指向的车内零部件。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -54,7 +54,7 @@ declare namespace carAwareness {
      */
     SPATIAL_POINT = 'SpatialPoint',
     /**
-     * 姿体动作能力
+     * 肢体动作感知能力，支持识别用户特定姿势动作。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -63,7 +63,7 @@ declare namespace carAwareness {
      */
     SPATIAL_GESTURE = 'SpatialGesture',
     /**
-     * 实时天气能力
+     * 实时天气感知能力，支持识别车辆当前所处环境的天气状态。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -71,7 +71,7 @@ declare namespace carAwareness {
      */
     REALTIME_WEATHER = 'RealTimeWeather',
     /**
-     * 加油识别能力
+     * 补能识别能力，支持识别车辆加油的开始与结束状态。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -79,7 +79,7 @@ declare namespace carAwareness {
      */
     REFUELING = 'Refueling',
     /**
-     * 车辆状态采集能力
+     * 车辆状态感知能力，支持获取车辆相关状态信息。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -88,27 +88,45 @@ declare namespace carAwareness {
      */
     CAR_STATUS = 'CarStatus',
     /**
-     * 车辆配置采集能力
+     * 习惯推荐感知能力，支持基于用户习惯生成推荐。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1
      */
-    CAR_CFG = 'CarCfg',
+    HABIT_RECOMMENDATION = 'HabitRecommendation',
     /**
-     * 习惯推荐能力
+     * 空间绘画能力，支持识别用户隔空画画的动作。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1
      */
-    HABIT_RECOMMENDATION = 'HabitRecommendation'
+    SPATIAL_DRAW = 'SpatialDraw',
+    /**
+     * 挥手关门识别能力，支持识别用户手部关门动作
+     *
+     * @syscap SystemCapability.MultimodalAwareness.CarAwareness
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    GESTURE_CLOSEDOR = 'GestureCloseDoor',
+    /**
+     * 乘员感知能力，支持识别车内乘员布局和分类
+     *
+     * @syscap SystemCapability.MultimodalAwareness.CarAwareness
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    OCCUPANT_SENSE = 'OccupantSense'
   }
 
   /**
-   * 空间运动响应信息的接口。
+   * 隔空手势感知的结果信息接口。
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -116,7 +134,7 @@ declare namespace carAwareness {
    */
   export interface SpatialMotionInfo {
     /**
-     * 时间戳。
+     * 识别结果的时间戳。
      * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -126,7 +144,7 @@ declare namespace carAwareness {
     timestamp: number;
 
     /**
-     * 指示手在屏幕上的X坐标。
+     * 手部在屏幕上的 X 轴坐标。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -135,7 +153,7 @@ declare namespace carAwareness {
     pointX: number;
 
     /**
-     * 指示手在屏幕上的Y坐标。
+     * 手部在屏幕上的 Y 轴坐标。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -144,8 +162,11 @@ declare namespace carAwareness {
     pointY: number;
 
     /**
-     * 指示屏幕上的手移动。
-     * 取值限定为整数。
+     * 手势事件类型。
+     * -1：无效
+     * 0：准备就绪
+     * 1：移动
+     * 2：点击。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -155,11 +176,12 @@ declare namespace carAwareness {
   }
 
   /**
-   * 开启空间动作感知，订阅空间动作感知结果。如果能力不支持，则不会回调。支持的能力可以通过getAllCapacityList方法获取。
+   * 订阅隔空手势感知结果。设备不支持该能力时抛出34000002错误码，可调用 getAllCapabilityList查询设备可用能力。通过callback异步返回数据。
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { Callback<SpatialMotionInfo> } callback - 获取对应能力数据的回调。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<SpatialMotionInfo> } callback - 回调函数，用于返回隔空手势感知数据。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -169,11 +191,12 @@ declare namespace carAwareness {
   function onSpatialMotion(callback: Callback<SpatialMotionInfo>): void;
 
   /**
-   * 关闭空间动作感知，订阅空间动作感知结果。
+   * 取消订阅隔空手势结果。
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { Callback<SpatialMotionInfo> } [callback] - 获取对应能力数据的回调。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<SpatialMotionInfo> } [callback] - 回调函数。传入指定回调则注销对应监听，不传入则注销所有监听。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -182,7 +205,7 @@ declare namespace carAwareness {
   function offSpatialMotion(callback?: Callback<SpatialMotionInfo>): void;
 
   /**
-   * 实时天气响应信息接口。
+   * 实时天气感知的结果信息接口。
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -190,7 +213,7 @@ declare namespace carAwareness {
    */
   export interface RealTimeWeatherInfo {
     /**
-     * 时间戳。
+     * 识别结果的时间戳。
      * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -200,8 +223,16 @@ declare namespace carAwareness {
     timestamp: number;
 
     /**
-     * 指示当前天气。
-     * 单位为：毫秒。取值限定为整数。
+     * 天气状态。
+     * -1：无效
+     * 0：其他
+     * 1：雾
+     * 2：浓雾
+     * 3：雪
+     * 4：大雪
+     * 5：雨
+     * 6：大雨。
+     * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -211,11 +242,12 @@ declare namespace carAwareness {
   }
 
   /**
-   * 开启实时天气感知，订阅实时天气感知结果。如果能力不支持，则不会回调。支持的能力可以通过getAllCapacityList方法获取。
+   * 订阅实时天气感知结果。设备不支持该能力时抛出34000002错误码，可调用getAllCapabilityList查询设备可用能力。通过callback异步返回数据。
    *
    * @permission ohos.permission.vehicle.MMA_WEATHER
-   * @param { Callback<RealTimeWeatherInfo> } callback - 获取对应能力数据的回调。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RealTimeWeatherInfo> } callback - 回调函数，用于返回实时天气感知数据。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -225,11 +257,12 @@ declare namespace carAwareness {
   function onRealTimeWeather(callback: Callback<RealTimeWeatherInfo>): void;
 
   /**
-   * 关闭实时天气感知功能。
+   * 取消订阅实时天气结果。
    *
    * @permission ohos.permission.vehicle.MMA_WEATHER
-   * @param { Callback<RealTimeWeatherInfo> } [callback] - 获取对应能力数据的回调。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RealTimeWeatherInfo> } [callback] - 回调函数。传入指定回调则注销对应监听，不传入则注销所有监听。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -238,7 +271,7 @@ declare namespace carAwareness {
   function offRealTimeWeather(callback?: Callback<RealTimeWeatherInfo>): void;
 
   /**
-   * 加油响应信息接口。
+   * 补能识别的结果信息接口。
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -247,7 +280,7 @@ declare namespace carAwareness {
    */
   export interface RefuelingInfo {
     /**
-     * 时间戳。
+     * 识别结果的时间戳。
      * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -258,7 +291,11 @@ declare namespace carAwareness {
     timestamp: number;
 
     /**
-     * 指示加油状态。
+     * 加油状态。
+     * -1：无效
+     * 0：空闲（未开始加油）
+     * 1：开始加油
+     * 2：加油结束。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -269,11 +306,12 @@ declare namespace carAwareness {
   }
 
   /**
-   * 开启加油感知，订阅加油感知结果。如果不支持该功能，将不回调。支持的能力可以通过getAllCapacityList方法获取。
+   * 订阅补能状态感知结果。设备不支持该能力时抛出34000002错误码，可调用 getAllCapabilityList查询设备可用能力。通过callback异步返回数据。
    *
    * @permission ohos.permission.vehicle.MMA_ENERGYREFILL
-   * @param { Callback<RefuelingInfo> } callback - 获取对应能力数据的回调。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RefuelingInfo> } callback - 回调函数，用于返回补能识别数据。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -284,11 +322,12 @@ declare namespace carAwareness {
   function onRefueling(callback: Callback<RefuelingInfo>): void;
 
   /**
-   * 禁用加油感知。
+   * 取消订阅加油状态结果。
    *
    * @permission ohos.permission.vehicle.MMA_ENERGYREFILL
-   * @param { Callback<RefuelingInfo> } [callback] - 获取对应能力数据的回调。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RefuelingInfo> } [callback] - 回调函数。传入指定回调则注销对应监听，不传入则注销所有监听。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -298,7 +337,7 @@ declare namespace carAwareness {
   function offRefueling(callback?: Callback<RefuelingInfo>): void;
 
   /**
-   * 汽车感知响应信息接口。
+   * 车辆感知通用结果信息接口。
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
@@ -307,7 +346,7 @@ declare namespace carAwareness {
    */
   export interface CarAwarenessInfo {
     /**
-     * 时间戳。
+     * 识别结果的时间戳。
      * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -317,7 +356,7 @@ declare namespace carAwareness {
      */
     timestamp: number;
     /**
-     * 表示特定能力。
+     * 指定的感知能力类型。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -326,7 +365,7 @@ declare namespace carAwareness {
      */
     capability: Capability;
     /**
-     * 汽车感知数据项列表信息接口。
+     * 感知结果数据键值对，不同能力返回不同字段。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -337,7 +376,7 @@ declare namespace carAwareness {
   }
 
   /**
-   * 汽车感知信息接口
+   * 车辆感知订阅配置选项接口。
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
@@ -346,7 +385,7 @@ declare namespace carAwareness {
    */
   export interface CarAwarenessOptions {
     /**
-     * 自定义键值对格式的感知参数。
+     * 自定义感知参数键值对，用于传入特定能力的配置项。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -357,13 +396,12 @@ declare namespace carAwareness {
   }
 
   /**
-   * 开启汽车感知，订阅汽车感知结果。如果不支持该功能，则不会回调，支持的能力可以通过getAllCapacityList方法获取。
+   * 订阅车辆感知结果。设备不支持该能力时抛出34000002错误码，可调用getAllCapabilityList查询设备可用能力。通过callback异步返回数据。
    *
-   * @param { Capability } capability - 表示特定能力。
-   * @param { Callback<CarAwarenessInfo[]> } callback - Callback used to return obtaining corresponding capability
-   *     data.
-   * @param { CarAwarenessOptions } [options] - Indicates options to specific capability.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
+   * @param { Capability } capability - 指定订阅的感知能力类型。
+   * @param { Callback<CarAwarenessInfo[]> } callback - 回调函数，用于返回感知结果数据数组。
+   * @param { CarAwarenessOptions } [options] - 感知能力的可选配置项。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
@@ -375,12 +413,12 @@ declare namespace carAwareness {
   CarAwarenessOptions): void;
 
   /**
-   * 取消订阅汽车感知结果。
+   * 取消订阅指定类型的车辆感知结果。
    *
-   * @param { Capability } capability - 表示特定能力。
-   * @param { Callback<CarAwarenessInfo[]> } [callback] - Callback used to return the corresponding capability data.
-   * @param { CarAwarenessOptions } [options] - Indicates options to specific capability.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
+   * @param { Capability } capability - 指定取消订阅的感知能力类型。
+   * @param { Callback<CarAwarenessInfo[]> } [callback] - 回调函数，指定取消订阅的感知能力类型。
+   * @param { CarAwarenessOptions } [options] - 感知能力的可选配置项。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
@@ -391,11 +429,11 @@ declare namespace carAwareness {
   CarAwarenessOptions): void;
 
   /**
-   * 返回所有能力列表
+   * 获取当前设备支持的所有车辆感知能力列表。
    *
-   * @returns { Promise<Capability[]> } Promise用于返回所有的能力列表。
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited
-   *     device capabilities.
+   * @returns { Promise<Capability[]> } Promise对象，返回设备支持的感知能力枚举列表。
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
@@ -404,13 +442,17 @@ declare namespace carAwareness {
   function getAllCapabilityList(): Promise<Capability[]>;
 
   /**
-   * 更新感知启用事件，当应用订阅功能时
+   * 更新空间动作感知的启停状态。
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { number } event - 感知事件。0：结束，1：开始。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited device
+   * @param { number } event - 启停状态值。
+   *     0：结束
+   *     1：开始
+   *     取值应为整数。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
@@ -422,13 +464,17 @@ declare namespace carAwareness {
   function updateSpatialActionEnableStatus(event: number): void;
 
   /**
-   * 语音更新声音区域，当语音订阅空间点引擎能力时
+   * 更新空间动作感知的音区信息。
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { number } zone - 音区。3表示后排左边，4表示后边右边。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited device
+   * @param { number } zone - 音区编号。
+   *     3：左后
+   *     4：右后
+   *     取值应为整数。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
@@ -440,14 +486,13 @@ declare namespace carAwareness {
   function updateSpatialActionZone(zone: number): void;
 
   /**
-   *    /**
-   * 关闭汽车感知，订阅汽车感知结果。
+   * 单次获取指定类型的车辆感知结果。
    *
-   * @param { Capability } capability - 表示特定能力。
-   * @param { CarAwarenessOptions } [options] - 指示特定功能的选项。
-   * @returns { Promise<CarAwarenessInfo[]> } Promise用于返回对应的能力数据。
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited device
+   * @param { Capability } capability - 指定获取的感知能力类型。
+   * @param { CarAwarenessOptions } [options] - 感知能力的可选配置项。
+   * @returns { Promise<CarAwarenessInfo[]> } Promise对象，返回感知结果数据数组。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
