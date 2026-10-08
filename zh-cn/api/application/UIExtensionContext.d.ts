@@ -45,7 +45,7 @@ import UIServiceExtensionConnectCallback from './UIServiceExtensionConnectCallba
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
- * @since 12 dynamic
+ * @since 10 dynamic
  * @since 23 static
  */
 declare class UIExtensionContext extends ExtensionContext {

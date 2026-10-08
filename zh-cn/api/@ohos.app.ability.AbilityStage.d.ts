@@ -264,13 +264,24 @@ declare class AbilityStage {
   onLaunchFromHyperSnap(): void;
 
   /**
-   * 无
+   * 当AbilityStage即将创建第一个Ability时调用。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 24 dynamic&static
    */
   onAboutToCreateAbility(): void;
+
+  /**
+   * 当AbilityStage即将创建第一个Ability时调用。使用Promise异步回调。此方法返回的Promise成功resolve后，后续的生命周期回调才会继续执行，否则将被挂起。
+   * 若同时实现[onAboutToCreateAbility]{@link AbilityStage.onAboutToCreateAbility}和此方法，仅此方法生效。
+   *
+   * @returns { Promise<void> } 无返回值的Promise。
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  onAboutToCreateAbilityAsync(): Promise<void>;
 }
 
 export default AbilityStage;
