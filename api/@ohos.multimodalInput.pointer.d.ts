@@ -526,6 +526,9 @@ declare namespace pointer {
      * [setCustomCursor]{@link pointer.setCustomCursor(windowId: int, cursor: CustomCursor, config: CursorConfig)} to
      * set a custom pointer. The custom pointer cannot be directly set using
      * [setPointerStyle]{@link pointer.setPointerStyle(windowId: int, pointerStyle: PointerStyle)}.
+     * Custom pointer style, set via the API. This value is used by **getPointerStyle** to return data in specific
+     * scenarios (obtaining the style on a window where a custom pointer style has been set). It cannot be used as an
+     * input parameter of the **setCustomCursor** or **setPointerStyle** API.
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic

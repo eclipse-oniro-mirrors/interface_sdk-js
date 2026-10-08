@@ -516,6 +516,8 @@ declare namespace pointer {
      * 自定义光标，开发者可使用
      * [setCustomCursor]{@link pointer.setCustomCursor(windowId: int, cursor: CustomCursor, config: CursorConfig)}设置自定义光
      * 标，不支持使用[setPointerStyle]{@link pointer.setPointerStyle(windowId: int, pointerStyle: PointerStyle)}直接设置。
+     * 自定义光标样式，通过接口设置。该参数用于getPointerStyle在特定场景（在设置自定义光标样式的窗口上获取样式）下返回数据，不能作为
+     * setCustomCursor、setPointerStyle接口入参使用。
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
