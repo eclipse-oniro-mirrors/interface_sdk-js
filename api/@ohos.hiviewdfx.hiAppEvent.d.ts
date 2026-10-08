@@ -1818,6 +1818,20 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     collectMinidump?: boolean;
+
+    /**
+     * Policy for the APP_CRASH event
+     * the value true means the application will receive the APP_CRASH event upon its next startup.
+     * the value false means the system will deliver the APP_CRASH event as soon as possible.
+     * the policy only takes effect when using the **onTrigger** and **onReceive** callbacks.
+     * <br>Default value:false.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    publishOnNextLaunch?: boolean;
   }
 
   /**
