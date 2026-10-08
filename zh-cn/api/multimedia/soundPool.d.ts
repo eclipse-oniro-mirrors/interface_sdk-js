@@ -20,7 +20,7 @@
  * [createSoundPool]{@link ../@ohos.multimedia.media:media.createSoundPool}
  * 完成音频池实例的创建。
  *
- * @file
+ * @file 音频池
  * @kit MediaKit
  */
 

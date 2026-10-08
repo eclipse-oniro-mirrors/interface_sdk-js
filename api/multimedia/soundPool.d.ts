@@ -22,7 +22,7 @@
  * [media.createSoundPool]{@link ../@ohos.multimedia.media:media.createSoundPool}
  * to create a **SoundPool** instance.
  *
- * @file
+ * @file SoundPool
  * @kit MediaKit
  */
  
