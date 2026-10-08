@@ -346,7 +346,61 @@ declare namespace common {
      * @stagemodelonly
      * @since 26.0.1
      */
-    PRINTER_IP_ADDRESS_POLICY = 3
+    PRINTER_IP_ADDRESS_POLICY = 3,
+
+    /**
+     * The feature of optical disc drive burn.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    OPTICAL_DISC_DRIVE_BURN = 4,
+
+    /**
+     * The feature of exact timer.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXACT_TIMER = 5,
+
+    /**
+     * The feature of exemption resource.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXEMPTION_RESOURCE = 6,
+
+    /**
+     * The feature of x key.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    X_KEY = 7,
+
+    /**
+     * The feature of system rollback.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SYSTEM_ROLLBACK = 8,
+
+    /**
+     * The feature of super privacy.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SUPER_PRIVACY = 9
   }
 
   /**
