@@ -74,6 +74,8 @@ declare namespace boardInfo {
    * Example: 0123456789ABCDEF.
    *
    * @permission ohos.permission.ACCESS_BOARD_INFO
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @syscap SystemCapability.Startup.BoardInfo
    * @stagemodelonly
    * @since 26.0.1 dynamic
