@@ -53,7 +53,9 @@ declare type SpringLoadingContext = import('../api/@ohos.arkui.dragController').
 declare type DragSpringLoadingConfiguration = import('../api/@ohos.arkui.dragController').default.DragSpringLoadingConfiguration;
 
 /**
- * Defines the options of Component ClassDecorator.
+ * Defines parameters of a custom component, which is used to configure whether to support component freezing and the
+ * global reuse pool. They apply to scenarios where the performance of custom components needs to be optimized and the
+ * component reuse efficiency needs to be improved.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -64,7 +66,15 @@ declare type DragSpringLoadingConfiguration = import('../api/@ohos.arkui.dragCon
  */
 declare interface ComponentOptions {
   /**
-   * freeze UI state.
+   * Whether the custom component supports component freezing. The value **true** enables component freezing, and
+   * **false** disables it. If **ComponentOptions** is not specified, **false** is used as the default value of
+   * **freezeWhenInactive**.
+   * <br>Since API version 11, this parameter can be used to configure component freezing for
+   * [\@Component](docroot://ui/state-management/arkts-create-custom-components.md). For details, see
+   * [Freezing a Custom Component (V1)](docroot://ui/state-management/arkts-custom-components-freeze.md).
+   * <br>Since API version 12, this parameter can be used to configure component freezing for
+   * [\@ComponentV2](docroot://ui/state-management/arkts-create-custom-components.md). For details, see
+   * [Freezing a Custom Component (V2)](docroot://ui/state-management/arkts-custom-components-freezeV2.md).
    *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -77,7 +87,11 @@ declare interface ComponentOptions {
   freezeWhenInactive : boolean;
 
   /**
-   * the reuse type of a custom component.
+   * Type of the global reuse pool on a custom component. This is applicable to scenarios where an app has multiple
+   * reusable custom components of the same type and needs to share or isolate reuse resources between component
+   * instances to improve reuse efficiency. If this parameter is not passed, the global reuse pool does not take effect.
+   * **reusePool** must be used together with **poolAccepts**. When **reusePool** is set, **poolAccepts** must be a
+   * non-empty array; otherwise, global reuse does not take effect.
    *
    * @default perInstance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -90,7 +104,11 @@ declare interface ComponentOptions {
   reusePool?: ReusePoolOwnership;
 
   /**
-   * Collection of custom components to be reused.
+   * List of custom component names that the global reuse pool can accept (that is, components allowed to be reused).
+   * When **reusePool** is set, the system caches the matching reusable components into the global reuse pool based on
+   * the component names listed in **poolAccepts** for subsequent reuse. When **reusePool** is set, **poolAccepts** must
+   * be a non-empty array. Setting **poolAccepts** alone does not enable global reuse. When neither **poolAccepts** nor
+   * **reusePool** is assigned, global reuse does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -103,7 +121,14 @@ declare interface ComponentOptions {
 }
 
 /**
- * Defining the reuse type of a custom component.
+ * Defines the ownership type of the global reuse pool.
+ *
+ * 'shared': All instances of the **@Component** / **@ComponentV2** class share the same reuse pool instance. This is
+ * applicable to scenarios where multiple component instances of the same type need to reuse the same resources,
+ * maximizing reuse pool utilization and reducing memory usage.
+ * 'perInstance': Each instance of **@Component** / **@ComponentV2** has an independent reuse pool instance. This is
+ * applicable to scenarios where the reuse resources of each component instance need to be isolated, preventing reuse
+ * resources of different instances from affecting each other.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -114,7 +139,7 @@ declare interface ComponentOptions {
 declare type ReusePoolOwnership = 'shared' | 'perInstance';
 
 /**
- * Defines a type for memory optimization strategy.
+ * Enumerates the memory optimization strategies of reusable custom components.
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -124,7 +149,7 @@ declare type ReusePoolOwnership = 'shared' | 'perInstance';
  */
 declare enum ReusableMemOptStrategy {
   /**
-   * No memory optimization.
+   * No memory optimization strategy.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -133,7 +158,25 @@ declare enum ReusableMemOptStrategy {
    */
   DEFAULT = 0,
   /**
-   * CustomComponent handles the memory optimization.
+   * Automatic memory optimization strategy. It is recommended to use this strategy in scenarios where the memory usage
+   * of reusable custom components needs to be reduced.
+   * <br>When any of the following conditions is met, all custom components of this type in the reuse pool are
+   * released:
+   * <br> - The app is switched to the background.
+   * <br> - The component where the reuse pool resides is invisible (the
+   * [visibility]{@link visibility} attribute is set to a value other than [Visible]{@link Visible}, or the component
+   * area is 0, regardless of occlusion).
+   * <br> - The device is low on memory (the [MemoryLevel]{@link MemoryLevel} reaches
+   * **MEMORY_LEVEL_LOW** or **MEMORY_LEVEL_CRITICAL**).
+   * <br>When the number of custom components of this type with the same **ReuseId** in the reuse pool exceeds the reuse
+   * pool capacity limit and does not increase within 5 seconds, the components within the limit are retained and the
+   * rest are released. The reuse pool capacity limit is set as follows:
+   * <br> - When the device memory is greater than 8 GB, the limit is 48.
+   * <br> - When the device memory is greater than 6 GB and less than or equal to 8 GB, the limit is 4.
+   * <br> - When the device memory is less than or equal to 6 GB, the limit is 2.
+   * <br>When nodes are released, the
+   * [custom component lifecycle](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md) is
+   * triggered.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -144,7 +187,8 @@ declare enum ReusableMemOptStrategy {
 }
 
 /**
- * Defines the options for Reusable ClassDecorator.
+ * Defines the parameters of a reusable custom component, which are used to configure the memory optimization strategy.
+ * They apply to scenarios where the memory usage of reusable custom components needs to be reduced.
  *
  * @interface ReusableOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -154,7 +198,12 @@ declare enum ReusableMemOptStrategy {
  */
 declare interface ReusableOptions {
   /**
-   * Memory optimization strategy for CustomComponent reuse
+   * Memory optimization strategy for reusable custom components. This parameter is set when a reusable custom
+   * component is created and cannot be dynamically modified. When
+   * [ENABLE_AUTO_CACHE_OPTIMIZATION]{@link ReusableMemOptStrategy} is passed, automatic memory optimization is
+   * enabled, and components in the reuse pool are automatically released in scenarios such as the app being switched
+   * to the background, the component being invisible, or the device being low on memory. If this parameter is not
+   * passed, the default value [DEFAULT]{@link ReusableMemOptStrategy} (no memory optimization strategy) is used.
    *
    * @type { ?ReusableMemOptStrategy }
    * @default ReusableMemOptStrategy.DEFAULT
@@ -177,14 +226,12 @@ declare interface ReusableOptions {
  */
 declare interface InputCounterOptions {
   /**
-   * Threshold percentage for displaying the character counter. The character counter is displayed when the number of
-   * characters that have been entered is greater than the maximum number of characters multiplied by the threshold
-   * percentage value. When displayed, the character counter is in the following format: Number of characters that have
-   * been entered/Maximum number of characters allowed. It is visible when the number of characters entered is greater
-   * than the character limit multiplied by the threshold percentage value. Value range: [1, 100]. If the value is not
-   * an integer, it is rounded down to the nearest integer. If the value exceeds the valid value range, the character
-   * counter is not displayed. If the value is **undefined**, the character counter is displayed, but this parameter has
-   * no effect.
+   * Percentage of the maximum number of characters that can be entered. The character counter displays the current
+   * number of entered characters/the maximum number of characters. When the number of entered characters is greater
+   * than the maximum number of characters multiplied by the percentage value, the character counter is displayed. The
+   * valid value range is [1,100]. When the value is a decimal, it is rounded down. If the set number is outside the
+   * valid value range, the character counter is not displayed. When set to undefined, the character counter is
+   * displayed, but this parameter is not effective.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -195,11 +242,13 @@ declare interface InputCounterOptions {
   thresholdPercentage?: number;
 
   /**
-   * Whether to highlight the text box border and character counter subscript in red. If **InputCounterOptions** is not
-   * set, the text box border and character counter subscript turn red when the number of characters entered reaches the
-   *  limit. If the character counter is displayed and **thresholdPercentage** is set to a valid value, the text box
-   * border and character counter subscript turn red when the number of entered characters exceeds the limit. If this
-   * parameter is **true**, the red border is displayed; if **false**, it is not displayed.
+   * If InputCounterOptions is not set when the user sets the counter, the border and the counter subscript turn red
+   * when the current number of entered characters reaches the maximum number of characters. If the user sets the
+   * character counter to be displayed and the thresholdPercentage parameter value is within the valid value range, the
+   * border and the counter subscript turn red when the number of entered characters exceeds the maximum number of
+   * characters. If this parameter is true, a red border is displayed; if it is false, no red border is displayed.
+   *
+   * Default value: true
    *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -211,9 +260,10 @@ declare interface InputCounterOptions {
   highlightBorder?: boolean;
 
   /**
-   * Text color of the character counter. When the input character count exceeds the maximum limit multiplied by the
-   * specified percentage, the counter displays the current count text using this color. If **counterTextColor** is not
-   * set, the default gray color is used.
+   * Sets the text color of the character counter in the component. When the number of characters entered by the user is
+   * greater than the maximum number of characters multiplied by the percentage value, the counter displays the current
+   * number of entered characters, and the text color of the counter is the color specified by counterTextColor. If
+   * counterTextColor is not set, the text color of the counter is the default color, which is gray.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -224,14 +274,16 @@ declare interface InputCounterOptions {
   counterTextColor?: ColorMetrics;
 
   /**
-   * Text color of the character counter when the maximum limit is exceeded. When the user input exceeds the maximum
-   * character count, both the counter text and border switch to this color to indicate overflow. If
-   * **counterTextOverflowColor** is not set, the default red color is used.
+   * Sets the text color of the character counter in the component when it overflows. When the number of characters
+   * entered by the user exceeds the maximum number of characters, the text color of the counter and the color of the
+   * border switch to the color specified by counterTextOverflowColor to remind the user that the input has exceeded the
+   * limit. If counterTextOverflowColor is not set, the text color of the counter and the border when overflowing is the
+   * default color, which is red.
    *
    * **NOTE**
    *
-   * The border color is changed only when the **highlightBorder** attribute of
-   * [InputCounterOptions]{@link InputCounterOptions} is set.
+   * When the highlightBorder attribute of [InputCounterOptions]{@link InputCounterOptions} is set, the border color is
+   * changed synchronously.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -243,7 +295,7 @@ declare interface InputCounterOptions {
 }
 
 /**
- * Provides text decoration options.
+ * Provides the text decoration options.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -253,7 +305,7 @@ declare interface InputCounterOptions {
  */
 declare interface TextDecorationOptions {
   /**
-   * Type of the text decoration.
+   * Sets the text decoration line type.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -264,7 +316,8 @@ declare interface TextDecorationOptions {
   type: TextDecorationType;
 
   /**
-   * Color of the text decoration.
+   * Sets the color of the text decoration line.
+   *
    * Default value: Color.Black.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -276,7 +329,8 @@ declare interface TextDecorationOptions {
   color?: ResourceColor;
 
   /**
-   * Style of the text decoration.
+   * Sets the style of the text decoration line.
+   *
    * Default value: TextDecorationStyle.SOLID.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -288,8 +342,13 @@ declare interface TextDecorationOptions {
   style?: TextDecorationStyle;
 
   /**
-   * The scale value of decoration thickness.
-   * Value constraint: Negative values are handled as default values. Default value: 1.
+   * Sets the thickness scaling ratio of the text decoration line.
+   *
+   * Default value: 1.0
+   *
+   * Value range: [0, +∞)
+   *
+   * **Note:** Negative values are processed as the default value.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -301,8 +360,32 @@ declare interface TextDecorationOptions {
 }
 
 /**
- * Defining Component ClassDecorator
- * Component is a ClassDecorator and it supports ComponentOptions as parameters.
+ * The **@Component** decorator can decorate a struct declared with the **struct** keyword. A struct decorated by
+ * **@Component** gains componentization capabilities, enabling UI encapsulation and reuse. It is suitable for
+ * scenarios such as building reusable custom components and splitting complex UIs. The **build** method must be
+ * implemented to describe the UI. A struct can be decorated by only one **@Component**.
+ *
+ * For the development guide, see
+ * [Creating a Custom Component](docroot://ui/state-management/arkts-create-custom-components.md).
+ *
+ * > **NOTE**
+ *
+ * > - Since API version 11, **@Component** can accept an optional parameter of the
+ * > [ComponentOptions]{@link ComponentOptions} type.
+ * >
+ * > - Since API version 26.0.0, **ComponentOptions** can accept the optional parameters **reusePool** and
+ * > **poolAccepts** for configuring the global reuse pool. For the development guide, see
+ * > [Global Reuse: Centralized Component Recycling and Reuse](docroot://ui/state-management/arkts-global-reuse-pool.md).
+ *
+ * options: Options of the **@Component** decorator, used to configure component freezing
+ * and global reuse. You can use **freezeWhenInactive** to control component freezing (applicable to scenarios where
+ * UI refresh is frozen when components such as page routing, **TabContent**, **LazyForEach**, and **Navigation** are
+ * inactive, to reduce unnecessary refreshes and optimize performance), and use **reusePool** and **poolAccepts** to
+ * configure the global reuse pool (applicable to scenarios where multiple parent components share reusable components
+ * of the same type and need to reuse recycled instances across parent components when switching via if or other
+ * means). For details about specific attributes, see **ComponentOptions**. When not specified, component freezing and
+ * global reuse are disabled.
+ * ClassDecorator: Class decorator. Developers do not need to pay attention to this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -315,8 +398,26 @@ declare interface TextDecorationOptions {
 declare const Component: ClassDecorator & ((options: ComponentOptions) => ClassDecorator);
 
 /**
- * Defining ComponentV2 ClassDecorator
- * ComponentV2 is a ClassDecorator and it supports ComponentOptions as parameters.
+ * **@ComponentV2** is primarily used with state management V2. Compared with
+ * [@Component](docroot://ui/state-management/arkts-create-custom-components.md), **@ComponentV2** supports
+ * deep observation and deep listening of objects. The decorator is highly easy to use and extensible, and is suitable
+ * for scenarios requiring deep observation of nested object states. Unless otherwise specified, custom components
+ * decorated with **@ComponentV2** behave the same as those decorated with **@Component**.
+ *
+ * See the development guide:
+ * [@ComponentV2](docroot://ui/state-management/arkts-create-custom-components.md).
+ *
+ * > **NOTE**
+ *
+ * > - Since API version 26.0.0, the [ComponentOptions]{@link ComponentOptions}
+ * > parameter of \@ComponentV2 supports the optional attributes `reusePool` and `poolAccepts` for configuring the
+ * > global reuse pool. See the development guide:
+ * > [Global Reuse: Centralized Component Recycling and Reuse](docroot://ui/state-management/arkts-global-reuse-pool.md).
+ *
+ * options: Options of the **@ComponentV2** decorator. Pass this parameter for custom
+ * configuration when the component freezing or global reuse feature needs to be enabled. If not specified, both the
+ * component freezing and global reuse features are disabled.
+ * ClassDecorator: Class decorator. Developers do not need to pay attention to this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -329,7 +430,8 @@ declare const Component: ClassDecorator & ((options: ComponentOptions) => ClassD
 declare const ComponentV2: ClassDecorator & ((options: ComponentOptions) => ClassDecorator);
 
 /**
- * Defines the options of Entry ClassDecorator.
+ * Page entry configuration options, used to configure parameters such as the route name, state storage, and shared
+ * storage when decorating a page with @Entry.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -340,7 +442,9 @@ declare const ComponentV2: ClassDecorator & ((options: ComponentOptions) => Clas
  */
 declare interface EntryOptions {
   /**
-   * Named route name.
+   * Name of the page as a named route. When the page needs to be navigated to through a named route, set this
+   * parameter as the route name. If this parameter is not passed, the page is not registered as a named route page
+   * and cannot be accessed through named route navigation; it is loaded only as the default entry page.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -352,7 +456,10 @@ declare interface EntryOptions {
   routeName? : string;
 
   /**
-   * LocalStorage to be passed.
+   * Page-level UI state storage. Pass this parameter when you need to create and manage UI state outside the page in
+   * advance, or when you need to bind an existing LocalStorage instance to this page for state sharing. If this
+   * parameter is not passed, the framework creates a new LocalStorage instance as the default value. When
+   * useSharedStorage is set to true and storage is assigned, the value of useSharedStorage takes precedence.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -364,7 +471,11 @@ declare interface EntryOptions {
   storage? : LocalStorage;
 
   /**
-   * Determines whether to use the LocalStorage instance object returned by the LocalStorage.getShared() interface.
+   * Whether to use the LocalStorage instance passed in by [loadContent]{@link loadContent}.
+   * The default value is false. true: uses the shared LocalStorage instance (prerequisite: ensure that the
+   * loadContent API has passed in a LocalStorage instance; if not, a new LocalStorage instance is created). false:
+   * does not use the shared LocalStorage instance. When useSharedStorage is set to true and storage is assigned,
+   * the value of useSharedStorage takes precedence.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -377,9 +488,10 @@ declare interface EntryOptions {
 }
 
 /**
- * Defines Entry ClassDecorator.
+ * A custom component decorated by \@Entry serves as the entry to a UI page and is identified by the framework as the
+ * root component of the page. It is suitable for building standalone UI pages.
  *
- * Entry is a ClassDecorator and it supports LocalStorage or EntryOptions as parameters.
+ * In a single UI page, only one custom component decorated by \@Entry is allowed as the page entry.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -392,7 +504,12 @@ declare interface EntryOptions {
 declare const Entry: ClassDecorator & ((options?: LocalStorage | EntryOptions) => ClassDecorator);
 
 /**
- * Defining Observed ClassDecorator.
+ * **\@Observed** is a class decorator used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to observe property changes of nested class objects.
+ *
+ * For details, see
+ * [@Observed and @ObjectLink Decorators: Observing Property Changes in Nested Class Objects](docroot://ui/state-management/arkts-observed-and-objectlink.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -405,7 +522,18 @@ declare const Entry: ClassDecorator & ((options?: LocalStorage | EntryOptions) =
 declare const Observed: ClassDecorator;
 
 /**
- * Defining ObservedV2 ClassDecorator.
+ * **\@ObservedV2** is a class decorator used in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md).
+ * **\@ObservedV2** is used together with
+ * [@Trace]{@link Trace} to decorate classes and class properties, enhancing the observation capability for decorated
+ * classes and properties. Compared with [@Observed]{@link Observed} in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md),
+ * **\@ObservedV2** provides more fine-grained, property-level in-depth observation capabilities. It is suitable for
+ * scenarios where changes in nested object properties need to be precisely tracked to drive UI updates, effectively
+ * improving the performance and flexibility of state management.
+ *
+ * For details, see
+ * [@ObservedV2 and @Trace Decorators: Observing Class Property Changes](docroot://ui/state-management/arkts-new-observedV2-and-trace.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -435,7 +563,26 @@ declare const ObservedV2: ClassDecorator;
 declare const Preview: ClassDecorator & ((value: PreviewParams) => ClassDecorator);
 
 /**
- * Defining Require PropertyDecorator.
+ * The **\@Require** decorator validates whether [\@Prop](docroot://ui/state-management/arkts-prop.md),
+ * [\@State](docroot://ui/state-management/arkts-state.md),
+ * [\@Provide](docroot://ui/state-management/arkts-provide-and-consume.md),
+ * [\@BuilderParam](docroot://ui/state-management/arkts-builderparam.md),
+ * [\@Param](docroot://ui/state-management/arkts-new-param.md),
+ * and regular variables (variables not decorated by any state decorator) require constructor input parameters. When a
+ * variable is decorated with **\@Require**, the parent component must pass the corresponding parameter when
+ * constructing the child component. Otherwise, a compile-time error is reported, thereby preventing runtime exceptions
+ * caused by missing parameters. This decorator is suitable for scenarios where mandatory parameters of a custom
+ * component must be properly initialized.
+ *
+ * See the development guide:
+ * [\@Require Decorator: Validating Constructor Input Parameters](docroot://ui/state-management/arkts-require.md).
+ *
+ * > **NOTE**
+ * >
+ * > Validation for **\@Prop** and **\@BuilderParam** is supported since API version 11.
+ * >
+ * > Validation for **\@State**, **\@Provide**, **\@Param**, and regular variables (variables not decorated by
+ * > any state decorator) is supported since API version 12.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -448,7 +595,13 @@ declare const Preview: ClassDecorator & ((value: PreviewParams) => ClassDecorato
 declare const Require: PropertyDecorator;
 
 /**
- * Defining BuilderParam PropertyDecorator
+ * **\@BuilderParam** is used to decorate variables that point to [\@Builder]{@link Builder}
+ * functions, enabling a custom component to receive externally passed **\@Builder** functions for custom rendering of
+ * UI content. It is suitable for scenarios where the parent component's UI building logic needs to be passed to a
+ * child component to achieve dynamic customization of component content.
+ *
+ * For details, see the development guide:
+ * [\@BuilderParam Decorator: Referencing the @Builder Function](docroot://ui/state-management/arkts-builderparam.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -461,7 +614,15 @@ declare const Require: PropertyDecorator;
 declare const BuilderParam: PropertyDecorator;
 
 /**
- * Defining Local PropertyDecorator.
+ * **\@Local** is used in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to represent the internal state of components, enabling the observation of variables within custom components. It is
+ * applicable to scenarios where partial states (such as counters and switch states) need to be maintained and observed
+ * within custom components. Using **\@Local** can simplify the internal state management logic of components. When the
+ * state changes, the UI is automatically refreshed without manual management.
+ *
+ * For details, see
+ * [@Local Decorator: Representing the Internal State of Components](docroot://ui/state-management/arkts-new-local.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -474,7 +635,16 @@ declare const BuilderParam: PropertyDecorator;
 declare const Local: PropertyDecorator;
 
 /**
- * Defining Param PropertyDecorator.
+ * **@Param** is used in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to receive external input and implement unidirectional data synchronization between parent and child components.
+ * This is applicable to scenarios where a parent component needs to pass state data to its child component in a
+ * unidirectional manner. It simplifies communication between components and ensures a clear data flow direction.
+ * Variables decorated with **@Param** cannot be directly modified in a component. If a child component needs to
+ * synchronize data to its parent component, use **@Param** together with [@Event]{@link Event}.
+ *
+ * For details, see
+ * [@Param Decorator: Inputting External Parameters to Components](docroot://ui/state-management/arkts-new-param.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -487,7 +657,14 @@ declare const Local: PropertyDecorator;
 declare const Param: PropertyDecorator;
 
 /**
- * Defining Once PropertyDecorator.
+ * **\@Once** is an auxiliary decorator used in
+ * [State Management V2](docroot://ui/state-management/arkts-state-management-overview.md).
+ * It must be used together with [@Param]{@link Param}
+ * and is applicable to scenarios where data is initialized from an external source only once without accepting
+ * subsequent synchronization changes. If **\@Once** is not used together with **\@Param**, an error will be reported
+ * during compilation when **\@Once** is used independently.
+ *
+ * For details, see [@Once: Implementing Initialization Once](docroot://ui/state-management/arkts-new-once.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -500,7 +677,15 @@ declare const Param: PropertyDecorator;
 declare const Once: PropertyDecorator;
 
 /**
- * Defining Event PropertyDecorator.
+ * **\@Event** decorates a callback function, which is used as the output of a custom component in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md).
+ * **\@Event** is usually used together with [@Param]{@link Param}.
+ * **\@Param** transfers data from a parent component to its child component. **\@Event** defines the callback for the
+ * child component to transfer messages to the parent component, which is applicable to scenarios where the parent
+ * component state change or event processing needs to be triggered in the child component.
+ *
+ * For details, see
+ * [@Event Decorator: Standardizing Component Output](docroot://ui/state-management/arkts-new-event.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -513,7 +698,13 @@ declare const Once: PropertyDecorator;
 declare const Event: PropertyDecorator;
 
 /**
- * Defining State PropertyDecorator.
+ * **@State** is used for
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to convert common variables within a custom component into state variables. When the state variables change, the UI
+ * in the component is re-rendered. It is applicable to scenarios where mutable states need to be managed within a
+ * component.
+ *
+ * For details, see [@State Decorator: State Owned by Component](docroot://ui/state-management/arkts-state.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -526,7 +717,15 @@ declare const Event: PropertyDecorator;
 declare const State: PropertyDecorator;
 
 /**
- * Defining Track PropertyDecorator.
+ * **@Track** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to implement property-level precise observation by decorating specified properties of a class object. When a
+ * property decorated with **@Track** changes, the system updates only the UI components that depend on that property,
+ * thereby reducing unnecessary UI re-rendering. It is applicable to scenarios where a class object contains many
+ * properties and redundant UI refreshes need to be reduced to optimize rendering performance.
+ *
+ * For details, see
+ * [@Track Decorator: Implementing Class Object Property-Level Updates](docroot://ui/state-management/arkts-track.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -539,7 +738,19 @@ declare const State: PropertyDecorator;
 declare const Track: PropertyDecorator;
 
 /**
- * Defining Trace PropertyDecorator.
+ * **@Trace** is a property decorator used in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md).
+ * [@ObservedV2]{@link ObservedV2} and **@Trace** are used
+ * together to decorate classes and class properties, enhancing the observation capability for decorated classes and
+ * properties. That is, they can recursively observe changes in property values of nested objects and trigger automatic
+ * UI refresh. They are applicable to scenarios where precise observation and management of class property changes are
+ * required.
+ *
+ * For details, see
+ * [@ObservedV2 and @Trace Decorators: Observing Class Property Changes](docroot://ui/state-management/arkts-new-observedV2-and-trace.md).
+ *
+ * Declares an observable property. **@Trace** must be used together with **@ObservedV2** and takes effect only in
+ * classes decorated with **@ObservedV2**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -552,7 +763,19 @@ declare const Track: PropertyDecorator;
 declare const Trace: PropertyDecorator;
 
 /**
- * Defining Prop PropertyDecorator.
+ * **@Prop** is used for
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to receive values passed from external sources and establish a one-way synchronization relationship with parent
+ * components. When the state variables decorated with
+ * [@State]{@link State} in the parent component change, the
+ * changes are synchronously updated to the corresponding **@Prop** decorated
+ * variables in the child component, triggering the child component to re-render. **@Prop** uses a unidirectional data
+ * flow mechanism. Changes to **@Prop** decorated variables in child components take effect only within the child
+ * components and are not synchronized back to the parent component. This is applicable when child components need to
+ * respond to state changes of parent components but do not need to modify the parent component's state reversely.
+ *
+ * For details, see
+ * [@Prop Decorator: Implementing One-Way Synchronization from Parent to Child Components](docroot://ui/state-management/arkts-prop.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -565,7 +788,15 @@ declare const Trace: PropertyDecorator;
 declare const Prop: PropertyDecorator;
 
 /**
- * Defining Link PropertyDecorator.
+ * **\@Link** is used for
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to receive the reference of the state variable passed by the parent component and establish two-way data binding
+ * between the parent and child components. It is applicable to scenarios where the parent component's state needs to
+ * be directly changed in the child component and the communication between the parent and child components needs to be
+ * simplified.
+ *
+ * For details, see
+ * [@Link Decorator: Implementing Two-Way Synchronization Between Parent and Child Components](docroot://ui/state-management/arkts-link.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -578,7 +809,15 @@ declare const Prop: PropertyDecorator;
 declare const Link: PropertyDecorator;
 
 /**
- * Defining ObjectLink PropertyDecorator.
+ * **\@ObjectLink** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to receive instances of classes decorated with
+ * [@Observed]{@link Observed} and establish two-way data
+ * binding with the data source in the parent component. It is applicable to scenarios where nested class properties
+ * are independently observed and listened to in child components to trigger UI updates.
+ *
+ * For details, see
+ * [@Observed and @ObjectLink Decorators: Observing Property Changes in Nested Class Objects](docroot://ui/state-management/arkts-observed-and-objectlink.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -591,7 +830,11 @@ declare const Link: PropertyDecorator;
 declare const ObjectLink: PropertyDecorator;
 
 /**
- * Defines the options of Provide PropertyDecorator.
+ * Options of the **@Provide** decorator. You can use **allowOverride** to override the alias of an @Provide decorated
+ * variable with the same name in the same component tree. It is suitable for scenarios where a child component needs
+ * to override the alias of the **@Provide** decorated variable with the same name in the parent component, improving
+ * the flexibility of cross-level state management. For details, see
+ * [Support for the allowOverride Parameter](docroot://ui/state-management/arkts-provide-and-consume.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -602,8 +845,11 @@ declare const ObjectLink: PropertyDecorator;
  */
 declare interface ProvideOptions {
   /**
-   * Override the @Provide of any parent or parent of parent @Component.@Provide({allowOverride: "name"}) is
-   * also allowed to be used even when there is no ancestor @Component whose @Provide would be overridden.
+   * Alias of an **@Provide** decorated variable that can be overridden. In detail, you can use this property to
+   * override the alias of an @Provide decorated variable with the same name in the same component tree.
+   * <br> If the property is not specified, the alias of an **@Provide** decorated variable cannot be overridden. If
+   * you define an **@Provide** decorated variable with the same name without setting **allowOverride**, an error will
+   * be reported at runtime.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -616,7 +862,26 @@ declare interface ProvideOptions {
 }
 
 /**
- * Defining Provide PropertyDecorator.
+ * **@Provide** and [@Consume]{@link Consume} are used
+ * together for [state management V1](docroot://ui/state-management/arkts-state-management-overview.md) to
+ * implement two-way synchronization across component levels. This is applicable to scenarios where state data needs to
+ * be transferred across multiple component levels to avoid layer-by-layer transfer. It can solve the problem of
+ * complex state transfer when there are many component levels. Variables decorated with **@Provide** are used as data
+ * sources. Bidirectional binding relationships are established between the data sources and variables decorated with
+ * **@Consume** through aliases or variable names. When a variable decorated with **@Provide** or **@Consume** changes,
+ * the change is automatically synchronized to the other party.
+ *
+ * For details, see
+ * [@Provide and @Consume Decorators: Two-Way Synchronization with Descendant Components](docroot://ui/state-management/arkts-provide-and-consume.md).
+ *
+ * value: Used to set an alias or used as an alias that can be overridden.
+ * <br> If the type is string, the value is directly used as an alias. Descendant components can access data through
+ * this alias.
+ * <br> When the type is ProvideOptions, if **allowOverride** is set, the value will be used as an alias and the alias
+ * can be overridden; if **allowOverride** is not set, an alias is a variable name and cannot be overridden.
+ * <br> When this parameter is not specified, a variable name is used and cannot be overridden. If an **@Provide**
+ * decorated variable is defined with the same name in this case, an error will be reported at runtime.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -629,8 +894,24 @@ declare interface ProvideOptions {
 declare const Provide: PropertyDecorator & ((value: string | ProvideOptions) => PropertyDecorator);
 
 /**
- * Defining Provider PropertyDecorator, aliasName is the only matching key and if
- * aliasName is the default, the default attribute name is regarded as aliasName.
+ * **@Provider** and [@Consumer]{@link Consumer} are used together in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to implement bidirectional data synchronization across component levels. **@Provider** decorates a data provider to
+ * provide data for child components. It is applicable to scenarios where state data needs to be shared across multiple
+ * layers of components (with deep component layers) to avoid layer-by-layer data transfer. This simplifies the state
+ * management process and reduces the coupling between components.
+ *
+ * For details, see
+ * [@Provider and @Consumer Decorators: Synchronizing Across Component Levels in a Two-Way Manner](docroot://ui/state-management/arkts-new-provider-and-consumer.md)
+ * .
+ *
+ * Decorates a data provider to provide data for child components. It is used together with **@Consumer** in state
+ * management V2 to implement bidirectional data synchronization across component levels.
+ *
+ * aliasName: Alias, which is used as the matching identifier for bidirectional data
+ * synchronization between variables decorated with **@Provider** and **@Consumer**. The alias must be the same as
+ * that of the **@Consumer** decorated variable. By default, the alias is the variable name.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -643,7 +924,7 @@ declare const Provide: PropertyDecorator & ((value: string | ProvideOptions) => 
 declare const Provider: (aliasName?: string) => PropertyDecorator;
 
 /**
- * Defines the class of System Env Key.
+ * Defines the type corresponding to the system environment variable key.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -653,7 +934,7 @@ declare const Provider: (aliasName?: string) => PropertyDecorator;
  */
 declare class SystemEnvKey<T> {
   /**
-   * The corresponding type of the system env key.
+   * Data type of the value corresponding to the system environment variable key. The default value is **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -663,7 +944,7 @@ declare class SystemEnvKey<T> {
    */
   private type?: T;
   /**
-   * constructor.
+   * Creates an instance of this class.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -674,7 +955,7 @@ declare class SystemEnvKey<T> {
   protected constructor();
 }
 /**
- * Defines writable system environment variable keys.
+ * Defines a writable system environment variable key, which inherits from [SystemEnvKey<T>]{@link SystemEnvKey}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -684,7 +965,7 @@ declare class SystemEnvKey<T> {
  */
 declare class WritableSystemEnvKey<T> extends SystemEnvKey<T> {}
 /**
- * Define read-only system environment variable keys.
+ * Defines a read-only system environment variable key, which inherits from [SystemEnvKey<T>]{@link SystemEnvKey}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -694,7 +975,7 @@ declare class WritableSystemEnvKey<T> extends SystemEnvKey<T> {}
  */
 declare class ReadonlySystemEnvKey<T> extends SystemEnvKey<T> {}
 /**
- * Defines the custom environment Key.
+ * Defines the type of the key for a custom environment variable.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -704,7 +985,7 @@ declare class ReadonlySystemEnvKey<T> extends SystemEnvKey<T> {}
  */
 declare class CustomEnvKey<S> {
   /**
-   * The corresponding type of the custom env key.
+   * Type of the key for a custom environment variable.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -714,9 +995,10 @@ declare class CustomEnvKey<S> {
    */
   private type?: S;
   /**
-   * create CustomEnvKey
+   * Creates a custom environment variable key, which serves as a parameter of the **\@CustomEnv** decorator.
    *
-   * @returns { CustomEnvKey<T> } CustomEnvKey
+   * @returns { CustomEnvKey<T> } Custom environment variable key, used to identify the custom environment variable to
+   *     obtain.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -726,7 +1008,7 @@ declare class CustomEnvKey<S> {
   static create<T>(): CustomEnvKey<T>;
 
   /**
-   * constructor.
+   * Creates an instance of this class.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -737,7 +1019,11 @@ declare class CustomEnvKey<S> {
   protected constructor();
 }
 /**
- * Defines the writable system environment key.
+ * Defines the set of writable system environment variable keys, which are used to obtain the corresponding system
+ * environment variables through the **\@Env** decorator. You can use the [env]{@link env}
+ * method in [WithEnv]{@link WithEnv} to set local environment
+ * variable values to affect the rendering of descendant components. For details, see
+ * [Example 2: Setting Local Layout Direction]{@link WithEnv}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -747,7 +1033,12 @@ declare class CustomEnvKey<S> {
  */
 declare class WritableEnvKey {
   /**
-   * Defines the system environment key direction.
+   * Variable parameter of [\@Env]{@link Env}. The value of the [Direction]{@link Direction}
+   * enum can be obtained through **\@Env(WritableEnvKey.DIRECTION)**.
+   * <br>When this decorator is declared in
+   * [\@Component](docroot://ui/state-management/arkts-create-custom-components.md)
+   * or [\@ComponentV2](docroot://ui/state-management/arkts-create-custom-components.md), it is used to
+   * obtain the layout direction of the screen where the window is located.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -757,7 +1048,13 @@ declare class WritableEnvKey {
    */
   static readonly DIRECTION: WritableSystemEnvKey<Direction>;
   /**
-   * Defines the system environment key fontScale.
+   * Variable parameter of [\@Env]{@link Env}. The value of the number type can be obtained through
+   * **\@Env(WritableEnvKey.FONT_SCALE)**. There is no upper limit for the value, and values less than or equal to 0
+   * are processed as 0.
+   * <br>When this decorator is declared in
+   * [\@Component](docroot://ui/state-management/arkts-create-custom-components.md)
+   * or [\@ComponentV2](docroot://ui/state-management/arkts-create-custom-components.md), it is used to
+   * provide a local font scale factor for descendant components.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -767,9 +1064,9 @@ declare class WritableEnvKey {
    */
   static readonly FONT_SCALE: WritableSystemEnvKey<double>;
 }
-
 /**
- * Defines the readonly system environment key.
+ * Defines the set of read-only system environment variable keys, which are used to obtain the corresponding system
+ * environment variables through the **\@Env** decorator.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -854,12 +1151,20 @@ declare class ReadonlyEnvKey {
    */
   static readonly WINDOW_IS_HIGHLIGHTED: ReadonlySystemEnvKey<boolean>;
 }
-
 /**
- * Defines the custom environment PropertyDecorator.
+ * This component is used to obtain custom environment variables.
  *
- * @param { CustomEnvKey<T> } key - custom environment key.
- * @returns { PropertyDecorator } CustomEnv decorator
+ * See the developer guide: [\@CustomEnv: Custom Environment Variable](docroot://ui/arkts-custom-env-property.md).
+ *
+ * Obtains custom environment variables. A custom environment variable key is created through
+ * [CustomEnvKey.create()]{@link CustomEnvKey#create} and passed as a parameter to the **\@CustomEnv** decorator.
+ *
+ * A variable decorated by **\@CustomEnv** reads the environment variable value corresponding to the key.
+ * If the environment variable is not set, the locally declared default value is used.
+ *
+ * @param { CustomEnvKey<T> } key - Key of the custom environment variable, used to identify the custom environment
+ *     variable to obtain.
+ * @returns { PropertyDecorator } Property decorator. You do not need to care about this return value.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -869,10 +1174,11 @@ declare class ReadonlyEnvKey {
 declare function CustomEnv<T>(key: CustomEnvKey<T>): PropertyDecorator;
 
 /**
- * Define Env Decorator type
+ * Defines the **EnvDecorator** property decorator type.
  *
- * @param { SystemProperties } value - key value input by the user
- * @returns { PropertyDecorator } Env decorator
+ * @param { SystemProperties } value - Environment variable attribute name, used to specify the system environment
+ *     variable to obtain.
+ * @returns { PropertyDecorator } Property decorator. You do not need to pay attention to this return value.
  * @throws { BusinessError } 140000 - Invalid key for @Env
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -880,13 +1186,20 @@ declare function CustomEnv<T>(key: CustomEnvKey<T>): PropertyDecorator;
  * @since 22 dynamic
  */
 declare type EnvDecorator = (value: SystemProperties) => PropertyDecorator;
+
 /**
- * Defining Env PropertyDecorator.
- * On API 26.0.0 and above, the parameter also supports the SystemEnvKey<T> type.
+ * The **\@Env** decorator is used to obtain system environment variables, helping you sense system environment changes
+ * and dynamically adjust the UI display.
+ *
+ * Obtains system environment variables. Before API version 26.0.0, only the **SystemProperties** enum can be passed in.
+ * Since API version 26.0.0, the [SystemEnvKey<T>]{@link SystemEnvKey} class or the
+ * [SystemProperties]{@link SystemProperties} enum can be passed in as the parameter.
+ *
+ * For details about the developer guide, see [\@Env Developer Guide](docroot://ui/arkts-env-system-property.md).
  *
  * @param { SystemProperties } key - key value input by the user. [since 22 - 24]
- * @param { SystemEnvKey<T> | SystemProperties } key - key value input by the user. [since 26.0.0]
- * @returns { PropertyDecorator } Env decorator
+ * @param { SystemEnvKey<T> | SystemProperties } key - Environment variable key. [since 26.0.0]
+ * @returns { PropertyDecorator } Property decorator. Developers do not need to pay attention to this return value.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform [since 26.0.0]
@@ -986,7 +1299,37 @@ declare enum SystemProperties {
 }
 
 /**
- * Defining Consume PropertyDecorator.
+ * [@Provide]{@link Provide} and **\@Consume** are used together for
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md) to
+ * implement two-way synchronization across component levels. This is applicable to scenarios where states need to be
+ * shared among multiple layers of nested components. It simplifies the communication logic between components by
+ * avoiding the complexity of layer-by-layer data transfer. As a data consumer, the variable decorated with
+ * **\@Consume** establishes a bidirectional binding relationship with the variable decorated with **\@Provide**
+ * through an alias or variable name. When a variable decorated with **\@Provide** or **\@Consume** changes, the change
+ * is automatically synchronized to the other party. An alias is preferred for matching. If no alias is set, a
+ * variable name is used for matching.
+ *
+ * For details, see
+ * [@Provide and @Consume Decorators: Two-Way Synchronization with Descendant Components](docroot://ui/state-management/arkts-provide-and-consume.md).
+ *
+ * > **NOTE**
+ * >
+ * > Since API version 20, **\@Consume** decorated variables support default value assignment. If no matching variable
+ * > decorated with **\@Provide** is found, the **\@Consume** decorated variable initializes with its default value.
+ * > When a matching variable decorated with **\@Provide** is found, the **\@Consume** decorated variable uses the
+ * > value of the \@Provide decorated variable, and the default value is ignored.
+ * >
+ * > Since API version 20, cross-BuilderNode pairing of **\@Provide** / **\@Consume** decorated variables is supported.
+ * > In the BuilderNode scenario, a BuilderNode constructs nodes before being mounted to the tree. Therefore, the
+ * > **\@Consume** decorated variable defined inside the BuilderNode must be assigned a default value. After the
+ * > BuilderNode is mounted to the tree, the framework retrieves the **\@Provide** decorated variable closest to the
+ * > BuilderNode again and establishes a two-way synchronization relationship with the variable.
+ *
+ * value: Used to set an alias. If no alias is specified, a variable name is used by default.
+ * When an alias is set, an **\@Consume** decorated variable matches and binds to an **\@Provide** decorated variable
+ * through the alias. When no alias is set, matching and binding are performed through a variable name, implementing
+ * two-way data synchronization across component levels.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -999,9 +1342,18 @@ declare enum SystemProperties {
 declare const Consume: PropertyDecorator & ((value: string) => PropertyDecorator);
 
 /**
- * Defining Consumer PropertyDecorator, aliasName is the only matching key and
- * if aliasName is the default, the default attribute name is regarded as aliasName.
- * And @Consumer will find the nearest @Provider.
+ * Decorates a data consumer to obtain data from a data source. It is used together with **\@Provider** in state
+ * management V2 to implement bidirectional data synchronization across component levels. If the variable decorated
+ * with **\@Consumer** does not find the variable decorated with **\@Provider** with the matching alias in the
+ * component tree, it uses its own initial value and does not perform data synchronization.
+ *
+ * For details, see
+ * [@Provider and @Consumer Decorators: Synchronizing Across Component Levels in a Two-Way Manner](docroot://ui/state-management/arkts-new-provider-and-consumer.md).
+ *
+ * aliasName: Alias, which is used as the matching identifier for bidirectional data synchronization
+ * between variables decorated with **\@Consumer** and **\@Provider**. The alias must be the same as that of the
+ * **\@Provider** decorated variable. By default, the alias is the variable name.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1014,7 +1366,13 @@ declare const Consume: PropertyDecorator & ((value: string) => PropertyDecorator
 declare const Consumer: (aliasName?: string) => PropertyDecorator;
 
 /**
- * Defining Computed MethodDecorator.
+ * **@Computed** is a method decorator used in
+ * [State Management V2](docroot://ui/state-management/arkts-state-management-overview.md) to
+ * decorate a **getter** method, turning it into a computed property. Its return value is cached and recalculated
+ * only when the dependent source data changes, reducing the overhead of repeated computation.
+ *
+ * For details, see
+ * [@Computed Decorator: Declaring Computed Properties](docroot://ui/state-management/arkts-new-computed.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1027,7 +1385,24 @@ declare const Consumer: (aliasName?: string) => PropertyDecorator;
 declare const Computed: MethodDecorator;
 
 /**
- * Defining StorageProp PropertyDecorator.
+ * **@StorageProp** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to establish unidirectional data synchronization with the corresponding property in
+ * [AppStorage]{@link AppStorage}. The changes of the corresponding property in AppStorage are synchronized to the
+ * variable decorated with **@StorageProp**, but the changes of the variable decorated with **@StorageProp** will not
+ * be synchronized back to AppStorage. It is applicable to scenarios where the global state changes of AppStorage need
+ * to be detected across pages and [abilities]{@link ability} and only unidirectional data flow is required. This can
+ * avoid unnecessary data writeback.
+ *
+ * For details, see [AppStorage: Storing Application-wide UI State](docroot://ui/state-management/arkts-appstorage.md).
+ *
+ * value: Property key name in AppStorage, which is used to establish unidirectional data synchronization with the
+ * property corresponding to the key name. If the property corresponding to the key name already exists in AppStorage,
+ * the local initial value of the variable decorated with **@StorageProp** will be overwritten by the value of the
+ * corresponding property in AppStorage. If the property corresponding to the key name does not exist in AppStorage,
+ * the corresponding property will be created in AppStorage based on the local initial value of the variable decorated
+ * with **@StorageProp**.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1039,7 +1414,26 @@ declare const Computed: MethodDecorator;
 declare const StorageProp: (value: string) => PropertyDecorator;
 
 /**
- * Defining StorageLink PropertyDecorator.
+ * **@StorageLink** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to establish bidirectional data synchronization with the property of a specified key in
+ * [AppStorage]{@link AppStorage}. When the variable decorated
+ * with **@StorageLink** changes, the change is synchronized to the property corresponding to the key in AppStorage.
+ * When the property corresponding to the key in AppStorage changes, the change is also synchronized back to the
+ * variable decorated with **@StorageLink**. It is applicable to scenarios where the global state of AppStorage needs
+ * to be shared across pages and [abilities]{@link ability} and
+ * bidirectional data synchronization with AppStorage is required. It can avoid layer-by-layer state data transfer to
+ * ensure data consistency.
+ *
+ * For details, see [AppStorage: Storing Application-wide UI State](docroot://ui/state-management/arkts-appstorage.md).
+ *
+ * value: Property key name in AppStorage, which is used to establish bidirectional data
+ * synchronization with the property corresponding to the key name. If the property corresponding to the key name
+ * already exists in AppStorage, the local initial value of the variable decorated with **@StorageLink** will be
+ * overwritten by the value of the corresponding property in AppStorage. If the property corresponding to the key name
+ * does not exist in AppStorage, the corresponding property will be created in AppStorage based on the local initial
+ * value of the variable decorated with **@StorageLink**.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1051,7 +1445,18 @@ declare const StorageProp: (value: string) => PropertyDecorator;
 declare const StorageLink: (value: string) => PropertyDecorator;
 
 /**
- * Defining Watch PropertyDecorator.
+ * **\@Watch** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to listen for changes to state variables and trigger specified callback functions when the variables change. It
+ * applies to scenarios where linked logic, data synchronization, or derived value calculation needs to be
+ * automatically executed when a state variable changes.
+ *
+ * For details, see
+ * [@Watch Decorator: Getting Notified of State Variable Changes](docroot://ui/state-management/arkts-watch.md).
+ *
+ * value: Name of the callback function for listening to changes in the state variable. The function signature is
+ * **(propertyName: string) => void**, where **propertyName** indicates the name of the changed property.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1147,7 +1552,7 @@ declare type StylesVersionDecorator = (versionCondition: VersionCondition) => Me
  * The @Styles decorator is used to extract multiple style settings into a method, which can be directly called at the 
  * component declaration site to define and reuse custom styles. It is suitable for scenarios where multiple components 
  * need to share the same styles, reducing repetitive code and improving the efficiency of maintaining style 
- * consistency.
+ * consistency. 
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
  * @type { MethodDecorator & StylesVersionDecorator } [since 26.2.0]
@@ -1192,7 +1597,17 @@ declare const Extend: MethodDecorator & ((value: any) => MethodDecorator);
 declare const AnimatableExtend: MethodDecorator & ((value: Object) => MethodDecorator);
 
 /**
- * Define Monitor MethodDecorator
+ * **\@Monitor** is used in
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to listen for changes to state variables, so that the state variables support deep listening. It is applicable to
+ * scenarios where custom logic (such as data synchronization, UI refresh, and log recording) needs to be executed when
+ * state variables or their nested properties change. Compared with
+ * [@Watch]{@link Watch} in [state management V1](docroot://ui/state-management/arkts-state-management-overview.md),
+ * **\@Monitor** supports deep listening to changes in nested object properties. Since API version 26.0.0, **\@Monitor**
+ * also supports wildcard characters, allowing for more flexible matching of variable paths.
+ *
+ * For details, see
+ * [@Monitor Decorator: Listening for Value Changes of the State Variables](docroot://ui/state-management/arkts-new-monitor.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1205,12 +1620,22 @@ declare const AnimatableExtend: MethodDecorator & ((value: Object) => MethodDeco
 declare const Monitor: MonitorDecorator;
 
 /**
- * Defines Monitor Decorator type
+ * Represents the actual type of the **@Monitor** decorator.
  *
  * @param { string } value - Monitored path input by the user [since 12 - 24]
- * @param { string[] } args - Monitored path(s) input by the user
- * @param { string | MonitorDecoratorOptions } value - Monitored path input by the user or config options. [since 26.0.0]
- * @returns { MethodDecorator } Monitor decorator
+ * @param { string[] } args - Array of paths of the state variables to monitor. The path uses dots (.) to separate
+ *     nested properties (for example, 'a.b.c'), and its content is specified by you. When the developer has used
+ *     MonitorDecoratorOptions or passed multiple strings, the input parameter is of this type. If this parameter is
+ *     not passed, it defaults to empty. When value is of the string type, only the state variable path specified by
+ *     the value parameter is monitored. When value is of the MonitorDecoratorOptions type, the state variable path to
+ *     monitor must be specified through this parameter. If undefined is passed, the corresponding monitoring does not
+ *     take effect.
+ * @param { string | MonitorDecoratorOptions } value - In versions earlier than API 26.0.0, this parameter indicates
+ *     the path of the monitored variable name. The path is separated by dots (.) to indicate nested properties (for
+ *     example, 'a.b.c'). The content is specified by you. The input value is of the string type when only a string is
+ *     passed. Since API version 26.0.0, this parameter can also be an object of the **MonitorDecoratorOptions** type,
+ *     which is used to configure the wildcard capability. [since 26.0.0]
+ * @returns { MethodDecorator } Method decorator. You do not need to concern yourself with this return value.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1222,7 +1647,7 @@ declare const Monitor: MonitorDecorator;
 declare type MonitorDecorator = (value: string | MonitorDecoratorOptions, ...args: string[]) => MethodDecorator;
 
 /**
- * Defines MonitorDecoratorOptions interface
+ * Represents the configuration options of the **@Monitor** decorator.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1233,9 +1658,9 @@ declare type MonitorDecorator = (value: string | MonitorDecoratorOptions, ...arg
  */
 declare interface MonitorDecoratorOptions {
   /**
-   * Enables wildcard feature.
-   * Set to true to enable wildcard feature, set to false to disable it.
-   * The default value is true.
+   * Whether to support the wildcard capability. The value **true** indicates to enable the wildcard capability,
+   * allowing the use of wildcards (**'*'**) in the path for fuzzy monitoring, and **false** indicates to disable
+   * the wildcard capability. The default value is **true**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1248,7 +1673,8 @@ declare interface MonitorDecoratorOptions {
 }
 
 /**
- * Define IMonitor interface
+ * When the monitored state variable changes, the state management framework will call the registered function and
+ * pass the change information of the **IMonitor** type.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1259,7 +1685,11 @@ declare interface MonitorDecoratorOptions {
  */
 declare interface IMonitor {
   /**
-   * Array of changed paths(keys)
+   * Array of paths where properties have changed in the monitored state variable. The path format is the same as
+   * that of the variable name path specified by **\@Monitor**. Nested property paths separated by periods (.) are
+   * supported, for example, **'a.b.c'**. Since API version 26.0.0, when the wildcard capability is enabled, this
+   * array may contain wildcard paths, and querying wildcard paths through [value]{@link IMonitor#value}() will
+   * return **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1271,12 +1701,22 @@ declare interface IMonitor {
   dirty: Array<string>;
 
   /**
-   * Return the pair of the value before the most recent change and current value for given path.
-   * If path does not exist, return undefined; If path is not specified, return the value pair
-   * corresponding to the first path in dirty.
+   * Obtains the change information for the specified path.
    *
-   * @param { string } [path]
-   * @returns { IMonitorValue<T> | undefined }
+   * @param { string } [path] - Path name of the monitored state variable. If it is not specified, the first path in
+   *     the **dirty** array is used by default. Since API version 26.0.0, the first non-wildcard path in **dirty** is
+   *     used by default. If the specified path is a wildcard path, **undefined** is returned.
+   * @returns { IMonitorValue<T> | undefined } Path and change information for the variable monitored by
+   *     **\@Monitor**.
+   *     <br>**T** is the type of the monitored state variable.
+   *     <br>If the monitored path does not exist, **undefined** is returned.
+   *     <br>Prior to API version 26.0.0, if no path is specified, this parameter returns information corresponding to
+   *     the first path in the **dirty** array of changed paths by default.
+   *     <br>Since API version 26.0.0, if no path is specified, this parameter returns the first non-wildcard path
+   *     in the **dirty** array of changed paths by default.
+   *     <br>If the specified path is a wildcard path, **undefined** is returned.
+   *     <br>If no path is specified and all paths in the **dirty** array are wildcard paths, **undefined** is
+   *     returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1288,7 +1728,8 @@ declare interface IMonitor {
 }
 
 /**
- * Define IMonitorValue interface
+ * Provides the specific information about the state variable changes monitored by **\@Monitor**, obtained through
+ * the **value** API of **IMonitor**. **T** is the state variable type.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1299,7 +1740,7 @@ declare interface IMonitor {
  */
 declare interface IMonitorValue<T> {
   /**
-   * Get the previous value.
+   * Value of the state variable before the change.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1311,7 +1752,7 @@ declare interface IMonitorValue<T> {
   before: T;
 
   /**
-   * Get current value.
+   * Current value of the state variable.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1323,7 +1764,7 @@ declare interface IMonitorValue<T> {
   now: T;
 
   /**
-   * Monitored path input by the user.
+   * Path of the state variable.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1473,7 +1914,25 @@ declare const Sendable: ClassDecorator;
 declare const CustomDialog: ClassDecorator;
 
 /**
- * Defining LocalStorageLink PropertyDecorator.
+ * **\@LocalStorageLink** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to establish bidirectional data synchronization with the property corresponding to the specified key in
+ * [LocalStorage]{@link LocalStorage}. When either the variable decorated by **\@LocalStorageLink** or the
+ * corresponding property in LocalStorage changes, the change will be synchronized to the other party. This is
+ * applicable to scenarios where the UI state needs to be shared among multiple components and data needs to be
+ * synchronized with LocalStorage in real time. It can avoid layer-by-layer data transfer and ensure cross-component
+ * data consistency.
+ *
+ * For details, see
+ * [LocalStorage: Storing Page-Level UI State](docroot://ui/state-management/arkts-localstorage.md).
+ *
+ * value: Property key name in LocalStorage, which is used to establish bidirectional data
+ * synchronization with the property corresponding to the key name. If the property corresponding to the key name
+ * already exists in LocalStorage, the local initial value of the variable decorated with **@LocalStorageLink** will
+ * be overwritten by the value of the corresponding property in LocalStorage. If the property corresponding to the
+ * key name does not exist in LocalStorage, the corresponding property will be created in LocalStorage based on the
+ * local initial value of the variable decorated with **@LocalStorageLink**.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1485,8 +1944,25 @@ declare const CustomDialog: ClassDecorator;
 declare const LocalStorageLink: (value: string) => PropertyDecorator;
 
 /**
- * Defining LocalStorageProp PropertyDecorator
+ * **\@LocalStorageProp** is used in
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md)
+ * to establish unidirectional data synchronization with the property corresponding to the specified key in
+ * [LocalStorage]{@link LocalStorage}. After the
+ * establishment, changes to the property value in LocalStorage will be synchronized to the variable decorated with
+ * **\@LocalStorageProp**, but changes to the variable decorated with **\@LocalStorageProp** will not be synchronized
+ * back to LocalStorage. This is applicable to scenarios where LocalStorage needs to be shared among multiple
+ * components and only unidirectional data flow is required, avoiding unnecessary data writeback.
  *
+ * For details, see
+ * [LocalStorage: Storing Page-Level UI State](docroot://ui/state-management/arkts-localstorage.md).
+ *
+ * value: Property key name in LocalStorage, which is used to establish unidirectional data synchronization with the
+ * property corresponding to the key name. If the property corresponding to the key name already exists in
+ * LocalStorage, the local initial value of the variable decorated with **@LocalStorageProp** will be overwritten by
+ * the value of the corresponding property in LocalStorage. If the property corresponding to the key name does not
+ * exist in LocalStorage, the corresponding property will be created in LocalStorage based on the local initial value
+ * of the variable decorated with **@LocalStorageProp**.
+ * PropertyDecorator: Property decorator. You do not need to concern yourself with this return value.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1565,7 +2041,27 @@ declare function getContext(component?: Object): Context;
 declare const Reusable: ClassDecorator & ((options: ReusableOptions) => ClassDecorator);
 
 /**
- * Defining ReusableV2 ClassDecorator that is used to decorate @ComponentV2.
+ * To reduce the performance overhead caused by repeatedly creating and destroying custom components, developers can
+ * use the **@ReusableV2** decorator on custom components decorated by [@ComponentV2]{@link ComponentV2} to
+ * achieve component reuse. This is applicable to scenarios where components need to be repeatedly created and
+ * destroyed, such as list scrolling and frequent toggling of component visibility, and supports configuring memory
+ * optimization strategies through parameters.
+ *
+ * Declares a reusable custom component. This decorator must be used together with **@ComponentV2** to decorate a
+ * custom component for component reuse.
+ *
+ * See the development guide:
+ * [@ReusableV2 Decorator: Reusing V2 Components](docroot://ui/state-management/arkts-new-reusableV2.md).
+ *
+ * For the principles and applicable scenarios of component reuse, see
+ * [Component Reuse](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-component-reuse).
+ *
+ * options: Configuration parameters of the reusable custom component, used to configure
+ * the memory optimization policy. This parameter can be configured for optimization in scenarios where a large number
+ * of reusable components exist (for example, dozens or more reusable component instances on the same page), or when
+ * the device memory is limited and the app memory usage is high. No memory optimization policy is applied by
+ * default.**Since:** 26.0.0
+ * ClassDecorator: Class decorator. You do not need to pay attention to this return value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1624,34 +2120,14 @@ declare type Context = import('../api/application/Context').default;
  * Post Card Action.
  *
  * @param { Object } component - indicate the card entry component.
- * @param { Object } action - indicate the router, message or call event.
+ * @param { Object } action - indicate the router, message or call event.<!--Del-->Since API version 26.0.1,
+ *     for system applications,the action support insightIntent event.<!--DelEnd-->
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @StageModelOnly
+ * @crossplatform [since 10]
  * @form
- * @since 9
- */
-/**
- * Post Card Action.
- *
- * @param { Object } component - indicate the card entry component.
- * @param { Object } action - indicate the router, message or call event.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @StageModelOnly
- * @crossplatform
- * @form
- * @since 10
- */
-/**
- * Post Card Action.
- *
- * @param { Object } component - indicate the card entry component.
- * @param { Object } action - indicate the router, message or call event.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @StageModelOnly
- * @crossplatform
- * @form
- * @atomicservice
- * @since 11 dynamic
+ * @atomicservice [since 11]
+ * @since 9 dynamiconly
  */
 declare function postCardAction(component: Object, action: Object): void;
 
@@ -5588,8 +6064,16 @@ declare type TransitionEffects = {
 };
 
 /**
- * Defined the draw modifier of node. Provides draw callbacks for the associated Node.
- * Each DrawModifier instance can be set for only one component. Repeated setting is not allowed.
+ * DrawModifier can set the drawing methods of the mask layer (drawOverlay<sup>23+</sup>), foreground
+ * (drawForeground<sup>20+</sup>), content foreground (drawFront), content (drawContent), and content background
+ * (drawBehind), and also provides the [invalidate]{@link DrawModifier#invalidate} method to actively trigger
+ * redrawing. Each DrawModifier instance can be set to only one component, and repeated setting is prohibited.
+ *
+ * > **NOTE**
+ * >
+ * > The drawing order from bottom to top is: content background (drawBehind) → content (drawContent) → content
+ * > foreground (drawFront) → foreground (drawForeground) → mask layer (drawOverlay). Each layer is drawn
+ * > independently, and the methods of each layer are optional to implement.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -5599,9 +6083,15 @@ declare type TransitionEffects = {
  */
 declare class DrawModifier {
   /**
-   * drawBehind Method. Executed before drawing associated Node.
+   * Draws the content background. Override this method to implement custom content background drawing. The background
+   * is located below the component content layer, and is suitable for scenarios where decorative background elements
+   * need to be added at the bottom layer of the component. The Canvas in the
+   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * instructions, not the actual canvas of the node. For usage, see
+   * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
-   * @param { DrawContext } drawContext - The drawContext used to draw.
+   * @param { DrawContext } drawContext - Graphics drawing context that provides properties such as canvas (canvas
+   *     object) and size (drawing area size), used to perform specific drawing operations in custom drawing methods.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5611,10 +6101,15 @@ declare class DrawModifier {
   drawBehind?(drawContext: DrawContext): void;
 
   /**
-   * drawContent Method. Executed when associated Node is drawing, the default drawContent method will be replaced
-   * if this method is set.
+   * Draws the content. Override this method to implement custom content drawing, which will replace the component's
+   * default content drawing function. It is suitable for scenarios where the component content drawing needs to be
+   * fully customized and the component's original content drawing logic is not used. The Canvas in the
+   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * instructions, not the actual canvas of the node. For usage, see
+   * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
-   * @param { DrawContext } drawContext - The drawContext used to draw.
+   * @param { DrawContext } drawContext - Graphics drawing context that provides properties such as canvas (canvas
+   *     object) and size (drawing area size), used to perform specific drawing operations in custom drawing methods.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5624,9 +6119,15 @@ declare class DrawModifier {
   drawContent?(drawContext: DrawContext): void;
 
   /**
-   * drawFront Method. Executed after drawing associated Node.
+   * Draws the content foreground. Override this method to implement custom content foreground drawing. The content
+   * foreground is located between the content and the foreground, and is suitable for scenarios where drawing content
+   * needs to be added above the component content and below the component foreground. The Canvas in the
+   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * instructions, not the actual canvas of the node. For usage, see
+   * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
-   * @param { DrawContext } drawContext - The drawContext used to draw.
+   * @param { DrawContext } drawContext - Graphics drawing context that provides properties such as canvas (canvas
+   *     object) and size (drawing area size), used to perform specific drawing operations in custom drawing methods.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5636,11 +6137,17 @@ declare class DrawModifier {
   drawFront?(drawContext: DrawContext): void;
 
   /**
-   * drawforeground Method. This method is executed after drawing the associated Node and its children.
-   * It allows you to perform additional drawing operations on top of the already rendered content.
-   * This can be useful for adding visual elements that should appear above the main content.
+   * Draws the foreground. Override this method to implement custom foreground drawing. Compared with
+   * [drawFront]{@link DrawModifier#drawFront} (content foreground), drawForeground is at a higher layer and is drawn
+   * above the content foreground and below the mask layer. drawFront is suitable for drawing the foreground effect of
+   * the component content itself, while drawForeground is suitable for scenarios where an additional foreground effect
+   * needs to be added above the content foreground. The Canvas in the
+   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * instructions, not the actual canvas of the node. For usage, see
+   * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
-   * @param { DrawContext } drawContext - The drawContext used to draw.
+   * @param { DrawContext } drawContext - Graphics drawing context that provides properties such as canvas (canvas
+   *     object) and size (drawing area size), used to perform specific drawing operations in custom drawing methods.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5650,14 +6157,15 @@ declare class DrawModifier {
   drawForeground(drawContext: DrawContext): void;
 
   /**
-   * Draws content in the overlay layer after the associated Node and all its children have been drawn.
-   * 
-   * Custom drawing consists of five layers: Behind, Content, Front, Foreground, and Overlay.
-   * 
-   * - The Foreground and Overlay layers are drawn after child nodes.
-   * - The Overlay layer differs from Foreground in that it can draw outside the bounds of the component.
+   * Interface for custom drawing of the mask. If this method is overridden, custom drawing of the mask can be
+   * performed. The mask is the topmost drawing layer, suitable for scenarios where a mask effect (such as highlighting
+   * or masking) needs to be added to the topmost layer of a component. The Canvas in
+   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this interface is a temporary canvas used to record
+   * instructions, not the actual canvas of the node. For usage, see
+   * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
-   * @param { DrawContext } drawContext - The drawContext used to draw
+   * @param { DrawContext } drawContext - Graphics drawing context that provides properties such as canvas (canvas
+   *     object) and size (drawing area size), used to perform specific drawing operations in custom drawing methods.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5667,8 +6175,10 @@ declare class DrawModifier {
   drawOverlay(drawContext: DrawContext): void;
 
   /**
-   * Invalidate the component, which will cause a re-render of the component.
-   * No overloading is allowed or needed.
+   * Interface for proactively triggering redrawing. Developers do not need to and cannot override this method. Calling
+   * it triggers redrawing of the bound component. When the attributes that custom drawing depends on (such as size,
+   * color, and position) change, for example, when drawing parameters are dynamically updated during an animation,
+   * call this method to make the latest drawing effect take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -17775,7 +18285,9 @@ declare interface ClickEffect {
 }
 
 /**
- * Defines the fadingEdge options.
+ * Implements an object used to configure the
+ * [fadingEdge]{@link ScrollableCommonMethod#fadingEdge(enabled: Optional<boolean>, options?: FadingEdgeOptions)}
+ * attribute.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -17798,7 +18310,8 @@ declare interface FadingEdgeOptions {
 }
 
 /**
- * Define nested scroll options
+ * Implements an object used to configure the
+ * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
  *
  * @interface NestedScrollOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -17806,7 +18319,8 @@ declare interface FadingEdgeOptions {
  * @since 10
  */
 /**
- * Define nested scroll options
+ * Implements an object used to configure the
+ * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
  *
  * @interface NestedScrollOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -17815,7 +18329,8 @@ declare interface FadingEdgeOptions {
  * @since 11 dynamic
  */
 /**
- * Define nested scroll options
+ * Implements an object used to configure the
+ * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
  *
  * @interface NestedScrollOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -17936,135 +18451,265 @@ declare interface MenuElement {
 }
 
 /**
- * Defines the attribute modifier.
+ * You need a custom class to implement the **AttributeModifier** API.
+ * 
+ * > **NOTE**
+ * >
+ * > In the following APIs, setting the same value or object for the same attribute of the **instance** object will not
+ * > trigger an update.
+ * 
+ * ###### Attribute Type Support Scope
+ *
+ * | Name | Description |
+ * | ----------------- | --------------- |
+ * | AlphabetIndexerAttribute | [Attributes]{@link AlphabetIndexerAttribute} of AlphabetIndexer. |
+ * | BadgeAttribute | [Attributes]{@link BadgeAttribute} of Badge. |
+ * | BlankAttribute | [Attributes]{@link BlankAttribute} of Blank. |
+ * | ButtonAttribute | [Attributes]{@link ButtonAttribute} of Button. |
+ * | CalendarPickerAttribute | [Attributes]{@link CalendarPickerAttribute} of CalendarPicker. |
+ * | CanvasAttribute | [Attributes]{@link CanvasAttribute} of Canvas. |
+ * | CheckboxAttribute | [Attributes]{@link CheckboxAttribute} of Checkbox. |
+ * | CheckboxGroupAttribute | [Attributes]{@link CheckboxGroupAttribute} of CheckboxGroup. |
+ * | CircleAttribute | [Attributes]{@link CircleAttribute} of Circle. |
+ * | ColumnAttribute | [Attributes]{@link ColumnAttribute} of Column. |
+ * | ColumnSplitAttribute | [Attributes]{@link ColumnSplitAttribute} of ColumnSplit. |
+ * | CommonAttribute | [Attributes]{@link CommonAttribute} of Common. |
+ * | CounterAttribute | [Attributes]{@link CounterAttribute} of Counter. |
+ * | DataPanelAttribute | [Attributes]{@link DataPanelAttribute} of DataPanel. |
+ * | DatePickerAttribute | [Attributes]{@link DatePickerAttribute} of DatePicker. |
+ * | DividerAttribute | [Attributes]{@link DividerAttribute} of Divider. |
+ * | EllipseAttribute | [Attributes]{@link EllipseAttribute} of Ellipse. |
+ * | FlexAttribute | [Attributes]{@link FlexAttribute} of Flex. |
+ * | FlowItemAttribute | [Attributes]{@link FlowItemAttribute} of FlowItem. |
+ * | FormLinkAttribute | [Attributes]{@link FormLinkAttribute} of FormLink. |
+ * | GaugeAttribute | [Attributes]{@link GaugeAttribute} of Gauge. |
+ * | GridAttribute | [Attributes]{@link GridAttribute} of Grid. |
+ * | GridColAttribute | [Attributes]{@link GridColAttribute} of GridCol. |
+ * | GridItemAttribute | [Attributes]{@link GridItemAttribute} of GridItem. |
+ * | GridRowAttribute | [Attributes]{@link GridRowAttribute} of GridRow. |
+ * | HyperlinkAttribute | [Attributes]{@link HyperlinkAttribute} of Hyperlink. |
+ * | IndicatorComponentAttribute | [Attributes]{@link IndicatorComponentAttribute} of IndicatorComponent. |
+ * | ImageAttribute | [Attributes]{@link ImageAttribute} of Image. |
+ * | ImageAnimatorAttribute | [Attributes]{@link ImageAnimatorAttribute} of ImageAnimator. |
+ * | ImageSpanAttribute | [Attributes]{@link ImageSpanAttribute} of ImageSpan. |
+ * | ContainerSpanAttribute | [Attributes]{@link ContainerSpanAttribute} of ContainerSpan. |
+ * | LineAttribute | [Attributes]{@link LineAttribute} of Line. |
+ * | ListAttribute | [Attributes]{@link ListAttribute} of List. |
+ * | ListItemAttribute | [Attributes]{@link ListItemAttribute} of ListItem. |
+ * | ListItemGroupAttribute | [Attributes]{@link ListItemGroupAttribute} of ListItemGroup. |
+ * | LoadingProgressAttribute | [Attributes]{@link LoadingProgressAttribute} of LoadingProgress. |
+ * | MarqueeAttribute | [Attributes]{@link MarqueeAttribute} of Marquee. |
+ * | MenuAttribute | [Attributes]{@link MenuAttribute} of Menu. |
+ * | MenuItemAttribute | [Attributes]{@link MenuItemAttribute} of MenuItem. |
+ * | MenuItemGroupAttribute | Attributes of [MenuItemGroup]{@link ./menu_item_group}. |
+ * | NavDestinationAttribute | [Attributes]{@link NavDestinationAttribute} of NavDestination. |
+ * | NavigationAttribute | [Attributes]{@link NavigationAttribute} of Navigation. |
+ * | NavigatorAttribute | [Attributes]{@link NavigatorAttribute} of Navigator. |
+ * | NavRouterAttribute | [Attributes]{@link NavRouterAttribute} of NavRouter. |
+ * | PanelAttribute | [Attributes]{@link PanelAttribute} of Panel. |
+ * | PathAttribute | [Attributes]{@link PathAttribute} of Path. |
+ * | PatternLockAttribute | [Attributes]{@link PatternLockAttribute} of PatternLock. |
+ * | PolygonAttribute | [Attributes]{@link PolygonAttribute} of Polygon. |
+ * | PolylineAttribute | [Attributes]{@link PolylineAttribute} of Polyline. |
+ * | ProgressAttribute | [Attributes]{@link ProgressAttribute} of Progress. |
+ * | QRCodeAttribute | [Attributes]{@link QRCodeAttribute} of QRCode. |
+ * | RadioAttribute | [Attributes]{@link RadioAttribute} of Radio. |
+ * | RatingAttribute | [Attributes]{@link RatingAttribute} of Rating. |
+ * | RectAttribute | [Attributes]{@link RectAttribute} of Rect. |
+ * | RefreshAttribute | [Attributes]{@link RefreshAttribute} of Refresh. |
+ * | RelativeContainerAttribute | [Attributes]{@link RelativeContainerAttribute} of RelativeContainer. |
+ * | RichEditorAttribute | [Attributes]{@link RichEditorAttribute} of RichEditor. |
+ * | RichTextAttribute | [Attributes]{@link RichTextAttribute} of RichText. |
+ * | RowAttribute | [Attributes]{@link RowAttribute} of Row. |
+ * | RowSplitAttribute | [Attributes]{@link RowSplitAttribute} of RowSplit. |
+ * | ScrollAttribute | [Attributes]{@link ScrollAttribute} of Scroll. |
+ * | ScrollBarAttribute | [Attributes]{@link ScrollBarAttribute} of ScrollBar. |
+ * | SearchAttribute | [Attributes]{@link SearchAttribute} of Search. |
+ * | SelectAttribute | [Attributes]{@link SelectAttribute} of Select. |
+ * | ShapeAttribute | [Attributes]{@link ShapeAttribute} of Shape. |
+ * | SideBarContainerAttribute | [Attributes]{@link SideBarContainerAttribute} of SideBarContainer. |
+ * | SliderAttribute | [Attributes]{@link SliderAttribute} of Slider. |
+ * | SpanAttribute | [Attributes]{@link SpanAttribute} of Span. |
+ * | SymbolSpanAttribute | [Attributes]{@link SymbolSpanAttribute} of SymbolSpan. |
+ * | StackAttribute | [Attributes]{@link StackAttribute} of Stack. |
+ * | StepperAttribute | [Attributes]{@link StepperAttribute} of Stepper. |
+ * | StepperItemAttribute | [Attributes]{@link StepperItemAttribute} of StepperItem. |
+ * | SwiperAttribute | [Attributes]{@link SwiperAttribute} of Swiper. |
+ * | SymbolGlyphAttribute | [Attributes]{@link SymbolGlyphAttribute} of SymbolGlyph. |
+ * | TabContentAttribute | [Attributes]{@link TabContentAttribute} of TabContent. |
+ * | TabsAttribute | [Attributes]{@link TabsAttribute} of Tabs. |
+ * | TextAttribute | [Attributes]{@link TextAttribute} of Text. |
+ * | TextAreaAttribute | [Attributes]{@link TextAreaAttribute} of TextArea. |
+ * | TextClockAttribute | [Attributes]{@link TextClockAttribute} of TextClock. |
+ * | TextInputAttribute | [Attributes]{@link TextInputAttribute} of TextInput. |
+ * | TextPickerAttribute | [Attributes]{@link TextPickerAttribute} of TextPicker. |
+ * | TextTimerAttribute | [Attributes]{@link TextTimerAttribute} of TextTimer. |
+ * | TimePickerAttribute | [Attributes]{@link TimePickerAttribute} of TimePicker. |
+ * | ToggleAttribute | [Attributes]{@link ToggleAttribute} of Toggle. |
+ * | VideoAttribute | [Attributes]{@link VideoAttribute} of Video. |
+ * | WaterFlowAttribute | [Attributes]{@link WaterFlowAttribute} of WaterFlow. |
+ * | XComponentAttribute | [Attributes]{@link XComponentAttribute} of XComponent. |
+ * | ParticleAttribute | [Attributes]{@link ParticleAttribute} of Particle. |
+ * | UIPickerComponentAttribute<sup>22+</sup> | [Attributes]{@link UIPickerComponentAttribute} of UIPickerComponent. |
+ * | <!--DelRow-->EffectComponentAttribute | [Attributes]{@link EffectComponentAttribute} of EffectComponent. |
+ * | <!--DelRow-->FormComponentAttribute | [Attributes]{@link FormComponentAttribute} of FormComponent. |
+ * | <!--DelRow-->PluginComponentAttribute | [Attributes]{@link PluginComponentAttribute} of PluginComponent. |
+ * | <!--DelRow-->RemoteWindowAttribute | [Attributes]{@link RemoteWindowAttribute} of RemoteWindow. |
+ * | UIExtensionComponentAttribute | [Attributes]{@link UIExtensionComponentAttribute} of UIExtensionComponent. |
+ * | ContainerReaderAttribute | [Attributes]{@link ContainerReaderAttribute} of ContainerReader.<br>**Since:** 26.0.0|
+ * 
+ * > **NOTE**
+ * >
+ * > - **StepperAttribute** is supported since API version 11 and deprecated since API version 22. You are advised to
+ * > use **SwiperAttribute** instead.
+ * >
+ * > - **StepperItemAttribute** is supported since API version 11 and deprecated since API version 22. You are advised
+ * > to use **SwiperAttribute** instead.
+ * >
+ * > - **NavigatorAttribute** is supported since API version 11 and deprecated since API version 20. You are advised to
+ * > use **NavigationAttribute** instead.
+ * >
+ * > - **NavRouterAttribute** is supported since API version 11 and deprecated since API version 20. You are advised to
+ * > use **NavigationAttribute** instead.
+ * >
+ * > - **PanelAttribute** is supported since API version 11 and deprecated since API version 20. You are advised to use
+ * > the universal attribute **bindSheet** instead.
+ *
+ * **Supported attributes**
+ *
+ * 1. Attributes that accept or return a [CustomBuilder]{@link CustomBuilder} are not supported.
+ * 2. Attributes whose input parameter is of the [modifier](docroot://ui/arkts-user-defined-modifier.md) type are not
+ * supported, specifically the following attribute methods: [attributeModifier]{@link CommonMethod#attributeModifier},
+ * [drawModifier]{@link CommonMethod#drawModifier}, and [gestureModifier]{@link CommonMethod#gestureModifier}.
+ * 3. Attribute related to [animation]{@link CommonMethod#animation} are not supported.
+ * 4. Attributes of the [gesture](docroot://ui/arkts-gesture-events-binding.md) type are not supported.
+ * 5. The [stateStyles]{@link CommonMethod#stateStyles} attribute is not supported.
+ * 6. Deprecated attributes are not supported.
+ *    <!--Del-->
+ * 7. Built-in component attributes are not supported.<!--DelEnd-->
+ *
+ * When unsupported or unimplemented attributes are used, exceptions such as "Method not implemented.", "is not callable
+ * ", or "Builder is not supported." are thrown. For details about the supported scope of modifiers, see
+ * [attributeModifier Support for Attributes and Events](docroot://ui/arkts-user-defined-extension-attributeModifier.md#attributemodifier-support-for-attributes-and-events).
  *
  * @interface AttributeModifier<T>
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @since 11
- */
-/**
- * Defines the attribute modifier.
- *
- * @interface AttributeModifier<T>
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 12 dynamic
+ * @atomicservice [since 12]
+ * @since 11 dynamic
  */
 declare interface AttributeModifier<T> {
-
   /**
-   * Defines the normal update attribute function.
+   * Applies the style of a component in the normal state.
    *
-   * @param { T } instance
+   * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
+   *     setting, for example, the
+   *     [attribute]{@link ButtonAttribute} (
+   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     [attribute]{@link TextAttribute} (**TextAttribute**)
+   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Defines the normal update attribute function.
-   *
-   * @param { T } instance
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   applyNormalAttribute?(instance: T) : void;
 
   /**
-   * Defines the pressed update attribute function.
+   * Applies the style of a component in the pressed state. For implementation examples, see
+   * [Example 2: Implementing the Pressed State Effect with a Modifier]{@link AttributeModifier#applyPressedAttribute}
+   * and
+   * [Example 8: Implementing the Pressed State Effect for a Custom Component with a Modifier]{@link AttributeModifier#applyPressedAttribute}.
    *
-   * @param { T } instance
+   * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
+   *     setting, for example, the
+   *     [attribute]{@link ButtonAttribute} (
+   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     [attribute]{@link TextAttribute} (**TextAttribute**)
+   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Defines the pressed update attribute function.
-   *
-   * @param { T } instance
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   applyPressedAttribute?(instance: T) : void;
 
   /**
-   * Defines the focused update attribute function.
+   * Applies the style of a component in the focused state. For the implementation example, see
+   * [Example 5: Setting the Focused State Style with a Modifier]{@link AttributeModifier#applyFocusedAttribute}.
    *
-   * @param { T } instance
+   * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
+   *     setting, for example, the
+   *     [attribute]{@link ButtonAttribute} (
+   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     [attribute]{@link TextAttribute} (**TextAttribute**)
+   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Defines the focused update attribute function.
-   *
-   * @param { T } instance
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   applyFocusedAttribute?(instance: T) : void;
 
   /**
-   * Defines the disabled update attribute function.
+   * Style of a component in the disabled state. See
+   * [Example 6: Setting the Disabled State Style with a Modifier]{@link AttributeModifier#applyDisabledAttribute}.
    *
-   * @param { T } instance
+   * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
+   *     setting, for example, the
+   *     [attribute]{@link ButtonAttribute} (
+   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     [attribute]{@link TextAttribute} (**TextAttribute**)
+   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Defines the disabled update attribute function.
-   *
-   * @param { T } instance
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   applyDisabledAttribute?(instance: T) : void;
 
   /**
-   * Defines the selected update attribute function.
+   * Applies the style of a component in the selected state.
    *
-   * @param { T } instance
+   * You can customize the implementation of the preceding callback methods as needed, identify the component type
+   * through the passed-in parameter, set attributes on the instance, and use the **if/else** syntax for dynamic
+   * setting. See
+   * [Example 7: Setting the Selected State Style with a Modifier]{@link AttributeModifier#applySelectedAttribute}.
+   *
+   * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
+   *     setting, for example, the
+   *     [attribute]{@link ButtonAttribute} (
+   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     [attribute]{@link TextAttribute} (**TextAttribute**)
+   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Defines the selected update attribute function.
-   *
-   * @param { T } instance
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   applySelectedAttribute?(instance: T) : void;
 
   /**
-   * Defines the function that updates the hovered attribute.
+   * Defines the style of a component in the hover state. See
+   * [Example 9: Implementing the Mouse Hover Effect with a Modifier]{@link AttributeModifier#applyHoveredAttribute}.
    *
-   * @param { T } instance
+   * @param { T } instance - Component attribute class, used to identify the component type for attribute setting, for
+   *     example, the [attributes]{@link ButtonAttribute} (
+   *     ButtonAttribute) of the [Button]{@link ./button} component and the
+   *     [attributes]{@link TextAttribute} (TextAttribute) of
+   *     the [Text]{@link ./text} component. For details about the specific values, see
+   *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -19073,12 +19718,22 @@ declare class CommonMethod<T> {
   height(heightValue: Length | LayoutPolicy): T;
 
   /**
-   * Sets the drawModifier of the current component.
+   * Creates a drawing modifier.
    *
-   * @param { DrawModifier | undefined } modifier - drawModifier used to draw, or undefined if it is not available.
-   *     Default value: undefined
-   *     A custom modifier applies only to the FrameNode of the currently bound component, not to its subnodes.
-   * @returns { T }
+   * > **NOTE**
+   * >
+   * > This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
+   * @param { DrawModifier | undefined } modifier - Custom drawing modifier, which defines the logic of custom drawing.
+   *     <br>If no custom drawing modifier is set, the component uses the original default
+   *     drawing behavior and does not perform custom drawing.
+   *     <br>Default value: **undefined**.
+   *     <br>**Note:**
+   *     <br>Each custom drawing modifier takes effect only on the [FrameNode]{@link ./arkui/FrameNode:FrameNode}
+   *     of
+   *     the currently bound component, and does not take effect on its child nodes. Each DrawModifier instance can be
+   *     set to only one component, and repeated setting is prohibited.
+   * @returns { T } Current component, used for chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -19138,7 +19793,7 @@ declare class CommonMethod<T> {
    * > - When a component extends into a non-safe area, events in the non-safe area, such as click events, may be
    * > intercepted by the system and preferentially responded to by system components such as the status bar.
    * >
-   
+
  * > - It is not recommended to set the **expandSafeArea** attribute on components in a scrollable
  * > container. If it is
    * > set, the **expandSafeArea** attribute must be set on all direct nodes from the current node to the scrollable
@@ -20158,7 +20813,7 @@ declare class CommonMethod<T> {
    * Sets the border.
    * > **NOTE**
    * >
-   * > When neither **color** nor **radius** is specified, set borderColor and borderRadius after 
+   * > When neither **color** nor **radius** is specified, set borderColor and borderRadius after
    * > border to ensure they take effect.
    *
    * @param { BorderOptions } value - Unified border style setting API.<br>The default border width is **0**, that is,
@@ -24699,25 +25354,26 @@ declare class CommonMethod<T> {
   obscured(reasons: Array<ObscuredReasons>): T;
 
   /**
-   * Reuse id is used for identify the reuse type for each custom node.
+   * Reuse identifier, used to divide custom components into reuse groups. This API can be used only in the stage model.
    *
-   * @param { string } id - The id for reusable custom node.
-   * @returns { T }
+   * > **NOTE**
+   * >
+   * > - Set the corresponding reuseId based on the different layout forms or types of components to improve the
+   * > precision of reuse matching. For best practices, see Component Reuse -
+   * > [Using reuseId to Mark Components with Layout Changes](https://developer.huawei.com/consumer/en/doc/harmonyos-guides/arkts-component_reuse#using-reuseid-to-mark-components-with-layout-changes).
+   * >
+   * > - This API cannot be called in [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
+   * @param { string } id - Reuse identifier used to divide custom components into reuse groups. It is recommended that
+   *     different reuseId values be set for components with different layouts or types to prevent components from being
+   *     incorrectly reused and improve reuse efficiency. This attribute takes effect only on custom components
+   *     decorated by @Reusable.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 10
-   */
-  /**
-   * Reuse id is used for identify the reuse type for each custom node.
-   *
-   * @param { string } id - The id for reusable custom node.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   reuseId(id: string): T;
 
@@ -24772,27 +25428,18 @@ declare class CommonMethod<T> {
   renderFit(fitMode: Optional<RenderFit>): T;
 
   /**
-   * Sets the attribute modifier.
+   * Creates an attribute modifier.
    *
-   * @param { AttributeModifier<T> } modifier
-   * @returns { T }
+   * @param { AttributeModifier<T> } modifier - Dynamically sets the attribute method on the current component,
+   *     supporting the use of if/else syntax.
+   *     <br>modifier: attribute modifier. Developers need to define a custom class to implement the AttributeModifier
+   *     interface.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Sets the attribute modifier.
-   *
-   * @param { AttributeModifier<T> } modifier
-   * The if/else syntax is supported.
-   * You need a custom class to implement the AttributeModifier API.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   attributeModifier(modifier: AttributeModifier<T>): T;
 
@@ -25610,15 +26257,15 @@ declare class CommonShapeMethod<T> extends CommonMethod<T> {
    *
    * @param { number | string | Resource } value - Opacity of the fill area. <br>
    *     **NOTE**
-   * 
+   *
    *     The value range of the number format is [0.0, 1.0]. If the given value is less than 0.0, the value is
    *     0.0; if the given value is greater than 1.0, the value is 1.0. Other abnormal values are processed as 1.0.
    *     The string format supports the string form of the number format value, and the value range is the same
    *     as that of the number format.
-   *     
+   *
    *     The Resource format supports strings in system resources or app resources, and the value range is the
    *     same as that of the number format.
-   *     
+   *
    *     The abnormal value NaN is processed as 0.0, and undefined, null, and Infinity are processed as 1.0.
    *     Default value: 1.0
    * @returns { T }
@@ -25678,7 +26325,7 @@ declare class CommonShapeMethod<T> extends CommonMethod<T> {
    * @param { Array<any> } value - Array that defines the dashed pattern of the Rect stroke. The array elements
    *     alternately represent the segment length and gap length. <br>
    *     Default value: [] (empty array) <br>
-   *     Default unit: vp <br> 
+   *     Default unit: vp <br>
    *     The abnormal values undefined and null are processed as the default value. <br>
    *     **NOTE**
    *     Empty array: solid line <br>
@@ -27217,7 +27864,13 @@ declare interface CaretOffset {
  */
 declare interface TextContentControllerOptions {
   /**
-   * Insertion position for the text.
+   * Position to insert text. Value range: [0, text length]. If the value is out of range, it is automatically corrected
+   * to a valid boundary position.
+   *
+   * **Note:**
+   *
+   * Pass this parameter when text needs to be inserted at a specified position (rather than at the end). If not passed,
+   * text is inserted at the end by default.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27243,23 +27896,23 @@ declare abstract class TextContentControllerBase {
    *
    * > **NOTE**
    * >
-   * > - If this API is called when the caret position is updated in the current frame, it will not take effect.
+   * > - If this API is called while the caret position is being updated in the current frame, this API does not take
+   * > effect.
    * >
-   * > - For the **Search** component, the returned position information is the offset of the first character relative
-   * > to the search icon in the component.
+   * > - In the Search component, the returned position information is the offset relative to the search icon in the
+   * > Search component.
    * >
-   * > - If no text is entered in the **Search** component, the return value contains the position information relative
-   * > to the component.
+   * > - In the Search component, when no text is entered, the return value contains the position information relative
+   * > to the Search component.
    * >
-   * > - The location information in the return value is the location of the caret relative to the editable component.
+   * > - The position information in the return value is the position of the caret relative to the editable component.
    * >
-   * > - If the caret position cannot be obtained (for example, when the
-   * > [TextInputController]{@link TextInputController} is not bound to the [TextInput]{@link ./text_input} component),
-   * > **null** is returned.
+   * > - When the caret position cannot be obtained (for example, when [TextInputController]{@link TextInputController}
+   * > is not bound to the [TextInput]{@link ./text_input} component), this API returns undefined.
    *
    * @returns { CaretOffset } Position of the caret relative to the text box.
-   *     <br>If no component is bound to the controller or the component bound to the controller is released, **undefined**
-   *     is returned.
+   *     <br>If no component is bound to the controller or the component bound to the controller is released,
+   *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27273,8 +27926,8 @@ declare abstract class TextContentControllerBase {
    * is pixel.
    *
    * @returns { RectResult } Position of the edited text area relative to the component and its size.
-   *     <br>If no component is bound to the controller or the component bound to the controller is released, **undefined**
-   *     is returned.
+   *     <br>If no component is bound to the controller or the component bound to the controller is released,
+   *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27287,8 +27940,8 @@ declare abstract class TextContentControllerBase {
    * Obtains the number of lines of the edited text.
    *
    * @returns { number } Number of lines of the edited text.
-   *     <br>If no component is bound to the controller or the component bound to the controller is released, **undefined**
-   *     is returned.
+   *     <br>If no component is bound to the controller or the component bound to the controller is released,
+   *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27303,12 +27956,20 @@ declare abstract class TextContentControllerBase {
    *
    * This API does not work when the text is being dragged.
    *
-   * **addText** only affects the UI performance within the application and has no effect on the internal logic of the
-   * input method application. Therefore, avoid calling this API for the preview text.
+   * `addText` only affects the UI performance within the application and does not affect the internal logic of the
+   * input method application. The preview text state is managed by the input method. Calling `addText`/`deleteText` at
+   * the application layer disrupts the state management of the input method. Therefore, avoid calling `addText` in the
+   * preview text state.
+   *
+   * > **NOTE**
+   * >
+   * > When the controller is not bound to a component or the component bound to the controller is released, this API
+   * > does not take effect.
    *
    * @param { string } text - Text to insert.
-   * @param { TextContentControllerOptions } [textOperationOptions] - Configuration option for inserting text. If this
-   *     parameter is not provided, the text is appended to the end.
+   * @param { TextContentControllerOptions } [textOperationOptions] - Configuration options for inserting text, used to
+   *     set parameters such as the insertion position. Pass this parameter when text needs to be inserted at a
+   *     specified position. If not set, text is inserted at the end by default.
    * @returns { number } New cursor position after insertion.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27321,16 +27982,37 @@ declare abstract class TextContentControllerBase {
   /**
    * Deletes text within a specified range in the editable content.
    *
+   * This API does not work when the text is being dragged.
+   *
+   * `deleteText` only affects the UI performance within the application and does not affect the internal logic of the
+   * input method application. The preview text state is managed by the input method. Calling `addText`/`deleteText` at
+   * the application layer disrupts the state management of the input method. Therefore, avoid calling `deleteText` in
+   * the preview text state.
+   *
    * > **NOTE**
    * >
-   * > - This API does not work when the text is being dragged.
+   * > When the controller is not bound to a component or the component bound to the controller is released, this API
+   * > does not take effect.
    * >
-   * > - **deleteText** only affects the UI performance within the application and has no effect on the internal logic
-   * > of the input method application. Therefore, avoid calling this API for the preview text.
+   * > **Differences from [deleteBackward]{@link TextContentControllerBase#deleteBackward}**:
+   * >
+   * > - deleteText supports range deletion and can delete text in any specified area; deleteBackward simulates the user
+   * > deletion operation and deletes the character before the caret or the selected text.
+   * >
+   * > - Avoid calling deleteText in the preview text state. deleteBackward is not supported in the preview text
+   * > scenario.
+   * >
+   * > - Select the API based on the deletion requirement: use deleteText to delete text in a specified range, and use
+   * > deleteBackward to delete the character before the caret.
    *
-   * @param { TextRange } [range] - Range of the text to be deleted, including the start and end positions.<br>If the
-   *     range is not specified, the entire text is deleted. If the start position is not specified, deletion starts from
-   *     index 0. If the end position is not specified, deletion ends at the end of the text.
+   * @param { TextRange } [range] - Range of the text to delete, including the start position and end position of the
+   *     text to delete.
+   *     <br>The start position must be less than or equal to the end position; otherwise, the API call is invalid. A
+   *     start position less than 0 is treated as 0, and an end position greater than the text length is treated as the
+   *     text length.
+   *     <br>If the deletion range is not specified, all text is deleted by default. If the start position of the text
+   *     to delete is not specified, deletion starts from subscript 0 by default; if the end position of the text to
+   *     delete is not specified, the end of the text is used as the deletion end point by default.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27343,8 +28025,8 @@ declare abstract class TextContentControllerBase {
    * Obtains the current text selection range.
    *
    * @returns { TextRange } Current text selection range, or cursor position if no text is selected.
-   *     <br>If no component is bound to the controller or the component bound to the controller is released, **undefined**
-   *     is returned.
+   *     <br>If no component is bound to the controller or the component bound to the controller is released,
+   *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27373,8 +28055,8 @@ declare abstract class TextContentControllerBase {
    *
    * > **NOTE**
    * >
-   * > When the controller is not bound to any component or the component bound to the controller is released, this
-   * interface does not take effect.
+   * > When the controller is not bound to a component or the component bound to the controller is released, this API is
+   * > not effective.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27385,16 +28067,16 @@ declare abstract class TextContentControllerBase {
   clearPreviewText(): void;
 
   /**
-   * Binds or updates the styled placeholder string.
+   * Sets the placeholder text with the styled string, triggering binding or update.
    *
    * > **NOTE**
    * >
-   * > When the controller is not bound to any component or the component bound to the controller is released, this
-   * interface does not take effect.
+   * > When the controller is not bound to a component or the component bound to the controller is released, this API
+   * > does not take effect.
    *
-   * @param { StyledString } styledString - Styled string for the placeholder. This takes precedence over the plain text.
-   *     **placeholder** attribute.<br>The placeholder does not support gesture events or hyperlink navigation within
-   *     styled strings.
+   * @param { StyledString } styledString - Sets the placeholder of the styled string. Its priority is higher than that
+   *     of the plain text placeholder attribute.
+   *     <br>The placeholder does not support styled string events, gestures, or hyperlink jumps.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27408,15 +28090,18 @@ declare abstract class TextContentControllerBase {
    * and scrolls the text within the range to the visible area.
    *
    * > **NOTE**
-   * > When the controller is not bound to any component or the component bound to the controller is released, this
-   * interface does not take effect.
+   * >
+   * > When the controller is not bound to a component or the component bound to the controller is released, this API is
+   * > not effective.
    *
-   * @param { TextRange } [range] - Text range to be scrolled to the visible area, including the start and end positions.
-   *     of the text.<br>The start position must be less than or equal to the end position. Otherwise, the API call is
-   *     invalid. If the start position is less than 0, it is treated as the value **0**. If the end position is greater
-   *     than the length of the entire text, it is treated as the length of the entire text.<br>If no range is specified,
-   *     the entire text is used by default. If the start position is not specified, the default start position is 0. If the
-   *     end position is not specified, the default end position is the length of the entire text.
+   * @param { TextRange } [range] - Text range to be scrolled to the visible area, including the start and end positions
+   *     of the text.
+   *     <br>The start position must be less than or equal to the end position. Otherwise, the API call is invalid. If
+   *     the start position is less than 0, it is treated as the value **0**. If the end position is greater than the
+   *     length of the entire text, it is treated as the length of the entire text.
+   *     <br>If no range is specified, the entire text is used by default. If the start position is not specified, the
+   *     default start position is 0. If the end position is not specified, the default end position is the length of
+   *     the entire text.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27426,15 +28111,15 @@ declare abstract class TextContentControllerBase {
   scrollToVisible(range?: TextRange): void;
 
   /**
-   * Deletes the character before the text cursor in the text box bound to the basic controller. If some text has been
-   * selected using the mouse or keyboard before this function is called, the selected text will be deleted.
+   * Deletes the character before the caret in the text input box bound to the base controller `controller`. If some
+   * text has been selected with the mouse or keyboard before this API is called, the selected text is deleted.
    *
-   * This API is not supported in preview display scenarios.
+   * This API is not effective in the state of dragged text.
    *
    * > **NOTE**
    * >
-   * > When the controller is not bound to any component or the component bound to the controller is released, this
-   * interface does not take effect.
+   * > When the controller is not bound to a component or the component bound to the controller is released, this API is
+   * > not effective.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27446,7 +28131,10 @@ declare abstract class TextContentControllerBase {
 }
 
 /**
- * Enum of scrollable containers' content clip mode.
+ * Enumerates the content clipping modes for the scrollable container.
+ *
+ * The figure below illustrates the clipping areas corresponding to each enumeration value after the component has been
+ * configured with margin and padding attributes.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -27456,7 +28144,7 @@ declare abstract class TextContentControllerBase {
  */
 declare enum ContentClipMode {
   /**
-   * Clip to content rect inside margin & padding.
+   * Clip to the content area, corresponding to the green area in the figure.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27467,7 +28155,7 @@ declare enum ContentClipMode {
   CONTENT_ONLY = 0,
 
   /**
-   * Clip to scrollable's outer rect, including padding but inside margin.
+   * Clip to the component area, corresponding to the entire blue area in the figure.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27478,7 +28166,7 @@ declare enum ContentClipMode {
   BOUNDARY = 1,
 
   /**
-   * Clip to the safeArea of scrollable container.
+   * Clip to the safe area configured for the component, corresponding to the entire yellow area in the figure.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27514,10 +28202,11 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Sets the scrollbar state.
    *
-   * @param { BarState } barState - Scrollbar state.<br>Default value: <em>BarState.Auto</em> for the <em>List</em>, <em
-   *     >Grid</em>,
-   *     and <em>Scroll</em> components and <em>BarState.Off</em> for the <em>WaterFlow</em> component
-   * @returns { T }
+   * @param { BarState } barState - Scrollbar state. **BarState.Off** indicates that the scrollbar is not displayed;
+   *     **BarState.Auto** indicates that the scrollbar is displayed as needed; **BarState.On** indicates that the
+   *     scrollbar is always displayed.<br/>Default value: **BarState.Auto** for the **List**, **Grid**, and **Scroll**
+   *     components, and **BarState.Off** for the **WaterFlow** component.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27529,11 +28218,12 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Sets the scrollbar color.
    *
-   * @param { Color | number | string } color - Scrollbar color.<br>Default value: <em>'\#182431'</em> (40% opacity)
-   *     <br>A number value indicates a HEX color in RGB or ARGB format,
-   *     for example, <em>0xffffff</em>. A string value indicates a color in RGB or ARGB format, for example, <em>'#
-   *     ffffff'</em>.
-   * @returns { T }
+   * @param { Color | number | string } color - Scrollbar color.
+   *     <br>The default value on children's smartwatches is **'#ffffff'**, which indicates white (100% opacity). The
+   *     default value on other devices is **'#182431'**, which indicates dark blue-gray (40% opacity).
+   *     <br>A number value indicates a HEX color in RGB or ARGB format, for example, **0xffffff**. A string value
+   *     indicates a color in RGB or ARGB format, for example, **'#ffffff'**.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27543,13 +28233,16 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarColor(color: Color | number | string): T;
 
   /**
-   * Sets the scrollbar color.
+   * Sets the scrollbar color. Compared with
+   * [scrollBarColor<sup>11+</sup>]{@link ScrollableCommonMethod#scrollBarColor(color: Color | number | string)},
+   * this API supports the Resource type for the **color** parameter.
    *
-   * @param { Color | number | string | Resource } color - Scrollbar color.<br>Default value: <em>'\#182431'</em> (40%
-   *     opacity)
-   *     <br>A number value indicates a HEX color in RGB or ARGB format, for example, <em>0xffffff</em>.
-   *     A string value indicates a color in RGB or ARGB format, for example, <em>'#ffffff'</em>.
-   * @returns { T }
+   * @param { Color | number | string | Resource } color - Scrollbar color.
+   *     <br>The default value on children's smartwatches is **'#ffffff'**, which indicates white (100% opacity). The
+   *     default value on other devices is **'#182431'**, which indicates dark blue-gray (40% opacity).
+   *     <br>A number value indicates a HEX color in RGB or ARGB format, for example, **0xffffff**. A string value
+   *     indicates a color in RGB or ARGB format, for example, **'#ffffff'**.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27559,13 +28252,14 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarColor(color: Color | number | string | Resource): T;
 
   /**
-   * Sets the scrollbar width.
+   * Sets the width of the scrollbar. Percentage values are not supported. After the width is set, the scrollbar width
+   * in both the normal state and the pressed state is the set value. If the scrollbar width exceeds the visible size of
+   * the scrollable component along the main axis, the scrollbar width changes to the default value of 4 vp.
    *
-   * @param { number | string } value  - Scrollbar width.<br>Default value: <em>4</em>
-   *     <br>Unit: vp
-   *     <br>If this parameter is set to a value less than or equal to 0, the default value is used.
-   *     The value <em>0</em> means not to show the scrollbar.
-   * @returns { T }
+   * @param { number | string } value - Width of the scrollbar.<br/>Default value: **4**<br/>Unit: vp <br/>Value range:
+   *     [0, +∞). If the value is less than 0, the default value is used, and on a children's smartwatch, the default
+   *     value 5 vp is restored. If the value is 0, the scrollbar is not displayed.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27575,14 +28269,19 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarWidth(value: number | string): T;
 
   /**
-   * Sets the scrollbar width.
+   * Sets the width of the scrollbar. Percentage values are not supported. After the width is set, the scrollbar width 
+   * in both the normal state and the pressed state is the set value. If the scrollbar width exceeds the visible size of
+   * the scrollable component along the main axis, the scrollbar width changes to the default value of 4 vp. Resource 
+   * type is supported.
+   * 
+   * If this API is not used, the scrollbar width is 4 vp.
    *
    * @param { number | string | Resource } value - Scrollbar width.
    *     <br>Unit: vp
-   *     <br>Default value: <em>4</em>
-   *     <br>If this parameter is set to a value less than 0, the default value is used.
-   *     The value <em>0</em> means not to show the scrollbar.
-   * @returns { T }
+   *     <br>The value range is
+   *     [0, +∞). If this parameter is set to a value less than 0, **4vp** is used, and **5vp** is used for children's
+   *     smartwatches. The value **0** means not to show the scrollbar.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27592,10 +28291,19 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarWidth(value: number | string | Resource): T;
 
   /**
-   * Margin of the scrollbar.
+   * Sets the margin of the scrollbar. The margin is calculated based on the distance by which the scrollbar avoids the 
+   * rounded corner area of the scrollable component. If the scrollbar area is smaller than the minimum length of the 
+   * scrollbar, the scrollbar is not displayed. If this attribute is set, the automatic margin adjustment of 
+   * [autoAdjustScrollBarMargin]{@link ScrollableCommonMethod#autoAdjustScrollBarMargin(enable: boolean | undefined)}
+   * does not take effect. Ensure that the sum of 
+   * [scrollBarHeight]{@link ScrollableCommonMethod#scrollBarHeight(height: LengthMetrics | undefined)} and 
+   * the value of this attribute does not exceed the height of the scrollable component; otherwise, the scrollbar may 
+   * not be displayed properly.
    *
-   * @param { ScrollBarMargin } margin - Margin of the scrollbar.
-   * @returns { T }
+   * @param { ScrollBarMargin } margin - Start and end margins of the scrollbar.<br/>Default value for children's
+   *     smartwatches: **{start: LengthMetrics.vp(42), end: LengthMetrics.vp(0)}**<br/>Default value for other devices:
+   *     **{start: LengthMetrics.vp(0), end: LengthMetrics.vp(0)}**
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27605,12 +28313,28 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarMargin(margin: ScrollBarMargin): T;
 
   /**
-   * Set the scroll bar auto adjust the margin to avoid the padding, safeAreaPadding, and
-   * contentStartOffset/contentEndOffset of the component.
+   * Sets whether to automatically adjust the margin of the scrollbar. By default, the margin is not automatically 
+   * adjusted.
+   * 
+   * When the automatic margin adjustment feature is enabled, the scrolling direction of the scrollbar avoids the 
+   * [padding]{@link CommonMethod#padding}, [safeAreaPadding]{@link CommonMethod#safeAreaPadding} and 
+   * [contentStartOffset]{@link ScrollableCommonMethod#contentStartOffset(offset: number | Resource)}
+   * /[contentEndOffset]{@link ScrollableCommonMethod#contentEndOffset(offset: number | Resource)} 
+   * areas of the component. If the 
+   * [scrollBarMargin]{@link ScrollableCommonMethod#scrollBarMargin(margin: ScrollBarMargin)} 
+   * attribute is set, this feature does not take effect. If the sum of the horizontal 
+   * [padding]{@link CommonMethod#padding}, [safeAreaPadding]{@link CommonMethod#safeAreaPadding}, 
+   * [contentStartOffset]{@link ScrollableCommonMethod#contentStartOffset(offset: number | Resource)}
+   * and 
+   * [contentEndOffset]{@link ScrollableCommonMethod#contentEndOffset(offset: number | Resource)} 
+   * values is greater than the width of the component, or the sum of the vertical values is greater than the height of 
+   * the component, the scrollbar is not displayed.
    *
-   * @param { boolean | undefined } enable - Whether to enable automatic adjustment of scroll bar margin.
-   *     <br>Default value: false.
-   * @returns { T }
+   * @param { boolean | undefined } enable - Whether to automatically adjust the margin.
+   *     <br>**true**: yes.
+   *     <br>**false**: no.
+   *     <br>**undefined**: no.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27624,16 +28348,16 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * @param { EdgeEffect } edgeEffect - Effect used when the scroll boundary is reached. The spring and shadow effects
    *     are supported.
-   *     <br>Default value: <em>EdgeEffect.None</em> for the <em>Grid</em>, <em>Scroll</em>, and <em>WaterFlow</em>
-   *     components and <em>EdgeEffect.Spring</em> for the <em>List</em> component
-   * @param { EdgeEffectOptions } options - Whether to enable the scroll effect when the component content is smaller
-   *     than the component itself.
-   *     The value <em>{ alwaysEnabled: true }</em> means to enable the scroll effect, and <em>{ alwaysEnabled: false }<
-   *     /em> means the opposite.
-   *     <br>Default value:<br><em>{ alwaysEnabled: false }</em> for the <em>List</em>, <em>Grid</em>, and <em>WaterFlow
-   *     </em> components,
-   *     and <em>{ alwaysEnabled: true }</em> for the <em>Scroll</em> component
-   * @returns { T }
+   *     <br>Default value: **EdgeEffect.None** for the **Grid**, **Scroll**, and **WaterFlow** components and
+   *     **EdgeEffect.Spring** for the **List** component
+   * @param { EdgeEffectOptions } options - Whether to enable the sliding effect when the component content size is
+   *     smaller than the component itself. Since API version 18, the edge where the edge effect takes effect can be
+   *     set. Setting it to **{ alwaysEnabled: true }** enables the sliding effect, and **{ alwaysEnabled: false }**
+   *     disables it.<br/>Default value:<br/>For the **List**, **Grid**, and **WaterFlow** components, the default value
+   *     is **{ alwaysEnabled: false }**; for the **Scroll** component, the default value is
+   *     **{ alwaysEnabled: true }**. Since API version 18, the **effectEdge** field is added by default, with the value
+   *     **EffectEdge.START | EffectEdge.END**.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27643,11 +28367,51 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   edgeEffect(edgeEffect: EdgeEffect, options?: EdgeEffectOptions): T;
 
   /**
-   * Called when setting whether to enable fading Edge effect.
+   * Sets whether to enable the edge fading effect and the length of the fading edge.
+   * 
+   * > **NOTE**
+   * >
+   * > **fadingEdge** is implemented by setting the [overlay]{@link CommonMethod#overlay} attribute and the 
+   * > [blendMode]{@link CommonMethod#blendMode(value: BlendMode, type?: BlendApplyType)} attribute (with the parameter 
+   * > values **BlendMode.SRC_OVER** and **BlendApplyType.OFFSCREEN**). When **fadingEdge** takes effect, it overrides 
+   * > the **.overlay()** and **.blendMode()** attributes of the original component, and causes the APIs that require 
+   * > screen capture of the current component and its child components to fail to capture the correct image. The APIs 
+   * > that require screen capture include [blur]{@link CommonMethod#blur(value: number, options?: BlurOptions)}, 
+   * > [linearGradientBlur]{@link CommonMethod#linearGradientBlur(value: number, options: LinearGradientBlurOptions)}, 
+   * > [brightness]{@link CommonMethod#brightness(value: number)}, [visualEffect]{@link CommonMethod#visualEffect}, 
+   * > [grayscale]{@link CommonMethod#grayscale(value: number)}, [saturate]{@link CommonMethod#saturate(value: number)},
+   * > [contrast]{@link CommonMethod#contrast(value: number)}, 
+   * > [invert]{@link CommonMethod#invert(value: number | InvertOptions)}, 
+   * > [sepia]{@link CommonMethod#sepia(value: number)}, 
+   * > [hueRotate]{@link CommonMethod#hueRotate(value: number | string)}, 
+   * > [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}, 
+   * > [lightUpEffect]{@link CommonMethod#lightUpEffect(value: number)}, 
+   * > [pixelStretchEffect]{@link CommonMethod#pixelStretchEffect(options: PixelStretchEffectOptions)}, 
+   * > [blendMode]{@link CommonMethod#blendMode(value: BlendMode, type?: BlendApplyType)}, and 
+   * > [backgroundBrightness]{@link CommonMethod#backgroundBrightness(params: BackgroundBrightnessOptions)}.
+   * >
+   * > When **fadingEdge** takes effect, it is recommended not to set the [background]{@link CommonMethod#background} 
+   * > related attributes on the component on which the **fadingEdge** attribute is set, because doing so affects the 
+   * > fading display effect.
+   * >
+   * > When **fadingEdge** takes effect, it is recommended not to set the 
+   * > [systemMaterial]{@link CommonMethod#systemMaterial} related attributes on the component on which the 
+   * > **fadingEdge** attribute is set or on its child components, because doing so affects the display effect of the 
+   * > system material and causes the material effect to be inconsistent with the expected effect.
+   * >
+   * > When **fadingEdge** takes effect, the component on which the **fadingEdge** attribute is set is clipped to the 
+   * > boundary. Setting the [clip]{@link CommonMethod#clip(value: boolean)} attribute to **false** on this component 
+   * > does not take effect.
    *
-   * @param { Optional<boolean> } enabled - Whether to turn on the edge fade effect
-   * @param { FadingEdgeOptions } [options] - The options of fadingEdge.
-   * @returns { T }
+   * @param { Optional<boolean> } enabled - Whether to enable the edge fading effect. **true** to enable, **false**
+   *     otherwise.
+   *     <br>Default value: **false**.
+   * @param { FadingEdgeOptions } [options] - Object defining edge fading effect properties, such as the fading edge
+   *     length.
+   *     <br>If the value is less than 0, undefined, or not set, the default value is used. The default length is 32 vp.
+   *     <br>If the value exceeds half the height of the container, it is adjusted to exactly half the height of the
+   *     container.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27657,10 +28421,13 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   fadingEdge(enabled: Optional<boolean>, options?: FadingEdgeOptions): T;
 
   /**
-   * Sets the nested scrolling options.
+   * Sets the nested scrolling mode in the forward and backward directions to implement scrolling linkage with the
+   * parent component.
    *
-   * @param { NestedScrollOptions } value - options for nested scrolling.
-   * @returns { T }
+   * @param { NestedScrollOptions } value - Nested scrolling options.
+   *     <br>Default value:
+   *     **{ scrollForward: NestedScrollMode.SELF_ONLY, scrollBackward: NestedScrollMode.SELF_ONLY }**
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27672,8 +28439,12 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Sets whether to support scroll gestures.
    *
-   * @param { boolean } value - Whether to support scroll gestures.<br>Default value: <em>true</em>
-   * @returns { T }
+   * @param { boolean } value - Whether to support finger or mouse wheel gestures. The value **true** means supported,
+   *     and **false** means not supported. However, this does not affect the scrolling APIs of the controller
+   *     [Scroller]{@link Scroller} or the
+   *     [backToTop]{@link ScrollableCommonMethod#backToTop(backToTop: boolean)} attribute.<
+   *     br/>Default value: **true**
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27683,10 +28454,19 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   enableScrollInteraction(value: boolean): T;
 
   /**
-   * Sets the friction coefficient.
+   * Sets the friction coefficient. It takes effect when the scroll area is swiped manually, and affects only the
+   * inertial scrolling process. It indirectly affects the linkage effect between nested scrollable components during
+   * inertial scrolling (for example, the chain animation [chainAnimation]{@link ListAttribute#chainAnimation} of the
+   * List component). It applies to scenarios where the deceleration speed of inertial scrolling needs to be adjusted.
+   * If the value is set to less than or equal to 0, the default value is used.
    *
    * @param { number | Resource } value - Friction coefficient.
-   * @returns { T }
+   *     <br>Default value: **0.6** for non-wearable devices and **0.9** for wearable devices.
+   *     <br>Since API version 11, the default value for non-wearable devices is **0.7**.
+   *     <br>Since API version 12, the default value for non-wearable devices is **0.75**.
+   *     <br>Value range: (0, +∞). If this parameter is set to a value less than or equal to 0, the default value is
+   *     used.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27696,13 +28476,18 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   friction(value: number | Resource): T;
 
   /**
-   * Sets the offset from the start of the content to the boundary of the scrollable display area.
+   * Sets the offset from the start of the content area. When the component scrolls to the start position, the content
+   * area maintains a specified distance from the component's display boundary.
    *
-   * @param { number | Resource } offset - Offset from the start of the content to the boundary of
-   *     the scrollable display area.
-   *     <br>Default value: <em>0</em>
-   *     <br>Unit: vp
-   * @returns { T }
+   * If the combined value of contentStartOffset and contentEndOffset exceeds the scrollable content area length, both
+   * offsets are reset to 0.
+   *
+   * @param { number | Resource } offset - Offset of the start position of the content area.<br/><br
+   *     />the default value
+   *     is used.
+   *     <br>Unit: vp<br/><br/>If an invalid value such as a negative number or a non-numeric Resource is set. The value
+   *     must be greater than or equal to 0. Default value: **0**.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27712,13 +28497,17 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   contentStartOffset(offset: number | Resource): T;
 
   /**
-   * Sets the offset from the end of the content to the boundary of the scrollable display area.
+   * Sets the offset from the end of the content area. When the component scrolls to the end position, the content area 
+   * maintains a specified distance from the component's display boundary.
+   * 
+   * If the combined value of contentStartOffset and contentEndOffset exceeds the scrollable content area length, both 
+   * offsets are reset to 0.
    *
-   * @param { number | Resource } offset - Offset from the end of the content to the boundary of
-   *     the scrollable display area.
-   *     <br>Default value: <em>0</em>
-   *     <br>Unit: vp
-   * @returns { T }
+   * @param { number | Resource } offset - Offset of the end of the content area.<br/>Default value: **0**<br/>Unit: vp
+   *     <br/>Value range:
+   *     [0, +∞)<br/>If an invalid value such as a negative number or a non-numeric Resource is set, the default value
+   *     is used.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27747,9 +28536,11 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Triggered when the scrollable component scrolls.
    *
-   * @param { function } event - callback of scrollable,
-   *     scrollOffset is offset per frame scrolling, ScrollState is current scroll state.
-   * @returns { T }
+   * @param { function } event - Callback triggered when the scrollable component scrolls.
+   *     <br>**scrollOffset**: offset relative to the previous frame. The offset is positive when the scrollable
+   *     component is scrolled up and negative when it is scrolled down. Unit: vp
+   *     <br>**scrollState**: current scroll state.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27761,10 +28552,30 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onScroll(event: (scrollOffset: number, scrollState: ScrollState) => void): T;
 
   /**
-   * Called when the scrollable will scroll.
+   * Triggered before the scrollable component scrolls. Comparison with 
+   * [onDidScroll]{@link ScrollableCommonMethod#onDidScroll(handler: OnScrollCallback)}: 
+   * **onWillScroll** is triggered before scrolling occurs and can specify the offset to be scrolled through its return 
+   * value, making it suitable for scenarios where scrolling needs to be intercepted or customized; **onDidScroll **is 
+   * triggered when scrolling occurs and returns the actual scroll offset and scrolling state of the current frame, 
+   * making it suitable for scenarios where only the scrolling process needs to be monitored. The two can be used 
+   * together.
+   * 
+   * Called to return the offset to be scrolled in the current frame, the current scroll state, and the source of the 
+   * scroll operation. The offset returned in the callback is the calculated offset to be scrolled, not the final actual
+   * scroll offset. You can specify the offset to be scrolled by the scrollable component through the return value of 
+   * this callback. The parameter type of the [onWillScroll]{@link ScrollAttribute#onWillScroll} API of the 
+   * [Scroll]{@link ./scroll} component is [ScrollOnWillScrollCallback]{@link ScrollOnWillScrollCallback}.
+   * 
+   * > **NOTE**
+   * >
+   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 14.
+   * >
+   * > - When [ScrollEdge]{@link Scroller#scrollEdge} and [ScrollToIndex]{@link Scroller#scrollToIndex} without 
+   * > animation are called, **onWillScroll** is not triggered.
    *
-   * @param { Optional<OnWillScrollCallback> } handler - callback of scrollable.
-   * @returns { T }
+   * @param { Optional<OnWillScrollCallback> } handler - Callback triggered when the scrollable component is about to
+   *     scroll.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27774,10 +28585,15 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onWillScroll(handler: Optional<OnWillScrollCallback>): T;
 
   /**
-   * Triggered when the scrollable component scrolls.
+   * Triggered when the scrollable component scrolls. The return value is the offset amount by which the list has
+   * scrolled and the current scroll state.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 14.
    *
    * @param { OnScrollCallback } handler - Callback triggered when the scrollable component scrolls.
-   * @returns { T }
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27788,10 +28604,10 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onDidScroll(handler: OnScrollCallback): T;
 
   /**
-   * Called when the scrollable will start dragging.
+   * Triggered when the scrollable component starts to be dragged.
    *
-   * @param { VoidCallback } handler - callback of start dragging.
-   * @returns { T }
+   * @param { VoidCallback } handler - Callback invoked when the scrollable component starts to be dragged.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27802,10 +28618,10 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onWillStartDragging(handler: VoidCallback): T;
 
   /**
-   * Called when the scrollable will end dragging.
+   * Triggered when the scrollable component is released. It is not triggered for scrolling via mouse wheel.
    *
-   * @param { OnWillStopDraggingCallback } handler - callback of end dragging.
-   * @returns { T }
+   * @param { OnWillStopDraggingCallback } handler - Callback invoked when the scrollable component is released.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27816,10 +28632,10 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onWillStopDragging(handler: OnWillStopDraggingCallback): T;
 
   /**
-   * Called when the scrollable did end dragging.
+   * Called when the scrollable component stops being dragged.
    *
-   * @param { OnDidStopDraggingCallback } handler - callback of end dragging.
-   * @returns { T }
+   * @param { OnDidStopDraggingCallback } handler - Callback invoked when the scrollable component stops being dragged.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27830,10 +28646,19 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onDidStopDragging(handler: OnDidStopDraggingCallback): T;
 
   /**
-   * Called when the scrollable will start fling.
+   * Triggered when the scrollable component is about to initiate an inertial animation.
+   * 
+   * > **NOTE**
+   * >
+   * > - If the inertial animation is triggered by the [fling]{@link Scroller#fling} method, **onWillStartFling** is not
+   * > triggered.
+   * >
+   * > - For details about the triggering scenarios of the inertial animation, see the description of 
+   * > [flingSpeedLimit]{@link ScrollableCommonMethod#flingSpeedLimit(speedLimit: number)}.
    *
-   * @param { VoidCallback } handler - callback of start fling.
-   * @returns { T }
+   * @param { VoidCallback } handler - Callback invoked when the scrollable component is about to initiate an inertial
+   *     animation.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27844,10 +28669,11 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onWillStartFling(handler: VoidCallback): T;
 
   /**
-   * Called when the scrollable did end fling.
+   * Triggered when the inertial animation of the scrollable component ends. It is not triggered if the animation is 
+   * interrupted by a new swipe gesture.
    *
-   * @param { VoidCallback } handler - callback of end fling.
-   * @returns { T }
+   * @param { VoidCallback } handler - Callback invoked when the inertial animation of the scrollable component ends.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27860,8 +28686,12 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Triggered when the scrollable component reaches the start position.
    *
-   * @param { function } event - Callback function, triggered when the scrollable reaches the start position.
-   * @returns { T }
+   * This event is triggered once when the component is initialized and once when the component scrolls to the start
+   * position. If the edge effect is set to a spring effect, this event is triggered once when the swipe passes the
+   * start position, and triggered again when the swipe rebounds back to the start position.
+   *
+   * @param { function } event - Callback invoked when the scrollable component reaches the start position.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27873,8 +28703,12 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Triggered when the scrollable component reaches the end position.
    *
-   * @param { function } event - Callback function, triggered when the scrollable reaches the end position.
-   * @returns { T }
+   * Triggered once when the scrollable component is initialized and is already at the end position. When the edge
+   * effect is a spring effect, this event is triggered once when the component is swiped past the end position, and
+   * once again when it bounces back to the end position.
+   *
+   * @param { function } event - Callback invoked when the scrollable component reaches the end position.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27884,11 +28718,18 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onReachEnd(event: () => void): T;
 
   /**
-   * Triggered when the scrollable component starts scrolling initiated by the user's finger dragging the component or 
-   * its scrollbar.
+   * Triggered when the scrollable component starts scrolling initiated by the user's finger dragging the component or
+   * its scrollbar. This event is also triggered when the animation contained in the scrolling triggered by
+   * [Scroller]{@link Scroller} starts.
    *
-   * @param { function } event - Callback function, triggered when the scrollable starts scrolling.
-   * @returns { T }
+   * Trigger conditions:
+   *
+   * 1. The scrollable component starts scrolling, supporting various input settings including keyboard and mouse
+   * operations.
+   * 2. Scrolling is initiated through scroller controller API calls with transition animation effects.
+   *
+   * @param { function } event - Callback invoked when scrolling starts.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27898,10 +28739,17 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onScrollStart(event: () => void): T;
 
   /**
-   * Triggered when scrolling stops after the user's finger leaves the screen.
+   * Triggered when the scrollable component stops scrolling after the user's finger leaves the screen. This event is
+   * also triggered when the animation contained in the scrolling triggered by [Scroller]{@link Scroller} stops.
    *
-   * @param { function } event - Callback function, triggered when the scrollable stops scrolling.
-   * @returns { T }
+   * Trigger conditions:
+   *
+   * 1. The scrollable component stops scrolling, supporting various input settings including keyboard and mouse
+   * operations.
+   * 2. The animation stops after scroller controller API calls with transition effects.
+   *
+   * @param { function } event - Callback invoked when scrolling stops.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27911,15 +28759,28 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   onScrollStop(event: () => void): T;
 
   /**
-   * Sets the maximum initial velocity at the start of the fling animation that occurs after gesture-driven scrolling 
-   * ends.
+   * Sets the maximum initial speed for inertial animation after a fling gesture.
    *
-   * @param { number } speedLimit - Maximum initial velocity at the start of the fling animation.
-   *     <br>Default value: <em>9000</em>
+   * > **NOTE**
+   * >
+   * > - Inertial animation is the effect that the scrolling content continues to scroll and gradually decelerates and
+   * > stops after the finger quickly flings and leaves the screen. It is also called inertial scrolling.
+   * >
+   * > - Inertial animation is triggered when the finger quickly flings and leaves the screen, or when the
+   * > [fling]{@link Scroller#fling} method is called.
+   * >
+   * > - Inertial animation is not generated when the mouse wheel or keyboard arrow keys are used to scroll, or when the
+   * > [scrollTo]{@link Scroller#scrollTo} method is used to scroll to a specified position.
+   * >
+   * > - If the inertial animation is triggered by the [fling]{@link Scroller#fling} method, the **flingSpeedLimit**
+   * > setting does not take effect.
+   *
+   * @param { number } speedLimit - Maximum initial speed for inertial animation.
+   *     <br>Default value: **9000**
    *     <br>Unit: vp/s
    *     <br>Value range: (0, +∞). If this parameter is set to a value less than or equal to 0, the default value is
    *     used.
-   * @returns { T }
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27931,8 +28792,21 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Sets the content clipping area for this scrollable component.
    *
-   * @param { ContentClipMode | RectShape } clip - A value from enum ContentClipMode or a customized clip rect.
-   * @returns { T }
+   * Since API version 26.0.0, child components within the content-layer clipping area can be displayed normally. In
+   * versions earlier than API version 26.0.0, when the content-layer clipping area of the [List]{@link ./list}
+   * component is larger than the component itself, child components that are completely outside the component area but
+   * within the clipping area are not displayed by default. To display them, set the **show** parameter of the
+   * **cachedCount** attribute of the component to **true**. However, because the preloaded child components set by the
+   * **cachedCount** attribute are executed only in idle time slots, flickering may occur due to untimely updates in
+   * scenarios such as component size changes and data updates.
+   *
+   * @param { ContentClipMode | RectShape } clip - Clipping applies only to the content of the scroll container, that
+   *     is, its child nodes, and the background is not affected. When a custom rectangular area is passed in through
+   *     **RectShape**, only the width, height, and [offset]{@link @ohos.arkui.shape:CommonShapeMethod#offset} relative
+   *     to the upper left corner of the component are supported, and rounded corners are not supported.
+   *     <br>Default value: the default value for **Grid** and **Scroll** is **ContentClipMode.BOUNDARY**, and the
+   *     default value for **List** and **WaterFlow** is **ContentClipMode.CONTENT_ONLY**.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27942,10 +28816,17 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   clipContent(clip: ContentClipMode | RectShape): T;
 
   /**
-   * Set the sensitivity of rotating crown.
+   * Sets the sensitivity of the digital crown's response to events.
+   * 
+   * A component must have focus to receive [crown events]{@link ./common}. Focus control can be managed using 
+   * [focusable]{@link CommonMethod#focusable}, [defaultFocus]{@link CommonMethod#defaultFocus}, and 
+   * [focusOnTouch]{@link CommonMethod#focusOnTouch}.
    *
-   * @param { Optional<CrownSensitivity> } sensitivity - The sensitivity of rotating crown, default value is { MEDIUM }.
-   * @returns { T } The component instance.
+   * @param { Optional<CrownSensitivity> } sensitivity - Crown response sensitivity. **CrownSensitivity.LOW** indicates
+   *     low sensitivity, with a slower scrolling response; **CrownSensitivity.MEDIUM** indicates medium sensitivity,
+   *     with a moderate scrolling response; **CrownSensitivity.HIGH** indicates high sensitivity, with a faster
+   *     scrolling response.<br/>Default value: **CrownSensitivity.MEDIUM**, with a moderate response speed.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27955,12 +28836,20 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   digitalCrownSensitivity(sensitivity: Optional<CrownSensitivity>): T;
 
   /**
-   * Sets whether to enable the back-to-top feature for a scrollable component when the status bar is touched.
+   * Sets whether to enable the back-to-top feature for the scrollable component when the status bar is touched.
    *
-   * @param { boolean } backToTop - Whether to enable the back-to-top feature for a scrollable component when the status
-   *     bar is touched.
-   *     <br>Default value: <em>false</em>
-   * @returns { T }
+   * When a status bar touch event is received, the scrollable component on the current page can scroll to the top with
+   * an animation. This behavior does not affect scrollable components in background applications, which will not scroll
+   * to the top. This attribute is independent of the
+   * [enableScrollInteraction]{@link ScrollableCommonMethod#enableScrollInteraction(value: boolean)}
+   * setting.
+   *
+   * @param { boolean } backToTop - Whether to enable the back-to-top feature for the scrollable component when the
+   *     status bar is touched. **true** to enable, **false** otherwise.
+   *     <br>Default value:
+   *     <br>Versions earlier than API version 18: **false**
+   *     <br>API version 18 and later: **false** for horizontal scrolling and **true** for vertical scrolling
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27970,13 +28859,22 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   backToTop(backToTop: boolean): T;
 
   /**
-   * Sets the scrollbar track height.
+   * Sets the height of the scrollbar track.
    *
-   * @param { LengthMetrics | undefined } height - Scrollbar track height.
-   *     <br>The value must be greater than or equal to 0, If set to undefined or a value less than 0, the default value
-   *     is used. If set to 0, the scrollbar is not displayed.
-   *     <br> Default value: adaptive to the height of the scrollable component. 
-   * @returns { T }
+   * If this API is not called, the height of the scrollbar track adapts to the height of the scrollable component by
+   * default. The default height on a wearable is 37 vp.
+   *
+   * > **NOTE**
+   * >
+   * > Ensure that the sum of the values set for **scrollBarHeight** and
+   * > [scrollBarMargin]{@link ScrollableCommonMethod#scrollBarMargin(margin: ScrollBarMargin)}
+   * > does not exceed the height of the scrollable component. Otherwise, the scrollbar may fail to display properly.
+   *
+   * @param { LengthMetrics | undefined } height - Height of the scrollbar track.<br/>The value must be greater than or
+   *     equal to 0. If it is set to **undefined** or a value less than 0, the height adapts to the scrollable
+   *     component, and on a wearable it is restored to the default value 37 vp. If it is set to 0, the scrollbar is not
+   *     displayed.
+   * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27987,7 +28885,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
 }
 
 /**
- * The actual offset by which the scrollable scrolls.
+ * Implements a return value object of the [OnWillScrollCallback]{@link OnWillScrollCallback} callback.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28009,13 +28907,17 @@ declare class ScrollResult {
 }
 
 /**
- * Called before scroll to allow developer to control real offset the Scrollable can scroll.
+ * Triggered when the scrollable component is about to scroll.
  *
- * @param { number } scrollOffset - offset this frame will scroll, which may or may not be reached.
- * @param { ScrollState } scrollState - current scroll state.
- * @param { ScrollSource } scrollSource - source of current scroll.
- * @returns { void | ScrollResult } the remain offset for the scrollable,
- *     same as scrollOffset when no ScrollResult is returned.
+ * @param { number } scrollOffset - Offset relative to the previous frame. The offset is positive when the scrollable
+ *     component is scrolled up and negative when it is scrolled down.
+ *     <br>Unit: vp
+ * @param { ScrollState } scrollState - Current scroll state.
+ * @param { ScrollSource } scrollSource - Source of the current scrolling operation.
+ * @returns { void | ScrollResult } Returns a **ScrollResult** object if the scrollable component scrolls by the
+ *     developer-specified offset relative to the previous frame; returns no **ScrollResult** object if the component
+ *     scrolls by the offset specified by **scrollOffset** in the callback.
+ *     <br>Value range: (-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28026,10 +28928,12 @@ declare type OnWillScrollCallback =
 (scrollOffset: number, scrollState: ScrollState, scrollSource: ScrollSource) => void | ScrollResult;
 
 /**
- * On scroll callback using in scrollable onDidScroll.
+ * Triggered when the scrollable component scrolls.
  *
- * @param { number } scrollOffset - offset this frame did scroll.
- * @param { ScrollState } scrollState - current scroll state.
+ * @param { number } scrollOffset - Offset relative to the previous frame. The offset is positive when the scrollable
+ *     component is scrolled up and negative when it is scrolled down.
+ *     <br>Unit: vp
+ * @param { ScrollState } scrollState - Current scroll state.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28040,11 +28944,12 @@ declare type OnWillScrollCallback =
 declare type OnScrollCallback = (scrollOffset: number, scrollState: ScrollState) => void;
 
 /**
- * Defines the callback type used in onItemDragStart.
+ * Called when a list or grid element starts to be dragged.
  *
- * @param { ItemDragInfo } event - Information about the dragged item.
- * @param { number } itemIndex - The index number of the dragged item.
- * @returns { CustomBuilder }
+ * @param { ItemDragInfo } event - Information about the drag point.
+ * @param { number } itemIndex - Index of the dragged element.
+ * @returns { CustomBuilder } Returns a **CustomBuilder** object for constructing the drag preview of the dragged
+ *     element. If **void** is returned, the drag operation cannot be performed.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform
@@ -28054,9 +28959,17 @@ declare type OnScrollCallback = (scrollOffset: number, scrollState: ScrollState)
 declare type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: number) => CustomBuilder;
 
 /**
- * Defines the callback type used in onGetPreviewBadge of EditModeOptions.
+ * Called to obtain the number of selected items when the animation for gathering selected items upon long press is
+ * about to start.
  *
- * @returns { boolean | number }
+ * @returns { boolean | number } Whether to display a badge showing the count of selected items on the menu preview
+ *     image after the animation for gathering selected items upon long press is played, or the specific number to
+ *     display.
+ *     <br>**true**: The number of selected items in a **Grid** or **List** component will be displayed as the badge.
+ *     **false**: The badge is not displayed.
+ *     <br>If a number is returned, it will be displayed as the badge by default. Value range: [0, 2<sup>31</sup>-1]. If
+ *     the value is out of the range, it is treated as **true**.
+ *     <br>If a floating-point number is returned, it is rounded down.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28066,9 +28979,10 @@ declare type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: number) 
 declare type OnGetPreviewBadgeCallback = () => boolean | number;
 
 /**
- * On scroll callback using in scrollable onWillStopDragging.
+ * Defines the callback invoked when the scrollable component is released.
  *
- * @param { number } velocity - The veolicity of the scroll view at the moment the touch was released.
+ * @param { number } velocity - Scroll velocity. Positive for scrolling upward, negative for scrolling downward.
+ *     <br>Unit: vp/s.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28079,9 +28993,10 @@ declare type OnGetPreviewBadgeCallback = () => boolean | number;
 declare type OnWillStopDraggingCallback = (velocity: number) => void;
 
 /**
- * On scroll callback using in scrollable onDidStopDragging.
+ * Defines the callback invoked when the scrollable component stops being dragged.
  *
- * @param { boolean } willFling - whether start fling animation.
+ * @param { boolean } willFling - Whether an inertial animation will follow. **true**: An inertial animation will
+ *     follow. **false**: No inertial animation will follow.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28092,10 +29007,24 @@ declare type OnWillStopDraggingCallback = (velocity: number) => void;
 declare type OnDidStopDraggingCallback = (willFling: boolean) => void;
 
 /**
- * Defines the callback type used in OnVisibleIndexesChange.
+ * Defines the callback type invoked when the indexes of the child components displayed by the lazy loading layout
+ * containers [LazyColumnLayout](docroot://reference/apis-arkui/arkui-ts/ts-container-lazycolumnlayout.md),
+ * [LazyVGridLayout]{@link ./lazy_grid_layout}, and
+ * [LazyVWaterFlowLayout](docroot://reference/apis-arkui/arkui-ts/ts-container-lazyvwaterflowlayout.md) change.
  *
- * @param { int } start - the first index in visible content.
- * @param { int } end - the last index in visible content.
+ * > **NOTE**
+ * >
+ * > - When the lazy loading layout container has no child components, both **start** and **end** return -1.
+ * >
+ * > - When the lazy loading layout container has no child components in the visible area, both **start** and **end**
+ * > return -1.
+ *
+ * @param { int } start - Index of the start position of the visible area.<br/>Value range:
+ *     [0, total number of child nodes - 1]. The value **-1** is returned when there is no child node or all child nodes
+ *     are outside the visible area.
+ * @param { int } end - Index of the end position of the visible area.<br/>Value range:
+ *     [0, total number of child nodes - 1]. The value **-1** is returned when there is no child node or all child nodes
+ *     are outside the visible area.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28105,10 +29034,10 @@ declare type OnDidStopDraggingCallback = (willFling: boolean) => void;
 declare type OnVisibleIndexesChangeCallback = (start: int, end: int) => void;
 
 /**
- * Defines the onMove callback.
+ * Defines the callback triggered when data is moved during drag-and-drop sorting.
  *
- * @param { number } from - Index number for moving elements.
- * @param { number } to - Target index number for moving elements.
+ * @param { number } from - Start index of the drag operation. The value range is [0, data source length - 1].
+ * @param { number } to - End index of the drag operation. The value range is [0, data source length - 1].
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28118,7 +29047,7 @@ declare type OnVisibleIndexesChangeCallback = (start: int, end: int) => void;
 declare type OnMoveHandler = (from: number, to: number) => void;
 
 /**
- * Define item drag event handler.
+ * Defines callbacks for drag events on a data source, allowing you to respond to different drag operations.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28128,7 +29057,8 @@ declare type OnMoveHandler = (from: number, to: number) => void;
  */
 declare interface ItemDragEventHandler {
   /**
-   * This callback is triggered when the item is long pressed.
+   * Callback triggered when long pressed. When not set, this callback is not triggered. The parameter **index** is the
+   * index of the current target when long pressed. The value range is [0, Data Source Length - 1].
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28139,7 +29069,8 @@ declare interface ItemDragEventHandler {
   onLongPress?: Callback<number>;
 
   /**
-   * This callback is triggered when the item is dragged.
+   * Callback triggered when drag starts. When not set, this callback is not triggered. The parameter **index** is the
+   * index of the current target when drag starts. The value range is [0, Data Source Length - 1].
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28150,7 +29081,9 @@ declare interface ItemDragEventHandler {
   onDragStart?: Callback<number>;
 
   /**
-   * This callback is triggered when an item is moved through other items.
+   * Callback triggered when passing through other components during page-following sliding. When not set, this callback
+   * is not triggered. The parameter **from** is the Start Index of the drag, and the parameter **to** is the Target
+   * Index currently passed through. The value range of both is [0, Data Source Length - 1].
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28161,7 +29094,8 @@ declare interface ItemDragEventHandler {
   onMoveThrough?: OnMoveHandler;
 
   /**
-   * This callback is triggered when the item is dropped.
+   * Callback triggered when drag ends. When not set, this callback is not triggered. The parameter **index** is the
+   * index of the current target when drag ends. The value range is [0, Data Source Length - 1].
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28183,13 +29117,17 @@ declare interface ItemDragEventHandler {
  */
 declare class DynamicNode<T> {
   /**
-   * Invoked when data is moved during drag and drop sorting.
-   * This callback is only applicable in a List component.
-   * where each ForEach iteration generates a ListItem component.
-   * It allows you to define custom drag actions and handle various drag events.
+   * Callback for data movement during drag sorting. It takes effect only when the parent container component is
+   * [List]{@link ./list} or [Grid]{@link ./grid} and each iteration of ForEach/LazyForEach/Repeat generates a ListItem
+   * or GridItem component. After being called, the drag sorting feature is enabled. After the drag is released, if the
+   * data position changes, the handler callback is triggered to report the start index and target index of the data
+   * movement. The data source must be modified in the callback, and it must be ensured that only the order of the data
+   * changes so that the placement animation can be executed properly.
    *
-   * @param { Optional<OnMoveHandler> } handler
-   * @returns { T }
+   * @param { Optional<OnMoveHandler> } handler - Callback for data movement during drag sorting. Triggered when the
+   *     data position changes due to dragging. In the callback, modify the data source based on the start index and
+   *     target index.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28199,11 +29137,22 @@ declare class DynamicNode<T> {
   onMove(handler: Optional<OnMoveHandler>): T;
 
   /**
-   * Set the move action.
+   * Callback for data movement during drag sorting. It takes effect only when the parent container component is
+   * [List]{@link ./list} or [Grid]{@link ./grid} and each iteration of ForEach/LazyForEach/Repeat generates a ListItem
+   * or GridItem component. After being called, the drag sorting feature is enabled. After the drag is released, if the
+   * data position changes, the handler callback is triggered to report the start index and target index of the data
+   * movement. The data source must be modified in the callback, and it must be ensured that only the order of the data
+   * changes so that the placement animation can be executed properly. Compared with
+   * [onMove]{@link onMove}, this API adds the
+   * eventHandler parameter, which can listen to drag phase events such as long press, drag start, passing over other
+   * components, and drag end.
    *
-   * @param { Optional<OnMoveHandler> } handler
-   * @param { ItemDragEventHandler } eventHandler
-   * @returns { T }
+   * @param { Optional<OnMoveHandler> } handler - Callback for drag sorting data movement. Invoked when the data
+   *     position changes due to dragging. In the callback, modify the data source based on the start index and target
+   *     index.
+   * @param { ItemDragEventHandler } eventHandler - Set of drag event callbacks, used to listen for drag phase events
+   *     such as long press, drag start, passing over other components, and drag end.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28222,7 +29171,8 @@ declare class DynamicNode<T> {
  * @since 11
  */
 /**
- * Define EdgeEffect Options.
+ * Implements an object used to configure the
+ * [edgeEffect]{@link ScrollableCommonMethod#edgeEffect(edgeEffect: EdgeEffect, options?: EdgeEffectOptions)} attribute.
  *
  * @interface EdgeEffectOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28266,7 +29216,7 @@ declare interface EdgeEffectOptions {
 }
 
 /**
- * Enumerates the effective edge of the edge effect.
+ * Enumerates the edges where the edge effect is applied.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28277,7 +29227,7 @@ declare interface EdgeEffectOptions {
 declare enum EffectEdge {
 
   /**
-   * Effective only for the starting edge.
+   * Start edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28288,7 +29238,7 @@ declare enum EffectEdge {
   START = 1,
 
   /**
-   * Effective only for the end edge.
+   * End edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28300,7 +29250,14 @@ declare enum EffectEdge {
 }
 
 /**
- * Indicates children main size.
+ * Provides the size information of the child components of the **List** or **ListItemGroup** component along the main 
+ * axis. This object only supports one-to-one binding to the **List** or **ListItemGroup** component.
+ * 
+ * > **NOTE**
+ * >
+ * > - The main axis size information must match the actual main axis size of the child components. When child 
+ * > components' main axis sizes change or components are added or removed, the **ChildrenMainSize** object methods must
+ * > be invoked to notify the **List** or **ListItemGroup** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28310,10 +29267,12 @@ declare enum EffectEdge {
  */
 declare class ChildrenMainSize {
   /**
-   * Creates an instance of ChildrenMainSize.
+   * A constructor used to create a **ChildrenMainSize** object.
    *
-   * @param { number } childDefaultSize - default main size, in vp. If the main axis is vertical, it indicates height.
-   *     If the main axis is horizontal, it indicates width.
+   * @param { number } childDefaultSize - Default size of the child component along the main axis.
+   *     <br>Unit: vp
+   *     <br>**NOTE**
+   *     <br>The value must be a finite non-negative number; otherwise, an exception will be thrown.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -28327,10 +29286,12 @@ declare class ChildrenMainSize {
   constructor(childDefaultSize: number);
 
   /**
-   * Set default size.
+   * Sets the default size of the child component along the main axis.
    *
-   * @param { number } value - default main size, in vp. If the main axis is vertical, it indicates height.
-   *     If the main axis is horizontal, it indicates width.
+   * @param { number } value - Default size of the child component along the main axis.
+   *     <br>Unit: vp
+   *     <br>**NOTE**
+   *     <br>The value must be a finite non-negative number; otherwise, an exception will be thrown.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -28357,11 +29318,34 @@ declare class ChildrenMainSize {
   get childDefaultSize(): number;
 
   /**
-   * Changes children main size by removing or replacing existing elements and/or adding new elements in place.
+   * Performs batch operations to add, delete, or modify the size information of child components along the main axis.
    *
-   * @param { number } start - Zero-based index at which to start changing the children main size.
-   * @param { number } [deleteCount] - Indicating the number of children main size to remove from start.
-   * @param { Array<number> } [childrenSize] - Add the new children main size, beginning from start.
+   * @param { number } start - Index starting from 0, which indicates the position at which to begin modifying the size
+   *     information of child components along the main axis.
+   *     <br>**NOTE**
+   *     <br>1. The value must be a finite non-negative number; otherwise, an exception will be thrown.
+   *     <br>2. Non-integer values are truncated to the nearest integer.
+   *     <br>3. Values exceeding the maximum index do not take effect.
+   *     <br>Value range: [0, +∞)
+   * @param { number } [deleteCount] - Number of size information entries to be deleted starting from the **start**
+   *     position.
+   *     <br>**NOTE**
+   *     <br>1.  The value must be a finite non-negative number; otherwise, it will be treated as **0**.
+   *     <br>2. Non-integer values are truncated to the nearest integer.
+   *     <br>3. The result of (start + deleteCount - 1) can exceed the maximum index, which will delete all size
+   *     information of child components starting from the **start** position.
+   *     <br>Default value: **+∞**
+   *     <br>Value range: [0, +∞)
+   * @param { Array<number> } [childrenSize] - Size information of all child components to be inserted, starting from
+   *     the **start** position.
+   *     <br>Unit for each value in the array: vp
+   *     <br>**NOTE**
+   *     <br>1. If the values in the array are finite non-negative number, they are considered specified sizes and will
+   *     not change with the default size.
+   *     <br>2. If the values in the array are not finite non-negative number, they will be treated as the default size
+   *     and will change with the default size.
+   *     <br>The default value is an empty array.
+   *     <br>Value range: [0, +∞)
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -28396,7 +29380,7 @@ declare class ChildrenMainSize {
 }
 
 /**
- * Define edit mode options.
+ * Sets attributes of the **List** or **Grid** component in edit mode.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28631,10 +29615,26 @@ declare interface LightSource {
 }
 
 /**
- * Defining wrapBuilder function.
+ * `wrapBuilder` is used to encapsulate a global [\@Builder]{@link Builder} function, so that the global
+ * `@Builder` function can be passed as a parameter to implement pass-by-reference and dynamic invocation,
+ * improving code reusability.
  *
- * @param { function } builder
- * @returns { WrappedBuilder<Args> }
+ * For details about the development guide, see
+ * [wrapBuilder: Encapsulating Global @Builder](docroot://ui/state-management/arkts-wrapBuilder.md).
+ *
+ * `wrapBuilder` is a template function that returns a `WrappedBuilder` object. The template parameter
+ * `Args extends Object[]` is the parameter list of the `@Builder` function to be encapsulated. When a global
+ * `@Builder` function needs to be passed, it is recommended to encapsulate it through `wrapBuilder` first, and
+ * then use the returned `WrappedBuilder` object as a parameter or variable.
+ *
+ * @param { function } builder - Global function decorated by `@Builder`. After being passed in, it
+ *     is wrapped into a `WrappedBuilder` object. This function must return no value (`void`), and the types and
+ *     order of its parameter list `...args` are defined by the generic `Args`. Pass this parameter when a global
+ *     `@Builder` function needs to be passed by reference or reused between components.
+ * @returns { WrappedBuilder<Args> } An instance of `WrappedBuilder<Args>`, used to reuse or pass a global
+ *     `@Builder` function between components. This instance encapsulates the specified global `@Builder` function,
+ *     and the encapsulated builder function can be invoked through its `builder` property, making it convenient to
+ *     pass as a parameter between components or assign to a variable.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28644,9 +29644,13 @@ declare interface LightSource {
 declare function wrapBuilder<Args extends Object[]>(builder: (...args: Args) => void): WrappedBuilder<Args>;
 
 /**
- * Defines the callback type used in mutableBuilder.
+ * `BuilderCallback` is a type alias of the global `@Builder` function. It serves as the input parameter type of
+ * the `mutableBuilder` function and is used to specify the global `@Builder` function to be wrapped.
  *
- * @param { Args } args - The parameter of MutableBuilder.
+ * @param { Args } args - Input parameters of the global `@Builder` function. `...args` uses the rest parameter
+ *     syntax, allowing any number of parameters to be passed in. `Args` represents the type list of these
+ *     parameters. When no parameter is passed in, the parameter list is empty and the `@Builder` function is
+ *     called without parameters.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28656,10 +29660,26 @@ declare function wrapBuilder<Args extends Object[]>(builder: (...args: Args) => 
 declare type BuilderCallback<Args extends Object[] = any[]> = (...args: Args) => void;
 
 /**
- * Defining mutableBuilder function.
+ * Use `mutableBuilder` to wrap a global [\@Builder]{@link Builder} function, so as to dynamically switch the
+ * content of the global `@Builder` function at runtime based on different conditions (for example, switching
+ * between different UI building logic based on the state). For details about the development guide, see
+ * [mutableBuilder: Implementing Dynamic Update of Global @Builder](docroot://ui/state-management/arkts-mutableBuilder.md).
  *
- * @param { BuilderCallback } builder
- * @returns { MutableBuilder<Args> }
+ * `mutableBuilder` is a generic function. It returns a `MutableBuilder` object and accepts only a single global
+ * `@Builder` function as its parameter.
+ *
+ * The `builder` attribute method of the `MutableBuilder` object returned by the `mutableBuilder` function
+ * can be called only inside the `build` function of a custom component or a function decorated by `@Builder`.
+ *
+ * @param { BuilderCallback } builder - Global function decorated by `@Builder`, used as the target builder
+ *     function encapsulated by `mutableBuilder`. This function must conform to the `BuilderCallback` type,
+ *     that is, `(...args: Args) => void`, which is a function with no return value. The type of its parameter
+ *     list `...args` is specified by the generic `Args`.
+ * @returns { MutableBuilder<Args> } An instance of `MutableBuilder<Args>`, used to encapsulate a global
+ *     `@Builder` function and support dynamically switching the build logic at runtime. This instance holds a
+ *     reference to the global `@Builder` function. You can call the encapsulated build function through its
+ *     `builder` attribute, or dynamically switch the build logic by reassigning a new instance returned by the
+ *     `mutableBuilder` function. Its `builder` attribute method can only be used inside a custom component.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -28669,7 +29689,8 @@ declare type BuilderCallback<Args extends Object[] = any[]> = (...args: Args) =>
 declare function mutableBuilder<Args extends Object[]>(builder: BuilderCallback): MutableBuilder<Args>;
 
 /**
- * Defines the WrappedBuilder class.
+ * `WrappedBuilder` is a wrapper class for `@Builder` functions. It is used to encapsulate a global `@Builder`
+ * function and its parameters to implement pass-by-reference and dynamic invocation.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28679,6 +29700,7 @@ declare function mutableBuilder<Args extends Object[]>(builder: BuilderCallback)
  */
 declare class WrappedBuilder<Args extends Object[]> {
   /**
+   * Global function decorated by `@Builder`, used to generate the corresponding custom build content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28689,8 +29711,11 @@ declare class WrappedBuilder<Args extends Object[]> {
   builder: (...args: Args) => void;
 
   /**
+   * A constructor used to create a `WrappedBuilder` instance.
    *
-   * @param { function } builder
+   * @param { function } builder - A global function decorated by `@Builder`, used as a constructor
+   *     parameter to initialize a `WrappedBuilder` instance. The function parameter `args` is the parameter list
+   *     required by the `@Builder` function.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28701,7 +29726,13 @@ declare class WrappedBuilder<Args extends Object[]> {
 }
 
 /**
- * Defines the MutableBuilder class.
+ * `MutableBuilder` inherits from [WrappedBuilder]{@link WrappedBuilder} and is used to wrap a
+ * [global `@Builder`](docroot://ui/state-management/arkts-builder.md) function and to support switching
+ * the build function at runtime. When you need to dynamically replace the content of a global `@Builder`
+ * function based on state or conditions, it is recommended that you use the
+ * [mutableBuilder](docroot://ui/state-management/arkts-mutableBuilder.md) function to create a
+ * `MutableBuilder` object. Its `builder` attribute method can be called only inside the `build` function
+ * of a custom component or a function decorated by `@Builder`.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -28709,8 +29740,7 @@ declare class WrappedBuilder<Args extends Object[]> {
  * @atomicservice
  * @since 22 dynamiconly
  */
-declare class MutableBuilder<Args extends Object[]> extends WrappedBuilder<Args> {
-}
+declare class MutableBuilder<Args extends Object[]> extends WrappedBuilder<Args> {}
 
 /**
  * Provides animation configuration options.
@@ -29170,7 +30200,7 @@ declare interface UICommonEvent {
 }
 
 /**
- * Defines a UIScrollableCommonEvent which is used to set event to target component.
+ * Configures scroll event callbacks.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -29180,10 +30210,12 @@ declare interface UICommonEvent {
  */
 declare interface UIScrollableCommonEvent extends UICommonEvent {
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the start position.
+   * Sets the callback for the 
+   * [onReachStart]{@link ScrollableCommonMethod#onReachStart(event: () => void)} event.
+   * 
+   * If the input parameter is **undefined**, the event callback is reset.
    *
-   * @param { Callback<void> | undefined } callback - callback function, triggered when the
-   *     scrolling reaches the start position.
+   * @param { Callback<void> | undefined } callback - Callback for the **onReachStart** event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -29193,10 +30225,12 @@ declare interface UIScrollableCommonEvent extends UICommonEvent {
   setOnReachStart(callback: Callback<void> | undefined): void;
 
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the end position.
+   * Sets the callback for the 
+   * [onReachEnd]{@link ScrollableCommonMethod#onReachEnd(event: () => void)} event.
+   * 
+   * If the input parameter is **undefined**, the event callback is reset.
    *
-   * @param { Callback<void> | undefined } callback - callback function, triggered when the
-   *     scrolling reaches the end position.
+   * @param { Callback<void> | undefined } callback - Callback for the **onReachEnd** event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -29206,9 +30240,12 @@ declare interface UIScrollableCommonEvent extends UICommonEvent {
   setOnReachEnd(callback: Callback<void> | undefined): void;
 
   /**
-   * Set or reset the callback which is triggered when the scrolling started.
+   * Sets the callback for the 
+   * [onScrollStart]{@link ScrollableCommonMethod#onScrollStart(event: () => void)} event.
+   * 
+   * If the input parameter is **undefined**, the event callback is reset.
    *
-   * @param { Callback<void> | undefined } callback - callback function, triggered when the scrolling started.
+   * @param { Callback<void> | undefined } callback - Callback for the **onScrollStart** event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -29218,9 +30255,12 @@ declare interface UIScrollableCommonEvent extends UICommonEvent {
   setOnScrollStart(callback: Callback<void> | undefined): void;
 
   /**
-   * Set or reset the callback which is triggered when the scrolling stoped.
+   * Sets the callback for the 
+   * [onScrollStop]{@link ScrollableCommonMethod#onScrollStop(event: () => void)} event.
+   * 
+   * If the input parameter is **undefined**, the event callback is reset.
    *
-   * @param { Callback<void> | undefined } callback - callback function, triggered when the scrolling stoped.
+   * @param { Callback<void> | undefined } callback - Callback for the **onScrollStop** event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -29230,10 +30270,11 @@ declare interface UIScrollableCommonEvent extends UICommonEvent {
   setOnScrollStop(callback: Callback<void> | undefined): void;
 
   /**
-   * Set or reset the callback which is triggered when scrolling begin each frame.
+   * Sets the callback for the [onScrollFrameBegin]{@link ScrollAttribute#onScrollFrameBegin} event.
+   * 
+   * If the input parameter is **undefined**, the event callback is reset.
    *
-   * @param { OnScrollFrameBeginCallback | undefined } callback - callback function, triggered when the
-   *     scrolling begin each frame.
+   * @param { OnScrollFrameBeginCallback | undefined } callback - Callback for the **onScrollFrameBegin** event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -29335,7 +30376,7 @@ declare interface GestureModifier {
 }
 
 /**
- * Defines the selection options.
+ * Provides the configuration options for text selection.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -29345,8 +30386,7 @@ declare interface GestureModifier {
  */
 declare interface SelectionOptions {
   /**
-   * Menu display policy.
-   * Default value: MenuPolicy.DEFAULT.
+   * Policy for menu popup. Default value: MenuPolicy.DEFAULT.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

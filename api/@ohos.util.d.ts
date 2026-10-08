@@ -18,6 +18,10 @@
  * @kit ArkTS
  */
 
+/*** if arkts dynamic */
+import collections from '@arkts.collections';
+/*** endif */
+
 /**
  * The util module provides common utility functions, such as [TextEncoder]{@link util.TextEncoder} and
  * [TextDecoder]{@link util.TextDecoder} for string encoding and decoding,
@@ -122,8 +126,7 @@ declare namespace util {
    * @param { function } original - Function, in which the first parameter **err** indicates the cause of the rejection
    *     (the value is **null** if the promise has been resolved) and the second parameter **value** indicates the
    *     resolved value.
-   * @returns { function } Return a function that returns promises [since 9 - 11]
-   * @returns { Function } Promise function. [since 10]
+   * @returns { Function } Promise function.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
    * @atomicservice [since 12]
@@ -197,7 +200,7 @@ declare namespace util {
    * and returned. If a hash value has been obtained, the hash value saved in the **hash** field is returned (the same
    * value is returned for the same object).
    *
-   * @param { object } [object] - Object whose hash value is to be obtained.
+   * @param { object } object - Object whose hash value is to be obtained.
    * @returns { number } Hash value.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform
@@ -788,7 +791,7 @@ declare namespace util {
     /**
      * A constructor used to create a **LruBuffer** instance. The default capacity of the cache is 64.
      *
-     * @param { number } capacity - Capacity of the cache to create. The default value is **64**.
+     * @param { number } [capacity] - Capacity of the cache to create. The default value is **64**.
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1394,7 +1397,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.toString
+     * @useinstead ohos.util.ScopeHelper.toString
      */
     toString(): string;
 
@@ -1491,7 +1494,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.contains
+     * @useinstead ohos.util.ScopeHelper.contains
      */
     contains(value: ScopeType): boolean;
 
@@ -1504,7 +1507,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.contains
+     * @useinstead ohos.util.ScopeHelper.contains
      */
     contains(range: Scope): boolean;
 
@@ -1873,7 +1876,8 @@ declare namespace util {
      * encoding formats, including standard Base64 encoding, MIME-compliant Base64 encoding (with line breaks), and URL-
      * safe Base64 encoding.
      *
-     * @param { Uint8Array } src - Uint8Array object to encode.
+     * @param { Uint8Array } src - Uint8Array object to encode. [since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - Uint8Array object to encode. [since 26.2.0]
      * @param { Type } [options] - Encoding format.<br>The following values are available:<br>- **util.Type.BASIC** (
      *     default): Base64 encoding. The return value does not contain carriage return characters or newline
      *     characters.<br>- **util.Type.MIME**: Base64 encoding. If the return value exceeds 76 characters, a line break
@@ -1882,7 +1886,7 @@ declare namespace util {
      *     does not contain carriage return characters or newline characters.<br>- **util.Type.MIME_URL_SAFE**: Base64
      *     URL encoding. Each line in the return value contains a maximum of 76 characters and ends with '\r\n'.
      *     [since 10 - 11]
-     * @param { Type } options - Encoding format.<br>The following values are available:<br>- **util.Type.BASIC** (
+     * @param { Type } [options] - Encoding format.<br>The following values are available:<br>- **util.Type.BASIC** (
      *     default): Base64 encoding. The return value does not contain carriage return characters or newline
      *     characters.<br>- **util.Type.MIME**: Base64 encoding. If the return value exceeds 76 characters, a line break
      *     is inserted every 76 characters, and each line ends with '\r\n'. If the return value is fewer than 76
@@ -1896,7 +1900,7 @@ declare namespace util {
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
-    encodeToStringSync(src: Uint8Array, options?: Type): string;
+    encodeToStringSync(src: Uint8Array | collections.Uint8Array, options?: Type): string;
 
     /**
      * Decodes a string into a Uint8Array object. This API returns the result synchronously.
@@ -1932,7 +1936,8 @@ declare namespace util {
     /**
      * Encodes the input content into a string. This API uses a promise to return the result.
      *
-     * @param { Uint8Array } src - Uint8Array object to encode.
+     * @param { Uint8Array } src - Uint8Array object to encode. [since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - Uint8Array object to encode. [since 26.2.0]
      * @param { Type } [options] - Encoding format.<br>The following values are available:<br>- **util.Type.BASIC** (
      *     default): Base64 encoding. The return value does not contain carriage return characters or newline
      *     characters.<br>- **util.Type.MIME**: Base64 encoding. Each line of the return value contains a maximum of 76
@@ -1945,7 +1950,7 @@ declare namespace util {
      * @atomicservice [since 12]
      * @since 9 dynamic
      */
-    encodeToString(src: Uint8Array, options?: Type): Promise<string>;
+    encodeToString(src: Uint8Array | collections.Uint8Array, options?: Type): Promise<string>;
 
     /**
      * Decodes the input content into a Uint8Array object. This API uses a promise to return the result.

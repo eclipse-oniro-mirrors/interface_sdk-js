@@ -776,7 +776,7 @@ export interface TargetInfo {
 }
 
 /**
- * Sets the background luminance sampling parameters.
+ * Defines the background luminance sampling parameter configuration.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -786,7 +786,11 @@ export interface TargetInfo {
 export interface BackgroundLuminanceSamplingConfigs {
 
   /**
-   * Color sampling interval, in milliseconds. The minimum value is 180 ms.
+   * Sampling interval, in milliseconds. Value range: ≥180 ms. Set a smaller value (for example, 180–300 ms) when more 
+   * frequent background color sampling responses are needed, and set a larger value (for example, 500–1000 ms) to 
+   * conserve system resources.
+   * 
+   * Default value: 500 ms
    *
    * @default 500
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -797,8 +801,12 @@ export interface BackgroundLuminanceSamplingConfigs {
   samplingInterval?: number;
 
   /**
-   * Light color brightness threshold. The value must be an integer in the range of [0, 255]. The dark color brightness
-   * threshold must be less than the light color brightness threshold.
+   * Light brightness threshold. The value is an integer in the range [0, 255]. The light brightness threshold must be 
+   * greater than the dark brightness threshold. When you need to adjust the sensitivity of light‑color detection, you 
+   * can customize this value. A lower value makes the light‑color detection more lenient, while a higher value makes it
+   * more stringent.
+   * 
+   * Default value: 220
    *
    * @default 220
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -809,8 +817,12 @@ export interface BackgroundLuminanceSamplingConfigs {
   brightThreshold?: number;
 
   /**
-   * Dark color brightness threshold. The value must be an integer in the range of [0, 255]. The dark color brightness
-   * threshold must be less than the light color brightness threshold.
+   * Dark brightness threshold. The value is an integer in the range [0, 255]. The dark brightness threshold must be 
+   * less than the light brightness threshold. When you need to adjust the sensitivity of dark‑color detection, you can 
+   * customize this value. A higher value makes the dark‑color detection more lenient, while a lower value makes it more
+   * stringent.
+   * 
+   * Default value: 150
    *
    * @default 150
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -821,10 +833,11 @@ export interface BackgroundLuminanceSamplingConfigs {
   darkThreshold?: number;
 
   /**
-   * Sample area offset relative to the component, calculated from the component's upper left corner as the reference
-   * point.
+   * Offset of the sampling area relative to the component, calculated based on the upper left corner of the component. 
+   * It is recommended to set the sampling area within the visible range to avoid inaccurate sampling results caused by 
+   * excessive offset.
    *
-   * The component's own area is used by default.
+   * The component's own region is used by default.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -837,11 +850,11 @@ export interface BackgroundLuminanceSamplingConfigs {
 /**
  * Sets the background luminance color picking parameters, registers the luminance change listening callback, and
  * unregisters the listening callback.
- *
+ * 
  * > **NOTE**
  * >
  * > In the following API examples, you must first use [getLuminanceSampler]{@link UIContext#getLuminanceSampler} in
- * > **UIContext** to obtain a **LuminanceSampler** object, and then call the APIs using the obtained object.
+ * > > **UIContext** to obtain a **LuminanceSampler** object, and then call the APIs using the obtained object.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -867,7 +880,7 @@ export class LuminanceSampler {
 
   /**
    * Registers the callback for listening to color picking.
-   *
+   * 
    * The background luminance is divided into three ranges based on the luminance threshold and dark threshold set by
    * the [setBackgroundLuminanceSamplingConfigs]{@link LuminanceSampler#setBackgroundLuminanceSamplingConfigs} API:
    * [0, Dark threshold], (Dark threshold, Luminance threshold], and (Luminance threshold, 255]. The callback is
@@ -875,7 +888,8 @@ export class LuminanceSampler {
    * and the interval between the current color picking and the last color picking reaches the specified interval, and
    * the current background luminance is returned.
    *
-   * @param { Callback<number> } samplingCallback - Callback used to return the current background luminance.<br>Note:
+   * @param { Callback<number> } samplingCallback - Callback used to return the current background luminance.
+   *     <br>Note:
    *     [offBackgroundLuminanceChange]{@link LuminanceSampler#off} cannot be called in the listening callback.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -5321,34 +5335,35 @@ export class UIContext {
    * > - Avoid using **animateTo** in **aboutToAppear** or **aboutToDisappear**.
    * >
    * > - When **animateTo** is called in
-   * > [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear), the
-   * > component's build method is not executed yet, and internal components are not created. This means the animation
-   * > has no initial values to work with and will not function as expected.
+   * > > [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear), the
+   * > > component's build method is not executed yet, and internal components are not created. This means the animation
+   * > > has no initial values to work with and will not function as expected.
    * >
    * > - During execution of
-   * > [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear),
-   * > the component is being destroyed, so animations should not be used.
+   * > > [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear),
+   * > > the component is being destroyed, so animations should not be used.
    * >
    * > - When a component appears or disappears, animation effects can be added through
-   * > [component transition]{@link common}.
+   * > > [component transition]{@link common}.
    * >
    * > - For properties that component transitions do not support, refer to
+   * > > 
    * > [Example 2: Enabling Component Disappearance After Animation Completion](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#example-2-enabling-component-disappearance-after-animation-completion),
-   * > which uses **animateTo** to achieve the effect of the component disappearing after the animation finishes.
+   * > > which uses **animateTo** to achieve the effect of the component disappearing after the animation finishes.
    * >
    * > - In certain scenarios, using animateTo with
-   * > [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2) may
-   * > produce unexpected results. For details, see
+   * > > [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2) may
+   * > > produce unexpected results. For details, see
+   * > > 
    * > [Using animateTo Failed in State Management V2](docroot://ui/state-management/arkts-new-local.md#using-animateto-failed-in-state-management-v2).
    * >
-   * >
    * > - When a UIAbility switches from the foreground to the background, any limited iteration animations that are
-   * > currently running will end immediately, thereby triggering the
-   * > [onFinish animation completion callback]{@link AnimateParam}.
+   * > > currently running will end immediately, thereby triggering the
+   * > > [onFinish animation completion callback]{@link AnimateParam}.
    * >
    * > - If transition animations are turned off in Developer options, animations end on the current frame, and the
-   * > **onFinish** callback is executed immediately. Avoid placing timing-dependent functional logic inside this
-   * > callback.
+   * > > **onFinish** callback is executed immediately. Avoid placing timing-dependent functional logic inside this
+   * > > callback.
    *
    * @param { AnimateParam } value - Animation settings.
    * @param { function } event - Closure function that displays the animation. The system automatically inserts the
@@ -5503,7 +5518,7 @@ export class UIContext {
 
   /**
    * Obtains the avoidance mode of the virtual keyboard.
-   * 
+   *
    * > **NOTE**
    * >
    * > Since API version 18, the **getKeyboardAvoidMode** API returns an enumeration value of **KeyboardAvoidMode**,
@@ -5594,7 +5609,7 @@ export class UIContext {
   getMeasureUtils(): MeasureUtils;
 
   /**
-   * Generates a key frame animation. For details about how to use this API, see [keyframeAnimateTo]{@link common}.
+   * Generates a key frame animation.
    *
    * @param { KeyframeAnimateParam } param - Overall animation parameter of the keyframe animation.
    * @param { Array<KeyframeState> } keyframes - List of all keyframe states.
@@ -5621,8 +5636,7 @@ export class UIContext {
   /**
    * Specifies a clear animation host instance context via the UIContext object and triggers the explicit animation to
    * be dispatched immediately. This avoids issues where animations are not executed or animation end callbacks are not
-   * triggered due to inability to locate the instance or using an incorrect instance. This API uses an asynchronous
-   * callback to return the result.
+   * triggered due to inability to locate the instance or using an incorrect instance.
    *
    * @param { AnimateParam } param - Animation settings.
    * @param { Callback<void> } processor - Callback function. It specifies the closure function that displays the
@@ -6013,23 +6027,28 @@ export class UIContext {
   /**
    * Creates a sheet whose content is as defined in **bindSheetContent** and displays the sheet. This API uses a promise
    * to return the result.
-   *
+   * 
    * > **NOTE**
    * >
    * > 1. When calling this API, if no valid value is provided for **targetId**, you won't be able to set
-   * > **SheetOptions.preferType** to **POPUP** or **SheetOptions.mode** to **EMBEDDED**.
+   * > > **SheetOptions.preferType** to **POPUP** or **SheetOptions.mode** to **EMBEDDED**.
    * >
    * > 2. Since [updateBindSheet]{@link UIContext#updateBindSheet} and [closeBindSheet]{@link UIContext#closeBindSheet}
-   * > depend on **bindSheetContent**, you need to maintain the passed **bindSheetContent** yourself.
+   * > > depend on **bindSheetContent**, you need to maintain the passed **bindSheetContent** yourself.
    * >
    * > 3. Setting **SheetOptions.UIContext** is not supported.
    *
    * @param { ComponentContent<T> } bindSheetContent - Content to display on the sheet.
-   * @param { SheetOptions } sheetOptions - Style of the sheet.<br>**NOTE**<br>1. **SheetOptions.uiContext** cannot be
-   *     set. Its value is fixed to the **UIContext** object of the current instance.<br>2. If **targetId** is not
+   * @param { SheetOptions } sheetOptions - Style of the sheet.
+   *     <br>**NOTE**
+   *     <br>1. **SheetOptions.uiContext** cannot be
+   *     set. Its value is fixed to the **UIContext** object of the current instance.
+   *     <br>2. If **targetId** is not
    *     passed in, **SheetOptions.preferType** cannot be set to **POPUP**; if **POPUP** is set, it will be replaced
-   *     with **CENTER**.<br>3. If **targetId** is not passed in, **SheetOptions.mode** cannot be set to **EMBEDDED**;
-   *     the default mode is **OVERLAY**.<br>4. For the default values of other attributes, see
+   *     with **CENTER**.
+   *     <br>3. If **targetId** is not passed in, **SheetOptions.mode** cannot be set to **EMBEDDED**;
+   *     the default mode is **OVERLAY**.
+   *     <br>4. For the default values of other attributes, see
    *     [SheetOptions]{@link SheetOptions}.
    * @param { number } targetId - ID of the component to be bound. If this parameter is not set, no component is bound.
    *     If the ID does not exist, the error code 120004 is returned. Returns error code 401 if **undefined** is passed
@@ -6055,17 +6074,23 @@ export class UIContext {
   /**
    * Updates the style of the sheet corresponding to the provided **bindSheetContent**. This API uses a promise to
    * return the result.
-   *
+   * 
    * > **NOTE**
    * >
    * > **SheetOptions.UIContext**, **SheetOptions.mode**, and callback functions cannot be updated.
    *
    * @param { ComponentContent<T> } bindSheetContent - Content to display on the sheet.
-   * @param { SheetOptions } sheetOptions - Style of the sheet.<br>**NOTE**<br>**SheetOptions.UIContext** and
+   * @param { SheetOptions } sheetOptions - Style of the sheet.
+   *     <br>**NOTE**
+   *     <br>**SheetOptions.UIContext** and
    *     **SheetOptions.mode** cannot be updated.
-   * @param { boolean } partialUpdate - Whether to update the sheet in incremental mode.<br>Default value: **false**<br>
-   *     **NOTE**<br>1. **true**: incremental update, where the specified properties in **SheetOptions** are updated,
-   *     and other properties stay at their current value.<br>2. **false**: full update, where all properties except
+   * @param { boolean } partialUpdate - Whether to update the sheet in incremental mode.
+   *     <br>Default value: **false**
+   *     <br>
+   *     **NOTE**
+   *     <br>1. **true**: incremental update, where the specified properties in **SheetOptions** are updated,
+   *     and other properties stay at their current value.
+   *     <br>2. **false**: full update, where all properties except
    *     those specified in **SheetOptions** are restored to default values.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -6625,13 +6650,20 @@ export const enum MarqueeDynamicSyncSceneType {
 }
 
 /**
- * Provides the capability to control text menus.
+ * The TextMenuController class is used to control the behavior of the text selection menu. It supports setting menu
+ * display options (such as displaying in a separate window with priority), disabling system service menu items or
+ * specific menu items. It is applicable to app scenarios where the text selection menu display mode needs to be
+ * customized or specific menu functions need to be restricted, such as disabling translation, search, and other
+ * functions in specific business scenarios.
  *
  * > **NOTE**
  * >
- * > - In the following non-static API examples, you must first use
- * > [getTextMenuController()]{@link UIContext.getTextMenuController} in **UIContext** to obtain a
- * > **TextMenuController** instance, and then call the APIs using the obtained instance.
+ * > - The initial APIs of this class are supported since API version 16.
+ * >
+ * > - **setMenuOptions** is a non-static API. You need to first use the
+ * > [getTextMenuController()]{@link UIContext.getTextMenuController} method in UIContext to obtain a TextMenuController
+ * > instance, and then call the corresponding method through this instance. **disableSystemServiceMenuItems** and
+ * > **disableMenuItems** are static methods and can be called directly through the TextMenuController class.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -6640,12 +6672,12 @@ export const enum MarqueeDynamicSyncSceneType {
  * @since 16 dynamic
  */
 export class TextMenuController {
-
   /**
-   * Sets menu options.
+   * Sets menu options. For example, when the text selection menu needs to be displayed in a separate window with
+   * priority under a specific UIContext, the menu display mode can be set through this API. If not set through this
+   * API, the text selection menu is displayed in the current window by default (showMode is TextMenuShowMode.DEFAULT).
    *
-   * @param { TextMenuOptions } options - Menu options.
-   *     <br>Default value: {showMode: TextMenuShowMode.DEFAULT}.
+   * @param { TextMenuOptions } options - Menu options for controlling the display mode of the text selection menu.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6655,19 +6687,23 @@ export class TextMenuController {
   setMenuOptions(options: TextMenuOptions): void;
 
   /**
-   * Disables all system service menu items in the text selection menu.
+   * Disables all system service menu items in the text selection menu. This is applicable to scenarios where the text
+   * selection menu needs to be fully customized, for example, in enterprise security apps where only basic functions
+   * such as copy, cut, select all, and paste are retained, and service menus such as search, translation, and share
+   * that may involve outgoing data transmission are disabled. If not set through this API, system service menu items
+   * are not disabled by default.
    *
    * > **NOTE**
    * >
-   * > - This API takes effect globally for the entire application process after being called.
+   * > - This API takes effect globally for the entire app process after being called.
    * >
    * > - This API can be used in [UIAbility]{@link @ohos.app.ability.UIAbility}.
    * >
-   * > - After this API is called, the [editMenuOptions]{@link TextAttribute#editMenuOptions} API of text components
-   * > will be affected. The parameter list of its [onCreateMenu]{@link EditMenuOptions.onCreateMenu} callback will not
-   * > include the disabled menu options.
+   * > - After this API is called, it affects the text component's API
+   * > [editMenuOptions]{@link TextAttribute#editMenuOptions}, and the input parameter list of its callback method
+   * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu} does not include the disabled menu options.
    * >
-   * > - Components involving text selection menus include the following: [Text]{@link ./@internal/component/ets/text},
+   * > - Components involving the text selection menu include [Text]{@link ./@internal/component/ets/text},
    * > [TextArea]{@link ./@internal/component/ets/text_area}, [TextInput]{@link ./@internal/component/ets/text_input},
    * > [Search]{@link ./@internal/component/ets/search}, [RichEditor]{@link ./@internal/component/ets/rich_editor}, and
    * > [Web]{@link ./@internal/component/ets/web}.
@@ -6675,22 +6711,25 @@ export class TextMenuController {
    * > - System service menu items refer to menu items other than copy, cut, select all, and paste in
    * > [TextMenuItemId]{@link TextMenuItemId}.
    * >
-   * > - When both **disableSystemServiceMenuItems** and **disableMenuItems** are set, the earlier-set
-   * > **disableSystemServiceMenuItems** takes precedence.
+   * > - When both disableSystemServiceMenuItems and disableMenuItems are set, the method called first takes precedence.
+   * > For example, if disableSystemServiceMenuItems(true) is called first and then disableMenuItems([...]) is called,
+   * > the setting of disableSystemServiceMenuItems prevails. Conversely, if disableMenuItems([...]) is called first,
+   * > the setting of disableMenuItems prevails. It is recommended to use only one of the two methods based on the
+   * > actual disabling scope requirements and avoid calling both.
    * >
-   * > - This API takes effect globally, and multiple calls are subject to the last call.
+   * > - When this API is used, it takes effect globally, and if called multiple times, the last call prevails.
    * >
-   * > - Disabled menus can be restored in the following ways:
+   * > - The disabled menu can be restored in the following three ways:
+   * > >
+   * > >   - If only disableSystemServiceMenuItems(true) is used to disable the menu, set it to false to restore the
+   * > menu.
    * >
-   * > - If only **disableSystemServiceMenuItems(true)** is used to disable menus, set it to **false** to restore.
-   * >
-   * > - If only **disableMenuItems** is used to disable menus, set it to an empty array to restore.
-   * >
-   * > - If both **disableSystemServiceMenuItems** and **disableMenuItems** are used, set the former to **false** and
-   * > the latter to an empty array to restore.
+   * > >   - If only disableMenuItems is used to disable the menu, set it to an empty array to restore the menu.
+   * > >   - If both disableSystemServiceMenuItems and disableMenuItems are used, set the former to false and the
+   * > latter to an empty array to restore the menu.
    *
-   * @param { boolean } disable - Whether to disable system service menu items. The value **true** means to disable
-   *     system service menu items, and **false** means the opposite.
+   * @param { boolean } disable - Whether to disable the system service menu item. The value **true** indicates yes,
+   *     and **false** indicates no.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6700,19 +6739,22 @@ export class TextMenuController {
   static disableSystemServiceMenuItems(disable: boolean): void;
 
   /**
-   * Disables specified system service menu items in the text selection menu.
+   * Disables specified system service menu items in the text selection menu. This is applicable to scenarios where
+   * specific menu functions need to be disabled on demand, for example, disabling the search and translation menus to
+   * simplify the user interface or restrict access to external services. If not set through this API, no menu items are
+   * disabled by default.
    *
    * > **NOTE**
    * >
-   * > - This API takes effect globally for the entire application process after being called.
+   * > - This API takes effect globally for the entire app process after being called.
    * >
    * > - This API can be used in [UIAbility]{@link @ohos.app.ability.UIAbility}.
    * >
-   * > - After this API is called, the [editMenuOptions]{@link TextAttribute#editMenuOptions} API of text components
-   * > will be affected. The parameter list of its [onCreateMenu]{@link EditMenuOptions.onCreateMenu} callback will not
-   * > include the disabled menu options.
+   * > - After this API is called, it affects the text component's API
+   * > [editMenuOptions]{@link TextAttribute#editMenuOptions}, and the input parameter list of its callback method
+   * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu} does not include the disabled menu options.
    * >
-   * > - Components involving text selection menus include the following: [Text]{@link ./@internal/component/ets/text},
+   * > - Components involving the text selection menu include [Text]{@link ./@internal/component/ets/text},
    * > [TextArea]{@link ./@internal/component/ets/text_area}, [TextInput]{@link ./@internal/component/ets/text_input},
    * > [Search]{@link ./@internal/component/ets/search}, [RichEditor]{@link ./@internal/component/ets/rich_editor}, and
    * > [Web]{@link ./@internal/component/ets/web}.
@@ -6720,28 +6762,29 @@ export class TextMenuController {
    * > - System service menu items refer to menu items other than copy, cut, select all, and paste in
    * > [TextMenuItemId]{@link TextMenuItemId}.
    * >
-   * > - When both **disableSystemServiceMenuItems** and **disableMenuItems** are set, the earlier-set
-   * > **disableSystemServiceMenuItems** takes precedence.
+   * > - When both disableSystemServiceMenuItems and disableMenuItems are set, the setting result of
+   * > disableSystemServiceMenuItems that is set first prevails.
    * >
-   * > - This API takes effect globally, and multiple calls are subject to the last call.
+   * > - When this API is used, it takes effect globally, and if called multiple times, the last call prevails.
    * >
-   * > - Disabling a first-level menu item will also disable all its second-level menu items. For example, disabling the
-   * > first-level menu item **autoFill** (parent item) in [TextMenuItemId]{@link TextMenuItemId} will simultaneously
-   * > disable the second-level menu item **passwordVault** (child item) in **TextMenuItemId**.
+   * > - Disabling a first-level menu item also disables all its second-level menu items. For example, disabling the
+   * > first-level menu item autoFill (parent menu item) in [TextMenuItemId]{@link TextMenuItemId} also disables the
+   * > second-level menu item passwordVault (child menu item).
    * >
-   * > - Disabling individual second-level menu items is not supported. If required, this can be achieved by disabling
-   * > the corresponding first-level menu item.
+   * > - Disabling second-level menu items is not supported. If needed, this can be achieved by disabling the
+   * > corresponding first-level menu item.
    * >
-   * > - Disabled menus can be restored in the following ways:
+   * > - The disabled menu can be restored in the following three ways:
+   * > >
+   * > >   - If only disableSystemServiceMenuItems(true) is used to disable the menu, set it to false to restore the menu.
    * >
-   * > - If only **disableSystemServiceMenuItems(true)** is used to disable menus, set it to **false** to restore.
-   * >
-   * > - If only **disableMenuItems** is used to disable menus, set it to an empty array to restore.
-   * >
-   * > - If both **disableSystemServiceMenuItems** and **disableMenuItems** are used, set the former to **false** and
-   * > the latter to an empty array to restore.
+   * > >   - If only disableMenuItems is used to disable the menu, set it to an empty array to restore the menu.
+   * > >   - If both disableSystemServiceMenuItems and disableMenuItems are used, set the former to false and the latter
+   * > to an empty array to restore the menu.
    *
-   * @param { Array<TextMenuItemId> } items - List of menu items to disable.
+   * @param { Array<TextMenuItemId> } items - List of disabled menu items. Only system service menu items (excluding
+   *     copy, cut, select all, and paste) can be disabled. Disabling a first-level menu item also disables all its
+   *     second-level menu items. Second-level menu items cannot be disabled directly.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

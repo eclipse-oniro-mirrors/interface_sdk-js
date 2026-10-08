@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
-  * @file
+  * @file WebView Controller
   * @kit ArkWeb
   */
 import { Resource } from './global/resource';
@@ -4745,6 +4745,38 @@ declare namespace webview {
          * @since 26.0.0 static
          */
         executeAIPageCommand(command: string): Promise<string>;
+
+        /**
+         * Sets the browser zoom factor of this web page. Both text and images are scaled simultaneously, and the page
+         * is re-laid out (reflow) to fit the width of the **Web** component.
+         * This API works independently of {@link zoom}, {@link zoomIn}, and {@link zoomOut} (visual scaling without
+         * re-layout) and {@link textZoomRatio} (text-only scaling). The zoom factor takes effect on the current web
+         * component instance only and is retained after in-page cross-document navigation.
+         *
+         * @param { double } zoomFactor - Browser zoom factor to set. The value **1** indicates that the page is not
+         *     zoomed. A value smaller than **1** indicates zoom-out, and a value greater than **1** indicates zoom-in.
+         *     <br>Value range: [0.25, 5].
+         *     <br>Values beyond this range are clamped to the boundary.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        setZoomFactor(zoomFactor: double): void;
+
+        /**
+         * Gets the current browser zoom factor of this web page.
+         *
+         * @returns { double } Current browser zoom factor. The value **1** indicates that the page is not zoomed.
+         *     <br>Value range: [0.25, 5.0]. The default value is **1**.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        getZoomFactor(): double;
     }
 
     /**
@@ -6195,16 +6227,18 @@ declare namespace webview {
          * Plays this video.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        play: ZeroParamFn<>;
+        play: ZeroParamFn<void>;
         /**
          * Pauses playback.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        pause: ZeroParamFn<>;
+        pause: ZeroParamFn<void>;
         /**
          * Seeks to a specific time point in the media.
          *
@@ -6237,23 +6271,26 @@ declare namespace webview {
          * Releases this player.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        release: ZeroParamFn<>;
+        release: ZeroParamFn<void>;
         /**
          * Enables the player to enter full screen mode.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        enterFullscreen: ZeroParamFn<>;
+        enterFullscreen: ZeroParamFn<void>;
         /**
          * Enables the player to exit full screen mode.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        exitFullscreen: ZeroParamFn<>;
+        exitFullscreen: ZeroParamFn<void>;
         /**
          * Resumes the player and its status information.
          *

@@ -83,9 +83,6 @@ declare namespace distributedKVStore {
      * [BaseContext](../apis-ability-kit/js-apis-inner-application-baseContext.md).
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
-     *     if swap the area, you should close all the KV store and use the new Context to create the KVManager [since 9 - 23]
-     * @syscap SystemCapability.DistributedDataManager.KVStore.Core
-     *     if swap the area, you should close all the KV store and use the new BaseContext to create the KVManager [since 10]
      * @stagemodelonly [staticonly]
      * @crossplatform [since 24]
      * @since 9 dynamic
@@ -2935,7 +2932,6 @@ declare namespace distributedKVStore {
      * @returns { Promise<void> } the promise returned by the function.
      * @throws { BusinessError } 15100003 - Database corrupted.
      * @throws { BusinessError } 15100005 - Database or result set already closed.
-     * @throws { BusinessError } 15100006 - Failed to update the key.
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
