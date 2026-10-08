@@ -2540,6 +2540,24 @@ export declare class WebResourceResponse {
      * @since 23 static
      */
     getResponseIsReady(): boolean;
+    /**
+     * Sets the response data.
+     *
+     * > **NOTE**
+     * >
+     * > - This API supports obtaining HSP resources based on Resource objects,
+     * > which {@link setResponseData} does not support.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource or HSP resource.
+     *     ArrayBuffer type indicates binary data.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    setResponseBody(data: string | int | Resource | ArrayBuffer): void;
 }
 /**
  * Defines the Web's request/response header.
@@ -2596,6 +2614,14 @@ export declare class WebResourceError {
      * @since 23 static
      */
     getErrorCode(): int;
+    /**
+      * Gets the custom error code of the Web resource.
+      *
+      * @returns { int } Return the custom error code of the Web resource.
+      * @syscap SystemCapability.Web.Webview.Core
+      * @since 26.0.1 static
+      */
+    getCustomErrorCode(): int;
 }
 /**
  * Defines the js geolocation request.
