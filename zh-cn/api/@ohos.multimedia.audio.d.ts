@@ -9978,6 +9978,16 @@ declare namespace audio {
      * @since 23 dynamic&static
      */
     percentage?: int;
+
+    /**
+     * 应用的UID.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    appUid?: int;
   }
 
   /**
