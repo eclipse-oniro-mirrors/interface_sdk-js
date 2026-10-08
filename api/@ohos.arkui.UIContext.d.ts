@@ -726,7 +726,7 @@ export class Router {
  * Defines a type that can be used for component attributes and method parameters to customize the UI description and
  * generate custom components with a specific component ID.
  *
- * @param { number } id
+ * @param { number } id - Component ID.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -762,9 +762,10 @@ export interface TargetInfo {
   id: string | number;
 
   /**
-   * Unique ID of the custom component where the target node is located.
-   * When the above **id** is specified as a string, this property can be used to narrow down the scope,
-   * helping you ensure the uniqueness of **id: string** within a certain range.
+   * **UniqueID** of the custom component where the target node is located. When the above **id** is specified as
+   * the string type and the target node needs to be found within a specified custom component scope, this property
+   * can be used to define the scope, making it easier for you to ensure the uniqueness of **id: string** within a
+   * certain range. By default, no custom component scope is specified.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1535,7 +1536,8 @@ export class DialogPresenter {
  * Defines the callback type for listening for click events in **UIObserver**.
  *
  * @param { ClickEvent } event - Information about the click event that triggers the callback.
- * @param { FrameNode } [node] - Component bound to the click event.
+ * @param { FrameNode } [node] - Bound component of the click event that triggers the event listener. When this
+ *     parameter is not passed, the default value is **undefined**.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1545,11 +1547,13 @@ export class DialogPresenter {
 declare type ClickEventListenerCallback = (event: ClickEvent, node?: FrameNode) => void;
 
 /**
- * Defines a callback for pan gesture events.
+ * Defines the callback type for pan gesture event listening. It can be used in scenarios where you need to listen
+ * for pan gesture interactions such as dragging and translating components.
  *
  * @param { GestureEvent } event - Information about the gesture event that triggers the callback.
  * @param { GestureRecognizer } current - Information about the gesture recognizer that detects the event.
- * @param { FrameNode } [node] - Component bound to the gesture event.
+ * @param { FrameNode } [node] - Component to which the gesture event that triggers the event listener is bound.
+ *     If this parameter is not passed, the default value is **undefined**.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1572,9 +1576,9 @@ declare type PanListenerCallback = (event: GestureEvent, current: GestureRecogni
 declare type GestureEventListenerCallback = (event: GestureEvent, node?: FrameNode) => void;
 
 /**
- * Defines the type can be used for identiting the node, for the string type, it's the inspector id
- * set through .[id]{@link CommonMethod#id} attribute, and for the number type, it's the unique ID got from the FrameNode by
- * [getUniqueId]{@link FrameNode:FrameNode#getUniqueId} method.
+ * Defines the component ID. For the string type, it is the ID of the component, which is set through the universal
+ * attribute .[id]{@link CommonMethod#id}; for the number type, it is the unique ID assigned by the system to the
+ * node, which can be obtained through [getUniqueId]{@link FrameNode:FrameNode#getUniqueId}.
  *
  * @unionmember { string }
  * @unionmember { number }
@@ -1589,9 +1593,12 @@ export declare type NodeIdentity = string | number;
 /**
  * Defines the callback type for listening for the rendering state of a specific node in **UIObserver**.
  *
- * @param { NodeRenderState } state - Information about the gesture event that triggers the callback.
- * @param { FrameNode } [node] - Component bound to the gesture event that triggers the listener; returns **null** if
- *     the component has been released.
+ * @param { NodeRenderState } state - Current render state of the node, which indicates whether the monitored node
+ *     is in a renderable state.
+ * @param { FrameNode } [node] - Component that triggers the render state change listener. When you need to obtain
+ *     the node information of the component whose render state has changed, you can obtain it through this
+ *     parameter. If the component is released, **null** is returned. If this parameter is not passed, the default
+ *     value is **undefined**.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1636,7 +1643,7 @@ export interface PageInfo {
   routerPageInfo?: observer.RouterPageInfo;
 
   /**
-   * the property of navDestination information.
+   * Navigation destination information.
    *
    * @type { ?observer.NavDestinationInfo }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1649,7 +1656,7 @@ export interface PageInfo {
 }
 
 /**
- * Defines the callback type for intercepting a back-press event on an overlay.
+ * Defines the callback type for intercepting the overlay swipe-back event.
  *
  * @returns { boolean } Whether to intercept the back-press event.
  *     If **true** is returned, the event is intercepted and is prevented from reaching the lower-layer component.
@@ -1675,8 +1682,10 @@ export declare type OnOverlayBackPressCallback = () => boolean;
 export interface OverlayManagerOptions {
 
   /**
-   *  Whether to render the overlay root node. The value **true** means to render the overlay root node,
-   * and **false** means the opposite. The default value is **true**.<br>
+   * Whether to render the overlay root node. The value **true** indicates that the overlay root node is rendered,
+   * and **false** indicates the opposite. The default value is **true**. By setting this parameter to **false**,
+   * you can resolve the issue where **PhotoPickerComponent** cannot select photos when **OverlayManager** is
+   * displayed on top of it.<br>
    * **Atomic service API**: This API can be used in atomic services since API version 15.
    *
    * @default true
@@ -1689,8 +1698,8 @@ export interface OverlayManagerOptions {
   renderRootOverlay?: boolean;
 
   /**
-   * hether to enable the swipe-to-dismiss gesture for **ComponentContent** under **OverlayManager**.
-   * The value **true** means to enable the swipe-to-dismiss gesture, and **false** means the opposite. Default value: **false**.<br>
+   * Whether to support closing the **ComponentContent** under **OverlayManager** through a swipe gesture. The value
+   * **true** indicates yes, and **false** indicates no. The default value is **false**.<br>
    * **Atomic service API**: This API can be used in atomic services since API version 19.
    *
    * @default false
@@ -1703,15 +1712,15 @@ export interface OverlayManagerOptions {
   enableBackPressedEvent?: boolean;
 
   /**
-   * Callback for intercepting back-press events on an overlay.
+   * Callback for intercepting the overlay swipe-back event.
    * 
    * **NOTE**
    * 1. When this callback is registered and **enableBackPressedEvent** is set to **true**,
-   *    the back-press event will not close the overlay automatically. Instead, the overlay invokes this callback
-   *    to decide whether the event should be propagated to the underlying components.
-   * 2. Return **true** to intercept the event (the event is consumed and will not be passed
-   *    to lower layers), or **false** to allow the event to propagate through to the components
-   *    below the overlay.
+   *    the swipe-back event does not automatically close the overlay. Instead, this callback is invoked to
+   *    determine whether the event is passed to lower-level components.
+   * 2. The value **true** indicates that the event is intercepted (consumed and not passed to
+   *    lower-level components), and **false** indicates that the event is not intercepted and will be passed
+   *    through to lower-level components.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2959,7 +2968,9 @@ export interface SwiperItemInfo {
 }
 
 /**
- * Provides API for obtaining the coordinates and size of the drawing area of a component.
+ * Provides the capability to obtain attribute information of a component's drawing area, including coordinates, size,
+ * translation, scaling, rotation, and affine matrix. This is suitable for scenarios where you need to query component
+ * drawing area information, helping you access component layout results.
  *
  * > **NOTE**
  * >
@@ -2982,12 +2993,23 @@ export class ComponentUtils {
    *
    * > **NOTE**
    * >
-   * > This API should be called after the target component's layout is complete to obtain its size information. It is
-   * > recommended that you use this API within [onAppear]{@link CommonMethod#onAppear}.
+   * > This API should be called after the target component layout is complete to obtain its area size information. It
+   * is recommended to use this API in the [layout callback]{@link @ohos.arkui.inspector:inspector}. If a component is
+   * dynamically created but not yet attached to the component tree, its measurement and layout information cannot be
+   * accessed through this API since this component has not undergone measurement and layout by the UI framework.
+   * Ensure the component is attached to the component tree before attempting to retrieve component information.
+   * >
+   * > The component position returned by this API is the layout position. Some property calculations are not
+   * supported, such as position-setting properties like **offset**, **markAnchor**, **Edges**, **position** of the
+   * **LocalizedEdges** type, and graphics transformation properties like **rotate**, **translate**, **scale**, and
+   * **transform**. For an alternative, you can use
+   * [getPositionToWindowWithTransform]{@link FrameNode:FrameNode#getPositionToWindowWithTransform} to obtain the
+   * component's position offset relative to the window, including drawing attributes.
    *
-   * @param { string } id - Unique component ID.
-   * @returns { componentUtils.ComponentInfo } Size, position, translation, scaling, rotation, and affine matrix
-   *     information of the component.
+   * @param { string } id - Unique ID of a component. Ensure that the component corresponding to the ID has been
+   *     mounted to the component tree and the layout has been completed.
+   * @returns { componentUtils.ComponentInfo } **ComponentInfo** object, which provides the size, position,
+   *     translation, scaling, rotation, and affine matrix information of the component.
    * @throws { BusinessError } 100001 - UI execution context not found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3367,8 +3389,8 @@ export interface GestureTriggerInfo {
 }
 
 /**
- * Specifies the gesture callback phases to listen for (passing an empty array will be ineffective). Notifications are
- * sent only when the gesture triggers the specified phases.
+ * Specifies the gesture callback phases to listen for (passing an empty array means no gesture callback stage is
+ * listened for). Notifications are sent only when the gesture triggers the specified phases.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3379,7 +3401,8 @@ export interface GestureTriggerInfo {
 export interface GestureObserverConfigs {
 
   /**
-   * Gesture event object.
+   * Gesture callback phases to listen for. An empty array is invalid. Notifications are sent only when the gesture
+   * triggers the specified phases.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3473,8 +3496,10 @@ export class MarqueeDynamicSyncScene extends DynamicSyncScene {
 }
 
 /**
- * Provides APIs for initiating drag actions. When receiving a gesture event, such as a touch or long-press event, an
- * application can initiate a drag action and carry drag information therein.
+ * Provides drag-and-drag control capabilities, supporting the proactive initiation of dragging with attached drag
+ * information when the application receives events such as touch or long press. It also supports creating drag
+ * actions, obtaining the drag preview, controlling drag event reporting and drag start requests, canceling drag data
+ * loading, and displaying the drop-disallowed badge when dropping onto a target area is not allowed.
  *
  * > **NOTE**
  * >
@@ -3499,13 +3524,15 @@ export class DragController {
    *     only to generate the image displayed during the current dragging. If the root component of the builder has zero
    *     width or height, it will cause failure in drag image generation, which in turn breaks the entire drag
    *     operation. Changes to the builder, if any, apply to the next dragging, but not to the current dragging.
-   * @param { dragController.DragInfo } dragInfo - Drag information.
+   * @param { dragController.DragInfo } dragInfo - Drag information object, used to specify drag configuration such as
+   *     the touch point that initiates the drag, data carried during the drag, and extra information.
    * @param { AsyncCallback<{ event: DragEvent, extraParams: string }> } callback - Callback used to return the result.<br>
    *     - **event**: drag event information that includes only the drag result.<br>- **extraParams**: extra
    *     information about the drag event. [since 11 - 11]
-   * @param { AsyncCallback<dragController.DragEventParam> } callback - Callback used to return the result.<br>-
-   *     **event**: drag event information that includes only the drag result.<br>- **extraParams**: extra information
-   *     about the drag event. [since 12]
+   * @param { AsyncCallback<dragController.DragEventParam> } callback - Callback used to return the drag result. The
+   *     callback parameters include **err** and **data**. **err** indicates the error information, and **data**
+   *     indicates the drag event result. **data.event** provides the drag event information, which includes only the
+   *     drag result. **data.extraParams** provides additional information about the drag event. [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3529,7 +3556,9 @@ export class DragController {
    * @returns { Promise<{ event: DragEvent, extraParams: string }> } Callback used to return the result.
    *     <br>- **event**: drag event information that includes only the drag result.
    *     <br>- **extraParams**: extra information about the drag event. [since 11 - 11]
-   * @returns { Promise<dragController.DragEventParam> } A Promise with the drag event information. [since 12]
+   * @returns { Promise<dragController.DragEventParam> } Promise used to return the result. **resolve** returns the drag
+   *     end result.<br>- **event**: drag event information that includes only the drag result.<br>- **extraParams**:
+   *     extra information about the drag event. **reject** returns the error information. [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3545,16 +3574,16 @@ export class DragController {
     : Promise<dragController.DragEventParam>;
 
   /**
-   * Creates a drag action object for initiating drag and drop operations. You need to explicitly specify one or more
-   * drag previews, the drag data, and the drag handle point. If a drag operation initiated by an existing drag action
-   * object is not completed, no new object can be created, and calling the API will throw an exception. After the
-   * lifecycle of the drag action object ends, the callback functions registered on this object become invalid.
-   * Therefore, it is necessary to hold this object within a longer scope and replace the old value with a new object
-   * returned by **createDragAction** before each drag initiation.
+   * Creates a drag action object, explicitly specifying the drag preview (multiple previews are supported), drag data,
+   * and touch-down point. If a drag initiated by an existing DragAction object is not yet finished, a new DragAction
+   * object cannot be created, and the API throws an exception. After the lifecycle of a DragAction object ends, the
+   * callbacks registered on it become invalid. Therefore, you need to hold the object while receiving its callbacks,
+   * and overwrite it with a new object returned by **createDragAction** before each drag initiation.
    *
    * > **NOTE**
    * >
-   * > For optimal drag and drop performance, limit the number of drag previews.
+   * > You are advised to limit the number of drag previews to avoid increased drag start latency caused by a large
+   * > number of previews.
    *
    * @param { Array<CustomBuilder | DragItemInfo> } customArray - Object to be dragged.
    * @param { dragController.DragInfo } dragInfo - Drag information.
@@ -3577,7 +3606,8 @@ export class DragController {
    * Obtains the **DragPreview** object, which represents the preview displayed during a drag operation.
    *
    * @returns { dragController.DragPreview } **DragPreview** object. It provides the API for setting the preview style.
-   *     It does not work in the **OnDrop** and **OnDragEnd** callbacks.
+   *     Setting the drop preview style using this object in the **onDrop** or **onDragEnd** callback does not take
+   *     effect.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 18]
@@ -3587,12 +3617,12 @@ export class DragController {
   getDragPreview(): dragController.DragPreview;
 
   /**
-   * Sets whether the **onDragLeave** callback of the parent component is triggered when an item is dragged from the
-   * parent to the child component.
+   * Sets whether the **onDragLeave** callback of the parent component is triggered when a drag object is dragged from
+   * a parent component to a child component.
    *
-   * @param { boolean } enable - Whether the **onDragLeave** callback of the parent component is triggered when an item
-   *     is dragged from the parent to the child component. The value **true** means the **onDragLeave** callback of the
-   *     parent component is triggered, and **false** means the opposite.
+   * @param { boolean } enable - Whether the **onDragLeave** callback of the parent component is triggered when a drag
+   *     object is dragged from a parent component to a child component. The value **true** indicates yes, and the value
+   *     **false** indicates no.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3602,10 +3632,18 @@ export class DragController {
   setDragEventStrictReportingEnabled(enable: boolean): void;
 
   /**
-   * Controls whether the application can initiate a drag operation.
+   * Controls whether the application can initiate a drag operation. This API is typically used in conjunction with the
+   * **onPreDrag** and **onDragStart** callbacks of the component. When a drag starts but the data is not yet ready, you
+   * can call **notifyDragStartRequest(DragStartRequestStatus.WAITING)** in the **onDragStart** callback to prevent the
+   * drag from starting immediately. Once the drag data and preview resources are ready, call
+   * **notifyDragStartRequest(DragStartRequestStatus.READY)** to allow the drag to proceed. If the status is not
+   * reported correctly according to the drag preparation process, the drag may fail to start as expected, or it may
+   * start before the drag data is fully prepared.
    *
    * @param { dragController.DragStartRequestStatus } requestStatus - Whether the application can initiate a drag
-   *     operation.
+   *     operation. The value **WAITING** indicates that the application data is still being prepared and dragging is
+   *     not allowed to start. The value **READY** indicates that the application data has been prepared and dragging is
+   *     allowed to proceed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -3641,8 +3679,9 @@ export class DragController {
   interruptFollowHandMorphDropAnimation(): boolean;
 
   /**
-   * Specifies whether to enable the display of a disallowed badge when dragged content is incompatible with a component
-   * 's configured [allowDrop]{@link CommonMethod#allowDrop} types. When a component can accept or process dragged data
+   * Enables the display of the drop-disallowed badge when the dragged data type does not intersect with the data types
+   * allowed by the component's [allowDrop]{@link CommonMethod#allowDrop} configuration. When a component can accept or
+   * process dragged data
    * or returns **DragBehavior.COPY** to indicate copy mode processing, the drag preview shows a plus icon with data
    * count badge. When the component returns **DragBehavior.MOVE** to indicate cut mode processing, only the data count
    * badge appears. When this feature is enabled, the system automatically displays a disallowed badge during drag
@@ -3650,9 +3689,11 @@ export class DragController {
    * currently does not support [UIExtension]{@link @ohos.arkui.uiExtension:uiExtension}.
    *
    * @param { boolean } enabled - Whether to enable the display of a disallowed badge when dragged content is
-   *     incompatible with a component's configured [allowDrop]{@link CommonMethod#allowDrop} types. The value **true**
-   *     means to enable the display of a disallowed badge, and **false** means the opposite. The default value is
-   *     **false**.
+   *     incompatible with the data types allowed by the component's [allowDrop]{@link CommonMethod#allowDrop}
+   *     configuration, a drag-disallowed badge can be displayed. During a drag operation on a target component, the
+   *     **enableDropDisallowedBadge** method can be used to check whether the drag-disallowed badge should be displayed.
+   *     The value **true** means to enable the display of a disallowed badge, and **false** means the opposite. The
+   *     default value is **false**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3752,7 +3793,9 @@ export class MeasureUtils {
 }
 
 /**
- * Provides capabilities to control focus, including features such as clearing, moving, and activating focus.
+ * Provides the capability to control focus, including clearing, moving, and activating focus. This is suitable for
+ * scenarios where you need to manage the focus state of a page or component and control focus navigation. It helps you
+ * optimize focus interaction experiences with input methods such as keyboards.
  *
  * > **NOTE**
  * >
@@ -3780,7 +3823,9 @@ export class FocusController {
   clearFocus(): void;
 
   /**
-   * Transfers focus to a component node by the component ID, which is effective immediately.
+   * Transfers focus to the corresponding entity node in the component tree by the component ID, taking effect in the
+   * current frame. This is suitable for scenarios where you need to actively focus on a specified component during
+   * form validation, page initialization, or keyboard operation flows.
    *
    * @param { string } key - [Component ID]{@link common} of the target node.
    * @throws { BusinessError } 150001 - the component cannot be focused.
@@ -3811,7 +3856,9 @@ export class FocusController {
   activate(isActive: boolean, autoInactive?: boolean): void;
 
   /**
-   * Obtains the focus activation state of the UI instance.
+   * Obtains the focus activation state of the UI instance. This is suitable for scenarios where you need to decide
+   * whether to enable direction-based focus navigation or update focus prompts based on the current focus activation
+   * state.
    *
    * For details about the focus activation state, see
    * [Basic Concepts](docroot://ui/arkts-common-events-focus-event.md#basic-concepts).
@@ -3844,7 +3891,8 @@ export class FocusController {
   setAutoFocusTransfer(isAutoFocusTransfer: boolean): void;
 
   /**
-   * Sets the mode for processing key events.
+   * Sets the priority of key event handling. This is suitable for scenarios where both parent and child components
+   * need to handle key events, and you need to control the key event dispatch strategy.
    *
    * @param { KeyProcessingMode } mode - Mode for processing key events.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3866,7 +3914,10 @@ export class FocusController {
 export type PointerStyle = pointer.PointerStyle;
 
 /**
- * Provides the capability to set cursor styles.
+ * Provides the capability to set mouse cursor styles, including restoring the default cursor style, setting a system
+ * cursor style, and setting a custom cursor style. It is suitable for scenarios where the mouse cursor display effect
+ * needs to be dynamically adjusted based on interface interaction states, helping improve the clarity of interface
+ * interaction cues.
  *
  * > **NOTE**
  * >
@@ -3886,6 +3937,11 @@ export class CursorController {
   /**
    * Restores the default cursor style.
    *
+   * > **NOTE**
+   * >
+   * > This API does not take effect immediately after being called. Instead, the mouse cursor style is updated in the
+   * > next frame.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3901,7 +3957,9 @@ export class CursorController {
    * >
    * > This API does not take effect immediately. The cursor style will be updated in the next rendering frame.
    *
-   * @param { PointerStyle } value - Pointer style.
+   * @param { PointerStyle } value - Mouse cursor style. It specifies the system-defined cursor type to set, such as
+   *     arrow, hand pointer, and crosshair. For details about the meaning of each style, see the **PointerStyle** enum
+   *     description.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3915,13 +3973,23 @@ export class CursorController {
    *
    * > **NOTE**
    * >
-   * > This API does not take effect immediately. The cursor style will be updated in the next rendering frame.
+   * > - This API does not take effect immediately after being called. Instead, the mouse cursor style is updated in
+   * > the next frame.
+   * >
+   * > - Only static images are supported. Dynamic images are not supported.
    *
-   * @param { image.PixelMap } value - Pixel map of the custom mouse cursor style.
-   * @param { int } [focusX] - X coordinate of the custom cursor's hotspot. The hotspot refers to the actual location
-   *     where the click occurs.<br>Default value: **0**<br>Unit: px<br>Value range: [0, +∞)
-   * @param { int } [focusY] - Y coordinate of the custom cursor's hotspot.<br>Default value: **0**<br>Unit: px<br>Value
-   *     range: [0, +∞)
+   * @param { image.PixelMap } value - PixelMap of the custom cursor style. Only static images are supported; dynamic
+   *     images are not supported. The maximum size is 256 × 256 px. If the image exceeds this size, the setting will
+   *     not take effect, and the mouse cursor will remain unchanged.
+   * @param { int } [focusX] - X coordinate of the custom cursor focus point. The origin is the upper left corner of
+   *     the cursor image, and the positive direction is to the right. When displayed, this focus point is aligned with
+   *     the screen coordinates of the system mouse pointer, and all mouse operations such as clicking and dragging are
+   *     based on this point.<br>Default value: **0**<br>Unit: px<br>Value range: [0, image width]. If the value is out
+   *     of range, the default value is used.
+   * @param { int } [focusY] - Y coordinate of the custom cursor focus point. The origin is the upper left corner of
+   *     the cursor image, and the positive direction is downward. This parameter and **focusX** together determine the
+   *     point within the image that represents the actual interaction position.<br>Default value: **0**<br>Unit:
+   *     px<br>Value range: [0, image height]. If the value is out of range, the default value is used.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4009,8 +4077,7 @@ export abstract class FrameCallback {
 }
 
 /**
- * The base context of an ability or an application. It allows access to
- * application-specific resources.
+ * Context of the Ability (app component) where the current component resides.
  *
  * @typedef { common.Context } Context
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -4022,8 +4089,9 @@ export abstract class FrameCallback {
 export type Context = common.Context;
 
 /**
- * Provides APIs for obtaining component snapshots, including snapshots of components that have been loaded and
- * snapshots of components that have not been loaded yet.
+ * Provides the capability of obtaining component screenshots, including screenshots of loaded and unloaded components.
+ * This is applicable to scenarios where the component rendering result needs to be obtained for display or subsequent
+ * processing.
  *
  * > **NOTE**
  * >
@@ -4045,8 +4113,9 @@ export type Context = common.Context;
 export class ComponentSnapshot {
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link common}. This
-   * API uses an asynchronous callback to return the result.
+   * Obtains a screenshot of a loaded component by passing the [component ID]{@link common}. The corresponding component
+   * is captured. This is suitable for scenarios such as generating component previews, saving, or sharing partial UI
+   * screenshots. This API uses an asynchronous callback to return the result.
    *
    * > **NOTE**
    * >
@@ -4059,7 +4128,9 @@ export class ComponentSnapshot {
    *     successful, **err** is **undefined**, and **data** contains the resulting
    *     [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}. Otherwise, **err** provides detailed error
    *     information.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot.
+   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot. Pass this parameter when
+   *     you need to customize screenshot settings such as scaling ratio and wait-for-render strategy. If not passed,
+   *     the system default screenshot configuration is used.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -4075,8 +4146,9 @@ export class ComponentSnapshot {
   get(id: string, callback: AsyncCallback<image.PixelMap>, options?: componentSnapshot.SnapshotOptions): void;
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link common}. This
-   * API uses a promise to return the result.
+   * Obtains a screenshot of a loaded component by passing the [component ID]{@link common}. The corresponding component
+   * is captured. This is suitable for scenarios such as generating component previews, saving, or sharing partial UI
+   * screenshots. This API uses a promise to return the result.
    *
    * > **NOTE**
    * >
@@ -4085,7 +4157,9 @@ export class ComponentSnapshot {
    *
    * @param { string } id - [ID]{@link common} of the target component.<br>Note: Off-screen or cached components not
    *     mounted in the component tree are not supported.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot.
+   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot. Pass this parameter when
+   *     you need to customize screenshot settings such as scaling ratio and wait-for-render strategy. If not passed,
+   *     the system default screenshot configuration is used.
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
@@ -4102,8 +4176,10 @@ export class ComponentSnapshot {
   get(id: string, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * Captures a snapshot of an offscreen-rendered component created from a [CustomBuilder]{@link common:CustomBuilder}.
-   * This API uses an asynchronous callback to return the result.
+   * Builds a passed [CustomBuilder]{@link common:CustomBuilder} custom component off-screen and then captures a
+   * screenshot. This is suitable for scenarios such as generating previews of components not yet on-screen, sharing
+   * widgets, or exporting images of temporarily built components. This API uses an asynchronous callback to return
+   * the result.
    *
    * > **NOTE**
    * >
@@ -4123,22 +4199,25 @@ export class ComponentSnapshot {
    *     [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}. Otherwise, **err** provides detailed error
    *     information. The coordinates and size of the offscreen component's drawing area can be obtained through the
    *     callback.
-   * @param { number } [delay] - Delay time for triggering the screenshot command. When the layout includes an image
-   *     component, it is necessary to set a delay time to allow the system to decode the image resources. The decoding
-   *     time is subject to the resource size. In light of this, whenever possible, use pixel map resources that do not
-   *     require decoding.<br> When PixelMap resources are used or when [syncLoad]{@link ImageAttribute#syncLoad} is set
-   *     to **true** for the **Image** component, you can set **delay** to **0** to forcibly capture snapshots without
-   *     waiting. This delay time does not refer to the time from the API call to the return: As the system needs to
-   *     temporarily construct the passed-in **builder** offscreen, the return time is usually longer than this delay.<
-   *     br>Note: In the **builder** passed in, state variables should not be used to control the construction of child
-   *     components. If they are used, they should not change when the API is called, so as to avoid unexpected snapshot
-   *     results.<br> Default value: **300**<br> Unit: ms<br> Value range:
-   *     [0, +∞). If the value is less than 0, the default value is used.
+   * @param { number } [delay] - Delay time for triggering the screenshot command. When the layout includes an Image
+   *     component, it is necessary to set a delay time to allow the system to decode the image resources. Larger
+   *     resources require longer decoding time. It is recommended that PixelMap resources that do not need to be
+   *     decoded be used preferentially.<br> When PixelMap resources are used or when [syncLoad]{@link
+   *     ImageAttribute#syncLoad} is set to **true** for the **Image** component, you can set **delay** to **0** to
+   *     forcibly capture snapshots without waiting. This delay time does not refer to the time from the API call to
+   *     the return: As the system needs to temporarily construct the passed-in **builder** offscreen, the return time
+   *     is usually longer than this delay.<br>**Note:** In **builder** passed to the screenshot API, you should not
+   *     use state variables to control the construction of child components. If it is required to use state variables
+   *     for this purpose, ensure that the values of the relevant state variables do not change at the time the
+   *     screenshot API is called, to avoid unexpected screenshot results.<br> Default value: **300**<br> Unit:
+   *     ms<br> Value range: [0, +∞). If the value is less than 0, the default value is used.
    * @param { boolean } [checkImageStatus] - Whether to verify the image decoding status before taking a snapshot. If
-   *     the value is **true**, the system checks whether all **Image** components have been decoded before taking the
-   *     snapshot. If the check is not completed, the system aborts the snapshot and returns an exception.<br>Default
-   *     value: **false**.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot.
+   *     it is set to **true**, the screenshot API checks whether all Image components have completed decoding before
+   *     capturing the screenshot. If any Image component is still decoding, the screenshot is aborted and an exception
+   *     is returned.<br>Default value: **false**.
+   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot. Pass this parameter when
+   *     you need to customize screenshot settings such as scaling ratio and wait-for-render strategy. If not passed,
+   *     the system default screenshot configuration is used.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -4158,8 +4237,9 @@ export class ComponentSnapshot {
     delay?: number, checkImageStatus?: boolean, options?: componentSnapshot.SnapshotOptions): void;
 
   /**
-   * Captures a snapshot of an offscreen-rendered component created from a [CustomBuilder]{@link common:CustomBuilder}.
-   * This API uses a promise to return the result.
+   * Builds a passed [CustomBuilder]{@link common:CustomBuilder} custom component off-screen and then captures a
+   * screenshot. This is suitable for scenarios such as generating previews of components not yet on-screen, sharing
+   * widgets, or exporting images of temporarily built components. This API uses a promise to return the result.
    *
    * > **NOTE**
    * >
@@ -4175,21 +4255,24 @@ export class ComponentSnapshot {
    *     br>If the root component of the builder has a width or height of zero, the snapshot operation will fail with
    *     error code 100001.
    * @param { number } [delay] - Delay time for triggering the screenshot command. When the layout includes an image
-   *     component, it is necessary to set a delay time to allow the system to decode the image resources. The decoding
-   *     time is subject to the resource size. In light of this, whenever possible, use pixel map resources that do not
-   *     require decoding.<br> When PixelMap resources are used or when [syncLoad]{@link ImageAttribute#syncLoad} is set
-   *     to **true** for the **Image** component, you can set **delay** to **0** to forcibly capture snapshots without
-   *     waiting. This delay time does not refer to the time from the API call to the return: As the system needs to
-   *     temporarily construct the passed-in **builder** offscreen, the return time is usually longer than this delay.<
-   *     br>Note: In the **builder** passed in, state variables should not be used to control the construction of child
-   *     components. If they are used, they should not change when the API is called, so as to avoid unexpected snapshot
-   *     results.<br> Default value: **300**<br> Unit: ms<br> Value range:
-   *     [0, +∞). If the value is less than 0, the default value is used.
+   *     component, it is necessary to set a delay time to allow the system to decode the image resources. Larger
+   *     resources require longer decoding time. It is recommended that PixelMap resources that do not need to be
+   *     decoded be used preferentially.<br> When PixelMap resources are used or when [syncLoad]{@link
+   *     ImageAttribute#syncLoad} is set to **true** for the **Image** component, you can set **delay** to **0** to
+   *     forcibly capture snapshots without waiting. This delay time does not refer to the time from the API call to
+   *     the return: As the system needs to temporarily construct the passed-in **builder** offscreen, the return time
+   *     is usually longer than this delay.<br>**Note:** In **builder** passed to the screenshot API, you should not
+   *     use state variables to control the construction of child components. If it is required to use state variables
+   *     for this purpose, ensure that the values of the relevant state variables do not change at the time the
+   *     screenshot API is called, to avoid unexpected screenshot results.<br> Default value: **300**<br> Unit:
+   *     ms<br> Value range: [0, +∞). If the value is less than 0, the default value is used.
    * @param { boolean } [checkImageStatus] - Whether to verify the image decoding status before taking a snapshot. If
-   *     the value is **true**, the system checks whether all **Image** components have been decoded before taking the
-   *     snapshot. If the check is not completed, the system aborts the snapshot and returns an exception.<br>Default
-   *     value: **false**.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot.
+   *     it is set to **true**, whether all Image components have completed decoding is checked before screenshot
+   *     capturing. If any Image component is still decoding, the screenshot is aborted and an exception is returned.<
+   *     br>Default value: **false**.
+   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot. Pass this parameter when
+   *     you need to customize screenshot settings such as scaling ratio and wait-for-render strategy. If not passed,
+   *     the system default screenshot configuration is used.
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
@@ -4210,10 +4293,12 @@ export class ComponentSnapshot {
     checkImageStatus?: boolean, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link common}. This
-   * API synchronously returns a [PixelMap]{@link @ohos.multimedia.image:image.PixelMap} after completing the capture.
-   * Note that this API blocks the main thread and has a 3-second timeout. If the operation exceeds this limit, it
-   * throws an exception. Use with caution in performance-critical scenarios.
+   * Obtains a screenshot of a loaded component by passing the [component ID]{@link common}. The corresponding component
+   * is located and captured, and the [PixelMap]{@link @ohos.multimedia.image:image.PixelMap} is returned after
+   * completion synchronously. This is suitable for scenarios where you need to obtain the screenshot result promptly
+   * and performance requirements are not critical. Note that this API blocks the main thread and has a 3-second
+   * timeout. If the operation exceeds this limit, it throws an exception. Use with caution in performance-critical
+   * scenarios.
    *
    * > **NOTE**
    * >
@@ -4240,8 +4325,10 @@ export class ComponentSnapshot {
   getSync(id: string, options?: componentSnapshot.SnapshotOptions): image.PixelMap;
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided **uniqueId**. This API uses a
-   * promise to return the result.
+   * Obtains a screenshot of a loaded component by passing the component's **uniqueId**. The corresponding component is
+   * located and captured. This is suitable for scenarios where components are managed through node objects such as
+   * FrameNode and a component screenshot needs to be generated by its unique node ID. This API uses a promise to
+   * return the result.
    *
    * > **NOTE**
    * >
@@ -4249,8 +4336,9 @@ export class ComponentSnapshot {
    * > update, the re-rendered content will not be included in the obtained snapshot.
    *
    * @param { number } uniqueId - Unique ID of the target component. The unique ID of the **FrameNode** can be obtained
-   *     via the [getUniqueId]{@link FrameNode:FrameNode#getUniqueId} API.<br>Note: Off-screen or cached components not
-   *     mounted in the component tree are not supported.
+   *     via the [getUniqueId]{@link FrameNode:FrameNode#getUniqueId} API.<br>Note: Components that are not attached to
+   *     the tree are not supported. If the passed **uniqueId** corresponds to a node that is off-screen or cached and
+   *     not attached to the tree, the system will not capture a screenshot of it.
    * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot.
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4268,8 +4356,12 @@ export class ComponentSnapshot {
   getWithUniqueId(uniqueId: number, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided **uniqueId**. This API synchronously
-   * waits for the snapshot to complete and returns a [PixelMap]{@link @ohos.multimedia.image:image.PixelMap} object.
+   * Obtains a screenshot of a loaded component by passing the component's **uniqueId**. The corresponding component is
+   * located and captured. This is suitable for scenarios where components are managed through node objects such as
+   * FrameNode and synchronous screenshot retrieval is required. This API synchronously waits for the snapshot to
+   * complete and returns a [PixelMap]{@link @ohos.multimedia.image:image.PixelMap} object. This method blocks the main
+   * thread; use it with caution. If synchronous screenshot retrieval is not strictly necessary, it is recommended to
+   * use [getWithUniqueId]{@link ComponentSnapshot#getWithUniqueId} to obtain the screenshot asynchronously.
    *
    * > **NOTE**
    * >
@@ -4277,9 +4369,12 @@ export class ComponentSnapshot {
    * > update, the re-rendered content will not be included in the obtained snapshot.
    *
    * @param { number } uniqueId - Unique ID of the target component. The unique ID of the **FrameNode** can be obtained
-   *     via the [getUniqueId]{@link FrameNode:FrameNode#getUniqueId} API.<br>Note: Off-screen or cached components not
-   *     mounted in the component tree are not supported.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot.
+   *     via the [getUniqueId]{@link FrameNode:FrameNode#getUniqueId} API.<br>Note: Components that are not attached to
+   *     the tree are not supported. If the passed **uniqueId** corresponds to a node that is off-screen or cached and
+   *     not attached to the tree, the system will not capture a screenshot of it.
+   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot. Pass this parameter when
+   *     you need to customize screenshot settings such as scaling ratio and wait-for-render strategy. If not passed,
+   *     the system default screenshot configuration is used.
    * @returns { image.PixelMap } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
@@ -4297,28 +4392,43 @@ export class ComponentSnapshot {
   getSyncWithUniqueId(uniqueId: number, options?: componentSnapshot.SnapshotOptions): image.PixelMap;
 
   /**
-   * Captures a snapshot of the provided component content. This API uses a promise to return the result.
+   * Captures a snapshot of the provided component content. Unlike **createFromBuilder**, which takes a CustomBuilder
+   * and builds the component off-screen, **createFromComponent** takes an already built ComponentContent object. This
+   * is suitable for scenarios where component content is already managed through ComponentContent, such as dialogs and
+   * node management. This API uses a promise to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > - Because the API needs to wait for the component to be built and rendered successfully, there is a certain
+   * > delay in returning the screenshot. It is therefore not suitable for performance-sensitive scenarios.
+   * >
+   * > - If a component is on a time-consuming task, for example, an [Image]{@link image} or [Web]{@link web} component
+   * > that is loading online images, its loading may be still in progress when this API is called. In this case, the
+   * > output snapshot does not represent the component in the way it looks when the loading is successfully completed.
    *
    * @param { ComponentContent<T> } content - Component content to be captured. This is the content currently displayed
    *     in the **UIContext**.
    * @param { number } [delay] - Delay time for triggering the screenshot command. When the layout includes an image
-   *     component, it is necessary to set a delay time to allow the system to decode the image resources. The decoding
-   *     time is subject to the resource size. In light of this, whenever possible, use pixel map resources that do not
-   *     require decoding.<br> When PixelMap resources are used or when [syncLoad]{@link ImageAttribute#syncLoad} is set
-   *     to **true** for the **Image** component, you can set **delay** to **0** to forcibly capture snapshots without
-   *     waiting. This delay time does not refer to the time from the API call to the return: As the system needs to
-   *     temporarily construct the passed-in **builder** offscreen, the return time is usually longer than this delay.<
-   *     br>Note: In the **builder** passed in, state variables should not be used to control the construction of child
-   *     components. If they are used, they should not change when the API is called, so as to avoid unexpected snapshot
-   *     results.<br> Value range:
-   *     [0, +∞). If the value is less than 0, the default value is used.<br>Default value: **300**<br> Unit: ms
+   *     component, it is necessary to set a delay time to allow the system to decode the image resources. Larger
+   *     resources require longer decoding time. It is recommended that PixelMap resources that do not need to be
+   *     decoded be used preferentially.<br> When PixelMap resources are used or when [syncLoad]{@link
+   *     ImageAttribute#syncLoad} is set to **true** for the **Image** component, you can set **delay** to **0** to
+   *     forcibly capture snapshots without waiting. This delay time does not refer to the duration from the API call
+   *     to its return. Since the system needs to process the screenshot of the passed content object, the actual
+   *     return time is usually longer than the specified delay.<br>Note: In the **content** object passed to the
+   *     screenshot API, you should not use state variables to control the construction of child components. If it is
+   *     absolutely necessary to use them, ensure that their values do not change at the time the screenshot API is
+   *     called, to avoid unexpected screenshot results.<br> Value range: [0, +∞). If the value is less than 0, the
+   *     default value is used.<br>Default value: **300**<br> Unit: ms
    * @param { boolean } [checkImageStatus] - Whether to verify the image decoding status before taking a snapshot. If
-   *     the value is **true**, the system checks whether all **Image** components have been decoded before taking the
-   *     snapshot. If the check is not completed, the system aborts the snapshot and returns an exception.<br>Default
-   *     value: **false**.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Custom settings of the snapshot. You can specify the scale
-   *     ratio for the pixelmap during rendering and whether to force the system to complete all rendering commands
-   *     before taking the snapshot.
+   *     it is set to **true**, whether all Image components have completed decoding is checked before screenshot
+   *     capturing. If any Image component is still decoding, the screenshot is aborted and an exception is returned.<
+   *     br>Default value: **false**.
+   * @param { componentSnapshot.SnapshotOptions } [options] - Custom parameters for screenshots. You can specify the
+   *     scaling ratio for drawing the PixelMap on the graphics side and whether to force the system to wait for all
+   *     drawing commands to be executed before capturing the screenshot. Pass this parameter when you need to
+   *     customize the screenshot scaling ratio or the wait-for-render strategy. If not passed, the system default
+   *     screenshot configuration is used.
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
@@ -4366,9 +4476,10 @@ export class ComponentSnapshot {
     options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * Obtains the size limit of a component screenshot.
+   * Queries the maximum size limit for component screenshots. This is suitable for scenarios where you need to verify
+   * whether the target component size exceeds the system limit before taking a component screenshot.
    *
-   * @returns { componentSnapshot.SnapshotSizeLimitation } Size limit of a component screenshot.
+   * @returns { componentSnapshot.SnapshotSizeLimitation } Size limit information for component screenshots.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4379,9 +4490,9 @@ export class ComponentSnapshot {
 }
 
 /**
- * Base class for smart gesture handling. When dynamically customizing smart gesture behavior through the
- * [registerMonitor]{@link SmartGestureController#registerMonitor} API, the callback parameter type is an instance of a
- * specific subclass type.
+ * Base class for smart gesture handling. When the [registerMonitor]{@link SmartGestureController#registerMonitor} API
+ * is used to dynamically customize smart gesture behaviors, the callback parameter is an instance of a specific
+ * subclass type.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4391,7 +4502,7 @@ export class ComponentSnapshot {
 export abstract class BaseGestureHandlingProposal {
 
   /**
-   * Final action of the smart gesture.
+   * Final action executed by the smart gesture.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4422,7 +4533,7 @@ export abstract class BaseGestureHandlingProposal {
 export abstract class TargetedGestureProposal extends BaseGestureHandlingProposal {
 
   /**
-   * Target node that handles the current smart gesture.
+   * Target node for handling the current smart gesture.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4440,10 +4551,10 @@ export abstract class TargetedGestureProposal extends BaseGestureHandlingProposa
  *
  * > **NOTE**
  * >
- * > - This action handling follows the "select first, then click" processing semantics.
+ * > - This action handling follows the "select first, then click" semantics.
  * >
- * > - If the target node is not yet selected, this handling first establishes the selected state without immediately
- * > triggering the click.
+ * > - When the target node has not been selected yet, this handling prioritizes establishing the selected state and
+ * >   does not immediately trigger the click.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4453,7 +4564,7 @@ export abstract class TargetedGestureProposal extends BaseGestureHandlingProposa
 export class ClickActionProposal extends TargetedGestureProposal {
 
   /**
-   * Constructor for the smart gesture click action handling.
+   * Constructor for smart gesture click action handling.
    *
    * @param { FrameNode } node - Target node that responds to the click action.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4467,8 +4578,8 @@ export class ClickActionProposal extends TargetedGestureProposal {
 /**
  * Smart gesture selection action handling. When dynamically customizing smart gesture behavior through the
  * [registerMonitor]{@link SmartGestureController#registerMonitor} API, setting the return value
- * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type causes
- * the target component to be selected.
+ * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type selects
+ * the target component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4478,7 +4589,7 @@ export class ClickActionProposal extends TargetedGestureProposal {
 export class SelectActionProposal extends TargetedGestureProposal {
 
   /**
-   * Constructor for the smart gesture selection action handling.
+   * Constructor for smart gesture selection action handling.
    *
    * @param { FrameNode } node - Target node that responds to the selection action.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4490,10 +4601,10 @@ export class SelectActionProposal extends TargetedGestureProposal {
 }
 
 /**
- * Smart gesture no-op action handling. When dynamically customizing smart gesture behavior through the
+ * Smart gesture no-action handling. When dynamically customizing smart gesture behavior through the
  * [registerMonitor]{@link SmartGestureController#registerMonitor} API, setting the return value
- * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type
- * triggers no action.
+ * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type will
+ * not trigger any action.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4503,7 +4614,7 @@ export class SelectActionProposal extends TargetedGestureProposal {
 export class NoneActionProposal extends BaseGestureHandlingProposal {
 
   /**
-   * Constructor for the smart gesture no-op action handling.
+   * Constructor of smart gesture no-action handling.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4514,7 +4625,7 @@ export class NoneActionProposal extends BaseGestureHandlingProposal {
 }
 
 /**
- * Smart gesture back press action handling. When dynamically customizing smart gesture behavior through the
+ * Smart gesture back action handling. When dynamically customizing smart gesture behavior through the
  * [registerMonitor]{@link SmartGestureController#registerMonitor} API, setting the return value
  * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type
  * navigates back to the previous page.
@@ -4527,7 +4638,7 @@ export class NoneActionProposal extends BaseGestureHandlingProposal {
 export class BackPressActionProposal extends BaseGestureHandlingProposal {
 
   /**
-   * Constructor for the smart gesture back press action handling.
+   * Constructor for smart gesture back action handling.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4538,11 +4649,11 @@ export class BackPressActionProposal extends BaseGestureHandlingProposal {
 }
 
 /**
- * Smart gesture page switch action handling. The default direction is forward page switching, including right and down.
- * When dynamically customizing smart gesture behavior through the
+ * Handles the smart gesture page turning action. The default direction is forward page turning, including rightward
+ * and downward. When dynamically customizing smart gesture behavior through the
  * [registerMonitor]{@link SmartGestureController#registerMonitor} API, setting the return value
  * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type
- * triggers a page switching operation on the target component.
+ * triggers the page turning operation of the target component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4552,11 +4663,11 @@ export class BackPressActionProposal extends BaseGestureHandlingProposal {
 export class PageSwitchActionProposal extends TargetedGestureProposal {
 
   /**
-   * Constructor for the smart gesture page switch action handling.
+   * Constructor for the smart gesture page turning action handling.
    *
-   * @param { FrameNode } node - Target node that responds to the page switch action.
-   * @param { int } pageCount - Number of pages to switch.<br/>Value range:
-   *     [0, +∞). Values less than 0 are treated as 0.<br/>Unit: pages.
+   * @param { FrameNode } node - Target node that responds to the page turning action.
+   * @param { int } pageCount - Number of pages to turn.<br/>Value range:
+   *     [0, +∞). Values less than 0 are treated as 0.<br/>Unit: page.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4565,11 +4676,11 @@ export class PageSwitchActionProposal extends TargetedGestureProposal {
   constructor(node: FrameNode, pageCount: int);
 
   /**
-   * Number of pages to switch in the smart gesture.
+   * Number of pages for the smart gesture page turning.
    *
    * Value range: [0, +∞). Values less than 0 are treated as 0.
    *
-   * Unit: pages.
+   * Unit: page.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4580,11 +4691,11 @@ export class PageSwitchActionProposal extends TargetedGestureProposal {
 }
 
 /**
- * Smart gesture scroll action handling. The default direction is forward scrolling, including right and down. When
- * dynamically customizing smart gesture behavior through the
+ * Smart gesture scroll action handling, with the default direction being forward scrolling, including rightward and
+ * downward. When dynamically customizing smart gesture behavior through the
  * [registerMonitor]{@link SmartGestureController#registerMonitor} API, setting the return value
  * [GestureHandlingResolution]{@link GestureHandlingResolution}'s **selectedProposal** to an object of this type
- * triggers a scroll operation on the target component.
+ * triggers the scroll operation of the target component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4594,7 +4705,7 @@ export class PageSwitchActionProposal extends TargetedGestureProposal {
 export class ScrollActionProposal extends TargetedGestureProposal {
 
   /**
-   * Constructor for the smart gesture scroll action handling.
+   * Constructor for smart gesture scroll action handling.
    *
    * @param { FrameNode } node - Target node that responds to the scroll action.
    * @param { double } distance - Scroll distance.<br/>Value range:
@@ -4607,7 +4718,7 @@ export class ScrollActionProposal extends TargetedGestureProposal {
   constructor(node: FrameNode, distance: double);
 
   /**
-   * Scroll distance of the smart gesture.
+   * Smart gesture scroll distance.
    *
    * Value range: [0, +∞). Values less than 0 are treated as 0.
    *
@@ -4622,7 +4733,7 @@ export class ScrollActionProposal extends TargetedGestureProposal {
 }
 
 /**
- * Class for declaring the result of smart gesture handling.
+ * Declares the smart gesture handling result.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4634,10 +4745,11 @@ export class GestureHandlingResolution {
   /**
    * Constructor for the smart gesture handling result.
    *
-   * @param { boolean } isConsumed - Whether to consume the current smart gesture.<br/>**true**: The smart gesture is
-   *     consumed. If [selectedProposal]{@link GestureHandlingResolution#selectedProposal}
-   *     is not set, the system default action handling is used. If **selectedProposal** is set, the custom action
-   *     handling is used.<br/>**false**: The smart gesture is not consumed, and the system treats it as unhandled.
+   * @param { boolean } isConsumed - Whether to consume the current smart gesture.<br/>The value **true** means to
+   *     consume the current smart gesture. In this case, if
+   *     [selectedProposal]{@link GestureHandlingResolution#selectedProposal} is not set, the system default action
+   *     handling is used; if **selectedProposal** is set, custom action handling is used.<br/>The value **false**
+   *     means not to consume, and the system treats this smart gesture as unhandled.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4648,10 +4760,10 @@ export class GestureHandlingResolution {
   /**
    * Whether to consume the current smart gesture.
    *
-   * **true**: The smart gesture is consumed. If **selectedProposal** is not set, the system default action handling is
-   * used. If **selectedProposal** is set, the custom action handling is used.
+   * The value **true** means to consume the current smart gesture. In this case, if **selectedProposal** is not set,
+   * the system default action handling is used; if **selectedProposal** is set, custom action handling is used.
    *
-   * **false**: The smart gesture is not consumed, and the system treats it as unhandled.
+   * The value **false** means not to consume, and the system treats this smart gesture as unhandled.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4661,12 +4773,12 @@ export class GestureHandlingResolution {
   isConsumed: boolean;
 
   /**
-   * The smart gesture handling behavior specified by the user.
+   * Smart gesture handling behavior specified by the user.
    *
-   * When **isConsumed** is **true**: If **selectedProposal** is not set, the system default action handling is used. If
-   * **selectedProposal** is set, the custom action handling is used.
+   * When **isConsumed** is **true**, if **selectedProposal** is not set, the system default action handling is used;
+   * if **selectedProposal** is set, custom action handling is used.
    *
-   * When **isConsumed** is **false**, the **selectedProposal** setting does not take effect.
+   * When **isConsumed** is **false**, the setting of **selectedProposal** does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4677,12 +4789,14 @@ export class GestureHandlingResolution {
 }
 
 /**
- * Provides the capability to enable smart gestures, monitor them, control the selection state, and dynamically
- * determine smart gesture behavior.
+ * Provides the capabilities of smart gestures enabling, listening, selected state control, and dynamic smart gesture
+ * behaviors decision. It is suitable for scenarios where an app integrates smart gestures, listens for the system's
+ * default gesture handling intent, and customizes gesture response behaviors, helping the app flexibly control the
+ * smart gesture interaction process.
  *
  * > **NOTE**
  * >
- * > The following APIs must be called using a **SmartGestureController** instance obtained via
+ * > To use the following APIs, you need to obtain a **SmartGestureController** instance using
  * > [getSmartGestureController()]{@link UIContext#getSmartGestureController} in **UIContext**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4693,17 +4807,17 @@ export class GestureHandlingResolution {
 export class SmartGestureController {
 
   /**
-   * Sets whether to enable the tap and slide operations of smart gestures.
+   * Sets whether to enable tap and slide gestures in smart gestures.
    *
    * > **NOTE**
    * >
-   * > - This API affects only the tap and slide smart gestures, not the wrist-turn gesture.
+   * > - This API affects only tap and slide gestures in smart gestures, but does not affect a wrist rotation gesture.
    * >
-   * > - When disabled, the [smartGestureShortcut]{@link CommonMethod#smartGestureShortcut}
-   * > attribute on the component side is retained, but the tap and slide smart gestures will not be responded to.
+   * > - After disabled, the [smartGestureShortcut]{@link CommonMethod#smartGestureShortcut} configuration on the
+   * > component side will be retained, but tap and slide gestures in smart gestures will not be responded.
    *
-   * @param { boolean } enabled - Whether to enable the tap and slide smart gesture handling. The value **true** means
-   *     to enable it, and **false** means to disable it.
+   * @param { boolean } enabled - Whether to enable tap and slide gestures in smart gestures. The value **true**
+   *     indicates yes, and **false** indicates no.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4712,32 +4826,32 @@ export class SmartGestureController {
   enableSmartTapAndSlideGestures(enabled: boolean): void;
 
   /**
-   * Registers a smart gesture monitoring callback. Before the system processes the current smart gesture, the
-   * application can receive the default action handling of the current gesture and apply custom intervention. The
-   * callback is used for asynchronous callbacks.
+   * Registers a callback for listening to smart gestures. Before the system handles the current smart gesture, an
+   * application can receive the default action handling of the current gesture and perform custom intervention. This
+   * API uses an asynchronous callback to return the result.
    *
    * > **NOTE**
    * >
-   * > - This API enables the application to receive the system's handling intent for the current smart gesture event
-   * > before it is processed by the system and apply custom intervention.
+   * > - This API allows an app to receive the processing intent of the current smart gesture event before the system
+   * > handles it, and perform custom intervention.
    * >
-   * > - Users can customize the behavior of the current smart gesture through this callback.
+   * > - An app can use this callback to customize the behavior decision for the current smart gesture.
    * >
-   * > - Multiple monitoring callbacks can be registered. They are triggered in the reverse order of registration (the
-   * > last registered one is executed first). When a monitoring callback consumes the smart gesture event, that is,
-   * > when the return value [GestureHandlingResolution]{@link GestureHandlingResolution}.isConsumed is **true**,
-   * > subsequent monitoring callbacks will not be executed.
+   * > - An app can register multiple listener callbacks, which are triggered in last-registered-first-executed order.
+   * > When a listener callback consumes the smart gesture event, that is, when the return value
+   * > [GestureHandlingResolution]{@link GestureHandlingResolution}.isConsumed is **true**, subsequent listener callbacks
+   * > will not be executed.
    * >
-   * > - If the same callback is registered repeatedly, only the first registration takes effect; duplicate
-   * > registrations are ignored.
+   * > - When an app registers the same callback repeatedly, only the first registered callback is retained, and
+   * > duplicate registrations do not take effect.
    * >
-   * > - The return value of the callback must be a valid [GestureHandlingResolution]{@link GestureHandlingResolution}
-   * > instance; otherwise, the modification will not take effect.
+   * > - The callback return value must be a valid [GestureHandlingResolution]{@link GestureHandlingResolution}
+   * > instance; otherwise, the current override does not take effect.
    *
    * @param { Callback<BaseGestureHandlingProposal, GestureHandlingResolution> } monitorCallback - Smart gesture
-   *     monitoring callback. The callback parameter is the default action handling provided by the system, and the
-   *     return value is used to declare whether to consume the current smart gesture and whether to replace the default
-   *     action handling.
+   *     listener callback. The callback parameter is the default action handling provided by the system, and the
+   *     return value declares whether to consume the current smart gesture and whether to replace the default action
+   *     handling.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4746,10 +4860,10 @@ export class SmartGestureController {
   registerMonitor(monitorCallback: Callback<BaseGestureHandlingProposal, GestureHandlingResolution>): void;
 
   /**
-   * Unregisters a smart gesture monitoring callback.
+   * Unregisters a callback for listening to smart gestures.
    *
-   * @param { Callback<BaseGestureHandlingProposal, GestureHandlingResolution> } monitorCallback - The smart gesture
-   *     monitoring callback to unregister.
+   * @param { Callback<BaseGestureHandlingProposal, GestureHandlingResolution> } monitorCallback - Smart gesture
+   *     listener callback to unregister.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4758,7 +4872,7 @@ export class SmartGestureController {
   unregisterMonitor(monitorCallback: Callback<BaseGestureHandlingProposal, GestureHandlingResolution>): void;
 
   /**
-   * Clears all monitoring callbacks registered for the current **UIContext**.
+   * Clears all callbacks for listening to smart gestures, which are registered in the current UI context.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4768,20 +4882,22 @@ export class SmartGestureController {
   clearMonitors(): void;
 
   /**
-   * Requests to set the specified component as the current smart gesture selected node. After successful selection, a
-   * selection prompt box is displayed. The style of the selection box varies by device.
+   * Requests to set a specified component as the node selected by the current smart gesture. After the selection is
+   * successful, a selection dialog box is displayed. The style of the selection dialog box varies depending on the
+   * device.
    *
    * > **NOTE**
    * >
-   * > - The request takes effect only when all the following conditions are met: the target component can respond to
-   * > smart gestures, the component is visible on the screen, and the component has an
-   * > [onClick]{@link CommonMethod#onClick(event: Callback<ClickEvent>, distanceThreshold: number)} event bound or a
-   * > [TapGesture]{@link TapGesture} gesture bound.
+   * > - The request takes effect only when the target component meets all of the following conditions: the component
+   * > can respond to smart gestures, the component is visible on the screen, and the component is bound with
+   * > [onClick]{@link CommonMethod#onClick} or a tap gesture [TapGesture]{@link TapGesture}.
    * >
    * > - Whether a component can respond to smart gestures is determined by **enabled** in
    * > [smartGestureShortcut]{@link CommonMethod#smartGestureShortcut}.
    *
-   * @param { string } id - Component [id]{@link CommonMethod#id}.
+   * @param { string } id - Component [id]{@link CommonMethod#id}. The target component corresponding to this ID must
+   *     meet the following requirements: it can respond to smart gestures, is visible on the screen, and is bound with
+   *     [onClick]{@link CommonMethod#onClick} or [TapGesture]{@link TapGesture}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -4790,7 +4906,7 @@ export class SmartGestureController {
   requestSelected(id: string): void;
 
   /**
-   * Clears the currently selected node of smart gestures.
+   * Clears the node selected by the current smart gesture.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5757,19 +5873,18 @@ export class UIContext {
   getCursorController(): CursorController;
 
   /**
-   * Registers a local input event monitor.
+   * Registers a local input event listener.
    *
-   * The "Local" in the interface name indicates that the monitor is only valid within the current UIContext,
-   * and does not affect other UIContext instances. Each UIContext maintains its own independent list of monitors.
-   *
-   * Performance Warning: Do not perform time-consuming operations in the callback!
-   *
-   * Monitor Object Notes:
-   *
-   * - The returned Monitor object is a unique identifier created by the system.
-   * - Developers cannot actively construct or forge this object.
-   * - Must save the returned monitor object reference for subsequent cancellation.
-   * - It is recommended to use a variable to save it to avoid losing the reference.
+   * > **NOTE**
+   * >
+   * > - Do not perform time-consuming operations (such as complex calculations or network requests) in the
+   * > callback. Otherwise, stuttering may occur.
+   * > - This listener is valid only in the current UIContext (that is, the current window) and does not
+   * > respond to other UIContext instances.
+   * > - The returned **InputEventMonitor** object is a unique identifier created by the system. You cannot
+   * > construct or forge this object. You must retain its reference for subsequent unregistration.
+   * > - If an invalid parameter is passed, **undefined** is returned, indicating that the listener fails
+   * > to be registered.
    *
    * Usage Examples:
    *
@@ -5803,11 +5918,11 @@ export class UIContext {
    * uiContext.removeLocalInputEventMonitor(monitor2);
    * ```
    *
-   * @param { int } eventMask - Event type mask, specifying the types of events to monitor through
-   *     bitwise operations.
-   * @param { InputEventListener } listener - Event listener callback function.
-   * @returns { InputEventMonitor } Unique identifier object for the monitor, used for subsequent
-   *     cancellation of registration.
+   * @param { int } eventMask - Event type mask, which specifies event types to listen for via bitwise
+   *     operations. For details about the values and their meanings, see {@link InputEventSubTypeMask}.
+   * @param { InputEventListener } listener - Callback function of the event listener.
+   * @returns { InputEventMonitor } Unique identifier object of the listener, which is used for subsequent
+   *     unregistration.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5817,15 +5932,16 @@ export class UIContext {
   addLocalInputEventMonitor(eventMask: int, listener: InputEventListener): InputEventMonitor;
 
   /**
-   * Removes a local input event monitor.
+   * Removes the local input event listener.
    *
-   * **Important Notes**:
+   * > **NOTE**
+   * >
+   * > - Only the **InputEventMonitor** object returned by addLocalInputEventMonitor can be removed.
+   * > - You cannot manually construct an object to unregister the listener.
+   * > - If an invalid object is passed, the system ignores it silently.
    *
-   * - Only Monitor objects returned by addLocalInputEventMonitor can be removed.
-   * - Cannot unregister a monitor by manually constructing an object.
-   * - If an invalid object is passed, the system silently ignores it.
-   *
-   * @param { InputEventMonitor } monitor - Monitor identifier object (returned by addLocalInputEventMonitor).
+   * @param { InputEventMonitor } monitor - Listener identifier object, which is returned by
+   *     addLocalInputEventMonitor.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
