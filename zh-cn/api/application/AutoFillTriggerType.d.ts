@@ -22,8 +22,10 @@
  * 自动填充服务的拉起类型，通过用户手势操作来选择不同的自动填充服务拉起方式。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 23 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
+ * @atomicservice
  * @since 23 dynamic&static
  */
 export enum AutoFillTriggerType {
@@ -31,8 +33,10 @@ export enum AutoFillTriggerType {
    * 自动拉起自动填充服务，可通过[TextInput]{@link @internal/component/ets/text_input}控件获焦后自动拉起。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 23 dynamic&static
    */
   AUTO_REQUEST = 0,
@@ -41,8 +45,10 @@ export enum AutoFillTriggerType {
    * 手动拉起自动填充服务，可通过长按任意输入控件弹出二级菜单，选择自动填充，拉起自动填充服务。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 23 dynamic&static
    */
   MANUAL_REQUEST = 1,
@@ -51,8 +57,10 @@ export enum AutoFillTriggerType {
    * 粘贴拉起自动填充服务，仅在用户已从密码保险箱内长按用户名或密码选择安全复制后，通过长按任意输入控件弹出二级菜单并选择粘贴时拉起自动填充服务。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 23 dynamic&static
    */
   PASTE_REQUEST = 2,
