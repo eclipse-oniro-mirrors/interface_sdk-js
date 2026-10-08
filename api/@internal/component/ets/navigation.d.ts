@@ -362,19 +362,6 @@ declare interface NavigationMenuItem {
   isEnabled?: boolean;
 
   /**
-   * Set system-styled materials for the menu item. Different materials have different effects, which can influence
-   * the backgroundColor, border, shadow, and other visual attributes of the menu item.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  systemMaterial?: Material;
-
-  /**
    * Callback invoked when the menu item is selected.
    *
    * @type { ?(() => void) } [since 8 - 9]
@@ -2204,44 +2191,6 @@ declare interface NavigationTitleOptions {
    * @since 26.0.0 dynamic
    */
   systemMaterial?: Material;
-
-  /**
-   * Sets the vibrancy mode for the titleBar icons.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  vibrancyMode?: VibrancyMode;
-}
-
-/**
- * Defines the options for the back button on the title bar.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @systemapi
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare interface NavigationBackButtonOptions {
-  /**
-   * System-styled material of the back button. Different materials have different effects, which can influence
-   * the backgroundColor, border, shadow, and other visual attributes.
-   * When this field is set, the back button uses the independent material effect, which takes precedence over the
-   * title bar overall material. When not set, the back button falls back to the title bar overall material. When both
-   * are not set, the back button uses the default style without any material effect.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  systemMaterial?: Material;
 }
 
 /**
@@ -2626,35 +2575,27 @@ declare class NavigationAttribute extends CommonMethod<NavigationAttribute> {
   backButtonIcon(icon: string | PixelMap | Resource | SymbolGlyphModifier, accessibilityText?: ResourceStr): NavigationAttribute;
 
   /**
-   * Sets the icon, accessibility text, and system material for the back button on the title bar.
-   *
-   * When the **systemMaterial** in options is set, the back button uses the independent material effect, which takes
-   * precedence over the title bar overall material. When not set, the back button falls back to the title bar overall
-   * material. When both are not set, the back button uses the default style without any material effect.
+   * Sets the icon and accessibility text for the back button on the title bar.
    *
    * > **NOTE**
    * >
-   * > This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    * >
-   * > The following are not allowed: modify the icon size through the **fontSize** attribute of the
+   * The following are not allowed: modify the icon size through the **fontSize** attribute of the
    * > **SymbolGlyphModifier** object, change the animation effects through the **effectStrategy** attribute, or change
-   * > the type of animation effects through the **symbolEffect** attribute.
+   * the type of animation effects through the **symbolEffect** attribute.
    *
    * @param { string | PixelMap | Resource | SymbolGlyphModifier } icon - Icon of the back button in the title bar.
-   * @param { ResourceStr } [accessibilityText] - Accessibility text for the back button.
-   *     <br>when the system language is English.
-   *     <br>Default value: **back**.
-   * @param { Optional<NavigationBackButtonOptions> } [options] - Options for back button, including system material.
+   * @param { ResourceStr } [accessibilityText] - Accessibility text for the back button.<br>Default value: **back**
+   *     when the system language is English.
    * @returns { NavigationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 19 dynamic
    */
-  backButtonIcon(icon: string | PixelMap | Resource | SymbolGlyphModifier,
-    accessibilityText?: ResourceStr, options?: Optional<NavigationBackButtonOptions>): NavigationAttribute;
+  backButtonIcon(icon: string | PixelMap | Resource | SymbolGlyphModifier, accessibilityText?: ResourceStr): NavigationAttribute;
 
   /**
    * Sets whether to hide the navigation page. If the value is set to **true**, the navigation bar, including the title

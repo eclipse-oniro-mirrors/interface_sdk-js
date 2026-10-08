@@ -1121,40 +1121,6 @@ interface TabContentInterface {
 }
 
 /**
- * Defines a sidebar section grouping with a title.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare class SidebarSection {
-  /**
-   * The section title.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  title: ResourceStr;
-
-  /**
-   * Creates a SidebarSection with the specified title.
-   *
-   * @param { ResourceStr } title - The section title.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  constructor(title: ResourceStr);
-}
-
-/**
  * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
  *
  * In addition to the [universal events]{@link ./common}, the following events are supported.
@@ -1320,49 +1286,6 @@ declare class TabContentAttribute extends CommonMethod<TabContentAttribute> {
    * @since 26.2.0 dynamic
    */
   tabBarVisibility(visibility: TabVisibility, displayMode?: TabBarDisplayMode): TabContentAttribute;
-
-  /**
-   * Sets the sidebar section grouping for this TabContent.
-   *
-   * @param { Optional<SidebarSection> } value - The sidebar section.
-   * @returns { TabContentAttribute } - the attribute of the tab content.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  sidebarSection(value: Optional<SidebarSection>): TabContentAttribute;
-
-  /**
-   * Marks this TabContent as not recyclable, regardless of the trigger.
-   *
-   * This property takes effect in two scenarios:
-   * 1. When **Tabs.recycleOnBackground** is enabled — TabContent with **keepAlive=true**
-   *    will NOT be destroyed on background, regardless of whether it is currently selected.
-   * 2. When **Tabs.cachedMaxCount** is configured — TabContent with **keepAlive=true**
-   *    will NOT be destroyed by the cache eviction logic, even if it falls outside
-   *    the cache range.
-   *
-   * In both cases, the TabContent is always kept in memory with its full content intact.
-   * This is useful for TabContent that developers want to always keep alive, such as
-   * the home or main tab.
-   *
-   * The currently selected tab is always kept alive regardless of this property.
-   * This property only affects the behavior of non-selected (invisible) TabContent.
-   *
-   * @param { Optional<boolean> } keepAlive - Whether to keep this TabContent alive and
-   *     not recyclable.<br>Passing **undefined** resets this
-   *     property to its default value (**false**).
-   *     <br>Default value: **false**.
-   * @returns { TabContentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  keepAlive(keepAlive: Optional<boolean>): TabContentAttribute;
 }
 
 /**

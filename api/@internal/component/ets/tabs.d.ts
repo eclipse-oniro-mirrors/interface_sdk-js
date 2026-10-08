@@ -244,55 +244,7 @@ declare enum LayoutStyle {
 }
 
 /**
- * Enumerates the overlap modes of the tab bar and tab content.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare enum BarOverlapMode {
-
-  /**
-   * The tab bar does not overlap with the tab content. The tab content height equals the Tabs height minus the tab bar
-   * height. This is equivalent to **barOverlap(false)**.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  STANDARD = 0,
-
-  /**
-   * The tab bar floats on top of the tab content. The tab content occupies all available space. This is equivalent to
-   * **barOverlap(true)**.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  STACK = 1,
-
-  /**
-   * The tab bar area becomes part of the safe area padding for the tab content. The tab content can extend into the
-   * tab bar area.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  SAFE_AREA_PADDING = 2
-}
-
-/**
- * Enumerates the cache modes of child components.
+ * Enumerates the caching modes for child components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -301,9 +253,10 @@ declare enum BarOverlapMode {
  * @since 19 dynamic
  */
 declare enum TabsCacheMode {
+
   /**
-   * Caches the currently displayed child component and the child components on both sides of it. That is, when the
-   * count value of the **cachedMaxCount** attribute is set to **n**, a maximum of  2n + 1 child components are cached.
+   * Cache the currently displayed child component and the child components on both sides.
+   *     For example, if **cachedMaxCount** is set to **n**, up to 2n+1 child components will be cached.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -314,9 +267,8 @@ declare enum TabsCacheMode {
   CACHE_BOTH_SIDE = 0,
 
   /**
-   * Caches the currently displayed child component and the most recently switched child component. That is, when the
-   * **count** value of the **cachedMaxCount** attribute is set to **n**, a maximum of n + 1 child components are
-   * cached.
+   * Cache the currently displayed child component and the most recently switched child component.
+   *    For example, if **cachedMaxCount** is set to **n**, up to n+1 child components will be cached.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -328,7 +280,7 @@ declare enum TabsCacheMode {
 }
 
 /**
- * Enumerates the display styles of the sidebar.
+ * Enumerates the display styles of the tab side bar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -360,6 +312,44 @@ declare enum TabsSidebarDisplayStyle {
    * @since 26.2.0 dynamic
    */
   DISPLACE = 1
+}
+
+/**
+ * Enumerates the nested scrolling modes of the **Tabs** component and its parent container.
+ *
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 24 dynamic
+ */
+declare enum TabsNestedScrollMode {
+
+  /**
+   * The scrolling is contained within the **Tabs** component, and no scroll chaining occurs, that is,
+   *     the parent component does not scroll when the component scrolling reaches the boundary.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 24 dynamic
+   */
+  SELF_ONLY = 0,
+
+  /**
+   * The **Tabs** component scrolls first, and when it hits the boundary, the parent component scrolls.
+   *     When the parent container hits the boundary, its edge effect is displayed. If no edge effect is specified
+   *     for the parent container, the edge effect of the **Tabs** component is displayed instead.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 24 dynamic
+   */
+  SELF_FIRST = 1
 }
 
 /**
@@ -1090,196 +1080,6 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   systemMaterial?: UIMaterial.ImmersiveMaterial;
-
-  /**
-   * The maximum width of the bar. It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  maxWidth?: Length;
-
-  /**
-   * The offset of the bar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  offset?: Position | Edges | LocalizedEdges;
-
-  /**
-   * The MiniBar configuration for the floating tab bar.
-   * When set, a MiniBar node is mounted as a child of the tab bar, rendering the
-   * configured builder content and applying the specified width, style, and layout mode.
-   * When not set, no MiniBar is displayed.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  minibar?: TabsMiniBar;
-}
-
-/**
- * Provides an interface for the options for the top floating tab bar style.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-interface TopFloatingTabBarStyle {
-
-  /**
-   * The bar width at different breakpoints.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  barWidth?: FloatingTabBarWidth;
-
-  /**
-   * The width of the left and right margins of the bar. It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  barSideMargin?: Length;
-
-  /**
-   * The distance between the bar and the top of the tab. It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  barTopMargin?: Length;
-
-  /**
-   * The color of the mask.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  maskColor?: ResourceColor;
-
-  /**
-   * The height of the mask. It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  maskHeight?: Length;
-
-  /**
-   * Whether to adapt to the handedness.
-   *
-   * @default false
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  adaptToHandedness?: boolean;
-
-  /**
-   * The style of the material.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  systemMaterial?: UIMaterial.ImmersiveMaterial;
-
-  /**
-   * The maximum width of the bar. It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  maxWidth?: Length;
-
-  /**
-   * The offset of the bar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  offset?: Position | Edges | LocalizedEdges;
-}
-
-/**
- * Enumerates the nested scrolling modes of the **Tabs** component and its parent component.
- *
- * | Name                  | Value | Description                                     |
- * | --------------------- | -- | ---------------------------------------- |
- * | SELF_ONLY       | 0  | The **Tabs** component scrolls by itself without interacting with the parent component. This mode applies to scenarios where the **Tabs** component has complete scrolling functionality and requires independent control of the scrolling behavior. |
- * | SELF_FIRST | 1  | The **Tabs** component scrolls first, and the parent component scrolls after the **Tabs** component reaches its edge. After the parent component reaches its edge, if the parent component has an edge effect, the parent component triggers the edge effect; otherwise, the **Tabs** component triggers the edge effect. This mode applies to nested scrolling scenarios where the **Tabs** component serves as the primary scrolling area and needs to interact with the parent component after reaching its edge. |
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 24 dynamic
- */
-declare enum TabsNestedScrollMode {
-  /**
-   * The scrolling is contained within the **Tabs** component, and no scroll chaining occurs, that is,
-   *     the parent component does not scroll when the component scrolling reaches the boundary.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 24 dynamic
-   */
-  SELF_ONLY = 0,
-
-  /**
-   * The **Tabs** component scrolls first, and when it hits the boundary, the parent component scrolls.
-   *     When the parent container hits the boundary, its edge effect is displayed. If no edge effect is specified
-   *     for the parent container, the edge effect of the **Tabs** component is displayed instead.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 24 dynamic
-   */
-  SELF_FIRST = 1
 }
 
 /**
@@ -1452,31 +1252,6 @@ declare enum TabBarStyle {
    * @since 26.2.0 dynamic
    */
   SIDEBAR_ADAPTABLE = 2,
-
-  /**
-   * The top floating tab bar style. The tab bar is always displayed at the top in a floating form.
-   * The **BarPosition** setting is ignored when this style is used.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  TOP = 3,
-
-  /**
-   * The adaptable top floating tab bar style. The tab bar position automatically switches between
-   * top and bottom floating based on the Tabs container size breakpoints.
-   * The **BarPosition** setting is ignored when this style is used.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  TOP_ADAPTABLE = 4
 }
 
 /**
@@ -1583,17 +1358,6 @@ declare enum TabBarDisplayMode {
    * @since 26.2.0 dynamic
    */
   SIDEBAR = 1,
-
-  /**
-   * The tab bar is displayed as a top floating bar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  TOP_TABBAR = 2
 }
 
 /**
@@ -1640,342 +1404,7 @@ declare interface TabsBreakpointType<T> {
   lg?: T;
 }
 
-/**
- * Defines the width of the MiniBar under different Tabs container widths.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare interface TabsMiniBarWidth {
-  /**
-   * Sets the width of the MiniBar when the Tabs container width is less than 440vp.
-   * It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  smallBarWidth?: Length;
 
-  /**
-   * Sets the width of the MiniBar when the Tabs container width is between 440vp and 600vp,
-   * or when the width is between 600vp and 840vp and the aspect ratio is less than 0.8.
-   * It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  mediumBarWidth?: Length;
-
-  /**
-   * Sets the width of the MiniBar when the Tabs container width is greater than 840vp,
-   * or when the width is between 600vp and 840vp and the aspect ratio is greater than 0.8.
-   * It cannot be set in percentage.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  largeBarWidth?: Length;
-}
-
-/**
- * Enumerates the display styles of the MiniBar.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare enum TabsMiniBarStyle {
-  /**
-   * The collapsed style. The MiniBar is displayed in a narrow form with minimal content.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  COLLAPSE = 0,
-
-  /**
-   * The expanded style. The MiniBar is displayed in a wider form with full content.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  EXPAND = 1
-}
-
-/**
- * Enumerates the trigger modes of the MiniBar style change.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare enum TabsMiniBarChangeMode {
-  /**
-   * Normal mode, including screen rotation and screen opening and closing.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  NORMAL = 0,
-
-  /**
-   * User click mode, triggered by clicking the collapsed MiniBar or TabBar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  USER_CLICK = 1,
-
-  /**
-   * App trigger mode, triggered by invoking the interface of the controller.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  APP_TRIGGER = 2
-}
-
-/**
- * Defines the bar layout mode for MiniBar and TabBar arrangement.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare enum TabsMiniBarLayoutMode {
-  /**
-   * Horizontal bar layout: MiniBar and TabBar are arranged horizontally in one row.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  HORIZONTAL = 0,
-
-  /**
-   * Vertical bar layout: MiniBar and TabBar are arranged vertically in two rows.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  VERTICAL = 1
-}
-
-/**
- * Declares the function for style change callback.
- *
- * @param { TabsMiniBarStyle } miniBarStyle - Current MiniBar style.
- * @param { TabsMiniBarStyle } tabBarStyle - Current TabBar style.
- * @param { number } miniBarWidth - Current MiniBar width.
- * @param { number } tabBarWidth - Current TabBar width.
- * @param { TabsMiniBarChangeMode } mode - Bar change mode.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare type BarStyleChangeCallback = (miniBarStyle: TabsMiniBarStyle,
-    tabBarStyle: TabsMiniBarStyle, miniBarWidth: number, tabBarWidth: number,
-    mode: TabsMiniBarChangeMode) => void;
-
-/**
- * Declares the function for sideBar visible change callback.
- *
- * @param { boolean } isVisible - The visibility of the Tabs sidebar.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare type TabsOnSideBarChangeCallback = (isVisible: boolean) => void;
-
-/**
- * Sets the attributes of the MiniBar.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare interface TabsMiniBar {
-  /**
-   * Sets the builder for the MiniBar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  builder?: ComponentContent;
-
-  /**
-   * Sets the width of the MiniBar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  miniBarWidth?: TabsMiniBarWidth;
-
-  /**
-   * Style of the MiniBar.
-   * Default value: TabsMiniBarStyle.COLLAPSE.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  miniBarStyle?: TabsMiniBarStyle;
-
-  /**
-   * Sets the bar layout mode for MiniBar and TabBar.
-   * Default value: TabsMiniBarLayoutMode.HORIZONTAL.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  barLayoutMode?: TabsMiniBarLayoutMode;
-
-  /**
-   * Callback function for the bar style changes.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  onBarStyleChange?: BarStyleChangeCallback;
-}
-
-/**
- * Defines the centralized customization configuration for the sidebar tab bar.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-interface TabViewCustomization {
-  /**
-   * A map of TabContent index to sidebar visibility.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  visibilityMap?: Map<number, TabVisibility>;
-
-  /**
-   * A map of TabContent index to sidebar section.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  sectionMap?: Map<number, SidebarSection>;
-
-  /**
-   * An array of TabContent indices defining the display priority of tab items in the sidebar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  orderList?: number[];
-}
-
-/**
- * Defines the options for the title bar of the sidebar tab bar. The title bar is displayed above the header area.
- * When the title bar is set, the expand/collapse button moves from the default left side to the right side of the
- * title bar.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.2.0 dynamic
- */
-declare interface TabsSidebarTitleBarOptions {
-
-  /**
-   * Icon of the title bar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  icon?: ResourceStr;
-
-  /**
-   * Text of the title bar.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  text?: ResourceStr;
-}
 
 /**
  * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
@@ -2446,24 +1875,6 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barOverlap(value: boolean): TabsAttribute;
 
   /**
-   * Sets the overlap mode of the tab bar and **TabContent** component.
-   *
-   * @param { BarOverlapMode | boolean } value - Overlap mode of the tab bar and **TabContent** component.
-   *     **BarOverlapMode.STACK**: The tab bar overlaps the **TabContent** component with a blurred background effect,
-   *     and the default blur style of the tab bar is set to **'BlurStyle.COMPONENT_THICK'**.<br>
-   *     **BarOverlapMode.STANDARD**: There is no blur or overlap effect.<br>
-   *     **BarOverlapMode.SAFE_AREA_PADDING**: The tab bar area becomes part of the safe area padding for the tab
-   *     content, and the tab content can extend into the tab bar area.
-   * @returns { TabsAttribute } the attribute of the tabs
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  barOverlap(value: BarOverlapMode | boolean): TabsAttribute;
-
-  /**
    * Sets the background color of the tab bar.
    *
    * @param { ResourceColor } value - Background color of the tab bar.<br/>**Note:**<br/>It is recommended to use this
@@ -2735,20 +2146,6 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.0.0 dynamic
    */
   barFloatingStyle(style: Optional<FloatingTabBarStyle>): TabsAttribute;
-
-  /**
-   * Enable top floating style for bar. This is effective only when **barStyle** is set to
-   * **TabBarStyle.TOP** or **TabBarStyle.TOP_ADAPTABLE**.
-   *
-   * @param { Optional<TopFloatingTabBarStyle> } style - top floating style for bar.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  topBarFloatingStyle(style: Optional<TopFloatingTabBarStyle>): TabsAttribute;
 
   /**
    * Sets the display style of the tab bar.
@@ -3054,114 +2451,6 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarDivider(value: Optional<DividerStyle>): TabsAttribute;
-
-  /**
-   * Sets whether to display the sidebar control button.
-   *
-   * @param { Optional<boolean> } value - Whether to display the sidebar control button.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  showSideBarControlButton(value: Optional<boolean>): TabsAttribute;
-
-  /**
-   * Sets the centralized customization configuration for the sidebar tab bar.
-   *
-   * @param { Optional<TabViewCustomization> } value - The centralized customization configuration.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  tabViewCustomization(value: Optional<TabViewCustomization>): TabsAttribute;
-
-  /**
-   * Sets whether the sidebar tab bar is visible.
-   *
-   * @param { Optional<boolean> } value - Whether the sidebar is visible.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  showSideBar(value: Optional<boolean>): TabsAttribute;
-
-  /**
-   * Enables or disables the edge swipe gesture for sidebar expand/collapse.
-   *
-   * @param { Optional<boolean> } value - Whether to enable the edge swipe gesture.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  showSideBarWithGesture(value: Optional<boolean>): TabsAttribute;
-
-  /**
-   * Called when the sidebar visibility state changes.
-   *
-   * @param { Optional<TabsOnSideBarChangeCallback> } callback - Callback invoked when the sidebar visibility changes.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  onSideBarChange(callback: Optional<TabsOnSideBarChangeCallback>): TabsAttribute;
-
-  /**
-   * Sets whether to enable immersive material for the sidebar.
-   *
-   * @param { Optional<boolean> } value - Whether to enable immersive material for the sidebar.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  enableSidebarImmersiveMaterial(value: Optional<boolean>): TabsAttribute;
-
-  /**
-   * Sets the title bar of the sidebar tab bar. The title bar is displayed above the header area. When the title bar is
-   * set, the expand/collapse button moves from the default left side to the right side of the title bar.
-   *
-   * @param { Optional<TabsSidebarTitleBarOptions> } value - Title bar options of the sidebar tab bar.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  sidebarTitleBar(value: Optional<TabsSidebarTitleBarOptions>): TabsAttribute;
-
-  /**
-   * Provides a callback to set the parallel relationship between the built-in gesture of the **Tabs** component and
-   * gestures of other components in the response chain.
-   *
-   * @param { Optional<ShouldBuiltInRecognizerParallelWithCallback> } callback - A callback instance used
-   *     when a component is doing touch test.
-   * @returns { TabsAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  onShouldBuiltInRecognizerParallelWith(callback: Optional<ShouldBuiltInRecognizerParallelWithCallback>): TabsAttribute;
 }
 
 /**

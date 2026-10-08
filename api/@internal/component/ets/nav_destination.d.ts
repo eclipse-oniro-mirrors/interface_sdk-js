@@ -908,36 +908,6 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   backButtonIcon(icon: ResourceStr | PixelMap | SymbolGlyphModifier, accessibilityText?: ResourceStr): NavDestinationAttribute;
 
   /**
-   * Sets the icon, accessibility text, and system material for the back button on the title bar.
-   *
-   * When the **systemMaterial** in options is set, the back button uses the independent material effect, which takes
-   * precedence over the title bar overall material. When not set, the back button falls back to the title bar overall
-   * material. When both are not set, the back button uses the default style without any material effect.
-   *
-   * > **NOTE**
-   *
-   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
-   * >
-   * > - The following operations are not allowed: modifying the icon size through the **fontSize** attribute of the
-   * > **SymbolGlyphModifier** object, changing the animation effects through the **effectStrategy** attribute, or
-   * > changing the animation effect type through the **symbolEffect** attribute.
-   *
-   * @param { ResourceStr | PixelMap | SymbolGlyphModifier } icon - Icon of the back button on the title bar.
-   * @param { ResourceStr } [accessibilityText] - Accessibility text for the back button.<br>Default value: **back**
-   *     when the system language is English.
-   * @param { Optional<NavigationBackButtonOptions> } [options] - Options for back button, including system material.
-   * @returns { NavDestinationAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  backButtonIcon(icon: ResourceStr | PixelMap | SymbolGlyphModifier,
-    accessibilityText?: ResourceStr, options?: Optional<NavigationBackButtonOptions>): NavDestinationAttribute;
-
-  /**
    * Sets the menu items in the upper right corner of the page. If this attribute is not set, no menu item is displayed.
    * When the value type is Array<[NavigationMenuItem]{@link NavigationMenuItem}&gt;, the menu shows a maximum of three
    * icons in portrait mode and a maximum of five icons in landscape mode, with excess icons (if any) placed under the
