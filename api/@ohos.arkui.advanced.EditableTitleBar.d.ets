@@ -26,7 +26,6 @@
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare class EditableTitleBarMenuItem {
   /**
@@ -185,7 +184,6 @@ export declare class EditableTitleBarMenuItem {
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
- * @noninterop
  */
 export type EditableTitleBarItem = EditableTitleBarMenuItem;
 
@@ -197,7 +195,6 @@ export type EditableTitleBarItem = EditableTitleBarMenuItem;
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare enum EditableLeftIconType {
   /**
@@ -231,7 +228,6 @@ export declare enum EditableLeftIconType {
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
- * @noninterop
  */
 export declare interface EditableTitleBarOptions {
   /**
@@ -313,7 +309,6 @@ export declare interface EditableTitleBarOptions {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 @Component
 export declare struct EditableTitleBar {

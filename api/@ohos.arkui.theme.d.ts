@@ -52,13 +52,7 @@ export declare interface Theme {
 export declare interface Colors {
 
   /**
-   * Brand color. When the non-[Resource]{@link Resource} type in [ResourceColor]{@link ResourceColor} is used to set
-   * the color, the default values of **backgroundEmphasize**, **compBackgroundEmphasize**,
-   * **compEmphasizeSecondary**, **compEmphasizeTertiary**, **interactiveFocus**, and **interactiveSelect** change
-   * according to the mapping. For details, see the description of the corresponding color attributes.
-   *
-   * **Affected components**: [TextInput]{@link ./@internal/component/ets/text_input} and
-   * [Search]{@link ./@internal/component/ets/search}
+   * System brand Color.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -69,13 +63,7 @@ export declare interface Colors {
   brand: ResourceColor;
 
   /**
-   * Primary color. The default value is **undefined**, indicating that the primary color does not take effect. Since
-   * API version 26.0.0, when the non-[Resource]{@link Resource} type in [ResourceColor]{@link ResourceColor} is used
-   * to set the color, the default values of **fontPrimary**, **fontSecondary**, **fontTertiary**, **fontFourth**,
-   * **iconPrimary**, **iconSecondary**, **iconTertiary**, and **iconFourth** change with the mapping. For details,
-   * see the description of the corresponding color attributes.
-   *
-   * **Affected components**: N/A
+   * System primary Color.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -86,14 +74,7 @@ export declare interface Colors {
   primary?: ResourceColor;
 
   /**
-   * Inverted primary color. The default value is **undefined**, indicating that the emphasis color does not take
-   * effect. Since API version 26.0.0, when the non-[Resource]{@link Resource} type in
-   * [ResourceColor]{@link ResourceColor} is used to set the color, the default values of **fontOnPrimary**,
-   * **fontOnSecondary**, **fontOnTertiary**, **fontOnFourth**, **iconOnPrimary**, **iconOnSecondary**,
-   * **iconOnTertiary**, and **iconOnFourth** change with the mapping. For details, see the description of the
-   * corresponding color attributes.
-   *
-   * **Affected components**: N/A
+   * System onPrimary Color.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -104,13 +85,7 @@ export declare interface Colors {
   onPrimary?: ResourceColor;
 
   /**
-   * Container color. The default value is **undefined**, indicating that the container color does not take effect.
-   * Since API version 26.0.0, when the non-[Resource]{@link Resource} type in [ResourceColor]{@link ResourceColor} is
-   * used to set the color, the default values of **compBackgroundSecondary**, **compBackgroundTertiary**,
-   * **compDivider**, **interactiveHover**, **interactivePressed**, and **interactiveClick** change with the mapping.
-   * For details, see the description of the corresponding color attributes.
-   *
-   * **Affected components**: N/A
+   * System container Color.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -532,7 +507,6 @@ export declare interface Colors {
    * Primary background color (solid, opaque).
    *
    * **Affected components**: [TextInput]{@link ./@internal/component/ets/text_input} and
-   * [QRCode]{@link ./@internal/component/ets/qrcode}
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -26,7 +26,6 @@
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare class TabTitleBarMenuItem {
   /**
@@ -157,7 +156,6 @@ export declare class TabTitleBarMenuItem {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare class TabTitleBarTabItem {
   /**
@@ -216,7 +214,6 @@ export declare class TabTitleBarTabItem {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 @Component
 export declare struct TabTitleBar {

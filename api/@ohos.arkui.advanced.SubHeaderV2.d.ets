@@ -415,26 +415,6 @@ export declare class SubHeaderV2Select {
    * @since 18 dynamic
    */
   constructor(options: SubHeaderV2SelectOptions);
-
-  /**
-   * Sets the selected content of the SubHeaderV2SelectOptions.
-   *
-   * @type { ?string }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 18
-   */
-  /**
-   * Sets the selected content of the SubHeaderV2SelectOptions.
-   *
-   * @type { ?ResourceStr }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
-   */
-  @Trace selectedContent?: ResourceStr;
 }
 
 /**

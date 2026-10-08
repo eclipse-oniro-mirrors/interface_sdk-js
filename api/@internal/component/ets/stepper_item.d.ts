@@ -18,8 +18,6 @@
  * @kit ArkUI
  */
 
-import { CommonMethod } from './common';
-
 /**
  * Display status of **nextLabel** in the stepper.
  *

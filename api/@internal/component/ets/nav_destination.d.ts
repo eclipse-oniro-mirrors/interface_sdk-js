@@ -523,33 +523,6 @@ declare interface NavDestinationContext {
 /**
  * Provides the information about the nested scrollable containers.
  *
- * ###### NavDestinationActiveReason<sup>17+</sup>
- *
- * Enumerates reasons for the activation state changes of the **NavDestination** component.
- *
- * **Atomic service API**: This API can be used in atomic services since API version 17.
- *
- * | Name  | Value| Description                                    |
- * | ---- | -- | ---------------------------------------- |
- * | TRANSITION | 0   | Activation state changes due to page navigation.                      |
- * | CONTENT_COVER | 1   | Activation state changes due to the opening or closing of a modal page. |
- * | SHEET | 2   | Activation state changes due to the opening or closing of a sheet.|
- * | DIALOG | 3   | Activation state changes due to the opening or closing of a custom dialog box.|
- * | OVERLAY | 4   | Activation state changes due to the opening or closing of an overlay using **OverlayManager**.|
- * | APP_STATE | 5   | Activation state changes due to switching between foreground and background states of the application.|
- *
- * ###### VisibilityChangeReason<sup>21+</sup>
- *
- * Enumerates reasons for **NavDestination** visibility changes.
- *
- * **Atomic service API**: This API can be used in atomic services since API version 21.
- *
- * | Name  | Value| Description                                    |
- * | ---- | -- | ---------------------------------------- |
- * | TRANSITION | 0   | Visibility changes due to page navigation.                      |
- * | CONTENT_COVER | 1   | Visibility changes due to the opening or closing of a modal page. |
- * | APP_STATE | 2   | Visibility changes due to switching between the foreground and background states.|
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -557,6 +530,7 @@ declare interface NavDestinationContext {
  * @since 14 dynamic
  */
 declare interface NestedScrollInfo {
+
   /**
    * Controller of the target scrollable container.
    *
@@ -654,30 +628,6 @@ declare interface NavDestinationTransition {
    */
   event: Callback<void>;
 }
-
-/**
- * Custom page state save callback.
- *
- * @returns { Record<string, Object> | null } Custom page state.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.0.0 dynamic
- */
-declare type SaveStateCallback = () => Record<string, Object> | null;
-
-/**
- * Custom page state restore callback.
- *
- * @param { Record<string, Object> | null } savedState - Custom page state saved by onSaveState.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.0.0 dynamic
- */
-declare type RestoreStateCallback = (savedState: Record<string, Object> | null) => void;
 
 /**
  * The [universal attributes]{@link ./common} are supported.
@@ -1571,3 +1521,27 @@ declare const NavDestinationInstance: NavDestinationAttribute;
  */
 declare type NavDestinationTransitionDelegate =
     (operation: NavigationOperation, isEnter: boolean) => Array<NavDestinationTransition> | undefined;
+
+/**
+ * Custom page state save callback.
+ *
+ * @returns { Record<string, Object> | null } Custom page state.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.0 dynamic
+ */
+declare type SaveStateCallback = () => Record<string, Object> | null;
+
+/**
+ * Custom page state restore callback.
+ *
+ * @param { Record<string, Object> | null } savedState - Custom page state saved by onSaveState.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.0 dynamic
+ */
+declare type RestoreStateCallback = (savedState: Record<string, Object> | null) => void;

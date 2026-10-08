@@ -26,7 +26,6 @@
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare enum TreeListenType {
   /**
@@ -93,7 +92,6 @@ export declare enum TreeListenType {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare class TreeListener {
   /**
@@ -157,7 +155,6 @@ export declare class TreeListener {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare class TreeListenerManager {
   /**
@@ -207,7 +204,6 @@ export declare class TreeListenerManager {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 @Component
 export declare struct TreeView {
@@ -231,7 +227,6 @@ export declare struct TreeView {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export interface CallbackParam {
   /**
@@ -287,7 +282,6 @@ export interface CallbackParam {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export interface NodeParam {
   /**
@@ -467,7 +461,6 @@ export interface NodeParam {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 export declare class TreeController {
   /**

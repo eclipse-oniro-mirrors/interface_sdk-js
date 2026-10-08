@@ -31,7 +31,19 @@
 declare type UIMaterial = import('../api/@ohos.arkui.uiMaterial').uiMaterial;
 
 /**
- * Enumerates the layout modes of the tab bar.
+ * Defines a parameter object for the **Tabs** component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 15 dynamic
+ * @noninterop
+ */
+declare type CommonModifier = import('../api/arkui/CommonModifier').CommonModifier;
+
+/**
+ * Enumerates layout modes of the tab bar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -631,44 +643,6 @@ interface TabsInterface {
    * @crossplatform [since 10]
    * @atomicservice [since 11]
    * @since 7 dynamic
-   */
-  (options?: TabsOptions): TabsAttribute;
-  /**
-   * Called when the view is switched.
-   *
-   * @param { object } value
-   * @returns { TabsAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Called when the view is switched.
-   *
-   * @param { object } value
-   * @returns { TabsAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Called when the view is switched.
-   *
-   * @param { object } value
-   * @returns { TabsAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Called when the view is switched.
-   *
-   * @param { TabsOptions } [options] - Tabs options.
-   * @returns { TabsAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
    */
   (options?: TabsOptions): TabsAttribute;
 }
@@ -1729,24 +1703,26 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onChange(event: Callback<number>): TabsAttribute;
 
   /**
-   * Triggered when the selected element changes. The index of the element that is about to be hidden is returned.
+   * Triggered when the selected element changes. The index of the currently selected element is returned.
    *
-   * This event is triggered when any of the following conditions is met:
+   * This event is triggered when any of the following occurs:
    *
-   * 1. When the swipe is released and the page-turning threshold is met, the event is triggered
-   *    when the switching animation starts.
-   * 2. When the [changeIndex]{@link TabsController#changeIndex} API is called through the
-   *    [TabsController]{@link TabsController} controller, the event is triggered when the switching animation starts.
-   * 3. Triggered after the **index** attribute constructed by dynamically modifying the
+   * 1. When the swipe gesture is released and the tab switching threshold is met, triggering the switching animation.
+   *
+   * 2. When the [changeIndex]{@link TabsController#changeIndex} API of [TabsController]{@link TabsController}
+   *     is called, triggering the switching animation.
+   *
+   * 3. When the index of the active tab is changed through the bound
    *    [state variable](docroot://ui/state-management/arkts-state.md).
-   * 4. Triggered by tapping a tab.
+   *
+   * 4. When a tab is tapped.
    *
    * > **NOTE**
    * >
-   * > In the **onUnselected** callback, you cannot set the index of the currently displayed page through the **index**
-   * > of **TabsOptions**, nor call the **TabsController.changeIndex()** method.
+   * > In the **onSelected** callback, the index of the current displayed page cannot be set using **index** of
+   * > [TabsOptions]{@link TabsOptions}, and **TabsController.changeIndex()** cannot be called.
    *
-   * @param { Callback<number> } event - Index of the element to be hidden, starting from 0.
+   * @param { Callback<number> } event - Index of the currently selected element.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1754,13 +1730,13 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @atomicservice
    * @since 18 dynamic
    */
-  onUnselected(event: Callback<number>): TabsAttribute;
+  onSelected(event: Callback<number>): TabsAttribute;
 
   /**
-   * Triggered when a tab is tapped.
+   * Triggered when a tab is clicked.
    *
-   * @param { function } event - Index of the tapped tab, starting from 0. [since 10 - 17]
-   * @param { Callback<number> } event - Index of the tapped tab, starting from 0. [since 18]
+   * @param { function } event - Index of the clicked tab. The index starts from 0. [since 10 - 17]
+   * @param { Callback<number> } event - Index of the clicked tab. The index starts from 0. [since 18]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1769,6 +1745,29 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 10 dynamic
    */
   onTabBarClick(event: Callback<number>): TabsAttribute;
+
+  /**
+   * Triggered when the selected element changes. The index of the element that is about to be hidden is returned.
+   *
+   * This event is triggered when any of the following occurs:
+   *
+   * 1. When the swipe gesture is released and the tab switching threshold is met, triggering the switching animation.
+   *
+   * 2. When the [changeIndex]{@link TabsController#changeIndex} API of [TabsController]{@link TabsController} is called, triggering the switching animation.
+   *
+   * 3. When the index of the active tab is changed through the bound [state variable](docroot://ui/state-management/arkts-state.md).
+   *
+   * 4. When a tab is tapped.
+   *
+   * @param { Callback<number> } event - Index of the element that is about to be hidden.
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 18 dynamic
+   */
+  onUnselected(event: Callback<number>): TabsAttribute;
 
   /**
    * Triggered when the switching animation starts. When [animationDuration]{@link TabsAttribute#animationDuration} is
@@ -2065,32 +2064,22 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onContentWillChange(handler: OnTabsContentWillChangeCallback): TabsAttribute;
 
   /**
-   * Triggered when the selected element changes. The index of the currently selected element is returned.
+   * Triggered when content in the **Tabs** component scrolls.
    *
-   * This event is triggered when any of the following conditions is met:
+   * During page scrolling, the [OnTabsContentDidScrollCallback]{@link OnTabsContentDidScrollCallback} callback is
+   * invoked for all pages in the viewport on a frame-by-frame basis. For example, when there are two pages whose
+   * subscripts are 0 and 1 in the viewport, two callbacks whose indexes are 0 and 1 are invoked in each frame.
    *
-   * 1. The page switching threshold is reached when the finger is released after swiping,
-   *    and the switching animation starts.
-   * 2. The [changeIndex]{@link TabsController#changeIndex} API is called through the
-   *    [TabsController]{@link TabsController} controller, and the switching animation starts.
-   * 3. Triggered after the [state variable](docroot://ui/state-management/arkts-state.md)
-   *    that constructs the index attribute is dynamically modified.
-   * 4. Triggered by tapping a tab.
-   *
-   * > **NOTE**
-   * >
-   * > In the onSelected callback, you cannot set the index of the currently displayed page through
-   * > [TabsOptions]{@link TabsOptions}, nor call the **TabsController.changeIndex()** method.
-   *
-   * @param { Callback<number> } event - Index of the currently selected element, starting from 0.
-   * @returns { TabsAttribute }
+   * @param { OnTabsContentDidScrollCallback | undefined } handler - Callback triggered when a tab page is swiped.
+   *     Passing **undefined** will unbind the previously registered callback.
+   * @returns { TabsAttribute } - the attribute of the Tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 18 dynamic
+   * @since 23 dynamic
    */
-  onSelected(event: Callback<number>): TabsAttribute;
+  onContentDidScroll(handler: OnTabsContentDidScrollCallback | undefined): TabsAttribute;
 
   /**
    * Sets the nested scrolling mode between the **Tabs** component and its parent component. If not set, the default
@@ -2107,24 +2096,6 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 24 dynamic
    */
   nestedScroll(value: TabsNestedScrollMode | undefined): TabsAttribute;
-
-  /**
-   * Listens for the page swipe event of **Tabs**.
-   *
-   * During page swiping, the [OnTabsContentDidScrollCallback]{@link OnTabsContentDidScrollCallback} callback is
-   * triggered frame by frame for all pages in the viewport. For example, when there are two pages with indexes 0 and 1
-   * in the viewport, the callback is triggered twice per frame, with the index values 0 and 1 respectively.
-   *
-   * @param { OnTabsContentDidScrollCallback | undefined } handler - Callback triggered when **Tabs** is swiped. The
-   *     value **undefined** unbinds the original callback.
-   * @returns { TabsAttribute } - the attribute of the Tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 23 dynamic
-   */
-  onContentDidScroll(handler: OnTabsContentDidScrollCallback | undefined): TabsAttribute;
 
   /**
    * Sets the floating style of the tab bar.
@@ -2296,46 +2267,6 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   sidebarSelectedBoardColor(value: Optional<ResourceColor>): TabsAttribute;
 
   /**
-   * Sets the display style of the sidebar for the **Tabs** component.
-   *
-   * @param { Optional<TabsSidebarDisplayStyle> } style - Display style of the sidebar for the **Tabs** component.
-   *     <br>Default value: **SidebarDisplayStyle.EMBED**.
-   * @returns { TabsAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  sidebarDisplayStyle(style: Optional<TabsSidebarDisplayStyle>): TabsAttribute;
-
-  /**
-   * Sets the footer content of the sidebar tab bar.
-   *
-   * @param { Optional<ComponentContent> } footer - footer content of the sidebar tab bar.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  sidebarFooter(footer: Optional<ComponentContent>): TabsAttribute;
-
-  /**
-   * Sets the bottom bar content of the sidebar tab bar.
-   *
-   * @param { Optional<ComponentContent> } bottomBar - bottom bar content of the sidebar tab bar.
-   * @returns { TabsAttribute } - the attribute of the tabs.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.2.0 dynamic
-   */
-  sidebarBottomBar(bottomBar: Optional<ComponentContent>): TabsAttribute;
-
-  /**
    * Sets the width of the sidebar tab bar.
    * This attribute takes effect only when the tab bar is displayed as a sidebar.
    *
@@ -2451,6 +2382,46 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarDivider(value: Optional<DividerStyle>): TabsAttribute;
+
+  /**
+   * Sets the display style of the sidebar for the **Tab** component.
+   *
+   * @param { TabsSidebarDisplayStyle } value - Display style of the sidebar for the **Tabs** component.
+   *     <br>Default value: **SidebarDisplayStyle.EMBED**
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  sidebarDisplayStyle(style: Optional<TabsSidebarDisplayStyle>): TabsAttribute;
+
+  /**
+   * Sets the footer content of the sidebar tab bar.
+   *
+   * @param { ComponentContent } footer - footer content of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  sidebarFooter(footer: Optional<ComponentContent>): TabsAttribute;
+
+  /**
+   * Sets the bottom bar content of the sidebar tab bar.
+   *
+   * @param { ComponentContent } bottomBar - bottom bar content of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  sidebarBottomBar(bottomBar: Optional<ComponentContent>): TabsAttribute;
 }
 
 /**
@@ -2604,15 +2575,3 @@ declare const Tabs: TabsInterface;
  * @noninterop [since 11]
  */
 declare const TabsInstance: TabsAttribute;
-
-/**
- * Sets the parameters of the **Tabs** component.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 15 dynamic
- * @noninterop
- */
-declare type CommonModifier = import('../api/arkui/CommonModifier').CommonModifier;

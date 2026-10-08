@@ -100,7 +100,6 @@ declare class IndicatorComponentController {
  * @form
  * @atomicservice
  * @since 15 dynamic
- * @noninterop
  */
 interface IndicatorComponentInterface {
 
@@ -128,7 +127,6 @@ interface IndicatorComponentInterface {
  * @form
  * @atomicservice
  * @since 15 dynamic
- * @noninterop
  */
 declare class IndicatorComponentAttribute extends CommonMethod<IndicatorComponentAttribute> {
   /**
@@ -225,7 +223,6 @@ declare class IndicatorComponentAttribute extends CommonMethod<IndicatorComponen
  * @form
  * @atomicservice
  * @since 15 dynamic
- * @noninterop
  */
 declare const IndicatorComponent: IndicatorComponentInterface;
 
@@ -238,6 +235,5 @@ declare const IndicatorComponent: IndicatorComponentInterface;
  * @form
  * @atomicservice
  * @since 15 dynamic
- * @noninterop
  */
 declare const IndicatorComponentInstance: IndicatorComponentAttribute;

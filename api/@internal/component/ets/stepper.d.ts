@@ -52,7 +52,7 @@ interface StepperInterface {
 }
 
 /**
- * None
+ * Defines the stepper attribute functions
  *
  * @extends CommonMethod<StepperAttribute>
  * @syscap SystemCapability.ArkUI.ArkUI.Full

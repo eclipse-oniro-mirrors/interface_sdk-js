@@ -65,12 +65,6 @@ declare enum SelectedMode {
 /**
  * Enumerates the layout modes of the images and texts on the bottom tabs.
  *
- * | Name        | Value| Description                                    |
- * | ----------  | - | ---------------------------------------- |
- * | AUTO        | 0 | If the tab width is greater than 104 vp, the tab content is arranged from left to right (icon on the left and text on the right). Otherwise, the tab content is arranged from top to bottom (icon on the top and text at the bottom). This parameter is valid only when the tab bar is in vertical mode or fixed horizontal mode.|
- * | VERTICAL    | 1 | The tab content is arranged from top to bottom, with the icon on the top and the text at the bottom. This value is applicable to scenarios where the tab width is limited and space needs to be saved.|
- * | HORIZONTAL  | 2 | The tab content is arranged from left to right, with the icon on the left and the text on the right. This value is applicable to scenarios where the tab width is sufficient and more content needs to be displayed.|
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

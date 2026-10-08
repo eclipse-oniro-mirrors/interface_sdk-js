@@ -415,16 +415,7 @@ export declare struct ToolBar {
   @Prop
   activateIndex?: number;
   /**
-   * Toolbar controller used to associate with **Tabs** component page switching. It does not support controlling
-   * toolbar items.
-   *
-   * **NOTE**
-   *
-   * According to the
-   * [usage restrictions](docroot://ui/state-management/arkts-custom-components-access-restrictions.md#constraints) of
-   * custom component member attribute access qualifiers, this API is a regular member variable. It can be initialized
-   * by passing parameters, or left uninitialized. When not passed, it is initialized with the component's preset value:
-   * **new TabsController()**.
+   * Toolbar controller, which cannot be used for controlling individual toolbar items.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

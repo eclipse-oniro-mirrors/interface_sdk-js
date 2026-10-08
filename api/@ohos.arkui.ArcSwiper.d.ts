@@ -128,18 +128,6 @@ export enum ArcDirection {
 /**
  * Describes the properties and behavior of the arc dot navigation indicator.
  *
- * ###### ArcDirection
- *
- * Enumerates the directions of the arc navigation indicator.
- *
- * **Atomic service API**: This API can be used in atomic services since API version 18.
- *
- * | Name                 | Value  | Description       |
- * | --------------------- | ---- | ----------- |
- * | THREE_CLOCK_DIRECTION | 0    | 3 o'clock direction.|
- * | SIX_CLOCK_DIRECTION   | 1    | 6 o'clock direction.|
- * | NINE_CLOCK_DIRECTION  | 2    | 9 o'clock direction.|
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @crossplatform
  * @atomicservice

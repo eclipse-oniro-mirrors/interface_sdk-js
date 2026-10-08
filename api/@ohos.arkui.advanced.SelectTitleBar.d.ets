@@ -276,28 +276,4 @@ export declare struct SelectTitleBar {
    * @since 10 dynamic
    */
   onSelected?: ((index: number) => void);
-
-  /**
-   * Callback function when an option is selected
-   * @type { ?(index: number) => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 10
-   */
-  /**
-   * Callback function when an option is selected
-   * @type { ?(index: number) => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Callback function when an option is selected
-   * @type { ?(index: number) => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
-   * @since 22 static
-   */
-  onSelected?: ((index: number) => void);
 }

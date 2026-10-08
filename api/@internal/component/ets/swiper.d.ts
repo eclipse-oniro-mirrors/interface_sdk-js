@@ -928,39 +928,6 @@ declare interface ArrowStyle {
 /**
  * Enumerates the modes in which elements are displayed along the main axis.
  *
- * | Name                              |  Value|Description                                                        |
- * | ---------------------------------- | -- |------------------------------------------------------------ |
- * | Stretch<sup>(deprecated)</sup>     | 0 |The width of one page swiped by Swiper is the width of the Swiper component
- * itself.
- *
- * **Note:** This is supported since API version 7 and deprecated since API version 10. You are advised to use STRETCH
- * instead.
- *
- * |
- * | AutoLinear<sup>(deprecated)</sup>  | 1 |The width of one page swiped by Swiper is the maximum width among the child
- * components. This enum value behaves the same as setting the value to auto using the string type in
- * [displayCount]{@link SwiperAttribute#displayCount(value: number | string | SwiperAutoFill, swipeByGroup?: boolean)}.
- * For details, see
- * [displayCount]{@link SwiperAttribute#displayCount(value: number | string | SwiperAutoFill, swipeByGroup?: boolean)}.
- *
- * **Note:** This is supported since API version 7 and deprecated since API version 10. You are advised to use
- * AUTO_LINEAR instead.
- *
- * |
- * | STRETCH<sup>10+</sup>              | 0 |The width of one page swiped by Swiper is the width of the Swiper component
- * itself.
- *
- * |
- * | AUTO_LINEAR<sup>(deprecated)</sup> | 1 |The width of one page swiped by Swiper is the width of the leftmost child
- * component in the viewport. This enum value behaves the same as setting the value to auto using the string type in
- * [displayCount]{@link SwiperAttribute#displayCount(value: number | string | SwiperAutoFill, swipeByGroup?: boolean)}.
- * For details, see
- * [displayCount]{@link SwiperAttribute#displayCount(value: number | string | SwiperAutoFill, swipeByGroup?: boolean)}.
- *
- * **Note:** This is supported since API version 10 and deprecated since API version 12. You are advised to use
- * [Scroller.scrollTo]{@link Scroller#scrollTo} instead.
- *
- * |
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -969,6 +936,7 @@ declare interface ArrowStyle {
  * @since 7 dynamic
  */
 declare enum SwiperDisplayMode {
+
   /**
    * The width of each page in the **Swiper** component equals the component's
    * own width.
@@ -1295,6 +1263,44 @@ declare interface AutoPlayOptions {
 }
 
 /**
+ * Set the indicator item's icon for a specified index.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.0.0 dynamic
+ */
+declare interface IndicatorIconInfo {
+
+  /**
+   * The specified index.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  index: int;
+
+  /**
+   * Icon that needs to be set.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  icon: ResourceStr | SymbolGlyphModifier;
+}
+
+/**
  * Describes the configuration options for child components to be preloaded.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1344,57 +1350,6 @@ declare interface CachedCountOptions {
    * @since 24 dynamic
    */
   independent?: boolean;
-}
-
-/**
- * Sets the configuration of the dot navigation indicator icon.
- *
- * > **NOTE**
- * >
- * > Only the icon color can be modified through the
- * > [fontColor]{@link SymbolGlyphAttribute#fontColor(value: Array<ResourceColor>)} attribute of the SymbolGlyphModifier
- * > object.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @form
- * @atomicservice
- * @since 26.0.0 dynamic
- */
-declare interface IndicatorIconInfo {
-  /**
-   * Index of the navigation dot for which the icon is configured.
-   *
-   * Value range: [0, number of child components of Swiper - 1]
-   *
-   * **NOTE**
-   *
-   * If the set value is greater than the maximum page index, the icon is not displayed.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  index: int;
-  /**
-   * Icon content to configure.
-   *
-   * **NOTE**
-   *
-   * If no valid icon is set, the dot navigation indicator is displayed.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  icon: ResourceStr | SymbolGlyphModifier;
 }
 
 /**
@@ -2518,19 +2473,6 @@ declare class SwiperAttribute extends CommonMethod<SwiperAttribute> {
    * @since 26.0.0 dynamic
    */
   ignoreHiddenItem(enabled: boolean): SwiperAttribute;
-
-  /**
-   * Use indicator component controller.
-   *
-   * @param { IndicatorComponentController } controller - indicator component controller.
-   * @returns { SwiperAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 13 dynamic
-   */
-  indicator(controller: IndicatorComponentController): SwiperAttribute;
 }
 
 /**
