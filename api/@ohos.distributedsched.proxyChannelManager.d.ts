@@ -82,8 +82,8 @@ declare namespace proxyChannelManager {
    *     The lifecycle of the channelId is the same as that of the proxy channel. If the proxy is not closed, passing
    *     the same input parameters returns the same channelId. If the operation fails, the promise is rejected with
    *     error information. For details about the error codes, see the error code table.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
    *     been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390001 - BR is disabled.
@@ -113,8 +113,8 @@ declare namespace proxyChannelManager {
    *     Using an invalid or closed channelId returns error code 32390004. If the value is out of range, error code 3239
    *     0006 is returned. The channelId takes effect only when the proxy channel is available, and becomes unavailable
    *     after the channel is closed or disconnected.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
    *     been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -149,8 +149,8 @@ declare namespace proxyChannelManager {
    * @param { ArrayBuffer } data - Binary data to send to the peer end. The data format is defined by the app layer,
    *     with a maximum length of 4096 bytes. Exceeding the length limit returns error code 32390103.
    * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
    *     been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -189,8 +189,8 @@ declare namespace proxyChannelManager {
    *     The callback parameter is a [DataInfo]{@link proxyChannelManager.DataInfo} object, which contains channelId (
    *     channel ID) and data (received byte data). Data can be received only after a proxy channel is opened by calling
    *     openProxyChannel. If registered multiple times, only the last registration takes effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -220,8 +220,8 @@ declare namespace proxyChannelManager {
    *     parameter is not passed, all data receive event subscriptions are unsubscribed. The callback passed must be the
    *     last one registered via the on method to unsubscribe that callback; passing any other callback will not take
    *     effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -254,8 +254,8 @@ declare namespace proxyChannelManager {
    *     The callback parameter is a [DataInfo]{@link proxyChannelManager.DataInfo} object, which contains channelId (
    *     channel ID) and data (received byte data). Data can be received only after a proxy channel is opened by calling
    *     openProxyChannel. If registered multiple times, only the last registration takes effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -284,8 +284,8 @@ declare namespace proxyChannelManager {
    *     parameter is not passed, all data receive event subscriptions are unsubscribed. The callback passed must be the
    *     last one registered via the on method to unsubscribe that callback; passing any other callback will not take
    *     effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -321,8 +321,8 @@ declare namespace proxyChannelManager {
    *     which contains channelId (channel ID) and state (channel connection state). The proxy channel must be opened
    *     through openProxyChannel before receiving the channel state. If registered multiple times, only the last
    *     registered callback takes effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -352,8 +352,8 @@ declare namespace proxyChannelManager {
    *     passed, all channel state event subscriptions are unsubscribed. The callback passed must be the one last
    *     registered through the **on** method to unsubscribe from that callback; passing any other callback will not
    *     take effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -387,8 +387,8 @@ declare namespace proxyChannelManager {
    *     which contains channelId (channel ID) and state (channel connection state). The proxy channel must be opened
    *     through openProxyChannel before receiving the channel state. If registered multiple times, only the last
    *     registered callback takes effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
@@ -417,8 +417,8 @@ declare namespace proxyChannelManager {
    *     passed, all channel state event subscriptions are unsubscribed. The callback passed must be the one last
    *     registered through the **on** method to unsubscribe from that callback; passing any other callback will not
    *     take effect.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
    * @throws { BusinessError } 32390006 - Parameter error.
    * @throws { BusinessError } 32390100 - Internal error.
