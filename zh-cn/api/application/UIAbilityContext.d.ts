@@ -2319,6 +2319,28 @@ declare class UIAbilityContext extends Context {
   setAbilityInstanceInfo(label: string, icon: image.PixelMap, groupId: string): Promise<void>;
 
   /**
+   * 当一个模块下首个启动的UIAbility需要跳转到另一个UIAbility时，目标UIAbility被称为DelegatorAbility。关于如何设置DelegatorAbility的详细信息，请参阅本API示例中的步骤1。
+   * 当DelegatorAbility完成其特定操作后，可以使用此接口恢复到第一个UIAbility。使用Promise异步回调。
+   *
+   * > **说明**
+   * >
+   * > 该接口成功调用后，DelegatorAbility内的[Window]{@link ./../@ohos.window}接口将变为不可用。
+   *
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 801 - Capability not support.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000065 - The API can be called only when the ability is running in the foreground.
+   * @throws { BusinessError } 16000084 - Only DelegatorAbility is allowed to call this API, and only once.
+   * @throws { BusinessError } 16000085 - An error occurred during the interaction between the ability and window.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 17 dynamic
+   * @since 23 static
+   */
+  revokeDelegator(): Promise<void>;
+
+  /**
    * 设置UIAbility的深浅色模式。调用该接口前需要保证该UIAbility对应页面已完成加载。仅支持主线程调用。
    *
    * > **说明**：
@@ -2602,6 +2624,128 @@ declare class UIAbilityContext extends Context {
    * @since 23 static
    */
   setMissionWindowIcon(windowIcon: image.PixelMap): Promise<void>;
+
+  /**
+   * 将当前UIAbility连接到一个指定account的ServiceExtensionAbility。仅支持在主线程调用。
+   * 该接口在Phone、Tablet中可正常调用，在其他设备类型中返回16000006错误码。
+   *
+   * > **说明：**
+   * >
+   * > 组件启动规则详见：[组件启动规则（Stage模型）](docroot://application-models/component-startup-rules.md)。
+   * > > 当accountId为当前用户时，无需进行权限校验。
+   *
+   * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
+   * @param { Want } want - 启动UIAbility的Want信息。
+   * @param { int } accountId - 系统账号的账号ID，可以通过
+   *     [getCreatedOsAccountsCount]{@link ./../@ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount(callback: AsyncCallback<int>)}
+   *     接口获取。
+   * @param { ConnectOptions } options - 与ServiceExtensionAbility建立连接后回调函数的实例。
+   * @returns { long } 返回Ability连接的结果code。
+   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   *     2.Incorrect parameter types.
+   * @throws { BusinessError } 16000001 - The specified ability does not exist.
+   * @throws { BusinessError } 16000005 - The specified process does not have the permission.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000002 - Incorrect ability type. [since 10]
+   * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
+   * @throws { BusinessError } 16000006 - Cross-user operations are not allowed. [since 10]
+   * @throws { BusinessError } 16000008 - The crowdtesting application expires. [since 10]
+   * @throws { BusinessError } 16000053 - The ability is not on the top of the UI. [since 10]
+   * @throws { BusinessError } 16000055 - Installation-free timed out. [since 10]
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 9 dynamiconly
+   * @deprecated since 10
+   * @useinstead UIAbilityContext#connectServiceExtensionAbilityWithAccount(want: Want, accountId: int, options: ConnectOptions)
+   */
+  connectAbilityWithAccount(want: Want, accountId: int, options: ConnectOptions): long;
+
+  /**
+   * 断开与[ServiceExtensionAbility](docroot://application-models/extensionability-overview.md)的连接，断开连接之后开发者需要将连接成功时返回的
+   * remote对象置空。使用callback异步回调。仅支持在主线程调用。
+   *
+   * @param { long } connection - 连接的ServiceExtensionAbility的标识id，即
+   *     [connectServiceExtensionAbility]{@link UIAbilityContext.connectServiceExtensionAbility}返回的connectionId。
+   * @param { AsyncCallback<void> } callback - 回调函数。当断开与ServiceExtensionAbility的连接成功，err为undefined；否则为错误对象。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   *     2.Incorrect parameter types.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed.
+   *     2.System service failed to communicate with dependency module.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 9 dynamiconly
+   * @deprecated since 10
+   * @useinstead UIAbilityContext#disconnectServiceExtensionAbility(connection: long, callback: AsyncCallback<void>)
+   */
+  disconnectAbility(connection: long, callback: AsyncCallback<void>): void;
+
+  /**
+   * 断开与[ServiceExtensionAbility](docroot://application-models/extensionability-overview.md)的连接，断开连接之后开发者需要将连接成功时返回的
+   * remote对象置空。使用Promise异步回调。仅支持在主线程调用。
+   *
+   * @param { long } connection - 连接的ServiceExtensionAbility的标识id，即
+   *     [connectServiceExtensionAbility]{@link UIAbilityContext.connectServiceExtensionAbility}返回的connectionId。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   *     2.Incorrect parameter types.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed.
+   *     2.System service failed to communicate with dependency module.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 9 dynamiconly
+   * @deprecated since 10
+   * @useinstead UIAbilityContext#disconnectServiceExtensionAbility(connection: long)
+   */
+  disconnectAbility(connection: long): Promise<void>;
+
+  /**
+   * 将当前UIAbility实例拉到前台。
+   *
+   * @returns { Promise<void> } 接口返回的Promise对象。
+   * @throws { BusinessError } 801 - Capability not supported, because starting self to foreground
+   *     from background is not supported in current device or current UIAbility is a non-native UIAbility.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error. Connect to system service failed.
+   * @throws { BusinessError } 16000082 - The UIAbility is being started.
+   *     The UIAbility has not completed onCreate or onWindowStageCreate.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  startSelf(): Promise<void>;
+
+  /**
+   * 在子进程中拉起应用自身的UIAbility。如果UIAbility的launchMode为specified，可以设置specifiedFlag。
+   *
+   * @param { Want } want - 表示要启动的ability。
+   * @param { string } specifiedFlag - 如果目标UIAbility的launchType为specified，可以通过此参数设置specifiedFlag，系统将不会调用onAcceptWant。
+   * @returns { Promise<void> } 接口返回的Promise对象。
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 16000001 - The specified ability does not exist.
+   * @throws { BusinessError } 16000008 - The crowdtesting application expires.
+   * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error. Connect to system service failed.
+   * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
+   * @throws { BusinessError } 16000122 - The target component is blocked by the system module and
+   *     does not support startup.
+   * @throws { BusinessError } 16000123 - Implicit startup is not supported.
+   * @throws { BusinessError } 16000124 - Starting a remote UIAbility is not supported.
+   * @throws { BusinessError } 16000130 - The UIAbility not belong to caller.
+   * @throws { BusinessError } 16000131 - The UIAbility is already exist, can not start again.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  startSelfUIAbilityInChildProcess(want: Want, specifiedFlag: string): Promise<void>;
 }
 
 export default UIAbilityContext;

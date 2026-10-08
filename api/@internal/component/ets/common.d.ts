@@ -1594,7 +1594,7 @@ declare type StylesVersionDecorator = (versionCondition: VersionCondition) => Me
  * The @Styles decorator is used to extract multiple style settings into a method, which can be directly called at the 
  * component declaration site to define and reuse custom styles. It is suitable for scenarios where multiple components 
  * need to share the same styles, reducing repetitive code and improving the efficiency of maintaining style 
- * consistency.
+ * consistency. 
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
  * @type { MethodDecorator & StylesVersionDecorator } [since 26.2.0]
@@ -2162,34 +2162,14 @@ declare type Context = import('../api/application/Context').default;
  * Post Card Action.
  *
  * @param { Object } component - indicate the card entry component.
- * @param { Object } action - indicate the router, message or call event.
+ * @param { Object } action - indicate the router, message or call event.<!--Del-->Since API version 26.0.1,
+ *     for system applications,the action support insightIntent event.<!--DelEnd-->
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @StageModelOnly
+ * @crossplatform [since 10]
  * @form
- * @since 9
- */
-/**
- * Post Card Action.
- *
- * @param { Object } component - indicate the card entry component.
- * @param { Object } action - indicate the router, message or call event.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @StageModelOnly
- * @crossplatform
- * @form
- * @since 10
- */
-/**
- * Post Card Action.
- *
- * @param { Object } component - indicate the card entry component.
- * @param { Object } action - indicate the router, message or call event.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @StageModelOnly
- * @crossplatform
- * @form
- * @atomicservice
- * @since 11 dynamic
+ * @atomicservice [since 11]
+ * @since 9 dynamiconly
  */
 declare function postCardAction(component: Object, action: Object): void;
 

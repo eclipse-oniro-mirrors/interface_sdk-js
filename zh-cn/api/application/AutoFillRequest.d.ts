@@ -37,7 +37,8 @@ import { AutoFillTriggerType } from './AutoFillTriggerType';
  * 自动填充的填充请求。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 11 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @atomicservice
  * @since 11 dynamic
@@ -48,7 +49,8 @@ export interface FillRequest {
    * 自动填充类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
    * @since 11 dynamic
@@ -60,7 +62,8 @@ export interface FillRequest {
    * 查看数据。填充请求的页面基本信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
    * @since 11 dynamic
@@ -98,9 +101,11 @@ export interface FillRequest {
    * 自动填充服务的拉起类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 23 dynamic&static
    */
   triggerType?: AutoFillTriggerType;
 }
@@ -109,8 +114,10 @@ export interface FillRequest {
  * 保存自动填充的请求。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 11 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
+ * @atomicservice
  * @since 11 dynamic
  * @since 23 static
  */
@@ -119,8 +126,10 @@ export interface SaveRequest {
    * 查看数据。填充请求的页面基本信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
