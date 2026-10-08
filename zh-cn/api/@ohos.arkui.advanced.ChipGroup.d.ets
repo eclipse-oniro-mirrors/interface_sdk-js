@@ -1050,6 +1050,17 @@ export declare struct ChipGroup {
   onChange?: Callback<Array<number>>;
 
   /**
+   * 注册ChipItems的回调。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  onItemsChange?: Callback<ChipGroupItemOptions[]>;
+
+  /**
    * 支持开发者自定义builder，如需在组件最右侧显示自定义内容可配置suffix属性，使用属性suffix需引用[IconGroupSuffix]{@link IconGroupSuffix}接口。
    *
    * 默认不传入时，没有suffix。
