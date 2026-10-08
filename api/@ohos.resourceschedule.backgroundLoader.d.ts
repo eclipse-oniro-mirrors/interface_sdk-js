@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Application data background loading
  * @kit BackgroundTasksKit
  */
 

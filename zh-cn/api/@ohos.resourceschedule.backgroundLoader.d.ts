@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 应用数据后台加载
  * @kit BackgroundTasksKit
  */
 
