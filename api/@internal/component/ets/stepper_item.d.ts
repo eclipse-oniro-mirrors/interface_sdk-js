@@ -18,6 +18,8 @@
  * @kit ArkUI
  */
 
+import { CommonMethod } from './common';
+
 /**
  * Display status of **nextLabel** in the stepper.
  *
@@ -29,7 +31,6 @@
  * @useinstead Swiper
  */
 declare enum ItemState {
-
   /**
    * The button on the right is clickable and can navigate users to the next **StepperItem** when it is clicked.
    *
@@ -45,7 +46,7 @@ declare enum ItemState {
    * @deprecated since 22
    * @useinstead Swiper.SwiperAttribute#index
    */
-  Normal,
+  Normal = 0,
 
   /**
    * The button on the right is disabled.
@@ -62,7 +63,7 @@ declare enum ItemState {
    * @deprecated since 22
    * @useinstead Swiper.SwiperAttribute#indicatorInteractive
    */
-  Disabled,
+  Disabled = 1,
 
   /**
    * The button on the right is not displayed, and a progress bar is displayed instead.
@@ -70,7 +71,7 @@ declare enum ItemState {
    * **NOTE**
    *
    * This API is supported since API version 8 and deprecated since API version 22. You are advised to use
-   * [Swiper]{@link swiper} instead.
+   * [Swiper]{@link ./swiper} instead.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -79,7 +80,7 @@ declare enum ItemState {
    * @deprecated since 22
    * @useinstead Swiper
    */
-  Waiting,
+  Waiting = 2,
 
   /**
    * The button on the right reads "Skip" by default. You can define the processing logic for this state in the
@@ -97,18 +98,16 @@ declare enum ItemState {
    * @deprecated since 22
    * @useinstead Swiper.SwiperAttribute#index
    */
-  Skip
+  Skip = 3
 }
 
 /**
- * The **StepperItem** component represents a page component used within a [Stepper]{@link stepper} container.
+ * The **StepperItem** component represents a page component used within a [Stepper]{@link ./stepper} container.
  *
  * > **NOTE**
- *
+ * >
  * > - This component is supported since API version 8 and deprecated since API version 22. You are advised to use
- * > [Swiper]{@link swiper} instead.
- *
- * > Updates will be marked with a superscript to indicate their
+ * > [Swiper]{@link ./swiper} instead.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -119,11 +118,13 @@ declare enum ItemState {
  * @noninterop
  */
 interface StepperItemInterface {
-
   /**
-   * Creates a page component for the [Stepper]{@link stepper} container.
+   * Creates a page component for the [Stepper]{@link ./stepper} container.
    *
    * > **NOTE**
+   * >
+   * > This component is supported since API version 8 and deprecated since API version 22. You are advised to use
+   * > [Swiper]{@link ./swiper} instead.
    *
    * @returns { StepperItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -148,12 +149,9 @@ interface StepperItemInterface {
  * @noninterop
  */
 declare class StepperItemAttribute extends CommonMethod<StepperItemAttribute> {
-
   /**
    * Sets the text label of the button on the left, which is not displayed on the first page. When the **Stepper**
    * contains more than one page, the default value for all pages except the first page is **Back**.
-   *
-   * > **NOTE**
    *
    * @param { string } value - Text label of the button on the left. When the string is too long, it is scaled down,
    *     wrapped in two lines, and then clipped.
@@ -171,8 +169,6 @@ declare class StepperItemAttribute extends CommonMethod<StepperItemAttribute> {
    * Sets the text label of the button on the right. The default value is **Start** for the last page and **Next** for
    * the other pages.
    *
-   * > **NOTE**
-   *
    * @param { string } value - Text label of the button on the right. When the string is too long, it is scaled down,
    *     wrapped in two lines, and then clipped.
    * @returns { StepperItemAttribute }
@@ -188,9 +184,8 @@ declare class StepperItemAttribute extends CommonMethod<StepperItemAttribute> {
   /**
    * Sets the display status of **nextLabel** in the stepper.
    *
-   * > **NOTE**
-   *
-   * @param { ItemState } value - Display status of **nextLabel** in the stepper.<br>Default value: **ItemState.Normal**
+   * @param { ItemState } value - Display status of **nextLabel** in the stepper.
+   *     <br>Default value: **ItemState.Normal**
    * @returns { StepperItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -216,19 +211,17 @@ declare class StepperItemAttribute extends CommonMethod<StepperItemAttribute> {
 declare const StepperItemInstance: StepperItemAttribute;
 
 /**
- * The **StepperItem** component represents a page component used within a [Stepper]{@link stepper} container.
+ * The **StepperItem** component represents a page component used within a [Stepper]{@link ./stepper} container.
  *
  * > **NOTE**
- *
+ * >
  * > - This component is supported since API version 8 and deprecated since API version 22. You are advised to use
- * > [Swiper]{@link swiper} instead.
- *
- * > Updates will be marked with a superscript to indicate their
+ * > [Swiper]{@link ./swiper} instead.
  *
  * ###### Child Components
  *
  * This component supports only one child component.
- * 
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
  * @atomicservice [since 11]

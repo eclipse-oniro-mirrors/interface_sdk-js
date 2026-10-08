@@ -125,7 +125,7 @@ export declare class ToolBarOption {
    */
   content: ResourceStr;
   /**
-   * Click event of the toolbar item.
+   * Tap event of the toolbar item. If not passed in, tapping the item does not trigger any action.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -137,9 +137,9 @@ export declare class ToolBarOption {
   /**
    * Icon of the toolbar item.
    *
-   * If this parameter is not set or is set to **undefined**, the icon is not displayed.
+   * By default, if not set or set to **undefined**, the icon is not displayed.
    *
-   * If **toolBarSymbolOptions** has input parameters, **icon** is ineffective.
+   * When the **toolBarSymbolOptions** attribute is set, the icon attribute does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -185,9 +185,11 @@ export declare class ToolBarOption {
    */
   activatedTextColor?: ResourceColor;
   /**
-   * Icon fill color of the toolbar item.
+   * Fill color of the toolbar item icon.
    *
-   * Default value: **$r('sys.color.icon_primary')**
+   * Default value: $r('sys.color.icon_primary').
+   *
+   * When the toolBarSymbolOptions attribute is set, this parameter does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -197,9 +199,11 @@ export declare class ToolBarOption {
    */
   iconColor?: ResourceColor;
   /**
-   * Icon fill color of the toolbar option in the activated state.
+   * Fill color of the toolbar item icon in the activated state.
    *
-   * Default value: **$r('sys.color.icon_emphasize')**
+   * Default value: **$r('sys.color.icon_emphasize')**.
+   *
+   * When the **toolBarSymbolOptions** attribute is set, this parameter does not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -209,7 +213,8 @@ export declare class ToolBarOption {
    */
   activatedIconColor?: ResourceColor;
   /**
-   * Icon symbol options of the toolbar item.
+   * Icon attribute of the toolbar item, of the symbol type. After this parameter is set, the **icon** attribute does
+   * not take effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -219,13 +224,12 @@ export declare class ToolBarOption {
    */
   toolBarSymbolOptions?: ToolBarSymbolGlyphOptions;
   /**
-   * Accessibility text, that is, accessible label name, of the toolbar item. If a component does not contain text
-   * information, it will not be announced by the screen reader when selected. In this case, the screen reader user
-   * cannot know which component is selected. To solve this problem, you can set accessibility text for components
-   * without text information. When such a component is selected, the screen reader announces the specified
-   * accessibility text, informing the user which component is selected.
+   * Accessibility text attribute of the toolbar item. When the component does not contain a text attribute, the screen
+   * reader does not announce it when this component is selected. Developers can set accessibility text for components
+   * that do not contain text information, so that the screen reader announces the text content when this component is
+   * selected.
    *
-   * Default value: value of **content**
+   * Default value: the content of the current item's content attribute.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -235,13 +239,12 @@ export declare class ToolBarOption {
    */
   accessibilityText?: ResourceStr;
   /**
-   * Accessible description of the toolbar item. You can provide comprehensive text explanations to help users
-   * understand the operation they are about to perform and its potential consequences, especially when these cannot be
-   * inferred from the component's attributes and accessibility text alone. If a component contains both text
-   * information and the accessible description, the text is announced first and then the accessible description, when
-   * the component is selected.
+   * Accessibility description of the toolbar item. Used to explain the function and operation consequences of the
+   * current component to users in detail, especially when such information cannot be directly obtained from the
+   * component text alone. When the component is selected, the content of the text attribute and the accessibility
+   * description attribute are announced in sequence.
    *
-   * Default value: **"Double-tap to activate"**
+   * Default value: "Double-tap with one finger to execute".
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -251,18 +254,18 @@ export declare class ToolBarOption {
    */
   accessibilityDescription?: ResourceStr;
   /**
-   * Accessibility level of the toolbar item. It determines whether the component can be recognized by accessibility
-   * services.
+   * Accessibility level of the toolbar item. Used to control whether the current item can be recognized by
+   * accessibility services.
    *
-   * The options are as follows:
+   * Supported values:
    *
-   * **"auto"**: This option is treated as "yes" by the system for this component.
+   * **"auto"**: The current component is converted to **"yes"**.
    *
-   * **"yes"**: The component can be recognized by accessibility services.
+   * **"yes"**: The current component can be recognized by accessibility services.
    *
-   * **"no"**: The component cannot be recognized by accessibility services.
+   * **"no"**: The current component cannot be recognized by accessibility services.
    *
-   * **"no-hide-descendants"**: Neither the component nor its child components can be recognized by accessibility
+   * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by accessibility
    * services.
    *
    * Default value: **"auto"**
@@ -291,9 +294,8 @@ export declare class ToolBarOption {
 export declare class ToolBarOptions extends Array<ToolBarOption> {}
 
 /**
- * Provides APIs for setting the height (**height**), background color (**backgroundColor**), left and right padding (
- * **padding**, which only takes effect when there are fewer than five items) of the toolbar, and whether to display the
- * pressed state effect (**stateEffect**).
+ * Provides methods for setting the toolbar height, background color, left and right padding (takes effect only when the
+ * number of items is less than 5), and whether to display the pressed state (**stateEffect**).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -304,12 +306,11 @@ export declare class ToolBarOptions extends Array<ToolBarOption> {}
  */
 export declare class ToolBarModifier {
   /**
-   * Sets the height of the toolbar. By overriding this API, you can implement custom drawing for the height of the
-   * toolbar, which does not include the height of the divider.
+   * Sets the toolbar height. This height does not include the divider line height.
    *
    * @param { LengthMetrics } height - Height of the toolbar.
    *     <br>The default height of the toolbar is 56 vp, which does not include the divider.
-   * @returns { ToolBarModifier } **ToolBarModifier** object after the height is set.
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 18]
@@ -318,12 +319,11 @@ export declare class ToolBarModifier {
    */
   height(height: LengthMetrics): ToolBarModifier;
   /**
-   * Sets the background color of the toolbar. By overriding this API, you can implement custom drawing for the
-   * background color of the toolbar.
+   * Sets the toolbar background color.
    *
-   * @param { ResourceColor } backgroundColor - Toolbar background color
+   * @param { ResourceColor } backgroundColor - Toolbar background color.
    *     <br>Default value: **$r('sys.color.ohos_id_color_toolbar_bg')**
-   * @returns { ToolBarModifier } **ToolBarModifier** object after the background color is set.
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 18]
@@ -332,14 +332,12 @@ export declare class ToolBarModifier {
    */
   backgroundColor(backgroundColor: ResourceColor): ToolBarModifier;
   /**
-   * Sets the left and right padding of the toolbar. By overriding this API, you can implement custom drawing for the
-   * left and right padding of the toolbar.
+   * Sets the left and right padding of the toolbar.
    *
-   * @param { LengthMetrics } padding - Left and right padding of the toolbar, which is effective only when there are
-   *     fewer than five items.
-   *     <br>By default, the padding is 24 vp when there are fewer than five items and 0 when there are five or more
-   *     items.
-   * @returns { ToolBarModifier } **ToolBarModifier** object after the padding is set.
+   * @param { LengthMetrics } padding - Left and right padding of the toolbar. Takes effect only when the number of
+   *     items is less than 5.<br/>By default, the toolbar padding is 24 vp when the number of items is less than 5, and
+   *     0 vp when the number of items is 5 or more.
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 18]
@@ -354,7 +352,7 @@ export declare class ToolBarModifier {
    *     <br>The value **true** means to display the pressed state effect on the toolbar, and **false** means the
    *     opposite.
    *     <br>Default value: **true**
-   * @returns { ToolBarModifier } **ToolBarModifier** object after the pressed state effect is set.
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 18]
@@ -365,10 +363,10 @@ export declare class ToolBarModifier {
 }
 
 /**
- * The **Toolbar** component is designed to present a set of action options related to the current screen, displayed at
- * the bottom of the screen. It can display up to five child components. If there are six or more child components, the
- * first four are shown directly, and the additional ones are grouped under a **More** item on the rightmost side of the
- * toolbar.
+ * The **Toolbar** component is used to display operation options for the current interface content, shown at the bottom
+ * of the interface. It is suitable for scenarios where quick action entry points need to be provided for users, such as
+ * copy, paste, and share operations on an editing page. A maximum of 5 entries are displayed at the bottom. Any excess
+ * entries are collapsed into a "More" item, displayed on the far right.
  *
  * > **NOTE**
  * >
@@ -376,7 +374,7 @@ export declare class ToolBarModifier {
  * >
  * > - If the **ToolBar** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **ToolBar** component itself. As a result, the configured universal attributes and universal events
  * > may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events with
  * > the **ToolBar** component.
@@ -405,10 +403,7 @@ export declare struct ToolBar {
   /**
    * Index of the active item.
    *
-   * The value must be greater than or equal to -1.
-   *
-   * The default value is **-1**, indicating that there is no active item. Values less than -1 are treated as no active
-   * item.
+   * Default value: **-1**, indicating no active item. Values less than -1 are treated as no active item.
    *
    * @type { ?number }. [since 10 - 17]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -420,7 +415,16 @@ export declare struct ToolBar {
   @Prop
   activateIndex?: number;
   /**
-   * Toolbar controller, which cannot be used for controlling individual toolbar items.
+   * Toolbar controller used to associate with **Tabs** component page switching. It does not support controlling
+   * toolbar items.
+   *
+   * **NOTE**
+   *
+   * According to the
+   * [usage restrictions](docroot://ui/state-management/arkts-custom-components-access-restrictions.md#constraints) of
+   * custom component member attribute access qualifiers, this API is a regular member variable. It can be initialized
+   * by passing parameters, or left uninitialized. When not passed, it is initialized with the component's preset value:
+   * **new TabsController()**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

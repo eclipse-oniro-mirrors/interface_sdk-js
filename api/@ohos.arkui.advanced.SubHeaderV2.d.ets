@@ -20,9 +20,10 @@
 import { TextModifier as TextModifier } from '@ohos.arkui.modifier';
 
 /**
- * SubHeaderV2IconType
+ * Defines the union type for the icon content.
  *
- * @typedef { ResourceStr | SymbolGlyphModifier } SubHeaderV2IconType
+ * @unionmember { ResourceStr } Resource type for defining common icons.
+ * @unionmember { SymbolGlyphModifier } Symbol type for defining symbol icons.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -414,6 +415,26 @@ export declare class SubHeaderV2Select {
    * @since 18 dynamic
    */
   constructor(options: SubHeaderV2SelectOptions);
+
+  /**
+   * Sets the selected content of the SubHeaderV2SelectOptions.
+   *
+   * @type { ?string }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @crossplatform
+   * @atomicservice
+   * @since 18
+   */
+  /**
+   * Sets the selected content of the SubHeaderV2SelectOptions.
+   *
+   * @type { ?ResourceStr }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @crossplatform
+   * @atomicservice
+   * @since 20 dynamic
+   */
+  @Trace selectedContent?: ResourceStr;
 }
 
 /**
@@ -480,8 +501,11 @@ export declare enum SubHeaderV2OperationType {
 export type SubHeaderV2OperationItemAction = () => void;
 
 /**
- * SubHeaderV2OperationItemType
+ * Defines the union type for the content of elements in the operation area.
  *
+ * @unionmember { ResourceStr } String type for defining text display or common icons; resource type for defining common
+ *     icons.
+ * @unionmember { SymbolGlyphModifier } Symbol type for defining symbol icons.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -739,7 +763,7 @@ export type SubHeaderV2TitleBuilder = () => void;
  * >
  * > - If the **SubHeaderV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **SubHeaderV2** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **SubHeaderV2** component.

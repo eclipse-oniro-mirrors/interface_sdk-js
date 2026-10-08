@@ -20,6 +20,318 @@
  * >
  * > - The APIs of this module are no longer maintained since API version 8. You are advised to use 
  * > [@ohos.router]{@link @ohos.router:router} instead.
+ * 
+ * ###### router.push
+ * 
+ * push(options: RouterOptions): void
+ * 
+ * Navigates to a specified page in the application.
+ * 
+ * **Parameters**
+ * 
+ * | Name    | Type                             | Mandatory  | Description                        |
+ * | ------- | ------------------------------- | ---- | -------------------------- |
+ * | options | [RouterOptions]{@link RouterOptions} | Yes   | Page routing parameters. For details, see **RouterOptions**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * // Current page
+ * import router from '@system.router';
+ * class A{
+ *   pushPage() {
+ *     router.push({
+ *       uri: 'pages/routerpage2/routerpage2',
+ *       params: {
+ *         data1: 'message',
+ *         data2: {
+ *           data3: [123, 456, 789]
+ *         }
+ *       }
+ *     });
+ *   }
+ * }
+ * export default new A()
+ * ```
+ * 
+ * ```ts
+ * // routerpage2 page
+ * class B{
+ *   data:Record<string,string> = {'data1': 'default'}
+ *   data2:Record<string,number[]> = {'data3': [1, 2, 3]}
+ *   onInit() {
+ *     console.info('showData1:' + this.data.data1);
+ *     console.info('showData3:' + this.data2.data3);
+ *   }
+ * }
+ * export default new B()
+ * ```
+ * 
+ * > **NOTE**
+ * > > The page routing stack supports a maximum of 32 pages.
+ * 
+ * ###### router.replace
+ * 
+ * replace(options: RouterOptions): void
+ * 
+ * Replaces the current page with another one in the application and destroys the current page.
+ * 
+ * **Parameters**
+ * 
+ * | Name    | Type                             | Mandatory  | Description                        |
+ * | ------- | ------------------------------- | ---- | -------------------------- |
+ * | options | [RouterOptions]{@link RouterOptions} | Yes   | Page routing parameters. For details, see **RouterOptions**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * // Current page
+ * import router from '@system.router';
+ * class C{
+ *   replacePage() {
+ *     router.replace({
+ *       uri: 'pages/detail/detail',
+ *       params: {
+ *         data1: 'message'
+ *       }
+ *     });
+ *   }
+ * }
+ * export default new C()
+ * ```
+ * 
+ * ```ts
+ * // detail page
+ * class Area {
+ *   data:Record<string,string> = {'data1': 'default'}
+ *   onInit() {
+ *     console.info(`showData1: ${JSON.stringify(this.data)}`);
+ *   }
+ * }
+ * export default new Area()
+ * ```
+ * 
+ * ###### router.back
+ * 
+ * back(options?: BackRouterOptions): void
+ * 
+ * Returns to the previous or a specified page.
+ * 
+ * **Parameters**
+ * 
+ * | Name    | Type                                     | Mandatory  | Description                     |
+ * | ------- | --------------------------------------- | ---- | ----------------------- |
+ * | options | [BackRouterOptions]{@link BackRouterOptions} | No   | For details, see **BackRouterOptions**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * // index page
+ * import router from '@system.router';
+ * class D{
+ *   indexPushPage() {
+ *     router.push({
+ *       uri: 'pages/detail/detail'
+ *     });
+ *   }
+ * }
+ * export default new D()
+ * ```
+ * 
+ * ```ts
+ * // detail page
+ * import router from '@system.router';
+ * class E{
+ *   detailPushPage() {
+ *     router.push({
+ *       uri: 'pages/mall/mall'
+ *     });
+ *   }
+ * }
+ * export default new E()
+ * ```
+ * 
+ * ```ts
+ * // Navigate from the mall page to the detail page through router.back().
+ * import router from '@system.router';
+ * class F{
+ *   mallBackPage() {
+ *     router.back();
+ *   }
+ * }
+ * export default new F()
+ * ```
+ * 
+ * ```ts
+ * // Navigate from the detail page to the index page through router.back().
+ * import router from '@system.router';
+ * class G{
+ *   defaultBack() {
+ *     router.back();
+ *   }
+ * }
+ * export default new G()
+ * ```
+ * 
+ * ```ts
+ * // Return to the detail page through router.back().
+ * import router from '@system.router';
+ * class H{
+ *   backToDetail() {
+ *     router.back({uri:'pages/detail/detail'});
+ *   }
+ * }
+ * export default new H()
+ * ```
+ * 
+ * > **NOTE**
+ * > > In the example, the **uri** field indicates the page route, which is specified by the **pages** list in the 
+ * > configuration file.
+ * 
+ * ###### router.getParams<sup>7+</sup>
+ * 
+ * getParams(): ParamsInterface
+ * 
+ * Obtains parameter information about the current page.
+ * 
+ * **Return value**
+ * 
+ * | Type                                 | Description                   |
+ * | ----------------------------------- | --------------------- |
+ * | [ParamsInterface]{@link ParamsInterface} | For details, see **ParamsInterface**.|
+ * 
+ * ###### router.clear
+ * 
+ * clear(): void
+ * 
+ * Clears all historical pages in the stack and retains only the current page at the top of the stack.
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * import router from '@system.router';
+ * class I{
+ *   clearPage() {
+ *     router.clear();
+ *   }
+ * }
+ * export default new I()
+ * ```
+ * 
+ * ###### router.getLength
+ * 
+ * getLength(): string
+ * 
+ * Obtains the number of pages in the current stack.
+ * 
+ * **Return value**
+ * 
+ * | Type    | Description                |
+ * | ------ | ------------------ |
+ * | string | Number of pages in the stack. The maximum value is **32**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * import router from '@system.router';
+ * class J{
+ *   getLength() {
+ *     let size = router.getLength();
+ *     console.info('pages stack size = ' + size);
+ *   }
+ * }
+ * export default new J()
+ * ```
+ * 
+ * ###### router.getState
+ * 
+ * getState(): RouterState
+ * 
+ * Obtains state information about the current page.
+ * 
+ * **Return value**
+ * 
+ * | Type                       | Description               |
+ * | --------------------------- | ----------------- |
+ * | [RouterState]{@link RouterState} | For details, see **RouterState**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * import router from '@system.router';
+ * class K{
+ *   getState() {
+ *     let page = router.getState();
+ *     console.info('current index = ' + page.index);
+ *     console.info('current name = ' + page.name);
+ *     console.info('current path = ' + page.path);
+ *   }
+ * }
+ * export default new K()
+ * ```
+ * 
+ * ###### router.enableAlertBeforeBackPage<sup>6+</sup>
+ * 
+ * enableAlertBeforeBackPage(options: EnableAlertBeforeBackPageOptions): void
+ * 
+ * Enables the display of a confirm dialog box before returning to the previous page.
+ * 
+ * **Parameters**
+ * 
+ * | Name    | Type                                      | Mandatory  | Description                                    |
+ * | ------- | ---------------------------------------- | ---- | -------------------------------------- |
+ * | options | [EnableAlertBeforeBackPageOptions]{@link EnableAlertBeforeBackPageOptions} | Yes   | For details, see **EnableAlertBeforeBackPageOptions**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * import router from '@system.router';
+ * class L{
+ *   enableAlertBeforeBackPage() {
+ *     router.enableAlertBeforeBackPage({
+ *       message: 'Message Info',
+ *       success: ()=> {
+ *         console.info('success');
+ *       },
+ *       cancel: ()=> {
+ *         console.info('cancel');
+ *       }
+ *     });
+ *   }
+ * }
+ * export default new L()
+ * ```
+ * 
+ * ###### router.disableAlertBeforeBackPage<sup>6+</sup>
+ * 
+ * disableAlertBeforeBackPage(options?: DisableAlertBeforeBackPageOptions): void
+ * 
+ * Disables the display of a confirm dialog box before returning to the previous page.
+ * 
+ * **Parameters**
+ * 
+ * | Name    | Type                                      | Mandatory  | Description                                     |
+ * | ------- | ---------------------------------------- | ---- | --------------------------------------- |
+ * | options | [DisableAlertBeforeBackPageOptions]{@link DisableAlertBeforeBackPageOptions} | No   | For details, see **DisableAlertBeforeBackPageOptions**.|
+ * 
+ * **Example**
+ * 
+ * ```ts
+ * import router from '@system.router';
+ * class Z{
+ *   disableAlertBeforeBackPage() {
+ *     router.disableAlertBeforeBackPage({
+ *       success: ()=> {
+ *         console.info('success');
+ *       },
+ *       cancel: ()=> {
+ *         console.info('cancel');
+ *       }
+ *     });
+ *   }
+ * }
+ * export default new Z()
+ * ```
  *
  * @file Page Routing
  * @kit ArkUI
@@ -89,7 +401,7 @@ export interface BackRouterOptions {
   uri?: string;
 
   /**
-   * Data that needs to be passed to the target page during redirection.
+   * Data to be passed to the target page when the page is returned.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Lite
    * @since 7 dynamiconly
@@ -232,7 +544,7 @@ export interface DisableAlertBeforeBackPageOptions {
 }
 
 /**
- * List of routing parameters.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7 dynamiconly
  * @deprecated since 8

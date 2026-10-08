@@ -17,7 +17,6 @@
  * @file
  * @kit ArkUI
  */
-
 /**
  * The **Stepper** component provides a step navigator, suitable for guiding users through a step-by-step task
  * completion process.
@@ -34,14 +33,12 @@
  * @noninterop
  */
 interface StepperInterface {
-
   /**
    * Creates a **Stepper** component.
    *
-   * > **NOTE**
-   *
-   * @param { object } value - Index of the **StepperItem** that is currently displayed.<br>Default value: **0**<br>
-   *     Since API version 10, this parameter supports two-way binding through
+   * @param { object } value - Index of the **StepperItem** that is currently displayed.
+   *     <br>Default value: **0**
+   *     <br>Since API version 10, this parameter supports two-way binding through
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    * @returns { StepperAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -55,7 +52,7 @@ interface StepperInterface {
 }
 
 /**
- * Defines the stepper attribute functions
+ * None
  *
  * @extends CommonMethod<StepperAttribute>
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -67,12 +64,9 @@ interface StepperInterface {
  * @noninterop
  */
 declare class StepperAttribute extends CommonMethod<StepperAttribute> {
-
   /**
-   * Triggered when [nextLabel]{@link StepperItemAttribute#nextLabel} of the last [StepperItem]{@link stepper_item} in
+   * Triggered when [nextLabel]{@link StepperItemAttribute#nextLabel} of the last [StepperItem]{@link ./stepper_item} in
    * the stepper is clicked and the [ItemState]{@link ItemState} attribute is **Normal**.
-   *
-   * > **NOTE**
    *
    * @param { function } callback - Invoked when the **nextLabel** of the last **StepperItem** in the **Stepper** is
    *     clicked and the **ItemState** attribute is set to **Normal**.
@@ -88,9 +82,7 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
 
   /**
    * Triggered when [nextLabel]{@link StepperItemAttribute#nextLabel} is clicked and the
-   * [StepperItem]{@link stepper_item} status is **ItemState.Skip**.
-   *
-   * > **NOTE**
+   * [StepperItem]{@link ./stepper_item} status is **ItemState.Skip**.
    *
    * @param { function } callback - Invoked when the current **StepperItem** is **ItemState.Skip** and the **nextLabel**
    *     is clicked.
@@ -110,10 +102,9 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
    * **StepperItem** component, provided that the current page is not the last **StepperItem** in the stepper and the
    * [ItemState]{@link ItemState} attribute is **Normal**.
    *
-   * > **NOTE**
-   *
    * @param { function } callback - Callback triggered when the page is switched.<br/>prevIndex: Index of the step page
-   *     before the switching.<br>Value range:
+   *     before the switching.
+   *     <br>Value range:
    *     [0, +∞).<br/>index: Index of the step page after the switching, that is, index of the previous or next page.
    *     <br>Value range: [0, +∞).
    * @returns { StepperAttribute }
@@ -131,8 +122,6 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
    * **StepperItem**, provided that the current page is not the last **StepperItem** in the stepper and the
    * [ItemState]{@link ItemState} attribute is **Normal**.
    *
-   * > **NOTE**
-   *
    * @param { function } callback - Callback triggered when the page is switched.<br/>index: Index of the current step
    *     page.<br/>pendingIndex: Index of the next step page.
    * @returns { StepperAttribute }
@@ -148,8 +137,6 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
   /**
    * Triggered when switching to the previous step by clicking [prevLabel]{@link StepperItemAttribute#prevLabel} of a
    * **StepperItem**.
-   *
-   * > **NOTE**
    *
    * @param { function } callback - Callback triggered when the page is switched.<br/>index: Index of the current step
    *     page.<br/>pendingIndex: Index of the next step page.
@@ -170,10 +157,9 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
  *
  * > **NOTE**
  *
- *
  * ###### Child Components
  *
- * Only the child component [StepperItem]{@link stepper_item} is supported.
+ * Only the child component [StepperItem]{@link ./stepper_item} is supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

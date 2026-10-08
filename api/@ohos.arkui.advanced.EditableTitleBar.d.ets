@@ -26,6 +26,7 @@
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
+ * @noninterop
  */
 export declare class EditableTitleBarMenuItem {
   /**
@@ -40,7 +41,7 @@ export declare class EditableTitleBarMenuItem {
   value: ResourceStr;
 
   /**
-   * Icon label.
+   * Icon label description. When this parameter is not set, no icon label is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -51,11 +52,13 @@ export declare class EditableTitleBarMenuItem {
   label?: ResourceStr;
 
   /**
-   * Whether to enable the item. Default value: **true**.
+   * Whether to enable.
    *
-   * **true**: The item is enabled.
+   * Default value: **true**, meaning enabled by default.
    *
-   * **false**: The item is disabled.
+   * When **isEnabled** is **true**, the item is enabled.
+   *
+   * When **isEnabled** is **false**, the item is disabled.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -66,7 +69,8 @@ export declare class EditableTitleBarMenuItem {
   isEnabled?: boolean;
 
   /**
-   * Right-side custom button click event of the title bar.
+   * Tap event for the custom button on the right side of the title bar. When this parameter is not set, tapping the
+   * button has no response.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -77,13 +81,15 @@ export declare class EditableTitleBarMenuItem {
   action?: () => void;
 
   /**
-   * Accessibility text, that is, accessible label name. If a component does not contain text information, it will not
-   * be announced by the screen reader when selected. In this case, the screen reader user cannot know which component
-   * is selected. To solve this problem, you can set accessibility text for components without text information. When
-   * such a component is selected, the screen reader announces the specified accessibility text, informing the user
-   * which component is selected.
+   * Accessibility text attribute for the custom button on the right side of the title bar. When a component does not
+   * contain a text attribute, the screen reader does not announce anything when this component is selected, and the
+   * user cannot clearly know which component is currently selected. To address this scenario, developers can set
+   * accessibility text for components that do not contain text information. When the screen reader selects this
+   * component, it announces the accessibility text, helping screen reader users clearly know which component they have
+   * selected.
    *
-   * Default value: value of the **label** property if it is set and an empty string otherwise.
+   * Default value: **" "** when the label attribute is not set; the content of the label attribute when the label
+   * attribute is set.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -135,16 +141,19 @@ export declare class EditableTitleBarMenuItem {
   accessibilityLevel?: string;
 
   /**
-   * Whether to set the item as the default focus.
+   * Whether to set as the default focus.
    *
-   * **true**: Set the item as the default focus.
+   * **true**: The item gains focus.
    *
-   * **false**: Do not set the item as the default focus.
+   * **false**: The item does not gain focus.
    *
    * Default value: **false**
    *
-   * The **defaultFocus** attribute requires the **isEnabled** attribute to be set to **true** beforehand; otherwise,
-   * **defaultFocus** will be treated as **false**.
+   * When using the **defaultFocus** attribute, set the **isEnabled** attribute to **true** beforehand; otherwise, the
+   * **defaultFocus** setting does not take effect.
+   *
+   * **Note:** If multiple operable areas are set as the default focus at the same time, the first operable area in the
+   * display order among those set as the default focus becomes the default focus.
    *
    * @default { false }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -156,7 +165,8 @@ export declare class EditableTitleBarMenuItem {
   defaultFocus?: boolean;
 
   /**
-   * Symbol icon resource, which has higher priority than **value**.
+   * Symbol icon resource, which takes precedence over value. When this parameter is not set, the value parameter is
+   * used to display the icon.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -175,6 +185,7 @@ export declare class EditableTitleBarMenuItem {
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
+ * @noninterop
  */
 export type EditableTitleBarItem = EditableTitleBarMenuItem;
 
@@ -186,6 +197,7 @@ export type EditableTitleBarItem = EditableTitleBarMenuItem;
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
+ * @noninterop
  */
 export declare enum EditableLeftIconType {
   /**
@@ -219,6 +231,7 @@ export declare enum EditableLeftIconType {
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
+ * @noninterop
  */
 export declare interface EditableTitleBarOptions {
   /**
@@ -248,7 +261,7 @@ export declare interface EditableTitleBarOptions {
   backgroundBlurStyle?: BlurStyle;
 
   /**
-   * Types of the expanded safe areas.
+   * Types of the expanded safe area.
    *
    * Default value: **[SafeAreaType.SYSTEM]**
    *
@@ -261,7 +274,7 @@ export declare interface EditableTitleBarOptions {
   safeAreaTypes?: Array<SafeAreaType>;
 
   /**
-   * Edges for expanding the safe area.
+   * Edges of the expanded safe area.
    *
    * Default value: **[SafeAreaEdge.TOP]**
    *
@@ -275,8 +288,14 @@ export declare interface EditableTitleBarOptions {
 }
 
 /**
- * The editable title bar is a title bar that comes with button icons, typically **Cancel** on the left and **Confirm**
- * on the right, on a multi-select or editing page.
+ * An editable title bar component that provides a standard title bar implementation for editing scenarios. It supports
+ * custom left button types (back/cancel), profile picture display, right-side menu items, background blur styles, and
+ * other features. It is suitable for scenarios requiring content editing and multi-selection operations, such as album
+ * multi-select editing, text editors, and form editing pages. This component encapsulates common UI interaction
+ * patterns for editing scenarios (left close, right confirm), so developers do not need to implement the title bar
+ * layout and interaction logic themselves. It enables rapid construction of editing pages that comply with design
+ * specifications, improving development efficiency and ensuring UI consistency. It also supports accessibility property
+ * configuration to meet accessibility requirements.
  *
  * > **NOTE**
  * >
@@ -284,7 +303,7 @@ export declare interface EditableTitleBarOptions {
  * >
  * > - If the **EditableTitleBar** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **EditableTitleBar** component itself. As a result, the configured universal attributes and
  * > universal events may fail to take effect or behave as intended. For this reason, avoid using universal attributes
  * > and events with the **EditableTitleBar** component.
@@ -294,6 +313,7 @@ export declare interface EditableTitleBarOptions {
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
+ * @noninterop
  */
 @Component
 export declare struct EditableTitleBar {
@@ -341,10 +361,10 @@ export declare struct EditableTitleBar {
   title: ResourceStr;
 
   /**
-   * Subtitle. This parameter is required to display a subtitle below the title bar. If this parameter is not passed,
-   * the default value is used and no subtitle is displayed.
+   * Subtitle. Pass this parameter when supplementary information needs to be displayed below the title. If not passed,
+   * no subtitle is displayed.
    *
-   * Default value: **''**, indicating that the subtitle is empty.
+   * Default value: **''**, indicating that the subtitle content is empty.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -355,13 +375,14 @@ export declare struct EditableTitleBar {
   subtitle?: ResourceStr;
 
   /**
-   * Whether the save button on the right is required.
+   * Whether to show the save button on the right. The value **true** indicates that the save button on the right is
+   * required, and **false** indicates the opposite.
    *
-   * Default value: **true**, indicating that the save button on the right is required.
+   * Default value: **true**
    *
-   * **NOTE**
-   *
-   * If not decorated by @Require, this parameter is not subject to mandatory validation during construction.
+   * **Note:** This parameter is not decorated with **@Require**, so it is not mandatory during construction. When
+   * **isSaveIconRequired** is set to **false**, the save button is not displayed and the **onSave** callback is not
+   * triggered.
    *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -465,9 +486,13 @@ export declare struct EditableTitleBar {
   contentMargin?: LocalizedMargin;
 
   /**
-   * Whether the left icon is the default focus.
+   * Whether the left icon is the default focus. The value **true** indicates that it is the default focus, and
+   * **false** indicates the opposite.
    *
-   * Default value: **false**, indicating that the left icon is not the default focus.
+   * Default value: **false**
+   *
+   * **Note:** If multiple operable areas are set as the default focus simultaneously, the first one in display order
+   * among them is the default focus.
    *
    * @default { false }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -479,9 +504,14 @@ export declare struct EditableTitleBar {
   leftIconDefaultFocus?: boolean;
 
   /**
-   * Whether the save icon is the default focus.
+   * Whether the save icon is the default focus. The value **true** indicates that it is the default focus, and
+   * **false** indicates the opposite.
    *
-   * Default value: **false**, indicating that the save icon is not the default focus.
+   * Default value: **false**
+   *
+   * **Note:** This attribute takes effect only when the save button on the right is required (**isSaveIconRequired** is
+   * **true**). If multiple operable areas are set as the default focus simultaneously, the first one in display order
+   * among them is the default focus.
    *
    * @default { false }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
