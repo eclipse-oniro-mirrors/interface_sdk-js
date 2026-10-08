@@ -109,8 +109,9 @@ declare namespace functionManager {
    *
    * @permission ohos.permission.ACCESS_FUNCTION
    * @returns { Promise<Array<FunctionInfo>> } Promise对象，返回可用Function的信息列表，包含命名空间、名称、版本、描述、输入输出模式等。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -129,8 +130,9 @@ declare namespace functionManager {
    * @param { Record<string, Object> } args - 符合Function提供方定义格式的输入参数。
    * @param { InvokeOptions } [options] - Function调用的可选参数。默认值：详见{@link InvokeOptions}的具体属性默认值。
    * @returns { Promise<InvokeResult> } Promise对象。返回Function调用的结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 35600060 - The function does not exist.
@@ -153,9 +155,9 @@ declare namespace functionManager {
    * @permission ohos.permission.REGISTER_AGENT_HOOK
    * @param { FunctionHook } hook - 实现FunctionHook接口的Hook对象。该对象必须实现至少一个可选方法。
    * @returns { Promise<void> } Promise对象，无返回值。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600034 - The device is not in developer mode.
    * @throws { BusinessError } 35600035 - A hook is already registered; unregister it first.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -174,9 +176,9 @@ declare namespace functionManager {
    * @permission ohos.permission.REGISTER_AGENT_HOOK
    * @param { FunctionHook } hook - 待取消注册的Hook对象。
    * @returns { Promise<void> } Promise对象，无返回值。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600036 - No hook is registered; nothing to unregister.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.

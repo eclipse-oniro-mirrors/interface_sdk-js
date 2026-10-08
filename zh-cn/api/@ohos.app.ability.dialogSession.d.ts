@@ -243,7 +243,7 @@ declare namespace dialogSession {
    *
    * @param { string } dialogSessionId - 用户请求会话ID。
    * @returns { DialogSessionInfo } 同步返回会话信息。
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
@@ -262,7 +262,7 @@ declare namespace dialogSession {
    * @param { string } dialogSessionId - 用户请求会话ID。
    * @returns { DialogSessionInfo | null } Returns the session info when the target DialogSessionInfo of
    *     dialogSessionId exists. Returns null if the target DialogSessionInfo of dialogSessionId not exist.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -280,7 +280,7 @@ declare namespace dialogSession {
    * @param { Want } targetWant - 用户请求目标。
    * @param { boolean } isAllowed - 是否允许拉起目标Ability。true表示允许，false表示不允许。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
@@ -301,7 +301,7 @@ declare namespace dialogSession {
    * @param { Want } targetWant - 用户请求目标。
    * @param { boolean } isAllowed - 是否允许拉起目标Ability。true表示允许，false表示不允许。
    * @param { AsyncCallback<void> } callback - 回调函数。当发送用户请求成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.

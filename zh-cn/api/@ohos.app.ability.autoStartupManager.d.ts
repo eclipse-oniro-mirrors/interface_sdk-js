@@ -46,9 +46,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { 'systemAutoStartup' } type - 固定取值“systemAutoStartup”，表示为系统应用所调用。
    * @param { AutoStartupCallback } callback - 监听应用组件开机自启动状态变化的回调对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are lef
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -64,9 +64,9 @@ declare namespace autoStartupManager {
    *
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupCallback } callback - 监听应用组件开机自启动状态变化的回调对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -83,9 +83,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { 'systemAutoStartup' } type - 固定取值“systemAutoStartup”，表示为系统应用所调用。
    * @param { AutoStartupCallback } [callback] - 监听应用组件开机自启动状态变化的回调对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -101,9 +101,9 @@ declare namespace autoStartupManager {
    *
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupCallback } [callback] - 监听应用组件开机自启动状态变化的回调对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -120,9 +120,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupInfo } info - 要设置的开机自启动应用组件信息。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置应用组件开机自启动成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -144,9 +144,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupInfo } info - 要设置的开机自启动应用组件信息。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -168,9 +168,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupInfo } info - 要取消的开机自启动应用组件信息。
    * @param { AsyncCallback<void> } callback - 回调函数。当取消应用组件开机自启动成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -192,9 +192,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AutoStartupInfo } info - 要取消的开机自启动应用组件信息。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -216,9 +216,9 @@ declare namespace autoStartupManager {
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @param { AsyncCallback<Array<AutoStartupInfo>> } callback - 回调函数。当查询自启动应用组件信息成功，err为undefined，data为获取到的Array<
    *     [AutoStartupInfo]{@link ./application/AutoStartupInfo:AutoStartupInfo}>；否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -237,9 +237,9 @@ declare namespace autoStartupManager {
    *
    * @permission ohos.permission.MANAGE_APP_BOOT
    * @returns { Promise<Array<AutoStartupInfo>> } Promise对象，返回自启动应用组件信息。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.MANAGE_APP_BOOT".
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
    *     unspecified; 2. Incorrect parameters types.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
@@ -256,7 +256,8 @@ declare namespace autoStartupManager {
    * 该接口仅在Phone、PC/2in1、Tablet和Wearable设备中可正常调用，在其他设备中返回801错误码。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示当前应用已被用户设置为开机自启动，false表示当前应用未被用户设置为开机自启动。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

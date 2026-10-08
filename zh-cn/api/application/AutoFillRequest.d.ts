@@ -185,7 +185,7 @@ export interface FillRequestCallback {
    * 自动填充或者生成密码时的回调对象，可以通过此回调通知客户端成功或者失败。
    *
    * @param { FillResponse } response - 自动填充响应信息。
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Mandatory parameters are left unspecified.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
@@ -199,7 +199,7 @@ export interface FillRequestCallback {
   /**
    * 通知自动填充请求已失败。
    *
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -213,7 +213,7 @@ export interface FillRequestCallback {
    * 通知自动填充已被取消。
    *
    * @param { string } [fillContent] - 表示通知自动填充取消后，返回给输入法框架的填充内容。 [since 12]
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br>1.The input parameter is not valid parameter;
@@ -230,7 +230,7 @@ export interface FillRequestCallback {
    * 动态调整气泡弹窗的尺寸和位置。
    *
    * @param { AutoFillPopupConfig } autoFillPopupConfig - 气泡弹窗尺寸和位置信息。
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Mandatory parameters are left unspecified.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
@@ -255,7 +255,7 @@ export interface SaveRequestCallback {
   /**
    * 通知保存请求已成功处理。
    *
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -268,7 +268,7 @@ export interface SaveRequestCallback {
   /**
    * 通知保存请求处理失败。
    *
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi

@@ -189,8 +189,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { 'abilityForegroundState' } type - 调用接口类型，固定填'abilityForegroundState'字符串。
    * @param { AbilityForegroundStateObserver } observer - Ability状态观测器，用于观测Ability的启动和退出。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -205,8 +206,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AbilityForegroundStateObserver } observer - Ability状态观测器，用于观测Ability的启动和退出。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -221,8 +223,9 @@ declare namespace abilityManager {
    * @param { 'abilityForegroundState' } type - 调用接口类型，固定填'abilityForegroundState'字符串。
    * @param { AbilityForegroundStateObserver } [observer] - Ability状态观测器，用于观测Ability的启动和退出。如果未配置该参数，则取消当前应用注册的所有observer。如果配置
    *     了该参数，则取消该observer。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -238,8 +241,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AbilityForegroundStateObserver } [observer] - Ability状态观测器，用于观测Ability的启动和退出。如果未配置该参数，则取消当前应用注册的所有observer。如果配置
    *     了该参数，则取消该observer。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -253,8 +257,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.UPDATE_CONFIGURATION
    * @param { Configuration } config - 新的配置项，仅需配置需要更新的项。
    * @param { AsyncCallback<void> } callback - 回调函数。当更新配置成功，err为undefined；否则为错误对象。可进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -271,8 +276,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.UPDATE_CONFIGURATION
    * @param { Configuration } config - 新的配置项，仅需配置需要更新的项。
    * @returns { Promise<void> } Promise对象，无返回结果。开发者可在此进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -305,7 +311,7 @@ declare namespace abilityManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { AsyncCallback<Array<AbilityRunningInfo>> } callback - 回调函数。当获取UIAbility运行相关信息成功，err为undefined，data为获取到的
    *     UIAbility运行相关信息；否则为错误对象。可进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -322,7 +328,7 @@ declare namespace abilityManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { int } upperLimit - 获取消息数量的最大限制，最大为2<sup>31</sup>-1。
    * @returns { Promise<Array<ExtensionRunningInfo>> } Promise对象，返回接口运行结果及运行扩展能力的信息。开发者可在此进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -340,7 +346,7 @@ declare namespace abilityManager {
    * @param { int } upperLimit - 获取消息数量的最大限制，最大为2<sup>31</sup>-1。
    * @param { AsyncCallback<Array<ExtensionRunningInfo>> } callback - 回调函数。当获取运行扩展能力的信息成功，err为undefined，data为获取到的运行扩展能力信息；否则为
    *     错误对象。可进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -355,7 +361,7 @@ declare namespace abilityManager {
    * 获取窗口焦点所在的Ability。使用Promise异步回调。
    *
    * @returns { Promise<ElementName> } Promise对象，返回接口运行结果及应用名。开发者可在此进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -369,7 +375,7 @@ declare namespace abilityManager {
    *
    * @param { AsyncCallback<ElementName> } callback - 回调函数。当获取窗口焦点所在的Ability成功，err为undefined，data为获取到的应用名；否则为错误对象。可进行错误处理或其他自
    *     定义处理。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -390,7 +396,7 @@ declare namespace abilityManager {
    *     定义处理。 [since 10 - 10]
    * @param { AsyncCallback<Record<string, Object>> } callback - 回调函数。当接口调用成功，err为undefined，data为获取到的分享数据；否则为错误对象。可进行错误处理或其他自
    *     定义处理。 [since 11]
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -405,7 +411,7 @@ declare namespace abilityManager {
    *
    * @param { int } missionId - 目标应用的missionId，最大为231-1。
    * @param { AsyncCallback<Record<string, RecordData>> } callback - 以回调方式返回接口运行结果及分享得到的数据，可进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system service failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -423,7 +429,7 @@ declare namespace abilityManager {
    * @returns { Promise<{ [key: string]: Object }> } The promise returned by the function. [since 10 - 10]
    * @returns { Promise<Record<string, Object>> } Promise used to return the API call result and the shared data. You can
    *     perform error handling or other custom processing. [since 11]
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -438,7 +444,7 @@ declare namespace abilityManager {
    *
    * @param { int } missionId - 目标应用的missionId，最大为231-1。
    * @returns { Promise<Record<string, RecordData>> } The promise returned by the function.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -458,8 +464,9 @@ declare namespace abilityManager {
    * @param { AbilityResult } parameter - 返回给调用startAbilityForResult?接口调用方的相关信息。
    * @param { int } requestCode - DLP管理应用传入的请求代码。
    * @param { AsyncCallback<void> } callback - 回调函数。当另存为结果通知成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -479,8 +486,9 @@ declare namespace abilityManager {
    * @param { AbilityResult } parameter - 返回给调用startAbilityForResult?接口调用方的相关信息。
    * @param { int } requestCode - DLP管理应用传入的请求代码。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -498,8 +506,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { AsyncCallback<Array<AbilityStateData>> } callback - 以回调方式返回接口运行结果及有关前台Ability的信息，可进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -515,8 +524,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.GET_RUNNING_INFO
    * @returns { Promise<Array<AbilityStateData>> } 以Promise方式返回接口运行结果及有关前台Ability的信息，可进行错误处理或其他自定义处理。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -549,8 +559,9 @@ declare namespace abilityManager {
    * @param { string } sessionId - 指示AssertFault的请求ID。
    * @param { UserStatus } status - 用户的操作状态。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -572,7 +583,7 @@ declare namespace abilityManager {
    * @param { string } bundleName - 常驻进程的包名。
    * @param { boolean } enable - 常驻进程的使能状态。true表示该进程为常驻进程；false表示该进程为普通进程，不会进行保活。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - Not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1.Non empty package name needs to be provided;
    *     2.The second parameter needs to provide a Boolean type setting value.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -594,7 +605,8 @@ declare namespace abilityManager {
    * @returns { Promise<AtomicServiceStartupRule> } Promise对象。返回嵌入式拉起原子化服务的规则。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -639,8 +651,9 @@ declare namespace abilityManager {
    * @param { Want } want - 启动Ability的Want信息。
    * @returns { Promise<int> } Promise对象，返回预加载的
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}的ID，用于后续清除或管理操作。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -660,8 +673,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { int } preloadId - 预加载[UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}实例的ID。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000003 - The specified ID does not exist. Possible causes:
    *     1.The specified ID is incorrect; 2.The preloaded UIExtensionAbility has been loaded;
    *     3.The preloaded UIExtensionAbility has been destroyed;
@@ -679,8 +693,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
    *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -696,8 +711,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityLoadedFn } callback - 用于接收被加载的预加载
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}实例ID的回调函数。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -711,8 +727,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityLoadedFn } [callback] - 需要注销监听的回调函数。如果不传入任何回调函数，则会注销当前进程中所有该事件类型的监听。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -727,8 +744,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityDestroyedFn } callback - 用于接收被销毁的预加载
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}实例ID的回调函数。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -742,8 +760,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityDestroyedFn } [callback] - 需要注销监听的回调函数。如果不传入任何回调函数，则会注销当前进程中所有该事件类型的监听。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
