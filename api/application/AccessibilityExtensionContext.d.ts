@@ -2452,6 +2452,24 @@ export interface ElementAttributeValues {
    */
   screenRect: Rect;
   /**
+   * Zoom ratio of the window in the X axis direction.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  windowScaleX?: double;
+  /**
+   * Zoom ratio of the window in the Y axis direction.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  windowScaleY?: double;
+  /**
    * Whether the element is scrollable. The value **true** indicates that the element is scrollable, and **false** 
    * indicates the opposite. The default value is **false**. In accessibility mode, when the values of 
    * accessibilityScrollable and scrollable conflict, the accessibilityScrollable attribute takes precedence.

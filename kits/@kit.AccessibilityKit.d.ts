@@ -30,7 +30,7 @@ import AccessibilityExtensionAbility, {
 } from '@ohos.application.AccessibilityExtensionAbility';
 import { AccessibilityEventType, AccessibilityAction, FocusMoveResultCode,
   InjectActionType, AccessibilityFocusScene, FocusRuleType, OperateVirtualNodeResult,
-  AccessibilitySourceType } from '@ohos.accessibility';
+  AccessibilitySourceType, UIRect, UIAccessibilityElement } from '@ohos.accessibility';
 /*** endif */
 
 /*** if arkts static */
@@ -42,7 +42,7 @@ import AccessibilityExtensionAbility, {
 } from '@ohos.application.AccessibilityExtensionAbility';
 import { AccessibilityEventType, AccessibilityAction, FocusMoveResultCode,
   InjectActionType, AccessibilityFocusScene, FocusRuleType, OperateVirtualNodeResult,
-  AccessibilitySourceType } from '@ohos.accessibility';
+  AccessibilitySourceType, UIRect, UIAccessibilityElement } from '@ohos.accessibility';
 /*** endif */
 
 /*** if arkts dynamic */
@@ -52,7 +52,8 @@ export {
   GesturePoint, Rect, WindowType, accessibility, config, AccessibilityEvent, AccessibilityEventInfo,
   AccessibilityAction, AccessibilityEventType, Parameter,
   FocusRule, FocusCondition, FocusMoveResult, FocusMoveResultCode, InjectActionType, AccessibilityFocusScene,
-  AccessibilityVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType
+  AccessibiltiyVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType,
+  UIRect, UIAccessibilityElement
 };
 /*** endif */
 
@@ -61,6 +62,7 @@ export {
   AccessibilityElement, AccessibilityExtensionAbility, AccessibilityExtensionContext, FocusDirection, Rect,
   WindowType, accessibility, config, AccessibilityEventInfo, AccessibilityAction, AccessibilityEventType,
   Parameter, FocusRule, FocusCondition, FocusMoveResult, FocusMoveResultCode, InjectActionType, AccessibilityFocusScene,
-  AccessibilityVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType
+  AccessibiltiyVirtualNode, TouchPosition, FocusRuleType, OperateVirtualNodeResult, AccessibilitySourceType,
+  UIRect, UIAccessibilityElement
 };
 /*** endif */

@@ -1331,8 +1331,10 @@ declare namespace accessibility {
    * @param { 'touchModeChange' } type - 监听的事件名，固定为‘touchModeChange’，即触摸浏览功能下的单击/双击操作模式变化事件。
    * @param { Callback<string> } callback - 回调函数，在触摸浏览功能下的单击/双击操作模式变化时将操作模式通过此函数进行通知。返回'singleTouchMode'表示单击操作模式，'
    *     doubleTouchMode'表示双击操作模式，'none'表示未开启触摸浏览功能。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2.
-   *     Incorrect parameter types. 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types;
+   *     3. Parameter verification failed.
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @crossplatform [since 23]
    * @form [since 23]
@@ -1360,8 +1362,10 @@ declare namespace accessibility {
    * @param { Callback<string> } [callback] - 回调函数，取消指定callback对象的事件响应。需与
    *     [accessibility.on('touchModeChange')]{@link accessibility.on(type: 'touchModeChange', callback: Callback<string>)}
    *     的callback一致。缺省时，表示注销所有已注册事件。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2.
-   *     Incorrect parameter types. 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types;
+   *     3. Parameter verification failed.
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @crossplatform [since 23]
    * @form [since 23]
@@ -1652,6 +1656,74 @@ declare namespace accessibility {
    * @since 26.0.0 dynamic&static
    */
   function setSeniorModeStateForSelf(state: boolean): Promise<void>;
+
+  /**
+   * 获取应用内的无障碍焦点元素。使用Promise异步回调。
+   *
+   * @returns { Promise<UIAccessibilityElement | undefined> } Promise对象。返回当前应用内的无障碍焦点元素；如果没有无障碍焦点，则返回undefined。
+   * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
+   *     <br>1.Internal operation failed.
+   *     <br>2.Failed to obtain the required service or client object (null pointer).
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getFocusedUIAccessibilityElement(): Promise<UIAccessibilityElement | undefined>;
+  
+  /**
+   * 监听应用内无障碍焦点变化事件。
+   *
+   * @param { Callback<UIAccessibilityFocusChangeInfo> } callback - 回调函数。在应用内焦点变化时将焦点变化信息通过此函数进行通知。
+   * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
+   *     <br>1.Internal operation failed.
+   *     <br>2.Failed to obtain the required service or client object (null pointer).
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onUIAccessibilityFocusChanged(callback: Callback<UIAccessibilityFocusChangeInfo>): void;
+ 
+  /**
+   * 取消监听应用内无障碍焦点变化事件。
+   *
+   * @param { Callback<UIAccessibilityFocusChangeInfo> } [callback] - 回调函数，取消指定callback对象的事件响应。需与
+   *     [accessibility.onUIAccessibilityFocusChanged]{@link accessibility.onUIAccessibilityFocusChanged}
+   *     的callback一致。缺省时，表示注销所有已注册事件。
+   * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
+   *     <br>1.Internal operation failed.
+   *     <br>2.Failed to obtain the required service or client object (null pointer).
+   *     <br>3.The listener or observer is not registered.
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offUIAccessibilityFocusChanged(callback?: Callback<UIAccessibilityFocusChangeInfo>): void;
+  
+  /**
+   * 应用内无障碍焦点变化信息。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface UIAccessibilityFocusChangeInfo {
+    /**
+     * 本次焦点变化中获得焦点的无障碍元素。
+     *
+     * @syscap SystemCapability.BarrierFree.Accessibility.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    focusedElement?: UIAccessibilityElement;
+    /**
+     * 本次焦点变化中失去焦点的无障碍元素。
+     *
+     * @syscap SystemCapability.BarrierFree.Accessibility.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    unfocusedElement?: UIAccessibilityElement;
+  }
 }
 
 export default accessibility;
@@ -2979,4 +3051,436 @@ export enum AccessibilitySourceType {
    * @since 26.0.0 dynamic&static
    */
   UPDATED_FROM_ACCESSIBILITY_VIRTUAL_NODE = 3
+}
+
+/**
+ * 表示矩形区域。
+ *
+ * @syscap SystemCapability.BarrierFree.Accessibility.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic&static
+ */
+export interface UIRect {
+  /**
+   * 矩形区域的左边界，单位为像素（px）。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  left: int;
+  /**
+   * 矩形区域的上边界，单位为像素（px）。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  top: int;
+  /**
+   * 矩形区域的宽度，单位为像素（px）。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  width: int;
+  /**
+   * 矩形区域的高度，单位为像素（px）。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  height: int;
+}
+ 
+/**
+ * 无障碍节点元素。
+ *
+ * 通过[accessibility.getFocusedUIAccessibilityElement]{@link accessibility.getFocusedUIAccessibilityElement}获取
+ * UIAccessibilityElement实例。
+ *
+ * @syscap SystemCapability.BarrierFree.Accessibility.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic&static
+ */
+export declare interface UIAccessibilityElement {
+  /**
+   * 表示元素是否因无障碍目的获得焦点。true表示已获得焦点，false表示未获得焦点。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityFocused?: boolean;
+  /**
+   * 元素是否可勾选。true表示可勾选，false表示不可勾选。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly checkable?: boolean;
+  /**
+   * 元素是否已勾选。true表示已勾选，false表示未勾选。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isChecked?: boolean;
+  /**
+   * 元素是否可点击。true表示可点击，false表示不可点击。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly clickable?: boolean;
+  /**
+   * 元素所属组件的ID。
+   * 
+   * 默认值：-1。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly componentId?: long;
+  /**
+   * 元素所属组件的类型。取值为组件类型名，例如Button组件为**'Button'**，Image组件为**'Image'**。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly componentType?: string;
+  /**
+   * 元素的无障碍说明。组件可通过[accessibilityDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityDescription}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityDescription?: string;
+  /**
+   * 元素是否可编辑。true表示可编辑，false表示不可编辑。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly editable?: boolean;
+  /**
+   * 元素错误状态下提示的错误文本。组件可通过[showError]{@link ./@internal/component/ets/text_input:TextInputAttribute.showError}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly error?: string;
+  /**
+   * 表示元素是否可聚焦。true表示元素可聚焦，false表示元素不可聚焦。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly focusable?: boolean;
+  /**
+   * 无输入时的提示文本。组件可通过[placeholder]{@link ./@internal/component/ets/text_input:TextInputOptions.placeholder}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly hintText?: string;
+  /**
+   * 组件的唯一标识。组件可通过[id]{@link ./@internal/component/ets/common:CommonMethod.id}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly identifier?: string;
+  /**
+   * 元素是否处于活动状态。true表示活动状态，false表示非活动状态。
+   * 
+   * 默认值：true。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isActive?: boolean;
+  /**
+   * 元素是否启用。true表示启用，false表示未启用。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isEnabled?: boolean;
+  /**
+   * 表示元素是否聚焦。true表示元素处于聚焦状态，false表示元素不处于聚焦状态。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isFocused?: boolean;
+  /**
+   * 元素是否可见。true表示元素可见，false表示元素不可见。
+   * 
+   * 默认值：false。
+   * 
+   * 组件可通过[visibility]{@link ./@internal/component/ets/common:CommonMethod.visibility}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly isVisible?: boolean;
+  /**
+   * 元素是否可长按。true表示可长按，false表示不可长按。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly longClickable?: boolean;
+  /**
+   * 页面ID。
+   * 
+   * 默认值：-1。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly pageId?: int;
+  /**
+   * 元素的区域。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly rect?: UIRect;
+  /**
+   * 元素是否可滚动。true表示元素可滚动，false表示不可滚动。当与accessibilityScrollable取值冲突时，以accessibilityScrollable为准。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly scrollable?: boolean;
+  /**
+   * 元素是否已选中。true表示已选中，false表示未选中。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly selected?: boolean;
+  /**
+   * 元素的文本内容。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly text?: string;
+  /**
+   * 元素的最大文本长度。默认值：0。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly textLengthLimit?: int;
+  /**
+   * 元素取值范围内的最大值，适用于滑动条等取值类组件。单位由组件定义，通常为百分比。
+   * 
+   * 默认值：0。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly valueMax?: double;
+  /**
+   * 元素取值范围内的最小值，适用于滑动条等取值类组件。单位由组件定义，通常为百分比。
+   * 
+   * 默认值：0。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly valueMin?: double;
+  /**
+   * 元素的当前值，取值在valueMin和valueMax定义的范围内。单位由组件定义，通常为百分比。
+   * 
+   * 默认值：0。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly valueNow?: double;
+  /**
+   * 内容区域相对于可滚动组件（如List和Grid）顶部坐标的像素偏移量，单位为像素（px）。
+   * 
+   * 默认值：0。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly offset?: double;
+  /**
+   * 元素的无障碍文本信息。组件可通过[accessibilityText]{@link ./@internal/component/ets/common:CommonMethod.accessibilityText}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityText?: string;
+  /**
+   * 自定义无障碍组件类型。组件可通过[accessibilityRole]{@link ./@internal/component/ets/common:CommonMethod.accessibilityRole}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityRole?: string;
+  /**
+   * 下一个要获得焦点的组件的ID。该ID为目标组件的componentId，区别于identifier属性。组件可通过
+   * [accessibilityNextFocusId]{@link ./@internal/component/ets/common:CommonMethod.accessibilityNextFocusId}设置该属性。
+   * 
+   * 默认值：-1。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityNextFocusId?: long;
+  /**
+   * 上一个要获得焦点的组件的ID。该ID为目标组件的componentId，区别于identifier属性。
+   * 
+   * 默认值：-1。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityPreviousFocusId?: long;
+  /**
+   * 元素是否因无障碍目的而可滚动。优先级高于scrollable，即当accessibilityScrollable与scrollable取值冲突时以accessibilityScrollable为准。
+   * 
+   * true表示元素可滚动，false表示元素不可滚动。
+   * 
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityScrollable?: boolean;
+  /**
+   * 元素是否为无障碍组。true表示元素是无障碍组，false表示元素不是无障碍组。
+   * 
+   * 默认值：false。
+   * 
+   * 组件可通过[accessibilityGroup]{@link ./@internal/component/ets/common:CommonMethod.accessibilityGroup}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityGroup?: boolean;
+  /**
+   * 组件的无障碍级别。
+   * 
+   * 'auto'：当前组件由无障碍分组服务和ArkUI进行综合判断组件是否可被辅助功能识别。
+   * 
+   * 'yes'：当前组件可被辅助功能识别。
+   * 
+   * 'no'：当前组件不可被辅助功能识别。
+   * 
+   * 'no-hide-descendants'：当前组件及其所有子组件不可被辅助功能识别。默认值：'auto'。
+   * 
+   * 组件可通过[accessibilityLevel]{@link ./@internal/component/ets/common:CommonMethod.accessibilityLevel}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityLevel?: string;
+  /**
+   * 组件是否无障碍可见。不同于isVisible，该值在无障碍场景下基于组件的可见性及屏幕坐标和边框计算得出。true表示可见，false表示不可见。默认值：true。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityVisible?: boolean;
+  /**
+   * 组件的父元素ID。默认值：-1。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly parentId?: long;
+  /**
+   * 组件的子元素ID列表。默认值：空数组。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly childrenIds?: Array<long>;
+ 
+  /**
+   * 元素的自定义无障碍状态播报文本信息。组件可通过[accessibilityStateDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityStateDescription}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly accessibilityStateDescription?: string;
+ 
+  /**
+   * 元素支持的自定义操作列表。组件可通过[accessibilityCustomActions]{@link ./@internal/component/ets/common:CommonMethod.accessibilityCustomActions}设置该属性。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly customActions?: Array<string>;
 }

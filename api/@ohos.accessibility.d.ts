@@ -2138,7 +2138,9 @@ declare namespace accessibility {
    *
    * @returns { Promise<UIAccessibilityElement | undefined> } Promise used to return the current accessibility focus 
    *     element within the application; returns undefined if there is no accessibility focus.
-   * @throws { BusinessError } 9300000 - System abnormality.
+   * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
+   *     <br>1.Internal operation failed.
+   *     <br>2.Failed to obtain the required service or client object (null pointer).
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
@@ -2146,33 +2148,36 @@ declare namespace accessibility {
   function getFocusedUIAccessibilityElement(): Promise<UIAccessibilityElement | undefined>;
 
   /**
-   * Subscribes to accessibility focus change events in the app. This API uses an asynchronous callback to return the 
-   * result.
+   * Subscribes to accessibility focus change events in the app. 
    *
-   * @param { Callback<FocusedUIAccessibilityElementChangeInfo> } callback - Callback function. This function is used to
+   * @param { Callback<UIAccessibilityFocusChangeInfo> } callback - Callback function. This function is used to
    *     notify the focus change information when the accessibility focus changes in an application.
-   * @throws { BusinessError } 9300000 - System abnormality.
+   * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
+   *     <br>1.Internal operation failed.
+   *     <br>2.Failed to obtain the required service or client object (null pointer).
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  function onFocusedUIAccessibilityElementChanged(callback: Callback<FocusedUIAccessibilityElementChangeInfo>): void;
-  
+  function onUIAccessibilityFocusChanged(callback: Callback<UIAccessibilityFocusChangeInfo>): void;
+
   /**
-   * Unsubscribes from accessibility focus change events in the app. This API uses an asynchronous callback to return 
-   * the result.
+   * Unsubscribes from accessibility focus change events in the app. 
    *
-   * @param { Callback<FocusedUIAccessibilityElementChangeInfo> } [callback] - Callback for accessibility focus change 
+   * @param { Callback<UIAccessibilityFocusChangeInfo> } [callback] - Callback for accessibility focus change 
    *     events. It must be the same as the callback used in  
-   *     [accessibility.onFocusedUIAccessibilityElementChanged]{@link accessibility.onFocusedUIAccessibilityElementChanged}.
+   *     [accessibility.onUIAccessibilityFocusChanged]{@link accessibility.onUIAccessibilityFocusChanged}.
    *     If this parameter is not specified, all registered events are unsubscribed.
-   * @throws { BusinessError } 9300000 - System abnormality.
+   * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
+   *     <br>1.Internal operation failed.
+   *     <br>2.Failed to obtain the required service or client object (null pointer).
+   *     <br>3.The listener or observer is not registered.
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  function offFocusedUIAccessibilityElementChanged(callback?: Callback<FocusedUIAccessibilityElementChangeInfo>): void;
-  
+  function offUIAccessibilityFocusChanged(callback?: Callback<UIAccessibilityFocusChangeInfo>): void;
+
   /**
    * Accessibility focus change information in an app.
    *
@@ -2180,9 +2185,9 @@ declare namespace accessibility {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface FocusedUIAccessibilityElementChangeInfo {
+  interface UIAccessibilityFocusChangeInfo {
     /**
-     * The accessibility element currently in focus.
+     * The accessibility element that gains focus in this focus change.
      *
      * @syscap SystemCapability.BarrierFree.Accessibility.Core
      * @stagemodelonly
@@ -2190,13 +2195,13 @@ declare namespace accessibility {
      */
     focusedElement?: UIAccessibilityElement;
     /**
-     * The accessibility element previously in focus.
+     * The accessibility element that loses focus in this focus change.
      *
      * @syscap SystemCapability.BarrierFree.Accessibility.Core
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    unFocusedElement?: UIAccessibilityElement;
+    unfocusedElement?: UIAccessibilityElement;
   }
 
   /**
@@ -3214,6 +3219,48 @@ export enum AccessibilitySourceType {
 }
 
 /**
+ * Defines a rectangle.
+ *
+ * @syscap SystemCapability.BarrierFree.Accessibility.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic&static
+ */
+export interface UIRect {
+  /**
+   * Left boundary of the rectangle, in pixels.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  left: int;
+  /**
+   * Top boundary of the rectangle, in pixels.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  top: int;
+  /**
+   * Width of the rectangle, in pixels.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  width: int;
+  /**
+   * Height of the rectangle, in pixels.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  height: int;
+}
+ 
+/**
  * Accessible node element.
  *
  * Obtains the UIAccessibilityElement instance through
@@ -3256,7 +3303,7 @@ export declare interface UIAccessibilityElement {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  readonly checked?: boolean;
+  readonly isChecked?: boolean;
   /**
    * Whether the element is clickable. The value **true** indicates that the element is clickable, and **false** 
    * indicates the opposite.
@@ -3279,7 +3326,8 @@ export declare interface UIAccessibilityElement {
    */
   readonly componentId?: long;
   /**
-   * Type of the component to which the element belongs.
+   * Type of the component to which the element belongs. It corresponds to the component type name,
+   * such as **'Button'** for the Button component and **'Image'** for the Image component.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3336,18 +3384,6 @@ export declare interface UIAccessibilityElement {
    */
   readonly hintText?: string;
   /**
-   * Type of the input text. Different values correspond to different input modes: **0** indicates no specific type; 
-   * **1** indicates text; **2** indicates email; **3** indicates date; **4** indicates time; **5** indicates number; 
-   * **6** indicates password; **7** indicates phone number; **8** indicates username; **9** indicates new password.
-   * 
-   * Default value: **0**.
-   *
-   * @syscap SystemCapability.BarrierFree.Accessibility.Core
-   * @stagemodelonly
-   * @since 26.0.1 dynamic&static
-   */
-  readonly inputType?: int;
-  /**
    * Unique ID of a component. This property can be set by using 
    * [id]{@link ./@internal/component/ets/common:CommonMethod.id}.
    *
@@ -3355,7 +3391,7 @@ export declare interface UIAccessibilityElement {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  readonly inspectorKey?: string;
+  readonly identifier?: string;
   /**
    * Whether the element is active. The value **true** indicates that the element is active, and **false** indicates the
    * opposite.
@@ -3377,7 +3413,7 @@ export declare interface UIAccessibilityElement {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  readonly isEnable?: boolean;
+  readonly isEnabled?: boolean;
   /**
    * Whether the element is focused. The value **true** indicates that the element is focused, and **false** indicates 
    * the opposite.
@@ -3390,21 +3426,12 @@ export declare interface UIAccessibilityElement {
    */
   readonly isFocused?: boolean;
   /**
-   * Whether the element is a password. The value **true** indicates that the element is a password, and **false** 
-   * indicates the opposite.
-   * 
-   * Default value: **false**.
-   *
-   * @syscap SystemCapability.BarrierFree.Accessibility.Core
-   * @stagemodelonly
-   * @since 26.0.1 dynamic&static
-   */
-  readonly isPassword?: boolean;
-  /**
    * Whether the element is visible. The value **true** indicates that the element is visible, and **false** indicates 
    * the opposite.
    * 
    * Default value: **false**.
+   * 
+   * This property can be set by using [visibility]{@link ./@internal/component/ets/common:CommonMethod.visibility}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3433,24 +3460,13 @@ export declare interface UIAccessibilityElement {
    */
   readonly pageId?: int;
   /**
-   * Whether the element supports multi-line text. The value **true** indicates that the element supports multi-line 
-   * text, and **false** indicates the opposite.
-   * 
-   * Default value: **false**.
-   *
-   * @syscap SystemCapability.BarrierFree.Accessibility.Core
-   * @stagemodelonly
-   * @since 26.0.1 dynamic&static
-   */
-  readonly pluralLineSupported?: boolean;
-  /**
    * Area of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  readonly rect?: Rect;
+  readonly rect?: UIRect;
   /**
    * Whether the element is scrollable. The value **true** indicates that the element is scrollable, and **false** 
    * indicates the opposite. When the value conflicts with that of accessibilityScrollable, the value of 
@@ -3548,7 +3564,7 @@ export declare interface UIAccessibilityElement {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  readonly customComponentType?: string;
+  readonly accessibilityRole?: string;
   /**
    * ID of the next component to gain focus. This property can be set by using 
    * [accessibilityNextFocusId]{@link ./@internal/component/ets/common:CommonMethod.accessibilityNextFocusId}.
@@ -3620,8 +3636,9 @@ export declare interface UIAccessibilityElement {
    */
   readonly accessibilityLevel?: string;
   /**
-   * Whether the component is visible for accessibility. The value **true** indicates that the component is visible, and
-   * **false** indicates the opposite. Default value: **true**.
+   * Whether the component is visible for accessibility. Unlike the isVisible property, this value is calculated based 
+   * on the component's visibility, screen coordinates, and borders in accessibility scenarios. The value **true** 
+   * indicates that the component is visible, and **false** indicates the opposite. Default value: **true**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3644,7 +3661,7 @@ export declare interface UIAccessibilityElement {
    * @since 26.0.1 dynamic&static
    */
   readonly childrenIds?: Array<long>;
-
+ 
   /**
    * Custom accessibility state announcement text of the element. This property can be set by using 
    * [accessibilityStateDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityStateDescription}.
@@ -3654,7 +3671,7 @@ export declare interface UIAccessibilityElement {
    * @since 26.0.1 dynamic&static
    */
   readonly accessibilityStateDescription?: string;
-
+ 
   /**
    * List of custom actions supported by the element. This property can be set by using 
    * [accessibilityCustomActions]{@link ./@internal/component/ets/common:CommonMethod.accessibilityCustomActions}.
