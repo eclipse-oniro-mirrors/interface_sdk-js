@@ -130,7 +130,7 @@ declare enum NavigationMode {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Stack = 0,
+  Stack,
 
   /**
    * The navigation page and content area are displayed in different columns.
@@ -159,7 +159,7 @@ declare enum NavigationMode {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Split = 1,
+  Split,
 
   /**
    * For API version 9 and earlier, the **Split** mode is used when the **Navigation** width is greater than or equal to
@@ -174,7 +174,7 @@ declare enum NavigationMode {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Auto = 2,
+  Auto,
 
   /**
    * The **Split** mode is used when the **Navigation** width is greater than or equal to 600 vp and the aspect ratio is
@@ -187,7 +187,7 @@ declare enum NavigationMode {
    * @atomicservice
    * @since 24 dynamic
    */
-  AUTO_WITH_ASPECT_RATIO = 3
+  AUTO_WITH_ASPECT_RATIO
 }
 
 /**
@@ -207,7 +207,7 @@ declare enum NavBarPosition {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Start = 0,
+  Start,
 
   /**
    * When two columns are displayed, the main column is at the end of the main axis.
@@ -217,7 +217,7 @@ declare enum NavBarPosition {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  End = 1
+  End
 }
 
 /**
@@ -262,7 +262,7 @@ declare enum NavigationTitleMode {
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
-  Full = 1,
+  Full,
 
   /**
    * The title is fixed at mini mode.
@@ -279,7 +279,7 @@ declare enum NavigationTitleMode {
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
-  Mini = 2
+  Mini
 }
 
 /**

@@ -982,7 +982,7 @@ declare enum SwiperDisplayMode {
    * @deprecated since 10
    * @useinstead SwiperDisplayMode#STRETCH
    */
-  Stretch = 0,
+  Stretch,
 
   /**
    * The width of each page in the **Swiper** component equals the maximum width
@@ -1000,7 +1000,7 @@ declare enum SwiperDisplayMode {
    * @deprecated since 10
    * @useinstead SwiperDisplayMode#AUTO_LINEAR
    */
-  AutoLinear = 1,
+  AutoLinear,
 
   /**
    * The width of each page in the **Swiper** component equals the component's
@@ -1013,7 +1013,7 @@ declare enum SwiperDisplayMode {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  STRETCH = 2,
+  STRETCH,
 
   /**
    * The width of each page in the **Swiper** component equals the width of the
@@ -1034,7 +1034,7 @@ declare enum SwiperDisplayMode {
    * @deprecated since 12
    * @useinstead Scroller#scrollTo
    */
-  AUTO_LINEAR = 3
+  AUTO_LINEAR
 }
 
 /**

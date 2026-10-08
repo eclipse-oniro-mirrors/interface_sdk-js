@@ -35,7 +35,7 @@ declare enum IndexerAlign {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Left = 0,
+  Left,
 
   /**
    * The pop-up window is displayed on the left of the indexer.
@@ -45,7 +45,7 @@ declare enum IndexerAlign {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Right = 1,
+  Right,
 
   /**
    * The pop-up window is displayed on the right of the indexer for left-to-right scripts, and on the left of the
@@ -57,7 +57,7 @@ declare enum IndexerAlign {
    * @atomicservice
    * @since 12 dynamic
    */
-  START = 2,
+  START,
 
   /**
    * The pop-up window is displayed on the left of the indexer for left-to-right scripts, and on the right of the
@@ -69,7 +69,7 @@ declare enum IndexerAlign {
    * @atomicservice
    * @since 12 dynamic
    */
-  END = 3
+  END
 }
 
 /**
