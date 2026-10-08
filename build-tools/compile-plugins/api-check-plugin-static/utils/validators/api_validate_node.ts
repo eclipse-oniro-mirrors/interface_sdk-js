@@ -658,9 +658,9 @@ export class CommentSuppressWarningsValidator extends BaseValidator implements N
       isChainedCall: { isChain: false, chainNode: node }
     }
 
-    // 检查父节点是否为成员表达式（如a.b），若不是则无需向上遍历
+    // 检查父节点是否为成员表达式（如a.b）、属性节点或类型节点，若均不是则无需向上遍历
     let current: arkts.AstNode = nodeStatement.node.parent;
-    if (!current || !arkts.isMemberExpression(current) || !current.object) {
+    if (!current || (!arkts.isTypeNode(current) && !arkts.isProperty(current) && (!arkts.isMemberExpression(current) || !current.object))) {
       return nodeStatement;
     }
 
@@ -683,9 +683,10 @@ export class CommentSuppressWarningsValidator extends BaseValidator implements N
           break;
         }
       }
-      // 场景2：普通调用——当前节点是标识符或变量声明，且该节点有注释
-      //   如 const test = a.b 中的 test 或 a.b 语句
-      if ((arkts.isIdentifier(nodeStatement.node) || arkts.isVariableDeclarator(nodeStatement.node)) && this.hasChainCallNodeComment(nodeStatement.node)) {
+      // 场景2：普通调用——当前节点为语句级节点且该节点有注释
+      //   支持标识符、变量声明、调用表达式、类属性、对象属性、赋值表达式
+      //   如 const test = a.b、a.b() 或 a.b = c
+      if (this.hasNodeComment(nodeStatement.node)) {
         nodeStatement.isChainedCall.chainNode = nodeStatement.node;
         nodeStatement.isChainedCall.isChain = true;
         break;
@@ -694,6 +695,19 @@ export class CommentSuppressWarningsValidator extends BaseValidator implements N
       nodeStatement.node = nodeStatement.node.parent;
     }
     return nodeStatement;
+  }
+
+  private hasNodeComment(node: arkts.AstNode): boolean {
+    if ((arkts.isIdentifier(node) ||
+      arkts.isVariableDeclarator(node) ||
+      arkts.isCallExpression(node) ||
+      arkts.isClassProperty(node) ||
+      arkts.isProperty(node) ||
+      arkts.isAssignmentExpression(node)) &&
+      this.hasChainCallNodeComment(node)) {
+      return true;
+    }
+    return false;
   }
 
   /**
