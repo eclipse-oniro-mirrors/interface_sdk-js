@@ -918,24 +918,6 @@ export declare interface AccessibilityElement {
    */
   screenRect?: Rect;
   /**
-   * 窗口在X轴方向上的缩放比例。
-   *
-   * @syscap SystemCapability.BarrierFree.Accessibility.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  windowScaleX?: double;
-  /**
-   * 窗口在Y轴方向上的缩放比例。
-   *
-   * @syscap SystemCapability.BarrierFree.Accessibility.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  windowScaleY?: double;
-  /**
    * 元素是否可滚动。true表示元素可滚动，false表示不可滚动。当与accessibilityScrollable取值冲突时，以accessibilityScrollable为准。
    * 
    * 默认值：false。
