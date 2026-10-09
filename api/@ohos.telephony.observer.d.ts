@@ -1203,7 +1203,7 @@ declare namespace observer {
    * @FaAndStageModel
    * @since 26.0.1 dynamic&static
    */
-  function onCallTransferChange(slotId: int, callback: Callback<boolean>): void
+  function onCallTransferChange(slotId: int, callback: Callback<boolean>): void;
   
   /**
    * Cancel callback when the call forwarding status is updated.
@@ -1222,7 +1222,7 @@ declare namespace observer {
    * @FaAndStageModel
    * @since 26.0.1 dynamic&static
    */
-  function offCallTransferChange(callback?: Callback<boolean>): void
+  function offCallTransferChange(callback?: Callback<boolean>): void;
   
   /**
    * Enumerates SIM card types and states.
