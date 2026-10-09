@@ -724,6 +724,17 @@ declare namespace deviceInfo {
    * @since 26.0.0 dynamic
    */
   const deviceColor: string;
+
+  /**
+   * Obtain the kernel version.
+   * The value is in the format of 'HongMeng Kernel X.Y.Z'.
+   * Example: 'HongMeng Kernel 1.0.0'.
+   *
+   * @syscap SystemCapability.Startup.SystemInfo
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  const kernelVersion: string;
 }
 
 export default deviceInfo;

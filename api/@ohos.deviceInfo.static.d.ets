@@ -758,5 +758,16 @@ declare namespace deviceInfo {
      * @since 26.0.1 static
      */
     function apiAvailable(version: string | int): boolean;
+
+    /**
+     * Obtain the kernel version.
+     * The value is in the format of 'HongMeng Kernel X.Y.Z'.
+     * Example: 'HongMeng Kernel 1.0.0'.
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    get kernelVersion(): string;
 }
 export default deviceInfo;
