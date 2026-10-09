@@ -402,6 +402,23 @@ declare class StartOptions {
    * @since 23 static
    */
   windowCreateParams?: window.WindowCreateParams;
+
+  /**
+   * Whether to prefer using the default browser to open the URL when the target
+   * is an **http** or **https** URL. The value **true** means to use the default browser,
+   * and **false** means to use the normal startAbility flow.
+   *
+   * **Constraints**:
+   *
+   * 1. This property takes effect only when the target URI starts with **http** or **https**.
+   * 2. If no default browser is available, the normal startAbility flow is used.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  preferDefaultBrowser?: boolean;
 }
 
 export default StartOptions;
