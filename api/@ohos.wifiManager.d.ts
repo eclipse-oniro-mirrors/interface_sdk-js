@@ -794,6 +794,7 @@ declare namespace wifiManager {
    * @throws {BusinessError} 2501000 - Operation failed.
    * @throws {BusinessError} 2501001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.STA
+   * @atomicservice [since 26.0.1]
    * @since 15 dynamic
    * @since 23 static
    */
@@ -5693,7 +5694,7 @@ declare namespace wifiManager {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  function getSpecialWifiInfoSync(): SpecialWifiInfo;
+  function getSpecialWifiInfo(): SpecialWifiInfo;
 
   /**
    * Query whether Wi-Fi is available
