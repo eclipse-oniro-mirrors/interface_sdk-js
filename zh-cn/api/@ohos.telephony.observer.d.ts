@@ -124,7 +124,7 @@ declare namespace observer {
   type TelCallState = call.TelCallState;
 
   /**
-   * 运营商通话状态码。
+   * 运营商通话状态
    *
    * @syscap SystemCapability.Telephony.StateRegistry
    * @since 23 dynamic&static
@@ -768,13 +768,13 @@ declare namespace observer {
 
   /**
    * 取消订阅通话状态变化事件，使用callback方式作为异步方法。
-   * 
+   *
    * > **说明：**
    * >
    * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
    *
    * @param { 'callStateChange' } type - 通话状态变化事件，参数固定为'callStateChange'。
-   * @param { Callback<CallStateInfo> } callback - 回调函数，返回通话状态信息对象。参考call的
+   * @param { Callback<CallStateInfo> } [callback] - 回调函数，返回通话状态信息对象。参考call的
    *     [CallState]{@link @ohos.telephony.call:call.CallState}。<br />number：电话号码。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -867,11 +867,11 @@ declare namespace observer {
   function offCallStateChangeEx(callback?: Callback<TelCallState>): void;
 
   /**
-   * 三方应用监听运营商通话状态并获取通话号码，使用callback方式作为异步方法。
+   * 运营商通话状态变更时回调
    *
    * @permission ohos.permission.MANAGE_CALL_FOR_DEVICES
-   * @param { Callback<CCallStateInfo> } callback - 回调函数，返回通话状态信息对象。<br/>应用可获取到CCallState。<br/>
-   * @param { ObserverOptions } [options] - 电话相关事件订阅参数可选项。
+   * @param { Callback<CCallStateInfo> } callback - 运营商通话状态变化回调
+   * @param { ObserverOptions } [options] - 可选参数
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 8800001 - Invalid parameter value.
    * @throws { BusinessError } 8800002 - Service connection failed.
@@ -884,10 +884,10 @@ declare namespace observer {
   function onCCallStateChange(callback: Callback<CCallStateInfo>, options?: ObserverOptions): void;
 
   /**
-   * 取消三方应用监听运营商通话状态并获取通话号码，使用callback方式作为异步方法。
+   * 取消监听运营商通话状态的回调
    *
    * @permission ohos.permission.MANAGE_CALL_FOR_DEVICES
-   * @param { Callback<CCallStateInfo> } [callback] - 回调函数，返回通话状态信息对象。<br/>应用可获取到CCallState。<br/>
+   * @param { Callback<CCallStateInfo> } [callback] - 指示了需要取消订阅的回调函数
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 8800001 - Invalid parameter value.
    * @throws { BusinessError } 8800002 - Service connection failed.
@@ -899,6 +899,40 @@ declare namespace observer {
    */
   function offCCallStateChange(callback?: Callback<CCallStateInfo>): void;
 
+  /**
+   * VoIP通话状态更新时的回调。此回调在以下情况下被调用
+   * 第三方VoIP应用程序的呼叫状态发生变化，并添加了观察者
+   * 来监控更新。
+   *
+   * @permission ohos.permission.MANAGE_CALL_FOR_DEVICES
+   * @param { Callback<VoIPCallStateInfo> } callback - Indicates the callback for
+   *     getting the VoIP call state information.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 8800001 - Invalid parameter value.
+   * @throws { BusinessError } 8800002 - Service connection failed.
+   * @throws { BusinessError } 8800003 - System internal error.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function onVoIPStateChange(callback: Callback<VoIPCallStateInfo>): void;
+ 
+  /**
+   * VoIP通话状态更新时取消回调。
+   *
+   * @permission ohos.permission.MANAGE_CALL_FOR_DEVICES
+   * @param { Callback<VoIPCallStateInfo> } [callback] - 的回调
+   *     获取VoIP呼叫状态信息。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 8800001 - Invalid parameter value.
+   * @throws { BusinessError } 8800002 - Service connection failed.
+   * @throws { BusinessError } 8800003 - System internal error.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function offVoIPStateChange(callback?: Callback<VoIPCallStateInfo>): void;
+ 
   /**
    * 订阅sim状态更改事件，使用callback方式作为异步方法。
    * 
@@ -1135,7 +1169,7 @@ declare namespace observer {
   }
 
   /**
-   * 通话状态相关信息。
+   * 运营商通话状态及号码
    *
    * @syscap SystemCapability.Telephony.StateRegistry
    * @since 11 dynamic
@@ -1143,7 +1177,7 @@ declare namespace observer {
    */
   export interface CallStateInfo {
     /**
-     * 通话类型。
+     * 运营商通话状态
      *
      * @syscap SystemCapability.Telephony.StateRegistry
      * @since 11 dynamic
@@ -1152,7 +1186,7 @@ declare namespace observer {
     state: CallState;
 
     /**
-     * 电话号码。
+     * 运营商通话电话号码
      *
      * @syscap SystemCapability.Telephony.StateRegistry
      * @since 11 dynamic
@@ -1364,6 +1398,176 @@ declare namespace observer {
      * @since 23 static
      */
     SIM_SIM_PUK = 12
+  }
+  /**
+   * VoIP呼叫状态信息。
+   *
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  export interface VoIPCallStateInfo {
+    /**
+     * VoIP应用的名称。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    appName: string;
+ 
+    /**
+     * VoIP呼叫的联系人姓名。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    contactName: string;
+ 
+    /**
+     * VoIP呼叫类型。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    callType: VoIPCallType;
+ 
+    /**
+     * 表示VoIP呼叫的状态。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    callState: VoIPCallState;
+ 
+    /**
+     * 指示VoIP应用程序是否支持将当前呼叫作为语音呼叫应答。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    isVoiceAnswerSupported: boolean;
+  }
+ 
+  /**
+   * VoIP呼叫类型枚举。
+   *
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  export enum VoIPCallType {
+    /**
+     * 表示语音呼叫。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    VOICE = 0,
+ 
+    /**
+     * 视频呼叫。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    VIDEO = 1
+  }
+ 
+  /**
+   * VoIP呼叫状态枚举。
+   *
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  export enum VoIPCallState {
+    /**
+     * 表示VoIP呼叫空闲。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    IDLE = 0,
+ 
+    /**
+     * 表示VoIP呼入。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    INCOMING = 1,
+ 
+    /**
+     * 表示VoIP呼出。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    OUTGOING = 2,
+ 
+    /**
+     * 表示拨号VoIP呼叫。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    DIALING =3,
+ 
+    /**
+     * 表示已应答的VoIP呼叫。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    ANSWERED = 4,
+ 
+    /**
+     * 表示正在进行的VoIP呼叫。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    ACTIVE = 5,
+ 
+    /**
+     * 表示保持VoIP呼叫。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    HOLDING = 6,
+ 
+    /**
+     * 表示VoIP呼叫正在断开。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    DISCONNECTING = 7,
+ 
+    /**
+     * 表示VoIP呼叫被挂断。
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    DISCONNECTED = 8
   }
 
   /**
