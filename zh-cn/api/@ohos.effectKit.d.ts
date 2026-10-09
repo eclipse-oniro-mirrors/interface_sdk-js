@@ -111,7 +111,7 @@ declare namespace effectKit {
      *     位置取值范围为[0, 1]，椭圆中心对应位置0，椭圆边界对应位置1。模糊程度取值范围为[0, 1]，0表示无模糊，大于1的值自动转为1。
      *     位置参数值需严格递增，数组长度不能小于2，最大为12。
      * @returns { Filter } 返回已添加的图像效果。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @systemapi
      * @stagemodelonly
@@ -168,7 +168,7 @@ declare namespace effectKit {
      * @param { Array<double> } colorMatrix - 自定义颜色矩阵。用于创建效果滤镜的4x5大小的矩阵，数组长度必须为20，
      * 前4列对应R、G、B、A通道的变换系数，第5列为常量偏移值。建议元素取值为[-1, 1]，超出此范围可能导致颜色值溢出或产生非预期效果。数组长度不为20时返回null。
      * @returns { Filter } 返回已添加效果的Filter实例，用于继续添加效果或获取处理后的图像。
-     * @throws { BusinessError } 401 - 输入参数错误。
+     * @throws { BusinessError } 401 - Input parameter error.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 14]
      * @since 12 dynamic
@@ -313,7 +313,7 @@ declare namespace effectKit {
      * @returns { Map<Color | null, double | null> } 图像占比前`colorCount`的颜色值与对应比例的字典，比例的取值范围为[0,1]。
      *     - 当实际读取的特征色个数小于`colorCount`时，字典大小为实际特征色个数。
      *     - 取色失败或取色个数小于1返回`Map()`。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @systemapi
      * @form
@@ -326,7 +326,7 @@ declare namespace effectKit {
      * 获取图像中完全透明的像素占比。
      *
      * @returns { double } 完全透明的像素占比，比例的取值范围为[0, 1]。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @systemapi
      * @form
@@ -338,7 +338,7 @@ declare namespace effectKit {
      * 获取图像颜色深浅度。当无法判别图像颜色深浅度时，返回默认值UNKNOWN_SHADE_DEGREE_PICTURE。
      *
      * @returns { PictureShadeDegree } 图像颜色深浅度。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @systemapi
      * @form
@@ -351,7 +351,7 @@ declare namespace effectKit {
      * 获取图像内容复杂度。当无法判别图像内容复杂度时，返回默认值UNKNOWN_COMPLEXITY_DEGREE_PICTURE。
      *
      * @returns { PictureComplexityDegree } 图像内容复杂度。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @systemapi
      * @form
@@ -651,7 +651,7 @@ declare namespace effectKit {
    * @param { image.PixelMap } source - image模块创建的PixelMap实例。可通过图片解码或直接创建获得，
    *     具体可见[Image Kit简介](docroot://media/image/image-overview.md)。
    * @returns { Promise<ColorPicker> } - Promise对象。返回创建的ColorPicker实例。
-   * @throws { BusinessError } 401 - 输入参数错误。
+   * @throws { BusinessError } 401 - Input parameter error.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 14]
    * @form [since 12]
@@ -668,7 +668,7 @@ declare namespace effectKit {
    *     具体可见[Image Kit简介](docroot://media/image/image-overview.md)。
    * @param { Array<double> } region - 指定图片的取色区域。 数组第三个元素需大于第一个元素，第四个元素需大于第二个元素。
    * @returns { Promise<ColorPicker> } - Promise对象。返回创建的ColorPicker实例。
-   * @throws { BusinessError } 401 - 输入参数错误。
+   * @throws { BusinessError } 401 - Input parameter error.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 14]
    * @form [since 12]
@@ -684,7 +684,7 @@ declare namespace effectKit {
    * @param { image.PixelMap } source - image模块创建的PixelMap实例。可通过图片解码或直接创建获得，
    *     具体可见[Image Kit简介](docroot://media/image/image-overview.md)。
      * @param { AsyncCallback<ColorPicker> } callback - 回调函数。返回创建的ColorPicker实例。
-   * @throws { BusinessError } 401 - 输入参数错误。
+   * @throws { BusinessError } 401 - Input parameter error.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 14]
    * @form [since 12]
@@ -701,7 +701,7 @@ declare namespace effectKit {
    *     具体可见[Image Kit简介](docroot://media/image/image-overview.md)。
    * @param { Array<double> } region - 指定图片的取色区域。 数组第三个元素需大于第一个元素，第四个元素需大于第二个元素。
      * @param { AsyncCallback<ColorPicker> } callback - 回调函数。返回创建的ColorPicker实例。
-   * @throws { BusinessError } 401 - 输入参数错误。
+   * @throws { BusinessError } 401 - Input parameter error.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 14]
    * @form [since 12]
