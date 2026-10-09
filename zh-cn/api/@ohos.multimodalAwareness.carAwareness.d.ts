@@ -106,16 +106,16 @@ declare namespace carAwareness {
      */
     SPATIAL_DRAW = 'SpatialDraw',
     /**
-     * 挥手关门识别能力，支持识别用户手部关门动作
+     * 挥手关门识别能力，支持识别用户手部关门动作。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1
      */
-    GESTURE_CLOSEDOR = 'GestureCloseDoor',
+    GESTURE_CLOSEDOOR = 'GestureCloseDoor',
     /**
-     * 乘员感知能力，支持识别车内乘员布局和分类
+     * 乘员感知能力，支持识别车内乘员布局和分类。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -135,7 +135,7 @@ declare namespace carAwareness {
   export interface SpatialMotionInfo {
     /**
      * 识别结果的时间戳。
-     * 单位为：毫秒。
+     * 单位为：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -214,7 +214,7 @@ declare namespace carAwareness {
   export interface RealTimeWeatherInfo {
     /**
      * 识别结果的时间戳。
-     * 单位为：毫秒。
+     * 单位为：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -232,7 +232,6 @@ declare namespace carAwareness {
      * 4：大雪
      * 5：雨
      * 6：大雨。
-     * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -281,7 +280,7 @@ declare namespace carAwareness {
   export interface RefuelingInfo {
     /**
      * 识别结果的时间戳。
-     * 单位为：毫秒。
+     * 单位为：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -347,7 +346,7 @@ declare namespace carAwareness {
   export interface CarAwarenessInfo {
     /**
      * 识别结果的时间戳。
-     * 单位为：毫秒。
+     * 单位为：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -474,7 +473,7 @@ declare namespace carAwareness {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device device
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
