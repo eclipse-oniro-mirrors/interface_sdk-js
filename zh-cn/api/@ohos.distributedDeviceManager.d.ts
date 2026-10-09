@@ -1422,7 +1422,7 @@ declare namespace distributedDeviceManager {
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 10 dynamic
      */
-    on(type: 'discoverFailure', callback: Callback<{ reason: number; }>): void;
+    on(type: 'discoverFailure', callback: Callback<{ reason: int; }>): void;
 
     /**
      * 注册设备发现失败回调。使用callback异步回调。此回调在调用startDiscovering发现设备失败时触发，
