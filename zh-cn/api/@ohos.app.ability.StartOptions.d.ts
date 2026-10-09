@@ -365,6 +365,22 @@ declare class StartOptions {
    * @since 23 static
    */
   windowCreateParams?: window.WindowCreateParams;
+
+  /**
+   * 当目标URI为**http**或**https**链接时，是否优先使用默认浏览器打开该链接。取值为**true**时表示使用默认浏览器，
+   * 取值为**false**时表示使用正常的startAbility流程。
+   *
+   * **约束：**
+   *
+   * 1. 该功能仅在目标URI以**http**或**https**开头时生效。
+   * 2. 若无默认浏览器可用，则使用正常的startAbility流程。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  preferDefaultBrowser?: boolean;
 }
 
 export default StartOptions;
