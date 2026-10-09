@@ -766,7 +766,7 @@ declare namespace deviceInfo {
      *
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.0.1 dynamic
      */
     get kernelVersion(): string;
 }
