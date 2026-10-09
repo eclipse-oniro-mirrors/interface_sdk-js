@@ -4195,17 +4195,17 @@ declare namespace wifiManager {
   interface SpecialWifiInfo {
     /**
      * The network ID of the connected Wi-Fi
-     * @type { number }
+     * 
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    networkId: number;
+    networkId: int;
 
     /**
      * Whether the connected Wi-Fi is CEAIR airplane Wi-Fi
-     * @type { boolean }
+     * 
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
@@ -5685,9 +5685,9 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.GET_WIFI_INFO
    * @returns { SpecialWifiInfo } Returns the special Wi-Fi info.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - System API is not allowed called by Non-system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 2501000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @systemapi Hide this for inner system use.
