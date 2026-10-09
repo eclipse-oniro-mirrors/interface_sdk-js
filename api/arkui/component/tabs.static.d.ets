@@ -1681,6 +1681,28 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.2.0 static
    */
   default sidebarDisplayStyle(style: TabsSidebarDisplayStyle | undefined): this;
+
+  /**
+   * Sets the footer content of the sidebar tab bar.
+   *
+   * @param { ComponentContent } footer - footer content of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarFooter(footer: ComponentContentBase | undefined): this;
+ 
+  /**
+   * Sets the bottom bar content of the sidebar tab bar.
+   *
+   * @param { ComponentContent } bottomBar - bottom bar content of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarBottomBar(bottomBar: ComponentContentBase | undefined): this;
 }
 
 /**
