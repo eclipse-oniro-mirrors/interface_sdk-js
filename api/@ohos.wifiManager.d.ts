@@ -5688,7 +5688,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - System API is not allowed called by Non-system application.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2501000 - Operation failed.
+   * @throws { BusinessError } 2501000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
