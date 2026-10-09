@@ -29,7 +29,7 @@
  * > - 模块维护策略：
  * >  >   - 对于Lite Wearable设备类型，该模块长期维护，正常使用。 
  * >  >   - 对于支持该模块的其他设备类型，该模块从API version 8开始不再维护，推荐使用新接口[@ohos.vibrator (振动)]{@link @ohos.vibrator:vibrator}。
- *
+ * > - 本模块首批接口从API version 3开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * > - 该功能使用需要对应硬件支持，仅支持真机调试。可通过系统设备信息或相关接口查询设备是否支持振动功能。
  *
  * @file 振动控制模块
@@ -112,6 +112,7 @@ export interface VibrateOptions {
 }
 
 /**
+ * 提供触发设备振动的静态方法。
  *
  * @permission ohos.permission.VIBRATE
  * @syscap SystemCapability.Sensors.MiscDevice.Lite
@@ -124,6 +125,9 @@ export interface VibrateOptions {
 export default class Vibrator {
   /**
    * 触发设备振动，根据指定的振动模式执行短振动或长振动效果。该接口通过callback方式返回调用结果。
+   *
+   * 当开发者需要在Lite Wearable设备上实现闹钟振动、来电振动、开关机振动、按键触觉反馈等场景时，使用此接口触发设备振动。调用后，设备将按照指定的振动模式（短振动或长振动）执行振动效果。
+   * 若未指定mode参数，设备将执行长振动（mode默认值为'long'）。
    *
    * > **说明：**
    * >
