@@ -3827,6 +3827,35 @@ declare namespace webview {
      * @since 23 dynamic
      */
     static isActiveWebEngineEvergreen(): boolean;
+  
+    /**
+     * Sets the data directory suffix for the WebEngine in current process.
+     * 
+     * The provided suffix is appended to the data directory path to achieve data isolation for different processes.
+     * If this API is not called, no suffix will be used. The WebEngine in current process uses the default data directory.
+     * This API must be called before WebEngine is initialized.
+     * 
+     * @param { string } suffix - The data directory suffix.
+     *     <br>The maximum length is 128.
+     *     <br>Must not contain a path separator.
+     *     <br>This value cannot be null.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    static setDataDirectorySuffix(suffix: string): void;
+
+    /**
+     * Obtains the data directory suffix for current process.
+     * 
+     * If the data directory suffix has not been set, an empty string is returned.
+     *
+     * @returns { string } The current data directory suffix, or an empty string if not set.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    static getDataDirectorySuffix(): string;
 
     /**
      * Loads the dynamic library file of the web engine through this API before the **Web** component is initialized, so
