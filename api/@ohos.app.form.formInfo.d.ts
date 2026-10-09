@@ -2382,7 +2382,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
   interface FormHostServiceInfo {
     /**
@@ -2391,7 +2391,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceName: string;
     /**
@@ -2400,7 +2400,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceDisplayName: string;
     /**
@@ -2409,7 +2409,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     displayId: string;
     /**
@@ -2418,7 +2418,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     customData?: Record<string, string>;
   }
@@ -2429,7 +2429,7 @@ declare namespace formInfo {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   interface PeerFormHostServiceInfo {
     /**
@@ -2438,7 +2438,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceName: string;
     /**
@@ -2447,7 +2447,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceDisplayName: string;
     /**
@@ -2456,7 +2456,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     displayId: string;
     /**
@@ -2465,7 +2465,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     customData?: Record<string, string>;
     /**
@@ -2474,7 +2474,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     deviceId: string;
     /**
@@ -2483,7 +2483,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     networkId: string;
     /**
@@ -2492,7 +2492,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceId: string;
   }
@@ -2503,7 +2503,7 @@ declare namespace formInfo {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   interface PublishFormCrossDeviceResult {
     /**
@@ -2512,7 +2512,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     formId: string;
   }
