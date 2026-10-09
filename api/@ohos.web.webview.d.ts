@@ -8832,7 +8832,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    ENTER_BACKGROUND,
+    ENTER_BACKGROUND = 1,
 
     /**
      * The page is automatically cleaned up by the system.
@@ -8840,7 +8840,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    AUTO_CLEANUP
+    AUTO_CLEANUP = 2
   }
 
   /**
