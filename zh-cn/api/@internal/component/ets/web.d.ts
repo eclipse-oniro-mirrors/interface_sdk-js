@@ -7705,6 +7705,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > - 精确颜色值 **#00000000** 保留为重置哨兵值。重置后使用网页CSS `caret-color`；CSS为 **auto**
    * 或未设置时使用内置默认颜色。
    *
+   * 开发者需自行设置适合深色和浅色模式的对应颜色。本接口不会自动调整颜色或保证对比度。
+   *
    * @param { ResourceColor } value - 网页文本输入光标及选择手柄的颜色。
    *     <br>传入undefined或null时重置该属性。
    * @returns { WebAttribute }
