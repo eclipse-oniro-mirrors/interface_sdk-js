@@ -853,7 +853,7 @@ declare interface RichEditorImageSpanStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   resizable?: ResizableOptions;
 }
@@ -1444,7 +1444,7 @@ declare interface RichEditorImageSpanStyleResult {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   resizable?: ResizableOptions;
 }
