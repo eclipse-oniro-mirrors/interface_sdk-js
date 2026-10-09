@@ -125,7 +125,7 @@ declare namespace formAgent {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   function getAvailableFormHostServices(): Promise<Array<formInfo.PeerFormHostServiceInfo>>;
 }
