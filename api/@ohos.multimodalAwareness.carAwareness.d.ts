@@ -99,7 +99,7 @@ declare namespace carAwareness {
      */
     HABIT_RECOMMENDATION = 'HabitRecommendation',
     /**
-     * Space painting capability, which can identify users' movements of drawing in space.
+     * Spatial draw capability, which supports identifying the users' air gestures during mid-air drawing.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -108,16 +108,16 @@ declare namespace carAwareness {
      */
     SPATIAL_DRAW = 'SpatialDraw',
     /**
-     * Identifies users' hand closing actions.
+     * Gesture close door capability, which supports recognizing user's hand action for closing the doors.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1
      */
-    GESTURE_CLOSEDOR = 'GestureCloseDoor',
+    GESTURE_CLOSEDOOR = 'GestureCloseDoor',
     /**
-     * Occupant sense specific capability
+     * Occupant sense capability, which supports recognizing position and classification of in-car occupants.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -137,7 +137,7 @@ declare namespace carAwareness {
   export interface SpatialMotionInfo {
     /**
      * Timestamp of the recognition result.
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -219,7 +219,7 @@ declare namespace carAwareness {
   export interface RealTimeWeatherInfo {
     /**
      * Timestamp of the recognition result.
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -290,7 +290,7 @@ declare namespace carAwareness {
   export interface RefuelingInfo {
     /**
      * Timestamp of the recognition result.
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
@@ -359,7 +359,7 @@ declare namespace carAwareness {
   export interface CarAwarenessInfo {
     /**
      * Timestamp of the recognition result.
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
@@ -491,7 +491,7 @@ declare namespace carAwareness {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device device
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
