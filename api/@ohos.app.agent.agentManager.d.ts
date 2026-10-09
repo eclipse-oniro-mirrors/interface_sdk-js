@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Agent Manager
  * @kit AbilityKit
  */
 import Want from './@ohos.app.ability.Want';
@@ -26,7 +26,9 @@ import { ConnectOptions } from './ability/connectOptions';
 import AgentExtensionContext from './application/AgentExtensionContext';
 
 /**
- * The module provides the capability to interact with agents in the system.
+ * The agentManager module provides agent management capabilities, supporting operations such as connecting to and
+ * disconnecting from AgentExtensionAbility, lifecycle management of LOW_CODE agents, connection management between
+ * AgentExtensionAbility and ServiceExtensionAbility, and obtaining AgentCard information on the device.
  *
  * @namespace agentManager
  * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -116,7 +118,7 @@ declare namespace agentManager {
   function disconnectAgentExtensionAbility(proxy: AgentProxy): Promise<void>;
 
   /**
-   * Gets all AgentCards on the device.
+   * Obtains all AgentCards on the device. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_AGENT_CARD
    * @returns { Promise<Array<AgentCard>> } Returns the array of AgentCard.
@@ -135,7 +137,7 @@ declare namespace agentManager {
    * Gets all AgentCards within specified bundleName.
    *
    * @permission ohos.permission.GET_AGENT_CARD
-   * @param { string } bundleName - The bundle name of the AgentCard belongs to.
+   * @param { string } bundleName - The bundle name the AgentCard belongs to.
    * @returns { Promise<Array<AgentCard>> } Returns the array of AgentCard.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
@@ -153,7 +155,7 @@ declare namespace agentManager {
    * Gets the AgentCard within specified agent id.
    *
    * @permission ohos.permission.GET_AGENT_CARD
-   * @param { string } bundleName - The bundle name of the AgentCard belongs to.
+   * @param { string } bundleName - The bundle name the AgentCard belongs to.
    * @param { string } agentId - The agent id the AgentCard belongs to.
    * @returns { Promise<AgentCard> } Returns the specified AgentCard.
    * @throws { BusinessError } 201 - Permission denied.

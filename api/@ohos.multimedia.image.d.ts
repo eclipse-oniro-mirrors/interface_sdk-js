@@ -24,91 +24,82 @@ import type resourceManager from './@ohos.resourceManager';
 import type rpc from './@ohos.rpc';
 
 /**
- * # SVG Tags
- * 
- * The SVG tags are supported since API version 10. The used version is (SVG) 1.1, and the width and height of the SVG 
- * tag must be set. An XML declaration can be added to an SVG file and start with **<?xml**. The following tags are 
- * supported:
- * 
- * - a
- * - circle
- * - clipPath
- * - defs
- * - ellipse
- * - feBlend
- * - feColorMatrix
- * - feComposite
- * - feDiffuseLighting
- * - feDisplacementMap
- * - feDistantLight
- * - feFlood
- * - feGaussianBlur
- * - feImage
- * - feMorphology
- * - feOffset
- * - fePointLight
- * - feSpecularLighting
- * - feSpotLight
- * - feTurbulence
- * - filter
- * - g
- * - image
- * - line
- * - linearGradient
- * - mask
- * - path
- * - pattern
- * - polygon
- * - polyline
- * - radialGradient
- * - rect
- * - stop
- * - svg
- * - text
- * - textPath
- * - tspan
- * - use
- */
-/**
  * The module provides capabilities for image decoding, encoding, editing, metadata processing, and image receiving.
  * This module contains the following classes:
  * 
  * - [ImageSource]{@link @ohos.multimedia.image:image.ImageSource}: provides the capabilities of obtaining 
  * [image information]{@link @ohos.multimedia.image:image.ImageInfo}, decoding images to PixelMaps or Pictures, and 
  * reading and modifying [image properties]{@link @ohos.multimedia.image:image.PropertyKey}. 
- * [Supported image formats for decoding]{@link @ohos.multimedia.image: image.ImageSource#supportedFormats}
+ * [Supported image formats for decoding]{@link image.ImageSource#supportedFormats}
  * include png, jpeg, bmp, gif, webp, dng, and heic<sup>12+</sup>.
+ * 
  * - [ImagePacker]{@link @ohos.multimedia.image:image.ImagePacker}: provides the capability of encoding images into
  * compressed data streams or files. Encoding requires the ImageSource, PixelMap, or Picture of an image as the input. 
- * [Supported image formats for encoding]{@link @ohos.multimedia.image: image.ImagePacker#supportedFormats}
+ * [Supported image formats for encoding]{@link @ohos.multimedia.image:image.ImagePacker#supportedFormats}
  * include jpeg, webp, png, heic<sup>12+</sup>, and gif<sup>18+</sup>.
- * - [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}: contains pixel data and 
+ * 
+ * - [PixelMap]{@link image.PixelMap}: contains pixel data and 
  * [image information]{@link @ohos.multimedia.image:image.ImageInfo}. It can be used for reading/writing pixel data and 
  * performing operations such as cropping, scaling, translating, rotating, and mirroring. It can also be directly passed
  * to the [Image component]{@link Image} for display. Additionally, it provides APIs for 
  * obtaining and setting the color gamut and HDR metadata of images.
- * - [Picture]{@link @ohos.multimedia.image:image.Picture}: a multi-picture object composed of a main picture,
+ * 
+ * - [Picture]{@link image.Picture}: a multi-picture object composed of a main picture,
  * auxiliary pictures, and metadata. The main picture contains the primary image information; auxiliary pictures store
  * additional information related to the main picture; metadata stores other information related to the image.
  * Picture provides methods for obtaining the main picture, compositing HDR images, obtaining and setting auxiliary
  * pictures, and obtaining and setting metadata.
+ * 
  * - [AuxiliaryPicture]{@link @ohos.multimedia.image:image.AuxiliaryPicture}: used to display special information
  * alongside the main picture, enriching the overall content of the image. The supported types of auxiliary pictures
  * can be found in [AuxiliaryPictureType]{@link @ohos.multimedia.image:image.AuxiliaryPictureType}.
- * - [Metadata]{@link @ohos.multimedia.image:image.Metadata}: used to store image metadata. The supported metadata types
- * can be found in [MetadataType]{@link @ohos.multimedia.image:image.MetadataType}. It includes Exif metadata and
- * watermark cropping metadata, both stored in Key-Value pairs. The keys for Exif metadata can be found in
- * [PropertyKey]{@link @ohos.multimedia.image:image.PropertyKey}, and the keys for watermark cropping metadata can be
- * found in [FragmentPropertyKey]{@link @ohos.multimedia.image:image.FragmentMapPropertyKey}.
+ * 
+ * - [Metadata]{@link image.Metadata}: stores image metadata in key-value format. The supported
+ * metadata types can be found in [MetadataType]{@link image.MetadataType}, including Exif metadata, fragment map
+ * metadata, and HEIF sequence image metadata. For details about the keys of Exif metadata, fragment map metadata, and
+ * HEIF sequence image metadata, see [PropertyKey]{@link image.PropertyKey},
+ * [FragmentMapPropertyKey]{@link image.FragmentMapPropertyKey}, and
+ * [HeifsPropertyKey]{@link image.HeifsPropertyKey}, respectively.
+ * 
+ * - [ExifMetadata]{@link image.ExifMetadata}: stores Exif metadata of images in key-value format. For details about
+ * the keys of Exif metadata, see [PropertyKey]{@link image.PropertyKey}.
+ * 
+ * - [MakerNoteHuaweiMetadata]{@link image.MakerNoteHuaweiMetadata}: stores photo metadata defined by Huawei cameras 
+ * in key-value format. For details about keys of HUAWEI camera-defined photo metadata, see
+ * [PropertyKey]{@link image.PropertyKey}.
+ * 
+ * - [HeifsMetadata]{@link image.MakerNoteHuaweiMetadata}: stores HEIF sequence image metadata of images in key-value
+ * format. For details about keys of HEIF sequence image metadata, see [HeifsPropertyKey]{@link image.HeifsPropertyKey}.
+ * 
+ * - [WebPMetadata]{@link image.WebPMetadata}: stores WebP image metadata in key-value format. For details about keys
+ * in WebP image metadata, see [WebPPropertyKey]{@link image.WebPPropertyKey}.
+ * 
+ * - [GifMetadata]{@link image.GifMetadata}: stores GIF image metadata in key-value format. For details about keys in
+ * GIF image metadata, see [GifPropertyKey]{@link image.GifPropertyKey}.
+ * 
+ * - [JfifMetadata]{@link image.JfifMetadata}: stores JFIF image metadata in key-value format. For details about keys
+ * in JFIF image metadata, see [JfifPropertyKey]{@link image.JfifPropertyKey}.
+ * 
+ * - [TiffMetadata]{@link image.TiffMetadata}: stores TIFF image metadata in key-value format. For details about keys
+ * in TIFF image metadata, see [TiffPropertyKey]{@link image.TiffPropertyKey}.
+ * 
+ * - [PngMetadata]{@link image.PngMetadata}: stores PNG image metadata in key-value format. For details about keys in
+ * PNG image metadata, see [PngPropertyKey]{@link image.PngPropertyKey}.
+ * 
+ * - [AvisMetadata]{@link image.AvisMetadata}: stores AVIS image metadata in key-value format. For details about keys
+ * in AVIS image metadata, see [AvisPropertyKey]{@link image.AvisPropertyKey}.
+ * 
  * - [ImageReceiver]{@link @ohos.multimedia.image:image.ImageReceiver}: acts as a consumer of images, used for receiving
  * and reading images from a surface.
+ * 
  * - [ImageCreator]{@link @ohos.multimedia.image:image.ImageCreator}: acts as a producer of images, used for writing
  * images into a surface.
+ * 
  * - [Image]{@link @ohos.multimedia.image:image.Image}: used by ImageReceiver and ImageCreator for transferring image
  * objects, with the actual content determined by the producer. For example, the Image object provided by
  * a camera preview stream contains YUV data, whereas the Image object provided by a camera photo contains a JPEG file.
  *
- * @syscap SystemCapability.Multimedia.Image.Core [since 11]
+ * @syscap SystemCapability.Multimedia.Image.Core
  * @crossplatform [since 11]
  * @form [since 12]
  * @atomicservice [since 11]
@@ -3745,6 +3736,17 @@ declare namespace image {
      * @since 26.0.0 dynamic&static
      */
     sizeLimit?: PackingSizeLimit;
+
+    /**
+     * Reserved space size for C2PA data during encoding, in bytes. The default value is 0, indicating
+     * no reserved space is added.
+     *
+     * @syscap SystemCapability.Multimedia.Image.ImagePacker
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    c2paDataSize?: int;
   }
 
   /**
@@ -4166,6 +4168,69 @@ declare namespace image {
   }
 
   /**
+   * Enumerates SVG resource limit levels.
+   *
+   * Higher level allows using less resources during parsing and rendering an SVG image.
+   * System-defined default resource limits are always enforced regardless of the specified level.
+   *
+   * @syscap SystemCapability.Multimedia.Image.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum SVGResourceLimitLevel {  
+    /**
+     * Uses the system-defined default SVG resource limits.
+     *
+     * This level does not disable SVG resource protection.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    NONE = 0,
+
+    /**
+     * Uses low-level restrictions which means allowing using more SVG resource budget.
+     *
+     * This level is suitable for complex SVG images. System-defined default resource
+     * limits are still applied.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    LOW = 1,
+
+    /**
+     * Uses medium-level restrictions which means allowing using moderate SVG resource budget.
+     *
+     * This level balances SVG compatibility and resource consumption and is suitable
+     * for most SVG images.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    MEDIUM = 2,
+
+    /**
+     * Uses high-level restrictions which means allowing using less SVG resource budget.
+     *
+     * This level is suitable for simple SVG images, such as icons and basic UI resources.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    HIGH = 3
+  }
+
+  /**
    * Defines image source initialization options.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
@@ -4218,6 +4283,20 @@ declare namespace image {
      * @since 23 static
      */
     sourceSize?: Size;
+
+    /**
+     * SVG resource limit level used when parsing and rendering an SVG image.
+     * The limit takes effect before SVG metadata is parsed. Therefore, it is also applied
+     * when image information is obtained. This property has no effect on non-SVG images.
+     * Default value: The default value is {@link SVGResourceLimitLevel.NONE}, which uses the
+     * system-defined default resource limits and does not disable SVG resource protection.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    svgResourceLimitLevel?: SVGResourceLimitLevel;
   }
 
   /**
@@ -4960,11 +5039,53 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
    * [release]{@link @ohos.multimedia.image:image.ImageSource.release(callback: AsyncCallback<void>)} to free the memory
    * promptly. Before releasing the instance, ensure that all asynchronous operations associated with the instance have 
    * finished and the instance is no longer needed.
+   * 
+   * The SVG tags are supported since API version 10. The used version is (SVG) 1.1, and the width and height of the SVG 
+   * tag must be set. An XML declaration can be added to an SVG file and start with **<?xml**. The following tags are 
+   * supported:
+   * 
+   * - a
+   * - circle
+   * - clipPath
+   * - defs
+   * - ellipse
+   * - feBlend
+   * - feColorMatrix
+   * - feComposite
+   * - feDiffuseLighting
+   * - feDisplacementMap
+   * - feDistantLight
+   * - feFlood
+   * - feGaussianBlur
+   * - feImage
+   * - feMorphology
+   * - feOffset
+   * - fePointLight
+   * - feSpecularLighting
+   * - feSpotLight
+   * - feTurbulence
+   * - filter
+   * - g
+   * - image
+   * - line
+   * - linearGradient
+   * - mask
+   * - path
+   * - pattern
+   * - polygon
+   * - polyline
+   * - radialGradient
+   * - rect
+   * - stop
+   * - svg
+   * - text
+   * - textPath
+   * - tspan
+   * - use
    *
    * @param { string } uri - Image path. Currently, only the application sandbox path is supported.
    *     <br>The following formats are supported: .jpg, .png, .gif, .bmp, .webp, .dng, .heic<sup>12+</sup> 
-   *     (depending on the hardware), [.svg<sup>10+</sup>]{@link @ohos.multimedia.image:image.Functions#SVG Tags}, and
-   *     .ico<sup>11+</sup>.
+   *     (depending on the hardware), .svg<sup>10+</sup>, and .ico<sup>11+</sup>.
    * @returns { ImageSource } ImageSource instance. If the operation fails, undefined is returned.
    * @syscap SystemCapability.Multimedia.Image.ImageSource
    * @crossplatform [since 10]
@@ -4991,11 +5112,53 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
    * [release]{@link @ohos.multimedia.image:image.ImageSource.release(callback: AsyncCallback<void>)} to free the memory
    * promptly. Before releasing the instance, ensure that all asynchronous operations associated with the instance have 
    * finished and the instance is no longer needed.
+   * 
+   * The SVG tags are supported since API version 10. The used version is (SVG) 1.1, and the width and height of the SVG 
+   * tag must be set. An XML declaration can be added to an SVG file and start with **<?xml**. The following tags are 
+   * supported:
+   * 
+   * - a
+   * - circle
+   * - clipPath
+   * - defs
+   * - ellipse
+   * - feBlend
+   * - feColorMatrix
+   * - feComposite
+   * - feDiffuseLighting
+   * - feDisplacementMap
+   * - feDistantLight
+   * - feFlood
+   * - feGaussianBlur
+   * - feImage
+   * - feMorphology
+   * - feOffset
+   * - fePointLight
+   * - feSpecularLighting
+   * - feSpotLight
+   * - feTurbulence
+   * - filter
+   * - g
+   * - image
+   * - line
+   * - linearGradient
+   * - mask
+   * - path
+   * - pattern
+   * - polygon
+   * - polyline
+   * - radialGradient
+   * - rect
+   * - stop
+   * - svg
+   * - text
+   * - textPath
+   * - tspan
+   * - use
    *
    * @param { string } uri - Image path. Currently, only the application sandbox path is supported.
    *     <br>The following formats are supported: .jpg, .png, .gif, .bmp, .webp, .dng, .heic<sup>12+</sup> (depending on
-   *     the hardware), [.svg<sup>10+</sup>]{@link @ohos.multimedia.image:image.Functions#SVG Tags}, and
-   *     .ico<sup>11+</sup>.
+   *     the hardware), .svg<sup>10+</sup> and .ico<sup>11+</sup>.
    * @param { SourceOptions } options - Image properties, including the image pixel density, pixel format, and image
    *     size.
    * @returns { ImageSource } ImageSource instance. If the operation fails, undefined is returned.
@@ -5394,7 +5557,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
    * @param { int } capacity - Maximum number of images that can be accessed at the same time. This parameter is used
    *     only as an expected value. The actual capacity is determined by the device hardware.
    * @returns { ImageCreator } ImageCreator instance.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2.Incorrect parameter types;
    * @syscap SystemCapability.Multimedia.Image.ImageCreator
    * @since 11 dynamic
@@ -5533,7 +5696,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -5646,7 +5809,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { PositionArea } area - Area from which the pixels will be read.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -5760,7 +5923,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { PositionArea } area - Area to which the pixels will be written.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -5860,7 +6023,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -5912,7 +6075,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * Obtains the image information. This API returns the result synchronously.
      *
      * @returns { ImageInfo } Image information.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform
      * @form
@@ -6046,7 +6209,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } rate - Opacity rate. The value range is (0,1].
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6138,7 +6301,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6240,7 +6403,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } y - Scale factor of the height.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6261,7 +6424,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -6282,7 +6445,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { AntiAliasingLevel } level - Anti-aliasing level.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6301,7 +6464,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6318,7 +6481,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6420,7 +6583,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } y - Y coordinate to translate, in px.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6517,7 +6680,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } angle - Angle to rotate. Unit: degrees.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6620,7 +6783,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     **false** otherwise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6716,7 +6879,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     image.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6934,7 +7097,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @param { boolean } detached - Whether to detach from the original thread. **true** to detach, **false**
      *     otherwise.
-     * @throws { BusinessError } 501 - Resource Unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
      * @since 23 static
@@ -6948,7 +7111,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { HdrMetadataValue } Value of the metadata with the given key.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -6966,7 +7129,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.The length of the input parameter is too
      *     long.
      *     2.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980286 - Memory format not supported.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 13 dynamic
@@ -6978,7 +7141,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * Copies this PixelMap object. This API returns the result synchronously.
      *
      * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
-     * @throws { BusinessError } 501 - Resource unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -6996,7 +7159,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * Copies this PixelMap object. This API uses a promise to return the result.
      *
      * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
-     * @throws { BusinessError } 501 - Resource unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7018,7 +7181,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - Resource unavailable.
+     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -7326,7 +7489,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @param { rpc.MessageSequence } sequence - MessageSequence object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-     *     2.Incorrect parameter types; 3.Parameter verification failed.
+     *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 62980097 - IPC error. Possible cause: 1.IPC communication failed. 2. Image upload
      *     exception.
      *     3. Decode process exception. 4. Insufficient memory.
@@ -7365,6 +7528,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @since 26.0.0 dynamic&static
      */
     hdrComposeToMainPixelmap(): Promise<void>;
+
+    /**
+     * Sets the PixelMap object of the picture.
+     *
+     * @param { PixelMap } pixelmap - PixelMap object.
+     * @throws { BusinessError } 7700204 - Parameter error. The pixelmap object is null or has been released.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setMainPixelmap(pixelmap: PixelMap): void;
   }
 
   /**
@@ -7655,6 +7829,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setAuxiliaryPictureInfo(info: AuxiliaryPictureInfo): void;
 
     /**
+     * Obtains the PixelMap of this auxiliary picture.
+     *
+     * @returns { PixelMap | null } PixelMap object obtained. Returns null when the auxiliary picture does not
+     *     contain PixelMap data.   
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    acquirePixelmap(): PixelMap | null;
+
+    /**
      * Releases this AuxiliaryPicture object. No value is returned.
      * 
      * Images occupy a large amount of memory. When you finish using an AuxiliaryPicture instance, call this API to free
@@ -7759,6 +7944,28 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @since 26.0.0 dynamic&static
     */
     LHDR_GAINMAP = 10,
+
+    /**
+     * Oxygen saturation map.
+     *
+     * It records the oxygen saturation level for face area pixels, and could be used for skin analysis.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    OXY_MAP = 11,
+
+    /**
+     * Melanin concentration map.
+     *
+     * It records the melanin distribution in face area, and could be used for skin analysis.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    MEL_MAP = 12,
   }
 
   /**
@@ -8959,6 +9166,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * Enumerates the properties available for the metadata of a TIFF image.
+   * 
+   * > **NOTE**
+   * >
+   * > For details about the return value type, see [TiffMetadata]{@link TiffMetadata}.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -9202,6 +9413,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * Enumerates the properties available for the metadata of a PNG image.
+   * 
+   * > **NOTE**
+   * >
+   * > For details about the return value type, see [PngMetadata]{@link image.PngMetadata}.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -11468,272 +11683,137 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   }
 
   /**
-   * The XMAGE watermark is at the bottom of the photo.
+   * The XMAGE watermark is at the bottom of the photo.The value is 9.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const XMAGE_WATERMARK_MODE_AT_THE_BOTTOM = 9;
-
-  /**
-   * The XMAGE watermark is at the bottom of the photo.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const XMAGE_WATERMARK_MODE_AT_THE_BOTTOM : int;
 
   /**
-   * The XMAGE watermark is around the edges of the photo.
+   * The XMAGE watermark is around the edges of the photo.The value is 10.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const XMAGE_WATERMARK_MODE_BORDER = 10;
-
-  /**
-   * The XMAGE watermark is around the edges of the photo.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const XMAGE_WATERMARK_MODE_BORDER : int;
 
   /**
-   * Capture mode: professional.
+   * Capture mode: professional.The value is 2.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_PROFESSIONAL = 2;
-
-  /**
-   * Capture mode: professional.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_PROFESSIONAL : int;
 
   /**
-   * Capture mode: night view with front lens.
+   * Capture mode: night view with front lens.The value is 7.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_FRONT_LENS_NIGHT_VIEW = 7;
-
-  /**
-   * Capture mode: night view with front lens.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_FRONT_LENS_NIGHT_VIEW : int;
 
   /**
-   * Capture mode: panorama.
+   * Capture mode: panorama.The value is 8.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_PANORAMA = 8;
-
-  /**
-   * Capture mode: panorama.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_PANORAMA : int;
 
   /**
-   * Capture mode: tail light.
+   * Capture mode: tail light.The value is 9.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_TAIL_LIGHT = 9;
-
-  /**
-   * Capture mode: tail light.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_TAIL_LIGHT : int;
 
   /**
-   * Capture mode: light graffiti.
+   * Capture mode: light graffiti.The value is 10.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_LIGHT_GRAFFITI = 10;
-
-  /**
-   * Capture mode: light graffiti.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_LIGHT_GRAFFITI : int;
 
   /**
-   * Capture mode: silky water.
+   * Capture mode: silky water.The value is 11.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_SILKY_WATER = 11;
-
-  /**
-   * Capture mode: silky water.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_SILKY_WATER : int;
 
   /**
-   * Capture mode: star track.
+   * Capture mode: star track.The value is 12.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_STAR_TRACK = 12;
-
-  /**
-   * Capture mode: star track.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_STAR_TRACK : int;
 
   /**
-   * Capture mode: wide aperture.
+   * Capture mode: wide aperture.The value is 19.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_WIDEAPERTURE = 19;
-
-  /**
-   * Capture mode: wide aperture.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_WIDEAPERTURE : int;
 
   /**
-   * Capture mode: moving photos.
+   * Capture mode: moving photos.The value is 20.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_MOVING_PHOTO = 20;
-
-  /**
-   * Capture mode: moving photos.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_MOVING_PHOTO : int;
 
   /**
-   * Capture mode: portrait.
+   * Capture mode: portrait.The value is 23.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_PORTRAIT = 23;
-
-  /**
-   * Capture mode: portrait.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_PORTRAIT : int;
 
   /**
-   * Capture mode: night view with rear lens.
+   * Capture mode: night view with rear lens.The value is 42.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_REAR_LENS_NIGHT_VIEW = 42;
-
-  /**
-   * Capture mode: night view with rear lens.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_REAR_LENS_NIGHT_VIEW : int;
 
   /**
-   * Capture mode: super macro.
+   * Capture mode: super macro.The value is 47.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_SUPER_MACRO = 47;
-
-  /**
-   * Capture mode: super macro.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_SUPER_MACRO : int;
 
   /**
-   * Capture mode: snap shot.
+   * Capture mode: snap shot.The value is 62.
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_SNAP_SHOT = 62;
-
-  /**
-   * Capture mode: snap shot.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_SNAP_SHOT : int;
 
@@ -13252,6 +13332,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * XMP namespace: XMP basic.
+   * Namespace uri: 'http://ns.adobe.com/xap/1.0/', prefix: 'xmp'
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -13261,6 +13342,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * XMP namespace: XMP rights.
+   * Namespace uri: 'http://ns.adobe.com/xap/1.0/rights/', prefix: 'xmpRights'
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -13270,6 +13352,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * XMP namespace: exif.
+   * Namespace uri: 'http://ns.adobe.com/exif/1.0/', prefix: 'exif'
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -13279,6 +13362,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * XMP namespace: dublin core.
+   * Namespace uri: 'http://purl.org/dc/elements/1.1/', prefix: 'dc'
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -13288,6 +13372,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
    * XMP namespace: tiff.
+   * Namespace uri: 'http://ns.adobe.com/tiff/1.0/', prefix: 'tiff'
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
@@ -13496,6 +13581,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
 
   /**
  	 * Enumerates the properties available for the metadata of a Avis image.
+   * 
+   * > **NOTE**
+   * >
+   * > For detail about the return value type, see [AvisMetadata]{@link image.AvisMetadata}. 
  	 *
  	 * @syscap SystemCapability.Multimedia.Image.Core
  	 * @stagemodelonly
@@ -14850,6 +14939,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     **err** is **undefined**; otherwise, **err** is an error object.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform [since 10]
+     * @atomicservice [since 26.0.1]
      * @since 6 dynamic
      * @since 23 static
      */
@@ -14867,6 +14957,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform [since 10]
+     * @atomicservice [since 26.0.1]
      * @since 6 dynamic
      * @since 23 static
      */
@@ -15031,6 +15122,31 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - **ISOSpeedRatings**: If its value is **0** or **65535**, the recommended exposure index is used first. If the
      * > recommended exposure index does not exist, the standard output sensitivity, ISO speed, and exposure index are 
      * > used in sequence.
+     * >
+     * > This API supports reading metadata in the following formats:
+     * >
+     * > - Since API version 24, DNG metadata can be read. For details about the properties, see
+     * > [DngPropertyKey]{@link image.DngPropertyKey}.
+     * >
+     * > - Since API version 24, HEIFS metadata can be read. For details about the properties, see
+     * > [HeifsPropertyKey]{@link image.HeifsPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, PNG metadata can be read. For details about the properties, see
+     * > [PngPropertyKey]{@link image.PngPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, JFIF metadata can be read. For details about the properties, see
+     * > [JfifPropertyKey]{@link image.JfifPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, TIFF metadata can be read. For details about the properties, see
+     * > [TiffPropertyKey]{@link image.TiffPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, GIF metadata can be read. For details about the properties, see
+     * > [GifPropertyKey]{@link image.GifPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, XMP metadata of JPEG, PNG, GIF, DNG, and TIFF images can be read. For details about
+     * > how to operate XMP metadata, see [XMPMetadata]{@link image.XMPMetadata}.
+     * >
+     * > - Since API version 26.0.0, AVIS metadata can be read. For details about the properties, see [AvisPropertyKey]{@link image.AvisPropertyKey}.
      *
      * @param { string[] } [propertyKeys] - Array of properties names. If **propertyKeys** is not specified, all
      *     supported metadata is returned.
@@ -15067,7 +15183,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - This API applies only to images that are in JPEG, PNG, or HEIF format and contain the Exif information. 
      * > Before modifying properties, use the **supportedFormats** property to check whether the device supports Exif 
      * > information read/write in HEIF format.
-     *
+     * >
+     * > - Since API version 26.0.0, XMP metadata of JPEG, PNG, and GIF images can be read. For details about how to
+     * > operate XMP metadata, see [XMPMetadata]{@link image.XMPMetadata}.
+     * >
+     * > - When calling the **writeImageMetadata** API to modify the **Exif** field, ensure that the corresponding
+     * > image file has write permission. Otherwise, the field modification will fail.
+     * 
      * @param { ImageMetadata } imageMetadata - Image metadata set. If all property values in **imageMetadata** are
      *     empty, all Exif metadata is cleared.
      * @returns { Promise<void> } Promise that returns no value.
@@ -15110,7 +15232,31 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - **HEIFS_METADATA** applies to HEIFS images.
      * >
      * > - If the input **MetadataType** does not match the image format, error code **7700102** will be returned.
-     *
+     * >
+     * > - Since API version 24, DNG metadata can be read. For details about the properties, see
+     * > [DngPropertyKey]{@link image.DngPropertyKey}.
+     * >
+     * > - Since API version 24, HEIFS metadata can be read. For details about the properties, see
+     * > [HeifsPropertyKey]{@link image.HeifsPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, PNG metadata can be read. For details about the properties, see
+     * > [PngPropertyKey]{@link image.PngPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, JFIF metadata can be read. For details about the properties, see
+     * > [JfifPropertyKey]{@link image.JfifPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, TIFF metadata can be read. For details about the properties, see
+     * > [TiffPropertyKey]{@link image.TiffPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, GIF metadata can be read. For details about the properties, see
+     * > [GifPropertyKey]{@link image.GifPropertyKey}.
+     * >
+     * > - Since API version 26.0.0, XMP metadata of JPEG, PNG, GIF, DNG, and TIFF images can be read. For details
+     * > about how to operate XMP metadata, see [XMPMetadata]{@link image.XMPMetadata}.
+     * >
+     * > - Since API version 26.0.0, AVIS metadata can be read. For details about the properties, see
+     * > [AvisPropertyKey]{@link image.AvisPropertyKey}.
+     * 
      * @param { MetadataType[] } [metadataTypes] - Metadata type array. If this parameter is left empty, all supported
      *     metadata is obtained.
      * @param { int }[index] - Image frame number for metadata retrieval. The default value is **0**.
@@ -15381,7 +15527,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { PackingOptionsForSequence } options - Options for encoding animated images.
      * @returns { Promise<ArrayBuffer> } Promise used to return the encoded data.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-     *     2.Incorrect parameter types;3.Parameter verification failed.
+     *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 7800301 - Failed to encode image.
      * @syscap SystemCapability.Multimedia.Image.ImagePacker
      * @since 18 dynamic
@@ -16046,6 +16192,26 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @since 23 static
      */
     release(): Promise<void>;
+
+    /**
+     * Sets the memory name for the ImageReceiver instance. This API returns the result synchronously.
+     *
+     * Only visible ASCII characters are supported. Spaces, newlines, tabs, and other control characters will be
+     * filtered out. If the filtered result consists entirely of digits, a prefix "ImageReceiver:" will be automatically
+     * prepended.The length of name must not exceed 256 bytes.
+     *
+     * @param { string } name - Memory name to set.
+     *     <br>The maximum length is 256.
+     * @throws { BusinessError } 7900201 - Invalid parameter. Possible causes:
+     *     <ol><li>Name is empty.</li>
+     *     <li>Name contains no visible characters after filtering.</li>
+     *     <li>The length of name exceeds 256 bytes.</li>
+     *     <li>Ensure the name parameter contains visible ASCII characters.</li></ol>
+     * @syscap SystemCapability.Multimedia.Image.ImageReceiver
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setMemoryName(name: string): void;
   }
 
   /**

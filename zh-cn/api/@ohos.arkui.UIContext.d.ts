@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -55,8 +55,14 @@ import type common from './@ohos.app.ability.common';
 import type pointer from './@ohos.multimodalInput.pointer';
 
 /**
-* class Font
-*
+ * Font用于管理自定义字体和系统字体信息，支持注册自定义字体、获取系统字体列表、查询字体详细信息等功能，适用于需要在应用中使用自定义字体或查询系统字体资源的场景。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getFont()]{@link UIContext.getFont}方法获取到Font对象，再通过该对象调用对应方法。
+ * >
+ * > - 推荐使用字体引擎的[loadFontSync]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}接口注册自定义字体。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -66,9 +72,14 @@ import type pointer from './@ohos.multimodalInput.pointer';
 export class Font {
 
   /**
-   * Register a customized font in the FontManager.
+   * 在字体管理中注册自定义字体。
    *
-   * @param { font.FontOptions } options - FontOptions
+   * 推荐使用字体引擎的[loadFontSync](../apis-arkgraphics2d/js-apis-graphics-text.md#loadfontsync)接口注册自定义字体。
+   *
+   * 该接口为异步接口，字体注册为异步过程，不支持并发调用。由于注册是异步完成的，建议在页面初始化阶段（如aboutToAppear）提前调用，以确保字体在使用前已注册完成。
+   *
+   * @param { font.FontOptions } options - 注册的自定义字体信息。
+   *     <br>**说明：**<br>设置注册字体文件的路径，读取系统沙箱路径内的资源时，建议使用file://路径前缀的字符串，需要确保沙箱目录路径下的文件存在并且有可读权限。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -80,7 +91,12 @@ export class Font {
   /**
    * 获取系统支持的字体列表。
    *
-   * @returns { Array<string> } 字体名称列表
+   * 该接口仅在PC/2in1设备上生效，在其他设备上返回空数组。
+   *
+   * > **说明**
+   * > 推荐使用[getSystemFontFullNamesByType]{@link @ohos.graphics.text:text.getSystemFontFullNamesByType}接口获取系统最新支持的字体列表数据。
+   *
+   * @returns { Array<string> } 系统支持的字体名称列表，返回的名称可用于getFontByName方法查询对应字体的详细信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 11]
@@ -90,10 +106,10 @@ export class Font {
   getSystemFontList(): Array<string>;
 
   /**
-   * 根据字体名称获取字体详细信息。
+   * 根据传入的系统字体名称获取系统字体的相关信息。
    *
-   * @param { string } fontName - 字体名称
-   * @returns { font.FontInfo } Returns the font info
+   * @param { string } fontName - 系统的字体名，可通过[getSystemFontList()](#getsystemfontlist)方法获取支持的字体名称列表。
+   * @returns { font.FontInfo } 字体的详细信息。<br>如果查询不到字体，返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 11]
@@ -115,10 +131,10 @@ export class Font {
 export class MediaQuery {
 
   /**
-   * Sets the media query criteria and returns the corresponding listening handle
+   * 设置媒体查询的查询条件，并返回对应的监听句柄。
    *
-   * @param { string } condition - media conditions
-   * @returns { mediaQuery.MediaQueryListener } the corresponding listening handle
+   * @param { string } condition - 媒体查询的匹配条件，具体可参考[媒体查询语法规则](docroot:../../ui/arkts-layout-development-media-query.md#语法规则)。
+   * @returns { mediaQuery.MediaQueryListener } 媒体事件监听句柄，用于注册和去注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -131,6 +147,8 @@ export class MediaQuery {
 /**
 * class UIInspector
 *
+* 提供注册组件布局和组件绘制送显完成回调通知的能力。送显指节点的绘制命令发送到图形服务并完成显示。例如，开发者可在组件布局完成后获取组件精确尺寸，或在送显完成后执行截图、动画同步等操作，适用于需要精确感知组件布局和绘制时机的场景。
+*
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -140,12 +158,10 @@ export class MediaQuery {
 export class UIInspector {
 
   /**
-   * Sets the component after layout or draw criteria and returns the corresponding listening handle
+   * 注册组件布局和组件绘制送显完成回调通知。例如，开发者可在组件布局完成后获取组件精确尺寸，或在送显完成后执行截图、动画同步等操作。
    *
-   * @param { string } id - ID of the target component, set using the universal attributes [id]{@link CommonMethod#id}
-   *     or [key]{@link CommonMethod#key}.
-   * @returns { inspector.ComponentObserver } Component observer, which is used to register or unregister listeners
-   *     for completion of component layout or drawing display.
+   * @param { string } id - 指定组件id，该id通过通用属性id或者key设置。
+   * @returns { inspector.ComponentObserver } 组件回调事件监听句柄，用于注册和取消注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -155,11 +171,10 @@ export class UIInspector {
   createComponentObserver(id: string): inspector.ComponentObserver;
 
   /**
-   * 创建当前节点或者当前节点的子节点的布局和送显的事件监听句柄。
+   * 注册组件布局和组件绘制送显完成回调通知。例如，开发者可在组件布局完成后获取组件精确尺寸，或在送显完成后执行截图、动画同步等操作。
    *
-   * @param { string | number } id - 当前节点的inspector key或者唯一id。
-   * @returns { inspector.ComponentObserver } Component observer, which is used to register or unregister listeners
-   *     for completion of component layout or drawing display.
+   * @param { string | number } id - 指定组件id，该id通过通用属性id或者key设置。
+   * @returns { inspector.ComponentObserver } 组件回调事件监听句柄，用于注册和取消注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -170,8 +185,30 @@ export class UIInspector {
 }
 
 /**
-* class Router
-*
+ * 提供通过不同的url访问不同的页面，包括跳转到应用内的指定页面、同应用内的某个页面替换当前页面、返回上一页面或指定的页面等。
+ * Router还支持命名路由跳转、页面栈管理、参数传递、返回确认对话框等能力，适用于需要统一管理页面导航流程、处理页面间数据传递的场景，与UIContext集成使用可实现灵活的路由控制。
+ * 
+ * Router基于页面栈机制管理页面导航，页面栈支持的最大容量为32个页面。当调用pushUrl时，目标页面会被压入栈顶；调用replaceUrl时，当前页面会被弹出栈并销毁，目标页面压入栈顶；调用back时，栈顶页面会被弹出。
+ * 
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 10开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
+ * >
+ * > - 以下API需先使用UIContext中的[getRouter()](arkts-apis-uicontext-uicontext.md#getrouter)方法获取到Router对象，再通过该对象调用对应方法。
+ * >
+ * > - Router提供了以下两种路由方式：
+ * >
+ * >   - **普通路由**（[pushUrl](#pushurl)/[replaceUrl](#replaceurl)）：通过url路径标识目标页面，适用于简单的页面跳转场景。
+ * >
+ * >   - **命名路由**（[pushNamedRoute](#pushnamedroute)/[replaceNamedRoute](#replacenamedroute)）：
+ * >     通过name标识目标页面，在跳转之前需要将目标跳转页面通过import将页面进行加载，适用于跨包跳转场景。
+ * >
+ * >   建议在页面路径可能变化或需要统一管理路由的场景下使用命名路由，其他场景使用普通路由。根据是否需要返回上一页来选择使用哪个方法。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -181,11 +218,10 @@ export class UIInspector {
 export class Router {
 
   /**
-   * Navigates to a specified page in the application.
+   * 跳转到应用内的指定页面。使用callback异步回调。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 跳转页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -202,10 +238,16 @@ export class Router {
   pushUrl(options: router.RouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a specified page in the application. This API uses a promise to return the result.
+   * 跳转到应用内的指定页面，使用Promise异步回调。
+   * 
+   * > **说明：** 
+   * >
+   * > pushUrl()会在页面栈顶部添加新页面，页面栈深度+1（上限32页，超限报错误码100003），后续可调用back()返回到上一页面或调用replaceUrl()替换当前页面。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.RouterOptions } options - 跳转页面描述信息，包含url（目标页面路径）和params（传递的参数）等字段。
+   * **说明：** 页面栈最大支持32个页面，建议跳转前通过[getStackSize](#getstacksize23)（从API version 23开始支持）检查当前栈大小，避免超出限制导致跳转失败（错误码100003）。
+   * API version 23之前可使用[getLength](#getlengthdeprecated)检查。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -222,12 +264,12 @@ export class Router {
   pushUrl(options: router.RouterOptions): Promise<void>;
 
   /**
-   * Navigates to a specified page in the application.
+   * 跳转到应用内的指定页面。使用callback异步回调。与[pushUrl](#pushurl-1)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -244,11 +286,12 @@ export class Router {
   pushUrl(options: router.RouterOptions, mode: router.RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a specified page in the application. This API uses a promise to return the result.
+   * 跳转到应用内的指定页面，使用Promise异步回调。与[pushUrl](#pushurl)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.RouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -265,11 +308,10 @@ export class Router {
   pushUrl(options: router.RouterOptions, mode: router.RouterMode): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面。使用callback异步回调。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -287,10 +329,15 @@ export class Router {
   replaceUrl(options: router.RouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面，使用Promise异步回调。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @returns { Promise<void> } Promise that returns no value.
+   * > **说明：**
+   * >
+   * > replaceUrl()会替换页面栈栈顶页面，页面栈深度维持不变。与pushUrl()的核心差异：pushUrl()入栈新页面、栈深度 + 1，replaceUrl()不改变栈深度。
+   * > 被替换的页面会直接销毁，无法通过back()回退访问。适用场景：登录成功跳转首页（避免回退至登录页）、页面重定向、临时中转页面跳转等。
+   *
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -308,12 +355,12 @@ export class Router {
   replaceUrl(options: router.RouterOptions): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面。使用callback异步回调。与[replaceUrl](#replaceurl-1)相比，新增了mode参数，即支持设置替换页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @param { router.RouterMode } mode - 替换页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -331,11 +378,12 @@ export class Router {
   replaceUrl(options: router.RouterOptions, mode: router.RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面，使用Promise异步回调。与[replaceUrl](#replaceurl)相比，新增了mode参数，即支持设置替换页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @param { router.RouterMode } mode - 替换页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -353,13 +401,15 @@ export class Router {
   replaceUrl(options: router.RouterOptions, mode: router.RouterMode): Promise<void>;
 
   /**
-   * Returns to the previous page or a specified page.
+   * 返回上一页面或指定的页面。
    *
-   * @param { router.RouterOptions } options - Description of the target page. The **url** parameter specifies the URL
-   *     of the page to return to. If the page with the specified URL does not exist in the navigation stack, no action
-   *     is performed. If the navigation stack contains the corresponding URL, the application returns to the page with.
-   *     the largest index.<br>If no URL is set, the application returns to the previous page, and the page is not
-   *     rebuilt. The page in the page stack is not reclaimed. It will be reclaimed after being popped up.
+   * > **说明：**
+   * >
+   * > 如果之前调用了showAlertBeforeBackPage()开启了返回询问对话框，则调用back()时会弹出确认对话框：用户选择"取消"则back()不执行，选择"确认"则继续执行；
+   * > 可通过hideAlertBeforeBackPage()关闭返回询问对话框。
+   *
+   * @param { router.RouterOptions } options - 返回页面描述信息。当需要返回到指定的页面时传入此参数（通过url指定目标页面）；当只需返回上一页时可以不传入此参数。
+   * url指定返回的目标页面：若页面栈中存在该url，则返回至index最大的同名页面；若不存在则不响应操作。若url未设置，则返回上一页（页面不会重新构建，出栈后会被回收）。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -369,11 +419,11 @@ export class Router {
   back(options?: router.RouterOptions): void;
 
   /**
-   * Returns to the specified page.
+   * 返回指定的页面。
    *
-   * @param { number } index - Index of the target page to navigate to.
-   *     <br>Value range: [0, +∞).
-   * @param { Object } [params] - Parameters carried when returning to the page.
+   * @param { number } index - 返回目标页面的索引值，从0开始计数（注意：与[getStateByIndex](#getstatebyindex12)的index参数不同，后者从1开始计数）。
+   *     <br>取值范围：[0, +∞)。如果index超出页面栈范围或不存在对应页面，则不响应用户操作。
+   * @param { Object } [params] - 页面返回时携带的参数。不传入时不携带参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -383,7 +433,13 @@ export class Router {
   back(index: number, params?: Object): void;
 
   /**
-   * Clears all historical pages and retains only the current page at the top of the stack.
+   * 清空页面栈中的所有历史页面，仅保留当前页面作为栈顶页面。
+   *
+   * > **说明：**
+   * >
+   * > 调用 clear()方法会清空全部历史页面栈，最终仅保留当前页面，页面栈深度变为1。此时栈内无历史记录，back()回退接口将失效；
+   * > 但pushUrl()、replaceUrl()等跳转方法仍可正常使用，支持新增页面或替换当前页面。
+   * > 该操作具备不可逆特性，执行完成后用户无法回访任何历史页面，建议仅在退出登录、切换账号等业务场景下使用，调用前务必持久化存储关键页面状态数据。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -394,9 +450,13 @@ export class Router {
   clear(): void;
 
   /**
-   * Obtains the number of pages in the current stack.
+   * 获取当前在页面栈内的页面数量。
    *
-   * @returns { string } Number of pages in the stack. The maximum value is **32**.
+   * > **说明：**
+   * >
+   * > 从API version 10开始支持，从 API version 23开始废弃，建议使用[getStackSize](#getstacksize23)替代。
+   *
+   * @returns { string } 页面数量，页面栈支持最大数值是32。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -408,9 +468,9 @@ export class Router {
   getLength(): string;
 
   /**
-   * Obtains information about the current page state.
+   * 获取当前页面栈内的页面数量。
    *
-   * @returns { number } Number of pages in the stack. The maximum value is **32**.
+   * @returns { number } 页面数量，页面栈支持最大数值是32。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -420,9 +480,9 @@ export class Router {
   getStackSize(): number;
 
   /**
-   * Obtains information about the current page state.
+   * 获取当前页面的状态信息。
    *
-   * @returns { router.RouterState } Page routing state.
+   * @returns { router.RouterState } 页面状态信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -432,12 +492,11 @@ export class Router {
   getState(): router.RouterState;
 
   /**
-   * Obtains page information by index.
+   * 通过索引值获取对应页面的状态信息。
    *
-   * @param { number } index - Index of the target page.
-   *     <br>Value range: [1, +∞).
-   * @returns { router.RouterState | undefined } State information about the target page. **undefined** if the specified
-   *     index does not exist.
+   * @param { number } index - 表示要获取的页面索引，从1开始计数（注意：与[back](#back12)的index参数不同，后者从0开始计数）。
+   *     <br>取值范围：[1, +∞)。索引不存在时返回undefined。
+   * @returns { router.RouterState | undefined } 返回页面状态信息。索引不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -447,10 +506,10 @@ export class Router {
   getStateByIndex(index: number): router.RouterState | undefined;
 
   /**
-   * Obtains page information by url.
+   * 通过url获取匹配指定url的页面的状态信息。
    *
-   * @param { string } url - URL of the target page.
-   * @returns { Array<router.RouterState> } Page routing state.
+   * @param { string } url - 表示要获取对应页面信息的url，需使用应用内页面路径格式。如果页面栈中没有对应url的页面，返回空数组。
+   * @returns { Array<router.RouterState> } 页面状态信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -460,9 +519,11 @@ export class Router {
   getStateByUrl(url: string): Array<router.RouterState>;
 
   /**
-   * Pop up alert dialog to ask whether to back.
+   * 开启页面返回询问对话框。调用此方法后，当用户触发返回操作（如点击返回键、调用back方法）时，系统会先弹出确认对话框询问用户是否返回；用户确认后才会执行返回操作，取消则留在当前页面。
+   * 适用于表单填写页面（防止用户误触返回导致内容丢失）、重要操作确认页面（如支付、提交订单等）、内容编辑页面（用户可能有未保存的修改时）等场景。
+   * 与hideAlertBeforeBackPage()方法成对使用：调用本方法开启对话框后，建议在适当时机调用hideAlertBeforeBackPage()关闭对话框。
    *
-   * @param { router.EnableAlertOptions } options - Description of the dialog box.
+   * @param { router.EnableAlertOptions } options - 文本弹窗信息描述，包含message（弹窗提示内容）等参数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -477,7 +538,7 @@ export class Router {
   showAlertBeforeBackPage(options: router.EnableAlertOptions): void;
 
   /**
-   * Hide alert before back page.
+   * 禁用页面返回询问对话框。适用于用户已完成保存操作可以安全返回、页面状态切换后不再需要返回确认、需要动态控制返回行为等场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -488,9 +549,9 @@ export class Router {
   hideAlertBeforeBackPage(): void;
 
   /**
-   * Obtains information about the current page params.
+   * 获取发起跳转的页面往当前页传入的参数。参数在页面跳转时通过RouterOptions或NamedRouterOptions的params字段传递。
    *
-   * @returns { Object } Parameters passed from the page that initiates redirection to the current page.
+   * @returns { Object } 发起跳转的页面往当前页传入的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -500,11 +561,10 @@ export class Router {
   getParams(): Object;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面。使用callback异步回调。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -521,10 +581,10 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面，使用Promise异步回调。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息，包含name（命名路由名称）和params（传递的参数）等字段。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -541,12 +601,12 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions): Promise<void>;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面。使用callback异步回调。与[pushNamedRoute](#pushnamedroute-1)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -563,11 +623,12 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions, mode: router.RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面，使用Promise异步回调。与[pushNamedRoute](#pushnamedroute)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -584,11 +645,10 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions, mode: router.RouterMode): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用指定的命名路由页面替换当前页面，并销毁被替换的页面。使用callback异步回调。
    *
-   * @param { router.NamedRouterOptions } options - Description of the new page.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 替换页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -605,10 +665,10 @@ export class Router {
   replaceNamedRoute(options: router.NamedRouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用指定的命名路由页面替换当前页面，并销毁被替换的页面，使用Promise异步回调。适用于大型应用中使用命名路由管理页面、路由路径可能变化时避免硬编码URL、模块化开发中各模块独立管理自己的命名路由等场景。
    *
-   * @param { router.NamedRouterOptions } options - Description of the new page.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.NamedRouterOptions } options - 替换页面描述信息。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - if the number of parameters is less than 1 or the type of the url parameter is not
    *     string.
    * @throws { BusinessError } 100001 - The UI execution context is not found. This error code is thrown only in the
@@ -623,12 +683,12 @@ export class Router {
   replaceNamedRoute(options: router.NamedRouterOptions): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用指定的命名路由页面替换当前页面，并销毁被替换的页面。使用callback异步回调。与[replaceNamedRoute](#replacenamedroute-1)相比，新增了mode参数，即支持设置替换页面使用的模式。
    *
-   * @param { router.NamedRouterOptions } options - Description of the new page.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 替换页面描述信息。
+   * @param { router.RouterMode } mode - 替换页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - if the number of parameters is less than 1 or the type of the url parameter is not
    *     string.
    * @throws { BusinessError } 100001 - The UI execution context is not found. This error code is thrown only in the
@@ -647,8 +707,9 @@ export class Router {
    * router.NamedRouterOptions)}相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
    * @param { router.NamedRouterOptions } options - 替换页面描述信息。
-   * @param { router.RouterMode } mode - 跳转页面使用的模式。
-   * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象。无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -678,8 +739,8 @@ export class Router {
 declare type CustomBuilderWithId = (id: number) => void;
 
 /**
-* Defines the target info.
-*
+ * 指定组件绑定的目标节点。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -689,7 +750,10 @@ declare type CustomBuilderWithId = (id: number) => void;
 export interface TargetInfo {
 
   /**
-   * ID of target node.
+   * 指定popup或menu绑定的目标节点。<br/>**说明：** <br/>
+   * 1. 当id是number时，对应组件实例的UniqueID，此id由系统保证唯一性。<br/>
+   * 2. 当id是string时，对应[通用属性id]{@link CommonMethod#id}所指定的组件
+   *    此id的唯一性需由开发者确保，但实际可能会有多个相同id的组件的可能性。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -700,7 +764,8 @@ export interface TargetInfo {
   id: string | number;
 
   /**
-   * Unique ID that generated by framework. This ID used to constrain range of target.
+   * 目标节点所在的自定义组件的UniqueID。当上述id指定为string类型且需要在指定自定义组件范围内查找目标节点时，可通过此属性圈定范围，
+   * 方便开发者在一定范围内保证id: string的唯一性。默认不指定自定义组件范围。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -712,8 +777,8 @@ export interface TargetInfo {
 }
 
 /**
-* 背景取色参数配置。
-*
+ * 背景亮度采样参数配置。背景亮度采样用于定期从组件背景区域取色，根据亮度阈值判定背景的明暗程度，以支持组件自适应明暗风格等场景。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
@@ -722,9 +787,9 @@ export interface TargetInfo {
 export interface BackgroundLuminanceSamplingConfigs {
 
   /**
-   * 取色间隔，单位为毫秒，最小值180ms。
-   *
-   * 默认值：500
+   * 取色间隔，单位为毫秒，取值范围：≥180ms。传入小于180ms的值时，自动修正为180ms。当需要更频繁的背景取色响应时可设置较小值（如180-300ms），当需要节省系统资源时可设置较大值（如500-1000ms）。
+   * 
+   * 默认值：500ms
    *
    * @default 500
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -735,8 +800,9 @@ export interface BackgroundLuminanceSamplingConfigs {
   samplingInterval?: number;
 
   /**
-   * 浅色亮度阈值：[0, 255]内的整数，设置的深色亮度阈值应小于浅色亮度阈值。
-   *
+   * 浅色亮度阈值：[0, 255]内的整数，设置的浅色亮度阈值应大于深色亮度阈值，若浅色亮度阈值不大于深色亮度阈值，将抛出异常。当需要调整浅色判定灵敏度时可自定义此值，低于默认值220的设置使浅色判定更宽松，高于默认值的设置使浅色判定
+   * 更严格。
+   * 
    * 默认值：220
    *
    * @default 220
@@ -748,8 +814,8 @@ export interface BackgroundLuminanceSamplingConfigs {
   brightThreshold?: number;
 
   /**
-   * 深色亮度阈值：[0, 255]内的整数，设置的深色亮度阈值应小于浅色亮度阈值。
-   *
+   * 深色亮度阈值：[0, 255]内的整数，设置的深色亮度阈值应小于浅色亮度阈值。当需要调整深色判定灵敏度时可自定义此值，高于默认值150的设置使深色判定更宽松，低于默认值的设置使深色判定更严格。
+   * 
    * 默认值：150
    *
    * @default 150
@@ -761,9 +827,9 @@ export interface BackgroundLuminanceSamplingConfigs {
   darkThreshold?: number;
 
   /**
-   * 相对组件的取色区域偏移，以组件自身的左上点为基准进行偏移计算。
-   *
-   * 默认使用组件自身区域
+   * 相对组件的采样区域偏移，以组件自身的左上点为基准进行偏移计算。取色区域建议设置在可见范围内，避免偏移超出组件可见区域导致采样结果不准确。
+   * 
+   * 默认取色区域与所配置组件区域一致（即不设置偏移时，取色区域等于组件自身区域）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -829,8 +895,17 @@ export class LuminanceSampler {
 }
 
 /**
-* class PromptAction
-*
+ * 创建并显示即时反馈、对话框、操作菜单以及自定义弹窗。
+ *
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 10开始支持。
+ * >
+ * > - 以下API需先使用UIContext中的[getPromptAction()]{@link UIContext#getPromptAction}方法获取到
+ *     PromptAction对象，再通过该对象调用对应方法。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -840,9 +915,9 @@ export class LuminanceSampler {
 export class PromptAction {
 
   /**
-   * Displays the notification text.
+   * 创建并显示即时反馈。
    *
-   * @param { promptAction.ShowToastOptions } options - Toast configuration options.
+   * @param { promptAction.ShowToastOptions } options - Toast选项。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -857,10 +932,10 @@ export class PromptAction {
   showToast(options: promptAction.ShowToastOptions): void;
 
   /**
-   * Displays the notification text.
+   * 显示即时反馈。使用Promise异步回调返回即时反馈的id，可供closeToast使用。
    *
-   * @param { promptAction.ShowToastOptions } options - Toast configuration options.
-   * @returns { Promise<number> } Promise that returns the toast ID for use with **closeToast**.
+   * @param { promptAction.ShowToastOptions } options - Toast选项。
+   * @returns { Promise<number> } Promise对象。返回即时反馈的id，可供closeToast使用。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -875,9 +950,9 @@ export class PromptAction {
   openToast(options: promptAction.ShowToastOptions): Promise<number>;
 
   /**
-   * Close the notification text.
+   * 关闭即时反馈。
    *
-   * @param { number } toastId - Toast ID returned from **openToast**.
+   * @param { number } toastId - openToast返回的id。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -893,10 +968,11 @@ export class PromptAction {
   closeToast(toastId: number): void;
 
   /**
-   * 弹出对话框。
+   * 创建并显示对话框，对话框响应结果使用callback异步回调返回。
    *
-   * @param { promptAction.ShowDialogOptions } options - 选项。
-   * @param { AsyncCallback<promptAction.ShowDialogSuccessResponse> } callback - showDialog的回调。
+   * @param { promptAction.ShowDialogOptions } options - 页面显示对话框信息描述。
+   * @param { AsyncCallback<promptAction.ShowDialogSuccessResponse> } callback - 回调函数。弹出对话框成功，err为undefined，
+   *    data为获取到的对话框响应结果，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -911,10 +987,10 @@ export class PromptAction {
   showDialog(options: promptAction.ShowDialogOptions, callback: AsyncCallback<promptAction.ShowDialogSuccessResponse>): void;
 
   /**
-   * 弹出对话框。
+   * 创建并显示对话框，使用Promise异步回调获取对话框的响应结果。
    *
-   * @param { promptAction.ShowDialogOptions } options - 选项。
-   * @returns { Promise<promptAction.ShowDialogSuccessResponse> } Promise that returns the dialog box response.
+   * @param { promptAction.ShowDialogOptions } options - 对话框选项。
+   * @returns { Promise<promptAction.ShowDialogSuccessResponse> } Promise对象，返回对话框的响应结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -929,10 +1005,10 @@ export class PromptAction {
   showDialog(options: promptAction.ShowDialogOptions): Promise<promptAction.ShowDialogSuccessResponse>;
 
   /**
-   * Shows an action menu in the given settings. This API uses an asynchronous callback to return the result.
+   * 创建并显示操作菜单，菜单响应结果使用callback异步回调返回。
    *
-   * @param { promptAction.ActionMenuOptions } options - Action menu options.
-   * @param { promptAction.ActionMenuSuccessResponse } callback - Callback used to return the menu response.
+   * @param { promptAction.ActionMenuOptions } options - 操作菜单选项。
+   * @param { promptAction.ActionMenuSuccessResponse } callback - 回调函数，返回菜单的响应结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -947,11 +1023,10 @@ export class PromptAction {
   showActionMenu(options: promptAction.ActionMenuOptions, callback: promptAction.ActionMenuSuccessResponse): void;
 
   /**
-   * 显示给定设置中的操作菜单。该接口使用异步回调返回结果。
+   * 创建并显示操作菜单，菜单响应结果使用callback异步回调返回。
    *
-   * @param { promptAction.ActionMenuOptions } options - 操作菜单选项。
-   * @param { AsyncCallback<promptAction.ActionMenuSuccessResponse> } callback -  用于返回操作的回调
-   *     菜单响应结果。
+   * @param { promptAction.ActionMenuOptions } options - 操作菜单选项。用于配置操作菜单的显示内容和样式，包括title、buttons等属性。
+   * @param { AsyncCallback<promptAction.ActionMenuSuccessResponse> } callback -  菜单响应结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -966,10 +1041,10 @@ export class PromptAction {
   showActionMenu(options: promptAction.ActionMenuOptions, callback: AsyncCallback<promptAction.ActionMenuSuccessResponse>): void;
 
   /**
-   * 显示菜单。
+   * 创建并显示操作菜单，通过Promise异步回调获取菜单的响应结果。
    *
-   * @param { promptAction.ActionMenuOptions } options - 选项。
-   * @returns { Promise<promptAction.ActionMenuSuccessResponse> } callback - Promise that returns the action menu response.
+   * @param { promptAction.ActionMenuOptions } options - 操作菜单选项。
+   * @returns { Promise<promptAction.ActionMenuSuccessResponse> } callback - Promise对象，返回菜单的响应结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -984,11 +1059,15 @@ export class PromptAction {
   showActionMenu(options: promptAction.ActionMenuOptions): Promise<promptAction.ActionMenuSuccessResponse>;
 
   /**
-   * 使用frameNode打开自定义对话框。
+   * 创建并弹出dialogContent对应的自定义弹窗，使用Promise异步回调。通过该接口弹出的弹窗内容样式完全按照dialogContent中设置的样式显示，
+   * 即相当于customDialog设置customStyle为true时的显示效果。
    *
-   * @param { ComponentContent<T> } dialogContent - 自定义对话框的内容。
-   * @param { promptAction.BaseDialogOptions } options - 选项。
-   * @returns { Promise<void> } 函数返回的promise。
+   * @param { ComponentContent<T> } dialogContent - 自定义弹窗中显示的组件内容。
+   * @param { promptAction.BaseDialogOptions } options - 弹窗样式。<br>
+   *    **说明：** 如果BaseDialogOptions中的[isModal]{@link @ohos.promptAction:promptAction.BaseDialogOptions}
+   *    与[showInSubWindow]{@link @ohos.promptAction:promptAction.BaseDialogOptions}同时设置为true，则只生效showInSubWindow = true，
+   *    此时为非模态弹出框且不会显示蒙层，并在子窗口中显示。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1004,14 +1083,17 @@ export class PromptAction {
   openCustomDialog<T extends Object>(dialogContent: ComponentContent<T>, options?: promptAction.BaseDialogOptions): Promise<void>;
 
   /**
-   * 打开带有frameNode和控制器的自定义对话框。
+   * 创建并弹出dialogContent对应的自定义弹窗，使用Promise异步回调。支持传入弹窗控制器与自定义弹窗绑定，后续可以通过控制器控制自定义弹窗。
    *
-   * isModal = true和showInSubWindow = true不能同时使用。
+   * 通过该接口弹出的弹窗内容样式完全按照dialogContent中设置的样式显示，即相当于customDialog设置customStyle为true时的显示效果。
    *
-   * @param { ComponentContent<T> } dialogContent - 自定义对话框的内容。
-   * @param { promptAction.DialogController } controller - 对话框控制器。
-   * @param { promptAction.BaseDialogOptions } options - 选项。
-   * @returns { Promise<void> } 函数返回的promise。
+   * @param { ComponentContent<T> } dialogContent - 自定义弹窗中显示的组件内容。
+   * @param { promptAction.DialogController } controller - 自定义弹窗的控制器。
+   * @param { promptAction.BaseDialogOptions } options - 自定义弹窗的样式。 <br>
+   *    **说明：** 如果BaseDialogOptions中的[isModal]{@link @ohos.promptAction:promptAction.BaseDialogOptions}与
+   *    [showInSubWindow]{@link @ohos.promptAction:promptAction.BaseDialogOptions}同时设置为true，则只生效showInSubWindow = true，
+   *    此时为非模态弹出框且不会显示蒙层，并在子窗口中显示。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1028,12 +1110,11 @@ export class PromptAction {
     options?: promptAction.BaseDialogOptions): Promise<void>;
 
   /**
-   * Update the custom dialog with frameNode.
+   * 更新已弹出的dialogContent对应的自定义弹窗的样式，使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } dialogContent - Content of the custom dialog box.
-   * @param { promptAction.BaseDialogOptions } options - Dialog box style. Currently,
-   *     only **alignment**, **offset**, **autoCancel**, and **maskColor** can be updated.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { ComponentContent<T> } dialogContent - 自定义弹窗中显示的组件内容。
+   * @param { promptAction.BaseDialogOptions } options - 弹窗样式，目前仅支持更新alignment、offset、autoCancel、maskColor。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1049,10 +1130,10 @@ export class PromptAction {
   updateCustomDialog<T extends Object>(dialogContent: ComponentContent<T>, options: promptAction.BaseDialogOptions): Promise<void>;
 
   /**
-   * Closes a custom dialog box corresponding to dialogContent. This API uses a promise to return the result.
+   * 关闭已弹出的dialogContent对应的自定义弹窗，使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } dialogContent -  Content of the custom dialog box.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { ComponentContent<T> } dialogContent - 自定义弹窗中显示的组件内容。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1068,10 +1149,13 @@ export class PromptAction {
   closeCustomDialog<T extends Object>(dialogContent: ComponentContent<T>): Promise<void>;
 
   /**
-   * 打开自定义对话框。
+   * 创建并弹出自定义弹窗。使用Promise异步回调返回对话框的id，可供closeCustomDialog使用。
    *
-   * isModal = true和showInSubWindow = true不能同时使用。
-   *   * @param { promptAction.CustomDialogOptions } options - 选项。   * @returns { Promise<number> } 返回将由closeCustomDialog使用的对话框ID。
+   * @param { promptAction.CustomDialogOptions } options - 自定义弹窗的内容。<br>
+   *    **说明：** 如果BaseDialogOptions中的[isModal]{@link @ohos.promptAction:promptAction.BaseDialogOptions}与
+   *    [showInSubWindow]{@link @ohos.promptAction:promptAction.BaseDialogOptions}同时设置为true，则只生效showInSubWindow = true，
+   *    此时为非模态弹出框且不会显示蒙层，并在子窗口中显示。
+   * @returns { Promise<number> } Promise对象。返回对话框id，可供closeCustomDialog使用。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -1086,18 +1170,17 @@ export class PromptAction {
   openCustomDialog(options: promptAction.CustomDialogOptions): Promise<number>;
 
   /**
-   * 使用控制器显示自定义对话框。
+   * 创建并弹出自定义弹窗。使用Promise异步回调返回对话框的id，可供closeCustomDialog使用。
    *
-   * isModal = true和showInSubWindow = true不能同时使用。
+   * 支持在自定义弹窗内容中持有弹窗ID进行对应操作。支持传入弹窗控制器与自定义弹窗绑定，后续可以通过控制器控制自定义弹窗。
    *
-   * @param { CustomBuilder | CustomBuilderWithId } builder - 对话框生成器。
-   * @param { promptAction.DialogController } [controller] - Controller of the custom dialog box. [since 26.0.0]
-   * @param { promptAction.DialogOptions } [options] - Style of the custom dialog box.<br>
-   *     Note: If both [isModal]{@link @ohos.promptAction:promptAction.BaseDialogOptions}
-   *     and [showInSubWindow]{@link @ohos.promptAction:promptAction.BaseDialogOptions} in **BaseDialogOptions**
-   *     are set to **true**, only **showInSubWindow** takes effect. In this case, the non-modal dialog box is displayed
-   *     without mask in the subwindow. [since 26.0.0]
-   * @returns { Promise<number> } Promise Promise used to return the custom dialog box ID.
+   * @param { CustomBuilder | CustomBuilderWithId } builder - 自定义弹窗的内容。
+   * @param { promptAction.DialogController } [controller] - 自定义弹窗的控制器。 [since 26.0.0]
+   * @param { promptAction.DialogOptions } [options] - 自定义弹窗的样式。<br>
+   *    **说明：** 如果BaseDialogOptions中的[isModal]{@link @ohos.promptAction:promptAction.BaseDialogOptions}与
+   *    [showInSubWindow]{@link @ohos.promptAction:promptAction.BaseDialogOptions}同时设置为true，则只生效showInSubWindow = true，
+   *    此时为非模态弹出框且不会显示蒙层，并在子窗口中显示。 [since 26.0.0]
+   * @returns { Promise<number> } Promise对象。返回自定义弹窗ID。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1113,9 +1196,9 @@ export class PromptAction {
     options?: promptAction.DialogOptions): Promise<number>;
 
   /**
-   * Close the custom dialog.
+   * 关闭自定义弹窗。
    *
-   * @param { number } dialogId - ID of the custom dialog box to close. It is returned from **openCustomDialog**.
+   * @param { number } dialogId - openCustomDialog返回的对话框id。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -1130,9 +1213,11 @@ export class PromptAction {
   closeCustomDialog(dialogId: number): void;
 
   /**
-   * Get order value of top dialog.
+   * 返回最顶层显示的弹窗的顺序。
    *
-   * @returns { LevelOrder } Order of the topmost dialog box.
+   * 获取最顶层显示的弹窗的顺序，可以在下一个弹窗时指定期望的顺序。
+   *
+   * @returns { LevelOrder } 返回弹窗层级信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1142,9 +1227,9 @@ export class PromptAction {
   getTopOrder(): LevelOrder;
 
   /**
-   * Get order value of bottom dialog.
+   * 获取最底层显示的弹窗的顺序，可以在下一个弹窗时指定期望的顺序。
    *
-   * @returns { LevelOrder } Order of the topmost dialog box.
+   * @returns { LevelOrder } 返回弹窗层级信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1154,12 +1239,20 @@ export class PromptAction {
   getBottomOrder(): LevelOrder;
 
   /**
-   * Open popup with frameNode.
+   * 创建并弹出以content作为内容的Popup弹窗，使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } content - Content displayed in the popup.
-   * @param { TargetInfo } target - Information about the target component to bind.
-   * @param { PopupCommonOptions } [options] - Style of the popup.
-   * @returns { Promise<void> } Promise that returns no value.
+   * > **说明：**
+   * >
+   * > - 使用该接口时，若未传入有效的target，则无法弹出popup弹窗。
+   * >
+   * > - 由于[updatePopup]{@link PromptAction#updatePopup}和[closePopup]{@link PromptAction#closePopup}依赖content去更新或者关闭指定的popup弹窗，开发者需自行维护传入的content。
+   * >
+   * > - 如果在wrapBuilder中包含其他组件（例如：[Popup]{@link @ohos.arkui.advanced.Popup}、[Chip]{@link @ohos.arkui.advanced.Chip}组件），则[ComponentContent]{@link ComponentContent:ComponentContent}应采用带有四个参数的构造函数constructor，其中options参数应传递{ nestingBuilderSupported: true }。
+   *
+   * @param { ComponentContent<T> } content - popup弹窗中显示的组件内容。
+   * @param { TargetInfo } target - 需要绑定组件的信息。
+   * @param { PopupCommonOptions } [options] - popup弹窗样式。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1177,21 +1270,21 @@ export class PromptAction {
   openPopup<T extends Object>(content: ComponentContent<T>, target: TargetInfo, options?: PopupCommonOptions): Promise<void>;
 
   /**
-   * Update popup with frameNode.
+   * 更新content对应的Popup弹窗的样式，使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } content - Content displayed in the popup.
-   * @param { PopupCommonOptions } options - Style of the popup.<br>
-   *     **NOTE**<br>
-   *     Updating the following properties is not supported: **showInSubWindow**, **focusable**, **onStateChange**,
-   *     **onWillDismiss**, and **transition**.
-   * @param { boolean } [partialUpdate] - Whether to update the popup in incremental mode.<br>
-   *     Default value: **false**<br>
-   *     **NOTE**<br>
-   *     **true**: Incremental update. Only specified attributes in **options** are updated, and the other attributes
-   *     retain their current values. If the attribute value passed in **options** is invalid or **undefined**,
-   *     the attribute is not updated.<br>**false**: Full update. Specified attributes in **options** are updated,
-   *     and the other attributes are restored to their default values.
-   * @returns { Promise<void> } Promise that returns no value.
+   * > **说明：**
+   * >
+   * > 不支持更新showInSubWindow、focusable、onStateChange、onWillDismiss、transition。
+   *
+   * @param { ComponentContent<T> } content - popup弹窗中显示的组件内容。
+   * @param { PopupCommonOptions } options - popup弹窗样式。<br/>
+   *    **说明：** <br/>
+   *    不支持更新showInSubWindow、focusable、onStateChange、onWillDismiss、transition。
+   * @param { boolean } [partialUpdate] - popup弹窗更新方式，默认值为false。<br/>
+   *    **说明：** <br/>
+   *    true：增量更新，此时更新options中的指定属性，其它属性保留当前值。options中传入的属性为异常值或undefined时，不会对该属性进行更新。
+   *    false：全量更新，此时更新options中的指定属性，并且其他属性恢复默认值。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1207,10 +1300,10 @@ export class PromptAction {
   updatePopup<T extends Object>(content: ComponentContent<T>, options: PopupCommonOptions, partialUpdate?: boolean): Promise<void>;
 
   /**
-   * Close popup with frameNode.
+   * 关闭content对应的Popup弹窗，使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } content - Content displayed in the popup.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { ComponentContent<T> } content - popup弹窗中显示的组件内容。
+   * @returns { Promise<void> }  Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -1226,13 +1319,29 @@ export class PromptAction {
   closePopup<T extends Object>(content: ComponentContent<T>): Promise<void>;
 
   /**
-   * Open menu with frameNode.
+   * 创建并弹出以content作为内容的Menu弹窗。使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } content - Content displayed in the menu.
-   * @param { TargetInfo } target - Information about the target component to bind.
-   * @param { MenuOptions } [options] - Style of the menu.<br>**NOTE**<br>The **title** property is not effective.<br>
-   *      The **preview** parameter supports only the **MenuPreviewMode** type.
-   * @returns { Promise<void> } Promise that returns no value.
+   * > **说明：**
+   * >
+   * > - 使用该接口时，若未传入有效的target，则无法弹出menu弹窗。
+   * >
+   * > - 由于[updateMenu]{@link PromptAction#updateMenu}和[closeMenu]{@link PromptAction#closeMenu}依赖content去更新或者关闭指定的menu弹窗，开发者需自行维护传入的content。
+   * >
+   * > - 如果在wrapBuilder中包含其他组件（例如：[Popup]{@link @ohos.arkui.advanced.Popup}、
+   *    [Chip]{@link @ohos.arkui.advanced.Chip}组件），则
+   *    [ComponentContent]{@link ComponentContent:ComponentContent}应采用带有四个参数的构造函数constructor，
+   *    其中options参数应传递{ nestingBuilderSupported: true }。
+   * >
+   * > - 子窗弹窗里不能再弹出子窗弹窗，例如[openMenu]{@link PromptAction#openMenu}设置了showInSubWindow为true时，则不能再弹出另一个设置了
+   *    showInSubWindow为true的弹窗。
+   *
+   * @param { ComponentContent<T> } content -  menu弹窗中显示的组件内容。
+   * @param { TargetInfo } target - 需要绑定组件的信息。
+   * @param { MenuOptions } [options] - menu弹窗样式。<br/>
+   *    **说明：**<br/>
+   *    title属性不生效。<br/>
+   *    preview参数仅支持设置MenuPreviewMode类型。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -1250,20 +1359,27 @@ export class PromptAction {
   openMenu<T extends Object>(content: ComponentContent<T>, target: TargetInfo, options?: MenuOptions): Promise<void>;
 
   /**
-   * Update menu with frameNode.
+   * 更新content对应的Menu弹窗的样式。使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } content - Content displayed in the menu.
-   * @param { MenuOptions } options - Style of the menu.<br>**NOTE**<br>1. Updating for the following is not supported:
-   *     **showInSubWindow**, **preview**, **previewAnimationOptions**, **transition**, **onAppear**, **aboutToAppear**,
-   *     **onDisappear**, **aboutToDisappear**, **onWillAppear**, **onDidAppear**, **onWillDisappear**, and
-   *     **onDidDisappear**.<br>2. The mask style can be updated by configuring [MenuMaskType]{@link MenuMaskType}.
-   *     However, this API does not support mask presence toggling (that is, switching the mask from non-existent to
-   *     existent or vice versa) by setting a boolean value.
-   * @param { boolean } [partialUpdate] - Whether to update the menu in incremental mode. Default value: **false**.<br>
-   *     **NOTE**<br>1. **true**: incremental update, where the specified properties in **options** are updated, and
-   *     other properties stay at their current value.<br>2. **false**: full update, where all properties except those
-   *     specified in **options** are restored to default values.
-   * @returns { Promise<void> }  Promise that returns no value.
+   * > **说明：**
+   * >
+   * > - 不支持更新showInSubWindow、preview、previewAnimationOptions、transition、onAppear、aboutToAppear、onDisappear、
+   * > aboutToDisappear、onWillAppear、onDidAppear、onWillDisappear和onDidDisappear。
+   * >
+   * > - 支持mask通过设置[MenuMaskType]{@link MenuMaskType}实现更新蒙层样式，不支持mask通过设置boolean实现蒙层从无到有或者从有到无的更新。
+   *
+   * @param { ComponentContent<T> } content - menu弹窗中显示的组件内容。
+   * @param { MenuOptions } options - menu弹窗样式。<br/>
+   *    **说明：** <br/>
+   *    1. 不支持更新showInSubWindow、preview、previewAnimationOptions、transition、onAppear、aboutToAppear、onDisappear、
+   *        aboutToDisappear、onWillAppear、onDidAppear、onWillDisappear和onDidDisappear。<br/>
+   *    2. 支持mask通过设置[MenuMaskType]{@link MenuMaskType}实现更新蒙层样式，
+   *        不支持mask通过设置boolean实现蒙层从无到有或者从有到无的更新。
+   * @param { boolean } [partialUpdate] - menu弹窗更新方式，默认值为false。<br/>
+   *     **说明：** <br/>
+   *      1. true为增量更新，保留当前值，更新options中的指定属性。 <br/>
+   *      2. false为全量更新，除options中的指定属性，其他属性恢复默认值。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1279,10 +1395,10 @@ export class PromptAction {
   updateMenu<T extends Object>(content: ComponentContent<T>, options: MenuOptions, partialUpdate?: boolean): Promise<void>;
 
   /**
-   * Close menu with frameNode.
+   * 关闭content对应的Menu弹窗。使用Promise异步回调。
    *
-   * @param { ComponentContent<T> } content - Content displayed in the menu.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { ComponentContent<T> } content - menu弹窗中显示的组件内容。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -1299,43 +1415,41 @@ export class PromptAction {
 }
 
 /**
- * 提供统一的Dialog API。
+ * 提供统一的Dialog API，可创建并显示固定样式弹出框、自定义样式弹出框，并支持更新与关闭弹出框。适用于应用中需要弹出提示、确认、选择等弹出框交互的场景。
+ * 
+ * > **说明：**
+ * >
+ * > 以下API需先使用UIContext中的[getDialogPresenter()](arkts-apis-uicontext-uicontext.md#getdialogpresenter)方法获取到DialogPresenter对象，再通过该对象调用对应方法。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.1.0 dynamic
+ * @since 26.0.1 dynamic
  */
 export class DialogPresenter {
   /**
-   * 提供一个固定样式的对话框。
+   * 提供一个固定样式的弹出框，返回对话结果。使用Promise异步回调。适用于使用系统统一样式展示提示或确认信息的场景。
    *
-   * @param { dialog.DialogStyleOptions } [options] - 对话框选项。
-   * @returns { Promise<DialogResult> } 用于返回对话结果的Promise。
+   * @param { dialog.DialogStyleOptions } [options] - 固定样式弹出框的配置选项，用于配置弹出框的标题、副标题、消息、按钮及工作表项等内容。弹出框样式（背景、对齐、蒙层、避让等）
+   *      继承自[dialog.DialogBaseOptions](js-apis-dialog.md#dialogbaseoptions)。<br/>**说明：** dialog.DialogBaseOptions中的isModal与showInSubWindow不能同时设置为true。
+   * @returns { Promise<DialogResult> } Promise对象，返回对话结果，包含弹出框ID。
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
    * @throws { BusinessError } 103308 - The dialog cannot be opened due to subwindow create failure.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   present(options?: dialog.DialogStyleOptions): Promise<DialogResult>;
 
   /**
-   * 提供一个自定义样式的对话框，其中包含所提供的内容。
+   * 提供一个自定义样式的弹出框，其中包含所提供的内容，返回对话结果，使用Promise异步回调。适用于需要自定义弹出框内容、布局和样式的场景。
    *
-   * content参数通过联合类型接受CustomBuilder或ComponentContent：
-   * -CustomBuilder：自定义对话框内容的生成器函数。
-   * - ComponentContent：支持状态驱动更新的ComponentContent。
-   *
-   * > **说明**
-   * > isModal = true和showInSubWindow = true不能同时使用。
-   *
-   * @param { CustomBuilder | CustomBuilderWithId | ComponentContent<Object> } content - 自定义对话框内容。
-   * @param { dialog.DialogCustomOptions } [options] - 自定义对话框选项。
-   * @returns { Promise<DialogResult> } 用于返回对话结果的Promise。
+   * @param { CustomBuilder | CustomBuilderWithId | ComponentContent<Object> } content - 自定义弹出框内容，支持三种类型：CustomBuilder（自定义内容的生成器函数）、CustomBuilderWithId（支持传入ID的生成器函数）、ComponentContent（支持状态驱动更新的组件内容）。
+   * @param { dialog.DialogCustomOptions } [options] - 自定义弹出框的配置选项，用于配置弹出框的背景、对齐、蒙层、避让等样式，继承自dialog.DialogBaseOptions。
+   * @returns { Promise<DialogResult> } Promise对象，返回对话结果，包含弹出框ID。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103302 - Dialog content already exist. The ComponentContent has already been opened.
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
@@ -1344,39 +1458,40 @@ export class DialogPresenter {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   present(content: CustomBuilder | CustomBuilderWithId | ComponentContent<Object>, options?: dialog.DialogCustomOptions): Promise<DialogResult>;
 
   /**
-   * 更新已呈现的自定义对话框。
+   * 更新已弹出的自定义弹出框，无返回结果。使用Promise异步回调。适用于弹出框已弹出后需要动态更新其样式或位置的交互场景。
    *
-   * @param { ComponentContent<Object> } content - 用于标识对话框的内容。
-   * @param { dialog.DialogBaseOptions } [options] - 要更新的选项。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @param { ComponentContent<Object> } content - 用于标识弹出框的组件内容。
+   * @param { dialog.DialogBaseOptions } [options] - 要更新的弹出框选项。目前仅支持更新alignment、offset、autoCancel、maskColor。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103303 - Dialog content not found. The ComponentContent cannot be found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   update(content: ComponentContent<Object>, options?: dialog.DialogBaseOptions): Promise<void>;
 
   /**
-   * 关闭对话框。
-   * 接受对话ID（由当前返回）或ComponentContent引用。
+   * 关闭弹出框，无返回结果。使用Promise异步回调。适用于在用户完成交互后关闭弹出框的场景。
+   * 
+   * 接受弹出框ID（由[present](#present)返回的[DialogResult](js-apis-dialog.md#dialogresult)中的dialogId）或[ComponentContent](./js-apis-arkui-ComponentContent.md)引用作为target，关闭对应的弹出框。
    *
-   * @param { int | ComponentContent<Object> } target - 要取消的对话ID或组件内容。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @param { int | ComponentContent<Object> } target - 要关闭的弹出框ID或组件内容。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103303 - Dialog content not found. The ComponentContent cannot be found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   dismiss(target: int | ComponentContent<Object>): Promise<void>;
 }
@@ -1461,12 +1576,8 @@ export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, nod
 export declare type GestureListenerCallback = (info: GestureTriggerInfo) => void;
 
 /**
-* Defines the PageInfo type.
-* The value of routerPageInfo indicates the information of the router page, or undefined if the
-* frameNode does not have router page information. And the value of navDestinationInfo indicates
-* the information of the navDestination, or undefined if the frameNode does not have navDestination
-* information.
-*
+ * Router和NavDestination等页面信息，若无对应的Router或NavDestination页面信息，则对应属性为undefined。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1476,7 +1587,8 @@ export declare type GestureListenerCallback = (info: GestureTriggerInfo) => void
 export interface PageInfo {
 
   /**
-   * the property of router page information.
+   * Router页面信息，包含当前Router页面的路由状态和页面信息。当页面为Router页面时，可通过此属性获取对应的Router页面信息；
+   * 若当前页面不是Router页面，则该属性为undefined。若无对应的Router页面信息，则该属性为undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1487,7 +1599,8 @@ export interface PageInfo {
   routerPageInfo?: observer.RouterPageInfo;
 
   /**
-   * the property of navDestination information.
+   * NavDestination页面信息，包含当前NavDestination页面的导航状态和页面信息。当页面为NavDestination页面时，可通过此属性获取对应的NavDestination页面信息；
+   * 若当前页面不是NavDestination页面，则该属性为undefined。若无对应的NavDestination页面信息，则该属性为undefined。
    *
    * @type { ?observer.NavDestinationInfo }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1500,9 +1613,8 @@ export interface PageInfo {
 }
 
 /**
-* the property of OverlayManager.
-*
- * @interface OverlayManagerOptions
+* 初始化OverlayManager时所用参数。
+* 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1512,7 +1624,8 @@ export interface PageInfo {
 export interface OverlayManagerOptions {
 
   /**
-   * the render property of overlay node.
+   * 是否渲染overlay根节点，true表示渲染overlay根节点，false表示不渲染overlay根节点，默认值为true。
+   * 通过将该参数设置为false，可以解决OverlayManager显示在PhotoPickerComponent上层时，PhotoPickerComponent无法选中照片的问题。
    *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1524,7 +1637,7 @@ export interface OverlayManagerOptions {
   renderRootOverlay?: boolean;
 
   /**
-   * Set whether support backPressed event or not.
+   * 是否支持通过侧滑手势关闭OverlayManager下的ComponentContent，true表示可以通过侧滑关闭，false表示不可以通过侧滑关闭，默认值为false。
    *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1534,6 +1647,20 @@ export interface OverlayManagerOptions {
    * @since 19 dynamic
    */
   enableBackPressedEvent?: boolean;
+
+  /**
+   * 拦截Overlay侧滑返回事件的回调。
+   * 说明：
+   * 1. 注册该回调且enableBackPressedEvent设置为true时，侧滑返回事件不会自动关闭Overlay，而是调用该回调决定事件是否向下层组件传递。
+   * 2. 返回true表示拦截该事件（事件被消费，不会向下层传递）；返回false表示不拦截，事件将向下层组件透传。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  onBackPress?: OnOverlayBackPressCallback;
 }
 
 /**
@@ -1583,14 +1710,15 @@ export interface OrderOverlayOptions {
 }
 
 /**
-* 提供UI组件行为变化的无感监听能力。
+* UIObserver提供了UI组件行为变化的无感监听能力，支持监听Navigation页面状态变化（NavDestination）、滚动事件、路由页面状态、屏幕像素密度变化、
+* 绘制指令下发、布局完成、页面切换等多种UI组件行为。开发者可以通过该模块实现对UI组件状态的实时感知和追踪，适用于需要监控页面生命周期、处理滚动事件、
+* 优化渲染性能等场景，帮助开发者更好地理解和管理UI组件的行为变化。无感监听是指在组件状态变化时，系统自动触发回调函数通知开发者，无需开发者手动轮询或主动查询组件状态。监听器通过注册回调函数实现，当目标组件状态改变时，系统内部的事件分发机制会调用已注册的回调函数，携带状态变化信息。
 *
 * > **说明：**
 *
 * > - 以下API需先使用UIContext中的[getUIObserver()]{@link UIContext#getUIObserver}方法获取到UIObserver对象，再通过该对象调用对应方法。
 * >
-* > - UIObserver仅能监听到本进程内的相关信息，不支持获取<!--Del-->[UIExtensionComponent]{@link ui_extension_component}等<!--DelEnd-->跨进程场景的信
-* > 息。
+* > - UIObserver仅能监听到本进程内的UI组件状态变化信息，不支持获取<!--Del-->[UIExtensionComponent]{@link ui_extension_component}等<!--DelEnd-->跨进程场景的信息。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2392,9 +2520,9 @@ export class UIObserver {
 
   /**
    * 注册一个回调函数，以便在特定节点的渲染状态发生变化时调用，当注册成功时，此回调将立即执行一次。
-   * 
+   *
    * 注意节点数量的限制。出于性能考虑，在单个UI实例中，注册节点太多，将会抛出异常。
-   * 
+   *
    * 通常，当组件被移动到屏幕外时，会收到RENDER_OUT的通知。但在某些情况下，即使组件移动到屏幕外也不会触发RENDER_OUT通知。例如，具有缓存功能的组件[Swiper]{@link swiper}，即使
    * [cachedCount]{@link SwiperAttribute#cachedCount(count: number, isShown: boolean)}属性中的参数isShown配置为true，也不会触发
    * RENDER_OUT通知。
@@ -2641,7 +2769,7 @@ export class UIObserver {
 }
 
 /**
-* Swiper组件的内容区信息。
+* Swiper组件的内容区信息，包含Swiper组件标识、唯一标识符及当前显示状态的子组件信息，用于获取Swiper运行时的内容区状态。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2652,7 +2780,7 @@ export class UIObserver {
 export interface SwiperContentInfo {
 
   /**
-   * Swiper组件的id。
+   * Swiper组件通过通用属性id设置的标识符，由开发者指定。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2663,7 +2791,7 @@ export interface SwiperContentInfo {
   id: string;
 
   /**
-   * Swiper子组件的唯一标识符。
+   * Swiper组件的唯一标识符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2686,7 +2814,7 @@ export interface SwiperContentInfo {
 }
 
 /**
-* Swiper子组件的信息。
+* Swiper子组件的信息，包含子组件的唯一标识符和索引，可通过SwiperContentInfo获取。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2697,7 +2825,7 @@ export interface SwiperContentInfo {
 export interface SwiperItemInfo {
 
   /**
-   * SwiperItem的uniqueId值。
+   * Swiper子组件的唯一标识符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2708,7 +2836,7 @@ export interface SwiperItemInfo {
   uniqueId: number;
 
   /**
-   * Swiper子组件在Swiper中的索引。
+   * Swiper子组件在Swiper中的索引，取值从0开始，最大值为Swiper子组件数量-1。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2720,8 +2848,8 @@ export interface SwiperItemInfo {
 }
 
 /**
- * 提供获取组件绘制区域坐标和大小的能力。
- * 
+ * 提供获取组件绘制区域坐标、大小、平移、缩放、旋转及仿射矩阵等属性信息的能力，适用于需要查询组件绘制区域信息的场景，帮助开发者获取组件布局结果。
+ *
  * > **说明：**
  * >
  * > - 本Class首批接口从API version 10开始支持。
@@ -2738,15 +2866,19 @@ export class ComponentUtils {
 
   /**
    * 获取组件大小、位置、平移、缩放、旋转及仿射矩阵属性信息。
-   * 
+   *
    * > **说明：**
    * >
    * > 该接口需要在目标组件布局完成以后获取目标组件区域大小信息，建议在[布局回调]{@link @ohos.arkui.inspector:inspector}中使用该接口。如果组件动态创建但未挂载组件树，则无法通过该接口获取正常的
-   * > 组件信息。因为组件在未挂载组件树的情况下，一般未经过UI框架正常的测量与布局，此时请确保组件正常挂载组件树后再尝试获取组件信息。
+   * > 组件信息。因为此时组件一般未经过UI框架的测量与布局，请确保组件已挂载到组件树后再尝试获取组件信息。
+   * >
+   * > 该接口返回的组件位置为布局位置，某些属性计算不支持，如位置设置类[offset]{@link CommonMethod#offset}、[markAnchor]{@link CommonMethod#markAnchor}、[Edges]{@link Edges}
+   * 和[LocalizedEdges]{@link LocalizedEdges}类型的[position]{@link CommonMethod#position}，以及图形变换类[rotate]{@link CommonMethod#rotate}、
+   * [translate]{@link CommonMethod#translate}、[scale]{@link CommonMethod#scale}、[transform]{@link CommonMethod#transform}。
+   * 可使用替代接口[getPositionToWindowWithTransform]{@link FrameNode#getPositionToWindowWithTransform}，获取组件相对于窗口且带有绘制属性的位置偏移。
    *
-   * @param { string } id - 组件唯一标识id。
-   * @returns { componentUtils.ComponentInfo } Size, position, translation, scaling, rotation, and affine matrix
-   *     information of the component.
+   * @param { string } id - 组件唯一标识id，需确保该id对应的组件已挂载到组件树且完成布局。
+   * @returns { componentUtils.ComponentInfo } 组件大小、位置、平移、缩放、旋转及仿射矩阵属性信息。
    * @throws { BusinessError } 100001 - UI execution context not found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2771,7 +2903,7 @@ export class OverlayManager {
   /**
    * Adds a specified ComponentContent node to the OverlayManager.
    *
-   * @param { ComponentContent } content - 	Content to add to the target node on the **OverlayManager**.<br>
+   * @param { ComponentContent } content -  Content to add to the target node on the **OverlayManager**.<br>
    *     **NOTE**<br>
    *     By default, the new node is centered on the page and stacked according to its stacking level.
    * @param { number } [ index ] - Stacking level of the new node on the **OverlayManager**.<br>
@@ -2885,7 +3017,13 @@ export class OverlayManager {
 }
 
 /**
- * 提供控制放大镜的能力。
+ * 提供控制放大镜的显示与隐藏的能力，放大镜会对组件内容进行放大显示，便于查看组件细节。适用于非文本类组件（如图片）需要查看细节的场景。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMagnifier()]{@link UIContext.getMagnifier}方法获取Magnifier实例，再通过此实例调用对应方法。
+ * >
+ * > - 与文本类组件自带的放大镜能力互不影响，文本类组件推荐使用自带的放大镜能力。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2896,9 +3034,14 @@ export class OverlayManager {
 export class Magnifier {
 
   /**
-   * 将放大镜和组件绑定。
+   * 绑定放大镜与指定id的组件。
    *
-   * @param { string } id - 组件id
+   * > **说明**
+   * >
+   * >  使用前需先通过UIContext中的getMagnifier()方法获取Magnifier实例。
+   *
+   * @param { string } id - 组件id，可通过通用属性[id]{@link CommonMethod#id}或[key]{@link
+   *     CommonMethod#key}设置。当组件id为空字符串或未找到匹配id的组件时，不显示放大镜。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2908,12 +3051,18 @@ export class Magnifier {
   bind(id: string): void;
 
   /**
-   * 设置放大镜显示内容的位置。
+   * 设置放大镜显示的组件内容相对于组件左上角的位置，设置成功后放大镜会对以该坐标点为中心的区域内容进行放大显示。
    *
-   * @param { number } x - 放大镜显示内容相对组件水平方向坐标。
-   * 单位为vp。
-   * @param { number } y - 放大镜显示内容相对组件垂直方向坐标。
-   * 单位为vp。
+   * > **说明**
+   * >
+   * > - 使用前需先通过UIContext中的getMagnifier()方法获取Magnifier实例。
+   * >
+   * > - 调用此方法前，需先调用[bind](#bind)方法绑定目标组件。
+   * >
+   * > - 当与放大镜绑定的组件自身内容发生变化时，放大镜显示内容不会自动更新，需要主动调用show接口对放大镜显示内容进行更新。
+   *
+   * @param { number } x - 放大镜显示的组件内容相对于组件左上角的水平方向坐标，单位为vp。当坐标值大于组件宽度或小于0时不显示放大镜；传入undefined时不生效，保持放大镜当前的显示状态。
+   * @param { number } y - 放大镜显示的组件内容相对于组件左上角的垂直方向坐标，单位为vp。当坐标值大于组件高度或小于0时不显示放大镜；传入undefined时不生效，保持放大镜当前的显示状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2923,7 +3072,7 @@ export class Magnifier {
   show(x: number, y: number): void;
 
   /**
-   * 将放大镜和组件解绑。
+   * 解除放大镜与当前组件的绑定。使用前需先通过UIContext中的getMagnifier()方法获取Magnifier实例。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2946,9 +3095,10 @@ export class Magnifier {
 export interface AtomicServiceBar {
 
   /**
-   * Set the visibility of the bar, except the icon.
+   * 通过该方法设置原子化服务menuBar是否可见。
    *
-   * @param { boolean } visible - whether this bar is visible.
+   * @param { boolean } visible - 原子化服务menuBar是否可见。true表示设置menuBar可见，false表示设置menuBar不可见。
+   *         从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -2957,9 +3107,10 @@ export interface AtomicServiceBar {
   setVisible(visible: boolean): void;
 
   /**
-   * Set the background color of the bar.
+   * 通过该方法设置原子化服务menuBar的背景颜色。
    *
-   * @param { Nullable< Color | number | string> } color - the color to set, undefined indicates using default.
+   * @param { Nullable< Color | number | string> } color - 原子化服务menuBar的背景颜色，undefined代表使用默认颜色。
+   *         number为HEX格式颜色，支持rgb或者argb，示例：0xffffff。string为rgb或者argb格式颜色，示例：'#ffffff'。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -2968,9 +3119,9 @@ export interface AtomicServiceBar {
   setBackgroundColor(color: Nullable< Color | number | string>): void;
 
   /**
-   * Set the title of the bar.
+   * 通过该方法设置原子化服务menuBar的标题内容。
    *
-   * @param { string } content - the content of the bar.
+   * @param { string } content - 原子化服务menuBar中的标题内容。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -2979,9 +3130,9 @@ export interface AtomicServiceBar {
   setTitleContent(content: string): void;
 
   /**
-   * Set the font style of the bar's title.
+   * 通过该方法设置原子化服务menuBar标题的字体样式。
    *
-   * @param { FontStyle } font - the font style of the bar's title.
+   * @param { FontStyle } font - 原子化服务menuBar标题中的字体样式。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -2990,9 +3141,10 @@ export interface AtomicServiceBar {
   setTitleFontStyle(font: FontStyle): void;
 
   /**
-   * Set the color of the icon on the bar.
+   * 通过该方法设置原子化服务menuBar图标的颜色。
    *
-   * @param { Nullable< Color | number | string> } color - the color to set to icon, undefined indicates using default.
+   * @param { Nullable< Color | number | string> } color - 原子化服务menuBar图标的颜色，undefined代表使用默认颜色。
+   *         number为HEX格式颜色，支持rgb或者argb，示例：0xffffff。string为rgb或者argb格式颜色，示例：'#ffffff'。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3001,9 +3153,9 @@ export interface AtomicServiceBar {
   setIconColor(color: Nullable< Color | number | string>): void;
 
   /**
-   * Get size and position of the bar.
+   * 获取原子化服务menuBar相对窗口的布局信息。
    *
-   * @returns { Frame } The size and position of bar in vp relative to window.
+   * @returns { Frame } 原子化服务menuBar的大小和位置。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3013,9 +3165,10 @@ export interface AtomicServiceBar {
   getBarRect(): Frame;
 
   /**
-   * 当appbar的组件大小发生变化时会触发调用。
+   * 当原子化服务menuBar（即AtomicServiceMenuBar，右上角菜单功能胶囊）的大小或位置发生变化时，触发注册的回调，返回menuBar最新的布局信息。
+   * 该布局信息包含了menuBar的大小和位置，其中位置已考虑左右margin的影响。
    *
-   * @param { Callback<Frame> } callback - 回调函数的参数为Frame。当传入的callback为undefined时表示取消监听appbar组件的大小变化。回调函数触发时，回调函数的参数不可能为undefined或者null。
+   * @param { Callback<Frame> } callback - AtomicServiceMenuBar布局变化时的回调，返回变化后的布局信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3082,7 +3235,7 @@ export interface GestureTriggerInfo {
 }
 
 /**
- * 该参数用于指定需要监听的手势回调阶段（传入空数组将无效），仅当手势触发指定阶段时才会发送通知。
+ * 该参数用于指定需要监听的手势回调阶段（传入空数组时不监听任何手势回调阶段），仅当手势触发指定阶段时才会发送通知。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3093,7 +3246,7 @@ export interface GestureTriggerInfo {
 export interface GestureObserverConfigs {
 
   /**
-   * 手势事件对象。
+   * 需要监听的手势回调阶段。传入空数组将无效，仅当手势触发指定阶段时才会发送通知。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3105,7 +3258,19 @@ export interface GestureObserverConfigs {
 }
 
 /**
- * Represents a dynamic synchronization scene.
+ * 提供组件自定义场景下相关帧率的配置。
+ * 
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 12开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
+ * >
+ * > - 以下接口需先使用UIContext中的
+ * >   [requireDynamicSyncScene](arkts-apis-uicontext-uicontext.md#requiredynamicsyncscene12)方法获取DynamicSyncScene对象，
+ * >   再通过此实例调用对应方法。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3115,7 +3280,9 @@ export interface GestureObserverConfigs {
 export class DynamicSyncScene {
 
   /**
-   * Sets the FrameRateRange of the DynamicSyncScene.
+   * 设置期望帧率范围。
+   * 
+   * 最终结果不一定是设置的帧率，会由系统能力做综合决策，尽量满足开发者的设置帧率。
    *
    * @param { ExpectedFrameRateRange } range - The range of frameRate.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3126,7 +3293,7 @@ export class DynamicSyncScene {
   setFrameRateRange(range: ExpectedFrameRateRange): void;
 
   /**
-   * Gets the FrameRateRange of the DynamicSyncScene.
+   * 获取期望帧率范围。
    *
    * @returns { ExpectedFrameRateRange } The range of frameRate.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3138,10 +3305,10 @@ export class DynamicSyncScene {
 }
 
 /**
-* 提供Swiper组件相关帧率的配置。
+* 提供Swiper组件动态帧率场景的相关配置，适用于为动画过渡和手势跟手等不同交互场景设置差异化帧率范围，以兼顾流畅度和功耗。
 *
 * > **说明**
-* > SwiperDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext}，对应Swiper的动态帧率场景。
+* > SwiperDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext}，对应Swiper的动态帧率场景。使用前需先通过UIContext的requireDynamicSyncScene方法获取实例，再调用继承的方法设置对应场景的帧率范围。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3151,7 +3318,7 @@ export class DynamicSyncScene {
 export class SwiperDynamicSyncScene extends DynamicSyncScene {
 
   /**
-   * Swiper的动态帧率场景。
+   * Swiper的动态帧率场景类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3162,9 +3329,12 @@ export class SwiperDynamicSyncScene extends DynamicSyncScene {
 }
 
 /**
-* Represents a dynamic synchronization scene of Marquee.
-*
- * @extends DynamicSyncScene
+ * 提供Marquee组件动态帧率的配置能力，支持在Marquee组件运行动画时动态调节帧率，优化性能和功耗，适用于需要在跑马灯场景中平衡动画流畅度和系统资源消耗的场景。
+ *
+ * > **说明：**
+ * >
+ * > - MarqueeDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext}，对应[Marquee]{@link ./@internal/component/ets/marquee}的动态帧率场景。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice
@@ -3173,10 +3343,8 @@ export class SwiperDynamicSyncScene extends DynamicSyncScene {
 export class MarqueeDynamicSyncScene extends DynamicSyncScene {
 
   /**
-   * Type of the MarqueeDynamicSyncSceneType.
+   * Marquee的动态帧率场景类型。用于指定Marquee组件的动态帧率场景模式，不同场景类型对应不同的帧率调节策略，详见MarqueeDynamicSyncSceneType。
    *
-   * @type { MarqueeDynamicSyncSceneType }
-   * @readonly
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -3187,7 +3355,7 @@ export class MarqueeDynamicSyncScene extends DynamicSyncScene {
 
 /**
  * 提供发起主动拖拽的能力，当应用接收到触摸或长按等事件时可以主动发起拖拽的动作，并在其中携带拖拽信息。
- * 
+ *
  * > **说明：**
  * >
  * > 以下API需先使用UIContext中的[getDragController()]{@link UIContext#getDragController}方法获取DragController实例，再通过此实例调用对应方法。
@@ -3206,12 +3374,12 @@ export class DragController {
    * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。 <br/> **说明：** <br/>不支持全局builder。如果builder中使用了
    *     [Image]{@link image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link ImageAttribute#syncLoad}为true。该builder只用于生成当次拖拽中显示的图
    *     片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
-   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息对象，用于指定发起拖拽的触摸点、拖拽过程中携带的数据、额外信息等拖拽配置信息。
    * @param { AsyncCallback<{ event: DragEvent, extraParams: string }> } callback - Callback used to return the result.<br>
    *     - **event**: drag event information that includes only the drag result.<br>- **extraParams**: extra
    *     information about the drag event. [since 11 - 11]
-   * @param { AsyncCallback<dragController.DragEventParam> } callback - 拖拽结束返回结果的回调<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>-
-   *     extraParams：拖拽事件额外信息。 [since 12]
+   * @param { AsyncCallback<dragController.DragEventParam> } callback - 拖拽结束返回结果的回调，回调参数包括err和data：err表示错误信息，data表示拖拽事件结果；
+   * data.event为拖拽事件信息，仅包括拖拽结果，data.extraParams为拖拽事件额外信息。 [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3229,12 +3397,15 @@ export class DragController {
   /**
    * 主动发起拖拽能力，传入拖拽发起后跟手效果所拖拽的对象以及携带拖拽信息。通过Promise返回拖拽事件结果。
    *
-   * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。
-   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。当仅需通过builder生成当次拖拽中显示的图片时，使用CustomBuilder；当需要同时提供pixelMap、builder或extraInfo等拖拽项信息时，使用DragItemInfo。
+   * <br> **说明：** <br>CustomBuilder不支持全局builder。如果builder中使用了Image组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link ImageAttribute#syncLoad}为true。
+   * 该builder只用于生成当次拖拽中显示的图片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息对象。
    * @returns { Promise<{ event: DragEvent, extraParams: string }> } Callback used to return the result.
    *     <br>- **event**: drag event information that includes only the drag result.
    *     <br>- **extraParams**: extra information about the drag event. [since 11 - 11]
-   * @returns { Promise<dragController.DragEventParam> } A Promise with the drag event information. [since 12]
+   * @returns { Promise<dragController.DragEventParam> } Promise对象。resolve返回拖拽结束结果：
+   * <br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。reject返回错误信息。 [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3252,7 +3423,7 @@ export class DragController {
   /**
    * 创建拖拽的Action对象，需要显式指定拖拽背板图（可多个），以及拖拽的数据，跟手点等信息；当通过一个已创建的Action对象发起的拖拽未结束时，无法再次创建新的Action对象，接口会抛出异常；当Action对象的生命周期结束
    * 后，注册在该对象上的回调函数会失效，因此需要在一个尽量长的作用域下持有该对象，并在每次发起拖拽前通过createDragAction返回新的对象覆盖旧值。
-   * 
+   *
    * > **说明：**
    * >
    * > 建议控制传递的拖拽背板数量，传递过多容易导致拖起的效率问题。
@@ -3351,12 +3522,17 @@ export class DragController {
 }
 
 /**
- * class MeasureUtils
+ * MeasureUtils提供文本宽度、高度等相关计算能力，适用于文本自适应布局、多行文本截断、动态UI适配等场景。通过该类可精确计算文本尺寸，帮助开发者在布局前预判文本显示效果，避免文本溢出或布局错乱等问题。
  *
- * <p><strong>NOTE</strong>:
- * <br>You must first use getMeasureUtils() in UIContext to obtain a MeasureUtils instance,
- * and then call the APIs using the obtained instance.
- * </p>
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMeasureUtils()]{@link UIContext.getMeasureUtils}方法获取MeasureUtils实例，再通过此实例调用对应方法。
+ * >
+ * > - 如需更多测算文本参数，建议使用图形对应测算接口[Paragraph]{@link @ohos.graphics.text:text.Paragraph}接口。
+ * >
+ * > - 调用文本计算接口时，应避免同时用[ApplicationContext.setFontSizeScale](../apis-ability-kit/js-apis-inner-application-applicationContext.md#applicationcontextsetfontsizescale13)设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
+ * >
+ * > - 在测算裁剪后的文本时，由于某些Unicode字符（如emoji）的码位长度大于1，直接按字符串长度裁剪会导致不准确的结果。建议基于Unicode码点进行迭代处理，避免错误截断字符，确保测算结果准确，请参考[measureTextSize]{@link MeasureUtils.measureTextSize}的示例2。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3365,12 +3541,17 @@ export class DragController {
  * @since 12 dynamic
  */
 export class MeasureUtils {
-
   /**
-   * Obtains the width of the specified text in a single line layout.
+   * 计算指定文本作为单行文本显示时的宽度，如果文本包含多行（由换行符`\n`分隔），则返回其中最长的行的宽度。
    *
-   * @param { MeasureOptions } options - Options.
-   * @returns { number } - The unit is px.
+   * > **说明**
+   * >
+   * > - 调用此接口时，应避免同时使用[ApplicationContext.setFontSizeScale]{@link ./application/ApplicationContext:ApplicationContext.setFontSizeScale}设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
+   * >
+   * > - measureText接口的计算结果始终是单行文本的宽度，入参options中配置的布局约束（如constraintWidth、maxLines）对measureText的结果没有影响。如果需要计算布局约束下的宽度，请使用[measureTextSize]{@link MeasureUtils.measureTextSize}方法。
+   *
+   * @param { MeasureOptions } options - 文本测量配置选项。包含文本内容（textContent）、字体大小（fontSize）等属性。constraintWidth、maxLines等布局约束属性对measureText的计算结果无影响，如需计算布局约束下的宽度，请使用measureTextSize方法。
+   * @returns { number } 文本宽度。<br>**说明：**<br>浮点数会向上取整。<br>单位：px
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3380,11 +3561,14 @@ export class MeasureUtils {
   measureText(options: MeasureOptions): number;
 
   /**
-   * Obtains the width and height of the specified text in a single line layout.
+   * 计算指定文本的宽度和高度。
    *
-   * @param { MeasureOptions } options - Options of measure area occupied by text.
-   * @returns { SizeOptions } width and height for text to display.The return values for text width and height are both
-   *     in px.
+   * > **说明**
+   * >
+   * > 调用此接口时，应避免同时使用[ApplicationContext.setFontSizeScale]{@link ./application/ApplicationContext:ApplicationContext.setFontSizeScale}设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
+   *
+   * @param { MeasureOptions } options - 文本测量配置选项。包含文本内容（textContent）、字体大小（fontSize）、约束宽度（constraintWidth）、最大行数（maxLines）等属性，用于配置被计算文本的测量参数。
+   * @returns { SizeOptions } 返回文本所占布局宽度和高度。<br>**说明：**<br>未设置constraintWidth时，文本宽度返回值会向上取整；传参constraintWidth时，文本宽度返回值不被取整。<br>文本宽度以及高度返回值单位均为px。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3394,11 +3578,11 @@ export class MeasureUtils {
   measureTextSize(options: MeasureOptions): SizeOptions;
 
   /**
-   * 获取样式字符串的布局信息。
+   * 将属性字符串根据文本布局选项转换成对应的[Paragraph]{@link @ohos.graphics.text:text.Paragraph}数组。
    *
-   * @param { StyledString } styledString - 样式化的字符串值。
-   * @param { TextLayoutOptions } [options] - 布局选项。
-   * @returns { Array<Paragraph> } 段落结果
+   * @param { StyledString } styledString - 待转换的属性字符串。
+   * @param { TextLayoutOptions } [options] - 文本布局选项。省略时使用默认布局配置。
+   * @returns { Array<Paragraph> } 根据文本布局选项转换后得到的[Paragraph]{@link @ohos.graphics.text:text.Paragraph}对象数组，用于后续的文本布局计算。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3408,9 +3592,15 @@ export class MeasureUtils {
 }
 
 /**
- * 提供控制焦点的能力，如清除、移动和激活焦点等功能。
- * 
+ * 提供控制焦点的能力，如清除、移动和激活焦点等功能，适用于需要管理页面或组件焦点状态、控制焦点流转的场景，可帮助开发者优化键盘等输入方式下的焦点交互体验。
+ *
  * > **说明：**
+ *
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 12开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
  * >
  * > 以下API需先使用UIContext中的[getFocusController()]{@link UIContext#getFocusController}方法获取FocusController实例，再通过该实例调用对应方法。
  *
@@ -3434,7 +3624,7 @@ export class FocusController {
   clearFocus(): void;
 
   /**
-   * 通过组件的id将焦点转移到组件树对应的实体节点，当前帧生效。
+   * 通过组件的id将焦点转移到组件树对应的实体节点，当前帧生效，适用于需要在表单校验、页面初始化或键盘操作流程中主动将焦点定位到指定组件的场景。
    *
    * @param { string } key - 节点对应的[组件标识]{@link common}。
    * @throws { BusinessError } 150001 - the component cannot be focused.
@@ -3462,8 +3652,8 @@ export class FocusController {
   activate(isActive: boolean, autoInactive?: boolean): void;
 
   /**
-   * 返回UI实例的焦点激活态。
-   * 
+   * 返回UI实例的焦点激活态。适用于需要根据当前焦点激活状态决定是否启用方向键走焦或更新焦点提示的场景。
+   *
    * 焦点激活态可参考[基础概念：焦点激活态](docroot://ui/arkts-common-events-focus-event.md#基础概念)。
    *
    * @returns { boolean } 返回UI实例的焦点激活态。true表示当前进入焦点激活态，false表示当前已退出焦点激活态。
@@ -3490,7 +3680,7 @@ export class FocusController {
   setAutoFocusTransfer(isAutoFocusTransfer: boolean): void;
 
   /**
-   * 设置按键事件处理的优先级。
+   * 设置按键事件处理的优先级，适用于父子组件都需要处理按键事件时，开发者需要控制按键事件优先分发策略的场景。
    *
    * @param { KeyProcessingMode } mode - 按键处理模式。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3512,8 +3702,8 @@ export class FocusController {
 export type PointerStyle = pointer.PointerStyle;
 
 /**
- * 提供光标样式设置的能力。
- * 
+ * 提供鼠标光标样式设置的能力，支持恢复默认鼠标光标样式、设置系统鼠标光标样式以及设置自定义鼠标光标样式，适用于需要根据界面交互状态动态调整鼠标光标显示效果的场景，有助于提升界面交互提示的清晰度。
+ *
  * > **说明：**
  * >
  * > - 本Class首批接口从API version 12开始支持。
@@ -3531,6 +3721,10 @@ export class CursorController {
   /**
    * 恢复默认的光标样式。
    *
+   * > **说明：**
+   * >
+   * > 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3541,7 +3735,7 @@ export class CursorController {
 
   /**
    * 更改当前的鼠标光标样式。
-   * 
+   *
    * > **说明：**
    * >
    * > 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
@@ -3557,15 +3751,17 @@ export class CursorController {
 
   /**
    * 设置自定义鼠标光标样式。
-   * 
+   *
    * > **说明：**
    * >
-   * > 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
+   * > - 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
+   * > - 仅支持设置静态图片，不支持设置动态图片。
    *
    * @param { image.PixelMap } value - 自定义鼠标光标样式的像素图。最大尺寸为256*256px，超过该尺寸时设置自定义鼠标光标样式不生效。
-   * @param { int } [focusX] - 自定义光标的焦点X坐标。焦点指的是鼠标实际点击的位置，焦点设置为(0, 0)时表示图片左上角为实际点击位置。<br/>默认值：0<br/>单位：px<br/>取值范围：
-   *     [0, +∞)
-   * @param { int } [focusY] - 自定义光标的焦点Y坐标。<br/>默认值：0<br/>单位：px<br/>取值范围：[0, +∞)
+   * @param { int } [focusX] - 自定义光标焦点的X坐标。以光标图片左上角为原点，向右为正方向。该焦点将在显示时与系统鼠标指针的屏幕坐标对齐，鼠标的点击、拖拽等操作均以此点为准。
+   * <br>默认值：0<br>单位：px<br>取值范围：[0, 图片宽度]，超出取值范围时按默认值处理。
+   * @param { int } [focusY] - 自定义光标焦点的Y坐标。以光标图片左上角为原点，向下为正方向。结合focusX共同确定图像内代表实际交互位置的点。
+   * <br>默认值：0<br>单位：px<br>取值范围：[0, 图片高度]，超出取值范围时按默认值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -3575,8 +3771,19 @@ export class CursorController {
 }
 
 /**
-* class ContextMenuController
-*
+ * 提供控制菜单关闭的能力。开发者可以通过此接口在特定场景下（如定时关闭、点击外部区域关闭等）主动关闭菜单。
+ *
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 12开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
+ *
+ * > - 以下API需先使用UIContext中的[getContextMenuController()]{@link UIContext#getContextMenuController}方法获取
+ * > ContextMenuController实例，再通过此实例调用对应方法。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3586,7 +3793,7 @@ export class CursorController {
 export declare class ContextMenuController {
 
   /**
-   * Close context menu.
+   * 关闭当前通过bindContextMenu展示的菜单。若当前无菜单展示，调用本方法无效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3598,7 +3805,7 @@ export declare class ContextMenuController {
 }
 
 /**
-* 用于设置下一帧渲染时需要执行的任务。
+* 用于定义帧回调任务，可在下一帧渲染阶段或帧渲染任务结束后的空闲阶段执行。
 *
 * > **说明：**
 * >
@@ -3617,7 +3824,11 @@ export abstract class FrameCallback {
   /**
    * 在下一帧进行渲染时，该方法将被执行。
    *
-   * @param { number } frameTimeInNano - 下一帧渲染开始执行的时间，以纳秒为单位。<br/>取值范围：[0, +∞)
+   * 继承FrameCallback类并重写该方法后，可配合[UIContext]{@link @ohos.arkui.UIContext}中的
+   * [postFrameCallback]{@link UIContext#postFrameCallback}和
+   * [postDelayedFrameCallback]{@link UIContext#postDelayedFrameCallback}使用。
+   * 
+   * @param { number } frameTimeInNano - 下一帧渲染开始执行的时间，以纳秒为单位，由系统回调时传入，开发者无需手动传入。<br>取值范围：[0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3627,9 +3838,10 @@ export abstract class FrameCallback {
   onFrame(frameTimeInNano: number): void;
 
   /**
-   * 在下一帧渲染结束时，如果距离下一个Vsync信号到来还有1ms以上的剩余时间，该方法将被执行，否则将顺延至后面的帧。
+   * 下一帧渲染任务结束后，若当前时间到下一个VSync信号的剩余时间大于1ms，则执行该回调；若剩余时间小于等于1ms，则将回调顺延至后续某一帧，待当前时间到下一个VSync信号的剩余时间大于1ms时执行。
+   * 若当前没有已请求的下一帧，系统会自动请求一帧。
    *
-   * @param { number } timeLeftInNano - 这一帧剩余的空闲时间，以纳秒为单位。<br/>取值范围：[0, +∞)
+   * @param { number } timeLeftInNano - 这一帧剩余的空闲时间，以纳秒为单位，由系统回调时传入，开发者无需手动传入。<br>取值范围：[0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3652,7 +3864,7 @@ export type Context = common.Context;
 
 /**
  * 提供获取组件截图的能力，包括已加载的组件的截图和没有加载的组件的截图。
- * 
+ *
  * > **说明：**
  * >
  * > - 本Class首批接口从API version 12开始支持。
@@ -3671,8 +3883,8 @@ export class ComponentSnapshot {
 
   /**
    * 获取已加载的组件的截图，传入组件的[组件标识]{@link common}，找到对应组件进行截图。使用callback异步回调。
-   * 
-   * > **说明：** 
+   *
+   * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
@@ -3696,7 +3908,7 @@ export class ComponentSnapshot {
 
   /**
    * 获取已加载的组件的截图，传入组件的[组件标识]{@link common}，找到对应组件进行截图。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
@@ -3720,8 +3932,8 @@ export class ComponentSnapshot {
 
   /**
    * 传入[CustomBuilder]{@link common:CustomBuilder}自定义组件，系统对其进行离屏构建后进行截图。使用callback异步回调。
-   * 
-   * > **说明：** 
+   *
+   * > **说明：**
    * >
    * > - 由于需要等待组件构建、渲染成功，离屏截图的回调有500ms以内的延迟，不适宜使用在对性能敏感的场景。
    * >
@@ -3730,7 +3942,8 @@ export class ComponentSnapshot {
    * @param { CustomBuilder } builder - 自定义组件构建函数。<br/>**说明：** 不支持全局builder。<br/>builder的根组件宽高为0时，截图操作会失败并抛出100001错误码。
    * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当截图返回结果成功，err为undefined，data为获取到的image.
    *     [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}；否则为错误对象。支持在回调中获取离屏组件绘制区域坐标和大小。
-   * @param { number } [delay] - 指定触发截图指令的延迟时间。当布局中使用了图片组件时，需要指定延迟时间，以便系统解码图片资源。资源越大，解码需要的时间越长，建议尽量使用不需要解码的PixelMap资源。<br/>
+   * @param { number } [delay] - 指定触发截图指令的延迟时间。当布局中使用了图片组件时，需要指定延迟时间，以便系统解码图片资源。
+   *     资源越大，解码需要的时间越长，建议尽量使用不需要解码的PixelMap资源。<br/>
    *     当使用PixelMap资源或对Image组件设置[syncLoad]{@link ImageAttribute#syncLoad}为true时，可以配置delay为0，强制不等待触发截图。该延迟时间并非指接口从调
    *     用到返回的时间，由于系统需要对传入的builder进行临时离屏构建，因此返回的时间通常要比该延迟时间长。<br/>**说明：** 截图接口传入的builder中，不应使用状态变量控制子组件的构建，如果必须要使用，在调用截图
    *     接口时，也不应再有变化，以避免出现截图不符合预期的情况。<br/> 默认值：300 <br/> 单位：毫秒 <br/> 取值范围：[0, +∞)，小于0时按默认值处理。
@@ -3757,8 +3970,8 @@ export class ComponentSnapshot {
 
   /**
    * 传入[CustomBuilder]{@link common:CustomBuilder}自定义组件，系统对其进行离屏构建后进行截图。使用Promise异步回调。
-   * 
-   * > **说明：** 
+   *
+   * > **说明：**
    * >
    * > - 由于需要等待组件构建、渲染成功，离屏截图的回调有500ms以内的延迟，不适宜使用在对性能敏感的场景。
    * >
@@ -3794,7 +4007,7 @@ export class ComponentSnapshot {
   /**
    * 获取已加载的组件的截图。传入组件的[组件标识]{@link common}，找到对应组件进行截图，同步等待截图完成返回[PixelMap]{@link @ohos.multimedia.image:image.PixelMap}。
    * 本方法会阻塞主线程，请谨慎使用。接口的最大等待时间为3s，如果3s后未返回将会抛出异常。
-   * 
+   *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
@@ -3819,7 +4032,7 @@ export class ComponentSnapshot {
 
   /**
    * 获取已加载的组件的截图，传入组件的uniqueId，找到对应组件进行截图。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
@@ -3845,7 +4058,7 @@ export class ComponentSnapshot {
 
   /**
    * 获取已加载的组件的截图，传入组件的uniqueId，找到对应组件进行截图。同步等待截图完成返回[PixelMap]{@link @ohos.multimedia.image:image.PixelMap}。
-   * 
+   *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
@@ -3903,7 +4116,7 @@ export class ComponentSnapshot {
 
   /**
    * 传入两个组件的ID，获取范围内的组件的截图，并通过Promise返回结果。
-   * 
+   *
    * > **说明：**
    * >
    * > start对应的组件和end对应的组件必须为同一棵组件树上的组件，且start对应的组件需要为end对应的组件的祖先组件。
@@ -3912,7 +4125,7 @@ export class ComponentSnapshot {
    * @param { NodeIdentity } end - 范围结束的组件的ID。
    * @param { boolean } isStartRect - 范围是否以开始组件的外接矩形为准。<br/>true表示以开始组件的外接矩形为准，false表示以结束组件的外接矩形为准。<br/>默认值为true。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数，不支持region参数。
-   * @returns { Promise<image.PixelMap> } Result of the snapshot.
+   * @returns { Promise<image.PixelMap> } 截图返回的结果。
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 100001 - Invalid ID detected.
    * @throws { BusinessError } 160003 - Unsupported color space or dynamic range mode in snapshot options. [since 23]
@@ -3992,7 +4205,7 @@ export abstract class TargetedGestureProposal extends BaseGestureHandlingProposa
 /**
  * 智慧手势点击动作处理。当通过[registerMonitor]{@link SmartGestureController#registerMonitor}接口动态自定义智慧手势行为时，设置返回值
  * [GestureHandlingResolution]{@link GestureHandlingResolution}的selectedProposal为该类型对象，会触发目标组件的点击操作。
- * 
+ *
  * > **说明：**
  * >
  * > - 该动作处理遵循“先选中，再点击”的处理语义。
@@ -4110,9 +4323,9 @@ export class PageSwitchActionProposal extends TargetedGestureProposal {
 
   /**
    * 智慧手势翻页数量。
-   * 
+   *
    * 取值范围：[0, +∞)，小于0时按0处理。
-   * 
+   *
    * 单位为页。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4148,9 +4361,9 @@ export class ScrollActionProposal extends TargetedGestureProposal {
 
   /**
    * 智慧手势滚动距离。
-   * 
+   *
    * 取值范围：[0, +∞)，小于0时按0处理。
-   * 
+   *
    * 单位为vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4186,9 +4399,9 @@ export class GestureHandlingResolution {
 
   /**
    * 是否消费当前智慧手势。
-   * 
+   *
    * true表示消费当前智慧手势，此时如果未设置selectedProposal沿用系统默认动作处理，设置了selectedProposal以自定义动作处理。
-   * 
+   *
    * false表示不消费，系统将本次智慧手势视为未处理。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4200,9 +4413,9 @@ export class GestureHandlingResolution {
 
   /**
    * 用户指定的智慧手势处理行为。
-   * 
+   *
    * 当isConsumed为true时，如果未设置selectedProposal沿用系统默认动作处理，设置了selectedProposal以自定义动作处理。
-   * 
+   *
    * 当isConsumed为false时，selectedProposal设置不生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4215,7 +4428,7 @@ export class GestureHandlingResolution {
 
 /**
  * 提供智慧手势使能、监听、选中态控制，以及动态决策智慧手势行为的能力。
- * 
+ *
  * > **说明：**
  * >
  * > 以下API需先使用UIContext中的[getSmartGestureController()]{@link UIContext#getSmartGestureController}方法获取SmartGestureController实例，
@@ -4230,7 +4443,7 @@ export class SmartGestureController {
 
   /**
    * 设置是否启用智慧手势的敲一敲和划一划操作。
-   * 
+   *
    * > **说明：**
    * >
    * > - 该接口仅影响智慧手势的敲一敲和划一划手势，不影响翻腕手势。
@@ -4247,7 +4460,7 @@ export class SmartGestureController {
 
   /**
    * 注册智慧手势监听回调。在系统处理当前智慧手势前，应用可接收当前手势的默认动作处理并进行自定义干预。使用callback异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > - 该接口使应用能够在系统处理当前智慧手势事件前接收其处理意图，并进行自定义干预。
@@ -4293,7 +4506,7 @@ export class SmartGestureController {
 
   /**
    * 请求将指定组件设置为当前智慧手势选中节点。成功选中后会显示选中提示框，选中框样式根据设备有所不同。
-   * 
+   *
    * > **说明：**
    * >
    * > - 仅当目标组件满足以下全部条件时，请求才会生效：组件可以响应智慧手势，且组件在屏幕内可见，且组件绑定了
@@ -4405,8 +4618,7 @@ export const enum ResolveStrategy {
 * >
 * > - 示例效果请以真机运行为准，当前DevEco Studio预览器不支持。
 * >
-* > - ResolvedUIContext继承自[UIContext]{@link @ohos.arkui.UIContext}，该类对象包含[UIContext]{@link @ohos.arkui.UIContext}实例和
-* > [UIContext]{@link @ohos.arkui.UIContext}的解析策略。
+* > - ResolvedUIContext继承自[UIContext]{@link @ohos.arkui.UIContext}，并新增strategy属性用于记录该UIContext实例的解析策略。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4436,8 +4648,8 @@ export class ResolvedUIContext extends UIContext {
 * > - 示例效果请以真机运行为准，当前DevEco Studio预览器不支持。
 * >
 * > - 以下API需要通过对应的UIContext实例调用。获取UIContext分为三种方式，第一种是使用ohos.window中的
-* > [getUIContext()](docroot://reference/apis-arkui/arkts-apis-window-Window.md#getuicontext10)方法获取UIContext实例，第二种是通过自定
-* > 义组件内置方法[getUIContext()](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-api.md#getuicontext)获取UIContext
+* > [getUIContext()]{@link UIContext#getUIContext}方法获取UIContext实例，第二种是通过自定
+* > 义组件内置方法[getUIContext()]{@link UIContext#getUIContext}获取UIContext
 * > 实例，第三种是通过UIContext类的静态方法如[getCallingScopeUIContext]{@link UIContext#getCallingScopeUIContext}获取UIContext实例。本文中
 * > UIContext对象以uiContext表示。
 *
@@ -4471,9 +4683,7 @@ export class UIContext {
    * >
    * > 返回的UIContext对象可能指向一个已销毁的UI实例，通常在由已销毁的实例抛出异步任务时出现。建议通过[isAvailable]{@link UIContext#isAvailable}接口判断其有效性。
    *
-   * @returns { UIContext | undefined } UIContext of the current
-   *     [calling scope](docroot://ui/arkts-global-interface.md#basic-concepts). Returns **undefined** if the calling
-   *     scope is ambiguous.
+   * @returns { UIContext | undefined } 当前[调用作用域](../../ui/arkts-global-interface.md#基本概念)的UIContext，调用作用域不明确时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4555,9 +4765,9 @@ export class UIContext {
 
   /**
    * 判断UIContext对象对应的UI实例是否有效。使用
-   * [getUIContext](docroot://reference/apis-arkui/arkts-apis-window-Window.md#getuicontext10)方法获取UIContext对象。后端UI实例存在时，
+   * [getUIContext]{@link getUIContext}方法获取UIContext对象。后端UI实例存在时，
    * 该UI实例有效。通过new UIContext()创建的UIContext对象无对应的UI实例；多次
-   * [loadContent](docroot://reference/apis-arkui/arkts-apis-window-Window.md#loadcontent9)后，旧的UI实例会失效。多窗口应用场景，当窗口关闭后，该窗
+   * [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}后，旧的UI实例会失效。多窗口应用场景，当窗口关闭后，该窗
    * 口的UI实例失效。总而言之，当UIContext对象没有对应的后端UI实例时，该对象是无效的。
    *
    * @returns { boolean } 返回UIContext对象对应的UI实例是否有效。true表示有效，false表示无效。
@@ -4570,9 +4780,9 @@ export class UIContext {
   isAvailable(): boolean;
 
   /**
-   * get object font.
+   * 获取Font对象。
    *
-   * @returns { Font } object Font.
+   * @returns { Font } Font实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4594,9 +4804,9 @@ export class UIContext {
   getMediaQuery(): MediaQuery;
 
   /**
-   * get object UIInspector.
+   * 获取UIInspector对象。
    *
-   * @returns { UIInspector }    **UIInspector** object.
+   * @returns { UIInspector }    返回UIInspector实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4723,7 +4933,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   getDialogPresenter(): DialogPresenter;
 
@@ -4764,7 +4974,7 @@ export class UIContext {
   getOverlayManager(): OverlayManager;
 
   /**
-   * 获取[Magnifier]{@link @ohos.arkui.UIContext}对象，可控制放大镜显示和隐藏。
+   * 获取[Magnifier]{@link Magnifier}对象，可控制放大镜显示和隐藏。
    *
    * @returns { Magnifier } Magnifier对象，可用于控制放大镜的显示和隐藏。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4843,16 +5053,16 @@ export class UIContext {
    * >
    * > - 不推荐在aboutToAppear、aboutToDisappear中调用动画。
    * >
-   * > - 如果在[aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear)中调用动
+   * > - 如果在[aboutToAppear]{@link BaseCustomComponent#aboutToAppear}中调用动
    * > 画，自定义组件内的build还未执行，内部组件还未创建，动画时机过早，动画属性没有初值无法对组件产生动画。
    * >
-   * > - 执行[aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear)
+   * > - 执行[aboutToDisappear]{@link BaseCustomComponent#aboutToDisappear}
    * > 时，组件即将销毁，不能在aboutToDisappear里面做动画。
    * >
    * > - 在组件出现和消失时，可以通过[组件内转场]{@link common}添加动画效果。
    * >
    * > - 组件内转场不支持的属性，可以参考[显式动画]{@link common}中的
-   * > [示例2](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#示例2动画执行结束后组件消失)，使用animateTo实现动画执行结束后组件消失的效
+   * > [示例2]{@link ./common}，使用animateTo实现动画执行结束后组件消失的效
    * > 果。
    * >
    * > - 某些场景下，在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中使用animateTo动画，会产生异常效果，
@@ -4955,7 +5165,8 @@ export class UIContext {
   showTextPickerDialog(style: TextPickerDialogOptions | TextPickerDialogOptionsExt): void;
 
   /**
-   * 设置内存中缓存解码后图片的数量上限，提升再次加载同源图片的加载速度。如果不设置则默认为0，不进行缓存。缓存采用内置的LRU策略，新图片加载后，如果超过缓存上限，会删除最久未再次加载的缓存。建议根据应用内存需求，设置合理缓存数量，数字过大可能导致内存使用过高。
+   * 设置内存中缓存解码后图片的数量上限，提升再次加载同源图片的加载速度。如果不设置则默认为0，不进行缓存。缓存采用内置的LRU策略，新图片加载后，如果超过缓存上限，会删除最久未再次加载的缓存。
+   * 建议根据应用内存需求，设置合理缓存数量，数字过大可能导致内存使用过高。
    *
    * @param { number } value - 内存中缓存解码后图片的数量上限
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4967,7 +5178,8 @@ export class UIContext {
   setImageCacheCount(value: number): void;
 
   /**
-   * 设置内存中缓存解码前图片数据的大小上限，单位为字节，提升再次加载同源图片的加载速度。如果不设置则默认为0，不进行缓存。缓存采用内置的LRU策略，新图片加载后，如果解码前数据超过缓存上限，会删除最久未再次加载的图片数据缓存。建议根据应用内存需求，设置合理缓存上限，过大可能导致应用内存使用过高。
+   * 设置内存中缓存解码前图片数据的大小上限，单位为字节，提升再次加载同源图片的加载速度。如果不设置则默认为0，不进行缓存。缓存采用内置的LRU策略，新图片加载后，如果解码前数据超过缓存上限，会删除最久未再次加载的图片数据缓存。
+   * 建议根据应用内存需求，设置合理缓存上限，过大可能导致应用内存使用过高。
    *
    * @param { number } value - capacity of raw image data size in bytes.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4979,9 +5191,9 @@ export class UIContext {
   setImageRawDataCacheSize(value: number): void;
 
   /**
-   * 在当前UI上下文执行传入的回调函数。
+   * 在当前UIContext对应的UI实例作用域内执行传入的回调函数。
    *
-   * @param { function } callback - 回调函数
+   * @param { function } callback - 需要在当前UIContext对应的UI实例作用域内执行的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5028,9 +5240,11 @@ export class UIContext {
   getKeyboardAvoidMode(): KeyboardAvoidMode;
 
   /**
-   * 设置当前页面的像素取整模式。
+   * 设置当前页面的像素取整模式，影响整个页面的像素取整时机。通常在使用[组件级像素取整]{@link pixelRound}无法解决像素取整问题时，可尝试采用PIXEL_ROUND_AFTER_MEASURE模式。
    *
-   * @param { PixelRoundMode } mode - 像素取整模式。<br />默认值：PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH<br/>设置异常值时，该属性为默认值。
+   * @param { PixelRoundMode } mode - 像素取整模式，可选值：<br>- PIXEL_ROUND_ON_LAYOUT_FINISH：在布局完成后进行像素取整，适合大多数场景。
+   *      <br>- PIXEL_ROUND_AFTER_MEASURE：在组件测量大小结束后进行像素取整，适用于使用组件级像素取整无法解决的像素取整问题场景，但最终大小相比PIXEL_ROUND_ON_LAYOUT_FINISH模式可能扩大1px。
+   *      <br>设置异常值时，按PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH模式处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5040,9 +5254,9 @@ export class UIContext {
   setPixelRoundMode(mode: PixelRoundMode): void;
 
   /**
-   * 获取当前应用的像素取整模式。
+   * 获取当前页面的像素取整模式。
    *
-   * @returns { PixelRoundMode } Pixel rounding mode of the current page.
+   * @returns { PixelRoundMode } - 当前页面的像素取整模式，取值包括：<br>- PIXEL_ROUND_ON_LAYOUT_FINISH（对应数值：0）：在布局完成后进行像素取整。<br>- PIXEL_ROUND_AFTER_MEASURE（对应数值：1）：在组件测量大小结束后进行像素取整。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5066,9 +5280,9 @@ export class UIContext {
   dispatchKeyEvent(node: number | string, event: KeyEvent): boolean;
 
   /**
-   * Get AtomicServiceBar.
+   * 获取AtomicServiceBar对象，通过该对象设置原子化服务menuBar的属性。
    *
-   * @returns { Nullable<AtomicServiceBar> } The atomic service bar.
+   * @returns { Nullable<AtomicServiceBar> } 如果是原子化服务则返回AtomicServiceBar类型，否则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5090,9 +5304,9 @@ export class UIContext {
   getDragController(): DragController;
 
   /**
-   * Get MeasureUtils.
+   * 允许用户通过UIContext对象，获取MeasureUtils对象进行文本计算。
    *
-   * @returns { MeasureUtils } the MeasureUtils
+   * @returns { MeasureUtils } 提供文本宽度、高度等相关计算。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5167,7 +5381,7 @@ export class UIContext {
   getAttachedFrameNodeById(id: string): FrameNode | null;
 
   /**
-   * 提供getFrameNodeByUniqueId接口通过组件的uniqueId获取组件树的实体节点。
+   * 通过组件的uniqueId获取组件树的实体节点。
    *
    * 1. 当uniqueId对应的是系统组件时，返回组件所对应的FrameNode；
    * 2. 当uniqueId对应的是自定义组件时：
@@ -5175,7 +5389,7 @@ export class UIContext {
    *    - 若其无渲染内容，或者被[@Reusable装饰器](docroot://ui/state-management/arkts-reusable.md)修饰时，在该自定义组件的子组件创建完成前调用此接口，将返回null；在该自定义组件的子组件创建完成后调用，返回其第一个子组件的FrameNode。
    * 3. 当uniqueId无对应的组件时，返回null。
    *
-   * @param { number } id - 节点对应的UniqueId
+   * @param { number } id - 节点对应的UniqueId。
    * @returns { FrameNode | null } - The FrameNode with the target uniqueId, or null if the frameNode is not existed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5186,7 +5400,7 @@ export class UIContext {
   getFrameNodeByUniqueId(id: number): FrameNode | null;
 
   /**
-   * Get page information of the frameNode with uniqueId.
+   * 通过组件的uniqueId获取该节点对应的Router和NavDestination页面信息。
    *
    * @param { number } id - The uniqueId of the target FrameNode.
    * @returns { PageInfo } - The page information of the frameNode with the target uniqueId, includes
@@ -5327,7 +5541,7 @@ export class UIContext {
    * > **说明：**
    * >
    * > 1. getUIContext需在windowStage.
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)之后调用，确保UIContext初始化完成后
+   * > [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}之后调用，确保UIContext初始化完成后
    * > 调用此接口，否则无法返回准确结果。
    * >
    * > 2. UI实例未创建时，[像素单位]{@link common}中的vp2px接口使用默认屏幕的虚拟像素比进行转换。在该场景下，开发者使用UIContext接口替换时，可参考
@@ -5353,7 +5567,7 @@ export class UIContext {
    * > **说明：**
    * >
    * > 1. getUIContext需在windowStage.
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)之后调用，确保UIContext初始化完成后
+   * > [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}之后调用，确保UIContext初始化完成后
    * > 调用此接口，否则无法返回准确结果。
    * >
    * > 2. UI实例未创建时，[像素单位]{@link common}中的px2vp接口使用默认屏幕的虚拟像素比进行转换。在该场景下，开发者使用UIContext接口替换时，可参考
@@ -5376,13 +5590,13 @@ export class UIContext {
    *
    * 像素密度：当前窗口生效的像素密度值，即虚拟屏幕的密度[VirtualScreenConfig]{@link @ohos.display:display.VirtualScreenConfig}.density。
    *
-   * 字体缩放比例：系统设置的字体缩放系数，对应 [Configuration.fontScale](docroot://reference/apis-arkui/arkui-ts/ts-types.md#configuration)。
+   * 字体缩放比例：系统设置的字体缩放系数，对应 [Configuration.fontScale]{@link Configuration#fontScale}。
    *
    *
    * > **说明：**
    * >
    * > getUIContext需在windowStage.
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)之后调用，确保UIContext初始化完成后
+   * > [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}之后调用，确保UIContext初始化完成后
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
@@ -5402,13 +5616,13 @@ export class UIContext {
    *
    * 像素密度：当前窗口生效的像素密度值，即虚拟屏幕的密度[VirtualScreenConfig]{@link @ohos.display:display.VirtualScreenConfig}.density。
    *
-   * 字体缩放比例：系统设置的字体缩放系数，对应 [Configuration.fontScale](docroot://reference/apis-arkui/arkui-ts/ts-types.md#configuration)。
+   * 字体缩放比例：系统设置的字体缩放系数，对应 [Configuration.fontScale]{@link Configuration#fontScale}。
    *
    *
    * > **说明：**
    * >
    * > getUIContext需在windowStage.
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)之后调用，确保UIContext初始化完成后
+   * > [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}之后调用，确保UIContext初始化完成后
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
@@ -5429,7 +5643,7 @@ export class UIContext {
    * > **说明：**
    * >
    * > getUIContext需在windowStage.
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)之后调用，确保UIContext初始化完成后
+   * > [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}之后调用，确保UIContext初始化完成后
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
@@ -5450,7 +5664,7 @@ export class UIContext {
    * > **说明：**
    * >
    * > getUIContext需在windowStage.
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)之后调用，确保UIContext初始化完成后
+   * > [loadContent]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}之后调用，确保UIContext初始化完成后
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
@@ -5537,7 +5751,7 @@ export class UIContext {
   /**
    * 获取当前实例所在窗口的高度断点。具体枚举值根据窗口高宽比确定，详见 [HeightBreakpoint]{@link HeightBreakpoint}。
    *
-   * @returns { HeightBreakpoint } 当前实例所在窗口的宽高比对应的高度断点枚举值。若窗口高宽比为0，则返回HEIGHT_SM。
+   * @returns { HeightBreakpoint } 当前实例所在窗口的高宽比对应的高度断点枚举值。若窗口高宽比为0，则返回HEIGHT_SM。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
@@ -5796,9 +6010,9 @@ export class UIContext {
   freezeUINode(uniqueId: number, isFrozen: boolean): void;
 
   /**
-   * Get object text menu controller.
+   * 获取[TextMenuController]{@link TextMenuController}对象，可通过该对象控制文本选择菜单。
    *
-   * @returns { TextMenuController } object text menu controller.
+   * @returns { TextMenuController } TextMenuController对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5816,7 +6030,7 @@ export class UIContext {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 20 dynamic
+   * @since 20 dynamiconly
    */
   setKeyboardAppearanceConfig(uniqueId: number, config: KeyboardAppearanceConfig): void;
 
@@ -6128,7 +6342,10 @@ export const enum MarqueeDynamicSyncSceneType {
 }
 
 /**
- * class TextMenuController
+ * TextMenuController用于控制文本选择菜单的行为，支持设置菜单显示选项（如优先使用独立窗口显示）、屏蔽系统服务菜单项或指定菜单项，适用于需要自定义文本选择菜单显示方式或限制特定菜单功能的应用场景，如在特定业务场景下禁用翻译、搜索等功能。
+ *
+ * > **说明**
+ * > - setMenuOptions接口为非静态API，需先使用UIContext中的[getTextMenuController()]{@link UIContext#getTextMenuController}方法获取TextMenuController实例，再通过此实例调用对应方法。disableSystemServiceMenuItems和disableMenuItems为静态方法，可直接通过TextMenuController类调用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -6139,9 +6356,10 @@ export const enum MarqueeDynamicSyncSceneType {
 export class TextMenuController {
 
   /**
-   * Set text menu options.
+   * 设置菜单选项。例如，需要在特定UIContext下优先使用独立窗口显示文本选择菜单时，可通过此接口设置菜单的显示模式。未通过该接口设置时，文本选择菜单默认在当前窗口显示（showMode为TextMenuShowMode.DEFAULT）。
    *
-   * @param { TextMenuOptions } options - the options of the text menu.
+   * @param { TextMenuOptions } options - 设置菜单选项，用于控制文本选择菜单的显示模式。
+   *     <br>默认值：{showMode: TextMenuShowMode.DEFAULT}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6151,9 +6369,37 @@ export class TextMenuController {
   setMenuOptions(options: TextMenuOptions): void;
 
   /**
-   * 禁用所有的系统菜单
+   * 屏蔽文本选择菜单内所有系统服务菜单项。适用于需要完全自定义文本选择菜单的场景，例如企业安全应用中仅保留复制、剪切、全选、粘贴等基础功能，禁用搜索、翻译、分享等可能涉及数据外发的服务菜单。未通过该接口设置时，默认不禁用系统服务菜单项。
    *
+   * > **说明**
+   * > >
+   * > - 此接口调用后整个应用进程都会生效。
+   * > >
+   * > - 此接口可在[UIAbility]{@link @ohos.app.ability.UIAbility}使用。
+   * > >
+   * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法[onCreateMenu]{@link
+   * > EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   * > >
+   * > - 涉及文本选择菜单的组件有 [Text]{@link ./@internal/component/ets/text}、[TextArea]{@link
+   * > ./@internal/component/ets/text_area}、[TextInput]{@link ./@internal/component/ets/text_input}、[Search]{@link
+   * > ./@internal/component/ets/search}、[RichEditor]{@link ./@internal/component/ets/rich_editor}、[Web]{@link
+   * > ./@internal/component/ets/web}。
+   * > >
+   * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时设置时，以先调用的方法为准。例如：先调用disableSystemServiceMenuItems(true)，再调用disableMenuItems([...])时，以disableSystemServiceMenuItems的设置为准；反之，先调用disableMenuItems([...])时，则以disableMenuItems的设置为准。建议根据实际禁用范围需求选择使用其中一个方法，避免同时调用。
+   * > >
+   * >  - 使用该接口时，全局生效，多次调用以最后一次为准。
+   * > >
+   * >  - 可以通过以下三种方式恢复禁用菜单：
+   * > >
+   * >  - 仅设置disableSystemServiceMenuItems(true)禁用菜单时，设置false即可恢复菜单；
+   * > >
+   * >  - 仅设置disableMenuItems禁用菜单时，设置为空数组即可恢复菜单；
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时使用时，则前者设置为false，后者设置为空数组，即可恢复菜单。
    *
+   * @param { boolean } disable - 是否禁用系统服务菜单项。true表示禁用，false表示不禁用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6163,8 +6409,36 @@ export class TextMenuController {
   static disableSystemServiceMenuItems(disable: boolean): void;
 
   /**
-   * 按照id禁用菜单项
+   * 屏蔽文本选择菜单内指定的系统服务菜单项。适用于需要按需禁用特定菜单功能的场景，例如禁用搜索和翻译菜单以简化用户界面或限制对外部服务的访问。未通过该接口设置时，默认不禁用任何菜单。
    *
+   * > **说明**
+   * > >
+   * > - 此接口调用后整个应用进程都会生效。
+   * > >
+   * >  - 此接口可在[UIAbility]{@link @ohos.app.ability.UIAbility}使用。
+   * > >
+   * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法
+   * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   * > >
+   * > - 涉及文本选择菜单的组件有 [Text]{@link ./@internal/component/ets/text}、[TextArea]{@link ./@internal/component/ets/text_area}
+   * > 、[TextInput]{@link ./@internal/component/ets/text_input}、[Search]{@link ./@internal/component/ets/search}、
+   * > [RichEditor]{@link ./@internal/component/ets/rich_editor}、[Web]{@link ./@internal/component/ets/web}。
+   * > >
+   * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时设置时，以先设置的disableSystemServiceMenuItems的设置结果为准。。
+   * > >
+   * > - 使用该接口时，全局生效，多次调用以最后一次为准。
+   * > >
+   * > - 可以通过以下三种方式恢复禁用菜单：
+   * > >
+   * > - 仅设置disableSystemServiceMenuItems(true)禁用菜单时，设置false即可恢复菜单；
+   * > >
+   * >  - 仅设置disableMenuItems禁用菜单时，设置为空数组即可恢复菜单；
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时使用时，则前者设置为false，后者设置为空数组，即可恢复菜单。
+   *
+   * @param { Array<TextMenuItemId> } items - 禁用菜单项的列表。仅支持禁用系统服务菜单项（复制、剪切、全选、粘贴除外），禁用一级菜单项会同时禁用其所有二级菜单项，不支持直接禁用二级菜单项。 。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6334,8 +6608,12 @@ export const enum GestureListenerType {
 }
 
 /**
-* 自定义键盘接续特性的枚举。
-*
+ * 指定自定义键盘切换时是否接续。
+ *
+ * 设置为接续，切换输入框时，自定义键盘不会收起和重新拉起。
+ *
+ * 设置为不接续，切换输入框时，自定义键盘会收起并重新拉起。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -6345,7 +6623,7 @@ export const enum GestureListenerType {
 export const enum CustomKeyboardContinueFeature {
 
   /**
-   * 使能自定义键盘接续。
+   * 接续。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6356,7 +6634,7 @@ export const enum CustomKeyboardContinueFeature {
   ENABLED = 0,
 
   /**
-   * 关闭自定义键盘接续。
+   * 不接续。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file Web控制器
  * @kit ArkWeb
  */
 import webview from '../../@ohos.web.webview';
@@ -2540,6 +2540,24 @@ export declare class WebResourceResponse {
      * @since 23 static
      */
     getResponseIsReady(): boolean;
+    /**
+     * Sets the response data.
+     *
+     * > **NOTE**
+     * >
+     * > - This API supports obtaining HSP resources based on Resource objects,
+     * > which {@link setResponseData} does not support.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource or HSP resource.
+     *     ArrayBuffer type indicates binary data.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    setResponseBody(data: string | int | Resource | ArrayBuffer): void;
 }
 /**
  * Defines the Web's request/response header.
@@ -2596,6 +2614,14 @@ export declare class WebResourceError {
      * @since 23 static
      */
     getErrorCode(): int;
+    /**
+      * Gets the custom error code of the Web resource.
+      *
+      * @returns { int } Return the custom error code of the Web resource.
+      * @syscap SystemCapability.Web.Webview.Core
+      * @since 26.0.1 static
+      */
+    getCustomErrorCode(): int;
 }
 /**
  * Defines the js geolocation request.
@@ -6608,6 +6634,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default onInputmethodAttached(callback: OnInputmethodAttachedCallback | undefined): this;
+
+    /**
+     * 当网页的浏览器级缩放倍率变化时触发。
+     *
+     * @param { OnZoomChangeCallback | undefined } callback - 浏览器级缩放倍率变化时触发的回调。该回调仅由浏览器级
+     *     缩放变化（例如{@link setZoomFactor}）触发；页面显示比例变化（捏合缩放）由{@link onScaleChange}通知。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
 }
 
 /**
@@ -6770,6 +6808,18 @@ export declare interface EmbedOptions {
      * @since 23 static
      */
     supportCssDisplayChange?: boolean;
+    /**
+     * Whether the same-layer rendering component supports CSS transform rotate and skew.
+     * When set to true, the same-layer rendering component correctly handles CSS transform rotate/skew.
+     * When set to false or not set, retains the original behavior.
+     * This attribute takes effect only when `enableNativeEmbedMode` is enabled and cannot be dynamically modified.
+     *
+     * @default false
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    supportTransformRotateAndSkew?: boolean;
 }
 /**
  * Enum type supplied to {@link gestureFocusMode} for setting the web gesture focus mode.
@@ -7247,3 +7297,40 @@ export declare enum AISessionResultType {
  * @since 26.0.0 static
  */
 export type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * 浏览器级缩放倍率变化时触发的回调类型。
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * 描述网页浏览器级缩放倍率变化的信息。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface OnZoomChangeEvent {
+  /**
+   * 变化前的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  oldZoomFactor: double;
+
+  /**
+   * 变化后的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  newZoomFactor: double;
+}

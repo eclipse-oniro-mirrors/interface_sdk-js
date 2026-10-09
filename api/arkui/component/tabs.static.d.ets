@@ -22,7 +22,8 @@
 
 import { BackgroundBlurStyleOptions, BackgroundEffectOptions, BlurStyle, Callback, CommonMethod, TranslateOptions, DividerStyle, Bindable } from './common';
 import { EdgeEffect, PageFlipMode, Curve } from "./enums";
-import { Dimension, Length, ResourceColor } from "./units";
+import { Dimension, Length, ResourceColor, ResourceStr } from "./units";
+import { ComponentContentBase } from '../ComponentContent';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, ICurve } from "./common";
 import { CommonModifier } from '@ohos.arkui.modifier';
@@ -162,7 +163,7 @@ export declare enum BarPosition {
    * @stagemodelonly
    * @since 23 static
    */
-  Start = 0,
+  Start,
 
   /**
    * When the vertical attribute method is set to true, the tab is located on the right of the container.
@@ -172,7 +173,7 @@ export declare enum BarPosition {
    * @stagemodelonly
    * @since 23 static
    */
-  End = 1
+  End
 }
 
 /**
@@ -309,6 +310,16 @@ export declare class TabsController {
    * @since 23 static
    */
   setTabBarOpacity(opacity: double): void;
+
+  /**
+   * Get the current display mode of the Tabs.
+   *
+   * @returns { TabBarDisplayMode } The current displayMode.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  getBarDisplayMode(): TabBarDisplayMode;
 }
 
 /**
@@ -711,6 +722,197 @@ export type OnTabsContentWillChangeCallback = (currentIndex: int, comingIndex: i
  * @since 23 static
  */
 export type OnTabsContentDidScrollCallback = (selectedIndex: int, index: int, position: double, mainAxisLength: double) => void;
+
+/**
+ * Enumerates the display styles of the tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum TabBarStyle {
+  /**
+   * The bottom tab bar style. The tab bar position can be adjusted through the **vertical** attribute of **Tabs**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  BOTTOM = 0,
+
+  /**
+   * The sidebar style. The tab bar is displayed as a sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SIDEBAR = 1,
+
+  /**
+   * The adaptable sidebar style. The tab bar can switch between bottom tab bar and sidebar modes
+   * based on the Tabs container size.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SIDEBAR_ADAPTABLE = 2
+}
+
+/**
+ * Enumerates the display styles of the tab side bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum TabsSidebarDisplayStyle {
+  /**
+   * The embedded style. The tab bar is embedded in the content area of the **Tabs** container,
+   * taking up space within it.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  EMBED = 0,
+ 
+  /**
+   * The displaced style. The tab bar is displayed as a sidebar,
+   * pushing the content area of the **Tabs** container aside.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  DISPLACE = 1,
+}
+
+/**
+ * Search filter callback.
+ *
+ * @param { int } tabIndex - Index of the tab to filter.
+ *     <br>The value should be an integer.
+ * @param { string } text - The current search text.
+ * @returns { boolean } Returns **true** if the tab matches the search criteria, **false** otherwise.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type TabsSidebarSearchFilterCallback = (tabIndex: int, text: string) => boolean;
+
+/**
+ * Defines the options for the searchable sidebar tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface TabsSidebarSearchableOptions {
+  /**
+   * Sets the text input in the search text box.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  searchText?: ResourceStr;
+
+  /**
+   * Placeholder text displayed when the search input is empty.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  placeholder?: ResourceStr;
+
+  /**
+   * Callback triggered when the search text changes.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  searchCallback?: Callback<string>;
+
+  /**
+   * Filter function to determine whether a tab should be displayed based on the search text.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  searchFilter?: TabsSidebarSearchFilterCallback;
+}
+
+/**
+ * Enumerates the actual display modes of the tab bar under different Tabs container sizes.
+ * This enum is used in [barDisplayModeBreakpoint]{@link TabsAttribute#barDisplayModeBreakpoint} to specify
+ * the display mode for different breakpoint sizes. It is only meaningful when **TabBarStyle** is set to
+ * **SIDEBAR_ADAPTABLE** or **SIDEBAR**.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum TabBarDisplayMode {
+  /**
+   * The tab bar is displayed at the bottom.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  BOTTOM_TABBAR = 0,
+
+  /**
+   * The tab bar is displayed as a sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SIDEBAR = 1
+}
+
+/**
+ * Defines the value type for different Tabs container sizes.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface TabsBreakpointType<T> {
+  /**
+   * Value for small Tabs container size.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  sm?: T;
+
+  /**
+   * Value for medium Tabs container size.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  md?: T;
+
+  /**
+   * Value for large Tabs container size.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  lg?: T;
+}
+
 /**
  * The TabsAttribute.
  *
@@ -1223,7 +1425,8 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } Returns the instance of the TabsAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setTabsOptions(options?: TabsOptions): this;
 
@@ -1237,6 +1440,247 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default barFloatingStyle(style: FloatingTabBarStyle | undefined): this;
+
+  /**
+   * Sets the display style of the tab bar.
+   *
+   * @param { TabBarStyle | undefined } style - Display style of the tab bar.
+   *     BOTTOM**.
+   *     <br>Default value: **TabBarStyle.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default barStyle(style: TabBarStyle | undefined): this;
+
+  /**
+   * Sets the position of the sidebar tab bar.
+   * The sidebar tab bar position is not affected by the **vertical** attribute.
+   * It is always on the start or end side of the Tabs container, regardless of the **vertical** setting.
+   *
+   * @param { BarPosition | undefined } position - Position of the sidebar tab bar.Start**.
+   *     <br>Default value: **BarPosition.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarPosition(position: BarPosition | undefined): this;
+
+  /**
+   * Sets the header content of the sidebar tab bar.
+   *
+   * @param { ComponentContentBase | undefined } header - Header content of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarHeader(header: ComponentContentBase | undefined): this;
+
+  /**
+   * Sets the search options for the sidebar tab bar.
+   *
+   * @param { TabsSidebarSearchableOptions | undefined } searchOptions - Search options for the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarSearchable(searchOptions: TabsSidebarSearchableOptions | undefined): this;
+
+  /**
+   * Sets the display mode of the tab bar for different Tabs container sizes.
+   *
+   * @param { TabsBreakpointType<TabBarDisplayMode> | undefined } style - Display mode of the tab bar for different Tabs
+   *     container sizes.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default barDisplayModeBreakpoint(style: TabsBreakpointType<TabBarDisplayMode> | undefined): this;
+
+  /**
+   * Sets the display mode of the tab bar for different Tabs container sizes.
+   *
+   * @param { Callback<TabBarDisplayMode> | undefined } callback - Display mode change callback.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default onBarDisplayModeChange(callback: Callback<TabBarDisplayMode> | undefined): this;
+
+  /**
+   * Sets the selected color of the tab icon in sidebar mode.
+   *
+   * @param { ResourceColor | undefined } value - Selected color of the tab icon in sidebar mode.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarSelectedIconColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * Sets the selected color of the tab text in sidebar mode.
+   *
+   * @param { ResourceColor | undefined } value - Selected color of the tab text in sidebar mode.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarSelectedTextColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * Sets the unselected color of the tab icon in sidebar mode.
+   *
+   * @param { ResourceColor | undefined } value - Unselected color of the tab icon in sidebar mode.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarUnselectedIconColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * Sets the unselected color of the tab text in sidebar mode.
+   *
+   * @param { ResourceColor | undefined } value - Unselected color of the tab text in sidebar mode.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarUnselectedTextColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * Sets the selected color of the tab board in sidebar mode.
+   *
+   * @param { ResourceColor | undefined } value - Selected color of the tab board in sidebar mode.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarSelectedBoardColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * Sets the width of the sidebar tab bar.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { Length | undefined } value - Width of the sidebar tab bar.
+   *     <br>Default value: **240vp**.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarWidth(value: Length | undefined): this;
+
+  /**
+   * Sets the minimum width of the sidebar tab bar.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { Length | undefined } value - Minimum width of the sidebar tab bar. The width of the sidebar tab bar does
+   *     not become smaller than this value.
+   *     <br>If this attribute is not set or is set to **undefined**, no minimum width is imposed on the sidebar tab
+   *     bar, which means the sidebar tab bar can be compressed to **0vp**.
+   *     <br>The set value is expected to be less than or equal to that of
+   *     [maxSidebarWidth]{@link TabsAttribute#maxSidebarWidth}.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default minSidebarWidth(value: Length | undefined): this;
+
+  /**
+   * Sets the maximum width of the sidebar tab bar.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { Length | undefined } value - Maximum width of the sidebar tab bar. The width of the sidebar tab bar does
+   *     not exceed this value.
+   *     <br>If this attribute is not set or is set to **undefined**, no maximum width is imposed on the sidebar tab
+   *     bar, which means the sidebar tab bar can be as wide as the **Tabs** component.
+   *     <br>The set value is expected to be greater than or equal to that of
+   *     [minSidebarWidth]{@link TabsAttribute#minSidebarWidth}.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default maxSidebarWidth(value: Length | undefined): this;
+
+  /**
+   * Sets the minimum width of the content area of the **Tabs** component.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { Length | undefined } value - Minimum width of the content area. The width of the content area does not
+   *     become smaller than this value; if the remaining space is insufficient, the content area is clipped.
+   *     <br>If this attribute is not set or is set to **undefined**, no minimum width is imposed on the content area,
+   *     which means the content area can be compressed to **0vp**.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default minContentWidth(value: Length | undefined): this;
+
+  /**
+   * Sets the background color of the sidebar tab bar.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { ResourceColor | undefined } value - Background color of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarBackgroundColor(value: ResourceColor | undefined): this;
+
+  /**
+   * Sets the background blur style of the sidebar tab bar.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { BlurStyle | undefined } value - Background blur style of the sidebar tab bar.
+   *     <br>Default value: **BlurStyle.NONE**.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarBackgroundBlurStyle(value: BlurStyle | undefined): this;
+
+  /**
+   * Sets the divider between the sidebar tab bar and the content area.
+   * This attribute takes effect only when the tab bar is displayed as a sidebar.
+   *
+   * @param { DividerStyle | undefined } value - Divider style between the sidebar tab bar and the content area.
+   *     The divider is displayed vertically, where **strokeWidth** is its width, and **startMargin** and
+   *     **endMargin** are the distances from the top and bottom of the sidebar, respectively.
+   *     <br>**DividerStyle**: divider style.<br>**undefined**: no divider is displayed (default).
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarDivider(value: DividerStyle | undefined): this;
+
+  /**
+   * Sets the display style of the sidebar for the **Tab** component.
+   *
+   * @param { TabsSidebarDisplayStyle | undefined } style - Display style of the sidebar for the **Tabs** component.
+   *     <br>Default value: **SidebarDisplayStyle.EMBED**
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default sidebarDisplayStyle(style: TabsSidebarDisplayStyle | undefined): this;
 }
 
 /**
@@ -1334,7 +1778,8 @@ export declare function Tabs(
  * @returns { TabsAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 @Builder
 export declare function Tabs(

@@ -23,9 +23,9 @@ import { AsyncCallback } from './@ohos.base';
 /**
  * # Supported System Time Zones
  * 
- * The following table lists the supported system time zones and the respective offset (unit: h) between each time zone 
- * and time zone 0.
- * 
+ * The following table lists the supported system time zones and the respective standard-time offset (unit: h) between
+ * each time zone and time zone 0.
+ *
  * | Time Zone                          | Offset        |
  * | ------------------------------ | --------------------- |
  * | Antarctica/McMurdo             | 12                    |
@@ -34,9 +34,9 @@ import { AsyncCallback } from './@ohos.base';
  * | America/Noronha                | -2                    |
  * | America/St_Johns               | -3                    |
  * | Africa/Kinshasa                | 1                     |
- * | America/Santiago               | -3                    |
+ * | America/Santiago               | -4                    |
  * | Asia/Shanghai                  | 8                     |
- * | Asia/Nicosia                   | 3                     |
+ * | Asia/Nicosia                   | 2                     |
  * | Europe/Berlin                  | 2                     |
  * | America/Guayaquil              | -5                    |
  * | Europe/Madrid                  | 2                     |
@@ -47,17 +47,17 @@ import { AsyncCallback } from './@ohos.base';
  * | Asia/Almaty                    | 6                     |
  * | Pacific/Majuro                 | 12                    |
  * | Asia/Ulaanbaatar               | 8                     |
- * | America/Mexico_City            | -5                    |
+ * | America/Mexico_City            | -6                    |
  * | Asia/Kuala_Lumpur              | 8                     |
  * | Pacific/Auckland               | 12                    |
  * | Pacific/Tahiti                 | -10                   |
  * | Pacific/Port_Moresby           | 10                    |
- * | Asia/Gaza                      | 3                     |
- * | Europe/Lisbon                  | 1                     |
+ * | Asia/Gaza                      | 2                     |
+ * | Europe/Lisbon                  | 0                     |
  * | Europe/Moscow                  | 3                     |
- * | Europe/Kiev                    | 3                     |
+ * | Europe/Kiev                    | 2                     |
  * | Pacific/Wake                   | 12                    |
- * | America/New_York               | -4                    |
+ * | America/New_York               | -5                    |
  * | Asia/Tashkent                  | 5                     |
  */
 /**
@@ -128,9 +128,8 @@ declare namespace systemTime {
   /**
    * Obtains the time elapsed since the Unix epoch. This API uses a promise to return the result.
    *
-   * @param { boolean } isNano - Whether the time to return is in nanoseconds. The default value is **false**.<br>The
-   *     default value is false.<br>- **true**: The result is in nanoseconds.<br>- **false**: The result is in
-   *     milliseconds.
+   * @param { boolean } isNano - Whether the time to return is in nanoseconds. The default value is **false**.<br>- **true**: The result is in nanoseconds.
+   *     <br>- **false**: The result is in milliseconds.
    * @returns { Promise<number> } Promise used to return the time elapsed since the Unix epoch.
    * @throws { BusinessError } -1 - Parameter check failed, permission denied, or system error.
    * @syscap SystemCapability.MiscServices.Time
@@ -216,9 +215,8 @@ declare namespace systemTime {
    * Obtains the time elapsed since system startup, including the deep sleep time. This API uses a promise to return the
    * result.
    *
-   * @param { boolean } isNano - Whether the time to return is in nanoseconds. The default value is **false**.<br>The
-   *     default value is false.<br>- **true**: The result is in nanoseconds.<br>- **false**: The result is in
-   *     milliseconds.
+   * @param { boolean } isNano - Whether the time to return is in nanoseconds. The default value is **false**.<br>- **true**: The result is in nanoseconds.
+   *     <br>- **false**: The result is in milliseconds.
    * @returns { Promise<number> } Promise used to return the time elapsed since system startup, including the deep sleep
    *     time.
    * @throws { BusinessError } -1 - Parameter check failed, permission denied, or system error.

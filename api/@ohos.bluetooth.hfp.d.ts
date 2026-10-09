@@ -57,7 +57,8 @@ declare namespace hfp {
    * @throws { BusinessError } 801 - Capability not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function createHfpHfProfile(): HandsFreeHfProfile;
 
@@ -117,7 +118,8 @@ declare namespace hfp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface HandsFreeHfProfile extends BaseProfile {
     /**
@@ -135,7 +137,8 @@ declare namespace hfp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     connect(deviceId: string): void;
 
@@ -154,7 +157,8 @@ declare namespace hfp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     disconnect(deviceId: string): void;
   }

@@ -14,7 +14,7 @@
  */
 
 import * as arkts from '@koalaui/libarkts';
-import { JSDoc, JsDocNodeCheckConfigItem } from '../api-check-wrapper';
+import { JSDoc, JsDocNodeCheckConfigItem, DiagnosticCategory } from '../api-check-wrapper';
 import { PermissionValidTokenState } from './api_check_plugin_define';
 
 export type AnnotationAllowedAstNode = arkts.AnnotationDeclaration |
@@ -72,6 +72,7 @@ export interface ProjectConfig extends ApiCheckConfig {
   bundleName: string;
   moduleName: string;
   cachePath: string;
+  compileMode: string;
   projectRootPath: string;
   isCrossplatform: boolean;
   ignoreCrossplatformCheck: boolean;
@@ -229,4 +230,19 @@ export interface DistributionOSApiAvailableVersionResult {
   valid: boolean;
   version: string;
   message: string;
+}
+
+export interface ApiAvailableResult {
+  valid: boolean,
+  message: string,
+  type: DiagnosticCategory.ERROR
+}
+interface ChainedModel {
+  isChain: boolean
+  chainNode: arkts.AstNode
+}
+
+export interface NodeParentModel {
+  node: arkts.AstNode
+  isChainedCall: ChainedModel
 }

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Agent Card
  * @kit AbilityKit
  */
 import type agentConstant from '../@ohos.app.agent.agentConstant';
@@ -67,6 +67,7 @@ export interface AgentCard {
    * When `type` is `agentConstant.AgentCardType.LOW_CODE`, the corresponding application must be a system application.
    * Otherwise, the agent card cannot be registered, installed, or updated.
    *
+   * @default AgentCardType.APP
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly
    * @atomicservice

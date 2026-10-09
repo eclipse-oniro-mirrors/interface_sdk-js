@@ -42,17 +42,25 @@ import {
   STAGE_TAG_CHECK_ERROR,
   AVAILABLE_TAG_NAME,
   AVAILABLE_DECORATOR_WARNING,
-  AVAILABLE_FILE_NAME
+  AVAILABLE_FILE_NAME,
+  ERROR_CODE_INFO,
+  STAGE_COMPILE_MODE,
+  FA_TAG_CHECK_ERROR,
+  FA_TAG_HUMP_CHECK_NAME
 } from '../utils/api_check_plugin_define';
 import { globalObject } from '../index';
 import {
-  checkPermissionValue,
   checkSinceValue,
-  checkSyscapAbility,
+  checkSyscapTag,
   checkAvailableDecorator,
   checkSystemApiTag,
   getJsDocNodeCheckConfigItem,
+  checkFaModelOnlyValue,
   checkStageModuleValue,
+  checkTestValue,
+  checkPermissionTag,
+  checkAtomicserviceValue,
+  checkFormValue,
   isCardFile,
   pushLog,
   collectInfo
@@ -134,7 +142,7 @@ function getSyscapCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): voi
     message: SYSCAP_TAG_CHECK_WARNING,
     type: DiagnosticCategory.WARNING,
     tagNameShouldExisted: false,
-    checkJsDocSuppressorValidCallback: checkSyscapAbility
+    checkJsDocSuppressorValidCallback: checkSyscapTag
   };
   checkConfigArray.push(syscapConfig);
 }
@@ -144,7 +152,8 @@ function getTestCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): void 
     tagName: [TEST_TAG_CHECK_NAME],
     message: TEST_TAG_CHECK_ERROR,
     type: DiagnosticCategory.WARNING,
-    tagNameShouldExisted: false
+    tagNameShouldExisted: false,
+    checkJsDocSuppressorValidCallback: checkTestValue
   };
   checkConfigArray.push(testConfig);
 }
@@ -155,35 +164,57 @@ function getPermissionCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]):
     message: PERMISSION_TAG_CHECK_ERROR,
     type: DiagnosticCategory.WARNING,
     tagNameShouldExisted: false,
-    checkJsDocSuppressorValidCallback: checkPermissionValue
+    checkJsDocSuppressorValidCallback: checkPermissionTag
   };
   checkConfigArray.push(getJsDocNodeCheckConfigItem(permissionConfig));
 }
 
 function getFormCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): void {
+  const diagnosticMessage: string = `${ERROR_CODE_INFO.get(FORM_TAG_CHECK_ERROR)?.code}#${FORM_TAG_CHECK_ERROR}`;
   const formConfig: JsDocNodeCheckConfigItemInterface = {
     tagName: [FORM_TAG_CHECK_NAME],
-    message: FORM_TAG_CHECK_ERROR,
+    message: diagnosticMessage,
     type: DiagnosticCategory.ERROR,
-    tagNameShouldExisted: true
+    tagNameShouldExisted: true,
+    checkJsDocSuppressorValidCallback: checkFormValue
   };
   checkConfigArray.push(formConfig);
 }
 
 function getCrossplatformCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[], logType: DiagnosticCategory): void {
+  const diagnosticMessage: string = `${ERROR_CODE_INFO.get(CROSSPLATFORM_TAG_CHECK_ERROR)?.code}#${CROSSPLATFORM_TAG_CHECK_ERROR}`;
   const crossplatformConfig: JsDocNodeCheckConfigItemInterface = {
     tagName: [CROSSPLATFORM_TAG_CHECK_NAME],
-    message: CROSSPLATFORM_TAG_CHECK_ERROR,
+    message: diagnosticMessage,
     type: logType,
     tagNameShouldExisted: true
   };
   checkConfigArray.push(crossplatformConfig);
 }
 
+/**
+ * get FA module check config
+ *
+ * @param {ts.JsDocNodeCheckConfigItem[]} checkConfigArray - check config array
+ * @returns {void}
+ */
+function getFAModuleCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): void {
+  const diagnosticMessage: string = `${ERROR_CODE_INFO.get(FA_TAG_CHECK_ERROR)?.code}#${FA_TAG_CHECK_ERROR}`;
+  const faModelOnlyConfig: JsDocNodeCheckConfigItemInterface = {
+    tagName: [FA_TAG_CHECK_ERROR, FA_TAG_HUMP_CHECK_NAME],
+    message: diagnosticMessage,
+    type: DiagnosticCategory.ERROR,
+    tagNameShouldExisted: false,
+    checkJsDocSuppressorValidCallback: checkFaModelOnlyValue
+  }
+  checkConfigArray.push(getJsDocNodeCheckConfigItem(faModelOnlyConfig));
+}
+
 function getStageModuleCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): void {
+  const diagnosticMessage: string = `${ERROR_CODE_INFO.get(STAGE_TAG_CHECK_ERROR)?.code}#${STAGE_TAG_CHECK_ERROR}`;
   const stageModelOnlyConfig: JsDocNodeCheckConfigItemInterface = {
     tagName: [STAGE_TAG_CHECK_NAME, STAGE_TAG_HUMP_CHECK_NAME],
-    message: STAGE_TAG_CHECK_ERROR,
+    message: diagnosticMessage,
     type: DiagnosticCategory.ERROR,
     tagNameShouldExisted: false,
     checkJsDocSuppressorValidCallback: checkStageModuleValue
@@ -192,11 +223,13 @@ function getStageModuleCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[])
 }
 
 function getAtomicserviceCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): void {
+  const diagnosticMessage: string = `${ERROR_CODE_INFO.get(ATOMICSERVICE_TAG_CHECK_ERROR)?.code}#${ATOMICSERVICE_TAG_CHECK_ERROR}`;
   const atomicserviceConfig: JsDocNodeCheckConfigItemInterface = {
     tagName: [ATOMICSERVICE_TAG_CHECK_NAME],
-    message: ATOMICSERVICE_TAG_CHECK_ERROR,
+    message: diagnosticMessage,
     type: DiagnosticCategory.ERROR,
-    tagNameShouldExisted: true
+    tagNameShouldExisted: true,
+    checkJsDocSuppressorValidCallback: checkAtomicserviceValue
   };
   checkConfigArray.push(atomicserviceConfig);
 }
@@ -252,17 +285,26 @@ function getJsDocNodeCheckConfig(fileName: string, sourceFileName: string): JsDo
     }
     getPermissionCheckConfig(checkConfigArray);
     if (isCardFile(fileName)) {
+      needCheckResult = true;
       getFormCheckConfig(checkConfigArray);
     }
     if (globalObject.projectConfig.isCrossplatform) {
+      needCheckResult = true;
       const logType: DiagnosticCategory =
         globalObject.projectConfig.ignoreCrossplatformCheck !== true ? DiagnosticCategory.ERROR :
           DiagnosticCategory.WARNING;
       getCrossplatformCheckConfig(checkConfigArray, logType);
     }
-    getStageModuleCheckConfig(checkConfigArray);
+    if (globalObject.projectConfig.compileMode === STAGE_COMPILE_MODE) {
+      needCheckResult = true;
+      getFAModuleCheckConfig(checkConfigArray);
+    } else if (globalObject.projectConfig.compileMode !== '') {
+      needCheckResult = true;
+      getStageModuleCheckConfig(checkConfigArray);
+    }
     if (globalObject.projectConfig.bundleType === ATOMICSERVICE_BUNDLE_TYPE &&
       globalObject.projectConfig.compileSdkVersion >= ATOMICSERVICE_TAG_CHECK_VERSION) {
+      needCheckResult = true;
       getAtomicserviceCheckConfig(checkConfigArray);
     }
   }

@@ -53,7 +53,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   type BluetoothAddress = common.BluetoothAddress;
 
@@ -63,7 +63,8 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type BluetoothTransport = connection.BluetoothTransport;
 
@@ -108,7 +109,8 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function createGattClientDevice(deviceId: string, setting: GattSetting): GattClientDevice;
 
@@ -166,7 +168,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 21 dynamic
-   * @since 23 static
+   * @since 26.0.1 static
    */
   function getConnectedBLEDevices(profile: BleProfile): Array<string>;
 
@@ -468,7 +470,7 @@ declare namespace ble {
    * @stagemodelonly
    * @crossplatform [since 13]
    * @since 11 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   function stopAdvertising(advertisingId: int, callback: AsyncCallback<void>): void;
 
@@ -491,7 +493,7 @@ declare namespace ble {
    * @stagemodelonly
    * @crossplatform [since 13]
    * @since 11 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   function stopAdvertising(advertisingId: int): Promise<void>;
 
@@ -524,7 +526,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @crossplatform
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   function onAdvertisingStateChange(callback: Callback<AdvertisingStateChangeInfo>): void;
 
@@ -557,7 +559,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @crossplatform
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   function offAdvertisingStateChange(callback?: Callback<AdvertisingStateChangeInfo>): void;
 
@@ -584,22 +586,22 @@ declare namespace ble {
    */
   function on(type: 'BLEDeviceFind', callback: Callback<Array<ScanResult>>): void;
 
-  /**
-   * Subscribe BLE scan result.
-   * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
-   *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
+  /** 
+   * Subscribe BLE scan result. 
+   * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+   * Otherwise, the type of the peer device address is virtual. 
+   * 
+   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
    *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @stagemodelonly
-   * @crossplatform
-   * @since 26.0.0 static
-   */
+   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event. 
+   * @throws { BusinessError } 201 - Permission denied. 
+   * @throws { BusinessError } 801 - Capability not supported. 
+   * @throws { BusinessError } 2900099 - Operation failed. 
+   * @syscap SystemCapability.Communication.Bluetooth.Core 
+   * @stagemodelonly 
+   * @crossplatform 
+   * @since 26.0.1 static 
+   */ 
   function onBLEDeviceFind(callback: Callback<Array<ScanResult>>): void;
 
   /**
@@ -621,19 +623,19 @@ declare namespace ble {
    */
   function off(type: 'BLEDeviceFind', callback?: Callback<Array<ScanResult>>): void;
 
-  /**
-   * Unsubscribe BLE scan result.
-   *
-   * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { Callback<Array<ScanResult>> } [callback] - Callback used to listen for the scan result event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @stagemodelonly
-   * @crossplatform
-   * @since 26.0.0 static
-   */
+  /** 
+   * Unsubscribe BLE scan result. 
+   * 
+   * @permission ohos.permission.ACCESS_BLUETOOTH 
+   * @param { Callback<Array<ScanResult>> } [callback] - Callback used to listen for the scan result event. 
+   * @throws { BusinessError } 201 - Permission denied. 
+   * @throws { BusinessError } 801 - Capability not supported. 
+   * @throws { BusinessError } 2900099 - Operation failed. 
+   * @syscap SystemCapability.Communication.Bluetooth.Core 
+   * @stagemodelonly 
+   * @crossplatform 
+   * @since 26.0.1 static 
+   */ 
   function offBLEDeviceFind(callback?: Callback<Array<ScanResult>>): void;
 
   /**
@@ -706,7 +708,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     removeAllServices(): void;
 
@@ -726,7 +729,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getService(serviceUuid: string): GattService;
 
@@ -744,7 +747,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getServices(): GattService[];
 
@@ -782,7 +785,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     connect(deviceId: string, autoConnect?: boolean): void;
 
@@ -800,7 +804,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     disconnect(deviceId: string): void;
 
@@ -894,7 +899,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getConnectedState(deviceId: string): ProfileConnectionState;
 
@@ -912,7 +917,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     readPhy(deviceId: string): Promise<PhyValue>;
 
@@ -933,7 +938,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     setPhy(deviceId: string, phyValue: PhyValue): Promise<void>;
 
@@ -960,22 +965,22 @@ declare namespace ble {
      */
     on(type: 'characteristicRead', callback: Callback<CharacteristicReadRequest>): void;
 
-    /**
-     * Subscribe characteristic read event.
-     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Subscribe characteristic read event. 
+     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+     * Otherwise, the type of the peer device address is virtual. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
+     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) 
+     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read 
+     *     event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onCharacteristicRead(callback: Callback<CharacteristicReadRequest>): void;
 
     /**
@@ -997,19 +1002,19 @@ declare namespace ble {
      */
     off(type: 'characteristicRead', callback?: Callback<CharacteristicReadRequest>): void;
 
-    /**
-     * Unsubscribe characteristic read event.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<CharacteristicReadRequest> } [callback] -
-     *     Callback used to listen for the characteristic read event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Unsubscribe characteristic read event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH 
+     * @param { Callback<CharacteristicReadRequest> } [callback] - 
+     *     Callback used to listen for the characteristic read event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     offCharacteristicRead(callback?: Callback<CharacteristicReadRequest>): void;
 
     /**
@@ -1035,22 +1040,22 @@ declare namespace ble {
      */
     on(type: 'characteristicWrite', callback: Callback<CharacteristicWriteRequest>): void;
 
-    /**
-     * Subscribe characteristic write event.
-     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Subscribe characteristic write event. 
+     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+     * Otherwise, the type of the peer device address is virtual. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
+     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) 
+     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write 
+     *     event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onCharacteristicWrite(callback: Callback<CharacteristicWriteRequest>): void;
 
     /**
@@ -1072,19 +1077,19 @@ declare namespace ble {
      */
     off(type: 'characteristicWrite', callback?: Callback<CharacteristicWriteRequest>): void;
 
-    /**
-     * Unsubscribe characteristic write event.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<CharacteristicWriteRequest> } [callback]
-     *     - Callback used to listen for the characteristic write event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Unsubscribe characteristic write event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH 
+     * @param { Callback<CharacteristicWriteRequest> } [callback] 
+     *     - Callback used to listen for the characteristic write event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     offCharacteristicWrite(callback?: Callback<CharacteristicWriteRequest>): void;
 
     /**
@@ -1109,21 +1114,21 @@ declare namespace ble {
      */
     on(type: 'descriptorRead', callback: Callback<DescriptorReadRequest>): void;
 
-    /**
-     * Subscribe descriptor read event.
-     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Subscribe descriptor read event. 
+     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+     * Otherwise, the type of the peer device address is virtual. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
+     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) 
+     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onDescriptorRead(callback: Callback<DescriptorReadRequest>): void;
 
     /**
@@ -1154,7 +1159,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offDescriptorRead(callback?: Callback<DescriptorReadRequest>): void;
 
@@ -1180,21 +1185,21 @@ declare namespace ble {
      */
     on(type: 'descriptorWrite', callback: Callback<DescriptorWriteRequest>): void;
 
-    /**
-     * Subscribe descriptor write event.
-     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+	  /** 
+     * Subscribe descriptor write event. 
+     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+     * Otherwise, the type of the peer device address is virtual. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
+     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) 
+     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onDescriptorWrite(callback: Callback<DescriptorWriteRequest>): void;
 
     /**
@@ -1225,7 +1230,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offDescriptorWrite(callback?: Callback<DescriptorWriteRequest>): void;
 
@@ -1252,22 +1257,22 @@ declare namespace ble {
      */
     on(type: 'connectionStateChange', callback: Callback<BLEConnectionChangeState>): void;
 
-    /**
-     * Subscribe server connection state changed event.
-     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<BLEConnectionChangeState> } callback -
-     *     Callback used to listen for the connection state changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+	  /** 
+     * Subscribe server connection state changed event. 
+     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+     * Otherwise, the type of the peer device address is virtual. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
+     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) 
+     * @param { Callback<BLEConnectionChangeState> } callback - 
+     *     Callback used to listen for the connection state changed event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onConnectionStateChange(callback: Callback<BLEConnectionChangeState>): void;
 
     /**
@@ -1293,14 +1298,14 @@ declare namespace ble {
      * Unsubscribe server connection state changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLEConnectionChangeState> } [callback]
-     *     - Callback used to listen for the connection state changed event.
+     * @param { Callback<BLEConnectionChangeState> } [callback] - Callback used to listen for the connection state changed
+     *     event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offConnectionStateChange(callback?: Callback<BLEConnectionChangeState>): void;
 
@@ -1321,18 +1326,18 @@ declare namespace ble {
      */
     on(type: 'BLEMtuChange', callback: Callback<int>): void;
 
-    /**
-     * Subscribe mtu changed event.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Subscribe mtu changed event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH 
+     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onBLEMtuChange(callback: Callback<int>): void;
 
     /**
@@ -1362,7 +1367,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offBLEMtuChange(callback?: Callback<int>): void;
 
@@ -1376,7 +1381,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onBlePhyUpdate(callback: Callback<PhyValue>): void;
 
@@ -1390,7 +1395,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offBlePhyUpdate(callback?: Callback<PhyValue>): void;
   }
@@ -1521,7 +1526,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getServices(callback: AsyncCallback<Array<GattService>>): void;
 
@@ -1542,7 +1547,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getServices(): Promise<Array<GattService>>;
 
@@ -1570,7 +1575,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     readCharacteristicValue(characteristic: BLECharacteristic, callback: AsyncCallback<BLECharacteristic>): void;
 
@@ -1680,7 +1685,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     writeCharacteristicValue(
       characteristic: BLECharacteristic,
@@ -1713,7 +1718,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     writeCharacteristicValue(characteristic: BLECharacteristic, writeType: GattWriteType): Promise<void>;
 
@@ -1740,7 +1745,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     writeCharacteristicValueWithContext(
       characteristic: BLECharacteristic, writeType: GattWriteType): Promise<GattRspContext>;
@@ -1769,7 +1774,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     writeDescriptorValue(descriptor: BLEDescriptor, callback: AsyncCallback<void>): void;
 
@@ -1797,7 +1802,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     writeDescriptorValue(descriptor: BLEDescriptor): Promise<void>;
 
@@ -1817,7 +1822,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getRssiValue(callback: AsyncCallback<int>): void;
 
@@ -1837,7 +1842,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getRssiValue(): Promise<int>;
 
@@ -1876,7 +1881,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     setBLEMtu(mtu: int): Promise<int>;
 
@@ -1902,7 +1908,7 @@ declare namespace ble {
      * @crossplatform [since 26.0.0]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     setCharacteristicChangeNotification(
       characteristic: BLECharacteristic,
@@ -1932,7 +1938,7 @@ declare namespace ble {
      * @crossplatform [since 26.0.0]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     setCharacteristicChangeNotification(characteristic: BLECharacteristic, enable: boolean): Promise<void>;
 
@@ -2006,7 +2012,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     getConnectedState(): ProfileConnectionState;
 
@@ -2026,7 +2032,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     updateConnectionParam(param: ConnectionParam): Promise<void>;
 
@@ -2043,7 +2049,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     readPhy(): Promise<PhyValue>;
 
@@ -2063,7 +2069,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     setPhy(phyValue: PhyValue): Promise<void>;
 
@@ -2091,11 +2097,11 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<BLECharacteristic> } callback
-     *     - Callback used to listen for the characteristic value changed event.
+     *  - Callback used to listen for the characteristic value changed event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onBLECharacteristicChange(callback: Callback<BLECharacteristic>): void;
 
@@ -2122,13 +2128,13 @@ declare namespace ble {
      * Unsubscribe characteristic value changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLECharacteristic> } [callback]
-     *     - Callback used to listen for the characteristic value changed event.
+     * @param { Callback<BLECharacteristic> } [callback] 
+     *  - Callback used to listen for the characteristic value changed event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offBLECharacteristicChange(callback?: Callback<BLECharacteristic>): void;
 
@@ -2156,13 +2162,13 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<BLEConnectionChangeState> } callback
-     *     - Callback used to listen for the connection state changed event.
+     *  - Callback used to listen for the connection state changed event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onBLEConnectionStateChange(callback: Callback<BLEConnectionChangeState>): void;
 
@@ -2189,13 +2195,13 @@ declare namespace ble {
      * Unsubscribe client connection state changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLEConnectionChangeState> } [callback]
-     *     - Callback used to listen for the connection state changed event.
+     * @param { Callback<BLEConnectionChangeState> } [callback] 
+     *  - Callback used to listen for the connection state changed event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offBLEConnectionStateChange(callback?: Callback<BLEConnectionChangeState>): void;
 
@@ -2217,17 +2223,17 @@ declare namespace ble {
      */
     on(type: 'BLEMtuChange', callback: Callback<int>): void;
 
-    /**
-     * Subscribe mtu changed event.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Subscribe mtu changed event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH 
+     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     onBLEMtuChange(callback: Callback<int>): void;
 
     /**
@@ -2248,18 +2254,18 @@ declare namespace ble {
      */
     off(type: 'BLEMtuChange', callback?: Callback<int>): void;
 
-    /**
-     * Unsubscribe mtu changed event.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<int> } [callback] - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.0 static
-     */
+    /** 
+     * Unsubscribe mtu changed event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH 
+     * @param { Callback<int> } [callback] - Callback used to listen for the mtu changed event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
     offBLEMtuChange(callback?: Callback<int>): void;
 
     /**
@@ -2288,7 +2294,7 @@ declare namespace ble {
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onServiceChange(callback: Callback<void>): void;
 
@@ -2316,7 +2322,7 @@ declare namespace ble {
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offServiceChange(callback?: Callback<void>): void;
 
@@ -2330,7 +2336,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onBlePhyUpdate(callback: Callback<PhyValue>): void;
 
@@ -2344,7 +2350,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offBlePhyUpdate(callback?: Callback<PhyValue>): void;
   }
@@ -2460,11 +2466,11 @@ declare namespace ble {
 
     /**
      * Subscribe BLE scan result.
-     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
-     *
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+     * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real. 
+     * Otherwise, the type of the peer device address is virtual. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and 
+     *  ohos.permission.GET_BLUETOOTH_PEERS_MAC)
      * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
@@ -2472,9 +2478,10 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onBLEDeviceFind(callback: Callback<ScanReport>): void;
+
     /**
      * Unsubscribe BLE scan result.
      *
@@ -2505,7 +2512,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offBLEDeviceFind(callback?: Callback<ScanReport>): void;
   }
@@ -3252,7 +3259,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 20 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     reason?: GattDisconnectReason;
     /**
@@ -3261,7 +3268,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     reasonMessage?: string;
   }
@@ -3294,7 +3302,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     address?: BluetoothAddress;
     /**
@@ -3350,7 +3358,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     advertiseFlags?: int;
 
@@ -3362,7 +3370,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     manufacturerDataMap?: Map<int, Uint8Array>;
 
@@ -3374,7 +3382,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     serviceDataMap?: Map<string, Uint8Array>;
 
@@ -3386,7 +3394,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     serviceUuids?: string[];
 
@@ -3398,7 +3406,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     txPowerLevel?: int;
 
@@ -3410,7 +3418,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     advertisingDataMap?: Map<int, Uint8Array>;
   }
@@ -3502,7 +3510,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     isExtended?: boolean;
   }
@@ -3584,7 +3593,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     advertiseName?: string;
   }
@@ -3823,7 +3832,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     address?: BluetoothAddress;
     /**
@@ -3834,7 +3843,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     irk?: Uint8Array;
 
@@ -3966,7 +3975,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     rssiThreshold?: int;
   }
@@ -4042,7 +4051,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     isExtended?: boolean;
     /**
@@ -4051,7 +4061,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     scanEnhanceMode?: ScanEnhanceMode;
   }
@@ -4162,7 +4173,8 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface GattSetting {
     /**
@@ -4171,7 +4183,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     autoConnect?: boolean;
     /**
@@ -4180,7 +4193,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     transport?: BluetoothTransport;
   }
@@ -4191,7 +4205,8 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ScanEnhanceMode {
     /**
@@ -4200,7 +4215,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     enhanceMode: EnhanceMode;
     /**
@@ -4210,7 +4226,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     timeout: int;
   }
@@ -4512,7 +4529,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 19 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     ON_BATCH = 3
   }
@@ -4523,7 +4540,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 21 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum BleProfile {
     /**
@@ -4532,7 +4549,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 21 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     GATT = 1,
     /**
@@ -4541,7 +4558,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 21 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     GATT_CLIENT = 2,
     /**
@@ -4550,7 +4567,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 21 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     GATT_SERVER = 3
   }
@@ -4562,7 +4579,7 @@ declare namespace ble {
    * @stagemodelonly
    * @crossplatform
    * @since 22 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum ConnectionParam {
     /**
@@ -4572,7 +4589,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     LOW_POWER = 1,
     /**
@@ -4582,7 +4599,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     BALANCED = 2,
     /**
@@ -4592,7 +4609,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     HIGH = 3
   }
@@ -4605,7 +4622,7 @@ declare namespace ble {
    * @crossplatform
    * @atomicservice
    * @since 20 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum GattDisconnectReason {
     /**
@@ -4616,7 +4633,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 20 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     CONN_TIMEOUT = 1,
     /**
@@ -4627,7 +4644,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 20 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     CONN_TERMINATE_PEER_USER = 2,
     /**
@@ -4638,7 +4655,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 20 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     CONN_TERMINATE_LOCAL_HOST = 3,
     /**
@@ -4649,7 +4666,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 20 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     CONN_UNKNOWN = 4
   }
@@ -4660,7 +4677,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum BlePhy {
     /**
@@ -4669,7 +4686,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     BLE_PHY_1M = 1,
     /**
@@ -4678,7 +4695,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     BLE_PHY_2M = 2,
     /**
@@ -4687,7 +4704,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     BLE_PHY_CODED = 3,
   }
@@ -4697,7 +4714,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum CodedPhyMode {
     /**
@@ -4706,7 +4723,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     BLE_PHY_CODED_S2 = 1,
     /**
@@ -4715,7 +4732,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     BLE_PHY_CODED_S8 = 2
   }
@@ -4827,7 +4844,7 @@ declare namespace ble {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface GattRspContext {
     /**
@@ -4837,7 +4854,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     timestamp: long;
   }
@@ -4848,7 +4865,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface PhyValue {
     /**
@@ -4857,7 +4874,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     txPhy: BlePhy;
     /**
@@ -4866,7 +4883,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     rxPhy: BlePhy;
     /**
@@ -4875,7 +4892,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     phyMode?: CodedPhyMode;
   }
@@ -4886,7 +4903,8 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum EnhanceMode {
     /**
@@ -4895,7 +4913,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     BLE_SCAN_ENHANCE_MODE_BALANCED = 0,
     /**
@@ -4904,7 +4923,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     BLE_SCAN_ENHANCE_MODE_MEDIUM = 1,
     /**
@@ -4913,7 +4933,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     BLE_SCAN_ENHANCE_MODE_FAST = 2,
     /**
@@ -4922,7 +4943,8 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     BLE_SCAN_ENHANCE_MODE_ULTRA_FAST = 3
   }

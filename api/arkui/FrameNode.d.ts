@@ -14,40 +14,15 @@
  */
 
 /**
- * **FrameNode** represents an entity node in the component tree. It can be used by a 
- * [NodeController]{@link NodeController:NodeController} to mount a [BuilderNode]{@link BuilderNode} (that holds the 
- * FrameNode) to a [NodeContainer]{@link node_container} or mount a [RenderNode]{@link RenderNode:RenderNode} to another
- * FrameNode. For best practices, see 
- * [Dynamic Component Creation: Dynamically Adding, Updating, and Deleting Components](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-ui-dynamic-operations#section153921947151012).
- * 
- * > **NOTE**
- * >
- * > - **FrameNode** is not available in DevEco Studio Previewer.
- * >
- * > - FrameNodes cannot be dragged.
- * >
- * > - FrameNode objects do not support JSON serialization.
- * >
- * > - When the API of the [FrameNode]{@link FrameNode} object is invoked in the scenario of 
- * > [ambiguous UI context](docroot://ui/arkts-global-interface.md#ambiguous-ui-context), you are advised to use the 
- * > [runScopedTask](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#runscopedtask) API of 
- * > [UIContext]{@link @ohos.arkui.UIContext} to specify the UI context. For details, see 
- * > [Executing the Closure Bound to a UI Instance](docroot://ui/arkts-global-interface.md#executing-the-closure-bound-to-a-ui-instance).
- *
  * @file
  * @kit ArkUI
  */
 
 import { UIContext } from '../@ohos.arkui.UIContext';
-
 import { RenderNode } from './RenderNode';
-
 import { Size, Position, Edges, LengthMetrics, SizeT } from './Graphics';
-
 import { DrawContext } from './Graphics';
-
 import { ComponentContent, ReactiveComponentContent } from './ComponentContent';
-
 import { BusinessError } from '../@ohos.base';
 
 /**
@@ -60,7 +35,6 @@ import { BusinessError } from '../@ohos.base';
  * @since 12 dynamic
  */
 declare interface LayoutConstraint {
-
   /**
    * Maximum size.
    *
@@ -107,7 +81,6 @@ declare interface LayoutConstraint {
  * @since 15 dynamic
  */
 declare interface CrossLanguageOptions {
-
   /**
    * Whether the FrameNode supports cross-language settings.
    *
@@ -161,7 +134,6 @@ declare interface CrossLanguageOptions {
  * @since 19 dynamic
  */
 declare interface InteractionEventBindingInfo {
-
   /**
    * Whether the event is bound declaratively.
    *
@@ -176,10 +148,11 @@ declare interface InteractionEventBindingInfo {
   baseEventRegistered: boolean;
 
   /**
-   * Whether the event is bound through a custom component node. For the implementation example, see
+   * Whether the event is bound through a custom component node. For details, see
    * [Basic Event Example](docroot://reference/apis-arkui/js-apis-arkui-frameNode.md#basic-event-example).
    *
-   * The value **true** means that the event is bound through a custom component node, and **false** means the opposite.
+   * The value **true** indicates that the event is bound through a custom component node, and **false** indicates the
+   * opposite.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -208,7 +181,7 @@ declare interface InteractionEventBindingInfo {
    * Whether the component has built-in events (events that are defined internally by the component and do not require
    * manual binding).
    *
-   * The value **true** means that the component has built-in events, and **false** means the opposite.
+   * The value **true** indicates that the component has built-in events, and **false** indicates the opposite.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -229,11 +202,14 @@ declare interface InteractionEventBindingInfo {
  * @since 15 dynamic
  */
 export enum ExpandMode {
-
   /**
    * The child nodes of the current FrameNode are not expanded. If the FrameNode contains
-   * [LazyForEach]{@link lazy_for_each} child nodes, the child nodes are not expanded when the nodes in the main tree
-   * are being obtained. The child node sequence numbers are calculated based on the nodes in the main tree.
+   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, the child nodes of the current FrameNode
+   * are not expanded when the child nodes on the main node tree are being obtained. The child node sequence numbers are
+   * calculated based on the child nodes on the main node tree.
+   *
+   * Application scenario: Only expanded child nodes on the main node tree need to be obtained without triggering
+   * expansion.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -244,9 +220,12 @@ export enum ExpandMode {
   NOT_EXPAND = 0,
 
   /**
-   * The child nodes of the current FrameNode are expanded. If the FrameNode contains [LazyForEach]{@link lazy_for_each}
-   * child nodes, all child nodes are expanded when being obtained. The child node sequence numbers are calculated based
-   * on all child nodes.
+   * The child nodes of the current FrameNode are expanded. If the FrameNode contains
+   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, the child nodes of the current FrameNode
+   * are expanded when all child nodes are being obtained. The child node sequence numbers are calculated based on all
+   * child nodes.
+   *
+   * Application scenario: All child nodes, including lazy loading ones, need to be obtained.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -258,9 +237,12 @@ export enum ExpandMode {
 
   /**
    * The child nodes of the current FrameNode are expanded on demand. If the FrameNode contains
-   * [LazyForEach]{@link lazy_for_each} child nodes, the child nodes are not expanded when the nodes in the main tree
-   * are being obtained, but are expanded when nodes not in the main tree are being obtained. The child node sequence
-   * numbers are calculated based on all child nodes.
+   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, the child nodes of the current FrameNode
+   * are not expanded when the child nodes on the main node tree are being obtained, and are expanded when the child
+   * nodes not on the main node tree are being obtained. The child node sequence numbers are calculated based on all
+   * child nodes.
+   *
+   * Application scenario: Child nodes on both the main node tree and non-main node tree need to be obtained on demand.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -271,11 +253,13 @@ export enum ExpandMode {
   LAZY_EXPAND = 2,
 
   /**
-   * Do not expand children of node.
-   * If the FrameNode contains LazyForEach child nodes, child nodes can be obtained directly when nodes in main tree.
-   * When nodes are not in main tree, only a node at corresponding position will be created,
-   * rather than expanding all child nodes.
-   * The child node sequence numbers are calculated based on all child nodes.
+   * The child nodes of the current FrameNode are not expanded. If the FrameNode contains
+   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, already expanded child nodes can be
+   * returned directly. When obtaining unexpanded child nodes, only the node at the corresponding position is created
+   * without expanding all child nodes. The child node sequence numbers are calculated based on all child nodes.
+   *
+   * Application scenario: Child nodes need to be obtained precisely by position without batch expansion of lazy loading
+   * child nodes.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -287,8 +271,7 @@ export enum ExpandMode {
 }
 
 /**
- * Enum for children count mode.
- * Specifies how to count children when querying number of child nodes.
+ * Enumerates the modes of counting child nodes.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -297,11 +280,14 @@ export enum ExpandMode {
  * @since 26.0.0 dynamic
  */
 export enum ChildrenCountMode {
-
   /**
-   * Expand mode. When encountering lazy-loaded nodes (e.g., LazyForEach),
-   * the nodes are expanded and the count includes all child nodes.
-   * This is the default behavior.
+   * Counting all child nodes after expansion. When a lazy loading node (such as
+   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each}) is encountered, the node is expanded and the total
+   * number of child nodes is returned.
+   *
+   * Whether to expand lazy loading nodes: yes
+   *
+   * Application scenario: scenarios where all child nodes need to be expanded and the total number returned.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -312,9 +298,12 @@ export enum ChildrenCountMode {
   ALL_EXPAND = 0,
 
   /**
-   * Count expanded mode. Does not expand lazy-loaded nodes.
-   * Returns the count of only currently expanded child nodes. Unexpanded lazy-loaded nodes
-   * are not included in the count.
+   * Counting currently expanded child nodes. Lazy loading nodes are not expanded, and only the number of currently
+   * expanded child nodes is returned. Lazy loading nodes that are not expanded are not included in the count.
+   *
+   * Whether to expand lazy loading nodes: no
+   *
+   * Application scenario: Only the number of expanded child nodes needs to be queried.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -325,9 +314,14 @@ export enum ChildrenCountMode {
   ONLY_EXPANDED = 1,
 
   /**
-   * Count all mode. Does not expand lazy-loaded nodes,
-   * but returns the count including all potential children (both expanded and unexpanded lazy-loaded nodes).
-   * This provides the total potential child count without triggering expansion.
+   * Counting all child nodes. Lazy loading nodes are not expanded, but the total number of potential child nodes (
+   * including both expanded and unexpanded lazy loading nodes) is returned. This counting mode provides the total
+   * number of potential child nodes without triggering any expansion.
+   *
+   * Whether to expand lazy loading nodes: no
+   *
+   * Application scenario: This counting mode is used when the total number of all child nodes needs to be obtained.
+   * Unlike **ALL_EXPAND**, this mode does not expand child nodes.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -348,7 +342,6 @@ export enum ChildrenCountMode {
  * @since 20 dynamic
  */
 export enum UIState {
-
   /**
    * Normal state.
    *
@@ -407,7 +400,7 @@ export enum UIState {
   SELECTED = 1 << 3,
 
   /**
-   * The hovered state.
+   * Hovered state.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -419,15 +412,16 @@ export enum UIState {
 }
 
 /**
- * Defines the callback triggered when the UI state changes. Defines the callback triggered on UI state changes. It
- * receives the current [UIState]{@link UIState} value when triggered. The parameter represents **UIState** enumerated
- * values or their bitwise combinations.
+ * Defines the callback triggered when the UI state changes. It receives the current [UIState]{@link UIState} value when
+ * triggered. The parameter represents **UIState** enumerated values or their bitwise combinations.
  *
  * @param { FrameNode } node - Node triggering the UI state change.
- * @param { number } currentUIStates - Current UI states when the callback is triggered.<br>You can use the bitwise AND
- *     operation to check the [UI states]{@link UIState} that are currently included.<br>Example:
- *     **if (currentState & UIState.PRESSED == UIState.PRESSED)**.<br>Direct comparison:
- *     **if (currentState == UIState.PRESSED)**.
+ * @param { number } currentUIStates - Current UI states when the callback is triggered.
+ *     <br>You can use a bitwise AND operation to determine which [UI states]{@link UIState} are currently included.
+ *     <br>Bitwise AND operation: **if ((currentUIStates & UIState.PRESSED) == UIState.PRESSED)**.
+ *     <br>If you only need to determine whether there is a single state, you can directly use
+ *     **if (currentUIStates == UIState.PRESSED)**. Note: This method is valid only when a single state is active. To
+ *     determine whether a specific state is included among multiple states, use a bitwise AND operation.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -437,7 +431,30 @@ export enum UIState {
 declare type UIStatesChangeHandler = (node: FrameNode, currentUIStates: number) => void;
 
 /**
- * Defines FrameNode.
+ * **FrameNode** represents an entity node in the component tree, supporting capabilities such as node tree operations,
+ * custom drawing and layout, position query, and animation. It can be used by a
+ * [NodeController]{@link ./NodeController:NodeController} to mount a [BuilderNode]{@link ./BuilderNode} (that holds the
+ * FrameNode) to a [NodeContainer]{@link ../@internal/component/ets/node_container} or mount a
+ * [RenderNode]{@link ./RenderNode:RenderNode} to another FrameNode. It is suitable for scenarios where component node
+ * trees need to be dynamically created and managed through code, enabling flexible UI composition and custom rendering
+ * requirements that cannot be directly met by declarative components.
+ *
+ * > **NOTE**
+ * >
+ * > - **FrameNode** is not available in DevEco Studio Previewer.
+ * >
+ * > - FrameNodes cannot be dragged.
+ * >
+ * > - FrameNode objects do not support JSON serialization.
+ * >
+ * > - When the API of the [FrameNode]{@link FrameNode} object is invoked in the scenario of
+ * > [ambiguous UI context](docroot://ui/arkts-global-interface.md#ambiguous-ui-context), you are advised to use the
+ * > [runScopedTask]{@link @ohos.arkui.UIContext:UIContext.runScopedTask} API of
+ * > [UIContext]{@link @ohos.arkui.UIContext} to specify the UI context. For details, see
+ * > [Executing the Closure Bound to a UI Instance](docroot://ui/arkts-global-interface.md#executing-the-closure-bound-to-a-ui-instance).
+ * >
+ * > - In the FrameNode APIs, only the mandatory parameters of the [Optional]{@link Optional} type can be set to null or
+ * > undefined.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -446,7 +463,6 @@ declare type UIStatesChangeHandler = (node: FrameNode, currentUIStates: number) 
  * @since 11 dynamic
  */
 export class FrameNode {
-
   /**
    * A constructor used to create a FrameNode.
    *
@@ -460,7 +476,7 @@ export class FrameNode {
   constructor(uiContext: UIContext);
 
   /**
-   * Obtains the [RenderNode]{@link RenderNode:RenderNode} held by the FrameNode.
+   * Obtains the [RenderNode]{@link ./RenderNode:RenderNode} held by the FrameNode.
    *
    * @returns { RenderNode | null } **RenderNode** instance. If the current FrameNode does not hold any RenderNode,
    *     **null** is returned. If the current FrameNode is a node created by a declarative component, **null** is
@@ -476,15 +492,17 @@ export class FrameNode {
   /**
    * Checks whether this FrameNode is modifiable.
    *
-   * @returns { boolean } Whether this FrameNode is modifiable.
-   *     <br>The value **true** means that the FrameNode is modifiable, and **false** means the opposite.
-   *     <br>Returns **false** if the node is a system component proxy node in a
-   *     [custom component node](docroot://ui/arkts-user-defined-node.md#custom-component-node-framenode) or the node
-   *     has been [disposed]{@link FrameNode#dispose}.
-   *     <br>When **false** is returned, the current FrameNode does not support operations such as
-   *     [appendChild]{@link FrameNode#appendChild}, [insertChildAfter]{@link FrameNode#insertChildAfter},
-   *     [removeChild]{@link FrameNode#removeChild}, [clearChildren]{@link FrameNode#clearChildren},
-   *     [createAnimation]{@link FrameNode#createAnimation}, and [cancelAnimations]{@link FrameNode#cancelAnimations}.
+   * @returns { boolean } Whether the current node is modifiable.<br/>The value **true** indicates that the current node
+   *     is modifiable, and **false** indicates the opposite.<br/>The value **false** is returned when the node is a
+   *     system component proxy node in a
+   *     [custom component node](docroot://ui/arkts-user-defined-node.md#custom-component-node-framenode) or when the
+   *     node has been [disposed]{@link FrameNode#dispose} of.<br/>When **false** is returned, the current FrameNode
+   *     does not support the following operations: [appendChild]{@link FrameNode#appendChild},
+   *     [insertChildAfter]{@link FrameNode#insertChildAfter}, [removeChild]{@link FrameNode#removeChild},
+   *     [clearChildren]{@link FrameNode#clearChildren}, [createAnimation]{@link FrameNode#createAnimation},
+   *     [cancelAnimations]{@link FrameNode#cancelAnimations}, [moveTo]{@link FrameNode#moveTo},
+   *     [addComponentContent]{@link FrameNode#addComponentContent}, [adoptChild]{@link FrameNode#adoptChild}, and
+   *     [removeAdoptedChild]{@link FrameNode#removeAdoptedChild}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -498,10 +516,11 @@ export class FrameNode {
    * When **appendChild** is called, [typeNode]{@link typeNode} validates the type or number of child nodes. If the
    * validation fails, an exception is thrown. For specific limitations, see [typeNode]{@link typeNode}.
    *
-   * @param { FrameNode } node - Child node to append.<br> The target node must not be a declaratively created node,
-   *     that is, a FrameNode that is not modifiable. Only declarative nodes obtained from a BuilderNode can be used as
-   *     child nodes. If the child node does not meet the specifications, an exception is thrown.<br> The FrameNode
-   *     cannot have a parent node. Otherwise, an exception is thrown.
+   * @param { FrameNode } node - FrameNode to add.<br/> The node cannot be a non-modifiable FrameNode (for example, a
+   *     declarative component node obtained through APIs such as **getFrameNodeById**). Only the FrameNode obtained
+   *     through the **getFrameNode** API of [BuilderNode]{@link ./BuilderNode} can be added as a declarative child
+   *     node. If the child node does not meet the specifications, an exception is thrown.<br/> The node cannot have a
+   *     parent node; otherwise, an exception is thrown.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
    * @throws { BusinessError } 100025 - The parameter is invalid. Details about the invalid parameter and the reason
    *     are included in the error message. For example: "The parameter 'node' is invalid: it cannot be adopted.
@@ -515,13 +534,16 @@ export class FrameNode {
   appendChild(node: FrameNode): void;
 
   /**
-   * Inserts a child node after the specified child node of this FrameNode. If this FrameNode is not modifiable, an
-   * exception is thrown.
+   * Adds a new child node after the specified child node of this FrameNode. If the current FrameNode is not modifiable,
+   * an exception is thrown. [typeNode]{@link typeNode} validates the child component type or count during
+   * **insertChildAfter**, and throws an exception if the validation fails. For restrictions, see the description of
+   * [typeNode]{@link typeNode}.
    *
-   * @param { FrameNode } child - Child node to add.<br>The target child node must not be a declaratively created node,
-   *     that is, a FrameNode that is not modifiable. Only declarative nodes obtained from a BuilderNode can be used as
-   *     child nodes. If the child node does not meet the specifications, an exception is thrown.<br> The child node
-   *     cannot have a parent node. Otherwise, an exception is thrown.
+   * @param { FrameNode } child - Child node to add.<br/>The child node cannot be a non-modifiable FrameNode (for
+   *     example, a declarative component node obtained through APIs such as **getFrameNodeById**). Only the FrameNode
+   *     obtained by [BuilderNode]{@link ./BuilderNode} through the **getFrameNode** API can be added as a declarative
+   *     child node. If the child node does not meet the specifications, an exception is thrown.<br/>The child node
+   *     cannot have a parent node; otherwise, an exception is thrown.
    * @param { FrameNode | null } sibling - Node after which the new child node will be inserted. If this parameter is
    *     left empty, the new node is inserted before the first subnode.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
@@ -564,7 +586,8 @@ export class FrameNode {
   /**
    * Obtains the child node in the specified position of this node.
    *
-   * @param { number } index - Index of the child node to obtain.<br>The value range of index is
+   * @param { number } index - Index of the child node to obtain.
+   *     <br>The value range of index is
    *     [0, +∞). If the current node has n child nodes, the valid value range of index is [0, n-1].
    * @returns { FrameNode | null } Child node obtained. If the FrameNode does not contain the specified child node, null
    *     is returned.
@@ -580,9 +603,11 @@ export class FrameNode {
    * Obtains a child node at a specified index from this FrameNode, with optional support for specifying the expansion
    * mode of the child node.
    *
-   * @param { number } index - Index of the child node to obtain.<br>The value range of index is
+   * @param { number } index - Index of the child node to obtain.
+   *     <br>The value range of index is
    *     [0, +∞). If the current node has n child nodes, the valid value range of index is [0, n-1].
-   * @param { ExpandMode } expandMode - Expansion mode of the child node.<br>Default value: **ExpandMode.EXPAND**.
+   * @param { ExpandMode } expandMode - Expansion mode of the child node.
+   *     <br>Default value: **ExpandMode.EXPAND**.
    * @returns { FrameNode | null } Child node obtained. If the FrameNode does not contain the specified child node, null
    *     is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -684,7 +709,7 @@ export class FrameNode {
   getChildrenCount(): number;
 
   /**
-   * Get the children count of the current FrameNode with specified count mode.
+   * Obtains the number of child nodes of this FrameNode based on the specified counting mode.
    *
    * @param { ChildrenCountMode } [countMode] - The children count mode. Default value is ChildrenCountMode.ALL_EXPAND.
    * @returns { int } - Returns the number of children of the current FrameNode based on the count mode.
@@ -708,17 +733,20 @@ export class FrameNode {
    * > operations: [Stack]{@link typeNode.Stack}, [XComponent]{@link typeNode.XComponent}. This API does not work for
    * > other node types.
    * >
-   * > This API only supports [BuilderNode]{@link BuilderNode:BuilderNode} with root components of these types:
-   * > [Stack]{@link stack}, [XComponent]{@link xcomponent}, [EmbeddedComponent]{@link embedded_component}. This API
-   * > does not work for other component types.
+   * > This API only supports [BuilderNode]{@link ./BuilderNode:BuilderNode} with root components of these types:
+   * > [Stack]{@link ../@internal/component/ets/stack}, [XComponent]{@link ../@internal/component/ets/xcomponent},
+   * > [EmbeddedComponent]{@link ../@internal/component/ets/embedded_component}. This API does not work for other
+   * > component types.
    *
-   * @param { FrameNode } targetParent - Target parent node.<br>The target parent node must not be a declaratively
-   *     created node, that is, a FrameNode that is not modifiable. If it does not meet the specifications, an exception
-   *     is thrown.
+   * @param { FrameNode } targetParent - Target parent node.
+   *     <br>The target parent node must not be a declaratively created node, that is, a FrameNode that is not
+   *     modifiable. If it does not meet the specifications, an exception is thrown.
    * @param { number } [index] - Index of the child node. The current FrameNode will be inserted before the child node
    *     at the specified sequence number in the target FrameNode. If the target FrameNode has *n* nodes, the value
-   *     range for **index** is 0, *n*-1].<br>If the parameter is invalid or not specified, the current FrameNode will
-   *     be added to the end of the target FrameNode.<br>Default value: **-1**
+   *     range for **index** is [0, *n*-1].
+   *     <br>If the parameter is invalid or not specified, the current FrameNode will be added to the end of the target
+   *     FrameNode.
+   *     <br>Default value: **-1**
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
    * @throws { BusinessError } 100027 - The current node has been adopted. [since 22]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -734,13 +762,13 @@ export class FrameNode {
    *
    * > **NOTE**
    * >
-   * > - After the **dispose** API is called, the FrameNode object no longer corresponds to any entity FrameNode. In
-   * > this case, attempts to call certain query APIs, such as [getMeasuredSize]{@link FrameNode#getMeasuredSize} and
-   * > [getLayoutPosition]{@link FrameNode#getLayoutPosition}, will result in a JS crash in the application.
+   * > - After a **FrameNode** object calls **dispose**, since it does not correspond to any entity FrameNode, calling
+   * > certain query APIs (such as [getMeasuredSize]{@link FrameNode#getMeasuredSize} and
+   * > [getLayoutPosition]{@link FrameNode#getLayoutPosition}) will cause a jscrash in the application.
    * >
-   * > - To check whether the current FrameNode object corresponds to an entity FrameNode, you can use
-   * > [getUniqueId]{@link FrameNode#getUniqueId} API. A **UniqueId** value greater than 0 indicates that the object is
-   * > associated with an entity FrameNode.
+   * > - You can use [getUniqueId]{@link FrameNode#getUniqueId} to determine whether the current FrameNode corresponds
+   * > to an entity FrameNode. When the value of **UniqueID** is greater than 0, the object corresponds to an entity
+   * > FrameNode.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -850,9 +878,11 @@ export class FrameNode {
   getUserConfigSize(): SizeT<LengthMetrics>;
 
   /**
-   * Obtains the node ID set by the user, which is the same as the value of the [component ID]{@link common}.
+   * Obtains the node ID set by the user, which is the same as the value of the
+   * [component ID]{@link ../@internal/component/ets/common}.
    *
-   * @returns { string } Node ID set by the user, which is the same as the value of the [component ID]{@link common}.
+   * @returns { string } Node ID set by the user, which is the same as the value of the
+   *     [component ID]{@link ../@internal/component/ets/common}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -862,9 +892,9 @@ export class FrameNode {
   getId(): string;
 
   /**
-   * Obtains the system-assigned unique ID of the node.
+   * Obtains the unique identifier (**UniqueID**) assigned by the system to this node.
    *
-   * @returns { number } System-assigned unique ID of the node.
+   * @returns { number } Unique identifier (**UniqueID**) assigned by the system.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -875,8 +905,8 @@ export class FrameNode {
 
   /**
    * Obtains the type of the node. For built-in components, the node type corresponds to the component name. For
-   * example, the node type of the [Button]{@link button} component is **Button**. For custom components that implement
-   * rendering, the node type is **__Common__**.
+   * example, the node type of the [Button]{@link ../@internal/component/ets/button} component is **Button**. For custom
+   * components that implement rendering, the node type is **__Common__**.
    *
    * @returns { string } Type of the node.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -917,11 +947,11 @@ export class FrameNode {
   isVisible(): boolean;
 
   /**
-   * Checks whether the node is clipped to the component area. This API returns **true** after the
-   * [dispose]{@link FrameNode#dispose} API is called to release the reference to the FrameNode.
+   * Obtains whether the node is clipped to the component area. After [dispose]{@link FrameNode#dispose} is called to
+   * release the reference to the entity FrameNode, the return value is **true**.
    *
-   * @returns { boolean } Whether the node is clipped to the component area.
-   *     <br>The value **true** means that the node is clipped to the component area, and **false** means the opposite.
+   * @returns { boolean } Whether the node is clipped to the component area.<br/>The value **true** indicates that the
+   *     node is clipped to the component area, and **false** indicates the opposite.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -944,10 +974,12 @@ export class FrameNode {
   isAttached(): boolean;
 
   /**
-   * Checks whether this FrameNode object has released its reference to its backend entity node. Frontend nodes maintain
-   * references to corresponding backend entity nodes. After a node calls the **dispose** API to release this reference,
-   * subsequent API calls may cause crashes or return default values. This API facilitates validation of node validity
-   * prior to operations, thereby mitigating risks in scenarios where calls after disposal are required.
+   * Queries whether the current **FrameNode** object has been released from the reference to the backend entity node.
+   * Each frontend node is bound to a corresponding backend entity node. After a node calls the **dispose** API to
+   * release the binding, calling other APIs of this node may result in crashes or return default values. Due to service
+   * requirements, there may be cases where a node's APIs are still called after the call to **dispose**. To address
+   * this, this API is provided for you to check the validity of a node before operating on it, thereby avoiding
+   * potential risks.
    *
    * @returns { boolean } Whether the reference to the backend node is released. The value **true** means that the
    *     reference to backend node is released, and **false** means the opposite.
@@ -1010,8 +1042,11 @@ export class FrameNode {
   /**
    * Obtains the **UIGestureEvent** object held by this FrameNode, which is used to set gesture events bound to the
    * component. Gesture events set using the **gestureEvent** API will not override gestures bound using the
-   * [declarative gesture API]{@link common}. If both APIs are used to set gestures, the declarative API takes
-   * precedence.
+   * [gesture binding API]{@link ../@internal/component/ets/common}. If both APIs are used to set gestures, the gesture
+   * binding API takes precedence.
+   *
+   * In LazyForEach scenarios, due to node destruction and reconstruction, gesture event callbacks must be re-set for
+   * reconstructed nodes to ensure that the listening events respond properly.
    *
    * @returns { UIGestureEvent } **UIGestureEvent** object, which is used to set the gestures bound to the component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1024,14 +1059,15 @@ export class FrameNode {
 
   /**
    * Obtains the **CommonAttribute** API associated with the FrameNode, which is used to configure
-   * [universal attributes]{@link common} and [universal events]{@link common}.
+   * [universal attributes]{@link ../@internal/component/ets/common} and
+   * [universal events]{@link ../@internal/component/ets/common}.
    *
    * Note that only the attributes of a custom node can be modified.
    *
    * > **NOTE**
    * >
-   * > The visual representation of the FrameNode is similar to that of a [Stack]{@link stack} container that is aligned
-   * > to the top start edge.
+   * > The visual representation of the FrameNode is similar to that of a
+   * > [Stack]{@link ../@internal/component/ets/stack} container that is aligned to the top start edge.
    * >
    * > For details about the supported attributes, see
    * > [attributeModifier Support for Attributes and Events](docroot://ui/arkts-user-defined-extension-attributeModifier.md#attributemodifier-support-for-attributes-and-events).
@@ -1051,7 +1087,7 @@ export class FrameNode {
    * Implements custom drawing for the FrameNode. This API overrides the default drawing behavior and is invoked during
    * FrameNode content rendering.
    *
-   * Note: The Canvas provided in the [DrawContext]{@link Graphics:DrawContext} parameter is a temporary command-
+   * Note: The Canvas provided in the [DrawContext]{@link ./Graphics:DrawContext} parameter is a temporary command-
    * recording canvas, not the actual rendering canvas of the node. For usage instructions, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-arktsNode-frameNode.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -1083,7 +1119,7 @@ export class FrameNode {
    * layout method. It can be used to specify how the FrameNode and its child nodes are positioned and sized within the
    * layout.
    *
-   * @param { Position } position - Position information used in layout.
+   * @param { Position } position - Position used for component layout. The unit is px.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1093,10 +1129,11 @@ export class FrameNode {
   onLayout(position: Position): void;
 
   /**
-   * Sets the measured size of this FrameNode. The default unit is PX. If the configured width or height values are
-   * negative, they are automatically set to 0.
+   * Sets the measured size of this FrameNode. The default unit is px. If the set width or height values are negative,
+   * they are automatically set to 0. It is recommended to call this API in [onMeasure]{@link FrameNode#onMeasure} to
+   * set the result of custom measurement.
    *
-   * @param { Size } size - Measured size of the FrameNode.
+   * @param { Size } size - Measured size of the FrameNode, in px.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1106,9 +1143,10 @@ export class FrameNode {
   setMeasuredSize(size: Size): void;
 
   /**
-   * Sets the position of this FrameNode after layout. The default unit is PX.
+   * Sets the position of this FrameNode after layout. The default unit is px. It is recommended to call this API in
+   * [onLayout]{@link FrameNode#onLayout} to set the result of custom layout.
    *
-   * @param { Position } position - Position of the FrameNode after layout.
+   * @param { Position } position - Position of the FrameNode after layout, in px.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1136,7 +1174,7 @@ export class FrameNode {
    * method is overridden, the overridden method is called. It is recommended that this API be called in
    * [onLayout]{@link FrameNode#onLayout}.
    *
-   * @param { Position } position - Position information used in layout.
+   * @param { Position } position - Position used for component layout. The unit is px.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1146,7 +1184,8 @@ export class FrameNode {
   layout(position: Position): void;
 
   /**
-   * Marks this FrameNode as needing layout, so that it will be relaid out in the next frame.
+   * Marks this FrameNode as needing layout, so that it will be re-laid out in the next frame, triggering the calls of
+   * [onMeasure]{@link FrameNode#onMeasure} and [onLayout]{@link FrameNode#onLayout} .
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1157,7 +1196,8 @@ export class FrameNode {
   setNeedsLayout(): void;
 
   /**
-   * Invalidates this FrameNode to trigger a re-rendering of the self-drawing content.
+   * Invalidates this FrameNode to trigger a re-rendering of the self-drawing content, that is, re-invokes
+   * [onDraw]{@link FrameNode#onDraw} for self-drawing.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1180,7 +1220,9 @@ export class FrameNode {
   getPositionToScreen(): Position;
 
   /**
-   * Obtains the position offset of this FrameNode relative to the global display, in vp.
+   * Obtains the position offset of this FrameNode relative to the global display, in vp. The coordinate system
+   * reference differs from that of [getPositionToScreen]{@link FrameNode#getPositionToScreen}. Choose the appropriate
+   * API based on the actual scenario.
    *
    * @returns { Position } Position offset of the node relative to the global display, in vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1192,14 +1234,14 @@ export class FrameNode {
   getGlobalPositionOnDisplay(): Position;
 
   /**
-   * Obtains the position offset of a FrameNode relative to the drawing-enabled window, in vp. Drawing attributes
-   * include [transform](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-transformation.md#transform)
-   * and [translate]{@link CommonMethod#translate(value: TranslateOptions)}. This API returns the upper left corner
-   * coordinates after component layout.
+   * Obtains the position offset of this FrameNode relative to the window with drawing attributes applied, in vp.
+   * Drawing attributes include [transform]{@link CommonMethod#transform(value: object)} and
+   * [translate]{@link CommonMethod#translate(value: TranslateOptions)}. This API returns the transformed coordinates of
+   * the upper left corner after component layout.
    *
-   * @returns { Position } Position offset of the node relative to the window, in vp. If other drawing attributes (such
-   *     as **transform** and **translate**) are set, the return value may slightly deviate due to the precision of
-   *     floating point numbers.
+   * @returns { Position } Offset of the node relative to the window, in vp. When other drawing attributes (such as
+   *     **transform** and **translate**) are set, the return value may have a slight deviation due to floating-point
+   *     precision.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1209,15 +1251,14 @@ export class FrameNode {
   getPositionToWindowWithTransform(): Position;
 
   /**
-   * Obtains the position offset of a FrameNode relative to its drawing-enabled parent component, in vp. Drawing
-   * attributes include
-   * [transform](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-transformation.md#transform) and
-   * [translate]{@link CommonMethod#translate(value: TranslateOptions)}. This API returns the upper left corner
-   * coordinates after component layout.
+   * Obtains the position offset of this FrameNode relative to its parent component with drawing attributes applied, in
+   * vp. Drawing attributes include [transform]{@link CommonMethod#transform(value: object)} and
+   * [translate]{@link CommonMethod#translate(value: TranslateOptions)}. This API returns the transformed coordinates of
+   * the upper left corner after component layout.
    *
-   * @returns { Position } Position offset of the node relative to the parent component, in vp. If other drawing
-   *     attributes (such as **transform** and **translate**) are set, the return value may slightly deviate due to the
-   *     precision of floating point numbers.
+   * @returns { Position } Offset of the node relative to its parent component, in vp. When other drawing attributes (
+   *     such as **transform** and **translate**) are set, the return value may have slight deviations due to floating-
+   *     point precision.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1227,14 +1268,14 @@ export class FrameNode {
   getPositionToParentWithTransform(): Position;
 
   /**
-   * Obtains the position offset of a FrameNode relative to the drawing-enabled screen, in vp. Drawing attributes
-   * include [transform](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-transformation.md#transform)
-   * and [translate]{@link CommonMethod#translate(value: TranslateOptions)}. This API returns the upper left corner
-   * coordinates after component layout.
+   * Obtains the position offset of this FrameNode relative to the screen with drawing attributes applied, in vp.
+   * Drawing attributes include [transform]{@link CommonMethod#transform(value: object)} and
+   * [translate]{@link CommonMethod#translate(value: TranslateOptions)}. This API returns the transformed coordinates of
+   * the upper left corner after component layout.
    *
-   * @returns { Position } Position offset of the node relative to the screen, in vp. If other drawing attributes (such
-   *     as **transform** and **translate**) are set, the return value may slightly deviate due to the precision of
-   *     floating point numbers.
+   * @returns { Position } Position offset of the node relative to the screen, in vp. When other drawing attributes (
+   *     such as **transform**, and **translate**) are set, the return value may have slight deviations due to floating-
+   *     point precision.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1287,7 +1328,7 @@ export class FrameNode {
    * > [Column]{@link typeNode.Column}, [Row]{@link typeNode.Row}, [Stack]{@link typeNode.Stack},
    * > [Flex]{@link typeNode.Flex}, [RelativeContainer]{@link typeNode.RelativeContainer},
    * > [Progress]{@link typeNode.Progress}, [LoadingProgress]{@link typeNode.LoadingProgress},
-   * > [Image]{@link typeNode.Image}, [Button]{@link typeNode.Button}, [CheckBox]{@link typeNode.Checkbox},
+   * > [Image]{@link typeNode.Image}, [Button]{@link typeNode.Button}, [Checkbox]{@link typeNode.Checkbox},
    * > [Radio]{@link typeNode.Radio}, [Slider]{@link typeNode.Slider}, [Toggle]{@link typeNode.Toggle}, and
    * > [TypedFrameNode]{@link TypedFrameNode} of the [XComponent]{@link typeNode.XComponent} type.
    *
@@ -1319,7 +1360,7 @@ export class FrameNode {
 
   /**
    * Triggers child component recycling in global reuse scenarios and fully releases FrameNode backend resources for
-   * reuse. This ensures efficient resource reclamation and reuse.
+   * [reuse]{@link FrameNode#reuse}. This ensures efficient resource reclamation and reuse.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1346,9 +1387,11 @@ export class FrameNode {
    * Obtains the event binding information for the target node. Returns **undefined** if the specified interaction event
    * type is not bound to the component node.
    *
-   * @param { EventQueryType } eventType - Type of the interaction event to query.
-   * @returns { InteractionEventBindingInfo | undefined } Returns an **InteractionEventBindingInfo** object containing
-   *     event binding details if the interaction event is bound to the current node; returns **undefined** otherwise.
+   * @param { EventQueryType } eventType - Type of the interaction event to query. For example,
+   *     **EventQueryType.ON_CLICK** indicates querying the binding information of the tap event. For details about the
+   *     enumerated values, see [EventQueryType]{@link EventQueryType}.
+   * @returns { InteractionEventBindingInfo | undefined } **InteractionEventBindingInfo** object if the queried type of
+   *     interaction event is bound on the current node, indicating event binding details; **undefined** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1360,13 +1403,15 @@ export class FrameNode {
   /**
    * Adds the polymorphic style states supported by the component.
    *
-   * @param { number } uiStates - UI states of the target node to be processed.<br>Multiple states can be specified
-   *     simultaneously using bitwise OR operations, for example,
+   * @param { number } uiStates - UI states of the target node to be processed.
+   *     <br>Multiple states can be specified simultaneously using bitwise OR operations, for example,
    *     **targetUIStates = UIState.PRESSED  |  UIState.FOCUSED**.
    * @param { UIStatesChangeHandler } statesChangeHandler - Callback invoked when the state changes.
-   * @param { boolean } [excludeInner] - Whether to disable the default state style processing. Default value:
-   *     **false**.<br> **true**: Disable default state style processing. **false**: Enable default state style
-   *     processing.
+   * @param { boolean } [excludeInner] - Whether to disable internal default state style processing. The default value
+   *     is **false**. Internal default state style processing refers to the built-in state style response of a
+   *     component (for example, the default visual feedback when a button is pressed).
+   *     <br>The value **true** means to disable internal default state style processing, and **false** means not to
+   *     disable it.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1378,8 +1423,9 @@ export class FrameNode {
   /**
    * Removes the state processing registration from the component.
    *
-   * @param { number } uiStates - UI states to be removed.<br>Multiple states can be specified simultaneously using
-   *     bitwise OR operations, for example, **targetUIStates = UIState.PRESSED  |  UIState.FOCUSED**.
+   * @param { number } uiStates - UI states to be removed.
+   *     <br>Multiple states can be specified simultaneously using bitwise OR operations, for example,
+   *     **removeUIStates = UIState.PRESSED  |  UIState.FOCUSED**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1392,34 +1438,40 @@ export class FrameNode {
    * Creates a property animation for the FrameNode.
    *
    * @param { AnimationPropertyType } property - Animation property type.
-   * @param { Optional<number[]> } startValue - Animation start value. The value can be **undefined** or an array. If
-   *     the value is **undefined**, the animation uses the last set value of the property on the node as the starting
-   *     value. If the value is an array, the length must match the property type requirements:<br>-
-   *     **AnimationPropertyType.ROTATION**: [rotationX, rotationY, rotationZ] in degrees (°).<br>-
-   *     **AnimationPropertyType.TRANSLATION**: [translateX, translateY] in px.<br>- **AnimationPropertyType.SCALE**:
-   *     [scaleX, scaleY] (scale factors).<br>- **AnimationPropertyType.OPACITY**: [opacity] (value range: [0, 1]).<br>
-   *     For the first animation of a property, **startValue** must be explicitly specified. For subsequent animations,
-   *     it is recommended that you either omit **startValue** or set it to the previous animation's end value to avoid
-   *     abrupt changes.
-   * @param { number[] } endValue - Animation end value. The value is an array. The array length must match the property
-   *     type requirements:<br>- **AnimationPropertyType.ROTATION**: [rotationX, rotationY, rotationZ] in degrees (°).<
-   *     br>- **AnimationPropertyType.TRANSLATION**: [translateX, translateY] in px.<br>-
-   *     **AnimationPropertyType.SCALE**: [scaleX, scaleY] (scale factors).<br>- **AnimationPropertyType.OPACITY**:
-   *     [opacity] (value range: [0, 1]).
+   * @param { Optional<number[]> } startValue - Animation start value. The value can be **undefined** or an array. If it
+   *     is an array, the array length must match the property enumeration. If it is **undefined**, the animation start
+   *     value is not explicitly specified, and the last property end value set on the node is used as the start point
+   *     of this animation. If it is an array:<br/>- **AnimationPropertyType.ROTATION**:
+   *     [rotationX, rotationY, rotationZ], in degrees (°), indicating the rotation angles around the x, y, and z axes.<
+   *     br/>- **AnimationPropertyType.TRANSLATION**: [translateX, translateY], in px, indicating the translation
+   *     amounts along the x and y axes.<br/>- **AnimationPropertyType.SCALE**: [scaleX, scaleY], indicating the scale
+   *     ratios in the x and y directions.<br/>- ** AnimationPropertyType.OPACITY**: [opacity], indicating the opacity.
+   *     The value range of opacity is [0, 1]. Values outside this range are clamped to [0, 1], and the animation is
+   *     created normally.<br/>When the property has never been set on the node, **startValue** must be explicitly
+   *     specified to create the animation properly. When the property has already been set on the node (for example,
+   *     when creating an animation for the second time or later), it is recommended not to explicitly specify
+   *     **startValue**, or to explicitly specify **startValue** as the previous end value, so that the previous end
+   *     value is used as the new animation start point to avoid a jump in the start value.
+   * @param { number[] } endValue - Animation end value. The value is an array, and the array length must match the
+   *     property enumeration.<br/>- ** AnimationPropertyType.ROTATION**: [rotationX, rotationY, rotationZ], in degrees
+   *     (°), indicating the rotation angles around the x, y, and z axes.<br/>- **AnimationPropertyType.TRANSLATION**:
+   *     [translateX, translateY], in px, indicating the translation amounts along the x and y axes.<br/>-
+   *     **AnimationPropertyType.SCALE**: [scaleX, scaleY], indicating the scale ratios in the x and y directions.<br/>-
+   *     **AnimationPropertyType.OPACITY**: [opacity], indicating the opacity. The value range of opacity is [0, 1].
+   *     Values outside this range are clamped to [0, 1], and the animation is created normally.
    * @param { AnimateParam } param - Animation parameters, including the duration, animation curve, and end callback.
    * @returns { boolean } Whether the animation is created successfully.
    *     <br>Returns **true** if the animation is created successfully. If an end callback is specified in the animation
    *     parameters, it will be invoked upon animation completion.
    *     <br>Returns **false** if the animation creation fails. The end callback will not be invoked even if specified.
    *     <br>Possible failure reasons:
-   *     <br>Additional notes:
    *     <br> 1. The node has been released (the [dispose]{@link FrameNode#dispose} API has been called).
-   *     <br> 2. The node is a built-in component proxy (where [isModifiable]{@link FrameNode#isModifiable} returns **false**
-   *     ).
-   *     <br> 3. There is an invalid property enumeration or length mismatch between the property type and **startValue** or
-   *     **endValue** arrays.
-   *     <br> 4. No start value is available (**startValue** is **undefined** for the first animation of a property) or the
-   *     start and end values are identical.
+   *     <br> 2. The node is a built-in component proxy (where [isModifiable]{@link FrameNode#isModifiable} returns
+   *     **false**).
+   *     <br> 3. There is an invalid property enumeration or length mismatch between the property type and
+   *     **startValue** or **endValue** arrays.
+   *     <br> 4. No start value is available (**startValue** is **undefined** for the first animation of a property) or
+   *     the start and end values are identical.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1435,21 +1487,18 @@ export class FrameNode {
    *
    * @param { AnimationPropertyType[] } properties - Array of animation properties to cancel. You can simultaneously
    *     cancel the animations of multiple properties on the node.
-   * @returns { boolean } Animation cancellation status.
-   *     <br>**true**: successful.
-   *     <br>**false**: failed.
-   *     <br>The possible causes are as follows:
-   *     <br>Additional notes:
-   *     <br> 1. The node has been released (the [dispose]{@link FrameNode#dispose} API has been called).
-   *     <br> 2. The node is a built-in component proxy (where [isModifiable]{@link FrameNode#isModifiable} returns **false**
-   *     ).
-   *     <br> 3. The property array contains invalid enumerated values.
-   *     <br> 4. System error. Example: system IPC communication error.
-   *     <br>Additional notes:
-   *     <br> 1. This API returns **true** for properties without active animations, if there are no system errors.
-   *     <br> 2. Valid parameters with normal node returning **false** indicate a system exception. In this case, you can
-   *     retry cancellation later or use [createAnimation]{@link FrameNode#createAnimation} with a zero duration as an
-   *     alternative.
+   * @returns { boolean } Whether the animation is canceled successfully.<br/>The value **true** indicates that the
+   *     animation is canceled successfully.<br/>The value **false** indicates that the animation cancellation fails.<br
+   *     />Possible causes of animation cancellation failure:<br/> 1. The node has been released and the
+   *     [dispose]{@link FrameNode#dispose} API has been called.<br/> 2. For a proxy node of a system component, that
+   *     is, a node whose [isModifiable]{@link FrameNode#isModifiable} is set to **false**, calling this API will fail.<
+   *     br/> 3. The property enumeration array contains invalid enumeration values.<br/> 4. System exception. For
+   *     example, an IPC exception causes the animation cancellation to fail.<br/>Additional notes:<br/> 1. Even if
+   *     there is no animation on the property, attempting to cancel the animation on that property will also return
+   *     **true** when no system exception occurs.<br/> 2. If you ensure that the input parameters are valid and the
+   *     node is normal, a return value of **false** indicates that a system exception has occurred. In this case, you
+   *     can try to cancel again after a period of time, or stop the animation on the property by calling the
+   *     [createAnimation]{@link FrameNode#createAnimation} API with **duration** being set to **0**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1462,21 +1511,18 @@ export class FrameNode {
    * Obtains the property value of the FrameNode.
    *
    * @param { AnimationPropertyType } property - Animation property type.
-   * @returns { number[] } Current property value from the render node. The array length corresponds to the property
-   *     type.
-   *     <br>The return value format varies by property:
-   *     <br>- An empty array (length 0) is returned
-   *     if the node has been disposed, the [dispose]{@link FrameNode#dispose}
-   *     API has been called, or the property enumeration is invalid.
-   *     <br>- **AnimationPropertyType.ROTATION**: [rotationX, rotationY, rotationZ] in degrees (°).
-   *     <br>- **AnimationPropertyType.TRANSLATION**: [translateX, translateY] in px.
-   *     <br>- **AnimationPropertyType.SCALE**: [scaleX, scaleY] (scale factors).
-   *     <br>- **AnimationPropertyType.OPACITY**: [opacity].
-   *     <br>1. After animation cancellation, the node's property value is restored to the display value at the time of
-   *     cancellation, which can be obtained using this API.
-   *     <br>2. During animation playback, this API returns the final target value
-   *     rather than real-time interpolated values.
-   *     <br>
+   * @returns { number[] } Property value of the FrameNode. The length of the returned array depends on the property
+   *     enumeration. An empty array is returned in case of exceptions.<br/>Return value formats for different property
+   *     enumerations:<br/>- When the node has been released, the [dispose]{@link FrameNode#dispose} API has been
+   *     called, or the property enumeration is invalid, an empty array with a length of 0 is returned.<br/>-
+   *     **AnimationPropertyType.ROTATION**: [rotationX, rotationY, rotationZ], in degrees (°), indicating the rotation
+   *     angles around the x, y, and z axes.<br/>- **AnimationPropertyType.TRANSLATION**: [translateX, translateY], in
+   *     px, indicating the translation amounts along the x and y axes.<br/>- **AnimationPropertyType.SCALE**:
+   *     [scaleX, scaleY], indicating the scale ratios in the x and y directions.<br/>-
+   *     **AnimationPropertyType.OPACITY**: [opacity], indicating the opacity.<br/>1. After an animation is normally
+   *     canceled, the property value on the node is restored to the value at the time of cancellation. This API can be
+   *     used to obtain the displayed value after cancellation.<br/>2. During an animation, the return value of this API
+   *     is the final value of the property, not the real-time value during the animation process.<br/>
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1500,20 +1546,6 @@ export class FrameNode {
   isTransferred(): boolean;
 
   /**
-   * Checks whether this node is in render state. A node is considered to be in render state when its corresponding
-   * RenderNode is present in the render tree.
-   *
-   * @returns { boolean } Whether the node is in render state.
-   *     <br>**true**: The node is in render state. **false**: The node is not in render state.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 23 dynamic
-   */
-  isInRenderState(): boolean;
-
-  /**
    * Forces immediate node property updates in this frame.
    *
    * By default, property modifications applied after the build phase are deferred until the next frame.
@@ -1529,11 +1561,14 @@ export class FrameNode {
   invalidateAttributes(): void;
 
   /**
-   * Adopts the target node as an affiliated node. The adopted node must not have an existing parent. This API is not
-   * used to add a node as a child node. Instead, it only allows the node to receive lifecycle callbacks of the
-   * corresponding child node.
+   * Adopts the target node as an affiliated node. If the current FrameNode is not modifiable, an exception is thrown.
+   * The adopted affiliated node must not already have a parent node. Calling this API does not actually add the target
+   * node as a child node. Instead, it only allows the current node to receive lifecycle callbacks of the affiliated
+   * node. When you need to listen to a lifecycle callback of a node without changing its parent-child relationship or
+   * the component tree structure, you can adopt it as an affiliated node through this API.
    *
-   * @param { FrameNode } child - Node to be adopted.
+   * @param { FrameNode } child - Node to be adopted. The child node must not have a parent node; otherwise, an
+   *     exception is thrown.
    * @throws { BusinessError } 100021 - The current FrameNode is not modifiable.
    * @throws { BusinessError } 100025 - The parameter is invalid. Details about the invalid parameter and the reason
    *     are included in the error message. For example: "The parameter 'child' is invalid: it cannot be disposed."
@@ -1547,9 +1582,9 @@ export class FrameNode {
   adoptChild(child: FrameNode): void;
 
   /**
-   * Removes a previously-adopted affiliated node.
+   * Removes the adopted target affiliated node. If the current FrameNode is not modifiable, an exception is thrown.
    *
-   * @param { FrameNode } child - Node to remove.
+   * @param { FrameNode } child - Target affiliated node that has been adopted.
    * @throws { BusinessError } 100021 - The current FrameNode is not modifiable.
    * @throws { BusinessError } 100025 - The parameter is invalid. Details about the invalid parameter and the reason
    *     are included in the error message. For example: "The parameter 'child' is invalid: it cannot be null."
@@ -1565,9 +1600,11 @@ export class FrameNode {
   /**
    * Converts a coordinate point from this node's coordinate system to the target node's coordinate system.
    *
-   * @param { Position } position - Coordinates relative to the current node's coordinate system.
-   * @param { FrameNode } targetNode - Target node for coordinate transformation.
-   * @returns { Position } Converted coordinates relative to the target node's local coordinate system.
+   * @param { Position } position - Relative coordinates in the coordinate system of the current node. The unit is vp.
+   * @param { FrameNode } targetNode - Target node for this coordinate conversion. The converted point coordinates are
+   *     relative coordinates in the coordinate system of this node. The targetNode must not be a released node and must
+   *     share a common ancestor node with the current node; otherwise, an exception is thrown.
+   * @returns { Position } Converted coordinates in the local coordinate system of the target node, in vp.
    * @throws { BusinessError } 100024 - The current FrameNode and the target FrameNode do not have a common ancestor
    *     node.
    * @throws { BusinessError } 100025 - The parameter is invalid. Details about the invalid parameter and the reason
@@ -1584,9 +1621,9 @@ export class FrameNode {
    * Converts the coordinates of a point from the coordinate system of the current node to the coordinate system of the
    * window where the current node is located.
    *
-   * @param { Position } positionByLocal - Coordinates relative to the current node's coordinate system.
-   * @returns { Position } Converted coordinates in the coordinate system of the window where the current node is
-   *     located.
+   * @param { Position } positionByLocal - Relative coordinates in the current node's coordinate system. The unit is vp.
+   * @returns { Position } Converted coordinates of the current node in the coordinate system of the window where the
+   *     node is located, in vp.
    * @throws { BusinessError } 100026 - The current FrameNode has been disposed.
    * @throws { BusinessError } 100028 - The current FrameNode is not on the main tree.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1602,8 +1639,8 @@ export class FrameNode {
    * the coordinate system of the current node.
    *
    * @param { Position } positionByWindow - Relative coordinates in the coordinate system of the window where the
-   *     current node is located.
-   * @returns { Position } Converted coordinates in the coordinate system of the current node.
+   *     current node is located. The unit is vp.
+   * @returns { Position } Converted coordinates in the current node's coordinate system, in vp.
    * @throws { BusinessError } 100026 - The current FrameNode has been disposed.
    * @throws { BusinessError } 100028 - The current FrameNode is not on the main tree.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1615,7 +1652,25 @@ export class FrameNode {
   convertPositionFromWindow(positionByWindow: Position): Position;
 
   /**
-   * Queries whether a node is mounted to the main node tree.
+   * Obtains whether the node is in render state. A node is considered to be in render state when its corresponding
+   * RenderNode is present in the render tree.
+   *
+   * @returns { boolean } Whether the node is in render state.
+   *     <br>**true**: The node is in render state. **false**: The node is not in render state.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 23 dynamic
+   */
+  isInRenderState(): boolean;
+
+  /**
+   * Queries whether the node is mounted to the main node tree. Both this API and
+   * [isAttached]{@link FrameNode#isAttached} are used to determine whether a node is mounted to the main node tree. The
+   * difference is that this API throws error code 100026 when the node has called [dispose]{@link FrameNode#dispose} to
+   * release the reference. You can choose this API or [isAttached]{@link FrameNode#isAttached} based on whether error
+   * code validation upon node dispose (that is, throwing error code 100026) is needed.
    *
    * @returns { boolean } Whether the node is mounted to the main node tree.
    *     <br>The value **true** means that the node is mounted to the main node tree, and **false** means the opposite.
@@ -1648,7 +1703,8 @@ export class FrameNode {
    * first node that matches the specified ID. The search sequence is as follows: Search for direct child nodes first,
    * then level-2 child nodes, and so on. The search stops as soon as a matching node is found.
    *
-   * @param { string } id - ID of the child node to be queried, which is the same as the [component ID]{@link common}.
+   * @param { string } id - ID of the child node to be queried, which is the same as the
+   *     [component ID]{@link ../@internal/component/ets/common}.
    * @returns { FrameNode | null } First node that matches the specified ID, which is returned by searching for all
    *     child nodes layer by layer from the current node (which is used as the root node). If no child node of the
    *     current node matches the specified ID, a null is returned.
@@ -1665,7 +1721,6 @@ export class FrameNode {
    * [getUniqueId]{@link FrameNode#getUniqueId} API) under the current node (which is used as the root node).
    *
    * @param { int } id - Unique ID of the child node to be queried.
-   *     <br>The value should be an integer.
    * @returns { FrameNode | null } Child node with the unique ID, which is found from the current node (which is used as
    *     the root node). If the child node with the unique ID cannot be found under the current node, a null is
    *     returned.
@@ -1679,7 +1734,9 @@ export class FrameNode {
 }
 
 /**
- * Extends [FrameNode]{@link FrameNode} to define a FrameNode with specific type constraints.
+ * Extends [FrameNode]{@link FrameNode} to define a FrameNode with specific type constraints. It supports various
+ * component types such as **Text**, **Image**, **Button**, and **Column**, and is suitable for scenarios where
+ * component nodes of specific types need to be dynamically created through code.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1688,9 +1745,8 @@ export class FrameNode {
  * @since 12 dynamic
  */
 export interface TypedFrameNode<C, T> extends FrameNode {
-
   /**
-   * Construction parameters for creating a component, used to set or update the component's initial values.
+   * Passes construction parameters for creating a component, used to set or update the component's initial values.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1699,9 +1755,9 @@ export interface TypedFrameNode<C, T> extends FrameNode {
    * @since 12 dynamic
    */
   initialize: C;
-
   /**
-   * Attribute configuration object for setting or updating common and specific attributes of the component.
+   * Obtains the attribute setting object of the corresponding component to set or update its common and private
+   * attributes.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1714,11 +1770,14 @@ export interface TypedFrameNode<C, T> extends FrameNode {
 
 /**
  * Provides APIs for creating a specific type of FrameNode, which can be mounted through the basic API of the FrameNode
- * and be displayed using a placeholder container.
+ * and be displayed using a placeholder container. It is suitable for scenarios where component nodes of specific types
+ * need to be dynamically created through code and custom-mounted.
  *
- * When **typeNode** is used to create [Text]{@link text}, [Image]{@link image}, [Select]{@link select}, or
- * [Toggle]{@link toggle} nodes, if the UI instance corresponding to the input [UIContext]{@link @ohos.arkui.UIContext}
- * is destroyed, this API returns an invalid FrameNode that cannot be properly mounted or displayed.
+ * When **typeNode** is used to create [Text]{@link ../@internal/component/ets/text},
+ * [Image]{@link ../@internal/component/ets/image}, [Select]{@link ../@internal/component/ets/select}, or
+ * [Toggle]{@link ../@internal/component/ets/toggle} nodes, if the UI instance corresponding to the input
+ * [UIContext]{@link @ohos.arkui.UIContext} is destroyed, this API returns an invalid FrameNode that cannot be properly
+ * mounted or displayed.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1728,7 +1787,6 @@ export interface TypedFrameNode<C, T> extends FrameNode {
  * @noninterop
  */
 export namespace typeNode {
-
   /**
    * Represents a FrameNode of the **Text** type. This type of node does not allow child components to be added.
    *
@@ -1741,7 +1799,9 @@ export namespace typeNode {
   type Text = TypedFrameNode<TextInterface, TextAttribute>;
 
   /**
-   * Creates a FrameNode of the **Text** type.
+   * Creates a FrameNode of the **Text** type. When **typeNode** is used to create a **Text** node, after the UI
+   * instance corresponding to the passed **UIContext** is destroyed, calling this API returns an invalid FrameNode that
+   * cannot be properly mounted and displayed.
    *
    * @param { UIContext } context - UI context for node creation.
    * @param { 'Text' } nodeType - Node type. Set to **'Text'**.
@@ -1777,7 +1837,7 @@ export namespace typeNode {
    *
    * @param { FrameNode } node - Target node for controller binding.
    * @param { TextController } controller - **TextController** instance to bind.
-   * @param { 'Text' } nodeType - Node type. Set to **'Text'**.
+   * @param { 'Text' } nodeType - Type of the target node bound to the controller. Set to **Text**.
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node
    *     is incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
@@ -1818,7 +1878,7 @@ export namespace typeNode {
    * Obtains the attributes of a **Column** node. If the node is not created using ArkTS, cross-language access must be
    * enabled; otherwise, **undefined** is returned. This API does not support declaratively created nodes.
    *
-   * @param { FrameNode } node - Target node from which to obtain attributes.
+   * @param { FrameNode } node - Target node from which attributes are obtained.
    * @param { 'Column' } nodeType - Node type. Set to **'Column'**.
    * @returns { ColumnAttribute | undefined } Attributes of the **Column** node, or **undefined** if they fail to be
    *     obtained.
@@ -2145,9 +2205,11 @@ export namespace typeNode {
   function getAttribute(node: FrameNode, nodeType: 'Scroll'): ScrollAttribute | undefined;
 
   /**
-   * Obtains the **UIScrollEvent** object associated with the **Scroll** node for configuring scroll events. The scroll
-   * events configured through this API coexist with declarative events without overriding them. If both event callbacks
-   * are registered, the declaratively defined event callback takes precedence.
+   * Obtains the **UIScrollEvent** object held by the **Scroll** node, which is used to set scroll events. If the node
+   * is not created via ArkTS, whether cross-language access is supported must be set. If cross-language access is not
+   * supported, **undefined** is returned. This API does not support nodes created in a declarative manner. The scroll
+   * events set through this API coexist with declaratively defined events. The set scroll events do not override the
+   * original declarative events. When both event callbacks are set, the declarative event callback takes precedence.
    *
    * @param { FrameNode } node - Target node.
    * @param { 'Scroll' } nodeType - **Scroll** node type for scroll event configuration.
@@ -2164,15 +2226,15 @@ export namespace typeNode {
   /**
    * Binds the [Scroller]{@link Scroller} to the [Scroll]{@link typeNode.Scroll} node. Cross-language access must be
    * enabled for nodes not created via ArkTS; otherwise, an exception will be thrown. This API supports declaratively
-   * created nodes since API version 26.0.0.
+   * created nodes since API version 26.0.0. Versions earlier than API version 26.0.0 do not support this.
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @param { Scroller } controller - the controller which is bind to the target FrameNode.
-   * @param { 'Scroll' } nodeType - node type.
+   * @param { FrameNode } node - Target node to which the scroll controller is bound.
+   * @param { Scroller } controller - Scroll controller.
+   * @param { 'Scroll' } nodeType - Node type, which is **Scroll** in this API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. the type of the node is error.
    *     2. the node is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 15 and will not
-   *     be threw above API version 24. [since 15 - 24]
+   *     be thrown above API version 24. [since 15 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 23]
@@ -2275,9 +2337,9 @@ export namespace typeNode {
   function createNode(context: UIContext, nodeType: 'LoadingProgress'): LoadingProgress;
 
   /**
-   * Obtains the attributes of a [LoadingProgress]{@link loading_progress} node. If the node is not created using ArkTS,
-   * cross-language access must be enabled; otherwise, **undefined** is returned. This API does not support
-   * declaratively created nodes.
+   * Obtains the attributes of a [LoadingProgress]{@link ../@internal/component/ets/loading_progress} node. If the node
+   * is not created using ArkTS, cross-language access must be enabled; otherwise, **undefined** is returned. This API
+   * does not support declaratively created nodes.
    *
    * @param { FrameNode } node - Target node from which to obtain attributes.
    * @param { 'LoadingProgress' } nodeType - Node type. Set to **'LoadingProgress'**.
@@ -2353,7 +2415,9 @@ export namespace typeNode {
   type Image = TypedFrameNode<ImageInterface, ImageAttribute>;
 
   /**
-   * Creates a FrameNode of the **Image** type.
+   * Creates a FrameNode of the **Image** type. When **typeNode** is used to create an **Image** node, after the UI
+   * instance corresponding to the passed **UIContext** is destroyed, calling this API returns an invalid FrameNode that
+   * cannot be properly mounted and displayed.
    *
    * @param { UIContext } context - UI context for node creation.
    * @param { 'Image' } nodeType - Node type, which is **Image** in this API.
@@ -2398,7 +2462,7 @@ export namespace typeNode {
    * Creates a FrameNode of the **List** type.
    *
    * @param { UIContext } context - UI context for node creation.
-   * @param { 'List' } nodeType - Node type, which is **List** in this API.
+   * @param { 'List' } nodeType - Node type. Set to **'List'**.
    * @returns { List } FrameNode of the **List** type.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2427,7 +2491,7 @@ export namespace typeNode {
   /**
    * Binds a [Scroller]{@link Scroller} instance to the [List]{@link typeNode.List} node. Cross-language access must be
    * enabled for nodes not created via ArkTS; otherwise, an exception will be thrown. This API supports declaratively
-   * created nodes since API version 26.0.0.
+   * created nodes since API version 26.0.0. Versions earlier than API version 26.0.0 do not support this.
    *
    * @param { FrameNode } node - Target node to which the scroll controller is bound.
    * @param { Scroller } controller - Scroll controller.
@@ -2435,7 +2499,7 @@ export namespace typeNode {
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node is
    *     incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 20 and will not
-   *     be threw above API version 24. [since 20 - 24]
+   *     be thrown above API version 24. [since 20 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2456,9 +2520,11 @@ export namespace typeNode {
   type ListItem = TypedFrameNode<ListItemInterface, ListItemAttribute>;
 
   /**
-   * Obtains the **UIListEvent** object associated with the **List** node for configuring scroll events. The scroll
-   * events configured through this API coexist with declarative events without overriding them. If both event callbacks
-   * are registered, the declaratively defined event callback takes precedence.
+   * Obtains the **UIListEvent** object held by the **List** node, which is used to set scroll events. If the node is
+   * not created via ArkTS, whether cross-language access is supported must be set. If cross-language access is not
+   * supported, **undefined** is returned. This API does not support nodes created in a declarative manner. The scroll
+   * events set through this API coexist with declaratively defined events. The set scroll events do not override the
+   * original declarative events. When both event callbacks are set, the declarative event callback takes precedence.
    *
    * @param { FrameNode } node - Target node.
    * @param { 'List' } nodeType - **List** node type for scroll event configuration.
@@ -2544,9 +2610,11 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'TextInput'): TextInputAttribute | undefined;
 
   /**
-   * Binds the [TextInputController]{@link TextInputController} to the [TextInput]{@link typeNode.TextInput} node. Cross
-   * -language access must be enabled for nodes not created via ArkTS; otherwise, an exception will be thrown. This API
-   * supports declaratively created nodes since API version 26.0.0.
+   * Binds the input box controller [TextInputController]{@link TextInputController} to the
+   * [TextInput]{@link typeNode.TextInput} node. If the node is not created via ArkTS, whether cross-language access is
+   * supported must be set. If cross-language access is not supported, an exception is thrown. Since API version 26.0.0,
+   * this API supports nodes created in a declarative manner. Versions earlier than API version 26.0.0 do not support
+   * this.
    *
    * @param { FrameNode } node - Target node to which the input box controller is bound.
    * @param { TextInputController } controller - Input box controller.
@@ -2564,7 +2632,7 @@ export namespace typeNode {
 
   /**
    * Represents a FrameNode of the **Button** type. When created in child component mode, this type of node allows only
-   * one child component to be added. When created in label mode, it does not child components to be added.
+   * one child component to be added. When created in label mode, it does not allow child components to be added.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2605,8 +2673,8 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'Button'): ButtonAttribute | undefined;
 
   /**
-   * Represents a FrameNode of the **ListItemGroup** type. Only [ListItem]{@link list_item} child components can be
-   * added.
+   * Represents a FrameNode of the **ListItemGroup** type. Only [ListItem]{@link ../@internal/component/ets/list_item}
+   * child components can be added.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2647,7 +2715,8 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'ListItemGroup'): ListItemGroupAttribute | undefined;
 
   /**
-   * Represents a FrameNode of the **WaterFlow** type. Only [FlowItem]{@link flow_item} child components can be added.
+   * Represents a FrameNode of the **WaterFlow** type. Only [FlowItem]{@link ../@internal/component/ets/flow_item} child
+   * components can be added.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2698,7 +2767,7 @@ export namespace typeNode {
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node
    *     is incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 20 and will not
-   *     be threw above API version 24. [since 20 - 24]
+   *     be thrown above API version 24. [since 20 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2708,9 +2777,12 @@ export namespace typeNode {
   export function bindController(node: FrameNode, controller: Scroller, nodeType: 'WaterFlow'): void;
 
   /**
-   * Obtains the **UIWaterFlowEvent** object associated with the [WaterFlow]{@link typeNode.WaterFlow} node for
-   * configuring scroll events. The scroll events configured through this API coexist with declarative events without
-   * overriding them. If both event callbacks are registered, the declaratively defined event callback takes precedence.
+   * Obtains the **UIWaterFlowEvent** object held by the [WaterFlow]{@link typeNode.WaterFlow} node, which is used to
+   * set scroll events. If the node is not created via ArkTS, whether cross-language access is supported must be set. If
+   * cross-language access is not supported, **undefined** is returned. This API does not support nodes created in a
+   * declarative manner. The scroll events set through this API coexist with declaratively defined events. The set
+   * scroll events do not override the original declarative events. When both event callbacks are set, the declarative
+   * event callback takes precedence.
    *
    * @param { FrameNode } node - Target node.
    * @param { 'WaterFlow' } nodeType - **WaterFlow** node type for scroll event configuration.
@@ -2980,7 +3052,9 @@ export namespace typeNode {
   type Select = TypedFrameNode<SelectInterface, SelectAttribute>;
 
   /**
-   * Creates a FrameNode of the **Select** type.
+   * Creates a FrameNode of the **Select** type. When **typeNode** is used to create a **Select** node, after the UI
+   * instance corresponding to the passed **UIContext** is destroyed, calling this API returns an invalid FrameNode that
+   * cannot be properly mounted and displayed.
    *
    * @param { UIContext } context - UI context for node creation.
    * @param { 'Select' } nodeType - Node type. Set to **'Select'**.
@@ -3035,7 +3109,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'Slider'): SliderAttribute | undefined;
 
   /**
-   * FrameNode of the [Toggle]{@link toggle} type.
+   * FrameNode of the [Toggle]{@link ../@internal/component/ets/toggle} type.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3046,12 +3120,15 @@ export namespace typeNode {
   type Toggle = TypedFrameNode<ToggleInterface, ToggleAttribute>;
 
   /**
-   * Creates a FrameNode of the **Toggle** type.
+   * Creates a FrameNode of the **Toggle** type. When **typeNode** is used to create a **Toggle** node, after the UI
+   * instance corresponding to the passed **UIContext** is destroyed, calling this API returns an invalid FrameNode that
+   * cannot be properly mounted and displayed.
    *
    * @param { UIContext } context - UI context for node creation.
    * @param { 'Toggle' } nodeType - Node type. Set to **'Toggle'**.
-   * @param { ToggleOptions } [options] - Options for configuring the node of the Toggle type, including setting the
-   *     style through the **type** property.
+   * @param { ToggleOptions } [options] - Options for creating a **Toggle** node. The switch style can only be set
+   *     through the **type** attribute in **ToggleOptions**. When this parameter is not passed, the **type** attribute
+   *     of **Toggle** must be set through the **initialize** API.
    * @returns { Toggle } FrameNode of the **Toggle** type.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3144,9 +3221,11 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'TextArea'): TextAreaAttribute | undefined;
 
   /**
-   * Binds a [TextAreaController]{@link TextAreaController} instance to the [TextArea]{@link typeNode.TextArea} node.
-   * Cross-language access must be enabled for nodes not created via ArkTS; otherwise, an exception will be thrown. This
-   * API supports declaratively created nodes since API version 26.0.0.
+   * Binds the input box controller [TextAreaController]{@link TextAreaController} to the
+   * [TextArea]{@link typeNode.TextArea} node. If the node is not created via ArkTS, whether cross-language access is
+   * supported must be set. If cross-language access is not supported, an exception is thrown. Since API version 26.0.0,
+   * this API supports nodes created in a declarative manner. Versions earlier than API version 26.0.0 do not support
+   * this.
    *
    * @param { FrameNode } node - Target node to which the input box controller is bound.
    * @param { TextAreaController } controller - Input box controller.
@@ -3331,7 +3410,7 @@ export namespace typeNode {
   /**
    * Binds a [Scroller]{@link Scroller} instance to the [Grid]{@link typeNode.Grid} node. Cross-language access must be
    * enabled for nodes not created via ArkTS; otherwise, an exception will be thrown. This API supports declaratively
-   * created nodes since API version 26.0.0.
+   * created nodes since API version 26.0.0. Versions earlier than API version 26.0.0 do not support this.
    *
    * @param { FrameNode } node - Target node to which the scroll controller is bound.
    * @param { Scroller } controller - Scroll controller.
@@ -3339,7 +3418,7 @@ export namespace typeNode {
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node
    *     is incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 20 and will not
-   *     be threw above API version 24. [since 20 - 24]
+   *     be thrown above API version 24. [since 20 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3349,9 +3428,11 @@ export namespace typeNode {
   export function bindController(node: FrameNode, controller: Scroller, nodeType: 'Grid'): void;
 
   /**
-   * Obtains the **UIGridEvent** object associated with the **Grid** node for configuring scroll events. The scroll
-   * events configured through this API coexist with declarative events without overriding them. If both event callbacks
-   * are registered, the declaratively defined event callback takes precedence.
+   * Obtains the **UIGridEvent** object held by the **Grid** node, which is used to set scroll events. If the node is
+   * not created via ArkTS, whether cross-language access is supported must be set. If cross-language access is not
+   * supported, **undefined** is returned. This API does not support nodes created in a declarative manner. The scroll
+   * events set through this API coexist with declaratively defined events. The set scroll events do not override the
+   * original declarative events. When both event callbacks are set, the declarative event callback takes precedence.
    *
    * @param { FrameNode } node - Target node.
    * @param { 'Grid' } nodeType - **Grid** node type for scroll event configuration.
@@ -3408,12 +3489,14 @@ export namespace typeNode {
 }
 
 /**
- * Provides lazy loading capabilities for FrameNode data, implementing [LazyForEach]{@link lazy_for_each} API
- * functionality.
+ * Provides lazy loading capabilities for FrameNode data, implementing API functionality through
+ * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each}. It is suitable for scenarios such as long lists where
+ * node data needs to be loaded on demand, improving rendering performance and reducing memory usage.
  *
  * > **NOTE**
  * >
- * > Negative input parameters are ignored and trigger no processing.
+ * > Numeric input parameters (such as **start**, **count**, **from**, and **to**) in **NodeAdapter** APIs must not be
+ * > negative. Negative input parameters are ignored and trigger no processing.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3422,7 +3505,6 @@ export namespace typeNode {
  * @since 12 dynamic
  */
 declare class NodeAdapter {
-
   /**
    * A constructor used to create a **NodeAdapter** object.
    *
@@ -3433,7 +3515,6 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   constructor();
-
   /**
    * Disposes of this **NodeAdapter** object. Bindings, if any, of the object will be cleared before the object is
    * disposed of.
@@ -3445,11 +3526,11 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   dispose(): void;
-
   /**
    * Sets the total number of items in this node.
    *
-   * @param { number } count - Total number of items.<br>Value range: [0, +∞).
+   * @param { number } count - Total number of items.
+   *     <br>Value range: [0, +∞).
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3457,7 +3538,6 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   set totalNodeCount(count: number);
-
   /**
    * Get the total number of node count.
    *
@@ -3469,10 +3549,10 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   get totalNodeCount(): number;
-
   /**
-   * Reloads all items in this node. This API calls the [OnDataReloaded]{@link DataChangeListener.onDataReloaded} API in
-   * **LazyForEach** to trigger component data refresh.
+   * Reloads all items in this node. This API actually calls the
+   * [onDataReloaded]{@link DataChangeListener.onDataReloaded()} API in **LazyForEach** to instruct the component to
+   * reload all data.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3481,12 +3561,13 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   reloadAllItems(): void;
-
   /**
    * Reloads a specified number of items starting from a specific index.
    *
-   * @param { number } start - Starting index of the items to reload.<br>Value range: [0, +∞).
-   * @param { number } count - Number of the items to reload.<br>Value range: [0, +∞).
+   * @param { number } start - Starting index of the items to reload.
+   *     <br>Value range: [0, +∞).
+   * @param { number } count - Number of the items to reload.
+   *     <br>Value range: [0, +∞).
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3494,12 +3575,13 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   reloadItem(start: number, count: number): void;
-
   /**
    * Removes a specified number of items starting from a specific index.
    *
-   * @param { number } start - Starting index of the items to remove.<br>Value range: [0, +∞).
-   * @param { number } count - Number of the items to remove.<br>Value range: [0, +∞).
+   * @param { number } start - Starting index of the items to remove.
+   *     <br>Value range: [0, +∞).
+   * @param { number } count - Number of the items to remove.
+   *     <br>Value range: [0, +∞).
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3507,12 +3589,13 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   removeItem(start: number, count: number): void;
-
   /**
    * Inserts a specified number of items starting from a specific index.
    *
-   * @param { number } start - Starting index of the items to insert.<br>Value range: [0, +∞).
-   * @param { number } count - Number of the items to insert.<br>Value range: [0, +∞).
+   * @param { number } start - Starting index of the items to insert.
+   *     <br>Value range: [0, +∞).
+   * @param { number } count - Number of the items to insert.
+   *     <br>Value range: [0, +∞).
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3520,12 +3603,13 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   insertItem(start: number, count: number): void;
-
   /**
    * Moves items from the starting index to the ending index.
    *
-   * @param { number } from - Original index from which the data will be moved.<br>Value range: [0, +∞).
-   * @param { number } to - Target index to which the data will be moved.<br>Value range: [0, +∞).
+   * @param { number } from - Original index from which the data will be moved.
+   *     <br>Value range: [0, +∞).
+   * @param { number } to - Target index to which the data will be moved.
+   *     <br>Value range: [0, +∞).
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3533,14 +3617,13 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   moveItem(from: number, to: number): void;
-
   /**
    * Obtains all available items. Available nodes include both currently displayed and preloaded nodes. The number of
    * preloaded nodes can be configured by adjusting the **cachedCount** property of the parent container, following the
    * [usage constraints](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md#constraints) of
    * **LazyForEach**.
    *
-   * @returns { Array<FrameNode> } Array of items in the FrameNode.
+   * @returns { Array<FrameNode> } Set of FrameNode data nodes.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3548,11 +3631,25 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   getAllAvailableItems(): Array<FrameNode>;
-
   /**
    * Called when a FrameNode is attached to the NodeAdapter.
    *
-   * @param { FrameNode } target - FrameNode attached to the NodeAdapter.
+   * > **NOTE**
+   * >
+   * > In versions earlier than API version 26.0.0, this callback is triggered when the host node is mounted to the main
+   * > tree. If you set this callback by dynamically assigning a value, you can complete the setting after calling
+   * > [attachNodeAdapter]{@link NodeAdapter#attachNodeAdapter} and before the host node is mounted to the main tree,
+   * > and receive this callback when the host node is mounted to the main tree.
+   * >
+   * > Since API version 26.0.0, this callback is triggered immediately when the NodeAdapter is bound to the host node,
+   * > rather than when the host node is mounted to the main node tree. At this point, the host node may not yet be
+   * > mounted to the main node tree. If the callback logic depends on the node being mounted (for example, accessing
+   * > layout information or executing animations), it is recommended to register
+   * > [onAppear]{@link CommonMethod#onAppear} in this callback and place the relevant logic in **onAppear** for
+   * > execution. If you set this callback by dynamically assigning a value, complete the setting before calling
+   * > [attachNodeAdapter]{@link NodeAdapter#attachNodeAdapter}; otherwise, the callback may not be triggered.
+   *
+   * @param { FrameNode } target - FrameNode node bound to the NodeAdapter.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3560,7 +3657,6 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   onAttachToNode?(target: FrameNode): void;
-
   /**
    * Called when detachment occurs.
    *
@@ -3571,12 +3667,12 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   onDetachFromNode?(): void;
-
   /**
    * Called during node initialization or when new child nodes are detected. The **index** parameter enables custom ID
    * generation. Ensure that IDs remain unique across different index values.
    *
-   * @param { number } index - Index of the loaded node.<br>Value range: [0, +∞).
+   * @param { number } index - Index of the loaded node.
+   *     <br>Value range: [0, +∞).
    * @returns { number } Custom ID. Make sure the ID is unique.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3585,15 +3681,15 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   onGetChildId?(index: number): number;
-
   /**
    * Called during node initialization or when new child nodes are detected. When adding child components, follow the
    * child component restrictions for declarative components. For example, **WaterFlow** only supports adding
    * **FlowItem** child nodes. The parent node uses the child node's index and key to determine whether the node is
    * being loaded for the first time or a new node is sliding into view.
    *
-   * @param { number } index - Index of the loaded node.<br>Value range: [0, +∞).
-   * @returns { FrameNode } FrameNode created by you.
+   * @param { number } index - Index of the loaded node.
+   *     <br>Value range: [0, +∞).
+   * @returns { FrameNode } FrameNode node you created.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3601,13 +3697,12 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   onCreateChild?(index: number): FrameNode;
-
   /**
    * Called when a child node is about to be disposed. Nodes that are neither displayed on the screen nor within the
    * preload range are considered nodes about to be disposed.
    *
    * @param { number } id - ID of the child node to be disposed of.
-   * @param { FrameNode } node - FrameNode to be disposed of.
+   * @param { FrameNode } node - FrameNode node to be disposed of.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3615,13 +3710,12 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   onDisposeChild?(id: number, node: FrameNode): void;
-
   /**
    * Called when a loaded node is reused. Node reuse occurs when the key value of a cached node matches that of the node
    * to be reused.
    *
    * @param { number } id - ID of the node to be reused.
-   * @param { FrameNode } node - FrameNode that is reused.
+   * @param { FrameNode } node - FrameNode node to be reused.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3629,7 +3723,6 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   onUpdateChild?(id: number, node: FrameNode): void;
-
   /**
    * Attaches a FrameNode to a NodeAdapter. Each node can be bound to only one NodeAdapter. Attempts to re-attach to a
    * NodeAdapter that has already been attached to will fail and return **false**.
@@ -3640,7 +3733,7 @@ declare class NodeAdapter {
    * > **RelativeContainer**, **List**, **ListItemGroup**, **WaterFlow**, and **Grid**.
    *
    * @param { NodeAdapter } adapter - NodeAdapter class for lazy loading.
-   * @param { FrameNode } node - FrameNode to be attached.
+   * @param { FrameNode } node - Attached FrameNode node.
    * @returns { boolean } Attachment result. Returns **true** if the attachment is successful; returns **false**
    *     otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3650,11 +3743,10 @@ declare class NodeAdapter {
    * @since 12 dynamic
    */
   static attachNodeAdapter(adapter: NodeAdapter, node: FrameNode): boolean;
-
   /**
    * Detaches a FrameNode from its NodeAdapter.
    *
-   * @param { FrameNode } node - FrameNode to detach.
+   * @param { FrameNode } node - FrameNode node to be detached.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3664,10 +3756,12 @@ declare class NodeAdapter {
   static detachNodeAdapter(node: FrameNode): void;
 
   /**
-   * Checks whether this FrameNode object has released its reference to its backend entity node. Frontend nodes maintain
-   * references to corresponding backend entity nodes. After a node calls the **dispose** API to release this reference,
-   * subsequent API calls may cause crashes or return default values. This API facilitates validation of node validity
-   * prior to operations, thereby mitigating risks in scenarios where calls after disposal are required.
+   * Queries whether the current **NodeAdapter** object has been released from the reference to the backend entity node.
+   * Each frontend node is bound to a corresponding backend entity node. After a node calls the **dispose** API to
+   * release the binding, calling other APIs of this node may result in crashes or return default values. Due to service
+   * requirements, there may be cases where a node's APIs are still called after the call to **dispose**. To address
+   * this, this API is provided for you to check the validity of a node before operating on it, thereby avoiding
+   * potential risks.
    *
    * @returns { boolean } Whether the reference to the backend node is released. The value **true** means that the
    *     reference to backend node is released, and **false** means the opposite.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd1.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -269,8 +269,9 @@ declare namespace uiExtension {
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible causes:
      *     1. The window is not created or destroyed.
      *     2. Internal task error.
-     *     3. The subWindow has been created and can not be created again.
+     *     3. The subWindow has been created and cannot be created again.
      *     4. It is not allowed to create non-secure window when secure extension exists.
+     *     5. Subwindow level exceeds the maximum limit.
      * @throws { BusinessError } 1300035 - Creating a subwindow is not allowed in the current context. Possible cause:
      *     1. An AgentUIExtensionAbility cannot create a subwindow.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -293,11 +294,12 @@ declare namespace uiExtension {
      * @returns { Promise<window.Window> } Promise used to return the subwindow.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
-     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible causes:
      *     1. The window is not created or destroyed.
      *     2. Internal task error.
-     *     3. The subWindow has been created and can not be created again.
+     *     3. The subWindow has been created and cannot be created again.
      *     4. It is not allowed to create non-secure window when secure extension exists.
+     *     5. Subwindow level exceeds the maximum limit.
      * @throws { BusinessError } 1300035 - Creating a subwindow is not allowed in the current context. Possible cause:
      *     1. An AgentUIExtensionAbility cannot create a subwindow.
      * @syscap SystemCapability.ArkUI.ArkUI.Full

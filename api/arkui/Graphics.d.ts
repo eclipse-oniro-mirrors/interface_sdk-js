@@ -14,16 +14,16 @@
  */
 
 /**
- * The **Graphics** module provides APIs for defining attributes of a custom node.
+ * Defines the graphics attributes of custom nodes (RenderNode), including geometric transformations (scaling, rotation,
+ * and translation), unified representation of colors and lengths, shapes, graphics masking and clipping, and blur 
+ * effects. It is suitable for scenarios that require refined graphics drawing and visual effect processing on custom 
+ * nodes.
  *
  * @file
  * @kit ArkUI
  */
-
 import drawing from '../@ohos.graphics.drawing';
-
 import type common2D from '../@ohos.graphics.common2D';
-
 import { Resource } from '../global/resource';
 
 /**
@@ -37,13 +37,14 @@ import { Resource } from '../global/resource';
  * @since 11 dynamic
  */
 export interface Size {
-
   /**
    * Width of the component.
    *
    * Unit: vp.
    *
    * Value range: [0, +∞).
+   *
+   * A negative value is treated as the default value.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -60,6 +61,8 @@ export interface Size {
    *
    * Value range: [0, +∞).
    *
+   * A negative value is treated as the default value.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -70,7 +73,7 @@ export interface Size {
 }
 
 /**
- * Graphics drawing context, which provides the canvas width and height required for drawing.
+ * Graphics drawing context, which provides the canvas used for drawing and its width and height.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -127,9 +130,8 @@ export class DrawContext {
  * @since 11 dynamic
  */
 interface Vector2 {
-
   /**
-   * X coordinate value of the vector.
+   * Value of the vector along the x-axis.
    *
    * Value range: (-∞, +∞).
    *
@@ -142,7 +144,7 @@ interface Vector2 {
   x: number;
 
   /**
-   * Y coordinate value of the vector.
+   * Value of the vector along the y-axis.
    *
    * Value range: (-∞, +∞).
    *
@@ -199,9 +201,8 @@ interface Vector2T<T> {
  * @since 11 dynamic
  */
 interface Vector3 {
-
   /**
-   * X coordinate value of the vector.
+   * Value of the vector along the x-axis.
    *
    * Value range: (-∞, +∞).
    *
@@ -214,7 +215,7 @@ interface Vector3 {
   x: number;
 
   /**
-   * Y coordinate value of the vector.
+   * Value of the vector along the y-axis.
    *
    * Value range: (-∞, +∞).
    *
@@ -227,7 +228,7 @@ interface Vector3 {
   y: number;
 
   /**
-   * Rotation angle along the z-axis.
+   * Value of the vector along the z-axis.
    *
    * Value range: (-∞, +∞).
    *
@@ -250,10 +251,10 @@ interface Vector3 {
  * @since 26.0.0 dynamic
  */
 interface Vector4 {
-
   /**
-   * X coordinate value of the vector.
-   * Value range: (-∞,+∞).
+   * Value of the vector along the x-axis.
+   *
+   * Value range: (-∞, +∞).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -264,7 +265,8 @@ interface Vector4 {
   x: double;
 
   /**
-   * Y coordinate value of the vector.
+   * Value of the vector along the y-axis.
+   *
    * Value range: (-∞, +∞).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -276,7 +278,8 @@ interface Vector4 {
   y: double;
 
   /**
-   * Z coordinate value of the vector.
+   * Value of the vector along the z-axis.
+   *
    * Value range: (-∞, +∞).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -288,7 +291,8 @@ interface Vector4 {
   z: double;
 
   /**
-   * W coordinate value of the vector.
+   * Value of the vector along the w-axis.
+   *
    * Value range: (-∞, +∞).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -301,9 +305,10 @@ interface Vector4 {
 }
 
 /**
- * Sets a 4x4 matrix.
- * The **Matrix4** type is used to set transformation information for components.Value range of each number: (-∞, +∞).
- * The following is an example:
+ * Sets a 4 x 4 matrix.
+ *
+ * This type is a 4 x 4 matrix represented by `number[]` of length 16, which is used to set transformation information
+ * for components. The following is an example:
  * ```
  * const transform: Matrix4 = [
  * 1, 0, 45, 0,
@@ -373,8 +378,7 @@ export type PositionT<T> = Vector2T<T>;
 
 /**
  * Sets the pivot of the component. As the rotation or scaling center of the component, the pivot affects the rotation
- * and scaling effects. X and Y coordinates of the pivot is a floating point number in the range [0.0, 1.0], and the 
- * default value is **0.5**.
+ * and scaling effects.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -427,7 +431,6 @@ export type Rotation = Vector3;
  * @since 11 dynamic
  */
 export declare interface Frame {
-
   /**
    * Horizontal position.
    *
@@ -459,11 +462,13 @@ export declare interface Frame {
   y: number;
 
   /**
-   * Component width.
+   * Width of the component.
    *
    * Unit: vp.
    *
    * Value range: [0, +∞).
+   *
+   * A negative value is treated as the default value.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -474,11 +479,13 @@ export declare interface Frame {
   width: number;
 
   /**
-   * Component height.
+   * Height of the component.
    *
    * Unit: vp.
    *
    * Value range: [0, +∞).
+   *
+   * A negative value is treated as the default value.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -499,7 +506,6 @@ export declare interface Frame {
  * @since 12 dynamic
  */
 export interface Edges<T> {
-
   /**
    * Left edge.
    *
@@ -555,9 +561,8 @@ export interface Edges<T> {
  * @since 12 dynamic
  */
 declare enum LengthUnit {
-
   /**
-   * Length in px.
+   * Length type used to describe the length in units of px.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -568,7 +573,7 @@ declare enum LengthUnit {
   PX = 0,
 
   /**
-   * Length in vp.
+   * Length type used to describe the length in units of vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -579,7 +584,7 @@ declare enum LengthUnit {
   VP = 1,
 
   /**
-   * Length in fp.
+   * Length type used to describe the length in units of fp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -590,7 +595,7 @@ declare enum LengthUnit {
   FP = 2,
 
   /**
-   * Length in percentage.
+   * Length type used to describe the length in units of %.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -601,7 +606,7 @@ declare enum LengthUnit {
   PERCENT = 3,
 
   /**
-   * Length in lpx.
+   * Length type used to describe the length in units of lpx.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -622,7 +627,6 @@ declare enum LengthUnit {
  * @since 12 dynamic
  */
 export interface SizeT<T> {
-
   /**
    * Width.
    *
@@ -658,7 +662,7 @@ export interface SizeT<T> {
 export enum LengthMetricsUnit {
 
   /**
-   * Length in vp.
+   * Length type, used to describe the length in units of the default vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -669,7 +673,7 @@ export enum LengthMetricsUnit {
   DEFAULT = 0,
 
   /**
-   * Length in px.
+   * Length type, used to describe the length in units of px.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -690,14 +694,14 @@ export enum LengthMetricsUnit {
  * @since 12 dynamic
  */
 declare class LengthMetrics {
-
   /**
    * A constructor used to create a **LengthMetrics** instance. If the **unit** parameter is omitted or explicitly set
    * to **undefined**, the default unit VP is used. If it is set to a value that is not of the LengthUnit type, the
    * default value 0 VP is used.
    *
-   * @param { number } value - Value of the length property.<br>Value range: [0, +∞).
-   * @param { LengthUnit } [unit] - Unit of the length property.
+   * @param { number } value - Value of the length property.
+   *     <br>Value range: (-∞, +∞).
+   * @param { LengthUnit } [unit] - Unit of the length property. The default value is vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -709,8 +713,9 @@ declare class LengthMetrics {
   /**
    * Creates a length property in px.
    *
-   * @param { number } value - Value of the length property.<br>Value range: (-∞, +∞).
-   * @returns { LengthMetrics } Instance of the **LengthMetrics** class.
+   * @param { number } value - Value of the length property.
+   *     <br>Value range: (-∞, +∞).
+   * @returns { LengthMetrics } Length property object in units of px.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -722,8 +727,9 @@ declare class LengthMetrics {
   /**
    * Creates a length property in vp.
    *
-   * @param { number } value - Value of the length property.<br>Value range: (-∞, +∞).
-   * @returns { LengthMetrics } Instance of the **LengthMetrics** class.
+   * @param { number } value - Value of the length property.
+   *     <br>Value range: (-∞, +∞).
+   * @returns { LengthMetrics } Length property object in units of vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -735,8 +741,9 @@ declare class LengthMetrics {
   /**
    * Creates a length property in fp.
    *
-   * @param { number } value - Value of the length property.<br>Value range: (-∞, +∞).
-   * @returns { LengthMetrics } Instance of the **LengthMetrics** class.
+   * @param { number } value - Value of the length property.
+   *     <br>Value range: (-∞, +∞).
+   * @returns { LengthMetrics } Length property object in units of fp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -748,8 +755,10 @@ declare class LengthMetrics {
   /**
    * Creates a length property in percent. The value **1** indicates 100%.
    *
-   * @param { number } value - Value of the length property.<br>Value range: [0, 1].
-   * @returns { LengthMetrics } Instance of the **LengthMetrics** class.
+   * @param { number } value - Value of the length property.
+   *     <br>Value range: [0, 1].
+   *     <br>A value out of range is treated as a boundary value.
+   * @returns { LengthMetrics } Length property object in units of percentage, where a value of **1** indicates 100%.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -761,8 +770,9 @@ declare class LengthMetrics {
   /**
    * Creates a length property in lpx.
    *
-   * @param { number } value - Value of the length property.<br>Value range: (-∞, +∞).
-   * @returns { LengthMetrics } Instance of the **LengthMetrics** class.
+   * @param { number } value - Value of the length property.
+   *     <br>Value range: (-∞, +∞).
+   * @returns { LengthMetrics } Length property object in units of lpx.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -775,7 +785,7 @@ declare class LengthMetrics {
    * Represents the length of a resource of the Resource type.
    *
    * @param { Resource } value - Value of the length property.
-   * @returns { LengthMetrics } Instance of the **LengthMetrics** class.
+   * @returns { LengthMetrics } Length property object of a Resource-type resource.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -799,6 +809,12 @@ declare class LengthMetrics {
   /**
    * Value of the length property.
    *
+   * Value range: (-∞, +∞).
+   *
+   * When **unit** is set to **PERCENT**, **value** indicates a percentage (1 indicates 100%), and the reference size
+   * depends on the specific usage scenario; for other units, **value** indicates the absolute length in the
+   * corresponding unit.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -808,16 +824,15 @@ declare class LengthMetrics {
   public value: number;
 
   /**
-   * Sets automatic refresh for the LengthMetrics object.
-   * When enabled, the length value of the object created by LengthMetrics.resource() is automatically updated
-   * when the system configuration changes.
+   * Sets whether the **LengthMetrics** object automatically updates with system configuration changes.
    *
-   * @param { boolean } value - whether to automatically update the length value when the system configuration changes.
-   *     <br>If set to true, the length value of the object created by LengthMetrics.resource() is automatically updated
-   *     when the system configuration changes. If set to false, the length value of the object created by
-   *     LengthMetrics.resource() is automatically updated when the system configuration changes.
-   *     The default value is false.
-   * @returns { LengthMetrics } Returns the LengthMetrics object for chaining.
+   * @param { boolean } value - Whether the **LengthMetrics** object constructed using
+   *     [resource]{@link LengthMetrics#resource} automatically refreshes the value when the system configuration
+   *     changes.
+   *     <br>**true**: The object proactively listens to the system configuration changes, and refreshes the value to
+   *     the resource value corresponding to the configuration when the configuration changes.
+   *     <br>**false**: The object does not proactively listen to the system configuration changes.
+   * @returns { LengthMetrics } **LengthMetrics** object after the auto-refresh property is set.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -828,7 +843,8 @@ declare class LengthMetrics {
 }
 
 /**
- * Used to mix colors.
+ * Provides a unified representation and encapsulation of colors. It supports color mixing as well as obtaining the
+ * color components in the R, G, B, and Alpha channels.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -837,46 +853,13 @@ declare class LengthMetrics {
  * @since 12 dynamic
  */
 declare class ColorMetrics {
-
-  /**
-   * Check if ColorMetrics represents an HDR color.
-   * Returns true if color was created using createHDRColorWithXx or has RGB values > 1.0.
-   *
-   * @returns { boolean } Whether ColorMetrics is an HDR color.
-   *     Returns true if:
-   *     - The color was created using createHDRColorWithXx() method.
-   *     - Any RGB channel value is greater than 1.0.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.0.0 dynamic
-   */
-  isHDR(): boolean;
-
-  /**
-   * Sets automatic refresh for the ColorMetrics object.
-   * When enabled, the color values of objects created with ColorMetrics.resourceColor() are automatically updated
-   * when the system configuration changes.
-   *
-   * @param { boolean } value - Whether to automatically refresh the color value when system configuration changes.
-   *     <br>If this parameter is set to true, the color values of objects created using ColorMetrics.resourceColor()
-   *     are automatically updated when the system configuration changes. If set to false, the color values of objects
-   *     created by ColorMetrics.resourceColor() are not automatically updated.
-   *     The default value is false.
-   * @returns { ColorMetrics } Returns the ColorMetrics object for chaining.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  autoRefresh?(value: boolean): ColorMetrics;
-
   /**
    * Instantiates the **ColorMetrics** class using a color in HEX format.
    *
-   * @param { number } value - Color in HEX format.<br>RGB and ARGB color values are supported.
-   * @returns { ColorMetrics } Instance of the **ColorMetrics** class.
+   * @param { number } value - Color in HEX format. RGB and ARGB color values are supported.
+   *     <br>Value range: [0, 0xffffffff]
+   *     <br>A value out of range is treated as a boundary value.
+   * @returns { ColorMetrics } Color object corresponding to a color in HEX format.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -888,13 +871,17 @@ declare class ColorMetrics {
   /**
    * Instantiates the **ColorMetrics** class using colors in RGB or RGBA format.
    *
-   * @param { number } red - Red component of the color. The value is an integer ranging from 0 to 255.
-   * @param { number } green - Green component of the color. The value is an integer ranging from 0 to 255.
-   * @param { number } blue - Blue component of the color. The value is an integer ranging from 0 to 255.
+   * @param { number } red - Red component of the color. The value is an integer ranging from 0 to 255. A value out of
+   *     range is treated as a boundary value.
+   * @param { number } green - Green component of the color. The value is an integer ranging from 0 to 255. A value out
+   *     of range is treated as a boundary value.
+   * @param { number } blue - Blue component of the color. The value is an integer ranging from 0 to 255. A value out of
+   *     range is treated as a boundary value.
    * @param { number } alpha - Alpha component of the color. The value is a floating point number ranging from 0.0 to 1.
-   *     0. The default value is **1.0** (fully opaque).<br> Note: If alpha is less than 0, the color is fully
-   *     transparent. If alpha is greater than 1, the color is opaque.
-   * @returns { ColorMetrics } Instance of the **ColorMetrics** class.
+   *     0. The default value is 1.0 (fully opaque).
+   *     <br> **Note:** If alpha is less than 0, the color is fully transparent. If alpha is greater than 1, the color
+   *     is opaque.
+   * @returns { ColorMetrics } Color object corresponding to the color in RGB or RGBA format.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -904,18 +891,24 @@ declare class ColorMetrics {
   static rgba(red: number, green: number, blue: number, alpha?: number): ColorMetrics;
 
   /**
-   * Creates a **ColorMetrics** instance using specified [ColorSpace]{@link ColorSpace} and RGBA values. Only certain
-   * attributes support color configuration in the display-p3 color space.
+   * Instantiates the **ColorMetrics** class using [ColorSpace]{@link ColorSpace} and RGBA colorS. Only the red, green,
+   * and blue attributes support color configuration in the display-p3 color space, and the alpha attribute is not
+   * affected by the color space.
    *
-   * @param { ColorSpace } colorSpace - Color space used to specify the color. If ColorSpace.DISPLAY_P3 is used, the
-   *     [setWindowColorSpace](docroot://reference/apis-arkui/arkts-apis-window-Window.md#setwindowcolorspace9-1) API
-   *     must be called to set the current window to the wide color gamut mode.
-   * @param { number } red - Red component of the color. The value is a floating point number ranging from 0 to 1.
-   * @param { number } green - Green component of the color. The value is a floating point number ranging from 0 to 1.
-   * @param { number } blue - Blue component of the color. The value is a floating point number ranging from 0 to 1.
+   * @param { ColorSpace } colorSpace - Color space. To use ColorSpace.DISPLAY_P3, call
+   *     [setWindowColorSpace]{@link @ohos.window:window.Window.setWindowColorSpace(colorSpace:ColorSpace)} on the
+   *     corresponding window to set the current window to wide color gamut mode.
+   * @param { number } red - Red component of the color. The value is a floating point number ranging from 0 to 1. A
+   *     value out of range is treated as a boundary value.
+   * @param { number } green - Green component of the color. The value is a floating point number ranging from 0 to 1. A
+   *     value out of range is treated as a boundary value.
+   * @param { number } blue - Blue component of the color. The value is a floating point number ranging from 0 to 1. A
+   *     value out of range is treated as a boundary value.
    * @param { number } [alpha] - Alpha component of the color. The value is a floating point number ranging from 0.0 to
-   *     1.0. The default value is **1.0** (fully opaque).
-   * @returns { ColorMetrics } Instance of the **ColorMetrics** class.
+   *     1.0. The default value is 1.0 (fully opaque).
+   *     <br> **Note:** If alpha is less than 0, the color is fully transparent. If alpha is greater than 1, the color
+   *     is opaque.
+   * @returns { ColorMetrics } color object corresponding to a color in RGBA format in the specified color space.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -925,10 +918,10 @@ declare class ColorMetrics {
   static colorWithSpace(colorSpace: ColorSpace, red: number, green: number, blue: number, alpha?: number): ColorMetrics;
 
   /**
-   * Instantiates the **ColorMetrics** class using a color in resource reference format.
+   * Instantiates the **ColorMetrics** class using a color in Resource format.
    *
-   * @param { ResourceColor } color - Color in resource reference format.
-   * @returns { ColorMetrics } Instance of the **ColorMetrics** class.
+   * @param { ResourceColor } color - Color in Resource format.
+   * @returns { ColorMetrics } Color object corresponding to the color in Resource format.
    * @throws { BusinessError } 180003 - Failed to obtain the color resource.
    * @throws { BusinessError } 401 - Parameter error. Possible cause:
    *     1. The type of the input color parameter is not ResourceColor.
@@ -1004,7 +997,8 @@ declare class ColorMetrics {
    * @param { ColorSpace } colorSpace - Color space of color.
    *     Supports SRGB, DISPLAY_P3, and BT2020 color spaces.
    * @param { double } red - Red component value. Valid range: [0, +∞). Values greater than 1.0 enable HDR brightness.
-   * @param { double } green - Green component value. Valid range: [0, +∞).
+   * @param { double } green - Green component value. Valid range:
+   *     [0, +∞).
    *     Values greater than 1.0 enable HDR brightness.
    * @param { double } blue - Blue component value. Valid range: [0, +∞).
    *     Values greater than 1.0 enable HDR brightness.
@@ -1032,15 +1026,28 @@ declare class ColorMetrics {
   getColorSpace(): ColorSpace;
 
   /**
+   * Check if ColorMetrics represents an HDR color.
+   * Returns true if color was created using createHDRColorWithXx or has RGB values > 1.0.
+   *
+   * @returns { boolean } Whether ColorMetrics is an HDR color.
+   *     Returns true if:
+   *     - The color was created using createHDRColorWithXx() method.
+   *     - Any RGB channel value is greater than 1.0.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic
+   */
+  isHDR(): boolean;
+
+  /**
    * Get red value.
    * Returns red channel value as a floating-point number.
-   * For SDR colors, value is in range [0, 1].
-   * For HDR colors, value can be greater than 1.0 to represent extended brightness.
    *
    * @returns { double } The red value.
    *     Valid range:
-   *     For SDR colors: [0, 1].
-   *     Fro HDR colors: [0, +∞), values > 1.0 indicate HDR brightness.
+   *     For SDR colors: [0.0, 1.0].
+   *     Fro HDR colors: [0.0, +∞), values > 1.0 indicate HDR brightness.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -1051,13 +1058,11 @@ declare class ColorMetrics {
   /**
    * Get green value.
    * Returns green channel value as a floating-point number.
-   * For SDR colors, value is in range [0, 1].
-   * For HDR colors, value can be greater than 1.0 to represent extended brightness.
    *
    * @returns { double } The green value.
    *     Valid range:
-   *     For SDR colors: [0, 1].
-   *     Fro HDR colors: [0, +∞), values > 1.0 indicate HDR brightness.
+   *     For SDR colors: [0.0, 1.0].
+   *     Fro HDR colors: [0.0, +∞), values > 1.0 indicate HDR brightness.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -1068,13 +1073,11 @@ declare class ColorMetrics {
   /**
    * Get blue value.
    * Returns blue channel value as a floating-point number.
-   * For SDR colors, value is in range [0, 1].
-   * For HDR colors, value can be greater than 1.0 to represent extended brightness.
    *
    * @returns { double } The blue value.
    *     Valid range:
-   *     For SDR colors: [0, 1].
-   *     Fro HDR colors: [0, +∞), values > 1.0 indicate HDR brightness.
+   *     For SDR colors: [0.0, 1.0].
+   *     Fro HDR colors: [0.0, +∞), values > 1.0 indicate HDR brightness.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -1150,7 +1153,9 @@ declare class ColorMetrics {
   /**
    * Obtains the alpha component of the ColorMetrics color.
    *
-   * @returns { number } Alpha component of the color. The value is an integer ranging from 0 to 255.
+   * @returns { number } Alpha component (opacity) of the color, which is an integer ranging from 0 to 255. When set
+   *     through the **rgba()** or **colorWithSpace()** API, the alpha value ranges from 0.0 to 1.0 as a floating point
+   *     number, and is internally converted to an integer ranging from 0 to 255 for storage.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1158,6 +1163,24 @@ declare class ColorMetrics {
    * @since 12 dynamic
    */
   get alpha(): number;
+
+  /**
+   * Sets whether the **ColorMetrics** object automatically updates with system configuration changes.
+   *
+   * @param { boolean } value - Whether the **ColorMetrics** object constructed using
+   *     [resourceColor]{@link ColorMetrics#resourceColor} automatically refreshes the color value when the system
+   *     configuration changes.
+   *     <br>**true**: The object proactively listens to the system configuration changes, and refreshes the value to
+   *     the resource value corresponding to the configuration when the configuration changes.
+   *     <br>**false**: The object does not proactively listen to the system configuration changes.
+   * @returns { ColorMetrics } **ColorMetrics** object after the auto-refresh property is set.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  autoRefresh?(value: boolean): ColorMetrics;
 }
 
 /**
@@ -1170,7 +1193,6 @@ declare class ColorMetrics {
  * @since 12 dynamic
  */
 interface Corners<T> {
-
   /**
    * Radius of the upper left corner.
    *
@@ -1259,7 +1281,6 @@ export type Rect = common2D.Rect;
  * @since 12 dynamic
  */
 export interface RoundRect {
-
   /**
    * Attributes of the rectangle.
    *
@@ -1293,9 +1314,10 @@ export interface RoundRect {
  * @since 12 dynamic
  */
 export interface Circle {
-
   /**
    * X-coordinate of the center of the circle, in px.
+   *
+   * Value range: (-∞, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1307,6 +1329,8 @@ export interface Circle {
 
   /**
    * Y-coordinate of the center of the circle, in px.
+   *
+   * Value range: (-∞, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1320,6 +1344,8 @@ export interface Circle {
    * Radius of the circle, in px.
    *
    * Value range: [0, +∞).
+   *
+   * A negative value is treated as the default value.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1340,9 +1366,9 @@ export interface Circle {
  * @since 12 dynamic
  */
 export interface CommandPath {
-
   /**
-   * Commands for drawing a path. For details about how to convert pixel units, see [Pixel Units]{@link common}.
+   * Commands for drawing a path. For details about how to convert pixel units, see
+   * [Pixel Units]{@link ../@internal/component/ets/common}.
    *
    * Unit: px
    *
@@ -1356,7 +1382,8 @@ export interface CommandPath {
 }
 
 /**
- * Describes the shape mask.
+ * Sets a graphics mask, which supports multiple shapes such as rectangles, rounded rectangles, circles, ellipses, and
+ * custom paths. It can be applied to a RenderNode to implement a shape mask effect.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1365,7 +1392,6 @@ export interface CommandPath {
  * @since 12 dynamic
  */
 export declare class ShapeMask {
-
   /**
    * A constructor used to create a **ShapeMask** instance.
    *
@@ -1438,11 +1464,15 @@ export declare class ShapeMask {
   setCommandPath(path: CommandPath): void;
 
   /**
-   * Describes the fill color of the mask, in ARGB format. The default value is **0XFF000000**.
+   * Fill color of the mask, in ARGB format. Default value: `0XFF000000`.
    *
-   * A color with only the transparency is generated based on the transparency and brightness of **fillColor**. The
-   * higher the brightness, the more transparent the color. Then, the color is blended with the color of **RenderNode**
-   * using the [BlendMode.SRC_IN]{@link @ohos.graphics.drawing:drawing.BlendMode} API to generate the final color.
+   * Value range: [0, 0xffffffff]
+   *
+   * A value out of range is treated as the default value.
+   *
+   * A color containing only transparency is generated based on the transparency and brightness of **fillColor**. The
+   * higher the brightness, the more transparent the color. Then, the color is blended with the color of the RenderNode
+   * itself using [BlendMode.SRC_IN]{@link @ohos.graphics.drawing:drawing.BlendMode} to generate the final color.
    *
    * @default 0XFF000000
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1454,11 +1484,15 @@ export declare class ShapeMask {
   fillColor: number;
 
   /**
-   * Sets the stroke color for the mask, in ARGB format. The default value is **0XFF000000**.
+   * Stroke color for the mask, in ARGB format. Default value: `0XFF000000`.
    *
-   * A color with only the transparency is generated based on the transparency and brightness of **strokeColor**. The
-   * higher the brightness, the more transparent the color. Then, the color is blended with the color of **RenderNode**
-   * using the [BlendMode.SRC_IN]{@link @ohos.graphics.drawing:drawing.BlendMode} API to generate the final color.
+   * Value range: [0, 0xffffffff]
+   *
+   * A value out of range is treated as the default value.
+   *
+   * A color containing only transparency is generated based on the transparency and brightness of **strokeColor**. The
+   * higher the brightness, the more transparent the color. Then, the color is blended with the color of the RenderNode
+   * itself using [BlendMode.SRC_IN]{@link @ohos.graphics.drawing:drawing.BlendMode} to generate the final color.
    *
    * @default 0XFF000000
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1470,7 +1504,11 @@ export declare class ShapeMask {
   strokeColor: number;
 
   /**
-   * Sets the stroke width for the mask, in px. The default value is **0**.
+   * Stroke width for the mask, in px. Default value: **0**.
+   *
+   * Value range: [0, +∞)
+   *
+   * A negative value is treated as the default value.
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1483,7 +1521,8 @@ export declare class ShapeMask {
 }
 
 /**
- * Sets the clipping shape.
+ * Sets graphics clipping, which supports multiple shapes such as rectangles, rounded rectangles, circles, ellipses, and
+ * custom paths. It can clip a RenderNode by shape so that only the content within the clipping area is displayed.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1492,9 +1531,8 @@ export declare class ShapeMask {
  * @since 12 dynamic
  */
 export declare class ShapeClip {
-
   /**
-   * A constructor used to create a **ShapeClip** instance.
+   * A constructor used to create a **ShapeClip** object.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1568,7 +1606,9 @@ export declare class ShapeClip {
 /**
  * Generates an **edgeColors** object with the specified edge color for all edges.
  *
- * @param { number } all - Edge color, in ARGB format, for example, **0xffff00ff**.<br>Value range: [0, 0xffffffff]
+ * @param { number } all - Edge color, in ARGB format, for example, **0xffff00ff**.
+ *     <br>Value range: [0, 0xffffffff]
+ *     <br>A value out of range is treated as a boundary value.
  * @returns { Edges<number> } **edgeColors** object whose edge colors are all at the specified value.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1581,7 +1621,9 @@ export function edgeColors(all: number): Edges<number>;
 /**
  * Generates an **edgeWidths** object with the specified edge width for all edges.
  *
- * @param { number } all - Edge width, in vp.<br>Value range: [0, +∞).
+ * @param { number } all - Edge width, in vp.
+ *     <br>Value range: [0, +∞)
+ *     <br>A negative value is treated as the default value.
  * @returns { Edges<number> } **edgeWidths** object whose edge widths are all at the specified value.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1607,7 +1649,10 @@ export function borderStyles(all: BorderStyle): Edges<BorderStyle>;
 /**
  * Generates a **borderRadiuses** object with the specified radius for all border corners.
  *
- * @param { number } all - Radius of border corners.<br>Unit: vp.<br>Value range: [0, +∞).
+ * @param { number } all - Radius of the border corners.
+ *     <br>Unit: vp
+ *     <br>Value range: [0, +∞)
+ *     <br>A negative value is treated as the default value.
  * @returns { BorderRadiuses } **borderRadiuses** object whose border corners all have the specified radius.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1618,7 +1663,8 @@ export function borderStyles(all: BorderStyle): Edges<BorderStyle>;
 export function borderRadiuses(all: number): BorderRadiuses;
 
 /**
- * Defines the background blur effect.
+ * Sets the background blur effect. The blur radius can be used to control the blur degree, and the grayscale parameter
+ * can be used to adjust the levels of black and white pixels in the image.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1627,11 +1673,15 @@ export function borderRadiuses(all: number): BorderRadiuses;
  * @since 26.0.0 dynamic
  */
 export interface BackgroundBlur {
-
   /**
-   * Blur radius for background blur.
-   * The value must be greater than or equal to 0, the larger the value, the more blurred the background.
-   * The value 0 indicates no blur.
+   * Blur radius.
+   *
+   * Unit: px
+   *
+   * Value range:
+   * [0, +∞). Default value: **0**. A negative value, **NaN**, and **Infinity** are invalid and treated as the default
+   * value. A larger value indicates a more obvious background blur effect.
+   * If the value is **0**, the background is not blurred.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1642,8 +1692,14 @@ export interface BackgroundBlur {
   radius: double;
 
   /**
-   * Grayscale parameters for the blur effect.
-   * Value range for each parameter: [0, 127].
+   * Grayscale blur, with two parameters in the value range of [0, 127]. The default value is [0, 0].  A value out of
+   * range is treated as the default value. The levels of black and white in the image are adjusted to make them tend
+   * toward gray for a softer and more pleasing appearance. It has no effect on the adjustment of colors in the image.
+   * The first parameter indicates the degree of brightening the black color, and the second parameter indicates the
+   * degree of darkening the white color. A larger value indicates a more obvious adjustment (black and white become
+   * more gray). For example, if the value specified is (20, 20), the RGB value [0, 0, 0] (black) is adjusted to
+   * [20, 20, 20] (0+20), RGB value [255, 255, 255] (white) is adjusted to [235, 235, 235] (255-20), and the color
+   * pixels remain unchanged in the image.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1655,7 +1711,8 @@ export interface BackgroundBlur {
 }
 
 /**
- * Defines the content blur effect.
+ * Sets the content blur effect. The blur radius can be used to control the blur degree, and the grayscale parameter can
+ * be used to adjust the levels of black and white pixels in the image.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1664,11 +1721,15 @@ export interface BackgroundBlur {
  * @since 26.0.0 dynamic
  */
 export interface ContentBlur {
-
   /**
-   * Blur radius for content blur.
-   * The value must be greater than or equal to 0, the larger the value, the more blurred the content.
-   * The value 0 indicates no blur.
+   * Blur radius.
+   *
+   * Unit: px
+   *
+   * Value range:
+   * [0, +∞). Default value: **0**. A negative value, **NaN**, and **Infinity** are invalid and treated as the default
+   * value. A larger value indicates a more obvious background blur effect.
+   * If the value is **0**, the background is not blurred.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1679,8 +1740,14 @@ export interface ContentBlur {
   radius: double;
 
   /**
-   * Grayscale parameters for the blur effect.
-   * Value range for each parameter: [0, 127].
+   * Grayscale blur, with two parameters in the value range of [0, 127]. The default value is [0, 0].  A value out of
+   * range is treated as the default value. The levels of black and white in the image are adjusted to make them tend
+   * toward gray for a softer and more pleasing appearance. It has no effect on the adjustment of colors in the image.
+   * The first parameter indicates the degree of brightening the black color, and the second parameter indicates the
+   * degree of darkening the white color. A larger value indicates a more obvious adjustment (black and white become
+   * more gray). For example, if the value specified is (20, 20), the RGB value [0, 0, 0] (black) is adjusted to
+   * [20, 20, 20] (0+20), RGB value [255, 255, 255] (white) is adjusted to [235, 235, 235] (255-20), and the color
+   * pixels remain unchanged in the image.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1692,7 +1759,7 @@ export interface ContentBlur {
 }
 
 /**
- * Defines the foreground blur effect.
+ * Sets the foreground blur effect. The blur radius can be used to control the blur degree.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1701,11 +1768,15 @@ export interface ContentBlur {
  * @since 26.0.0 dynamic
  */
 export interface ForegroundBlur {
-
   /**
-   * Blur radius for foreground blur.
-   * The value must be greater than or equal to 0, the larger the value, the more blurred the foreground.
-   * The value 0 indicates no blur.
+   * Blur radius.
+   *
+   * Unit: px
+   *
+   * Value range:
+   * [0, +∞). Default value: **0**. A negative value, **NaN**, and **Infinity** are invalid and treated as the default
+   * value. A larger value indicates a more obvious background blur effect.
+   * If the value is **0**, the background is not blurred.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

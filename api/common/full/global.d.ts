@@ -551,14 +551,26 @@ export declare const STANDARD: string;
 export declare const LITE: string;
 
 /**
- * Sets a digital crown events listener for current page, only be supported on the devices supporting digital crown.
- * Please be awared, the listener will be removed automaticlly if the current page is pushed back or
- * replaced, so it's recommaned to call this function in the onShow lifecycle callback of the page.
- * And only one listener can be set for current page, the system will use the listener passed in through the
- * latest calling of this function.
- * Do not use this function in app.js, the behavior is not undefined.
+ * Sets a crown rotation event monitor for the current page. When a crown rotation event is triggered, the monitor
+ * triggers a callback.
  *
- * @param { Function } handler - Indicates the function to be called when the crown event trigger.
+ * This monitor is automatically removed when page routing occurs, and can be manually removed using the
+ * **clearMonitorForCrownEvents** API.
+ *
+ * > **NOTE**
+ * >
+ * > - When page routing occurs, the monitor is automatically removed. Therefore, it is recommended to call this API
+ * > in the **onShow** lifecycle callback of the page.
+ * > - Each page supports only one monitor. A newly registered monitor will overwrite the previous one, and the system
+ * > will use the monitor passed in the last call to this API.
+ * > - Do not use this API in app.js, because its behavior is undefined.
+ *
+ * @param { Function } handler - Callback executed after a crown rotation event occurs, in the format of
+ * **(event)=>{ return false/true; }**.<br>When **true** is returned, the crown rotation event is no longer dispatched
+ * to the component that gains a focus.<br>When **false** is returned, the crown rotation event continues to be
+ * dispatched to the component that gains a focus. If the callback's return value is abnormal, for example,
+ * **undefined** or no return value, the value **false** is used by default.<br>The crown rotation event information
+ * can be obtained through the input parameter.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @famodelonly
  * @since 24 dynamiconly
@@ -566,7 +578,7 @@ export declare const LITE: string;
 export declare function setMonitorForCrownEvents(handler: Function): void;
 
 /**
- * Removes the digital crown events monitor function.
+ * Clears the crown rotation event monitor for the current page.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @famodelonly

@@ -86,7 +86,7 @@ export declare enum SideBarPosition {
    * @stagemodelonly
    * @since 23 static
    */
-  Start = 0,
+  Start,
 
   /**
    * The sidebar is on the End of the container
@@ -95,7 +95,7 @@ export declare enum SideBarPosition {
    * @stagemodelonly
    * @since 23 static
    */
-  End = 1
+  End
 }
 
 /**
@@ -370,8 +370,9 @@ export declare interface SideBarContainerAttribute extends CommonMethod {
    *     <br>Default value:SideBarContainerType.Embed
    * @returns { SideBarContainerAttribute } Returns the instance of the SideBarContainerAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setSideBarContainerOptions(type?: SideBarContainerType): this;
 }
@@ -400,8 +401,9 @@ export declare function SideBarContainer(
  * @param { CustomBuilder } [content_] - container
  * @returns { SideBarContainerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function SideBarContainer(

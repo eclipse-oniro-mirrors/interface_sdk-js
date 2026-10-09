@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -403,8 +403,8 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    * Triggered when the **SaveButton** component is clicked. When a user clicks the save button for the first time, an
    * authorization dialog box is displayed. If the user allows authorization, the app obtains temporary access to media
    * library APIs. For details about the authorization duration, see the description of the
-   * [SaveButton](docroot://reference/apis-arkui/arkui-ts/ts-security-components-savebutton.md#savebutton-1)
-   * constructor. Authorization fails if the user declines authorization or closes the dialog box.
+   * [SaveButton]{@link SaveButton} constructor. Authorization fails if the user declines authorization or closes the
+   * dialog box.
    *
    * @param { function } event - Callback object for the click event, which carries click details, authorization result
    *     and error information.
@@ -487,11 +487,11 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
   iconSize(size: Dimension | SizeOptions): SaveButtonAttribute;
 
   /**
-   * Sets the corner radius of the **SaveButton** component.
+   * Sets the corner radius of the icon of the **SaveButton** component.
    *
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
-   * @param { Dimension | BorderRadiuses } radius - Corner radius of the **SaveButton** component. You can set the
-   *     radius for each of the four corners individually.
+   * @param { Dimension | BorderRadiuses } radius - Corner radius of the icon of the **SaveButton** component. You can
+   *     set the radius for each of the four corners individually.
    *     <br>The default value is 0 vp for all four corners. Units such as vp and px are supported, and valid values are
    *     greater than or equal to 0. Negative values are automatically clamped to **0**.
    *     <br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON** permission, the corner radius
@@ -509,7 +509,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    *
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
    * @param { boolean } enabled - Whether to enable the press effect. **true** to enable, **false** otherwise.
-   *     <br>Default value: **false**.<br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON**
+   *     <br>Default value: **true**.<br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON**
    *     permission, the press effect setting does not take effect.
    * @returns { SaveButtonAttribute } Returns the attributes of the save button.
    * @syscap SystemCapability.ArkUI.ArkUI.Full

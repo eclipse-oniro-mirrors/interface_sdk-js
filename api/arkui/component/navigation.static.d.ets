@@ -117,7 +117,7 @@ export declare enum NavigationMode {
    * @stagemodelonly
    * @since 23 static
    */
-  Stack = 0,
+  Stack,
 
   /**
    * The navigation bar and the content area are displayed side by side.
@@ -126,7 +126,7 @@ export declare enum NavigationMode {
    * @stagemodelonly
    * @since 23 static
    */
-  Split = 1,
+  Split,
 
   /**
    * If the window width is greater than the sum of minNavBarWidth and minContentWidth, the navigation component is
@@ -137,7 +137,7 @@ export declare enum NavigationMode {
    * @stagemodelonly
    * @since 23 static
    */
-  Auto = 2,
+  Auto,
 
   /**
    * If the navigation width is greater than the sum of minNavBarWidth and minContentWidth,
@@ -148,7 +148,7 @@ export declare enum NavigationMode {
    * @stagemodelonly
    * @since 24 static
    */
-  AUTO_WITH_ASPECT_RATIO = 3
+  AUTO_WITH_ASPECT_RATIO
 }
 
 /**
@@ -167,7 +167,7 @@ export declare enum NavBarPosition {
    * @stagemodelonly
    * @since 23 static
    */
-  Start = 0,
+  Start,
 
   /**
    * The navigation bar is on the End of the container
@@ -176,7 +176,7 @@ export declare enum NavBarPosition {
    * @stagemodelonly
    * @since 23 static
    */
-  End = 1
+  End
 }
 
 /**
@@ -204,7 +204,7 @@ export declare enum NavigationTitleMode {
    * @stagemodelonly
    * @since 23 static
    */
-  Full = 1,
+  Full,
 
   /**
    * The title is mini mode.
@@ -213,7 +213,7 @@ export declare enum NavigationTitleMode {
    * @stagemodelonly
    * @since 23 static
    */
-  Mini = 2
+  Mini
 }
 
 /**
@@ -466,7 +466,8 @@ export declare enum LaunchMode {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 export declare interface NavigationModuleInfo {
 
@@ -475,7 +476,8 @@ export declare interface NavigationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   moduleName: string;
 
@@ -484,7 +486,8 @@ export declare interface NavigationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   pagePath: string;
 
@@ -495,7 +498,8 @@ export declare interface NavigationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   isUserCreateStack?: boolean;
 }
@@ -526,6 +530,24 @@ export declare interface NavigationOptions {
    * @since 23 static
    */
   animated?: boolean;
+}
+
+/**
+ * Indicates options for preloading a page.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare interface PreloadOptions {
+  /**
+   * Callback when preloaded page is destroyed by the system.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  onDestroy?: VoidCallback;
 }
 
 /**
@@ -970,6 +992,25 @@ export declare class NavPathStack {
    * @since 23 static
    */
   setPathStack(pathStack: Array<NavPathInfo>, animated?: boolean): void;
+
+
+  /**
+   * Preloads navigation destination page specified by **info**.
+   * The preload page will not be displayed immediately, but will be cached.
+   * When **pushPath** is called later with matching parameters, preloaded instance
+   * will be used for fast display.
+   *
+   * @param { NavPathInfo } info - Indicates NavDestination to be preloaded.
+   * @param { PreloadOptions } [options] - Indicates options for preloading.
+   * @returns { Promise<void> } The promise returned by function.
+   * @throws { BusinessError } 100001 - Internal error.
+   * @throws { BusinessError } 100005 - Builder function not registered.
+   * @throws { BusinessError } 100006 - NavDestination not found.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  preloadPath(info: NavPathInfo, options?: PreloadOptions): Promise<void>;
 }
 
 /**
@@ -1637,6 +1678,33 @@ export declare interface NavigationConfiguration {
    * @since 26.0.0 static
    */
   stackSizeLimit?: int;
+
+  /**
+   * Whether to clear the content stack when navigation is triggered from the primary side.
+   *
+   * In Navigation split mode, when enabled, navigaiton triggered from the primary side clears old
+   * NavDestination after the Primary/Home node while preserving all NavDestinations created by
+   * the current operation.
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  clearContentStackOnPrimaryNavigation?: boolean;
+
+  /**
+   * Whether to recycle invisible pages when a low memory signal is received.
+   *
+   * When enabled, Navigation recycles invisible NavDestination page instance after receiving
+   * low memory pressure notifications. NavPathInfo is preserved, and the page can be reconstructed later.
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  recyclePagesOnLowMemory?: boolean;
 }
 
 /**
@@ -2003,7 +2071,8 @@ export declare interface NavigationAttribute extends CommonMethod {
    * @returns { NavigationAttribute } Returns instance of NavigationAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setNavigationOptions(pathInfos?: NavPathStack, homeDestination?: HomePathInfo, moduleInfo?: NavigationModuleInfo): this;
 
@@ -2015,7 +2084,8 @@ export declare interface NavigationAttribute extends CommonMethod {
    * @returns { NavigationAttribute } Returns instance of NavigationAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setNavigationOptions(pathInfos?: NavPathStack,  moduleInfo?: NavigationModuleInfo): this;
 
@@ -2311,7 +2381,8 @@ export declare function Navigation(
  * @returns { NavigationAttribute } Returns the instance of the NavigationAttribute.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 @Builder
 export declare function Navigation(

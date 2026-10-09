@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file Web Controller
  * @kit ArkWeb
  */
 import webview from '../../@ohos.web.webview';
@@ -2490,11 +2490,16 @@ export declare class WebResourceResponse {
     /**
      * Sets the response data.
      *
-     * @param { string | int | Resource | ArrayBuffer } data - the response data.
-     *                                                         string type indicate strings in HTML format.
-     *                                                         number type indicate file handle.
-     *                                                         Resource type indicate $rawfile resource.
-     *                                                         ArrayBuffer type indicate binary data.
+     * > **NOTE**
+     * >
+     * > - This API does not support obtaining HSP resources based on Resource objects.
+     * > To obtain HSP resources, use {@link setResponseBody} instead.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource.
+     *     ArrayBuffer type indicates binary data.
      * @syscap SystemCapability.Web.Webview.Core
      * @since 23 static
      */
@@ -2555,6 +2560,24 @@ export declare class WebResourceResponse {
      * @since 23 static
      */
     getResponseIsReady(): boolean;
+    /**
+     * Sets the response data.
+     *
+     * > **NOTE**
+     * >
+     * > - This API supports obtaining HSP resources based on Resource objects,
+     * > which {@link setResponseData} does not support.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource or HSP resource.
+     *     ArrayBuffer type indicates binary data.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    setResponseBody(data: string | int | Resource | ArrayBuffer): void;
 }
 /**
  * Defines the Web's request/response header.
@@ -2611,6 +2634,14 @@ export declare class WebResourceError {
      * @since 23 static
      */
     getErrorCode(): int;
+    /**
+      * Gets the custom error code of the Web resource.
+      *
+      * @returns { int } Return the custom error code of the Web resource.
+      * @syscap SystemCapability.Web.Webview.Core
+      * @since 26.0.1 static
+      */
+    getCustomErrorCode(): int;
 }
 /**
  * Defines the js geolocation request.
@@ -5622,7 +5653,7 @@ export declare interface WebAttribute extends CommonMethod {
      *
      * @param { int | undefined } size - Font size.
      *     <br>Value constraint:In actual rendering, the value that exceeds 72px is rendered as 72px,
-     *     and the value that is less than 1px is rendered as 1px.
+     *     and the value that is less than 1px is rendered as 1px.Unit:px.
      *     <br>Value range:[-2^31, 2^31-1].Unit:px.
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
@@ -6685,6 +6716,33 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default enableFullscreenVideoOverlay(enabled: boolean | undefined): this;
+
+    /**
+     * Set whether to enable media network proxy for Web components.
+     * When enabled, network requests for media resources are routed through the web components network stack.
+     * This attribute takes effect for HLS media, other media formats are unaffected.
+     *
+     * @param { boolean | undefined } enabled - {@code true} to enable media network proxy, {@code false} to disable it.
+     *     The default value is false.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    default enableMediaNetworkProxy(enabled: boolean | undefined): this;
+
+    /**
+     * Called when the browser zoom factor of the page changes.
+     *
+     * @param { OnZoomChangeCallback | undefined } callback - Function triggered when the browser zoom factor
+     *     of the page changes. The callback is triggered only by browser zoom changes (for example,
+     *     setZoomFactor); page display scale changes (pinch zoom) are notified by onScaleChange instead.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
 }
 
 /**
@@ -6847,6 +6905,18 @@ export declare interface EmbedOptions {
      * @since 23 static
      */
     supportCssDisplayChange?: boolean;
+    /**
+     * Whether the same-layer rendering component supports CSS transform rotate and skew.
+     * When set to true, the same-layer rendering component correctly handles CSS transform rotate/skew.
+     * When set to false or not set, retains the original behavior.
+     * This attribute takes effect only when `enableNativeEmbedMode` is enabled and cannot be dynamically modified.
+     *
+     * @default false
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    supportTransformRotateAndSkew?: boolean;
 }
 /**
  * Enum type supplied to {@link gestureFocusMode} for setting the web gesture focus mode.
@@ -7324,3 +7394,40 @@ export declare enum AISessionResultType {
  * @since 26.0.0 static
  */
 export type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * The callback of onZoomChange.
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - callback information of onZoomChange.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * Defines the triggered when the browser zoom factor of the page changed.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface OnZoomChangeEvent {
+  /**
+   * Browser zoom factor of the page before the change.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  oldZoomFactor: double;
+
+  /**
+   * Browser zoom factor of the page after the change.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  newZoomFactor: double;
+}

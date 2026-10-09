@@ -14,18 +14,18 @@
  */
 
 /**
- * @file
+ * @file Page Routing
  * @kit ArkUI
  */
 
 import { Callback } from './@ohos.base';
-
 import { AsyncCallback } from './@ohos.base';
 
 /**
- * The **Router** module provides APIs to access pages through URLs. You can use the APIs to navigate to a specified
- * page in an application, replace the current page with another one in the same application, and return to the previous
- * page or a specified page.
+ * This module provides page routing capabilities, including supporting page navigation and replacement via URLs or
+ * named routes, returning to the previous page or a specified page, managing the page stack, obtaining page states and
+ * navigation parameters, and setting page return confirm dialog boxes. It is applicable to scenarios where page
+ * navigation and flow are required within an application.
  *
  * For routing management, it is recommended that you use the
  * [Navigation](docroot://ui/arkts-navigation-architecture.md) component instead as your application routing framework.
@@ -39,14 +39,12 @@ import { AsyncCallback } from './@ohos.base';
  * > where [the UI context is ambiguous](docroot://ui/arkts-global-interface.md#ambiguous-ui-context). For details, see
  * > [UIContext]{@link @ohos.arkui.UIContext}.
  * >
- * > - When using
- * > [pushUrl]{@link @ohos.arkui.UIContext:Router#pushUrl(options: router.RouterOptions, callback: AsyncCallback<void>)}
- * > or
- * > [pushNamedRoute]{@link @ohos.arkui.UIContext:Router#pushNamedRoute(options: router.NamedRouterOptions, callback: AsyncCallback<void>)}
- * > with a callback to return the result, be aware that the stack information obtained through the callback using APIs
- * > such as [getLength]{@link @ohos.arkui.UIContext:Router#getLength} represents an intermediate state during the
- * > navigation operation. This temporary state might differ from the final stack information available after the stack
- * > operation is complete.
+ * > - When using [pushUrl]{@link @ohos.arkui.UIContext:Router.pushUrl} or
+ * > [pushNamedRoute]{@link @ohos.arkui.UIContext:Router.pushNamedRoute} with a callback to return the result, be aware
+ * > that the stack information obtained through the callback using APIs such as
+ * > [getStackSize]{@link @ohos.arkui.UIContext:Router.getStackSize} represents an intermediate state during the
+ * > navigation operation. This temporary state might differ from the final stack information obtained through
+ * > [getStackSize]{@link @ohos.arkui.UIContext:Router.getStackSize} after the stack operation is complete.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -54,7 +52,6 @@ import { AsyncCallback } from './@ohos.base';
  * @since 8 dynamic
  */
 declare namespace router {
-
   /**
    * Enumerates the routing modes.
    *
@@ -64,41 +61,47 @@ declare namespace router {
    * @since 9 dynamic
    */
   export enum RouterMode {
-
     /**
-     * Multi-instance mode. It is the default routing mode.
+     * Multi-instance mode, which is also the default page navigation mode.
      *
-     * The target page is added to the top of the page stack, regardless of whether a page with the same URL exists in
-     * the stack.
+     * The target page is added to the top of the page stack, regardless of whether a page with the same URL already
+     * exists in the stack. This mode is suitable for scenarios where multiple identical pages need to be retained, for
+     * example, when product detail pages are browsed, each product requires an independent page instance.
      *
      * **NOTE**
      *
-     * If no routing mode is used, the navigation will be carried out according to the default multi-instance mode.
+     * If no routing mode is specified, the default multi-instance mode is used for page navigation.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
-    Standard = 0,
+    Standard,
 
     /**
      * Singleton mode.
      *
-     * If the URL of the target page already exists in the page stack, the page is moved to the top of the stack.
+     * If the URL of the target page already exists in the page stack, the page with that URL is moved to the top of the
+     * stack.
      *
-     * If the URL of the target page does not exist in the page stack, the page is redirected to in multi-instance mode.
+     * If the URL of the target page has no matching page in the page stack, the default multi-instance mode is used for
+     * page navigation. This mode is suitable for scenarios where a unique page instance needs to be maintained, for
+     * example, pages such as the home page and login page that should not appear repeatedly in the stack.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
-    Single = 1
+    Single
   }
 
   /**
    * Describes the page routing options.
+   *
+   * > **NOTE**
+   * >  > The page routing stack supports a maximum of 32 pages.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Lite
    * @crossplatform [since 19]
@@ -106,15 +109,20 @@ declare namespace router {
    * @since 8 dynamic
    */
   interface RouterOptions {
-
     /**
-     * URL of the target page, in either of the following formats:
+     * URL of the target page, which can be in either of the following formats:
      *
-     * - Absolute path of the page. The value is available in the pages list in the **config.json** file, for example:
-     *  - pages/index/index
-     *  - pages/detail/detail
-     * - special value. If the value of **url** is **"/"**, the application navigates to the home page. By default, the
-     * home page is set to the first item in the **src** value array.
+     * - Absolute page path, provided by the **pages** list in the configuration file, for example:
+     *
+     *   - pages/index/index
+     *
+     *   - pages/detail/detail
+     *
+     * - Special value. If the value of **url** is **"/"**, the home page is redirected to. The home page defaults to
+     * the first data item in the **src** array of the page navigation configuration.
+     *
+     * If a nonexistent or invalid URL path is passed in, the navigation fails. For details about the error codes, see
+     * the error code description of each API.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Lite
      * @crossplatform [since 19]
@@ -125,16 +133,19 @@ declare namespace router {
 
     /**
      * Data that needs to be passed to the target page during redirection. The received data becomes invalid when the
-     * page is switched to another page. The target page can use **router.getParams()** to obtain the passed parameters,
-     * for example, **this.keyValue** (**keyValue** is the value of a key in **params**). In the web-like paradigm,
-     * these parameters can be directly used on the target page. If the field specified by **key** already exists on the
-     * target page, the passed value of the key will be displayed.
+     * page is switched to another page. After navigation to the target page, use **router.getParams()** to obtain the
+     * passed parameters. In addition, in the web-like paradigm, parameters can also be used directly on the page, for
+     * example, **this.keyValue** (where **keyValue** is the value of a key in the **params** parameter during
+     * navigation). If the target page already has this parameter, its value will be overwritten by the passed parameter
+     * value.
      *
      * **NOTE**
      *
-     * The **params** parameter can only carry serializable data. Objects returned by methods and system APIs (for
-     * example, **PixelMap** objects defined and returned by media APIs) cannot be passed. To pass such objects, extract
-     * from them the basic type attributes to be passed, and then construct objects of the object type.
+     * The **params** parameter can only pass serializable parameters. It cannot pass methods or objects returned by
+     * system APIs (for example, the **PixelMap** object defined and returned by media APIs). Passing non-serializable
+     * parameters may cause parameter transfer failure or application running exceptions. You are advised to extract the
+     * basic-type attributes that need to be passed from the objects returned by system APIs, and construct an object-
+     * type object for passing.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Lite
      * @crossplatform [since 19]
@@ -174,7 +185,6 @@ declare namespace router {
    * @since 8 dynamic
    */
   interface RouterState {
-
     /**
      * Index of the current page in the stack. The index starts from 1 from the bottom to the top of the stack.
      *
@@ -206,7 +216,14 @@ declare namespace router {
     path: string;
 
     /**
-     * Parameters carried on the current page.
+     * Parameters carried by the current page.
+     *
+     * **Note**
+     *
+     * The **params** parameter can only pass serializable parameters. It cannot pass methods or objects returned by
+     * system APIs (for example, the **PixelMap** object defined and returned by media APIs). You are advised to extract
+     * the basic-type attributes that need to be passed from the objects returned by system APIs, and construct an
+     * object for passing.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -218,7 +235,7 @@ declare namespace router {
   }
 
   /**
-   * Describes the page routing state.
+   * Describes the confirm dialog box.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -226,7 +243,6 @@ declare namespace router {
    * @since 8 dynamic
    */
   interface EnableAlertOptions {
-
     /**
      * Content displayed in the confirm dialog box.
      *
@@ -260,7 +276,9 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { RouterOptions } options - Page routing parameters.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page routing result.
+   *     <br>When the page redirection is successful, the value of **error** is **undefined**. When the page redirection
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -288,7 +306,7 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { RouterOptions } options - Page routing parameters.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -317,7 +335,9 @@ declare namespace router {
    *
    * @param { RouterOptions } options - Page routing parameters.
    * @param { RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page navigation result.<br/>When the page
+   *     navigation is successful, **error** is **undefined**. When the page navigation fails, **error** is the error
+   *     object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -346,7 +366,7 @@ declare namespace router {
    *
    * @param { RouterOptions } options - Page routing parameters.
    * @param { RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -364,7 +384,9 @@ declare namespace router {
   function pushUrl(options: RouterOptions, mode: RouterMode): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application and destroys the current page.
+   * Replaces the current page with a page within the application and destroys the current page. Page transition
+   * animation is not supported. If you need to set the animation, you are advised to use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * @param { RouterOptions } options - Description of the new page.
    * @syscap SystemCapability.ArkUI.ArkUI.Lite
@@ -375,7 +397,9 @@ declare namespace router {
   function replace(options: RouterOptions): void;
 
   /**
-   * Replaces the current page with another one in the application and destroys the current page.
+   * Replaces the current page with another one in the application and destroys the current page. This API cannot be
+   * used to configure page transition effects. To configure page transition effects, use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -385,7 +409,9 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { RouterOptions } options - Description of the new page.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page replacement result.
+   *     <br>When the page replacement is successful, the value of **error** is **undefined**. When the page replacement
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -416,7 +442,7 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { RouterOptions } options - Description of the new page.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -435,7 +461,9 @@ declare namespace router {
   function replaceUrl(options: RouterOptions): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application and destroys the current page.
+   * Replaces the current page with another one in the application and destroys the current page. This API cannot be
+   * used to configure page transition effects. To configure page transition effects, use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -445,8 +473,10 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { RouterOptions } options - Description of the new page.
-   * @param { RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { RouterMode } mode - Mode used for replacing the page.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page replacement result.
+   *     <br>When the page replacement is successful, the value of **error** is **undefined**. When the page replacement
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -465,7 +495,9 @@ declare namespace router {
   function replaceUrl(options: RouterOptions, mode: RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application and destroys the current page.
+   * Replaces the current page with another one in the application and destroys the current page. This API cannot be
+   * used to configure page transition effects. To configure page transition effects, use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -475,8 +507,8 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { RouterOptions } options - Description of the new page.
-   * @param { RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @param { RouterMode } mode - Mode for page replacement.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -495,8 +527,10 @@ declare namespace router {
   function replaceUrl(options: RouterOptions, mode: RouterMode): Promise<void>;
 
   /**
-   * Returns to the previous page or a specified page, which deletes all pages between the current page and the target
-   * page.
+   * Returns to the previous page or a specified page, and removes all pages between the current page and the specified
+   * page. If [showAlertBeforeBackPage]{@link router.showAlertBeforeBackPage} has been called to enable the return
+   * confirm dialog box, a confirm dialog box will be displayed before the return operation is executed. The return is
+   * performed only after the user confirms; if the user cancels, the return is not performed.
    *
    * > **NOTE**
    * >
@@ -505,11 +539,13 @@ declare namespace router {
    * > [UIContext]{@link @ohos.arkui.UIContext} to obtain the [Router]{@link @ohos.arkui.UIContext} object associated
    * > with the current UI context.
    *
-   * @param { RouterOptions } options - Description of the target page. The **url** parameter indicates the URL of the
-   *     page to return to. If the specified page does not exist in the navigation stack, no action is taken. If no URL
-   *     is set, the application returns to the previous page, and the page is not rebuilt. Pages are only reclaimed
-   *     after being popped from the navigation stack. Setting **url** to the special value **"/"** has no effect. If
-   *     the named route is used, the provided URL must be the name of the named route.
+   * @param { RouterOptions } options - Description of the target page, where **url** indicates the route address of the
+   *     target page to return to. If the page with the specified URL does not exist in the page stack, the current back
+   *     request will not be responded to. If **url** is not set, the previous page is returned, the page will not be
+   *     rebuilt, and the page in the page stack will not be reclaimed, but will be reclaimed after being popped out of
+   *     the stack. **back** indicates the back API, and setting **url** to the special value **"/"** does not take
+   *     effect. If the page is navigated to using a named route, the **url** passed in must be the name of the named
+   *     route.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -520,7 +556,10 @@ declare namespace router {
   function back(options?: RouterOptions): void;
 
   /**
-   * Returns to the specified page, which deletes all pages between the current page and the target page.
+   * Returns to a specified page, and removes all pages between the current page and the specified page. If
+   * [showAlertBeforeBackPage]{@link router.showAlertBeforeBackPage} has been called to enable the return confirm dialog
+   * box, a confirm dialog box will be displayed before the return operation is executed. The return is performed only
+   * after the user confirms; if the user cancels, the return is not performed.
    *
    * > **NOTE**
    * >
@@ -529,9 +568,14 @@ declare namespace router {
    * > [UIContext]{@link @ohos.arkui.UIContext} to obtain the [Router]{@link @ohos.arkui.UIContext} object associated
    * > with the current UI context.
    *
-   * @param { number } index - Index of the target page to navigate to. The index starts from 1 from the bottom to the
-   *     top of the stack.
-   * @param { Object } [params] - Parameters carried when returning to the page.
+   * @param { number } index - Index of the target page to return to. The value range is [1, Page stack size], and the
+   *     maximum page stack size is 32. The index starts from 1 from the bottom to the top of the stack. No response is
+   *     returned if the index does not exist or exceeds the valid range of the page stack.
+   * @param { Object } [params] - Parameters carried when returning to the page.<br/>**NOTE**<br/>The **params**
+   *     parameter can only pass serializable parameters. It cannot pass methods or objects returned by system APIs (for
+   *     example, the **PixelMap** object defined and returned by media APIs). You are advised to extract the basic-type
+   *     attributes that need to be passed from the objects returned by system APIs, and construct an object-type object
+   *     for passing.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -591,7 +635,8 @@ declare namespace router {
    * > [UIContext]{@link @ohos.arkui.UIContext} to obtain the [Router]{@link @ohos.arkui.UIContext} object associated
    * > with the current UI context.
    *
-   * @returns { RouterState } Page routing state.
+   * @returns { RouterState } State of the page at the top of the stack, including the page index, name, path, and
+   *     parameters.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -611,10 +656,11 @@ declare namespace router {
    * > [UIContext]{@link @ohos.arkui.UIContext} to obtain the [Router]{@link @ohos.arkui.UIContext} object associated
    * > with the current UI context.
    *
-   * @param { number } index - Index of the target page. The index starts from 1 from the bottom to the top of the
-   *     stack.
-   * @returns { RouterState | undefined } State information about the target page; **undefined** if the specified index
-   *     does not exist.
+   * @param { number } index - Index of the page to obtain. The value range is [1, Page stack size], and the maximum
+   *     page stack size is 32. The index starts from 1 from the bottom to the top of the stack. If the index does not
+   *     exist, **undefined** is returned.
+   * @returns { RouterState | undefined } State of the page at the corresponding index, including the page index, name,
+   *     path, and parameters. **undefined** is returned if the index does not exist.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -635,8 +681,10 @@ declare namespace router {
    * > [UIContext]{@link @ohos.arkui.UIContext} to obtain the [Router]{@link @ohos.arkui.UIContext} object associated
    * > with the current UI context.
    *
-   * @param { string } url - URL of the target page.
-   * @returns { Array<RouterState> } Page routing state.
+   * @param { string } url - URL of the page whose information is to be obtained. The URL is an absolute page path
+   *     provided in the **pages** list of the configuration file, for example, **pages/index/index**.
+   * @returns { Array<RouterState> } Array of page state information matching the specified URL. Each element contains
+   *     the page index, name, path, and parameters.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -648,7 +696,12 @@ declare namespace router {
   function getStateByUrl(url: string): Array<RouterState>;
 
   /**
-   * Enables the display of a confirm dialog box before returning to the previous page.
+   * Enables the display of a confirm dialog box before returning to the previous page. After this API is called, a
+   * confirm dialog box will be displayed when [back]{@link router.back} is executed to return to a page. The page
+   * return operation is performed only after the user confirms; if the user cancels, the return is not performed. This
+   * is applicable to scenarios where you need to prevent data loss caused by accidental return operations, for example,
+   * when the user is filling in a form, editing a document, or making a payment, a confirm dialog box is displayed to
+   * avoid accidental exit.
    *
    * @param { EnableAlertOptions } options - Description of the dialog box.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -659,7 +712,11 @@ declare namespace router {
   function enableAlertBeforeBackPage(options: EnableAlertOptions): void;
 
   /**
-   * Enables the display of a confirm dialog box before returning to the previous page.
+   * Enables the display of a confirm dialog box before returning to the previous page. After this API is called, a
+   * confirm dialog box will be displayed when [back]{@link router.back} is executed to return to a page. The page
+   * return operation is performed only after the user confirms. This is applicable to scenarios where you need to
+   * prevent data loss caused by accidental return operations, for example, when the user is filling in a form, editing
+   * a document, or making a payment, a confirm dialog box is displayed to avoid accidental exit.
    *
    * > **NOTE**
    * >
@@ -684,7 +741,10 @@ declare namespace router {
   function showAlertBeforeBackPage(options: EnableAlertOptions): void;
 
   /**
-   * Disables the display of a confirm dialog box before returning to the previous page.
+   * Disables the display of a confirm dialog box before returning to the previous page. After this API is called, the
+   * return confirm dialog box enabled by [enableAlertBeforeBackPage]{@link router.enableAlertBeforeBackPage} will be
+   * closed, and the [back]{@link router.back} operation will no longer display a confirm dialog box but will directly
+   * perform the page return.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @since 8 dynamiconly
@@ -694,7 +754,10 @@ declare namespace router {
   function disableAlertBeforeBackPage(): void;
 
   /**
-   * Disables the display of a confirm dialog box before returning to the previous page.
+   * Disables the display of a confirm dialog box before returning to the previous page. After this API is called, the
+   * return confirm dialog box enabled by [showAlertBeforeBackPage]{@link router.showAlertBeforeBackPage} will be
+   * closed, and the [back]{@link router.back} operation will no longer display a confirm dialog box but will directly
+   * perform the page return.
    *
    * > **NOTE**
    * >
@@ -745,9 +808,8 @@ declare namespace router {
    * @since 10 dynamic
    */
   interface NamedRouterOptions {
-
     /**
-     * Name of the target named route.
+     * Name of the target named route page, which must be a registered named route name.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -758,16 +820,20 @@ declare namespace router {
     name: string;
 
     /**
-     * Data that needs to be passed to the target page during redirection. The target page can use
-     * **router.getParams()** to obtain the passed parameters, for example, **this.keyValue** (**keyValue** is the value
-     * of a key in **params**). In the web-like paradigm, these parameters can be directly used on the target page. If
-     * the field specified by **key** already exists on the target page, the passed value of the key will be displayed.
+     * Data that needs to be passed to the target page during redirection. The received data becomes invalid when the
+     * page is switched to another page. After navigating to the target page, use **router.getParams()** to obtain the
+     * passed parameters. In addition, in the web-like paradigm, parameters can also be used directly on the page, for
+     * example, **this.keyValue** (where **keyValue** is the value of a key in the **params** parameter during
+     * navigation). If the target page already has this parameter, its value will be overwritten by the passed parameter
+     * value.
      *
      * **NOTE**
      *
-     * The **params** parameter cannot pass objects returned by methods and system APIs, for example, **PixelMap**
-     * objects defined and returned by media APIs. To pass such objects, extract from them the basic type attributes to
-     * be passed, and then construct objects of the object type.
+     * The **params** parameter can only pass serializable parameters. It cannot pass methods or objects returned by
+     * system APIs (for example, the **PixelMap** object defined and returned by media APIs). Passing non-serializable
+     * parameters may cause parameter transfer failure or application running exceptions. You are advised to extract the
+     * basic-type attributes that need to be passed from objects returned by system APIs, and construct an object-type
+     * object for passing.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -800,7 +866,7 @@ declare namespace router {
   }
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * Navigates to a page using the named route.
    *
    * > **NOTE**
    * >
@@ -810,7 +876,9 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { NamedRouterOptions } options - Page routing parameters.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page routing result.
+   *     <br>When the page redirection is successful, the value of **error** is **undefined**. When the page redirection
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -829,7 +897,7 @@ declare namespace router {
   function pushNamedRoute(options: NamedRouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * Navigates to a page using the named route.
    *
    * > **NOTE**
    * >
@@ -839,7 +907,7 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { NamedRouterOptions } options - Page routing parameters.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -858,7 +926,7 @@ declare namespace router {
   function pushNamedRoute(options: NamedRouterOptions): Promise<void>;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * Navigates to a page using the named route.
    *
    * > **NOTE**
    * >
@@ -869,7 +937,9 @@ declare namespace router {
    *
    * @param { NamedRouterOptions } options - Page routing parameters.
    * @param { RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page routing result.
+   *     <br>When the page redirection is successful, the value of **error** is **undefined**. When the page redirection
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -888,7 +958,7 @@ declare namespace router {
   function pushNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * Navigates to a page using the named route.
    *
    * > **NOTE**
    * >
@@ -899,7 +969,7 @@ declare namespace router {
    *
    * @param { NamedRouterOptions } options - Page routing parameters.
    * @param { RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -918,7 +988,9 @@ declare namespace router {
   function pushNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise<void>;
 
   /**
-   * Replaces the current page with another one using the named route and destroys the current page.
+   * Replaces the current page with the specified named route page and destroys the current page. Page transition
+   * animation is not supported. If you need to set the animation, you are advised to use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -928,7 +1000,9 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { NamedRouterOptions } options - Description of the new page.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page replacement result.
+   *     <br>When the page replacement is successful, the value of **error** is **undefined**. When the page replacement
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -947,7 +1021,9 @@ declare namespace router {
   function replaceNamedRoute(options: NamedRouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one using the named route and destroys the current page.
+   * Replaces the current page with the specified named route page and destroys the current page. Page transition
+   * animation is not supported. If you need to set the animation, you are advised to use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -957,7 +1033,7 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { NamedRouterOptions } options - Description of the new page.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -976,7 +1052,9 @@ declare namespace router {
   function replaceNamedRoute(options: NamedRouterOptions): Promise<void>;
 
   /**
-   * Replaces the current page with another one using the named route and destroys the current page.
+   * Replaces the current page with the specified named route page and destroys the current page. Page transition
+   * animation is not supported. If you need to set the animation, you are advised to use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -986,8 +1064,10 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { NamedRouterOptions } options - Description of the new page.
-   * @param { RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { RouterMode } mode - Mode used for replacing the page.
+   * @param { AsyncCallback<void> } callback - Callback used to return the page replacement result.
+   *     <br>When the page replacement is successful, the value of **error** is **undefined**. When the page replacement
+   *     fails, the value of **error** is the error object returned by the system.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -1006,7 +1086,9 @@ declare namespace router {
   function replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one using the named route and destroys the current page.
+   * Replaces the current page with the specified named route page and destroys the current page. Page transition
+   * animation is not supported. If you need to set the animation, you are advised to use the
+   * [Navigation](docroot://ui/arkts-navigation-architecture.md) component.
    *
    * > **NOTE**
    * >
@@ -1016,8 +1098,8 @@ declare namespace router {
    * > with the current UI context.
    *
    * @param { NamedRouterOptions } options - Description of the new page.
-   * @param { RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @param { RouterMode } mode - Mode for page replacement.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.

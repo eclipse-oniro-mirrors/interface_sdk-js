@@ -28,6 +28,7 @@ declare namespace identifySensitiveContent {
     /**
      * 定义敏感内容识别策略。
      * 单个策略内，关键字与正则表达式为顺序组合关系，实行两级匹配：首先进行关键字匹配，若命中，则仅在该关键字匹配位置的前后50字节窗口内，进行正则表达式匹配。
+     * 若只设置关键字，则仅进行关键字匹配。若只设置正则表达式，则仅进行正则表达式匹配。
      * 多个Policy策略之间独立，扫描时会分别应用每个策略。
      * sensitiveLabel用于标记匹配结果，便于识别具体匹配的策略。
      *
@@ -95,8 +96,8 @@ declare namespace identifySensitiveContent {
      * @param { string } filePath - 识别的文件路径，需使用物理路径，路径指向的文件必须存在且支持访问。
      * @param { Array<Policy> } identifyPolicies - 用于识别敏感内容的策略数组。每个Policy定义识别规则（标签、关键字、正则表达式），系统将根据这些规则扫描文件内容并返回匹配结果。
      * @returns { Promise<Array<MatchResult>> } Promise对象，返回敏感内容识别的结果。成功时返回匹配结果数组，异常返回错误码。
-     * @throws { BusinessError } 201 - permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: The device type does not support the capability.
      * @throws { BusinessError } 19110001 - Parameter error. Possible causes:
      *     1. Incorrect policy format.
      *     2. Invalid parameter range.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,7 @@
  * APIs provided by this module. When a deferred task is triggered, the system calls back the application through the 
  * APIs and processes the task logic in the callback.
  *
- * @file
+ * @file Deferred Task Scheduling Callbacks
  * @kit BackgroundTasksKit
  */
 

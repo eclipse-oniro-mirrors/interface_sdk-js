@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
-  * @file
+  * @file WebView控制
   * @kit ArkWeb
   */
 import { Resource } from './global/resource';
@@ -786,8 +786,10 @@ declare namespace webview {
          * @param { string } realm - Realm to which HTTP authentication credentials apply.
          * @param { string } username - User name.
          * @param { string } password - Password.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         * 1. Mandatory parameters are left unspecified.
+         * 2. Incorrect parameter types.
+         * 3. Parameter verification failed.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
@@ -1219,6 +1221,36 @@ declare namespace webview {
          * @since 23 static
          */
         static fetchAllCookies(incognito: boolean): Promise<Array<WebHttpCookie>>;
+
+        /**
+         * Gets all cookies for the given URL Asynchronously.
+         *
+         * @param { string } url - The URL for which to fetch cookies.
+         * @param { boolean } incognito - Whether to fetch cookies in incognito mode.
+         * @param { boolean } includePartitionedCookies - If true, allows fetching first-party partitioned cookies.
+         * @returns { Promise<string> } A promise resolved with the cookie string.
+         * @throws { BusinessError } 17100002 - URL error. No valid cookie found for the specified URL.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.0.0 static
+         */
+        static fetchCookie(url: string, incognito: boolean, includePartitionedCookies: boolean): Promise<string>;
+
+        /**
+         * Gets all cookies for the given URL.
+         *
+         * @param { string } url - The URL for which the cookies are requested.
+         * @param { boolean } [incognito] - {@code true} gets all cookies for the given URL
+         *     in incognito mode; {@code false} otherwise.
+         * @param { boolean } [includePartitionedCookies] - If true, allows fetching first-party partitioned
+         *     cookies.
+         * @returns { string } - The cookie value for the given URL.
+         * @throws { BusinessError } 17100002 - URL error. No valid cookie found for the specified URL.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.0.0 static
+         */
+        static fetchCookieSync(url: string, incognito?: boolean, includePartitionedCookies?: boolean): string;
     }
 
     /**
@@ -3925,7 +3957,7 @@ declare namespace webview {
          *
          * @param { boolean } enable {@code true} Enable Ads block; {@code false} otherwise.
          * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Parameter string is too long. 3.Parameter verification failed.
+         * <br>2. Parameter string is too long. 3. Parameter verification failed.
          * @throws { BusinessError } 17100001 - Init error.
          *     The WebviewController must be associated with a Web component.
          * @throws { BusinessError } 801 - Capability not supported.
@@ -4019,7 +4051,7 @@ declare namespace webview {
          * @param { string } urlTrustList - the URL trust list in JSON format.
          *     An empty string means that all URLs are allowed to access.
          * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Parameter string is too long. 3.Parameter verification failed.
+         * <br>2. Parameter string is too long. 3. Parameter verification failed.
          * @throws { BusinessError } 17100001 - Init error.
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
@@ -4047,7 +4079,7 @@ declare namespace webview {
          *
          * @param { Array<string> } pathList - The path list allow universal access.
          * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Parameter string is too long. 3.Parameter verification failed.
+         * <br>2. Parameter string is too long. 3. Parameter verification failed.
          * @throws { BusinessError } 17100001 - Init error.
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
@@ -4059,8 +4091,10 @@ declare namespace webview {
          * Trim memory by different memory pressure level.
          *
          * @param { PressureLevel } level - The memory pressure level for the ArkWeb.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Parameter string is too long. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         * 1. Mandatory parameters are left unspecified.
+         * 2. Parameter string is too long.
+         * 3. Parameter verification failed.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
@@ -4590,6 +4624,50 @@ declare namespace webview {
          * @since 23 static
          */
         stopMicrophone(): void;
+
+        /**
+         * 异步执行AI页面命令操作。
+         *
+         * @param { string } command - JSON格式的命令参数。
+         * @returns { Promise<string> } Promise对象。返回JSON格式的命令执行结果。
+         * @throws { BusinessError } 17100001 - Init error.
+         *                           The WebviewController must be associated with a Web component.
+         * @throws { BusinessError } 17100024 - Command format error.
+         *                           The command parameter does not conform to the JSON format requirements.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.0.0 static
+         */
+        executeAIPageCommand(command: string): Promise<string>;
+
+        /**
+         * 调用此接口设置当前网页的浏览器级缩放倍率。文字与图片同时缩放，页面重新布局（reflow）以适应Web组件宽度。
+         * 该接口与{@link zoom}、{@link zoomIn}、{@link zoomOut}（仅视觉缩放，不触发重新布局）以及
+         * {@link textZoomRatio}（仅缩放文字）相互独立。缩放倍率仅作用于当前Web组件实例，页面内跨文档跳转后保持不变。
+         *
+         * @param { double } zoomFactor - 要设置的浏览器级缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
+         *     <br>取值范围：[0.25, 5]。
+         *     <br>超出该范围的值会被裁剪到边界值。
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        setZoomFactor(zoomFactor: double): void;
+
+        /**
+         * 获取当前网页的浏览器级缩放倍率。
+         *
+         * @returns { double } 当前浏览器级缩放倍率。**1**表示不缩放。
+         *     <br>取值范围：[0.25, 5.0]，默认值为**1**。
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        getZoomFactor(): double;
     }
 
     /**
@@ -5552,6 +5630,26 @@ declare namespace webview {
          * @since 23 static
          */
         getHeaderByName(name: string): string
+        /**
+         * Set the custom error code for the Web response.
+         *
+         * @param { int } customErrorCode - The custom error code for this response, Web engine will pass the custom
+         *     error code directly to the application through onErrorReceive.
+         *     <br>The value should be an integer.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.0.1 static
+         */
+        setCustomErrorCode(customErrorCode: int): void;
+        /**
+         * Get the custom error code of the Web response.
+         *
+         * @returns { int } Return the custom error code that was set for this response.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.0.1 static
+         */
+        getCustomErrorCode(): int;
     }
 
     /**
@@ -5614,6 +5712,21 @@ declare namespace webview {
          * @since 23 static
          */
         didFail(code: WebNetErrorList, completeIfNoResponse: boolean): void;
+
+        /**
+         * Notify that this request should be failed.
+         *
+         * @param { WebNetErrorList } code - Set response error code to intercept.
+         * @param { boolean } completeIfNoResponse - If completeIfNoResponse is true, when DidFailWithError is called,
+         *     if DidReceiveResponse has not been called, a response is automatically constructed and the current
+         *     request is terminated.
+         * @param { int } customErrorCode - The custom error code for this response, Web engine will pass the custom
+         *     error code directly to the application through onErrorReceive.
+         * @throws { BusinessError } 17100021 - The resource handler is invalid.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @since 26.0.1 static
+         */
+        didFail(code: WebNetErrorList, completeIfNoResponse: boolean, customErrorCode: int): void;
     }
 
     /**
@@ -6147,6 +6260,10 @@ declare namespace webview {
         /**
          * 媒体源的类型。
          *
+         * 只读：否
+         *
+         * 可选：否
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
@@ -6154,12 +6271,20 @@ declare namespace webview {
         /**
          * 媒体源地址。
          *
+         * 只读：否
+         *
+         * 可选：否
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         source: string;
         /**
          * 媒体源格式，可能为空，需要开发者自行判断格式。
+         *
+         * 只读：否
+         *
+         * 可选：否
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -6233,12 +6358,20 @@ declare namespace webview {
          *
          * 详见[NativeEmbedDataInfo]{@link ./@internal/component/ets/web:NativeEmbedDataInfo}。
          *
+         * 只读：否
+         *
+         * 可选：否
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         id: string;
         /**
-         * surface的位置信息。
+         * surface的位置信息，用于指定同层渲染时 surface 的显示位置和尺寸。
+         *
+         * 只读：否
+         *
+         * 可选：否
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static

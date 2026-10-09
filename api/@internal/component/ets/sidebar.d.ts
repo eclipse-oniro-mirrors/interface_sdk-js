@@ -19,7 +19,7 @@
  */
 
 /**
- * Enumerates the types of sidebar containers.
+ * Enumerates the sidebar types of the container.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -27,20 +27,25 @@
  * @since 8 dynamic
  */
 declare enum SideBarContainerType {
-
   /**
-   * The sidebar is embedded in the component and displayed side by side with the content area.
+   * The sidebar is embedded in the component and displayed side by side with the content area. This mode applies to
+   * scenarios where both the sidebar and the content area need to be displayed.
    *
-   * With the overall container size unchanged, displaying the sidebar reduces the content area, and hiding the sidebar
-   * expands the content area.
+   * When the overall container size remains unchanged, showing the sidebar shrinks the content area, and hiding the
+   * sidebar expands the content area.
    *
-   * If the component size is less than the sum of [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}
-   * and [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)}, and **showSideBar** is not
-   * set, the sidebar is automatically hidden.
+   * When the component size is smaller than [minContentWidth]{@link SideBarContainerAttribute#minContentWidth} +
+   * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} and **showSideBar** is not set,
+   * the sidebar is not displayed by default.
    *
-   * If **minSideBarWidth** or **minContentWidth** is not set, the default value will be used for calculation.
+   * When the **showSideBar** attribute is set, the value set by the **showSideBar** attribute prevails.
    *
-   * The user can bring out the sidebar in Overlay mode by clicking the control button.
+   * When [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} or
+   * [minContentWidth]{@link SideBarContainerAttribute#minContentWidth} is not set, the default value of the
+   * corresponding API is used for calculation.
+   *
+   * After the component is automatically hidden, if the sidebar is brought up by tapping the control button, the
+   * sidebar floats over the content area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -50,7 +55,11 @@ declare enum SideBarContainerType {
   Embed = 0,
 
   /**
-   * The sidebar is overlaid on top of the content area, without affecting the size of the content area.
+   * The sidebar floats over the content area and does not affect the size of the content area. This mode applies to
+   * scenarios where the sidebar needs to be displayed temporarily.
+   *
+   * When the component size is smaller than [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}, the
+   * content area is displayed in a truncated manner.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -60,13 +69,19 @@ declare enum SideBarContainerType {
   Overlay = 1,
 
   /**
-   * The sidebar is displayed in Embed mode when the component size is greater than or equal to the sum of
-   * **minSideBarWidth** and **minContentWidth**
+   * When the component size is greater than or equal to
+   * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} +
+   * [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}, the Embed mode is used for display.
    *
-   * and in Overlay mode otherwise.
+   * When the component size is smaller than
+   * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} +
+   * [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}, the Overlay mode is used for display. This mode
+   * applies to scenarios that require responsive layout or multi-device adaptation.
    *
-   * If **minSideBarWidth** or **minContentWidth** is not set, the default value will be used for calculation. If the
-   * calculation result is less than 600 vp, 600 vp will be used as the breakpoint value for mode switching.
+   * When [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} or
+   * [minContentWidth]{@link SideBarContainerAttribute#minContentWidth} is not set, the default value of the unset API
+   * is used for calculation. If the calculated value is smaller than 600 vp, 600 vp is used as the threshold for mode
+   * switching.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -77,7 +92,9 @@ declare enum SideBarContainerType {
   AUTO = 2,
 
   /**
-   * The sideBar Displace. Sidebar is visible, content will offscreen to make space for sideBar.
+   * The sidebar and the content area are displayed in parallel, and the overflow part of the content area is moved
+   * outside the component. When the sidebar is expanded, the content area is displayed with a gray overlay (color: #330
+   * 00000) and events are disabled. You can tap the content area to collapse the sidebar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -97,7 +114,6 @@ declare enum SideBarContainerType {
  * @since 9 dynamic
  */
 declare enum SideBarPosition {
-
   /**
    * The sidebar is on the left side of the container.
    *
@@ -106,7 +122,7 @@ declare enum SideBarPosition {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Start = 0,
+  Start,
 
   /**
    * The sidebar is on the right side of the container.
@@ -116,14 +132,14 @@ declare enum SideBarPosition {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  End = 1
+  End
 }
 
 /**
  * Describes the icons of the sidebar control button.
  *
  * > **NOTE**
- *
+ * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
  * > While historical version information is preserved for anonymous objects, there may be cases where the outer element
  * > 's @since version number is higher than inner elements'. This does not affect interface usability.
@@ -135,7 +151,6 @@ declare enum SideBarPosition {
  * @since 18 dynamic
  */
 declare interface ButtonIconOptions {
-
   /**
    * Icon of the control button when the sidebar is displayed.
    *
@@ -176,15 +191,16 @@ declare interface ButtonIconOptions {
  * @since 8 dynamic
  */
 declare interface ButtonStyle {
-
   /**
-   * Spacing between the sidebar control button and the left of the container.
+   * Distance between the sidebar control button and the left edge of the container.
    *
    * Default value: **16vp**
    *
    * Unit: vp
    *
-   * Value range: [0, +∞).
+   * Value range: [0, +∞)
+   *
+   * The default value is used when an invalid value is set.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -201,6 +217,8 @@ declare interface ButtonStyle {
    * Unit: vp
    *
    * Value range: [0, +∞).
+   *
+   * If the value is abnormal, the default value is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -222,6 +240,8 @@ declare interface ButtonStyle {
    *
    * Value range: [0, +∞).
    *
+   * If the value is abnormal, the default value is used.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -241,6 +261,8 @@ declare interface ButtonStyle {
    * Unit: vp
    *
    * Value range: [0, +∞).
+   *
+   * If the value is abnormal, the default value is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -265,11 +287,13 @@ declare interface ButtonStyle {
 }
 
 /**
- * The **SideBarContainer** component contains a sidebar and content area as its child components. The sidebar is the
- * first child component and can be shown or hidden as needed. The content area is the second child component.
+ * Provides a container that allows the sidebar to be shown and hidden. The sidebar and content area are defined by
+ * child components, with the first child component representing the sidebar and the second representing the content
+ * area. It supports sidebar navigation layout scenarios, where the sidebar can be shown or hidden through a control
+ * button or gesture, improving app navigation efficiency.
  *
  * > **NOTE**
- *
+ * >
  * > The APIs of this module are supported since API version 8. Updates will be marked with a superscript to indicate
  * > their
  *
@@ -280,12 +304,11 @@ declare interface ButtonStyle {
  * @noninterop
  */
 interface SideBarContainerInterface {
-
   /**
    * Creates a sidebar container.
    *
-   * @param { SideBarContainerType } type - Display type of the sidebar.<br>Default value:
-   *     **SideBarContainerType.Embed**
+   * @param { SideBarContainerType } type - Display type of the sidebar.
+   *     <br>Default value: **SideBarContainerType.Embed**
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -299,21 +322,22 @@ interface SideBarContainerInterface {
  * Sets the divider style.
  *
  * > **NOTE**
- *
- * > The settings of the [universal size attributes]{@link common} **width** and **height** do not take effect for the
- * > sidebar child component.
- * > >  The settings do not take effect for the sidebar content area either. By default, the sidebar content area takes
- * > up the remaining space of the sidebar container.
- *
- * > If the [showSideBar]{@link SideBarContainerAttribute#showSideBar} attribute is not set, the sidebar's visibility is
- * > subject to its size.
- *
- * > - If the size is less than the sum of
- * > [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} and
- * > [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}, the sidebar is not displayed by default.
  * >
- * > - If the size is greater than or equal to the sum of **minSideBarWidth** and **minContentWidth**, the sidebar is
- * > displayed by default.
+ * > When [width]{@link CommonMethod#width(value: Length)} and [height]{@link CommonMethod#height(value: Length)} are
+ * > set for the sidebar child component, neither takes effect.
+ * >
+ * > When [width]{@link CommonMethod#width(value: Length)} and [height]{@link CommonMethod#height(value: Length)} are
+ * > set for the sidebar content area, neither takes effect. By default, the content area occupies the remaining space
+ * > of the **SideBarContainer**.
+ * >
+ * > When the [showSideBar]{@link SideBarContainerAttribute#showSideBar} attribute is not set, the sidebar is displayed
+ * > automatically based on the component size:
+ * >
+ * > - Smaller than [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} +
+ * > [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}: the sidebar is not displayed by default.
+ * >
+ * > - Greater than or equal to [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} +
+ * > [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}: the sidebar is displayed by default.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -322,22 +346,23 @@ interface SideBarContainerInterface {
  * @since 10 dynamic
  */
 interface DividerStyle {
-
   /**
-   * Stroke width of the divider.
+   * Width of the divider.
    *
    * Default value: **1vp**
    *
    * Unit: vp
    *
-   * Value range: [0, +∞).
+   * Value range: [0, +∞)
+   *
+   * The default value is used when an abnormal value is set.
    *
    * **NOTE**
    *
-   * Percentage values are not supported. The priority of this attribute is lower than that of the universal attribute
-   * [height]{@link CommonMethod#height(value: Length)}. If the value of this attribute is greater than that of
-   * **height**, cropping is performed based on the **height** settings. Due to hardware limitations on some devices
-   * where 1 px dividers may not display properly after rounding, you are advised to use the **2px** value.
+   * The width of the divider does not support percentage settings. It has a lower priority than the
+   * [common attribute height]{@link CommonMethod#height(value: Length)}. If the width exceeds the size set by the
+   * common attribute, it is clipped according to the common attribute. On some devices, the divider may not be
+   * displayed due to 1-pixel rounding in hardware. 2 px is recommended.
    *
    * @default 1vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -351,7 +376,7 @@ interface DividerStyle {
   /**
    * Color of the divider.
    *
-   * Default value: **#000000, 3%**
+   * Default value: **#000000**, 3%, black.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -370,6 +395,8 @@ interface DividerStyle {
    *
    * Value range: [0, +∞).
    *
+   * If the value is abnormal, the default value is used.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -387,6 +414,8 @@ interface DividerStyle {
    *
    * Value range: [0, +∞).
    *
+   * If the value is abnormal, the default value is used.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -397,9 +426,9 @@ interface DividerStyle {
 }
 
 /**
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link common}, the following events are supported.
+ * In addition to the [universal events]{@link ./common}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -408,15 +437,22 @@ interface DividerStyle {
  * @noninterop
  */
 declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAttribute> {
-
   /**
-   * Specifies whether to display the sidebar.
+   * Sets whether to display the sidebar. Setting this attribute triggers the show/hide animation of the sidebar.
+   *
+   * When the **showSideBar** attribute is not set, the sidebar is automatically displayed based on the component size:
+   * it is hidden by default when the size is smaller than
+   * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} +
+   * [minContentWidth]{@link SideBarContainerAttribute#minContentWidth}, and displayed by default when the size is
+   * greater than or equal to that value.
    *
    * Since API version 10, this attribute supports two-way binding through
    * [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *
-   * @param { boolean } value - Whether to display the sidebar.<br>**true**: The sidebar is displayed.<br>**false**: The
-   *     sidebar is not displayed.<br>Default value: **true**
+   * @param { boolean } value - Whether to display the sidebar.
+   *     <br>**true**: The sidebar is displayed.
+   *     <br>**false**: The sidebar is not displayed.
+   *     <br>Default value: **true**
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -426,9 +462,11 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   showSideBar(value: boolean): SideBarContainerAttribute;
 
   /**
-   * Sets the attributes of the sidebar control button.
+   * Sets the attributes of the sidebar control button. The control button is used to switch the sidebar between the
+   * shown and hidden states.
    *
-   * @param { ButtonStyle } value - Attributes of the sidebar control button.
+   * @param { ButtonStyle } value - Style of the sidebar control button, used to configure the position, size, and icon
+   *     of the control button.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -438,10 +476,13 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   controlButton(value: ButtonStyle): SideBarContainerAttribute;
 
   /**
-   * Specifies whether to display the sidebar control button.
+   * Sets whether to display the control button. The control button is used to toggle the **showSideBar** attribute.
+   * Tapping it shows or hides the sidebar and updates the **showSideBar** attribute value.
    *
-   * @param { boolean } value - Whether to display the sidebar control button.<br>**true**: The sidebar control button
-   *     is displayed.<br>**false**: The sidebar control button is not displayed.<br>Default value: **true**
+   * @param { boolean } value - Whether to display the sidebar control button.
+   *     <br>**true**: The sidebar control button is displayed.
+   *     <br>**false**: The sidebar control button is not displayed.
+   *     <br>Default value: **true**
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -469,15 +510,16 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   onChange(callback: (value: boolean) => void): SideBarContainerAttribute;
 
   /**
-   * Sets the width of the sidebar. If a value less than 0 is set, the default value is used. The value must comply with
-   * the width constraints. If it is not within the valid range, the valid value closest to the set one is used.
+   * Sets the width of the sidebar. If a value less than 0 is set, the default value is used. The value is subject to
+   * the **minSideBarWidth** and **maxSideBarWidth** constraints. If it is not within the valid range, the closest
+   * boundary value is used.
    *
    * Since API version 18, this attribute supports two-way binding through
    * [!!](docroot://ui/state-management/arkts-new-binding.md).
    *
-   * @param { number } value - Width of the sidebar.<br>Default value: **240vp**<br>Unit: vp<br>Value range:
-   *     [0, +∞).<br>**NOTE**<br>In API version 9 and earlier versions, the default value is **200vp**.
-   *     In API version 10, the default value is **240vp**.
+   * @param { number } value - Width of the sidebar.<br/>Default value: **240vp**<br/>Unit: vp<br/>Value range:
+   *     [0, +∞)<br/>The default value is used when an invalid value is set.<br/>**NOTE**<br/>
+   *     The default value is **200vp** for API versions earlier than 10, and **240vp** for API version 10 and later.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -494,9 +536,9 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
    * **minSideBarWidth**, whether it is specified or kept at the default value, takes precedence over **minWidth** of
    * the sidebar child components.
    *
-   * @param { number } value - Minimum width of the sidebar.
-   *     <br>Unit: vp. Value range: [0, +∞). Default value: In API version 9 and earlier versions,
-   *     the default value is **200vp**.
+   * @param { number } value - Minimum width of the sidebar.<br/>Default value: **200vp** for API version 9 and earlier,
+   *     and **240vp** for API version 10 and later.<br/>Unit: vp<br/>Value range:
+   *     [0, +∞)<br/>The default value is used when an invalid value is set.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -513,8 +555,9 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
    * **maxSideBarWidth**, whether it is specified or kept at the default value, takes precedence over **maxWidth** of
    * the sidebar child components.
    *
-   * @param { number } value - Maximum width of the sidebar.<br>Default value: **280vp**<br>Unit: vp<br>Value range:
-   *     [0, +∞).
+   * @param { number } value - Maximum width of the sidebar.<br/>Default value: **280vp**<br/>Unit: vp<br/>Value range:
+   *     [0, +∞)<br/>The default value is used when an invalid value is set.<br/>The value cannot exceed the width of
+   *     the sidebar container itself. If it does, the width of the sidebar container itself is used.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -524,16 +567,17 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   maxSideBarWidth(value: number): SideBarContainerAttribute;
 
   /**
-   * Sets the width of the sidebar. If a value less than 0 is set, the default value is used. The value must comply with
-   * the width constraints. If it is not within the valid range, the valid value closest to the set one is used.
-   * Compared to [sideBarWidth]{@link SideBarContainerAttribute#sideBarWidth(value: number)}, this API supports
-   * percentage strings and other [pixel units]{@link common} for the **value** parameter.
+   * Sets the width of the sidebar. If a value less than 0 is set, the default value is used. The value is subject to
+   * the **minSideBarWidth** and **maxSideBarWidth** constraints. If it is not within the valid range, the closest
+   * boundary value is used. Compared with [sideBarWidth]{@link SideBarContainerAttribute#sideBarWidth(value: number)},
+   * the **value** parameter additionally supports percentage strings and other [pixel units]{@link ./common}.
    *
    * Since API version 18, this attribute supports two-way binding through
    * [!!](docroot://ui/state-management/arkts-new-binding.md).
    *
-   * @param { Length } value - Width of the sidebar.<br>Default value: **240vp**<br>Unit: vp<br>Value range:
-   *     [0, +∞).<br>**NOTE**<br>The default value is **200vp** in API version 9 and **240vp** in API version 10.
+   * @param { Length } value - Width of the sidebar.<br/>Default value: **240vp**<br/>Unit: vp<br/>Value range:
+   *     [0, +∞)<br/>If the value is abnormal, the default value is used.<br/>
+   *     **NOTE**<br/>The default value is **200vp** since API version 9, and **240vp** since API version 10.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -547,13 +591,14 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
    * exceed the width of the sidebar container. If the specified value exceeds the sidebar container width, the
    * container width is used instead. Compared to
    * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)}, this API supports percentage
-   * strings and other [pixel units]{@link common} for the **value** parameter.
+   * strings and other [pixel units]{@link ./common} for the **value** parameter.
    *
    * **minSideBarWidth**, whether it is specified or kept at the default value, takes precedence over **minWidth** of
    * the sidebar child components.
    *
-   * @param { Length } value - Minimum width of the sidebar.<br>Default value: In API version 9 and earlier versions,
-   *     the default value is **200vp**. In API version 10, the default value is **240vp**.<br>Value range: [0, +∞).
+   * @param { Length } value - Minimum width of the sidebar.<br/>Default value: **200vp** for API version 9 and earlier,
+   *     and **240vp** for API version 10 and later.<br/>Unit: vp<br/>Value range:
+   *     [0, +∞)<br/>The default value is used when an invalid value is set.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -567,13 +612,15 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
    * exceed the width of the sidebar container. If the specified value exceeds the sidebar container width, the
    * container width is used instead. Compared with
    * [maxSideBarWidth]{@link SideBarContainerAttribute#maxSideBarWidth(value: number)}, this API supports percentage
-   * strings and other [pixel units]{@link common} for the **value** parameter.
+   * strings and other [pixel units]{@link ./common} for the **value** parameter.
    *
    * **maxSideBarWidth**, whether it is specified or kept at the default value, takes precedence over **maxWidth** of
    * the sidebar child components.
    *
-   * @param { Length } value - Maximum width of the sidebar.<br>Default value: **280vp**<br>Unit: vp<br>Value range:
-   *     [0, +∞).
+   * @param { Length } value - Maximum width of the sidebar.<br/>Default value: **280vp**<br/>Unit: vp<br/>Value range:
+   *     [0, +∞)<br/>The default value is used when an exception occurs.<br/>
+   *     The value cannot exceed the width of the sidebar container itself.
+   *     If it does, the width of the sidebar container itself is used.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -583,16 +630,21 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   maxSideBarWidth(value: Length): SideBarContainerAttribute;
 
   /**
-   * Specifies whether to automatically hide the sidebar when it is dragged to be smaller than the minimum width. The
-   * value is subject to the **minSideBarWidth** attribute method. If it is not set in **minSideBarWidth**, the default
-   * value is used.
+   * Sets whether to automatically hide the sidebar when it is dragged to be smaller than the minimum width. The value
+   * is subject to the **minSideBarWidth** attribute method. If the **minSideBarWidth** attribute method is not set, the
+   * default value is used. After the sidebar is automatically hidden, the **showSideBar** attribute value is
+   * synchronously updated to **false**, and the **onChange** event is triggered.
    *
-   * Whether the sidebar should be hidden is determined when it is being dragged. When it is dragged to be smaller than
-   * the minimum width, the damping effect is required to trigger hiding (a distance out of range).
+   * Determines whether to automatically hide the sidebar during dragging. When the sidebar is dragged to be smaller
+   * than the minimum width, it must be dragged beyond the boundary by a certain distance (the specific distance is
+   * determined by the system implementation) to trigger automatic hiding, which provides a damping effect to avoid
+   * accidental operations.
    *
    * @param { boolean } value - Whether to automatically hide the sidebar when it is dragged to be smaller than the
-   *     minimum width.<br>**true**: The sidebar is automatically hidden.<br>**false**: The sidebar is not automatically
-   *     hidden.<br>Default value: **true**
+   *     minimum width.
+   *     <br>**true**: The sidebar is automatically hidden.
+   *     <br>**false**: The sidebar is not automatically hidden.
+   *     <br>Default value: **true**
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -604,7 +656,8 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   /**
    * Sets the position of the sidebar.
    *
-   * @param { SideBarPosition } value - Position of the sidebar.<br>Default value: **SideBarPosition.Start**
+   * @param { SideBarPosition } value - Position of the sidebar.
+   *     <br>Default value: **SideBarPosition.Start**
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -616,9 +669,9 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   /**
    * Sets the divider style.
    *
-   * @param { DividerStyle | null } value - Divider style.<br>- **DividerStyle** (default): The divider is displayed.<br
-   *     >- **null** or **undefined**: No action is taken, and the divider style remains consistent with the default.<br
-   *     >**NOTE**<br>In API version 11 and earlier versions, **null** results in the divider not being displayed.
+   * @param { DividerStyle | null } value - Style of the divider.<br/>The default value is **DividerStyle**, which
+   *     displays the divider.<br/>- **null** or **undefined**: The divider style remains the default value and is not
+   *     changed.<br/>**Note:** <br/>In API version 11 and earlier, **null** means that the divider is not displayed.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -642,7 +695,6 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
    *
    * until its width reaches the value defined by **minSideBarWidth**; if the component size is further decreased, then:
    *
-   *
    * - If [autoHide]{@link SideBarContainerAttribute#autoHide} is set to **false**, while retaining the
    * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)} and **minContentWidth** settings,
    * the content area has its content clipped.
@@ -654,8 +706,8 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
    * of the sidebar. If **minContentWidth** is not set, **minSideBarWidth** and **maxSideBarWidth** take precedence over
    * its default value.
    *
-   * @param { Dimension } value - Minimum content area width of the sidebar container.<br>Default value: **360vp**<br>
-   *     Unit: vp
+   * @param { Dimension } value - Minimum width of the content area of the **SideBarContainer** component.<br/>Default
+   *     value: **360vp**<br/>Value range: [0, +∞)<br/>If the value is less than 0, the default value is used.
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -666,12 +718,29 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   minContentWidth(value: Dimension): SideBarContainerAttribute;
 
   /**
-   * Specifies whether sideBar can be presented or dismissed by gesture.
+   * Sets whether the sidebar can be displayed or hidden by swiping. If this API is not called, the sidebar cannot be
+   * displayed or hidden by swiping.
    *
-   * @param { boolean } value - Indicates whether the sidebar can be presented or dismissed by gesture.
-   *     <br>Default value: **false**.
-   *     **true**: Sidebar can be presented or dismissed by gesture.
-   *     **false**: Sidebar cannot be presented or dismissed by gesture.
+   * > **NOTE**
+   * >
+   * > - The swipe gesture takes effect on the sidebar and content area (excluding the divider). When the swiping
+   * > distance reaches 100 vp, the sidebar is displayed or hidden. The maximum swiping distance is equal to the width
+   * > of the sidebar.
+   * >
+   * > - When the sidebar is on the left of the container:
+   * >
+   * > - You can swipe right to expand the sidebar when it is hidden.
+   * >
+   * > - You can swipe left to close the sidebar when it is displayed.
+   * >
+   * > - When the sidebar is on the right of the container:
+   * >
+   * > - You can swipe left to expand the sidebar when it is hidden.
+   * >
+   * > - You can swipe right to close the sidebar when it is displayed.
+   *
+   * @param { boolean } value - Whether to support showing or hiding the sidebar through gesture swiping.<br/>**true**:
+   *     gesture swiping is supported.<br/>**false**: gesture swiping is not supported.<br/>Default value: **false**
    * @returns { SideBarContainerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -683,11 +752,13 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
 }
 
 /**
- * The **SideBarContainer** component contains a sidebar and content area as its child components. The sidebar is the
- * first child component and can be shown or hidden as needed. The content area is the second child component.
+ * Provides a container that allows the sidebar to be shown and hidden. The sidebar and content area are defined by
+ * child components, with the first child component representing the sidebar and the second representing the content
+ * area. It supports sidebar navigation layout scenarios, where the sidebar can be shown or hidden through a control
+ * button or gesture, improving app navigation efficiency.
  *
  * > **NOTE**
- *
+ * >
  * > The APIs of this module are supported since API version 8. Updates will be marked with a superscript to indicate
  * > their
  *

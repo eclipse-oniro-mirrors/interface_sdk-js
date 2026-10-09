@@ -14,12 +14,14 @@
  */
 
 /**
- * @file Keycode
+ * 按键设备的键值，按键设备包括键盘、光盘、游戏手柄等。
+ *
+ * @file 键值
  * @kit InputKit
  */
 
 /**
- * 按键设备的键值，按键设备包括键盘、光盘、游戏手柄等。
+ * 键值。
  *
  * @syscap SystemCapability.MultimodalInput.Input.Core
  * @atomicservice [since 12]
@@ -75,9 +77,9 @@ export declare enum KeyCode {
 
   /**
    * 多媒体键：播放/暂停。
-   * 
+   *
    * 与KEYCODE_PLAYPAUSE的区别为：
-   * 
+   *
    * KEYCODE_PLAYPAUSE是较早的定义，KEYCODE_MEDIA_PLAY_PAUSE为现代媒体键设备设计，常见于较新的媒体键设备。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
@@ -309,7 +311,7 @@ export declare enum KeyCode {
   KEYCODE_STAR = 2010,
 
   /**
-   * 按键'*'。
+   * 按键'#'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -714,7 +716,7 @@ export declare enum KeyCode {
   KEYCODE_DEL = 2055,
 
   /**
-   * 按键'*'。
+   * 按键'`'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -777,7 +779,7 @@ export declare enum KeyCode {
   KEYCODE_SEMICOLON = 2062,
 
   /**
-   * 按键''' (单引号)。
+   * 按键'''（单引号）。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -786,7 +788,7 @@ export declare enum KeyCode {
   KEYCODE_APOSTROPHE = 2063,
 
   /**
-   * 按键'*'。
+   * 按键'/'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -795,7 +797,7 @@ export declare enum KeyCode {
   KEYCODE_SLASH = 2064,
 
   /**
-   * 按键'*'。
+   * 按键'@'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -1562,7 +1564,7 @@ export declare enum KeyCode {
   KEYCODE_SCALE = 2612,
 
   /**
-   * 日文韩语键。
+   * 韩文键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -1571,7 +1573,7 @@ export declare enum KeyCode {
   KEYCODE_HANGUEL = 2613,
 
   /**
-   * 日文汉语键。
+   * 韩文汉字键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -1616,7 +1618,7 @@ export declare enum KeyCode {
   KEYCODE_PROPS = 2618,
 
   /**
-   * 撤消键。
+   * 撤销键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -1706,7 +1708,7 @@ export declare enum KeyCode {
   KEYCODE_BOOKMARKS = 2628,
 
   /**
-   * 向下翻页键。
+   * Page Down键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -1715,11 +1717,8 @@ export declare enum KeyCode {
   KEYCODE_NEXT = 2629,
 
   /**
-   * 多媒体键：播放/暂停。
-   * 
-   * 与KEYCODE_MEDIA_PLAY_PAUSE的区别为：
-   * 
-   * KEYCODE_PLAYPAUSE是较早的定义，KEYCODE_MEDIA_PLAY_PAUSE为现代媒体键设备设计，常见于较新的媒体键设备。
+   * 多媒体键：播放/暂停。<br>与KEYCODE_MEDIA_PLAY_PAUSE的区别为：<br> KEYCODE_PLAYPAUSE是较早的定义，
+   * KEYCODE_MEDIA_PLAY_PAUSE为现代媒体键设备设计，常见于较新的媒体键设备。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -1728,7 +1727,7 @@ export declare enum KeyCode {
   KEYCODE_PLAYPAUSE = 2630,
 
   /**
-   * 向上翻页键。
+   * Page Up键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2214,7 +2213,7 @@ export declare enum KeyCode {
   KEYCODE_CALENDAR = 2685,
 
   /**
-   * 红色指示器。
+   * 红色指示器键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2223,7 +2222,7 @@ export declare enum KeyCode {
   KEYCODE_RED = 2686,
 
   /**
-   * 绿色指示器。
+   * 绿色指示器键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2232,7 +2231,7 @@ export declare enum KeyCode {
   KEYCODE_GREEN = 2687,
 
   /**
-   * 黄色指示器。
+   * 黄色指示器键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2241,7 +2240,7 @@ export declare enum KeyCode {
   KEYCODE_YELLOW = 2688,
 
   /**
-   * 蓝色指示器。
+   * 蓝色指示器键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2412,7 +2411,7 @@ export declare enum KeyCode {
   KEYCODE_NEWS = 2707,
 
   /**
-   * 语音信箱。
+   * 语音信箱键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2421,7 +2420,7 @@ export declare enum KeyCode {
   KEYCODE_VOICEMAIL = 2708,
 
   /**
-   * 通讯簿。
+   * 通讯簿键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2457,7 +2456,7 @@ export declare enum KeyCode {
   KEYCODE_SPELLCHECK = 2712,
 
   /**
-   * 终端锁/屏幕保护程序。
+   * 终端锁/屏幕保护程序键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2493,7 +2492,7 @@ export declare enum KeyCode {
   KEYCODE_BUTTONCONFIG = 2716,
 
   /**
-   * 任务管理器。
+   * 任务管理器键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2655,7 +2654,7 @@ export declare enum KeyCode {
   KEYCODE_AOD_SINGLE_CLICK = 2740,
 
   /**
-   * 挡风玻璃除雾器开关。
+   * 挡风玻璃除雾器开关键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -2925,7 +2924,7 @@ export declare enum KeyCode {
   KEYCODE_PROG4 = 2829,
 
   /**
-   * 仪表板。
+   * 仪表板键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3033,7 +3032,7 @@ export declare enum KeyCode {
   KEYCODE_BLUETOOTH = 2843,
 
   /**
-   * 无线局域网。
+   * 无线局域网键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3060,7 +3059,7 @@ export declare enum KeyCode {
   KEYCODE_WWAN_WIMAX = 2846,
 
   /**
-   * 控制所有收音机的键。
+   * 控制所有无线设备的键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3078,7 +3077,7 @@ export declare enum KeyCode {
   KEYCODE_CHANNEL = 3001,
 
   /**
-   * 按键0。
+   * 按钮'0'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3087,7 +3086,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_0 = 3100,
 
   /**
-   * 按键1。
+   * 按钮'1'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3096,7 +3095,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_1 = 3101,
 
   /**
-   * 按键2。
+   * 按钮'2'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3105,7 +3104,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_2 = 3102,
 
   /**
-   * 按键3。
+   * 按钮'3'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3114,7 +3113,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_3 = 3103,
 
   /**
-   * 按键4。
+   * 按钮'4'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3123,7 +3122,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_4 = 3104,
 
   /**
-   * 按键5。
+   * 按钮'5'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3132,7 +3131,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_5 = 3105,
 
   /**
-   * 按键6。
+   * 按钮'6'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3141,7 +3140,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_6 = 3106,
 
   /**
-   * 按键7。
+   * 按钮'7'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3150,7 +3149,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_7 = 3107,
 
   /**
-   * 按键8。
+   * 按钮'8'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3159,7 +3158,7 @@ export declare enum KeyCode {
   KEYCODE_BTN_8 = 3108,
 
   /**
-   * 按键9。
+   * 按钮'9'。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic
@@ -3228,5 +3227,86 @@ export declare enum KeyCode {
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
    */
-  KEYCODE_FINGERPRINT_SLIDE_DOWN = 3234
+  KEYCODE_FINGERPRINT_SLIDE_DOWN = 3234,
+
+  /**
+   * 云台单击键。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_CLICK = 3235,
+
+  /**
+   * 云台调焦左调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_FOCUS_LEFT = 3236,
+
+  /**
+   * 云台调焦右调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_FOCUS_RIGHT = 3237,
+
+  /**
+   * 云台曝光左调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_EXPOSURE_LEFT = 3238,
+
+  /**
+   * 云台曝光右调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_EXPOSURE_RIGHT = 3239,
+
+  /**
+   * 云台快门速度左调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_SHUTTER_LEFT = 3240,
+
+  /**
+   * 云台快门速度右调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_SHUTTER_RIGHT = 3241,
+
+  /**
+   * 云台光圈左调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_APERTURE_LEFT = 3242,
+
+  /**
+   * 云台光圈右调节。
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  KEYCODE_PTZ_APERTURE_RIGHT = 3243
 }

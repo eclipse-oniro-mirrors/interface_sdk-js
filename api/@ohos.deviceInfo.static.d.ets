@@ -409,6 +409,38 @@ declare namespace deviceInfo {
      * @since 24 static
      */
     get sdkApiVersion(): int;
+
+    /**
+     * Starting from API version 26.0.0, the minor version is introduced as part of semantic versioning.
+     * It is the middle field in the semantic version and is an integer.
+     * The complete API version is represented by sdkApiVersion.sdkMinorApiVersion.sdkPatchApiVersion.
+     *
+     * Example:
+     * If the API version of the system software is 26.0.1, sdkMinorApiVersion is 0.
+     * If the API version of the system software is 26.1.0, sdkMinorApiVersion is 1.
+     *
+     * @returns { int }
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    get sdkMinorApiVersion(): int;
+
+    /**
+     * Starting from API version 26.0.0, the patch version is introduced as part of semantic versioning.
+     * It is the third field in the semantic version and is an integer.
+     * The complete API version is represented by sdkApiVersion.sdkMinorApiVersion.sdkPatchApiVersion.
+     *
+     * Example:
+     * If the API version of the system software is 26.0.1, sdkPatchApiVersion is 1.
+     * If the API version of the system software is 26.1.0, sdkPatchApiVersion is 0.
+     *
+     * @returns { int }
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    get sdkPatchApiVersion(): int;
     
     /**
      * First API version.
@@ -704,5 +736,38 @@ declare namespace deviceInfo {
      * @since 26.0.0 static
      */
     get deviceColor(): string;
+
+    /**
+     * Checks whether a specified API version is available on the current device.
+     * This API provides compatibility check across different OpenHarmony/Distribution OS versions.
+     * A suitable version check method is automatically selected based on the input format and supported API versions.
+     *
+     * @param { string | int } version - API version number to be verified. The value can be an integer or in the
+     *     dotted format.
+     *     - String format shall be in M.S.F (e.g., "26.0.0", "5.0.1"):
+     *     - For API 26.0.0 & 26.0.0+ (version >= 26.0.0): Represents both OpenHarmony and Distribution OS API versions
+     *     - For API 26.0.0- (version < 26.0.0): Represents Distribution OS API version
+     *     - Number format (e.g., 13): Represents OpenHarmony SDK API version (API 26- only)
+     *     M>=26,0<=S<=99,0<=F<=99. A compilation error occurs when an invalid literal is input.
+     * @returns { boolean } Boolean value. The value **true** indicates that the current version number is
+     *     later than or equal to the input parameter version number; **false** indicates that the current
+     *     device's API version is lower than the input version number, or the input version number is in an invalid
+     *     format, or the specified version does not exist.
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    function apiAvailable(version: string | int): boolean;
+
+    /**
+     * Obtain the kernel version.
+     * The value is in the format of 'HongMeng Kernel X.Y.Z'.
+     * Example: 'HongMeng Kernel 1.0.0'.
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    get kernelVersion(): string;
 }
 export default deviceInfo;

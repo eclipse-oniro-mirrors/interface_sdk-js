@@ -18,390 +18,219 @@
  * @kit ArkUI
  */
 
-
-
-
 import { SymbolGlyphModifier, DividerModifier } from './@ohos.arkui.modifier';
 import { LengthMetrics } from './@ohos.arkui.node';
 /**
- * Declare enum ItemState
- * @enum { ItemState }
+ * Enumerates toolbar item states.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declare enum ItemState
- * @enum { ItemState }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11
- */
-/**
- * Declare enum ItemState
- * @enum { ItemState }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 18 dynamic
+ * @crossplatform [since 18]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  * @noninterop
  */
 export declare enum ItemState {
   /**
-   * Enable type.
+   * The toolbar item is enabled.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Enable type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Enable type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   ENABLE = 1,
   /**
-   * Disable type.
+   * The toolbar item is disabled.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Disable type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Disable type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   DISABLE = 2,
   /**
-   * Activate type.
+   * The toolbar item is activated.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Activate type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Activate type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   ACTIVATE = 3
 }
 
 /**
- * Defines toolBar symbolGlyph options.
+ * Defines the icon symbol options.
  *
- * @interface ToolBarSymbolGlyphOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
+ * @crossplatform [since 18]
  * @atomicservice
- * @since 13
- */
-/**
- * Defines toolBar symbolGlyph options.
- *
- * @interface ToolBarSymbolGlyphOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 18 dynamic
+ * @since 13 dynamic
  * @noninterop
  */
 export interface ToolBarSymbolGlyphOptions {
 
   /**
-   * Modifier of toolbar's normal symbol.
+   * Icon symbol of the toolbar item in normal state.
    *
-   * @type { ?SymbolGlyphModifier }
+   * Default value: **fontColor: $r('sys.color.icon_primary'), fontSize: 24vp**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Modifier of toolbar's normal symbol.
-   *
-   * @type { ?SymbolGlyphModifier }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   normal?: SymbolGlyphModifier;
 
   /**
-   * Modifier of toolbar's activated symbol.
+   * Icon symbol of the toolbar item in activated state.
    *
-   * @type { ?SymbolGlyphModifier }
+   * Default value: **fontColor: $r('sys.color.icon_emphasize'), fontSize: 24vp**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Modifier of toolbar's activated symbol.
-   *
-   * @type { ?SymbolGlyphModifier }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   activated?: SymbolGlyphModifier;
 }
 
 /**
- * Declare type ToolBarOption
+ * Defines the content and attributes of a toolbar.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declare type ToolBarOption
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11
- */
-/**
- * Declare type ToolBarOption
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 18 dynamic
+ * @crossplatform [since 18]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  * @noninterop
  */
 @Observed
 export declare class ToolBarOption {
   /**
-   * Define text content.
-   * @type { ResourceStr }.
+   * Text of the toolbar item.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Define text content.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Define text content.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   content: ResourceStr;
   /**
-   * Define the action event.
-   * @type { ?() => void }.
+   * Tap event of the toolbar item. If not passed in, tapping the item does not trigger any action.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Define the action event.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Define the action event.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   action?: () => void;
   /**
-   * Define icon resource.
-   * @type { ?Resource }.
+   * Icon of the toolbar item.
+   *
+   * By default, if not set or set to **undefined**, the icon is not displayed.
+   *
+   * When the **toolBarSymbolOptions** attribute is set, the icon attribute does not take effect.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Define icon resource.
-   * @type { ?Resource }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Define icon resource.
-   * @type { ?Resource }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   icon?: Resource;
   /**
-   * Define item type.
-   * @type { ?ItemState }.
+   * State of the toolbar item.
+   *
+   * Default value: **ItemState.ENABLE**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Define item type.
-   * @type { ?ItemState }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Define item type.
-   * @type { ?ItemState }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   state?: ItemState;
   /**
-   * Define text fontColor.
-   * @type { ?ResourceColor }.
+   * Font color of the toolbar item.
+   *
+   * Default value: **$r('sys.color.font_primary')**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Define text fontColor.
-   * @type { ?ResourceColor }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   textColor?: ResourceColor;
   /**
-   * Text fontColor when the item is activated.
-   * @type { ?ResourceColor }.
+   * Font color of the toolbar item in the activated state.
+   *
+   * Default value: **$r('sys.color.font_emphasize')**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Text fontColor when the item is activated.
-   * @type { ?ResourceColor }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   activatedTextColor?: ResourceColor;
   /**
-   * Define icon fillColor.
-   * @type { ?ResourceColor }.
+   * Fill color of the toolbar item icon.
+   *
+   * Default value: $r('sys.color.icon_primary').
+   *
+   * When the toolBarSymbolOptions attribute is set, this parameter does not take effect.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Define icon fillColor.
-   * @type { ?ResourceColor }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   iconColor?: ResourceColor;
   /**
-   * Icon fillColor when the item is activated.
-   * @type { ?ResourceColor }.
+   * Fill color of the toolbar item icon in the activated state.
+   *
+   * Default value: **$r('sys.color.icon_emphasize')**.
+   *
+   * When the **toolBarSymbolOptions** attribute is set, this parameter does not take effect.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Icon fillColor when the item is activated.
-   * @type { ?ResourceColor }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   activatedIconColor?: ResourceColor;
   /**
-   * Item symbol icon.
+   * Icon attribute of the toolbar item, of the symbol type. After this parameter is set, the **icon** attribute does
+   * not take effect.
    *
-   * @type { ?ToolBarSymbolGlyphOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Item symbol icon.
-   *
-   * @type { ?ToolBarSymbolGlyphOptions }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   toolBarSymbolOptions?: ToolBarSymbolGlyphOptions;
   /**
-   * The accessibilityText of item.
+   * Accessibility text attribute of the toolbar item. When the component does not contain a text attribute, the screen
+   * reader does not announce it when this component is selected. Developers can set accessibility text for components
+   * that do not contain text information, so that the screen reader announces the text content when this component is
+   * selected.
    *
-   * @type { ?ResourceStr }
+   * Default value: the content of the current item's content attribute.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -410,9 +239,13 @@ export declare class ToolBarOption {
    */
   accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of item.
+   * Accessibility description of the toolbar item. Used to explain the function and operation consequences of the
+   * current component to users in detail, especially when such information cannot be directly obtained from the
+   * component text alone. When the component is selected, the content of the text attribute and the accessibility
+   * description attribute are announced in sequence.
    *
-   * @type { ?ResourceStr }
+   * Default value: "Double-tap with one finger to execute".
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -421,9 +254,22 @@ export declare class ToolBarOption {
    */
   accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of item.
+   * Accessibility level of the toolbar item. Used to control whether the current item can be recognized by
+   * accessibility services.
    *
-   * @type { ?string }
+   * Supported values:
+   *
+   * **"auto"**: The current component is converted to **"yes"**.
+   *
+   * **"yes"**: The current component can be recognized by accessibility services.
+   *
+   * **"no"**: The current component cannot be recognized by accessibility services.
+   *
+   * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by accessibility
+   * services.
+   *
+   * Default value: **"auto"**
+   *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -435,271 +281,185 @@ export declare class ToolBarOption {
 }
 
 /**
- * Declare ToolBarOptions use in ToolBar
+ * Inherits from Array<[ToolBarOption]{@link ToolBarOption}>.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declare ToolBarOptions use in ToolBar
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11
- */
-/**
- * Declare ToolBarOptions use in ToolBar
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 18 dynamic
+ * @crossplatform [since 18]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  * @noninterop
  */
 @Observed
-export declare class ToolBarOptions extends Array<ToolBarOption> {
-}
+export declare class ToolBarOptions extends Array<ToolBarOption> {}
 
 /**
- * Declare ToolBarModifier use in ToolBar
+ * Provides methods for setting the toolbar height, background color, left and right padding (takes effect only when the
+ * number of items is less than 5), and whether to display the pressed state (**stateEffect**).
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
+ * @crossplatform [since 18]
  * @atomicservice
- * @since 13
- */
-/**
- * Declare ToolBarModifier use in ToolBar
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 18 dynamic
+ * @since 13 dynamic
  * @noninterop
  */
 export declare class ToolBarModifier {
   /**
-   * Sets the height of the toolBar.
+   * Sets the toolbar height. This height does not include the divider line height.
    *
-   * @param { LengthMetrics } height - toolBar's height.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
+   * @param { LengthMetrics } height - Height of the toolbar.
+   *     <br>The default height of the toolbar is 56 vp, which does not include the divider.
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Sets the height of the toolBar.
-   *
-   * @param { LengthMetrics } height - toolBar's height.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   height(height: LengthMetrics): ToolBarModifier;
   /**
-   * Sets the backgroundColor of the toolBar.
+   * Sets the toolbar background color.
    *
-   * @param { ResourceColor } backgroundColor - toolBar's backgroundColor.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
+   * @param { ResourceColor } backgroundColor - Toolbar background color.
+   *     <br>Default value: **$r('sys.color.ohos_id_color_toolbar_bg')**
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Sets the backgroundColor of the toolBar.
-   *
-   * @param { ResourceColor } backgroundColor - toolBar's backgroundColor.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   backgroundColor(backgroundColor: ResourceColor): ToolBarModifier;
   /**
    * Sets the left and right padding of the toolbar.
    *
-   * @param { LengthMetrics } padding - left and right padding.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
+   * @param { LengthMetrics } padding - Left and right padding of the toolbar. Takes effect only when the number of
+   *     items is less than 5.<br/>By default, the toolbar padding is 24 vp when the number of items is less than 5, and
+   *     0 vp when the number of items is 5 or more.
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Sets the left and right padding of the toolbar.
-   *
-   * @param { LengthMetrics } padding - left and right padding.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   padding(padding: LengthMetrics): ToolBarModifier;
   /**
-   * Sets whether or not to display the press status effect.
+   * Sets whether to display the pressed state effect.
    *
-   * @param { boolean } stateEffect - press status effect.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
+   * @param { boolean } stateEffect - Whether to display the pressed state effect on the toolbar.
+   *     <br>The value **true** means to display the pressed state effect on the toolbar, and **false** means the
+   *     opposite.
+   *     <br>Default value: **true**
+   * @returns { ToolBarModifier } Returns the current **ToolBarModifier** object, which supports chained calls.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Sets whether or not to display the press status effect.
-   *
-   * @param { boolean } stateEffect - press status effect.
-   * @returns { ToolBarModifier } returns the instance of the ToolBarModifier.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
   stateEffect(stateEffect: boolean): ToolBarModifier;
 }
 
 /**
- * Declare Component ToolBar
+ * The **Toolbar** component is used to display operation options for the current interface content, shown at the bottom
+ * of the interface. It is suitable for scenarios where quick action entry points need to be provided for users, such as
+ * copy, paste, and share operations on an editing page. A maximum of 5 entries are displayed at the bottom. Any excess
+ * entries are collapsed into a "More" item, displayed on the far right.
+ *
+ * > **NOTE**
+ * >
+ * > - This component can be used only in the stage model.
+ * >
+ * > - If the **ToolBar** component has [universal attributes]{@link ./@internal/component/ets/common} and
+ * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **ToolBar** component itself. As a result, the configured universal attributes and universal events
+ * > may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events with
+ * > the **ToolBar** component.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declare Component ToolBar
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11
- */
-/**
- * Declare Component ToolBar
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 18 dynamic
+ * @crossplatform [since 18]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  * @noninterop
  */
 @Component
 export declare struct ToolBar {
   /**
-   * Define toolbar list array.
-   * @type { ToolBarOptions }.
+   * Toolbar list.
+   *
+   * @type { ToolBarOptions }. [since 10 - 17]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
+  @ObjectLink
+  toolBarList: ToolBarOptions;
   /**
-   * Define toolbar list array.
-   * @type { ToolBarOptions }.
+   * Index of the active item.
+   *
+   * Default value: **-1**, indicating no active item. Values less than -1 are treated as no active item.
+   *
+   * @type { ?number }. [since 10 - 17]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @atomicservice
-   * @since 11
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
+  @Prop
+  activateIndex?: number;
   /**
-   * Define toolbar list array.
-   * @type { ToolBarOptions }.
+   * Toolbar controller, which cannot be used for controlling individual toolbar items.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
-   */
-  @ObjectLink toolBarList: ToolBarOptions;
-  /**
-   * Define toolbar activate item index, default is -1.
-   * @type { ?number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Define toolbar activate item index, default is -1.
-   * @type { ?number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Define toolbar activate item index, default is -1.
-   * @type { ?number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
-   */
-  @Prop activateIndex?: number;
-  /**
-   * Define toolbar controller.
-   * @type { TabsController }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Define toolbar controller.
-   * @type { TabsController }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Define toolbar controller.
-   * @type { TabsController }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @crossplatform [since 18]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   controller: TabsController;
   /**
-   * Define divider Modifier.
-   * @type { ?DividerModifier }.
+   * Modifier for the toolbar header divider, which can be used to customize the divider's height, color, and other
+   * attributes.
+   *
+   * Default value: system default value
+   *
+   * @type { ?DividerModifier }. [since 13 - 17]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 13
+   * @since 13 dynamic
    */
+  @Prop
+  dividerModifier?: DividerModifier;
   /**
-   * Define divider Modifier.
-   * @type { ?DividerModifier }.
+   * Modifier for the toolbar, which can be used to set the toolbar's height, background color, padding (which only
+   * takes effect when there are fewer than five toolbar items), and whether to display the pressed state.
+   *
+   * Default value:
+   *
+   * Height of the toolbar: **56vp**
+   *
+   * Background color: **ohos_id_toolbar_bg**
+   *
+   * Padding: **24vp**
+   *
+   * Whether to display the pressed state: yes
+   *
+   * @type { ?ToolBarModifier }. [since 13 - 17]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform
+   * @crossplatform [since 18]
    * @atomicservice
-   * @since 18 dynamic
+   * @since 13 dynamic
    */
-  @Prop dividerModifier?: DividerModifier;
-  /**
-   * Define toolbar modifier.
-   * @type { ?ToolBarModifier }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 13
-   */
-  /**
-   * Define toolbar modifier.
-   * @type { ?ToolBarModifier }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
-   */
-  @Prop toolBarModifier?: ToolBarModifier;
+  @Prop
+  toolBarModifier?: ToolBarModifier;
 }

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 视图数据
  * @kit AbilityKit
  */
 
@@ -28,30 +28,32 @@ import AutoFillRect from './AutoFillRect';
 /*** endif */
 
 /**
- * 查看自动填充的数据。
+ * 自动填充的视图数据信息。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
  * @systemapi [since 11 - 24]
  * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.0 dynamic&static
+ * @since 11 dynamic
+ * @since 23 static
  */
 export default interface ViewData {
   /**
-   * 包名称。
+   * 应用的包名。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   bundleName: string;
 
   /**
-   * 模块名称。
+   * 模块名称，用于指定自动填充数据所属的模块。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -62,7 +64,7 @@ export default interface ViewData {
   moduleName: string;
 
   /**
-   * Ability名称。
+   * Ability名称，用于指定自动填充数据所属的Ability。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -80,7 +82,8 @@ export default interface ViewData {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   pageUrl: string;
 
@@ -92,19 +95,21 @@ export default interface ViewData {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   pageNodeInfos: Array<PageNodeInfo>;
 
   /**
-   * 该页面记录了信息。
+   * 页面的位置坐标与宽高信息。在PC/2in1设备上，密码保险箱以弹窗形式展示，为保证弹窗位置跟随输入框，left和top需置为0。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 12 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 12 dynamic
+   * @since 23 static
    */
   pageRect: AutoFillRect;
 

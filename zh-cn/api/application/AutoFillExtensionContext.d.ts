@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 自动填充扩展上下文
  * @kit AbilityKit
  */
 
@@ -38,7 +38,7 @@ import CustomData from './CustomData';
  */
 declare class AutoFillExtensionContext extends ExtensionContext {
   /**
-   * 拉起模态页面。使用Promise异步回调。
+   * 重新拉起模态页面。使用Promise异步回调。
    *
    * @param { CustomData } customData - 拉起模态页面时的自定义信息。
    * @returns { Promise<void> } Promise对象，无返回结果。

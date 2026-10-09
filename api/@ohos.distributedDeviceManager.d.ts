@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Device Management
  * @kit DistributedServiceKit
  */
 
@@ -494,7 +494,8 @@ declare namespace distributedDeviceManager {
     protocolType: int;
 
     /**
-     * Device type.
+     * Setup type.
+     * The value should be an integer.
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -638,9 +639,8 @@ declare namespace distributedDeviceManager {
 
     /**
      * Image specification name. Value:
-     *
-     * - **lg**: large image (size: 1016064 pixels)
-     * - **sm**: small image (size: 65536 pixels)
+     * - **lg**: large image (size: 1008×1008 pixels)
+     * - **sm**: small image (size: 256×256 pixels).
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -701,9 +701,8 @@ declare namespace distributedDeviceManager {
 
     /**
      * Image specification name. Value:
-     *
-     * - **lg**: large image (size: 1016064 pixels)
-     * - **sm**: small image (size: 65536 pixels)
+     * - **lg**: large image (size: 1008×1008 pixels)
+     * - **sm**: small image (size: 256×256 pixels).
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -1228,7 +1227,8 @@ declare namespace distributedDeviceManager {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<DeviceStateChangeResult> } callback
      *     Indicates the device state callback to register.
-     * @throws { BusinessError } 201 - Permission verification failed.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 23 static
      */
@@ -1471,7 +1471,7 @@ declare namespace distributedDeviceManager {
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 10 dynamic
      */
-    on(type: 'serviceDie', callback?: Callback<{}>): void;
+    on(type: 'serviceDie', callback: Callback<{}>): void;
 
     /**
      * Register a serviceError callback so that the application can be notified when devicemanager service died
@@ -1790,10 +1790,12 @@ declare namespace distributedDeviceManager {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC and ohos.permission.ACCESS_SERVICE_DM and
      *     ohos.permission.sec.ACCESS_UDID
      * @param { Array<string> } deviceIds - A list of device IDs that could be obtained by the application,
-     *                                      with a maximum list size of 50.
+     *     with a maximum list size of 50.
+     *     <br>The maximum length is 96 character and cannot be empty.
      * @returns { Array<DeviceIdentification> } - Returns a list of DeviceIdentification.
-     * @throws { BusinessError } 201 - User permission verify failed.
-     * @throws { BusinessError } 202 - The caller is not a system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
@@ -1820,6 +1822,28 @@ declare namespace distributedDeviceManager {
      * @since 24 dynamic&static
      */
     restoreLocalDeviceName(): void;
+
+    /**
+     * Query the device operating system type by device network ID.
+     *
+     * @permission ohos.permission.DISTRIBUTED_DATASYNC and ohos.permission.ACCESS_SERVICE_DM
+     * @param { string } networkId - The device's network ID
+     * @returns { int } - Returns the device operating system type.
+     *     Possible return:
+     *     1. 10: Operating system based on OpenHarmony
+     *     2. 11: Operating system not based on OpenHarmony
+     *     3. -1: Unknown
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 11600102 - Failed to obtain service.
+     * @throws { BusinessError } 11600110 - Invalid network ID.
+     * @syscap SystemCapability.DistributedHardware.DeviceManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getOsTypeByNetworkId(networkId: string): int;
   }
 }
 

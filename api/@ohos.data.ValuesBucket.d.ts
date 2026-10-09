@@ -16,7 +16,7 @@
 /**
  * **ValuesBucket** is a dataset in the form of key-value (KV) pairs that can be inserted in the database.
  *
- * @file
+ * @file Data Set
  * @kit ArkData
  */
 
@@ -43,6 +43,7 @@ export type ValueType = long | double | string | boolean;
  *
  * @syscap SystemCapability.DistributedDataManager.DataShare.Core
  * @stagemodelonly
+ * @crossplatform [since 12]
  * @since 10 dynamic
  * @since 23 static
  */

@@ -45,7 +45,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   type BluetoothAddress = common.BluetoothAddress;
 
@@ -121,7 +121,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   function createHidDeviceProfile(): HidDeviceProfile;
 
@@ -131,7 +131,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface HidDeviceProfile extends BaseProfile {
     /**
@@ -158,7 +158,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     registerHidDevice(sdp: HidDeviceSdp, inQos: HidDeviceQos, outQos: HidDeviceQos, callback: Callback<boolean>): void;
 
@@ -173,7 +173,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     unregisterHidDevice(): void;
 
@@ -191,7 +191,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     connect(deviceId: BluetoothAddress): void;
 
@@ -207,7 +207,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     disconnect(): void;
 
@@ -226,7 +226,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     sendReport(id: int, reportData: Uint8Array): void;
 
@@ -247,7 +247,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     replyReport(type: ReportType, id: int, reportData: Uint8Array): void;
 
@@ -265,7 +265,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     reportError(error: ErrorReason): void;
 
@@ -279,7 +279,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onGetReport(callback: Callback<GetReportData>): void;
 
@@ -293,7 +293,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offGetReport(callback?: Callback<GetReportData>): void;
 
@@ -307,7 +307,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onSetReport(callback: Callback<SetReportData>): void;
 
@@ -321,7 +321,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offSetReport(callback?: Callback<SetReportData>): void;
 
@@ -335,7 +335,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onInterruptDataReceived(callback: Callback<InterruptData>): void;
 
@@ -349,7 +349,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offInterruptDataReceived(callback?: Callback<InterruptData>): void;
 
@@ -363,7 +363,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onSetProtocol(callback: Callback<ProtocolData>): void;
 
@@ -377,7 +377,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offSetProtocol(callback?: Callback<ProtocolData>): void;
 
@@ -391,7 +391,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     onVirtualCableUnplug(callback: Callback<void>): void;
 
@@ -405,7 +405,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     offVirtualCableUnplug(callback?: Callback<void>): void;
   }
@@ -416,7 +416,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface HidDeviceSdp {
     /**
@@ -425,7 +425,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     name: string;
     /**
@@ -434,7 +434,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     description: string;
     /**
@@ -443,7 +443,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     provider: string;
     /**
@@ -452,7 +452,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     subclass: Subclass;
     /**
@@ -461,7 +461,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     descriptors: Uint8Array;
   }
@@ -472,7 +472,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface HidDeviceQos {
     /**
@@ -481,7 +481,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     serviceType?: ServiceType;
     /**
@@ -490,7 +490,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     tokenRate?: int;
     /**
@@ -499,7 +499,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     tokenBucketSize?: int;
     /**
@@ -508,7 +508,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     peakBandwidth?: int;
     /**
@@ -517,7 +517,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     latency?: int;
     /**
@@ -526,7 +526,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     delayVariation?: int;
   }
@@ -538,7 +538,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface GetReportData {
     /**
@@ -547,7 +547,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     type: ReportType;
     /**
@@ -556,7 +556,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     id: int;
     /**
@@ -565,7 +565,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     bufferSize: int;
   }
@@ -576,7 +576,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface SetReportData {
     /**
@@ -585,7 +585,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     type: ReportType;
     /**
@@ -594,7 +594,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     id: int;
     /**
@@ -603,7 +603,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     data: Uint8Array;
   }
@@ -614,7 +614,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface InterruptData {
     /**
@@ -623,7 +623,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     id: int;
     /**
@@ -632,7 +632,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     data: Uint8Array;
   }
@@ -643,7 +643,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   interface ProtocolData {
     /**
@@ -652,7 +652,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     protocol: ProtocolType;
   }
@@ -663,7 +663,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum Subclass {
     /**
@@ -672,7 +672,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_UNCATEGORIZED = 0,
     /**
@@ -681,7 +681,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_JOYSTICK = 1,
     /**
@@ -690,7 +690,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_GAMEPAD = 2,
     /**
@@ -699,7 +699,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_REMOTE_CONTROL = 3,
     /**
@@ -708,7 +708,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_SENSING_DEVICE = 4,
     /**
@@ -717,7 +717,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_DIGITIZER_TABLET = 5,
     /**
@@ -726,7 +726,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_CARD_READER = 6,
     /**
@@ -735,7 +735,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_KEYBOARD = 64,
     /**
@@ -744,7 +744,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_MOUSE = 128,
     /**
@@ -753,7 +753,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SUBCLASS_COMBO = 192
   }
@@ -764,7 +764,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum ReportType {
     /**
@@ -773,7 +773,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     REPORT_TYPE_INPUT = 1,
     /**
@@ -782,7 +782,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     REPORT_TYPE_OUTPUT = 2,
     /**
@@ -791,7 +791,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     REPORT_TYPE_FEATURE = 3
   }
@@ -802,7 +802,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum ServiceType {
     /**
@@ -811,7 +811,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SERVICE_NO_TRAFFIC = 0,
     /**
@@ -820,7 +820,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SERVICE_BEST_EFFORT = 1,
     /**
@@ -829,7 +829,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     SERVICE_GUARANTEED = 2
   }
@@ -840,7 +840,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum ErrorReason {
     /**
@@ -849,7 +849,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     RSP_SUCCESS = 0,
     /**
@@ -858,7 +858,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     RSP_NOT_READY = 1,
     /**
@@ -867,7 +867,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     RSP_INVALID_REPORT_ID = 2,
     /**
@@ -876,7 +876,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     RSP_UNSUPPORTED_REQ = 3,
     /**
@@ -885,7 +885,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     RSP_INVALID_PARAM = 4,
     /**
@@ -894,7 +894,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     RSP_UNKNOWN = 14
   }
@@ -905,7 +905,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.0 static
+   * @since 26.0.1 static
    */
   enum ProtocolType {
     /**
@@ -914,7 +914,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     PROTOCOL_BOOT_MODE = 0,
     /**
@@ -923,7 +923,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.0 static
+     * @since 26.0.1 static
      */
     PROTOCOL_REPORT_MODE = 1
   }

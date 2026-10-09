@@ -18,231 +18,167 @@
  * @kit ArkUI
  */
 
-
-
-
-
 /**
  * Declaration of the menu item on the right side.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declaration of the menu item on the right side.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11 dynamic
- */
-/**
- * Declaration of the menu item on the right side.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 22 dynamic
+ * @crossplatform [since 22]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 export declare class EditableTitleBarMenuItem {
   /**
-   * Icon resource for this menu item.
-   * @type { ResourceStr }.
+   * Icon resource.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Icon resource for this menu item.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Icon resource for this menu item.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   value: ResourceStr;
 
   /**
-   * Symbol style for this menu item.
-   * @type { ?SymbolGlyphModifier }.
+   * Icon label description. When this parameter is not set, no icon label is displayed.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @atomicservice
-   * @since 18 dynamic
-   */
-  /**
-   * Symbol style for this menu item.
-   * @type { ?SymbolGlyphModifier }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
-   */
-  symbolStyle?: SymbolGlyphModifier;
-
-  /**
-   * Icon label for this menu item.
-   * @type { ?ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
+   * @crossplatform [since 22]
    * @atomicservice
    * @since 12 dynamic
-   */
-  /**
-   * Icon label for this menu item.
-   * @type { ?ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
    */
   label?: ResourceStr;
 
   /**
-   * Whether to enable this menu item.
-   * @type { ?boolean }.
+   * Whether to enable.
+   *
+   * Default value: **true**, meaning enabled by default.
+   *
+   * When **isEnabled** is **true**, the item is enabled.
+   *
+   * When **isEnabled** is **false**, the item is disabled.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Whether to enable this menu item.
-   * @type { ?boolean }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Whether to enable this menu item.
-   * @type { ?boolean }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   isEnabled?: boolean;
 
   /**
-   * Callback function when click on this menu item.
-   * @type { ?() => void }.
+   * Tap event for the custom button on the right side of the title bar. When this parameter is not set, tapping the
+   * button has no response.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Callback function when click on this menu item.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Callback function when click on this menu item.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   action?: () => void;
 
   /**
-   * The accessibilityText of this menu item.
-   * @type { ?ResourceStr }.
+   * Accessibility text attribute for the custom button on the right side of the title bar. When a component does not
+   * contain a text attribute, the screen reader does not announce anything when this component is selected, and the
+   * user cannot clearly know which component is currently selected. To address this scenario, developers can set
+   * accessibility text for components that do not contain text information. When the screen reader selects this
+   * component, it announces the accessibility text, helping screen reader users clearly know which component they have
+   * selected.
+   *
+   * Default value: **" "** when the label attribute is not set; the content of the label attribute when the label
+   * attribute is set.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 22]
    * @atomicservice
    * @since 18 dynamic
-   */
-  /**
-   * The accessibilityText of this menu item.
-   * @type { ?ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
    */
   accessibilityText?: ResourceStr;
 
   /**
-   * The accessibilityDescription of this menu item.
-   * @type { ?ResourceStr }
+   * Accessible description. You can provide comprehensive text explanations to help users understand the operation they
+   * are about to perform and its potential consequences, especially when these cannot be inferred from the component's
+   * attributes and accessibility text alone. If a component contains both text information and the accessible
+   * description, the text is announced first and then the accessible description, when the component is selected.
+   *
+   * Default value: **"Double-tap to activate"**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 22]
    * @atomicservice
    * @since 18 dynamic
-   */
-  /**
-   * The accessibilityDescription of this menu item.
-   * @type { ?ResourceStr }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
    */
   accessibilityDescription?: ResourceStr;
 
   /**
-   * The accessibilityLevel of this menu item.
-   * @type { ?string }
+   * Accessibility level. It determines whether the component can be recognized by accessibility services.
+   *
+   * The options are as follows:
+   *
+   * **"auto"**: This option is treated as "yes" by the system for this component.
+   *
+   * **"yes"**: The component can be recognized by accessibility services.
+   *
+   * **"no"**: The component cannot be recognized by accessibility services.
+   *
+   * **"no-hide-descendants"**: Neither the component nor its child components can be recognized by accessibility
+   * services.
+   *
+   * Default value: **"auto"**
+   *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 22]
    * @atomicservice
    * @since 18 dynamic
-   */
-  /**
-   * The accessibilityLevel of this menu item.
-   * @type { ?string }
-   * @default "auto"
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
    */
   accessibilityLevel?: string;
 
   /**
-   * Set the default focus state of this menu item.
-   * @type { ?boolean }.
-   * @default { false }.
+   * Whether to set as the default focus.
+   *
+   * **true**: The item gains focus.
+   *
+   * **false**: The item does not gain focus.
+   *
+   * Default value: **false**
+   *
+   * When using the **defaultFocus** attribute, set the **isEnabled** attribute to **true** beforehand; otherwise, the
+   * **defaultFocus** setting does not take effect.
+   *
+   * **Note:** If multiple operable areas are set as the default focus at the same time, the first operable area in the
+   * display order among those set as the default focus becomes the default focus.
+   *
+   * @default { false }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 22]
    * @atomicservice
    * @since 18 dynamic
    */
+  defaultFocus?: boolean;
+
   /**
-   * Set the default focus state of this menu item.
-   * @type { ?boolean }.
-   * @default { false }.
+   * Symbol icon resource, which takes precedence over value. When this parameter is not set, the value parameter is
+   * used to display the icon.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform
+   * @crossplatform [since 22]
    * @atomicservice
-   * @since 22 dynamic
+   * @since 18 dynamic
    */
-  defaultFocus?: boolean;
+  symbolStyle?: SymbolGlyphModifier;
 }
 
 /**
  * Declaration of the image item.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -253,72 +189,33 @@ export type EditableTitleBarItem = EditableTitleBarMenuItem;
 
 /**
  * Declaration of the left icon type.
- * @enum { EditableLeftIconType }.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declaration of the left icon type.
- * @enum { EditableLeftIconType }.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11 dynamic
- */
-/**
- * Declaration of the left icon type.
- * @enum { EditableLeftIconType }.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 22 dynamic
+ * @crossplatform [since 22]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 export declare enum EditableLeftIconType {
   /**
-   * The back type.
+   * Back.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * The back type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * The back type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   Back = 0,
 
   /**
-   * The cancel type.
+   * Cancel.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * The cancel type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * The cancel type.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   Cancel = 1
 }
@@ -326,7 +223,6 @@ export declare enum EditableLeftIconType {
 /**
  * Indicates the options of the editable title bar.
  *
- * @interface EditableTitleBarOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -335,9 +231,10 @@ export declare enum EditableLeftIconType {
  */
 export declare interface EditableTitleBarOptions {
   /**
-   * Background color.
+   * Background color of the title bar.
    *
-   * @type { ?ResourceColor }
+   * Default value: **'#00000000'**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -347,9 +244,10 @@ export declare interface EditableTitleBarOptions {
   backgroundColor?: ResourceColor;
 
   /**
-   * Background blur style.
+   * Background blur style of the title bar.
    *
-   * @type { ?BlurStyle }
+   * Default value: **BlurStyle.NONE**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -359,9 +257,10 @@ export declare interface EditableTitleBarOptions {
   backgroundBlurStyle?: BlurStyle;
 
   /**
-   * Indicates the types of the safe area.
+   * Types of the expanded safe area.
    *
-   * @type { ?Array<SafeAreaType> }
+   * Default value: **[SafeAreaType.SYSTEM]**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -371,9 +270,10 @@ export declare interface EditableTitleBarOptions {
   safeAreaTypes?: Array<SafeAreaType>;
 
   /**
-   * Indicates the edges of the safe area.
+   * Edges of the expanded safe area.
    *
-   * @type { ?Array<SafeAreaEdge> }
+   * Default value: **[SafeAreaEdge.TOP]**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -384,57 +284,56 @@ export declare interface EditableTitleBarOptions {
 }
 
 /**
- * Declaration of the editable title bar.
+ * An editable title bar component that provides a standard title bar implementation for editing scenarios. It supports
+ * custom left button types (back/cancel), profile picture display, right-side menu items, background blur styles, and
+ * other features. It is suitable for scenarios requiring content editing and multi-selection operations, such as album
+ * multi-select editing, text editors, and form editing pages. This component encapsulates common UI interaction
+ * patterns for editing scenarios (left close, right confirm), so developers do not need to implement the title bar
+ * layout and interaction logic themselves. It enables rapid construction of editing pages that comply with design
+ * specifications, improving development efficiency and ensuring UI consistency. It also supports accessibility property
+ * configuration to meet accessibility requirements.
+ *
+ * > **NOTE**
+ * >
+ * > - This component can be used only in the stage model.
+ * >
+ * > - If the **EditableTitleBar** component has [universal attributes]{@link ./@internal/component/ets/common} and
+ * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **EditableTitleBar** component itself. As a result, the configured universal attributes and
+ * > universal events may fail to take effect or behave as intended. For this reason, avoid using universal attributes
+ * > and events with the **EditableTitleBar** component.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declaration of the editable title bar.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11 dynamic
- */
-/**
- * Declaration of the editable title bar.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 22 dynamic
+ * @crossplatform [since 22]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 @Component
 export declare struct EditableTitleBar {
   /**
-   * Style of the left icon.
-   * @type { EditableLeftIconType }.
+   * Type of the icon on the left.
+   *
+   * Default value: **EditableLeftIconType.Back**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Style of the left icon.
-   * @type { EditableLeftIconType }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Style of the left icon.
-   * @type { EditableLeftIconType }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   leftIconStyle: EditableLeftIconType;
 
   /**
-   * Image item between the left icon and the title.
-   * @type { ?EditableTitleBarItem }
+   * A single menu item for the profile picture on the left. This parameter is required to display a profile picture on
+   * the left side of the title bar. If this parameter is not passed, the default value is used and no profile picture
+   * is displayed.
+   *
+   * Default value: **undefined**
+   *
+   * Note: Accessibility properties are not supported.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -444,34 +343,24 @@ export declare struct EditableTitleBar {
   imageItem?: EditableTitleBarItem;
 
   /**
-   * Title of this title bar.
-   * @type { ResourceStr }.
+   * Title.
+   *
+   * Default value: **''**, indicating that the title is empty.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Title of this title bar.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Title of this title bar.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   title: ResourceStr;
 
   /**
-   * Sub-Title of this title bar.
-   * @type { ?ResourceStr }
+   * Subtitle. Pass this parameter when supplementary information needs to be displayed below the title. If not passed,
+   * no subtitle is displayed.
+   *
+   * Default value: **''**, indicating that the subtitle content is empty.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -481,8 +370,15 @@ export declare struct EditableTitleBar {
   subtitle?: ResourceStr;
 
   /**
-   * Whether to require the save icon.
-   * @type { boolean }
+   * Whether to show the save button on the right. The value **true** indicates that the save button on the right is
+   * required, and **false** indicates the opposite.
+   *
+   * Default value: **true**
+   *
+   * **Note:** This parameter is not decorated with **@Require**, so it is not mandatory during construction. When
+   * **isSaveIconRequired** is set to **false**, the save button is not displayed and the **onSave** callback is not
+   * triggered.
+   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -493,86 +389,69 @@ export declare struct EditableTitleBar {
   isSaveIconRequired: boolean;
 
   /**
-   * Menu items on the right side.
-   * @type { ?Array<EditableTitleBarMenuItem> }.
+   * List of menu items on the right. This parameter is required to display custom buttons on the right of the title
+   * bar. If this parameter is not passed, the default value is used, and no menu item list is displayed on the right.
+   *
+   * Default value: **undefined**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Menu items on the right side.
-   * @type { ?Array<EditableTitleBarMenuItem> }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Menu items on the right side.
-   * @type { ?Array<EditableTitleBarMenuItem> }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   menuItems?: Array<EditableTitleBarMenuItem>;
 
   /**
-   * Callback function when click on the save icon at the right side.
-   * @type { ?() => void }.
+   * Save button click event. This parameter is required to customize the save operation logic. If this parameter is not
+   * specified, clicking the button does not respond.
+   *
+   * Default value: **() => void**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Callback function when click on the save icon at the right side.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Callback function when click on the save icon at the right side.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   onSave?: () => void;
 
   /**
-   * Callback function when click on the cancel icon at the left side.
-   * @type { ?() => void }.
+   * Cancel action event, which is triggered when the left button is of the Cancel type. This parameter is required to
+   * customize the return or cancel operation logic. If this parameter is not specified, clicking the button on the left
+   * does not respond.
+   *
+   * Default value: **() => void**
+   *
+   * Back action event, which is triggered when the button on the left side is of the Back type, since API version 12.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Callback function when click on the cancel icon at the left side.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11 dynamic
-   */
-  /**
-   * Callback function when click on the cancel icon at the left side.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 22 dynamic
+   * @crossplatform [since 22]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   onCancel?: () => void;
-  
+
   /**
-   * Indicates the options of the title bar.
-   * @type { EditableTitleBarOptions }
+   * Title style.
+   *
+   * Default value:
+   *
+   * {
+   *
+   * safeAreaTypes: [SafeAreaType.SYSTEM],
+   *
+   * safeAreaEdges: [SafeAreaEdge.TOP],
+   *
+   * backgroundColor: '#00000000'
+   *
+   * }
+   *
+   * **NOTE**
+   *
+   * If not decorated by @Require, this parameter is not subject to mandatory validation during construction.
+   *
    * @default {expandSafeAreaTypes: SafeAreaType.SYSTEM, expandSafeAreaEdges: SafeAreaEdge.TOP}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -583,21 +462,33 @@ export declare struct EditableTitleBar {
   options: EditableTitleBarOptions;
 
   /**
-   * Sets the content margins.
-   * @type { ?LocalizedMargin }
+   * Content margin. Negative numbers are not supported.
+   *
+   * Default value:
+   *
+   * {start: LengthMetrics.resource(*$r('sys.float.margin_left')*), end: LengthMetrics.resource(*$r('
+   * sys.float.margin_right')*)}
+   *
    * @default {start: LengthMetrics.resource($r('sys.float.margin_left')),
-   * <br> end: LengthMetrics.resource($r('sys.float.margin_right'))}
+   *     <br> end: LengthMetrics.resource($r('sys.float.margin_right'))}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 12 dynamic
    */
-  @Prop contentMargin?: LocalizedMargin;
+  @Prop
+  contentMargin?: LocalizedMargin;
 
   /**
-   * Sets the default focus state of left icon.
-   * @type { ?boolean }
+   * Whether the left icon is the default focus. The value **true** indicates that it is the default focus, and
+   * **false** indicates the opposite.
+   *
+   * Default value: **false**
+   *
+   * **Note:** If multiple operable areas are set as the default focus simultaneously, the first one in display order
+   * among them is the default focus.
+   *
    * @default { false }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -608,8 +499,15 @@ export declare struct EditableTitleBar {
   leftIconDefaultFocus?: boolean;
 
   /**
-   * Sets the default focus state of save icon.
-   * @type { ?boolean }
+   * Whether the save icon is the default focus. The value **true** indicates that it is the default focus, and
+   * **false** indicates the opposite.
+   *
+   * Default value: **false**
+   *
+   * **Note:** This attribute takes effect only when the save button on the right is required (**isSaveIconRequired** is
+   * **true**). If multiple operable areas are set as the default focus simultaneously, the first one in display order
+   * among them is the default focus.
+   *
    * @default { false }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -321,8 +321,9 @@ export declare interface SelectionContainerAttribute extends CommonMethod {
    *
    * @returns { SelectionContainerAttribute } returns the instance of the SelectionContainerAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setSelectionContainerOptions(): this;
 }
@@ -334,7 +335,7 @@ export declare interface SelectionContainerAttribute extends CommonMethod {
  * @returns { SelectionContainerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 static
+ * @since 26.0.0 staticonly
  * @noninterop
  */
 @ComponentBuilder
@@ -349,8 +350,9 @@ export declare function SelectionContainer(content_?: CustomBuilder): SelectionC
  *     attributes.
  * @returns { SelectionContainerAttribute } returns the instance of the SelectionContainerAttribute.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function SelectionContainer(

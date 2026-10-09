@@ -20,7 +20,10 @@
 import { Permissions }  from './permissions';
 import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
 /**
- * The namespace of abilityToolAccessCtrl
+ * This module provides permission management capabilities for tools (CLI commands and APIs), including permission
+ * query, user authorization, and remote authorization. Permission query is used to check the permission status of
+ * tools, user authorization grants permissions to tools based on user decisions, and remote authorization enables
+ * cross-device permission management through a ticket mechanism.
  *
  * @syscap SystemCapability.Security.Asset
  * @systemapi
@@ -58,6 +61,61 @@ declare namespace abilityToolAccessCtrl {
     subCliCmdName: string;
   }
 
+  /**
+   * Interaction params for remote control
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  interface RemoteControlParams {
+    /**
+     * Anti-replay challenge.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    challenge?: string;
+    /**
+     * Remote control ticket for trusted devices.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    remoteControlTicket?: string;
+    /**
+     * Device name of controlled device.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    controlledDeviceName?: string;
+    /**
+     * Device name of controller device.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    controllerDeviceName?: string;
+    /**
+     * Extra message required for signature verification.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    signVerifyMsg?: string;
+  }
   /**
    * Permission query information.
    *
@@ -100,6 +158,16 @@ declare namespace abilityToolAccessCtrl {
     ticketExpireTimeMs?: long;
 
     /**
+     * Remote device information.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    remoteInfo?: RemoteInfo;
+
+    /**
      * Caller token ID.
      * Value range: (-∞,+∞).
      *
@@ -119,6 +187,57 @@ declare namespace abilityToolAccessCtrl {
      * @since 26.0.0 dynamiconly
      */
     domainId?: string;
+  }
+
+  /**
+   * Remote device information.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  interface RemoteInfo {
+
+    /**
+     * Device role.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    role: Role;
+
+    /**
+     * Remote device ID.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    remoteId: string;
+
+    /**
+     * Domain ID.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    domainId: string;
+
+    /**
+     * interaction params in remote control.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    remoteControlParams?: RemoteControlParams;
   }
 
   /**
@@ -306,6 +425,47 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * Remote authorization package.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  interface RemoteAuthPackage {
+
+    /**
+     * Remote message.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    remoteMessage: string;
+
+    /**
+     * Challenge value.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    challenge: string;
+
+    /**
+     * Ticket string.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    ticket: string;
+  }
+
+  /**
    * User authorization result.
    *
    * @syscap SystemCapability.Security.Asset
@@ -334,6 +494,68 @@ declare namespace abilityToolAccessCtrl {
      * @since 26.0.0 dynamiconly
      */
     permissionQuery: PermissionQuery;
+  }
+
+  /**
+   * Remote user authorization results.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  interface RemoteUserAuthResults {
+
+    /**
+     * Authorization result list.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    results: RemoteUserAuthItem[];
+
+    /**
+     * Permission query information.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    permissionQuery: PermissionQuery;
+  }
+
+  /**
+   * Remote user authorization item.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  interface RemoteUserAuthItem {
+
+    /**
+     * Permission name.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    permission: string;
+
+    /**
+     * Authorization result.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    authResult: string;
   }
 
   /**
@@ -397,6 +619,36 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * Device role.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  enum Role {
+    /**
+     * Controller device.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    CONTROLLER = 0x01,
+
+    /**
+     * Controlled device.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    CONTROLLED = 0x02
+  }
+
+  /**
    * Operation type.
    *
    * @syscap SystemCapability.Security.Asset
@@ -427,6 +679,36 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * Remote grant status.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  enum RemoteGrantStatus {
+    /**
+     * Enable remote grant.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    ENABLE = 0x01,
+
+    /**
+     * Disable remote grant.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.1 dynamiconly
+     */
+    DISABLE = 0x02
+  }
+
+  /**
    * Queries tool permissions based on the specified operations.
    * This function checks the permission status for CLI commands or APIs specified in permissionQuery.operationInfo.
    * For each operation, it returns the permission status, authorization status, and whether a user dialog is required.
@@ -440,8 +722,8 @@ declare namespace abilityToolAccessCtrl {
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 24010000 - Invalid parameter. OperationType and operationInfo do not match,
    *     specified callerTokenId does not exist, ticketExpireTime exceeds 24h, etc.
-   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
-   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
    * @throws { BusinessError } 24010003 - The account is not logged in, network is unavailable, timeout, etc.
    * @throws { BusinessError } 24010006 - The requested operation is not allowed to be executed
@@ -466,8 +748,8 @@ declare namespace abilityToolAccessCtrl {
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 24010000 - Invalid parameter. PermissionName exceeds 256 characters,
    *     permissionStatus is invalid, etc.
-   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
-   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
    * @throws { BusinessError } 24010003 - The account is not logged in, network is unavailable, timeout, etc.
    * @throws { BusinessError } 24010004 - Invalid permission. A permission in permissionInfo does not exist.
@@ -479,6 +761,147 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.0.0 dynamiconly
    */
   export function grantToolPermissionsByUser(userAuthResult: UserAuthResult[]): Promise<TicketInfo[]>;
+
+  /**
+   * Generates an authorization package for the controller device.
+   * This function generates a remote authorization package based on the remote user authorization results.
+   * The generated package can be sent to the controlled device for permission verification.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { RemoteUserAuthResults[] } remoteUserAuthResult - Remote user authorization result list.
+   * @returns { Promise<RemoteAuthPackage[]> } Promise used to return ${RemoteAuthPackage[]}.
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 24010000 - Invalid parameter. OperationType and operationInfo do not match,
+   *     specified callerTokenId does not exist, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010003 - The account is not logged in, network is unavailable, timeout, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  export function generateControllerDevicePackage(remoteUserAuthResult: RemoteUserAuthResults[]):
+    Promise<RemoteAuthPackage[]>;
+
+  /**
+   * Generates an authorization package for the controlled device.
+   * This function generates a remote authorization package based on the permission query list.
+   * The generated package can be sent to the controller device for permission verification.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { PermissionQuery[] } permissionQuery - Permission query list.
+   * @returns { Promise<RemoteAuthPackage[]> } Promise used to return ${RemoteAuthPackage[]}.
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 24010000 - Invalid parameter. Permission exceeds 256 characters,
+   *     specified tokenId is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010003 - The account is not logged in, network is unavailable, timeout, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  export function generateControlledDevicePackage(permissionQuery: PermissionQuery[]): Promise<RemoteAuthPackage[]>;
+
+  /**
+   * Verifies the authorization package from the controller device.
+   * This function verifies the remote authorization package sent by the controller device.
+   * It validates the ticket and remote device information to ensure the authorization is legitimate.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { RemoteAuthPackage[] } ticketInfo - Remote authorization package list.
+   * @param { RemoteInfo } remoteInfo - Remote device information.
+   * @returns { Promise<boolean[]> } Promise used to return ${boolean[]}.
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 24010000 - Invalid parameter. Format of ticketInfo or remoteInfo is invalid.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010003 - The account is not logged in, network is unavailable, timeout, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  export function verifyControllerDevicePackage(ticketInfo: RemoteAuthPackage[], remoteInfo: RemoteInfo):
+    Promise<boolean[]>;
+
+  /**
+   * Verifies the authorization package from the controlled device.
+   * This function verifies the remote authorization package sent by the controlled device.
+   * It validates the ticket to ensure the authorization is legitimate.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { RemoteAuthPackage[] } ticketInfo - Remote authorization package list.
+   * @returns { Promise<boolean[]> } Promise used to return ${boolean[]}.
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 24010000 - Invalid parameter. Format of ticketInfo is invalid.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010003 - The account is not logged in, network is unavailable, timeout, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  export function verifyControlledDevicePackage(ticketInfo: RemoteAuthPackage[]): Promise<boolean[]>;
+
+  /**
+   * Gets the remote grant status.
+   * This function queries whether the remote authorization feature is enabled or disabled.
+   * When enabled, the device can grant permissions to remote devices;
+   *    when disabled, remote authorization is not allowed.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @returns { Promise<RemoteGrantStatus> } Promise used to return ${RemoteGrantStatus}.
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  export function getRemoteGrantStatus(): Promise<RemoteGrantStatus>;
+
+  /**
+   * Updates the remote grant status.
+   * This function enables or disables the remote authorization feature.
+   * When enabled, the device can grant permissions to remote devices;
+   *    when disabled, remote authorization is not allowed.
+   *
+   * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
+   * @param { RemoteGrantStatus } remoteGrantStatus - Remote grant status to be set.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS".
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 24010000 - Invalid parameter. RemoteGrantStatus is invalid.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.0.1 dynamiconly
+   */
+  export function updateRemoteGrantStatus(remoteGrantStatus: RemoteGrantStatus): Promise<void>;
 }
 
 export default abilityToolAccessCtrl;

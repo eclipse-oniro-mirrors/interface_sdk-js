@@ -32,20 +32,25 @@ export const CROSSPLATFORM_TAG_CHECK_NAME: string = 'crossplatform';
 export const CROSSPLATFORM_TAG_CHECK_ERROR: string = "'{0}' can't support crossplatform application.";
 export const DEPRECATED_TAG_CHECK_NAME: string = 'deprecated';
 export const DEPRECATED_TAG_CHECK_WARNING: string = "'{0}' has been deprecated.";
+export const FA_TAG_CHECK_NAME: string = 'famodelonly';
+export const FA_TAG_HUMP_CHECK_NAME: string = 'FAModelOnly';
+export const FA_TAG_CHECK_ERROR: string = 'This API is used only in FA Mode, but the current Mode is Stage.';
 export const STAGE_TAG_CHECK_NAME: string = 'stagemodelonly';
 export const STAGE_TAG_HUMP_CHECK_NAME: string = 'StageModelOnly';
 export const STAGE_TAG_CHECK_ERROR: string = 'This API is used only in Stage Mode, but the current Mode is FA.';
+export const STAGE_COMPILE_MODE: string = 'moduleJson';
 export const ATOMICSERVICE_BUNDLE_TYPE: string = 'atomicService';
 export const ATOMICSERVICE_TAG_CHECK_NAME: string = 'atomicservice';
 export const ATOMICSERVICE_TAG_CHECK_ERROR: string = "'{0}' can't support atomicservice application.";
 export const SINCE_TAG_NAME: string = 'since';
-export const SINCE_TAG_CHECK_ERROR: string =
-  "The '{0}' API is supported since SDK version $SINCE1. However, the current compatible SDK version is $SINCE2.";
+export const SINCE_TAG_CHECK_ERROR: string = `The '{0}' API is supported since SDK version $SINCE1. However, the current compatible SDK version is $SINCE2.
+ It is recommended to use apiAvailable to safeguard API compatibility.`;
 export const ATOMICSERVICE_TAG_CHECK_VERSION: number = 11;
 export const FIND_MODULE_WARNING: string = "Cannot find name '{0}'.";
 
 export const AVAILABLE_TAG_NAME: string = 'available';
-export const AVAILABLE_DECORATOR_WARNING: string = `The '{0}' API is available since SDK version $SINCE1. However, the current compatible SDK version is $SINCE2.`;
+export const AVAILABLE_DECORATOR_WARNING: string = `The '{0}' API is available since SDK version $SINCE1. However, the current compatible SDK version is $SINCE2.
+ It is recommended to use apiAvailable to safeguard API compatibility.`;
 export const AVAILABLE_FILE_NAME: string = '@ohos.annotation.d.ets';
 export const AVAILABLE_VERSION_FORMAT_ERROR_PREFIX: string =
   'The runtime OS for the current project is $RUNTIMEOS. The OS version number $VERSION is invalid.';
@@ -55,10 +60,24 @@ export const AVAILABLE_SCOPE_ERROR: string =
   'Unnecessary. The outer annotation already indicates that the version is greater than or equal to $VERSION.';
 export const AVAILABLE_VERSION_FORMAT_ERROR: string =
   'The OpenHarmony version must be an integer between 1 and 999, and when the OpenHarmony version is greater than or equal to 26, the version number format also supports the M.S.F format.';
+export const APIAVAILABLE_CHECK_ERROR: string = 'Invalid parameters for apiAvailable.';
+export const APIAVAILABLE_OPENHARMONY_CONTENT_ERROR: string = `The api version must be a decimal integer between 1 and 25.
+ The M.S.F format must meet the following requirements: The value must be in the three decimal format, M must be greater than or equal to 26, and S and F must be decimal integers between 0 and 99.`;
+export const APIAVAILABLE_DISTRIBUTIONOS_CONTENT_ERROR: string = `The api version must be a decimal integer between 1 and 25.
+ The M.S.F format must meet the following requirements: The value must be in the three decimal format, M must be decimal intergers between 1 and 99, and S and F must be decimal integers between 0 and 99.`;
+export const APIAVAILABLE_DISTRIBUTIONOS_CONTENT_CHECK_ERROR: string = 'Invalid $RUNTIMEOS version.';
+export const APIAVAILABLE_TS_FILE_ERROR: string = 'apiAvailable cannot be used in .ts files. Please use .ets files instead.';
+export const APIAVAILABLE_NUMBER_FORMAT_ERROR: string = 'Only decimal digits are allowed.';
+export const APIAVAILABLE_STRING_OPENHARMONY_FORMAT_ERROR: string = 'Only digits and dots are allowed.';
+export const APIAVAILABLE_STRING_DISTRIBUTIONOS_FORMAT_ERROR: string = 'Only digits, dots, and left and right parentheses are allowed.';
+export const APIAVAILABLE_CHECK_NUMBER_STRING_ERROR = 'numberOrStringFormat';
+export const APIAVAILABLE_NULLORUNDEFINED_FORMAT_ERROR: string = 'Null and undefined are not allowed for parameters.';
 export const API_INTERFACE_WHITE_LIST: Map<string, string[]> = new Map([
+  ['@ohos.deviceInfo.d.ets', ['apiAvailable']]
 ]);
 export const MSF_INTEGER_VERSION: number = 26;
 export const MSF_SANDF_VERSION: number = 99;
+export const DISTINGUISH_FUNCTION_NAME: string = 'ETSGLOBAL';
 
 /**
  * Permission validation token state enum
@@ -124,13 +143,23 @@ export type ValueCheckerFunction = (
 export type FormatCheckerFunction = (version: string) => VersionValidationResult;
 
 export const SUPPRESSWARNINGS_RULE_INFO: Map<string, string> = new Map([
-  [SINCE_TAG_NAME, 'SuppressWarnings'],
-  [AVAILABLE_TAG_NAME, 'SuppressWarnings'],
-  [SYSCAP_TAG_CHECK_NAME, 'SuppressWarnings'],
-  [PERMISSION_TAG_CHECK_NAME, 'SuppressWarnings']
+  [SINCE_TAG_NAME, 'SuppressWarningsType.COMPATIBILITY'],
+  [AVAILABLE_TAG_NAME, 'SuppressWarningsType.COMPATIBILITY'],
+  [SYSCAP_TAG_CHECK_NAME, 'SuppressWarningsType.SYSCAP'],
+  [PERMISSION_TAG_CHECK_NAME, 'SuppressWarningsType.PERMISSION']
 ]);
 
 export const ERROR_CODE_INFO: Map<string, Omit<SdkHvigorLogInfo, 'cause' | 'position'>> = new Map([
+  [FORM_TAG_CHECK_ERROR, { code: '11706006', description: 'can\'t support form application.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [CROSSPLATFORM_TAG_CHECK_ERROR, { code: '11706007', description: 'can\'t support crossplatform application.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [FA_TAG_CHECK_ERROR, { code: '11706008', description: 'FA model interface used in Stage projects.', solutions: ['Check the official API reference documentation, and switch to the supported Stage model interfaces.'] }],
+  [STAGE_TAG_CHECK_ERROR, { code: '11706009', description: 'Stage model interface used in FA projects.', solutions: ['Check the official API reference documentation, and switch to the supported FA model interfaces.'] }],
+  [ATOMICSERVICE_TAG_CHECK_ERROR, { code: '11706010', description: 'can\'t support atomicservice application.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [SINCE_TAG_CHECK_ERROR, { code: '11706011', description: 'The API requires version $ApiVersion or newer.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [AVAILABLE_DECORATOR_WARNING, { code: '11706012', description: 'The API is only available in $ApiVersion or newer.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [APIAVAILABLE_CHECK_ERROR, { code: '11706013', description: 'Invalid parameters for apiAvailable.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [APIAVAILABLE_DISTRIBUTIONOS_CONTENT_CHECK_ERROR, { code: '11706014', description: 'Invalid parameters for apiAvailable.', solutions: ['Check the official API reference documentation, and switch to the supported interfaces.'] }],
+  [APIAVAILABLE_TS_FILE_ERROR, { code: '11706015', description: 'apiAvailable cannot be used in .ts files.', solutions: ['Use .ets files instead of .ts files for apiAvailable calls.'] }],
   [AVAILABLE_VERSION_FORMAT_ERROR_PREFIX, { code: '11706016', description: 'Invalid version format in @Available decorator.', solutions: ['Change the version number to an integer between 1 and 999, or use the standardized M.S.F format.'] }],
   [AVAILABLE_OSNAME_ERROR, { code: '11706017', description: 'Invalid OS name in @Available decorator.', solutions: ['Use the correct OS name matching the project runtime OS.'] }]
 ])

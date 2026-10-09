@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Auto Fill Framework
  * @kit AbilityKit
  */
 
@@ -49,7 +49,8 @@ import { AutoFillTriggerType as _AutoFillTriggerType } from './application/AutoF
 import { FillFailureResult as _FillFailureResult } from './application/AutoFillRequest';
 
 /**
- * The autoFillManager module provides APIs for saving accounts and passwords.
+ * The autoFillManager module provides applications with the auto-fill capability for user information such as
+ * accounts, passwords, addresses, and phone numbers.
  *
  * Unlike the system's auto-save feature that triggers during page transitions, this feature requires manual activation
  * by the user. For example, the user must input their account and password on a website and click the **Save** button
@@ -85,7 +86,7 @@ declare namespace autoFillManager {
   /**
    * Called when auto fill request is successfully handled.
    *
-   * @param { ViewData } viewData - Indicates the ui context where the filling operation will be performed.
+   * @param { ViewData } viewData - View data information for AutoFill.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @stagemodelonly
    * @atomicservice
@@ -96,7 +97,7 @@ declare namespace autoFillManager {
   /**
    * Called when auto fill request is failed to be handled.
    *
-   * @param { FillFailureResult } result - Indicates the ui context where the filling operation will be performed.
+   * @param { FillFailureResult } result - AutoFill failure result.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @stagemodelonly
    * @atomicservice
@@ -247,7 +248,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 11 dynamic
    */
   export type ViewData = _ViewData.default;
 
@@ -258,7 +259,7 @@ declare namespace autoFillManager {
    * @systemapi [since 23 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type ViewData = _ViewData;
 
@@ -270,7 +271,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 11 dynamic
    */
   export type PageNodeInfo = _PageNodeInfo.default;
 
@@ -281,7 +282,7 @@ declare namespace autoFillManager {
    * @systemapi [since 23 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type PageNodeInfo = _PageNodeInfo;
 
@@ -293,7 +294,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 11 dynamic
    */
   export { AutoFillType };
 
@@ -304,7 +305,7 @@ declare namespace autoFillManager {
    * @systemapi [since 23 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type AutoFillType = _AutoFillType;
 
@@ -316,7 +317,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 11 dynamic
    */
   export type FillRequest = _AutoFillRequest.FillRequest;
 
@@ -327,7 +328,7 @@ declare namespace autoFillManager {
    * @systemapi [since 23 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type FillRequest = _FillRequest;
 
@@ -339,7 +340,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 11 dynamic
    */
   export type SaveRequest = _AutoFillRequest.SaveRequest;
 
@@ -351,7 +352,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type SaveRequest = _SaveRequest;
 
@@ -475,7 +476,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 12 dynamic
    */
   export type AutoFillRect = _AutoFillRect.default;
 
@@ -486,7 +487,7 @@ declare namespace autoFillManager {
    * @systemapi [since 23 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type AutoFillRect = _AutoFillRect;
 
@@ -558,7 +559,7 @@ declare namespace autoFillManager {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 23 dynamic
    */
   export { AutoFillTriggerType };
 
@@ -569,7 +570,7 @@ declare namespace autoFillManager {
    * @systemapi [since 23 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 23 static
    */
   export type AutoFillTriggerType = _AutoFillTriggerType;
 }

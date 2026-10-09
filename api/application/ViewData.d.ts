@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file View Data
  * @kit AbilityKit
  */
 
@@ -35,23 +35,25 @@ import AutoFillRect from './AutoFillRect';
  * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.0 dynamic&static
+ * @since 11 dynamic
+ * @since 23 static
  */
 export default interface ViewData {
   /**
-   * Bundle name.
+   * Bundle name. The value cannot exceed 512 characters.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   bundleName: string;
 
   /**
-   * Module name.
+   * Module name, used to specify the module to which the auto-fill data belongs.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -62,7 +64,7 @@ export default interface ViewData {
   moduleName: string;
 
   /**
-   * Ability name.
+   * Ability name, used to specify the Ability to which the auto-fill data belongs.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -80,31 +82,35 @@ export default interface ViewData {
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   pageUrl: string;
 
   /**
-   * Page node information.
+   * Information of the page nodes.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   pageNodeInfos: Array<PageNodeInfo>;
 
   /**
-   * Coordinates, width, and height of the page.
+   * Coordinates, width, and height of the page. On PC/2-in-1 devices, the password vault is displayed as a pop-up. To
+   * ensure the pop-up position follows the input box, left and top must be set to 0.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 12 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 12 dynamic
+   * @since 23 static
    */
   pageRect: AutoFillRect;
 

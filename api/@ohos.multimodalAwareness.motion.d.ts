@@ -14,12 +14,15 @@
  */
 
 /**
- * @file
+ * @file Motion awareness
  * @kit MultimodalAwarenessKit
  */
 import type { Callback } from "./@ohos.base";
 /**
- * The **motion** module provides the user motion awareness capabilities, including user gestures and actions.
+ * This module provides awareness capabilities for user motions, supporting the recognition of user gestures
+ * and motion states. It is suitable for interactive scenarios where responses are required based on user
+ * gestures or motions, such as gesture recognition and motion triggering, helping applications deliver a more
+ * natural interactive experience and precise scenario awareness.
  *
  * @syscap SystemCapability.MultimodalAwareness.Motion
  * @since 15 dynamic
@@ -62,8 +65,8 @@ declare namespace motion {
   }
 
   /**
-   * Represents the holding hand status. The holding hand status is returned if listening for holding hand status 
-   * changes is enabled.
+   * Defines the holding hand state information, which represents the result of a holding hand state change awareness
+   * event. After subscribing to the event, the current holding hand state information is returned.
    *
    * @syscap SystemCapability.MultimodalAwareness.Motion
    * @since 20 dynamic
@@ -312,6 +315,35 @@ declare namespace motion {
   }
 
   /**
+   * Enum for hover hand actions.
+   *
+   * @syscap SystemCapability.MultimodalAwareness.Motion
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  export enum HoverHandAction {
+    /**
+     * Indicates the hover hand enters the detection area.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.Motion
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    DOWN = 0,
+    /**
+     * Indicates the hover hand leaves the detection area.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.Motion
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    UP = 1
+  }
+
+  /**
    * The basic data structure of the smart rotate sensor event.
    *
    * @syscap SystemCapability.MultimodalAwareness.Motion
@@ -341,7 +373,67 @@ declare namespace motion {
   }
 
   /**
-   * Subscribes to operating hand change events.
+   * The basic data structure of the hover hand detection area.
+   *
+   * @syscap SystemCapability.MultimodalAwareness.Motion
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  export interface HoverHandDetectionArea {
+    /**
+     * Left boundary of the rectangle.
+     * Unit: px. The value must be an integer within [-2147483648,2147483647].
+     *
+     * @syscap SystemCapability.MultimodalAwareness.Motion
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * Top boundary of the rectangle.
+     * Unit: px. The value must be an integer within [-2147483648,2147483647].
+     *
+     * @syscap SystemCapability.MultimodalAwareness.Motion
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * Width of the rectangle.
+     * Unit: px. The value must be an integer within [1,2147483647].
+     *
+     * @syscap SystemCapability.MultimodalAwareness.Motion
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    width: int;
+
+    /**
+     * Height of the rectangle.
+     * Unit: px. The value must be an integer within [1,2147483647].
+     *
+     * @syscap SystemCapability.MultimodalAwareness.Motion
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    height: int;
+  }
+
+  /**
+   * Subscribes to operating hand awareness events. The system collects user touch data through touchscreen sensors and
+   * combines gesture recognition algorithms to determine whether the current operating hand is the left hand or the
+   * right hand. This is suitable for scenarios such as gesture interaction and single-hand or dual-hand operation
+   * adaptation, optimizing the UI layout and interaction mode by identifying the user's operating hand state. It is
+   * recommended that you call off() to unsubscribe and release resources after use, to avoid unnecessary performance
+   * and power consumption overhead. Related method: off('operatingHandChanged'): unsubscribes from operating hand
+   * awareness events.
    * 
    * If the device does not support this function, error code 801 is returned.
    *
@@ -407,7 +499,12 @@ declare namespace motion {
   function getRecentOperatingHandStatus(): OperatingHandStatus;
 
   /**
-   * Enables listening for holding hand status changes.
+   * Subscribes to the holding hand status change awareness event. The system uses sensor data combined with recognition
+   * algorithms to determine whether the current holding hand is the left hand or the right hand. This is suitable for
+   * scenarios where reading applications, video playback, and other applications need to adjust the UI layout or
+   * functions based on the user's holding hand status. It is recommended that you call off() to unsubscribe and
+   * release resources after use to avoid unnecessary performance and power consumption overhead.
+   * Related method: off('holdingHandChanged'): unsubscribes from the holding hand status change awareness event.
    *
    * @permission ohos.permission.DETECT_GESTURE
    * @param { 'holdingHandChanged' } type - Event type. The value **holdingHandChanged** indicates the holding hand
@@ -565,6 +662,71 @@ declare namespace motion {
    * @since 26.0.0 dynamic&static
    */
   function onSmartRotateChange(callback: Callback<SmartRotateEvent>): void;
+
+  /**
+   * Subscribes to hover hand events and immediately starts detection for five seconds.
+   *
+   * @param { HoverHandDetectionArea } detectionArea - Rectangular detection area for hover hand.
+   *     <br> Repeated calls will override the previously set detection area.
+   *     <br> If the area exceeds the screen bounds, it defaults to detecting the overlap.
+   * @param { Callback<HoverHandAction> } callback - Callback used to return hover hand action.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited
+   *     <br> device capabilities.
+   * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
+   *     <br> container-related exception; 2. N-API invocation exception, invalid N-API status.
+   * @throws { BusinessError } 31500002 - Subscription failed. Possible causes: 1. Callback registration failure;
+   *     <br> 2. Failed to bind native object to js wrapper; 3. N-API invocation exception, invalid N-API status; 4. IPC
+   *     <br> request exception.
+   * @syscap SystemCapability.MultimodalAwareness.Motion
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function onHoverHandChange(detectionArea: HoverHandDetectionArea, callback: Callback<HoverHandAction>): void;
+
+  /**
+   * Subscribes to hover hand events and immediately starts detection.
+   *
+   * @param { HoverHandDetectionArea } detectionArea - Rectangular detection area for hover hand.
+   *     <br> Repeated calls will override the previously set detection area.
+   *     <br> If the area exceeds the screen bounds, it defaults to detecting the overlap.
+   * @param { int } duration - Detection duration.
+   *     <br> Unit: Seconds. The value must be an integer within [1,10].
+   *     <br> Subscription ends automatically after duration expires. Call again to restart the detection.
+   *     <br> Hover hand events are high power consumption events, developers are advised to set the duration as needed.
+   * @param { Callback<HoverHandAction> } callback - Callback used to return hover hand action.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited
+   *     <br> device capabilities.
+   * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
+   *     <br> container-related exception; 2. N-API invocation exception, invalid N-API status.
+   * @throws { BusinessError } 31500002 - Subscription failed. Possible causes: 1. Callback registration failure;
+   *     <br> 2. Failed to bind native object to js wrapper; 3. N-API invocation exception, invalid N-API status; 4. IPC
+   *     <br> request exception.
+   * @syscap SystemCapability.MultimodalAwareness.Motion
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function onHoverHandChange(
+    detectionArea: HoverHandDetectionArea, duration: int, callback: Callback<HoverHandAction>): void;
+
+  /**
+   * Unsubscribe to hover hand event.
+   *
+   * @param { Callback<HoverHandAction> } [callback] - Callback used to return hover hand action.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
+   *     <br> container-related exception; 2. N-API invocation exception, invalid N-API status.
+   * @throws { BusinessError } 31500003 - Unsubscription failed. Possible causes: 1. Callback failure;
+   *     <br> 2. N-API invocation exception, invalid N-API status; 3. IPC request exception.
+   * @syscap SystemCapability.MultimodalAwareness.Motion
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function offHoverHandChange(callback?: Callback<HoverHandAction>): void;
 
   /**
    * Unsubscribe to pick up sensor event.

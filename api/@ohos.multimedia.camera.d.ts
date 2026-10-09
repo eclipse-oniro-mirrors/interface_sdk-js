@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Camera Management
  * @kit CameraKit
  */
 
@@ -29,6 +29,11 @@ import photoAccessHelper from './@ohos.file.photoAccessHelper';
  * access and operate the camera hardware to implement basic operations, such as preview, taking photos, and recording 
  * videos. It can also perform more operations, for example, controlling the flash and exposure time, and focusing or 
  * adjusting the focus.
+ * 
+ * > **NOTE**
+ * >
+ * > - This topic describes only system APIs provided by the module. For details about its public APIs, see 
+ * > [@ohos.multimedia.camera (Camera Management)]{@link camera}.
  *
  * @syscap SystemCapability.Multimedia.Camera.Core
  * @atomicservice [since 12]
@@ -98,6 +103,36 @@ declare namespace camera {
      * @since 23 static
      */
     CAMERA_STATUS_UNAVAILABLE = 3
+  }
+
+  /**
+   * Enums for camera shared status.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+  */
+  enum CameraSharedStatus {
+    /**
+     * Shared status.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    CAMERA_STATUS_SHARED = 0,
+ 
+    /**
+     * Unshared status.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    CAMERA_STATUS_UNSHARED = 1
   }
 
   /**
@@ -233,7 +268,7 @@ declare namespace camera {
    */
   interface FrameRateRange {
     /**
-     * Minimum frame rate, in fps.
+     * Minimum frame rate. Unit: FPS
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -243,7 +278,7 @@ declare namespace camera {
     readonly min: int;
 
     /**
-     * Maximum frame rate, in fps.
+     * Maximum frame rate. Unit: FPS
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -263,7 +298,7 @@ declare namespace camera {
    */
   interface VideoProfile extends Profile {
     /**
-     * Frame rate range, in units of frames per second (FPS).
+     * Describes the frame rate range. Unit: FPS
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -365,6 +400,7 @@ declare namespace camera {
 
   /**
    * Enumerates the camera error codes,
+   * 
    * which are returned when an API call is incorrect or the **on()** API is used to listen for the error status.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -375,7 +411,7 @@ declare namespace camera {
   enum CameraErrorCode {
     /**
      * A parameter is missing or the parameter type is incorrect.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -385,7 +421,7 @@ declare namespace camera {
 
     /**
      * The operation is not allowed.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -395,7 +431,7 @@ declare namespace camera {
 
     /**
      * The session is not configured.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -405,7 +441,7 @@ declare namespace camera {
 
     /**
      * The session is not running.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -415,7 +451,7 @@ declare namespace camera {
 
     /**
      * The session configuration is locked.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -425,7 +461,7 @@ declare namespace camera {
 
     /**
      * The device setting is locked.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -435,7 +471,7 @@ declare namespace camera {
 
     /**
      * The device is already started.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -445,7 +481,7 @@ declare namespace camera {
 
     /**
      * The camera is disabled for security reasons.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -455,7 +491,7 @@ declare namespace camera {
 
     /**
      * The camera is preempted.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -465,7 +501,7 @@ declare namespace camera {
 
     /**
      * The configuration conflicts with the current configuration.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 12 dynamic
@@ -475,7 +511,7 @@ declare namespace camera {
 
     /**
      * The camera service is abnormal.
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -501,7 +537,27 @@ declare namespace camera {
      * @since 18 dynamic
      * @since 23 static
      */
-    CAMERA_LENS_RETRACTED = 7400112
+    CAMERA_LENS_RETRACTED = 7400112,
+
+    /**
+     * Unsupported multiple camera combination.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    UNSUPPORTED_MULTI_CAMERA_COMBINATION = 7400113,
+
+    /**
+     * Parameter out of range.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    PARAM_OUT_OF_RANGE = 7400115
   }
 
   /**
@@ -555,8 +611,8 @@ declare namespace camera {
    */
   interface SettingParam {
     /**
-     * Skin smoothing level, which is obtained through 
-     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value **1** 
+     * Skin smoothing level, which is obtained through
+     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value **1**
      * indicates level-1 smoothing.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -567,8 +623,8 @@ declare namespace camera {
     skinSmoothLevel: int;
 
     /**
-     * Face slimming level, which is obtained through 
-     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value **1** 
+     * Face slimming level, which is obtained through
+     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value **1**
      * indicates level-1 slimming.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -579,8 +635,8 @@ declare namespace camera {
     faceSlender: int;
 
     /**
-     * Skin tone perfection level, which is obtained through 
-     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value 
+     * Skin tone perfection level, which is obtained through
+     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value
      * **0xBF986C** indicates a specific color.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -593,7 +649,7 @@ declare namespace camera {
 
   /**
    * Defines the camera prelaunch configuration.
-   * Currently, the configuration is used for sensor-level prelaunch. It will be used for stream-level prelaunch in a 
+   * Currently, the configuration is used for sensor-level prelaunch. It will be used for stream-level prelaunch in a
    * later version.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -644,8 +700,48 @@ declare namespace camera {
   }
 
   /**
-   * Implements camera management. Before calling any API in CameraManager, you must use 
-   * [getCameraManager]{@link camera.getCameraManager} to obtain a CameraManager instance.
+   * RGB bias values.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface RGBBias {
+    /**
+     * The red bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    redBias: double;
+
+    /**
+     * The green bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    greenBias: double;
+
+    /**
+     * The blue bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    blueBias: double;
+  }
+
+  /**
+   * **CameraManager** implements camera management. Before calling any API in **CameraManager**, you must use 
+   * [getCameraManager]{@link camera.getCameraManager} to obtain a **CameraManager** instance.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -654,7 +750,11 @@ declare namespace camera {
    */
   interface CameraManager {
     /**
-     * Obtains the supported camera devices. This API returns the result synchronously.
+     * Obtains the supported cameras (such as the default camera whose **CameraType** is **CAMERA_TYPE_DEFAULT**). This 
+     * API returns the result synchronously.
+     * 
+     * Other cameras (such as the telephoto camera whose **CameraType** is **CAMERA_TYPE_TELEPHOTO**) can be obtained 
+     * using [getCameraDevices]{@link camera.CameraManager.getCameraDevices} API.
      *
      * @returns { Array<CameraDevice> } Array of camera devices supported.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -689,7 +789,7 @@ declare namespace camera {
     getSupportedSceneModes(camera: CameraDevice): Array<SceneMode>;
 
     /**
-     * Obtains the output capability supported by a camera device in a given scene mode. This API returns the result
+     * Obtains the output capability supported by a camera device in a given scene mode. This API returns the result 
      * synchronously.
      *
      * @param { CameraDevice } camera - Camera device.
@@ -703,12 +803,12 @@ declare namespace camera {
     getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode): CameraOutputCapability;
 
     /**
-     * Obtains the complete output capabilities supported by a specified camera in a specified mode, including YUV, HEIF
-     * , and HDR.
-     *
+     * Obtains the complete output capabilities supported by a specified camera in a specified mode, including YUV, 
+     * HEIF, and HDR.
+     * 
      * > **NOTE**
      * >
-     * > Before using YUV, HEIF, or HDR, you need to explicitly call this method to ensure that the complete output
+     * > Before using YUV, HEIF, or HDR, you need to explicitly call this method to ensure that the complete output 
      * > capabilities are obtained.
      *
      * @param { CameraDevice } camera - Camera device.
@@ -737,7 +837,8 @@ declare namespace camera {
      *
      * @returns { boolean } Check result for whether the camera device can be muted. **true** if it can be muted,
      *     **false** otherwise.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 13]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 13]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @since 10 dynamic
@@ -775,10 +876,11 @@ declare namespace camera {
     muteCameraPersistent(mute: boolean, type: PolicyType): void;
 
     /**
-     * Creates a **CameraInput** instance with the specified **CameraDevice** instance. This API returns the result
+     * Creates a **CameraInput** instance with the specified **CameraDevice** instance. This API returns the result 
      * synchronously.
+     * 
      * Before calling this API, call [getSupportedCameras]{@link camera.CameraManager.getSupportedCameras} to obtain the
-     * list of supported camera devices, select the camera device that meets the requirements based on the actual usage
+     * list of supported camera devices, select the camera device that meets the requirements based on the actual usage 
      * scenario, and then create the **CameraInput** instance.
      *
      * @permission ohos.permission.CAMERA
@@ -797,9 +899,10 @@ declare namespace camera {
     createCameraInput(camera: CameraDevice): CameraInput;
 
     /**
-     * Creates a **CameraInput** instance with the specified camera position and type. This API returns the result
+     * Creates a **CameraInput** instance with the specified camera position and type. This API returns the result 
      * synchronously.
-     * Before calling this API, specify the camera position and type based on the usage scenario. For example, open the
+     * 
+     * Before calling this API, specify the camera position and type based on the usage scenario. For example, open the 
      * front camera for the selfie feature
      *
      * @permission ohos.permission.CAMERA
@@ -823,7 +926,7 @@ declare namespace camera {
 
     /**
      * Creates a CameraInput instance by camera and calling token.
-     *
+     * 
      * Before using this interface, first through the getSupportedCameras interface to query the current list of camera
      * devices supported by the device, the developer needs to be based on specific scenarios to choose the camera
      * device
@@ -882,7 +985,7 @@ declare namespace camera {
 
     /**
      * Creates a **PhotoOutput** instance. This API returns the result synchronously.
-     *
+     * 
      * > **NOTE**
      * >
      * > - This API can only be used to create a **PhotoOutput** object in JPEG format.
@@ -904,7 +1007,7 @@ declare namespace camera {
     /**
      * Creates a **PhotoOutput** instance. This API returns the result synchronously.
      *
-     * @param { Profile } profile - Supported photo profile, which is obtained through
+     * @param { Profile } [profile] - Supported photo profile, which is obtained through
      *     [getSupportedOutputCapability]{@link camera.CameraManager.getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode)}.
      *     <br>In API version 11, this parameter is mandatory. Starting from API version 12, it will overwrite the
      *     preconfigured parameters passed in through [preconfig]{@link camera.PhotoSession.preconfig}.
@@ -921,9 +1024,11 @@ declare namespace camera {
 
     /**
      * Creates a **VideoOutput** instance. This API returns the result synchronously.
-     * In video recording mode, if SDR or HDR VIVID is enabled, the camera format and color space must be configured
-     * according to the relationships specified in the table below. Configurations that do not match the table will
+     * 
+     * In video recording mode, if SDR or HDR VIVID is enabled, the camera format and color space must be configured 
+     * according to the relationships specified in the table below. Configurations that do not match the table will 
      * cause issues such as preview exceptions.
+     * 
      * | SDR/HDR Photo Capture        | CameraFormat             | ColorSpace       |
      * |--------------------|--------------------------|------------------|
      * | SDR                | CAMERA_FORMAT_YUV_420_SP | BT709_LIMIT      |
@@ -931,7 +1036,8 @@ declare namespace camera {
      *
      * @param { VideoProfile } profile - Supported video profile, which is obtained through
      *     [getSupportedOutputCapability]{@link camera.CameraManager.getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode)}.
-     * @param { string } surfaceId - Surface ID, which is obtained from [AVRecorder]{@link @ohos.multimedia.media:media}.
+     * @param { string } surfaceId - Surface ID, which is obtained from
+     *     [AVRecorder]{@link @ohos.multimedia.media:media.AVRecorder}.
      * @returns { VideoOutput } **VideoOutput** instance created. If the operation fails, an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
@@ -944,10 +1050,11 @@ declare namespace camera {
     createVideoOutput(profile: VideoProfile, surfaceId: string): VideoOutput;
 
     /**
-     * Creates a **VideoOutput** instance without configuration. This API returns the result synchronously. It must be
+     * Creates a **VideoOutput** instance without configuration. This API returns the result synchronously. It must be 
      * used with [preconfig]{@link camera.VideoSession.preconfig}.
      *
-     * @param { string } surfaceId - Surface ID, which is obtained from [AVRecorder]{@link @ohos.multimedia.media:media}.
+     * @param { string } surfaceId - Surface ID, which is obtained from
+     *     [AVRecorder]{@link @ohos.multimedia.media:media.AVRecorder}.
      * @returns { VideoOutput } **VideoOutput** instance created. If the operation fails, an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
@@ -979,6 +1086,7 @@ declare namespace camera {
      * Creates a DepthDataOutput instance. This API returns the result synchronously.
      *
      * @param { DepthProfile } profile - Supported preview profile, which is obtained through
+     *
      *     [getSupportedOutputCapability]{@link camera.CameraManager.getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode)}.
      * @returns { DepthDataOutput } DepthDataOutput instance. If the operation fails, an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
@@ -1024,7 +1132,7 @@ declare namespace camera {
 
     /**
      * Subscribes to camera status events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -1049,11 +1157,23 @@ declare namespace camera {
     onCameraStatus(callback: AsyncCallback<CameraStatusInfo>): void;
 
     /**
+     * Subscribes camera shared status change event callback.
+     *
+     * @param { Callback<CameraSharedStatusInfo> } callback - Callback used to get the camera shared status change.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onCameraSharedStatus(callback: Callback<CameraSharedStatusInfo>): void;
+
+    /**
      * Unsubscribes from camera status events. This API uses an asynchronous callback to return the result.
      *
      * @param { 'cameraStatus' } type - Event type. The value is fixed at **'cameraStatus'**. The event can be listened
      *     for when a **CameraManager** instance is obtained.
-     * @param { AsyncCallback<CameraStatusInfo> } callback - Callback used to return the result. If this parameter is
+     * @param { AsyncCallback<CameraStatusInfo> } [callback] - Callback used to return the result. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.
@@ -1073,9 +1193,21 @@ declare namespace camera {
     offCameraStatus(callback?: AsyncCallback<CameraStatusInfo>): void;
 
     /**
-     * Subscribes to fold status change events of the foldable device. This API uses an asynchronous callback to return
-     * the result.
+     * Unsubscribes from camera shared status change event callback.
      *
+     * @param { Callback<CameraSharedStatusInfo> } [callback] - Callback used to get the camera shared status change.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offCameraSharedStatus(callback?: Callback<CameraSharedStatusInfo>): void;
+
+    /**
+     * Subscribes to fold status change events of the foldable device. This API uses an asynchronous callback to return 
+     * the result.
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -1104,7 +1236,7 @@ declare namespace camera {
      *
      * @param { 'foldStatusChange' } type - Event type. The value is fixed at **'foldStatusChange'**. The event is
      *     triggered when the fold state of the foldable device changes.
-     * @param { AsyncCallback<FoldStatusInfo> } callback - Callback used to return the fold state information about the
+     * @param { AsyncCallback<FoldStatusInfo> } [callback] - Callback used to return the fold state information about the
      *     foldable device. If this parameter is specified, the subscription to the specified event with the specified
      *     callback is canceled. (The callback object cannot be an anonymous function.) Otherwise, the subscriptions to
      *     the specified event with all the callbacks are canceled.
@@ -1131,7 +1263,8 @@ declare namespace camera {
      *     the status is returned when the camera device is muted or unmuted.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the camera mute status. **true** if muted,
      *     **false** otherwise.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 13]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 13]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @since 10 dynamic
@@ -1158,7 +1291,8 @@ declare namespace camera {
      *     **false** otherwise. This parameter is optional. If this parameter is specified, the subscription to the
      *     specified event **on('cameraMute')** with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.)
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 13]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 13]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @since 10 dynamic
@@ -1254,7 +1388,8 @@ declare namespace camera {
      * @param { CameraDevice } camera - Camera device.
      * @returns { boolean } Check result for the support of prelaunch. **true** if supported, **false** otherwise.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 12]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 12]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @since 10 dynamic
@@ -1307,10 +1442,13 @@ declare namespace camera {
     preSwitchCamera(cameraId: string): void;
 
     /**
-     * Creates a deferred PreviewOutput instance.
+     * Creates a deferred **PreviewOutput** instance and adds it, instead of a common **PreviewOutput** instance, to the
+     * data stream during stream configuration.
      *
-     * @param { Profile } profile - Preview output profile.
-     * @returns { PreviewOutput } the PreviewOutput instance.
+     * @param { Profile } profile - Supported preview profile, which is obtained through
+     *     [getSupportedOutputCapability]{@link camera.CameraManager.getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode)}.
+     * @returns { PreviewOutput } **PreviewOutput** instance created. If the operation fails, an error code defined in
+     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400201 - Camera service fatal error. [since 24]
@@ -1326,8 +1464,14 @@ declare namespace camera {
     /**
      * Checks whether the camera device supports the flashlight.
      *
-     * @returns { boolean } Check result for the support of the flashlight. **true** if supported, **false** otherwise.
-     *     If the API call fails, undefined is returned.
+     * @returns { boolean } Whether the device supports the flashlight. **true** if supported, **false** otherwise.
+     *     <br>If **false** is returned, [isTorchModeSupported]{@link camera.CameraManager.isTorchModeSupported},
+     *     [getTorchMode]{@link camera.CameraManager.getTorchMode},
+     *     [setTorchMode]{@link camera.CameraManager.setTorchMode},
+     *     [isTorchLevelControlSupported]{@link camera.CameraManager.isTorchLevelControlSupported}, and
+     *     [setTorchModeOnWithLevel](docroot://reference/apis-camera-kit/arkts-apis-camera-CameraManager.md#settorchmodeonwithlevel)
+     *     do not take effect.
+     *     <br>If the API call fails, undefined is returned.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 11 dynamic
@@ -1408,7 +1552,7 @@ declare namespace camera {
 
     /**
      * Subscribes to flashlight status change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -1437,7 +1581,7 @@ declare namespace camera {
      *
      * @param { 'torchStatusChange' } type - Event type. The value is fixed at **'torchStatusChange'**. The event can be
      *     listened for when a **CameraManager** instance is obtained.
-     * @param { AsyncCallback<TorchStatusInfo> } callback - Callback used to return the result. If this parameter is
+     * @param { AsyncCallback<TorchStatusInfo> } [callback] - Callback used to return the result. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.
@@ -1458,9 +1602,10 @@ declare namespace camera {
 
     /**
      * Obtains the specified camera based on the camera position and type.
-     * Obtains the camera lens of the specified [CameraPosition]{@link camera.CameraPosition}
-     * and [CameraType]{@link camera.CameraType}. If the returned result is undefined, the
-     * camera lens is not found on the current device.
+     * 
+     * Obtains the camera lens of the specified [CameraPosition]{@link camera.CameraPosition} and 
+     * [CameraType]{@link camera.CameraType}. If the returned result is undefined, the camera lens is not found on the 
+     * current device.
      *
      * @param { CameraPosition } position - Camera position.
      * @param { CameraType } type - Camera type.
@@ -1474,7 +1619,7 @@ declare namespace camera {
     getCameraDevice(position: CameraPosition, type: CameraType): CameraDevice;
 
     /**
-     * Obtains the concurrency information of the specified cameras. If the return value is an empty array, concurrency
+     * Obtains the concurrency information of the specified cameras. If the return value is an empty array, concurrency 
      * is not supported.
      *
      * @param { Array<CameraDevice> } cameras - Array of **CameraDevice** objects. You are advised to use the front and
@@ -1490,7 +1635,7 @@ declare namespace camera {
     getCameraConcurrentInfos(cameras: Array<CameraDevice>): Array<CameraConcurrentInfo>;
 
     /**
-     * Obtains the list of cameras that meet the search criteria based on the camera position, camera types, and
+     * Obtains the list of cameras that meet the search criteria based on the camera position, camera types, and 
      * connection type.
      *
      * @param { CameraPosition } position - Camera position.
@@ -1616,6 +1761,36 @@ declare namespace camera {
   }
 
   /**
+   * Camera shared status info.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+  */
+  interface CameraSharedStatusInfo {
+    /**
+     * Camera instance.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    camera: CameraDevice;
+ 
+    /**
+     * Current camera shared status.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    sharedStatus: CameraSharedStatus;
+  }
+
+  /**
    * Describes the fold state information about a foldable device.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -1686,7 +1861,7 @@ declare namespace camera {
 
     /**
      * Folded camera.
-     *
+     * 
      * This API is supported since API version 11 and deprecated since API version 12.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -1844,7 +2019,17 @@ declare namespace camera {
      * @since 10 dynamic
      * @since 23 static
      */
-    TABLET = 0x11
+    TABLET = 0x11,
+
+    /**
+     * Glasses.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    GLASSES = 0xA31
   }
 
   /**
@@ -1953,7 +2138,7 @@ declare namespace camera {
     readonly lensEquivalentFocalLength?: Array<int>;
 
     /**
-     * Whether a camera is a logical camera (consisting of multiple physical cameras). **true** if the camera is a
+     * Whether a camera is a logical camera (consisting of multiple physical cameras). **true** if the camera is a 
      * logical camera, **false** otherwise.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -2004,7 +2189,7 @@ declare namespace camera {
     readonly lensDistortion?: Array<double>;
 
     /**
-     * Array of lens internal parameter calibration parameters.
+     * Array of lens intrinsic calibration parameters.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
@@ -2115,7 +2300,8 @@ declare namespace camera {
   }
 
   /**
-   * Defines the camera input object.
+   * **CameraInput** defines the camera input object.
+   * 
    * It provides camera device information used in [Session]{@link camera.Session}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -2215,7 +2401,7 @@ declare namespace camera {
 
     /**
      * Subscribes to CameraInput error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -2251,7 +2437,7 @@ declare namespace camera {
      *     the camera device. For example, if the camera device is unavailable or a conflict occurs, the error
      *     information is returned.
      * @param { CameraDevice } camera - Camera device.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, only the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, only the
      *     corresponding callback will be unregistered (the callback object cannot be an anonymous function); otherwise,
      *     all registered callbacks will be unregistered.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -2272,7 +2458,7 @@ declare namespace camera {
 
     /**
      * Subscribes to **CameraInput** occlusion events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -2305,7 +2491,7 @@ declare namespace camera {
      * @param { 'cameraOcclusionDetection' } type - Event type. The value is fixed at **'cameraOcclusionDetection'**.
      *     The event can be listened for when a **CameraInput** instance is created. It is triggered when the occlusion
      *     status of the camera lens changes, and the occlusion status is returned.
-     * @param { AsyncCallback<CameraOcclusionDetectionResult> } callback - Callback used to return the result. If this
+     * @param { AsyncCallback<CameraOcclusionDetectionResult> } [callback] - Callback used to return the result. If this
      *     parameter is specified, the subscription to the specified event with the specified callback is canceled. (The
      *     callback object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with
      *     all the callbacks are canceled.
@@ -2360,8 +2546,8 @@ declare namespace camera {
     /**
      * Checks whether the physical camera orientation is adjustable in different fold states of the device.
      *
-     * @returns { boolean } Check result for whether the physical camera orientation is adjustable. **true** if
-     *     adjustable, **false** otherwise. If the API call fails, undefined is returned.
+     * @returns { boolean } Checks whether the physical camera orientation is adjustable in different fold states of the
+     *     device. **true** if adjustable, **false** otherwise. If the API call fails, undefined is returned.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice
      * @since 22 dynamic
@@ -2372,7 +2558,8 @@ declare namespace camera {
     /**
      * Obtains the physical camera orientation in the current fold state of the device.
      *
-     * @returns { int } Physical camera orientation. The unit is degree. The value range is [0, 360].
+     * @returns { int } Physical camera orientation.
+     *     <br>The value ranges from 0 to 360, in degrees.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice
      * @since 22 dynamic
@@ -2383,7 +2570,7 @@ declare namespace camera {
     /**
      * Enables or disables the use of the physical camera orientation.
      *
-     * @param { boolean } isUsed - Whether to enable the use of the physical camera orientation. **true** to enable,
+     * @param { boolean } isUsed - Enables or disables the use of the physical camera orientation. **true** to enable,
      *     **false** otherwise.
      * @throws { BusinessError } 7400102 - Operation not allowed.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -2708,7 +2895,7 @@ declare namespace camera {
     CAMERA_FORMAT_DEPTH_32 = 3001,
 
     /**
-     * Enhanced DNG image format.
+     * Enhanced image in DNG format.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 18 - 24]
@@ -2801,7 +2988,14 @@ declare namespace camera {
   }
 
   /**
-   * Provides APIs to obtain the flash information of a camera device, including whether the LCD flash is supported.
+   * FlashQuery provides APIs to query the flash status and mode of a camera device.
+   * 
+   * > **NOTE**
+   * >
+   * > - This interface was first introduced in API version 12. In this version, a compatibility change was made that 
+   * > preserved the initial version information of inner elements. As a result, you might see outer element's @since 
+   * > version number being higher than that of the inner elements. However, this discrepancy does not affect the 
+   * > functionality of the interface.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -2812,9 +3006,12 @@ declare namespace camera {
     /**
      * Checks whether the camera device has flash.
      *
-     * @returns { boolean } Check result for whether the camera device has flash. **true** if it has flash, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @returns { boolean } Whether the camera has flash. **true** if it has, **false** otherwise.
+     *     <br>If **false** is returned, [isFlashModeSupported]{@link camera.FlashQuery.isFlashModeSupported},
+     *     [setFlashMode]{@link camera.Flash.setFlashMode}, and [getFlashMode]{@link camera.Flash.getFlashMode} do not
+     *     take effect.
+     *     <br>If the operation fails, an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode} is
+     *     returned.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -2854,9 +3051,10 @@ declare namespace camera {
   }
 
   /**
-   * Flash extends [FlashQuery]{@link camera.FlashQuery}
-   * Provides APIs related to the flash.
-   *
+   * **Flash** inherits from [FlashQuery]{@link camera.FlashQuery}.
+   * 
+   * It provides APIs related to the flash.
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -2878,9 +3076,9 @@ declare namespace camera {
 
     /**
      * Sets a flash mode.
-     *
+     * 
      * Before the setting, do the following checks:
-     *
+     * 
      * 1. Use [hasFlash]{@link camera.FlashQuery.hasFlash} to check whether the camera device has flash.
      * 2. Use [isFlashModeSupported]{@link camera.FlashQuery.isFlashModeSupported} to check whether the camera device supports the flash mode.
      *
@@ -2896,7 +3094,7 @@ declare namespace camera {
 
     /**
      * Enables or disables the LCD flash.
-     *
+     * 
      * Before the setting, call [isLcdFlashSupported]{@link camera.FlashQuery.isLcdFlashSupported} to check whether the
      * device supports the LCD flash.
      *
@@ -2912,9 +3110,9 @@ declare namespace camera {
     enableLcdFlash(enabled: boolean): void;
 
     /**
-     * Subscribes flash state change event callback.
+     * Subscribes to flash light status change events.
      *
-     * @param { Callback<FlashState> } callback - Callback used to get the flash state change.
+     * @param { Callback<FlashState> } callback - Callback used to return the flash light status.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -2923,9 +3121,12 @@ declare namespace camera {
     onFlashStateChange(callback: Callback<FlashState>): void;
 
     /**
-     * Unsubscribes flash state change event callback.
+     * Unsubscribes from flash light status change events.
      *
-     * @param { Callback<FlashState> } [callback] - Callback used to get the flash state change.
+     * @param { Callback<FlashState> } [callback] - Callback used to return the result. If this parameter is specified,
+     *     the subscription to the specified event with the specified callback is canceled. (The callback object cannot
+     *     be an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
+     *     canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -2995,7 +3196,7 @@ declare namespace camera {
 
     /**
      * Exposure locked. The metering point cannot be set.
-     *
+     * 
      * After this mode is used, the exposure will be locked by default for each photo capture.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3006,9 +3207,9 @@ declare namespace camera {
     EXPOSURE_MODE_LOCKED = 0,
 
     /**
-     * Auto exposure. The metering point can be set by calling
+     * Auto exposure. The metering point can be set by calling 
      * [AutoExposure.setMeteringPoint]{@link camera.AutoExposure.setMeteringPoint}.
-     *
+     * 
      * After this mode is used, it takes effect only for the first photo capture.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3020,8 +3221,8 @@ declare namespace camera {
 
     /**
      * Continuous auto exposure. The metering point cannot be set.
-     *
-     * After this mode is used, the camera system automatically adjusts the exposure based on the environment changes
+     * 
+     * After this mode is used, the camera system automatically adjusts the exposure based on the environment changes 
      * each time.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3032,7 +3233,10 @@ declare namespace camera {
     EXPOSURE_MODE_CONTINUOUS_AUTO = 2,
 
     /**
-     * Manual exposure mode.
+     * Manual exposure. The exposure duration can be set.
+     * 
+     * In this mode, you can set the exposure duration by calling 
+     * [ManualExposure.setExposureDuration](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md#setexposureduration24).
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 12 - 23]
@@ -3054,7 +3258,7 @@ declare namespace camera {
    */
   enum ExposureState {
     /**
-     * Exposure is being scanned.
+     * Focusing.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
@@ -3064,7 +3268,7 @@ declare namespace camera {
     EXPOSURE_STATE_SCAN = 0,
 
     /**
-     * Exposure is converged.
+     * Exposure converged.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
@@ -3098,7 +3302,7 @@ declare namespace camera {
     MATRIX = 0,
 
     /**
-     * Center-weighted metering mode. Metering is performed on the entire image, with the center allocated with the
+     * Center-weighted metering mode. Metering is performed on the entire image, with the center allocated with the 
      * maximum weight, which is ideal for shooting portraits.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3137,9 +3341,9 @@ declare namespace camera {
 
   /**
    * AutoExposureQuery provides APIs to query the automatic exposure feature of a camera device.
-   *  >
-   * > - In this version, a compatibility change was made that preserved the initial version information of inner
-   * > elements. As a result, you might see outer element's @since version number being higher than that of the inner
+   * >
+   * > - In this version, a compatibility change was made that preserved the initial version information of inner 
+   * > elements. As a result, you might see outer element's @since version number being higher than that of the inner 
    * > elements. However, this discrepancy does not affect the functionality of the interface.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3178,10 +3382,10 @@ declare namespace camera {
     getExposureBiasRange(): Array<double>;
 
     /**
-     * Checks whether a specified exposure metering mode is supported.
+     * Checks whether the specified exposure metering mode is supported.
      *
-     * @param { ExposureMeteringMode } aeMeteringMode - Exposure metering mode
-     * @returns { boolean } Is the exposure metering mode supported.
+     * @param { ExposureMeteringMode } aeMeteringMode - Exposure metering mode.
+     * @returns { boolean } Whether the exposure metering mode is supported. **true** if supported, **false** otherwise.
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 23]
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
@@ -3196,7 +3400,8 @@ declare namespace camera {
   }
 
   /**
-   * AutoExposure inherits from [AutoExposureQuery]{@link camera.AutoExposureQuery}.
+   * **AutoExposure** inherits from [AutoExposureQuery]{@link camera.AutoExposureQuery}.
+   * 
    * It provides APIs related to auto exposure.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3207,10 +3412,10 @@ declare namespace camera {
   interface AutoExposure extends AutoExposureQuery {
     /**
      * Obtains the exposure mode in use.
-     *
+     * 
      * > **NOTE**
      * >
-     * > This API directly returns an invalid value if you have not set the exposure mode using
+     * > This API directly returns an invalid value if you have not set the exposure mode using 
      * > [setExposureMode]{@link camera.AutoExposure.setExposureMode}.
      *
      * @returns { ExposureMode } Exposure mode obtained. If the operation fails, undefined is returned and an error code
@@ -3224,9 +3429,9 @@ declare namespace camera {
     getExposureMode(): ExposureMode;
 
     /**
-     * Sets an exposure mode. Before the setting, call
-     * [isExposureModeSupported]{@link camera.AutoExposureQuery.isExposureModeSupported} to
-     * check whether the exposure mode is supported.
+     * Sets an exposure mode. Before the setting, call 
+     * [isExposureModeSupported]{@link camera.AutoExposureQuery.isExposureModeSupported} to check whether the exposure 
+     * mode is supported.
      *
      * @param { ExposureMode } aeMode - Exposure mode. If the input parameter is null or undefined, it is treated as 0
      *     and exposure is locked.
@@ -3253,12 +3458,12 @@ declare namespace camera {
     getMeteringPoint(): Point;
 
     /**
-     * Sets the metering point, which is the center point of the metering rectangle. The metering point must be in the
+     * Sets the metering point, which is the center point of the metering rectangle. The metering point must be in the 
      * coordinate system (0-1), where the top-left corner is {0, 0} and the bottom-right corner is {1, 1}.
-     *
-     * The coordinate system is based on the horizontal device direction with the device's charging port on the right.
-     * If the layout of the preview screen of an application is based on the vertical direction with the charging port
-     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate
+     * 
+     * The coordinate system is based on the horizontal device direction with the device's charging port on the right. 
+     * If the layout of the preview screen of an application is based on the vertical direction with the charging port 
+     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate 
      * point after conversion is {y/h, 1-x/w}.
      *
      * @param { Point } point - Metering point. The value range of x and y must be within [0, 1]. If a value less than 0
@@ -3273,17 +3478,18 @@ declare namespace camera {
 
     /**
      * Sets an exposure compensation value (EV).
-     * Before the setting, you are advised to use
-     * [getExposureBiasRange]{@link camera.AutoExposureQuery.getExposureBiasRange} to obtain the
-     * supported values.
+     * 
+     * Before the setting, you are advised to use 
+     * [getExposureBiasRange]{@link camera.AutoExposureQuery.getExposureBiasRange} to obtain the supported values.
      *
      * @param { double } exposureBias - EV. The supported EV range can be obtained by calling
-     *     [getExposureBiasRange]{@link camera.AutoExposureQuery.getExposureBiasRange}. If the
-     *     value passed is not within the supported range, the nearest critical point is used.<br>Exposure compensation
-     *     is adjusted in steps, and the step size may vary across devices due to hardware differences. For example, if
-     *     the step size is 0.5, setting a value of 1.2 would result in an actual effective exposure compensation value
-     *     of 1.0.<br>If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     *     [getExposureBiasRange]{@link camera.AutoExposureQuery.getExposureBiasRange}. If the value passed is not
+     *     within the supported range, the nearest critical point is used.
+     *     <br>Exposure compensation is adjusted in steps, and the step size may vary across devices due to hardware
+     *     differences. For example, if the step size is 0.5, setting a value of 1.2 would result in an actual effective
+     *     exposure compensation value of 1.0.
+     *     <br>If the operation fails, an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode} is
+     *     returned.
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws { BusinessError } 7400102 - Operation not allowed. [since 12]
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3309,9 +3515,9 @@ declare namespace camera {
     getExposureValue(): double;
 
     /**
-     * Gets current exposure metering mode.
+     * Obtains the exposure metering mode in use.
      *
-     * @returns { ExposureMeteringMode } The current exposure metering mode.
+     * @returns { ExposureMeteringMode } Exposure metering mode obtained.
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @throws { BusinessError } 7400102 - Operation not allowed, the inputDevice or the session is abnormal. [since 24]
@@ -3342,9 +3548,9 @@ declare namespace camera {
     setExposureMeteringMode(aeMeteringMode: ExposureMeteringMode): void;
 
     /**
-     * Registers a callback to listen for exposure state changes.
+     * Listens to exposure state change events. This API uses an asynchronous callback to return the result.
      *
-     * @param { Callback<ExposureState> } callback - Callback used to get the exposure state change.
+     * @param { Callback<ExposureState> } callback - Callback used to return the exposure state.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -3353,9 +3559,13 @@ declare namespace camera {
     onExposureStateChange(callback: Callback<ExposureState>): void
 
     /**
-     * Unregisters the callback used to listen for exposure state changes.
+     * Unregisters the listener for exposure state change events. This API uses an asynchronous callback to return the 
+     * result.
      *
-     * @param { Callback<ExposureState> } [callback] - Callback used to get the exposure state change.
+     * @param { Callback<ExposureState> } [callback] - Callback used to return the result. If this parameter is
+     *     specified, the subscription to the specified event with the specified callback is canceled. If the callback
+     *     object is null or an anonymous function, the subscriptions to the specified event with all the callbacks are
+     *     canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -3395,7 +3605,8 @@ declare namespace camera {
     FOCUS_MODE_CONTINUOUS_AUTO = 1,
 
     /**
-     * The flash mode is auto, indicating that the flash fires automatically depending on the photo capture conditions.
+     * Auto focus. The focal point can be set by calling [Focus.setFocusPoint]{@link camera.Focus.setFocusPoint}, and 
+     * auto focus is performed once based on the focal point.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -3567,7 +3778,14 @@ declare namespace camera {
   }
 
   /**
-   * Provides the API to check whether the focus assist is supported.
+   * FocusQuery provides APIs to check whether a focus mode is supported.
+   * 
+   * > **NOTE**
+   * >
+   * > - This interface was first introduced in API version 12. In this version, a compatibility change was made that 
+   * > preserved the initial version information of inner elements. As a result, you might see outer element's @since 
+   * > version number being higher than that of the inner elements. However, this discrepancy does not affect the 
+   * > functionality of the interface.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -3658,8 +3876,9 @@ declare namespace camera {
   }
 
   /**
-   * Focus extends [FocusQuery]{@link camera.FocusQuery}
-   * Provides APIs to obtain and set the camera focus mode and focus position.
+   * **Focus** inherits from [FocusQuery]{@link camera.FocusQuery}.
+   * 
+   * It provides APIs related to focus operations.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -3682,9 +3901,9 @@ declare namespace camera {
 
     /**
      * Sets a focus mode.
-     * Before the setting, call
-     * [isFocusModeSupported]{@link camera.FocusQuery.isFocusModeSupported} to check whether the
-     * focus mode is supported.
+     * 
+     * Before the setting, call [isFocusModeSupported]{@link camera.FocusQuery.isFocusModeSupported} to check whether 
+     * the focus mode is supported.
      *
      * @param { FocusMode } afMode - Focus mode. If the input parameter is null or undefined, it is treated as 0 and
      *     manual focus is used.
@@ -3699,10 +3918,10 @@ declare namespace camera {
     /**
      * Sets the focal point. The focal point must be in the coordinate system (0-1), where the top-left corner is {0, 0}
      * and the bottom-right corner is {1, 1}.
-     *
-     * The coordinate system is based on the horizontal device direction with the device's charging port on the right.
-     * If the layout of the preview screen of an application is based on the vertical direction with the charging port
-     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate
+     * 
+     * The coordinate system is based on the horizontal device direction with the device's charging port on the right. 
+     * If the layout of the preview screen of an application is based on the vertical direction with the charging port 
+     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate 
      * point after conversion is {y/h, 1-x/w}.
      *
      * @param { Point } point - Focal point. The value range of x and y must be within [0, 1]. If a value less than 0 is
@@ -3731,7 +3950,7 @@ declare namespace camera {
     /**
      * Obtains the focal length in use.
      *
-     * @returns { double } Focal length, in units of mm. If the operation fails, an error code defined in
+     * @returns { double } Focal length, in mm. If the operation fails, an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4027,7 +4246,7 @@ declare namespace camera {
   }
 
   /**
-   * WhiteBalanceQuery provides APIs to check whether a white balance mode is supported and obtain the white balance
+   * WhiteBalanceQuery provides APIs to check whether a white balance mode is supported and obtain the white balance 
    * mode range supported.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4073,9 +4292,9 @@ declare namespace camera {
     getWhiteBalanceRange(): Array<int>;
  
     /**
-     * Query the color tint range.
+     * Obtains the supported white balance hue adjustment range.
      *
-     * @returns { Array<int> } The array of color tint range.
+     * @returns { Array<int> } Hue adjustment range. If the API call fails, **undefined** is returned.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
@@ -4087,9 +4306,10 @@ declare namespace camera {
 
   /**
    * **WhiteBalance** inherits from [WhiteBalanceQuery]{@link camera.WhiteBalanceQuery}.
+   * 
    * It provides APIs to process white balance, including obtaining and setting the white balance mode and white balance
    * value.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 19]
    * @publicapi [since 20]
@@ -4274,7 +4494,7 @@ declare namespace camera {
     getIso(): int;
 
     /**
-     * Sets ISO sensitivity value, within the range of getSupportedIsoRange. This control is only effective if
+     * Sets ISO sensitivity value, within the range of getSupportedIsoRange. This control can not be effective if
      * ExposureMode is set to EXPOSURE_MODE_LOCKED.
      *
      * @param { int } iso - ISO
@@ -4322,7 +4542,7 @@ declare namespace camera {
    */
   interface SmoothZoomInfo {
     /**
-     * Total duration of smooth zoom, in ms.
+     * Total duration of smooth zoom, in milliseconds.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -4369,7 +4589,15 @@ declare namespace camera {
   }
 
   /**
-   * Provides the API to obtain the equivalent focal length information list in the current mode.
+   * ZoomQuery provides APIs to query the zoom feature of a device camera, including the API to obtain the supported 
+   * zoom ratio range.
+   * 
+   * > **NOTE**
+   * >
+   * > - This interface was first introduced in API version 12. In this version, a compatibility change was made that 
+   * > preserved the initial version information of inner elements. As a result, you might see outer element's @since 
+   * > version number being higher than that of the inner elements. However, this discrepancy does not affect the 
+   * > functionality of the interface.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -4381,8 +4609,8 @@ declare namespace camera {
      * Obtains the supported zoom ratio range.
      *
      * @returns { Array<double> } Array containing the minimum and maximum zoom ratios. If the operation fails,
-     *     undefined is returned and an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is thrown.
+     *     undefined is returned and an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode} is thrown.
+     *     If the device does not support zoom, **undefined** is returned when this API is called.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -4420,9 +4648,9 @@ declare namespace camera {
     isZoomCenterPointSupported(): boolean;
 
     /**
-     * Gets supported zoom ratio range during raw-capture.
+     * Obtains the supported zoom ratio range during shooting in RAW format.
      *
-     * @returns { Array<double> } The zoom ratio range.
+     * @returns { Array<double> } Zoom ratio range.
      * @throws {BusinessError} 7400102 - Operation not allowed, the inputDevice or the session is abnormal.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4434,10 +4662,10 @@ declare namespace camera {
   }
 
   /**
-   * Zoom extend [ZoomQuery]{@link camera.ZoomQuery}
-   * Provides APIs to process the zoom effect of a camera device, including obtaining the current zoom ratio, setting a
-   * zoom ratio, setting a zoom ratio in a smooth manner, and preparing or unpreparing for zooming.
-   *
+   * **Zoom** inherits from [ZoomQuery]{@link camera.ZoomQuery}.
+   * 
+   * It provides APIs related to zoom operations.
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -4462,10 +4690,10 @@ declare namespace camera {
      * Sets a zoom ratio, with a maximum precision of two decimal places.
      *
      * @param { double } zoomRatio - Zoom ratio. The supported zoom ratio range can be obtained by calling
-     *     [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange}. If the value passed in
-     *     is not within the supported range, the value within the precision range is retained.<br>It takes some time
-     *     for the zoom ratio to take effect at the bottom layer. To obtain the correct zoom ratio, you need to wait for
-     *     one to two frames.
+     *     [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange}. If the value passed in is not within the
+     *     supported range, the value within the precision range is retained.
+     *     <br>It takes some time for the zoom ratio to take effect at the bottom layer. To obtain the correct zoom
+     *     ratio, you need to wait for one to two frames.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -4478,9 +4706,9 @@ declare namespace camera {
      * Sets smooth zoom.
      *
      * @param { double } targetRatio - Target zoom ratio. The supported zoom ratio range can be obtained by calling
-     *     [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange}. If the value passed in
-     *     is not within the supported range, the value within the precision range is retained.
-     * @param { SmoothZoomMode } mode - Smooth zoom mode. The default value is **0**.
+     *     [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange}. If the value passed in is not within the
+     *     supported range, the value within the precision range is retained.
+     * @param { SmoothZoomMode } [mode] - Smooth zoom mode. The default value is **0**.
      * @throws { BusinessError } 7400103 - Session not config. [since 11 - 17]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -4602,12 +4830,12 @@ declare namespace camera {
 
   /**
    * StabilizationQuery provides APIs to check the support for video stabilization.
-   *
+   * 
    * > **NOTE**
    * >
-   * > - This interface was first introduced in API version 12. In this version, a compatibility change was made that
-   * > preserved the initial version information of inner elements. As a result, you might see outer element's @since
-   * > version number being higher than that of the inner elements. However, this discrepancy does not affect the
+   * > - This interface was first introduced in API version 12. In this version, a compatibility change was made that 
+   * > preserved the initial version information of inner elements. As a result, you might see outer element's @since 
+   * > version number being higher than that of the inner elements. However, this discrepancy does not affect the 
    * > functionality of the interface.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4634,12 +4862,11 @@ declare namespace camera {
 
   /**
    * **Stabilization** inherits from [StabilizationQuery]{@link camera.StabilizationQuery}.
+   * 
    * It provides APIs to set video stabilization.
-   * Video stabilization can be set only when the session has a recording stream (
-   * [VideoOutput]{@link camera.VideoOutput}). Among the enums of
-   * [VideoStabilizationMode]{@link camera.VideoStabilizationMode}, the **HIGH** mode only takes
-   * effect when the resolution set in [Profile]{@link camera.Profile} is 1920×1080.
-   *
+   * 
+   * You can set video stabilization only when a [VideoOutput]{@link camera.VideoOutput} stream exists in the session.
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -4660,11 +4887,10 @@ declare namespace camera {
     getActiveVideoStabilizationMode(): VideoStabilizationMode;
 
     /**
-     * Sets a video stabilization mode. Before the setting, call
-     * [isVideoStabilizationModeSupported]{@link camera.StabilizationQuery.isVideoStabilizationModeSupported}
-     * to check whether the target video stabilization mode is supported. It is recommended that you set the video
-     * stabilization mode between [commitConfig]{@link camera.Session.commitConfig()} and
-     * [Start]{@link camera.Session.start()}.
+     * Sets a video stabilization mode. Before the setting, call 
+     * [isVideoStabilizationModeSupported]{@link camera.StabilizationQuery.isVideoStabilizationModeSupported} to check 
+     * whether the target video stabilization mode is supported. It is recommended that you set the video stabilization 
+     * mode between [commitConfig]{@link camera.Session.commitConfig()} and [Start]{@link camera.Session.start()}.
      *
      * @param { VideoStabilizationMode } mode - Video stabilization mode.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -5113,7 +5339,7 @@ declare namespace camera {
     PORTRAIT = 1,
 
     /**
-     * Automatic composition.
+     * Auto focus.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice
@@ -5122,7 +5348,7 @@ declare namespace camera {
     AUTO_FRAMING = 2,
 
     /**
-     * Color effect.
+     * Color effect
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
@@ -5216,7 +5442,7 @@ declare namespace camera {
 
   /**
    * ColorManagementQuery provides the APIs for color space query.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 12 dynamic
@@ -5239,8 +5465,9 @@ declare namespace camera {
 
   /**
    * **ColorManagement** inherits from [ColorManagementQuery]{@link camera.ColorManagementQuery}.
+   * 
    * It provides the APIs for color space settings.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 12 dynamic
@@ -5261,57 +5488,58 @@ declare namespace camera {
 
     /**
      * Sets a color space.
-     *
-     * Before the setting, call
-     * [getSupportedColorSpaces]{@link camera.ColorManagementQuery.getSupportedColorSpaces} to obtain the supported
-     * color spaces. You are advised to call this API after [addOutput]{@link camera.Session.addOutput} and before
-     * [commitConfig]{@link camera.Session.commitConfig()}. If this API is called after
-     * [commitConfig]{@link camera.Session.commitConfig()}, the camera session configuration will take a longer time.
-     *
+     * 
+     * Before the setting, call [getSupportedColorSpaces]{@link camera.ColorManagementQuery.getSupportedColorSpaces} to 
+     * obtain the supported color spaces. You are advised to call this API after 
+     * [addOutput]{@link camera.Session.addOutput} and before [commitConfig]{@link camera.Session.commitConfig()}. If 
+     * this API is called after [commitConfig]{@link camera.Session.commitConfig()}, the camera session configuration 
+     * will take a longer time.
+     * 
      * P3 wide color gamut and HDR imaging:
-     *
-     * An application can deliver different color space parameters to declare its support for P3 and HDR. If an
+     * 
+     * An application can deliver different color space parameters to declare its support for P3 and HDR. If an 
      * application does not proactively set the color space, SDR is used by default in photo and video recording modes.
-     *
-     * For different modes, enabling HDR, setting the color space, and configuring
-     * [CameraFormat]{@link camera.CameraFormat} in the camera output stream [profile]{@link camera.Profile} should
-     * match. For details, see the table below. For example, to enable HDR in video recording mode, set
-     * [CameraFormat]{@link camera.CameraFormat} in the camera preview and video output stream
+     * 
+     * For different modes, enabling HDR, setting the color space, and configuring 
+     * [CameraFormat]{@link camera.CameraFormat} in the camera output stream [profile]{@link camera.Profile} should 
+     * match. For details, see the table below. For example, to enable HDR in video recording mode, set 
+     * [CameraFormat]{@link camera.CameraFormat} in the camera preview and video output stream 
      * [profiles]{@link camera.Profile} to **CAMERA_FORMAT_YCRCB_P010** and the color space to **BT2020_HLG_LIMIT**.
-     *
-     * To obtain HDR images in photo mode, set the color space to **DISPLAY_P3** or **BT2020_HLG**. **BT2020_HLG**
-     * provides a wider color gamut, and should be used together with the **CameraFormat**, including
+     * 
+     * To obtain HDR images in photo mode, set the color space to **DISPLAY_P3** or **BT2020_HLG**. **BT2020_HLG** 
+     * provides a wider color gamut, and should be used together with the **CameraFormat**, including 
      * **CAMERA_FORMAT_YCRCB_P010** and **CAMERA_FORMAT_YCBCR_P010**, to improve the image quality.
-     *
-     * Since API version 23, you can call the
-     * [getSupportedFullOutputCapability]{@link camera.CameraManager.getSupportedFullOutputCapability}
-     * API to check whether the preview format P010 is supported in photo mode.
-     *
-     * - If the application does not set the color space, the default color space in photo mode is SRGB when the
-     * **CameraFormat** is **CAMERA_FORMAT_YUV_420_SP**, and the default color space is **BT2020_HLG** when the
+     * 
+     * Since API version 23, you can call the 
+     * [getSupportedFullOutputCapability]{@link camera.CameraManager.getSupportedFullOutputCapability} API to check 
+     * whether the preview format P010 is supported in photo mode.
+     * 
+     * - If the application does not set the color space, the default color space in photo mode is SRGB when the 
+     * **CameraFormat** is **CAMERA_FORMAT_YUV_420_SP**, and the default color space is **BT2020_HLG** when the 
      * **CameraFormat** is **CAMERA_FORMAT_YCRCB_P010** or **CAMERA_FORMAT_YCBCR_P010**.
-     * - If the application sets the color space, in photo mode, the **CameraFormat** and **ColorSpace** must be
-     * configured according to the following mapping table. Otherwise, an error code will be returned in
-     * [setColorSpace]{@link camera.ColorManagement.setColorSpace} or
+     * - If the application sets the color space, in photo mode, the **CameraFormat** and **ColorSpace** must be 
+     * configured according to the following mapping table. Otherwise, an error code will be returned in 
+     * [setColorSpace]{@link camera.ColorManagement.setColorSpace} or 
      * [commitConfig]{@link camera.Session.commitConfig()}.
-     *
+     * 
      * Photo mode:
+     * 
      * | SDR/HDR Photo Capture       | CameraFormat| ColorSpace|
-     *  |--------------------|------------| ------------|
-     *  | SDR(Default)       | CAMERA_FORMAT_YUV_420_SP       | SRGB       |
-     *  | HDR P3               | CAMERA_FORMAT_YUV_420_SP | DISPLAY_P3 |
+     *   |--------------------|------------| ------------|
+     *   | SDR(Default)       | CAMERA_FORMAT_YUV_420_SP       | SRGB       |
+     *   | HDR P3               | CAMERA_FORMAT_YUV_420_SP | DISPLAY_P3 |
      *  | HDR BT.2020 | CAMERA_FORMAT_YCRCB_P010,<br>CAMERA_FORMAT_YCBCR_P010 | BT2020_HLG |
-     *
-     * In video recording mode, if SDR or HDR VIVID is enabled, the camera format and color space must be configured
-     * according to the relationships specified in the table below. Configurations that do not match the table will
+     * 
+     * In video recording mode, if SDR or HDR VIVID is enabled, the camera format and color space must be configured 
+     * according to the relationships specified in the table below. Configurations that do not match the table will 
      * cause issues such as preview exceptions.
-     *
+     * 
      * Recording mode:
+     * 
      * | SDR/HDR Photo Capture        | CameraFormat             | ColorSpace       |
      * |--------------------|--------------------------|------------------|
      * | SDR(Default)               | CAMERA_FORMAT_YUV_420_SP | BT709_LIMIT      |
      * | HDR_VIVID          | CAMERA_FORMAT_YCRCB_P010 | BT2020_HLG_LIMIT,<br>BT2020_HLG |
-     * | HDR_VIVID          | CAMERA_FORMAT_YCBCR_P010 | BT2020_HLG_LIMIT,<br>BT2020_HLG |
      *
      * @param { colorSpaceManager.ColorSpace } colorSpace - The type of color space.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
@@ -5328,7 +5556,7 @@ declare namespace camera {
 
   /**
    * ControlCenterQuery is used to check whether the camera controller is supported.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice
    * @since 20 dynamic
@@ -5360,9 +5588,10 @@ declare namespace camera {
   }
 
   /**
-   * ControlCenter inherits from [ControlCenterQuery]{@link camera.ControlCenterQuery}.
+   * **ControlCenter** inherits from [ControlCenterQuery]{@link camera.ControlCenterQuery}.
+   * 
    * It is used to enable the camera controller.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice
    * @since 20 dynamic
@@ -5385,11 +5614,11 @@ declare namespace camera {
 
   /**
    * **AutoDeviceSwitchQuery** is used to check whether a device supports automatic camera switch.
-   * [Automatic Camera Switching](docroot://media/camera/camera-auto-switch.md) is supported only on foldable devices.
-   *
-   * For details about how to enable this capability, see
+   * 
+   * [Automatic Camera Switching]{@link camera.AutoDeviceSwitch.enableAutoDeviceSwitch} is supported only on foldable 
+   * devices. For details about how to enable this capability, see 
    * [enableAutoDeviceSwitch]{@link camera.AutoDeviceSwitch.enableAutoDeviceSwitch}.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 13 dynamic
@@ -5411,19 +5640,19 @@ declare namespace camera {
   }
 
   /**
-   * **AutoDeviceSwitch** inherits from [AutoDeviceSwitchQuery]{@link camera.AutoDeviceSwitchQuery} and is used to
-   * enable or disable automatic camera switch. This capability can be used only on foldable devices. For details about
-   * the development, see
+   * **AutoDeviceSwitch** inherits from [AutoDeviceSwitchQuery]{@link camera.AutoDeviceSwitchQuery} and is used to 
+   * enable or disable automatic camera switch. This capability can be used only on foldable devices. For details about 
+   * the development, see 
    * [Practices for Automatic Camera Switching (ArkTS)](docroot://media/camera/camera-auto-switch.md).
-   *
+   * 
    * It is recommended that the system automatically handle input device switching, session configuration, and parameter
-   * continuity during automatic camera switch. If the system detects that the zoom ranges of the two cameras are
-   * different during camera switching, it will notify the application through the **isDeviceCapabilityChanged** field
-   * in [AutoDeviceSwitchStatus]{@link camera.AutoDeviceSwitchStatus}. However, the application
-   * still needs to handle the UX change. For example, for the zoom range adjustment, the application needs to call
-   * [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange} to obtain data and update the
-   * UX. Therefore, **AutoDeviceSwitch** is more applicable to simplified UX interactions.
-   *
+   * continuity during automatic camera switch. If the system detects that the zoom ranges of the two cameras are 
+   * different during camera switching, it will notify the application through the **isDeviceCapabilityChanged** field 
+   * in [AutoDeviceSwitchStatus]{@link camera.AutoDeviceSwitchStatus}. However, the application still needs to handle 
+   * the UX change. For example, for the zoom range adjustment, the application needs to call 
+   * [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange} to obtain data and update the UX. Therefore, 
+   * **AutoDeviceSwitch** is more applicable to simplified UX interactions.
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 13 dynamic
@@ -5431,13 +5660,13 @@ declare namespace camera {
    */
   interface AutoDeviceSwitch extends AutoDeviceSwitchQuery {
     /**
-     * Enables or disables automatic camera switch. You can use
-     * [isAutoDeviceSwitchSupported]{@link camera.AutoDeviceSwitchQuery.isAutoDeviceSwitchSupported}
-     * to check whether the device supports automatic camera switch.
-     *
+     * Enables or disables automatic camera switch. You can use 
+     * [isAutoDeviceSwitchSupported]{@link camera.AutoDeviceSwitchQuery.isAutoDeviceSwitchSupported} to check whether 
+     * the device supports automatic camera switch.
+     * 
      * > **NOTE**
      * >
-     * > This API is used only for foldable devices with multiple front cameras. In different fold states, the system
+     * > This API is used only for foldable devices with multiple front cameras. In different fold states, the system 
      * > can automatically switch to an available front camera. It does not enable automatic switching between front and
      * > rear cameras.
      *
@@ -5476,7 +5705,7 @@ declare namespace camera {
     readonly isDeviceSwitched: boolean;
 
     /**
-     * Whether the camera capability is changed after the camera is automatically switched. **true** if changed,
+     * Whether the camera capability is changed after the camera is automatically switched. **true** if changed, 
      * **false** otherwise.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5489,7 +5718,7 @@ declare namespace camera {
 
   /**
    * MacroQuery provides the API to check the support for macro photography.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 18]
    * @publicapi [since 19]
@@ -5499,7 +5728,7 @@ declare namespace camera {
    */
   interface MacroQuery {
     /**
-     * Checks whether macro photography is supported in the current state. This API must be called after
+     * Checks whether macro photography is supported in the current state. This API must be called after 
      * [commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)}.
      *
      * @returns { boolean } Check result for the support of macro photography. **true** if supported, **false**
@@ -5516,9 +5745,10 @@ declare namespace camera {
   }
 
   /**
-   * Macro inherits from [MacroQuery]{@link camera.MacroQuery}.
+   * **Macro** inherits from [MacroQuery]{@link camera.MacroQuery}.
+   * 
    * It provides the API to enable macro photography.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 11 - 18]
    * @publicapi [since 19]
@@ -5529,11 +5759,10 @@ declare namespace camera {
   interface Macro extends MacroQuery {
     /**
      * Enables or disables macro photography.
-     *
+     * 
      * > **NOTE**
      * >
-     * > Before calling this API, call
-     * > [isMacroSupported]{@link camera.MacroQuery.isMacroSupported} to check whether the
+     * > Before calling this API, call [isMacroSupported]{@link camera.MacroQuery.isMacroSupported} to check whether the
      * > current device supports macro photography.
      *
      * @param { boolean } enabled - Whether to enable macro photography. **true** to enable, **false** otherwise.
@@ -5571,10 +5800,10 @@ declare namespace camera {
   }
 
   /**
-   * **Session** implements a session, which saves all [CameraInput]{@link camera.CameraInput} and
-   * [CameraOutput]{@link camera.CameraOutput} instances required to run the camera and requests the camera
-   * to take a photo or record a video.
-   *
+   * **Session** implements a session, which saves all [CameraInput]{@link camera.CameraInput} and 
+   * [CameraOutput]{@link camera.CameraOutput} instances required to run the camera and requests the camera to take a 
+   * photo or record a video.
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -5598,9 +5827,8 @@ declare namespace camera {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the configuration is
      *     successfully committed, **err** is **undefined**; otherwise, **err** is an error object with an error code
-     *     defined in [CameraErrorCode]{@link camera.CameraErrorCode}. For example, if the
-     *     aspect ratio of the preview stream is different from that of the video output stream, error code 7400201 is
-     *     returned.
+     *     defined in [CameraErrorCode]{@link camera.CameraErrorCode}. For example, if the aspect ratio of the preview
+     *     stream is different from that of the video output stream, error code 7400201 is returned.
      * @throws { BusinessError } 7400102 - Operation not allowed.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5624,7 +5852,7 @@ declare namespace camera {
     commitConfig(): Promise<void>;
 
     /**
-     * Checks whether a **CameraInput** instance can be added to this session. This API must be called after
+     * Checks whether a **CameraInput** instance can be added to this session. This API must be called after 
      * [beginConfig]{@link camera.Session.beginConfig} and before [commitConfig]{@link camera.Session.commitConfig()}.
      *
      * @param { CameraInput } cameraInput - **CameraInput** instance to add. The API does not take effect if the input
@@ -5654,9 +5882,8 @@ declare namespace camera {
     addInput(cameraInput: CameraInput): void;
 
     /**
-     * Removes a [CameraInput]{@link camera.CameraInput} instance from this session. This API must be called
-     * after [beginConfig]{@link camera.Session.beginConfig} and before
-     * [commitConfig]{@link camera.Session.commitConfig()}.
+     * Removes a [CameraInput]{@link camera.CameraInput} instance from this session. This API must be called after 
+     * [beginConfig]{@link camera.Session.beginConfig} and before [commitConfig]{@link camera.Session.commitConfig()}.
      *
      * @param { CameraInput } cameraInput - **CameraInput** instance to remove.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
@@ -5671,7 +5898,7 @@ declare namespace camera {
     removeInput(cameraInput: CameraInput): void;
 
     /**
-     * Determines whether a CameraOutput instance can be added to this session. This API must be called after
+     * Determines whether a CameraOutput instance can be added to this session. This API must be called after 
      * [addInput]{@link camera.Session.addInput} and before [commitConfig]{@link camera.Session.commitConfig()}.
      *
      * @param { CameraOutput } cameraOutput - **CameraOutput** instance to add. The API does not take effect if the
@@ -5892,9 +6119,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements a capture session, which saves all [CameraInput]{@link camera.CameraInput} and
-   * [CameraOutput]{@link camera.CameraOutput} instances required to run the camera and requests the camera
-   * to complete shooting or video recording.
+   * **CaptureSession** implements a capture session, which saves all [CameraInput]{@link camera.CameraInput} and 
+   * [CameraOutput]{@link camera.CameraOutput} instances required to run the camera and requests the camera to complete 
+   * shooting or video recording.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @since 10 dynamiconly
@@ -6077,8 +6304,8 @@ declare namespace camera {
      * Checks whether the camera device has flash.
      *
      * @returns { boolean } Check result for whether the camera device has flash. **true** if it has flash, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     *     otherwise. If the operation fails, an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode}
+     *     is returned.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 10 dynamiconly
@@ -6092,8 +6319,7 @@ declare namespace camera {
      *
      * @param { FlashMode } flashMode - Flash mode.
      * @returns { boolean } Check result for the support of the flash mode. **true** if supported, **false** otherwise.
-     *     If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     *     If the operation fails, an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 10 dynamiconly
@@ -6117,11 +6343,11 @@ declare namespace camera {
 
     /**
      * Sets a flash mode.
+     * 
      * Before the setting, do the following checks:
-     *
+     * 
      * 1. Use [hasFlash]{@link camera.CaptureSession.hasFlash} to check whether the camera device has flash.
-     * 2. Use [isFlashModeSupported]{@link camera.CaptureSession.isFlashModeSupported} to check whether the camera
-     * device supports the flash mode.
+     * 2. Use [isFlashModeSupported]{@link camera.CaptureSession.isFlashModeSupported} to check whether the camera device supports the flash mode.
      *
      * @param { FlashMode } flashMode - Flash mode.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -6137,8 +6363,8 @@ declare namespace camera {
      *
      * @param { ExposureMode } aeMode - Exposure mode.
      * @returns { boolean } Check result for the support of the exposure mode. **true** if supported, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     *     otherwise. If the operation fails, an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode}
+     *     is returned.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 10 dynamiconly
@@ -6161,8 +6387,8 @@ declare namespace camera {
     getExposureMode(): ExposureMode;
 
     /**
-     * Sets an exposure mode. Before the setting, call
-     * [isExposureModeSupported]{@link camera.CaptureSession.isExposureModeSupported} to check whether the target
+     * Sets an exposure mode. Before the setting, call 
+     * [isExposureModeSupported]{@link camera.CaptureSession.isExposureModeSupported} to check whether the target 
      * exposure mode is supported.
      *
      * @param { ExposureMode } aeMode - Exposure mode.
@@ -6188,12 +6414,12 @@ declare namespace camera {
     getMeteringPoint(): Point;
 
     /**
-     * Sets the metering point, which is the center point of the metering rectangle. The metering point must be in the
+     * Sets the metering point, which is the center point of the metering rectangle. The metering point must be in the 
      * coordinate system (0-1), where the top-left corner is {0, 0} and the bottom-right corner is {1, 1}.
-     *
-     * The coordinate system is based on the horizontal device direction with the device's charging port on the right.
-     * If the layout of the preview screen of an application is based on the vertical direction with the charging port
-     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate
+     * 
+     * The coordinate system is based on the horizontal device direction with the device's charging port on the right. 
+     * If the layout of the preview screen of an application is based on the vertical direction with the charging port 
+     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate 
      * point after conversion is {y/h, 1-x/w}.
      *
      * @param { Point } point - Metering point. The value range of x and y must be within [0,1]. If a value less than 0
@@ -6221,16 +6447,16 @@ declare namespace camera {
 
     /**
      * Sets an exposure compensation value (EV).
-     * Before the setting, you are advised to use
+     * 
+     * Before the setting, you are advised to use 
      * [getExposureBiasRange]{@link camera.CaptureSession.getExposureBiasRange} to obtain the supported values.
      *
      * @param { number } exposureBias - EV. The supported EV range can be obtained by calling
-     *     [getExposureBiasRange]{@link camera.AutoExposureQuery.getExposureBiasRange}. If the
-     *     value passed is not within the supported range, the nearest critical point is used. There is a step for EV.
-     *     For example, if the step is 0.5 and this parameter is set to 1.2, the EV that takes effect is 1.0. If the
-     *     operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned. If the input parameter
-     *     is null or undefined, the EV is set to 0.
+     *     [getExposureBiasRange]{@link camera.AutoExposureQuery.getExposureBiasRange}. If the value passed is not
+     *     within the supported range, the nearest critical point is used. There is a step for EV. For example, if the
+     *     step is 0.5 and this parameter is set to 1.2, the EV that takes effect is 1.0. If the operation fails, an
+     *     error code defined in [CameraErrorCode]{@link camera.CameraErrorCode} is returned. If the input parameter is
+     *     null or undefined, the EV is set to 0.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 10 dynamiconly
@@ -6258,8 +6484,7 @@ declare namespace camera {
      *
      * @param { FocusMode } afMode - Focus mode.
      * @returns { boolean } Check result for the support of the focus mode. **true** if supported, **false** otherwise.
-     *     If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     *     If the operation fails, an error code defined in [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 10 dynamiconly
@@ -6283,7 +6508,8 @@ declare namespace camera {
 
     /**
      * Sets a focus mode.
-     * Before the setting, call [isFocusModeSupported]{@link camera.CaptureSession.isFocusModeSupported} to check
+     * 
+     * Before the setting, call [isFocusModeSupported]{@link camera.CaptureSession.isFocusModeSupported} to check 
      * whether the focus mode is supported.
      *
      * @param { FocusMode } afMode - Focus mode.
@@ -6298,10 +6524,10 @@ declare namespace camera {
     /**
      * Sets the focal point. The focal point must be in the coordinate system (0-1), where the top-left corner is {0, 0}
      * and the bottom-right corner is {1, 1}.
-     *
-     * The coordinate system is based on the horizontal device direction with the device's charging port on the right.
-     * If the layout of the preview screen of an application is based on the vertical direction with the charging port
-     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate
+     * 
+     * The coordinate system is based on the horizontal device direction with the device's charging port on the right. 
+     * If the layout of the preview screen of an application is based on the vertical direction with the charging port 
+     * on the lower side, the layout width and height are {w, h}, and the touch point is {x, y}, then the coordinate 
      * point after conversion is {y/h, 1-x/w}.
      *
      * @param { Point } point - Focal point. The value range of x and y must be within [0,1]. If a value less than 0 is
@@ -6370,9 +6596,9 @@ declare namespace camera {
      * Sets a zoom ratio, with a maximum precision of two decimal places.
      *
      * @param { number } zoomRatio - Zoom ratio. The supported zoom ratio range can be obtained by calling
-     *     [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange}. If the value passed in
-     *     is not within the supported range, the value within the precision range is retained. If the input parameter
-     *     is null or undefined, it is treated as 0 and the minimum zoom ratio is used.
+     *     [getZoomRatioRange]{@link camera.ZoomQuery.getZoomRatioRange}. If the value passed in is not within the
+     *     supported range, the value within the precision range is retained. If the input parameter is null or
+     *     undefined, it is treated as 0 and the minimum zoom ratio is used.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 10 dynamiconly
@@ -6411,8 +6637,8 @@ declare namespace camera {
     getActiveVideoStabilizationMode(): VideoStabilizationMode;
 
     /**
-     * Sets a video stabilization mode. Before the setting, call
-     * [isVideoStabilizationModeSupported]{@link camera.CaptureSession.isVideoStabilizationModeSupported} to check
+     * Sets a video stabilization mode. Before the setting, call 
+     * [isVideoStabilizationModeSupported]{@link camera.CaptureSession.isVideoStabilizationModeSupported} to check 
      * whether the target video stabilization mode is supported.
      *
      * @param { VideoStabilizationMode } mode - Video stabilization mode. If the input parameter is null or undefined,
@@ -6427,7 +6653,7 @@ declare namespace camera {
 
     /**
      * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -6461,7 +6687,7 @@ declare namespace camera {
 
     /**
      * Subscribes to CaptureSession error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -6485,7 +6711,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -6862,6 +7088,106 @@ declare namespace camera {
   }
 
   /**
+   * Enumerates the camera imaging modes.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum CameraImagingMode {
+    /**
+     * Auto imaging mode.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUTO = 0,
+
+    /**
+     * RGB imaging mode.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    RGB = 1,
+
+    /**
+     * IR imaging mode.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    IR = 2
+  }
+
+  /**
+   * Imaging mode query object.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ImagingModeQuery {
+    /**
+     * Checks whether a camera imaging mode is supported.
+     *
+     * @param { CameraImagingMode } mode - Imaging mode.
+     * @returns { boolean } Is the imaging mode supported.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isImagingModeSupported(mode: CameraImagingMode): boolean;
+  }
+
+  /**
+   * Implements imaging mode.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ImagingMode extends ImagingModeQuery {
+    /**
+     * Gets current imaging mode.
+     *
+     * @returns { CameraImagingMode } The current imaging mode.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getImagingMode(): CameraImagingMode;
+
+    /**
+     * Sets imaging mode.
+     *
+     * @param { CameraImagingMode } mode - Target imaging mode.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setImagingMode(mode: CameraImagingMode): void;
+  }
+
+  /**
    * Implements a photo session for system applications, which sets the parameters of the normal photo mode and saves
    * all [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
    * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
@@ -6869,12 +7195,14 @@ declare namespace camera {
    * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion [since 11 - 13]
    * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion,
    *     DepthFusion [since 14]
+   * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion,
+   *     DepthFusion, ImagingMode [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 11 dynamic
    * @since 23 static
    */
-  interface PhotoSessionForSys extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion, DepthFusion{
+  interface PhotoSessionForSys extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion, DepthFusion, ImagingMode {
   }
 
   /**
@@ -6887,7 +7215,7 @@ declare namespace camera {
    */
   enum PhotoQualityPrioritization {
     /**
-     * Focuses on image quality, which may increase the time required for capturing photos to ensure high-quality
+     * Focuses on image quality, which may increase the time required for capturing photos to ensure high-quality 
      * output.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -6909,10 +7237,23 @@ declare namespace camera {
   }
 
   /**
-   * Implements a photo session, which sets the parameters of the normal photo mode and saves all
-   * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
-   *
+   * **PhotoSession** inherits from [Session]{@link camera.Session}, [Flash]{@link camera.Flash}, 
+   * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
+   * [Zoom]{@link camera.Zoom}, [ColorManagement]{@link camera.ColorManagement}, 
+   * [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, [Macro]{@link camera.Macro}, 
+   * [ManualExposure]{@link camera.ManualExposure}, 
+   * [ManualFocus]{@link camera.ManualFocus}, 
+   * [ManualIso]{@link camera.ManualIso}, 
+   * [OIS]{@link camera.OIS}, and 
+   * [Aperture]{@link camera.Aperture}.
+   * 
+   * It implements a photo session, which provides operations on the flash, exposure, white balance, focus, zoom, color 
+   * space, macro mode, manual exposure, manual focus, manual ISO setting, optical image stabilization (OIS), and 
+   * aperture.
+   * 
+   * **PhotoSession** is provided for the default photo mode. It is used to take standard photos. It supports multiple 
+   * photo formats and resolutions, which are suitable for most daily photo capture scenarios.
+   * 
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorManagement [since 11 - 12]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorManagement, AutoDeviceSwitch [since 13 - 18]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorManagement, AutoDeviceSwitch, Macro [since 19 - 19]
@@ -6956,15 +7297,14 @@ declare namespace camera {
 
     /**
      * Subscribes to **PhotoSession** error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
+     *     calling of a session-related API such as [beginConfig]{@link camera.Session.beginConfig},
      *     [commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)}, and
      *     [addInput]{@link camera.Session.addInput}.
      * @param { ErrorCallback } callback - Callback used to return an error code defined in
@@ -6989,7 +7329,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -7010,7 +7350,7 @@ declare namespace camera {
 
     /**
      * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -7060,7 +7400,7 @@ declare namespace camera {
 
     /**
      * Subscribes to smooth zoom state change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -7263,9 +7603,9 @@ declare namespace camera {
     offEffectSuggestionChange(callback?: AsyncCallback<EffectSuggestionType>): void;
 
     /**
-     * Subscribes to automatic camera switch status change events. This API uses an asynchronous callback to return the
+     * Subscribes to automatic camera switch status change events. This API uses an asynchronous callback to return the 
      * result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -7365,7 +7705,7 @@ declare namespace camera {
 
     /**
      * Subscribes to system pressure level change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -7441,9 +7781,9 @@ declare namespace camera {
     getSessionConflictFunctions(): Array<PhotoConflictFunctions>;
 
     /**
-     * Subscribes ISO info change event callback.
+     * Subscribes to ISO information change events.
      *
-     * @param { Callback<IsoInfo> } callback - Callback used to get the ISO info change.
+     * @param { Callback<IsoInfo> } callback - Callback used to obtain the ISO information.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -7452,9 +7792,12 @@ declare namespace camera {
     onIsoInfoChange(callback: Callback<IsoInfo>): void;
 
     /**
-     * Unsubscribes from ISO info change event callback.
+     * Unsubscribes from ISO information change events.
      *
-     * @param { Callback<IsoInfo> } [callback] - Callback used to get the ISO info change.
+     * @param { Callback<IsoInfo> } [callback] - Callback used to return the result. If this parameter is specified, the
+     *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
+     *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
+     *     canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -7463,11 +7806,10 @@ declare namespace camera {
     offIsoInfoChange(callback?: Callback<IsoInfo>): void;
 
     /**
-     * Subscribes exposure info change event callback.
-     * After exposure parameters are changed, the system will returns the updated exposure infos.
+     * Subscribes to exposure information change events. After the exposure parameters are modified, the system returns 
+     * the updated exposure information. This API uses an asynchronous callback to return the result.
      *
-     * @param { Callback<ExposureInfo> } callback - Callback used to get the exposure value change.
-     *     <br>Exposure information callback listening.
+     * @param { Callback<ExposureInfo> } callback - Callback used to obtain the exposure information.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -7476,16 +7818,42 @@ declare namespace camera {
     onExposureInfoChange(callback: Callback<ExposureInfo>): void;
 
     /**
-     * Unsubscribes exposure info change event callback. Invoke this method after finishing camera operations.
+     * Unsubscribes from exposure information change events. If you have subscribed to exposure information change 
+     * events, cancel the subscription before releasing the camera object. This API uses an asynchronous callback to 
+     * return the result.
      *
-     * @param { Callback<ExposureInfo> } [callback] - Callback used to get the exposure value change.
-     *     <br>Callback listening for canceling exposure information.
+     * @param { Callback<ExposureInfo> } [callback] - Callback used to return the result. If this parameter is
+     *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
+     *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
+     *     callbacks are canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
      * @since 24 dynamic&static
      */
     offExposureInfoChange(callback?: Callback<ExposureInfo>): void;
+
+    /**
+     * Subscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } callback - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
+
+    /**
+     * Unsubscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } [callback] - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
 
   /**
@@ -7496,13 +7864,15 @@ declare namespace camera {
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro [since 11 - 14]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation [since 15 - 17]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation,
-   *     EffectSuggestion [since 18]
+   *     EffectSuggestion [since 18 - 24]
+   * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion,
+   *     ImagingMode, ColorControls [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 11 dynamic
    * @since 23 static
    */
-  interface VideoSessionForSys extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion {
+  interface VideoSessionForSys extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion, ImagingMode, ColorControls {
   }
 
   /**
@@ -7536,27 +7906,40 @@ declare namespace camera {
   }
 
   /**
-   * VideoSession extends Session, Flash, AutoExposure, Focus, Zoom, Stabilization, ColorManagement
-   * Implements a video session, which sets the parameters of the normal video mode and saves all
-   * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
-   *
+   * VideoSession inherits from [Session]{@link camera.Session}, [Flash]{@link camera.Flash}, 
+   * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
+   * [Zoom]{@link camera.Zoom}, [Stabilization]{@link camera.Stabilization}, 
+   * [ColorManagement]{@link camera.ColorManagement}, [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, 
+   * [Macro]{@link camera.Macro}, [ControlCenter]{@link camera.ControlCenter}, 
+   * [ManualExposure]{@link camera.ManualExposure}, 
+   * [ManualFocus]{@link camera.ManualFocus}, 
+   * [ManualIso]{@link camera.ManualIso}, 
+   * [OIS]{@link camera.OIS}, and 
+   * [Aperture]{@link camera.Aperture}.
+   * 
+   * It implements a video session, which provides operations on the flash, exposure, white balance, focus, zoom, video 
+   * stabilization, color space, macro mode and controller, manual exposure, manual focus, manual ISO, optical image 
+   * stabilization, and aperture.
+   * 
+   * **VideoSession** is provided for the default video recording mode. It applies to common scenarios. It supports 
+   * recording at various resolutions (such as 720p and 1080p) and frame rates (such as 30 fps and 60 fps).
+   * 
    * @extends Session, Flash, AutoExposure, Focus, Zoom, Stabilization, ColorManagement [since 11 - 12]
    * @extends AutoDeviceSwitch [since 13 - 18]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, Stabilization, ColorManagement,
    *     AutoDeviceSwitch, Macro [since 19 - 19]
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
    *     AutoDeviceSwitch, Macro [since 20 - 24]
- * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
-   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0]
+   * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
+   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0 - 26.0.0]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
    * @since 23 static
    */
   interface VideoSession extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization,
-      ColorManagement, ControlCenter, AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS,
-      Aperture {
+    ColorManagement, ControlCenter, AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS,
+    Aperture {
     /**
      * Checks whether this session supports a preconfigured resolution.
      *
@@ -7586,16 +7969,15 @@ declare namespace camera {
     preconfig(preconfigType: PreconfigType, preconfigRatio?: PreconfigRatio): void;
 
     /**
-     * Subscribes to **PhotoSession** error events. This API uses an asynchronous callback to return the result.
-     *
+     * Subscribes to **VideoSession** error events. This API uses an asynchronous callback to return the result.
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
+     *     calling of a session-related API such as [beginConfig]{@link camera.Session.beginConfig},
      *     [commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)}, and
      *     [addInput]{@link camera.Session.addInput}.
      * @param { ErrorCallback } callback - Callback used to return an error code defined in
@@ -7616,11 +7998,11 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from **PhotoSession** error events. This API uses a callback to return the result.
+     * Unsubscribes from **VideoSession** error events. This API uses a callback to return the result.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -7641,14 +8023,14 @@ declare namespace camera {
 
     /**
      * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
      *     listened for when a session is created. This event is triggered only when the camera focus state changes in
-     *     autofocus mode.
+     *     auto focus mode.
      * @param { AsyncCallback<FocusState> } callback - Callback used to return the focus state change.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -7691,7 +8073,7 @@ declare namespace camera {
 
     /**
      * Subscribes to smooth zoom state change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -7739,9 +8121,9 @@ declare namespace camera {
     offSmoothZoomInfoAvailable(callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-      * Subscribes to events indicating that the camera controller effect status changes. This API uses an asynchronous
+      * Subscribes to events indicating that the camera controller effect status changes. This API uses an asynchronous 
       * callback to return the result.
-      *
+      * 
       * > **NOTE**
       * >
       * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -7825,7 +8207,8 @@ declare namespace camera {
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If this parameter is specified,
      *     the subscription to the specified event with the specified callback is canceled. (The callback object cannot
      *     be an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
-     *     canceled.
+     *     canceled. If **true** is returned, the unsubscription is successful. If **false** is returned, the
+     *     unsubscription fails.
      * @throws { BusinessError } 202 - Not System Application. [since 11 - 19]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 11 - 19]
@@ -7897,17 +8280,17 @@ declare namespace camera {
     offLcdFlashStatus(callback?: AsyncCallback<LcdFlashStatus>): void;
 
     /**
-     * Subscribes to automatic camera switch status change events. This API uses an asynchronous callback to return the
+     * Subscribes to automatic camera switch status change events. This API uses an asynchronous callback to return the 
      * result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'autoDeviceSwitchStatusChange' } type - Event type. The value is fixed at
      *     **'autoDeviceSwitchStatusChange'**. The event can be listened for when a session is created.
-     * @param { AsyncCallback<AutoDeviceSwitchStatus> } callback - Callback function, which is used to obtain the status
-     *     of automatic camera switch.
+     * @param { AsyncCallback<AutoDeviceSwitchStatus> } callback - Callback used to obtain the status of automatic
+     *     camera switch.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 13 dynamic
@@ -8046,7 +8429,8 @@ declare namespace camera {
     /**
      * Subscribes to camera light status changes. This API uses an asynchronous callback to return the result.
      *
-     * @param { 'lightStatusChange' } type - Event type. The value is fixed at **'lightStatusChange'**.<br>The event can
+     * @param { 'lightStatusChange' } type - Event type. The value is fixed at **'lightStatusChange'**.
+     *     <br>The event can
      *     be listened for when a VideoSessionForSys object is created.
      * @param { AsyncCallback<LightStatus> } callback - Callback used to return the light status information.
      * @throws { BusinessError } 202 - Not System Application.
@@ -8070,7 +8454,8 @@ declare namespace camera {
     /**
      * Unsubscribes from camera light status changes.
      *
-     * @param { 'lightStatusChange' } type - Event type. The value is fixed at **'lightStatusChange'**.<br>The event can
+     * @param { 'lightStatusChange' } type - Event type. The value is fixed at **'lightStatusChange'**.
+     *     <br>The event can
      *     be listened for when a VideoSessionForSys object is created.
      * @param { AsyncCallback<LightStatus> } callback - Callback used to return the result. This parameter is optional.
      *     If this parameter is specified, the subscription to the specified event **on('lightStatusChange')** with the
@@ -8095,7 +8480,7 @@ declare namespace camera {
 
     /**
      * Subscribes to system pressure level change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -8172,14 +8557,14 @@ declare namespace camera {
 
     /**
      * Sets the priority level for video recording quality.
-     *
+     * 
      * > **NOTE**
      * >
      * > - The default value is **HIGH_QUALITY**. Switching to **POWER_BALANCE** will compromise video recording quality
      * > to achieve lower power usage. The extent of power conservation achieved varies depending on the platform.
      * >
-     * > - It is recommended that this API be called between
-     * > [commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)} and
+     * > - It is recommended that this API be called between 
+     * > [commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)} and 
      * > [start]{@link camera.Session.start()}.
      *
      * @param { QualityPrioritization } quality - Priority level to set. The default value is **HIGH_QUALITY**.
@@ -8195,9 +8580,9 @@ declare namespace camera {
     setQualityPrioritization(quality: QualityPrioritization): void;
 
     /**
-     * Subscribes ISO info change event callback.
+     * Subscribes to sensitivity (ISO) state change events and obtains the latest ISO value through a callback.
      *
-     * @param { Callback<IsoInfo> } callback - Callback used to get the ISO info change.
+     * @param { Callback<IsoInfo> } callback - Callback used to obtain the current ISO value of the camera.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -8207,9 +8592,12 @@ declare namespace camera {
     onIsoInfoChange(callback: Callback<IsoInfo>): void;
 
     /**
-     * Unsubscribes from ISO info change event callback.
+     * Unsubscribes from ISO state change events.
      *
-     * @param { Callback<IsoInfo> } [callback] - Callback used to get the ISO info change.
+     * @param { Callback<IsoInfo> } [callback] - Callback used for unsubscription.
+     *     <br>If this parameter is specified, the subscription to the specified event with the specified callback is
+     *     canceled. (The callback object cannot be an anonymous function.)
+     *     <br>Otherwise, the subscriptions to the specified event with all the callbacks are canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -8219,11 +8607,10 @@ declare namespace camera {
     offIsoInfoChange(callback?: Callback<IsoInfo>): void;
 
     /**
-     * Subscribes exposure info change event callback.
-     *     After exposure parameters are changed, the system will returns the updated exposure infos.
+     * Subscribes to exposure information change events. After the exposure parameters are changed, the system returns 
+     * the updated exposure information. This API uses an asynchronous callback to return the result.
      *
-     * @param { Callback<ExposureInfo> } callback - Callback used to get the exposure value change
-     *     Exposure information callback listening.
+     * @param { Callback<ExposureInfo> } callback - Callback used to obtain the exposure information.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -8232,16 +8619,120 @@ declare namespace camera {
     onExposureInfoChange(callback: Callback<ExposureInfo>): void;
 
     /**
-     * Unsubscribes exposure info change event callback. Invoke this method after finishing camera operations.
+     * Unsubscribes from exposure information change events. If you have subscribed to exposure information, cancel the 
+     * subscription before releasing the camera. This API uses an asynchronous callback to return the result.
      *
-     * @param { Callback<ExposureInfo> } [callback] - Callback used to get the exposure value change.
-     *     Callback listening for canceling exposure information.
+     * @param { Callback<ExposureInfo> } [callback] - Callback used to return the result. If this parameter is
+     *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
+     *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
+     *     callbacks are canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic&static
      */
     offExposureInfoChange(callback?: Callback<ExposureInfo>): void;
+
+    /**
+     * Subscribes aperture info event callback.
+     *
+     * @param { Callback<ApertureInfo> } callback - Callback used to get the aperture info.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onApertureInfoChange(callback: Callback<ApertureInfo>): void;
+
+    /**
+     * Unsubscribes from aperture info event callback.
+     *
+     * @param { Callback<ApertureInfo> } [callback] - Callback used to get the aperture info.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offApertureInfoChange(callback?: Callback<ApertureInfo>): void;
+
+    /**
+     * Checks whether the color cube is supported.
+     *
+     * @returns { boolean } Check result for the support of the color cube. **true** if supported, **false**
+     *     is otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isColorCubeSupported(): boolean;
+
+    /**
+     * Gets color cube dimension.
+     *
+     * @returns { int } color cube dimension.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSupportedCubeDimension(): int;
+
+    /**
+     * Enable the color cube.
+     *
+     * Before the setting, call [isColorCubeSupported] {@link camera.VideoSession.isColorCubeSupported} to check whether
+     * the device supports the color cube.
+     * 
+     * @param { Uint8Array } lutData - The cube texture data to use as a color lookup table.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    enableColorCube(lutData: Uint8Array): void;
+
+    /**
+     * Disable the color cube.
+     *
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    disableColorCube(): void;
+
+    /**
+     * Subscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } callback - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
+
+    /**
+     * Unsubscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } [callback] - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
 
   /**
@@ -8639,7 +9130,7 @@ declare namespace camera {
     /**
      * Sets physical aperture value.
      *
-     * @param { double } aperture - physical aperture value. The supported physical aperture range can be obtained by 
+     * @param { double } aperture - physical aperture value. The supported physical aperture range can be obtained by
      *     calling [getSupportedPhysicalApertures]{@link camera.ApertureQuery.getSupportedPhysicalApertures}
      * @throws { BusinessError } 202 - Not System Application. [since 11 - 23]
      * @throws { BusinessError } 7400103 - Session not config.
@@ -8652,6 +9143,108 @@ declare namespace camera {
      * @since 23 static
      */
     setPhysicalAperture(aperture: double): void;
+  }
+
+  /**
+   * Color controls query object.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControlsQuery {
+    /**
+     * Checks whether the saturation is supported.
+     *
+     * @returns { boolean } Check result for the support of the saturation. **true** is supported, **false** is
+     *     otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isSaturationSupported(): boolean;
+
+    /**
+     * Checks whether the RGB bias is supported.
+     *
+     * @returns { boolean } Check result for the support of the RGB bias. **true** is supported, **false** is
+     *     otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isRGBBiasSupported(): boolean;
+  }
+
+  /**
+   * Implements color controls. It inherits from [ColorControlsQuery]{@link camera.ColorControlsQuery}.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControls extends ColorControlsQuery {
+    /**
+     * Gets the amount of saturation.
+     *
+     * @returns { double } The current saturation.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSaturation(): double;
+
+    /**
+     * Sets the amount of saturation. Before the setting, call
+     *     [isSaturationSupported]{@link camera.ColorControlsQuery.isSaturationSupported} to check
+     *     whether saturation adjustment is supported by the current device.
+     *
+     * @param { double } val - The amount of saturation to apply.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setSaturation(val: double): void;
+
+    /**
+     * Gets RGB bias value.
+     *
+     * @returns { double } The current RGB bias value.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getRGBBias(): RGBBias;
+
+    /**
+     * Sets RGB bias value.
+     *
+     * @param { double } bias - RGB bias value.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRGBBias(bias: RGBBias): void;
   }
 
   /**
@@ -8699,7 +9292,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -8934,7 +9527,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -9165,7 +9758,8 @@ declare namespace camera {
     setExposure(exposure: int): void;
 
     /**
-     * Sets Exposure duration value, units: microseconds.
+     * Sets Exposure duration value, units: microseconds.This control is only effective if
+     * ExposureMode is set to EXPOSURE_MODE_MANUAL.
      *
      * @param { int } exposureDuration - Exposure duration value
      * @throws { BusinessError } 7400103 - Session not config.
@@ -9224,7 +9818,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -9389,7 +9983,7 @@ declare namespace camera {
   }
 
   /**
-   * Describes the ISO information.
+   * Describes the information about the sensitivity (ISO) settings.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 21]
@@ -9525,7 +10119,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -9890,7 +10484,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -10271,10 +10865,7 @@ declare namespace camera {
    * Implements a slow-motion video session, which sets the parameters of the slow-motion video mode and saves all
    * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
    * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
-   *
-   * > **NOTE**
-   * > > In slow-motion video mode, only preview streams and video streams can be added.
-   *
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 12 dynamic
@@ -10316,7 +10907,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -10441,11 +11032,7 @@ declare namespace camera {
 
     /**
      * Checks whether the device supports slow-motion detection.
-     *
-     * > **NOTE**
-     * > > This API must be called after [commitConfig]{@link camera.Session.commitConfig()} is
-     * > called.
-     *
+     * 
      * @returns { boolean } Check result for the support of slow-motion detection. **true** if supported, **false**
      *     otherwise. If the operation fails, an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
@@ -10460,14 +11047,7 @@ declare namespace camera {
 
     /**
      * Sets an area for slow-motion detection.
-     *
-     * > **NOTE**
-     * > > Before the setting, call
-     * > [isSlowMotionDetectionSupported]{@link camera.SlowMotionVideoSession.isSlowMotionDetectionSupported} to check
-     * > whether the device supports slow-motion detection.
-     * > This API must be called after [commitConfig]{@link camera.Session.commitConfig()} is
-     * > called.
-     *
+     * 
      * @param { Rect } area - Area.
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 18]
@@ -10537,7 +11117,7 @@ declare namespace camera {
    * Implements a high-resolution photo session, which sets the parameters of the high-resolution photo mode and saves
    * all [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
    * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
-   *
+   * 
    * > **NOTE**
    * >
    * > In high-resolution photo capture scenarios, the physical camera lens must be used instead of the logical lens.
@@ -10583,7 +11163,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -10707,7 +11287,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -10836,7 +11416,7 @@ declare namespace camera {
    * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
    * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
    *
-* @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus [since 12 - 17]
+   * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus [since 12 - 17]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus, ColorManagement [since 18]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -10880,7 +11460,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -11005,21 +11585,21 @@ declare namespace camera {
   }
 
   /**
-   * **SecureSession** inherits from [Session]{@link camera.Session},
-   * [Flash]{@link camera.Flash}, [AutoExposure]{@link camera.AutoExposure},
-   * [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, and [Zoom]{@link camera.Zoom}.
-   *
+   * **SecureSession** inherits from [Session]{@link camera.Session}, [Flash]{@link camera.Flash}, 
+   * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
+   * and [Zoom]{@link camera.Zoom}.
+   * 
    * It implements a secure session, which provides operations on the flash, exposure, white balance, focus, and zoom.
-   *
-   * You can call [createSession]{@link camera.CameraManager.createSession} with
-   * [SceneMode]{@link camera.SceneMode} set to **SECURE_PHOTO** to create a session in secure
-   * mode. The secure mode is designed for applications with high security requirements, such as facial recognition
-   * systems and banking services. It must be used together with the <!--RP1-->security TA<!--RP1End--> to support
-   * service scenarios where both standard preview streams and security streams are output.<!--RP2-->
-   *
-   * The security TA can verify the signature of data delivered by the server, sign images, parse and assemble TLV logic
-   * , and read, create, and operate keys. It applies to image processing.<!--RP2End-->
-   *
+   * 
+   * You can call [createSession]{@link camera.CameraManager.createSession} with [SceneMode]{@link camera.SceneMode} set
+   * to **SECURE_PHOTO** to create a session in secure mode. The secure mode is designed for applications with high 
+   * security requirements, such as facial recognition systems and banking services. It must be used together with the <
+   * !--RP1-->security TA<!--RP1End--> to support service scenarios where both standard preview streams and security 
+   * streams are output.<!--RP2-->
+   * 
+   * The security TA can verify the signature of data delivered by the server, sign images, parse and assemble TLV 
+   * logic, and read, create, and operate keys. It applies to image processing.<!--RP2End-->
+   * 
    * @extends Session, Flash, AutoExposure, Focus, Zoom [since 12 - 19]
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom [since 20]
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -11045,17 +11625,15 @@ declare namespace camera {
 
     /**
      * Subscribes to SecureSession error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
-     *     [commitConfig]{@link camera.Session.commitConfig()}, and
-     *     [addInput]{@link camera.Session.addInput}.
+     *     calling of a session-related API such as [beginConfig]{@link camera.Session.beginConfig},
+     *     [commitConfig]{@link camera.Session.commitConfig()}, and [addInput]{@link camera.Session.addInput}.
      * @param { ErrorCallback } callback - Callback used to return an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode}.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -11078,7 +11656,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -11099,7 +11677,7 @@ declare namespace camera {
 
     /**
      * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -11195,7 +11773,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -11363,7 +11941,8 @@ declare namespace camera {
    * Quick shot photo session object.
    *
    * @extends Session, AutoExposure, ColorEffect, ColorManagement, EffectSuggestion, Flash, Focus, Zoom [since 12 - 21]
-   * @extends Session, AutoExposure, ColorEffect, ColorManagement, EffectSuggestion, Flash, Focus, Zoom, Beauty [since 22]
+   * @extends Session, AutoExposure, ColorEffect, ColorManagement, EffectSuggestion, Flash, Focus, Zoom,
+   *     Beauty [since 22]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 12 dynamic
@@ -11406,7 +11985,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -11623,7 +12202,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -11732,7 +12311,7 @@ declare namespace camera {
      * Unsubscribes from error events.
      *
      * @param { 'error' } type - Event type.
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11865,8 +12444,8 @@ declare namespace camera {
   }
 
   /**
-   * CameraOutput implements output information used in [Session]{@link camera.Session}. It is the base
-   * class of **output**.
+   * CameraOutput implements output information used in [Session]{@link camera.Session}. It is the base class of 
+   * **output**.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -11942,7 +12521,7 @@ declare namespace camera {
   }
 
   /**
-   * Implements preview output. It inherits from [CameraOutput]{@link camera.CameraOutput}.
+   * PreviewOutput implements preview output. It inherits from [CameraOutput]{@link camera.CameraOutput}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -12001,7 +12580,7 @@ declare namespace camera {
 
     /**
      * Subscribes to preview frame start events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -12031,7 +12610,7 @@ declare namespace camera {
      *
      * @param { 'frameStart' } type - Event type. The value is fixed at **'frameStart'**. The event can be listened for
      *     when a previewOutput instance is created.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -12052,7 +12631,7 @@ declare namespace camera {
 
     /**
      * Subscribes to preview frame end events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -12082,7 +12661,7 @@ declare namespace camera {
      *
      * @param { 'frameEnd' } type - Event type. The value is fixed at **'frameEnd'**. The event can be listened for when
      *     a previewOutput instance is created.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -12103,7 +12682,7 @@ declare namespace camera {
 
     /**
      * Subscribes to PreviewOutput error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -12111,8 +12690,7 @@ declare namespace camera {
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     previewOutput instance is created. This event is triggered and the corresponding error message is returned
      *     when an error occurs during the use of a preview-related API such as
-     *     [Session.start]{@link camera.Session.start()} or
-     *     [CameraOutput.release]{@link camera.CameraOutput.release()}.
+     *     [Session.start]{@link camera.Session.start()} or [CameraOutput.release]{@link camera.CameraOutput.release()}.
      * @param { ErrorCallback } callback - Callback used to return an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode}.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -12135,7 +12713,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     previewOutput instance is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -12166,12 +12744,13 @@ declare namespace camera {
     getSupportedFrameRates(): Array<FrameRateRange>;
 
     /**
-     * Sets a frame rate range for preview streams. The range must be within the supported frame rate range, which can
-     * be obtained by calling [getSupportedFrameRates]{@link camera.PreviewOutput.getSupportedFrameRates}.
-     *
+     * Sets a frame rate range for preview streams. The range must be within the supported frame rate range,
+     * 
+     * which can be obtained by calling [getSupportedFrameRates]{@link camera.PreviewOutput.getSupportedFrameRates}.
+     * 
      * > **NOTE**
      * >
-     * > This API is valid only in [PhotoSession]{@link camera.PhotoSession} or
+     * > This API is valid only in [PhotoSession]{@link camera.PhotoSession} or 
      * > [VideoSession]{@link camera.VideoSession} mode.
      *
      * @param { int } minFps - Minimum frame rate, in fps. When the maximum value is less than the minimum value, the
@@ -12189,7 +12768,8 @@ declare namespace camera {
 
     /**
      * Obtains the configured frame rate range.
-     * This API is valid only after [setFrameRate]{@link camera.PreviewOutput.setFrameRate} is called to set a frame
+     * 
+     * This API is valid only after [setFrameRate]{@link camera.PreviewOutput.setFrameRate} is called to set a frame 
      * rate range for preview streams.
      *
      * @returns { FrameRateRange } Frame rate range.
@@ -12202,23 +12782,26 @@ declare namespace camera {
 
     /**
      * Obtains the preview rotation angle.
-     *
-     * - Device's natural orientation: the default orientation for using a device. For example, the default orientation
+     * 
+     * - Device' natural orientation: the default orientation for using a device. For example, the default orientation 
      * of the bar-type phone is in portrait mode, with the charging port facing downward.
-     * - Camera lens angle: equivalent to the angle at which the camera is rotated clockwise to match the device's
-     * natural orientation. For example, the rear camera sensor of a bar-type phone is installed in landscape mode.
+     * - Camera lens angle: equivalent to the angle at which the camera is rotated clockwise to match the device's 
+     * natural orientation. For example, the rear camera sensor of a bar-type phone is installed in landscape mode. 
      * Therefore, it needs to be rotated by 90 degrees clockwise to match the device's natural orientation.
-     * - [Screen rotation](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-multi-device-window-direction#section15598121101615)
-     * : indicates the clockwise rotation angle of the device screen.
+     * - 
+     * [Screen Rotation](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-multi-device-window-direction):
+     * indicates the clockwise rotation angle of the device screen.
      *
      * @param { int } displayRotation - Screen rotation angle of the display. It is obtained by calling
-     *     [display.getDefaultDisplaySync]{@link @ohos.display:display.getDefaultDisplaySync}.<br> Since API version 23,
-     *     the input parameter **displayRotation** is optional. If no parameter is passed, the system obtains the
-     *     **displayRotation** value to calculate rotation angle of a video. [since 12 - 22]
+     *     [display.getDefaultDisplaySync]{@link @ohos.display:display.getDefaultDisplaySync}.
+     *     <br> Since API version 23, the input parameter **displayRotation** is optional. If no parameter is passed,
+     *     the system obtains the **displayRotation** value to calculate rotation angle of a video.
+     *     <br> The value ranges from 0 to 360, in degrees. [since 12 - 22]
      * @param { int } [displayRotation] - Screen rotation angle of the display. It is obtained by calling
-     *     [display.getDefaultDisplaySync]{@link @ohos.display:display.getDefaultDisplaySync}.<br> Since API version 23,
-     *     the input parameter **displayRotation** is optional. If no parameter is passed, the system obtains the
-     *     **displayRotation** value to calculate rotation angle of a video. [since 23]
+     *     [display.getDefaultDisplaySync]{@link @ohos.display:display.getDefaultDisplaySync}.
+     *     <br> Since API version 23, the input parameter **displayRotation** is optional. If no parameter is passed,
+     *     the system obtains the **displayRotation** value to calculate rotation angle of a video.
+     *     <br> The value ranges from 0 to 360, in degrees. [since 23]
      * @returns { ImageRotation } The preview rotation angle obtained. If the API call fails, undefined is returned.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 22]
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -12260,9 +12843,11 @@ declare namespace camera {
     getActiveProfile(): Profile;
 
     /**
-     * Adds a deferred surface.
+     * Adds a surface for delayed preview. This API can run after [commitConfig]{@link camera.Session.commitConfig()} or
+     * [start]{@link camera.Session.start()} is called.
      *
-     * @param { string } surfaceId - Surface object id used in camera photo output.
+     * @param { string } surfaceId - Surface ID, which is obtained from
+     *     [XComponent]{@link XComponent}.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 13 - 23]
@@ -12397,15 +12982,16 @@ declare namespace camera {
 
     /**
      * Enables preview bandwidth compression.
-     * Before enabling this feature, you can call
-     * [isBandwidthCompressionSupported]{@link camera.PreviewOutput.isBandwidthCompressionSupported} to check whether
+     * 
+     * Before enabling this feature, you can call 
+     * [isBandwidthCompressionSupported]{@link camera.PreviewOutput.isBandwidthCompressionSupported} to check whether 
      * the device supports preview bandwidth compression.
-     *
+     * 
      * > **NOTE**
      * >
-     * > This function must be called prior to
-     * > [Session.commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)}.
-     * > Otherwise, the preview output stream format will be affected.
+     * > This function must be called prior to 
+     * > [Session.commitConfig]{@link camera.Session.commitConfig(callback: AsyncCallback<void>)}. Otherwise, the 
+     * > preview output stream format will be affected.
      *
      * @param { boolean } enabled - Whether to enable preview bandwidth compression. **true** to enable, **false**
      *     otherwise.
@@ -12604,7 +13190,7 @@ declare namespace camera {
    */
   interface Location {
     /**
-     * Latitude, in degrees, within the range [-90, 90].
+     * Latitude, in degrees, within the range [–90, 90].
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -12614,7 +13200,7 @@ declare namespace camera {
     latitude: double;
 
     /**
-     * Longitude, in degrees, within the range [-180, 180].
+     * Longitude, in degrees, within the range [–180, 180].
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -12684,7 +13270,7 @@ declare namespace camera {
    */
   interface PhotoCaptureSetting {
     /**
-     * Image quality (low by default).
+     * Image quality (high by default).
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -12714,9 +13300,9 @@ declare namespace camera {
     location?: Location;
 
     /**
-     * Whether mirror photography is enabled (disabled by default). Before using this enumerated value, call
-     * [isMirrorSupported]{@link camera.PhotoOutput.isMirrorSupported} to check whether mirror
-     * photography is supported. **true** if enabled, **false** otherwise.
+     * Whether mirror photography is enabled (disabled by default). Before using this enumerated value, call 
+     * [isMirrorSupported]{@link camera.PhotoOutput.isMirrorSupported} to check whether mirror photography is supported.
+     * **true** if enabled, **false** otherwise.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -12779,8 +13365,8 @@ declare namespace camera {
   }
 
   /**
-   * Defines a higher-resolution image object.
-   *
+   * Photo defines a full-quality image object.
+   * 
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -12841,6 +13427,36 @@ declare namespace camera {
   type ImageType = image.Image | image.Picture;
 
   /**
+   * Enumerates the auxiliary photo types.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  enum CameraAuxiliaryPhotoType {
+    /**
+     * Auxiliary photo type: oxygen photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    OXYGEN = 0,
+
+    /**
+     * Auxiliary photo type: pigmentation photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    PIGMENTATION = 1
+  }
+
+  /**
    * **CapturePhoto** provides APIs for obtaining the objects of the full-quality image and the uncompressed image.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -12858,6 +13474,26 @@ declare namespace camera {
      * @since 23 dynamic&static
      */
     main: ImageType;
+
+    /**
+     * Object of the oxygen auxiliary photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    oxygenPhoto?: ImageType;
+
+    /**
+     * Object of the pigmentation auxiliary photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    pigmentationPhoto?: ImageType;
 
     /**
      * Releases output resources. This API uses a promise to return the result.
@@ -12937,7 +13573,7 @@ declare namespace camera {
   }
 
   /**
-   * Implements output information used in a photo session. It inherits from
+   * PhotoOutput implements output information used in a photo session. It inherits from 
    * [CameraOutput]{@link camera.CameraOutput}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -12947,7 +13583,7 @@ declare namespace camera {
    */
   interface PhotoOutput extends CameraOutput {
     /**
-     * Captures a photo with the default photo capture parameters. This API uses an asynchronous callback to return the
+     * Captures a photo with the default photo capture parameters. This API uses an asynchronous callback to return the 
      * result.
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the photo is successfully
@@ -12976,7 +13612,7 @@ declare namespace camera {
     capture(): Promise<void>;
 
     /**
-     * Captures a photo with the specified photo capture parameters. This API uses an asynchronous callback to return
+     * Captures a photo with the specified photo capture parameters. This API uses an asynchronous callback to return 
      * the result.
      *
      * @param { PhotoCaptureSetting } setting - Photo capture settings. If the input data is of the **undefined** type,
@@ -13169,6 +13805,7 @@ declare namespace camera {
      * Sets a video codec type for moving photos.
      *
      * @param { VideoCodecType } codecType - Video codec type.
+     *     <br>If the value is not within the enumerated value range, this parameter does not take effect.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -13178,16 +13815,16 @@ declare namespace camera {
     setMovingPhotoVideoCodecType(codecType: VideoCodecType): void;
 
     /**
-     * Subscribes to the events of returning available photos. This API uses an asynchronous callback to return the
+     * Subscribes to the events of returning available photos. This API uses an asynchronous callback to return the 
      * result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'photoAvailable' } type - Event type. The value is fixed at **'photoAvailable'**. The event can be
      *     listened for when a **photoOutput** instance is created.
-     * @param { AsyncCallback<Photo> } callback - Callback used to listen for the events of returning available photos.
+     * @param { AsyncCallback<Photo> } callback - Callback used to listen for the event of returning available photos.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 11 dynamic
@@ -13207,8 +13844,8 @@ declare namespace camera {
      * Unsubscribes from the events of returning available photos.
      *
      * @param { 'photoAvailable' } type - Event type. The value is fixed at **'photoAvailable'**. The event can be
-     *     listened for when a photoOutput instance is created.
-     * @param { AsyncCallback<Photo> } callback - Callback used to return the result. If this parameter is specified,
+     *     listened for when a **photoOutput** instance is created.
+     * @param { AsyncCallback<Photo> } [callback] - Callback used to return the result. If this parameter is specified,
      *     the subscription to the specified event with the specified callback is canceled. (The callback object cannot
      *     be an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -13228,9 +13865,19 @@ declare namespace camera {
     offPhotoAvailable(callback?: AsyncCallback<Photo>): void;
 
     /**
-     * Subscribes photo available event callback, which supports delivery of uncompressed photo.
+     * Subscribes to the events of returning full-quality images and uncompressed images. This API uses an asynchronous 
+     * callback to return the result.
+     * 
+     * > **NOTE**
+     * >
+     * > - You cannot call 
+     * > [offCapturePhotoAvailable]{@link camera.PhotoOutput.offCapturePhotoAvailable(callback?: Callback<CapturePhoto>)}
+     * > to unregister the callback in the callback listened by this API.
+     * >
+     * > - This API can be used to register listeners only when uncompressed images in the YUV format are captured.
      *
-     * @param { Callback<CapturePhoto> } callback - Callback used to get the CapturePhoto.
+     * @param { Callback<CapturePhoto> } callback - Callback used to listen for the event of returning full-quality
+     *     images and uncompressed images.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -13239,9 +13886,13 @@ declare namespace camera {
     onCapturePhotoAvailable(callback: Callback<CapturePhoto>): void;
 
     /**
-     * Unsubscribes photo available event callback, which supports delivery of uncompressed photo.
+     * Unsubscribes from the events of returning full-quality images and uncompressed images. This API uses an 
+     * asynchronous callback to return the result.
      *
-     * @param { Callback<CapturePhoto> } [callback] - Callback used to get the CapturePhoto.
+     * @param { Callback<CapturePhoto> } [callback] - Callback used to return the result. If this parameter is
+     *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
+     *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
+     *     callbacks are canceled.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -13303,7 +13954,7 @@ declare namespace camera {
 
     /**
      * Subscribes to photo asset available events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13319,7 +13970,7 @@ declare namespace camera {
 
     /**
      * Subscribes to photo asset event callback.
-     *
+     * 
      * This API processes deferred photo delivery data by quickly displaying low-quality images to give
      * users the impression of faster photo capture, while also generating high-quality images to maintain the
      * final output quality. For details about the design specifications, see
@@ -13336,7 +13987,7 @@ declare namespace camera {
      *
      * @param { 'photoAssetAvailable' } type - Event type. The value is fixed at **'photoAssetAvailable'**. The event
      *     can be listened for when a photoOutput instance is created.
-     * @param { AsyncCallback<photoAccessHelper.PhotoAsset> } callback - Callback used for unsubscription. If this
+     * @param { AsyncCallback<photoAccessHelper.PhotoAsset> } [callback] - Callback used for unsubscription. If this
      *     parameter is specified, the subscription to the specified event with the specified callback is canceled. (The
      *     callback object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with
      *     all the callbacks are canceled.
@@ -13368,12 +14019,13 @@ declare namespace camera {
     isMirrorSupported(): boolean;
 
     /**
-     * Enables or disables mirroring photo capture.
-     * Before calling this API, check whether moving photo capture is supported by calling
-     * [isMovingPhotoSupported]{@link camera.PhotoOutput.isMovingPhotoSupported} and whether mirroring is supported by
+     * Enables or disables dynamic photo capture.
+     * 
+     * Before calling this API, check whether moving photo capture is supported by calling 
+     * [isMovingPhotoSupported]{@link camera.PhotoOutput.isMovingPhotoSupported} and whether mirroring is supported by 
      * calling [isMirrorSupported]{@link camera.PhotoOutput.isMirrorSupported}.
      *
-     * @param { boolean } enabled - Whether to enable mirroring photo capture. **true** to enable, **false** otherwise.
+     * @param { boolean } enabled - Enables or disables dynamic photo capture. **true** to enable, **false** otherwise.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -13386,7 +14038,7 @@ declare namespace camera {
 
     /**
      * Subscribes to capture start events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13404,14 +14056,14 @@ declare namespace camera {
 
     /**
      * Unsubscribes from capture start events.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'captureStart' } type - Event type. The value is fixed at **'captureStart'**. The event can be listened
      *     for when a photoOutput instance is created.
-     * @param { AsyncCallback<number> } callback - Callback used to return the result. If this parameter is specified,
+     * @param { AsyncCallback<number> } [callback] - Callback used to return the result. If this parameter is specified,
      *     the subscription to the specified event with the specified callback is canceled. (The callback object cannot
      *     be an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -13423,8 +14075,9 @@ declare namespace camera {
     off(type: 'captureStart', callback?: AsyncCallback<number>): void;
 
     /**
-     * Subscribes to capture start events. This API uses an asynchronous callback to return the result.
-     *
+     * Subscribes to capture start events. This API uses an asynchronous callback to return the 
+     * [capture start ID]{@link camera.CaptureStartInfo}.
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13452,7 +14105,7 @@ declare namespace camera {
      *
      * @param { 'captureStartWithInfo' } type - Event type. The value is fixed at **'captureStartWithInfo'**. The event
      *     can be listened for when a photoOutput instance is created.
-     * @param { AsyncCallback<CaptureStartInfo> } callback - Callback used to return the result. If this parameter is
+     * @param { AsyncCallback<CaptureStartInfo> } [callback] - Callback used to return the result. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.
@@ -13498,7 +14151,7 @@ declare namespace camera {
      *
      * @param { 'frameShutter' } type - Event type. The value is fixed at **'frameShutter'**. The event can be listened
      *     for when a photoOutput instance is created.
-     * @param { AsyncCallback<FrameShutterInfo> } callback - Callback used to return the result. If this parameter is
+     * @param { AsyncCallback<FrameShutterInfo> } [callback] - Callback used to return the result. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.
@@ -13519,7 +14172,7 @@ declare namespace camera {
 
     /**
      * Subscribes to frame shutter end events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13548,7 +14201,7 @@ declare namespace camera {
      *
      * @param { 'frameShutterEnd' } type - Event type. The value is fixed at **'frameShutterEnd'**. The event can be
      *     listened for when a photoOutput instance is created.
-     * @param { AsyncCallback<FrameShutterEndInfo> } callback - Callback used to return the result. If this parameter is
+     * @param { AsyncCallback<FrameShutterEndInfo> } [callback] - Callback used to return the result. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.
@@ -13570,7 +14223,7 @@ declare namespace camera {
 
     /**
      * Subscribes to capture end events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13599,7 +14252,7 @@ declare namespace camera {
      *
      * @param { 'captureEnd' } type - Event type. The value is fixed at **'captureEnd'**. The event can be listened for
      *     when a photoOutput instance is created.
-     * @param { AsyncCallback<CaptureEndInfo> } callback - Callback used to return the result. If this parameter is
+     * @param { AsyncCallback<CaptureEndInfo> } [callback] - Callback used to return the result. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.
@@ -13620,7 +14273,7 @@ declare namespace camera {
 
     /**
      * Subscribes to capture ready events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13649,7 +14302,7 @@ declare namespace camera {
      *
      * @param { 'captureReady' } type - Event type. The value is fixed at **'captureReady'**. The event can be listened
      *     for when a photoOutput instance is created.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -13670,7 +14323,7 @@ declare namespace camera {
 
     /**
      * Subscribes to estimated capture duration events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13702,7 +14355,7 @@ declare namespace camera {
      *
      * @param { 'estimatedCaptureDuration' } type - Event type. The value is fixed at **'estimatedCaptureDuration'**.
      *     The event can be listened for when a photoOutput instance is created.
-     * @param { AsyncCallback<double> } callback - Callback used to return the result. If this parameter is specified,
+     * @param { AsyncCallback<double> } [callback] - Callback used to return the result. If this parameter is specified,
      *     the subscription to the specified event with the specified callback is canceled. (The callback object cannot
      *     be an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -13724,7 +14377,7 @@ declare namespace camera {
 
     /**
      * Subscribes to PhotoOutput error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -13754,7 +14407,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     photoOutput instance is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -13945,8 +14598,8 @@ declare namespace camera {
      * Enables or disables the feature of taking moving photos.
      *
      * @permission ohos.permission.MICROPHONE
-     * @param { boolean } enabled - Whether to enable the feature of taking moving photos. **true** to enable, **false**
-     *     otherwise.
+     * @param { boolean } enabled - Enables or disables the feature of taking moving photos. **true** to enable,
+     *     **false** otherwise.
      * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -13956,6 +14609,37 @@ declare namespace camera {
      * @since 23 static
      */
     enableMovingPhoto(enabled: boolean): void;
+
+    /**
+     * Check if the automatic auxiliary photo delivery is supported.
+     *
+     * @param { CameraAuxiliaryPhotoType } auxPhotoType - Target auxiliary photo type for delivery.
+     * @returns { boolean } TRUE if the type of delivery image is supported; FALSE otherwise.
+     * @throws { BusinessError } 7400115 - Parameter out of the range. The auxPhotoType value is invalid. Check the
+     *     CameraAuxiliaryPhotoType enum for valid values.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isAutoAuxiliaryPhotoDeliverySupported(auxPhotoType: CameraAuxiliaryPhotoType): boolean;
+
+    /**
+     * Enable or disable auto auxiliary photo delivery.
+     *
+     * @param { CameraAuxiliaryPhotoType[] } auxPhotoTypes - Target auxiliary photo types for delivery.
+     * @param { boolean } enable - Target state for auto auxiliary photo delivery.
+     * @throws { BusinessError } 801 - Capability not supported. Check if the camera device supports the required
+     *     auxiliary photo types by using capability query APIs.
+     * @throws { BusinessError } 7400115 - Parameter out of the range. The auxPhotoType value is invalid. Check the
+     *     CameraAuxiliaryPhotoType enum for valid values.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    setAutoAuxiliaryPhotosDeliveryEnabled(auxPhotoTypes: CameraAuxiliaryPhotoType[], enable: boolean): void;
 
     /**
      * Checks whether the specified photo quality prioritization strategy is supported.
@@ -13974,8 +14658,9 @@ declare namespace camera {
 
     /**
      * Sets the photo quality prioritization strategy.
-     * Before setting the strategy, you can call
-     * [isPhotoQualityPrioritizationSupported]{@link camera.PhotoOutput.isPhotoQualityPrioritizationSupported} to check
+     * 
+     * Before setting the strategy, you can call 
+     * [isPhotoQualityPrioritizationSupported]{@link camera.PhotoOutput.isPhotoQualityPrioritizationSupported} to check 
      * whether the device supports the specified photo quality prioritization strategy.
      *
      * @param { PhotoQualityPrioritization } qualityPrioritization - Photo quality prioritization strategy.
@@ -13991,21 +14676,23 @@ declare namespace camera {
 
     /**
      * Obtains the photo rotation angle.
-     *
-     * - Device's natural orientation: the default orientation for using a device. For example, the default orientation
+     * 
+     * - Device' natural orientation: the default orientation for using a device. For example, the default orientation 
      * of the bar-type phone is in portrait mode, with the charging port facing downward.
-     * - Camera lens angle: equivalent to the angle at which the camera is rotated clockwise to match the device's
-     * natural orientation. For example, the rear camera sensor of a bar-type phone is installed in landscape mode.
+     * - Camera lens angle: equivalent to the angle at which the camera is rotated clockwise to match the device's 
+     * natural orientation. For example, the rear camera sensor of a bar-type phone is installed in landscape mode. 
      * Therefore, it needs to be rotated by 90 degrees clockwise to match the device's natural orientation.
      *
-     * @param { int } deviceDegree - Device rotation angle, measured in degrees, within the range of [0, 360].<br>If the
-     *     input value goes beyond this range, the system uses the remainder of the input value divided by 360.<br>Since
-     *     API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the system
-     *     obtains the **deviceDegree** value to calculate the photo rotation angle. [since 12 - 22]
-     * @param { int } [deviceDegree] - Device rotation angle, measured in degrees, within the range of [0, 360].<br>If
-     *     the input value goes beyond this range, the system uses the remainder of the input value divided by 360.<br>
-     *     Since API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the system
-     *     obtains the **deviceDegree** value to calculate the photo rotation angle. [since 23]
+     * @param { int } deviceDegree - Device rotation angle, measured in degrees, within the range of [0, 360].
+     *     <br>If the input value goes beyond this range, the system uses the remainder of the input value divided by 36
+     *     0.
+     *     <br>Since API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the
+     *     system obtains the **deviceDegree** value to calculate the photo rotation angle. [since 12 - 22]
+     * @param { int } [deviceDegree] - Device rotation angle, measured in degrees, within the range of [0, 360].
+     *     <br>If the input value goes beyond this range, the system uses the remainder of the input value divided by 36
+     *     0.
+     *     <br>Since API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the
+     *     system obtains the **deviceDegree** value to calculate the photo rotation angle. [since 23]
      * @returns { ImageRotation } Rotation angle of the photo. If the API call fails, undefined is returned.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 22]
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -14133,9 +14820,10 @@ declare namespace camera {
     enableOriginalImageGeneration(enabled: boolean): void;
 
     /**
-     * Confirm if auto extended gainmap delivery supported.
-     * 
-     * @returns { boolean } TRUE if the auto extended gainmap delivery is supported.
+     * Checks whether automatic extended gain map delivery is supported.
+     *
+     * @returns { boolean } Whether automatic extended gain map delivery is supported. The value **true** indicates it
+     *     is supported, and the value **false** indicates it is not supported.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -14144,9 +14832,10 @@ declare namespace camera {
     isAutoExtendedGainmapDeliverySupported(): boolean;
 
     /**
-     * Enable auto extended gainmap delivery.
-     * 
-     * @param { boolean } enabled - enable auto extended gainmap delivery if TRUE.
+     * Enables or disables automatic extended gain map delivery.
+     *
+     * @param { boolean } enabled - Whether to enable automatic extended gain map delivery. The value **true** indicates
+     *     it is enabled, and the value **false** indicates it is disabled.
      * @throws { BusinessError } 7400102 - Operation not allowed.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -14156,6 +14845,39 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     enableAutoExtendedGainmapDelivery(enabled: boolean): void;
+
+    /**
+     * Checks whether C2PA signature is supported.
+     *
+     * @returns { boolean } Check result for the support of C2PA signature. **true** if supported, **false**
+     *     otherwise. If the API call fails, undefined is returned.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isC2PASignatureSupported(): boolean;
+
+    /**
+     * Configures the C2PA signature settings. This API enables or disables C2PA signature and
+     * optionally sets the author information for the C2PA signature.
+     *
+     * Before calling this API, check whether C2PA signature is supported by calling
+     * [isC2PASignatureSupported]{@link camera.PhotoOutput.isC2PASignatureSupported}.
+     *
+     * @param { boolean } enableC2PA - Whether to enable C2PA signature. **true** to enable, **false** to disable.
+     * @param { C2PASignatureConfig } [config] - C2PA signature configuration, which includes the author name and
+     *     author ID. This parameter is optional. If not provided, the C2PA signature will be generated
+     *     without author information.
+     * @throws { BusinessError } 7400113 - An exception occurred in the session currently in use.
+     * @throws { BusinessError } 7400116 - The session does not have camerainput information.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    configureC2PASignature(enableC2PA: boolean, config?: C2PASignatureConfig): void;
   }
 
   /**
@@ -14177,7 +14899,7 @@ declare namespace camera {
      */
     captureId: int;
     /**
-     * Timestamp of the shutter, in milliseconds.
+     * Timestamp when the frame shutter event is triggered, in milliseconds.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -14226,8 +14948,8 @@ declare namespace camera {
      */
     captureId: int;
     /**
-     * Estimated duration when the sensor captures frames at the bottom layer in a single capture. If **–1** is reported
-     * , there is no estimated duration.
+     * Estimated duration when the sensor captures frames at the bottom layer in a single capture. If **-1** is 
+     * reported, there is no estimated duration.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -14296,7 +15018,7 @@ declare namespace camera {
   }
 
   /**
-   * **VideoOutput** implements output information used in a video session. It inherits from
+   * VideoOutput implements output information used in a video session. It inherits from 
    * [CameraOutput]{@link camera.CameraOutput}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14373,11 +15095,11 @@ declare namespace camera {
 
     /**
      * Enables or disables mirror recording.
-     *
-     * - Before calling this API, check whether mirror recording is supported by using
+     * 
+     * - Before calling this API, check whether mirror recording is supported by using 
      * [isMirrorSupported]{@link camera.VideoOutput.isMirrorSupported}.
-     * - After enabling or disabling mirror recording, call
-     * [getVideoRotation]{@link camera.VideoOutput.getVideoRotation} to obtain the rotation angle and
+     * - After enabling or disabling mirror recording, call 
+     * [getVideoRotation]{@link camera.VideoOutput.getVideoRotation} to obtain the rotation angle and 
      * [updateRotation]{@link @ohos.multimedia.media:media.AVRecorder.updateRotation} to update the rotation angle.
      *
      * @param { boolean } enabled - Whether to enable mirror recording. **true** to enable, **false** otherwise.
@@ -14405,13 +15127,18 @@ declare namespace camera {
     getSupportedFrameRates(): Array<FrameRateRange>;
 
     /**
-     * Sets a frame rate range for preview streams. The range must be within the supported frame rate range, which can
-     * be obtained by calling [getSupportedFrameRates]{@link camera.PreviewOutput.getSupportedFrameRates}.
-     *
+     * Sets a frame rate range for video streams. The range must be within the supported frame rate range,
+     * 
+     * which can be obtained by calling [getSupportedFrameRates]{@link camera.VideoOutput.getSupportedFrameRates}.
+     * 
      * > **NOTE**
      * >
-     * > This API is valid only in [PhotoSession]{@link camera.PhotoSession} or
+     * > This API is valid only in [PhotoSession]{@link camera.PhotoSession} or 
      * > [VideoSession]{@link camera.VideoSession} mode.
+     * >
+     * > Before calling this API, call [getActiveFrameRate]{@link camera.VideoOutput.getActiveFrameRate} to obtain the 
+     * > current frame rate of the video session. If the delivered frame rate matches the current frame rate, the 
+     * > delivered frame rate is not applied.
      *
      * @param { int } minFps - Minimum frame rate, in fps. When the maximum value is less than the minimum value, the
      *     API does not take effect.
@@ -14428,8 +15155,9 @@ declare namespace camera {
 
     /**
      * Obtains the configured frame rate range.
-     * This API is valid only after [setFrameRate]{@link camera.PreviewOutput.setFrameRate} is called to set a frame
-     * rate range for preview streams.
+     * 
+     * This API is valid only after [setFrameRate]{@link camera.VideoOutput.setFrameRate} is called to set a frame rate 
+     * range for video streams.
      *
      * @returns { FrameRateRange } Frame rate range.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14441,19 +15169,19 @@ declare namespace camera {
 
     /**
      * Obtains the video rotation angle.
-     *
-     * - Device's natural orientation: the default orientation for using a device. For example, the default orientation
+     * 
+     * - Device' natural orientation: the default orientation for using a device. For example, the default orientation 
      * of the bar-type phone is in portrait mode, with the charging port facing downward.
-     * - Camera lens angle: equivalent to the angle at which the camera is rotated clockwise to match the device's
-     * natural orientation. For example, the rear camera sensor of a bar-type phone is installed in landscape mode.
+     * - Camera lens angle: equivalent to the angle at which the camera is rotated clockwise to match the device's 
+     * natural orientation. For example, the rear camera sensor of a bar-type phone is installed in landscape mode. 
      * Therefore, it needs to be rotated by 90 degrees clockwise to match the device's natural orientation.
      *
-     * @param { int } deviceDegree - Device rotation angle, measured in degrees, within the range of [0, 360].<br>Since
-     *     API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the system
-     *     obtains the **deviceDegree** value to calculate the video rotation angle. [since 12 - 22]
-     * @param { int } [deviceDegree] - Device rotation angle, measured in degrees, within the range of [0, 360].<br>
-     *     Since API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the system
-     *     obtains the **deviceDegree** value to calculate the video rotation angle. [since 23]
+     * @param { int } deviceDegree - Device rotation angle, measured in degrees, within the range of [0, 360].
+     *     <br> Since API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the
+     *     system obtains the **deviceDegree** value to calculate the video rotation angle. [since 12 - 22]
+     * @param { int } [deviceDegree] - Device rotation angle, measured in degrees, within the range of [0, 360].
+     *     <br> Since API version 23, the input parameter **deviceDegree** is optional. If no parameter is passed, the
+     *     system obtains the **deviceDegree** value to calculate the video rotation angle. [since 23]
      * @returns { ImageRotation } Returns the rotation angle of a video. If the API call fails, undefined is returned.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 22]
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -14614,17 +15342,17 @@ declare namespace camera {
     offDeferredVideoEnhancementInfo(callback?: AsyncCallback<DeferredVideoEnhancementInfo>): void;
 
     /**
-     * Subscribes to preview frame start events. This API uses an asynchronous callback to return the result.
-     *
+     * Subscribes to video recording start events. This API uses an asynchronous callback to return the result.
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'frameStart' } type - Event type. The value is fixed at **'frameStart'**. The event can be listened for
-     *     when a previewOutput instance is created. This event is triggered and returned when the bottom layer starts
-     *     exposure for the first time.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. The preview starts as long as this
-     *     event is returned.
+     *     when a videoOutput instance is created. The event is triggered and the corresponding information is returned
+     *     when the bottom layer starts exposure for the first time.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result.  The recording starts as long as
+     *     this event is returned.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
      * @since 10 dynamic
@@ -14641,11 +15369,15 @@ declare namespace camera {
     onFrameStart(callback: AsyncCallback<void>): void;
 
     /**
-     * Unsubscribes from preview frame start events.
+     * Unsubscribes from video recording start events.
+     * 
+     * > **NOTE**
+     * >
+     * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'frameStart' } type - Event type. The value is fixed at **'frameStart'**. The event can be listened for
-     *     when a previewOutput instance is created.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If this parameter is specified, the
+     *     when a videoOutput instance is created.
+     * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -14665,16 +15397,12 @@ declare namespace camera {
     offFrameStart(callback?: AsyncCallback<void>): void;
 
     /**
-     * Subscribes to preview frame end events. This API uses an asynchronous callback to return the result.
-     *
-     * > **NOTE**
-     * >
-     * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
+     * Subscribes to video recording stop events. This API uses an asynchronous callback to return the result.
      *
      * @param { 'frameEnd' } type - Event type. The value is fixed at **'frameEnd'**. The event can be listened for when
-     *     a previewOutput instance is created. This event is triggered and returned when the last frame of preview
-     *     ends.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. The preview ends as long as this
+     *     a videoOutput instance is created. This event is triggered and returned when the last frame of recording is
+     *     complete.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. The recording ends as long as this
      *     event is returned.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -14692,11 +15420,11 @@ declare namespace camera {
     onFrameEnd(callback: AsyncCallback<void>): void;
 
     /**
-     * Unsubscribes from preview frame end events.
+     * Unsubscribes from video recording stop events.
      *
      * @param { 'frameEnd' } type - Event type. The value is fixed at **'frameEnd'**. The event can be listened for when
-     *     a previewOutput instance is created.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If this parameter is specified, the
+     *     a videoOutput instance is created.
+     * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -14716,17 +15444,16 @@ declare namespace camera {
     offFrameEnd(callback?: AsyncCallback<void>): void;
 
     /**
-     * Subscribes to metadata error events. This API uses an asynchronous callback to return the result.
-     *
+     * Subscribes to VideoOutput error events. This API uses an asynchronous callback to return the result.
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     metadataOutput instance is created. This event is triggered and the corresponding error message is returned
-     *     when an error occurs during the use of a metadata-related API such as
-     *     [start]{@link camera.MetadataOutput.start()} or
-     *     [CameraOutput.release]{@link camera.CameraOutput.release()}.
+     *     videoOutput instance is created. This event is triggered and the corresponding error message is returned when
+     *     an error occurs during the use of a recording-related API such as [start]{@link camera.VideoOutput.start()}
+     *     or [CameraOutput.release]{@link camera.CameraOutput.release()}.
      * @param { ErrorCallback } callback - Callback used to return an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode}.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14745,11 +15472,11 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from metadata error events.
+     * Unsubscribes from VideoOutput error events.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     metadataOutput instance is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     *     photoOutput instance is created.
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -14849,7 +15576,7 @@ declare namespace camera {
     FACE_DETECTION = 0,
 
     /**
-     * Metadata object used for human body detection.
+     * Metadata object used for body detection.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 22]
@@ -14921,7 +15648,7 @@ declare namespace camera {
     SALIENT_DETECTION = 6,
 
     /**
-     * Barcode detection type.
+     * Metadata object used for QR code detection.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 24]
@@ -14933,7 +15660,7 @@ declare namespace camera {
     BAR_CODE_DETECTION = 7,
 
     /**
-     * Basic face detection type.
+     * Metadata object for basic face detection.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 23 - 24]
@@ -15005,16 +15732,18 @@ declare namespace camera {
   }
 
   /**
-   * Describes a rectangle. The coordinate system for the returned detection points is based on the landscape device
+   * Describes a rectangle. The coordinate system for the returned detection points is based on the landscape device 
    * orientation, with the charging port on the right. In this coordinate system, the top-left corner is (0, 0), and the
    * bottom-right corner is (1, 1). Here, **topLeftX** and **topLeftY** represent the coordinates of the top-left corner
-   * of the rectangle, whereas **width** and **height** represent the width and height of the rectangle, respectively.
-   * When cropping or selecting a face region based on specific requirements, the x and y coordinates of the rectangle
-   * must be multiplied by the width and height of the actual camera preview output stream to obtain the cropped face
+   * of the rectangle, whereas **width** and **height** represent the width and height of the rectangle, respectively. 
+   * When cropping or selecting a face region based on specific requirements, the x and y coordinates of the rectangle 
+   * must be multiplied by the width and height of the actual camera preview output stream to obtain the cropped face 
    * region.
+   * 
    * The width and height of the actual preview stream refer to the resolution of the camera output stream. For details,
    * see **size** in [profile]{@link camera.Profile}.
-   * For details about how to obtain the preview stream data, see
+   * 
+   * For details about how to obtain the preview stream data, see 
    * [Dual-Channel Preview (ArkTS)](docroot://media/camera/camera-dual-channel-preview.md).
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15073,7 +15802,7 @@ declare namespace camera {
    */
   enum Emotion {
     /**
-     * Quiet and calm.
+     * Neutral.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 24]
@@ -15122,9 +15851,8 @@ declare namespace camera {
   }
 
   /**
-   * Implements the basic metadata object used for camera detection. It serves as the data source of the camera
-   * information in [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
-   * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
+   * Describes the camera metadata, which is the data source of [CameraInput]{@link camera.CameraInput}. The metadata is
+   * obtained through **metadataOutput.on('metadataObjectsAvailable')**.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -15143,7 +15871,7 @@ declare namespace camera {
     readonly type: MetadataObjectType;
 
     /**
-     * Current timestamp, in nanoseconds (ns).
+     * Timestamp, in ns.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -15194,7 +15922,10 @@ declare namespace camera {
   }
 
   /**
-   * Metadata object for basic face.
+   * Basic face metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. 
+   * It serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained 
+   * by calling metadataOutput.
+   * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 23 - 24]
@@ -15204,7 +15935,7 @@ declare namespace camera {
    */
   interface MetadataBasicFaceObject extends MetadataObject {
     /**
-     * Bounding box for left eye.
+     * Left eye area.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 23 - 24]
@@ -15215,7 +15946,7 @@ declare namespace camera {
     readonly leftEyeBoundingBox?: Rect;
 
     /**
-     * Bounding box for right eye.
+     * Right eye area.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 23 - 24]
@@ -15226,7 +15957,7 @@ declare namespace camera {
     readonly rightEyeBoundingBox?: Rect;
 
     /**
-     * Pitch angle for face.
+     * Pitch angle. The value range is [-90, 90], with the positive direction being downwards.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 23 - 24]
@@ -15237,7 +15968,7 @@ declare namespace camera {
     readonly pitchAngle?: int;
 
     /**
-     * Yaw angle for face.
+     * Yaw angle. The value range is [-90, 90], with the positive direction being rightwards.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 23 - 24]
@@ -15248,7 +15979,7 @@ declare namespace camera {
     readonly yawAngle?: int;
 
     /**
-     * Roll angle for face.
+     * Roll angle. The value range is [-180, 180], with the positive direction being clockwise.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 23 - 24]
@@ -15260,9 +15991,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the human face metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Face metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. It 
+   * serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained by 
+   * calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15310,7 +16041,7 @@ declare namespace camera {
     readonly emotion: Emotion;
 
     /**
-     * Confidence of the emotion detection, with a value range of [0, 1].
+     * Emotion detection confidence. The value range is [0, 1].
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 24]
@@ -15322,7 +16053,7 @@ declare namespace camera {
     readonly emotionConfidence: double;
 
     /**
-     * Pitch angle, with a value range of [-90, 90], where downward is positive.
+     * Pitch angle. The value range is [-90, 90], with the positive direction being downwards.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 24]
@@ -15334,7 +16065,7 @@ declare namespace camera {
     readonly pitchAngle: int;
 
     /**
-     * Yaw angle, with a value range of [-90, 90], where rightward is positive.
+     * Yaw angle. The value range is [-90, 90], with the positive direction being rightwards.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 24]
@@ -15346,7 +16077,7 @@ declare namespace camera {
     readonly yawAngle: int;
 
     /**
-     * Row angle, with a value range of [-180, 180], where clockwise direction is positive.
+     * Roll angle. The value range is [-180, 180], with the positive direction being clockwise.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 13 - 24]
@@ -15359,9 +16090,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the human body metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Human body metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. 
+   * It serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained 
+   * by calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15375,9 +16106,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the cat face metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Cat face metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. It 
+   * serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained by 
+   * calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15414,9 +16145,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the cat body metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Cat body metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. It 
+   * serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained by 
+   * calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15430,9 +16161,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the dog face metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Dog face metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. It 
+   * serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained by 
+   * calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15469,9 +16200,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the dog body metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Dog body metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. It 
+   * serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained by 
+   * calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15485,8 +16216,8 @@ declare namespace camera {
   }
 
   /**
-   * Implements the salient detection metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
+   * Salient subject metadata detected by the camera, which is extended from 
+   * [MetadataObject]{@link camera.MetadataObject}. It serves as the data source of the camera information in 
    * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
@@ -15501,9 +16232,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements the barcode metadata object used for camera detection. It inherits from
-   * [MetadataObject]{@link camera.MetadataObjectType} and is the data source of the camera information in
-   * [CameraInput]{@link camera.CameraInput}. It is obtained by calling metadataOutput.
+   * Barcode metadata detected by the camera, which is extended from [MetadataObject]{@link camera.MetadataObject}. It 
+   * serves as the data source of the camera information in [CameraInput]{@link camera.CameraInput}. It is obtained by 
+   * calling metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15517,7 +16248,7 @@ declare namespace camera {
   }
 
   /**
-   * Describes the instance returned by the occlusion status callback, which indicates whether the camera lens is
+   * Describes the instance returned by the occlusion status callback, which indicates whether the camera lens is 
    * blocked or dirty.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15554,7 +16285,7 @@ declare namespace camera {
   }
 
   /**
-   * Implements metadata streams. It inherits from [CameraOutput]{@link camera.CameraOutput}.
+   * MetadataOutput implements metadata streams. It inherits from [CameraOutput]{@link camera.CameraOutput}.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -15650,17 +16381,17 @@ declare namespace camera {
     removeMetadataObjectTypes(types: Array<MetadataObjectType>): void;
 
     /**
-     * Subscribes to events indicating available metadata objects. This API uses an asynchronous callback to return the
+     * Subscribes to events indicating available metadata objects. This API uses an asynchronous callback to return the 
      * result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
      *
      * @param { 'metadataObjectsAvailable' } type - Event type. The value is fixed at **'metadataObjectsAvailable'**.
-     *     The event can be listened for when a metadataOutput instance is created.<br>This event is triggered and the
-     *     corresponding metadata is returned when valid metadata is detected. If the input field is incorrect, no valid
-     *     listening will be created.
+     *     The event can be listened for when a metadataOutput instance is created.
+     *     <br>This event is triggered and the corresponding metadata is returned when valid metadata is detected. If
+     *     the input field is incorrect, no valid listening will be created.
      * @param { AsyncCallback<Array<MetadataObject>> } callback - Callback used to return the metadata.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice [since 19]
@@ -15703,7 +16434,7 @@ declare namespace camera {
 
     /**
      * Subscribes to metadata error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -15711,8 +16442,7 @@ declare namespace camera {
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     metadataOutput instance is created. This event is triggered and the corresponding error message is returned
      *     when an error occurs during the use of a metadata-related API such as
-     *     [start]{@link camera.MetadataOutput.start()} or
-     *     [CameraOutput.release]{@link camera.CameraOutput.release()}.
+     *     [start]{@link camera.MetadataOutput.start()} or [CameraOutput.release]{@link camera.CameraOutput.release()}.
      * @param { ErrorCallback } callback - Callback used to return an error code defined in
      *     [CameraErrorCode]{@link camera.CameraErrorCode}.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15731,11 +16461,11 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from metadata error events.
+     * Unsubscribes from VideoOutput error events.
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     metadataOutput instance is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     *     photoOutput instance is created.
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -15755,9 +16485,11 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Confirm if lock metadata object tracking supported.
+     * Checks whether the device supports the function of locking a metadata object (such as a cat or dog face) for 
+     * tracking.
      *
-     * @returns { boolean } TRUE if the lock metadata object tracking is supported.
+     * @returns { boolean } Whether the device supports the function of locking a metadata object for tracking. **true**
+     *     if supported; **false** otherwise.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
@@ -15766,9 +16498,17 @@ declare namespace camera {
     isLockMetadataObjectTrackingSupported(): boolean;
 
     /**
-     * Lock metadata object tracking.
+     * Locks a metadata object (such as a cat or dog face) for tracking.
+     * 
+     * > **NOTE**
+     * >
+     * > - This function tracks the object pointed to by **point**. If such object does not exist, this function does 
+     * > not take effect.
+     * >
+     * > - Locking for tracking is automatically canceled when the tracked object has left the viewfinder range for more
+     * > than three seconds or the object is unlocked.
      *
-     * @param { Point } point - lock metadata object tracking point.
+     * @param { Point } point - Point used to lock the metadata object for tracking.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15779,7 +16519,7 @@ declare namespace camera {
     lockMetadataObjectTracking(point: Point): void;
 
     /**
-     * Unlock metadata object tracking.
+     * Unlocks the metadata object (such as a cat or dog face) for tracking.
      *
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -15950,7 +16690,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
+     * @param { ErrorCallback } [callback] - Callback used to return the result. This parameter is optional. If this
      *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
      *     is canceled. (The callback object cannot be an anonymous function.)
      * @throws { BusinessError } 202 - Not System Application.
@@ -16356,10 +17096,9 @@ declare namespace camera {
 
   /**
    * Control center session object.
-   * 
+   *
    * @extends Beauty, Aperture [since 20 - 24]
    * @extends Beauty, Aperture, ColorEffect [since 26.0.0]
-   *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 20 dynamic
@@ -16664,7 +17403,7 @@ declare namespace camera {
 
     /**
      * Subscribes to depth data availability events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -16719,7 +17458,7 @@ declare namespace camera {
 
     /**
      * Subscribes to DepthDataOutput error events. This API uses an asynchronous callback to return the result.
-     *
+     * 
      * > **NOTE**
      * >
      * > Currently, you cannot use **off()** to unregister the callback in the callback method of **on()**.
@@ -16751,7 +17490,7 @@ declare namespace camera {
      *
      * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
      *     depthDataOutput instance is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. If this parameter is specified, the
+     * @param { ErrorCallback } [callback] - Callback used to return the result. If this parameter is specified, the
      *     subscription to the specified event with the specified callback is canceled. (The callback object cannot be
      *     an anonymous function.) Otherwise, the subscriptions to the specified event with all the callbacks are
      *     canceled.
@@ -16925,8 +17664,8 @@ declare namespace camera {
     getColorReservation(): ColorReservationType;
 
     /**
-     * Sets a color reservation type. Before the setting, call 
-     * [getSupportedColorReservationTypes]{@link camera.ColorReservationQuery.getSupportedColorReservationTypes} to 
+     * Sets a color reservation type. Before the setting, call
+     * [getSupportedColorReservationTypes]{@link camera.ColorReservationQuery.getSupportedColorReservationTypes} to
      * obtain the supported color reservation types.
      *
      * @param { ColorReservationType } type - Color reservation type, which is obtained by calling
@@ -17471,6 +18210,39 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     AUTOMOTIVE_CAMERA_POSITION_INTERIOR_ROW_3_RIGHT = 14
+  }
+
+  /**
+   * Describes the C2PA signature configuration, which includes the author name and author ID for C2PA
+   * signature generation.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  interface C2PASignatureConfig{
+    /**
+     * Author ID for the C2PA signature. This field is optional. If not set, the author ID
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorID?: string;
+
+    /**
+     * Author name for the C2PA signature. This field is optional. If not set, the author name
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorName?: string;
   }
 }
 

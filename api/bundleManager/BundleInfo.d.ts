@@ -14,21 +14,20 @@
  */
 
 /**
- * The module defines the bundle information. An application can obtain its own bundle information through 
- * [bundleManager.getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}
- * , with [bundleFlags]{@link @ohos.bundle.bundleManager:bundleManager.BundleFlag} set to the information to be 
- * contained in the returned [BundleInfo]{@link BundleInfo}.
- *
- * @file
+ * @file BundleInfo
  * @kit AbilityKit
  */
 
 import { ApplicationInfo } from './ApplicationInfo';
 import { HapModuleInfo, RouterItem } from './HapModuleInfo';
+import { Validity } from './AppProvisionInfo';
 import bundleManager from './../@ohos.bundle.bundleManager';
 
 /**
- * The module defines the bundle information.
+ * The module defines the bundle information. An application can obtain its own bundle information through
+ * [bundleManager.getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}, with
+ * [bundleFlags]{@link @ohos.bundle.bundleManager:bundleManager.BundleFlag} set to the information to be contained in
+ * the returned [BundleInfo]{@link ./BundleInfo}.
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @crossplatform [since 20]
@@ -112,7 +111,7 @@ export interface BundleInfo {
   /**
    * Application information. The information can be obtained by passing in **GET_BUNDLE_INFO_WITH_APPLICATION** to the
    * **bundleFlags** parameter of
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}.
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -133,7 +132,7 @@ export interface BundleInfo {
   /**
    * Module configuration information. The information can be obtained by passing in **GET_BUNDLE_INFO_WITH_HAP_MODULE**
    * to the **bundleFlags** parameter of
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}.
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -146,10 +145,9 @@ export interface BundleInfo {
   /**
    * Detailed information of the permissions to request from the system. The information can be obtained by passing in
    * **GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION** to the **bundleFlags** parameter of
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}.
-   * The indices of the **reqPermissionDetails** array and the **permissionGrantStates** array are in one-to-one
-   * correspondence, meaning that the authorization status of **reqPermissionDetails[2]** is
-   * **permissionGrantStates[2]**.
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}. The indices of the
+   * **reqPermissionDetails** array and the **permissionGrantStates** array are in one-to-one correspondence, meaning
+   * that the authorization status of **reqPermissionDetails[2]** is **permissionGrantStates[2]**.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -162,10 +160,9 @@ export interface BundleInfo {
   /**
    * Permission grant state. The information can be obtained by passing in **GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION**
    * to the **bundleFlags** parameter of
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}.
-   * The indices of the **reqPermissionDetails** array and the **permissionGrantStates** array are in one-to-one
-   * correspondence, meaning that the authorization status of **reqPermissionDetails[2]** is
-   * **permissionGrantStates[2]**.
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}. The indices of the
+   * **reqPermissionDetails** array and the **permissionGrantStates** array are in one-to-one correspondence, meaning
+   * that the authorization status of **reqPermissionDetails[2]** is **permissionGrantStates[2]**.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -178,7 +175,7 @@ export interface BundleInfo {
   /**
    * Signature information of the bundle. The information can be obtained by passing in
    * **GET_BUNDLE_INFO_WITH_SIGNATURE_INFO** to the **bundleFlags** parameter of
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}.
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -229,7 +226,7 @@ export interface BundleInfo {
    * Router table of the application. The table is obtained by deduplicating and combining the **routerMap** information
    * under **hapModulesInfo** based on the **name** field in **RouterItem**. The information can be obtained by passing
    * in **GET_BUNDLE_INFO_WITH_HAP_MODULE** and **GET_BUNDLE_INFO_WITH_ROUTER_MAP** to the **bundleFlags** parameter of
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}.
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @atomicservice
@@ -261,7 +258,8 @@ export interface BundleInfo {
 
   /**
    * Build version number of the application package, which identifies different build version packages under the same
-   * release version. It corresponds to the buildVersion field in the app.json5 file.
+   * release version. It corresponds to the **buildVersion** field in the
+   * [app.json5](docroot://quick-start/app-configuration-file.md) file.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
@@ -271,7 +269,7 @@ export interface BundleInfo {
   readonly buildVersion?: string;
 
   /**
-   * Bundle name of the sandbox application creator.
+   * Bundle name of the creator of the sandbox clone.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -279,6 +277,27 @@ export interface BundleInfo {
    * @since 26.0.0 dynamic&static
    */
   readonly sandboxCreatorBundleName?: string;
+
+  /**
+   * Define the enumeration of device mode distribution policies, which is used to specify how an application
+   * is distributed on a device.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly deviceModeDistributionPolicy?: bundleManager.DeviceModeDistributionPolicy;
+
+  /**
+   * App sandbox policy for dual-mode (2in1/tablet) scenarios.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appSandboxPolicy?: bundleManager.AppSandboxPolicy;
 }
 
 /**
@@ -352,8 +371,7 @@ export interface ReqPermissionDetail {
 }
 
 /**
- * Describes the use scenario and timing of the permission,
- * helping developers request and use permissions properly.
+ * Describes the use scenario and timing of the permission, helping developers request and use permissions properly.
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @crossplatform [since 20]
@@ -386,8 +404,8 @@ export interface UsedScene {
 }
 
 /**
- * Describes the signature information of the app package,which can identifythe app source, ensure app integrity,
- * and be used for app security verification and identification.
+ * Describes the signature information of the app package, which can identify the app source, ensure app integrity, and
+ * be used for app security verification and identification.
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @crossplatform [since 20]
@@ -440,6 +458,16 @@ export interface SignatureInfo {
    * @since 23 static
    */
   readonly certificate?: string;
+
+  /**
+   * Validity period in the signing certificate file.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly validity?: Validity;
 }
 
 /**
@@ -459,8 +487,8 @@ export interface AppCloneIdentity {
    */
   readonly bundleName: string;
   /**
-   * Clone index information of the app package. The value is an integer ranging from [0-5],
-   * where 0 indicates the main app and 1-5 indicate clone apps.
+   * Clone index information of the app package. The value is an integer ranging from [0-5], where 0 indicates the main
+   * app and 1-5 indicate clone apps.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @since 14 dynamic
@@ -470,7 +498,7 @@ export interface AppCloneIdentity {
 }
 
 /**
- * Obtains dynamic icon information about a bundle
+ * Describes the information about the dynamic icon of an application.
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @systemapi
@@ -479,7 +507,7 @@ export interface AppCloneIdentity {
  */
 export interface DynamicIconInfo {
   /**
-   * Indicates the name of the bundle.
+   * Bundle name of the application associated with the dynamic icon.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -489,7 +517,7 @@ export interface DynamicIconInfo {
   readonly bundleName: string;
 
   /**
-   * Indicates the name of the dynamic icon.
+   * Module name of the application associated with the dynamic icon.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -499,7 +527,7 @@ export interface DynamicIconInfo {
   readonly moduleName: string;
 
   /**
-   * Indicates the user id of the bundle.
+   * User ID of the application associated with the dynamic icon.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -509,7 +537,7 @@ export interface DynamicIconInfo {
   readonly userId: int;
 
   /**
-   * Indicates the index of the bundle.
+   * Index of the application clone associated with the dynamic icon.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -537,8 +565,8 @@ export interface AlternateIconInfo {
   readonly iconName: string;
 
   /**
-   * Resource ID of the backup icon, which is automatically generated
-   * during compilation and build based on the icon configured in the app.
+   * Resource ID of the backup icon, which is automatically generated during compilation and build based on the icon
+   * configured in the app.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
@@ -548,8 +576,14 @@ export interface AlternateIconInfo {
 
   /**
    * Whether the backup icon is enabled.
+   *
    * true: The current backup icon is enabled.
+   *
    * false: The current backup icon is not enabled.
+   *
+   * NOTE
+   *
+   * An app can enable at most one backup icon.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
@@ -559,7 +593,7 @@ export interface AlternateIconInfo {
 }
 
 /**
- * The bundle options of bundle manager
+ * Describes the bundle options used to set or query application information.
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @systemapi
@@ -568,7 +602,7 @@ export interface AlternateIconInfo {
  */
 export interface BundleOptions {
   /**
-   * Indicates the user id.
+   * User ID. By default, the user is the current caller.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -578,7 +612,7 @@ export interface BundleOptions {
   userId?: int;
 
   /**
-   * Indicates the app index.
+   * Index of an application clone. The default value is **0**, indicating the main application.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -588,7 +622,7 @@ export interface BundleOptions {
   appIndex?: int;
 
   /**
-   * Indicates bundle name
+   * Application bundle name. Default Value: Empty String.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -598,7 +632,7 @@ export interface BundleOptions {
   bundleName?: string;
 
   /**
-   * Indicates module name
+   * Name of the module to which the ability belongs. Default Value: Empty String.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -608,7 +642,7 @@ export interface BundleOptions {
   moduleName?: string;
 
   /**
-   * Indicates ability name
+   * Ability name. Default Value: Empty String.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -619,34 +653,84 @@ export interface BundleOptions {
 }
 
 /**
- * Defines the application clone preference configuration.
+ * App clone preference, used to configure the selection policy between the main app and the clone app at app startup.
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @systemapi
  * @stagemodelonly
- * @since 26.1.0 dynamic&static
+ * @since 26.0.0 dynamic&static
  */
 export interface AppClonePreference {
   /**
-   * Preference mode for application cloning.
+   * Mode of the app clone preference settings.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.0 dynamic&static
    */
   mode: bundleManager.AppClonePreferenceMode;
 
   /**
-   * Index of the application clone.
-   * This value is valid only when the mode is CLONE_APP.
-   * The value ranges from 1 to 5 (maximum 5 clones are supported).
+   * Index of the app clone.<br>This parameter is mandatory when **mode** is set to **AppClonePreferenceMode.CLONE_APP**,
+   * and is used to specify a specific clone app. The value is an integer ranging
+   * from 1 to 5 (the system supports a maximum of 5 clones).
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  appIndex?: int;
+}
+
+/**
+ * Defines bundle extension policy information.
+ *
+ * @syscap SystemCapability.BundleManager.BundleFramework.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamic&static
+ */
+export interface BundleExtensionPolicyInfo {
+  /**
+   * Bundle name of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly bundleName: string;
+
+  /**
+   * Index of an application.
    * The value should be an integer.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
-  appIndex?: int;
+  readonly appIndex: int;
+
+  /**
+   * The device mode distribution policy of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly deviceModeDistributionPolicy: bundleManager.DeviceModeDistributionPolicy;
+
+  /**
+   * The application sandbox policy.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appSandboxPolicy: bundleManager.AppSandboxPolicy;
 }

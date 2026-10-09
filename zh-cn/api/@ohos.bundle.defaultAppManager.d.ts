@@ -14,16 +14,21 @@
  */
 
 /**
- * @file
+ * @file 默认应用管理
  * @kit AbilityKit
  */
 
 import { AsyncCallback } from './@ohos.base';
+import { AbilityInfo } from './bundleManager/AbilityInfo';
 import { BundleInfo } from './bundleManager/BundleInfo';
 import { ElementName } from './bundleManager/ElementName';
 
 /**
- * 本模块提供查询默认应用的能力，支持查询当前应用是否是默认应用。
+ * 本模块提供查询，设置和重置默认应用的能力，支持查询当前应用是否是默认应用。
+ * 
+ * > **说明：**
+ * >
+ * > 当前页面仅包含本模块的系统接口，其他公开接口参见[@ohos.bundle.defaultAppManager]{@link defaultAppManager}。
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
  * @since 9 dynamic
@@ -113,13 +118,13 @@ declare namespace defaultAppManager {
   }
 
   /**
-   * 根据系统已定义的应用类型或者[UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor}类型判断当前应用是否是该类型的默认应用。使用
-   * callback异步回调。
+   * 根据系统已定义的应用类型或者[UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型判断当前
+   * 应用是否是该类型的默认应用。使用callback异步回调。
    *
    * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}或者
-   *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor}类型中的值。
-   * @param { AsyncCallback<boolean> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当获取成功时，err为undefined，data为bool值
-   *     ，true表示是默认应用，false表示不是默认应用；否则为错误对象。
+   *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型中的值。
+   * @param { AsyncCallback<boolean> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当获取成功时，err为undefined，
+   *     data为bool值，true表示是默认应用，false表示不是默认应用；否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -134,7 +139,7 @@ declare namespace defaultAppManager {
    * 应用是否是该类型的默认应用。使用Promise异步回调。
    *
    * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}或者
-   *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor}类型中的值。
+   *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型中的值。
    * @returns { Promise<boolean> } Promise对象，返回当前应用是否是默认应用，true表示是默认应用，false表示不是默认应用。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types.
@@ -146,11 +151,11 @@ declare namespace defaultAppManager {
   function isDefaultApplication(type: string) : Promise<boolean>;
 
   /**
-   * 以同步方法根据系统已定义的应用类型或者[UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor}类型判断当前应用是否是该类型的默认
-   * 应用，使用boolean形式返回结果。
+   * 以同步方法根据系统已定义的应用类型或者[UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类
+   * 型判断当前应用是否是该类型的默认应用，使用boolean形式返回结果。
    *
    * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}或者
-   *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor}类型中的值。
+   *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型中的值。
    * @returns { boolean } 返回当前应用是否是默认应用，true表示是默认应用，false表示不是默认应用。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types.
@@ -167,14 +172,13 @@ declare namespace defaultAppManager {
    * callback异步回调。
    *
    * @permission ohos.permission.GET_DEFAULT_APPLICATION
-   * @param { string } type - 要查询的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。
-   * @param { AsyncCallback<BundleInfo> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当获取成功时，err为undefined，data为获取
-   *     到的应用信息；否则为错误对象。
+   * @param { AsyncCallback<BundleInfo> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当获取成功时，err为
+   *     undefined，data为获取到的应用信息；否则为错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -196,11 +200,10 @@ declare namespace defaultAppManager {
    * callback异步回调。
    *
    * @permission ohos.permission.GET_DEFAULT_APPLICATION
-   * @param { string } type - 要查询的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
-   * @param { AsyncCallback<BundleInfo> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当获取成功时，err为undefined，data为获取
-   *     到的应用信息；否则为错误对象。
+   * @param { AsyncCallback<BundleInfo> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当获取成功时，err为
+   *     undefined，data为获取到的应用信息；否则为错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -221,11 +224,10 @@ declare namespace defaultAppManager {
    * 异步回调。
    *
    * @permission ohos.permission.GET_DEFAULT_APPLICATION
-   * @param { string } type - 要查询的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。默认值：调用方所在用户。
    * @returns { Promise<BundleInfo> } Promise对象，返回默认应用包信息。
    * @throws { BusinessError } 201 - Permission denied.
@@ -249,11 +251,10 @@ declare namespace defaultAppManager {
    * BundleInfo返回结果。
    *
    * @permission ohos.permission.GET_DEFAULT_APPLICATION
-   * @param { string } type - 要查询的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要查询的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。默认值：调用方所在用户。
    * @returns { BundleInfo } 返回的默认应用包信息。
    * @throws { BusinessError } 201 - Permission denied.
@@ -275,17 +276,17 @@ declare namespace defaultAppManager {
    * 根据系统已定义的应用类型或者符合媒体类型格式（type/subtype）的文件类型或者
    * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型设置默认应用。使用callback异
    * 步回调。
+   * 将应用设置为默认浏览器时，目标应用必须已被授予ohos.permission.DEFAULT_WEB_BROWSER权限，否则返回错误码18000001。 [since 26.0.1]
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要设置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要设置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { ElementName } elementName - 要设置为默认应用的组件信息。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。
-   * @param { AsyncCallback<void> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当设置默认应用成功时，err返回undefined。否则回调函数返回
-   *     具体错误对象。
+   * @param { AsyncCallback<void> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当设置默认应用成功时，err返回
+   *     undefined。否则回调函数返回具体错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -294,6 +295,8 @@ declare namespace defaultAppManager {
    * @throws { BusinessError } 17700004 - The specified user ID is not found.
    * @throws { BusinessError } 17700025 - The specified type is invalid.
    * @throws { BusinessError } 17700028 - The specified ability does not match the type.
+   * @throws { BusinessError } 18000001 - The specified type is Web Browser and the specified application does not
+   *     have the ohos.permission.DEFAULT_WEB_BROWSER permission. [since 26.0.1]
    * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
    * @systemapi
    * @since 9 dynamic
@@ -305,14 +308,14 @@ declare namespace defaultAppManager {
    * 根据系统已定义的应用类型或者符合媒体类型格式（type/subtype）的文件类型或者
    * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型设置默认应用。使用callback异
    * 步回调。
+   * 将应用设置为默认浏览器时，目标应用必须已被授予ohos.permission.DEFAULT_WEB_BROWSER权限，否则返回错误码18000001。 [since 26.0.1]
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要设置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要设置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { ElementName } elementName - 要设置为默认应用的组件信息。
-   * @param { AsyncCallback<void> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当设置默认应用成功时，err返回undefined。否则回调函数返回
-   *     具体错误对象。
+   * @param { AsyncCallback<void> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当设置默认应用成功时，err返回
+   *     undefined。否则回调函数返回具体错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -320,6 +323,8 @@ declare namespace defaultAppManager {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 17700025 - The specified type is invalid.
    * @throws { BusinessError } 17700028 - The specified ability does not match the type.
+   * @throws { BusinessError } 18000001 - The specified type is Web Browser and the specified application does not
+   *     have the ohos.permission.DEFAULT_WEB_BROWSER permission. [since 26.0.1]
    * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
    * @systemapi
    * @since 9 dynamic
@@ -331,14 +336,14 @@ declare namespace defaultAppManager {
    * 根据系统已定义的应用类型或者符合媒体类型格式（type/subtype）的文件类型或者
    * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型设置默认应用。使用Promise异步
    * 回调。
+   * 将应用设置为默认浏览器时，目标应用必须已被授予ohos.permission.DEFAULT_WEB_BROWSER权限，否则返回错误码18000001。 [since 26.0.1]
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要设置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要设置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { ElementName } elementName - 要设置为默认应用的组件信息。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。默认值：调用方所在用户。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
@@ -349,6 +354,8 @@ declare namespace defaultAppManager {
    * @throws { BusinessError } 17700004 - The specified user ID is not found.
    * @throws { BusinessError } 17700025 - The specified type is invalid.
    * @throws { BusinessError } 17700028 - The specified ability does not match the type.
+   * @throws { BusinessError } 18000001 - The specified type is Web Browser and the specified application does not
+   *     have the ohos.permission.DEFAULT_WEB_BROWSER permission. [since 26.0.1]
    * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
    * @systemapi
    * @since 9 dynamic
@@ -359,14 +366,14 @@ declare namespace defaultAppManager {
   /**
    * 以同步方法根据系统已定义的应用类型或者符合媒体类型格式（type/subtype）的文件类型或者
    * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型设置默认应用。
+   * 将应用设置为默认浏览器时，目标应用必须已被授予ohos.permission.DEFAULT_WEB_BROWSER权限，否则返回错误码18000001。 [since 26.0.1]
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要设置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要设置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { ElementName } elementName - 要设置为默认应用的组件信息。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。默认值：调用方所在用户。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
@@ -376,6 +383,8 @@ declare namespace defaultAppManager {
    * @throws { BusinessError } 17700004 - The specified user ID is not found.
    * @throws { BusinessError } 17700025 - The specified type is invalid.
    * @throws { BusinessError } 17700028 - The specified ability does not match the type.
+   * @throws { BusinessError } 18000001 - The specified type is Web Browser and the specified application does not
+   *     have the ohos.permission.DEFAULT_WEB_BROWSER permission. [since 26.0.1]
    * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
    * @systemapi
    * @since 10 dynamic
@@ -385,18 +394,20 @@ declare namespace defaultAppManager {
 
   /**
    * 以同步方法将分身应用设置为打开相应type类型的默认应用。
+   * 将应用设置为默认浏览器时，目标应用必须已被授予ohos.permission.DEFAULT_WEB_BROWSER权限，否则返回错误码18000001。 [since 26.0.1]
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION or
    *     (ohos.permission.SET_DEFAULT_APPLICATION and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS)
-   * @param { string } type - 要设置的应用类型，支持取值包括：
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值、
+   * @param { string } type - 要设置的应用类型，支持取值包括：[ApplicationType]{@link defaultAppManager.ApplicationType}中的值、
    *     [MIMEType](docroot://database/uniform-data-type-list.md#基础类型)类型、或
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { ElementName } elementName - 要设置为默认应用的组件信息，仅使用其中的bundleName、abilityName、moduleName属性，且三个属性必须设置。
-   * @param { int } appIndex - 表示分身应用的索引。<br>取值范围：1、2、3、4、5。
+   * @param { int } appIndex - 表示分身应用的索引。
+   *     <br>取值范围：1、2、3、4、5。
    * @param { int } [userId] - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
-   *     获取。<br>默认值：调用方所在用户Id。
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     获取。
+   *     <br>默认值：调用方所在用户ID。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -404,6 +415,8 @@ declare namespace defaultAppManager {
    * @throws { BusinessError } 17700025 - The specified type is invalid.
    * @throws { BusinessError } 17700028 - The specified ability and type do not match.
    * @throws { BusinessError } 17700061 - The specified app index is invalid.
+   * @throws { BusinessError } 18000001 - The specified type is Web Browser and the specified application does not
+   *     have the ohos.permission.DEFAULT_WEB_BROWSER permission. [since 26.0.1]
    * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
    * @systemapi
    * @since 23 dynamic&static
@@ -416,14 +429,13 @@ declare namespace defaultAppManager {
    * 步回调。
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要重置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要重置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。
-   * @param { AsyncCallback<void> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当重置默认应用成功时，err返回undefined。否则回调函数返回
-   *     具体错误对象。
+   * @param { AsyncCallback<void> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当重置默认应用成功时，err返回
+   *     undefined。否则回调函数返回具体错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -444,11 +456,10 @@ declare namespace defaultAppManager {
    * 步回调。
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要重置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要重置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
-   * @param { AsyncCallback<void> } callback - [回调函数]{@link @ohos.base:AsyncCallback}，当重置默认应用成功时，err返回undefined。否则回调函数返回
-   *     具体错误对象。
+   * @param { AsyncCallback<void> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}，当重置默认应用成功时，err返回
+   *     undefined。否则回调函数返回具体错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -468,11 +479,10 @@ declare namespace defaultAppManager {
    * 回调。
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要重置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要重置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。默认值：调用方所在用户。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
@@ -494,11 +504,10 @@ declare namespace defaultAppManager {
    * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型重置默认应用。
    *
    * @permission ohos.permission.SET_DEFAULT_APPLICATION
-   * @param { string } type - 要重置的应用类型，取
-   *     [ApplicationType]{@link @ohos.bundle.defaultAppManager:defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
+   * @param { string } type - 要重置的应用类型，取[ApplicationType]{@link defaultAppManager.ApplicationType}中的值，或者符合媒体类型格式的文件类型，或者
    *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型。
    * @param { int } userId - 表示用户ID，可以通过
-   *     [getOsAccountLocalId接口]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     获取。默认值：调用方所在用户。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
@@ -513,6 +522,36 @@ declare namespace defaultAppManager {
    * @since 23 static
    */
   function resetDefaultApplicationSync(type: string, userId?: int): void;
+
+  /**
+   * 查询可被设置为指定类型默认应用的应用列表。
+   * 
+   * 当前仅支持`BROWSER`类型的查询。未被授予ohos.permission.DEFAULT_WEB_BROWSER权限的应用将从结果中排除。
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED or
+   *     (ohos.permission.GET_BUNDLE_INFO_PRIVILEGED and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS)
+   * @param { ApplicationType } type - 目标应用类型。当前仅支持`BROWSER`类型的查询，传入其它值时返回错误码17700025。
+   * @param { int } abilityFlags - [AbilityFlag]{@link @ohos.bundle.bundleManager:bundleManager.AbilityFlag}，表示要获取的
+   *     Ability信息。
+   * @param { int } [userId] - 表示用户ID，可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
+   *     获取。默认值：调用方所在用户的用户ID。
+   * @returns { Promise<Array<AbilityInfo>> } Promise对象，返回符合要求的全部应用的Ability信息。未被授予ohos.permission.DEFAULT_WEB_BROWSER权限的
+   *     应用将从结果中排除。若没有符合要求的应用，返回空数组。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 17700004 - The specified user ID is not found.
+   * @throws { BusinessError } 17700025 - The specified type is invalid.
+   * @syscap SystemCapability.BundleManager.BundleFramework.DefaultApp
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getDefaultApplicationCandidates(type: ApplicationType, abilityFlags: int,
+  userId?: int): Promise<Array<AbilityInfo>>;
 }
 
 export default defaultAppManager;

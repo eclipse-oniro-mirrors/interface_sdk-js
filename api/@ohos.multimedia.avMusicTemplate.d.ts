@@ -494,6 +494,18 @@ declare namespace avMusicTemplate {
   type FavoriteMediaEntityEvent = (actionType: MediaFavoriteType, mediaEntity: MediaEntity) => Promise<OperResult>;
 
   /**
+   * The custom command event.
+   *
+   * @param { string } command - request command.
+   * @param { string } args - arguments associated with event.
+   * @returns { Promise<OperResult> } Promise used to return OperResult.
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  type CustomCommandEvent = (command: string, args: string) => Promise<OperResult>;
+
+  /**
    * AVMusicTemplate interface
    * 
    * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
@@ -1209,6 +1221,34 @@ declare namespace avMusicTemplate {
     offFavoriteMediaEntity(callback?: FavoriteMediaEntityEvent): void;
 
     /**
+     * Register custom command callback.
+     *
+     * @param { CustomCommandEvent } callback - The callback used to handle ('sendCustomCommand') event.
+     * @throws { BusinessError } 801 - Capability not supported.function onCustomCommand
+     *     can not work correctly due to limited device capabilities.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000012 - AVMusicTemplate error.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onCustomCommand(callback: CustomCommandEvent): void;
+
+    /**
+     * Unregister custom command callback.
+     *
+     * @param { CustomCommandEvent } [callback] - The callback used to handle ('sendCustomCommand') event.
+     * @throws { BusinessError } 801 - Capability not supported.function offCustomCommand
+     *     can not work correctly due to limited device capabilities.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000012 - AVMusicTemplate error.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offCustomCommand(callback?: CustomCommandEvent): void;
+
+    /**
      * Report user infomation to MediaUI.
      *
      * @param { UserInfo } userInfo - user information
@@ -1783,6 +1823,21 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     favoriteMediaEntity(actionType: MediaFavoriteType, mediaEntity: MediaEntity): Promise<OperResult>;
+
+    /**
+     * Send custom commands to AVMusicTemplate
+     *
+     * @param { string } command - The command name to be sent.
+     * @param { string } args - The parameters of command event.
+     * @returns { Promise<OperResult> } Promise used to return OperResult.
+     * @throws { BusinessError } 35000003 - Template listener not registered.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000006 - AVMusicTemplateController does not exist.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    sendCustomCommand(command: string, args: string): Promise<OperResult>;
 
     /**
      * Register report user info callback.
@@ -3709,6 +3764,15 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     playMode?: string;
+
+    /**
+     * extras of the Media.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    extras?: string;
   }
 
   /**
@@ -3764,6 +3828,185 @@ declare namespace avMusicTemplate {
   }
 
   /**
+   * The definition of SearchPlayKaraokeItem.
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SearchPlayKaraokeItem {  
+    /**
+     * The unique identifier of the media resource.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    entityId: string;
+ 
+    /**
+     * The name of the audio.
+     * When this parameter is left blank, the application searches for audio only based on {@link entityId}.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    entityName?: string;
+  }
+ 
+  /**
+   * The definition of SearchPlayKaraokeInfo.
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SearchPlayKaraokeInfo {  
+ 
+    /**
+     * Search the playlist.
+     * When this parameter is undefined or the array is empty, 
+     *     the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    items?: SearchPlayKaraokeItem[];
+ 
+    /**
+     * Song name.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    songName?: string;
+ 
+    /**
+     * Artist name.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    artist?: string;
+ 
+    /**
+     * Album name.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    albumName?: string;
+ 
+    /**
+     * Ranking name.
+     * When this parameter is left blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    billBoard?: string;
+ 
+    /**
+     * Scene.
+     * When this parameter is left blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    scene?: string;
+ 
+    /**
+     * Style.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    genre?: string;
+ 
+    /**
+     * Musical instruments.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    instrument?: string;
+ 
+    /**
+     * Language.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    language?: string;
+ 
+    /**
+     * Age.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    decade?: string;
+ 
+    /**
+     * Emotions.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    mood?: string;
+ 
+    /**
+     * Gender.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    gender?: string;
+ 
+    /**
+     * Search for keywords.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    queryKeyWord?: string;
+ 
+    /**
+     * Audio extras.
+     * When this value is blank, the application does not search for audio by referring to this field.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    extra?: string;
+  }
+
+  /**
    * The definition of SearchPlayInfo.
    *
    * @interface SearchPlayInfo
@@ -3791,6 +4034,16 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     videoInfo?: SearchPlayVideoInfo;
+
+     /**
+     * Search for information about karaoke songs.
+     * If this parameter is left blank, only the karaoke app is started.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+     karaokeInfo?: SearchPlayKaraokeInfo;
   }
 
 
@@ -4263,7 +4516,43 @@ declare namespace avMusicTemplate {
      * @stagemodelonly
      * @since 23 dynamic&static
      */
-    PLAY_VIDEO = 'playVideo'
+    PLAY_VIDEO = 'playVideo',
+
+    /**
+     * play music list.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_MUSIC_LIST = 'playMusicList',
+
+    /**
+     * play video list.
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_VIDEO_LIST = 'playVideoList',
+ 
+    /**
+     * K song on demand
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_KARAOKE = 'playKaroke',
+ 
+    /**
+     * K song playlist on-demand
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_KARAOKE_LIST = 'playKarokeList'
   }
 
   /**

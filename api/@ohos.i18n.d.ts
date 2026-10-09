@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Internationalization
  * @kit LocalizationKit
  */
 
@@ -238,8 +238,8 @@ declare namespace i18n {
 
     /**
      * Obtains the current system language. To listen for system language changes, enable listening for
-     * [COMMON_EVENT_LOCALE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
-     * . For details, see
+     * [COMMON_EVENT_LOCALE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}.
+     * For details, see
      * [System Language and Region](docroot://internationalization/i18n-system-language-region.md#how-to-develop).
      *
      * @returns { string } Language ID.
@@ -273,8 +273,8 @@ declare namespace i18n {
 
     /**
      * Obtains the current system country/region. To listen for system region changes, enable listening for
-     * [COMMON_EVENT_LOCALE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
-     * . For details, see
+     * [COMMON_EVENT_LOCALE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}.
+     * For details, see
      * [System Language and Region](docroot://internationalization/i18n-system-language-region.md#how-to-develop).
      *
      * @returns { string } Country/region ID.
@@ -320,7 +320,7 @@ declare namespace i18n {
 
     /**
      * Obtains the current system locale. To listen for system locale changes, enable listening for
-     * [COMMON_EVENT_LOCALE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [COMMON_EVENT_LOCALE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * . For details, see
      * [System Language and Region](docroot://internationalization/i18n-system-language-region.md#how-to-develop).
      *
@@ -352,7 +352,7 @@ declare namespace i18n {
 
     /**
      * Checks whether the 24-hour clock is used. To listen for system time format changes, enable listening for
-     * [COMMON_EVENT_TIME_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_time_changed)
+     * [COMMON_EVENT_TIME_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_TIME_CHANGED}
      * . For details, see [User Preference](docroot://internationalization/i18n-user-preferences.md#how-to-develop).
      *
      * @returns { boolean } Whether the 24-hour clock is used. The value **true** indicates that the 24-hour clock is
@@ -1366,14 +1366,13 @@ declare namespace i18n {
      * @param { int } year - Year to set.
      * @param { int } month - Month to set. Note: The month starts from **0**. For example, **0** indicates January.
      * @param { int } date - Day to set.
-     * @param { int } hour - Hour to set. The default value is the current system time.
-     * @param { int } minute - Minute to set. The default value is the current system time.
-     * @param { int } second - Second to set. The default value is the current system time.
+     * @param { int } [hour] - Hour to set. The default value is the current system time.
+     * @param { int } [minute] - Minute to set. The default value is the current system time.
+     * @param { int } [second] - Second to set. The default value is the current system time.
      * @syscap SystemCapability.Global.I18n
      * @crossplatform [since 10]
      * @atomicservice [since 12]
      * @since 8 dynamic
-     * @since 23 static
      */
     set(year: int, month: int, date:int, hour?: int, minute?: int, second?: int): void;
 
@@ -2214,7 +2213,6 @@ declare namespace i18n {
    * @syscap SystemCapability.Global.I18n
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead i18n.System.set24HourClock
    */
   export function set24HourClock(option: boolean): boolean;
 
@@ -2229,7 +2227,6 @@ declare namespace i18n {
    * @syscap SystemCapability.Global.I18n
    * @since 8 dynamiconly
    * @deprecated since 9
-   * @useinstead i18n.System.addPreferredLanguage
    */
   export function addPreferredLanguage(language: string, index?: int): boolean;
 
@@ -2243,7 +2240,6 @@ declare namespace i18n {
    * @syscap SystemCapability.Global.I18n
    * @since 8 dynamiconly
    * @deprecated since 9
-   * @useinstead i18n.System.removePreferredLanguage
    */
   export function removePreferredLanguage(index: int): boolean;
 
@@ -2879,6 +2875,26 @@ declare namespace i18n {
      * @since 23 static
      */
     zoneDisplayName: string;
+
+    /**
+     * Latitude info of time zone city in decimal degrees (°).
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    latitude: double;
+
+    /**
+     * Longitude info of time zone city in decimal degrees (°).
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    longitude: double;
 
     /**
      * Fixed offset of the time zone ID.

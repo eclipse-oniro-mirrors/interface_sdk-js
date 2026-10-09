@@ -21,6 +21,7 @@ import { AttributeModifier, CommonMethod, OnVisibleIndexesChangeCallback } from 
 import { LengthMetrics } from '../Graphics';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { StickyStyle } from './list';
+import { ItemFillPolicy } from './units';
 
 /**
  * The LazyGridLayoutAttribute.
@@ -125,12 +126,24 @@ export declare interface LazyVGridLayoutAttribute extends LazyGridLayoutAttribut
   default columnsTemplate(value: string | undefined): this;
 
   /**
+   * This parameter specifies the number of columns in the current grid layout.
+   *
+   * @param { ItemFillPolicy | undefined } template - Number of columns in the layout.
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default columnsTemplate(template: ItemFillPolicy | undefined): this;
+
+  /**
    * Set LazyVGrid options.
    *
    * @returns { LazyVGridLayoutAttribute } Returns the instance of the LazyVGridLayoutAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setLazyVGridLayoutOptions(): this;
 
@@ -168,8 +181,9 @@ export declare function LazyVGridLayout(
  * @param { CustomBuilder } [content_]
  * @returns { LazyVGridLayoutAttribute } The attribute of the LazyVGridLayout.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

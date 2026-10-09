@@ -19,9 +19,9 @@
  */
 
 /**
- * Defines the image analyze type.
+ * Defines the image AI analysis type. If it is not set, subject recognition and text recognition are enabled by
+ * default.
  *
- * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice
@@ -29,7 +29,7 @@
  */
 declare enum ImageAnalyzerType {
   /**
-   * Image analyze type subject.
+   * Subject recognition.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -39,7 +39,7 @@ declare enum ImageAnalyzerType {
   SUBJECT = 0,
 
   /**
-   * Image analyze type text.
+   * Text recognition.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -49,7 +49,7 @@ declare enum ImageAnalyzerType {
   TEXT,
 
   /**
-   * Image analyze type object lookup.
+   * Object lookup.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -60,7 +60,8 @@ declare enum ImageAnalyzerType {
 }
 
 /**
- * Image analyzer controller.
+ * Defines the image AI analysis controller. You can bind this object to a supported component and call the methods it
+ * provides through the controller.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -69,7 +70,7 @@ declare enum ImageAnalyzerType {
  */
 declare class ImageAnalyzerController {
   /**
-   * Constructor.
+   * A constructor used to create an **ImageAnalyzerController** instance.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -79,9 +80,11 @@ declare class ImageAnalyzerController {
   constructor();
 
   /**
-   * Get image analyzer support types.
+   * Obtains the image AI analysis types supported by the component to which this controller is bound. Before calling
+   * this method, bind the controller to a component through the **aiController** attribute of components such as
+   * **Image** and **ImageAnimator**. Otherwise, an empty array is returned.
    *
-   * @returns { ImageAnalyzerType[] }
+   * @returns { ImageAnalyzerType[] } AI analysis type supported by the corresponding component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -91,9 +94,8 @@ declare class ImageAnalyzerController {
 }
 
 /**
- * Image analyzer config.
+ * Provides image AI analyzer configuration.
  *
- * @interface ImageAnalyzerConfig
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice
@@ -101,9 +103,8 @@ declare class ImageAnalyzerController {
  */
 declare interface ImageAnalyzerConfig {
   /**
-   * Image analyze types.
+   * Image AI analysis type.
    *
-   * @type { ImageAnalyzerType[] }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -113,9 +114,18 @@ declare interface ImageAnalyzerConfig {
 }
 
 /**
- * Image ai options.
+ * Provides the image AI analysis options.
  *
- * @interface ImageAIOptions
+ * > **NOTE**
+ * >
+ * > The **types** parameter of this API has a higher priority than that of
+ * > [ImageAnalyzerConfig]{@link ImageAnalyzerConfig}. This means that, if both parameters are set, the value set by
+ * > this API takes precedence.
+ * >
+ * > This API depends on device capabilities and must be used together with the
+ * > [enableAnalyzer]{@link ImageAttribute#enableAnalyzer} API of the corresponding component (for example, the
+ * > [Image]{@link ./image} component).
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice
@@ -123,9 +133,8 @@ declare interface ImageAnalyzerConfig {
  */
 declare interface ImageAIOptions {
   /**
-   * Image analyze types.
+   * Image AI analysis type.
    *
-   * @type { ?ImageAnalyzerType[] }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -134,9 +143,8 @@ declare interface ImageAIOptions {
   types?: ImageAnalyzerType[];
 
   /**
-   * Image analyze AI controller.
+   * Image AI analysis controller.
    *
-   * @type { ?ImageAnalyzerController }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice

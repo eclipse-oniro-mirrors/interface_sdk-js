@@ -25,7 +25,7 @@
  * application is started. For details, see 
  * [Notification](docroot://notification/notification-with-wantagent.md).
  *
- * @file
+ * @file WantAgent Module
  * @kit AbilityKit
  */
 
@@ -130,6 +130,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - Target WantAgent object.
    * @param { AsyncCallback<Want> } callback - Callback used to return the Want.
+   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -148,6 +149,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - Target WantAgent object.
    * @returns { Promise<Want> } Promise used to return the Want.
+   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -223,8 +225,8 @@ declare namespace wantAgent {
    * @throws { BusinessError } 201 - The application does not have permission to call the interface.
    * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
    * @throws { BusinessError } 16000020 - The context is not ability context.
-   * @throws { BusinessError } 16000151 - Invalid wantagent object.
-   * @throws { BusinessError } 16000153 - The Wantagent has been canceled.
+   * @throws { BusinessError } 16000151 - Invalid wantAgent object.
+   * @throws { BusinessError } 16000153 - The WantAgent has been canceled.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file AutoFillRequest
  * @kit AbilityKit
  */
 
@@ -37,8 +37,10 @@ import { AutoFillTriggerType } from './AutoFillTriggerType';
  * 自动填充的填充请求。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 11 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
+ * @atomicservice
  * @since 11 dynamic
  * @since 23 static
  */
@@ -47,8 +49,10 @@ export interface FillRequest {
    * 自动填充类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -58,8 +62,10 @@ export interface FillRequest {
    * 查看数据。填充请求的页面基本信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -92,12 +98,14 @@ export interface FillRequest {
   isPopup: boolean;
 
   /**
-   * The trigger type of autofill service.
+   * 自动填充服务的拉起类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @systemapi [since 23 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 23 dynamic&static
    */
   triggerType?: AutoFillTriggerType;
 }
@@ -106,8 +114,10 @@ export interface FillRequest {
  * 保存自动填充的请求。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 11 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
+ * @atomicservice
  * @since 11 dynamic
  * @since 23 static
  */
@@ -116,8 +126,10 @@ export interface SaveRequest {
    * 查看数据。填充请求的页面基本信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -179,7 +191,7 @@ export interface FillResponse {
  */
 export interface FillRequestCallback {
   /**
-   * 通知自动填充请求已成功完成。
+   * 自动填充或者生成密码时的回调对象，可以通过此回调通知客户端成功或者失败。
    *
    * @param { FillResponse } response - 自动填充响应信息。
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
@@ -274,4 +286,24 @@ export interface SaveRequestCallback {
    * @since 23 static
    */
   onFailure(): void;
+}
+
+/**
+ * 自动填充失败结果。
+ *
+ * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.0.0 dynamic&static
+ */
+export interface FillFailureResult {
+  /**
+   * 自动填充失败的错误码。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic&static
+   */
+  errCode: int;
 }

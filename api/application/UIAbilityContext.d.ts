@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIAbility Context
  * @kit AbilityKit
  */
 
@@ -1286,7 +1286,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want, callback: AsyncCallback<void>): void;
 
   /**
-   * Stops a ServiceExtensionAbility in the same application. This API uses a promise to return the result.
+   * Stops a ServiceExtensionAbility. This API uses a promise to return the result.
    *
    * @param { Want } want - Want information for stopping the ServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
@@ -1311,7 +1311,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want): Promise<void>;
 
   /**
-   * Stops a ServiceExtensionAbility with the account ID specified in the same application. This API uses an 
+   * Stops a ServiceExtensionAbility with the account ID specified. This API uses an 
    * asynchronous callback to return the result.
    * 
    * > **NOTE**
@@ -1346,8 +1346,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbilityWithAccount(want: Want, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Stops a ServiceExtensionAbility with the account ID specified in the same application. This API uses a promise to 
-   * return the result.
+   * Stops a ServiceExtensionAbility with the account ID specified. This API uses a promise to return the result.
    * 
    * > **NOTE**
    * >
@@ -2503,6 +2502,29 @@ declare class UIAbilityContext extends Context {
    */
   setAbilityInstanceInfo(label: string, icon: image.PixelMap): Promise<void>;
 
+ /**
+   * Sets the icon and label for this UIAbility. The icon and label can be displayed in the task center and the shortcut
+   *     bar. This API uses a promise to return the result.
+   * This API can be properly called only on PCs/2-in-1 devices. If it is called on other device types, error code 801 
+   *     is returned.
+   * **Required permissions**: ohos.permission.SET_ABILITY_INSTANCE_INFO
+   *
+   * @permission ohos.permission.SET_ABILITY_INSTANCE_INFO
+   * @param { string } label - New icon label. The label cannot be an empty string, and can contain a maximum of 1024 bytes.
+   * @param { image.PixelMap } icon - Icon. The recommended icon size is 512 px * 512 px.
+   * @param { string } groupId - The icon aggregation label for UIAbility within the application on the shortcut bar.
+   *     The length must not exceed 64 characters.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Window operations encountered failures.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  setAbilityInstanceInfo(label: string, icon: image.PixelMap, groupId: string): Promise<void>;
+
   /**
    * When the first UIAbility launched under a module needs to redirect to another UIAbility, the target UIAbility is 
    * known as the DelegatorAbility. For details about how to set up the DelegatorAbility, see step 1 in the example 
@@ -2537,7 +2559,7 @@ declare class UIAbilityContext extends Context {
    * >
    * > - Before calling this API, ensure that the window has been created and the page corresponding to the UIAbility 
    * > has been loaded (using the 
-   * > [loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9) API in the 
+   * > [loadContent]{@link ./../@ohos.window:WindowStage.loadContent} API in the 
    * > [onWindowStageCreate()]{@link ./../@ohos.app.ability.UIAbility:UIAbility.onWindowStageCreate} lifecycle).
    * >
    * > - After this API is called, a new resource manager object is created. If a resource manager was previously cached
@@ -2795,7 +2817,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Connect to system server error.
-   * @throws { BusinessError } 16000063 - The target to restart does not belong to the caller or is not a UIAbility.
+   * @throws { BusinessError } 16000063 - The target to restart does not belong to the current application or is not a UIAbility.
    * @throws { BusinessError } 16000064 - Restart too frequently.
    * @throws { BusinessError } 16000065 - The API can be called only when the ability is focused.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -2929,7 +2951,7 @@ declare class UIAbilityContext extends Context {
    *
    * @returns { Promise<void> } The promise returned by the function.
    * @throws { BusinessError } 801 - Capability not supported, because starting self to foreground
-   *     from background is not supported in current devive or current UIAbility is a non-native UIAbility.
+   *     from background is not supported in current device or current UIAbility is a non-native UIAbility.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error. Connect to system service failed.
    * @throws { BusinessError } 16000082 - The UIAbility is being started.

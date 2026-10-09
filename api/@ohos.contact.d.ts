@@ -20,7 +20,6 @@
 
 import { AsyncCallback } from './@ohos.base';
 import type Context from './application/BaseContext';
-
 import { ValueType } from './@ohos.data.ValuesBucket';
 import type image from './@ohos.multimedia.image';
 
@@ -54,8 +53,12 @@ declare namespace contact {
    * @param { Contact } contact - Indicates the contact information.
    * @param { AsyncCallback<number> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     ID of the added contact is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Failed to open contact portrait file.
+   *     3.Internal error. Invalid contact id. Failed to generate contact profile.
+   *     4.Internal error. Failed to save contact portrait.
    * @syscap SystemCapability.Applications.ContactsData
    * @atomicservice [since 12]
    * @since 10
@@ -83,8 +86,12 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { Contact } contact - Indicates the contact information.
    * @returns { Promise<number> } Promise used to return the result, which is the ID of the added contact.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Failed to open contact portrait file.
+   *     3.Internal error. Invalid contact id. Failed to generate contact profile.
+   *     4.Internal error. Failed to save contact portrait.
    * @syscap SystemCapability.Applications.ContactsData
    * @atomicservice [since 12]
    * @since 10
@@ -189,7 +196,8 @@ declare namespace contact {
    *     through [queryKey]{@link contact.queryKey(context: Context, id: number, callback: AsyncCallback<string>)}.
    * @param { AsyncCallback<void> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     ID of the deleted contact is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -218,7 +226,8 @@ declare namespace contact {
    * @param { string } key - Unique query key of a contact. One contact corresponds to one key, which can be obtained
    *     through [queryKey]{@link contact.queryKey(context: Context, id: number, callback: AsyncCallback<string>)}.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -251,7 +260,8 @@ declare namespace contact {
    *     [queryKey]{@link contact.queryKey(context: Context, id: number, callback: AsyncCallback<string>)}.
    * @param { AsyncCallback<Contact> } callback - Indicates the callback for getting the result of the call. If the operation is successful, an
    *     array of queried contacts is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -291,7 +301,8 @@ declare namespace contact {
    *     contact application is used by default.
    * @param { AsyncCallback<Contact> } callback - Indicates the callback for getting the result of the call. If the operation is successful, an
    *     array of queried contacts is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -330,7 +341,8 @@ declare namespace contact {
    *     including the name, phone number, and email address) of the contact are queried.
    * @param { AsyncCallback<Contact> } callback - Indicates the callback for getting the result of the call. If the operation is successful, an
    *     array of queried contacts is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -373,7 +385,8 @@ declare namespace contact {
    *     including the name, phone number, and email address) of the contact are queried.
    * @param { AsyncCallback<Contact> } callback - Indicates the callback for getting the result of the call. If the operation is successful, an
    *     array of queried contacts is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -387,9 +400,9 @@ declare namespace contact {
    * @param { string } key - Unique query key of a contact, which is the unique identifier automatically generated by
    *     the system when a contact is created. Each contact corresponds to one key, which can be obtained through
    *     [queryKey]{@link contact.queryKey(context: Context, id: number, callback: AsyncCallback<string>)}.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is not specified, all contact
    *     attributes are queried by default.
    * @returns { Promise<Contact> } Promise used to return the result, which is the queried contact.
    * @syscap SystemCapability.Applications.ContactsData
@@ -407,12 +420,13 @@ declare namespace contact {
    * @param { string } key - Unique query key of a contact, which is the unique identifier automatically generated by
    *     the system when a contact is created. Each contact corresponds to one key, which can be obtained through
    *     [queryKey]{@link contact.queryKey(context: Context, id: number, callback: AsyncCallback<string>)}.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is not specified, all contact
    *     attributes are queried by default.
    * @returns { Promise<Contact> } Promise used to return the result, which is the queried contact.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -439,7 +453,8 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -470,7 +485,8 @@ declare namespace contact {
    *     contact application is used by default.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -503,7 +519,8 @@ declare namespace contact {
    *     including the name, phone number, and email address) of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -540,7 +557,8 @@ declare namespace contact {
    *     including the name, phone number, and email address) of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -551,9 +569,9 @@ declare namespace contact {
    * Queries all contacts based on the specified holder and attributes. This API uses a promise to return the result.
    *
    * @permission ohos.permission.READ_CONTACTS
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is not specified, all contact
    *     attributes are queried by default.
    * @returns { Promise<Array<Contact>> } Promise used to return the result, which is an array of queried contacts.
    * @syscap SystemCapability.Applications.ContactsData
@@ -568,12 +586,13 @@ declare namespace contact {
    *
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is not specified, all contact
    *     attributes are queried by default.
    * @returns { Promise<Array<Contact>> } Promise used to return the result, which is an array of queried contacts.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -610,7 +629,8 @@ declare namespace contact {
    * @param { string } email - Email address of the contact.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -651,7 +671,8 @@ declare namespace contact {
    *     contact application is used by default.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -668,8 +689,8 @@ declare namespace contact {
    *
    * @permission ohos.permission.READ_CONTACTS
    * @param { string } email - Email address of the contact.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and Emails attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
    * @syscap SystemCapability.Applications.ContactsData
@@ -689,11 +710,12 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
    * @param { string } email - Email address of the contact.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and Emails attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -712,8 +734,8 @@ declare namespace contact {
    * @param { string } email - Email address of the contact.
    * @param { Holder } holder - Application that creates the contacts.If the passed parameter is empty, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and Emails attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
    * @syscap SystemCapability.Applications.ContactsData
@@ -735,11 +757,12 @@ declare namespace contact {
    * @param { string } email - Email address of the contact.
    * @param { Holder } holder - Application that creates the contacts.If the passed parameter is empty, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and Emails attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -755,10 +778,10 @@ declare namespace contact {
    *
    * @permission ohos.permission.READ_CONTACTS
    * @param { string } email - Email address of the contact.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, it is not
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, it is not
    *     used for contact filtering by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
-   *     attributes are queried by default.
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and Emails attributes of the contact are queried.
    * @returns { Promise<Array<Contact>> } Promise used to return the result, which is an array of queried contacts.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 7
@@ -777,12 +800,13 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
    * @param { string } email - Email address of the contact.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, it is not
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, it is not
    *     used for contact filtering by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
-   *     attributes are queried by default.
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and Emails attributes of the contact are queried.
    * @returns { Promise<Array<Contact>> } Promise used to return the result, which is an array of queried contacts.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -823,8 +847,11 @@ declare namespace contact {
    *     supported.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Internal error. The query resultSet is nullptr.
+   *     3.Internal error. The query resultSet is empty.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -868,8 +895,11 @@ declare namespace contact {
    *     contact application is used by default.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Internal error. The query resultSet is nullptr.
+   *     3.Internal error. The query resultSet is empty.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -886,8 +916,8 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { string } phoneNumber - Phone number of a contact. Only full match is supported, and wildcards are not
    *     supported.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and phoneNumbers attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
    * @syscap SystemCapability.Applications.ContactsData
@@ -909,12 +939,15 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { string } phoneNumber - Phone number of a contact. Only full match is supported, and wildcards are not
    *     supported.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and phoneNumbers attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Internal error. The query resultSet is nullptr.
+   *     3.Internal error. The query resultSet is empty.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -933,8 +966,8 @@ declare namespace contact {
    *     supported.
    * @param { Holder } holder - Application that creates the contacts.If the passed parameter is empty, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and phoneNumbers attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
    * @syscap SystemCapability.Applications.ContactsData
@@ -958,12 +991,15 @@ declare namespace contact {
    *     supported.
    * @param { Holder } holder - Application that creates the contacts.If the passed parameter is empty, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and phoneNumbers attributes of the contact are queried.
    * @param { AsyncCallback<Array<Contact>> } callback - Indicates the callback for getting the result of the call.
    *     Returns the contact list which user select; returns empty contact list if user not select.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Internal error. The query resultSet is nullptr.
+   *     3.Internal error. The query resultSet is empty.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -981,10 +1017,10 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { string } phoneNumber - Phone number of a contact. Only full match is supported, and wildcards are not
    *     supported.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
-   *     attributes are queried by default.
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and phoneNumbers attributes of the contact are queried.
    * @returns { Promise<Array<Contact>> } Promise used to return the result, which is an array of queried contacts.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 7
@@ -1005,13 +1041,16 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { string } phoneNumber - Phone number of a contact. Only full match is supported, and wildcards are not
    *     supported.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
-   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is not specified, all contact
-   *     attributes are queried by default.
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is left empty, the id, key,
+   *     and phoneNumbers attributes of the contact are queried.
    * @returns { Promise<Array<Contact>> } Promise used to return the result, which is an array of queried contacts.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Internal error. The query resultSet is nullptr.
+   *     3.Internal error. The query resultSet is empty.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -1037,7 +1076,8 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { AsyncCallback<Array<Group>> } callback - Indicates the callback for getting the result of the call. If the operation is
    *     successful, an array of queried groups is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1070,7 +1110,8 @@ declare namespace contact {
    *     contact application is used by default.
    * @param { AsyncCallback<Array<Group>> } callback - Indicates the callback for getting the result of the call. If the operation is
    *     successful, an array of queried groups is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1081,7 +1122,7 @@ declare namespace contact {
    * Queries all groups of a contact based on the specified holder. This API uses a promise to return the result.
    *
    * @permission ohos.permission.READ_CONTACTS
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
    * @returns { Promise<Array<Group>> } Promise used to return the result, which is an array of groups.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1096,10 +1137,11 @@ declare namespace contact {
    *
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
    * @returns { Promise<Array<Group>> } Promise used to return the result, which is an array of groups.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1128,7 +1170,8 @@ declare namespace contact {
    * @param { AsyncCallback<Array<Holder>> } callback - Indicates the callback for getting the result of the call. If the operation is
    *     successful, an array of the queried applications is returned. If the operation fails, an error code is
    *     returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1153,7 +1196,8 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
    * @returns { Promise<Array<Holder>> } Promise used to return the result, which is an array of queried applications.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1184,7 +1228,8 @@ declare namespace contact {
    * @param { number } id - Contact ID.
    * @param { AsyncCallback<string> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     key of the queried contact is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1220,7 +1265,8 @@ declare namespace contact {
    *     contact application is used by default.
    * @param { AsyncCallback<string> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     key of the queried contact is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1234,7 +1280,7 @@ declare namespace contact {
    *
    * @permission ohos.permission.READ_CONTACTS
    * @param { number } id - Contact ID.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
    * @returns { Promise<string> } Promise used to return the result, which is the key of the queried contact.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1251,10 +1297,11 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
    * @param { number } id - Contact ID.
-   * @param { Holder } holder - Application information for a contact. If this parameter is not specified, the system
+   * @param { Holder } [holder] - Application information for a contact. If this parameter is not specified, the system
    *     contact application is used by default.
    * @returns { Promise<string> } Promise used to return the result, which is the key of the queried contact.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1282,7 +1329,8 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { AsyncCallback<Contact> } callback - Indicates the callback for getting the result of the call. If the operation is successful,
    *     information about my card is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1315,7 +1363,8 @@ declare namespace contact {
    *     including the name, phone number, and email address) of the contact are queried.
    * @param { AsyncCallback<Contact> } callback - Indicates the callback for getting the result of the call. If the operation is successful,
    *     information about my card is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1326,7 +1375,7 @@ declare namespace contact {
    * Queries my card. (The contact attribute list can be imported.) This API uses a promise to return the result.
    *
    * @permission ohos.permission.READ_CONTACTS
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
+   * @param { ContactAttributes } [attrs] - List of contact attributes. If this parameter is empty, all attribute fields (
    *     including the name, phone number, and email address) of the contact are queried.
    * @returns { Promise<Contact> } Promise used to return the result, which is a contact in my card.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1341,10 +1390,11 @@ declare namespace contact {
    *
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
+   * @param { ContactAttributes } [attrs] - List of contact attributes. If this parameter is empty, all attribute fields (
    *     including the name, phone number, and email address) of the contact are queried.
    * @returns { Promise<Contact> } Promise used to return the result, which is a contact in my card.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
@@ -1375,8 +1425,13 @@ declare namespace contact {
    *     [selectContacts]{@link contact.selectContacts()}.
    * @param { AsyncCallback<void> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     ID of the updated contact is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Failed to open contact portrait file.
+   *     3.Internal error. Invalid contact id. Failed to generate contact profile.
+   *     4.Internal error. Failed to save contact portrait.
+   *     5.Internal error. Invalid contact rawId.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -1389,8 +1444,8 @@ declare namespace contact {
    * @permission ohos.permission.WRITE_CONTACTS
    * @param { Contact } contact - Indicates the contact information. The ID is mandatory and can be obtained through
    *     [selectContacts]{@link contact.selectContacts()}.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, all attribute
+   *     fields of the contact are updated, including the name, phone number, and email address.
    * @param { AsyncCallback<void> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     ID of the updated contact is returned. If the operation fails, an error code is returned.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1408,12 +1463,17 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { Contact } contact - Indicates the contact information. The ID is mandatory and can be obtained through
    *     [selectContacts]{@link contact.selectContacts()}.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } attrs - Contact attribute list. If this parameter is left empty, all attribute
+   *     fields of the contact are updated, including the name, phone number, and email address.
    * @param { AsyncCallback<void> } callback - Indicates the callback for getting the result of the call. If the operation is successful, the
    *     ID of the updated contact is returned. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes:Mandatory parameters are left unspecified.
+   *     2.Failed to open contact portrait file.
+   *     3.Internal error. Invalid contact id. Failed to generate contact profile.
+   *     4.Internal error. Failed to save contact portrait.
+   *     5.Internal error. Invalid contact rawId.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -1425,8 +1485,8 @@ declare namespace contact {
    * @permission ohos.permission.WRITE_CONTACTS
    * @param { Contact } contact - Indicates the contact information. The ID is mandatory and can be obtained through
    *     [selectContacts]{@link contact.selectContacts()}.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is left empty, all attribute
+   *     fields of the contact are updated, including the name, phone number, and email address.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 7
@@ -1442,11 +1502,16 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of application or capability.
    * @param { Contact } contact - Indicates the contact information. The ID is mandatory and can be obtained through
    *     [selectContacts]{@link contact.selectContacts()}.
-   * @param { ContactAttributes } attrs - List of contact attributes. If this parameter is empty, all attribute fields (
-   *     including the name, phone number, and email address) of the contact are queried.
+   * @param { ContactAttributes } [attrs] - Contact attribute list. If this parameter is left empty, all attribute
+   *     fields of the contact are updated, including the name, phone number, and email address.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - 1.Parameter error. Possible causes: Mandatory parameters are left unspecified.
+   *     2.Failed to open contact portrait file.
+   *     3.Internal error. Invalid contact id. Failed to generate contact profile.
+   *     4.Internal error. Failed to save contact portrait.
+   *     5.Internal error. Invalid contact rawId.
    * @syscap SystemCapability.Applications.ContactsData
    * @since 10
    */
@@ -1478,7 +1543,8 @@ declare namespace contact {
    * @param { AsyncCallback<boolean> } callback - Indicates the callback for getting the result of the call. If the operation is successful, a
    *     Boolean value is returned. The value **true** indicates that the contact ID is in the local phonebook, and the
    *     value **false** indicates the opposite. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1508,7 +1574,8 @@ declare namespace contact {
    * @param { number } id - Contact ID. Each contact corresponds to one ID.
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the contact ID
    *     is in the local phonebook, and the value **false** indicates the opposite.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1540,7 +1607,8 @@ declare namespace contact {
    * @param { AsyncCallback<boolean> } callback - Indicates the callback for getting the result of the call. If the operation is successful, a
    *     Boolean value is returned. The value **true** indicates that the contact is included in my card, and the value
    *     **false** indicates the opposite. If the operation fails, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1570,7 +1638,8 @@ declare namespace contact {
    * @param { number } id - Contact ID.
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the contact is
    *     included in my card, and the value **false** indicates the opposite.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified. 2.Parameter verification failed.
    * @syscap SystemCapability.Applications.ContactsData
@@ -1630,9 +1699,11 @@ declare namespace contact {
     isDisplayedByName?: boolean;
 
     /**
-     * Indicates whether the contact picker is automatically closed when page routing is performed,for example, when the application is in the background.
+     * Whether to allow automatic dismissal of the picker when the page that launched it undergoes a route change.
+     * The value true means the picker is allowed to be dismissed automatically, and false means the picker is not
+     * allowed to be dismissed automatically.
      *
-     * The default value is false
+     * The default value is false.
      *
      * @syscap SystemCapability.Applications.Contacts
      * @stagemodelonly
@@ -1705,7 +1776,8 @@ declare namespace contact {
     events?: Event[];
 
     /**
-     * List of groups of the contact.
+     * List of groups of the contact. When adding or updating a contact, you can only associate the contact with
+     *	 an existing group. Creating a new group is not supported.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -1978,7 +2050,7 @@ declare namespace contact {
    */
   class Email {
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Custom email type, the default value is **0**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -1987,7 +2059,7 @@ declare namespace contact {
     static readonly CUSTOM_LABEL: 0;
 
     /**
-     * Home mailbox, the default value is **1**.
+     * Home email type, the default value is **1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -1996,7 +2068,7 @@ declare namespace contact {
     static readonly EMAIL_HOME: 1;
 
     /**
-     * Work mailbox, the default value is **2**.
+     * Work email type, the default value is **2**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2005,7 +2077,7 @@ declare namespace contact {
     static readonly EMAIL_WORK: 2;
 
     /**
-     * Other mailbox, the default value is **3**.
+     * Other email type, the default value is **3**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2014,7 +2086,7 @@ declare namespace contact {
     static readonly EMAIL_OTHER: 3;
 
     /**
-     * Invalid mailbox, the default value is **-1**.
+     * Invalid email type, the default value is **-1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2032,7 +2104,7 @@ declare namespace contact {
     email: string;
 
     /**
-     * Name of the mailbox type.
+     * Type name of the email.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2041,7 +2113,7 @@ declare namespace contact {
     labelName?: string;
 
     /**
-     * Displayed name of the mailbox.
+     * Displayed name of the email.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2050,7 +2122,7 @@ declare namespace contact {
     displayName?: string;
 
     /**
-     * Mailbox type.
+     * Type of the email.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2068,7 +2140,7 @@ declare namespace contact {
    */
   class Event {
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Custom event type, the default value is **0**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2077,7 +2149,7 @@ declare namespace contact {
     static readonly CUSTOM_LABEL: 0;
 
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Anniversary event type, the default value is **1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2086,7 +2158,7 @@ declare namespace contact {
     static readonly EVENT_ANNIVERSARY: 1;
 
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Other event type, the default value is **2**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2104,7 +2176,7 @@ declare namespace contact {
     static readonly EVENT_BIRTHDAY: 3;
 
     /**
-     * Invalid mailbox, the default value is **-1**.
+     * Invalid event type, the default value is **-1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2122,7 +2194,7 @@ declare namespace contact {
     eventDate: string;
 
     /**
-     * Name of the mailbox type.
+     * Name of the Event type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2131,7 +2203,7 @@ declare namespace contact {
     labelName?: string;
 
     /**
-     * Mailbox type.
+     * Event type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2208,7 +2280,7 @@ declare namespace contact {
    */
   class ImAddress {
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Custom instant message type, the default value is **-1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2280,7 +2352,7 @@ declare namespace contact {
     static readonly IM_JABBER: 7;
 
     /**
-     * Invalid mailbox, the default value is **-1**.
+     * Invalid instant message type, the default value is **-2**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2298,7 +2370,7 @@ declare namespace contact {
     imAddress: string;
 
     /**
-     * Name of the mailbox type.
+     * Name of the instant message type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2307,7 +2379,7 @@ declare namespace contact {
     labelName?: string;
 
     /**
-     * Mailbox type.
+     * Instant message type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2488,7 +2560,7 @@ declare namespace contact {
    */
   class PhoneNumber {
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Custom phone type, the default value is **0**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2677,7 +2749,7 @@ declare namespace contact {
     static readonly NUM_MMS: 20;
 
     /**
-     * Invalid mailbox, the default value is **-1**.
+     * Invalid phone type, the default value is **-1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2686,7 +2758,7 @@ declare namespace contact {
     static readonly INVALID_LABEL_ID: -1;
 
     /**
-     * Name of the mailbox type.
+     * Name of the phone number type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2704,7 +2776,7 @@ declare namespace contact {
     phoneNumber: string;
 
     /**
-     * Mailbox type.
+     * Phone number type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2763,7 +2835,7 @@ declare namespace contact {
    */
   class PostalAddress {
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Custom postal address type, the default value is **0**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2799,7 +2871,7 @@ declare namespace contact {
     static readonly ADDR_OTHER: 3;
 
     /**
-     * Invalid mailbox, the default value is **-1**.
+     * Invalid address type, the default value is **-1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2826,7 +2898,7 @@ declare namespace contact {
     country?: string;
 
     /**
-     * Name of the mailbox type.
+     * Name of the Postal address type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2889,7 +2961,7 @@ declare namespace contact {
     street?: string;
 
     /**
-     * Mailbox type.
+     * Postal address type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2925,7 +2997,7 @@ declare namespace contact {
     static readonly RELATION_ASSISTANT: 1;
 
     /**
-     * Sibling, the default value is **2**.
+     * Brother, the default value is **2**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -2997,7 +3069,7 @@ declare namespace contact {
     static readonly RELATION_PARENT: 9;
 
     /**
-     * Parent, the default value is **9**.
+     * Partner, the default value is **10**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3024,7 +3096,7 @@ declare namespace contact {
     static readonly RELATION_RELATIVE: 12;
 
     /**
-     * Relative, the default value is **12**.
+     * Sister, the default value is **13**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3051,7 +3123,7 @@ declare namespace contact {
     static readonly INVALID_LABEL_ID: -1;
 
     /**
-     * Name of the mailbox type.
+     * Name of the Relation type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3069,7 +3141,7 @@ declare namespace contact {
     relationName: string;
 
     /**
-     * Mailbox type.
+     * Relation type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3087,7 +3159,7 @@ declare namespace contact {
    */
   class SipAddress {
     /**
-     * Custom mailbox type, the default value is **0**.
+     * Custom SIP address type, the default value is **0**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3123,7 +3195,7 @@ declare namespace contact {
     static readonly SIP_OTHER: 3;
 
     /**
-     * Invalid mailbox, the default value is **-1**.
+     * Invalid SIP address type, the default value is **-1**.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3132,7 +3204,7 @@ declare namespace contact {
     static readonly INVALID_LABEL_ID: -1;
 
     /**
-     * Name of the mailbox type.
+     * SIP address type name.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3150,7 +3222,7 @@ declare namespace contact {
     sipAddress: string;
 
     /**
-     * Mailbox type.
+     * SIP address type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
@@ -3288,7 +3360,8 @@ declare namespace contact {
    * @param { Contact } contact - Indicates the contact information.
    * @returns { Promise<number> } Promise used to return the result, which is the contact ID.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
-   * @throws { BusinessError } 801 - The specified SystemCapability name was not found.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700101 - Failed to get value from contacts data.
    * @throws { BusinessError } 16700102 - Failed to set value to contacts data.
@@ -3466,13 +3539,14 @@ declare namespace contact {
   }
 
   /**
-   * Creates a contact through UI interaction. This API uses a promise to return the result.
+   * Calls the API for adding a contact to open the UI. This API uses a promise to return the result.
    *
    * @param { Context } context - Indicates the context of application or capability.
    * @param { Contact } contact - Indicates the contact information.
    * @returns { Promise<number> } Promise used to return the result, which is the contact ID.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: Mandatory parameters are left unspecified.
-   * @throws { BusinessError } 801 - The specified SystemCapability name was not found.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700102 - Failed to set value to contacts data.
    * @throws { BusinessError } 16700103 - User cancel.
@@ -3488,7 +3562,8 @@ declare namespace contact {
    * @permission ohos.permission.READ_CONTACTS
    * @param { Context } context - Indicates the context of application or capability.
    * @returns { Promise<int> } Promise used to return the result, which is the number of queried contacts.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16700001 - General error.
    * @syscap SystemCapability.Applications.ContactsData
    * @atomicservice
@@ -3504,7 +3579,8 @@ declare namespace contact {
    * @param { Array<Contact> } contacts - Indicates the contact information. array.
    * @returns { Promise<Array<int>> } Promise used to return the result, which is the ID array of the contacts added in
    *     batches.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700002 - Invalid parameter value.
    * @syscap SystemCapability.Applications.ContactsData
@@ -3514,16 +3590,18 @@ declare namespace contact {
   function addContacts(context: Context, contacts: Array<Contact>): Promise<Array<int>>;
 
   /**
-   * Check whether there are any calls that meet the specified condition.
-   *
-   * By default, the system queries call records generated within 6 hours.
+   * Checks whether there are call records that meet the specified conditions. By default, call records within the last
+   * 6 hours are queried. This API applies only to carrier calls. This API uses a promise to return the result.
    *
    * @permission ohos.permission.CHECK_CALL_LOG
    * @param { Context } context - Indicates the context of the application or capability.
-   * @param { string } phoneNumber - Indicates the phone number.
-   * @param { int } minDuration - Indicates the minimum call duration in seconds.
-   * @returns { Promise<boolean> } Returns true if any matching call is found, false otherwise.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { string } phoneNumber - Phone number of the contacts.
+   * @param { int } minDuration - Minimum call duration, in seconds. The value must be greater than 0.
+   * @returns { Promise<boolean> }Promise used to return the result of whether there are call records that meet the
+   *     specified conditions. The value **true** indicates that there are such records, and the value **false**
+   *     indicates the opposite.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700002 - Invalid parameter value.
    * @syscap SystemCapability.Applications.ContactsData
@@ -3534,16 +3612,21 @@ declare namespace contact {
   function hasMatchedCallLog(context: Context, phoneNumber: string, minDuration: int): Promise<boolean>;
 
   /**
-   * Check whether there are any calls that meet the specified condition.
+   * Checks whether there are call records that meet the specified conditions. This API applies only to carrier calls.
+   * This API uses a promise to return the result.
    *
    * @permission ohos.permission.CHECK_CALL_LOG
    * @param { Context } context - Indicates the context of the application or capability.
-   * @param { string } phoneNumber - Indicates the phone number.
-   * @param { int } minDuration - Indicates the minimum call duration in seconds.
-   * @param { int } withinTime - Indicates the period of time prior to the current time that the start and end time
-   *     of calls should be within, in seconds. Up to 6 hours.
-   * @returns { Promise<boolean> } Returns true if any matching call is found, false otherwise.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { string } phoneNumber - Phone number of the contacts.
+   * @param { int } minDuration - Minimum call duration, in seconds. The value must be greater than 0.
+   * @param { int } withinTime - Period of time that the start time and end time of calls should be within, in seconds.
+   *     This period starts from the current time. A maximum of six hours can be set. If the query duration exceeds six
+   *     hours, the query duration is six hours by default.
+   * @returns { Promise<boolean> }Promise used to return the result of whether there are call records that meet the
+   *     specified conditions. The value **true** indicates that there are such records, and the value **false**
+   *     indicates the opposite.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700002 - Invalid parameter value.
    * @syscap SystemCapability.Applications.ContactsData
@@ -3554,9 +3637,9 @@ declare namespace contact {
   function hasMatchedCallLog(context: Context, phoneNumber: string, minDuration: int, withinTime: int): Promise<boolean>;
 
   /**
-   * Sync multiple contacts in batches into contacts database.
+   * Synchronizes multiple contacts to the contacts database in batches.
    *
-   * A maximum of 400 contacts can be synchronized in batches. The invoking party must be in the foreground.
+   * A maximum of 400 contacts can be synchronized at a time. The caller must be running in the foreground.
    *
    * @permission ohos.permission.WRITE_CONTACTS
    * @param { Context } context - Indicates the context of the application or capability.
@@ -3566,7 +3649,8 @@ declare namespace contact {
    * @returns { Promise<Array<int>> } Returns the array of contacts creation results. Valid contact ID (which can be
    * obtained by {@link Contact#getId()}) indicates that the creation was successful.
    * {@link Contact#INVALID_CONTACT_ID} indicates the creation failed.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700002 - Invalid parameter value.
    * @throws { BusinessError } 16700003 - Background usage is prohibited.
@@ -3589,7 +3673,8 @@ declare namespace contact {
    * @param { Context } context - Indicates the context of the application or capability.
    * @returns { Promise<Array<ContactSyncInfo>> } Returns the array of contacts synchronization information for the
    * calling application. Returns null if no contacts are being synchronized.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16700001 - General error.
    * @syscap SystemCapability.Applications.ContactsData
    * @stagemodelonly
@@ -3601,7 +3686,7 @@ declare namespace contact {
   /**
    * Imports multiple contacts through UI interaction.
    *
-   *  A maximum of 100 contacts can be imported at a time.
+   *  A maximum of 100 contacts can be imported at a time. Importing contact portraits is not supported.
    *
    * @param { Context } context - Indicates the context of the application or capability.
    * @param { Array<Contact> } contacts - Indicates the array of contact information to be imported into the database.
@@ -3609,7 +3694,8 @@ declare namespace contact {
    *  obtained by [getId]{@link Contact#getId()}) indicates that the creation was successful.
    * [INVALID_CONTACT_ID]{@link Contact.INVALID_CONTACT_ID} indicates the creation failed.
    * -2 indicates that the user has not selected this contact.
-   * @throws { BusinessError } 801 - The specified SystemCapability name was not found.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16700001 - General error.
    * @throws { BusinessError } 16700002 - Invalid parameter value.
    * @throws { BusinessError } 16700004 - The number of contacts exceeds the limit.
@@ -3623,7 +3709,7 @@ declare namespace contact {
 
   /**
    * The type of contact synchronization mode.
-   * 
+   *
    * @syscap SystemCapability.Applications.ContactsData
    * @stagemodelonly
    * @atomicservice
@@ -3710,7 +3796,6 @@ declare namespace contact {
    * @since 26.0.0
    */
   interface ContactSyncInfo {
-
     /**
      * The contact synchronization mode.
      *
@@ -3718,8 +3803,9 @@ declare namespace contact {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0
-    */
+     */
     mode: ContactSyncMode;
+
     /**
      * Indicates the sync identifier used for synchronizing all contacts.
      *

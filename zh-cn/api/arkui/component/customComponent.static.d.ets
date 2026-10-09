@@ -229,24 +229,42 @@ export @interface ComponentV2 {
 }
 
 /**
- * Defining Reusable Annotation that is used to decorate @Component.
+ * 声明一个可复用的自定义组件。需与@Component搭配使用，用于装饰自定义组件，以实现组件复用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 @Retention({policy: "SOURCE"})
-export @interface Reusable {}
+export @interface Reusable {
+  /**
+   * 组件复用内存优化配置项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  memoryOptimizationStrategy: ReusableMemOptStrategy = ReusableMemOptStrategy.DEFAULT
+}
 
 /**
- * Defining ReusableV2 Annotation that is used to decorate @ComponentV2.
+ * 声明一个可复用的自定义组件。该装饰器必须与@ComponentV2搭配使用，用于装饰自定义组件，以实现组件复用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 @Retention({policy: "SOURCE"})
-export @interface ReusableV2 {}
+export @interface ReusableV2 {
+  /**
+   * 组件复用内存优化配置项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  memoryOptimizationStrategy: ReusableMemOptStrategy = ReusableMemOptStrategy.DEFAULT
+}
 
 /**
  * Defining CustomLayout Annotation that is used to decorate @Component and @ComponentV2.
@@ -643,7 +661,7 @@ export declare interface CustomComponentLifecycleObserver {
 
   /**
    * aboutToAppear函数在创建自定义组件的新实例后，执行其build()函数之前执行。开发者可以在此阶段修改状态变量。其功能与
-   * [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear)类似，但是在自定义组件状
+   * [aboutToAppear]{@link aboutToAppear}类似，但是在自定义组件状
    * 态机的约束下触发的。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -663,7 +681,7 @@ export declare interface CustomComponentLifecycleObserver {
 
   /**
    * aboutToDisappear函数在自定义组件被销毁之前执行。不建议在aboutToDisappear函数中修改状态变量，特别是@Link变量的修改可能会导致应用程序行为不稳定。其功能与
-   * [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear)类似，不同的
+   * [aboutToDisappear]{@link aboutToDisappear}类似，不同的
    * 是，CustomComponentLifecycleObserver中的aboutToDisappear函数受状态机约束，只有被监听的自定义组件状态向
    * CustomComponentLifecycleState.DISAPPEARED转变前触发回调。
    *

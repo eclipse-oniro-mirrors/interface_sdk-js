@@ -14,32 +14,33 @@
  */
 
 /**
- * @file
+ * @file System API
  * @kit ArkUI
  */
 
 /**
- * PluginComponentTemplate
+ * Defines the plugin component template information, which is used to bind to the component defined by the provider.
  *
- * @interface PluginComponentTemplate
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @since 9 dynamic
  */
 interface PluginComponentTemplate {
   /**
-   * Defines the plugin source name.
+   * Source of the component template. The value can be the absolute path of the template (not recommended), a relative
+   * path to the HAP package (in the "relative path&module name" format for multi-HAP scenarios), or the AbilityName
+   * in the FA model. For details, see [Attributes](#attributes).
    *
-   * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @since 9 dynamic
    */
   source: string;
   /**
-   * Defines the bundle name of the Template.
+   * bundleName of the provider application. This field does not need to be filled in when the template is provided
+   * through an absolute path, but must be filled in when the template is provided through an application package. For
+   * details, see [Attributes](#attributes).
    *
-   * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @since 9 dynamic
@@ -48,103 +49,78 @@ interface PluginComponentTemplate {
 }
 
 /**
- * Define options used to construct a plugin component.
- * AnonyMous Object Rectification
+ * Defines options for constructing a **PluginComponent**.
  *
- * @interface PluginComponentOptions
+ * > **NOTE**
+ * >
+ * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer element
+ * > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 18 dynamic
+ * @since 9 dynamic
  */
 declare interface PluginComponentOptions {
   /**
-   * Plugin component template.
-   * @type { PluginComponentTemplate }
+   * Template of the **PluginComponent**, which is bound to the component defined by the provider.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * Plugin component template.
-   * AnonyMous Object Rectification
-   * @type { PluginComponentTemplate }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   template: PluginComponentTemplate;
 
   /**
-   * Plugin component data.
-   * @type { any }
+   * Data passed to the plugin component provider for use. The type is not limited (objects, strings, and so on are
+   * supported). The specific data format is defined through negotiation between the user and the provider.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * Plugin component data.
-   * AnonyMous Object Rectification
-   * @type { any }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   data: any;
 }
 
 /**
- * Data provided when an error occurs.
- * AnonyMous Object Rectification
+ * Data provided when the error occurs.
  *
- * @interface PluginErrorData
+ * > **NOTE**
+ * >
+ * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer element
+ * > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 18 dynamic
+ * @since 9 dynamic
  */
 declare interface PluginErrorData {
   /**
    * Error code.
-   * @type { number }
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * Error code.
-   * AnonyMous Object Rectification
-   * @type { number }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   errcode: number;
 
   /**
    * Error message.
-   * @type { string }
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * Error message.
-   * AnonyMous Object Rectification
-   * @type { string }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   msg: string;
 }
 
 /**
  * Callback invoked when an error occurs.
- * AnonyMous Object Rectification
  *
- * @typedef { function } PluginErrorCallback
- * @param { PluginErrorData } info - Plugin error data
+ * @param { PluginErrorData } info - Data provided when an error occurs.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
@@ -153,90 +129,84 @@ declare interface PluginErrorData {
 declare type PluginErrorCallback = (info: PluginErrorData) => void;
 
 /**
- * Provides plugin component.
+ * Provides the embedded display capability for external application components, that is, the UI provided by an
+ * external application can be displayed within this application. It applies to scenarios where UI components need to
+ * be reused across applications, such as embedding pages or cards of other applications to implement UI collaboration
+ * and data interaction between applications. To implement updates through inter-process communication (IPC), see
+ * [@ohos.pluginComponent]{@link @ohos.pluginComponent}.
  *
- * @interface PluginComponentInterface
+ * > **NOTE**
+ * >
+ * > - The APIs provided by this module are system APIs.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @since 9 dynamic
  */
 interface PluginComponentInterface {
   /**
-   * Called when setting the plugin.
+   * Creates a **PluginComponent** to display the UI provided by an external application.
    *
-   * @param { object } value
+   * @param { object } value [since 9 - 17]
+   * @param { PluginComponentOptions } options - Configuration options of the **PluginComponent**. [since 18]
    * @returns { PluginComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * Called when setting the plugin.
-   * AnonyMous Object Rectification
-   *
-   * @param { PluginComponentOptions } options - Plugin component options
-   * @returns { PluginComponentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   (options: PluginComponentOptions): PluginComponentAttribute;
 }
 
 /**
- * Defines the plugin component attribute functions.
+ * The component width and height must be explicitly set to valid non-zero values; otherwise, the component cannot be
+ * displayed properly.
  *
- * @extends CommonMethod<PluginComponentAttribute>
+ * [Gesture events]{@link ./common} can be distributed to and processed inside the provider page.
+ *
+ * In addition to the [universal events]{@link ./common}, the following events are supported.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @since 9 dynamic
  */
 declare class PluginComponentAttribute extends CommonMethod<PluginComponentAttribute> {
   /**
-   * pluginComponent onComplete callback,
+   * Triggered when the component loading is complete.
    *
-   * @param { function } callback
+   * @param { function } callback - Callback invoked when the component loading is complete. [since 9 - 17]
+   * @param { VoidCallback } callback - Callback invoked when the component loading is complete. [since 18]
    * @returns { PluginComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * PluginComponent onComplete callback
-   * AnonyMous Object Rectification
-   *
-   * @param { VoidCallback } callback
-   * @returns { PluginComponentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   onComplete(callback: VoidCallback): PluginComponentAttribute;
 
   /**
-   * pluginComponent onError callback,
+   * Triggered when an error occurs during component loading.
    *
-   * @param { function } callback
+   * @param { function } callback - Callback invoked when an error occurs during component loading. [since 9 - 17]
+   * @param { PluginErrorCallback } callback - Callback invoked when an error occurs during component loading.
+   *     [since 18]
    * @returns { PluginComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
-   * @since 9
-   */
-  /**
-   * PluginComponent onError callback
-   * AnonyMous Object Rectification
-   *
-   * @param { PluginErrorCallback } callback
-   * @returns { PluginComponentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @since 18 dynamic
+   * @since 9 dynamic
    */
   onError(callback: PluginErrorCallback): PluginComponentAttribute;
 }
 
 /**
- * Defines PluginComponent Component.
+ * Provides the embedded display capability for external application components, that is, the UI provided by an
+ * external application can be displayed within this application. It applies to scenarios where UI components need to
+ * be reused across applications, such as embedding pages or cards of other applications to implement UI collaboration
+ * and data interaction between applications. To implement updates through inter-process communication (IPC), see
+ * [@ohos.pluginComponent]{@link @ohos.pluginComponent}.
+ *
+ *
+ * ###### Child Components
+ *
+ * Not supported
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi

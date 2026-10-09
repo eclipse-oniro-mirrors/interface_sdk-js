@@ -41,7 +41,7 @@ export declare enum IndexerAlign {
    * @stagemodelonly
    * @since 23 static
    */
-  Left = 0,
+  Left,
 
   /**
    * A dialog box is displayed on the left of the index bar.
@@ -50,7 +50,7 @@ export declare enum IndexerAlign {
    * @stagemodelonly
    * @since 23 static
    */
-  Right = 1,
+  Right,
 
   /**
    * A dialog box is displayed on the start of the index bar.
@@ -59,7 +59,7 @@ export declare enum IndexerAlign {
    * @stagemodelonly
    * @since 23 static
    */
-  START = 2,
+  START,
 
   /**
    * A dialog box is displayed on the end of the index bar.
@@ -68,7 +68,7 @@ export declare enum IndexerAlign {
    * @stagemodelonly
    * @since 23 static
    */
-  END = 3
+  END
 }
 /**
  * AlphabetIndexer constructor options.
@@ -455,7 +455,8 @@ export declare interface AlphabetIndexerAttribute extends CommonMethod {
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setAlphabetIndexerOptions(info: AlphabetIndexerOptions): this;
 }
@@ -481,7 +482,8 @@ export declare function AlphabetIndexer(
  * @returns { AlphabetIndexerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 @Builder
 export declare function AlphabetIndexer(

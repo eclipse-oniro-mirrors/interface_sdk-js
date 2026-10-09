@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Power Management
  * @kit BasicServicesKit
  */
 
@@ -125,6 +125,7 @@ declare namespace power {
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @since 9 dynamic
@@ -144,8 +145,11 @@ declare namespace power {
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
+   *     1. Not allowed to turn off the screen during the exam. [since 26.2.0]
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @since 9 dynamic
@@ -242,6 +246,7 @@ declare namespace power {
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @since 12 dynamic
@@ -263,6 +268,7 @@ declare namespace power {
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 4900201 - The device activity is being refreshed too frequently; the minimum time
    *     interval is 100 ms.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @since 20 dynamic

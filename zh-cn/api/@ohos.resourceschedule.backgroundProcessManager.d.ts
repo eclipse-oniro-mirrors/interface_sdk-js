@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2025-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@
 
 /**
  * 本模块提供了后台子进程管控接口。开发者可以通过本模块接口对子进程进行压制、解压制，避免子进程过多占用系统资源，导致系统使用卡顿。本模块接口仅对通过
- * [OH_Ability_StartNativeChildProcess](docroot://reference/apis-ability-kit/capi-native-child-process-h.md#oh_ability_startnativechildprocess)
+ * [OH_Ability_StartNativeChildProcess](docroot://reference/apis-ability-kit/c-apis/capi-native-child-process-h.md#oh_ability_startnativechildprocess)
  * 接口创建的子进程生效。
  *
  * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
@@ -83,14 +83,35 @@ declare namespace backgroundProcessManager {
     }
 
     /**
+     * 资源清理类型。
+     *
+     * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    export enum ClearType {
+        /**
+         * 清理多任务卡片。
+         *
+         * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
+         * @systemapi Hide this for inner system use.
+         * @stagemodelonly
+         * @since 26.0.1 dynamic&static
+         */
+        CLEAR_RECENT_CARDS = 1
+    }
+
+    /**
      * 设置子进程的压制档位，子进程被压制后可获得的CPU资源将会受到限制。如果主进程调度策略发生变化，如从后台切至前台等，子进程会跟随主进程一同变化，子进程如需继续压制，需要重新调用本接口。使用Promise异步回调。
      *
      * @param { int } pid - 需要被压制子进程的进程号，
-     *     [OH_Ability_StartNativeChildProcess](docroot://reference/apis-ability-kit/capi-native-child-process-h.md#oh_ability_startnativechildprocess)
+     *     [OH_Ability_StartNativeChildProcess](docroot://reference/apis-ability-kit/c-apis/capi-native-child-process-h.md#oh_ability_startnativechildprocess)
      *     接口创建子进程后的pid参数，即为子进程进程号。
      * @param { ProcessPriority } priority - 压制档位。
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: priority is out of range.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types; 3. Parameter verification failed.
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @since 17 dynamic
      * @since 23 static
@@ -101,7 +122,7 @@ declare namespace backgroundProcessManager {
      * 为子进程解压制，即子进程策略恢复为主进程调度策略。若主进程调度策略发生变化，如从后台切至前台等， 子进程会跟随主进程一同变化，等效于执行一次resetProcessPriority动作。使用Promise异步回调。
      *
      * @param { int } pid - 子进程的进程号，
-     *     [OH_Ability_StartNativeChildProcess](docroot://reference/apis-ability-kit/capi-native-child-process-h.md#oh_ability_startnativechildprocess)
+     *     [OH_Ability_StartNativeChildProcess](docroot://reference/apis-ability-kit/c-apis/capi-native-child-process-h.md#oh_ability_startnativechildprocess)
      *     接口创建子进程后的pid参数，即为子进程进程号。
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
@@ -112,9 +133,9 @@ declare namespace backgroundProcessManager {
 
     /**
      * 设置进程的能效模式，使用Promise异步回调。
-     * 
+     *
      * 当应用满足以下条件时，可以设置自身是否进入能效模式：
-     * 
+     *
      * - 应用未获取系统焦点，未执行音频或界面刷新操作。
      * - 无法通过框架层获取电源锁。
      * - 应用需要执行压缩、解压缩、编译等耗时较长的计算任务，不希望这些任务受到显著的CPU资源限制（即被迫进入能效模式）。
@@ -123,13 +144,14 @@ declare namespace backgroundProcessManager {
      * @param { int } pid - 进程号。
      * @param { PowerSaveMode } powerSaveMode - 能效模式。
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 31800002 - Parameter error. Possible causes:
      *     <br>  1. Mandatory parameters are left unspecified;
      *     <br>  2. Incorrect parameter types; 3. PowerSaveMode status is out of range.
      * @throws { BusinessError } 31800003 - Setup error, This setting is overridden by settings in Task Manager
      * @throws { BusinessError } 31800004 - The setting failed due to system scheduling reasons.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @since 20 dynamic
      * @since 23 static
@@ -142,10 +164,11 @@ declare namespace backgroundProcessManager {
      * @permission ohos.permission.BACKGROUND_MANAGER_POWER_SAVE_MODE
      * @param { int } pid - 进程号。
      * @returns { Promise<boolean> } Promise对象。返回进程PID是否处于能效模式，返回true表示进程处于能效模式，返回false表示进程未处于能效模式。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 31800002 - Parameter error. Possible causes:
-     *     <br> 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     <br> 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types.
+     * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @since 20 dynamic
      * @since 23 static
@@ -158,14 +181,32 @@ declare namespace backgroundProcessManager {
      * @permission ohos.permission.BACKGROUND_MANAGER_POWER_SAVE_MODE
      * @param { int } pid - 进程号。<br>取值范围：大于0的整数。
      * @returns { Promise<PowerSaveMode> } Promise对象。返回进程能效模式状态。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 31800002 - Parameter error. Possible causes:
-     *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types.
+     * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @since 23 dynamic&static
      */
     function getPowerSaveMode(pid: int): Promise<PowerSaveMode>;
+
+    /**
+     * 主动清理后台资源。
+     *
+     * @permission ohos.permission.CLEAR_BACKGROUND_APPS
+     * @param { ClearType } clearType - 资源清理类型。
+     * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 31800002 - Parameter error.
+     * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    function clearBackgroundApps(clearType: ClearType): Promise<void>;
 }
 
 export default backgroundProcessManager;

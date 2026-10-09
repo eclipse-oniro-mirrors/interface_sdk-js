@@ -147,7 +147,7 @@ import { DrawableDescriptor, LayeredDrawableDescriptor, PixelMapDrawableDescript
 import inspector from '@ohos.arkui.inspector';
 import {
   NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode, BuildOptions, NodeController, FrameNode, DrawContext, Size, Offset, Position, Pivot,
-  Scale, Translation, Matrix4, Rotation, Frame, RenderNode, XComponentNode, LengthMetrics, ColorMetrics, BackgroundBlur, ContentBlur, ForegroundBlur, LengthUnit, LengthMetricsUnit,
+  Scale, Translation, Matrix4, Rotation, Frame, RenderNode, XComponentNode, LengthMetrics, ColorMetrics, BackgroundBlur, ContentBlur, ForegroundBlur, LengthUnit, LengthMetricsUnit, Edges,
   LayoutConstraint, ComponentContent, ReactiveComponentContent, NodeContent, Content, typeNode, NodeAdapter, ShapeMask, ShapeClip, Rect, RoundRect,
   edgeColors, edgeWidths, borderStyles, borderRadiuses, ExpandMode, ChildrenCountMode, UIState, InputEventType
 } from '@ohos.arkui.node';
@@ -157,13 +157,17 @@ import { AppStorageV2, PersistenceV2, Type, UIUtils, ConnectOptions, Binding, Mu
 CustomComponentLifecycleState, ComponentInit, ComponentAppear, ComponentBuilt, ComponentReuse, 
 ComponentActive, ComponentInactive,
 ComponentRecycle, ComponentDisappear, CollectionType, ConnectOptionsCollections,
-CustomComponentContext, IReusePool, IReusableInfo } from '@ohos.arkui.StateManagement';
+CustomComponentContext, IReusePool, IReusableInfo,
+StorageDefaultCreator, TypeConstructorWithArgs, PersistenceErrorCallback, TypeConstructor, TypeDecorator,
+MonitorCallback, MonitorOptions, GetterCallback, SetterCallback, ObservedResult, DecoratorInfo, ElementInfo
+} from '@ohos.arkui.StateManagement';
 import { RectShape, CircleShape, EllipseShape, PathShape } from '@ohos.arkui.shape';
 import {
   AtomicServiceBar, ComponentUtils, ContextMenuController, CursorController, DialogPresenter, DragController, Font, KeyboardAvoidMode, MediaQuery, OverlayManager,
   PromptAction, Router, UIContext, UIInspector, UIObserver, PageInfo, SwiperDynamicSyncScene, SwiperDynamicSyncSceneType, MarqueeDynamicSyncScene,
   MarqueeDynamicSyncSceneType, MeasureUtils, FrameCallback, OverlayManagerOptions, TargetInfo, TextMenuController,
-  NodeIdentity, NodeRenderState, NodeRenderStateChangeCallback, Magnifier, ResolvedUIContext, TextSelectionClearPolicy
+  NodeIdentity, NodeRenderState, NodeRenderStateChangeCallback, Magnifier, ResolvedUIContext, TextSelectionClearPolicy, CustomKeyboardContinueFeature,
+  BackgroundLuminanceSamplingConfigs, LuminanceSampler
 } from '@ohos.arkui.UIContext';
 import curves from '@ohos.curves';
 import {
@@ -293,10 +297,10 @@ import { RowLayoutAlgorithm, ColumnLayoutAlgorithm, StackLayoutAlgorithm, GridLa
 import { LazyLayoutDirection, LazyLayoutHelper, LazyCustomLayoutAlgorithmOptions, LazyCustomLayoutAlgorithm, LazyLayoutAlgorithm } from '@ohos.arkui.lazyLayoutAlgorithm';
 import { DynamicLayout, DynamicLayoutAttribute } from '@ohos.arkui.components.ArkDynamicLayout';
 import { ContainerReader, ContainerReaderAttribute, BreakpointOptions } from '@ohos.arkui.components.ContainerReader';
+import { WithEnv, WithEnvAttribute} from '@ohos.arkui.WithEnv';
 import { LazyVWaterFlowLayout, LazyVWaterFlowLayoutAttribute, LazyWaterFlowLayoutAttribute } from '@ohos.arkui.components.ArkLazyWaterFlowLayout';
 import { LazyColumnLayout, LazyColumnLayoutAttribute } from '@ohos.arkui.components.ArkLazyColumnLayout';
 import { LazyDynamicLayout, LazyDynamicLayoutAttribute } from '@ohos.arkui.components.ArkLazyDynamicLayout';
-import { WithEnv, WithEnvAttribute} from '@ohos.arkui.WithEnv';
 import {
   OnMenuItemClickWithTextCallback,
   SelectionContainer,
@@ -304,7 +308,9 @@ import {
   SelectionContainerEditMenuOptions,
   SelectionContainerInstance,
   SelectionContainerMenuOptions,
-  SelectionContainerTextJoinStyle
+  SelectionContainerTextJoinStyle,
+  SelectionContainerOptions,
+  SelectionContainerController
 } from '@ohos.arkui.components.SelectionContainer';
 export {
   AtomicServiceSearch, InputFilterParams, SearchButtonParams, MenuAlignParams, SearchParams, SelectParams, OperationParams,
@@ -347,7 +353,7 @@ export {
   ToolBarV2ItemState, ToolBarV2SymbolGlyph, ToolBarV2SymbolGlyphOptions, ToolBarV2ItemText, ToolBarV2ItemTextOptions, ToolBarV2ItemIconType,
   ToolBarV2ItemImage, ToolBarV2ItemImageOptions, ToolBarV2, ToolBarV2Item, ToolBarV2ItemOptions, ToolBarV2Modifier, ToolBarV2ItemAction,
   TreeListenerManager, TreeView, UIContext, UIInspector, UIObserver, PageInfo, WindowExtensionAbility, WindowExtensionContext, WithEnv, WithEnvAttribute, XComponentNode,
-  LengthMetrics, LengthUnit, ColorMetrics, BackgroundBlur, ContentBlur, ForegroundBlur, LengthMetricsUnit, LayoutConstraint, ComponentContent, ReactiveComponentContent, NodeContent, Content,
+  LengthMetrics, LengthUnit, ColorMetrics, BackgroundBlur, ContentBlur, ForegroundBlur, LengthMetricsUnit, LayoutConstraint, ComponentContent, ReactiveComponentContent, NodeContent, Content, Edges,
   componentSnapshot, componentUtils, curves, display, dragController, dragInteraction, floatingBall, floatView,
   font, inspector, matrix4, mediaquery, performanceMonitor, pluginComponentManager, PluginComponentTemplate, prompt, promptAction, router,
   dialog, DialogBaseAlignment, DialogButtonOrientation, DialogState, DialogResult, DialogDismissal, DialogBaseController, DialogPresenter,
@@ -402,10 +408,13 @@ export {
   RowLayoutAlgorithm, ColumnLayoutAlgorithm, StackLayoutAlgorithm, GridLayoutAlgorithm, CustomLayoutAlgorithm, LayoutAlgorithm, DynamicLayout, DynamicLayoutAttribute,
   LazyLayoutDirection, LazyLayoutHelper, LazyCustomLayoutAlgorithmOptions, LazyCustomLayoutAlgorithm, LazyLayoutAlgorithm, LazyDynamicLayout, LazyDynamicLayoutAttribute,
   ContainerReader, ContainerReaderAttribute, BreakpointOptions, LazyColumnLayout, LazyColumnLayoutAttribute,
-  CustomComponentContext, IReusePool, IReusableInfo, PopupV2, PopupV2InitInfo, PopupV2Button,
+  CustomComponentContext, IReusePool, IReusableInfo,
+  StorageDefaultCreator, TypeConstructorWithArgs, PersistenceErrorCallback, TypeConstructor, TypeDecorator,
+  MonitorCallback, MonitorOptions, GetterCallback, SetterCallback, ObservedResult, DecoratorInfo, ElementInfo,
+  PopupV2, PopupV2InitInfo, PopupV2Button,
   BackPressActionProposal, BaseGestureHandlingProposal, ClickActionProposal, GestureHandlingResolution, NoneActionProposal, PageSwitchActionProposal, ScrollActionProposal, SelectActionProposal, SmartGestureController, TargetedGestureProposal,
   LazyVWaterFlowLayout, LazyVWaterFlowLayoutAttribute, LazyWaterFlowLayoutAttribute,
-  SelectionContainer, SelectionContainerAttribute, SelectionContainerInstance, SelectionContainerTextJoinStyle, SelectionContainerMenuOptions, SelectionContainerEditMenuOptions, OnMenuItemClickWithTextCallback,
+  SelectionContainer, SelectionContainerAttribute, SelectionContainerInstance, SelectionContainerTextJoinStyle, SelectionContainerMenuOptions, SelectionContainerEditMenuOptions, OnMenuItemClickWithTextCallback, SelectionContainerOptions, SelectionContainerController,
   DatePickerComponent, DatePickerComponentOptions, DisplayMode, DateMode, TimeFormat, DatePickerComponentResult,
   ComposeListItemV2, ContentItemV2, ContentItemV2Options, IconTypeV2, OperateButtonV2,
   OperateButtonV2Options, OperateCheckV2, OperateCheckV2Options, OperateIconV2, OperateIconV2Options,
@@ -416,5 +425,6 @@ export {
   EditableTitleBarMenuItemV2Options, EditableSaveButtonV2, EditableSaveButtonV2Options, EditableTitleBarStyleV2,
   EditableTitleBarStyleV2Options,
   MarginTypeV2, PromptOptionsV2, PromptOptionsV2Config, ExceptionPromptV2,
-  SwipeRefresherV2, CallbackParamV2, NodeParamV2, TreeControllerV2, TreeListenerV2, TreeListenerManagerV2, TreeViewV2
+  SwipeRefresherV2, CallbackParamV2, NodeParamV2, TreeControllerV2, TreeListenerV2, TreeListenerManagerV2, TreeViewV2, CustomKeyboardContinueFeature,
+  BackgroundLuminanceSamplingConfigs, LuminanceSampler
 };

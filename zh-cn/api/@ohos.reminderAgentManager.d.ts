@@ -50,7 +50,10 @@ declare namespace reminderAgentManager {
    * @param { ReminderRequest } reminderReq - 需要发布的代理提醒实例。
    * @param { AsyncCallback<int> } callback - 回调函数。
    *     当代理提醒发布成功，err为undefined，data为当前发布提醒的id；否则为错误对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700001 - Notification is not enabled.
    * @throws { BusinessError } 1700002 - The number of reminders exceeds the limit.
    * @syscap SystemCapability.Notification.ReminderAgent
@@ -72,7 +75,10 @@ declare namespace reminderAgentManager {
    * @permission ohos.permission.PUBLISH_AGENT_REMINDER
    * @param { ReminderRequest } reminderReq - 需要发布的代理提醒实例。
    * @returns { Promise<int> } Promise对象，返回当前发布提醒的id。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700001 - Notification is not enabled.
    * @throws { BusinessError } 1700002 - The number of reminders exceeds the limit.
    * @syscap SystemCapability.Notification.ReminderAgent
@@ -90,7 +96,8 @@ declare namespace reminderAgentManager {
    *     时作为返回值返回。
    * @param { AsyncCallback<void> } callback - 回调函数。
    *     当取消代理提醒成功，err为undefined；否则为错误对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700003 - The reminder does not exist.
    * @throws { BusinessError } 1700004 - The bundle name does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
@@ -107,7 +114,8 @@ declare namespace reminderAgentManager {
    *     [发布代理提醒]{@link reminderAgentManager.publishReminder(reminderReq: ReminderRequest, callback: AsyncCallback<int>)}
    *     时作为返回值返回。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700003 - The reminder does not exist.
    * @throws { BusinessError } 1700004 - The bundle name does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
@@ -136,7 +144,8 @@ declare namespace reminderAgentManager {
    *
    * @param { AsyncCallback<Array<ReminderRequest>> } callback - 回调函数。
    *     当查询代理提醒成功，err为undefined，data为当前应用设置的所有有效（未过期）的代理提醒；否则为错误对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700004 - The bundle name does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
@@ -148,7 +157,8 @@ declare namespace reminderAgentManager {
    * 获取当前应用设置的所有[有效（未过期）的代理提醒](docroot://task-management/agent-powered-reminder.md#约束与限制)。使用Promise异步回调。
    *
    * @returns { Promise<Array<ReminderRequest>> } Promise对象，返回当前应用设置的所有有效（未过期）的代理提醒。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700004 - The bundle name does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
@@ -161,7 +171,8 @@ declare namespace reminderAgentManager {
    *
    * @param { AsyncCallback<void> } callback - 回调函数。
    *     当取消代理提醒成功，err为undefined；否则为错误对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700004 - The bundle name does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
@@ -173,7 +184,8 @@ declare namespace reminderAgentManager {
    * 取消当前应用设置的所有代理提醒。使用Promise异步回调。
    *
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700004 - The bundle name does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
@@ -191,7 +203,8 @@ declare namespace reminderAgentManager {
    *     时作为返回值返回。
    * @param { ReminderRequest } reminderReq - 代理提醒对象实例，用于设置提醒类型、响铃时长等具体信息。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 1700003 - The reminder does not exist.
    * @throws { BusinessError } 1700007 - If the input parameter is not valid parameter.
    * @syscap SystemCapability.Notification.ReminderAgent
@@ -206,7 +219,8 @@ declare namespace reminderAgentManager {
    * @param { NotificationSlot } slot - 通知渠道实例，仅支持设置其notificationType属性。
    * @param { AsyncCallback<void> } callback - 回调函数。
    *     当添加NotificationSlot成功，err为undefined；否则为错误对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
    * @since 23 static
@@ -218,7 +232,8 @@ declare namespace reminderAgentManager {
    *
    * @param { NotificationSlot } slot - 通知渠道实例，仅支持设置其notificationType属性。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
    * @since 23 static
@@ -231,7 +246,8 @@ declare namespace reminderAgentManager {
    * @param { notification.SlotType } slotType - 通知渠道类型。
    * @param { AsyncCallback<void> } callback - 回调函数。
    *     当删除成功，err为undefined；否则为错误对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
    * @since 23 static
@@ -243,7 +259,8 @@ declare namespace reminderAgentManager {
    *
    * @param { notification.SlotType } slotType - 通知渠道类型。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 9 dynamic
    * @since 23 static
@@ -253,14 +270,17 @@ declare namespace reminderAgentManager {
   /**
    * 为指定id的周期性的日历提醒，添加不提醒日期（如每天提醒的日历，设置周二不提醒）。使用Promise异步回调。
    *
+   * @permission ohos.permission.PUBLISH_AGENT_REMINDER
    * @param { int } reminderId - 需要添加不提醒日期的代理提醒id。
    *     代理提醒id会在
    *     [发布代理提醒]{@link reminderAgentManager.publishReminder(reminderReq: ReminderRequest, callback: AsyncCallback<int>)}
    *     时作为返回值返回。
    * @param { Date } date - 不提醒的日期。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied
-   * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 1700003 - The reminder does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 12 dynamic
@@ -271,12 +291,14 @@ declare namespace reminderAgentManager {
   /**
    * 为指定id的周期性的日历提醒，删除设置的所有不提醒日期。使用Promise异步回调。
    *
+   * @permission ohos.permission.PUBLISH_AGENT_REMINDER
    * @param { int } reminderId - 需要删除不提醒日期的代理提醒id。
    *     代理提醒id会在
    *     [发布代理提醒]{@link reminderAgentManager.publishReminder(reminderReq: ReminderRequest, callback: AsyncCallback<int>)}
    *     时作为返回值返回。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 1700003 - The reminder does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 12 dynamic
@@ -287,12 +309,14 @@ declare namespace reminderAgentManager {
   /**
    * 为指定id的周期性的日历提醒，查询设置的所有不提醒日期。使用Promise异步回调。
    *
+   * @permission ohos.permission.PUBLISH_AGENT_REMINDER
    * @param { int } reminderId - 需要查询不提醒日期的代理提醒id。
    *     代理提醒id会在
    *     [发布代理提醒]{@link reminderAgentManager.publishReminder(reminderReq: ReminderRequest, callback: AsyncCallback<int>)}
    *     时作为返回值返回。
    * @returns { Promise<Array<Date>> } Promise对象。返回特定日历设置的所有不提醒日期。
-   * @throws { BusinessError } 201 - Permission denied
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 1700003 - The reminder does not exist.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 12 dynamic
@@ -304,8 +328,10 @@ declare namespace reminderAgentManager {
    * 获取当前应用设置的所有[有效（未过期）的代理提醒](docroot://task-management/agent-powered-reminder.md#约束与限制)。使用Promise异步回调。
    * 该接口调用需要申请ohos.permission.PUBLISH_AGENT_REMINDER权限。
    *
+   * @permission ohos.permission.PUBLISH_AGENT_REMINDER
    * @returns { Promise<Array<ReminderInfo>> } Promise对象，返回当前应用设置的所有有效（未过期）的代理提醒。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @since 12 dynamic
    * @since 23 static
@@ -318,7 +344,8 @@ declare namespace reminderAgentManager {
    * @permission ohos.permission.PUBLISH_AGENT_REMINDER
    * @param { Callback<Array<ReminderState>> } callback - 回调函数，返回代理提醒状态信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 1700007 - If the input parameter is not valid parameter.
    * @syscap SystemCapability.Notification.ReminderAgent
    * @stagemodelonly
@@ -444,6 +471,44 @@ declare namespace reminderAgentManager {
      * @since 23 dynamic&static
      */
     RING_CHANNEL_NOTIFICATION = 2
+  }
+
+  /**
+   * 时区类型。用于时区变更时，按照变更后的时区重新计算提醒的目标时间。
+   *
+   * @syscap SystemCapability.Notification.ReminderAgent
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  export enum TimeZoneType {  
+    /**
+     * 默认。修改时区，提醒时间的计算方式与固定时区的行为相同；修改时间，提醒时间的计算方式与跟随系统时区的行为相同。
+     * 建议根据业务场景，明确指定FIXED_TIME_ZONE或者SYSTEM_TIME_ZONE类型。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    DEFAULT = 0,
+
+    /**
+     * 固定时区，用于抢票、开会等场景。例如：设备在东八区创建08:00的提醒，那么无论设备时区如何变化，都会在东八区的08:00提醒，
+     * 即在东四区显示为04:00，修改系统时间不影响提醒目标时间。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    FIXED_TIME_ZONE = 1,
+
+    /**
+     * 跟随系统时区，用于早起闹钟、定点运动、睡觉等场景，例如：设备在东八区创建08:00的提醒，在东四区仍为08:00的提醒，修改系统时间不影响提醒目标时间。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    SYSTEM_TIME_ZONE = 2
   }
 
   /**
@@ -622,6 +687,38 @@ declare namespace reminderAgentManager {
      * @since 23 static
      */
     abilityName: string;
+  }
+
+  /**
+   * 通知请求信息。
+   *
+   * @syscap SystemCapability.Notification.ReminderAgent
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  interface NotificationRequestProxy {
+    /**
+     * 应用发送通知携带的唯一标识字段，用于通知去重，默认为空。具体请参考
+     * [NotificationRequest.appMessageId]{@link ./notification/notificationRequest:NotificationRequest}。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    appMessageId?: string;
+	
+    /**
+     * 发布或更新该通知时，是否只进行一次通知提醒，默认为false。具体请参考
+     * [NotificationRequest.isAlertOnce]{@link ./notification/notificationRequest:NotificationRequest}。
+     * 
+     * - true：仅首次发布通知时进行提醒，后续更新该通知时，提醒方式变更为[LEVEL_LOW]{@link @ohos.notificationManager:notificationManager.SlotLevel}.
+     * - false：每次均按照配置的通知提醒方式进行提醒。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    isAlertOnce?: boolean;
   }
 
   /**
@@ -901,6 +998,24 @@ declare namespace reminderAgentManager {
      * @since 23 dynamic&static
      */
     forceDistributed?: boolean;
+
+    /**
+     * 时区类型，默认为TimeZoneType.DEFAULT。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    fixedTimeZone?: TimeZoneType;
+
+    /**
+     * 通知请求信息，默认为空。
+     *
+     * @syscap SystemCapability.Notification.ReminderAgent
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    notificationRequestProxy?: NotificationRequestProxy;
   }
 
   /**
@@ -1032,8 +1147,6 @@ declare namespace reminderAgentManager {
      * 重复周期，无默认值，未赋值时，无重复周期。需和repeatCount一起使用。
      * 
      * 单位：s，范围：[86400, +∞)。超出范围返回错误码401。
-     * 
-     * 26.0.0
      *
      * @syscap SystemCapability.Notification.ReminderAgent
      * @stagemodelonly
@@ -1045,8 +1158,6 @@ declare namespace reminderAgentManager {
      * 重复次数，默认值为0，无限次重复。需和repeatInterval一起使用。
      * 
      * 范围：[0, +∞)。超出范围返回错误码401。
-     * 
-     * 26.0.0
      *
      * @syscap SystemCapability.Notification.ReminderAgent
      * @stagemodelonly

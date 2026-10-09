@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 关键资产存储服务
  * @kit AssetStoreKit
  */
 
@@ -34,7 +34,8 @@ declare namespace asset {
    *
    * @param { AssetMap } attributes - 待新增关键资产的属性集合，包括关键资产明文、访问控制属性、自定义数据等。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -93,15 +94,16 @@ declare namespace asset {
   /**
    * 在指定用户空间中新增一条关键资产。使用Promise异步回调。
    * 
-   * 设置[Tag.IS_PERSISTENT]{@link @ohos.security.asset:asset.TagType}属性，需申请ohos.permission.STORE_PERSISTENT_DATA权限，申请方式请参
-   * 考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
+   * 设置[Tag.IS_PERSISTENT]{@link @ohos.security.asset:asset.TagType}属性，需申请ohos.permission.STORE_PERSISTENT_DATA权限，
+   * 申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
    *
    * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
    * @param { number } userId - 用户ID。取值范围大于等于100。
    * @param { AssetMap } attributes - 待新增关键资产的属性集合，包括关键资产明文、访问控制属性、自定义数据等。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -128,11 +130,12 @@ declare namespace asset {
   /**
    * 新增一条关键资产，使用同步方式返回结果。
    * 
-   * 如果要设置[Tag.IS_PERSISTENT]{@link asset.TagType}属性，需要申请ohos.permission.STORE_PERSISTENT_DATA权限，申请方式请参考
-   * [声明权限](docroot://security/AccessToken/declare-permissions.md)。
+   * 如果要设置[Tag.IS_PERSISTENT]{@link asset.TagType}属性，需要申请ohos.permission.STORE_PERSISTENT_DATA权限，
+   * 申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
    *
    * @param { AssetMap } attributes - 待新增关键资产的属性集合，包括关键资产明文、访问控制属性、自定义数据等。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -162,8 +165,9 @@ declare namespace asset {
    * @param { AssetMap } query - 待删除关键资产的搜索条件，如别名、访问控制属性、自定义数据等。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000006 - Insufficient memory.
@@ -187,11 +191,13 @@ declare namespace asset {
    * @param { number } userId - 用户ID。取值范围大于等于100。
    * @param { AssetMap } query - 待删除关键资产的搜索条件，如别名、访问控制属性、自定义数据等。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000006 - Insufficient memory.
@@ -239,8 +245,9 @@ declare namespace asset {
    *
    * @param { AssetMap } query - 待删除关键资产的搜索条件，如别名、访问控制属性、自定义数据等。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000006 - Insufficient memory.
@@ -293,8 +300,9 @@ declare namespace asset {
    * @param { AssetMap } query - 待更新关键资产的搜索条件，如关键资产别名、访问控制属性、自定义数据等。
    * @param { AssetMap } attributesToUpdate - 待更新关键资产的属性集合，如关键资产明文和自定义数据等。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -374,15 +382,16 @@ declare namespace asset {
   function updateSync(query: AssetMap, attributesToUpdate: AssetMap): void;
 
   /**
-   * 查询的预处理，用于需要用户认证的关键资产。在用户认证成功后，应当随后调用[asset.query]{@link asset.query}和[asset.postQuery]{@link asset.postQuery}接口。使用
-   * Promise异步回调。
+   * 查询的预处理，用于需要用户认证的关键资产。在用户认证成功后，应当随后调用[asset.query]{@link asset.query}和[asset.postQuery]{@link asset.postQuery}接口。
+   * 使用Promise异步回调。
    *
    * @param { AssetMap } query - 关键资产的查询条件，如别名、访问控制属性、自定义数据等。
    * @returns { Promise<Uint8Array> } Promise对象，返回挑战值。
    *     <br>**说明：** 挑战值用于后续的用户认证。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000005 - The screen lock status does not match.
@@ -411,11 +420,13 @@ declare namespace asset {
    * @param { AssetMap } query - 关键资产的查询条件，如别名、访问控制属性、自定义数据等。
    * @returns { Promise<Uint8Array> } Promise对象，返回挑战值。
    *     <br>**说明：** 挑战值用于后续用户认证。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000005 - The screen lock status does not match.
@@ -443,8 +454,9 @@ declare namespace asset {
    * @returns { Uint8Array } 挑战值。
    *     <br>**说明：** 挑战值用于后续用户认证。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000005 - The screen lock status does not match.
@@ -466,16 +478,17 @@ declare namespace asset {
 
   /**
    * 查询一条或多条符合条件的关键资产。若查询需要用户认证的关键资产，则需要在本函数前调用[asset.preQuery]{@link asset.preQuery}接口，在本函数后调用
-   * [asset.postQuery]{@link asset.postQuery}接口，开发步骤请参考[开发指导](docroot://security/AssetStoreKit/asset-js-query-auth.md)。使
-   * 用Promise异步回调。
+   * [asset.postQuery]{@link asset.postQuery}接口，开发步骤请参考[开发指导](docroot://security/AssetStoreKit/asset-js-query-auth.md)。
+   * 使用Promise异步回调。
    * 
    * 如果未查询到符合条件的关键资产，将抛出“未找到关键资产”的异常，而非返回空的查询结果列表。
    *
    * @param { AssetMap } query - 关键资产的查询条件，如别名、访问控制属性、自定义数据等。
    * @returns { Promise<Array<AssetMap>> } Promise对象，返回查询结果列表。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000004 - Access denied.
@@ -504,11 +517,13 @@ declare namespace asset {
    * @param { number } userId - 用户ID。取值范围大于等于100。
    * @param { AssetMap } query - 关键资产的查询条件，如别名、访问控制属性、自定义数据等。
    * @returns { Promise<Array<AssetMap>> } Promise对象，返回查询结果列表。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000004 - Access denied.
@@ -538,8 +553,9 @@ declare namespace asset {
    * @param { AssetMap } query - 关键资产的查询条件，如别名、访问控制属性、自定义数据等。
    * @returns { Array<AssetMap> } 查询结果列表。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1. Incorrect parameter types.
-   *     2. Parameter verification failed.
+   *     1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
+   *     3. Parameter verification failed.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000002 - The asset is not found.
    * @throws { BusinessError } 24000004 - Access denied.
@@ -587,8 +603,9 @@ declare namespace asset {
    * @param { number } userId - 用户ID。取值范围大于等于100。
    * @param { AssetMap } handle - 待处理的查询句柄，当前包含[asset.preQueryAsUser]{@link asset.preQueryAsUser}执行成功返回的挑战值。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The caller doesn't have the permission.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -921,8 +938,7 @@ declare namespace asset {
   }
 
   /**
-   * [batchAdd]{@link asset.batchAdd}、[batchUpdate]{@link asset.batchUpdate}和[batchRemove]{@link asset.batchRemove}批量操作的
-   * 结果。
+   * [batchAdd]{@link asset.batchAdd}和[batchUpdate]{@link asset.batchUpdate}批量操作的结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -1279,7 +1295,7 @@ declare namespace asset {
      * @syscap SystemCapability.Security.Asset
      * @since 18
      */
-    WRAP_TYPE = TagType.NUMBER | 0x49,
+    WRAP_TYPE = TagType.NUMBER | 0x49
   }
 
   /**
@@ -1291,14 +1307,14 @@ declare namespace asset {
    */
   enum ErrorCode {
     /**
-     * 调用方无权限。
+     * 权限校验失败，应用无权限使用该API，需要申请权限。
      *
      * @syscap SystemCapability.Security.Asset
      * @since 11
      */
     PERMISSION_DENIED = 201,
     /**
-     * 调用方不是一个系统应用。
+     * 权限校验失败，非系统应用使用了系统API。
      *
      * @syscap SystemCapability.Security.Asset
      * @since 12

@@ -18,413 +18,262 @@
  * @kit ArkUI
  */
 
-
-
-
-
 /**
  * Declaration of the menu item on the right side.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declaration of the menu item on the right side.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11
- */
-/**
- * Declaration of the menu item on the right side.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 20 dynamic
+ * @crossplatform [since 20]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 export declare class SelectTitleBarMenuItem {
   /**
-   * Icon resource for this menu item.
-   * @type { ResourceStr }.
+   * Icon resource used to set the icon of the menu item on the right side of the title bar. It can be referenced
+   * through $r. When **symbolStyle** is also set, **symbolStyle** takes precedence.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Icon resource for this menu item.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Icon resource for this menu item.
-   * @type { ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   value: ResourceStr;
 
   /**
-   * Symbol resource for this menu item.
-   * @type { ?SymbolGlyphModifier }.
+   * Symbol icon resource, which has higher priority than **value**.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 20]
    * @atomicservice
-   * @since 18
-   */
-  /**
-   * Symbol resource for this menu item.
-   * @type { ?SymbolGlyphModifier }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @since 18 dynamic
    */
   symbolStyle?: SymbolGlyphModifier;
 
   /**
-   * Icon label for this menu item.
-   * @type { ?ResourceStr }.
+   * Icon label description, which can serve as the default value of **accessibilityText**. When both **label** and
+   * **accessibilityText** are set, **accessibilityText** takes precedence. When not set, there is no label by default.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 20]
    * @atomicservice
-   * @since 13
-   */
-  /**
-   * Icon label for this menu item.
-   * @type { ?ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @since 13 dynamic
    */
   label?: ResourceStr;
 
   /**
-   * Whether to enable this menu item.
-   * @type { ?boolean }.
+   * Whether to enable.
+   *
+   * Default value: **false**. The value **true** enables the menu item, and **false** disables it (grayed out and not
+   * tappable).
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Whether to enable this menu item.
-   * @type { ?boolean }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Whether to enable this menu item.
-   * @type { ?boolean }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   isEnabled?: boolean;
 
   /**
-   * Callback function when click on this menu item.
-   * @type { ?() => void }.
+   * Callback invoked when the custom button on the right is tapped. Developers can define custom operations to be
+   * executed after the button is tapped.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Callback function when click on this menu item.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Callback function when click on this menu item.
-   * @type { ?() => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   action?: () => void;
 
   /**
-   * The accessibilityText of this menu item.
-   * @type { ?ResourceStr }
+   * Accessibility text attribute of the custom button on the right side of the title bar. When a component does not
+   * contain a text attribute, the screen reader does not announce anything when this component is selected, and the
+   * user cannot clearly know which component is currently selected. To address this scenario, developers can set
+   * accessibility text for components that do not contain text information. When the screen reader selects this
+   * component, it announces the content of the accessibility text, helping screen reader users clearly know which
+   * component they have selected.
+   *
+   * Default value: when **label** is set, the default value is the content of the **label** attribute of the current
+   * item; when **label** is not set, the default value is a space character.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 20]
    * @atomicservice
-   * @since 18
-   */
-  /**
-   * The accessibilityText of this menu item.
-   * @type { ?ResourceStr }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @since 18 dynamic
    */
   accessibilityText?: ResourceStr;
 
   /**
-   * The accessibilityDescription of this menu item.
-   * @type { ?ResourceStr }
+   * Accessible description. You can provide comprehensive text explanations to help users understand the operation
+   * they are about to perform and its potential consequences, especially when these cannot be inferred from the
+   * component's attributes and accessibility text alone. If a component contains both text information and the
+   * accessible description, the text is announced first and then the accessible description, when the component is
+   * selected.
+   *
+   * Default value: **"Double-tap to activate"**
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 20]
    * @atomicservice
-   * @since 18
-   */
-  /**
-   * The accessibilityDescription of this menu item.
-   * @type { ?ResourceStr }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @since 18 dynamic
    */
   accessibilityDescription?: ResourceStr;
 
   /**
-   * The accessibilityLevel of this menu item.
-   * @type { ?string }
+   * Accessibility level of the custom button on the right side of the title bar. It controls whether the current item
+   * can be recognized by accessibility services.
+   *
+   * Supported values:
+   *
+   * **"auto"**: The component is automatically converted to **"yes"** or **"no"** based on the specific situation.
+   *
+   * **"yes"**: The component can be recognized by accessibility services.
+   *
+   * **"no"**: The component cannot be recognized by accessibility services.
+   *
+   * **"no-hide-descendants"**: The component and all its child components cannot be recognized by accessibility
+   * services.
+   *
+   * Default value: **"auto"**.
+   *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform [since 20]
    * @atomicservice
-   * @since 18
-   */
-  /**
-   * The accessibilityLevel of this menu item.
-   * @type { ?string }
-   * @default "auto"
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @since 18 dynamic
    */
   accessibilityLevel?: string;
 }
 
 /**
- * Declaration of the selectable title bar.
+ * The dropdown menu title bar is a title bar component that includes a dropdown menu, supports quick switching between
+ * pages, and can be configured with a back button and right-side menu items. This component is suitable for scenarios
+ * where navigation and switching between different views or pages are required, and it supports first-level pages as
+ * well as second-level and higher-level interfaces. Using this component facilitates quick access to and switching
+ * between different content views, improving the convenience of page navigation and user experience.
+ *
+ * > **NOTE**
+ * >
+ * > - This component can be used only in the stage model.
+ * >
+ * > - If the **SelectTitleBar** component has [universal attributes]{@link ./@internal/component/ets/common} and
+ * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **SelectTitleBar** component itself. As a result, the configured universal attributes and universal
+ * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
+ * > with the **SelectTitleBar** component.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Declaration of the selectable title bar.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11
- */
-/**
- * Declaration of the selectable title bar.
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 20 dynamic
+ * @crossplatform [since 20]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 @Component
 export declare struct SelectTitleBar {
   /**
-   * Selected index of the initial options in the drop-down menu. The index of the first item is 0.
-   * If this attribute is not set, the default value is -1. Which means, no menu item is selected.
-   * @type { number }.
+   * Index of the currently selected item.
+   *
+   * The index of the first item is 0, and the default value is **0**.
+   *
+   * @type { number }. [since 10 - 19]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
-  /**
-   * Selected index of the initial options in the drop-down menu. The index of the first item is 0.
-   * If this attribute is not set, the default value is -1. Which means, no menu item is selected.
-   * @type { number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Selected index of the initial options in the drop-down menu. The index of the first item is 0.
-   * If this attribute is not set, the default value is -1. Which means, no menu item is selected.
-   * @type { number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
-   */
-  @Prop selected: number;
+  @Prop
+  selected: number;
 
   /**
-   * Options inside the drop-down list.
-   * @type { Array<SelectOption> }.
+   * Items in the dropdown menu.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Options inside the drop-down list.
-   * @type { Array<SelectOption> }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Options inside the drop-down list.
-   * @type { Array<SelectOption> }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   options: Array<SelectOption>;
 
   /**
-   * Menu items on the right side.
-   * @type { ?Array<SelectTitleBarMenuItem> }.
+   * List of menu items on the right side, which defines the menu items on the right side of the title bar. This
+   * parameter is passed when menu items need to be added on the right side. If not specified, the right-side menu area
+   * is not displayed.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Menu items on the right side.
-   * @type { ?Array<SelectTitleBarMenuItem> }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Menu items on the right side.
-   * @type { ?Array<SelectTitleBarMenuItem> }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   menuItems?: Array<SelectTitleBarMenuItem>;
 
   /**
-   * Sub-title of this title bar.
-   * @type { ?ResourceStr }.
+   * Subtitle, used to display supplementary information. This parameter is passed to show the subtitle. If this
+   * parameter is not specified, the subtitle area is not displayed.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Sub-title of this title bar.
-   * @type { ?ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sub-title of this title bar.
-   * @type { ?ResourceStr }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   subtitle?: ResourceStr;
 
   /**
-   * The number displayed in a badge.
-   * @type { ?number }.
+   * New event badge, which displays a count on the menu icon on the right side of the title bar.
+   *
+   * Value range: [-2147483648, 2147483647]. If the value exceeds the range, 4294967296 is added to or subtracted from
+   * it to bring it within the range. If the value is not an integer, the decimal part is truncated, for example, 5.5
+   * becomes 5.
+   *
+   * **NOTE**
+   *
+   * If this parameter is not passed or is less than or equal to 0, the event badge is not displayed.
+   *
+   * The maximum number of messages is 99. If the number exceeds the maximum, only 99+ is displayed. An excessively
+   * large value is considered abnormal, and the event badge is not displayed.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * The number displayed in a badge.
-   * @type { ?number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * The number displayed in a badge.
-   * @type { ?number }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   badgeValue?: number;
 
   /**
-   * Whether to hide the back arrow at the left side.
-   * @type { ?boolean }.
+   * Whether to hide the back arrow on the left.
+   *
+   * Default value: **false**. **true** to hide, **false** to show.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Whether to hide the back arrow at the left side.
-   * @type { ?boolean }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Whether to hide the back arrow at the left side.
-   * @type { ?boolean }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   hidesBackButton?: boolean;
 
   /**
-   * Callback function when an option is selected
-   * @type { ?(index: number) => void }.
+   * Callback triggered when a dropdown menu item is selected. It passes the index of the selected item. This parameter
+   * is passed when specific business logic needs to be processed after a dropdown menu item is selected. If there is no
+   * specific business logic, this parameter can be omitted.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Callback function when an option is selected
-   * @type { ?(index: number) => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Callback function when an option is selected
-   * @type { ?(index: number) => void }.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @crossplatform [since 20]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   onSelected?: ((index: number) => void);
 }

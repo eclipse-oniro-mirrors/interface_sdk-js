@@ -80,8 +80,8 @@ declare namespace systemDateTime {
    * 设置系统时间，使用callback异步回调。
    *
    * @permission ohos.permission.SET_TIME
-   * @param { long } time - 目标时间戳(ms)。
-   * @param { AsyncCallback<void> } callback - 回调函数。
+   * @param { long } time - 目标时间戳(ms)，且必须>0。
+   * @param { AsyncCallback<void> } callback - 回调函数。设置系统时间的结果回调，设置成功时err为undefined，设置失败时err为错误对象。
    * @throws { BusinessError } 201 - Permission denied
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -89,7 +89,7 @@ declare namespace systemDateTime {
    *     <br> 2. Incorrect parameter types.
    * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
    *     1. The operation is restricted by the OS-account constraint.
-   *     2. The required privilege for the operation has not been granted. [since 24]
+   *     2. The required privilege for the operation has not been granted. [since 26.0.0]
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi Hide this for inner system use
    * @since 9 dynamic
@@ -100,7 +100,7 @@ declare namespace systemDateTime {
    * 设置系统时间，使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TIME
-   * @param { long } time - 目标时间戳(ms)。
+   * @param { long } time - 目标时间戳(ms)，且必须>0。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -109,7 +109,7 @@ declare namespace systemDateTime {
    *     <br> 2. Incorrect parameter types.
    * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
    *     1. The operation is restricted by the OS-account constraint.
-   *     2. The required privilege for the operation has not been granted. [since 24]
+   *     2. The required privilege for the operation has not been granted. [since 26.0.0]
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi Hide this for inner system use
    * @since 9 dynamic
@@ -307,13 +307,13 @@ declare namespace systemDateTime {
    *
    * @permission ohos.permission.SET_TIME
    * @param { Date } date - 目标日期，且必须>0。
-   * @param { AsyncCallback<void> } callback - 回调函数。
+   * @param { AsyncCallback<void> } callback - 回调函数。设置系统日期的结果回调，设置成功时err为undefined，设置失败时err为错误对象。
    * @throws { BusinessError } 201 - Permission denied
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameter types.
-   *     <br> 3. Parameter verification failed;
+   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi Hide this for inner system use
    * @since 9 dynamiconly
@@ -333,7 +333,7 @@ declare namespace systemDateTime {
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameter types.
-   *     <br> 3. Parameter verification failed;
+   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi Hide this for inner system use
    * @since 9 dynamiconly
@@ -382,7 +382,7 @@ declare namespace systemDateTime {
    *     <br> 2. Incorrect parameter types.
    * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
    *     1. The operation is restricted by the OS-account constraint.
-   *     2. The required privilege for the operation has not been granted. [since 24]
+   *     2. The required privilege for the operation has not been granted. [since 26.0.0]
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi Hide this for inner system use
    * @since 9 dynamic
@@ -404,7 +404,7 @@ declare namespace systemDateTime {
    *     <br> 2. Incorrect parameter types.
    * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
    *     1. The operation is restricted by the OS-account constraint.
-   *     2. The required privilege for the operation has not been granted. [since 24]
+   *     2. The required privilege for the operation has not been granted. [since 26.0.0]
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi Hide this for inner system use
    * @since 9 dynamic
@@ -498,7 +498,7 @@ declare namespace systemDateTime {
    *     2. Calls the underlying system interface failed.
    * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
    *     1. The operation is restricted by the OS-account constraint.
-   *     2. The required privilege for the operation has not been granted. [since 24]
+   *     2. The required privilege for the operation has not been granted. [since 26.0.0]
    * @syscap SystemCapability.MiscServices.Time
    * @systemapi
    * @since 21 dynamic

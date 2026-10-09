@@ -19,7 +19,8 @@
  * @kit ArkUI
  */
 
-import { BusinessError} from '../../@ohos.base'
+import { BusinessError} from '../../@ohos.base';
+import colorSpaceManager from '../../@ohos.graphics.colorSpaceManager';
 import { CommonMethod, PixelMap, DepthVector3, DepthVector4, DepthColorRGB } from './common';
 import { ResourceStr } from './units';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
@@ -275,6 +276,17 @@ export declare interface DepthComponentOptions {
    * @since 26.0.0 static
    */
   render3DScale?: double;
+
+  /**
+   * Color space of the background.
+   *
+   * @default colorSpaceManager.ColorSpace.SRGB
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  colorSpace?: colorSpaceManager.ColorSpace;
 }
 
 /**
@@ -458,8 +470,9 @@ export declare interface DepthComponentAttribute extends CommonMethod {
    * @returns { this } Returns instance of  DepthComponentAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setDepthComponentOptions(background: ResourceStr | PixelMap, options?: DepthComponentOptions): this;
 }
@@ -491,8 +504,9 @@ export declare function DepthComponent(
  * @returns { DepthComponentAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function DepthComponent(

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 开机自启应用组件信息
  * @kit AbilityKit
  */
 
@@ -106,7 +106,7 @@ export interface AutoStartupInfo {
   readonly setterUserId?: int;
 
   /**
-   * 表示是否允许开发者修改此应用的开机自启动状态，true表示允许，false表示不允许。
+   * 表示是否允许开发者修改此应用的开机自启动状态，true表示允许，false表示不允许。默认值为false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi

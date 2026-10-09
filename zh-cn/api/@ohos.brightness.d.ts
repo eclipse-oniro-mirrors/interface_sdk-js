@@ -14,14 +14,14 @@
  */
 
 /**
- * @file
+ * @file 屏幕亮度
  * @kit BasicServicesKit
  */
 
 import { BusinessError } from './@ohos.base';
 
 /**
- * 该模块提供屏幕亮度的设置接口。
+ * 该模块提供屏幕亮度的设置接口，支持设置指定亮度值及连续调节亮度，适用于需要在应用中动态控制屏幕亮度的场景，可实现屏幕亮度的精细化管理。
  * 
  * > **说明：**
  * >
@@ -34,7 +34,7 @@ import { BusinessError } from './@ohos.base';
  */
 declare namespace brightness {
   /**
-   * 设置系统的屏幕亮度。
+   * 设置系统的屏幕亮度。适用于需要固定屏幕亮度的场景，例如阅读应用、视频播放应用、夜间模式等。若需要连续调节亮度，建议使用setValue(value: number, continuous: boolean)接口。
    *
    * @param { int } value - 亮度的值。范围：0~255；该参数必须为数字类型。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -49,10 +49,10 @@ declare namespace brightness {
   function setValue(value: int): void;
 
   /**
-   * 设置系统的屏幕亮度。用于连续调节亮度的场景，在连续调节亮度过程中，设置continuous为true，结束时设置continuous为false，会有更好的性能。
+   * 设置系统的屏幕亮度。用于连续调节亮度的场景，在连续调节亮度过程中，设置continuous为true可减少不必要的系统亮度刷新，结束时设置continuous为false恢复正常刷新模式，从而提升连续调节时的流畅度。
    *
    * @param { int } value - 亮度的值。范围：0~255。
-   * @param { boolean } continuous - 亮度调节是否连续。true表示亮度调节连续，false表示亮度调节不连续，默认为false。
+   * @param { boolean } continuous - 亮度调节是否连续。true表示亮度调节连续，false表示亮度调节不连续。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types;

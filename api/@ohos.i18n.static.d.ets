@@ -15,7 +15,7 @@
  */
 
 /**
- * @file
+ * @file Internationalization
  * @kit LocalizationKit
  */
 
@@ -1077,9 +1077,9 @@ declare namespace i18n {
      * @param { int } year - Year to set.
      * @param { int } month - Month to set. Note: The month starts from 0. For example, 0 indicates January.
      * @param { int } date - Day to set.
-     * @param { int } hour - Hour to set. The default value is the current system time.
-     * @param { int } minute - Minute to set. The default value is the current system time.
-     * @param { int } second - Second to set. The default value is the current system time.
+     * @param { int } [hour] - Hour to set. The default value is the current system time.
+     * @param { int } [minute] - Minute to set. The default value is the current system time.
+     * @param { int } [second] - Second to set. The default value is the current system time.
      * @syscap SystemCapability.Global.I18n
      * @crossplatform
      * @atomicservice
@@ -2183,6 +2183,26 @@ declare namespace i18n {
      * @since 23 static
      */
     zoneDisplayName: string;
+
+    /**
+     * Latitude info of time zone city in decimal degrees (°).
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    latitude: double;
+
+    /**
+     * Longitude info of time zone city in decimal degrees (°).
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    longitude: double;
 
     /**
      * Fixed offset of the time zone ID.

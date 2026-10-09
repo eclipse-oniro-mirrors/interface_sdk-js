@@ -177,7 +177,7 @@ export declare interface InteractionEventBindingInfo {
 
   /**
    * 是否以注册节点事件（
-   * [registerNodeEvent](docroot://reference/apis-arkui/capi-arkui-nativemodule-arkui-nativenodeapi-1.md#registernodeevent)
+   * [registerNodeEvent](docroot://reference/apis-arkui/c-pis/capi-arkui-nativemodule-arkui-nativenodeapi-1.md#registernodeevent)
    * ）的方式绑定事件。
    *
    * true表示以注册节点事件的方式绑定事件，false表示没有以注册节点事件的方式绑定事件。
@@ -1292,7 +1292,7 @@ export declare class FrameNode {
    * 查询节点是否被挂载到主节点树上。
    *
    * @returns { boolean } - 节点是否被挂载到主节点树上。<br/>true表示节点被挂载到主节点树上，false表示节点没有被挂载到主节点树上。
-   * @throws { BusinessError } 100026 - The curent FrameNode has been disposed.
+   * @throws { BusinessError } 100026 - The current FrameNode has been disposed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

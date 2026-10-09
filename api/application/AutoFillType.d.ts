@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Auto Fill Type
  * @kit AbilityKit
  */
 
@@ -26,54 +26,59 @@
  * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.0 dynamic&static
+ * @since 11 dynamic
+ * @since 23 static
  */
 export enum AutoFillType {
   /**
-   * Undefined type.
+   * Unspecified type.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   UNSPECIFIED = 0,
 
   /**
-   * Password.
+   * Password type.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   PASSWORD = 1,
 
   /**
-   * Username.
+   * Username type.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   USER_NAME = 2,
 
   /**
-   * New password.
+   * New password type.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
    * @publicapi [since 26.0.0]
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 11 dynamic
+   * @since 23 static
    */
   NEW_PASSWORD = 3,
 

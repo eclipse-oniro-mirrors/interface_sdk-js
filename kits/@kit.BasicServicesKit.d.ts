@@ -23,6 +23,7 @@ import configPolicy from '@ohos.configPolicy';
 import customConfig from '@ohos.customization.customConfig';
 import distributedAccount from '@ohos.account.distributedAccount';
 import osAccount from '@ohos.account.osAccount';
+import authorization from '@ohos.account.osAccount.authorization';
 import PrintExtensionAbility from '@ohos.app.ability.PrintExtensionAbility';
 import { AsyncCallback, BusinessError, Callback, ErrorCallback } from '@ohos.base';
 import batteryInfo from '@ohos.batteryInfo';
@@ -31,6 +32,7 @@ import brightness from '@ohos.brightness';
 import charger from '@ohos.charger';
 import deviceAttest from '@ohos.deviceAttest';
 import deviceInfo from '@ohos.deviceInfo';
+import boardInfo from '@ohos.boardInfo';
 import pasteboard from '@ohos.pasteboard';
 import power from '@ohos.power';
 import print from '@ohos.print';
@@ -77,6 +79,7 @@ import selectionManager from '@ohos.selectionInput.selectionManager';
 import SelectionExtensionContext from '@ohos.selectionInput.SelectionExtensionContext';
 import { Available, SuppressWarnings, SuppressWarningsType } from '@ohos.annotation';
 import intelligentScene from '@ohos.intelligentScene';
+import settingsLite from '@ohos.settingsLite';
 export {
   AsyncCallback, Battery, BatteryResponse, Brightness, BrightnessModeResponse,
   BrightnessResponse, BusinessError, Callback, Device, DeviceResponse,
@@ -85,12 +88,12 @@ export {
   OnDownloadCompleteResponse, PrintExtensionAbility, Request, RequestData, RequestFile,
   SetBrightnessModeOptions, SetBrightnessOptions, SetKeepScreenOnOptions, UploadRequestOptions,
   UploadResponse, WallpaperExtensionAbility, appAccount, batteryInfo, batteryStats, brightness, charger, configPolicy,
-  customConfig, deviceAttest, deviceInfo, distributedAccount, osAccount, pasteboard, power, print, scan, request, cacheDownload, runningLock,
+  customConfig, deviceAttest, deviceInfo, distributedAccount, osAccount, authorization, pasteboard, power, print, scan, request, cacheDownload, runningLock,
   screenLock, settings, systemCapability, systemDateTime, systemParameter, systemParameterEnhance, systemTime,
   systemTimer, thermal, update, usb, usbManager, serialManager, wallpaper, zlib, commonEventManager, emitter, StaticSubscriberExtensionAbility,
   StaticSubscriberExtensionContext, systemLoad, intelligentVoice, selectionManager, SelectionExtensionAbility,
   PanelInfo, PanelType, SelectionExtensionContext, Available, SuppressWarnings, SuppressWarningsType, intelligentScene,
-  serial
+  serial, boardInfo, settingsLite
 };
 
 /*** if arkts static */
@@ -98,6 +101,7 @@ import configPolicy from '@ohos.configPolicy';
 import customConfig from '@ohos.customization.customConfig';
 import { AsyncCallback, BusinessError, Callback, ErrorCallback, RecordData } from '@ohos.base';
 import deviceInfo from '@ohos.deviceInfo';
+import boardInfo from '@ohos.boardInfo';
 import zlib from '@ohos.zlib';
 import commonEventManager from '@ohos.commonEventManager';
 import emitter from '@ohos.events.emitter';
@@ -110,12 +114,14 @@ import request from '@ohos.request';
 import appAccount from '@ohos.account.appAccount';
 import distributedAccount from '@ohos.account.distributedAccount';
 import osAccount from '@ohos.account.osAccount';
+import authorization from '@ohos.account.osAccount.authorization';
 import intelligentScene from '@ohos.intelligentScene';
-import { Available } from '@ohos.annotation';
+import { Available, SuppressWarnings, SuppressWarningsType } from '@ohos.annotation';
 
 export {
   zlib, configPolicy, AsyncCallback, BusinessError, Callback, ErrorCallback, RecordData, customConfig, systemDateTime,
-  deviceInfo,systemTimer, systemLoad, request, commonEventManager, emitter, StaticSubscriberExtensionAbility,
-  StaticSubscriberExtensionContext, appAccount, distributedAccount, osAccount, intelligentScene, Available
+  deviceInfo, systemTimer, systemLoad, request, commonEventManager, emitter, StaticSubscriberExtensionAbility,
+  StaticSubscriberExtensionContext, appAccount, distributedAccount, osAccount, authorization, intelligentScene, Available,
+  SuppressWarnings, SuppressWarningsType, boardInfo
 };
 /*** endif */
