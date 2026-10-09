@@ -28044,13 +28044,12 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   contentEndOffset(offset: number | Resource): T;
 
   /**
-   * 设置是否支持鼠标左键按下拖动滚动。未通过该接口设置时，默认不支持鼠标左键按下拖动滚动。
-   *
-   * @param { boolean | undefined } enabled - 是否支持鼠标左键按下拖动滚动。<br/>true：支持鼠标左键按下拖动滚动。<br/>false：不支持鼠标左键按下拖动滚动。<br/>
-   *     undefined：不支持鼠标左键按下拖动滚动。
-   * @returns { T }
-   *    返回当前滚动组件。
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * 设置是否支持左键拖动滚动。
+   * 
+   * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
+   *    <br>默认值：API版本26.2.0下的版本默认值为 false。API版本26.2.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+   * @returns { T } 当前滚动组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice

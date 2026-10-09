@@ -28946,14 +28946,13 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   contentEndOffset(offset: number | Resource): T;
 
   /**
-   * Sets whether to support scrolling by dragging with the left mouse button pressed. If this API is not called,
-   * scrolling by dragging with the left mouse button pressed is not supported by default.
+   * Set whether to support scrolling by dragging with the left mouse button pressed.
    *
-   * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button
-   *     pressed.
-   *     <br>**true**: yes.
-   *     <br>**false**: no.
-   *     <br>**undefined**: no.
+   * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
+   *    pressed.
+   *    <br>Default value: For API versions earlier than 26.2.0,the defalut value is false.
+   *    For API versions 26.2.0 and later, the defalut value is true when the scrollable component scrolls
+   *    horizontally,false otherwise.
    * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
