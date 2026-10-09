@@ -1,0 +1,225 @@
+# SDK 注释修改清单（common.d.ts）
+
+## 检查范围与结论
+
+- **对比基线**: 提交 `972126e78`（!36057 merge master into master）→ 当前工作区（分支 `refresh_common`，含 `28a1a03687` / `972c251227` / `048dc300f1` / `a2c9622ca9` 四笔 `fix` 提交）
+- **涉及文件**: `api/@internal/component/ets/common.d.ts`（仅此 1 个 SDK 声明文件）
+- **改动规模**: 263 个 diff hunk，+1625 / -740 行
+- **结论**: **仅修改注释（JSDoc），SDK 接口定义零改动**。基线与当前版本剥离 `/* */`、`//` 注释及全部空白后做 token 级比对，代码 token 完全一致——名称、类型、可选性、参数、返回值、签名、枚举定义均无变化；文件无 CRLF 残留。
+
+## 被修改注释的 API 清单
+
+共 **173** 处 doc 注释被修改（顶层声明 18 个，成员 155 个）：
+
+### 顶层声明（类型/接口/枚举/函数本体注释）
+
+- `animateTo`
+- `animateToImmediately`
+- `Blender`
+- `BlendMode`
+- `BlurStyleActivePolicy`
+- `DismissSheetAction`
+- `Filter`
+- `ForegroundBlurStyleOptions`
+- `FractionStop`
+- `LinearGradientOptions`
+- `Matrix4Transit`
+- `RadialGradientOptions`
+- `sharedTransitionOptions`
+- `SpringBackAction`
+- `SweepGradientOptions`
+- `TransitionFinishCallback`
+- `TransitionOptions`
+- `VisualEffect`
+
+### 成员级注释
+
+- `AnimateParam`（1 个成员）
+  - `AnimateParam.playMode`
+- `BackgroundEffectOptions`（1 个成员）
+  - `BackgroundEffectOptions.brightness`
+- `BindOptions`（5 个成员）
+  - `BindOptions.backgroundColor`
+  - `BindOptions.onAppear`
+  - `BindOptions.onDisappear`
+  - `BindOptions.onWillAppear`
+  - `BindOptions.onWillDisappear`
+- `BlendMode`（8 个成员）
+  - `BlendMode.DST_ATOP`
+  - `BlendMode.DST_IN`
+  - `BlendMode.DST_OUT`
+  - `BlendMode.DST_OVER`
+  - `BlendMode.EXCLUSION`
+  - `BlendMode.SRC_ATOP`
+  - `BlendMode.SRC_IN`
+  - `BlendMode.SRC_OUT`
+- `BlurSnapshotOptions`（1 个成员）
+  - `BlurSnapshotOptions.enableFreeze`
+- `BlurStyleOptions`（1 个成员）
+  - `BlurStyleOptions.scale`
+- `CommonMethod`（50 个成员）
+  - `CommonMethod.advancedBlendMode`
+  - `CommonMethod.animation`
+  - `CommonMethod.backdropBlur`
+  - `CommonMethod.backgroundBlurStyle`
+  - `CommonMethod.backgroundBrightness`
+  - `CommonMethod.backgroundEffect`
+  - `CommonMethod.bindContentCover`
+  - `CommonMethod.bindSheet`
+  - `CommonMethod.blendMode`
+  - `CommonMethod.blur`
+  - `CommonMethod.brightness`
+  - `CommonMethod.clickEffect`
+  - `CommonMethod.clip`
+  - `CommonMethod.clipShape`
+  - `CommonMethod.colorBlend`
+  - `CommonMethod.contrast`
+  - `CommonMethod.doubleSided`
+  - `CommonMethod.excludeFromRenderGroup`
+  - `CommonMethod.foregroundBlurStyle`
+  - `CommonMethod.foregroundColor`
+  - `CommonMethod.freeze`
+  - `CommonMethod.grayscale`
+  - `CommonMethod.hueRotate`
+  - `CommonMethod.invert`
+  - `CommonMethod.lightUpEffect`
+  - `CommonMethod.linearGradient`
+  - `CommonMethod.linearGradientBlur`
+  - `CommonMethod.mask`
+  - `CommonMethod.maskShape`
+  - `CommonMethod.motionBlur`
+  - `CommonMethod.opacity`
+  - `CommonMethod.outline`
+  - `CommonMethod.outlineColor`
+  - `CommonMethod.outlineRadius`
+  - `CommonMethod.outlineStyle`
+  - `CommonMethod.renderFit`
+  - `CommonMethod.renderGroup`
+  - `CommonMethod.rotate`
+  - `CommonMethod.saturate`
+  - `CommonMethod.scale`
+  - `CommonMethod.sepia`
+  - `CommonMethod.shadow`
+  - `CommonMethod.sphericalEffect`
+  - `CommonMethod.systemBarEffect`
+  - `CommonMethod.transform`
+  - `CommonMethod.transform3D`
+  - `CommonMethod.transition`
+  - `CommonMethod.translate`
+  - `CommonMethod.useShadowBatching`
+  - `CommonMethod.useUnionEffect`
+- `DismissContentCoverAction`（1 个成员）
+  - `DismissContentCoverAction.dismiss`
+- `DismissSheetAction`（2 个成员）
+  - `DismissSheetAction.dismiss`
+  - `DismissSheetAction.reason`
+- `EffectType`（2 个成员）
+  - `EffectType.DEFAULT`
+  - `EffectType.WINDOW_EFFECT`
+- `ICurve`（1 个成员）
+  - `ICurve.interpolate`
+- `InvertOptions`（4 个成员）
+  - `InvertOptions.high`
+  - `InvertOptions.low`
+  - `InvertOptions.threshold`
+  - `InvertOptions.thresholdRange`
+- `LinearGradientBlurOptions`（1 个成员）
+  - `LinearGradientBlurOptions.fractionStops`
+- `MotionBlurAnchor`（2 个成员）
+  - `MotionBlurAnchor.x`
+  - `MotionBlurAnchor.y`
+- `MotionBlurOptions`（2 个成员）
+  - `MotionBlurOptions.anchor`
+  - `MotionBlurOptions.radius`
+- `ProgressMask`（2 个成员）
+  - `ProgressMask.constructor`
+  - `ProgressMask.enableBreathingAnimation`
+- `RadialGradientOptions`（1 个成员）
+  - `RadialGradientOptions.radius`
+- `ScaleOptions`（1 个成员）
+  - `ScaleOptions.z`
+- `ShadowOptions`（6 个成员）
+  - `ShadowOptions.color`
+  - `ShadowOptions.fill`
+  - `ShadowOptions.offsetX`
+  - `ShadowOptions.offsetY`
+  - `ShadowOptions.radius`
+  - `ShadowOptions.type`
+- `ShadowType`（2 个成员）
+  - `ShadowType.BLUR`
+  - `ShadowType.COLOR`
+- `SheetDismiss`（1 个成员）
+  - `SheetDismiss.dismiss`
+- `SheetMode`（2 个成员）
+  - `SheetMode.EMBEDDED`
+  - `SheetMode.OVERLAY`
+- `SheetOptions`（41 个成员）
+  - `SheetOptions.blurSnapshot`
+  - `SheetOptions.blurStyle`
+  - `SheetOptions.borderColor`
+  - `SheetOptions.borderStyle`
+  - `SheetOptions.borderWidth`
+  - `SheetOptions.detentSelection`
+  - `SheetOptions.detents`
+  - `SheetOptions.dragBar`
+  - `SheetOptions.edgeLightMode`
+  - `SheetOptions.effectEdge`
+  - `SheetOptions.enableFloatingDragBar`
+  - `SheetOptions.enableHoverMode`
+  - `SheetOptions.enableOutsideInteractive`
+  - `SheetOptions.height`
+  - `SheetOptions.hoverModeArea`
+  - `SheetOptions.keyboardAvoidMode`
+  - `SheetOptions.maskColor`
+  - `SheetOptions.modalTransition`
+  - `SheetOptions.mode`
+  - `SheetOptions.offset`
+  - `SheetOptions.onDetentsDidChange`
+  - `SheetOptions.onHeightDidChange`
+  - `SheetOptions.onTypeDidChange`
+  - `SheetOptions.onWidthDidChange`
+  - `SheetOptions.onWillDismiss`
+  - `SheetOptions.onWillSpringBackWhenDismiss`
+  - `SheetOptions.placement`
+  - `SheetOptions.placementOnTarget`
+  - `SheetOptions.preferType`
+  - `SheetOptions.radius`
+  - `SheetOptions.radiusRenderStrategy`
+  - `SheetOptions.scrollSizeMode`
+  - `SheetOptions.shadow`
+  - `SheetOptions.shouldDismiss`
+  - `SheetOptions.showClose`
+  - `SheetOptions.showInSubWindow`
+  - `SheetOptions.systemMaterial`
+  - `SheetOptions.title`
+  - `SheetOptions.titleBarHoverMode`
+  - `SheetOptions.uiContext`
+  - `SheetOptions.width`
+- `SheetSize`（3 个成员）
+  - `SheetSize.FIT_CONTENT`
+  - `SheetSize.LARGE`
+  - `SheetSize.MEDIUM`
+- `SheetTitleOptions`（2 个成员）
+  - `SheetTitleOptions.subtitle`
+  - `SheetTitleOptions.title`
+- `SheetType`（5 个成员）
+  - `SheetType.BOTTOM`
+  - `SheetType.CENTER`
+  - `SheetType.CONTENT_COVER`
+  - `SheetType.POPUP`
+  - `SheetType.SIDE`
+- `SpringBackAction`（1 个成员）
+  - `SpringBackAction.springBack`
+- `TransitionEffect`（6 个成员）
+  - `TransitionEffect.animation`
+  - `TransitionEffect.asymmetric`
+  - `TransitionEffect.opacity`
+  - `TransitionEffect.rotate`
+  - `TransitionEffect.scale`
+  - `TransitionEffect.translate`
+
+## 验证方式
+
+1. `git diff --name-only 972126e789` 确认改动仅落在 `api/@internal/component/ets/common.d.ts`。
+2. 剥离注释与空白后的代码 token 序列比对（`git show 972126e789:...` vs 工作区文件）：完全相等，证明接口定义未修改。
+3. 将每个 doc 注释块与其所修饰的声明逐一配对，对比基线/当前注释文本，得到上表清单。
