@@ -415,7 +415,7 @@ declare namespace carAwareness {
    * 取消订阅指定类型的车辆感知结果。
    *
    * @param { Capability } capability - 指定取消订阅的感知能力类型。
-   * @param { Callback<CarAwarenessInfo[]> } [callback] - 回调函数，指定取消订阅的感知能力类型。
+   * @param { Callback<CarAwarenessInfo[]> } [callback] - 回调函数。传入指定回调则注销对应监听，不传入则注销所有监听。
    * @param { CarAwarenessOptions } [options] - 感知能力的可选配置项。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 34000001 - Service exception.
