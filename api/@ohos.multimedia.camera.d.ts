@@ -14845,6 +14845,39 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     enableAutoExtendedGainmapDelivery(enabled: boolean): void;
+
+    /**
+     * Checks whether C2PA signature is supported.
+     *
+     * @returns { boolean } Check result for the support of C2PA signature. **true** if supported, **false**
+     *     otherwise. If the API call fails, undefined is returned.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isC2PASignatureSupported(): boolean;
+
+    /**
+     * Configures the C2PA signature settings. This API enables or disables C2PA signature and
+     * optionally sets the author information for the C2PA signature.
+     *
+     * Before calling this API, check whether C2PA signature is supported by calling
+     * [isC2PASignatureSupported]{@link camera.PhotoOutput.isC2PASignatureSupported}.
+     *
+     * @param { boolean } enableC2PA - Whether to enable C2PA signature. **true** to enable, **false** to disable.
+     * @param { C2PASignatureConfig } [config] - C2PA signature configuration, which includes the author name and
+     *     author ID. This parameter is optional. If not provided, the C2PA signature will be generated
+     *     without author information.
+     * @throws { BusinessError } 7400113 - An exception occurred in the session currently in use.
+     * @throws { BusinessError } 7400116 - The session does not have camerainput information.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    configureC2PASignature(enableC2PA: boolean, config?: C2PASignatureConfig): void;
   }
 
   /**
@@ -18177,6 +18210,39 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     AUTOMOTIVE_CAMERA_POSITION_INTERIOR_ROW_3_RIGHT = 14
+  }
+
+  /**
+   * Describes the C2PA signature configuration, which includes the author name and author ID for C2PA
+   * signature generation.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  interface C2PASignatureConfig{
+    /**
+     * Author ID for the C2PA signature. This field is optional. If not set, the author ID
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorID?: string;
+
+    /**
+     * Author name for the C2PA signature. This field is optional. If not set, the author name
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorName?: string;
   }
 }
 
