@@ -248,7 +248,7 @@ declare namespace inputMethodEngine {
    * The numeric verification code edit box. The value is fixed at 15.
    * The value should be an integer.
    *
-   * @syscap SystemCapability.MiscServices.InputMethodFramework11
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
@@ -2365,6 +2365,92 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     offAttachOptionsDidChange(callback?: Callback<AttachOptions>): void;
+
+    /**
+     * Obtains the rich text of the specified length before the cursor. This API uses a promise to return the result.
+     * <br>
+     * <br> > **NOTE**
+     * <br>
+     * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
+     * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
+     * plain text implementation.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *     <br>The value must be an integer within [0,4096].
+     * @returns { Promise<InputMethodRichText> } Promise used to return the rich text of the specified length before the
+     *     cursor.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getLeftRichText(length: int): Promise<InputMethodRichText>;
+
+    /**
+     * Obtains the rich text of the specified length before the cursor.
+     * <br>
+     * <br> > **NOTE**
+     * <br>
+     * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
+     * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
+     * plain text implementation.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *     <br>The value must be an integer within [0,4096].
+     * @returns { InputMethodRichText } Rich text of the specified length before the cursor.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getLeftRichTextSync(length: int): InputMethodRichText;
+
+    /**
+     * Obtains the rich text of the specified length after the cursor. This API uses a promise to return the result.
+     * <br>
+     * <br> > **NOTE**
+     * <br>
+     * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
+     * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
+     * plain text implementation.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *     <br>The value must be an integer within [0,4096].
+     * @returns { Promise<InputMethodRichText> } Promise used to return the rich text of the specified length after the
+     *     cursor.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getRightRichText(length: int): Promise<InputMethodRichText>;
+
+    /**
+     * Obtains the rich text of the specified length after the cursor.
+     * <br>
+     * <br> > **NOTE**
+     * <br>
+     * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
+     * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
+     * plain text implementation.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *     <br>The value must be an integer within [0,4096].
+     * @returns { InputMethodRichText } Rich text of the specified length after the cursor.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getRightRichTextSync(length: int): InputMethodRichText;
   }
 
   /**
@@ -4551,6 +4637,131 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     CHARACTERS
+  }
+
+  /**
+   * Defines the rich text.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface InputMethodRichText {
+    /**
+     * Extracts the plain text from the rich text.
+     *
+     * @returns { string } Plain text extracted from the rich text.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getString(): string;
+
+    /**
+     * Obtains the spans that make up the rich text.
+     *
+     * @returns { Array<RichTextSpan> } Array of spans that make up the rich text.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getSpans(): Array<RichTextSpan>;
+  }
+
+  /**
+   * Defines a span in the rich text.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface RichTextSpan {
+    /**
+     * Obtains the type of the span.
+     *
+     * @returns { SpanType } Type of the span.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getType(): SpanType;
+
+    /**
+     * Obtains the content of the span.
+     * <br>
+     * <br> > **NOTE**
+     * <br>
+     * <br> > If the span type is image, the content is the tag information carried when the image is inserted into the
+     * ArkUI rich text component.
+     *
+     * @returns { string } Content of the span.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getContent(): string;
+
+    /**
+     * Obtains the range of the span in the rich text.
+     *
+     * @returns { Range } Range of the span in the rich text, represented by the start and end positions.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getRange(): Range;
+  }
+
+  /**
+   * Enumerates the types of spans in the rich text.<br>
+   * <br>
+   * | Name | Value| Description |
+   * | -------- | -- | -------- |
+   * | TEXT | 0 | Plain text.|
+   * | IMAGE | 1 | Image.|
+   * | SYMBOL | 2 | Symbol.|
+   * | CUSTOM | 3 | Custom.|
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export enum SpanType {
+    /**
+     * Plain text.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    TEXT = 0,
+
+    /**
+     * Image.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    IMAGE = 1,
+
+    /**
+     * Symbol.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    SYMBOL = 2,
+
+    /**
+     * Custom.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    CUSTOM = 3
   }
 }
 
