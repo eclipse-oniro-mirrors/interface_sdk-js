@@ -40,7 +40,7 @@ declare namespace metadataBinding {
    * @param { image.PixelMap } srcImage - Source image.
    * @param { string } metadata - Metadata to be encoded.
    * @returns { Promise<image.PixelMap> } Promise object, which is used to return the image with encoded metadata.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100002 - Encode process fail. Possible causes:
    *     <br>1. Image processing error.
@@ -57,7 +57,7 @@ declare namespace metadataBinding {
    *
    * @param { image.PixelMap } encodedImage - Image with metadata encoded.
    * @returns { Promise<string> } Promise object, which is used to return the encoded metadata of the image.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100003 - Decode process fail. Possible causes:
    *     <br>1. Image is not an encoded Image.
@@ -75,7 +75,7 @@ declare namespace metadataBinding {
    *
    * @param { string } bundleName - Bundle name used to obtain the application link.
    * @returns { Promise<string> } Promise used to return the application link information of the current page.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @syscap SystemCapability.MultimodalAwareness.MetadataBinding
    * @systemapi
