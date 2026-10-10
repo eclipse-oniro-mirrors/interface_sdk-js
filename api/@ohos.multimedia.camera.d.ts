@@ -5339,7 +5339,7 @@ declare namespace camera {
     PORTRAIT = 1,
 
     /**
-     * Auto focus.
+     * Auto framing.
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice
