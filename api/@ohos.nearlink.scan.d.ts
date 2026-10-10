@@ -27,15 +27,19 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
 declare namespace scan {
   /**
    * Starts NearLink scanning. This API uses a promise to return the result. You need to call
-   * [scan.onDeviceFound]{@link scan.on} to subscribe to the scanning results. After this API initiates scanning, the
-   * scanned device information is reported through the [scan.onDeviceFound]{@link scan.on} callback. After the scanning
-   * is complete, you can call [scan.stopScan]{@link scan.stopScan} to stop scanning.
+   * [scan.onDeviceFound]{@link scan.onDeviceFound} to subscribe to the scanning results. After this API initiates
+   * scanning, the scanned device information is reported through the [scan.onDeviceFound]{@link scan.onDeviceFound}
+   * callback. After the scanning is complete, you can call [scan.stopScan]{@link scan.stopScan} to stop scanning.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ScanFilters[] | null } filters - Filter criteria for NearLink advertising. Devices that meet the filter
@@ -44,8 +48,12 @@ declare namespace scan {
    *     this method is not recommended as it may pick up unexpected devices and increase power consumption.
    * @param { ScanOptions } [options] - Scan options. The low power consumption mode is used by default.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100040 - Integer out of range.
    * @throws { BusinessError } 36100041 - Invalid address.
@@ -53,6 +61,7 @@ declare namespace scan {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -60,17 +69,27 @@ declare namespace scan {
 
   /**
    * Stops NearLink scanning. This API uses a promise to return the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [startScan]{@link scan.startScan(filters: ScanFilters[] | null, options?: ScanOptions): Promise<void>} Starts
+   *     NearLink scanning.
    */
   function stopScan(): Promise<void>;
 
@@ -78,29 +97,47 @@ declare namespace scan {
    * Subscribes to NearLink scanning results. This API uses an asynchronous callback to return the result.
    *
    * The app must have the **ohos.permission.ACCESS_NEARLINK** permission to receive this event.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<ScanResults[]> } callback - Callback used to return a **ScanResults** object. By default, a
    *     random address is returned for the scanning result. If the app has the system permission
    *     **ohos.permission.GET_NEARLINK_PEER_MAC**, the actual device address is returned.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [offDeviceFound]{@link scan.offDeviceFound(callback?: Callback<ScanResults[]>): void} Unsubscribes from the
+   *     NearLink scanning result event.
    */
   function onDeviceFound(callback: Callback<ScanResults[]>): void;
 
   /**
    * Unsubscribes from NearLink scanning results. This API uses an asynchronous callback to return the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<ScanResults[]> } [callback] - Callback used to return a **ScanResults** object. If this parameter
    *     is specified, the current callback is unregistered. If this parameter is not specified, all callbacks
    *     corresponding to the event are unregistered.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [onDeviceFound]{@link scan.onDeviceFound(callback: Callback<ScanResults[]>): void} Subscribes to the NearLink
+   *     scanning result event.
    */
   function offDeviceFound(callback?: Callback<ScanResults[]>): void;
 
@@ -109,6 +146,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -118,6 +156,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -128,6 +167,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -137,6 +177,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -146,6 +187,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -156,6 +198,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -166,10 +209,21 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     deviceClass?: nearlinkConstant.DeviceClass;
+    /**
+     * Radio frame type of the received advertising packet. If this field is not returned,
+     * the frame type is **FRAME_TYPE_1**.
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -177,6 +231,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -186,6 +241,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -196,6 +252,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -206,6 +263,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -217,6 +275,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -229,6 +288,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -242,6 +302,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -253,6 +314,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -262,6 +324,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -273,10 +336,21 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     duration?: int;
+
+    /**
+     * NearLink radio frame type. The default value is **FRAME_TYPE_1**.
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -284,6 +358,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -293,6 +368,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -302,6 +378,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -312,10 +389,12 @@ declare namespace scan {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     SCAN_MODE_LOW_LATENCY = 2
   }
 }
+export default scan;
 export default scan;

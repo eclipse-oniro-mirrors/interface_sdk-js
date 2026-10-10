@@ -25,6 +25,7 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
@@ -36,52 +37,106 @@ declare namespace manager {
    * @returns { boolean } 表示当前设备是否支持星闪。返回true：设备支持星闪。返回false：设备不支持星闪。
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
   function isNearLinkSupported(): boolean;
 
   /**
+   * 查询当前设备是否支持帧类型4。
+   *
+   * @returns { boolean } 当前设备是否支持帧类型4。返回**true**表示设备支持帧类型4，返回**false**表示不支持。
+   * @syscap SystemCapability.Communication.NearLink.Base
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  function isFrameType4Supported(): boolean;
+
+  /**
    * 打开星闪。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 203 - EDM denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [disable]{@link disable(): void} 关闭星闪。
    */
   function enable(): void;
 
   /**
-   * 关闭星闪。
+   * 以指定选项打开星闪。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @param { EnableOptions } [options] - 打开星闪时使用的选项。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  function enableWithOptions(options?: EnableOptions): void;
+
+  /**
+   * 关闭星闪。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
+   *
+   * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @throws { BusinessError } 36100099 - Operation failed.
+   * @syscap SystemCapability.Communication.NearLink.Base
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [enable]{@link enable(): void} 打开星闪。
    */
   function disable(): void;
 
   /**
    * 查询星闪开关状态。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @returns { NearlinkState } 表示星闪开关状态。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -89,17 +144,23 @@ declare namespace manager {
 
   /**
    * 查询本机MAC地址。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.GET_NEARLINK_LOCAL_MAC
    * @returns { string } 表示本地MAC地址。例如'11:22:33:AA:BB:FF'。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -107,15 +168,21 @@ declare namespace manager {
 
   /**
    * 查询本机星闪名称。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @returns { string } 表示星闪设备本地名称。最大长度为30个字符。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -123,15 +190,21 @@ declare namespace manager {
 
   /**
    * 获取与当前设备配对的设备列表。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @returns { string[] } 配对设备地址的列表。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -139,21 +212,27 @@ declare namespace manager {
 
   /**
    * 设置连接模式。使用Promise异步回调。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
    * @param { ConnectionMode } mode - 表示要设置的连接模式。
    * @param { int } duration - 表示设置模式的持续时间，单位为s，取值范围为大于等于0的整数，若为0则表示无限制。
    *     <br>取值限定为整数。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100040 - Integer out of range.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -161,16 +240,22 @@ declare namespace manager {
 
   /**
    * 恢复出厂设置。使用Promise异步回调。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.MANAGE_NEARLINK
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -178,28 +263,40 @@ declare namespace manager {
 
   /**
    * 订阅星闪开关状态变化事件。使用callback异步回调。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<NearlinkState> } callback - 回调函数，返回星闪的开关状态。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [offStateChange]{@link offStateChange(callback?: Callback<NearlinkState>): void} 取消订阅星闪开关状态变化事件。
    */
   function onStateChange(callback: Callback<NearlinkState>): void;
 
   /**
    * 取消订阅星闪开关状态变化事件。使用callback异步回调。
+   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<NearlinkState> } [callback] - 回调函数，返回星闪的开关状态。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [onStateChange]{@link onStateChange(callback: Callback<NearlinkState>): void} 订阅星闪开关状态变化事件。
    */
   function offStateChange(callback?: Callback<NearlinkState>): void;
 
@@ -208,6 +305,7 @@ declare namespace manager {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -217,6 +315,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -226,6 +325,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -235,6 +335,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -244,6 +345,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -256,6 +358,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -266,6 +369,7 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -276,10 +380,77 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     SLE_MODE_CONNECTABLE = 1
   }
+
+  /**
+   * 打开星闪时使用的选项。
+   *
+   * @syscap SystemCapability.Communication.NearLink.Base
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface EnableOptions {
+    /**
+     * 打开星闪时使用的自动连接策略。
+     * 默认值为**AUTO_CONN_GENERAL**。
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @systemapi
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    autoConnPolicy?: AutoConnectPolicy;
+  }
+
+  /**
+   * 表示打开星闪时的自动连接策略，为枚举值。
+   *
+   * @syscap SystemCapability.Communication.NearLink.Base
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  enum AutoConnectPolicy {
+    /**
+     * 打开星闪后，自动回连所有已配对设备。
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @systemapi
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    AUTO_CONN_GENERAL = 0,
+    /**
+     * 打开星闪后，自动回连除音频设备外的所有已配对设备。
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @systemapi
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    AUTO_CONN_EXCEPT_AUDIO_DEVICES = 1,
+    /**
+     * 打开星闪后，自动回连除用户主动断连设备外的所有已配对设备。
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @systemapi
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    AUTO_CONN_EXCEPT_USER_DISCONNECTED_DEVICES = 2
+  }
 }
+export default manager;
 export default manager;

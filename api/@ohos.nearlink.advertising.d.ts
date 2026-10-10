@@ -19,6 +19,7 @@
  */
 
 import type { Callback } from '@ohos.base';
+import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
  * This module provides Nearlink advertising functions, including starting and stopping advertising as well as
@@ -26,6 +27,7 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
@@ -33,8 +35,11 @@ declare namespace advertising {
   /**
    * Starts NearLink advertising. This API uses a promise to return the result. This API is applicable to scenarios
    * where the local device capabilities or data needs to be advertised, such as device discovery and device information
-   * advertising. You can use [advertising.onAdvertisingStateChange]{@link advertising.on} to monitor the advertising
-   * status.
+   * advertising. You can use [advertising.onAdvertisingStateChange]{@link advertising.onAdvertisingStateChange} to
+   * monitor the advertising status.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { AdvertisingParams } advertisingParams - Advertising parameters.
@@ -43,14 +48,19 @@ declare namespace advertising {
    *     [advertising.stopAdvertising]{@link advertising.stopAdvertising} and
    *     [AdvertisingStateChangeInfo]{@link advertising.AdvertisingStateChangeInfo}.advertisingId, this ID can be used
    *     to distinguish the current advertising instance.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100040 - Integer out of range.
    * @throws { BusinessError } 36100043 - Invalid UUID.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -58,20 +68,30 @@ declare namespace advertising {
 
   /**
    * Stops NearLink advertising. This API uses a promise to return the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { int } advertisingId - Advertising ID, which is obtained when advertising is started. The value range is
    *     [0, 255].
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100040 - Invalid advertising ID.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [startAdvertising]{@link advertising.startAdvertising(advertisingParams: AdvertisingParams): Promise<int>}
+   *     Starts NearLink advertising.
    */
   function stopAdvertising(advertisingId: int): Promise<void>;
 
@@ -80,15 +100,22 @@ declare namespace advertising {
    * result. When [advertising.startAdvertising]{@link advertising.startAdvertising} is called to start advertising or
    * [advertising.stopAdvertising]{@link advertising.stopAdvertising} is called to stop advertising, the callback is
    * triggered to return the corresponding advertising ID and advertising status. This API must be used in pairs with
-   * [advertising.offAdvertisingStateChange]{@link advertising.off}.
+   * [advertising.offAdvertisingStateChange]{@link advertising.offAdvertisingStateChange}.
    *
    * The app must have the **ohos.permission.ACCESS_NEARLINK** permission to receive this event.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<AdvertisingStateChangeInfo> } callback - Callback used to return the advertising state change
    *     information.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -97,16 +124,25 @@ declare namespace advertising {
   /**
    * Unsubscribes from the NearLink advertising state change event. This API uses an asynchronous callback to return the
    * result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<AdvertisingStateChangeInfo> } [callback] - Callback used to return the advertising state change
    *     information.
    *     <br>If this parameter is specified, the current callback is unregistered. If this parameter is not specified,
    *     all callbacks corresponding to the event are unregistered.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
+   * @see [onAdvertisingStateChange]{@link advertising.onAdvertisingStateChange(callback:
+   *     Callback<AdvertisingStateChangeInfo>): void} Subscribes to the advertising state change event.
    */
   function offAdvertisingStateChange(callback?: Callback<AdvertisingStateChangeInfo>): void;
 
@@ -115,6 +151,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -124,6 +161,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -133,6 +171,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -144,6 +183,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -154,6 +194,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -164,6 +205,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -174,10 +216,20 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     isConnectable?: boolean;
+    /**
+     * NearLink radio frame type. The default value is **FRAME_TYPE_1**.
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -185,6 +237,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -195,6 +248,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -204,6 +258,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -213,6 +268,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -223,6 +279,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -234,6 +291,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -243,6 +301,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -252,6 +311,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -263,6 +323,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -272,6 +333,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -281,6 +343,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -292,6 +355,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -301,6 +365,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -310,6 +375,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -319,6 +385,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -330,6 +397,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -339,6 +407,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -348,6 +417,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -359,6 +429,7 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -368,6 +439,7 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -377,10 +449,12 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     STOPPED = 2
   }
 }
+export default advertising;
 export default advertising;
