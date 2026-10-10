@@ -160,8 +160,7 @@ declare enum SlideEffect {
 
 /**
  * Defines the common transition animation for page transitions, which is inherited and used by 
- * [PageTransitionEnter](docroot://reference/apis-arkui/arkui-ts/ts-page-transition-animation.md#pagetransitionenter) 
- * and [PageTransitionExit](docroot://reference/apis-arkui/arkui-ts/ts-page-transition-animation.md#pagetransitionexit).
+ * [PageTransitionEnter]{@link PageTransitionEnter} and [PageTransitionExit]{@link PageTransitionExit}.
  * It must be configured in the **pageTransition()** function. Both **slide** and **translate** involve position 
  * movement: **slide** is suitable for scenarios that require sliding in and out along a preset direction (left/right/up
  * /down/**START**\/**END)** and is simple to use; **translate** is suitable for scenarios that require a custom 
@@ -280,8 +279,7 @@ declare interface PageTransitionOptions {
    * **Note:**
    * 
    * When multiple 
-   * [PageTransitionEnter](docroot://reference/apis-arkui/arkui-ts/ts-page-transition-animation.md#pagetransitionenter) 
-   * or [PageTransitionExit](docroot://reference/apis-arkui/arkui-ts/ts-page-transition-animation.md#pagetransitionexit)
+   * [PageTransitionEnter]{@link PageTransitionEnter} or [PageTransitionExit]{@link PageTransitionExit}
    * components are configured in the **pageTransition** function, they take effect according to the **RouteType** 
    * matching rule: the system selects the last matching component from all configured **PageTransitionEnter**\/
    * **PageTransitionExit** components based on the current route operation type (**Push** or **Pop**); if no component 
