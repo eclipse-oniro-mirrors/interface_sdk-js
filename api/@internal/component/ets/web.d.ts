@@ -2221,6 +2221,23 @@ declare class ClientAuthenticationHandler {
   /**
    * Instructs the **Web** component to use the specified credentials (obtained from the certificate management module).
    *
+   * > **NOTE**
+   * >
+   * > - The authUri parameter must be obtained through the system certificate manager and requires the
+   * > ohos.permission.ACCESS_CERT_MANAGER permission to be configured.
+   * 
+   * | Signing Algorithm     | Key Length   | 
+   * | ------- | ------ |
+   * | SSL_SIGN_RSA_PKCS1_SHA256 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA384 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA512 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA256 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA384 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA512 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_ECDSA_SECP256R1_SHA256 | 256 | 
+   * | SSL_SIGN_ECDSA_SECP384R1_SHA384 | 384 | 
+   * | SSL_SIGN_ECDSA_SECP521R1_SHA512 | 521 | 
+   *
    * @param { string } authUri - Key value of the credentials.
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice [since 11]

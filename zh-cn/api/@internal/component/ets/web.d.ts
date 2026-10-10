@@ -2010,7 +2010,7 @@ declare class SslErrorHandler {
   /**
    * 通知Web组件取消此请求，并根据参数abortLoading决定是否停止加载。
    *
-   * @param { boolean } abortLoading - 是否在取消请求后停止加载页面。
+   * @param { boolean } abortLoading - SSL错误页场景，拒绝错误证书后是否终止页面加载。
    *     <br>true表示停止加载页面，false表示继续加载页面。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 20 dynamic
@@ -2050,6 +2050,23 @@ declare class ClientAuthenticationHandler {
   /**
    * 通知Web组件使用指定的凭据（从证书管理模块获得）。
    *
+   * > **说明：**
+   * >
+   * > authUri参数需通过系统证书管理器获取，需配置ohos.permission.ACCESS_CERT_MANAGER权限。
+   * 
+   * 支持的证书签名算法以及密钥长度详见下表。
+   * | 签名算法     | 密钥长度   | 
+   * | ------- | ------ |
+   * | SSL_SIGN_RSA_PKCS1_SHA256 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA384 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA512 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA256 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA384 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA512 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_ECDSA_SECP256R1_SHA256 | 256 | 
+   * | SSL_SIGN_ECDSA_SECP384R1_SHA384 | 384 | 
+   * | SSL_SIGN_ECDSA_SECP521R1_SHA512 | 521 | 
+   * 
    * @param { string } authUri - 凭据的关键值。
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice [since 11]
