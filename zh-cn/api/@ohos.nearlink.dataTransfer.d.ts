@@ -476,4 +476,3 @@ declare namespace dataTransfer {
   }
 }
 export default dataTransfer;
-export default dataTransfer;

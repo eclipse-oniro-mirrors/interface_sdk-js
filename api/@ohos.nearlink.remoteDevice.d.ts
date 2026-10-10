@@ -1117,5 +1117,3 @@ declare namespace remoteDevice {
 }
 
 export default remoteDevice;
-
-export default remoteDevice;

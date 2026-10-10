@@ -793,4 +793,3 @@ declare namespace nearlinkConstant {
   }
 }
 export default nearlinkConstant;
-export default nearlinkConstant;
