@@ -41,6 +41,14 @@ declare namespace huksExternalCrypto {
      */
     HUKS_EXT_CRYPTO_TAG_TYPE_INT = 1 << 28,
     /**
+     * The tag value is an unsigned integer.
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.2.0
+     */
+    HUKS_EXT_CRYPTO_TAG_TYPE_UINT = 2 << 28,
+    /**
      * The tag value is a byte array.
      *
      * @syscap SystemCapability.Security.Huks.CryptoExtension
@@ -92,6 +100,14 @@ declare namespace huksExternalCrypto {
      * @since 22
      */
     HUKS_EXT_CRYPTO_TAG_PURPOSE = HuksExternalCryptoTagType.HUKS_EXT_CRYPTO_TAG_TYPE_INT | 200005,
+    /**
+     * Asynchronous timeout duration in seconds, customizable by business logic.
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.0.1
+     */
+    HUKS_EXT_CRYPTO_TAG_TIMEOUT = HuksExternalCryptoTagType.HUKS_EXT_CRYPTO_TAG_TYPE_UINT | 200006,
     /**
      * Specify the information required to obtain the resource ID. The format and content are defined by the provider.
      *

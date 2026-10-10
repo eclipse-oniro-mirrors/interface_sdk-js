@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIAbility Context
  * @kit AbilityKit
  */
 
@@ -1286,7 +1286,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want, callback: AsyncCallback<void>): void;
 
   /**
-   * Stops a ServiceExtensionAbility in the same application. This API uses a promise to return the result.
+   * Stops a ServiceExtensionAbility. This API uses a promise to return the result.
    *
    * @param { Want } want - Want information for stopping the ServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
@@ -1311,7 +1311,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want): Promise<void>;
 
   /**
-   * Stops a ServiceExtensionAbility with the account ID specified in the same application. This API uses an 
+   * Stops a ServiceExtensionAbility with the account ID specified. This API uses an 
    * asynchronous callback to return the result.
    * 
    * > **NOTE**
@@ -1346,8 +1346,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbilityWithAccount(want: Want, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Stops a ServiceExtensionAbility with the account ID specified in the same application. This API uses a promise to 
-   * return the result.
+   * Stops a ServiceExtensionAbility with the account ID specified. This API uses a promise to return the result.
    * 
    * > **NOTE**
    * >
@@ -2818,7 +2817,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Connect to system server error.
-   * @throws { BusinessError } 16000063 - The target to restart does not belong to the caller or is not a UIAbility.
+   * @throws { BusinessError } 16000063 - The target to restart does not belong to the current application or is not a UIAbility.
    * @throws { BusinessError } 16000064 - Restart too frequently.
    * @throws { BusinessError } 16000065 - The API can be called only when the ability is focused.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

@@ -184,7 +184,8 @@ declare enum GestureMode {
 
   /**
    * Parallel recognition. Registered gestures are recognized concurrently until all gestures are recognized. The 
-   * recognition result of each gesture does not affect each other.
+   * recognition result of each gesture does not affect each other. This mode is suitable for interaction scenarios 
+   * where multiple gestures need to respond simultaneously without blocking each other.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -195,7 +196,9 @@ declare enum GestureMode {
 
   /**
    * Exclusive recognition. All registered gestures are processed simultaneously. Once any gesture is recognized 
-   * successfully, the recognition process ends, and all other gestures are deemed unrecognized.
+   * successfully, the recognition process ends, and all other gestures are deemed unrecognized. This mode is suitable 
+   * for interaction scenarios where multiple gestures may trigger simultaneously but only one is allowed to take 
+   * effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -281,7 +284,7 @@ declare enum GestureJudgeResult {
  */
 declare namespace GestureControl {
   /**
-   * Enumerates gesture recognizer types.
+   * Enumerates gesture types.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -379,8 +382,8 @@ declare namespace GestureControl {
     CLICK = 7,
 
     /**
-     * Swipe gesture used to create a selection area by dragging with the mouse within a scroll container, 
-     * enabling the batch selection of multiple elements.
+     * Mouse box selection gesture in a scrollable container. It is a special pan gesture used to create a selection 
+     * area by dragging the mouse in a scrollable container to select multiple elements in batches.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -391,7 +394,8 @@ declare namespace GestureControl {
     BOX_SELECT_GESTURE = 8,
 
     /**
-     * Swipe gesture used to control the scrolling behavior of a **Web** component.
+     * Web component scroll gesture. It is a special pan gesture used to control the scrolling behavior within the 
+     * **Web** component.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -402,7 +406,8 @@ declare namespace GestureControl {
     WEB_SCROLL_GESTURE = 9,
 
     /**
-     * Swipe gesture used to select text content by dragging within an input box component.
+     * Text selection gesture. It is a special pan gesture used to select text content by dragging in an input box 
+     * component.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -468,8 +473,8 @@ declare interface GestureInfo {
   type: GestureControl.GestureType;
 
   /**
-   * Whether the gesture is a system/component gesture. **true** if the gesture is a system/component gesture, **false**
-   * otherwise.
+   * Whether the current gesture is a system built-in gesture. The value **true** indicates that the gesture is a 
+   * system built-in gesture, and **false** indicates the opposite.
    * 
    * Default value: **false**
    *
@@ -644,7 +649,7 @@ interface FingerInfo {
    * Indexes for other input sources (mouse: 1001, stylus: 102, mouse wheel: 0, two-finger trackpad slide: 0) are also 
    * converted to finger indexes.
    * 
-   * Value range: [0, 9)
+   * Value range: [0, 10), 102, 1001
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -654,7 +659,8 @@ interface FingerInfo {
   id: number;
 
   /**
-   * X-coordinate relative to the upper left corner of the global display, in vp.
+   * X coordinate relative to the upper left corner of the global screen, in vp. If this parameter is not returned, 
+   * there is no global screen X coordinate information.
    * 
    * Value range: [0, +∞)
    *
@@ -667,7 +673,8 @@ interface FingerInfo {
   globalDisplayX?: number;
 
   /**
-   * Y-coordinate relative to the upper left corner of the global display, in vp.
+   * Y coordinate relative to the upper left corner of the global screen, in vp. If this parameter is not returned, 
+   * there is no global screen Y coordinate information.
    * 
    * Value range: [0, +∞)
    *
@@ -754,7 +761,8 @@ interface FingerInfo {
   displayY: number;
 
   /**
-   * Whether the event is triggered by a left-hand or right-hand tap.
+   * Whether the event is triggered by a left-hand or right-hand tap. If this parameter is not returned, the current 
+   * event has no left-hand or right-hand tap information.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -765,10 +773,11 @@ interface FingerInfo {
   hand?: InteractionHand;
 
   /**
-   * Gets the coordinates of the top-left corner of the current component based on its real-time position.
+   * Obtains the coordinates of the finger position relative to the upper left corner of the current component's 
+   * real-time position.
    *
-   * @returns { Coordinate2D } - return the coordinates of the top-left corner of the current component based on its
-   *     real-time position.
+   * @returns { Coordinate2D } - coordinates of the finger position relative to the upper left corner of the current
+   *     component's real-time position.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -779,7 +788,7 @@ interface FingerInfo {
 }
 
 /**
- * Defines the Gesture Type.
+ * Enumerates gesture types.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -806,7 +815,18 @@ declare type GestureType =
  */
 interface BaseGestureEvent extends BaseEvent {
   /**
-   * Information about all fingers triggering the event.
+   * Information about all fingers that trigger the event. For a gesture generated by the touchscreen, **fingerList** 
+   * contains information about all touch points that trigger the event. For a gesture initiated by the mouse, 
+   * **fingerList** contains only one record. The event category of a touchpad is the same as that of a mouse, so for a 
+   * gesture initiated by a touchpad, **fingerList** carries only one record.
+   * 
+   * **NOTE**
+   * 
+   * 1. The finger index corresponds to the position, that is, the id of **fingerList[index]** is **index**. The 
+   * position corresponding to a finger that is pressed first but does not participate in the current gesture trigger is 
+   * empty in **fingerList**.
+   * 2. When a gesture is triggered by a keyboard or gamepad, there is no finger information, and **fingerList** is 
+   * empty.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -817,9 +837,9 @@ interface BaseGestureEvent extends BaseEvent {
   fingerList: FingerInfo[];
 
   /**
-   * Information about touch points of the gesture event. For gesture events initiated by a touchscreen, **fingerInfos**
-   * includes information about all touch points. For gesture events initiated by a mouse or touchpad, **fingerInfos** 
-   * contains only one touch point.
+   * Information about all valid touch points that participate in triggering the event. For gesture events initiated by 
+   * a touchscreen, **fingerInfos** includes information about all touch points. For gesture events initiated by a 
+   * mouse or touchpad, **fingerInfos** contains only one touch point.
    * 
    * **NOTE**
    * 
@@ -848,8 +868,8 @@ interface BaseGestureEvent extends BaseEvent {
  */
 interface TapGestureEvent extends BaseGestureEvent {
   /**
-   * Coordinate information of the current tap gesture. For non-tap gestures, the return value of **tapLocation** is 
-   * **undefined**.
+   * Coordinate information of the tap gesture. If no value is returned, there is no coordinate information of the tap 
+   * gesture.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -898,6 +918,8 @@ interface PanGestureEvent extends BaseGestureEvent {
   /**
    * Offset of the gesture event on the x-axis relative to the original area of the current component, in vp. A positive
    * value means to pan from left to right, and a negative value means the opposite.
+   * 
+   * Value range: (-∞, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -910,6 +932,8 @@ interface PanGestureEvent extends BaseGestureEvent {
   /**
    * Offset of the gesture event on the y-axis relative to the original area of the current component, in vp. A positive
    * value means to pan from top to bottom, and a negative value means the opposite.
+   * 
+   * Value range: (-∞, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -923,6 +947,8 @@ interface PanGestureEvent extends BaseGestureEvent {
    * Velocity along the x-axis. The origin of the coordinate axis is the upper left corner of the screen. The velocity 
    * is positive if the movement is from left to right, and it is negative if the movement is from right to left. The 
    * unit is vp/s.
+   * 
+   * Value range: (-∞, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -936,6 +962,8 @@ interface PanGestureEvent extends BaseGestureEvent {
    * Velocity along the y-axis. The origin of the coordinate axis is the upper left corner of the screen. The velocity 
    * is positive if the movement is from top to bottom, and it is negative if the movement is from bottom to top. The 
    * unit is vp/s.
+   * 
+   * Value range: (-∞, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -948,6 +976,8 @@ interface PanGestureEvent extends BaseGestureEvent {
   /**
    * Velocity along the main axis. The value is the arithmetic square root of the sum of squares of the velocity along 
    * the x- and y-axis. The unit is vp/s.
+   * 
+   * Value range: [0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -971,6 +1001,8 @@ interface PanGestureEvent extends BaseGestureEvent {
 interface PinchGestureEvent extends BaseGestureEvent {
   /**
    * Scale factor.
+   * 
+   * Value range: [0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -982,6 +1014,8 @@ interface PinchGestureEvent extends BaseGestureEvent {
 
   /**
    * X-coordinate of the center of the pinch gesture, in vp, relative to the original area of the current component.
+   * 
+   * Value range: [0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -993,6 +1027,8 @@ interface PinchGestureEvent extends BaseGestureEvent {
 
   /**
    * Y-coordinate of the center of the pinch gesture, in vp, relative to the original area of the current component.
+   * 
+   * Value range: [0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1070,6 +1106,8 @@ interface SwipeGestureEvent extends BaseGestureEvent {
   /**
    * Swipe gesture speed, defined as the average swipe speed of all fingers relative to the original area of the current
    * component. The unit is vp/s.
+   * 
+   * Value range: [0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1297,7 +1335,7 @@ interface GestureEvent extends BaseEvent {
 }
 
 /**
- * Defines the gesture API.
+ * Configures common attributes of gestures, supporting setting gesture tags and input types for gesture responses.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1700,6 +1738,10 @@ declare class PanGestureOptions {
  * PanGesture is used to trigger a pan gesture when the movement distance of a finger on the screen reaches the minimum
  * value.
  *
+ * A pan gesture can be triggered by a finger or stylus swipe, a left-mouse-button swipe, mouse-wheel scrolling, or a
+ * two-finger touchpad gesture. For mouse-wheel and two-finger touchpad input, the vertical or horizontal axis value
+ * must be non-zero.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
  * @atomicservice [since 11]
@@ -1894,7 +1936,7 @@ interface PinchGestureInterface extends GestureInterface<PinchGestureInterface> 
    *     <br> - **distance**: minimum recognition distance, in vp. This distance refers to the difference between the
    *     current average distance from the multiple finger positions to their center point and the average distance
    *     when the fingers first made contact. If this difference meets or exceeds the minimum recognition distance,
-   *     the pinch gesture is recognized.<br>Default value: **5**<br>**NOTE**<br>Value range: (0, +∞). If the value is
+   *     the pinch gesture is recognized.<br>Default value: **5**<br>**NOTE**<br>Value range: [0, +∞). If the value is
    *     less than or equal to 0, it will be converted to the default value.
    * @returns { PinchGestureInterface }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2096,7 +2138,9 @@ interface RotationGestureInterface extends GestureInterface<RotationGestureInter
 
 /**
  * Combined gestures integrate two or more gestures into a compound gesture, supporting sequential recognition, parallel
- * recognition, and exclusive recognition.
+ * recognition, and exclusive recognition. They are suitable for scenarios where multiple basic gestures need to be
+ * combined on the same component and their recognition order, parallel relationship, or exclusive relationship needs to
+ * be controlled, helping developers implement more complex gesture interaction logic.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2105,10 +2149,15 @@ interface RotationGestureInterface extends GestureInterface<RotationGestureInter
  */
 interface GestureGroupInterface {
   /**
-   * Return to Obtain GestureGroup.
+   * Creates a combined gesture.
    *
-   * @param { GestureMode } mode
-   * @param { GestureType[] } gesture
+   * @param { GestureMode } mode - Gesture group recognition mode. If the recognition mode is not explicitly set,
+   *     **GestureMode.Sequence** is used by default.
+   * @param { GestureType[] } gesture - When two or more basic gesture types are set, these gestures are recognized as a
+   *     gesture group. If this parameter is not set, the gesture group recognition function does not take effect.
+   *     <br>**NOTE**<br>When you need to add both a single-tap gesture and a double-tap gesture to a component, you can
+   *     add two [TapGesture]{@link TapGesture} gestures in the gesture group. The double-tap gesture must be placed
+   *     before the single-tap gesture; otherwise, the gestures do not take effect.
    * @returns { GestureGroupInterface }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -2118,9 +2167,10 @@ interface GestureGroupInterface {
   (mode: GestureMode, ...gesture: GestureType[]): GestureGroupInterface;
 
   /**
-   * Triggered when a tap cancellation event is received after a gesture is recognized.
+   * Invoked when a touch cancel event is received after gesture recognition.
    *
-   * @param { function } event - Callback for the gesture event.
+   * @param { function } event - Callback for the gesture event, invoked when a touch cancel event is received after
+   *     combined gesture recognition succeeds. The callback has no parameters and no return value.
    * @returns { GestureGroupInterface }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -2201,7 +2251,8 @@ declare const RotationGesture: RotationGestureInterface;
 declare const GestureGroup: GestureGroupInterface;
 
 /**
- * Represents the base type for gesture handlers.
+ * Defines the base type of a gesture handler, which carries the common configuration capabilities of specific gesture 
+ * handlers, such as setting the gesture tag and limiting the supported event input sources.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2211,10 +2262,11 @@ declare const GestureGroup: GestureGroupInterface;
  */
 declare class GestureHandler<T> implements GestureInterface<T> {
   /**
-   * Sets the tag for the gesture handler.
+   * Sets the tag of the gesture handler. This is suitable for scenarios where multiple gesture handlers need to be 
+   * distinguished or managed.
    *
    * @param { string } tag - Gesture handler tag.
-   * @returns { T } Current component.
+   * @returns { T } Current gesture handler object.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2224,7 +2276,8 @@ declare class GestureHandler<T> implements GestureInterface<T> {
   tag(tag: string): T;
 
   /**
-   * Sets the event input sources supported by the gesture handler.
+   * Sets the event input sources supported by the gesture handler. This is suitable for scenarios where the gesture 
+   * needs to be limited to responding only to specific input sources such as touch, mouse, or stylus.
    *
    * @param { Array<SourceTool> } types - Supported input source types.
    * @returns { T } Current component.
@@ -2268,17 +2321,19 @@ interface TapGestureHandlerOptions extends BaseHandlerOptions {
    */
   count?: number;
   /**
-   * Number of fingers required to trigger a tap. The value ranges from 1 to 10. If the value is less than 1 or is not 
-   * set, the default value is used.
+   * Number of fingers that trigger a tap. The minimum is 1 finger, and the maximum is 10 fingers. If the value is 
+   * less than 1 or is not set, the default value is used.
    * 
    * Default value: **1**
    * 
    * **NOTE**
    * 
-   * 1. If the value is greater than 1, the tap gesture will fail to be recognized when the required number of fingers
-   * is not pressed within 300 milliseconds after the first finger touches down, or when the required number of fingers
-   * is not lifted within 300 milliseconds after the first finger is lifted.
-   * 2. When the number of fingers touching the screen exceeds the set value, the gesture can be recognized.
+   * 1. When multiple fingers are configured, if a sufficient number of fingers are not pressed within 300 ms after the 
+   * first finger is pressed, gesture recognition fails. If a sufficient number of fingers are not lifted within 300 ms 
+   * after the first finger is lifted, gesture recognition fails.
+   * 2. When **isFingerCountLimited** is not enabled, if the actual number of tapping fingers exceeds the configured 
+   * value, gesture recognition succeeds. When **isFingerCountLimited** is enabled, the number of fingers touching the 
+   * screen must be equal to the configured value; otherwise, gesture recognition fails.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2294,6 +2349,8 @@ interface TapGestureHandlerOptions extends BaseHandlerOptions {
    * Default value: **2^31-1**
    * 
    * Unit: vp
+   * 
+   * Value range: (0, +∞)
    * 
    * **NOTE**
    * 
@@ -2312,7 +2369,9 @@ interface TapGestureHandlerOptions extends BaseHandlerOptions {
 }
 
 /**
- * Defines a type of gesture handler object for tap gestures.
+ * Defines the tap gesture handler object type, which is used to recognize tap interactions on a component. It is 
+ * suitable for touch scenarios such as single tap, multiple taps, or multi-finger tap, and supports configuring 
+ * recognition conditions such as the tap count and the number of triggering fingers.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2324,7 +2383,11 @@ declare class TapGestureHandler extends GestureHandler<TapGestureHandler> {
   /**
    * Constructor used to create a tap gesture handler instance.
    *
-   * @param { TapGestureHandlerOptions } [options] - Parameters of the tap gesture handler.
+   * @param { TapGestureHandlerOptions } [options] - Tap gesture handler configuration options. Pass this parameter 
+   *     when you need to customize the number of consecutive taps, the number of fingers that trigger the tap, the 
+   *     finger count check, or the tap gesture movement threshold. If this parameter is not passed, the default tap 
+   *     gesture handler configuration is used, for example, the number of consecutive taps is 1, the number of 
+   *     fingers that trigger the tap is 1, and the number of fingers touching the screen is not checked by default.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2358,7 +2421,8 @@ declare class TapGestureHandler extends GestureHandler<TapGestureHandler> {
  */
 interface LongPressGestureHandlerOptions extends BaseHandlerOptions {
   /**
-   * Minimum number of fingers to trigger a long press gesture. The value ranges from 1 to 10.
+   * Minimum number of fingers to trigger a long press. When **isFingerCountLimited** is enabled, the number of fingers 
+   * touching the screen must equal the fingers value; otherwise, gesture recognition fails.
    * 
    * Default value: **1**
    * 
@@ -2395,7 +2459,7 @@ interface LongPressGestureHandlerOptions extends BaseHandlerOptions {
    * 
    * **NOTE**
    * 
-   * Value range: [0, +∞). If the value is less than or equal to 0, the default value **500** is used.
+   * Value range: (0, +∞). If the value is less than or equal to 0, the default value **500** is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2421,7 +2485,10 @@ interface LongPressGestureHandlerOptions extends BaseHandlerOptions {
 }
 
 /**
- * Defines a long press gesture handler object.
+ * Defines the long press gesture handler object type, which is used to recognize long press interactions on a 
+ * component. It is suitable for scenarios where an operation is triggered after pressing and holding, and supports 
+ * configuring recognition conditions such as the number of triggering fingers, the long press duration, whether to 
+ * trigger continuously, and the movement threshold.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2433,7 +2500,12 @@ declare class LongPressGestureHandler extends GestureHandler<LongPressGestureHan
   /**
    * Constructor used to create a long press gesture handler instance.
    *
-   * @param { LongPressGestureHandlerOptions } [options] - Parameters of the long press gesture handler.
+   * @param { LongPressGestureHandlerOptions } [options] - Configuration parameters of the long press gesture handler. 
+   *     Pass this parameter when you need to customize the minimum finger count for triggering a long press, whether 
+   *     to trigger continuously, the minimum trigger time, finger count verification, or the maximum movement 
+   *     distance. If this parameter is not passed, the default configuration of the long press gesture handler is 
+   *     used, for example, the trigger finger count is 1, **repeat** is **false**, the minimum time for triggering a 
+   *     long press is 500 ms, and the maximum movement distance is 15 px.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2565,6 +2637,11 @@ interface PanGestureHandlerOptions extends BaseHandlerOptions {
    * 
    * Default value: **8** for the stylus and **5** for other input sources
    * 
+   * **NOTE**
+   * 
+   * If a pan gesture and a [tab]{@link tabs} swipe occur at the same time, set the **distanceMap** value of the 
+   * corresponding input source to **1** to make the gesture more easily recognizable.
+   * 
    * Value range: [0, +∞). If the value specified is less than 0, the default value is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2577,7 +2654,10 @@ interface PanGestureHandlerOptions extends BaseHandlerOptions {
 }
 
 /**
- * Defines a pan gesture handler object.
+ * Defines the pan gesture handler object type, which is used to recognize drag or slide interactions on a component. 
+ * It is suitable for scenarios where the state needs to be updated as the finger moves, and supports configuring the 
+ * number of triggering fingers, the pan direction, the minimum drag distance, and the trigger distance for different 
+ * input sources.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2589,7 +2669,13 @@ declare class PanGestureHandler extends GestureHandler<PanGestureHandler> {
   /**
    * Constructor used to create a pan gesture handler instance.
    *
-   * @param { PanGestureHandlerOptions } [options] - Parameters of the pan gesture handler.
+   * @param { PanGestureHandlerOptions } [options] - Configuration options of the pan gesture handler. Pass this 
+   *     parameter when you need to customize the minimum number of fingers to trigger dragging, the trigger 
+   *     direction, the minimum drag distance, the minimum drag distance for different input sources, or finger count 
+   *     validation. If this parameter is not passed, the default configuration of the pan gesture handler is used, 
+   *     for example, the number of fingers to trigger is 1, the direction is **PanDirection.All**, the minimum drag 
+   *     distance uses the default value based on the input source, and the number of fingers touching the screen is 
+   *     not checked by default.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2677,11 +2763,12 @@ declare class PanGestureHandler extends GestureHandler<PanGestureHandler> {
  */
 interface SwipeGestureHandlerOptions extends BaseHandlerOptions {
   /**
-   * Minimum number of fingers to trigger a swipe gesture. The value ranges from 1 to 10.
+   * Minimum number of fingers required to trigger a swipe. Value range: [1, 10]. If the value is out of range, the 
+   * default value is used. Set this parameter to 1 when a single-finger swipe is sufficient to trigger the action; 
+   * set it to a value from 2 to 10 when you need to reduce accidental touches and require multi-finger coordination 
+   * to trigger the swipe.
    * 
    * Default value: **1**
-   * 
-   * Value range: [1, 10]
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2691,7 +2778,11 @@ interface SwipeGestureHandlerOptions extends BaseHandlerOptions {
    */
   fingers?: number;
   /**
-   * Directions in which the swipe gesture can be recognized.
+   * Swipe direction that triggers the swipe gesture. **SwipeDirection.All** applies to scenarios where a swipe in any 
+   * direction can trigger the action; **SwipeDirection.Horizontal** applies to scenarios where only horizontal swipes 
+   * are responded to, such as page turning or carousel switching; **SwipeDirection.Vertical** applies to scenarios 
+   * where only vertical swipes are responded to, such as switching content up and down; **SwipeDirection.None** 
+   * applies to scenarios where the swipe gesture is not triggered for the time being.
    * 
    * Default value: **SwipeDirection.All**
    *
@@ -2703,9 +2794,14 @@ interface SwipeGestureHandlerOptions extends BaseHandlerOptions {
    */
   direction?: SwipeDirection;
   /**
-   * Minimum speed of the swipe gesture.
+   * Minimum speed for recognizing a swipe. Set a smaller positive threshold when you need to recognize swipes more 
+   * sensitively; set a larger threshold when you need to reduce the chance of ordinary pans being misrecognized as 
+   * swipes. It is recommended to use the default value first and then adjust it based on interaction sensitivity and 
+   * accidental touch conditions.
    * 
    * Default value: 100 vp/s
+   * 
+   * Value range: (0, +∞), unit: vp/s
    * 
    * **NOTE**
    * 
@@ -2721,7 +2817,9 @@ interface SwipeGestureHandlerOptions extends BaseHandlerOptions {
 }
 
 /**
- * Defines a swipe gesture handler object.
+ * Defines the swipe gesture handler object type, which is used to recognize quick swipe interactions on a component. 
+ * It is suitable for scenarios where an operation is triggered based on the swipe direction or speed, and supports 
+ * configuring the number of triggering fingers, the swipe direction, and the minimum speed.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2733,7 +2831,11 @@ declare class SwipeGestureHandler extends GestureHandler<SwipeGestureHandler> {
   /**
    * Constructor used to create a swipe gesture handler instance.
    *
-   * @param { SwipeGestureHandlerOptions } [options] - Parameters of the swipe gesture handler.
+   * @param { SwipeGestureHandlerOptions } [options] - Configuration options of the swipe gesture handler. Pass this 
+   *     parameter when you need to customize the minimum finger count, swipe direction, minimum recognition speed, or 
+   *     finger count check for triggering a swipe; if not passed, the default configuration of the swipe gesture 
+   *     handler is used, that is, the trigger finger count is 1, the direction is **SwipeDirection.All**, the minimum 
+   *     speed is 100 vp/s, and the number of fingers touching the screen is not checked by default.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2766,14 +2868,17 @@ declare class SwipeGestureHandler extends GestureHandler<SwipeGestureHandler> {
  */
 interface PinchGestureHandlerOptions extends BaseHandlerOptions {
   /**
-   * Minimum number of fingers required to trigger the pinch gesture. The value ranges from 2 to 5.
+   * Minimum number of fingers that trigger a pinch. The value ranges from 2 to 5.
    * 
    * Default value: **2**
    * 
    * Value range: [2, 5]
    * 
-   * While more fingers than the minimum number can be pressed to trigger the gesture, only the first fingers of the 
-   * minimum number participate in gesture calculation.
+   * If the value is less than 2 or greater than 5, the default value **2** is used. If **isFingerCountLimited** is 
+   * not enabled, the number of fingers that trigger the gesture can be greater than **fingers**, but only the first 
+   * **fingers** fingers that touch the screen participate in gesture calculation. If **isFingerCountLimited** is 
+   * enabled, the number of fingers touching the screen must be equal to **fingers**; otherwise, the gesture will not 
+   * be recognized.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2783,13 +2888,18 @@ interface PinchGestureHandlerOptions extends BaseHandlerOptions {
    */
   fingers?: number;
   /**
-   * Minimum recognition distance, in vp.
+   * Minimum recognition distance, in vp. To recognize a pinch gesture more sensitively, set a smaller positive 
+   * threshold. To reduce the chance of triggering a pinch due to slight movement or accidental touch, set a larger 
+   * threshold. You are advised to use the default value first and then adjust it based on the component size and 
+   * interaction sensitivity.
    * 
    * Default value: **5**
    * 
+   * Value range: (0, +∞)
+   * 
    * **NOTE**
    * 
-   * If the value is less than or equal to 0, it will be converted to the default value.
+   * If the recognition distance is less than or equal to 0, the default value is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2801,7 +2911,9 @@ interface PinchGestureHandlerOptions extends BaseHandlerOptions {
 }
 
 /**
- * Defines a type of gesture handler object for pinch gestures.
+ * Defines the pinch gesture handler object type, which is used to recognize multi-finger pinch interactions on a 
+ * component. It is suitable for scaling operation scenarios, and supports configuring recognition conditions such as 
+ * the number of triggering fingers, the minimum recognition distance, and the finger count limit.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2813,7 +2925,11 @@ declare class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
   /**
    * Constructor used to create a pinch gesture handler instance.
    *
-   * @param { PinchGestureHandlerOptions } [options] - Parameters of the pinch gesture handler.
+   * @param { PinchGestureHandlerOptions } [options] - Configuration parameters of the pinch gesture handler. Pass 
+   *     this parameter when you need to customize the minimum finger count for triggering a pinch, the minimum 
+   *     recognition distance, or the finger count check. If this parameter is not passed, the default configuration 
+   *     of the pinch gesture handler is used, for example, the trigger finger count is 2, the minimum recognition 
+   *     distance is 5 vp, and the finger count on the touch screen is not checked by default.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2902,14 +3018,17 @@ declare class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
  */
 interface RotationGestureHandlerOptions extends BaseHandlerOptions {
   /**
-   * Minimum number of fingers required to trigger the rotation gesture. The value ranges from 2 to 5.
+   * Minimum number of fingers required to trigger rotation. The minimum is 2 and the maximum is 5.
    * 
    * Default value: **2**
    * 
    * Value range: [2, 5]
    * 
-   * While more fingers than the minimum number can be pressed to trigger the gesture, only the first two fingers 
-   * participate in gesture calculation.
+   * If the value is less than 2 or greater than 5, the default value **2** is used. When **isFingerCountLimited** is 
+   * not enabled, the number of fingers touching the screen can be greater than the value of **fingers** when the 
+   * gesture is triggered, but only the first two fingers that touch the screen participate in gesture calculation. 
+   * When **isFingerCountLimited** is enabled, the number of fingers touching the screen must be equal to the value of 
+   * **fingers**; otherwise, the gesture will not be recognized.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2919,9 +3038,14 @@ interface RotationGestureHandlerOptions extends BaseHandlerOptions {
    */
   fingers?: number;
   /**
-   * Minimum angle change required to trigger the rotation gesture, in degrees (deg).
+   * Minimum angle change required to trigger the rotation gesture, in degrees (deg). To recognize slight rotations 
+   * more sensitively, set a smaller positive angle. To reduce accidental touches or respond only to obvious 
+   * rotations, set a larger angle. It is recommended to use the default value first and then adjust it based on the 
+   * rotation interaction precision requirements.
    * 
    * Default value: **1**
+   * 
+   * Value range: (0, 360]
    * 
    * **NOTE**
    * 
@@ -2937,7 +3061,10 @@ interface RotationGestureHandlerOptions extends BaseHandlerOptions {
 }
 
 /**
- * Defines a rotation gesture handler object.
+ * Defines the rotation gesture handler object type, which is used to recognize multi-finger rotation interactions on 
+ * a component. It is suitable for scenarios where an object needs to be rotated or an angle needs to be adjusted, and 
+ * supports configuring recognition conditions such as the number of triggering fingers, the minimum angle change, and 
+ * the finger count limit.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2949,7 +3076,11 @@ declare class RotationGestureHandler extends GestureHandler<RotationGestureHandl
   /**
    * Constructor used to create a rotation gesture handler instance.
    *
-   * @param { RotationGestureHandlerOptions } [options] - Parameters of the rotation gesture handler.
+   * @param { RotationGestureHandlerOptions } [options] - Rotation gesture handler configuration options. Pass this 
+   *     parameter when you need to customize the minimum number of fingers to trigger rotation, the minimum angle 
+   *     change to trigger the rotation gesture, or the finger count check. If this parameter is not passed, the 
+   *     default configuration of the rotation gesture handler is used, for example, two fingers to trigger, a 
+   *     minimum angle change of 1deg, and no check on the number of fingers touching the screen by default.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3037,7 +3168,8 @@ declare class RotationGestureHandler extends GestureHandler<RotationGestureHandl
  */
 interface GestureGroupGestureHandlerOptions {
   /**
-   * Recognition mode of combined gestures.
+   * Gesture recognition mode of the gesture group. It applies to scenarios where multiple gestures need to be 
+   * recognized in sequence, in parallel, or mutually exclusively.
    * 
    * Default value: **GestureMode.Sequence**
    *
@@ -3067,7 +3199,9 @@ interface GestureGroupGestureHandlerOptions {
 }
 
 /**
- * Defines a gesture group handler object.
+ * Defines the gesture group handler object type, which is used to combine multiple gestures and bind them to a 
+ * component as a whole. It is suitable for scenarios where the recognition order or concurrency relationship of 
+ * multiple gestures such as single tap, double tap, and long press needs to be coordinated.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3079,7 +3213,10 @@ declare class GestureGroupHandler extends GestureHandler<GestureGroupHandler> {
   /**
    * Constructor used to create a gesture group handler instance.
    *
-   * @param { GestureGroupGestureHandlerOptions } [options] - Parameters of the gesture group handler.
+   * @param { GestureGroupGestureHandlerOptions } [options] - Configuration options of the gesture group handler. 
+   *     Passed when the combined gesture recognition mode and gesture set need to be set; if not passed, the default 
+   *     configuration of the gesture group handler is used, with the combined gesture recognition mode defaulting to 
+   *     **GestureMode.Sequence** and no gesture set configured.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3091,7 +3228,8 @@ declare class GestureGroupHandler extends GestureHandler<GestureGroupHandler> {
    * Sets the cancellation callback for the gesture group handler. The callback is triggered when a sequence gesture (
    * [GestureMode]{@link GestureMode}.Sequence) is cancelled.
    *
-   * @param { Callback<void> } event - Callback invoked when the gesture group is cancelled.
+   * @param { Callback<void> } event - Callback for the gesture group handler cancellation, which takes no input 
+   *     parameter and is used to receive a notification after the sequential combined gesture is canceled.
    * @returns { GestureGroupHandler } Current gesture group handler object.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3103,7 +3241,8 @@ declare class GestureGroupHandler extends GestureHandler<GestureGroupHandler> {
 }
 
 /**
- * Enumerates gesture priority levels.
+ * Defines the priority of the bound gesture, which is suitable for scenarios where the response order of gestures 
+ * needs to be controlled or gesture conflicts need to be handled when multiple gestures are bound at the same time.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3267,7 +3406,9 @@ declare class EventTargetInfo {
    */
   getId(): string;
   /**
-   * Returns the unique ID of the current component.
+   * Returns the unique ID of the current component. Different from the component ID returned by **getId()**, this API 
+   * returns the unique ID of the component. When an API parameter requires the unique ID of a component (such as the 
+   * **uniqueId** of **isHostBelongsTo**), use this API to obtain it.
    *
    * @returns { int } Unique ID of the current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3280,7 +3421,9 @@ declare class EventTargetInfo {
 }
 
 /**
- * Represents a touch gesture recognizer.
+ * Defines the touch gesture recognizer object, which supports obtaining touch target information, canceling the current 
+ * touch interaction, and determining whether the bound node belongs to a specified component subtree. It is applicable 
+ * to touch processing and event distribution control scenarios.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3302,7 +3445,9 @@ declare class TouchRecognizer {
      */
     getEventTargetInfo(): EventTargetInfo;
     /**
-     * Sends a touch cancellation event to this touch gesture recognizer.
+     * Sends a touch cancellation event to the current touch gesture recognizer. It is applicable to scenarios such as 
+     * page state changes, dialog box interruptions, or business logic that needs to actively terminate the current 
+     * touch interaction.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3312,13 +3457,16 @@ declare class TouchRecognizer {
      */
     cancelTouch(): void;
     /**
-     * Returns whether the node bound to the current touch gesture recognizer is a descendant of the specified 
-     * component.
+     * Returns whether the node bound to the current touch gesture recognizer is a descendant node of the passed-in 
+     * component. It is applicable to scenarios where it is determined whether an event comes from the target component 
+     * subtree during touch processing or gesture distribution.
      *
      * @param { int } uniqueId - Unique ID of the component. This ID can be obtained via the
-     *     [getUniqueId]{@link EventTargetInfo#getUniqueId} API.
-     * @returns { boolean } Whether the node bound to the current touch gesture recognizer is a descendant of the
-     *     specified component. Returns **true** if the bound node is a descendant, and **false** otherwise.
+     *     [getUniqueId]{@link EventTargetInfo#getUniqueId} API.<br>If the value does not match any component unique 
+     *     ID, **false** is returned.
+     * @returns { boolean } Whether the node bound to the current touch gesture recognizer is a descendant node of the
+     *     passed-in component. The value **true** indicates that the current bound node is a descendant node of the 
+     *     passed-in component, and **false** indicates the opposite.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -3329,7 +3477,10 @@ declare class TouchRecognizer {
 }
 
 /**
- * Gesture recognizer object.
+ * Defines the gesture recognizer object, which supports querying gesture tag, type, state, and target component 
+ * information, controlling the enabled state of the recognizer, blocking the current recognition process, and 
+ * determining whether the bound node belongs to a specified component subtree. It is applicable to gesture recognition 
+ * state management and gesture competition handling scenarios.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3375,8 +3526,9 @@ declare class GestureRecognizer {
   /**
    * Sets the enabled state of this gesture recognizer.
    *
-   * @param { boolean } isEnabled - Enabled state to set. The value **true** means that the gesture recognizer is
-   *     enabled and will trigger events, and **false** means the opposite.
+   * @param { boolean } isEnabled - Enabled status of the gesture recognizer. The value **true** indicates that the 
+   *     current gesture recognizer can call back app events, and **false** indicates that it does not call back app 
+   *     events.<br>Currently, this takes effect only when set for [PanRecognizer]{@link PanRecognizer}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3456,11 +3608,14 @@ declare class GestureRecognizer {
    */
   isFingerCountLimit(): boolean;
   /**
-   * Prevents a gesture recognizer from participating in the current gesture recognition before all fingers are lifted. 
-   * If the system has already determined the result of the gesture recognizer (regardless of success or failure), 
-   * calling this API will be ineffective. Unlike GestureRecognizer.[setEnabled]{@link GestureRecognizer#setEnabled}(isEnabled: boolean), 
-   * which only affects callback execution, this API prevents the recognizer from participating in 
-   * the recognition process entirely.
+   * Blocks the gesture recognizer from participating in the current gesture recognition before all fingers are lifted. 
+   * It is applicable to scenarios such as custom gesture competition or temporarily giving up the current gesture 
+   * recognition based on business conditions. If the system has already determined the result of this gesture 
+   * recognizer (whether successful or not), calling this API has no effect. This method differs from 
+   * GestureRecognizer.[setEnabled]{@link GestureRecognizer#setEnabled}(isEnabled: boolean). 
+   * [setEnabled]{@link GestureRecognizer#setEnabled} does not block the gesture recognizer object from participating in 
+   * the gesture recognition process, but only affects whether the callback function corresponding to the gesture is 
+   * executed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3470,12 +3625,15 @@ declare class GestureRecognizer {
    */
   preventBegin(): void;
   /**
-   * Returns whether the node bound to the current gesture recognizer is a descendant of the specified component.
+   * Returns whether the node bound to the current gesture recognizer is a descendant node of the passed-in component. 
+   * It is applicable to scenarios where it is determined whether an event comes from the target component subtree 
+   * during touch processing or gesture distribution.
    *
    * @param { int } uniqueId - Unique ID of the component. This ID can be obtained via the
-   *     [getUniqueId]{@link EventTargetInfo#getUniqueId} API.
-   * @returns { boolean } Whether the node bound to the current gesture recognizer is a descendant of the specified
-   *     component. Returns **true** if the bound node is a descendant, and **false** otherwise.
+   *     [getUniqueId]{@link EventTargetInfo#getUniqueId} API.<br>If the value is abnormal, **false** is returned.
+   * @returns { boolean } Whether the node bound to the current gesture recognizer is a descendant node of the
+   *     passed-in component. The value **true** indicates that the current bound node is a descendant node of the 
+   *     passed-in component, and **false** indicates the opposite.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3486,7 +3644,9 @@ declare class GestureRecognizer {
 }
 
 /**
- * Implements a tap gesture recognizer object. Inherits from [GestureRecognizer]{@link GestureRecognizer}.
+ * Defines the tap gesture recognizer object, which inherits from [GestureRecognizer]{@link GestureRecognizer} and 
+ * supports obtaining the tap count threshold. It is applicable to querying the recognition configuration of single-tap 
+ * or multi-tap gestures.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3510,7 +3670,9 @@ declare class TapRecognizer extends GestureRecognizer {
 }
 
 /**
- * Implements a long press gesture recognizer. Inherits from [GestureRecognizer]{@link GestureRecognizer}.
+ * Defines the long press gesture recognizer object, which inherits from [GestureRecognizer]{@link GestureRecognizer} 
+ * and supports querying whether long press is triggered repeatedly, the trigger duration threshold, and the maximum 
+ * recognizable movement distance. It is applicable to querying the long press gesture recognition configuration.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3558,7 +3720,9 @@ declare class LongPressRecognizer extends GestureRecognizer {
 }
 
 /**
- * Implements a swipe gesture recognizer. Inherits from [GestureRecognizer]{@link GestureRecognizer}.
+ * Defines the swipe gesture recognizer object, which inherits from [GestureRecognizer]{@link GestureRecognizer} and 
+ * supports querying the velocity threshold and swipe direction of the swipe gesture. It is applicable to querying the 
+ * swipe gesture recognition configuration.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3568,9 +3732,11 @@ declare class LongPressRecognizer extends GestureRecognizer {
  */
 declare class SwipeRecognizer extends GestureRecognizer {
   /**
-   * Obtains the minimum velocity required for the swipe gesture to be recognized.
+   * Returns the minimum velocity threshold for the preset swipe gesture recognizer to recognize a swipe. The default 
+   * minimum velocity is 100 vp/s.
    *
-   * @returns { number } Minimum velocity required for the swipe gesture to be recognized, in vp/s.
+   * @returns { number } Minimum velocity threshold for the preset swipe gesture recognizer to recognize a swipe, in 
+   *     vp/s. If no velocity threshold is configured, the default value 100vp/s is returned.
    *     <br>Value range: [0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3593,7 +3759,9 @@ declare class SwipeRecognizer extends GestureRecognizer {
 }
 
 /**
- * Implements a pinch gesture recognizer. Inherits from [GestureRecognizer]{@link GestureRecognizer}.
+ * Defines the pinch gesture recognizer object, which inherits from [GestureRecognizer]{@link GestureRecognizer} and 
+ * supports querying the minimum recognition distance threshold of the pinch gesture. It is applicable to querying the 
+ * recognition configuration of scaling gestures.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3617,7 +3785,9 @@ declare class PinchRecognizer extends GestureRecognizer {
 }
 
 /**
- * Implements a rotation gesture recognizer. Inherits from [GestureRecognizer]{@link GestureRecognizer}.
+ * Defines the rotation gesture recognizer object, which inherits from [GestureRecognizer]{@link GestureRecognizer} and 
+ * supports querying the minimum angle threshold for triggering the rotation gesture. It is applicable to querying the 
+ * gesture recognition configuration of rotation interactions.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3644,7 +3814,9 @@ declare class RotationRecognizer extends GestureRecognizer {
 }
 
 /**
- * Gesture recognizer object.
+ * Defines the pan gesture recognizer object, which inherits from [GestureRecognizer]{@link GestureRecognizer} and 
+ * supports querying pan gesture attributes, recognition direction, minimum pan distance, and pan thresholds for 
+ * different input sources. It is applicable to querying the pan gesture recognition configuration.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3676,9 +3848,11 @@ declare class PanRecognizer extends GestureRecognizer {
    */
   getDirection(): PanDirection;
   /**
-   * Obtains the minimum pan distance required to trigger this pan gesture recognizer.
+   * Returns the minimum pan distance that triggers the current pan gesture recognizer. The default pan threshold is 
+   * 5 vp.
    *
-   * @returns { number } Minimum swipe distance. Unit: vp.
+   * @returns { number } Minimum pan distance that triggers the current pan gesture recognizer. If the minimum pan 
+   *     distance is not configured, the default pan threshold 5vp is returned. Unit: vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3687,7 +3861,8 @@ declare class PanRecognizer extends GestureRecognizer {
    */
   getDistance(): number;
   /**
-   * Obtains the minimum pan distances required for different input sources to trigger this pan gesture recognizer.
+   * Returns the minimum pan distance that triggers the pan gesture recognizer for different input sources. The default 
+   * pan threshold is 5 vp.
    * 
    * > **NOTE**
    * >

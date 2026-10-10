@@ -19,8 +19,8 @@
  */
 
 /**
- * The **Blank** component is a spacer in the layout, automatically filling the remaining space along the main axis of 
- * its parent container. It works only when the parent component is [Row]{@link Row}, [Column]{@link Column}, or 
+ * The **Blank** component is a spacer in the layout, automatically filling the remaining space along the main axis of
+ * its parent container. It works only when the parent component is [Row]{@link Row}, [Column]{@link Column}, or
  * [Flex]{@link Flex}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -33,12 +33,12 @@
 interface BlankInterface {
   /**
    * Creates a **Blank** component.
-   *  
+   *
    * Since API version 10: 
    * 
-   * - When the **Blank** component is used within a [Row]{@link Row}, [Column]{@link Column}, or 
-   * [Flex]{@link Flex} container, it will automatically stretch or shrink along the main axis if it does not have a 
-   * main axis size specified. If the **Blank** component has a main axis size specified or if the container is set to 
+   * - When the **Blank** component is used within a [Row]{@link Row}, [Column]{@link Column}, or
+   * [Flex]{@link Flex} container, it will automatically stretch or shrink along the main axis if it does not have a
+   * main axis size specified. If the **Blank** component has a main axis size specified or if the container is set to
    * adapt to the size of its child nodes, the component will not automatically stretch or shrink.
    * - Relationship between **size** and **min** of the **Blank** component on the main axis: max(min, size). 
    * - If the **Blank** component has a cross axis size specified, it will not fill up the parent container on the cross
@@ -47,7 +47,7 @@ interface BlankInterface {
    *
    * @param { number | string } min - Minimum size of the **Blank** component in the container along the main axis.
    *     <br>Default value: **0**
-   *     <br>If the type is number, the default unit is vp. If the type is string, the [pixel unit]{@link CommonMethod} can
+   *     <br>If the type is number, the default unit is vp. The value range is [0, +∞). If the type is string, the [pixel unit]{@link CommonMethod} can
    *     be explicitly specified, for example, '**10px'**. If the unit is not specified, the default unit vp is used, in
    *     which case **'10'** is equivalent to **10vp**.
    *     <br>Invalid values are treated as the default value.
@@ -96,11 +96,11 @@ declare class BlankAttribute extends CommonMethod<BlankAttribute> {
 }
 
 /**
- * The **Blank** component is a spacer in the layout, automatically filling the remaining space along the main axis of 
- * its parent container. It works only when the parent component is [Row]{@link Row}, [Column]{@link Column}, or 
+ * The **Blank** component is a spacer in the layout, automatically filling the remaining space along the main axis of
+ * its parent container. It works only when the parent component is [Row]{@link Row}, [Column]{@link Column}, or
  * [Flex]{@link Flex}.
- * 
- * ###### Child Components
+ *
+ * ## Child Components
  *
  * No child component can be set.
  *

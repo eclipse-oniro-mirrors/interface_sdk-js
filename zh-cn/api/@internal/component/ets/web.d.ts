@@ -3490,6 +3490,20 @@ declare class WebResourceResponse {
    * @since 13 dynamic
    */
   getResponseIsReady(): boolean;
+
+  /**
+   * 设置响应数据。
+   *
+   * > **说明：**
+   * > - 该API支持基于Resource对象获取HSP资源，而 { setResponseData } 不支持该功能。
+   *
+   * @param { string | number | Resource | ArrayBuffer } data - 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄。
+   * Resource表示rawfile资源或HSP资源。ArrayBuffer表示二进制数据。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  setResponseBody(data:string | number | Resource | ArrayBuffer): void;
 }
 
 /**
@@ -4455,7 +4469,7 @@ declare interface NativeEmbedMouseInfo {
  */
 declare interface FirstMeaningfulPaint {
   /**
-   * 导航条加载时间，单位以微秒表示。
+   * 导航开始时间，单位以微秒表示。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
@@ -4482,7 +4496,7 @@ declare interface FirstMeaningfulPaint {
  */
 declare interface LargestContentfulPaint {
   /**
-   * 导航条加载时间，单位以微秒表示。
+   * 导航开始时间，单位以微秒表示。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
@@ -8997,6 +9011,18 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.0.0 dynamic
    */
   enableMediaNetworkProxy(enabled: boolean): WebAttribute;
+
+  /**
+   * 当网页的浏览器级缩放倍率变化时触发。
+   *
+   * @param { OnZoomChangeCallback } callback - 浏览器级缩放倍率变化时触发的回调。该回调仅由浏览器级缩放
+   *     变化（例如{@link setZoomFactor}）触发；页面显示比例变化（捏合缩放）由{@link onScaleChange}通知。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
 }
 
 /**
@@ -9717,3 +9743,40 @@ declare enum AISessionResultType {
  * @since 26.0.0 dynamic
  */
 type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * 浏览器级缩放倍率变化时触发的回调类型。
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * 描述网页浏览器级缩放倍率变化的信息。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare interface OnZoomChangeEvent {
+  /**
+   * 变化前的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  oldZoomFactor: number;
+
+  /**
+   * 变化后的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  newZoomFactor: number;
+}
