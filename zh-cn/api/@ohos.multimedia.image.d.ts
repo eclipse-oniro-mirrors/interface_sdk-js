@@ -93,7 +93,7 @@ import type rpc from './@ohos.rpc';
  */
 declare namespace image {
   /**
-   * 表示图片像素格式的枚举。
+   * 表示图片像素格式的枚举，包含像素数据的颜色通道排列和位深信息。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 10]
@@ -116,7 +116,7 @@ declare namespace image {
     UNKNOWN = 0,
 
     /**
-     * 颜色信息由透明度（Alpha）与R（Red）、G（Green）、B（Blue）四部分组成，每个部分占8位，总共占32位，按照从高位到低位的顺序储存。该格式当前仅支持PixelMap的接口。
+     * 颜色信息由透明度（Alpha）与R（Red）、G（Green）、B（Blue）四部分组成，每个部分占8位，总共占32位，按照从高位到低位的顺序存储。该格式当前仅支持PixelMap的接口。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
@@ -125,7 +125,7 @@ declare namespace image {
     ARGB_8888 = 1,
 
     /**
-     * 颜色信息由R（Red）、G（Green）、B（Blue）三部分组成，R占5位，G占6位，B占5位，总共占16位，按照从高位到低位的顺序储存。
+     * 颜色信息由R（Red）、G（Green）、B（Blue）三部分组成，R占5位，G占6位，B占5位，总共占16位，按照从高位到低位的顺序存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -137,7 +137,7 @@ declare namespace image {
     RGB_565 = 2,
 
     /**
-     * 颜色信息由R（Red）、G（Green）、B（Blue）与透明度（Alpha）四部分组成，每个部分占8位，总共占32位，按照从高位到低位的顺序储存。对应
+     * 颜色信息由R（Red）、G（Green）、B（Blue）与透明度（Alpha）四部分组成，每个部分占8位，总共占32位，按照从高位到低位的顺序存储。对应
      * [相机服务CameraFormat中的CAMERA_FORMAT_RGBA_8888]{@link @ohos.multimedia.camera:camera.CameraFormat}。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -150,7 +150,7 @@ declare namespace image {
     RGBA_8888 = 3,
 
     /**
-     * 颜色信息由B（Blue）、G（Green）、R（Red）与透明度（Alpha）四部分组成，每个部分占8位，总共占32位，按照从高位到低位的顺序储存。
+     * 颜色信息由B（Blue）、G（Green）、R（Red）与透明度（Alpha）四部分组成，每个部分占8位，总共占32位，按照从高位到低位的顺序存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -162,7 +162,7 @@ declare namespace image {
     BGRA_8888 = 4,
 
     /**
-     * 颜色信息由R（Red）、G（Green）、B（Blue）三部分组成，每个部分占8位，总共占24位，按照从高位到低位的顺序储存。
+     * 颜色信息由R（Red）、G（Green）、B（Blue）三部分组成，每个部分占8位，总共占24位，按照从高位到低位的顺序存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -174,7 +174,7 @@ declare namespace image {
     RGB_888 = 5,
 
     /**
-     * 颜色信息仅包含透明度（Alpha），每个像素占8位，按照从高位到低位的顺序储存。一个或多个像素组成一行像素，每行像素数据按4字节对齐，如果一行像素所占的字节数不是4的整数倍，则在行末填充空白字节以满足对齐要求。
+     * 颜色信息仅包含透明度（Alpha），每个像素占8位，按照从高位到低位的顺序存储。一个或多个像素组成一行像素，每行像素数据按4字节对齐，如果一行像素所占的字节数不是4的整数倍，则在行末填充空白字节以满足对齐要求。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -186,7 +186,7 @@ declare namespace image {
     ALPHA_8 = 6,
 
     /**
-     * 颜色信息由R（Red）、G（Green）、B（Blue）与透明度（Alpha）四部分组成，每个部分占16位，总共占64位，按照从高位到低位的顺序以FP16半精度浮点数的形式储存。
+     * 颜色信息由R（Red）、G（Green）、B（Blue）与透明度（Alpha）四部分组成，每个部分占16位，总共占64位，按照从高位到低位的顺序以FP16半精度浮点数的形式存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -198,7 +198,7 @@ declare namespace image {
     RGBA_F16 = 7,
 
     /**
-     * YVU像素排列，V分量在U分量之前。颜色信息由亮度分量Y和交错排列的色度分量V和U组成，其中Y分量占8位，UV分量因4:2:0采样平均占4位，总共平均占12位，按照从高位到低位的顺序储存。对应
+     * YVU像素排列，V分量在U分量之前。颜色信息由亮度分量Y和交错排列的色度分量V和U组成，其中Y分量占8位，UV分量因4:2:0采样平均占4位，总共平均占12位，按照从高位到低位的顺序存储。对应
      * [相机服务CameraFormat中的CAMERA_FORMAT_YUV_420_SP]{@link @ohos.multimedia.camera:camera.CameraFormat}。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -211,7 +211,7 @@ declare namespace image {
     NV21 = 8,
 
     /**
-     * YUV像素排列，U分量在V分量之前。颜色信息由亮度分量Y和交错排列的色度分量U和V组成，其中Y分量占8位，UV分量因4:2:0采样平均占4位，总共平均占12位，按照从高位到低位的顺序储存。
+     * YUV像素排列，U分量在V分量之前。颜色信息由亮度分量Y和交错排列的色度分量U和V组成，其中Y分量占8位，UV分量因4:2:0采样平均占4位，总共平均占12位，按照从高位到低位的顺序存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -223,7 +223,7 @@ declare namespace image {
     NV12 = 9,
 
     /**
-     * 颜色信息由R（Red）、G（Green）、B（Blue）与透明度（Alpha）四部分组成，其中R、G、B分别占10位，透明度占2位，总共占32位，按照从高位到低位的顺序储存。
+     * 颜色信息由R（Red）、G（Green）、B（Blue）与透明度（Alpha）四部分组成，其中R、G、B分别占10位，透明度占2位，总共占32位，按照从高位到低位的顺序存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -233,7 +233,7 @@ declare namespace image {
 
     /**
      * 颜色信息由亮度分量Y和色度分量Cb与Cr组成，每个分量有效10位，实际存储时，Y平面每个像素占16位数据（10位有效），UV平面交错排列，每4个像素占32位数据（每色度分量10位有效），平均有效占15位，按照从高位到低位的顺序
-     * 储存。对应[相机服务CameraFormat中的CAMERA_FORMAT_YCBCR_P010]{@link @ohos.multimedia.camera:camera.CameraFormat}。
+     * 存储。对应[相机服务CameraFormat中的CAMERA_FORMAT_YCBCR_P010]{@link @ohos.multimedia.camera:camera.CameraFormat}。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -243,7 +243,7 @@ declare namespace image {
 
     /**
      * 颜色信息由亮度分量Y和色度分量Cr与Cb组成，每个分量有效10位，实际存储时，Y平面每个像素占16位数据（10位有效），UV平面交错排列，每4个像素占32位数据（每色度分量10位有效），平均有效占15位，按照从高位到低位的顺序
-     * 储存。对应[相机服务CameraFormat中的CAMERA_FORMAT_YCRCB_P010]{@link @ohos.multimedia.camera:camera.CameraFormat}。
+     * 存储。对应[相机服务CameraFormat中的CAMERA_FORMAT_YCRCB_P010]{@link @ohos.multimedia.camera:camera.CameraFormat}。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -252,7 +252,7 @@ declare namespace image {
     YCRCB_P010 = 12,
 
     /**
-     * 仅包含Y平面（亮度）的单通道灰度格式，每个像素占8位，按照从高位到低位的顺序储存。
+     * 仅包含Y平面（亮度）的单通道灰度格式，每个像素占8位，按照从高位到低位的顺序存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
@@ -261,8 +261,7 @@ declare namespace image {
     Y8 = 14,
 
     /**
-     * Indicates that each pixel is stored on 8 bits, without 4-byte stride alignment.
-     * Each pixel contains 1 component: ALPHA(8bits) and is stored from the higher-order to the lower-order bits.
+     * 颜色信息仅包含透明度（Alpha），每个像素占8位，按照从高位到低位的顺序存储。所有像素紧密排列，不进行对齐。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
@@ -273,9 +272,7 @@ declare namespace image {
     ALPHA_U8 = 15,
 
     /**
-     * Indicates that each pixel is stored on 16 bits.
-     * Each pixel contains 1 component: ALPHA(16bits) and is stored from the higher-order to the lower-order bits in
-     * FP16.
+     * 颜色信息仅包含透明度（Alpha），每个像素占16位，按照从高位到低位的顺序以FP16半精度浮点数的形式存储。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
@@ -286,9 +283,7 @@ declare namespace image {
     ALPHA_F16 = 16,
 
     /**
-     * The storage format is ASTC 4x4 format, and the memory usage is only 1/4 of RGBA_8888.
-     * This format is only used for direct display scenes and does not support pixel access or post-
-     * processing editing.
+     * 存储格式为ASTC 4x4格式，内存使用量仅为RGBA_8888的1/4。该格式仅用于直接显示场景，不支持像素访问或后期处理编辑，不支持仿射变换级联使用。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
@@ -338,7 +333,7 @@ declare namespace image {
   }
 
   /**
-   * 表示图片尺寸。
+   * 表示图像尺寸。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 10]
@@ -349,9 +344,7 @@ declare namespace image {
    */
   interface Size {
     /**
-     * Height
-     *
-     * Unit:px.
+     * 图像或区域的高度。单位：像素（px）。取值范围是正整数。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -363,9 +356,7 @@ declare namespace image {
     height: int;
 
     /**
-     * Width
-     *
-     * Unit:px.
+     * 图像或区域的宽度。单位：像素（px）。取值范围是正整数。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3001,7 +2992,7 @@ declare namespace image {
    */
   enum ScaleMode {
     /**
-     * 图像适合目标尺寸的效果。
+     * 适配目标尺寸模式。表示将图像等比缩放至完全容纳于目标区域的尺寸内（长边对齐），不足的区域留黑边或透明。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3013,7 +3004,7 @@ declare namespace image {
     FIT_TARGET_SIZE = 0,
 
     /**
-     * 缩放图像以填充目标图像区域并居中裁剪区域外的效果。
+     * 中心裁剪模式。表示将图像等比缩放至刚好铺满目标区域的尺寸（短边对齐），然后居中裁剪超出区域的部分。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3106,7 +3097,7 @@ declare namespace image {
     HDR_DYNAMIC_METADATA = 2,
 
     /**
-     * Gainmap使用的元数据。
+     * 增益图使用的元数据。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -3142,7 +3133,7 @@ declare namespace image {
     BASE = 1,
 
     /**
-     * 表示用于Gainmap图的元数据。
+     * 表示用于增益图的元数据。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -3161,7 +3152,7 @@ declare namespace image {
   }
 
   /**
-   * 表示用于图像解码的内存类型的枚举。开发者可根据场景选择合适的内存申请类型。
+   * 表示用于解码后图像的内存分配类型的枚举。开发者可根据场景选择合适的内存分配类型。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @since 15 dynamic
@@ -3169,7 +3160,7 @@ declare namespace image {
    */
   enum AllocatorType {
     /**
-     * 系统决定内存申请类型。
+     * 系统决定内存分配类型。系统会根据图像类型、图像大小、平台能力等选择内存类型。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 15 dynamic
@@ -3187,7 +3178,7 @@ declare namespace image {
     DMA = 1,
 
     /**
-     * 使用共享内存（Share Memory）的内存类型。
+     * 使用共享内存（Shared Memory）的内存类型。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 15 dynamic
@@ -3208,7 +3199,7 @@ declare namespace image {
    */
   interface Region {
     /**
-     * 区域大小。
+     * 区域尺寸。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3220,7 +3211,7 @@ declare namespace image {
     size: Size;
 
     /**
-     * 区域左上角横坐标。单位：像素（px）。
+     * 区域左上角像素的横坐标（X坐标）。单位：像素（px）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3232,7 +3223,7 @@ declare namespace image {
     x: int;
 
     /**
-     * 区域左上角纵坐标。单位：像素（px）。
+     * 区域左上角像素的纵坐标（Y坐标）。单位：像素（px）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3256,7 +3247,7 @@ declare namespace image {
    */
   interface PositionArea {
     /**
-     * 像素数据缓冲区。仅支持BGRA_8888格式的像素数据。
+     * 像素数据缓冲区。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3280,7 +3271,7 @@ declare namespace image {
     offset: int;
 
     /**
-     * 跨距，内存中每行像素所占的空间。单位：字节（Byte）。stride >= region.size.width * 4，不满足时数据读取异常。
+     * 跨距，内存中每行像素所占的空间。单位：字节（Byte）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3292,7 +3283,7 @@ declare namespace image {
     stride: int;
 
     /**
-     * 区域信息，用于按区域进行图像数据的读写。写入的区域宽度加X坐标不能大于原图的宽度，写入的区域高度加Y坐标不能大于原图的高度。
+     * 区域信息，用于按区域进行图像数据的读写。指定的区域宽度加X坐标不能大于原图的宽度，指定的区域高度加Y坐标不能大于原图的高度。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3305,7 +3296,7 @@ declare namespace image {
   }
 
   /**
-   * 表示图片信息。
+   * 表示图像的基本信息。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 10]
@@ -3316,7 +3307,7 @@ declare namespace image {
    */
   interface ImageInfo {
     /**
-     * 图片大小。
+     * 图像尺寸。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -3340,7 +3331,7 @@ declare namespace image {
     density: int;
 
     /**
-     * 跨距，内存中每行像素所占的空间。单位：字节（Byte）。stride >= size.width * 4，不满足时数据读取异常。
+     * 跨距（行跨距），表示内存中每行像素所占的空间。单位：字节（Byte）。跨距 >= 图像宽度 * 每像素字节数。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @form [since 12]
@@ -3351,7 +3342,7 @@ declare namespace image {
     stride: int;
 
     /**
-     * 像素格式。
+     * 像素格式，表示像素数据的颜色通道排列和位深信息。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -3363,7 +3354,7 @@ declare namespace image {
     pixelFormat: PixelMapFormat;
 
     /**
-     * 透明度。
+     * 透明度类型。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -3391,7 +3382,7 @@ declare namespace image {
     mimeType: string;
 
     /**
-     * true表示图片为高动态范围（HDR），false表示图片非高动态范围（SDR）。对于[ImageSource]{@link image.ImageSource}，代表源图片是否为HDR；对于
+     * true表示图像为高动态范围（HDR），false表示图像非高动态范围（SDR）。对于[ImageSource]{@link image.ImageSource}，代表源图片是否为HDR；对于
      * [PixelMap]{@link image.PixelMap}，代表解码后的PixelMap是否为HDR。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -4032,7 +4023,7 @@ declare namespace image {
    */
   interface InitializationOptions {
     /**
-     * 创建的图片尺寸，宽高值必须为正整数。
+     * 创建的图像尺寸，宽高值必须为正整数。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -4065,7 +4056,7 @@ declare namespace image {
     pixelFormat?: PixelMapFormat;
 
     /**
-     * 图像像素是否可被编辑。true表示可被编辑，false表示不可被编辑。设为false时，可提升图像的渲染和传输性能，但是图像不可被二次编辑。例如，writePixels操作将失败。默认值为false。
+     * 图像像素是否可被编辑。true表示可被编辑，false表示不可被编辑。设为false时，可提升图像的渲染和传输性能，但是图像不可被二次编辑，例如，writePixels操作将失败。默认值为false。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -4077,7 +4068,7 @@ declare namespace image {
     editable?: boolean;
 
     /**
-     * 透明度。默认值为IMAGE_ALPHA_TYPE_PREMUL。
+     * 透明度类型。默认值为IMAGE_ALPHA_TYPE_PREMUL。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -4237,9 +4228,7 @@ declare namespace image {
    */
   interface HdrStaticMetadata {
     /**
-     * The X-coordinate of the primary colors. Specifies the normalized X-coordinates of the display device's three
-     * primary colors. The values are stored in an array of length 3, in the order of red, green, and blue (r, g, b).
-     * Each value is represented in units of 0.00002 and must fall within the range [0.0, 1.0].
+     * 归一化后显示设备三基色的X坐标。数组的长度为3，按R、G、B顺序存储，以0.00002为单位，取值范围是[0.0, 0.99998]。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4248,9 +4237,7 @@ declare namespace image {
     displayPrimariesX: Array<double>;
 
     /**
-     * The Y-coordinate of the primary colors. Specifies the normalized Y-coordinates of the display device's three
-     * primary colors. The values are stored in an array of length 3, in the order of red, green, and blue (r, g, b).
-     * Each value is represented in units of 0.00002 and must fall within the range [0.0, 1.0].
+     * 归一化后显示设备三基色的Y坐标。数组的长度为3，按R、G、B顺序存储，以0.00002为单位，取值范围是[0.0, 0.99998]。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4259,9 +4246,7 @@ declare namespace image {
     displayPrimariesY: Array<double>;
 
     /**
-     * The X-coordinate of the white point value. Specifies the normalized X-coordinate of the white point.
-     * 
-     * The value is represented in units of 0.00002 and must fall within the range [0.0, 1.0].
+     * 归一化后白点值的X坐标。以0.00002为单位，取值范围是[0.0, 0.99998]。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4270,9 +4255,7 @@ declare namespace image {
     whitePointX: double;
 
     /**
-     * The Y-coordinate of the white point value. Specifies the normalized Y-coordinate of the white point.
-     * 
-     * The value is represented in units of 0.00002 and must fall within the range [0.0, 1.0].
+     * 归一化后白点值的Y坐标。以0.00002为单位，取值范围是[0.0, 0.99998]。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4281,10 +4264,7 @@ declare namespace image {
     whitePointY: double;
 
     /**
-     * Maximum luminance of the image's primary display.
-     * The value is measured in units of 1, with a maximum allowed value of 65,535.
-     *
-     * Unit:nit.
+     * 图像主监视器最大亮度。浮点数，以1为单位，取值范围是[0, 65535]。单位：尼特（nit）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4293,9 +4273,7 @@ declare namespace image {
     maxLuminance: double;
 
     /**
-     * Minimum luminance of the image's primary display.
-     * 
-     * The value is measured in units of 0.0001, with a maximum allowed value of 6.55535.
+     * 图像主监视器最小亮度。以0.0001为单位，取值范围是[0, 6.5535]。单位：尼特（nit）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4304,9 +4282,7 @@ declare namespace image {
     minLuminance: double;
 
     /**
-     * Maximum brightness of displayed content.
-     * 
-     * The value is measured in units of 1, with a maximum allowed value of 65,535.
+     * 显示内容的最大亮度。浮点数，以1为单位，取值范围是[0, 65535]。单位：尼特（nit）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4315,9 +4291,7 @@ declare namespace image {
     maxContentLightLevel: double;
 
     /**
-     * Maximum average brightness of displayed content.
-     * 
-     * The value is measured in units of 1, with a maximum allowed value of 65,535.
+     * 显示内容的最大平均亮度。浮点数，以1为单位，取值范围是[0, 65535]。单位：尼特（nit）。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4327,7 +4301,7 @@ declare namespace image {
   }
 
   /**
-   * Gainmap图单个通道的数据内容，参考ISO 21496-1。
+   * HDR增益图单个通道的数据内容，参考ISO 21496-1。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @since 12 dynamic
@@ -4335,7 +4309,7 @@ declare namespace image {
    */
   interface GainmapChannel {
     /**
-     * The per-component max gain map values.
+     * 增益图的最大值。浮点数，取值范围是(0, +∞)且必须大于gainmapMin，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4344,7 +4318,7 @@ declare namespace image {
     gainmapMax: double;
 
     /**
-     * The per-component min gain map values.
+     * 增益图的最小值。浮点数，取值可以为0或负值但必须小于gainmapMax，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4353,7 +4327,7 @@ declare namespace image {
     gainmapMin: double;
 
     /**
-     * The per-component gamma values.
+     * 增益曲线的Gamma校正值。浮点数，取值范围是(0, +∞)，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4362,7 +4336,7 @@ declare namespace image {
     gamma: double;
 
     /**
-     * The per-component baseline offset.
+     * 基础图的偏移量。浮点数，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4371,7 +4345,7 @@ declare namespace image {
     baseOffset: double;
 
     /**
-     * The per-component alternate offset.
+     * 可选择图像的偏移量。浮点数，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4381,7 +4355,7 @@ declare namespace image {
   }
 
   /**
-   * Gainmap使用的元数据值，[HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_GAINMAP_METADATA关键字对应的值，参考ISO 21496-1。
+   * 增益图使用的元数据值，[HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_GAINMAP_METADATA关键字对应的值，参考ISO 21496-1。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @since 12 dynamic
@@ -4389,7 +4363,7 @@ declare namespace image {
    */
   interface HdrGainmapMetadata {
     /**
-     * The version used by the writer.
+     * 元数据编写器的版本。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4398,7 +4372,7 @@ declare namespace image {
     writerVersion: int;
 
     /**
-     * The minimum version a parser needs to understand.
+     * 元数据解析所需的最小版本。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4407,7 +4381,7 @@ declare namespace image {
     miniVersion: int;
 
     /**
-     * The number of gain map channels, with a value of 1 or 3.
+     * 增益图的颜色通道数。取值为1或3，值为3时RGB通道的元数据值不同，值为1时各通道元数据值相同，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4416,7 +4390,7 @@ declare namespace image {
     gainmapChannelCount: int;
 
     /**
-     * Indicate whether to use the color space of the base image.
+     * 是否使用基础图的色彩空间。true表示使用，false表示不使用，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4425,7 +4399,7 @@ declare namespace image {
     useBaseColorFlag: boolean;
 
     /**
-     * The baseline hdr headroom.
+     * 基础图的提亮比。取值范围是[1.0, +∞)，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4434,7 +4408,7 @@ declare namespace image {
     baseHeadroom: double;
 
     /**
-     * The alternate hdr headroom.
+     * 可选择图像的提亮比。取值范围是[1.0, +∞)，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4443,7 +4417,7 @@ declare namespace image {
     alternateHeadroom: double;
 
     /**
-     * The per-channel metadata.
+     * 各通道的数据，长度为3，按R、G、B三通道存储，参考ISO 21496-1。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4531,16 +4505,16 @@ declare namespace image {
    *
    * @unionmember { HdrMetadataType } Metadata value corresponding to the **HDR_METADATA_TYPE** key in
    *     [HdrMetadataKey]{@link @ohos.multimedia.image:image.HdrMetadataKey }
-   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_METADATA_TYPE关键字对应的元数据值类型。
+   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_METADATA_TYPE关键字对应的元数据值类型，用于表示HDR元数据的类型。不同取值对应不同类型的HDR元数据，需根据HDR图像的实际元数据类型选择合适的值，并填充对应类型的元数据成员字段。
    * @unionmember { HdrStaticMetadata } Metadata value corresponding to the **HDR_STATIC_METADATA** key in
    *     [HdrMetadataKey]{@link @ohos.multimedia.image:image.HdrMetadataKey }
-   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_STATIC_METADATA关键字对应的元数据值类型。
+   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_STATIC_METADATA关键字对应的元数据值类型，用于存储HDR静态元数据。
    * @unionmember { ArrayBuffer } Metadata value corresponding to the **HDR_DYNAMIC_METADATA** key in
    *     [HdrMetadataKey]{@link @ohos.multimedia.image:image.HdrMetadataKey }
-   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_DYNAMIC_METADATA关键字对应的元数据值类型，存储HDR动态元数据，格式遵循相关HDR动态元数据标准。
+   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_DYNAMIC_METADATA关键字对应的元数据值类型，用于存储HDR动态元数据，格式遵循相关HDR动态元数据标准。
    * @unionmember { HdrGainmapMetadata } Metadata value corresponding to the **HDR_GAINMAP_METADATA** key in
    *     [HdrMetadataKey]{@link @ohos.multimedia.image:image.HdrMetadataKey }
-   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_GAINMAP_METADATA关键字对应的元数据值类型。
+   *     [HdrMetadataKey]{@link image.HdrMetadataKey}中HDR_GAINMAP_METADATA关键字对应的元数据值类型，用于存储HDR增益图元数据，参考ISO 21496-1。
    * @syscap SystemCapability.Multimedia.Image.Core
    * @since 12 dynamic
    * @since 23 static
@@ -4548,28 +4522,28 @@ declare namespace image {
   type HdrMetadataValue = HdrMetadataType | HdrStaticMetadata | ArrayBuffer | HdrGainmapMetadata;
 
   /**
-   * Creates a PixelMap from existing pixel data. The pixel data will be copied and converted to the specified
-   * pixel format to initialize the PixelMap.
+   * 通过像素数据和图像属性创建PixelMap。传入的像素数据会进行拷贝并转换为[InitializationOptions]{@link image.InitializationOptions}.pixelFormat
+   * 指定的像素格式，用于初始化PixelMap的像素。使用Promise异步回调。
    *
-   * The following pixel formats are not supported for PixelMap creation:
-   * RGBA_1010102, YCBCR_P010, YCRCB_P010, ASTC_4x4.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
    *
-   * @param { ArrayBuffer } pixels - The pixel data buffer used to initialize the PixelMap.
-   *     The format of the pixel data can be specified by InitializationOptions.srcPixelFormat.
-   *     The size of the buffer should be: image width * image height * bytes per pixel.
-   * @param { InitializationOptions } param - Initialization options for the PixelMap.
-   *     If InitializationOptions.pixelFormat is set to ASTC_4x4, it will be reset to the default value RGBA_8888.
-   *     If InitializationOptions.srcPixelFormat is set to ASTC_4x4, it will be reset to the default value BGRA_8888.
-   * @returns { Promise<PixelMap> } A Promise of the new PixelMap created.
-   * @throws { BusinessError } 7600206 - Invalid parameter.
-   *     Possible cause: Size of the pixel data buffer does not match InitializationOptions.size.
+   * @param { ArrayBuffer } pixels - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>缓冲区的像素格式需要由[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定，
+   *     否则默认缓冲区的像素格式为BGRA_8888。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } param - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap对象，接口调用失败时会抛出异常。
+   * @throws { BusinessError } 7600206 - Invalid parameter. Possible cause: Size of the pixel data buffer does not match
+   *     InitializationOptions.size.
    * @throws { BusinessError } 7600207 - Unsupported pixel format.
-   * @throws { BusinessError } 7600301 - Failed to allocate memory.
-   *     Possible causes: 1. The resulting PixelMap size is too large. 2. The system is out of memory.
-   * @throws { BusinessError } 7600305 - Failed to create the PixelMap.
-   *     Possible causes:
- 	 *     1. Failed to perform pixel format conversion.
- 	 *     2. Internal data is corrupted. Please check the logs for detailed information.
+   * @throws { BusinessError } 7600301 - Failed to allocate memory. Possible causes: 1. The resulting PixelMap size is
+   *     too large. 2. The system is out of memory.
+   * @throws { BusinessError } 7600305 - Failed to create the PixelMap. Possible causes: 1. Failed to perform pixel
+   *     format conversion. 2. Internal data is corrupted. Please check the logs for detailed information.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
    * @crossplatform
@@ -4580,28 +4554,28 @@ declare namespace image {
   function createPixelMapFromPixels(pixels: ArrayBuffer, param: InitializationOptions): Promise<PixelMap>;
 
   /**
-   * Creates a PixelMap from existing pixel data. The pixel data will be copied and converted to the specified
-   * pixel format to initialize the PixelMap.
+   * 通过像素数据和图像属性创建PixelMap。传入的像素数据会进行拷贝并转换为[InitializationOptions]{@link image.InitializationOptions}.pixelFormat
+   * 指定的像素格式，用于初始化PixelMap的像素。同步返回结果。
    *
-   * The following pixel formats are not supported for PixelMap creation:
-   * RGBA_1010102, YCBCR_P010, YCRCB_P010, ASTC_4x4.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
    *
-   * @param { ArrayBuffer } pixels - The pixel data buffer used to initialize the PixelMap.
-   *     The format of the pixel data can be specified by InitializationOptions.srcPixelFormat.
-   *     The size of the buffer should be: image width * image height * bytes per pixel.
-   * @param { InitializationOptions } param - Initialization options for the PixelMap.
-   *     If InitializationOptions.pixelFormat is set to ASTC_4x4, it will be reset to the default value RGBA_8888.
-   *     If InitializationOptions.srcPixelFormat is set to ASTC_4x4, it will be reset to the default value BGRA_8888.
-   * @returns { PixelMap } The new PixelMap created.
-   * @throws { BusinessError } 7600206 - Invalid parameter.
-   *     Possible cause: Size of the pixel data buffer does not match InitializationOptions.size.
+   * @param { ArrayBuffer } pixels - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>缓冲区的像素格式需要由[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定，
+   *     否则默认缓冲区的像素格式为BGRA_8888。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } param - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
+   * @throws { BusinessError } 7600206 - Invalid parameter. Possible cause: Size of the pixel data buffer does not match
+   *     InitializationOptions.size.
    * @throws { BusinessError } 7600207 - Unsupported pixel format.
-   * @throws { BusinessError } 7600301 - Failed to allocate memory.
-   *     Possible causes: 1. The resulting PixelMap size is too large. 2. The system is out of memory.
-   * @throws { BusinessError } 7600305 - Failed to create the PixelMap.
-   *     Possible causes:
-   *     1. Failed to perform pixel format conversion.
-   *     2. Internal data is corrupted. Please check the logs for detailed information.
+   * @throws { BusinessError } 7600301 - Failed to allocate memory. Possible causes: 1. The resulting PixelMap size is
+   *     too large. 2. The system is out of memory.
+   * @throws { BusinessError } 7600305 - Failed to create the PixelMap. Possible causes: 1. Failed to perform pixel
+   *     format conversion. 2. Internal data is corrupted. Please check the logs for detailed information.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
    * @crossplatform
@@ -4612,63 +4586,74 @@ declare namespace image {
   function createPixelMapFromPixelsSync(pixels: ArrayBuffer, param: InitializationOptions): PixelMap;
 
   /**
-   * Create pixelmap by data buffer.
+   * 通过像素数据和图像属性创建PixelMap。传入的像素数据会进行拷贝并转换为[InitializationOptions]{@link image.InitializationOptions}.pixelFormat
+   * 指定的像素格式，用于初始化PixelMap的像素。使用callback异步回调。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } options Initialization options for pixelmap.
-   * @param { AsyncCallback<PixelMap> } callback Callback used to return the PixelMap object.
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @since 8
-   */
-  /**
-   * Create pixelmap by data buffer.
-   * 
-   * Starting from API 26.0.0, it is recommended to use {@link createPixelMapFromPixels} instead for better exception handling capabilities.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   * > - 从API版本26.0.0开始，建议使用[createPixelMapFromPixels]{@link image.createPixelMapFromPixels}代替，以获得更完善的异常处理能力。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } options Initialization options for pixelmap.
-   * @param { AsyncCallback<PixelMap> } callback Callback used to return the PixelMap object.
+   * @param { ArrayBuffer } colors - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>缓冲区的像素格式需要由[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定，
+   *     否则默认缓冲区的像素格式为BGRA_8888。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } options - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @param { AsyncCallback<PixelMap> } callback - 回调函数，当创建PixelMap成功，err为undefined，data为获取到的PixelMap对象；
+   *     否则为错误对象。
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform
-   * @since 10 dynamic
+   * @since 8 dynamic
    * @since 23 static
    */
   function createPixelMap(colors: ArrayBuffer, options: InitializationOptions, callback: AsyncCallback<PixelMap>): void;
 
   /**
-   * Create pixelmap by data buffer.
+   * 通过像素数据和图像属性创建PixelMap。传入的像素数据会进行拷贝并转换为[InitializationOptions]{@link image.InitializationOptions}.pixelFormat
+   * 指定的像素格式，用于初始化PixelMap的像素。使用Promise异步回调。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } options Initialization options for pixelmap.
-   * @returns { Promise<PixelMap> } A Promise instance used to return the PixelMap object.
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @since 8
-   */
-  /**
-   * Create pixelmap by data buffer.
-   * 
-   * Starting from API 26.0.0, it is recommended to use {@link createPixelMapFromPixels} instead for better exception handling capabilities.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   * > - 从API版本26.0.0开始，建议使用[createPixelMapFromPixels]{@link image.createPixelMapFromPixels}代替，以获得更完善的异常处理能力。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } options Initialization options for pixelmap.
-   * @returns { Promise<PixelMap> } A Promise instance used to return the PixelMap object.
+   * @param { ArrayBuffer } colors - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>缓冲区的像素格式需要由[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定，
+   *     否则默认缓冲区的像素格式为BGRA_8888。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } options - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap。<br>当创建的PixelMap大小超过源像素数据所能表示的图像大小时，
+   *     返回按源像素数据所能表示的图像大小创建的PixelMap。
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform
-   * @since 10 dynamic
+   * @since 8 dynamic
    * @since 23 static
    */
   function createPixelMap(colors: ArrayBuffer, options: InitializationOptions): Promise<PixelMap>;
 
   /**
-   * Create pixelmap by data buffer.
-   * 
-   * Starting from API 26.0.0, it is recommended to use {@link createPixelMapFromPixelsSync} instead for better exception handling capabilities.
+   * 通过像素数据和图像属性创建PixelMap。传入的像素数据会进行拷贝并转换为[InitializationOptions]{@link image.InitializationOptions}.pixelFormat
+   * 指定的像素格式，用于初始化PixelMap的像素。同步返回结果。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } options Initialization options for pixelmap.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, return undefined.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   * > - 从API版本26.0.0开始，建议使用[createPixelMapFromPixelsSync]{@link image.createPixelMapFromPixelsSync}代替，以获得更完善的异常处理能力。
+   *
+   * @param { ArrayBuffer } colors - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>缓冲区的像素格式需要由[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定，
+   *     否则默认缓冲区的像素格式为BGRA_8888。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } options - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform
    * @since 12 dynamic
@@ -4677,15 +4662,29 @@ declare namespace image {
   function createPixelMapSync(colors: ArrayBuffer, options: InitializationOptions): PixelMap;
 
   /**
-   * Create pixelmap by data buffer based on opts, the memory type used by the PixelMap can be specified
-   * by allocatorType. By default, the system selects the memory type based on the image type, image size,
-   * platform capability, etc. When processing the PixelMap returned by this interface, please always
-   * consider the impact of stride.
+   * 通过像素数据和图像属性创建PixelMap，可以指定内存类型。传入的像素数据会进行拷贝并转换为
+   * [InitializationOptions]{@link image.InitializationOptions}.pixelFormat指定的像素格式，用于初始化PixelMap的像素。使用Promise异步回调。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } param Initialization options for pixelmap.
-   * @param { AllocatorType } [allocatorType] Indicate which memory type will be used by the returned PixelMap.
-   * @returns { Promise<PixelMap> } A Promise instance used to return the PixelMap object.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { ArrayBuffer } colors - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>初始化前，必须通过[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定缓冲区的像素格式，
+   *     否则会创建失败。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } param - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @param { AllocatorType } [allocatorType] - 指定创建PixelMap的内存类型，默认值为AllocatorType.AUTO。
+   *     <br>1. image.AllocatorType.AUTO：不支持该内存类型的格式有UNKNOWN、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   *     <br>RGBA_1010102默认申请DMA内存。
+   *     <br>RGB_565、RGBA_8888、BGRA_8888、RGBA_F16和ALPHA_F16（从API版本26.0.0开始支持）尺寸大于等于512*512像素时默认申请DMA内存，
+   *     否则申请共享内存。
+   *     <br>其余格式默认申请共享内存。
+   *     <br>2. image.AllocatorType.DMA：RGBA_1010102、RGB_565、RGBA_8888、BGRA_8888、RGBA_F16和ALPHA_F16支持DMA内存类型，其余格式不支持。
+   *     <br>3. image.AllocatorType.SHARE_MEMORY：UNKNOWN、RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4不支持共享内存，其余格式支持。
+   * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 7600201 - Unsupported operation.
    * @throws { BusinessError } 7600301 - Memory alloc failed.
    * @throws { BusinessError } 7600302 - Memory copy failed.
@@ -4697,15 +4696,29 @@ declare namespace image {
     allocatorType?: AllocatorType): Promise<PixelMap>;
 
   /**
-   * Create pixelmap by data buffer based on opts, the memory type used by the PixelMap can be specified
-   * by allocatorType. By default, the system selects the memory type based on the image type, image size,
-   * platform capability, etc. When processing the PixelMap returned by this interface, please always
-   * consider the impact of stride.
+   * 通过像素数据和图像属性创建PixelMap，可以指定内存类型。传入的像素数据会进行拷贝并转换为
+   * [InitializationOptions]{@link image.InitializationOptions}.pixelFormat指定的像素格式，用于初始化PixelMap的像素。同步返回结果。
    *
-   * @param { ArrayBuffer } colors The image color buffer.
-   * @param { InitializationOptions } param Initialization options for pixelmap.
-   * @param { AllocatorType } [allocatorType] Indicate which memory type will be used by the returned PixelMap.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, return undefined.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { ArrayBuffer } colors - 图像像素数据的缓冲区，用于初始化PixelMap的像素。缓冲区内的像素数据必须紧密排列，不可以包含
+   *     内存对齐填充字节。<br>初始化前，必须通过[InitializationOptions]{@link image.InitializationOptions}.srcPixelFormat指定缓冲区的像素格式，
+   *     否则会创建失败。<br>**说明：** 缓冲区长度为：图像宽度 * 图像高度 * 每像素字节数。
+   * @param { InitializationOptions } param - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @param { AllocatorType } [allocatorType] - 指定创建PixelMap的内存类型，默认值为AllocatorType.AUTO。
+   *     <br>1. image.AllocatorType.AUTO：不支持该内存类型的格式有UNKNOWN、YCBCR_P010、YCRCB_P010和ASTC_4x4。
+   *     <br>RGBA_1010102默认申请DMA内存。
+   *     <br>RGB_565、RGBA_8888、BGRA_8888、RGBA_F16和ALPHA_F16（从API版本26.0.0开始支持）尺寸大于等于512*512像素时默认申请DMA内存，
+   *     否则申请共享内存。
+   *     <br>其余格式默认申请共享内存。
+   *     <br>2. image.AllocatorType.DMA：RGBA_1010102、RGB_565、RGBA_8888、BGRA_8888、RGBA_F16和ALPHA_F16支持DMA内存类型，其余格式不支持。
+   *     <br>3. image.AllocatorType.SHARE_MEMORY：UNKNOWN、RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4不支持共享内存，其余格式支持。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 7600201 - Unsupported operation.
    * @throws { BusinessError } 7600301 - Memory alloc failed.
    * @throws { BusinessError } 7600302 - Memory copy failed.
@@ -4717,18 +4730,22 @@ declare namespace image {
     allocatorType?: AllocatorType): PixelMap;
 
   /**
-   * Creates an empty PixelMap.
-   * 
-   * The following pixel format is not supported for PixelMap creation: ASTC_4x4.
+   * 通过图像属性创建空白PixelMap。
    *
-   * @param { InitializationOptions } param - Initialization options for the PixelMap.
-   *     If InitializationOptions.pixelFormat is set to ASTC_4x4, it will be reset to the default value RGBA_8888.
-   * @returns { PixelMap } The new PixelMap created.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { InitializationOptions } param - 创建图像的属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @returns { PixelMap } 返回创建的空白PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 7600206 - Invalid parameter.
-   * @throws { BusinessError } 7600301 - Failed to allocate memory.
-   *     Possible causes: 1. The resulting PixelMap size is too large. 2. The system is out of memory.
-   * @throws { BusinessError } 7600305 - Failed to create the PixelMap.
-   *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+   * @throws { BusinessError } 7600301 - Failed to allocate memory. Possible causes: 1. The resulting PixelMap size is
+   *     too large. 2. The system is out of memory.
+   * @throws { BusinessError } 7600305 - Failed to create the PixelMap. Possible cause: Internal data is corrupted.
+   *     Please check the logs for detailed information.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
    * @crossplatform
@@ -4739,14 +4756,20 @@ declare namespace image {
   function createEmptyPixelMap(param: InitializationOptions): PixelMap;
   
   /**
-   * Create an empty pixelmap.
-   * 
-   * Starting from API 26.0.0, it is recommended to use {@link createEmptyPixelMap} instead for better exception handling capabilities.
+   * 通过图像属性创建空白PixelMap。同步返回结果。
    *
-   * @param { InitializationOptions } options Initialization options for pixelmap.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, return undefined.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   * > - 从API版本26.0.0开始，建议使用[createEmptyPixelMap]{@link image.createEmptyPixelMap}代替，以获得更完善的异常处理能力。
+   *
+   * @param { InitializationOptions } options - 创建图像的属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform
    * @since 12 dynamic
@@ -4755,14 +4778,26 @@ declare namespace image {
   function createPixelMapSync(options: InitializationOptions): PixelMap;
 
   /**
-   * Create an empty pixelmap by data buffer based on opts, the memory type used by the PixelMap can be specified
-   * by allocatorType. By default, the system selects the memory type based on the image type, image size,
-   * platform capability, etc. When processing the PixelMap returned by this interface, please always
-   * consider the impact of stride.
+   * 通过图像属性创建空白PixelMap，可以指定内存类型。同步返回结果。
    *
-   * @param { InitializationOptions } param Initialization options for pixelmap.
-   * @param { AllocatorType } [allocatorType] Indicate which memory type will be used by the returned PixelMap.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, return undefined.
+   * > **说明：**
+   * >
+   * > - 此接口不支持创建以下像素格式的PixelMap：ASTC_4x4。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { InitializationOptions } param - 创建图像的初始化属性，包括尺寸、像素格式、透明度类型、缩放模式和是否可编辑。
+   *     <br>**说明：** 如果像素格式被指定为ASTC_4x4，则会使用默认的RGBA_8888格式。
+   * @param { AllocatorType } [allocatorType] - 指定创建PixelMap的内存类型，默认值为AllocatorType.AUTO。
+   *     <br>1. image.AllocatorType.AUTO：不支持该内存类型的格式有UNKNOWN和ASTC_4x4。
+   *     <br>RGBA_1010102、YCBCR_P010和YCRCB_P010默认申请DMA内存。
+   *     <br>RGB_565、RGBA_8888、BGRA_8888、RGBA_F16和ALPHA_F16（从API版本26.0.0开始支持）尺寸大于等于512*512像素时默认申请DMA内存，
+   *     否则申请共享内存。
+   *     <br>其余格式默认申请共享内存。
+   *     <br>2. image.AllocatorType.DMA：RGBA_1010102、RGB_565、RGBA_8888、BGRA_8888、RGBA_F16、ALPHA_F16、YCBCR_P010和YCRCB_P010
+   *     支持DMA内存类型，其余格式不支持。
+   *     <br>3. image.AllocatorType.SHARE_MEMORY：UNKNOWN、RGBA_1010102、YCBCR_P010、YCRCB_P010和ASTC_4x4不支持共享内存，其余格式支持。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 7600201 - Unsupported operation.
    * @throws { BusinessError } 7600301 - Memory alloc failed.
    * @syscap SystemCapability.Multimedia.Image.Core
@@ -4772,15 +4807,23 @@ declare namespace image {
   function createPixelMapUsingAllocatorSync(param: InitializationOptions, allocatorType?: AllocatorType): PixelMap;
 
   /**
-   * Transforms pixelmap from unpremultiplied alpha format to premultiplied alpha format.
+   * 将PixelMap像素数据的透明度类型从非预乘模式转换为预乘模式，转换后的像素数据存入目标PixelMap。适用于图像渲染管线需要预乘
+   * Alpha格式的场景，例如使用OpenGL等图形接口进行图像合成时。使用callback异步回调。
    *
-   * @param { PixelMap } src The source pixelmap.
-   * @param { PixelMap } dst The destination pixelmap.
-   * @param { AsyncCallback<void> } callback Callback used to return the operation result.
-   * If the operation fails, an error message is returned.
+   * > **说明：**
+   * >
+   * > - 该转换仅支持除RGBA_F16和ASTC_4x4之外其他包含Alpha通道的像素格式。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { PixelMap } src - 源PixelMap对象，透明度类型需为非预乘模式（AlphaType.UNPREMUL），像素格式必须包含Alpha通道
+   *     （RGBA_F16和ASTC_4x4除外）。
+   * @param { PixelMap } dst - 目标PixelMap对象，透明度类型需为预乘模式（AlphaType.PREMUL）且必须可编辑，其他属性（宽度、高度、
+   *     像素格式等）必须与源PixelMap相同，转换后的像素数据将写入该对象。
+   * @param { AsyncCallback<void> } callback - 回调函数，当透明度类型转换成功时，err为undefined；否则为错误对象。
    * @throws { BusinessError } 62980103 - The image data is not supported.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980246 - Failed to read the pixelMap.
    * @throws { BusinessError } 62980248 - Pixelmap not allow modify.
    * @syscap SystemCapability.Multimedia.Image.Core
@@ -4791,15 +4834,23 @@ declare namespace image {
 function createPremultipliedPixelMap(src: PixelMap, dst: PixelMap, callback: AsyncCallback<void>): void;
 
   /**
-   * Transforms pixelmap from premultiplied alpha format to unpremultiplied alpha format.
+   * 将PixelMap像素数据的透明度类型从非预乘模式转换为预乘模式，转换后的像素数据存入目标PixelMap。适用于图像渲染管线需要预乘
+   * Alpha格式的场景，例如使用OpenGL等图形接口进行图像合成时。使用Promise异步回调。
    *
-   * @param { PixelMap } src The source pixelMap.
-   * @param { PixelMap } dst The destination pixelmap.
-   * @returns { Promise<void> } A Promise instance used to return the operation result.
-   * If the operation fails, an error message is returned.
+   * > **说明：**
+   * >
+   * > - 该转换仅支持除RGBA_F16和ASTC_4x4之外其他包含Alpha通道的像素格式。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { PixelMap } src - 源PixelMap对象，透明度类型需为非预乘模式（AlphaType.UNPREMUL），像素格式必须包含Alpha通道
+   *     （RGBA_F16和ASTC_4x4除外）。
+   * @param { PixelMap } dst - 目标PixelMap对象，透明度类型需为预乘模式（AlphaType.PREMUL）且必须可编辑，其他属性（宽度、高度、
+   *     像素格式等）必须与源PixelMap相同，转换后的像素数据将写入该对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 62980103 - The image data is not supported.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980246 - Failed to read the pixelMap.
    * @throws { BusinessError } 62980248 - Pixelmap not allow modify.
    * @syscap SystemCapability.Multimedia.Image.Core
@@ -4810,15 +4861,23 @@ function createPremultipliedPixelMap(src: PixelMap, dst: PixelMap, callback: Asy
 function createPremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<void>;
 
   /**
-   * Transforms pixelmap from premultiplied alpha format to unpremultiplied alpha format.
+   * 将PixelMap像素数据的透明度类型从预乘模式转换为非预乘模式，转换后的像素数据存入目标PixelMap。适用于需要对像素原始颜色值进行
+   * 直接处理的场景，例如图像编辑、像素级分析等。使用callback异步回调。
    *
-   * @param { PixelMap } src The source pixelmap.
-   * @param { PixelMap } dst The destination pixelmap.
-   * @param { AsyncCallback<void> } callback Callback used to return the operation result.
-   * If the operation fails, an error message is returned.
+   * > **说明：**
+   * >
+   * > - 该转换仅支持除RGBA_F16和ASTC_4x4之外其他包含Alpha通道的像素格式。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { PixelMap } src - 源PixelMap对象，透明度类型需为预乘模式（AlphaType.PREMUL），像素格式必须包含Alpha通道
+   *     （RGBA_F16和ASTC_4x4除外）。
+   * @param { PixelMap } dst - 目标PixelMap对象，透明度类型需为非预乘模式（AlphaType.UNPREMUL）且必须可编辑，其他属性（宽度、高度、
+   *     像素格式等）必须与源PixelMap相同，转换后的像素数据将写入该对象。
+   * @param { AsyncCallback<void> } callback - 回调函数，当透明度类型转换成功时，err为undefined；否则为错误对象。
    * @throws { BusinessError } 62980103 - The image data is not supported.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980246 - Failed to read the pixelMap.
    * @throws { BusinessError } 62980248 - Pixelmap not allow modify.
    * @syscap SystemCapability.Multimedia.Image.Core
@@ -4829,15 +4888,23 @@ function createPremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<void
 function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap, callback: AsyncCallback<void>): void;
 
   /**
-   * Transforms pixelmap from premultiplied alpha format to unpremultiplied alpha format.
+   * 将PixelMap像素数据的透明度类型从预乘模式转换为非预乘模式，转换后的像素数据存入目标PixelMap。适用于需要对像素原始颜色值进行
+   * 直接处理的场景，例如图像编辑、像素级分析等。使用Promise异步回调。
    *
-   * @param { PixelMap } src The source pixelmap.
-   * @param { PixelMap } dst The destination pixelmap.
-   * @returns { Promise<void> } A Promise instance used to return the operation result.
-   * If the operation fails, an error message is returned.
+   * > **说明：**
+   * >
+   * > - 该转换仅支持除RGBA_F16和ASTC_4x4之外其他包含Alpha通道的像素格式。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { PixelMap } src - 源PixelMap对象，透明度类型需为预乘模式（AlphaType.PREMUL），像素格式必须包含Alpha通道
+   *     （RGBA_F16和ASTC_4x4除外）。
+   * @param { PixelMap } dst - 目标PixelMap对象，透明度类型需为非预乘模式（AlphaType.UNPREMUL）且必须可编辑，其他属性（宽度、高度、
+   *     像素格式等）必须与源PixelMap相同，转换后的像素数据将写入该对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 62980103 - The image data is not supported.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980246 - Failed to read the pixelMap.
    * @throws { BusinessError } 62980248 - Pixelmap not allow modify.
    * @syscap SystemCapability.Multimedia.Image.Core
@@ -4848,21 +4915,26 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap, callback: A
 function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<void>;
 
   /**
-   * Creates a PixelMap object based on MessageSequence parameter.
+   * 从MessageSequence中反序列化并获取PixelMap。
    *
-   * @param { rpc.MessageSequence } sequence - rpc.MessageSequence parameter.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * > 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { rpc.MessageSequence } sequence - 保存了PixelMap序列化数据的MessageSequence。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 62980096 - The operation failed. Possible cause: 1.Image upload exception.
-   * 2. Decoding process exception. 3. Insufficient memory.
-   * @throws { BusinessError } 62980097 - IPC error. Possible cause: 1.IPC communication failed. 2. Image upload exception.
-   * 3. Decode process exception. 4. Insufficient memory.
+   *     2. Decoding process exception. 3. Insufficient memory.
+   * @throws { BusinessError } 62980097 - IPC error. Possible cause: 1.IPC communication failed.
+   *     2. Image upload exception. 3. Decode process exception. 4. Insufficient memory.
    * @throws { BusinessError } 62980115 - Invalid input parameter.
    * @throws { BusinessError } 62980105 - Failed to get the data.
    * @throws { BusinessError } 62980177 - Abnormal API environment.
    * @throws { BusinessError } 62980178 - Failed to create the PixelMap.
    * @throws { BusinessError } 62980179 - Abnormal buffer size.
-   * @throws { BusinessError } 62980180 - FD mapping failed.
-   * Possible cause: 1. Size and address does not match. 2. Memory map in memalloc failed.
+   * @throws { BusinessError } 62980180 - FD mapping failed. Possible cause: 1. Size and address does not match.
+   *     2. Memory map in memalloc failed.
    * @throws { BusinessError } 62980246 - Failed to read the PixelMap.
    * @syscap SystemCapability.Multimedia.Image.Core
    * @since 11 dynamic
@@ -4871,11 +4943,23 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createPixelMapFromParcel(sequence: rpc.MessageSequence): PixelMap;
 
   /**
-   * Creates a PixelMap object from surface id.
+   * 根据Surface ID和区域信息创建一个PixelMap对象。该区域的大小由[Region]{@link image.Region}.size指定。使用Promise异步回调。
    *
-   * @param { string } surfaceId - surface id.
-   * @param { Region } region - The region to surface.
-   * @returns { Promise<PixelMap> } Returns the instance if the operation is successful;Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > - 当设备为折叠屏，切换折叠状态时，可能因Surface自带旋转角度导致接口创建失败。需根据Surface的旋转角度相应调整传入的宽高值，
+   * 如旋转90°或270°时互换宽与高。如果需要截取整个Surface的区域，推荐使用
+   * [image.createPixelMapFromSurface]{@link image.createPixelMapFromSurface}。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { string } surfaceId - 对应Surface的ID，可通过预览组件获取，如
+   *     [XComponent](../apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)组件。
+   * @param { Region } region - 截取的画面区域。仅支持从画面左上角开始截取部分或整个画面，即Region中的x和y必须为0，Region.size中
+   *     width和height的取值范围分别为[1, 预览流宽度]和[1, 预览流高度]。如需截取任意区域，可先使用
+   *     [image.createPixelMapFromSurface]{@link image.createPixelMapFromSurface}获取整个画面，再使用
+   *     [applyCrop]{@link image.PixelMap.applyCrop}截取所需区域。
+   * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 62980115 - If the image parameter invalid.
    * @throws { BusinessError } 62980105 - Failed to get the data.
    * @throws { BusinessError } 62980178 - Failed to create the PixelMap.
@@ -4886,11 +4970,23 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createPixelMapFromSurface(surfaceId: string, region: Region): Promise<PixelMap>;
 
   /**
-   * Creates a PixelMap object from surface id.
+   * 根据Surface ID和区域信息创建一个PixelMap对象。该区域的大小由[Region]{@link image.Region}.size指定。同步返回结果。
    *
-   * @param { string } surfaceId - surface id.
-   * @param { Region } region - The region to surface.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > - 当设备为折叠屏，切换折叠状态时，可能因Surface自带旋转角度导致接口创建失败。需根据Surface的旋转角度相应调整传入的宽高值，
+   * 如旋转90°或270°时互换宽与高。如果需要截取整个Surface的区域，推荐使用
+   * [image.createPixelMapFromSurfaceSync]{@link image.createPixelMapFromSurfaceSync}。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { string } surfaceId - 对应Surface的ID，可通过预览组件获取，如
+   *     [XComponent](../apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)组件。
+   * @param { Region } region - 截取的画面区域。仅支持从画面左上角开始截取部分或整个画面，即Region中的x和y必须为0，Region.size中
+   *     width和height的取值范围分别为[1, 预览流宽度]和[1, 预览流高度]。如需截取任意区域，可先使用
+   *     [image.createPixelMapFromSurfaceSync]{@link image.createPixelMapFromSurfaceSync}获取整个画面，再使用
+   *     [applyCropSync]{@link image.PixelMap.applyCropSync}截取所需区域。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980105 - Failed to get the data.
@@ -4902,10 +4998,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createPixelMapFromSurfaceSync(surfaceId: string, region: Region): PixelMap;
 
   /**
-   * Creates a PixelMap object from surface id.
+   * 从Surface ID创建一个PixelMap对象。使用Promise异步回调。
    *
-   * @param { string } surfaceId - surface id.
-   * @returns { Promise<PixelMap> } Returns the instance if the operation is successful;Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > - 如果Surface携带旋转或翻转的变换信息且需要校正方向，请使用
+   * [image.createPixelMapFromSurfaceWithTransformation]{@link image.createPixelMapFromSurfaceWithTransformation}。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { string } surfaceId - 对应Surface的ID，可通过预览组件获取，如
+   *     [XComponent](../apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)组件。
+   * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980105 - Failed to get the data.
@@ -4917,10 +5021,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createPixelMapFromSurface(surfaceId: string): Promise<PixelMap>;
 
   /**
-   * Creates a PixelMap object from surface id.
+   * 从Surface ID创建一个PixelMap对象。同步返回结果。
    *
-   * @param { string } surfaceId - surface id.
-   * @returns { PixelMap } Returns the instance if the operation is successful;Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > - 如果Surface携带旋转或翻转的变换信息且需要校正方向，请使用
+   * [image.createPixelMapFromSurfaceWithTransformationSync]{@link image.createPixelMapFromSurfaceWithTransformationSync}。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { string } surfaceId - 对应Surface的ID，可通过预览组件获取，如
+   *     [XComponent](../apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)组件。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 62980105 - Failed to get the data.
@@ -4932,15 +5044,23 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createPixelMapFromSurfaceSync(surfaceId: string): PixelMap;
 
   /**
-   * Creates a PixelMap object based on the ID of a Surface with transformation.
+   * 通过Surface的ID创建一个预览流画面的PixelMap对象。该Surface可能携带旋转或翻转的变换信息。使用Promise异步回调。
    *
-   * @param { string } surfaceId - ID of the Surface.
-   * @param { boolean } transformEnabled - Whether to inverse transform the PixelMap to cancel out the transformation
-   *     from the Surface.
-   *     If true, the PixelMap will be transformed by the same amount from the Surface but in a reversed direction;
-   *     if false, the PixelMap will not be transformed.
-   * @returns { Promise<PixelMap> } A Promise of PixelMap instance if the operation is successful.
-   *     Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > - 在API版本23之前，如果要获取无变换效果的PixelMap，可使用
+   * [@ohos.arkui.componentSnapshot (组件截图)](../apis-arkui/js-apis-arkui-componentSnapshot.md)能力，或者使用
+   * [image.createPixelMapFromSurface]{@link image.createPixelMapFromSurface}截取后再调用
+   * [rotate]{@link image.PixelMap.rotate}/[flip]{@link image.PixelMap.flip}手动校正方向。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { string } surfaceId - 对应Surface的ID，可通过预览组件获取，如
+   *     [XComponent](../apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)组件。
+   * @param { boolean } transformEnabled - 是否对携带变换信息的Surface预先进行逆变换来消除PixelMap的旋转或翻转效果，即是否进行方向校正。
+   *     如果Surface未携带变换信息，则本参数不生效。<br>true表示进行逆变换，变换的角度与Surface携带的角度一致且方向相反，输出的
+   *     PixelMap无旋转或翻转效果。<br>false表示不进行逆变换，输出的PixelMap会根据Surface中的变换信息而带有旋转或翻转效果。
+   * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 7600104 - Failed to get the data from Surface.
    * @throws { BusinessError } 7600201 - Unsupported operation, e.g. on cross-platform.
    * @throws { BusinessError } 7600206 - Invalid parameter.
@@ -4952,15 +5072,23 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createPixelMapFromSurfaceWithTransformation(surfaceId: string, transformEnabled: boolean): Promise<PixelMap>;
 
   /**
-   * Creates a PixelMap object based on the ID of a Surface with transformation.
+   * 通过Surface的ID创建一个预览流画面的PixelMap对象。该Surface可能携带旋转或翻转的变换信息。同步返回结果。
    *
-   * @param { string } surfaceId - ID of the Surface.
-   * @param { boolean } transformEnabled - Whether to inverse transform the PixelMap to cancel out the transformation
-   *     from the Surface.
-   *     If true, the PixelMap will be transformed by the same amount from the Surface but in a reversed direction;
-   *     if false, the PixelMap will not be transformed.
-   * @returns { PixelMap } A PixelMap instance if the operation is successful.
-   *     Otherwise, an exception will be thrown.
+   * > **说明：**
+   * >
+   * > - 在API版本23之前，如果要获取无变换效果的PixelMap，可使用
+   * [@ohos.arkui.componentSnapshot (组件截图)](../apis-arkui/js-apis-arkui-componentSnapshot.md)能力，或者使用
+   * [image.createPixelMapFromSurfaceSync]{@link image.createPixelMapFromSurfaceSync}截取后再调用
+   * [rotateSync]{@link image.PixelMap.rotateSync}/[flipSync]{@link image.PixelMap.flipSync}手动校正方向。
+   * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * @param { string } surfaceId - 对应Surface的ID，可通过预览组件获取，如
+   *     [XComponent](../apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)组件。
+   * @param { boolean } transformEnabled - 是否对携带变换信息的Surface预先进行逆变换来消除PixelMap的旋转或翻转效果，即是否进行方向校正。
+   *     如果Surface未携带变换信息，则本参数不生效。<br>true表示进行逆变换，变换的角度与Surface携带的角度一致且方向相反，输出的
+   *     PixelMap无旋转或翻转效果。<br>false表示不进行逆变换，输出的PixelMap会根据Surface中的变换信息而带有旋转或翻转效果。
+   * @returns { PixelMap } 返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 7600104 - Failed to get the data from Surface.
    * @throws { BusinessError } 7600201 - Unsupported operation, e.g. on cross-platform.
    * @throws { BusinessError } 7600206 - Invalid parameter.
@@ -5461,24 +5589,26 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   function createImageCreator(size: Size, format: ImageFormat, capacity: int): ImageCreator;
 
   /**
-   * The **PixelMap** class provides APIs to read or write image data and obtain image information. Before calling any
-   * API in PixelMap, you must use
-   * [image.createPixelMap]{@link @ohos.multimedia.image:image.createPixelMap(colors: ArrayBuffer, options: InitializationOptions)}
-   * to create a PixelMap object. Currently, the maximum size of a serialized PixelMap is 128 MB. A larger size will
-   * cause a display failure. The size is calculated as follows: Width x Height x
-   * [Bytes per pixel]{@link @ohos.multimedia.image:image.PixelMapFormat}.
-   * Since API version 11, PixelMap supports cross-thread calls through [Worker]{@link @ohos.worker}. If a PixelMap
-   * object is invoked by another thread through [Worker]{@link @ohos.worker}, all APIs of the PixelMap object cannot be
-   * called in the original thread. Otherwise, error 501 is reported, indicating that the server cannot complete the
-   * request.
-   * Before calling any API in PixelMap, you can use
-   * [image.createPixelMap]{@link @ohos.multimedia.image:image.createPixelMap(colors: ArrayBuffer, options: InitializationOptions)}
-   * to pass pixel data to create a PixelMap object, or use [ImageSource]{@link @ohos.multimedia.image:image} to decode
-   * an image to a PixelMap object.
-   * To develop an atomic service, use [ImageSource]{@link @ohos.multimedia.image:image} to create a PixelMap object.
-   * Images occupy a large amount of memory. When you finish using a PixelMap instance, call
-   * [release]{@link image.PixelMap.release()} to free the memory promptly. Before releasing the instance, ensure that
-   * all asynchronous operations associated with the instance have finished and the instance is no longer needed.
+   * 图像像素类，用于读取或写入图像数据以及获取图像信息，同时支持图像变换（缩放、平移、旋转、翻转、裁剪）、设置不透明度、提取Alpha通道、
+   * 色彩空间设置等操作，适用于图像处理、图像编辑、图像显示等需要进行像素级数据操作的场景。在调用PixelMap的方法前，需要先通过
+   * [image.createPixelMapFromPixels]{@link image.createPixelMapFromPixels}或
+   * [image.createPixelMapUsingAllocator]{@link image.createPixelMapUsingAllocator}系列接口传入像素数据创建一个PixelMap对象，
+   * 也可以通过[ImageSource]{@link image.ImageSource}进行图片解码创建PixelMap对象。目前PixelMap序列化大小最大为128MiB，超过会渲染失败。
+   * PixelMap大小的计算方式为：宽 \* 高 \* 每像素占用字节数（详情请参考[PixelMapFormat]{@link image.PixelMapFormat}）。
+   *
+   * 从API version 11开始，PixelMap支持通过[@ohos.worker (启动一个Worker)](../apis-arkts/js-apis-worker.md)跨线程调用。
+   * 当PixelMap通过Worker或[@ohos.taskpool (启动任务池)](../apis-arkts/js-apis-taskpool.md)跨线程传输后，原线程的PixelMap的所有接口均不能继续调用，
+   * 否则将抛出501或7600106（详情请参考[Image错误码](errorcode-image.md)）。
+   *
+   * 开发原子化服务请通过[ImageSource]{@link image.ImageSource}构建PixelMap对象。
+   *
+   * 图像占用的内存往往较大，当PixelMap对象使用完成后，应主动调用[release]{@link image.PixelMap.release}方法及时释放内存。
+   * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+   *
+   * > **说明：**
+   * >
+   * > - 本模块首批接口从API version 6开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+   * > - 本Interface首批接口从API version 7开始支持。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @crossplatform [since 10]
@@ -5489,10 +5619,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
    */
   interface PixelMap {
     /**
-     * Whether the image pixels are editable. **true** if editable, **false** otherwise. The value **false** provides
-     * better image rendering and transmission performance.<br>
-     * This API can be used in atomic services since API version 11.<br>
-     * This API can be used in ArkTS widgets since API version 12.
+     * 图像像素是否可被编辑。true表示可被编辑，false表示不可被编辑。为false时，图像的渲染和传输性能更好。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -5504,11 +5631,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readonly isEditable: boolean;
 
     /**
-     * Reads all the pixel data from the PixelMap and writes the data to a buffer.
-     * The resulting data will be in the same pixel format as the PixelMap.
+     * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。使用Promise异步回调。
      *
-     * @param { ArrayBuffer } dst - The buffer to receive the pixel data from the PixelMap.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
+     *     缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5525,10 +5652,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readAllPixelsToBuffer(dst: ArrayBuffer): Promise<void>;
 
     /**
-     * Reads all the pixel data from the PixelMap and writes the data to a buffer.
-     * The resulting data will be in the same pixel format as the PixelMap.
+     * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。同步返回结果。
      *
-     * @param { ArrayBuffer } dst - The buffer to receive the pixel data from the PixelMap.
+     * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
+     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5545,14 +5672,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readAllPixelsToBufferSync(dst: ArrayBuffer): void;
 
     /**
-     * Reads the pixels of this PixelMap object based on the PixelMap's pixel format and writes the data to the buffer.
-     * This API uses a promise to return the result.
+     * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link readAllPixelsToBuffer} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBuffer]{@link image.PixelMap.readAllPixelsToBuffer}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } dst - Buffer to which the pixels will be written. The buffer size is obtained by calling
-     *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
+     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5563,15 +5691,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixelsToBuffer(dst: ArrayBuffer): Promise<void>;
 
     /**
-     * Reads the pixels of this PixelMap object based on the PixelMap's pixel format and writes the data to the buffer.
-     * This API uses an asynchronous callback to return the result.
+     * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link readAllPixelsToBuffer} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBuffer]{@link image.PixelMap.readAllPixelsToBuffer}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } dst - Buffer to which the pixels will be written. The buffer size is obtained by calling
-     *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
+     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { AsyncCallback<void> } callback - 回调函数。当读取像素数据到ArrayBuffer成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5582,13 +5710,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixelsToBuffer(dst: ArrayBuffer, callback: AsyncCallback<void>): void;
 
     /**
-     * Reads the pixels of this PixelMap object based on the PixelMap's pixel format and writes the data to the buffer.
-     * This API returns the result synchronously.
+     * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link readAllPixelsToBufferSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBufferSync]{@link image.PixelMap.readAllPixelsToBufferSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } dst - Buffer to which the pixels will be written. The buffer size is obtained by calling
-     *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
+     * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
+     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -5602,11 +5731,21 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixelsToBufferSync(dst: ArrayBuffer): void;
 
     /**
-     * Reads pixel data from a certain area of the PixelMap to a buffer. The resulting data will be in BGRA_8888 format.
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
+     * 否则按照BGRA_8888格式存入缓冲区。使用Promise异步回调。
      *
-     * @param { PositionArea } area - Area of the PixelMap to read the data.
-     *     Data will be read from the PixelMap and copied into PositionArea.pixels.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     *
+     * @param { PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5624,10 +5763,20 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixelsToArea(area: PositionArea): Promise<void>;
 
     /**
-     * Reads pixel data from a certain area of the PixelMap to a buffer. The resulting data will be in BGRA_8888 format.
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
+     * 否则按照BGRA_8888格式存入缓冲区。同步返回结果。
      *
-     * @param { PositionArea } area - Area of the PixelMap to read the data.
-     *     Data will be read from the PixelMap and copied into PositionArea.pixels.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     *
+     * @param { PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5645,20 +5794,23 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixelsToAreaSync(area: PositionArea): void;
 
     /**
-     * Reads the pixels in the area specified by [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region
-     * of this PixelMap object in the BGRA_8888 format and writes the data to the
-     * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels buffer. This API uses a promise to return
-     * the result.
-     * You can use a formula to calculate the size of the memory to be applied for based on **PositionArea**.
-     * YUV region calculation formula: region to read (region.size{width * height}) * 1.5 (1 * Y component + 0.25 * U
-     * component + 0.25 * V component)
-     * RGBA region calculation formula: region to read (region.size{width * height}) * 4 (1 * R component + 1 * G
-     * component + 1 * B component + 1 * A component)
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
+     * 否则按照BGRA_8888格式存入缓冲区。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link readPixelsToArea} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * >
+     * > 从API版本26.0.0开始，建议使用[readPixelsToArea]{@link image.PixelMap.readPixelsToArea}代替，以获得更完善的异常处理能力。
      *
-     * @param { PositionArea } area - Area from which the pixels will be read.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5669,21 +5821,23 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixels(area: PositionArea): Promise<void>;
 
     /**
-     * Reads the pixels in the area specified by [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region
-     * of this PixelMap object in the BGRA_8888 format and writes the data to the
-     * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels buffer. This API uses an asynchronous
-     * callback to return the result.
-     * You can use a formula to calculate the size of the memory to be applied for based on **PositionArea**.
-     * YUV region calculation formula: region to read (region.size{width * height}) * 1.5 (1 * Y component + 0.25 * U
-     * component + 0.25 * V component)
-     * RGBA region calculation formula: region to read (region.size{width * height}) * 4 (1 * R component + 1 * G
-     * component + 1 * B component + 1 * A component)
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
+     * 否则按照BGRA_8888格式存入缓冲区。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link readPixelsToArea} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * >
+     * > 从API版本26.0.0开始，建议使用[readPixelsToArea]{@link image.PixelMap.readPixelsToArea}代替，以获得更完善的异常处理能力。
      *
-     * @param { PositionArea } area - Area from which the pixels will be read.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
+     * @param { AsyncCallback<void> } callback - 回调函数。当读取区域内的图片数据成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5694,14 +5848,22 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixels(area: PositionArea, callback: AsyncCallback<void>): void;
 
     /**
-     * Reads the pixels in the area specified by [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region
-     * of this PixelMap object in the BGRA_8888 format and writes the data to the
-     * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels buffer. This API returns the result
-     * synchronously.
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
+     * 否则按照BGRA_8888格式存入缓冲区。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link readPixelsToAreaSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * >
+     * > 从API版本26.0.0开始，建议使用[readPixelsToAreaSync]{@link image.PixelMap.readPixelsToAreaSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { PositionArea } area - Area from which the pixels will be read.
+     * @param { PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -5714,11 +5876,19 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readPixelsSync(area: PositionArea): void;
 
     /**
-     * Writes data from a buffer to a certain area of the PixelMap. The source data must be in BGRA_8888 format.
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。使用Promise异步回调。
      *
-     * @param { PositionArea } area - Area of the PixelMap to write the data.
-     *     Data will be copied from PositionArea.pixels to the PixelMap.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     *
+     * @param { PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
+     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5737,10 +5907,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixelsFromArea(area: PositionArea): Promise<void>;
 
     /**
-     * Writes data from a buffer to a certain area of the PixelMap. The source data must be in BGRA_8888 format.
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。同步返回结果。
      *
-     * @param { PositionArea } area - Area of the PixelMap to write the data.
-     *     Data will be copied from PositionArea.pixels to the PixelMap.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     *
+     * @param { PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
+     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5759,20 +5937,21 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixelsFromAreaSync(area: PositionArea): void;
 
     /**
-     * Reads the pixels in the [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region buffer in the
-     * BGRA_8888 format and writes the data to the area specified by
-     * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels in this PixelMap object. This API uses a
-     * promise to return the result.
-     * You can use a formula to calculate the size of the memory to be applied for based on **PositionArea**.
-     * YUV region calculation formula: region to read (region.size{width * height}) * 1.5 (1 * Y component + 0.25 * U
-     * component + 0.25 * V component)
-     * RGBA region calculation formula: region to read (region.size{width * height}) * 4 (1 * R component + 1 * G
-     * component + 1 * B component + 1 * A component)
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link writePixelsFromArea} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * >
+     * > 从API版本26.0.0开始，建议使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea}代替，以获得更完善的异常处理能力。
      *
-     * @param { PositionArea } area - Area to which the pixels will be written.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
+     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5783,21 +5962,21 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixels(area: PositionArea): Promise<void>;
 
     /**
-     * Reads the pixels in the [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region buffer in the
-     * BGRA_8888 format and writes the data to the area specified by
-     * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels in this PixelMap object. This API uses an
-     * asynchronous callback to return the result.
-     * You can use a formula to calculate the size of the memory to be applied for based on **PositionArea**.
-     * YUV region calculation formula: region to read (region.size{width * height}) * 1.5 (1 * Y component + 0.25 * U
-     * component + 0.25 * V component)
-     * RGBA region calculation formula: region to read (region.size{width * height}) * 4 (1 * R component + 1 * G
-     * component + 1 * B component + 1 * A component)
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link writePixelsFromArea} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * >
+     * > 从API版本26.0.0开始，建议使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea}代替，以获得更完善的异常处理能力。
      *
-     * @param { PositionArea } area - Area to which the pixels will be written.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
+     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
+     * @param { AsyncCallback<void> } callback - 回调函数，当写入成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5808,14 +5987,20 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixels(area: PositionArea, callback: AsyncCallback<void>): void;
 
     /**
-     * Reads the pixels in the [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region buffer in the
-     * BGRA_8888 format and writes the data to the area specified by
-     * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels in this PixelMap object. This API returns
-     * the result synchronously.
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link writePixelsFromAreaSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
+     * >
+     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
+     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * >
+     * > 从API版本26.0.0开始，建议使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { PositionArea } area - Area to which the pixels will be written.
+     * @param { PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
+     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -5829,11 +6014,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixelsSync(area: PositionArea): void;
 
     /**
-     * Reads the pixel data from a buffer and writes the data to the PixelMap.
-     * The source data must be in the same pixel format as the PixelMap.
+     * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
      *
-     * @param { ArrayBuffer } src - The buffer that contains pixel data to be written to the PixelMap.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
+     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5851,10 +6036,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeAllPixelsFromBuffer(src: ArrayBuffer): Promise<void>;
 
     /**
-     * Reads the pixel data from a buffer and writes the data to the PixelMap.
-     * The source data must be in the same pixel format as the PixelMap.
+     * 将缓冲区内的像素数据写入整个PixelMap。同步返回结果。
      *
-     * @param { ArrayBuffer } src - The buffer that contains pixel data to be written to the PixelMap.
+     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
+     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5872,14 +6057,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeAllPixelsFromBufferSync(src: ArrayBuffer): void;
 
     /**
-     * Reads the pixels in the buffer based on the PixelMap's pixel format and writes the data to this PixelMap object.
-     * This API uses a promise to return the result.
+     * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link writeAllPixelsFromBuffer} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } src - Buffer from which the pixels are read. The buffer size is obtained by calling
-     *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
+     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5890,15 +6076,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeBufferToPixels(src: ArrayBuffer): Promise<void>;
 
     /**
-     * Reads the pixels in the buffer based on the PixelMap's pixel format and writes the data to this PixelMap object.
-     * This API uses an asynchronous callback to return the result.
+     * 将缓冲区内的像素数据写入整个PixelMap。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link writeAllPixelsFromBuffer} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } src - Buffer from which the pixels are read. The buffer size is obtained by calling
-     *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the pixels in the buffer are
-     *     successfully written to the PixelMap, **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
+     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { AsyncCallback<void> } callback - 回调函数。当缓冲区中的图像像素数据写入PixelMap成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5909,13 +6095,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeBufferToPixels(src: ArrayBuffer, callback: AsyncCallback<void>): void;
 
     /**
-     * Reads the pixels in the buffer based on the PixelMap's pixel format and writes the data to this PixelMap object.
-     * This API returns the result synchronously.
+     * 将缓冲区内的像素数据写入整个PixelMap。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link writeAllPixelsFromBufferSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBufferSync]{@link image.PixelMap.writeAllPixelsFromBufferSync}
+     * 代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } src - Buffer from which the pixels are read. The buffer size is obtained by calling
-     *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
+     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
+     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -5928,9 +6116,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeBufferToPixelsSync(src: ArrayBuffer): void;
 
     /**
-     * Convert pixelmap to standard dynamic range.
+     * 将HDR的图像内容转换为SDR的图像内容。使用Promise异步回调。
      *
-     * @returns { Promise<void> } A Promise instance used to return the operation result. If the operation fails, an error message is returned.
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 62980137 - Invalid image operation.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -5939,9 +6127,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     toSdr(): Promise<void>;
 
     /**
-     * Obtains the image information of a PixelMap. This API uses a promise to return the result.
+     * 获取图像像素信息。使用Promise异步回调。
      *
-     * @returns { Promise<ImageInfo> } Promise used to return the image information.
+     * @returns { Promise<ImageInfo> } Promise对象，返回图像像素信息。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5952,11 +6140,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getImageInfo(): Promise<ImageInfo>;
 
     /**
-     * Obtains the image information. This API uses an asynchronous callback to return the result.
+     * 获取图像像素信息。使用callback异步回调。
      *
-     * @param { AsyncCallback<ImageInfo> } callback - Callback used to return the result. If the operation is successful
-     *     , **err** is **undefined** and **data** is the image information obtained; otherwise, **err** is an error
-     *     object.
+     * @param { AsyncCallback<ImageInfo> } callback - 回调函数。当获取图像像素信息成功，err为undefined，data为获取到的图像像素信息；否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5967,9 +6153,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getImageInfo(callback: AsyncCallback<ImageInfo>): void;
 
     /**
-     * Obtains the image information. This API returns the result synchronously.
+     * 获取图像像素信息。同步返回结果。
      *
-     * @returns { ImageInfo } Image information.
+     * @returns { ImageInfo } 图像像素信息。
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform
@@ -5981,9 +6167,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getImageInfoSync(): ImageInfo;
 
     /**
-     * Obtains the number of bytes per row of this image. Unit: bytes.
+     * 获取图像每行像素的字节数。
      *
-     * @returns { int } Number of bytes per row.
+     * @returns { int } 图像像素的行字节数。单位：字节（Byte）。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -5994,9 +6180,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getBytesNumberPerRow(): int;
 
     /**
-     * Obtains the total number of bytes of this image. Unit: bytes.
+     * 获取图像所有像素占用的总字节数，不包含内存对齐填充字节。
      *
-     * @returns { int } Total number of bytes.
+     * @returns { int } 图像像素的总字节数。单位：字节（Byte）。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6007,9 +6193,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getPixelBytesNumber(): int;
 
     /**
-     * Obtains the pixel density of this image. Unit: ppi (pixels/inch)
+     * 获取图像的像素密度。
      *
-     * @returns { int } Pixel density, in ppi.
+     * @returns { int } 图像的像素密度，单位：ppi（像素/英寸）。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6020,11 +6206,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getDensity(): int;
 
     /**
-     * Sets opacity of the PixelMap. Every pixel will be set to the same opacity value.
+     * 设置PixelMap的不透明度，指定的不透明度值将被应用于所有像素，不受原图不透明度的影响。使用Promise异步回调。
      *
-     * @param { double } value - The target opacity value to be set. Unit: Percentage, Value range: (0,1].
-     *     The valid range is (0.0, 1.0] where 1.0 is fully opaque and becoming transparent as it approaches 0.0.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * > **说明：**
+     * >
+     * > YUV格式的图像不支持设置不透明度。
+     *
+     * @param { double } value - 不透明度的值。取值范围是(0.0, 1.0]，1.0表示完全不透明，数值越接近0.0则透明度越高。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6042,10 +6231,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setOpacity(value: double): Promise<void>;
 
     /**
-     * Sets opacity of the PixelMap. Every pixel will be set to the same opacity value.
+     * 设置PixelMap的不透明度，指定的不透明度值将被应用于所有像素，不受原图不透明度的影响。同步返回结果。
      *
-     * @param { double } value - The target opacity value to be set. Unit: Percentage, Value range: (0,1].
-     *     The valid range is (0.0, 1.0] where 1.0 is fully opaque and becoming transparent as it approaches 0.0.
+     * > **说明：**
+     * >
+     * > YUV格式的图像不支持设置不透明度。
+     *
+     * @param { double } value - 不透明度的值。取值范围是(0.0, 1.0]，1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6063,14 +6255,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setOpacitySync(value: double): void;
 
     /**
-     * Sets an opacity rate for this image. This API uses an asynchronous callback to return the result. It is invalid
-     * for YUV images.
+     * 设置PixelMap的不透明度，指定的不透明度值将被应用于所有像素，不受原图不透明度的影响。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link setOpacity} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式的图像不支持设置不透明度。
+     * > - 从API版本26.0.0开始，建议使用[setOpacity]{@link image.PixelMap.setOpacity}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } rate - Opacity rate. The value range is (0,1].
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
+     * @param { AsyncCallback<void> } callback - 回调函数。当设置透明比率成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6081,12 +6274,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     opacity(rate: double, callback: AsyncCallback<void>): void;
 
     /**
-     * Sets an opacity rate for this image. It is invalid for YUV images. This API uses a promise to return the result.
+     * 设置PixelMap的不透明度，指定的不透明度值将被应用于所有像素，不受原图不透明度的影响。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link setOpacity} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式的图像不支持设置不透明度。
+     * > - 从API版本26.0.0开始，建议使用[setOpacity]{@link image.PixelMap.setOpacity}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } rate - Opacity rate. The value range is (0,1].
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6097,11 +6293,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     opacity(rate: double): Promise<void>;
 
     /**
-     * Sets an opacity rate for this image. This API returns the result synchronously. It is invalid for YUV images.
+     * 设置PixelMap的不透明度，指定的不透明度值将被应用于所有像素，不受原图不透明度的影响。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link setOpacitySync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式的图像不支持设置不透明度。
+     * > - 从API版本26.0.0开始，建议使用[setOpacitySync]{@link image.PixelMap.setOpacitySync}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } rate - Opacity rate. The value range is (0,1].
+     * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6114,9 +6313,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     opacitySync(rate: double): void;
 
     /**
-     * Extracts the alpha channel from the current PixelMap to create a new ALPHA_U8 format PixelMap.
+     * 提取当前PixelMap的Alpha通道数据，并生成一个仅包含Alpha通道信息的ALPHA_U8格式的PixelMap。生成的新PixelMap不可编辑，可用于阴影效果。使用Promise异步回调。
      *
-     * @returns { Promise<PixelMap> } A Promise of the new ALPHA_U8 format PixelMap.
+     * > **说明：**
+     * >
+     * > - YUV格式不支持此接口。
+     * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
+     *
+     * @returns { Promise<PixelMap> } Promise对象，返回仅包含Alpha通道信息的ALPHA_U8格式的PixelMap。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The current PixelMap has been released.
@@ -6135,9 +6339,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     extractAlphaPixelMap(): Promise<PixelMap>;
 
     /**
-     * Extracts the alpha channel from the current PixelMap to create a new ALPHA_U8 format PixelMap.
+     * 提取当前PixelMap的Alpha通道数据，并生成一个仅包含Alpha通道信息的ALPHA_U8格式的PixelMap。生成的新PixelMap不可编辑，可用于阴影效果。同步返回结果。
      *
-     * @returns { PixelMap } A new ALPHA_U8 format PixelMap.
+     * > **说明：**
+     * >
+     * > - YUV格式不支持此接口。
+     * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
+     *
+     * @returns { PixelMap } 返回仅包含Alpha通道信息的ALPHA_U8格式的PixelMap。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The current PixelMap has been released.
@@ -6156,12 +6365,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     extractAlphaPixelMapSync(): PixelMap;
 
     /**
-     * Creates a PixelMap object that contains only the alpha channel information. This object can be used for the
-     * shadow effect. It is invalid for YUV images. This API uses a promise to return the result.
+     * 根据Alpha通道的信息，生成一个仅包含Alpha通道信息的ALPHA_8格式的PixelMap，生成的新PixelMap不可编辑，可用于阴影效果。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link extractAlphaPixelMap} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式不支持此接口。
+     * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
+     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMap]{@link image.PixelMap.extractAlphaPixelMap}代替，以获得更完善的异常处理能力。
      *
-     * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
+     * @returns { Promise<PixelMap> } Promise对象，返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6172,13 +6384,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     createAlphaPixelmap(): Promise<PixelMap>;
 
     /**
-     * Creates a PixelMap object that contains only the alpha channel information. This object can be used for the
-     * shadow effect. It is invalid for YUV images. This API returns the result through a callback.
+     * 根据Alpha通道的信息，来生成一个仅包含Alpha通道信息的ALPHA_8格式的PixelMap，生成的新PixelMap不可编辑，可用于阴影效果。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link extractAlphaPixelMap} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式不支持此接口。
+     * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
+     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMap]{@link image.PixelMap.extractAlphaPixelMap}代替，以获得更完善的异常处理能力。
      *
-     * @param { AsyncCallback<PixelMap> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is undefined and **data** is the PixelMap object obtained; otherwise, **err** is an error object.
+     * @param { AsyncCallback<PixelMap> } callback - 回调函数，当创建PixelMap成功，err为undefined，data为获取到的PixelMap对象；否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6189,12 +6403,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     createAlphaPixelmap(callback: AsyncCallback<PixelMap>): void;
 
     /**
-     * Creates a PixelMap object that contains only the alpha channel information. This object can be used for the
-     * shadow effect. This API returns the result synchronously. It is invalid for YUV images.
+     * 根据Alpha通道的信息，生成一个仅包含Alpha通道信息的ALPHA_8格式的PixelMap，生成的新PixelMap不可编辑，可用于阴影效果。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link extractAlphaPixelMapSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式不支持此接口。
+     * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
+     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMapSync]{@link image.PixelMap.extractAlphaPixelMapSync}代替，以获得更完善的异常处理能力。
      *
-     * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
+     * @returns { PixelMap } 成功同步返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -6206,12 +6423,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     createAlphaPixelmapSync(): PixelMap;
 
     /**
-     * Scales the PixelMap in the horizontal and/or vertical dimensions.
+     * 根据指定的宽高缩放倍数和缩放算法对PixelMap进行缩放。使用Promise异步回调。
      *
-     * @param { double } x - The scale ratio of width. Unit: Percentage.
-     * @param { double } y - The scale ratio of height. Unit: Percentage.
-     * @param { AntiAliasingLevel } [level] - The anti-aliasing algorithm to be used. Default value: NONE.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * > **说明：**
+     * >
+     * > 缩放倍数 = 缩放后的图像尺寸 / 缩放前的图像尺寸。
+     *
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } [level] - 采用的缩放算法。该参数对于ASTC格式的PixelMap不生效。默认值为AntiAliasingLevel.NONE。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6230,11 +6451,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyScale(x: double, y: double, level?: AntiAliasingLevel): Promise<void>;
 
     /**
-     * Scales the PixelMap in the horizontal and/or vertical dimensions.
+     * 根据指定的宽高缩放倍数和缩放算法对PixelMap进行缩放。同步返回结果。
      *
-     * @param { double } x - The scale ratio of width. Unit: Percentage.
-     * @param { double } y - The scale ratio of height. Unit: Percentage.
-     * @param { AntiAliasingLevel } [level] - The anti-aliasing algorithm to be used. Default value: NONE.
+     * > **说明：**
+     * >
+     * > 缩放倍数 = 缩放后的图像尺寸 / 缩放前的图像尺寸。
+     *
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } [level] - 采用的缩放算法。该参数对于ASTC格式的PixelMap不生效。默认值为AntiAliasingLevel.NONE。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6253,15 +6478,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyScaleSync(x: double, y: double, level?: AntiAliasingLevel): void;
 
     /**
-     * Scales this image based on the scale factors of the width and height. This API uses an asynchronous callback to
-     * return the result.
+     * 根据输入的宽高缩放倍数对图片进行缩放。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyScale} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
+     * > - 从API版本26.0.0开始，建议使用[applyScale]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AsyncCallback<void> } callback - 回调函数。当对图片进行缩放成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6272,14 +6498,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     scale(x: double, y: double, callback: AsyncCallback<void>): void;
 
     /**
-     * Scales this image based on the scale factors of the width and height. This API uses a promise to return the
-     * result.
+     * 根据输入的宽高缩放倍数对图片进行缩放。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyScale} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
+     * > - 从API版本26.0.0开始，建议使用[applyScale]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6290,12 +6518,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     scale(x: double, y: double): Promise<void>;
 
     /**
-     * Scales this image based on the scale factors of the width and height. This API returns the result synchronously.
+     * 根据输入的宽高缩放倍数对图片进行缩放。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyScaleSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
+     * > - 从API版本26.0.0开始，建议使用[applyScaleSync]{@link image.PixelMap.applyScaleSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6308,15 +6539,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     scaleSync(x: double, y: double): void;
 
     /**
-     * Scales this image based on the specified anti-aliasing level and the scale factors for the width and height. This
-     * API uses a promise to return the result.
+     * 根据指定的缩放算法和输入的宽高的缩放倍数对图片进行缩放。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyScale} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
+     * > - 从API版本26.0.0开始，建议使用[applyScale]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
-     * @param { AntiAliasingLevel } level - Anti-aliasing level.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } level - 采用的缩放算法。该参数对于ASTC格式的PixelMap不生效。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6330,14 +6563,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     scale(x: double, y: double, level: AntiAliasingLevel): Promise<void>;
 
     /**
-     * Scales this image based on the specified anti-aliasing level and the scale factors for the width and height. This
-     * API returns the result synchronously.
+     * 根据指定的缩放算法和输入的宽高的缩放倍数对图片进行缩放。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyScaleSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
+     * > - 从API版本26.0.0开始，建议使用[applyScaleSync]{@link image.PixelMap.applyScaleSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
-     * @param { AntiAliasingLevel } level - Anti-aliasing level.
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } level - 采用的缩放算法。该参数对于ASTC格式的PixelMap不生效。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6350,13 +6585,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     scaleSync(x: double, y: double, level: AntiAliasingLevel): void;
 
     /**
-     * Creates an image that has been resized based on the specified anti-aliasing level and the scale factors of the
-     * width and height. This API uses a promise to return the result.
+     * 根据指定的缩放算法和输入的宽高的缩放倍数，基于当前PixelMap创建一个新的缩放后的PixelMap，生成的新PixelMap不可编辑。使用Promise异步回调。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
-     * @param { AntiAliasingLevel } level - Anti-aliasing level. The default value is **AntiAliasingLevel.NONE**.
-     * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
+     * > **说明：**
+     * >
+     * > 该接口不会拷贝原图像的HDR元数据和EXIF信息。
+     *
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } [level] - 采用的缩放算法，默认值为AntiAliasingLevel.NONE。该参数对于ASTC格式的PixelMap不生效。
+     * @returns { Promise<PixelMap> } Promise对象，返回缩放后的PixelMap。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6367,13 +6605,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     createScaledPixelMap(x: double, y: double, level?: AntiAliasingLevel): Promise<PixelMap>;
 
     /**
-     * Creates an image that has been resized based on the specified anti-aliasing level and the scale factors of the
-     * width and height. This API returns the result synchronously.
+     * 根据指定的缩放算法和输入的宽高的缩放倍数，基于当前PixelMap创建一个新的缩放后的PixelMap，生成的新PixelMap不可编辑。同步返回结果。
      *
-     * @param { double } x - Scale factor of the width.
-     * @param { double } y - Scale factor of the height.
-     * @param { AntiAliasingLevel } level - Anti-aliasing level. The default value is **AntiAliasingLevel.NONE**.
-     * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
+     * > **说明：**
+     * >
+     * > 该接口不会拷贝原图像的HDR元数据和EXIF信息。
+     *
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } [level] - 采用的缩放算法，默认值为AntiAliasingLevel.NONE。该参数对于ASTC格式的PixelMap不生效。
+     * @returns { PixelMap } 成功同步返回缩放后的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6384,11 +6625,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     createScaledPixelMapSync(x: double, y: double, level?: AntiAliasingLevel): PixelMap;
 
     /**
-     * Repositions the PixelMap in the horizontal and/or vertical directions.
+     * 根据指定的横向和纵向距离对PixelMap进行平移。使用Promise异步回调。
      *
-     * @param { double } x - The distance in pixels to move in the horizontal direction. Unit: px.
-     * @param { double } y - The distance in pixels to move in the vertical direction. Unit: px.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * > **说明：**
+     * >
+     * > 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     *
+     * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
+     * @param { double } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6407,10 +6654,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyTranslate(x: double, y: double): Promise<void>;
 
     /**
-     * Repositions the PixelMap in the horizontal and/or vertical directions.
+     * 根据指定的横向和纵向距离对PixelMap进行平移。同步返回结果。
      *
-     * @param { double } x - The distance in pixels to move in the horizontal direction. Unit: px.
-     * @param { double } y - The distance in pixels to move in the vertical direction. Unit: px.
+     * > **说明：**
+     * >
+     * > 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     *
+     * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
+     * @param { double } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6429,16 +6682,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyTranslateSync(x: double, y: double): void;
 
     /**
-     * Translates this image based on given coordinates. This API uses an asynchronous callback to return the result.
-     * The size of the translated image is changed to width+X and height+Y. It is recommended that the new width and
-     * height not exceed the width and height of the screen.
+     * 根据输入的坐标对图片进行位置变换。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyTranslate} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 从API版本26.0.0开始，建议使用[applyTranslate]{@link image.PixelMap.applyTranslate}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - X coordinate to translate, in px.
-     * @param { double } y - Y coordinate to translate, in px.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
+     * @param { double } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
+     * @param { AsyncCallback<void> } callback - 回调函数。当对图片进行位置变换成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6449,15 +6704,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     translate(x: double, y: double, callback: AsyncCallback<void>): void;
 
     /**
-     * Translates a PixelMap based on given coordinates. This API uses a promise to return the result.
-     * The size of the translated image is changed to width+X and height+Y. It is recommended that the new width and
-     * height not exceed the width and height of the screen.
+     * 根据输入的坐标对图片进行位置变换。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyTranslate} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 从API版本26.0.0开始，建议使用[applyTranslate]{@link image.PixelMap.applyTranslate}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - X coordinate to translate, in px.
-     * @param { double } y - Y coordinate to translate, in px.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
+     * @param { double } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6468,14 +6726,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     translate(x: double, y: double): Promise<void>;
 
     /**
-     * Translates this image based on given coordinates. This API returns the result synchronously.
-     * The size of the translated image is changed to width+X and height+Y. It is recommended that the new width and
-     * height not exceed the width and height of the screen.
+     * 根据输入的坐标对图片进行位置变换。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyTranslateSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 从API版本26.0.0开始，建议使用[applyTranslateSync]{@link image.PixelMap.applyTranslateSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } x - X coordinate to translate, in px.
-     * @param { double } y - Y coordinate to translate, in px.
+     * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
+     * @param { double } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。
+     *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6488,12 +6749,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     translateSync(x: double, y: double): void;
 
     /**
-     * Rotates the PixelMap.
+     * 根据指定的角度对PixelMap进行旋转。使用Promise异步回调。
      *
-     * Note: YUV format PixelMaps only support rotation angles that are multiples of 90 degrees.
+     * > **说明：**
+     * >
+     * > - YUV格式仅支持90°倍数的旋转角。
+     * > - 图像旋转角度的取值范围为[0, 360]。超出取值范围时，将根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 当旋转角度不是90°的倍数时，图像的尺寸会扩大为旋转后的外接矩形尺寸，以容纳旋转后的图像内容。例如：正方形图像旋转45°后，输出图像的尺寸（边长）变为原图像的√2倍。
      *
-     * @param { double } angle - The rotation angle in degrees. Unit: Degree.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * @param { double } angle - 旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6512,11 +6777,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyRotate(angle: double): Promise<void>;
 
     /**
-     * Rotates the PixelMap.
+     * 根据指定的角度对PixelMap进行旋转。同步返回结果。
      *
-     * Note: YUV format PixelMaps only support rotation angles that are multiples of 90 degrees.
+     * > **说明：**
+     * >
+     * > - YUV格式仅支持90°倍数的旋转角。
+     * > - 图像旋转角度的取值范围为[0, 360]。超出取值范围时，将根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 当旋转角度不是90°的倍数时，图像的尺寸会扩大为旋转后的外接矩形尺寸，以容纳旋转后的图像内容。例如：正方形图像旋转45°后，输出图像的尺寸（边长）变为原图像的√2倍。
      *
-     * @param { double } angle - The rotation angle in degrees. Unit: Degree.
+     * @param { double } angle - 旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6535,13 +6804,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyRotateSync(angle: double): void;
 
     /**
-     * Rotates this image based on a given angle. This API uses an asynchronous callback to return the result.
+     * 根据输入的角度对图片进行旋转。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyRotate} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式仅支持90°倍数的旋转角。
+     * > - 图像旋转的角度取值范围：[0, 360]。超出取值范围时，根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
+     * > - 从API版本26.0.0开始，建议使用[applyRotate]{@link image.PixelMap.applyRotate}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } angle - Angle to rotate. Unit: degrees.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
+     * @param { AsyncCallback<void> } callback - 回调函数。当对图片进行旋转成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6552,12 +6825,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     rotate(angle: double, callback: AsyncCallback<void>): void;
 
     /**
-     * Rotates a PixelMap based on a given angle. This API uses a promise to return the result.
+     * 根据输入的角度对图片进行旋转。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyRotate} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式仅支持90°倍数的旋转角。
+     * > - 图像旋转的角度取值范围：[0, 360]。超出取值范围时，根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
+     * > - 从API版本26.0.0开始，建议使用[applyRotate]{@link image.PixelMap.applyRotate}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } angle - Angle to rotate. Unit: degrees.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6568,11 +6846,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     rotate(angle: double): Promise<void>;
 
     /**
-     * Rotates this image based on a given angle. This API returns the result synchronously.
+     * 根据输入的角度对图片进行旋转。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyRotateSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > - YUV格式仅支持90°倍数的旋转角。
+     * > - 图像旋转的角度取值范围：[0, 360]。超出取值范围时，根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
+     * > - 从API版本26.0.0开始，建议使用[applyRotateSync]{@link image.PixelMap.applyRotateSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { double } angle - Angle to rotate. Unit: degrees.
+     * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6585,11 +6868,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     rotateSync(angle: double): void;
 
     /**
-     * Flips the PixelMap in the horizontal and/or vertical directions.
+     * 根据指定的水平或垂直翻转条件对PixelMap进行翻转。使用Promise异步回调。
      *
-     * @param { boolean } horizontal - Whether to flip horizontally.
-     * @param { boolean } vertical - Whether to flip vertically.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * @param { boolean } horizontal - 是否进行水平翻转。true表示进行水平翻转，false表示不进行水平翻转。
+     * @param { boolean } vertical - 是否进行垂直翻转。true表示进行垂直翻转，false表示不进行垂直翻转。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6607,10 +6890,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyFlip(horizontal: boolean, vertical: boolean): Promise<void>;
 
     /**
-     * Flips the PixelMap in the horizontal and/or vertical directions.
+     * 根据指定的水平或垂直翻转条件对PixelMap进行翻转。同步返回结果。
      *
-     * @param { boolean } horizontal - Whether to flip horizontally.
-     * @param { boolean } vertical - Whether to flip vertically.
+     * @param { boolean } horizontal - 是否进行水平翻转。true表示进行水平翻转，false表示不进行水平翻转。
+     * @param { boolean } vertical - 是否进行垂直翻转。true表示进行垂直翻转，false表示不进行垂直翻转。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6628,17 +6911,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyFlipSync(horizontal: boolean, vertical: boolean): void;
 
     /**
-     * Flips this image horizontally or vertically, or both. This API uses an asynchronous callback to return the
-     * result.
+     * 根据输入的水平或垂直翻转条件对图片进行翻转。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyFlip} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[applyFlip]{@link image.PixelMap.applyFlip}代替，以获得更完善的异常处理能力。
      *
-     * @param { boolean } horizontal - Whether to flip the image horizontally. **true** to flip the image horizontally,
-     *     **false** otherwise.
-     * @param { boolean } vertical - Whether to flip the image vertically. **true** to flip the image vertically,
-     *     **false** otherwise.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { boolean } horizontal - true表示进行水平翻转，false表示不进行水平翻转。
+     * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
+     * @param { AsyncCallback<void> } callback - 回调函数，当对图片翻转成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6649,15 +6930,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     flip(horizontal: boolean, vertical: boolean, callback: AsyncCallback<void>): void;
 
     /**
-     * Flips a PixelMap based on a given angle. This API uses a promise to return the result.
+     * 根据输入的水平或垂直翻转条件对图片进行翻转。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyFlip} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[applyFlip]{@link image.PixelMap.applyFlip}代替，以获得更完善的异常处理能力。
      *
-     * @param { boolean } horizontal - Whether to flip the image horizontally. **true** to flip the image horizontally,
-     *     **false** otherwise.
-     * @param { boolean } vertical - Whether to flip the image vertically. **true** to flip the image vertically,
-     *     **false** otherwise.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { boolean } horizontal - true表示进行水平翻转，false表示不进行水平翻转。
+     * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6668,14 +6949,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     flip(horizontal: boolean, vertical: boolean): Promise<void>;
 
     /**
-     * Flips this image horizontally or vertically, or both. This API returns the result synchronously.
+     * 根据输入的水平或垂直翻转条件对图片进行翻转。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyFlipSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[applyFlipSync]{@link image.PixelMap.applyFlipSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { boolean } horizontal - Whether to flip the image horizontally. **true** to flip the image horizontally,
-     *     **false** otherwise.
-     * @param { boolean } vertical - Whether to flip the image vertically. **true** to flip the image vertically,
-     *     **false** otherwise.
+     * @param { boolean } horizontal - true表示进行水平翻转，false表示不进行水平翻转。
+     * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6688,10 +6969,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     flipSync(horizontal: boolean, vertical: boolean): void;
 
     /**
-     * Crops the PixelMap.
+     * 根据指定的区域信息对PixelMap进行裁剪。使用Promise异步回调。
      *
-     * @param { Region } region - The region to crop.
-     * @returns { Promise<void> } A Promise that resolves when the operation completes.
+     * @param { Region } region - 裁剪的区域，区域范围不能超过图片的宽高。单位：像素（px）。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6710,9 +6991,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyCrop(region: Region): Promise<void>;
 
     /**
-     * Crops the PixelMap.
+     * 根据指定的区域信息对PixelMap进行裁剪。同步返回结果。
      *
-     * @param { Region } region - The region to crop.
+     * @param { Region } region - 裁剪的区域，区域范围不能超过图片的宽高。单位：像素（px）。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6731,14 +7012,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyCropSync(region: Region): void;
 
     /**
-     * Crops this image based on a given size. This API uses an asynchronous callback to return the result.
+     * 根据输入的区域信息对图片进行裁剪。使用callback异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyCrop} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[applyCrop]{@link image.PixelMap.applyCrop}代替，以获得更完善的异常处理能力。
      *
-     * @param { Region } region - Size of the image after cropping. The value cannot exceed the width or height of the
-     *     image.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
+     * @param { AsyncCallback<void> } callback - 回调函数。当对图片进行裁剪成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6749,13 +7030,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     crop(region: Region, callback: AsyncCallback<void>): void;
 
     /**
-     * Crops a PixelMap based on a given size. This API uses a promise to return the result.
+     * 根据输入的区域信息对图片进行裁剪。使用Promise异步回调。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyCrop} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[applyCrop]{@link image.PixelMap.applyCrop}代替，以获得更完善的异常处理能力。
      *
-     * @param { Region } region - Size of the image after cropping. The value cannot exceed the width or height of the
-     *     image.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6766,12 +7048,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     crop(region: Region): Promise<void>;
 
     /**
-     * Crops this image based on a given size. This API returns the result synchronously.
+     * 根据输入的区域信息对图片进行裁剪。同步返回结果。
      *
-     * Starting from API 26.0.0, it is recommended to use {@link applyCropSync} instead for better exception handling capabilities.
+     * > **说明：**
+     * >
+     * > 从API版本26.0.0开始，建议使用[applyCropSync]{@link image.PixelMap.applyCropSync}代替，以获得更完善的异常处理能力。
      *
-     * @param { Region } region - Size of the image after cropping. The value cannot exceed the width or height of the
-     *     image.
+     * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -6784,9 +7067,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     cropSync(region: Region): void;
 
     /**
-     * Obtains the color space of this image.
+     * 获取图像的色彩空间。
      *
-     * @returns { colorSpaceManager.ColorSpaceManager } Color space obtained.
+     * @returns { colorSpaceManager.ColorSpaceManager } 图像色彩空间信息。如果图像不含色彩空间信息，则会抛出异常。
      * @throws { BusinessError } 62980101 - The image data is abnormal.
      * @throws { BusinessError } 62980103 - The image data is not supported.
      * @throws { BusinessError } 62980115 - Invalid image parameter.
@@ -6798,9 +7081,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getColorSpace(): colorSpaceManager.ColorSpaceManager;
 
     /**
-     * Marshals this PixelMap object and writes it to a MessageSequence object.
+     * 将PixelMap序列化后写入MessageSequence。
      *
-     * @param { rpc.MessageSequence } sequence - MessageSequence object.
+     * @param { rpc.MessageSequence } sequence - 新创建的MessageSequence。
      * @throws { BusinessError } 62980115 - Invalid image parameter.
      * @throws { BusinessError } 62980097 - IPC error. Possible cause: 1.IPC communication failed. 2. Image upload
      *     exception.
@@ -6812,11 +7095,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     marshalling(sequence: rpc.MessageSequence): void;
 
     /**
-     * Unmarshals a MessageSequence object to obtain a PixelMap object. To create a PixelMap object in synchronous mode,
-     * use [createPixelMapFromParcel]{@link @ohos.multimedia.image:image.createPixelMapFromParcel}.
+     * 从MessageSequence中反序列化并获取PixelMap。使用Promise异步回调。
      *
-     * @param { rpc.MessageSequence } sequence - MessageSequence object that stores the PixelMap information.
-     * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
+     * > **说明：**
+     * >
+     * > 如需使用同步方式反序列化并创建PixelMap可使用[createPixelMapFromParcel]{@link image.createPixelMapFromParcel}。
+     *
+     * @param { rpc.MessageSequence } sequence - 保存有PixelMap信息的MessageSequence。
+     * @returns { Promise<PixelMap> } Promise对象，返回反序列化后的PixelMap。
      * @throws { BusinessError } 62980115 - Invalid image parameter.
      * @throws { BusinessError } 62980097 - IPC error. Possible cause: 1.IPC communication failed. 2. Image upload
      *     exception.
@@ -6830,53 +7116,21 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     unmarshalling(sequence: rpc.MessageSequence): Promise<PixelMap>;
 
     /**
-     * Set color space of pixel map.
+     * 设置图像的色彩空间。如需同时对图像的像素颜色进行色彩空间转换，请使用[applyColorSpace]{@link image.PixelMap.applyColorSpace}。
      *
-     * This method is only used to set the colorspace property of pixelmap, while all pixel data remains the same after calling this method.
-     * If you want to change colorspace for all pixels, use method {@Link #applyColorSpace(colorSpaceManager.ColorSpaceManager)} or
-     * {@Link #applyColorSpace(colorSpaceManager.ColorSpaceManager, AsyncCallback<void>)}.
-     *
-     * @param { colorSpaceManager.ColorSpaceManager } colorSpace The color space for pixel map.
-     * @throws { BusinessError } 62980111 - The image source data is incomplete.
-     * @throws { BusinessError } 62980115 - Invalid image parameter.
-     * @syscap SystemCapability.Multimedia.Image.Core
-     * @since 10
-     */
-    /**
-     * Set color space of pixel map.
-     *
-     * This method is only used to set the colorspace property of pixelmap, while all pixel data remains the same after calling this method.
-     * If you want to change colorspace for all pixels, use method {@Link #applyColorSpace(colorSpaceManager.ColorSpaceManager)} or
-     * {@Link #applyColorSpace(colorSpaceManager.ColorSpaceManager, AsyncCallback<void>)}.
-     *
-     * @param { colorSpaceManager.ColorSpaceManager } colorSpace The color space for pixel map.
-     * @throws { BusinessError } 62980111 - If the operation invalid.
-     * @throws { BusinessError } 62980115 - If the image parameter invalid.
-     * @syscap SystemCapability.Multimedia.Image.Core
-     * @crossplatform
-     * @since 11
-     */
-    /**
-     * Set color space of pixel map.
-     *
-     * This method is only used to set the colorspace property of pixelmap, while all pixel data remains the same after calling this method.
-     * If you want to change colorspace for all pixels, use method {@Link #applyColorSpace(colorSpaceManager.ColorSpaceManager)} or
-     * {@Link #applyColorSpace(colorSpaceManager.ColorSpaceManager, AsyncCallback<void>)}.
-     *
-     * @param { colorSpaceManager.ColorSpaceManager } colorSpace The color space for pixel map.
+     * @param { colorSpaceManager.ColorSpaceManager } colorSpace - 图像色彩空间信息。
      * @throws { BusinessError } 62980111 - The image source data is incomplete.
      * @throws { BusinessError } 62980115 - If the image parameter invalid.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
-     * @since 12 dynamic
+     * @since 10 dynamic
      * @since 23 static
      */
     setColorSpace(colorSpace: colorSpaceManager.ColorSpaceManager): void;
 
     /**
-     * Whether the row data of the image is memory aligned. The value **true** means that the row data is memory-aligned
-     * , and there may be blank bytes padded at the end of each row to meet alignment requirements. The value **false**
-     * means that the row data is not memory-aligned, and rows are packed contiguously with no padding bytes at the end.
+     * 图像的行数据是否已进行内存对齐。true表示已进行内存对齐，每行数据的末尾有空白填充字节以满足对齐要求（如果数据本身已满足对齐要求，则不会有填充字节）；
+     * false表示未进行内存对齐，每行数据紧密排列，末尾无空白填充字节。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 11 dynamic
@@ -6885,13 +7139,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     readonly isStrideAlignment: boolean;
 
     /**
-     * Performs color space conversion (CSC) on the image pixel color based on a given color space. This API uses an
-     * asynchronous callback to return the result.
+     * 根据输入的目标色彩空间对图像的像素颜色进行色彩空间转换。使用callback异步回调。
      *
-     * @param { colorSpaceManager.ColorSpaceManager } targetColorSpace - Target color space. SRGB, DCI_P3, DISPLAY_P3,
-     *     and ADOBE_RGB_1998 are supported.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * > **说明：**
+     * >
+     * > - 本接口仅执行色彩空间之间的数学转换，不包含HDR到SDR的色调映射。当源图像为HDR色彩空间（传输函数为HLG或PQ，
+     * > 例如BT2020_HLG、BT2020_PQ、P3_HLG、P3_PQ等）且目标为SDR色彩空间（传输函数为sRGB gamma，例如SRGB、
+     * > DISPLAY_P3、DCI_P3、ADOBE_RGB_1998等）时，直接调用本接口会导致图像整体偏亮、泛白、高光细节丢失。
+     * > - 从API版本12开始，如果要将HDR色彩空间转换为SDR色彩空间，请先调用[toSdr]{@link image.PixelMap.toSdr}
+     * > 完成HDR到SDR的转换和色调映射，再按需调用本接口在SDR色彩空间之间转换。
+     *
+     * @param { colorSpaceManager.ColorSpaceManager } targetColorSpace - 目标色彩空间，支持SRGB、DCI_P3、DISPLAY_P3、ADOBE_RGB_1998。
+     * @param { AsyncCallback<void> } callback - 回调函数。当对图像像素颜色进行色彩空间转换成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 62980104 - Failed to initialize the internal object.
@@ -6905,12 +7164,18 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyColorSpace(targetColorSpace: colorSpaceManager.ColorSpaceManager, callback: AsyncCallback<void>): void;
 
     /**
-     * Performs Color Space Converters (CSC) on the image pixel color based on a given color space. This API uses a
-     * promise to return the result.
+     * 根据输入的目标色彩空间对图像的像素颜色进行色彩空间转换。使用Promise异步回调。
      *
-     * @param { colorSpaceManager.ColorSpaceManager } targetColorSpace - Target color space. SRGB, DCI_P3, DISPLAY_P3,
-     *     and ADOBE_RGB_1998 are supported.
-     * @returns { Promise<void> } Promise that returns no value.
+     * > **说明：**
+     * >
+     * > - 本接口仅执行色彩空间之间的数学转换，不包含HDR到SDR的色调映射。当源图像为HDR色彩空间（传输函数为HLG或PQ，
+     * > 例如BT2020_HLG、BT2020_PQ、P3_HLG、P3_PQ等）且目标为SDR色彩空间（传输函数为sRGB gamma，例如SRGB、
+     * > DISPLAY_P3、DCI_P3、ADOBE_RGB_1998等）时，直接调用本接口会导致图像整体偏亮、泛白、高光细节丢失。
+     * > - 从API版本12开始，如果要将HDR色彩空间转换为SDR色彩空间，请先调用[toSdr]{@link image.PixelMap.toSdr}
+     * > 完成HDR到SDR的转换和色调映射，再按需调用本接口在SDR色彩空间之间转换。
+     *
+     * @param { colorSpaceManager.ColorSpaceManager } targetColorSpace - 目标色彩空间，支持SRGB、DCI_P3、DISPLAY_P3、ADOBE_RGB_1998。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 62980104 - Failed to initialize the internal object.
@@ -6924,10 +7189,21 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     applyColorSpace(targetColorSpace: colorSpaceManager.ColorSpaceManager): Promise<void>;
 
     /**
-     * The method is used for the transformation of the image formats. Pixel data will be changed by calling this method.
+     * YUV和RGB类型互转。使用Promise异步回调。
      *
-     * @param { PixelMapFormat } targetPixelFormat - The pixel format for pixelmap conversion.
-     * @returns { Promise<void> } A Promise instance used to return the operation result. If the operation fails, an error message is returned.
+     * 支持NV12/NV21与RGB_888/RGBA_8888/RGB_565/BGRA_8888/RGBA_F16互转，YCRCB_P010/YCBCR_P010与RGBA_1010102互转。
+     *
+     * 从API version 18开始，可用于ASTC_4x4类型转为RGBA_8888类型，目前仅支持ASTC_4x4转为RGBA_8888。
+     *
+     * > **注意：**
+     * >
+     * > 仅在ASTC_4x4格式的图像需要进行像素访问时，建议调用此接口将ASTC_4x4类型转为RGBA_8888类型。由于使用ASTC_4x4反解为RGBA_8888时延较高，
+     * > 其余情况下不推荐使用。
+     *
+     * @param { PixelMapFormat } targetPixelFormat - 目标像素格式，用于YUV和RGB类型互转，或者ASTC_4x4类型转为RGBA_8888类型。
+     *     目前仅支持NV12/NV21与RGB_888/RGBA_8888/RGB_565/BGRA_8888/RGBA_F16互转，YCRCB_P010/YCBCR_P010与RGBA_1010102互转，
+     *     ASTC_4x4转为RGBA_8888。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 62980115 - Invalid input parameter.
      * @throws { BusinessError } 62980111 - The image source data is incomplete.
      * @throws { BusinessError } 62980274 - The conversion failed.
@@ -6940,20 +7216,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     convertPixelFormat(targetPixelFormat: PixelMapFormat): Promise<void>;
 
     /**
-     * Releases this PixelMap instance. After the release, any attempt to access the internal data of this object will
-     * fail. This API uses an asynchronous callback to return the result.
-     * Images occupy a large amount of memory. When you finish using a PixelMap instance, call this API to free the
-     * memory promptly.
-     * Before releasing the instance, ensure that all asynchronous operations associated with the instance have finished
-     * and the instance is no longer needed.
+     * 释放PixelMap对象。释放后，任何访问该对象内部数据的方法调用都会失败。使用callback异步回调。
      *
-     * > **NOTE**
+     * 图片使用的内存往往较大，在PixelMap对象使用完成后，应主动调用该方法及时释放内存。
+     *
+     * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+     *
+     * > **注意：**
      * >
-     * > Release occurs when an ArkTS object relinquishes control over its associated native object. The memory occupied
-     * > by the native object is reclaimed only after all managing ArkTS objects have relinquished their control.
+     * > 释放指的是ArkTS对象释放与之关联的native对象的管理权。仅当所有管理该native对象的ArkTS对象都被释放时，native对象占用的内存才会被回收。
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { AsyncCallback<void> } callback - 回调函数。当对PixelMap对象释放成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6964,19 +7237,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     release(callback: AsyncCallback<void>): void;
 
     /**
-     * Releases this PixelMap instance. After the release, any attempt to access the internal data of this object will
-     * fail. This API uses a promise to return the result.
-     * Images occupy a large amount of memory. When you finish using a PixelMap instance, call this API to free the
-     * memory promptly.
-     * Before releasing the instance, ensure that all asynchronous operations associated with the instance have finished
-     * and the instance is no longer needed.
+     * 释放PixelMap对象。释放后，任何访问该对象内部数据的方法调用都会失败。使用Promise异步回调。
      *
-     * > **NOTE**
+     * 图片使用的内存往往较大，在PixelMap对象使用完成后，应主动调用该方法及时释放内存。
+     *
+     * 释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
+     *
+     * > **注意：**
      * >
-     * > Release occurs when an ArkTS object relinquishes control over its associated native object. The memory occupied
-     * > by the native object is reclaimed only after all managing ArkTS objects have relinquished their control.
+     * > 释放指的是ArkTS对象释放与之关联的native对象的管理权。仅当所有管理该native对象的ArkTS对象都被释放时，native对象占用的内存才会被回收。
      *
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
      * @form [since 12]
@@ -6987,11 +7258,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     release(): Promise<void>;
 
     /**
-     * Sets whether to detach from the original thread when this PixelMap is transmitted across threads. This API
-     * applies to the scenario where the PixelMap needs to be released immediately.
+     * 设置PixelMap在跨线程传输后断开原线程的引用。适用于需要立即释放PixelMap的场景。
      *
-     * @param { boolean } detached - Whether to detach from the original thread. **true** to detach, **false**
-     *     otherwise.
+     * @param { boolean } detached - true表示断开原线程引用，false表示不断开原线程引用。
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -7000,10 +7269,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setTransferDetached(detached: boolean): void;
 
     /**
-     * Obtains the value of the metadata with a given key in this PixelMap.
+     * 从PixelMap中获取HDR元数据。
      *
-     * @param { HdrMetadataKey } key - Key of the HDR metadata.
-     * @returns { HdrMetadataValue } Value of the metadata with the given key.
+     * > **说明：**
+     * >
+     * > 该接口仅支持DMA内存类型的PixelMap调用。详情请参考[图片解码内存优化(ArkTS)](../../media/image/image-allocator-type.md)。
+     *
+     * @param { HdrMetadataKey } key - HDR元数据的关键字，可用于查询对应值。
+     * @returns { HdrMetadataValue } 返回元数据的值。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -7016,11 +7289,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getMetadata(key: HdrMetadataKey): HdrMetadataValue;
 
     /**
-     * Sets a memory name for this PixelMap.
+     * 设置PixelMap的内存标识符，便于在内存调试或问题定位时识别该内存。
      *
-     * @param { string } name - Memory name, which can be set only for a PixelMap with the DMA or ASHMEM memory format.
-     *     The name length for DMA memory settings should be within the range of 1 to 255 bytes. For ASHMEM memory
-     *     settings, the name length should be within the range of 1 to 244 bytes.
+     * > **说明：**
+     * >
+     * > 仅支持DMA和SHARE_MEMORY内存类型的PixelMap设置内存标识符。
+     *
+     * @param { string } name - 需要设置的内存标识符。DMA内存标识符的字符串长度取值范围为[1, 255]字节，
+     *     SHARE_MEMORY内存标识符的字符串长度取值范围为[1, 244]字节。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.The length of the input parameter is too
      *     long.
      *     2.Parameter verification failed.
@@ -7033,9 +7309,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setMemoryNameSync(name: string): void;
 
     /**
-     * Copies this PixelMap object. This API returns the result synchronously.
+     * 拷贝一份当前的PixelMap对象。同步返回结果。
      *
-     * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
+     * > **说明：**
+     * >
+     * > 该接口不会拷贝原图像的EXIF信息。
+     *
+     * @returns { PixelMap } 成功同步返回拷贝的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
@@ -7051,9 +7331,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     cloneSync(): PixelMap;
 
     /**
-     * Copies this PixelMap object. This API uses a promise to return the result.
+     * 拷贝一份当前的PixelMap对象。使用Promise异步回调。
      *
-     * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
+     * > **说明：**
+     * >
+     * > 该接口不会拷贝原图像的EXIF信息。
+     *
+     * @returns { Promise<PixelMap> } Promise对象，返回拷贝的PixelMap。
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
@@ -7069,11 +7353,15 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     clone(): Promise<PixelMap>;
 
     /**
-     * Sets the value for the metadata with a given key in this PixelMap. This API uses a promise to return the result.
+     * 设置PixelMap的HDR元数据。使用Promise异步回调。
      *
-     * @param { HdrMetadataKey } key - Key of the HDR metadata.
-     * @param { HdrMetadataValue } value - Value of the metadata.
-     * @returns { Promise<void> } Promise that returns no value.
+     * > **说明：**
+     * >
+     * > 该接口仅支持DMA内存类型的PixelMap调用。详情请参考[图片解码内存优化(ArkTS)](../../media/image/image-allocator-type.md)。
+     *
+     * @param { HdrMetadataKey } key - HDR元数据的关键字，用于设置对应值。
+     * @param { HdrMetadataValue } value - 元数据的值。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
@@ -7086,16 +7374,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setMetadata(key: HdrMetadataKey, value: HdrMetadataValue): Promise<void>;
 
     /**
-     * Checks whether this PixelMap object is released. If released, any attempt to access the internal data of this
-     * object will fail.
-     * 
-     * > **NOTE**
-     * >
-     * > Release occurs when an ArkTS object relinquishes control over its associated native object. The memory occupied
-     * > by the native object is reclaimed only after all managing ArkTS objects have relinquished their control.
+     * 检查PixelMap对象是否已被释放。如果已被释放，则任何访问该对象内部数据的方法调用将会失败。
      *
-     * @returns { boolean } Check result for whether the PixelMap object is released. **true** if released; **false**
-     *     otherwise.
+     * > **注意：**
+     * >
+     * > 释放指的是ArkTS对象释放与之关联的native对象的管理权。仅当所有管理该native对象的ArkTS对象都被释放时，native对象占用的内存才会被回收。
+     *
+     * @returns { boolean } PixelMap是否已被释放。返回true表示已被释放，否则返回false。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 22 dynamic
      * @since 23 static
@@ -7103,9 +7388,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     isReleased(): boolean;
 
     /**
-     * Obtains the unique ID of this PixelMap.
+     * 获取PixelMap的唯一ID。
      *
-     * @returns { int } Unique ID. The value is a positive integer.
+     * @returns { int } 唯一ID。取值为正整数。
      * @throws { BusinessError } 7600201 - The PixelMap has been released.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 22 dynamic
@@ -7114,14 +7399,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     getUniqueId(): int;
 
     /**
-     * Creates an image that has been cropped and resized based on the specified cropping area, scale factors of the
-     * width and height, and anti-aliasing level. This API returns the result synchronously.
+     * 根据指定的裁剪区域、宽高的缩放倍数和缩放算法，基于当前PixelMap创建一个新的裁剪并缩放后的PixelMap。同步返回结果。
      *
-     * @param { Region } region - Area to crop. It must be within the original image's dimension (in pixels).
-     * @param { double } x - Scale factor of the width. It must not be **0**.
-     * @param { double } y - Scale factor of the height. It must not be **0**.
-     * @param { AntiAliasingLevel } [level] - Anti-aliasing level. Default value: **NONE**.
-     * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
+     * > **说明：**
+     * >
+     * > 该接口不会拷贝原图像的EXIF信息。
+     *
+     * @param { Region } region - 裁剪的区域。取值范围不能超过图片的宽和高。单位：像素（px）。
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } [level] - 采用的缩放算法。默认值为AntiAliasingLevel.NONE。该参数对于ASTC格式的PixelMap不生效。
+     * @returns { PixelMap } 成功则同步返回裁剪并缩放后的PixelMap对象，失败则抛出异常。
      * @throws { BusinessError } 7600201 - The PixelMap has been released.
      * @throws { BusinessError } 7600204 - Invalid region.
      * @throws { BusinessError } 7600205 - Unsupported memory format or pixel format.
@@ -7133,14 +7421,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     createCroppedAndScaledPixelMapSync(region: Region, x: double, y: double, level?: AntiAliasingLevel): PixelMap;
 
     /**
-     * Creates an image that has been cropped and resized based on the specified cropping area, scale factors of the
-     * width and height, and anti-aliasing level. This API uses a promise to return the result.
+     * 根据指定的裁剪区域、宽高的缩放倍数和缩放算法，基于当前PixelMap创建一个新的裁剪并缩放后的PixelMap。使用Promise异步回调。
      *
-     * @param { Region } region - Area to crop. It must be within the original image's dimension (in pixels).
-     * @param { double } x - Scale factor of the width. It must not be **0**.
-     * @param { double } y - Scale factor of the height. It must not be **0**.
-     * @param { AntiAliasingLevel } [level] - Anti-aliasing level. Default value: **NONE**.
-     * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
+     * > **说明：**
+     * >
+     * > 该接口不会拷贝原图像的EXIF信息。
+     *
+     * @param { Region } region - 裁剪的区域。取值范围不能超过图片的宽和高。单位：像素（px）。
+     * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
+     * @param { AntiAliasingLevel } [level] - 采用的缩放算法。默认值为AntiAliasingLevel.NONE。该参数对于ASTC格式的PixelMap不生效。
+     * @returns { Promise<PixelMap> } Promise对象，返回裁剪并缩放后的PixelMap。
      * @throws { BusinessError } 7600201 - The PixelMap has been released.
      * @throws { BusinessError } 7600204 - Invalid region.
      * @throws { BusinessError } 7600205 - Unsupported memory format or pixel format.
