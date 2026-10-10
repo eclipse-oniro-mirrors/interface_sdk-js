@@ -278,6 +278,114 @@ declare namespace common {
   }
 
   /**
+   * Disk type.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum DiskType {
+    /**
+     * SD card type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SD_CARD = 1,
+ 
+    /**
+     * USB flash drive type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    USB_FLASH = 2,
+ 
+    /**
+     * CD type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    CD_DVD_BD = 3
+  }
+ 
+  /**
+   * External storage device information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface ExternalStorageDeviceInfo {
+    /**
+     * Device type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    type: DiskType;
+ 
+    /**
+     * Device path.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    devicePath: string;
+ 
+    /**
+     * Volume ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    volumeId: string;
+ 
+    /**
+     * Mount status.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    mountStatus: boolean;
+ 
+    /**
+     * Vendor ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    vendorId: number;
+ 
+    /**
+     * Product ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    productId: number;
+ 
+    /**
+     * Serial Number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    serial: string;
+  }
+
+  /**
    * The policy of query enterprise device management policy.
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager

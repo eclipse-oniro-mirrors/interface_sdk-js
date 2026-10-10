@@ -450,4 +450,16 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.0.0
    */
   onAdminPolicyChanged(event: common.PolicyChangedEvent): void;
+
+  /**
+   * Callback for unmounting external storage devices.
+   * When an external storage device needs to be mounted, the callback is triggered.
+   *
+   * @param { common.ExternalStorageDeviceInfo } deviceInfo - Device information of
+   *     the external storage device that needs to be unmounted.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 }
