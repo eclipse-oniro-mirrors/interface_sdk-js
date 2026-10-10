@@ -1715,7 +1715,7 @@ export declare enum KeyCode {
 
   /**
    * Play/Pause key<br>Difference between this key and **KEYCODE_MEDIA_PLAY_PAUSE**:<br>**KEYCODE_PLAYPAUSE** is an
-   *     earlier definition, while **KEYCODE_MEDIA_PLAY_PAUSE** is designed for modern media key devices.
+   * earlier definition, while **KEYCODE_MEDIA_PLAY_PAUSE** is designed for modern media key devices.
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @since 9 dynamic

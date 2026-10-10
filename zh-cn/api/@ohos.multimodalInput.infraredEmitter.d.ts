@@ -80,7 +80,7 @@ declare namespace infraredEmitter {
    *
    * @permission ohos.permission.MANAGE_INPUT_INFRARED_EMITTER
    * @param { long } infraredFrequency - 红外频率，单位：Hz。
-   * @param { Array<long>} pattern - 红外电平信号，单位为微秒（μs）。电平信号的数量取值范围为[0, 1024]，取值为0时，接口调用不生效。电平信号的取值需大于0。<br/>比如
+   * @param { Array<long> } pattern - 红外电平信号，单位为微秒（μs）。电平信号的数量取值范围为[0, 1024]，取值为0时，接口调用不生效。电平信号的取值需大于0。<br/>比如
    * [100,200,300,400]该电平信号数组，其中100μs为高电平信号、200μs为低电平信号、300μs为高电平信号、400μs为低电平信号。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
