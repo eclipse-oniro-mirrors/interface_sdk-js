@@ -623,7 +623,7 @@ declare namespace restrictions {
     SATA_ODD_BURN = 52,
 
     /**
-     * Super privacy. Instantly block all access to your device's camera, microphone, and location.
+     * Super privacy mode. Once disabled, the super privacy mode cannot be enabled.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
