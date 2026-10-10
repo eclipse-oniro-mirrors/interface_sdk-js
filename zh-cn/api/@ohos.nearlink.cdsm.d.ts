@@ -207,4 +207,3 @@ declare namespace cdsm {
   }
 }
 export default cdsm;
-export default cdsm;

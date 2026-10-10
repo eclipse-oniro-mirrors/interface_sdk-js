@@ -470,4 +470,3 @@ declare namespace manager {
   }
 }
 export default manager;
-export default manager;

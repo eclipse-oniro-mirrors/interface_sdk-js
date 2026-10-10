@@ -397,4 +397,3 @@ declare namespace scan {
   }
 }
 export default scan;
-export default scan;
