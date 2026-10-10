@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Application Utility Class
  * @kit AbilityKit
  */
 
@@ -139,7 +139,7 @@ declare namespace application {
     * @syscap SystemCapability.Ability.AbilityRuntime.Core
     * @stagemodelonly
     * @atomicservice
-    * @since 26.1.0 dynamic&static
+    * @since 26.0.1 dynamic&static
     */
    export function createModuleContextSync(context: Context, moduleName: string): Context;
 

@@ -14,13 +14,14 @@
 */
 
 /**
- * @file
+ * @file Cascading Effect
  * @kit ArkGraphics2D
  */
 
 import { AsyncCallback } from './@ohos.base';
 import type common2D from './@ohos.graphics.common2D';
 import type image from './@ohos.multimedia.image';
+import type drawing from './@ohos.graphics.drawing';
 /*** if arkts static */
 import { LinearGradientBlurOptions } from '@ohos.arkui.component';
 /*** endif */
@@ -498,7 +499,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     haloBloom(tintColor: Color, bloomFactor: double, glowExposure: double): Filter;
 
@@ -521,9 +522,40 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     spinBlur(center: common2D.Point, angle: double, samples: int): Filter;
+
+    /**
+     * Performs color gradient mapping on the image based on its brightness.
+     * The mapping is based on the input colors and their corresponding brightness
+     * anchor positions. Darker areas of the image correspond to smaller brightness
+     * values; for example, black areas are the darkest with a brightness value of 0.0,
+     * while white areas are the brightest with a brightness value of 1.0.
+     * The color mapping is cyclic; for example, given 5 colors sorted by brightness
+     * anchor position in ascending order, the color mapping sequence is 1-->2-->3-->4-->5-->1.
+     *
+     * > **NOTE**
+     * >
+     * > It is recommended to use as a foreground filter.
+     *
+     * @param { Array<Color> } colors - The colors to apply. Each color value must be
+     *     greater than or equal to 0.0, with a recommended range of [0, 1].
+     *     Values less than 0 have no effect. Color values greater than 1.0 are treated as 1.0.
+     *     The array length range is [1, 5]. When the length is less than 1, the effect
+     *     does not take effect; when the length is 1, a solid color effect is applied;
+     *     when the length is greater than 5, the effect applies the first 5 colors.
+     * @param { Array<double> } positions - The brightness anchor positions corresponding
+     *     to each color. The array length must be equal to the length of colors;
+     *     otherwise, the effect does not take effect. The value range is [0.0, 1.0],
+     *     and values outside the range are clamped to the boundary values.
+     * @returns { Filter } - Returns the Filter with the color brightness mapping effect attached.
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    mapColorByBrightness(colors: Array<Color>, positions: Array<double>): Filter;
   }
 
   /**
@@ -796,6 +828,30 @@ declare namespace uiEffect {
      * @since 26.0.0 dynamiconly
      */
     distortionCollapse(distortionParam: DistortionParam): VisualEffect;
+
+    /**
+     * Adds a glass marble effect to the component. The glass marble effect composites a glass sphere with material
+     * parameters and an optional content layer to produce a realistic glass-like visual with refraction,
+     * dispersion, halo, shadow, and glow.
+     *
+     * > **NOTE**
+     * >
+     * > It is applied to the background layer of the component.
+     *
+     * @param { GlassMarbleMaterialParam } material - The material parameters controlling background color, opacity,
+     *     reflection map, shadow, caustic, and shape scaling.
+     * @param { GlassMarbleSphereParam | Mask } marbleShell - Required shape parameter; it can be either sphere
+     *     geometry parameters (center and radius) or a prebuilt resource map mask.
+     * @param { GlassMarbleContentParam } [content] - Optional content parameters including a content mask,
+     *     tint color, scaling, saturation, and chromatic dispersion of the blended content.
+     * @returns { VisualEffect } - Returns the VisualEffect with the glass marble effect attached.
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    glassMarbleEffect(material: GlassMarbleMaterialParam, marbleShell: GlassMarbleSphereParam | Mask,
+      content?: GlassMarbleContentParam): VisualEffect;
   }
 
   /**
@@ -1138,7 +1194,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface WarpedRingParam {
 
@@ -1150,7 +1206,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     radius: double;
 
@@ -1162,7 +1218,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     baseHalfWidth: double;
 
@@ -1174,7 +1230,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     widthVariation: double;
 
@@ -1187,7 +1243,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rotateAngle: double;
 
@@ -1199,7 +1255,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rotate3DProgress: double;
 
@@ -1210,9 +1266,260 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     noiseEvolution: double;
+  }
+
+  /**
+   * Material parameters for the glass marble. Controls material properties (background color,
+   * opacity, reflection map, shadow, caustic) and shape scaling.
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface GlassMarbleMaterialParam {
+    /**
+     * Average background color. The alpha channel is not used.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    averageBgColor: Color;
+
+    /**
+     * Overall opacity of the glass effect.
+     * The value range is [0, 1]; a value of 0 is fully transparent, 1 is fully opaque.
+     * Out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    opacity: double;
+
+    /**
+     * Vertical offset of the shadow, normalized to the shape radius.
+     * The value range is [-1, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowOffset: double;
+
+    /**
+     * Radius of the shadow, normalized to the shape radius.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowRadius: double;
+
+    /**
+     * Edge softness of the shadow.
+     * The value range is [0, 1]; a value of 0 produces a hard edge, and 1 produces a fully soft edge.
+     * Out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowEdgeSoftness: double;
+
+    /**
+     * Overall opacity of the shadow.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowOpacity: double;
+
+    /**
+     * Vertical offset of the caustic (focused light), normalized to the shape radius.
+     * The value range is [-1, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticOffset: double;
+
+    /**
+     * Radius of the caustic (focused light), normalized to the shape radius.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticRadius: double;
+
+    /**
+     * Edge softness of the caustic (focused light).
+     * The value range is [0, 1]; a value of 0 produces a hard edge, and 1 produces a fully soft edge.
+     * Out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticEdgeSoftness: double;
+
+    /**
+     * Overall opacity of the caustic (focused light).
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticOpacity: double;
+
+    /**
+     * Scaling factor applied to the glass shape.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shapeScale: double;
+
+    /**
+     * Reflection map used for environment reflections on the glass surface.
+     * Created through the image module as a PixelMap instance.
+     * If not set, the default is undefined, and no reflection is applied.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    reflectionMap?: image.PixelMap;
+  }
+
+  /**
+   * Content parameters for the glass marble. Controls how the content mask is blended inside
+   * the glass shape, including the content mask itself, tint color, scaling, saturation,
+   * and chromatic dispersion.
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface GlassMarbleContentParam {
+    /**
+     * Content mask to blend additional content inside the glass shape.
+     * When provided, the content mask is sampled and composited with the glass material.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentMask: Mask;
+
+    /**
+     * Tint color applied to the content blended inside the glass shape.
+     * The alpha channel is used as the mix coefficient between the original content color and
+     * the tint color.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentTintColor: Color;
+
+    /**
+     * Scaling factor applied to the content blended inside the glass shape.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentScale: double;
+ 
+    /**
+     * Saturation of the content blended inside the glass shape.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentSaturation: double;
+ 
+    /**
+     * Chromatic dispersion of the content blended inside the glass shape.
+     * Controls the color separation at the content edges.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentDispersion: double;
+  }
+
+  /**
+   * Sphere shape parameters for the glass marble. Defines the geometry of the glass shape
+   * through a center position and a radius, all in normalized coordinates relative to the
+   * component bounds.
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface GlassMarbleSphereParam {
+    /**
+     * Normalized center position of the sphere shape.
+     * [0, 0] represents the top-left corner and [1, 1] represents the bottom-right corner
+     * of the component bounds. Values outside [0, 1] will be clamped internally.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    center: [double, double];
+
+    /**
+     * Normalized radius of the sphere shape.
+     * The value range is [0, 1]; out-of-range values will be clamped internally.
+     * A value of 1 means the sphere diameter equals the minimum of the component's width and height.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    radius: double;
   }
 
   /**
@@ -1233,7 +1540,7 @@ declare namespace uiEffect {
    * @unionmember { BrightnessBlender } Brightness blender
    * @unionmember { HdrBrightnessBlender } HDR-enabled brightness blender [since 20]
    * @unionmember { HdrDarkenBlender } HDR-adaptive darken blender [since 26.0.0]
-   * @unionmember { ColorfulBrightnessBlender } Colorful brightness darken blender  [since 26.1.0]
+   * @unionmember { ColorfulBrightnessBlender } Hue-preserving brightening and darkening blender [since 26.2.0]
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
@@ -1411,33 +1718,39 @@ declare namespace uiEffect {
   }
 
   /**
-   * Parameter list of ColorfulBrightnessBlenderOptions, used to configure various properties of the colorful
-   * brightness darken effect, including the foreground darken weight, brightness darken strength, luma difference
-   * threshold, and HDR switch parameters.
+   * Optional enhanced configuration for the hue-preserving brightening and darkening blender, passed in as the
+   * options parameter of createColorfulBrightnessBlender. In addition to the regular BrightnessBlenderParam, it can
+   * be further fine-tuned for the brightening or darkening direction, color enhancement strength, input color
+   * influence, contrast against the background, and the HDR switch. If not passed, each item uses its default value.
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   interface ColorfulBrightnessBlenderOptions {
     /**
-     * Foreground color darken weight. When the value is 1, the color tends to be darker than the original color;
-     * when the value is 0, the color tends to be brighter than the original color.
-     * The value range is [0, 1], and values outside the range will be clamped during implementation.
+     * Foreground darken weight, which controls the direction and strength of brightening/darkening. When set to 0,
+     * the foreground is brightened, the foreground tends to be brighter than the background to ensure readability;
+     * when set to 1, the foreground is darkened, the foreground tends to be darker than the background; values
+     * between 0 and 1 are a transition between brightening and darkening. The default value is 1. The value range is
+     * [0, 1], and values outside the range will be clamped during implementation.
      *
      * @default 1
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     darkenWeight?: double;
 
     /**
-     * Brightness darken effect strength. The value range is [0, 1], and values outside the range will be
+     * Color enhancement strength, which controls the degree of saturation enhancement for the foreground. When set
+     * to 0, no additional saturation is enhanced and the foreground retains its original saturation; the larger the
+     * value, the more obvious the saturation enhancement. When set to 1, the enhancement reaches its maximum and the
+     * colors are most vivid. The default value is 0. The value range is [0, 1], and values outside the range will be
      * clamped during implementation.
      *
      * @default 0
@@ -1445,68 +1758,96 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     vibrancyStrength?: double;
 
     /**
-     * Luma difference threshold to ensure readability. The value range is [0, 1], and values outside the range
-     * will be clamped during implementation.
+     * Luma difference threshold to ensure readability, used to constrain the luma difference between the foreground
+     * and background to maintain sufficient contrast. When set to 0, no additional luma difference is enforced, the
+     * weakest readability constraint; the larger the value, the larger the enforced luma difference and the stronger
+     * the contrast; when set to 1, the maximum luma difference is enforced. The default value is 0. The value range
+     * is [0, 1], and values outside the range will be clamped during implementation.
      *
      * @default 0
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     lumaDiff?: double;
 
     /**
-     * Whether to actively enable HDR. When disabled, HDR may still be passively triggered if the foreground or
-     * background is HDR.
+     * Whether to actively enable HDR. When set to true, HDR is actively enabled and the resulting brightness can
+     * exceed the SDR range (>1.0), presenting higher brightness on HDR devices, suitable for HDR content;
+     * when set to false, HDR is not actively enabled and the result is limited to the SDR range (≤1.0), but HDR may
+     * still be passively triggered when the foreground or background itself is HDR. The default value is false.
      *
-     * @default true
+     * @default false
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     hdrEnabled?: boolean;
+
+    /**
+     * Input color influence, which controls the degree to which the input color participates in the
+     * brightening/darkening calculation. When set to 1, the input color fully participates in the calculation and
+     * the output result retains the color tendency of the input color; when set to 0, the input color does not
+     * participate in the calculation and the output result is not affected by the input color, performing
+     * brightening/darkening directly based on the background color; values between 0 and 1 are an interpolation
+     * transition between the two. The default value is 1. The value range is [0, 1], and values outside the range
+     * will be clamped during implementation.
+     *
+     * @default 1
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form
+     * @since 26.2.0 dynamiconly
+     */
+    tintedColorPercent?: double;
   }
 
  /**
-    * Colorful brightness darken blender, used to add a colorful brightness darken effect to a specified component.
-    * Before calling ColorfulBrightnessBlender, you need to first create a ColorfulBrightnessBlender instance
-    * through createColorfulBrightnessBlender.
+    * Hue-preserving brightening and darkening blender, used to add the brightening and darkening effect to a
+    * specified component. This effect preserves hue by reconstructing it channel by channel when brightening or
+    * darkening the foreground, and can enhance saturation to avoid the desaturation issue of common
+    * brightening/darkening; it also uses a luma difference threshold to ensure the contrast between
+    * the foreground and background. Before calling ColorfulBrightnessBlender, you need to first create a
+    * ColorfulBrightnessBlender instance through createColorfulBrightnessBlender.
     *
     * @syscap SystemCapability.Graphics.Drawing
     * @systemapi
     * @stagemodelonly
     * @form
-    * @since 26.1.0 dynamiconly
+    * @since 26.2.0 dynamiconly
     */
   interface ColorfulBrightnessBlender {
     /**
-     * Regular parameters for the colorful brightness darken effect. For details, see BrightnessBlenderParam.
+     * Regular parameters for brightening and darkening, used to configure basic properties such as brightness
+     * mapping and saturation curves.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     brightnessBlenderParam: BrightnessBlenderParam;
 
     /**
-     * Enhanced parameters for the colorful brightness darken effect. For details, see ColorfulBrightnessBlenderOptions.
+     * Enhanced parameters for brightening and darkening, used to control the brightening/darkening direction, color
+     * enhancement strength, readability threshold, and HDR switch.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     options?: ColorfulBrightnessBlenderOptions;
   }
@@ -1568,7 +1909,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum PrismShapeType {
   
@@ -1578,7 +1919,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ROUNDED_RECT = 0,
 
@@ -1588,7 +1929,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ELLIPSE = 1
   }
@@ -1599,7 +1940,7 @@ declare namespace uiEffect {
   * @syscap SystemCapability.Graphics.Drawing
   * @systemapi
   * @stagemodelonly
-  * @since 26.1.0 dynamic&static
+  * @since 26.0.1 dynamic&static
   */
   interface SweepRefractionParam {
 
@@ -1611,7 +1952,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     maskRadius: double;
 
@@ -1622,7 +1963,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     edgeThickness: double;
 
@@ -1633,7 +1974,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     refractAmount: double;
 
@@ -1644,7 +1985,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rippleWidth: double;
 
@@ -1655,7 +1996,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepOffset: double;
 
@@ -1666,7 +2007,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     chromaDelta: double;
   }
@@ -1677,7 +2018,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface SweepRefractionMaskOptions {
 
@@ -1688,7 +2029,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     shapeType?: PrismShapeType;
 
@@ -1701,7 +2042,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     cornerRadius?: double;
 
@@ -1714,7 +2055,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prismWidth?: double;
 
@@ -1727,7 +2068,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prismHeight?: double;
 
@@ -1740,7 +2081,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepCenterX?: double;
 
@@ -1753,7 +2094,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepCenterY?: double ;
   }
@@ -1930,7 +2271,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createSweepRefractionMask(param: SweepRefractionParam, options?: SweepRefractionMaskOptions): Mask;
 
@@ -1942,7 +2283,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createWarpedRingMask(ringParam: WarpedRingParam): Mask;
 
@@ -1968,7 +2309,7 @@ declare namespace uiEffect {
       * @syscap SystemCapability.Graphics.Drawing
       * @systemapi
       * @stagemodelonly
-      * @since 26.1.0 dynamic&static
+      * @since 26.0.1 dynamic&static
       */
     static createFractalGlassMask(glassNum: int, glassStrength: double, glassSoftness: double,
       isSymmetric: boolean, refractMask?: image.PixelMap): Mask;
@@ -1989,9 +2330,22 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createBinocularMask(radiusX: double, radiusY: double, gap: double, softness: double): Mask;
+
+    /**
+     * Creates an atlas frame mask for sprite sheet frame animation.
+     * The mask carries atlas frame parameters used to drive atlas frame animation.
+     *
+     * @param { drawing.AtlasImage } atlasInfo - the atlas frame parameters.
+     * @returns { Mask } - Returns a Mask with the atlas frame parameters.
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    static createAtlasFrameMask(atlasInfo: drawing.AtlasImage): Mask;
   }
 
   /**
@@ -2072,18 +2426,21 @@ declare namespace uiEffect {
     grayscaleFactor?: [double, double, double]): HdrDarkenBlender;
 
   /**
-   * Creates a ColorfulBrightnessBlender instance for adding a colorful brightness darken effect to a component.
+   * Creates a ColorfulBrightnessBlender instance to add a hue-preserving brightening and darkening effect to a
+   * component. This effect preserves hue by reconstructing it channel by channel when brightening or darkening
+   * the foreground, and can enhance saturation to avoid the desaturation issue of common brightening/darkening.
    *
-   * @param { BrightnessBlenderParam } brightnessBlenderParam - Regular parameters for the colorful brightness darken
-   *     effect.
-   * @param { ColorfulBrightnessBlenderOptions } [options] - Enhanced parameters for the
-   *     colorful brightness darken effect.
-   * @returns { ColorfulBrightnessBlender } Returns the colorful brightness darken blender.
+   * @param { BrightnessBlenderParam } brightnessBlenderParam - Regular parameters for brightening and darkening,
+   *     used to configure basic properties such as brightness mapping and saturation curves.
+   * @param { ColorfulBrightnessBlenderOptions } [options] - Enhanced parameters for brightening and darkening,
+   *     used to control the brightening/darkening direction, color enhancement strength, readability threshold,
+   *     and HDR switch.
+   * @returns { ColorfulBrightnessBlender } Returns the hue-preserving brightening and darkening blender.
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   function createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
     options?: ColorfulBrightnessBlenderOptions): ColorfulBrightnessBlender;

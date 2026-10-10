@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file WebView控制
  * @kit ArkWeb
  */
 
@@ -1641,7 +1641,7 @@ declare namespace webview {
      *     <br>2. Incorrect parameter types.
      * @throws { BusinessError } 17100002 - URL error. No valid cookie found for the specified URL.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -1787,7 +1787,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100005 - The provided cookie value is invalid. It must follow the format specified
      *     <br>in RFC 6265.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -1821,7 +1821,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100005 - The provided cookie value is invalid. It must follow the format specified
      *     <br>in RFC 6265.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @since 14 dynamic
      */
     static configCookieSync(url: string, value: string, incognito: boolean, includeHttpOnly: boolean): void;
@@ -1890,7 +1890,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100005 - The provided cookie value is invalid. It must follow the format specified
      *     <br>in RFC 6265.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @since 14 dynamic
      */
     static configCookie(url: string, value: string, incognito: boolean, includeHttpOnly: boolean): Promise<void>;
@@ -1957,7 +1957,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -1975,7 +1975,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2000,7 +2000,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2026,7 +2026,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2064,7 +2064,7 @@ declare namespace webview {
      *     <br>默认值：false。
      *     <br>传入undefined或null时不清除cookies。
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -2111,7 +2111,7 @@ declare namespace webview {
      * 清除所有会话cookie。
      *
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -3008,7 +3008,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    IMAGE = 0,
+    IMAGE,
 
     /**
      * CSS类型的资源。
@@ -3016,7 +3016,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    CSS = 1,
+    CSS,
 
     /**
      * 通过<script src="" />标签加载的JavaScript资源。
@@ -3024,7 +3024,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    CLASSIC_JS = 2,
+    CLASSIC_JS,
 
     /**
      * 通过<script src="" type="module" />标签加载的JavaScript资源。
@@ -3032,7 +3032,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    MODULE_JS = 3
+    MODULE_JS
   }
 
   /**
@@ -4507,7 +4507,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100001 - Init error.
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -5445,7 +5445,7 @@ declare namespace webview {
      *
      * @returns {string} ArkWeb默认User-Agent字符串。
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @since 14 dynamic
      */
     static getDefaultUserAgent(): string;
@@ -6312,6 +6312,35 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     executeAIPageCommand(command: string): Promise<string>;
+
+    /**
+     * 调用此接口设置当前网页的浏览器级缩放倍率。文字与图片同时缩放，页面重新布局（reflow）以适应Web组件宽度。
+     * 该接口与{@link zoom}、{@link zoomIn}、{@link zoomOut}（仅视觉缩放，不触发重新布局）以及
+     * {@link textZoomRatio}（仅缩放文字）相互独立。缩放倍率仅作用于当前Web组件实例，页面内跨文档跳转后保持不变。
+     *
+     * @param { number } zoomFactor - 要设置的浏览器级缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
+     *     <br>取值范围：[0.25, 5]。
+     *     <br>超出该范围的值会被裁剪到边界值。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    setZoomFactor(zoomFactor: number): void;
+
+    /**
+     * 获取当前网页的浏览器级缩放倍率。
+     *
+     * @returns { number } 当前浏览器级缩放倍率。**1**表示不缩放。
+     *     <br>取值范围：[0.25, 5.0]，默认值为**1**。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    getZoomFactor(): number;
   }
 
   /**
@@ -7580,7 +7609,7 @@ declare namespace webview {
      * @param { number } customErrorCode - 该响应的自定义错误码。
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     setCustomErrorCode(customErrorCode: number): void;
     /**
@@ -7589,7 +7618,7 @@ declare namespace webview {
      * @returns { number } 当前Response的自定义错误码。
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     getCustomErrorCode(): number;
   }
@@ -7689,7 +7718,7 @@ declare namespace webview {
      *     详情参考[WebResourceError.getCustomErrorCode]{@link WebResourceError#getCustomErrorCode}。
      * @throws { BusinessError } 17100021 - The resource handler is invalid.
      * @syscap SystemCapability.Web.Webview.Core
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     didFail(code: WebNetErrorList, completeIfNoResponse: boolean, customErrorCode: number): void;
   }
@@ -8295,6 +8324,10 @@ declare namespace webview {
     /**
      * 媒体源的类型。
      *
+     * 只读：否
+     * 
+     * 可选：否
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
@@ -8303,6 +8336,10 @@ declare namespace webview {
     /**
      * 媒体源地址。
      *
+     * 只读：否
+     * 
+     * 可选：否
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -8312,6 +8349,10 @@ declare namespace webview {
     /**
      * 媒体源格式，可能为空，需要开发者自行判断格式。
      *
+     * 只读：否
+     * 
+     * 可选：否
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -8378,6 +8419,10 @@ declare namespace webview {
      * 
      * 详见[NativeEmbedDataInfo]{@link NativeEmbedDataInfo}。
      *
+     * 只读：否
+     * 
+     * 可选：否
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -8387,6 +8432,10 @@ declare namespace webview {
     /**
      * surface 的位置信息，用于指定同层渲染时 surface 的显示位置和尺寸。
      *
+     * 只读：否
+     * 
+     * 可选：否
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
@@ -8714,7 +8763,7 @@ declare namespace webview {
     mediaTakeOver: boolean;
 
     /**
-     * Constructs a **BackForwardCacheSupportedFeatures** object.
+     * BackForwardCacheSupportedFeatures的构造函数。
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
@@ -8750,6 +8799,8 @@ declare namespace webview {
      * 设置为0或负数时，前进后退缓存功能不生效。
      * 
      * 默认值：600。
+     * 
+     * 单位：秒。
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic

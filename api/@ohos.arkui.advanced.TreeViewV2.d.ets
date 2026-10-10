@@ -19,7 +19,7 @@
  */
 
 /**
- * Callback method of event registration and processing.
+ * Defines the node event callback function.
  *
  * @param { CallbackParamV2 } callbackParam - The result of event.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30,7 +30,12 @@
  */
 declare type OnChangedCallback = (callbackParam: CallbackParamV2) => void;
 /**
- * Declare class TreeListenerV2
+ * Defines the listener of the tree view component, which is used to listen for changes to tree view nodes. Bind this
+ * object to a tree view component before use. A single tree view listener cannot control multiple tree view components.
+ * This listener provides two event registration modes: **on** and **once**. The **on** method continuously listens for
+ * events until canceled, while the **once** method listens once and then is automatically destroyed. After use, call
+ * **offNodeClick**, **offNodeAdd**, and other methods to cancel listening when the component is destroyed, to avoid
+ * memory leaks.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -40,10 +45,10 @@ declare type OnChangedCallback = (callbackParam: CallbackParamV2) => void;
  */
 export declare class TreeListenerV2 {
   /**
-   * Node click event registration and processing.
-   * The event will not be destroyed after being processed.
+   * Registers a listener for the node click event, which takes effect continuously. This API uses a callback to
+   * return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback invoked when a node is clicked.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -53,10 +58,10 @@ export declare class TreeListenerV2 {
   onNodeClick(callback: OnChangedCallback): void;
 
   /**
-   * Node click event registration and processing.
-   * After the event is processed once, it will be destroyed.
+   * Registers a node click event listener, which is automatically destroyed after being triggered once. This API uses
+   * a callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback for the node click event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -66,9 +71,10 @@ export declare class TreeListenerV2 {
   onceNodeClick(callback: OnChangedCallback): void;
 
   /**
-   * Destroy node click callback event.
+   * Unregisters the node click event listener. This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } [callback]
+   * @param { OnChangedCallback } [callback] - Callback for the node click event. If this parameter is passed, the
+   *     corresponding listener is removed; otherwise, all node click listeners are removed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -78,10 +84,10 @@ export declare class TreeListenerV2 {
   offNodeClick(callback?: OnChangedCallback): void;
 
   /**
-   * Node add event registration and processing.
-   * The event will not be destroyed after being processed.
+   * Registers a listener for the node addition event, which takes effect continuously. This API uses a callback to
+   * return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback invoked when a node is added.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -91,10 +97,10 @@ export declare class TreeListenerV2 {
   onNodeAdd(callback: OnChangedCallback): void;
 
   /**
-   * Node add event registration and processing.
-   * After the event is processed once, it will be destroyed.
+   * Registers a node add event listener, which is automatically destroyed after being triggered once. This API uses a
+   * callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback for the node addition event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -104,9 +110,10 @@ export declare class TreeListenerV2 {
   onceNodeAdd(callback: OnChangedCallback): void;
 
   /**
-   * Destroy node add callback event.
+   * Unregisters the node add event listener. This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } [callback]
+   * @param { OnChangedCallback } [callback] - Callback for the node addition event. If this parameter is passed in,
+   *     the corresponding listener is canceled; otherwise, all node addition listeners are canceled.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -116,10 +123,10 @@ export declare class TreeListenerV2 {
   offNodeAdd(callback?: OnChangedCallback): void;
 
   /**
-   * Node delete event registration and processing.
-   * The event will not be destroyed after being processed.
+   * Registers a listener for the node deletion event, which takes effect continuously. This API uses an asynchronous
+   * callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback invoked when a node is deleted.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -129,10 +136,10 @@ export declare class TreeListenerV2 {
   onNodeDelete(callback: OnChangedCallback): void;
 
   /**
-   * Node delete event registration and processing.
-   * After the event is processed once, it will be destroyed.
+   * Registers a node deletion event listener. The listener is automatically destroyed after being triggered once.
+   * This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback for the node deletion event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -142,9 +149,10 @@ export declare class TreeListenerV2 {
   onceNodeDelete(callback: OnChangedCallback): void;
 
   /**
-   * Destroy node delete callback event.
+   * Unregisters from the node deletion event. This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } [callback]
+   * @param { OnChangedCallback } [callback] - Callback for the node deletion event. If this parameter is passed, the
+   *     corresponding listener is unregistered; otherwise, all node deletion listeners are unregistered.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -154,10 +162,10 @@ export declare class TreeListenerV2 {
   offNodeDelete(callback?: OnChangedCallback): void;
 
   /**
-   * Node modify event registration and processing.
-   * The event will not be destroyed after being processed.
+   * Registers a listener for the node modification event, which takes effect continuously. This API uses a callback
+   * to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback for the node modification event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -167,10 +175,10 @@ export declare class TreeListenerV2 {
   onNodeModify(callback: OnChangedCallback): void;
 
   /**
-   * Node modify event registration and processing.
-   * After the event is processed once, it will be destroyed.
+   * Registers a node modification event listener, which is automatically destroyed after being triggered once. This
+   * API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback for the node modification event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -180,9 +188,10 @@ export declare class TreeListenerV2 {
   onceNodeModify(callback: OnChangedCallback): void;
 
   /**
-   * Destroy node modify callback event.
+   * Unregisters the node modification event listener. This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } [callback]
+   * @param { OnChangedCallback } [callback] - Callback for the node modification event. If this parameter is passed,
+   *     the corresponding listener is canceled; otherwise, all node modification listeners are canceled.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -192,10 +201,10 @@ export declare class TreeListenerV2 {
   offNodeModify(callback?: OnChangedCallback): void;
 
   /**
-   * Node move event registration and processing.
-   * The event will not be destroyed after being processed.
+   * Registers a node move event listener that takes effect continuously. Node move is triggered by drag operations.
+   * This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback invoked when a node is moved.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -205,10 +214,10 @@ export declare class TreeListenerV2 {
   onNodeMove(callback: OnChangedCallback): void;
 
   /**
-   * Node move event registration and processing.
-   * After the event is processed once, it will be destroyed.
+   * Registers a node move event listener that is automatically destroyed after being triggered once. Node move is
+   * triggered by drag operations. This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } callback
+   * @param { OnChangedCallback } callback - Callback for the node move event.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -218,9 +227,10 @@ export declare class TreeListenerV2 {
   onceNodeMove(callback: OnChangedCallback): void;
 
   /**
-   * Destroy node move callback event.
+   * Unregisters the node move event listener. This API uses a callback to return the result.
    *
-   * @param { OnChangedCallback } [callback]
+   * @param { OnChangedCallback } [callback] - Callback for the node move event. If this parameter is passed in, the
+   *     corresponding listener is unregistered; otherwise, all node move listeners are unregistered.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -231,7 +241,10 @@ export declare class TreeListenerV2 {
 }
 
 /**
- * Declare class TreeListenerManagerV2
+ * Defines the listener manager of the tree view component, which is used to manage changes to tree view listeners. Bind
+ * this object to the tree view component before use. The same listener manager cannot control multiple tree view
+ * components. This manager is designed in singleton mode. Obtain the globally unique instance through **getInstance**,
+ * and then obtain the listener instance through **getTreeListener**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -241,9 +254,9 @@ export declare class TreeListenerV2 {
  */
 export declare class TreeListenerManagerV2 {
   /**
-   * Get instance of treeListenerManagerV2.
+   * Obtains the singleton object of the tree view component listener manager.
    *
-   * @returns { TreeListenerManagerV2 } - Returns the treeListenerManagerV2 instance.
+   * @returns { TreeListenerManagerV2 } Singleton object of the listener manager of the tree view component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -252,9 +265,10 @@ export declare class TreeListenerManagerV2 {
    */
   static getInstance(): TreeListenerManagerV2;
   /**
-   * Get treeListenerV2.
+   * Obtains a tree view listener instance.
    *
-   * @returns { TreeListenerV2 } - Returns the treeListenerV2 object.
+   * @returns { TreeListenerV2 } Tree view listener instance, used to register or unregister event listeners for node
+   *     click, add, delete, modify, and move operations of the tree view.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -265,7 +279,30 @@ export declare class TreeListenerManagerV2 {
 }
 
 /**
- * Declare TreeViewV2 Component
+ * The **TreeViewV2** component is displayed as a list in a hierarchical manner, which is suitable for displaying nested
+ * structures. It has parent nodes and child nodes, can be expanded or collapsed, and supports node addition, deletion,
+ * modification, drag-and-drop movement, custom icons, event listening, and context menus.
+ *
+ * It is used in productivity apps, such as the side navigation bars in memos, emails, and galleries. It is suitable for
+ * scenarios that require displaying and managing hierarchical data and supporting node interaction operations.
+ *
+ * This component is implemented based on
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
+ * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1),
+ * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
+ * longer limited to the component level. With state management V2, you can more flexibly control the data and state of
+ * the tree view through this component, achieving more efficient UI refresh.
+ *
+ * > **NOTE**
+ * >
+ * > - This module's APIs can only be used in the stage model.
+ * >
+ * > - If [universal attributes]{@link ./@internal/component/ets/common} and
+ * > [universal events]{@link ./@internal/component/ets/common} are set for **TreeViewV2**, the compilation toolchain
+ * > will generate an additional node \_\_Common\_\_ and mount the universal attributes or universal events on \_\
+ * > _Common\_\_, rather than directly applying them to **TreeViewV2** itself. This may cause the set universal
+ * > attributes or universal events to not take effect or behave unexpectedly. Therefore, it is not recommended to set
+ * > universal attributes and universal events on **TreeViewV2**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -276,7 +313,9 @@ export declare class TreeListenerManagerV2 {
 @ComponentV2
 export declare struct TreeViewV2 {
   /**
-   * Node data source of TreeViewV2.
+   * Controller of the tree view nodes, used to control the node information of the tree. After being bound to the
+   * tree view component, it can be used to add, delete, and modify nodes. The same controller cannot control multiple
+   * tree view components.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -289,7 +328,7 @@ export declare struct TreeViewV2 {
 }
 
 /**
- * Declare CallbackParamV2
+ * Defines the node callback parameter API, used to pass parameter information of node event callbacks.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -299,7 +338,9 @@ export declare struct TreeViewV2 {
  */
 export interface CallbackParamV2 {
   /**
-   * Get the currentNodeId.
+   * ID of the current node.
+   *
+   * Value range: greater than or equal to 0.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -309,7 +350,11 @@ export interface CallbackParamV2 {
    */
   currentNodeId: number;
   /**
-   * Get the parentNodeId.
+   * ID of the current parent node.
+   *
+   * Value range: greater than or equal to -1.
+   *
+   * Default value: **-1**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -319,7 +364,13 @@ export interface CallbackParamV2 {
    */
   parentNodeId?: number;
   /**
-   * Get the childIndex.
+   * Child index.
+   *
+   * Value range: greater than or equal to -1.
+   *
+   * Default value: **-1**
+   *
+   * Valid only in the node move event, indicating the position index after the move.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -330,7 +381,7 @@ export interface CallbackParamV2 {
   childIndex?: number;
 }
 /**
- * Set subcomponent binded on tree item.
+ * Defines a container callback function type, which is used to define child component callbacks bound to tree nodes.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -340,7 +391,7 @@ export interface CallbackParamV2 {
  */
 declare type OnContainerCallback = () => void;
 /**
- * Declare NodeParamV2
+ * Defines the node parameter API, which is used to configure the properties of a tree node.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -350,7 +401,12 @@ declare type OnContainerCallback = () => void;
  */
 export interface NodeParamV2 {
   /**
-   * Set the parentNodeId.
+   * Parent node ID.
+   *
+   * Value range: greater than or equal to -1.
+   *
+   * Default value: **-1**, which is the root node ID. If the value is less than -1, the node is invalid and is not
+   * displayed in the tree view.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -361,7 +417,14 @@ export interface NodeParamV2 {
   parentNodeId?: number;
 
   /**
-   * Set currentNodeId.
+   * Current child node ID.
+   *
+   * Value range: greater than or equal to -1.
+   *
+   * It cannot be the root node ID or null; otherwise, an exception is thrown. Two identical **currentNodeId** values
+   * cannot be set.
+   *
+   * Default value: **-1**, which means the node ID is not specified and is automatically assigned by the system.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -372,9 +435,10 @@ export interface NodeParamV2 {
   currentNodeId?: number;
 
   /**
-   * Whether the node is a directory.
-   * Default value: false.
-   * true: The node is a directory. false: The node is not a directory.
+   * Whether the node is a folder. The value **true** indicates a directory node that can contain child nodes (used
+   * when a parent node that can be expanded is required); the value **false** indicates a leaf node that cannot
+   * contain child nodes (used when a non-expandable terminal node is required). If this parameter is not passed, the
+   * default value **false** (leaf node) is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -385,7 +449,11 @@ export interface NodeParamV2 {
   isFolder?: boolean;
 
   /**
-   * Set the icon resource.
+   * Icon used to customize the default icon of the node. Pass this parameter when a custom icon needs to be specified
+   * for the node. If it is not passed, the node displays the system default icon. When **symbolIconStyle** is also
+   * set, only the symbol icon is displayed and **icon** does not take effect.
+   *
+   * Default value: empty string, which means no custom icon is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -396,7 +464,12 @@ export interface NodeParamV2 {
   icon?: ResourceStr;
 
   /**
-   * Set the symbol resource.
+   * Symbol icon style used to set the system symbol icon. Pass this parameter when a system symbol icon is required (
+   * for example, when consistency with the system style and dynamic color support are needed). If it is not passed,
+   * the icon specified by the **icon** parameter is used. Its display priority is higher than that of icon. When both
+   * **symbolIconStyle** and **icon** are set, only the symbol icon is displayed.
+   *
+   * Default value: **undefined**, which means no Symbol icon is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -407,7 +480,12 @@ export interface NodeParamV2 {
   symbolIconStyle?: SymbolGlyphModifier;
 
   /**
-   * Set selected icon resource.
+   * Selected icon used to customize the icon displayed when the node is selected. Pass this parameter when an icon
+   * different from the default state needs to be displayed in the node selection state. If it is not passed, the node
+   * displays the same icon as in the unselected state after being selected. When **symbolSelectedIconStyle** is also
+   * set, only the symbol selected icon is displayed and **selectedIcon** does not take effect.
+   *
+   * Default value: empty string, which means no custom selected icon is displayed when the node is selected.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -418,7 +496,13 @@ export interface NodeParamV2 {
   selectedIcon?: ResourceStr;
 
   /**
-   * Set selected symbol resource.
+   * Symbol selected icon style used to set the system Symbol icon when the node is selected. Pass this parameter when
+   * a system symbol icon is required as the selected icon (for example, when consistency with the system style and
+   * dynamic color support are needed). If it is not passed, the node displays the same icon as in the unselected
+   * state after being selected. Its priority is higher than that of **selectedIcon**. When both
+   * **symbolSelectedIconStyle** and **selectedIcon** are set, only the symbol selected icon is displayed.
+   *
+   * Default value: **undefined**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -429,7 +513,12 @@ export interface NodeParamV2 {
   symbolSelectedIconStyle?: SymbolGlyphModifier;
 
   /**
-   * Set edit icon resource.
+   * Edit icon used to customize the icon displayed when the node enters the editing state. Pass this parameter when
+   * an icon different from the default state needs to be displayed in the node editing state. If it is not passed,
+   * the node displays the same icon as in the non-editing state in the editing state. When **symbolEditIconStyle** is
+   * also set, only the symbol edit icon is displayed and **editIcon** does not take effect.
+   *
+   * Default value: empty string, which means no custom edit icon is displayed in the editing state.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -440,7 +529,13 @@ export interface NodeParamV2 {
   editIcon?: ResourceStr;
 
   /**
-   * Set edit symbol resource.
+   * Symbol edit icon style used to set the system symbol icon in the node editing state. Pass this parameter when a
+   * system symbol icon is required as the edit icon (for example, when consistency with the system style and dynamic
+   * color support are needed). If it is not passed, the node displays the same icon as in the non-editing state in
+   * the editing state. Its priority is higher than that of **editIcon**. When both **symbolEditIconStyle** and
+   * **editIcon** are set, only the symbol edit icon is displayed.
+   *
+   * Default value: **undefined**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -451,7 +546,9 @@ export interface NodeParamV2 {
   symbolEditIconStyle?: SymbolGlyphModifier;
 
   /**
-   * Set primary title content.
+   * Primary title.
+   *
+   * Default value: empty string, which means no primary title is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -462,7 +559,9 @@ export interface NodeParamV2 {
   primaryTitle?: ResourceStr;
 
   /**
-   * Set secondary title content.
+   * Secondary title.
+   *
+   * Default value: empty string, which means no secondary title is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -473,7 +572,11 @@ export interface NodeParamV2 {
   secondaryTitle?: ResourceStr;
 
   /**
-   * set subcomponent binded on tree item.
+   * Right-click child component container bound to the node. The child component is decorated by **@Builder**. Pass
+   * this parameter when a right-click menu or custom right-click operation needs to be provided for the node. If it
+   * is not passed, the node does not display a right-click menu.
+   *
+   * Default value: **() => void**, which means no right-click child component container is bound.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -485,7 +588,8 @@ export interface NodeParamV2 {
 }
 
 /**
- * Declare TreeControllerV2
+ * Controller of the tree view component, used to control the node information of the tree. Bind this object to the tree
+ * view component before use. The same controller cannot control multiple tree view components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -495,9 +599,7 @@ export interface NodeParamV2 {
  */
 export declare class TreeControllerV2 {
   /**
-   * Delete a node.
-   * Register an ON_ITEM_DELETE callback through the ListTreeListenerV2 mechanism
-   * to obtain the IDs of all deleted nodes.
+   * Deletes the tapped node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -508,8 +610,7 @@ export declare class TreeControllerV2 {
   removeNode(): void;
 
   /**
-   * Modify the node name.
-   * Register an ON_ITEM_MODIFY callback to obtain the ID, parent node ID, and node name of the modified node.
+   * Modifies the tapped node.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -520,13 +621,15 @@ export declare class TreeControllerV2 {
   modifyNode(): void;
 
   /**
-   * Initialize the interface of the tree view. This interface is used to generate ListNodeDataSource data.
-   * addNode is only designed for initialization. It can only be invoked during initialization.
-   * A maximum of 50 directory levels can be added.
-   * For details, see the comment description of NodeParam.
+   * Adds a child node to the tapped node. After the node is added, you must call
+   * [buildDone()]{@link TreeControllerV2#buildDone} to trigger the saving of tree information; otherwise, the added
+   * node will not be displayed in the tree view. Chained calls are supported, for example,
+   * **addNode().addNode().buildDone()**.
    *
-   * @param { NodeParamV2 } [nodeParam] - Configuration information of the newly added node.
-   * @returns { TreeControllerV2 } - ListTreeNode Tree view component proxy class.
+   * @param { NodeParamV2 } [nodeParam] - Node information, used to specify the attributes of the node to be added. If
+   *     this parameter is not passed, a node titled "New Folder" is added under the currently selected node.
+   * @returns { TreeControllerV2 } Controller of the tree view component, used to chain other tree view control
+   *     methods.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -536,12 +639,15 @@ export declare class TreeControllerV2 {
   addNode(nodeParam?: NodeParamV2): TreeControllerV2;
 
   /**
-   * This interface is called when a secondaryTitle needs to be updated
+   * Locates the parent node based on the passed **parentId**, and updates the subtitle of the parent node (
+   * **parentSubTitle**) and the subtitle of the current node (**currentSubtitle**).
    *
-   * @param { number } parentId - ID of the parent node.
-   *     <br>Value range:The value must be greater than or equal to -1.
-   * @param { ResourceStr } parentSubTitle - secondaryTitle of parent node.
-   * @param { ResourceStr } currentSubtitle - secondaryTitle of current node.
+   * @param { number } parentId - ID of the parent node.<br />Value range: greater than or equal to -1.<br />If a
+   *     value less than -1 is passed, the node is invalid.
+   * @param { ResourceStr } parentSubTitle - Subtitle of the parent node, used to update the subtitle displayed on the
+   *     parent node.
+   * @param { ResourceStr } currentSubtitle - Subtitle of the current node, used to update the subtitle displayed on
+   *     the current node.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -551,9 +657,10 @@ export declare class TreeControllerV2 {
   refreshNode(parentId: number, parentSubTitle: ResourceStr, currentSubtitle: ResourceStr): void;
 
   /**
-   * After the initialization is complete by calling the addNode interface,
-   * call this interface to complete initialization.
-   * This interface must be called when you finish initializing the ListTreeViewV2 by addNode.
+   * Builds the tree view. After all nodes are added, this method must be called to trigger the saving of tree
+   * information. This API uses a two-phase build mode: first add nodes to the memory through **addNode**, and then
+   * call this method to save the node information in a unified manner and render it into the tree view. If this
+   * method is not called, the added nodes will not be displayed in the tree view.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

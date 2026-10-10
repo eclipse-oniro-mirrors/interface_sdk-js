@@ -14,24 +14,23 @@
  */
 
 /**
- * @file
+ *
+ * @file distributedBundleManager Module
  * @kit AbilityKit
  */
 
 import { AsyncCallback } from './@ohos.base';
 import { ElementName } from './bundleManager/ElementName';
 import { RemoteAbilityInfo as _RemoteAbilityInfo } from './bundleManager/RemoteAbilityInfo';
+import { ModuleMetadata } from './bundleManager/ApplicationInfo';
+
 /**
  * # System Capabilities
- *
+ * 
  * SystemCapability.BundleManager.DistributedBundleFramework
  */
 /**
  * The module provides APIs for managing distributed bundles.
- *
- * > **NOTE**
- * >
- * > The APIs provided by this module are system APIs.
  *
  * @syscap SystemCapability.BundleManager.DistributedBundleFramework
  * @systemapi
@@ -45,9 +44,9 @@ declare namespace distributedBundleManager {
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { ElementName } elementName - Target element name.
-   * @param { AsyncCallback<RemoteAbilityInfo> } callback - [Callback]{@link @ohos.base:AsyncCallback} used to return
-   *     the result. If the operation is successful, **err** is **null** and **data** is the RemoteAbilityInfo object
-   *     obtained. Otherwise, **err** is an error object and **data** is **undefined**.
+   * @param { AsyncCallback<RemoteAbilityInfo> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}. If the call
+   *     succeeds, err is null and data is the RemoteAbilityInfo object. If the call fails, err is an error object and
+   *     data is undefined.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -89,14 +88,14 @@ declare namespace distributedBundleManager {
   function getRemoteAbilityInfo(elementName: ElementName): Promise<RemoteAbilityInfo>;
 
   /**
-   * Obtains information about the remote abilities that match the given element names. This API uses an asynchronous
-   * callback to return the result.
+   * Obtains the AbilityInfo array information of the application on the specified remote device identified by
+   * elementNames. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-   * @param { Array<ElementName> } elementNames - **ElementName** array, whose maximum length is 10.
-   * @param { AsyncCallback<Array<RemoteAbilityInfo>> } callback - [Callback]{@link @ohos.base:AsyncCallback} used to
-   *     return the result. If the operation is successful, **err** is **null** and **data** is the array of
-   *     RemoteAbilityInfo objects obtained. Otherwise, **err** is an error object and **data** is **undefined**.
+   * @param { Array<ElementName> } elementNames - ElementName information. The maximum array length is 10.
+   * @param { AsyncCallback<Array<RemoteAbilityInfo>> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}. If
+   *     the call succeeds, err is null and data is an array of RemoteAbilityInfo objects. If the call fails, err is an
+   *     error object and data is undefined.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -114,13 +113,13 @@ declare namespace distributedBundleManager {
   function getRemoteAbilityInfo(elementNames: Array<ElementName>, callback: AsyncCallback<Array<RemoteAbilityInfo>>): void;
 
   /**
-   * Obtains information about the remote abilities that match the given element names. This API uses a promise to
-   * return the result.
+   * Obtains the AbilityInfo array information of the application on the specified remote device identified by
+   * elementNames. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Array<ElementName> } elementNames - **ElementName** array, whose maximum length is 10.
-   * @returns { Promise<Array<RemoteAbilityInfo>> } Promise used to return the result. If the operation is successful,
-   *     an array of RemoteAbilityInfo objects is returned. Otherwise, an error object is returned.
+   * @returns { Promise<Array<RemoteAbilityInfo>> } Promise used to return the result. If the call succeeds, it
+   *     returns a list of RemoteAbilityInfo objects; if the call fails, it returns an error object.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -144,9 +143,9 @@ declare namespace distributedBundleManager {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { ElementName } elementName - Target element name.
    * @param { string } locale - Target locale.
-   * @param { AsyncCallback<RemoteAbilityInfo> } callback - [Callback]{@link @ohos.base:AsyncCallback} used to return
-   *     the result. If the operation is successful, **err** is **null** and **data** is the RemoteAbilityInfo object
-   *     obtained. Otherwise, **err** is an error object and **data** is **undefined**.
+   * @param { AsyncCallback<RemoteAbilityInfo> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}. If the call
+   *     succeeds, err is null and data is the RemoteAbilityInfo object. If the call fails, err is an error object and
+   *     data is undefined.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -189,15 +188,15 @@ declare namespace distributedBundleManager {
   function getRemoteAbilityInfo(elementName: ElementName, locale: string): Promise<RemoteAbilityInfo>;
 
   /**
-   * Obtains information about the remote abilities that match the given element names and locale. This API uses an
-   * asynchronous callback to return the result.
+   * Obtains the AbilityInfo array information of the application on the specified remote device identified by
+   * elementNames and locale. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-   * @param { Array<ElementName> } elementNames - **ElementName** array, whose maximum length is 10.
+   * @param { Array<ElementName> } elementNames - ElementName information. The maximum array length is 10.
    * @param { string } locale - Target locale.
-   * @param { AsyncCallback<Array<RemoteAbilityInfo>> } callback - [Callback]{@link @ohos.base:AsyncCallback} used to
-   *     return the result. If the operation is successful, **err** is **null** and **data** is the array of
-   *     RemoteAbilityInfo objects obtained. Otherwise, **err** is an error object and **data** is **undefined**.
+   * @param { AsyncCallback<Array<RemoteAbilityInfo>> } callback - [AsyncCallback]{@link @ohos.base:AsyncCallback}. If
+   *     the call succeeds, err is null and data is an array of RemoteAbilityInfo objects. If the call fails, err is an
+   *     error object and data is undefined.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -215,14 +214,14 @@ declare namespace distributedBundleManager {
   function getRemoteAbilityInfo(elementNames: Array<ElementName>, locale: string, callback: AsyncCallback<Array<RemoteAbilityInfo>>): void;
 
   /**
-   * Obtains information about the remote abilities that match the given element names and locale. This API uses a
-   * promise to return the result.
+   * Obtains the AbilityInfo array information of the application on the specified remote device identified by
+   * elementNames and locale. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-   * @param { Array<ElementName> } elementNames - **ElementName** array, whose maximum length is 10.
+   * @param { Array<ElementName> } elementNames - ElementName information. The maximum array length is 10.
    * @param { string } locale - Target locale.
-   * @returns { Promise<Array<RemoteAbilityInfo>> } Promise used to return the result. If the operation is successful,
-   *     an array of RemoteAbilityInfo objects is returned. Otherwise, an error object is returned.
+   * @returns { Promise<Array<RemoteAbilityInfo>> } Promise used to return the result. If the call succeeds, a list
+   *     of RemoteAbilityInfo objects is returned; if the call fails, an error object is returned.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
@@ -240,15 +239,16 @@ declare namespace distributedBundleManager {
   function getRemoteAbilityInfo(elementNames: Array<ElementName>, locale: string): Promise<Array<RemoteAbilityInfo>>;
 
   /**
-   * Obtains the version information of an app with a specified bundle name on a specified remote device.
-   * This API uses a promise to return the result.
+   * Obtains the version code of the application with the specified bundle name on the specified remote device. This API
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-   * @param { string } deviceId - ID of the remote device. You can call getAvailableDeviceList to obtain
-   *     all trusted device lists. The value is the networkId field in the trusted device information.
+   * @param { string } deviceId - ID of the remote device. You can call
+   *     [getAvailableDeviceList]{@link @ohos.distributedDeviceManager:distributedDeviceManager.DeviceManager.getAvailableDeviceList()}
+   *     to obtain all trusted device lists. The value is the **networkId** field in the trusted device information.
    * @param { string } bundleName - Bundle name of the app.
-   * @returns { Promise<long> } Promise object. If the call succeeds, the version information is returned;
-   *     if the call fails, an error object is returned.
+   * @returns { Promise<long> } Promise used to return the result. The version code is returned if the call succeeds; an
+   *     error object is returned if the call fails.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -261,6 +261,29 @@ declare namespace distributedBundleManager {
    * @since 26.0.0 dynamic&static
    */
   function getRemoteBundleVersionCode(deviceId: string, bundleName: string): Promise<long>;
+
+  /**
+   * Obtains the metadata of an app with a specified bundle name on a specified remote device.
+   * This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } deviceId - ID of the remote device. You can call getAvailableDeviceList to obtain
+   *     all trusted device lists. The value is the networkId field in the trusted device information.
+   * @param { string } bundleName - Bundle name of the app.
+   * @returns { Promise<Array<ModuleMetadata>> } Promise used to return an array of ModuleMetadata.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700007 - The specified device ID is not found.
+   * @throws { BusinessError } 17700027 - The distributed service is not running.
+   * @throws { BusinessError } 17700101 - Bundle manager service is excepted.
+   * @syscap SystemCapability.BundleManager.DistributedBundleFramework
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getRemoteMetadata(deviceId: string, bundleName: string): Promise<Array<ModuleMetadata>>;
 
   /**
    * Defines the remote ability information.

@@ -28,7 +28,7 @@ import type { Callback } from './@ohos.base';
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @stagemodelonly
  * @since 16 dynamic
- * @since 26.1.0 static
+ * @since 26.0.1 static
  */
 declare namespace opp {
   /**
@@ -41,7 +41,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function createOppServerProfile(): OppServerProfile;
 
@@ -51,7 +51,7 @@ declare namespace opp {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   interface OppServerProfile {
     /**
@@ -81,6 +81,28 @@ declare namespace opp {
     on(type: 'transferStateChange', callback: Callback<OppTransferInformation>): void;
 
     /**
+     * 订阅文件传输状态变化上报的事件。
+     * 若应用程序拥有ohos.permission.GET_BLUETOOTH_PEERS_MAC权限，则对端设备地址类型为真实地址，否则为虚拟地址。
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
+     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
+     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+     * @param { Callback<OppTransferInformation> } callback - 表示文件传输进度和状态变化事件的回调函数。
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 2900001 - Service stopped.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    onTransferStateChange(callback: Callback<OppTransferInformation>): void;
+
+    /**
      * 取消订阅蓝牙文件传输的进度和状态变化事件。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
@@ -102,6 +124,25 @@ declare namespace opp {
      * @since 16 dynamic
      */
     off(type: 'transferStateChange', callback?: Callback<OppTransferInformation>): void;
+
+    /**
+     * 取消订阅文件传输状态变化上报的事件。
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
+     * @param { Callback<OppTransferInformation> } [callback] - 表示文件传输进度和状态变化事件的回调函数。
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 2900001 - Service stopped.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    offTransferStateChange(callback?: Callback<OppTransferInformation>): void;
 
     /**
      * 订阅蓝牙文件传输事件以接收文件。
@@ -130,6 +171,28 @@ declare namespace opp {
     on(type: 'receiveIncomingFile', callback: Callback<OppTransferInformation>): void;
 
     /**
+     * 订阅接收到文件传输请求的事件。
+     * 若应用程序拥有ohos.permission.GET_BLUETOOTH_PEERS_MAC权限，则对端设备地址类型为真实地址，否则为虚拟地址。
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
+     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
+     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+     * @param { Callback<OppTransferInformation> } callback - 表示是否有文件传输通知事件的回调函数。
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 2900001 - Service stopped.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    onReceiveIncomingFile(callback: Callback<OppTransferInformation>): void;
+
+    /**
      * 取消订阅蓝牙文件传输完成的事件。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
@@ -151,6 +214,25 @@ declare namespace opp {
      * @since 16 dynamic
      */
     off(type: 'receiveIncomingFile', callback?: Callback<OppTransferInformation>): void;
+
+    /**
+     * 取消订阅接收到文件传输请求的事件。
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
+     * @param { Callback<OppTransferInformation> } [callback] - 表示是否有文件传输通知事件的回调函数。
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 2900001 - Service stopped.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    offReceiveIncomingFile(callback?: Callback<OppTransferInformation>): void;
 
     /**
      * 使用蓝牙发送文件。使用Promise异步回调。
@@ -175,7 +257,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     sendFile(deviceId: string, fileHolds: Array<FileHolder>): Promise<void>;
 
@@ -201,7 +283,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     setIncomingFileConfirmation(accept: boolean, fileFd: int): Promise<void>;
 
@@ -223,7 +305,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     cancelTransfer(): Promise<void>;
 
@@ -248,7 +330,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     getCurrentTransferInformation(): Promise<OppTransferInformation>;
 
@@ -272,7 +354,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     setLastReceivedFileUri(uri: string): Promise<void>;
   }
@@ -283,7 +365,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   enum DirectionType {
     /**
@@ -293,7 +375,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     OUTBOUND = 0,
 
@@ -304,7 +386,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     INBOUND = 1
   }
@@ -316,7 +398,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   enum TransferStatus {
     /**
@@ -326,7 +408,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     PENDING = 0,
 
@@ -337,7 +419,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     RUNNING = 1,
 
@@ -348,7 +430,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     FINISH = 2
   }
@@ -360,7 +442,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   enum TransferResult {
     /**
@@ -370,7 +452,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     SUCCESS = 0,
 
@@ -381,7 +463,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_UNSUPPORTED_TYPE = 1,
 
@@ -392,7 +474,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_BAD_REQUEST = 2,
 
@@ -403,7 +485,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_NOT_ACCEPTABLE = 3,
 
@@ -414,7 +496,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_CANCELED = 4,
 
@@ -425,7 +507,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_CONNECTION_FAILED = 5,
 
@@ -436,7 +518,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_TRANSFER_FAILED = 6,
 
@@ -447,7 +529,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     ERROR_UNKNOWN = 7
   }
@@ -459,7 +541,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   interface OppTransferInformation {
     /**
@@ -469,7 +551,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     filePath: string;
 
@@ -480,7 +562,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     remoteDeviceName: string;
 
@@ -491,7 +573,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     remoteDeviceId: string;
 
@@ -502,7 +584,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     direction: DirectionType;
 
@@ -513,7 +595,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     status: TransferStatus;
 
@@ -524,7 +606,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     result: TransferResult;
 
@@ -535,7 +617,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     currentBytes: long;
 
@@ -546,7 +628,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     totalBytes: long;
 
@@ -557,7 +639,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     currentCount: int;
 
@@ -568,7 +650,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     totalCount: int;
   }
@@ -580,7 +662,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   interface FileHolder {
     /**
@@ -590,7 +672,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     filePath: string;
 
@@ -601,7 +683,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     fileSize: long;
 
@@ -612,7 +694,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     fileFd: int;
   }

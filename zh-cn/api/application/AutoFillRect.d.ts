@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 自动填充矩形区域
  * @kit AbilityKit
  */
 
@@ -22,51 +22,61 @@
  * 用于自动填充的矩形区域。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 12 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
+ * @atomicservice
  * @since 12 dynamic
  * @since 23 static
  */
 export default interface AutoFillRect {
   /**
-   * AutoFill表单或页面节点与页面左边界的距离。
+   * AutoFill表单或页面节点与页面左边界的距离，单位是px。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */
   left: double;
 
   /**
-   * AutoFill表单或页面节点与页面上边界的距离。
+   * AutoFill表单或页面节点与页面上边界的距离，单位是px。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */
   top: double;
 
   /**
-   * AutoFill表单或页面节点的宽度。
+   * AutoFill表单或页面节点的宽度，单位是px。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */
   width: double;
 
   /**
-   * AutoFill表单或页面节点的高度。
+   * AutoFill表单或页面节点的高度，单位是px。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */

@@ -22,6 +22,7 @@ import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
 import common from './@ohos.enterprise.common';
 import statistics from './@ohos.net.statistics';
+import formInfo from './@ohos.app.form.formInfo';
 
 /**
  * This module provides application management capabilities, including managing the application running blocklist,
@@ -293,6 +294,82 @@ declare namespace applicationManager {
      * @since 26.0.0
      */
     BACKGROUND = 5
+  }
+
+  /**
+   * Enumerates the standby resource types. These types represent resources that can be exempted from device standby
+   * restrictions. When a device enters standby mode, the system restricts network access and other resources for
+   * background applications. By applying for standby resource exemptions, specified applications can continue to use
+   * these resources even when the device is in standby mode.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  enum StandbyResourceType {
+    /**
+     * Network access resource. When applied, the specified application can continue to access the network during
+     * device standby.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    NETWORK = 1
+  }
+
+  /**
+   * Information about a form.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  interface FormInfo {
+    /**
+     * The bundle name of the application to which this form belongs.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    bundleName: string;
+
+    /**
+     * The name of the application module to which this form belongs.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    moduleName: string;
+
+    /**
+     * The ability name of the application to which this form belongs.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    abilityName: string;
+
+    /**
+     * The name of this form.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    name: string;
+
+    /**
+     * The form dimension of the template form.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    dimension: formInfo.FormDimension;
   }
 
   /**
@@ -2104,6 +2181,73 @@ declare namespace applicationManager {
    * @since 26.0.0
    */
   function getApplicationWindowStates(admin: Want, bundleName: string, appIndex: number): Array<WindowStateInfo>;
+
+  /**
+   * Applies for a standby resource exemption for a specified application. After a successful application, the specified
+   * application can use the exempted resources (such as network access) even when the device enters standby mode.
+   *
+   * The exemption is time-limited. When the specified duration expires, the system automatically releases the
+   * exemption. If the enterprise administrator needs to release the exemption early, call
+   * {@link applicationManager.releaseExemptionResource}.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { StandbyResourceType } resourceType - Standby resource type.
+   * @param { string } bundleName - Bundle name of the application to apply for the resource exemption.
+   * @param { number } duration - Exemption duration.
+   *     <br>Unit: Seconds. The value must be greater than 0.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201002 - The application is not installed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function requestExemptionResource(resourceType: StandbyResourceType, bundleName: string, duration: number): void;
+
+  /**
+   * Releases a standby resource exemption for a specified application.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { StandbyResourceType } resourceType - Standby resource type.
+   * @param { string } bundleName - Bundle name of the application to release the resource exemption for.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201002 - The application is not installed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function releaseExemptionResource(resourceType: StandbyResourceType, bundleName: string): void;
+
+  /**
+   * Publishes the form to the desktop.
+   *
+   * @permission ohos.permission.ENTERPRISE_REQUEST_PUBLISH_FORM
+   * @param { FormInfo } formInfo - formInfo indicates the information of the form.
+   * @returns { string } Returns the ID of form.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201047 - Form count limit reached or insufficient home screen space to add forms.
+   * @throws { BusinessError } 9201049 - The form does not exist.
+   * @throws { BusinessError } 9201050 - The form type is not supported.
+   * @throws { BusinessError } 9201051 - Failed to add the form to the desktop.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function publishFormToDesktop(formInfo: FormInfo): string;
 }
 
 export default applicationManager;

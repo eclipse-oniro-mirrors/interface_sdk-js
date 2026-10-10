@@ -14,7 +14,7 @@
  */
 
 /**
- * @file AutoDeviceSwitch
+ * @file Camera Management
  * @kit CameraKit
  */
 
@@ -111,7 +111,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
   */
   enum CameraSharedStatus {
     /**
@@ -120,7 +120,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     CAMERA_STATUS_SHARED = 0,
  
@@ -130,7 +130,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     CAMERA_STATUS_UNSHARED = 1
   }
@@ -537,7 +537,27 @@ declare namespace camera {
      * @since 18 dynamic
      * @since 23 static
      */
-    CAMERA_LENS_RETRACTED = 7400112
+    CAMERA_LENS_RETRACTED = 7400112,
+
+    /**
+     * Unsupported multiple camera combination.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    UNSUPPORTED_MULTI_CAMERA_COMBINATION = 7400113,
+
+    /**
+     * Parameter out of range.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    PARAM_OUT_OF_RANGE = 7400115
   }
 
   /**
@@ -677,6 +697,46 @@ declare namespace camera {
      * @since 23 static
      */
     settingParam?: SettingParam;
+  }
+
+  /**
+   * RGB bias values.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface RGBBias {
+    /**
+     * The red bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    redBias: double;
+
+    /**
+     * The green bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    greenBias: double;
+
+    /**
+     * The blue bias.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    blueBias: double;
   }
 
   /**
@@ -1104,7 +1164,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onCameraSharedStatus(callback: Callback<CameraSharedStatusInfo>): void;
 
@@ -1140,7 +1200,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offCameraSharedStatus(callback?: Callback<CameraSharedStatusInfo>): void;
 
@@ -1706,7 +1766,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
   */
   interface CameraSharedStatusInfo {
     /**
@@ -1715,7 +1775,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     camera: CameraDevice;
  
@@ -1725,7 +1785,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
     */
     sharedStatus: CameraSharedStatus;
   }
@@ -1959,7 +2019,17 @@ declare namespace camera {
      * @since 10 dynamic
      * @since 23 static
      */
-    TABLET = 0x11
+    TABLET = 0x11,
+
+    /**
+     * Glasses.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    GLASSES = 0xA31
   }
 
   /**
@@ -4232,21 +4302,6 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getColorTintRange(): Array<int>;
-
-    /**
-      * Checks whether the RGB gain is supported.
-      *
-      * @returns { boolean } Check result for the support of the RGB gain. **true** if supported, **false**
-      *     otherwise. If the operation fails, an error code defined in
-      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
-      * @throws { BusinessError } 202 - Not System Application.
-      * @throws { BusinessError } 7400103 - Session not config.
-      * @syscap SystemCapability.Multimedia.Camera.Core
-      * @systemapi
-      * @stagemodelonly
-      * @since 26.1.0 dynamic&static
-      */
-     isWhiteBalanceGainsSupported(): boolean;
   }
 
   /**
@@ -4354,32 +4409,6 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getColorTint(): int;
-
-    /**
-     * Gets RGB white balance gain values.
-     *
-     * @returns { WhiteBalanceGains } The current RGB white balance gain values.
-     * @throws { BusinessError } 202 - Not System Application.
-     * @throws { BusinessError } 7400103 - Session not config.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    getWhiteBalanceGains(): WhiteBalanceGains;
-
-    /**
-     * Sets RGB white balance gain values.
-     *
-     * @param { WhiteBalanceGains } gains - RGB white balance gain values.
-     * @throws { BusinessError } 202 - Not System Application.
-     * @throws { BusinessError } 7400103 - Session not config.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    setWhiteBalanceGains(gains: WhiteBalanceGains): void;
   }
 
   /**
@@ -7064,7 +7093,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum CameraImagingMode {
     /**
@@ -7073,7 +7102,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTO = 0,
 
@@ -7083,7 +7112,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     RGB = 1,
 
@@ -7093,7 +7122,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     IR = 2
   }
@@ -7104,7 +7133,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface ImagingModeQuery {
     /**
@@ -7117,7 +7146,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     isImagingModeSupported(mode: CameraImagingMode): boolean;
   }
@@ -7128,7 +7157,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface ImagingMode extends ImagingModeQuery {
     /**
@@ -7140,7 +7169,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getImagingMode(): CameraImagingMode;
 
@@ -7153,7 +7182,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     setImagingMode(mode: CameraImagingMode): void;
   }
@@ -7167,7 +7196,7 @@ declare namespace camera {
    * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion,
    *     DepthFusion [since 14]
    * @extends PhotoSession, Beauty, ColorEffect, ColorManagement, Macro, SceneDetection, EffectSuggestion,
-   *     DepthFusion, ImagingMode [since 26.1.0]
+   *     DepthFusion, ImagingMode [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 11 dynamic
@@ -7212,11 +7241,11 @@ declare namespace camera {
    * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
    * [Zoom]{@link camera.Zoom}, [ColorManagement]{@link camera.ColorManagement}, 
    * [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, [Macro]{@link camera.Macro}, 
-   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md), 
-   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md), 
-   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md), 
-   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md), and 
-   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md).
+   * [ManualExposure]{@link camera.ManualExposure}, 
+   * [ManualFocus]{@link camera.ManualFocus}, 
+   * [ManualIso]{@link camera.ManualIso}, 
+   * [OIS]{@link camera.OIS}, and 
+   * [Aperture]{@link camera.Aperture}.
    * 
    * It implements a photo session, which provides operations on the flash, exposure, white balance, focus, zoom, color 
    * space, macro mode, manual exposure, manual focus, manual ISO setting, optical image stabilization (OIS), and 
@@ -7803,6 +7832,28 @@ declare namespace camera {
      * @since 24 dynamic&static
      */
     offExposureInfoChange(callback?: Callback<ExposureInfo>): void;
+
+    /**
+     * Subscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } callback - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
+
+    /**
+     * Unsubscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } [callback] - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
 
   /**
@@ -7813,15 +7864,15 @@ declare namespace camera {
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro [since 11 - 14]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation [since 15 - 17]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation,
-   *     EffectSuggestion [since 18]
-   * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation,
-   *     EffectSuggestion, ImagingMode [since 26.1.0]
+   *     EffectSuggestion [since 18 - 24]
+   * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion,
+   *     ImagingMode, ColorControls [since 26.0.1]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 11 dynamic
    * @since 23 static
    */
-  interface VideoSessionForSys extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion, ImagingMode {
+  interface VideoSessionForSys extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion, ImagingMode, ColorControls {
   }
 
   /**
@@ -7860,11 +7911,11 @@ declare namespace camera {
    * [Zoom]{@link camera.Zoom}, [Stabilization]{@link camera.Stabilization}, 
    * [ColorManagement]{@link camera.ColorManagement}, [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, 
    * [Macro]{@link camera.Macro}, [ControlCenter]{@link camera.ControlCenter}, 
-   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md), 
-   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md), 
-   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md), 
-   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md), and 
-   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md).
+   * [ManualExposure]{@link camera.ManualExposure}, 
+   * [ManualFocus]{@link camera.ManualFocus}, 
+   * [ManualIso]{@link camera.ManualIso}, 
+   * [OIS]{@link camera.OIS}, and 
+   * [Aperture]{@link camera.Aperture}.
    * 
    * It implements a video session, which provides operations on the flash, exposure, white balance, focus, zoom, video 
    * stabilization, color space, macro mode and controller, manual exposure, manual focus, manual ISO, optical image 
@@ -7880,7 +7931,7 @@ declare namespace camera {
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
    *     AutoDeviceSwitch, Macro [since 20 - 24]
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
-   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0]
+   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0 - 26.0.0]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -8590,7 +8641,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onApertureInfoChange(callback: Callback<ApertureInfo>): void;
 
@@ -8602,49 +8653,86 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offApertureInfoChange(callback?: Callback<ApertureInfo>): void;
-  }
 
-  /**
-   * RGB white balance gain values.
-   *
-   * @syscap SystemCapability.Multimedia.Camera.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  interface WhiteBalanceGains {  
     /**
-     * The red gain component of the white balance value.
+     * Checks whether the color cube is supported.
      *
+     * @returns { boolean } Check result for the support of the color cube. **true** if supported, **false**
+     *     is otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    redGain: double;
+    isColorCubeSupported(): boolean;
 
     /**
-     * The green gain component of the white balance value.
+     * Gets color cube dimension.
      *
+     * @returns { int } color cube dimension.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    greenGain: double;
+    getSupportedCubeDimension(): int;
 
     /**
-     * The blue gain component of the white balance value.
+     * Enable the color cube.
      *
+     * Before the setting, call [isColorCubeSupported] {@link camera.VideoSession.isColorCubeSupported} to check whether
+     * the device supports the color cube.
+     * 
+     * @param { Uint8Array } lutData - The cube texture data to use as a color lookup table.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    blueGain: double;
+    enableColorCube(lutData: Uint8Array): void;
+
+    /**
+     * Disable the color cube.
+     *
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    disableColorCube(): void;
+
+    /**
+     * Subscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } callback - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
+
+    /**
+     * Unsubscribes camera switch request event callback.
+     *
+     * @param { Callback<CameraDevice> } [callback] - Callback used to get the target camera device.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
 
   /**
@@ -9055,6 +9143,108 @@ declare namespace camera {
      * @since 23 static
      */
     setPhysicalAperture(aperture: double): void;
+  }
+
+  /**
+   * Color controls query object.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControlsQuery {
+    /**
+     * Checks whether the saturation is supported.
+     *
+     * @returns { boolean } Check result for the support of the saturation. **true** is supported, **false** is
+     *     otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isSaturationSupported(): boolean;
+
+    /**
+     * Checks whether the RGB bias is supported.
+     *
+     * @returns { boolean } Check result for the support of the RGB bias. **true** is supported, **false** is
+     *     otherwise.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isRGBBiasSupported(): boolean;
+  }
+
+  /**
+   * Implements color controls. It inherits from [ColorControlsQuery]{@link camera.ColorControlsQuery}.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControls extends ColorControlsQuery {
+    /**
+     * Gets the amount of saturation.
+     *
+     * @returns { double } The current saturation.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSaturation(): double;
+
+    /**
+     * Sets the amount of saturation. Before the setting, call
+     *     [isSaturationSupported]{@link camera.ColorControlsQuery.isSaturationSupported} to check
+     *     whether saturation adjustment is supported by the current device.
+     *
+     * @param { double } val - The amount of saturation to apply.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setSaturation(val: double): void;
+
+    /**
+     * Gets RGB bias value.
+     *
+     * @returns { double } The current RGB bias value.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getRGBBias(): RGBBias;
+
+    /**
+     * Sets RGB bias value.
+     *
+     * @param { double } bias - RGB bias value.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRGBBias(bias: RGBBias): void;
   }
 
   /**
@@ -13237,6 +13427,36 @@ declare namespace camera {
   type ImageType = image.Image | image.Picture;
 
   /**
+   * Enumerates the auxiliary photo types.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  enum CameraAuxiliaryPhotoType {
+    /**
+     * Auxiliary photo type: oxygen photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    OXYGEN = 0,
+
+    /**
+     * Auxiliary photo type: pigmentation photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    PIGMENTATION = 1
+  }
+
+  /**
    * **CapturePhoto** provides APIs for obtaining the objects of the full-quality image and the uncompressed image.
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -13254,6 +13474,26 @@ declare namespace camera {
      * @since 23 dynamic&static
      */
     main: ImageType;
+
+    /**
+     * Object of the oxygen auxiliary photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    oxygenPhoto?: ImageType;
+
+    /**
+     * Object of the pigmentation auxiliary photo.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    pigmentationPhoto?: ImageType;
 
     /**
      * Releases output resources. This API uses a promise to return the result.
@@ -14371,6 +14611,37 @@ declare namespace camera {
     enableMovingPhoto(enabled: boolean): void;
 
     /**
+     * Check if the automatic auxiliary photo delivery is supported.
+     *
+     * @param { CameraAuxiliaryPhotoType } auxPhotoType - Target auxiliary photo type for delivery.
+     * @returns { boolean } TRUE if the type of delivery image is supported; FALSE otherwise.
+     * @throws { BusinessError } 7400115 - Parameter out of the range. The auxPhotoType value is invalid. Check the
+     *     CameraAuxiliaryPhotoType enum for valid values.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isAutoAuxiliaryPhotoDeliverySupported(auxPhotoType: CameraAuxiliaryPhotoType): boolean;
+
+    /**
+     * Enable or disable auto auxiliary photo delivery.
+     *
+     * @param { CameraAuxiliaryPhotoType[] } auxPhotoTypes - Target auxiliary photo types for delivery.
+     * @param { boolean } enable - Target state for auto auxiliary photo delivery.
+     * @throws { BusinessError } 801 - Capability not supported. Check if the camera device supports the required
+     *     auxiliary photo types by using capability query APIs.
+     * @throws { BusinessError } 7400115 - Parameter out of the range. The auxPhotoType value is invalid. Check the
+     *     CameraAuxiliaryPhotoType enum for valid values.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    setAutoAuxiliaryPhotosDeliveryEnabled(auxPhotoTypes: CameraAuxiliaryPhotoType[], enable: boolean): void;
+
+    /**
      * Checks whether the specified photo quality prioritization strategy is supported.
      *
      * @param { PhotoQualityPrioritization } qualityPrioritization - Photo quality prioritization strategy.
@@ -14574,6 +14845,39 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     enableAutoExtendedGainmapDelivery(enabled: boolean): void;
+
+    /**
+     * Checks whether C2PA signature is supported.
+     *
+     * @returns { boolean } Check result for the support of C2PA signature. **true** if supported, **false**
+     *     otherwise. If the API call fails, undefined is returned.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isC2PASignatureSupported(): boolean;
+
+    /**
+     * Configures the C2PA signature settings. This API enables or disables C2PA signature and
+     * optionally sets the author information for the C2PA signature.
+     *
+     * Before calling this API, check whether C2PA signature is supported by calling
+     * [isC2PASignatureSupported]{@link camera.PhotoOutput.isC2PASignatureSupported}.
+     *
+     * @param { boolean } enableC2PA - Whether to enable C2PA signature. **true** to enable, **false** to disable.
+     * @param { C2PASignatureConfig } [config] - C2PA signature configuration, which includes the author name and
+     *     author ID. This parameter is optional. If not provided, the C2PA signature will be generated
+     *     without author information.
+     * @throws { BusinessError } 7400113 - An exception occurred in the session currently in use.
+     * @throws { BusinessError } 7400116 - The session does not have camerainput information.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    configureC2PASignature(enableC2PA: boolean, config?: C2PASignatureConfig): void;
   }
 
   /**
@@ -17906,6 +18210,39 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     AUTOMOTIVE_CAMERA_POSITION_INTERIOR_ROW_3_RIGHT = 14
+  }
+
+  /**
+   * Describes the C2PA signature configuration, which includes the author name and author ID for C2PA
+   * signature generation.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  interface C2PASignatureConfig{
+    /**
+     * Author ID for the C2PA signature. This field is optional. If not set, the author ID
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorID?: string;
+
+    /**
+     * Author name for the C2PA signature. This field is optional. If not set, the author name
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorName?: string;
   }
 }
 

@@ -1818,6 +1818,20 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     collectMinidump?: boolean;
+
+    /**
+     * Policy for the APP_CRASH event
+     * the value true means the application will receive the APP_CRASH event upon its next startup.
+     * the value false means the system will deliver the APP_CRASH event as soon as possible.
+     * the policy only takes effect when using the **onTrigger** and **onReceive** callbacks.
+     * <br>Default value:false.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    publishOnNextLaunch?: boolean;
   }
 
   /**
@@ -2041,7 +2055,7 @@ declare namespace hiAppEvent {
    * @FaAndStageModel
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   class ExternalLogManager {
     /**
@@ -2052,7 +2066,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onCapacityReached(container: ExternalLogContainer): void;
   }
@@ -2064,7 +2078,7 @@ declare namespace hiAppEvent {
    * @FaAndStageModel
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   class ExternalLogContainer {
     /**
@@ -2075,7 +2089,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getAllLogs(): Set<ExternalLogWrapper>;
  
@@ -2087,7 +2101,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getAllLogFiles(): Set<string>;
  
@@ -2100,7 +2114,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getLogFilesOfSysEvent(event: string): Set<string>;
  
@@ -2113,7 +2127,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getLogFilesGeneratedAfter(timePoint: long): Set<string>;
  
@@ -2126,7 +2140,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getLogFilesGeneratedBefore(timePoint: long): Set<string>;
  
@@ -2139,7 +2153,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getLogFilesLargerThan(sizeKb: long): Set<string>;
  
@@ -2152,7 +2166,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getLogFilesSmallerThan(sizeKb: long): Set<string>;
  
@@ -2164,7 +2178,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getLogNumber(): int;
  
@@ -2177,7 +2191,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getFirstGeneratedLogFiles(num: int): Set<string>;
   }
@@ -2189,7 +2203,7 @@ declare namespace hiAppEvent {
    * @FaAndStageModel
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   class ExternalLogWrapper {
     /**
@@ -2200,7 +2214,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getFilePath(): string;
  
@@ -2212,7 +2226,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getGenerationTime(): long;
  
@@ -2224,7 +2238,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getSizeInKb(): long;
  
@@ -2236,7 +2250,7 @@ declare namespace hiAppEvent {
      * @FaAndStageModel
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getSysEvent(): string;
   }
@@ -2249,7 +2263,7 @@ declare namespace hiAppEvent {
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @FaAndStageModel
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function registerExternalLogManager(logMngr: ExternalLogManager): void;
  
@@ -2260,7 +2274,7 @@ declare namespace hiAppEvent {
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @FaAndStageModel
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function isExternalLogManagerRegistered(): boolean;
 }

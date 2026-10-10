@@ -38,7 +38,7 @@ import type UIAbilityContext from './application/UIAbilityContext';
  *
  * @syscap SystemCapability.Account.OsAccount
  * @stagemodelonly
- * @since 26.1.0 dynamic&static
+ * @since 26.0.1 dynamic&static
  */
 declare namespace authorization {
   /**
@@ -47,7 +47,7 @@ declare namespace authorization {
    * @returns { AuthorizationManager } Instance of the authorization manager.
    * @syscap SystemCapability.Account.OsAccount
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getAuthorizationManager(): AuthorizationManager;
 
@@ -56,7 +56,7 @@ declare namespace authorization {
    *
    * @syscap SystemCapability.Account.OsAccount
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface AuthorizationManager {
     /**
@@ -79,7 +79,7 @@ declare namespace authorization {
      *     Possible cause: Another authorization is being processed.
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     requestAuthorization(privilege: Privilege, context: UIAbilityContext): Promise<AuthorizationResult>;
 
@@ -93,7 +93,7 @@ declare namespace authorization {
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     hasAuthorization(privilege: Privilege): Promise<boolean>;
   }
@@ -106,7 +106,7 @@ declare namespace authorization {
    *
    * @syscap SystemCapability.Account.OsAccount
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum Privilege {
     /**
@@ -114,9 +114,29 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    PRIVILEGE_OPERATE_RAW_NET_PACKETS = 'ohos.privilege.operate_raw_net_packets'
+    PRIVILEGE_OPERATE_RAW_NET_PACKETS = 'ohos.privilege.operate_raw_net_packets',
+
+    /**
+     * Privilege for monitoring the raw USB packets.
+     *
+     * After authorization, allows the application to capture raw USB traffic at the kernel level
+     * via the usbmon interface. This includes:
+     * - Raw Packet Capture: Directly reading the complete binary byte stream on the USB bus,
+     * including PID (Packet Identifier), token packets, data packets, and handshake packets at the transaction layer.
+     * - URB Lifecycle Tracking: Exposing the submission and completion events of USB Request Blocks (URBs)
+     * in the kernel, with detailed metadata such as timestamps, endpoint addresses,
+     * transfer types (Control, Interrupt, Isochronous, or Bulk), status codes, and actual payload data buffers.
+     *
+     * These capabilities are intended for USB packet sniffing, low-level protocol analysis,
+     * and bus performance benchmarking.
+     *
+     * @syscap SystemCapability.Account.OsAccount
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PRIVILEGE_MONITOR_RAW_USB_PACKETS = 'ohos.privilege.monitor_raw_usb_packets'
   }
 
   /**
@@ -124,7 +144,7 @@ declare namespace authorization {
    *
    * @syscap SystemCapability.Account.OsAccount
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum AuthorizationResultCode {
     /**
@@ -132,7 +152,7 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTHORIZATION_GRANTED = 0,
 
@@ -151,7 +171,7 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTHORIZATION_CANCELED = 12300301,
 
@@ -170,7 +190,7 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTHORIZATION_DENIED = 12300303,
 
@@ -188,7 +208,7 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTHORIZATION_NOT_SUPPORTED = 12300305
   }
@@ -200,7 +220,7 @@ declare namespace authorization {
    *
    * @syscap SystemCapability.Account.OsAccount
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface AuthorizationResult {
     /**
@@ -213,7 +233,7 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     resultCode: AuthorizationResultCode;
 
@@ -222,7 +242,7 @@ declare namespace authorization {
      *
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     privilege: Privilege;
   }

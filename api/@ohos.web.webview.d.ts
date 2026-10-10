@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file WebView Controller
  * @kit ArkWeb
  */
 
@@ -1756,7 +1756,7 @@ declare namespace webview {
      *     <br>2. Incorrect parameter types.
      * @throws { BusinessError } 17100002 - URL error. No valid cookie found for the specified URL.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -1914,7 +1914,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100005 - The provided cookie value is invalid. It must follow the format specified
      *     <br>in RFC 6265.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -1954,7 +1954,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100005 - The provided cookie value is invalid. It must follow the format specified
      *     <br>in RFC 6265.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @since 14 dynamic
      */
     static configCookieSync(url: string, value: string, incognito: boolean, includeHttpOnly: boolean): void;
@@ -2033,7 +2033,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100005 - The provided cookie value is invalid. It must follow the format specified
      *     <br>in RFC 6265.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @since 14 dynamic
      */
     static configCookie(url: string, value: string, incognito: boolean, includeHttpOnly: boolean): Promise<void>;
@@ -2109,7 +2109,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2129,7 +2129,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2157,7 +2157,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2185,7 +2185,7 @@ declare namespace webview {
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -2226,7 +2226,7 @@ declare namespace webview {
      *     <br>The default value is **false**.
      *     <br>If **undefined** or **null** is passed, cookies are not cleared.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -2276,7 +2276,7 @@ declare namespace webview {
      * Deletes all session cookies.
      *
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 11 dynamic
      */
@@ -2320,6 +2320,8 @@ declare namespace webview {
      * > WebCookieManager. After this API is called and set to **true**, calling applicable APIs skips the
      * > initialization of the ArkWeb kernel when initializing CookieManager. You need to initialize the ArkWeb kernel
      * > separately afterwards.
+     * > 
+     * > -Since API version 26.0.1, when set to **true**, CookieManager interfaces can be used in asynchronous threads.
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -2613,8 +2615,8 @@ declare namespace webview {
   /**
    * Defines the data types supported by {@link onMessageEventExt}.
    *
-   * @unionmember { ArrayBuffer } String type. [since 11]
-   * @unionmember { string } Binary type. [since 11]
+   * @unionmember { ArrayBuffer } Binary type. [since 11]
+   * @unionmember { string } String type. [since 11]
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
    * @since 9 dynamic
@@ -4873,7 +4875,7 @@ declare namespace webview {
      * @throws { BusinessError } 17100001 - Init error.
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
@@ -5898,7 +5900,7 @@ declare namespace webview {
      *
      * @returns {string} Default **User-Agent** string of ArkWeb.
      * @syscap SystemCapability.Web.Webview.Core
-     * @crossplatform [since 26.1.0]
+     * @crossplatform [since 26.0.1]
      * @since 14 dynamic
      */
     static getDefaultUserAgent(): string;
@@ -6918,6 +6920,38 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     executeAIPageCommand(command: string): Promise<string>;
+
+    /**
+     * Sets the browser zoom factor of this web page. Both text and images are scaled simultaneously, and the page
+     * is re-laid out (reflow) to fit the width of the **Web** component.
+     * This API works independently of {@link zoom}, {@link zoomIn}, and {@link zoomOut} (visual scaling without
+     * re-layout) and {@link textZoomRatio} (text-only scaling). The zoom factor takes effect on the current web
+     * component instance only and is retained after in-page cross-document navigation.
+     *
+     * @param { number } zoomFactor - Browser zoom factor to set. The value **1** indicates that the page is not
+     *     zoomed. A value smaller than **1** indicates zoom-out, and a value greater than **1** indicates zoom-in.
+     *     <br>Value range: [0.25, 5].
+     *     <br>Values beyond this range are clamped to the boundary.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    setZoomFactor(zoomFactor: number): void;
+
+    /**
+     * Gets the current browser zoom factor of this web page.
+     *
+     * @returns { number } Current browser zoom factor. The value **1** indicates that the page is not zoomed.
+     *     <br>Value range: [0.25, 5.0]. The default value is **1**.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    getZoomFactor(): number;
   }
 
   /**
@@ -8248,7 +8282,7 @@ declare namespace webview {
      *     error code directly to the application through onErrorReceive.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     setCustomErrorCode(customErrorCode: number): void;
     /**
@@ -8257,7 +8291,7 @@ declare namespace webview {
      * @returns { number } Return the custom error code that was set for this response.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     getCustomErrorCode(): number;
   }
@@ -8374,7 +8408,7 @@ declare namespace webview {
      *     error code directly to the application through onErrorReceive.
      * @throws { BusinessError } 17100021 - The resource handler is invalid.
      * @syscap SystemCapability.Web.Webview.Core
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     didFail(code: WebNetErrorList, completeIfNoResponse: boolean, customErrorCode: number): void;
   }
@@ -9016,6 +9050,10 @@ declare namespace webview {
     /**
      * Type of the media source.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
@@ -9024,6 +9062,10 @@ declare namespace webview {
     /**
      * Address of the media source.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9033,6 +9075,10 @@ declare namespace webview {
     /**
      * Format of the media source, which may be empty. You need to determine the format by yourself.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9101,6 +9147,10 @@ declare namespace webview {
      *
      * For details, see [NativeEmbedDataInfo]{@link NativeEmbedDataInfo}.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9111,6 +9161,10 @@ declare namespace webview {
      * Position information of the surface, used to specify the display position and size of the surface during same-
      * layer rendering.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */

@@ -14,9 +14,13 @@
  */
 
 /**
- * @file
+ * @file 工具函数
  * @kit ArkTS
  */
+
+/*** if arkts dynamic */
+import collections from '@arkts.collections';
+/*** endif */
 
 /**
  * 该模块主要提供常用的工具函数，实现字符串编解码（[TextEncoder]{@link util.TextEncoder}，[TextDecoder]{@link util.TextDecoder}）、
@@ -182,7 +186,7 @@ declare namespace util {
    * 如果尚未获取过哈希值，则生成一个随机哈希值，保存到对象的 **hash** 字段中并返回。如果已经获取过哈希值，则返回保存在
    * **hash** 字段中的哈希值（同一对象返回相同的值）。
    *
-   * @param { object } [object] - 要获取哈希值的对象。
+   * @param { object } object - 要获取哈希值的对象。
    * @returns { number } 哈希值。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform
@@ -756,7 +760,7 @@ declare namespace util {
     /**
      * 用于创建 **LruBuffer** 实例的构造函数。缓存的默认容量为 64。
      *
-     * @param { number } capacity - 要创建的缓存的容量。默认值为 **64**。
+     * @param { number } [capacity] - 要创建的缓存的容量。默认值为 **64**。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1339,7 +1343,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.toString
+     * @useinstead ohos.util.ScopeHelper.toString
      */
     toString(): string;
 
@@ -1435,7 +1439,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.contains
+     * @useinstead ohos.util.ScopeHelper.contains
      */
     contains(value: ScopeType): boolean;
 
@@ -1447,7 +1451,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.contains
+     * @useinstead ohos.util.ScopeHelper.contains
      */
     contains(range: Scope): boolean;
 
@@ -1806,24 +1810,25 @@ declare namespace util {
      * 对输入的 Uint8Array 字节数组进行 Base64 编码，并返回字符串。该方法支持多种编码格式，包括标准 Base64 编码、符合
      * MIME 规范的 Base64 编码（带换行）以及 URL 安全的 Base64 编码。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
+     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.2.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
      *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
      *     编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符
      *     且以 '\r\n' 结尾。[since 10 - 11]
-     * @param { Type } options - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不包含
-     *     回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换行，
-     *     每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL 编码。
-     *     返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符且以
-     *     '\r\n' 结尾。[since 12]
+     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
+     *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
+     *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
+     *     编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符
+     *     且以 '\r\n' 结尾。[since 12]
      * @returns { string } 获取到的字符串。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
-    encodeToStringSync(src: Uint8Array, options?: Type): string;
+    encodeToStringSync(src: Uint8Array | collections.Uint8Array, options?: Type): string;
 
     /**
      * 将字符串解码为 Uint8Array 对象。该接口同步返回结果。
@@ -1858,7 +1863,8 @@ declare namespace util {
     /**
      * 将输入内容编码为字符串。该接口使用 promise 返回结果。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
+     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.2.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。返回值每行最多 76 个字符且以 '\r\n' 结尾。<br>-
      *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：
@@ -1869,7 +1875,7 @@ declare namespace util {
      * @atomicservice [since 12]
      * @since 9 dynamic
      */
-    encodeToString(src: Uint8Array, options?: Type): Promise<string>;
+    encodeToString(src: Uint8Array | collections.Uint8Array, options?: Type): Promise<string>;
 
     /**
      * 将输入内容解码为 Uint8Array 对象。该接口使用 promise 返回结果。
@@ -2659,6 +2665,29 @@ declare namespace util {
      * @since 26.0.0 dynamiconly
      */
     static setTrackGlobalRef(enable: boolean): void;
+
+    /**
+     * 获取当前调用线程所属 ArkTS 虚拟机正在使用的全局 handle 数量。可用于维测场景，例如根据全局 handle 数量决定是否
+     * 生成内存快照。
+     *
+     * > **说明：**
+     * >
+     * > 该计数是在调用线程所属的虚拟机上查询的。在 worker 中调用此接口返回的是该 worker 自身虚拟机的计数，而非主
+     * > 虚拟机的计数。
+     * >
+     * > 仅统计强引用（global handle）的数量，不包含弱引用（WeakRef）和 Sendable 引用（SendableRef）。弱引用存储在
+     * > 独立的弱引用链表中，Sendable 引用存储在独立的 Sendable 全局存储中，均不在本接口的遍历范围内。
+     * >
+     * > 返回值受强引用创建/删除操作的影响。例如，napi_create_strong_reference、napi_delete_strong_reference 会相应
+     * > 增减计数，而 napi_create_strong_sendable_reference、napi_delete_strong_sendable_reference 不会影响计数结果。
+     *
+     * @returns { number } 返回当前虚拟机正在使用的全局 handle 数量，该值大于等于 0。
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamiconly
+     */
+    static getGlobalHandleCount(): number;
   }
 
   /**

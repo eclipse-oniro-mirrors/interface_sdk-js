@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Device Usage Statistics
  * @kit BackgroundTasksKit
  */
 
@@ -539,11 +539,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result.
    *     The value **true** indicates the application is idle in a particular period, and **false** indicates otherwise.
    *     The time range of the particular period is defined by the system, which may be hours or days.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -565,11 +566,12 @@ declare namespace usageStatistics {
    * @returns { Promise<boolean> } the promise returned by isIdleState.
    *     boolean value is true mean the application is idle in a particular period; false mean otherwise.
    *     The time range of the particular period is defined by the system, which may be hours or days.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -591,11 +593,12 @@ declare namespace usageStatistics {
    * @returns { boolean }
    *     boolean value is true mean the application is idle in a particular period; false mean otherwise.
    *     The time range of the particular period is defined by the system, which may be hours or days.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -619,10 +622,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<int> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the app group of the calling application.
    *     Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -647,9 +652,10 @@ declare namespace usageStatistics {
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @returns { Promise<int> } the promise returned by queryAppGroup.
    *     Returns the app group of the calling application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -673,9 +679,10 @@ declare namespace usageStatistics {
    *
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @returns { int } Returns the app group of the calling application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -702,10 +709,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<int> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the usage priority group of the calling
    *     application. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -730,10 +739,12 @@ declare namespace usageStatistics {
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @param { string } bundleName - name of the application.
    * @returns { Promise<int> } Promise used to return the calling application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -758,10 +769,12 @@ declare namespace usageStatistics {
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @param { string } bundleName - name of the application.
    * @returns { int } the usage priority group of the calling application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -799,10 +812,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<BundleStatsMap> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the {@link BundleStatsMap} objects containing
    *     the usage information about each bundle. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -829,10 +844,12 @@ declare namespace usageStatistics {
    *     <br> Unit:ms
    * @returns { Promise<BundleStatsMap> } the promise returned by queryBundleStatsInfos.
    *     the {@link BundleStatsMap} objects containing the usage information about each bundle.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -868,10 +885,12 @@ declare namespace usageStatistics {
    *     <br> Unit:ms
    * @returns { Promise<AppStatsMap> } the promise returned by queryAppStatsInfos.
    *     the {@link AppStatsMap} objects containing the usage information about each application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -893,10 +912,12 @@ declare namespace usageStatistics {
    * @param { Record<string, Array<long>> } appInfo - bundle name and app index info for each application.
    * @returns { Promise<AppStatsMap> } the promise returned by queryLastUseTime.
    *     the {@link AppStatsMap} objects containing the usage information about each application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -985,10 +1006,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<BundleStatsInfo>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the list of {@link BundleStatsInfo} objects
    *     containing the usage information about each bundle. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1020,10 +1043,12 @@ declare namespace usageStatistics {
    * @param { long } end - Indicates the end time of the query period, in milliseconds.
    *     <br> Unit:ms
    * @returns { Promise<Array<BundleStatsInfo>> } Promise used to return the usage information about each bundle.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1053,11 +1078,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<BundleEvents>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the list of {@link BundleEvents} objects
    *     containing the state data of all bundles. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1082,11 +1108,12 @@ declare namespace usageStatistics {
    *     <br> Unit:ms
    * @returns { Promise<Array<BundleEvents>> } the promise returned by queryBundleEvents.
    *     the list of {@link BundleEvents} objects containing the state data of all bundles.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1101,35 +1128,36 @@ declare namespace usageStatistics {
    */
   function queryBundleEvents(begin: long, end: long): Promise<Array<BundleEvents>>;
 
-    /**
-     * Queries state data of all bundles within a specified period identified by the start and end time.
-     *
-     * @permission ohos.permission.BUNDLE_ACTIVE_INFO
-     * @param { long } begin - Indicates the start time of the query period, in milliseconds.
-     *     <br> Unit:ms
-     * @param { long } end - Indicates the end time of the query period, in milliseconds.
-     *     <br> Unit:ms
-     * @param { int } maxNum - Indicates max record number in result, max value is 1000, default value is 1000.
-     * @returns { Promise<Array<BundleEvents>> } the promise returned by queryBundleEvents.
-     *     the list of {@link BundleEvents} objects containing the state data of all bundles.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not System App.
-     * @throws { BusinessError } 10000001 - Memory operation failed.
-     * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-     *     <br> 2. Failed to apply for memory.
-     * @throws { BusinessError } 10000003 - Failed to get system ability manager.
-     * @throws { BusinessError } 10000004 - Failed to access the device usage service.
-     * @throws { BusinessError } 10000006 - Failed to get the application information.
-     * @throws { BusinessError } 10000007 - Failed to get the system time.
-     * @throws { BusinessError } 10000008 - Parameter error. Possible cause: 1. Mandatory parameters are left
-     *     unspecified;
-     *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-     * @syscap SystemCapability.ResourceSchedule.UsageStatistics.App
-     * @systemapi Hide this for inner system use.
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    function queryBundleEvents(begin: long, end: long, maxNum: int): Promise<Array<BundleEvents>>;
+  /**
+   * Queries state data of all bundles within a specified period identified by the start and end time.
+   *
+   * @permission ohos.permission.BUNDLE_ACTIVE_INFO
+   * @param { long } begin - Indicates the start time of the query period, in milliseconds.
+   *     <br> Unit:ms
+   * @param { long } end - Indicates the end time of the query period, in milliseconds.
+   *     <br> Unit:ms
+   * @param { int } maxNum - Indicates max record number in result, max value is 1000, default value is 1000.
+   * @returns { Promise<Array<BundleEvents>> } the promise returned by queryBundleEvents.
+   *     the list of {@link BundleEvents} objects containing the state data of all bundles.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 10000001 - Memory operation failed.
+   * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
+   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 10000003 - Failed to get system ability manager.
+   * @throws { BusinessError } 10000004 - Failed to access the device usage service.
+   * @throws { BusinessError } 10000006 - Failed to get the application information.
+   * @throws { BusinessError } 10000007 - Failed to get the system time.
+   * @throws { BusinessError } 10000008 - Parameter error. Possible cause: 1. Mandatory parameters are left
+   *     unspecified;
+   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @syscap SystemCapability.ResourceSchedule.UsageStatistics.App
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function queryBundleEvents(begin: long, end: long, maxNum: int): Promise<Array<BundleEvents>>;
 
   /**
    * Queries state data of the current bundle within a specified period.
@@ -1141,10 +1169,10 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<BundleEvents>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the {@link BundleEvents} object Array containing
    *     the state data of the current bundle. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1168,10 +1196,10 @@ declare namespace usageStatistics {
    *     <br> Unit:ms
    * @returns { Promise<Array<BundleEvents>> } the promise returned by queryCurrentBundleEvents.
    *     the {@link BundleEvents} object Array containing the state data of the current bundle.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1186,32 +1214,32 @@ declare namespace usageStatistics {
    */
   function queryCurrentBundleEvents(begin: long, end: long): Promise<Array<BundleEvents>>;
 
-   /**
-    * Queries state data of the current bundle within a specified period.
-    *
-    * @param { long } begin - Indicates the start time of the query period, in milliseconds.
-    *     <br> Unit:ms
-    * @param { long } end - Indicates the end time of the query period, in milliseconds.
-    *     <br> Unit:ms
-    * @param { int } maxNum - Indicates max record number in result, max value is 1000, default value is 1000.
-    * @returns { Promise<Array<BundleEvents>> } the promise returned by queryCurrentBundleEvents.
-    *     the {@link BundleEvents} object Array containing the state data of the current bundle.
-    * @throws { BusinessError } 202 - Not System App.
-    * @throws { BusinessError } 10000001 - Memory operation failed.
-    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-    *     <br> 2. Failed to apply for memory.
-    * @throws { BusinessError } 10000003 - Failed to get system ability manager.
-    * @throws { BusinessError } 10000004 - Failed to access the device usage service.
-    * @throws { BusinessError } 10000006 - Failed to get the application information.
-    * @throws { BusinessError } 10000007 - Failed to get the system time.
-    * @throws { BusinessError } 10000008 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-    *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-    * @syscap SystemCapability.ResourceSchedule.UsageStatistics.App
-    * @systemapi Hide this for inner system use.
-    * @stagemodelonly
-    * @since 26.0.0 dynamic&static
-    */
-   function queryCurrentBundleEvents(begin: long, end: long, maxNum: int): Promise<Array<BundleEvents>>;
+  /**
+   * Queries state data of the current bundle within a specified period.
+   *
+   * @param { long } begin - Indicates the start time of the query period, in milliseconds.
+   *     <br> Unit:ms
+   * @param { long } end - Indicates the end time of the query period, in milliseconds.
+   *     <br> Unit:ms
+   * @param { int } maxNum - Indicates max record number in result, max value is 1000, default value is 1000.
+   * @returns { Promise<Array<BundleEvents>> } the promise returned by queryCurrentBundleEvents.
+   *     the {@link BundleEvents} object Array containing the state data of the current bundle.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 10000001 - Memory operation failed.
+   * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
+   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 10000003 - Failed to get system ability manager.
+   * @throws { BusinessError } 10000004 - Failed to access the device usage service.
+   * @throws { BusinessError } 10000006 - Failed to get the application information.
+   * @throws { BusinessError } 10000007 - Failed to get the system time.
+   * @throws { BusinessError } 10000008 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
+   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @syscap SystemCapability.ResourceSchedule.UsageStatistics.App
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function queryCurrentBundleEvents(begin: long, end: long, maxNum: int): Promise<Array<BundleEvents>>;
 
   /**
    * Queries recently module usage records with maxNum.
@@ -1221,11 +1249,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<HapModuleInfo>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the {@link HapModuleInfo} object Array containing
    *     the usage data of the modules. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1247,11 +1276,12 @@ declare namespace usageStatistics {
    * @param { int } maxNum - Indicates max record number in result, max value is 1000, default value is 1000.
    * @returns { Promise<Array<HapModuleInfo>> } the promise returned by queryModuleUsageRecords.
    *     the {@link HapModuleInfo} object Array containing the usage data of the modules.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1273,11 +1303,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<HapModuleInfo>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the {@link HapModuleInfo} object Array containing
    *     the usage data of the modules. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1298,11 +1329,12 @@ declare namespace usageStatistics {
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @returns { Promise<Array<HapModuleInfo>> } the promise returned by queryModuleUsageRecords.
    *     the {@link HapModuleInfo} object Array containing the usage data of the modules.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1395,11 +1427,12 @@ declare namespace usageStatistics {
    * @param { GroupType } newGroup - the group of the application whose name is bundleName.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1421,11 +1454,12 @@ declare namespace usageStatistics {
    * @param { string } bundleName - name of the application.
    * @param { GroupType } newGroup - the group of the application whose name is bundleName.
    * @returns { Promise<void> } the promise returned by setAppGroup.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1448,11 +1482,12 @@ declare namespace usageStatistics {
    *     callback of AppGroupCallbackInfo when the group of app changed.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    *     If the registration is successful, **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1473,11 +1508,12 @@ declare namespace usageStatistics {
    * @param { Callback<AppGroupCallbackInfo> } groupCallback -
    *     callback of AppGroupCallbackInfo when the group of app changed.
    * @returns { Promise<void> } the promise returned by registerAppGroupCallBack.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1497,11 +1533,12 @@ declare namespace usageStatistics {
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    *     If the cancellation of registration is successful, **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1520,11 +1557,12 @@ declare namespace usageStatistics {
    *
    * @permission ohos.permission.BUNDLE_ACTIVE_INFO
    * @returns { Promise<void> } the promise returned by unregisterAppGroupCallBack.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1549,11 +1587,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<DeviceEventStats>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the {@link DeviceEventStats} object Array
    *     containing the event states data. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1578,11 +1617,12 @@ declare namespace usageStatistics {
    *     <br> Unit:ms
    * @returns { Promise<Array<DeviceEventStats>> } the promise returned by queryDeviceEventStats.
    *     the {@link DeviceEventStats} object Array containing the event states data.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1608,11 +1648,12 @@ declare namespace usageStatistics {
    * @param { AsyncCallback<Array<DeviceEventStats>> } callback - Callback used to return the result.
    *     If the query is successful, **err** is **undefined**, and data is the {@link DeviceEventStats} object Array
    *     containing the event states data. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.
@@ -1641,11 +1682,12 @@ declare namespace usageStatistics {
    *     <br> Unit:ms
    * @returns { Promise<Array<DeviceEventStats>> } the promise returned by queryNotificationEventStats.
    *     the {@link DeviceEventStats} object Array containing the event states data.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 10000001 - Memory operation failed.
    * @throws { BusinessError } 10000002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
    *     <br> 2. Failed to apply for memory.

@@ -38,7 +38,6 @@ declare type Orientation = import('../api/@ohos.window').default.Orientation;
  * @since 9 dynamic
  */
 declare interface NavDestinationCommonTitle {
-
   /**
    * Main title.
    *
@@ -73,7 +72,6 @@ declare interface NavDestinationCommonTitle {
  * @since 9 dynamic
  */
 declare interface NavDestinationCustomTitle {
-
   /**
    * Content of the title bar.
    *
@@ -87,7 +85,7 @@ declare interface NavDestinationCustomTitle {
   /**
    * Height of the title bar.
    *
-   * Value range: [0, +��)
+   * Value range: [0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -101,13 +99,18 @@ declare interface NavDestinationCustomTitle {
  * Type of the system transition animation.
  *
  * > **NOTE**
- *
+ * >
  * > System transition animations for the title bar and content area can be configured separately.
- *
+ * >
  * > The system transition animation of the title bar is only available for the push and pop animations of navigation
  * > destination pages in STANDARD mode, with the following constraints:
- *
- *
+ * >
+ * > 1. When **NavigationSystemTransitionType** is set to **TITLE**, only the system transition animation of the title
+ * > bar is displayed.
+ * >
+ * > 2. When **NavigationSystemTransitionType** is set to **CONTENT**, only the system transition animation of the
+ * > content area is displayed.
+ * >
  * > When **NONE** or **TITLE** is set, no system transition animation is displayed. When **CONTENT** or **DEFAULT** is
  * > set, the system transition animation is displayed by default.
  *
@@ -118,7 +121,6 @@ declare interface NavDestinationCustomTitle {
  * @since 14 dynamic
  */
 declare enum NavigationSystemTransitionType {
-
   /**
    * Default system transition animation.
    *
@@ -129,7 +131,6 @@ declare enum NavigationSystemTransitionType {
    * @since 14 dynamic
    */
   DEFAULT = 0,
-
   /**
    * No system transition animation.
    *
@@ -140,7 +141,6 @@ declare enum NavigationSystemTransitionType {
    * @since 14 dynamic
    */
   NONE = 1,
-
   /**
    * System transition animation of the title bar.
    *
@@ -151,7 +151,6 @@ declare enum NavigationSystemTransitionType {
    * @since 14 dynamic
    */
   TITLE = 2,
-
   /**
    * System transition animation of the content area.
    *
@@ -162,7 +161,6 @@ declare enum NavigationSystemTransitionType {
    * @since 14 dynamic
    */
   CONTENT = 3,
-
   /**
    * Fade-type system transition animation.
    *
@@ -173,7 +171,6 @@ declare enum NavigationSystemTransitionType {
    * @since 15 dynamic
    */
   FADE = 4,
-
   /**
    * Center-scale type system transition animation.
    *
@@ -184,7 +181,6 @@ declare enum NavigationSystemTransitionType {
    * @since 15 dynamic
    */
   EXPLODE = 5,
-
   /**
    * Right-slide type system transition animation.
    *
@@ -195,7 +191,6 @@ declare enum NavigationSystemTransitionType {
    * @since 15 dynamic
    */
   SLIDE_RIGHT = 6,
-
   /**
    * Bottom-slide type system transition animation.
    *
@@ -218,7 +213,6 @@ declare enum NavigationSystemTransitionType {
  * @since 11 dynamic
  */
 declare enum NavDestinationMode {
-
   /**
    * Standard mode.
    *
@@ -257,7 +251,6 @@ declare enum NavDestinationMode {
  * @since 17 dynamic
  */
 declare enum NavDestinationActiveReason {
-
   /**
    * Activation state changes due to page navigation.
    *
@@ -335,7 +328,6 @@ declare enum NavDestinationActiveReason {
  * @since 21 dynamic
  */
 declare enum VisibilityChangeReason {
-
   /**
    * Visibility changes due to page navigation.
    *
@@ -372,14 +364,14 @@ declare enum VisibilityChangeReason {
 
 /**
  * **NavDestination** is the root container of a destination page and represents the content area of the
- * [Navigation]{@link navigation} component.
+ * [Navigation]{@link ./navigation} component.
  *
  * > **NOTE**
- *
+ * >
  * > - Since API version 11, this component supports the safe area attribute by default, with the default attribute
  * > value being **expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])**. You can override
  * > this attribute to change the default behavior. In earlier versions, you need to use the
- * > [expandSafeArea]{@link common} attribute to implement the safe area feature.
+ * > [expandSafeArea]{@link ./common} attribute to implement the safe area feature.
  * >
  * > - The **NavDestination** component must be used in conjunction with the **Navigation** component to act as the root
  * > node for the navigation destination page. When used alone, it can only function as a standard container component
@@ -403,9 +395,8 @@ declare enum VisibilityChangeReason {
  * @noninterop
  */
 declare interface NavDestinationInterface {
-
   /**
-   * Creates the root container for a subpage in [Navigation]{@link navigation}.
+   * Creates the root container for a subpage in [Navigation]{@link ./navigation}.
    *
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -426,7 +417,6 @@ declare interface NavDestinationInterface {
  * @since 12 dynamic
  */
 declare interface RouteMapConfig {
-
   /**
    * Page name.
    *
@@ -471,7 +461,6 @@ declare interface RouteMapConfig {
  * @since 11 dynamic
  */
 declare interface NavDestinationContext {
-
   /**
    * Path information of the navigation destination page.
    *
@@ -508,7 +497,6 @@ declare interface NavDestinationContext {
 
   /**
    * Type of the current **NavDestination**.
-   * Default value: NavDestinationMode.Standard.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -577,7 +565,6 @@ declare interface NestedScrollInfo {
  * @since 15 dynamic
  */
 declare interface NavDestinationTransition {
-
   /**
    * Callback triggered when the transition animation ends.
    *
@@ -605,7 +592,7 @@ declare interface NavDestinationTransition {
   /**
    * Curve type of the animation.
    *
-   * Default value: Curve.EaseInOut](ts-appendix-enums.md#curve)
+   * Default value: [Curve.EaseInOut]{@link Curve}
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -643,9 +630,9 @@ declare interface NavDestinationTransition {
 }
 
 /**
- * The [universal attributes]{@link common} are supported.
+ * The [universal attributes]{@link ./common} are supported.
  *
- * In addition to the [universal events]{@link common}, the following events are supported.
+ * In addition to the [universal events]{@link ./common}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -654,14 +641,13 @@ declare interface NavDestinationTransition {
  * @noninterop
  */
 declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribute> {
-
   /**
    * Sets the page title. When the title string is too long: (1) If no subtitle is set, the string is scaled down,
    * wrapped in two lines, and then clipped with an ellipsis (...) if it is still overlong. (2) If a subtitle is set,
    * the subtitle is scaled down and then truncated with an ellipsis (...) if it is still overlong.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 12.
    *
    * @param { string | CustomBuilder | NavDestinationCommonTitle | NavDestinationCustomTitle } value - Page
@@ -681,8 +667,10 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   /**
    * Specifies whether to hide the title bar.
    *
-   * @param { boolean } value - Whether to hide the title bar.<br>Default value: **false**.<br>**true**: Hide the title
-   *     bar.<br>**false**: Show the title bar.
+   * @param { boolean } value - Whether to hide the title bar.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Hide the title bar.
+   *     <br>**false**: Show the title bar.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -696,11 +684,14 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * [hideTitleBar]{@link NavDestinationAttribute#hideTitleBar(value: boolean)}, this API adds the capability to control
    * whether to animate the visibility change of the title bar.
    *
-   * @param { boolean } hide - Whether to hide the title bar.<br>Default value: **false**.<br>**true**: Hide the title
-   *     bar.<br>**false**: Show the title bar.
-   * @param { boolean } animated - Whether to animate the visibility change of the title bar.<br>Default value:
-   *     **false**.<br>**true**: Animate the visibility change of the title bar.<br>**false**: Do not animate the
-   *     visibility change of the title bar.
+   * @param { boolean } hide - Whether to hide the title bar.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Hide the title bar.
+   *     <br>**false**: Show the title bar.
+   * @param { boolean } animated - Whether to animate the visibility change of the title bar.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Animate the visibility change of the title bar.
+   *     <br>**false**: Do not animate the visibility change of the title bar.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -713,8 +704,10 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   /**
    * Sets whether to hide the back button in the title bar.
    *
-   * @param { Optional<boolean> } hide - Whether to hide the back button in the title bar.<br>Default value: **false**.<
-   *     br>**true**: Hide the back button in the title bar.<br>**false**: Show the back button in the title bar.
+   * @param { Optional<boolean> } hide - Whether to hide the back button in the title bar.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Hide the back button in the title bar.
+   *     <br>**false**: Show the back button in the title bar.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -728,12 +721,13 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Triggered when the navigation destination page is displayed. Starting from API version 21, the callback includes a
    * **VisibilityChangeReason** parameter indicating the cause of the visibility change.
    *
-   * @param { function } callback - Triggered when the navigation destination page is displayed.<br>In versions earlier
-   *     than API version 21, the callback is a basic callback without parameters.<br>Since API version 21, the callback
-   *     includes a **VisibilityChangeReason** parameter describing the trigger cause. [since 10 - 20]
+   * @param { function } callback - Triggered when the navigation destination page is displayed.
+   *     <br>In versions earlier than API version 21, the callback is a basic callback without parameters.
+   *     <br>Since API version 21, the callback includes a **VisibilityChangeReason** parameter describing the trigger
+   *     cause. [since 10 - 20]
    * @param { Callback<VisibilityChangeReason> } callback - Triggered when the navigation destination page is displayed.
-   *     <br>In versions earlier than API version 21, the callback is a basic callback without parameters.<br>Since API
-   *     version 21, the callback includes a **VisibilityChangeReason** parameter describing the trigger
+   *     <br>In versions earlier than API version 21, the callback is a basic callback without parameters.
+   *     <br>Since API version 21, the callback includes a **VisibilityChangeReason** parameter describing the trigger
    *     cause. [since 21]
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -748,12 +742,13 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Triggered when the navigation destination page is hidden. Starting from API version 21, the callback includes a
    * **VisibilityChangeReason** parameter indicating the cause of the visibility change.
    *
-   * @param { function } callback - Triggered when the navigation destination page is hidden.<br>In versions earlier
-   *     than API version 21, the callback is a basic callback without parameters.<br>Since API version 21, the callback
-   *     includes a **VisibilityChangeReason** parameter describing the trigger cause. [since 10 - 20]
-   * @param { Callback<VisibilityChangeReason> } callback - Triggered when the navigation destination page is hidden.<br
-   *     >In versions earlier than API version 21, the callback is a basic callback without parameters.<br>Since API
-   *     version 21, the callback includes a **VisibilityChangeReason** parameter describing the trigger
+   * @param { function } callback - Triggered when the navigation destination page is hidden.
+   *     <br>In versions earlier than API version 21, the callback is a basic callback without parameters.
+   *     <br>Since API version 21, the callback includes a **VisibilityChangeReason** parameter describing the trigger
+   *     cause. [since 10 - 20]
+   * @param { Callback<VisibilityChangeReason> } callback - Triggered when the navigation destination page is hidden.
+   *     <br>In versions earlier than API version 21, the callback is a basic callback without parameters.
+   *     <br>Since API version 21, the callback includes a **VisibilityChangeReason** parameter describing the trigger
    *     cause. [since 21]
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -786,7 +781,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Triggered when the **NavDestination** component returns.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 22.
    *
    * @param {Optional<Callback<ESObject>>} callback - Indicates callback when pop to the navDestination with result.
@@ -803,11 +798,11 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets the mode of the **NavDestination** component. Dynamic modification is not supported.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 12.
    *
-   * @param { NavDestinationMode } value - Mode of the **NavDestination** component.<br>Default value:
-   *     **NavDestinationMode.STANDARD**.
+   * @param { NavDestinationMode } value - Mode of the **NavDestination** component.
+   *     <br>Default value: **NavDestinationMode.STANDARD**.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -821,7 +816,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets the icon of the back button on the title bar.
    *
    * > **NOTE**
-   *
+   * >
    * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 12.
    * >
    * > - The following operations are not allowed: modifying the icon size through the **fontSize** attribute of the
@@ -843,7 +838,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets the icon and accessibility text for the back button on the title bar.
    *
    * > **NOTE**
-   *
+   * >
    * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    * >
    * > - The following operations are not allowed: modifying the icon size through the **fontSize** attribute of the
@@ -851,8 +846,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * > changing the animation effect type through the **symbolEffect** attribute.
    *
    * @param { ResourceStr | PixelMap | SymbolGlyphModifier } icon - Icon of the back button on the title bar.
-   * @param { ResourceStr } accessibilityText - Accessibility text for the back button.<br>Default value: **back** when
-   *     the system language is English.
+   * @param { ResourceStr } accessibilityText - Accessibility text for the back button.
+   *     <br>Default value: **back** when the system language is English.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -869,7 +864,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * automatically generated **More** icon.
    *
    * > **NOTE**
-   *
+   * >
    * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 14.
    * >
    * > - The following operations are not allowed: modifying the icon size through the **fontSize** attribute of the
@@ -894,7 +889,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * if any) placed under the automatically generated **More** icon.
    *
    * > **NOTE**
-   *
+   * >
    * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    * >
    * > - The following operations are not allowed: modifying the icon size through the **fontSize** attribute of the
@@ -917,26 +912,27 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets the content of the toolbar. If this API is not called, the toolbar remains hidden.
    *
    * > **NOTE**
-   *
+   * >
    * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    * >
    * > - The following operations are not allowed: modifying the icon size through the **fontSize** attribute of the
    * > **SymbolGlyphModifier** object, changing the animation effects through the **effectStrategy** attribute, or
    * > changing the animation effect type through the **symbolEffect** attribute.
    *
-   * @param { Array<ToolbarItem> | CustomBuilder } toolbarParam - Content of the toolbar.<br>When configured with Array<
-   *     [ToolbarItem]{@link ToolbarItem}>, the toolbar follows the rules below:<br>- Toolbar items are evenly
-   *     distributed on the bottom toolbar, with text and icons evenly spaced in each content area.<br>- In portrait
-   *     mode, the toolbar shows a maximum of five icons, with any additional icons placed under an automatically
-   *     generated **More** icon. In landscape mode, the behavior of the toolbar is determined by the display mode: (1)
-   *     If the display mode is [Split]{@link NavigationMode}, the display will remain the same as in portrait mode. (2)
-   *     If the display mode is [Stack]{@link NavigationMode}, the toolbar must be used together with Array<
-   *     [NavigationMenuItem]{@link NavigationMenuItem}> of the
+   * @param { Array<ToolbarItem> | CustomBuilder } toolbarParam - Content of the toolbar.
+   *     <br>When configured with Array<[ToolbarItem]{@link ToolbarItem}>, the toolbar follows the rules below:
+   *     <br>- Toolbar items are evenly distributed on the bottom toolbar, with text and icons evenly spaced in each
+   *     content area.
+   *     <br>- In portrait mode, the toolbar shows a maximum of five icons, with any additional icons placed under an
+   *     automatically generated **More** icon. In landscape mode, the behavior of the toolbar is determined by the
+   *     display mode: (1) If the display mode is [Split]{@link NavigationMode}, the display will remain the same as in
+   *     portrait mode. (2) If the display mode is [Stack]{@link NavigationMode}, the toolbar must be used together with
+   *     Array<[NavigationMenuItem]{@link NavigationMenuItem}> of the
    *     [menus]{@link NavDestinationAttribute#menus(value: Array<NavigationMenuItem> | CustomBuilder)} attribute; in
    *     this configuration, the bottom toolbar is automatically hidden, and all items on the toolbar are relocated to
-   *     the menu in the upper right corner of the screen.<br>When configured with
-   *     [CustomBuilder](docroot://reference/apis-arkui/arkui-ts/ts-types.md#custombuilder8), the toolbar does not
-   *     follow the above rules.
+   *     the menu in the upper right corner of the screen.
+   *     <br>When configured with [CustomBuilder](docroot://reference/apis-arkui/arkui-ts/ts-types.md#custombuilder8),
+   *     the toolbar does not follow the above rules.
    * @param { NavigationToolbarOptions } [options] - Toolbar options. Toolbar options include the background color,
    *     background blur style and blur option, background properties, layout mode of the toolbar, as well as whether to
    *     hide the toolbar text, and options for the toolbar's more button menu.
@@ -952,11 +948,14 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   /**
    * Specifies whether to hide the toolbar.
    *
-   * @param { boolean } hide - Whether to hide the toolbar.<br>Default value: **false**.<br>**true**: Hide the toolbar.<
-   *     br>**false**: Show the toolbar.
-   * @param { boolean } [animated] - Whether to animate the visibility change of the toolbar.<br>Default value:
-   *     **false**.<br>**true**: Animate the visibility change of the toolbar.<br>**false**: Do not animate the
-   *     visibility change of the toolbar.
+   * @param { boolean } hide - Whether to hide the toolbar.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Hide the toolbar.
+   *     <br>**false**: Show the toolbar.
+   * @param { boolean } [animated] - Whether to animate the visibility change of the toolbar.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Animate the visibility change of the toolbar.
+   *     <br>**false**: Do not animate the visibility change of the toolbar.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -970,7 +969,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Triggered when the **NavDestination** component is about to build a child component.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
    * @param { import('../api/@ohos.base').Callback<NavDestinationContext> } callback - Triggered when the
@@ -989,7 +988,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * callback, and the modification takes effect in the current frame.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
    * @param { Callback<void> } callback - Called when the **NavDestination** component is about to be mounted. The
@@ -1008,7 +1007,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * any, is about to start).
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
    * @param { Callback<void> } callback - Called when the the **NavDestination** component is about to be unmounted (or
@@ -1026,7 +1025,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Called when the **NavDestination** component is about to display.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
    * @param { Callback<void> } callback - Called when the **NavDestination** component is about to display.
@@ -1043,7 +1042,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Called when the **NavDestination** component is about to be hidden.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
    * @param { Callback<void> } callback - Called when the **NavDestination** component is about to be hidden.
@@ -1060,9 +1059,10 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Ignores the layout safe area by allowing the component to extend into the non-safe areas of the screen.
    *
    * > **NOTE**
-   *
+   * >
    * > - Prerequisites for the **ignoreLayoutSafeArea** attribute to take effect:
-   * > > When **LayoutSafeAreaType.SYSTEM** is set, the component can extend into the non-safe area if its boundaries
+   * >
+   * > When **LayoutSafeAreaType.SYSTEM** is set, the component can extend into the non-safe area if its boundaries
    * > overlap with the non-safe area.
    * >
    * > - If the component extends into the non-safe area, events triggered within that area (such as click events) might
@@ -1072,10 +1072,12 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * > - To allow a component to extend into non-safe areas, the title bar and toolbar must be hidden or set to
    * > [STACK]{@link BarStyle} mode.
    *
-   * @param { Array<LayoutSafeAreaType> } [types] - Types of non-safe areas to extend into.<br>Default value:<br>
-   *     [LayoutSafeAreaType.SYSTEM]
-   * @param { Array<LayoutSafeAreaEdge> } [edges] - Edges for expanding the safe area.<br> Default value:<br>
-   *     [LayoutSafeAreaEdge.TOP, LayoutSafeAreaEdge.BOTTOM]
+   * @param { Array<LayoutSafeAreaType> } [types] - Types of non-safe areas to extend into.
+   *     <br>Default value:
+   *     <br>[LayoutSafeAreaType.SYSTEM]
+   * @param { Array<LayoutSafeAreaEdge> } [edges] - Edges for expanding the safe area.
+   *     <br> Default value:
+   *     <br>[LayoutSafeAreaEdge.TOP, LayoutSafeAreaEdge.BOTTOM]
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1090,7 +1092,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * component.
    *
    * > **NOTE**
-   *
+   * >
    * > - The setting takes effect only when the **NavDestination** component is used in conjunction with the
    * > **Navigation** component.
    * >
@@ -1115,13 +1117,15 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * **Navigation** component associated with the **NavDestination** component.
    *
    * > **NOTE**
-   *
+   * >
    * > This API must be used together with the [recoverable]{@link NavigationAttribute#recoverable} API of
    * > **Navigation**.
    *
    * @param { boolean } recoverable - Whether the **NavDestination** component is recoverable. By default, it is not
-   *     recoverable.<br>Default value: **false**.<br>**true**: The **NavDestination** component is recoverable.<br>
-   *     **false**: The **NavDestination** component is not recoverable.
+   *     recoverable.
+   *     <br>Default value: **false**.
+   *     <br>**true**: The **NavDestination** component is recoverable.
+   *     <br>**false**: The **NavDestination** component is not recoverable.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1133,8 +1137,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets the system transition animation of the **NavDestination** component. System transition animations for the
    * title bar and content area can be configured separately.
    *
-   * @param { NavigationSystemTransitionType } type - Type of the system transition animation.<br>Default value:
-   *     **NavigationSystemTransitionType.DEFAULT**.
+   * @param { NavigationSystemTransitionType } type - Type of the system transition animation.
+   *     <br>Default value: **NavigationSystemTransitionType.DEFAULT**.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1145,17 +1149,16 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   systemTransition(type: NavigationSystemTransitionType): NavDestinationAttribute;
 
   /**
-   * Binds the **NavDestination** component with a scrollable container, which can be a [List]{@link list},
-   * [Scroll]{@link scroll}, [Grid]{@link grid}, or [WaterFlow]{@link water_flow} component. This way, scrolling in the
-   * scrollable container triggers the display and hide animations of the title bar and toolbar of all
-   * **NavDestination** components that are bound to it �C scrolling up triggers the hide animation, and scrolling down
+   * Binds the **NavDestination** component with a scrollable container, which can be a [List]{@link ./list},
+   * [Scroll]{@link ./scroll}, [Grid]{@link ./grid}, or [WaterFlow]{@link ./water_flow} component. This way, scrolling
+   * in the scrollable container triggers the display and hide animations of the title bar and toolbar of all
+   * **NavDestination** components that are bound to it – scrolling up triggers the hide animation, and scrolling down
    * triggers the show animation. A single **NavDestination** component can be bound to multiple scrollable containers,
    * and a single scrollable container can be bound to multiple **NavDestination** components. For details, see
    * [Example 1](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-navdestination.md#example-1-linking-the-title-bar-and-toolbar-with-scrollable-components).
    *
-   *
    * > **NOTE**
-   *
+   * >
    * > - The connection between the scrolling actions and the animations for showing or hiding the title bar and toolbar
    * > of the **NavDestination** component takes effect only when the title bar or toolbar is visible.
    * >
@@ -1178,18 +1181,17 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   bindToScrollable(scrollers: Array<Scroller>): NavDestinationAttribute;
 
   /**
-   * Binds the **NavDestination** component with a nested scrollable container, which can be a [List]{@link list},
-   * [Scroll]{@link scroll}, [Grid]{@link grid}, or [WaterFlow]{@link water_flow} component. This way, scrolling in the
-   * scrollable container triggers the display and hide animations of the title bar and toolbar of all
-   * **NavDestination** components that are bound to it �C scrolling up triggers the hide animation, and scrolling down
+   * Binds the **NavDestination** component with a nested scrollable container, which can be a [List]{@link ./list},
+   * [Scroll]{@link ./scroll}, [Grid]{@link ./grid}, or [WaterFlow]{@link ./water_flow} component. This way, scrolling
+   * in the scrollable container triggers the display and hide animations of the title bar and toolbar of all
+   * **NavDestination** components that are bound to it – scrolling up triggers the hide animation, and scrolling down
    * triggers the show animation. A single **NavDestination** component can be bound to multiple nested scrollable
    * containers, and a single nested scrollable container can be bound to multiple **NavDestination** components. For
    * details, see
    * [Example 1](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-navdestination.md#example-1-linking-the-title-bar-and-toolbar-with-scrollable-components).
    *
-   *
    * > **NOTE**
-   *
+   * >
    * > - The connection between the scrolling actions and the animations for showing or hiding the title bar and toolbar
    * > of the **NavDestination** component takes effect only when the title bar or toolbar is visible.
    * >
@@ -1216,9 +1218,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * components blocking it). For details, see
    * [Example 5](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-navdestination.md#example-5-handling-navdestination-onactive-and-oninactive-lifecycle-events).
    *
-   *
    * > **NOTE**
-   *
+   * >
    * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 22.
    *
    * @param { Optional<Callback<NavDestinationActiveReason>> } callback - Indicates callback when destination is active.
@@ -1236,9 +1237,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * but blocked by special components). For details, see
    * [Example 5](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-navdestination.md#example-5-handling-navdestination-onactive-and-oninactive-lifecycle-events).
    *
-   *
    * > **NOTE**
-   *
+   * >
    * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 22.
    *
    * @param { Optional<Callback<NavDestinationActiveReason>> } callback - Indicates callback when destination is
@@ -1256,7 +1256,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets a custom transition animation for the **NavDestination** component.
    *
    * > **NOTE**
-   *
+   * >
    * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    * >
    * > - If both this attribute and [systemTransition]{@link NavDestinationAttribute#systemTransition} are set,
@@ -1278,7 +1278,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * [launchMode.MOVE_TO_TOP_SINGLETON]{@link LaunchMode} or [launchMode.POP_TO_SINGLETON]{@link LaunchMode}.
    *
    * > **NOTE**
-   *
+   * >
    * > - This callback is not triggered by
    * > [replacePath]{@link NavPathStack#replacePath(info: NavPathInfo, animated?: boolean)} or
    * > [replaceDestination]{@link NavPathStack#replaceDestination}.
@@ -1301,16 +1301,19 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * system also switches the application's main window to the specified display orientation.
    *
    * > **NOTE**
-   *
+   * >
    * > - This attribute is effective only if the following conditions are all met:
-   * > >   1. The **NavDestination** component belongs to the application's main window page, and the main window is a
-   * > full-screen window.
-   * > >   2. The **Navigation** container containing the **NavDestination** component occupies the entire application
-   * > page area.
-   * > >   3. The type of **NavDestination** is [NavDestinationMode]{@link NavDestinationMode}.STANDARD.
+   * >
+   * > 1. The **NavDestination** component belongs to the application's main window page, and the main window is a full-
+   * > screen window.
+   * >
+   * > 2. The **Navigation** container containing the **NavDestination** component occupies the entire application page
+   * > area.
+   * >
+   * > 3. The type of **NavDestination** is [NavDestinationMode]{@link NavDestinationMode}.STANDARD.
    * >
    * > - The actual effect of setting the display orientation depends on the specific device support. For details, see
-   * > [setPreferredOrientation](docroot://reference/apis-arkui/arkts-apis-window-Window.md#setpreferredorientation9-1).
+   * > [setPreferredOrientation]{@link @ohos.window:window.Window.setPreferredOrientation(orientation: Orientation)}.
    *
    * @param { Optional<Orientation> } orientation - Display orientation to set.
    * @returns { NavDestinationAttribute } Returns the instance of the NavDestinationAttribute.
@@ -1326,23 +1329,29 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets whether to show or hide the system status bar when entering this **NavDestination** component.
    *
    * > **NOTE**
-   *
+   * >
    * > - This attribute is effective only if the following conditions are all met:
-   * > >   1. The **NavDestination** component belongs to the application's main window page, and the main window is a
-   * > full-screen window.
-   * > >   2. The **Navigation** container containing the **NavDestination** component occupies the entire page area.
-   * > >   3. The **NavDestination** component occupies the entire **Navigation** container.
-   * > >   4. The type of **NavDestination** is [NavDestinationMode]{@link NavDestinationMode}.STANDARD.
+   * >
+   * > 1. The **NavDestination** component belongs to the application's main window page, and the main window is a full-
+   * > screen window.
+   * >
+   * > 2. The **Navigation** container containing the **NavDestination** component occupies the entire page area.
+   * >
+   * > 3. The **NavDestination** component occupies the entire **Navigation** container.
+   * >
+   * > 4. The type of **NavDestination** is [NavDestinationMode]{@link NavDestinationMode}.STANDARD.
    * >
    * > - The actual effect of setting the system status bar depends on the specific device support. For details, see
-   * > [setSpecificSystemBarEnabled](docroot://reference/apis-arkui/arkts-apis-window-Window.md#setspecificsystembarenabled11).
+   * > [setSpecificSystemBarEnabled]{@link @ohos.window:window.Window.setSpecificSystemBarEnabled}.
    *
    * @param { Optional<boolean> } enabled - Whether to show or hide the system status bar when entering the current
-   *     **NavDestination** component.<br>**true**: Show the system status bar.<br>**false**: Hide the system status
-   *     bar.
+   *     **NavDestination** component.
+   *     <br>**true**: Show the system status bar.
+   *     <br>**false**: Hide the system status bar.
    * @param { boolean } [animated] - Whether to animate the visibility change of the system status bar. Default value:
-   *     **false**.<br>**true**: Animate the visibility change of the system status bar.<br>**false**: Do not animate
-   *     the visibility change of the system status bar.
+   *     **false**.
+   *     <br>**true**: Animate the visibility change of the system status bar.
+   *     <br>**false**: Do not animate the visibility change of the system status bar.
    * @returns { NavDestinationAttribute } Returns the instance of the NavDestinationAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1356,16 +1365,25 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * Sets whether to show or hide the system navigation bar when entering this **NavDestination** component.
    *
    * > **NOTE**
-   *
+   * >
    * > This attribute is effective only if the following conditions are all met:
-   *
-   *
+   * >
+   * > 1. The **NavDestination** component belongs to the application's main window page, and the main window is a full-
+   * > screen window.
+   * >
+   * > 2. The **Navigation** container containing the **NavDestination** component occupies the entire page area.
+   * >
+   * > 3. The **NavDestination** component occupies the entire **Navigation** container.
+   * >
+   * > 4. The type of **NavDestination** is [NavDestinationMode]{@link NavDestinationMode}.STANDARD.
+   * >
    * > The actual effect of setting the system navigation bar depends on the specific device support. For details, see
-   * > [setSpecificSystemBarEnabled](docroot://reference/apis-arkui/arkts-apis-window-Window.md#setspecificsystembarenabled11).
+   * > [setSpecificSystemBarEnabled]{@link @ohos.window:window.Window.setSpecificSystemBarEnabled}.
    *
    * @param { Optional<boolean> } enabled - Whether to show or hide the system navigation bar when entering the current
-   *     **NavDestination** component.<br>**true**: Show the system navigation bar.<br>**false**: Hide the system
-   *     navigation bar.
+   *     **NavDestination** component.
+   *     <br>**true**: Show the system navigation bar.
+   *     <br>**false**: Hide the system navigation bar.
    * @returns { NavDestinationAttribute } Returns the instance of the NavDestinationAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1432,14 +1450,14 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
 
 /**
  * **NavDestination** is the root container of a destination page and represents the content area of the
- * [Navigation]{@link navigation} component.
+ * [Navigation]{@link ./navigation} component.
  *
  * > **NOTE**
- *
+ * >
  * > - Since API version 11, this component supports the safe area attribute by default, with the default attribute
  * > value being **expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])**. You can override
  * > this attribute to change the default behavior. In earlier versions, you need to use the
- * > [expandSafeArea]{@link common} attribute to implement the safe area feature.
+ * > [expandSafeArea]{@link ./common} attribute to implement the safe area feature.
  * >
  * > - The **NavDestination** component must be used in conjunction with the **Navigation** component to act as the root
  * > node for the navigation destination page. When used alone, it can only function as a standard container component
@@ -1490,8 +1508,9 @@ declare const NavDestinationInstance: NavDestinationAttribute;
  * Defines the delegate function for custom transition animations of the **NavDestination** component.
  *
  * @param { NavigationOperation } operation - Type of navigation operation for the current page transition.
- * @param { boolean } isEnter - Whether the current page is an entry page.<br>**true**: The current page is an entry
- *     page.<br>**false**: The current page is not an entry page.
+ * @param { boolean } isEnter - Whether the current page is an entry page.
+ *     <br>**true**: The current page is an entry page.
+ *     <br>**false**: The current page is not an entry page.
  * @returns { Array<NavDestinationTransition> | undefined } Array of custom animations for the **NavDestination** page.
  *     If **undefined** is returned, the default system animation is used.
  * @syscap SystemCapability.ArkUI.ArkUI.Full

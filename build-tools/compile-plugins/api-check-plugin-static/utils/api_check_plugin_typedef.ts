@@ -72,6 +72,7 @@ export interface ProjectConfig extends ApiCheckConfig {
   bundleName: string;
   moduleName: string;
   cachePath: string;
+  compileMode: string;
   projectRootPath: string;
   isCrossplatform: boolean;
   ignoreCrossplatformCheck: boolean;
@@ -235,4 +236,13 @@ export interface ApiAvailableResult {
   valid: boolean,
   message: string,
   type: DiagnosticCategory.ERROR
+}
+interface ChainedModel {
+  isChain: boolean
+  chainNode: arkts.AstNode
+}
+
+export interface NodeParentModel {
+  node: arkts.AstNode
+  isChainedCall: ChainedModel
 }

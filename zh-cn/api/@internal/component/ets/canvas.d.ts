@@ -151,7 +151,7 @@ declare type CanvasTextBaseline = "alphabetic" | "bottom" | "hanging" | "ideogra
 declare type ImageSmoothingQuality = "high" | "low" | "medium";
 
 /**
- * Import the frame node type object for Canvas.
+ * 为Canvas导入FrameNode类型对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -470,9 +470,9 @@ declare class CanvasPath {
    *    矩形右下角的圆弧半径，矩形左下角的圆弧半径]<br>如果**radii**中包含负数或数组元素个数不在[1,4]范围内，
    *    则上报错误码103701。<br>默认值：**0**。设置**null**或**undefined**时按默认值处理。<br>如果圆弧半径超过
    *    矩形的宽度和高度，将按比例缩小以匹配对应尺寸。<br>默认单位：vp
-   * @throws { BusinessError } 103701 - 参数错误。可能的原因：
-   * <br> 1. 参数radii数组的元素个数为0或超过4个。
-   * <br> 2. 参数radii中包含负数。
+   * @throws { BusinessError } 103701 - Parameter error. Possible causes:
+   * <br> 1. The param radii is a list that has zero or more than four elements.
+   * <br> 2. The param radii contains negative value.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1817,7 +1817,7 @@ declare class CanvasRenderer extends CanvasPath {
   /**
    * 获取虚线样式。
    *
-   * @returns { number[] }
+   * @returns { number[] } 虚线样式数组，包含交替绘制线和间距的距离。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -2664,16 +2664,6 @@ declare class CanvasRenderingContext2D extends CanvasRenderer {
  * @atomicservice [since 11]
  * @since 8 dynamic
  */
-declare interface OffscreenCanvasRenderingContext2DInterface {
-  /**
-   * @since 8
-   */
-  (width: number, height: number, settings?: RenderingContextSettings): OffscreenCanvasRenderingContext2D;
-  /**
-   * @since 12
-   */
-  (width: number, height: number, settings?: RenderingContextSettings, unit?: LengthMetricsUnit): OffscreenCanvasRenderingContext2D;
-}
 declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
   /**
    * 生成一个包含图片展示的URL，该接口存在内存拷贝行为，高耗时，应避免频繁使用。

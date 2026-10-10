@@ -187,7 +187,7 @@ declare namespace hidebug {
    *
    * @param { string } filename - Custom file name of the sampling data. The .json file is generated in the **files**
    *     directory of the application based on the specified file name. The maximum length of a string is 128.
-   * @throws {BusinessError} 401 - the parameter check failed, Parameter type error
+   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
    * @since 23 static
@@ -216,10 +216,10 @@ declare namespace hidebug {
    * @param { string } filename - User-defined name of the VM heap data output file. The .heapsnapshot file is generated
    *     in the **files** directory of the application based on the specified file name. The maximum length of a string
    *     is 128 bytes.
-   * @throws {BusinessError} 401 - the parameter check failed, Parameter type error
+   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function dumpJsHeapData(filename : string) : void;
 
@@ -239,7 +239,7 @@ declare namespace hidebug {
    * @stagemodelonly
    * @atomicservice
    * @since 24 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function dumpJsHeapData(filename : string, needClean : boolean) : void;
 
@@ -251,9 +251,9 @@ declare namespace hidebug {
    * @param { int } fd - File descriptor to which data is written by the API.
    * @param { Array<string> } args - Parameter list of the **Dump** API of the system service. The maximum length of a
    *     string is 254 characters. The excess part will be truncated.
-   * @throws {BusinessError} 401 - the parameter check failed, Possible causes:
-   *     1.the parameter type error
-   *     2.the args parameter is not string array
+   * @throws {BusinessError} 401 - The parameter check failed, Possible causes:
+   *     1.The parameter type error.
+   *     2.The args parameter is not string array.
    * @throws {BusinessError} 11400101 - ServiceId invalid. The system ability does not exist.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
@@ -305,7 +305,7 @@ declare namespace hidebug {
      * Thread name.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     threadName?: string;
   }
@@ -1206,7 +1206,7 @@ declare namespace hidebug {
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 20 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   enum JsRawHeapTrimLevel {
     /**
@@ -1214,7 +1214,7 @@ declare namespace hidebug {
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 20 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     TRIM_LEVEL_1 = 0,
     /**
@@ -1223,7 +1223,7 @@ declare namespace hidebug {
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 20 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     TRIM_LEVEL_2 = 1
   }
@@ -1244,7 +1244,7 @@ declare namespace hidebug {
    *     **TRIM_LEVEL_1**.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 20 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function setJsRawHeapTrimLevel(level: JsRawHeapTrimLevel): void;
 
@@ -1277,7 +1277,7 @@ declare namespace hidebug {
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @atomicservice
    * @since 18 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function dumpJsRawHeapData(needGC?: boolean): Promise<string>;
 
@@ -1312,7 +1312,7 @@ declare namespace hidebug {
    * @stagemodelonly
    * @atomicservice
    * @since 24 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function dumpJsRawHeapData(needGC: boolean, needClean: boolean): Promise<string>;
 
@@ -1350,7 +1350,7 @@ declare namespace hidebug {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function dumpJsRawHeapData(needGC: boolean, needClean: boolean, processDump: boolean): Promise<Array<string>>;
 
@@ -1571,7 +1571,7 @@ declare namespace hidebug {
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @FaAndStageModel
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getAppRunningUniqueId(): string;
 }

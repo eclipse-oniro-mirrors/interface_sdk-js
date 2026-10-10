@@ -34,7 +34,7 @@ import type baseProfile from './@ohos.bluetooth.baseProfile';
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @since 10 dynamic
- * @since 26.1.0 static
+ * @since 26.0.1 static
  */
 declare namespace socket {
   /**
@@ -59,7 +59,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppListen(name: string, options: SppOptions, callback: AsyncCallback<int>): void;
 
@@ -77,7 +77,7 @@ declare namespace socket {
    *     服务端通道建立异常或[SppType]{@link socket.SppType}非L2CAP链路类型时，返回-1。
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 20 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function getL2capPsm(serverSocket: int): int;
 
@@ -103,7 +103,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppAccept(serverSocket: int, callback: AsyncCallback<int>): void;
 
@@ -130,7 +130,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppConnect(deviceId: string, options: SppOptions, callback: AsyncCallback<int>): void;
 
@@ -152,7 +152,7 @@ declare namespace socket {
    * 3. Parameter verification failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 17 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function getDeviceId(clientSocket: int): string;
 
@@ -170,7 +170,7 @@ declare namespace socket {
    * @returns { int } 返回最大接收数据的大小，单位：Byte。
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 22 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function getMaxReceiveDataSize(clientSocket: int): int;
 
@@ -188,7 +188,7 @@ declare namespace socket {
    * @returns { int } 返回最大发送数据的大小，单位：Byte。
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 22 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function getMaxTransmitDataSize(clientSocket: int): int;
 
@@ -200,7 +200,7 @@ declare namespace socket {
    * @returns { boolean } 套接字链路是否已连接，true表示已连接，false表示未连接。
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 22 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function isConnected(clientSocket: int): boolean;
 
@@ -220,7 +220,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppCloseServerSocket(socket: int): void;
 
@@ -241,7 +241,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppCloseClientSocket(socket: int): void;
 
@@ -268,7 +268,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppWrite(clientSocket: int, data: ArrayBuffer): void;
 
@@ -298,6 +298,20 @@ declare namespace socket {
   function on(type: 'sppRead', clientSocket: number, callback: Callback<ArrayBuffer>): void;
 
   /**
+   * 客户端和服务端均可使用，订阅从套接字读取到数据时上报的事件。
+   *
+   * @param { int } clientSocket - 客户端套接字的ID。
+   *     该值是调用[sppAccept]{@link socket.sppAccept}或[sppConnect]{@link socket.sppConnect}接口，通过其异步callback获取到的。
+   * @param { Callback<ArrayBuffer> } callback - 指定订阅的回调函数，会返回读取到的数据。
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2901054 - IO error.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 26.0.1 static
+   */
+  function onSppRead(clientSocket: int, callback: Callback<ArrayBuffer>): void;
+
+  /**
    * 取消订阅套接字读请求事件。
    * 
    * 须在调用[socket.on('sppRead')]{@link socket.on(type: 'sppRead', clientSocket: number, callback: Callback<ArrayBuffer>)}成功订阅
@@ -322,6 +336,18 @@ declare namespace socket {
   function off(type: 'sppRead', clientSocket: number, callback?: Callback<ArrayBuffer>): void;
 
   /**
+   * 客户端和服务端均可使用，取消订阅从套接字读取到数据时上报的事件。
+   *
+   * @param { int } clientSocket - 客户端套接字的ID。
+   *     该值是调用[sppAccept]{@link socket.sppAccept}或[sppConnect]{@link socket.sppConnect}接口，通过其异步callback获取到的。
+   * @param { Callback<ArrayBuffer> } [callback] - 指定取消订阅的回调函数通知。
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 26.0.1 static
+   */
+  function offSppRead(clientSocket: int, callback?: Callback<ArrayBuffer>): void;
+
+  /**
    * 客户端和服务端均可使用，向对端设备发送数据。使用Promise异步回调。当连接断开时，该接口会抛出错误码并返回。
    * 
    * 仅在双方成功建立连接后，调用本接口才有效。
@@ -339,7 +365,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 18 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppWriteAsync(clientSocket: int, data: ArrayBuffer): Promise<void>;
 
@@ -364,7 +390,7 @@ declare namespace socket {
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 18 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function sppReadAsync(clientSocket: int): Promise<ArrayBuffer>;
 
@@ -373,7 +399,7 @@ declare namespace socket {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   interface SppOptions {
     /**
@@ -386,7 +412,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     uuid: string;
     /**
@@ -394,7 +420,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     secure: boolean;
     /**
@@ -402,7 +428,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     type: SppType;
     /**
@@ -422,7 +448,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 20 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     psm?: int;
   }
@@ -436,7 +462,7 @@ declare namespace socket {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   enum SppType {
     /**
@@ -444,7 +470,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     SPP_RFCOMM = 0,
     /**
@@ -452,7 +478,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 20 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     SPP_L2CAP = 1,
     /**
@@ -460,7 +486,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 20 dynamic
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     SPP_L2CAP_BLE = 2
   }

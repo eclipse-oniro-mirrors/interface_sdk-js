@@ -903,17 +903,6 @@ declare namespace imageGeneration {
      * @since 26.0.0 static
      */
     minimizeDuringGeneration?: boolean;
-   /**
-     * Whether to recover from cache for AI image generation.
-     * The persistent cache file is used to store configuration parameters for AI image generation.
-     *
-     * @type { ?boolean }
-     * @syscap SystemCapability.ArkUI.ArkUI.Full
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.0 static
-     */
-    recoverFromCache?: boolean;
    }
 
    /**
@@ -1014,7 +1003,7 @@ declare namespace imageGeneration {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 static
+   * @since 26.0.1 static
    */
   function startSmartCanvasService(
     context: common.ServiceExtensionContext | common.UIAbilityContext | common.UIExtensionContext): Promise<void>;
@@ -1125,17 +1114,6 @@ declare namespace imageGeneration {
    * @since 26.0.0 static
    */
   function restoreGeneratorNodeGraph(uiContext: UIContext): Promise<void>;
-  /**
-   * Whether to recover from cache for AI image generation.
-   * The persistent cache file is used to store configuration parameters for AI image generation.
-   *
-   * @type { ?boolean }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.0.0 static
-   */
-  recoverFromCache?: boolean;
 }
 
 export default imageGeneration;

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file formHost
  * @kit FormKit
  */
 
@@ -1769,7 +1769,7 @@ declare namespace formHost {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   function registerFormHostService(service: formInfo.FormHostServiceInfo): Promise<string>;
 
@@ -1787,7 +1787,7 @@ declare namespace formHost {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   function unregisterFormHostService(serviceId: string): Promise<void>;
 }

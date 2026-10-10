@@ -422,7 +422,7 @@ declare namespace deviceInfo {
      * @returns { int }
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     get sdkMinorApiVersion(): int;
 
@@ -438,7 +438,7 @@ declare namespace deviceInfo {
      * @returns { int }
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     get sdkPatchApiVersion(): int;
     
@@ -755,8 +755,19 @@ declare namespace deviceInfo {
      *     format, or the specified version does not exist.
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     function apiAvailable(version: string | int): boolean;
+
+    /**
+     * Obtain the kernel version.
+     * The value is in the format of 'HongMeng Kernel X.Y.Z'.
+     * Example: 'HongMeng Kernel 1.0.0'.
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    get kernelVersion(): string;
 }
 export default deviceInfo;

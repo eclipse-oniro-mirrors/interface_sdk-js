@@ -28,6 +28,7 @@ import ExtensionAbility from './@ohos.app.ability.ExtensionAbility';
  * @syscap SystemCapability.Communication.FusionConnectivity.Core
  * @stagemodelonly
  * @since 23 dynamic
+ * @since 26.0.1 static
  */
 type PartnerDeviceAddress = partnerAgent.PartnerDeviceAddress;
 
@@ -38,6 +39,7 @@ type PartnerDeviceAddress = partnerAgent.PartnerDeviceAddress;
  * @syscap SystemCapability.Communication.FusionConnectivity.Core
  * @stagemodelonly
  * @since 23 dynamic
+ * @since 26.0.1 static
  */
 type PartnerAgentExtensionAbilityDestroyReason = partnerAgent.PartnerAgentExtensionAbilityDestroyReason;
 
@@ -45,12 +47,12 @@ type PartnerAgentExtensionAbilityDestroyReason = partnerAgent.PartnerAgentExtens
  * Class for the PartnerAgentExtensionAbility.
  * Applications can use this ability to discover devices.
  *
- * @extends ExtensionAbility
  * @syscap SystemCapability.Communication.FusionConnectivity.Core
  * @stagemodelonly
  * @since 23 dynamic
+ * @since 26.0.1 static
  */
-export default class PartnerAgentExtensionAbility extends ExtensionAbility {
+export default declare class PartnerAgentExtensionAbility extends ExtensionAbility {
 
   /**
    * Context of the PartnerAgentExtensionAbility.
@@ -59,6 +61,7 @@ export default class PartnerAgentExtensionAbility extends ExtensionAbility {
    * @syscap SystemCapability.Communication.FusionConnectivity.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   context: PartnerAgentExtensionContext;
 
@@ -70,6 +73,7 @@ export default class PartnerAgentExtensionAbility extends ExtensionAbility {
    * @syscap SystemCapability.Communication.FusionConnectivity.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   onDestroyWithReason(reason: PartnerAgentExtensionAbilityDestroyReason): void;
 
@@ -80,6 +84,7 @@ export default class PartnerAgentExtensionAbility extends ExtensionAbility {
    * @syscap SystemCapability.Communication.FusionConnectivity.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   onDeviceDiscovered(deviceAddress: PartnerDeviceAddress): void;
 }

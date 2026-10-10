@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 设备管理
  * @kit DistributedServiceKit
  */
 
@@ -499,7 +499,8 @@ declare namespace distributedDeviceManager {
     protocolType: int;
 
     /**
-     * 设备类型。
+     * 设置类型。
+     * 取值限定为整数。
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -643,9 +644,8 @@ declare namespace distributedDeviceManager {
 
     /**
      * 图片规格名称。取值范围：
-     * 
-     * - lg：大图，尺寸为1016064px。
-     * - sm：小图，尺寸为65536px。
+     * - lg：大图（尺寸：1008×1008像素）
+     * - sm：小图（尺寸：256×256像素）。
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -706,9 +706,8 @@ declare namespace distributedDeviceManager {
 
     /**
      * 图片规格名称。取值范围：
-     * 
-     * - lg：大图，尺寸为1016064px。
-     * - sm：小图，尺寸为65536px。
+     * - lg：大图（尺寸：1008×1008像素）
+     * - sm：小图（尺寸：256×256像素）。
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -1242,7 +1241,8 @@ declare namespace distributedDeviceManager {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<DeviceStateChangeResult> } callback
      *     指示要注册的设备状态回调，返回设备状态和设备信息。
-     * @throws { BusinessError } 201 - Permission verification failed.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 23 static
      */
@@ -1422,7 +1422,7 @@ declare namespace distributedDeviceManager {
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 10 dynamic
      */
-    on(type: 'discoverFailure', callback: Callback<{ reason: number; }>): void;
+    on(type: 'discoverFailure', callback: Callback<{ reason: int; }>): void;
 
     /**
      * 注册设备发现失败回调。使用callback异步回调。此回调在调用startDiscovering发现设备失败时触发，
@@ -1806,8 +1806,9 @@ declare namespace distributedDeviceManager {
      *     ohos.permission.sec.ACCESS_UDID
      * @param { Array<string> } deviceIds - 应用程序可以获取的设备ID列表。
      * @returns { Array<DeviceIdentification> } DeviceIdentification列表。
-     * @throws { BusinessError } 201 - User permission verify failed.
-     * @throws { BusinessError } 202 - The caller is not a system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
@@ -1845,14 +1846,15 @@ declare namespace distributedDeviceManager {
      *     1. 10: Operating system based on OpenHarmony
      *     2. 11: Operating system not based on OpenHarmony
      *     3. -1: Unknown
-     * @throws { BusinessError } 201 - User permission verify failed.
-     * @throws { BusinessError } 202 - The caller is not a system application.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 11600102 - Failed to obtain service.
      * @throws { BusinessError } 11600110 - Invalid network ID.
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getOsTypeByNetworkId(networkId: string): int;
   }

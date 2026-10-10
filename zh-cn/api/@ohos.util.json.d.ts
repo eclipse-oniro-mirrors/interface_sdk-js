@@ -14,9 +14,13 @@
  */
 
 /**
- * @file
+ * @file JSON解析与生成
  * @kit ArkTS
  */
+
+/*** if arkts dynamic */
+import lang from '@arkts.lang';
+/*** endif */
 
 /**
  * 本模块提供了将JSON文本转换为JSON对象或值，以及将对象转换为JSON文本等功能。模块基于标准JSON规范实现解析与序列化，
@@ -46,12 +50,42 @@ declare namespace json {
   type Transformer = (this: Object, key: string, value: Object) => Object | undefined | null;
 
   /**
+   * ISendable是所有Sendable类型（除null和undefined）的父类型。自身没有任何必要的方法和属性。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  type ISendable = lang.ISendable;
+
+  /**
+   * 定义Sendable JSON解析的转换结果函数类型。
+   *
+   * 作为[parseSendable]{@link json.parseSendable}的参数时，解析得到的Sendable对象的每个成员都会调用该函数，
+   * 可在解析过程中进行自定义数据处理或转换。
+   *
+   * @param { ISendable } this - 解析中的键值对所属的ISendable对象。
+   * @param { string } key - 属性名。
+   * @param { ISendable | undefined | null } value - 解析中的键值对的值。
+   * @returns { ISendable | undefined | null } 返回修改后的ISendable、undefined或null。
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  type SendableTransformer = (this: ISendable, key: string,
+    value: ISendable | undefined | null) => ISendable | undefined | null;
+
+  /**
    * 解析JSON字符串生成ArkTS对象或null。解析过程中，每个键值对按从最内层到最外层的顺序依次经过reviver函数处理，返回值替换原始值；
    * 当传入ParseOptions指定BigIntMode时，符合条件的整数将被解析为BigInt；当入参字符串为'null'时返回null。
    *
    * @param { string } text - 有效的JSON字符串，需符合JSON语法规范。
    * @param { Transformer } [reviver] - 转换函数，用于修改解析生成的原始值；当需要对解析结果进行自定义转换时使用。默认值是undefined。
-   * @param {ParseOptions} options - 解析的配置选项，用于控制解析生成的类型。默认值是undefined。
+   * @param {ParseOptions} [options] - 解析的配置选项，用于控制解析生成的类型。默认值是undefined。
    * @returns { Object | null } 当传入的字符串为'null'时，返回null。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform
@@ -173,6 +207,77 @@ declare namespace json {
      * @since 12 dynamiconly
      */
     bigIntMode: BigIntMode;
+    /**
+     * 解析返回结果的类型。省略时默认为OBJECT。仅对{@link parseSendable}生效；{@link parse}会忽略该字段。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.1 dynamiconly
+     */
+    parseReturnType?: ParseReturnType;
+  }
+
+  /**
+   * 解析JSON字符串，生成可直接跨并发实例（Worker或TaskPool）传递、无需拷贝的Sendable对象。
+   * 当解析后的JSON数据需要跨线程共享时，使用本接口替代[parse]{@link json.parse}：解析结果直接创建于共享堆，
+   * 调用返回后即可被各并发实例访问。
+   *
+   * 使用说明：
+   * <ul>
+   * <li>取值范围在"0"到"4294967294"之间的数字字符串键会作为元素下标存储；任意属性数量下所有键值均可完整访问与枚举。</li>
+   * <li>重复键以后值为准，且枚举位置保持在首次出现的位置。</li>
+   * <li>当options.parseReturnType为{@link ParseReturnType.MAP}时，返回支持任意条数增删的collections.Map；
+   * 为{@link ParseReturnType.OBJECT}（默认）时，返回不可扩展的Sendable对象，其已有属性可更新、不可新增或删除。</li>
+   * </ul>
+   *
+   * @param { string } text - 有效的JSON字符串，需符合JSON语法规范。
+   * @param { SendableTransformer } [reviver] - 用于转换结果的函数。当前仅接受undefined；传入函数将抛出TypeError（与ASON.parse一致）。默认值是undefined。
+   * @param { ParseOptions } [options] - 解析的配置选项。也可传入仅含bigIntMode的既有ParseOptions对象（此时parseReturnType默认为OBJECT）。默认值是undefined。
+   * @returns { ISendable | null } 返回与JSON字符串对应的Sendable对象；当JSON字符串为'null'时返回null；
+   * 当options.parseReturnType为{@link ParseReturnType.MAP}时返回collections.Map。
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  function parseSendable(text: string, reviver?: SendableTransformer, options?: ParseOptions): ISendable | null;
+
+  /**
+   * 枚举解析返回结果的类型。
+   *
+   * 当parseReturnType为MAP时，解析结果为collection.Map而非Sendable对象。
+   * 仅对{@link parseSendable}生效；{@link parse}会忽略该字段。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  const enum ParseReturnType {
+    /**
+     * 解析结果为不可扩展的Sendable对象，其已有属性可更新、不可新增或删除。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.1 dynamiconly
+     */
+    OBJECT = 0,
+    /**
+     * 解析结果为collections.Map，支持任意条数的增删操作。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.1 dynamiconly
+     */
+    MAP = 1
   }
 }
 

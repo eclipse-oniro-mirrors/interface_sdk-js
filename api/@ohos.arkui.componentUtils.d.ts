@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file ComponentUtils
  * @kit ArkUI
  */
 
@@ -23,6 +23,14 @@ import type common2D from './@ohos.graphics.common2D';
 
 /**
  * The **componentUtils** module provides API for obtaining the coordinates and size of the drawing area of a component.
+ * It is applicable to scenarios where the actual drawing area information of a component needs to be queried after the
+ * component layout is complete, helping you obtain layout results such as component sizes and positions.
+ *
+ * > **NOTE**
+ * >
+ * > - The functionality of this module depends on UI context. This means that the APIs of this module cannot be used
+ * > where [the UI context is ambiguous](docroot://ui/arkts-global-interface.md#ambiguous-ui-context). For details, see
+ * > [UIContext]{@link @ohos.arkui.UIContext}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -56,7 +64,7 @@ declare namespace componentUtils {
     size: Size;
 
     /**
-     * Offset of the component relative to the parent component.
+     * Offset of the component relative to its parent component.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -305,7 +313,7 @@ declare namespace componentUtils {
     z: number;
 
     /**
-     * X-coordinate of the center point.
+     * X-axis coordinate of the transform center point.
      *
      * Unit: vp
      *
@@ -318,7 +326,7 @@ declare namespace componentUtils {
     centerX: number;
 
     /**
-     * Y-coordinate of the center point.
+     * Y-axis coordinate of the transform center point.
      *
      * Unit: vp
      *
@@ -365,7 +373,7 @@ declare namespace componentUtils {
     y: number;
 
     /**
-     * Z coordinate of the rotation vector.
+     * Z-coordinate of the rotation vector.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -376,7 +384,7 @@ declare namespace componentUtils {
     z: number;
 
     /**
-     * X-coordinate of the center point.
+     * X-axis coordinate of the transform center point.
      *
      * Unit: vp
      *
@@ -389,7 +397,7 @@ declare namespace componentUtils {
     centerX: number;
 
     /**
-     * Y-coordinate of the center point.
+     * Y-axis coordinate of the transform center point.
      *
      * Unit: vp
      *
@@ -416,7 +424,7 @@ declare namespace componentUtils {
   }
 
   /**
-   * The matrix is column-first fourth-order matrix.
+   * Number array whose length is 16 (4 x 4). The matrix is column-first.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -612,8 +620,16 @@ declare namespace componentUtils {
    * > must be mounted to the component tree before this API can obtain their information, as unmounted components are
    * > not measured or laid out by the UI framework. Always ensure that component mounting precedes information
    * > retrieval attempts.
+   * >
+   * > - The component position returned by this API is the layout position. Certain attribute calculations are not
+   * > supported, such as position-related attributes like **offset**, **markAnchor**, and **position** of the
+   * > **Edges** and **LocalizedEdges** types, as well as transformation-related attributes like **rotate**,
+   * > **translate**, **scale**, and **transform**. You can use the alternative API
+   * > [getPositionToWindowWithTransform]{@link FrameNode:FrameNode#getPositionToWindowWithTransform} to obtain the
+   * > position offset of a component relative to the window with drawing attributes.
    *
-   * @param {string} id - Component ID.
+   * @param {string} id - Component ID. The target component must be mounted to the component tree and have completed
+   *     layout.
    * @returns {ComponentInfo} **ComponentInfo** object, which provides the size, position, translation, scaling,
    *     rotation, and affine matrix information of the component.
    * @throws { BusinessError } 100001 - UI execution context not found.

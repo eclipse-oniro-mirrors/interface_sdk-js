@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 系统电源管理
  * @kit BasicServicesKit
  */
 
@@ -22,8 +22,8 @@ import { AsyncCallback, BusinessError, Callback } from './@ohos.base';
 
 /**
  * 该模块主要提供查询屏幕状态、查询电源模式、检测待机模式等接口，还提供电源键过滤策略的配置能力。
- *     开发者可以使用该模块的接口获取设备的活动状态、电源模式、亮灭屏状态、待机低功耗状态等，适用于需要根据设备电源状态进行业务逻辑调整的场景，
- *     例如在低功耗模式下限制后台活动、在待机模式下优化续航策略等。
+ * 开发者可以使用该模块的接口获取设备的活动状态、电源模式、亮灭屏状态、待机低功耗状态等，适用于需要根据设备电源状态进行业务逻辑调整的场景，
+ * 例如在低功耗模式下限制后台活动、在待机模式下优化续航策略等。
  *
  * @syscap SystemCapability.PowerManager.PowerManager.Core
  * @since 7 dynamic
@@ -233,7 +233,7 @@ declare namespace power {
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 19]
-   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.1.0]
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @since 12 dynamic
@@ -252,7 +252,7 @@ declare namespace power {
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 4900201 - The device activity is being refreshed too frequently; the minimum time
    *     interval is 100 ms.
-   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.1.0]
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @since 20 dynamic

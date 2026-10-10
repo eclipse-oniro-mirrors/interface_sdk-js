@@ -14,13 +14,14 @@
 */
 
 /**
- * @file
+ * @file 效果级联
  * @kit ArkGraphics2D
  */
 
 import { AsyncCallback } from './@ohos.base';
 import type common2D from './@ohos.graphics.common2D';
 import type image from './@ohos.multimedia.image';
+import type drawing from './@ohos.graphics.drawing';
 /*** if arkts static */
 import { LinearGradientBlurOptions } from '@ohos.arkui.component';
 /*** endif */
@@ -92,7 +93,7 @@ declare namespace uiEffect {
      *     当y取值为负值时，代表在屏幕上方。
      * @param { WaterRippleMode } rippleMode - 水波纹的场景模式。
      * @returns { Filter } - 返回挂载了水波纹效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 12 dynamic
@@ -110,7 +111,7 @@ declare namespace uiEffect {
      *     BOTTOM表示从设备底部飞入飞出形变场景。
      *     TOP表示从设备顶部飞入飞出形变场景。
      * @returns { Filter } - 返回挂载了飞入飞出形变效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 12 dynamic
@@ -126,7 +127,7 @@ declare namespace uiEffect {
      *     畸变系数小于0时，效果为桶形畸变；大于0时，效果为枕形畸变；
      *     越接近0时，畸变程度越小，等于0时，没有畸变效果。
      * @returns { Filter } - 返回挂载了透镜畸变效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 13 dynamic
@@ -142,7 +143,7 @@ declare namespace uiEffect {
      *     设置大于128的值时，按值为128处理。
      * @param { LinearGradientBlurOptions } gradientParam - 线性渐变参数，包含两个部分fractionStops和direction。
      * @returns { Filter } - 返回挂载了半径线性渐变模糊效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 19 dynamic
@@ -158,7 +159,7 @@ declare namespace uiEffect {
      *     更改控制点的位置可改变形成边缘的曲线形状，从而扭曲图像。控制点坐标使用归一化坐标系
      *     （默认范围为[0, 1]），且坐标值可大于1或小于0。数组长度不为12时效果不生效。
      * @returns { Filter } - 返回挂载了贝塞尔曲线变形效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -176,7 +177,7 @@ declare namespace uiEffect {
      * @param { double } lightIntensity - 光源强度，取值范围为[0, 1]，数值越大光源亮度越大，超出范围会自动截断。
      * @param { Mask } [displacementMap] - 置换贴图参数，该参数暂不生效，不建议传入。不设置时对功能无影响。
      * @returns { Filter } - 返回了具有内容光照效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -199,7 +200,7 @@ declare namespace uiEffect {
      *     透明度分布（如局部透明或动态透明效果）时传入此参数。不设置时，颜色渐变效果的透明度
      *     完全由colors参数决定。
      * @returns { Filter } - 返回挂载了颜色渐变效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -223,7 +224,7 @@ declare namespace uiEffect {
      *     当需要简洁描边效果时设置为false。不设置时默认为true（带发光效果）。
      *     小于16*16的图片默认只有描边效果，无发光效果，此参数失去作用。
      * @returns { Filter } - 返回挂载了描边高光效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -242,7 +243,7 @@ declare namespace uiEffect {
      *     设置为[0.0, 0.0]时，无扭曲效果。Mask的灰度值控制扭曲的方向和强度，factor与Mask灰度值
      *     相乘后共同决定最终的扭曲程度，即实际扭曲值 = Mask灰度值 × factor值。
      * @returns { Filter } - 返回挂载了扭曲效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -268,7 +269,7 @@ declare namespace uiEffect {
      *     色散强度和方向时传入此参数。不传入时默认值为[0.0, 0.0]，无B通道色散偏移。
      *     取值范围同rFactor，为[-1.0, 1.0]，超出范围自动截断。
      * @returns { Filter } - 返回挂载了由置换贴图控制的色散效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -293,10 +294,10 @@ declare namespace uiEffect {
      *     小于1.0按1.0处理；等于1.0不做处理；大于1.0尝试触发HDR渲染管线；
      *     超过最大倍数按最大倍数处理。
      * @returns { Filter } - 返回挂载了HDR提亮效果的Filter，支持链式调用继续添加其他效果。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      *     [since 20 - 23]
-     * @throws { BusinessError } 201 - 权限校验失败，应用无权限使用该API，需要申请权限。
-     *     [since 24]
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API. [since 24]
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
@@ -312,7 +313,7 @@ declare namespace uiEffect {
      *     模糊半径设置为0时不模糊；模糊半径设置小于0的值时，按值为0处理；设置大于128的值时，按值为128处理。
      * @param { Mask } radiusMap - 代表模糊程度的Mask对象。Mask的灰度值代表对应位置的模糊程度，灰度值越大越模糊。
      * @returns { Filter } - 返回当前效果的Filter对象。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -336,7 +337,7 @@ declare namespace uiEffect {
      * @param { double } [factor] - 采样缩放系数。当使用高度图作为mask且需要控制高度缩放时传入此参数。不设置时mask作为法线图采样直接使用；
      *     设置了值时mask作为高度图采样，实际高度值为mask采样值与factor的乘积。
      * @returns { Filter } - 返回挂载了由置换贴图控制的光照效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -359,7 +360,7 @@ declare namespace uiEffect {
      *     时设置为true；当需要正向转场效果（从前页面向后页面过渡）时设置为false。
      *     默认值为false（正向转场）。
      * @returns { Filter } - 返回挂载了转场效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -412,7 +413,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     haloBloom(tintColor: Color, bloomFactor: double, glowExposure: double): Filter;
 
@@ -435,9 +436,34 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     spinBlur(center: common2D.Point, angle: double, samples: int): Filter;
+
+    /**
+     * 根据图片的明暗程度进行颜色渐变映射。
+     * 根据输入的colors和对应的亮度锚点位置进行颜色映射，图片越暗对应的亮度值越小，
+     * 图片中黑色的部分最暗，亮度值为0.0；白色部分最亮，亮度值为1.0。
+     * 颜色映射为循环方式，如输入5个颜色，按照亮度锚点位置从小到大排序，
+     * 则颜色映射顺序为 1-->2-->3-->4-->5-->1。
+     *
+     * > **说明**
+     * >
+     * > 建议作为前景滤镜使用。
+     *
+     * @param { Array<Color> } colors - 应用的颜色。每个颜色值必须大于等于0.0，推荐使用范围为[0, 1]。
+     *     小于0时无效果。颜色值大于1.0时按1.0处理。
+     *     数量范围为[1, 5]，数量小于1时无效果；数量为1时为纯色效果；
+     *     数量大于5时，效果仅应用前5个颜色。
+     * @param { Array<double> } positions - 每个颜色对应的亮度锚点位置。数量必须与colors的数量一致，
+     *     不一致时无效果。取值范围为[0.0, 1.0]，超出范围时按边界值处理。
+     * @returns { Filter } - 返回挂载了颜色亮度映射效果的Filter。
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    mapColorByBrightness(colors: Array<Color>, positions: Array<double>): Filter;
   }
 
   /**
@@ -606,7 +632,7 @@ declare namespace uiEffect {
      * @param { double } borderWidth - 组件边框的受光宽度，取值范围为[0.0, 30.0]，超出范围会自动截断。
      *     设置为0.0时，组件边框无光照效果，数值越大，光可照亮的区域越宽。
      * @returns { VisualEffect } - 返回了具有边框光照效果的VisualEffect。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -630,7 +656,7 @@ declare namespace uiEffect {
      *     透明度分布（如局部透明或动态透明效果）时传入此参数。不设置时，颜色渐变效果的透明度
      *     完全由colors参数决定。
      * @returns { VisualEffect } - 返回具有颜色渐变效果的VisualEffect。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -654,7 +680,7 @@ declare namespace uiEffect {
      * @param { BrightnessParam } [brightnessParam] - 为材质增加提亮效果。当需要增强材质的视觉亮度（如高亮显示、发光效果）时传入此参数。
      *     不设置时默认不添加提亮效果，材质保持原始亮度。
      * @returns { VisualEffect } - 返回具有材质效果的VisualEffect。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 22 dynamic
@@ -682,6 +708,29 @@ declare namespace uiEffect {
      * @since 26.0.0 dynamiconly
      */
     distortionCollapse(distortionParam: DistortionParam): VisualEffect;
+
+    /**
+     * 为组件添加玻璃弹珠效果。玻璃弹珠效果将玻璃弹珠与材质参数以及可选的内容层进行合成，
+     * 产生具有折射、色散、光晕、阴影和发光的真实玻璃质感视觉效果。
+     *
+     * > **说明：**
+     * >
+     * > 作用于组件的背景层。
+     *
+     * @param { GlassMarbleMaterialParam } material - 材质参数，控制背景色、透明度、
+     *     反射贴图、阴影、焦散和形状缩放。
+     * @param { GlassMarbleSphereParam | Mask } marbleShell - 必选的形状参数；可以是球体几何参数
+     *     （圆心和半径），也可以是预置的资源图遮罩。
+     * @param { GlassMarbleContentParam } [content] - 可选的内容参数，包括内容遮罩、
+     *     混合内容的着色颜色、缩放、饱和度和色散。
+     * @returns { VisualEffect } - 返回附加了玻璃弹珠效果的VisualEffect。
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    glassMarbleEffect(material: GlassMarbleMaterialParam, marbleShell: GlassMarbleSphereParam | Mask,
+      content?: GlassMarbleContentParam): VisualEffect;
   }
 
   /**
@@ -994,7 +1043,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface WarpedRingParam {
 
@@ -1006,7 +1055,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     radius: double;
 
@@ -1018,7 +1067,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     baseHalfWidth: double;
 
@@ -1030,7 +1079,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     widthVariation: double;
 
@@ -1043,7 +1092,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rotateAngle: double;
 
@@ -1055,7 +1104,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rotate3DProgress: double;
 
@@ -1066,9 +1115,256 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     noiseEvolution: double;
+  }
+
+  /**
+   * 玻璃弹珠的材质参数。控制材质属性（背景色、透明度、反射贴图、阴影、焦散）以及形状缩放。
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface GlassMarbleMaterialParam {
+    /**
+     * 平均背景色，不使用alpha通道。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    averageBgColor: Color;
+
+    /**
+     * 玻璃效果的整体透明度。
+     * 取值范围为[0, 1]；0表示完全透明，1表示完全不透明。
+     * 超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    opacity: double;
+
+    /**
+     * 阴影的垂直偏移量，按形状半径归一化。
+     * 取值范围为[-1, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowOffset: double;
+
+    /**
+     * 阴影的半径，按形状半径归一化。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowRadius: double;
+
+    /**
+     * 阴影的边缘柔和度。
+     * 取值范围为[0, 1]；0产生硬边缘，1产生完全柔和的边缘。
+     * 超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowEdgeSoftness: double;
+
+    /**
+     * 阴影的整体透明度。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shadowOpacity: double;
+
+    /**
+     * 焦散（聚焦光线）的垂直偏移量，按形状半径归一化。
+     * 取值范围为[-1, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticOffset: double;
+
+    /**
+     * 焦散（聚焦光线）的半径，按形状半径归一化。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticRadius: double;
+
+    /**
+     * 焦散（聚焦光线）的边缘柔和度。
+     * 取值范围为[0, 1]；0产生硬边缘，1产生完全柔和的边缘。
+     * 超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticEdgeSoftness: double;
+
+    /**
+     * 焦散（聚焦光线）的整体透明度。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    causticOpacity: double;
+
+    /**
+     * 应用于玻璃形状的缩放系数。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    shapeScale: double;
+
+    /**
+     * 用于玻璃表面环境反射的反射贴图。
+     * 通过image模块创建为PixelMap实例。
+     * 不设置时，默认值为undefined，不应用反射效果。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    reflectionMap?: image.PixelMap;
+  }
+
+  /**
+   * 玻璃弹珠的内容参数。控制内容遮罩在玻璃形状内部的混合方式，
+   * 包括内容遮罩本身、着色颜色、缩放、饱和度和色散。
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface GlassMarbleContentParam {
+    /**
+     * 用于在玻璃形状内部混合附加内容的内容遮罩。
+     * 提供时，将对内容遮罩进行采样并与玻璃材质合成。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentMask: Mask;
+
+    /**
+     * 应用于玻璃形状内部混合内容的着色颜色。
+     * alpha通道用作原始内容颜色与着色颜色之间的混合系数。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentTintColor: Color;
+
+    /**
+     * 应用于玻璃形状内部混合内容的缩放系数。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentScale: double;
+
+    /**
+     * 玻璃形状内部混合内容的饱和度。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentSaturation: double;
+
+    /**
+     * 玻璃形状内部混合内容的色散。
+     * 控制内容边缘的颜色分离程度。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    contentDispersion: double;
+  }
+
+  /**
+   * 玻璃弹珠的球体形状参数。通过圆心位置和半径定义玻璃形状的几何结构，
+   * 均采用相对于组件边界的归一化坐标。
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface GlassMarbleSphereParam {
+    /**
+     * 球体形状的归一化圆心位置。
+     * [0, 0]表示组件边界的左上角，[1, 1]表示组件边界的右下角。
+     * 超出[0, 1]范围的值将在内部被截断。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    center: [double, double];
+
+    /**
+     * 球体形状的归一化半径。
+     * 取值范围为[0, 1]；超出范围的值将在内部被截断。
+     * 值为1表示球的直径等于组件宽度和高度的较小值。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    radius: double;
   }
 
   /**
@@ -1089,7 +1385,7 @@ declare namespace uiEffect {
    * @unionmember { BrightnessBlender } 提亮混合器
    * @unionmember { HdrBrightnessBlender } 支持HDR的提亮混合器 [since 20]
    * @unionmember { HdrDarkenBlender } 支持HDR的压暗混合器 [since 26.0.0]
-   * @unionmember { ColorfulBrightnessBlender } 具有彩色提亮压暗效果的混合器 [since 26.1.0]
+    * @unionmember { ColorfulBrightnessBlender } 具有提亮压暗效果的混合器（保持色相） [since 26.2.0]
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
@@ -1240,7 +1536,8 @@ declare namespace uiEffect {
 
     /**
      * 将RGB颜色转换为灰度值。灰度转换公式的权重可随当前色域自动调整，不同色域下使用不同的权重计算方式；适用于sRGB等标准色域场景。
-     * 当需要根据特定色域或视觉效果自定义灰度转换权重时传入此参数。三个分量均无边界限制。默认值为标准灰度权重[0.299, 0.587, 0.114]。
+     * 当需要根据特定色域或视觉效果自定义灰度转换权重时传入此参数。三个分量均无边界限制。
+     * 默认值为标准灰度权重[0.299, 0.587, 0.114]。
      *
      * @property { ?[double, double, double] }
      * @default [0.299, 0.587, 0.114]
@@ -1253,18 +1550,20 @@ declare namespace uiEffect {
   }
 
   /**
-   * ColorfulBrightnessBlenderOptions的参数列表，用于配置彩色提亮压暗效果的各项属性，
-   * 包括前景压暗权重、提亮压暗强度、亮度差阈值和hdr开关参数。
+   * 基于保持色相的提亮压暗混合器的可选增强配置项，作为createColorfulBrightnessBlender的options参数传入。
+   * 它在常规参数BrightnessBlenderParam之外，可进一步针对提亮或压暗方向、色彩增强强度、输入色彩影响度、
+   * 与背景的对比度以及HDR开关进行精细调整，不传时各项采用默认值。
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   interface ColorfulBrightnessBlenderOptions {
     /**
-     * 前景颜色压暗权重。为1的时候，颜色倾向比原始颜色暗；为0的时候，颜色倾向比原始颜色亮。
+     * 前景压暗权重，控制提亮压暗的方向与强度。取0时提亮前景，前景倾向亮于背景以保证可读性；
+     * 取1时压暗前景，前景倾向暗于背景；0到1之间为提亮与压暗的过渡。默认值为1。
      * 取值范围为[0, 1]，超出边界会在实现时自动截断。
      *
      * @default 1
@@ -1272,12 +1571,13 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     darkenWeight?: double;
 
     /**
-     * 提亮压暗效果强度。
+     * 色彩增强强度，控制对前景饱和度的增强程度。取0时不额外增强饱和度，前景保持原始饱和度；
+     * 值越大饱和度增强越明显，取1时增强到最大、色彩最鲜艳。默认值为0。
      * 取值范围为[0, 1]，超出边界会在实现时自动截断。
      *
      * @default 0
@@ -1285,12 +1585,13 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     vibrancyStrength?: double;
 
     /**
-     * 保证可读性的亮度差阈值。
+     * 保证可读性的亮度差阈值，用于约束前景与背景之间的亮度差以保持足够对比度。
+     * 取0时不强制额外亮度差，可读性约束最弱；值越大强制的亮度差越大、对比度越强；取1时强制最大亮度差。默认值为0。
      * 取值范围为[0, 1]，超出边界会在实现时自动截断。
      *
      * @default 0
@@ -1298,53 +1599,70 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     lumaDiff?: double;
 
     /**
-     * 是否主动开启hdr。关闭时也可能在前景或背景为hdr时被动触发hdr。
+     * 是否主动开启HDR。取true时主动开启HDR，结果亮度可超出SDR范围（>1.0），在HDR设备上呈现更高亮度，适合HDR内容；
+     * 取false时不主动开启HDR，结果限制在SDR范围（≤1.0），但当前景或背景本身为HDR时仍可能被动触发HDR。默认值为false。
      *
-     * @default true
+     * @default false
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     hdrEnabled?: boolean;
+
+    /**
+     * 输入色彩影响度，控制输入色参与提亮压暗计算的程度。取1时输入色完全参与计算，输出结果保留输入色的色彩倾向；
+     * 取0时输入色不参与计算，输出结果不受输入色的影响，直接基于背景颜色做提亮压暗；0到1之间为两者的插值过渡。默认值为1。
+     * 取值范围为[0, 1]，超出边界会在实现时自动截断。
+     *
+     * @default 1
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form
+     * @since 26.2.0 dynamiconly
+     */
+    tintedColorPercent?: double;
   }
 
   /**
-   * 彩色提亮压暗混合器，用于将提亮效果添加到指定的组件上。
+   * 基于保持色相的提亮压暗混合器，用于将该提亮压暗效果添加到指定的组件上。
+   * 该效果在对前景提亮或压暗时通过逐通道重建保持色相、并可增强饱和度，避免普通提亮压暗的去色问题；
+   * 同时依据亮度差阈值保证前景与背景的对比度。
    * 在调用ColorfulBrightnessBlender前，需要先通过createColorfulBrightnessBlender创建一个ColorfulBrightnessBlender实例。
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   interface ColorfulBrightnessBlender {
     /**
-     * 实现彩色提亮压暗效果的常规参数，具体可参考BrightnessBlenderParam。
+     * 提亮压暗的常规参数，用于配置亮度映射、饱和度曲线等基础属性。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     brightnessBlenderParam: BrightnessBlenderParam;
 
     /**
-     * 实现彩色提亮压暗效果的增强参数，具体可参考ColorfulBrightnessBlenderOptions。
+     * 提亮压暗的增强参数，用于控制提亮压暗方向、色彩增强强度、可读性阈值及HDR开关。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     options?: ColorfulBrightnessBlenderOptions;
   }
@@ -1406,7 +1724,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum PrismShapeType {
   
@@ -1416,7 +1734,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ROUNDED_RECT = 0,
 
@@ -1426,7 +1744,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ELLIPSE = 1
   }
@@ -1437,7 +1755,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface SweepRefractionParam {
 
@@ -1449,7 +1767,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     maskRadius: double;
 
@@ -1460,7 +1778,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     edgeThickness: double;
 
@@ -1471,7 +1789,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     refractAmount: double;
 
@@ -1482,7 +1800,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     rippleWidth: double;
 
@@ -1493,7 +1811,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepOffset: double;
 
@@ -1504,7 +1822,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     chromaDelta: double;
   }
@@ -1515,7 +1833,7 @@ declare namespace uiEffect {
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface SweepRefractionMaskOptions {
 
@@ -1526,7 +1844,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     shapeType?: PrismShapeType;
 
@@ -1539,7 +1857,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     cornerRadius?: double;
 
@@ -1552,7 +1870,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prismWidth?: double;
 
@@ -1565,7 +1883,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     prismHeight?: double;
 
@@ -1578,7 +1896,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepCenterX?: double;
 
@@ -1591,7 +1909,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     sweepCenterY?: double;
   }
@@ -1619,7 +1937,7 @@ declare namespace uiEffect {
      *     默认值为0，表示波峰在波环的正中心；-1.0表示波峰在波环的最内侧；1.0表示波峰在波环的最外侧。
      *     取值范围为[-1, 1]，超出边界会在实现时自动截断。
      * @returns { Mask } - 返回具有波环遮罩效果的Mask。
-          * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+          * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -1638,7 +1956,7 @@ declare namespace uiEffect {
      * @param { Color } [fillColor] - 节点上在pixelMap绘制区域之外的区域填充的颜色，
      *     各元素取值范围为[0, 1]，默认透明色，小于0的转为0，大于1的转为1。
      * @returns { Mask } - 返回基于pixelMap创建的Mask实例。
-          * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+          * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -1652,7 +1970,7 @@ declare namespace uiEffect {
      *
      * @param { image.PixelMap } pixelMap - image模块创建的PixelMap实例。可通过图片解码或直接创建获得。
      * @returns { Mask } - 返回具有pixelMap的Mask。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 22 dynamic
@@ -1674,7 +1992,7 @@ declare namespace uiEffect {
      *     RGBA颜色与位置的取值范围均为[0, 1]，可取浮点数，小于0的转为0，大于1的转为1。
      *     位置参数值须严格递增，Array数组中二元数组个数必须大于等于2，二元数组中的元素不能为空，否则该椭圆分布效果不生效。
      * @returns { Mask } - 返回椭圆形状的径向分布效果的灰度Mask。
-          * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+          * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -1697,7 +2015,7 @@ declare namespace uiEffect {
      * @param { double } [turbulenceStrength] - 设置单波圆环的湍流强度，默认值为0，强度为0则是规则圆环，否则圆环边缘会湍流扭曲。
      *     取值范围为[-1, 1]，可取浮点数，超出边界会在实现时自动截断。
      * @returns { Mask } - 返回单个水波形状的灰度Mask。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -1713,7 +2031,7 @@ declare namespace uiEffect {
      *
      * @param { boolean } useEffect - 标记是否使用模糊缓存。值为true，表示使用，会正常显示模糊效果；值为false，表示不使用，不显示模糊效果。
      * @returns { Mask } - 返回标记是否使用模糊缓存的Mask实例。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 22 dynamic
@@ -1733,7 +2051,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createSweepRefractionMask(param: SweepRefractionParam,
       options?: SweepRefractionMaskOptions): Mask;
@@ -1746,7 +2064,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createWarpedRingMask(ringParam: WarpedRingParam): Mask;
 
@@ -1771,7 +2089,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createFractalGlassMask(glassNum: int, glassStrength: double, glassSoftness: double,
       isSymmetric: boolean, refractMask?: image.PixelMap): Mask;
@@ -1792,9 +2110,22 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     static createBinocularMask(radiusX: double, radiusY: double, gap: double, softness: double): Mask;
+
+    /**
+     * 创建用于精灵图集序列帧动画的图集帧遮罩。
+     * 该遮罩携带用于驱动图集序列帧动画的图集帧参数。
+     *
+     * @param { drawing.AtlasImage } atlasInfo - 图集帧参数。
+     * @returns { Mask } - 返回携带图集帧参数的Mask实例。
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    static createAtlasFrameMask(atlasInfo: drawing.AtlasImage): Mask;
   }
 
   /**
@@ -1836,7 +2167,7 @@ declare namespace uiEffect {
    *
    * @param { BrightnessBlenderParam } param - 实现提亮效果的参数，包含灰度调整系数、饱和度、混合比例等配置项，用于配置提亮效果。
    * @returns { HdrBrightnessBlender } 返回具有提亮效果的混合器（支持HDR）。
-   * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @since 20 dynamic
@@ -1867,16 +2198,17 @@ declare namespace uiEffect {
     grayscaleFactor?: [double, double, double]): HdrDarkenBlender;
 
   /**
-   * 创建ColorfulBrightnessBlender实例用于给组件添加彩色提亮压暗效果。
+   * 创建ColorfulBrightnessBlender实例，用于给组件添加基于保持色相的提亮压暗效果。
+   * 该效果在对前景提亮或压暗时通过逐通道重建保持色相、并可增强饱和度，避免普通提亮压暗的去色问题。
    *
-   * @param { BrightnessBlenderParam } brightnessBlenderParam - 实现彩色提亮压暗效果的常规参数。
-   * @param { ColorfulBrightnessBlenderOptions } [options] - 实现彩色提亮压暗效果的增强参数。
-   * @returns { ColorfulBrightnessBlender } 返回具有彩色提亮压暗效果的混合器。
+   * @param { BrightnessBlenderParam } brightnessBlenderParam - 提亮压暗的常规参数，用于配置亮度映射、饱和度曲线等基础属性。
+   * @param { ColorfulBrightnessBlenderOptions } [options] - 提亮压暗的增强参数，用于控制提亮压暗方向、色彩增强强度、可读性阈值及HDR开关。
+   * @returns { ColorfulBrightnessBlender } 返回基于保持色相的提亮压暗混合器。
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   function createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
     options?: ColorfulBrightnessBlenderOptions): ColorfulBrightnessBlender;
