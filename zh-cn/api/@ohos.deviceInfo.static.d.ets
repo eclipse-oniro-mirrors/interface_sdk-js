@@ -882,8 +882,8 @@ declare namespace deviceInfo {
 
     /**
      * 获取内核版本。
-     * 格式为 '产品内核X.Y.Z'.
-     * Example: '产品内核1.0.0'.
+     * 格式为'产品内核X.Y.Z'。
+     * 示例: '产品内核1.0.0'。
      *
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
