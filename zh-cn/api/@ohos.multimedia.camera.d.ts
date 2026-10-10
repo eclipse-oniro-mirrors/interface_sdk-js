@@ -102,6 +102,36 @@ declare namespace camera {
   }
 
   /**
+   * 相机共享状态枚举。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+  */
+  enum CameraSharedStatus {
+    /**
+     * 共享状态。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    CAMERA_STATUS_SHARED = 0,
+ 
+    /**
+     * 非共享状态。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    CAMERA_STATUS_UNSHARED = 1
+  }
+
+  /**
    * 枚举，折叠机折叠状态。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -645,6 +675,46 @@ declare namespace camera {
   }
 
   /**
+   * RGB 偏置值。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface RGBBias {
+    /**
+     * 红色偏置值。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    redBias: double;
+
+    /**
+     * 绿色偏置值。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    greenBias: double;
+
+    /**
+     * 蓝色色偏置值。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    blueBias: double;
+  }
+
+  /**
    * 相机管理器类，使用前需要通过[getCameraManager]{@link camera.getCameraManager}接口获取相机管理实例。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -1045,6 +1115,18 @@ declare namespace camera {
     onCameraStatus(callback: AsyncCallback<CameraStatusInfo>): void;
 
     /**
+     * 订阅相机共享状态变更事件回调。
+     *
+     * @param { Callback<CameraSharedStatusInfo> } callback - 用于获取相机共享状态变更的回调函数。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onCameraSharedStatus(callback: Callback<CameraSharedStatusInfo>): void;
+
+    /**
      * 相机设备状态注销回调，通过注销回调函数取消获取相机的状态变化。
      *
      * @param { 'cameraStatus' } type - 监听事件，固定为'cameraStatus'。cameraManager对象获取成功后可监听。
@@ -1063,6 +1145,18 @@ declare namespace camera {
      * @since 23 static
      */
     offCameraStatus(callback?: AsyncCallback<CameraStatusInfo>): void;
+
+   /**
+     * 取消订阅相机共享状态变更事件回调。
+     *
+     * @param { Callback<CameraSharedStatusInfo> } [callback] - 用于获取相机共享状态变更的回调函数。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+   offCameraSharedStatus(callback?: Callback<CameraSharedStatusInfo>): void;
 
     /**
      * 注册折叠设备折叠状态变化的监听。使用callback异步回调。
@@ -1597,6 +1691,36 @@ declare namespace camera {
      * @since 23 static
      */
     status: CameraStatus;
+  }
+
+  /**
+   * 相机共享状态信息。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+  */
+  interface CameraSharedStatusInfo {
+    /**
+     * 相机实例。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    camera: CameraDevice;
+ 
+    /**
+     * 当前相机共享状态。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+    */
+    sharedStatus: CameraSharedStatus;
   }
 
   /**
@@ -4023,21 +4147,6 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getColorTintRange(): Array<int>;
-
-    /**
-      * Checks whether the RGB gain is supported.
-      *
-      * @returns { boolean } Check result for the support of the RGB gain. **true** if supported, **false**
-      *     otherwise. If the operation fails, an error code defined in
-      *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
-      * @throws { BusinessError } 202 - Not System Application.
-      * @throws { BusinessError } 7400103 - Session not config.
-      * @syscap SystemCapability.Multimedia.Camera.Core
-      * @systemapi
-      * @stagemodelonly
-      * @since 26.0.1 dynamic&static
-      */
-     isWhiteBalanceGainsSupported(): boolean;
   }
 
   /**
@@ -4143,32 +4252,6 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getColorTint(): int;
-
-    /**
-     * Gets RGB white balance gain values.
-     *
-     * @returns { WhiteBalanceGains } The current RGB white balance gain values.
-     * @throws { BusinessError } 202 - Not System Application.
-     * @throws { BusinessError } 7400103 - Session not config.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamic&static
-     */
-    getWhiteBalanceGains(): WhiteBalanceGains;
-
-    /**
-     * Sets RGB white balance gain values.
-     *
-     * @param { WhiteBalanceGains } gains - RGB white balance gain values.
-     * @throws { BusinessError } 202 - Not System Application.
-     * @throws { BusinessError } 7400103 - Session not config.
-     * @syscap SystemCapability.Multimedia.Camera.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamic&static
-     */
-    setWhiteBalanceGains(gains: WhiteBalanceGains): void;
   }
 
   /**
@@ -6918,7 +7001,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum CameraImagingMode {
     /**
@@ -6927,7 +7010,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     AUTO = 0,
 
@@ -6937,7 +7020,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     RGB = 1,
 
@@ -6947,7 +7030,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     IR = 2
   }
@@ -6958,7 +7041,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface ImagingModeQuery {
     /**
@@ -6971,7 +7054,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     isImagingModeSupported(mode: CameraImagingMode): boolean;
   }
@@ -6982,7 +7065,7 @@ declare namespace camera {
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface ImagingMode extends ImagingModeQuery {
     /**
@@ -6994,7 +7077,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getImagingMode(): CameraImagingMode;
 
@@ -7007,7 +7090,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     setImagingMode(mode: CameraImagingMode): void;
   }
@@ -7667,11 +7750,11 @@ declare namespace camera {
    * [Zoom]{@link camera.Zoom}、[Stabilization]{@link camera.Stabilization}、
    * [ColorManagement]{@link camera.ColorManagement}、[AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}、
    * [Macro]{@link camera.Macro}、[ControlCenter]{@link camera.ControlCenter}、
-   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md)、
-   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md)、
-   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md)、
-   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md)、
-   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md)。
+   * [ManualExposure]{@link camera.ManualExposure}、
+   * [ManualFocus]{@link camera.ManualFocus}、
+   * [ManualIso]{@link camera.ManualIso}、
+   * [OIS]{@link camera.OIS}、and 
+   * [Aperture]{@link camera.Aperture}。
    * 
    * 普通录像模式会话类，提供了对闪光灯、曝光、白平衡、对焦、变焦、视频防抖、色彩空间、微距及控制器、手动曝光、手动对焦、手动ISO、光学防抖及光圈的操作。
    * 
@@ -7684,7 +7767,7 @@ declare namespace camera {
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
    *     AutoDeviceSwitch, Macro [since 20 - 24]
    * @extends Session, Flash, AutoExposure, WhiteBalance, Focus, Zoom, Stabilization, ColorManagement, ControlCenter,
-   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0]
+   *     AutoDeviceSwitch, Macro, ManualExposure, ManualFocus, ManualIso, OIS, Aperture [since 26.0.0 - 26.0.0]
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
    * @since 11 dynamic
@@ -8361,46 +8444,60 @@ declare namespace camera {
      * @since 26.0.1 dynamic&static
      */
     offApertureInfoChange(callback?: Callback<ApertureInfo>): void;
-  }
 
-  /**
-   * RGB white balance gain values.
-   *
-   * @syscap SystemCapability.Multimedia.Camera.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.0.1 dynamic&static
-   */
-  interface WhiteBalanceGains {  
     /**
-     * The red gain component of the white balance value.
+     * 查询设备是否支持颜色映射规则表（Look-Up Table）设置。
      *
+     * @returns { boolean } 颜色映射规则表的检查结果。 返回true表示支持，否则返回false表示其他情况。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    redGain: double;
+    isColorCubeSupported(): boolean;
 
     /**
-     * The green gain component of the white balance value.
+     * 查询设备支持颜色映射规则表（Look-Up Table）的尺寸。
      *
+     * @returns { int } 色彩映射规则表的尺寸。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    greenGain: double;
+    getSupportedCubeDimension(): int;
 
     /**
-     * The blue gain component of the white balance value.
+     * 启用颜色映射规则表（Look-Up Table）的规则。
      *
+     * 在设置之前，调用[isColorCubeSupported] {@link camera.VideoSession.isColorCubeSupported}
+     * 检查是否支持颜色映射规则表设置。
+     * 
+     * @param { Uint8Array } lutData - The cube texture data to use as a color lookup table.
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    blueGain: double;
+    enableColorCube(lutData: Uint8Array): void;
+
+    /**
+     * 关闭颜色映射规则表（Look-Up Table）的规则。
+     *
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    disableColorCube(): void;
   }
 
   /**
@@ -8809,6 +8906,106 @@ declare namespace camera {
      * @since 23 static
      */
     setPhysicalAperture(aperture: double): void;
+  }
+
+  /**
+   * 设备色彩控制查询对象。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControlsQuery {
+    /**
+     * 检查是否支持饱和度。
+     *
+     * @returns { boolean } 检查对饱和度的支持结果。true表示支持，false表示不支持。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isSaturationSupported(): boolean;
+
+    /**
+     * 检查是否支持RGB偏移。
+     *
+     * @returns { boolean } 检查RGB偏置支持的结果。true表示支持，false表示不支持。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isRGBBiasSupported(): boolean;
+  }
+
+  /**
+   * 实现色彩控制功能。它继承自[ColorControlsQuery]{@link camera.ColorControlsQuery}.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface ColorControls extends ColorControlsQuery {
+    /**
+     * 获取饱和度值。
+     *
+     * @returns { double } 当前饱和度值。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSaturation(): double;
+
+    /**
+     * 设置饱和度值。在进行设置前，需调用
+     * [isSaturationSupported]{@link camera.ColorControlsQuery.isSaturationSupported}
+     * 检查当前设备是否支持饱和度调整。
+     *
+     * @param { double } val - 要应用的饱和度值。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setSaturation(val: double): void;
+
+    /**
+     * 获取RGB偏置值。
+     *
+     * @returns { double } 当前RGB偏置值。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getRGBBias(): RGBBias;
+
+    /**
+     * 设置RGB偏置值。
+     *
+     * @param { double } bias - RGB偏置值。
+     * @throws { BusinessError } 202 - Not System Application.
+     * @throws { BusinessError } 7400103 - Session not config.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRGBBias(bias: RGBBias): void;
   }
 
   /**
