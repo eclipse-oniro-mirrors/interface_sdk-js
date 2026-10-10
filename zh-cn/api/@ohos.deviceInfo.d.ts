@@ -702,7 +702,7 @@ declare namespace deviceInfo {
 
   /**
    * 获取内核版本。
-   * 示例: '产品内核1.0.0'.
+   * 示例: '产品内核1.0.0'。
    *
    * @syscap SystemCapability.Startup.SystemInfo
    * @stagemodelonly
