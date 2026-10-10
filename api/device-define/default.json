@@ -152,7 +152,6 @@
     "SystemCapability.USB.USBManager",
     "SystemCapability.Sensors.Sensor",
     "SystemCapability.Sensors.MiscDevice",
-    "SystemCapability.Startup.BoardInfo",
     "SystemCapability.Startup.SystemInfo",
     "SystemCapability.DistributedDataManager.RelationalStore.Core",
     "SystemCapability.DistributedDataManager.CommonType",
