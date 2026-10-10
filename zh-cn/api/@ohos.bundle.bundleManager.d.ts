@@ -1524,7 +1524,8 @@ declare namespace bundleManager {
      * 应用未安装。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
-     * @systemapi
+     * @systemapi [since 23 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_NOT_EXIST = 1,
