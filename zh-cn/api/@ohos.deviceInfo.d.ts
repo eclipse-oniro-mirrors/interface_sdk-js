@@ -699,6 +699,16 @@ declare namespace deviceInfo {
    * @since 26.0.0 dynamic
    */
   const deviceColor: string;
+
+  /**
+   * 获取内核版本。
+   * 示例: '产品内核1.0.0'.
+   *
+   * @syscap SystemCapability.Startup.SystemInfo
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  const kernelVersion: string;
 }
 
 export default deviceInfo;
