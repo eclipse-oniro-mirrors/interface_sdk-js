@@ -6743,9 +6743,6 @@ export declare interface WebAttribute extends CommonMethod {
      * `transparent`. The exact color value `#00000000` is reserved as the reset sentinel. After reset, the CSS
      * `caret-color` value is used. If the CSS value is `auto` or not set, the built-in default color is used.
      *
-     * Developers must set appropriate colors for dark and light modes. This API does not automatically adjust colors
-     * or guarantee contrast.
-     *
      * @param { ResourceColor | undefined } value - Color of the text input caret and selection handles.
      *     When undefined is passed in, this attribute is reset.
      * @returns { WebAttribute }
