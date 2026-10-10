@@ -66,6 +66,44 @@ declare namespace formBindingData {
   function createFormBindingData(obj?: RecordData): FormBindingData;
 
   /**
+   * Creates a **FormBindingData** object.
+   *
+   * @param { Object | string } [obj] - Data to be displayed on the widget. The value can be an object containing
+   *     multiple key-value pairs or a JSON string. The image data is identified by **'formImages'**, and the content is
+   *     multiple key-value pairs, each of which consists of an image identifier and image file descriptor. The final format
+   *     is {'formImages': {'key1': fd1, 'key2': fd2}}.<br>**NOTE**<br>During
+   *     [widget update](docroot://form/arkts-ui-widget-interaction-overview.md), when the widget UI receives widget data
+   *     through @LocalStorageProp, the **FormBindingData** object is serialized, that is, the widget data is converted into
+   *     the string type. if the widget data is updated using shared memory, the total size of the updated data cannot
+   *     exceed 10 MB, the number of updated images cannot exceed 30.Exceeding the limit will result in abnormal display.
+   * @returns { FormBindingData } **FormBindingData** object created based on the passed data.
+   * @syscap SystemCapability.Ability.Form
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  function createFormBindingDataEx(obj?: Object | string): FormBindingData;
+
+  /**
+   * Create an FormBindingData instance.
+   *
+   * @param { RecordData } [obj] - Data to be displayed on the widget. The value can be an object containing
+   *     multiple key-value pairs or a JSON string. The image data is identified by **'formImages'**, and the content is
+   *     multiple key-value pairs, each of which consists of an image identifier and image file descriptor. The final format
+   *     is {'formImages': {'key1': fd1, 'key2': fd2}}.<br>**NOTE**<br>During
+   *     [widget update](docroot://form/arkts-ui-widget-interaction-overview.md), when the widget UI receives widget data
+   *     through @LocalStorageProp, the **FormBindingData** object is serialized, that is, the widget data is converted into
+   *     the string type. if the widget data is updated using shared memory, the total size of the updated data cannot
+   *     exceed 10 MB, the number of updated images cannot exceed 30.Exceeding the limit will result in abnormal display.
+   * @returns { FormBindingData } **FormBindingData** object created based on the passed data.
+   * @syscap SystemCapability.Ability.Form
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 static
+   */
+  function createFormBindingDataEx(obj?: RecordData): FormBindingData;
+
+  /**
    * Defines the createFormBindingData result interface.
    *
    * @typedef FormBindingData
@@ -102,6 +140,20 @@ declare namespace formBindingData {
      * @since 23 static
      */
     proxies?: Array<ProxyData>;
+
+    /**
+     * Indicates whether to support updating more images if the widget data is
+     * updated using shared memory.
+     * When set to false, the maximum number of normally displayed images is 20.
+     * When set to true, the maximum number of normally displayed images is 30.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isSupportMoreImages?: boolean;
   }
 
   /**
