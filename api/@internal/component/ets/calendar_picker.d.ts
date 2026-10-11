@@ -61,6 +61,98 @@ declare enum CalendarAlign {
 }
 
 /**
+ * Enumerates the first day of the week for the calendar picker.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum CalendarFirstDayOfWeek {
+  /**
+   * Follows the system region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  LOCAL = 0,
+  /**
+   * Monday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  MON = 1,
+  /**
+   * Tuesday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  TUE = 2,
+  /**
+   * Wednesday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  WED = 3,
+  /**
+   * Thursday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  THU = 4,
+  /**
+   * Friday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  FRI = 5,
+  /**
+   * Saturday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SAT = 6,
+  /**
+   * Sunday.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SUN = 7
+}
+
+/**
  * Describes the parameters of the calendar picker.
  *
  * ###### Rules for Setting start and end
@@ -376,6 +468,20 @@ declare class CalendarPickerAttribute extends CommonMethod<CalendarPickerAttribu
    * @since 19 dynamic
    */
   markToday(enabled: boolean): CalendarPickerAttribute;
+
+  /**
+   * Sets the first day of the week for the CalendarPicker.
+   *
+   * @param { CalendarFirstDayOfWeek } value - First day of the week.<br>
+   *     Default value: **CalendarFirstDayOfWeek.LOCAL** (follows the system region).
+   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  firstDayOfWeek(value: CalendarFirstDayOfWeek): CalendarPickerAttribute;
 }
 
 /**
@@ -780,6 +886,18 @@ declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 dynamic
    */
   edgeLightMode?: EdgeLightMode;
+  /**
+   * Sets the first day of the week for the calendar picker dialog.
+   *
+   * Default value: **CalendarFirstDayOfWeek.LOCAL** (follows the system region).
+   * @default CalendarFirstDayOfWeek.LOCAL
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  firstDayOfWeek?: CalendarFirstDayOfWeek;
 }
 
 /**
