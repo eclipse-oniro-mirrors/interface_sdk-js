@@ -11699,6 +11699,28 @@ declare namespace media {
      * @since 23 static
      */
     enableBFrame?: boolean;
+
+    /**
+     * Whether to enable video encoding policy to quality stable encoding.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    enableStableQualityMode?: boolean;
+
+    /**
+     * Set the quality parameter in StableQualityMode. The value range is [0, 51].
+     * A smaller value indicates a higher output bit rate and better quality.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    sqrFactor?: int;
   }
 
   /**
