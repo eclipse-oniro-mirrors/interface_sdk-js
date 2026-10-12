@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
-  * @file
+  * @file WebView Controller
   * @kit ArkWeb
   */
 import { Resource } from './global/resource';
@@ -6227,16 +6227,18 @@ declare namespace webview {
          * Plays this video.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        play: ZeroParamFn<>;
+        play: ZeroParamFn<void>;
         /**
          * Pauses playback.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        pause: ZeroParamFn<>;
+        pause: ZeroParamFn<void>;
         /**
          * Seeks to a specific time point in the media.
          *
@@ -6269,23 +6271,26 @@ declare namespace webview {
          * Releases this player.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        release: ZeroParamFn<>;
+        release: ZeroParamFn<void>;
         /**
          * Enables the player to enter full screen mode.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        enterFullscreen: ZeroParamFn<>;
+        enterFullscreen: ZeroParamFn<void>;
         /**
          * Enables the player to exit full screen mode.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        exitFullscreen: ZeroParamFn<>;
+        exitFullscreen: ZeroParamFn<void>;
         /**
          * Resumes the player and its status information.
          *
@@ -6362,6 +6367,10 @@ declare namespace webview {
         /**
          * Type of the media source.
          *
+         * Read-only: No
+         *
+         * Optional: No
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
@@ -6369,12 +6378,20 @@ declare namespace webview {
         /**
          * Address of the media source.
          *
+         * Read-only: No
+         *
+         * Optional: No
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         source: string;
         /**
          * Format of the media source, which may be empty. You need to determine the format by yourself.
+         *
+         * Read-only: No
+         *
+         * Optional: No
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -6441,12 +6458,21 @@ declare namespace webview {
          * rendering at the same layer.<br>For details, see
          * [NativeEmbedDataInfo]{@link ./@internal/component/ets/web:NativeEmbedDataInfo}.
          *
+         * Read-only: No
+         *
+         * Optional: No
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         id: string;
         /**
-         * Position of the surface.
+         * Position information of the surface, used to specify the display position and size of the surface during same-
+         * layer rendering.
+         *
+         * Read-only: No
+         *
+         * Optional: No
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static

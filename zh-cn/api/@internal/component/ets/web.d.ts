@@ -3490,6 +3490,20 @@ declare class WebResourceResponse {
    * @since 13 dynamic
    */
   getResponseIsReady(): boolean;
+
+  /**
+   * 设置响应数据。
+   *
+   * > **说明：**
+   * > - 该API支持基于Resource对象获取HSP资源，而 { setResponseData } 不支持该功能。
+   *
+   * @param { string | number | Resource | ArrayBuffer } data - 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄。
+   * Resource表示rawfile资源或HSP资源。ArrayBuffer表示二进制数据。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  setResponseBody(data:string | number | Resource | ArrayBuffer): void;
 }
 
 /**

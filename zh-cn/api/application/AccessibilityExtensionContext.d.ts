@@ -723,7 +723,7 @@ export declare interface AccessibilityElement {
    */
   error?: string;
   /**
-   * 元素是否可获得焦点（此处指无障碍焦点，与输入焦点不同）。true表示可获得焦点，false表示不可获得焦点。
+   * 表示元素是否可聚焦。true表示元素可聚焦，false表示元素不可聚焦。
    * 
    * 默认值：false。
    *
@@ -796,7 +796,7 @@ export declare interface AccessibilityElement {
    */
   isHint?: boolean;
   /**
-   * 表示元素是否已获得焦点（此处指无障碍焦点，与输入焦点不同）。true表示已获得焦点，false表示未获得焦点。
+   * 表示元素是否聚焦。true表示元素处于聚焦状态，false表示元素不处于聚焦状态。
    * 
    * 默认值：false。
    *

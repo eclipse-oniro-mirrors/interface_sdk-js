@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * The **usbManager** module provides APIs for USB management.
@@ -300,6 +301,78 @@ declare namespace usbManager {
      * @since 26.0.0
      */
     descriptor?: Descriptor;
+  }
+
+  /**
+   * Represents the USB device identity information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface UsbDevice {
+    /**
+     * Vendor ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    vendorId: number;
+ 
+    /**
+     * Product ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    productId: number;
+ 
+    /**
+     * Serial Number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    serial: string;
+  }
+ 
+  /**
+   * Mounting strategy.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum MountPolicy {
+    /**
+     * Readable and writable mounting.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    MOUNT_READ_WRITE = 0,
+ 
+    /**
+     * Read-only mounting.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    MOUNT_READ_ONLY = 1,
+ 
+    /**
+     * Not mounted.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    UNMOUNT = 2
   }
 
   /**
@@ -791,12 +864,145 @@ declare namespace usbManager {
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9201055 - Failed to obtain the USB serial number.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
    */
   function getUsbSerialNumber(busNum: number, devAddress: number): string;
+
+  /**
+   * Add the list of USB devices that support CD/DVD burning.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - Array of USB device types to be added.
+   *     <br>The maximum length is 10000 and cannot be empty.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit. The maximum length of usbDevices is
+   *     10000. Remove some devices from the list and try again.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function addAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
+ 
+  /**
+   * Remove the list of USB devices that support CD/DVD burning.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - Array of USB device types to be removed.
+   *     <br>The maximum length is 10000 and cannot be empty.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit. The maximum length of usbDevices is
+   *     10000. Remove some devices from the list and try again.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function removeAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
+ 
+  /**
+   * Obtain the list of USB devices that support CD/DVD burning.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { common.QueryPolicy } [queryPolicy] - queryPolicy indicates the policy of query.
+   *     <br>Default value: common.QueryPolicy.SELF.
+   * @returns { Array<UsbDevice> } Array of allowed USB devices.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Array<UsbDevice>;
+ 
+  /**
+   * Set the enabling status of external storage device mounting.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { boolean } enable - Enable or disable.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setExternalStorageInterceptEnable(enable: boolean): void;
+ 
+  /**
+   * Query the enabling status of external storage device mounting.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { common.QueryPolicy } [queryPolicy] - queryPolicy indicates the policy of query.
+   *     <br>Default value: common.QueryPolicy.SELF.
+   * @returns { boolean } Enable or disable.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function isExternalStorageInterceptEnable(queryPolicy?: common.QueryPolicy): boolean;
+ 
+  /**
+   * Set the mounting policy for external storage devices.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { string } volumeId - Volume ID.
+   * @param { MountPolicy } policy - Mounting strategy.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201056 - Invalid external storage mount policy.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setExternalStorageDeviceMountPolicy(volumeId: string, policy: MountPolicy): void;
+ 
+  /**
+   * Obtain the volume information of the current device.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @returns { Array<common.ExternalStorageDeviceInfo> } Array of device disk information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getExternalStorageDeviceInfos(): Array<common.ExternalStorageDeviceInfo>;
 }
 
 export default usbManager;

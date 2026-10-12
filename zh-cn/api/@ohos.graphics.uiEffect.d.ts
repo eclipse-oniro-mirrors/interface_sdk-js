@@ -93,7 +93,7 @@ declare namespace uiEffect {
      *     当y取值为负值时，代表在屏幕上方。
      * @param { WaterRippleMode } rippleMode - 水波纹的场景模式。
      * @returns { Filter } - 返回挂载了水波纹效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 12 dynamic
@@ -111,7 +111,7 @@ declare namespace uiEffect {
      *     BOTTOM表示从设备底部飞入飞出形变场景。
      *     TOP表示从设备顶部飞入飞出形变场景。
      * @returns { Filter } - 返回挂载了飞入飞出形变效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 12 dynamic
@@ -127,7 +127,7 @@ declare namespace uiEffect {
      *     畸变系数小于0时，效果为桶形畸变；大于0时，效果为枕形畸变；
      *     越接近0时，畸变程度越小，等于0时，没有畸变效果。
      * @returns { Filter } - 返回挂载了透镜畸变效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 13 dynamic
@@ -143,7 +143,7 @@ declare namespace uiEffect {
      *     设置大于128的值时，按值为128处理。
      * @param { LinearGradientBlurOptions } gradientParam - 线性渐变参数，包含两个部分fractionStops和direction。
      * @returns { Filter } - 返回挂载了半径线性渐变模糊效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 19 dynamic
@@ -159,7 +159,7 @@ declare namespace uiEffect {
      *     更改控制点的位置可改变形成边缘的曲线形状，从而扭曲图像。控制点坐标使用归一化坐标系
      *     （默认范围为[0, 1]），且坐标值可大于1或小于0。数组长度不为12时效果不生效。
      * @returns { Filter } - 返回挂载了贝塞尔曲线变形效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -177,7 +177,7 @@ declare namespace uiEffect {
      * @param { double } lightIntensity - 光源强度，取值范围为[0, 1]，数值越大光源亮度越大，超出范围会自动截断。
      * @param { Mask } [displacementMap] - 置换贴图参数，该参数暂不生效，不建议传入。不设置时对功能无影响。
      * @returns { Filter } - 返回了具有内容光照效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -200,7 +200,7 @@ declare namespace uiEffect {
      *     透明度分布（如局部透明或动态透明效果）时传入此参数。不设置时，颜色渐变效果的透明度
      *     完全由colors参数决定。
      * @returns { Filter } - 返回挂载了颜色渐变效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -224,7 +224,7 @@ declare namespace uiEffect {
      *     当需要简洁描边效果时设置为false。不设置时默认为true（带发光效果）。
      *     小于16*16的图片默认只有描边效果，无发光效果，此参数失去作用。
      * @returns { Filter } - 返回挂载了描边高光效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -243,7 +243,7 @@ declare namespace uiEffect {
      *     设置为[0.0, 0.0]时，无扭曲效果。Mask的灰度值控制扭曲的方向和强度，factor与Mask灰度值
      *     相乘后共同决定最终的扭曲程度，即实际扭曲值 = Mask灰度值 × factor值。
      * @returns { Filter } - 返回挂载了扭曲效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -269,7 +269,7 @@ declare namespace uiEffect {
      *     色散强度和方向时传入此参数。不传入时默认值为[0.0, 0.0]，无B通道色散偏移。
      *     取值范围同rFactor，为[-1.0, 1.0]，超出范围自动截断。
      * @returns { Filter } - 返回挂载了由置换贴图控制的色散效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -294,10 +294,10 @@ declare namespace uiEffect {
      *     小于1.0按1.0处理；等于1.0不做处理；大于1.0尝试触发HDR渲染管线；
      *     超过最大倍数按最大倍数处理。
      * @returns { Filter } - 返回挂载了HDR提亮效果的Filter，支持链式调用继续添加其他效果。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      *     [since 20 - 23]
-     * @throws { BusinessError } 201 - 权限校验失败，应用无权限使用该API，需要申请权限。
-     *     [since 24]
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API. [since 24]
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
@@ -313,7 +313,7 @@ declare namespace uiEffect {
      *     模糊半径设置为0时不模糊；模糊半径设置小于0的值时，按值为0处理；设置大于128的值时，按值为128处理。
      * @param { Mask } radiusMap - 代表模糊程度的Mask对象。Mask的灰度值代表对应位置的模糊程度，灰度值越大越模糊。
      * @returns { Filter } - 返回当前效果的Filter对象。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -337,7 +337,7 @@ declare namespace uiEffect {
      * @param { double } [factor] - 采样缩放系数。当使用高度图作为mask且需要控制高度缩放时传入此参数。不设置时mask作为法线图采样直接使用；
      *     设置了值时mask作为高度图采样，实际高度值为mask采样值与factor的乘积。
      * @returns { Filter } - 返回挂载了由置换贴图控制的光照效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -360,7 +360,7 @@ declare namespace uiEffect {
      *     时设置为true；当需要正向转场效果（从前页面向后页面过渡）时设置为false。
      *     默认值为false（正向转场）。
      * @returns { Filter } - 返回挂载了转场效果的Filter。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -632,7 +632,7 @@ declare namespace uiEffect {
      * @param { double } borderWidth - 组件边框的受光宽度，取值范围为[0.0, 30.0]，超出范围会自动截断。
      *     设置为0.0时，组件边框无光照效果，数值越大，光可照亮的区域越宽。
      * @returns { VisualEffect } - 返回了具有边框光照效果的VisualEffect。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -656,7 +656,7 @@ declare namespace uiEffect {
      *     透明度分布（如局部透明或动态透明效果）时传入此参数。不设置时，颜色渐变效果的透明度
      *     完全由colors参数决定。
      * @returns { VisualEffect } - 返回具有颜色渐变效果的VisualEffect。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -680,7 +680,7 @@ declare namespace uiEffect {
      * @param { BrightnessParam } [brightnessParam] - 为材质增加提亮效果。当需要增强材质的视觉亮度（如高亮显示、发光效果）时传入此参数。
      *     不设置时默认不添加提亮效果，材质保持原始亮度。
      * @returns { VisualEffect } - 返回具有材质效果的VisualEffect。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 22 dynamic
@@ -1937,7 +1937,7 @@ declare namespace uiEffect {
      *     默认值为0，表示波峰在波环的正中心；-1.0表示波峰在波环的最内侧；1.0表示波峰在波环的最外侧。
      *     取值范围为[-1, 1]，超出边界会在实现时自动截断。
      * @returns { Mask } - 返回具有波环遮罩效果的Mask。
-          * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+          * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -1956,7 +1956,7 @@ declare namespace uiEffect {
      * @param { Color } [fillColor] - 节点上在pixelMap绘制区域之外的区域填充的颜色，
      *     各元素取值范围为[0, 1]，默认透明色，小于0的转为0，大于1的转为1。
      * @returns { Mask } - 返回基于pixelMap创建的Mask实例。
-          * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+          * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -1970,7 +1970,7 @@ declare namespace uiEffect {
      *
      * @param { image.PixelMap } pixelMap - image模块创建的PixelMap实例。可通过图片解码或直接创建获得。
      * @returns { Mask } - 返回具有pixelMap的Mask。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 22 dynamic
@@ -1992,7 +1992,7 @@ declare namespace uiEffect {
      *     RGBA颜色与位置的取值范围均为[0, 1]，可取浮点数，小于0的转为0，大于1的转为1。
      *     位置参数值须严格递增，Array数组中二元数组个数必须大于等于2，二元数组中的元素不能为空，否则该椭圆分布效果不生效。
      * @returns { Mask } - 返回椭圆形状的径向分布效果的灰度Mask。
-          * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+          * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -2015,7 +2015,7 @@ declare namespace uiEffect {
      * @param { double } [turbulenceStrength] - 设置单波圆环的湍流强度，默认值为0，强度为0则是规则圆环，否则圆环边缘会湍流扭曲。
      *     取值范围为[-1, 1]，可取浮点数，超出边界会在实现时自动截断。
      * @returns { Mask } - 返回单个水波形状的灰度Mask。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 20 dynamic
@@ -2031,7 +2031,7 @@ declare namespace uiEffect {
      *
      * @param { boolean } useEffect - 标记是否使用模糊缓存。值为true，表示使用，会正常显示模糊效果；值为false，表示不使用，不显示模糊效果。
      * @returns { Mask } - 返回标记是否使用模糊缓存的Mask实例。
-     * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @since 22 dynamic
@@ -2167,7 +2167,7 @@ declare namespace uiEffect {
    *
    * @param { BrightnessBlenderParam } param - 实现提亮效果的参数，包含灰度调整系数、饱和度、混合比例等配置项，用于配置提亮效果。
    * @returns { HdrBrightnessBlender } 返回具有提亮效果的混合器（支持HDR）。
-   * @throws { BusinessError } 202 - 权限校验失败，非系统应用调用系统接口。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @since 20 dynamic

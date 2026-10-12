@@ -764,7 +764,7 @@ declare namespace media {
    *
    * @returns {  Promise<AVTranscoder>  } Promise对象。异步返回AVTranscoder实例，失败时返回null。可用于视频转码。
    * @throws {  BusinessError  } 5400101 - No memory. Return by promise. 
-   * @throws {   BusinessError   } 5400101 - No memory. Return by promise. [since 22]
+   * @throws {   BusinessError   } 5400101 - No memory. Return by promise.
    * @syscap SystemCapability.Multimedia.Media.AVTranscoder
    * @atomicservice [since 22]
    * @since 12 dynamic
@@ -10895,6 +10895,16 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     enablePause?: boolean;
+
+    /**
+     * 表示当麦克风采集开启时，是否使能回声检测与回声消除功能。<br>
+     * true表示开启回声消除功能，false表示关闭回声消除功能，默认是false。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    enableAEC?: boolean;
   }
 
   /**

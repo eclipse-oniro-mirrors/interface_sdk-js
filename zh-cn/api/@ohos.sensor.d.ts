@@ -4554,13 +4554,17 @@ declare namespace sensor {
   function getInclination(inclinationMatrix: Array<double>): Promise<double>;
 
   /**
-   * Obtains the angle change between two rotation matrices. This API uses an asynchronous callback to return the 
-   * result.
+   * 获取两个旋转矩阵之间的角度变化。使用callback异步回调。
    *
-   * @param { Array<number> } currentRotationMatrix - Current rotation matrix.
-   * @param { Array<number> } preRotationMatrix - The other rotation matrix.
-   * @param { AsyncCallback<Array<number>> } callback - Callback used to return the angle change around the z, x, and y
-   *     axes, in degrees.
+   * > **说明**：
+   * >
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.getAngleVariation]{@link sensor.getAngleVariation(currentRotationMatrix: Array<double>, preRotationMatrix: Array<double>,
+   *  callback: AsyncCallback<Array<double>>)}替代。
+   *
+   * @param { Array<number> } currentRotationMatrix - 表示当前旋转矩阵。
+   * @param { Array<number> } preRotationMatrix - 表示旋转矩阵。
+   * @param { AsyncCallback<Array<number>> } callback - 异步返回z、x、y轴方向的旋转角度变化，单位：°（度）。
    * @syscap SystemCapability.Sensors.Sensor
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -4570,12 +4574,16 @@ declare namespace sensor {
     callback: AsyncCallback<Array<number>>): void;
 
   /**
-   * Obtains the angle change between two rotation matrices. This API uses a promise to return the result.
+   * 获取两个旋转矩阵之间的角度变化。使用Promise异步回调。
    *
-   * @param { Array<number> } currentRotationMatrix - Current rotation matrix.
-   * @param { Array<number> } preRotationMatrix - The other rotation matrix.
-   * @returns { Promise<Array<number>> } Promise used to return the angle change around the z, x, and y axes, in
-   *     degrees.
+   * > **说明**：
+   * >
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.getAngleVariation]{@link sensor.getAngleVariation(currentRotationMatrix: Array<double>, preRotationMatrix: Array<double>)}替代。
+   *
+   * @param { Array<number> } currentRotationMatrix - 表示当前旋转矩阵。
+   * @param { Array<number> } preRotationMatrix - 表示旋转矩阵。
+   * @returns { Promise<Array<number>> } 使用异步方式返回z、x、y轴方向的旋转角度变化，单位：°（度）。
    * @syscap SystemCapability.Sensors.Sensor
    * @since 8 dynamiconly
    * @deprecated since 9

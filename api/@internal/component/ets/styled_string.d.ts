@@ -2353,7 +2353,7 @@ declare class ImageAttachment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   readonly resizable?: ResizableOptions;
 }
@@ -2483,7 +2483,7 @@ declare interface ResourceImageAttachmentOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   resizable?: ResizableOptions;
 }
@@ -2583,7 +2583,7 @@ declare interface ImageAttachmentInterface {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   resizable?: ResizableOptions;
 }

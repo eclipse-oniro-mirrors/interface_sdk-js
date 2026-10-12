@@ -250,7 +250,7 @@ declare namespace json {
    * values are fully reachable and enumerable regardless of the property count.</li>
    * <li>For duplicate keys, the last value takes effect, and the enumeration position of the first occurrence
    * is retained.</li>
-   * <li>When options.parseReturnType is {@link ParseReturnType.MAP}, a sendable Map that supports adding and
+   * <li>When options.parseReturnType is {@link ParseReturnType.MAP}, a collections.Map that supports adding and
    * deleting entries of any count is returned; when {@link ParseReturnType.OBJECT} (default), a non-extensible
    * sendable object is returned, whose existing properties can be updated but cannot be added or deleted.</li>
    * </ul>
@@ -262,7 +262,7 @@ declare namespace json {
    * @param { ParseOptions } [options] - The parsing options. Any existing ParseOptions object (with only bigIntMode)
    *     is also accepted (parseReturnType defaults to OBJECT). The default value is undefined.
    * @returns { ISendable | null } Return a Sendable object graph corresponding to the JSON text; return
-   *     null if the JSON text is 'null'; return a sendable Map if options.parseReturnType is
+   *     null if the JSON text is 'null'; return a collections.Map if options.parseReturnType is
    *     {@link ParseReturnType.MAP}.
    * @syscap SystemCapability.Utils.Lang
    * @stagemodelonly
@@ -275,8 +275,8 @@ declare namespace json {
   /**
    * Enumerates the return types for parsing.
    *
-   * When parseReturnType is MAP, the parsed result is a Sendable Map (JSSharedMap) instead of a Sendable Object
-   * (JSSharedObject). Only effective for {@link parseSendable}; ignored by {@link parse}.
+   * When parseReturnType is MAP, the parsed result is a collections.Map instead of a Sendable Object.
+   * Only effective for {@link parseSendable}; ignored by {@link parse}.
    *
    * @syscap SystemCapability.Utils.Lang
    * @stagemodelonly
@@ -297,7 +297,7 @@ declare namespace json {
      */
     OBJECT = 0,
     /**
-     * The parsing result is a sendable Map, which supports adding and deleting entries.
+     * The parsing result is a collections.Map, which supports adding and deleting entries.
      *
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly

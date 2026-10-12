@@ -1286,7 +1286,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want, callback: AsyncCallback<void>): void;
 
   /**
-   * Stops a ServiceExtensionAbility in the same application. This API uses a promise to return the result.
+   * Stops a ServiceExtensionAbility. This API uses a promise to return the result.
    *
    * @param { Want } want - Want information for stopping the ServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
@@ -1311,7 +1311,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbility(want: Want): Promise<void>;
 
   /**
-   * Stops a ServiceExtensionAbility with the account ID specified in the same application. This API uses an 
+   * Stops a ServiceExtensionAbility with the account ID specified. This API uses an 
    * asynchronous callback to return the result.
    * 
    * > **NOTE**
@@ -1346,8 +1346,7 @@ declare class UIAbilityContext extends Context {
   stopServiceExtensionAbilityWithAccount(want: Want, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Stops a ServiceExtensionAbility with the account ID specified in the same application. This API uses a promise to 
-   * return the result.
+   * Stops a ServiceExtensionAbility with the account ID specified. This API uses a promise to return the result.
    * 
    * > **NOTE**
    * >

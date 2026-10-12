@@ -19,7 +19,8 @@
  */
 
 /**
- * UIMaterial
+ * Defines the system material module. Use the **ImmersiveMaterial** type in it when setting the system material
+ * attribute of the tab bar floating style.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -44,18 +45,16 @@ declare type CommonModifier = import('../api/arkui/CommonModifier').CommonModifi
 /**
  * Enumerates layout modes of the tab bar.
  *
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
  * @atomicservice [since 11]
  * @since 7 dynamic
  */
 declare enum BarMode {
-
   /**
-   * The width of each tab is determined by the actual layout. The tabs are scrollable in the following case:
-   *     In horizontal layout, the total width exceeds the tab bar width; in vertical layout,
-   *     the total height exceeds the tab bar height.
+   * Each tab bar uses its actual layout width. When the total length exceeds the
+   * [barWidth]{@link TabsAttribute#barWidth} of a horizontal **Tabs** or the
+   * [barHeight]{@link TabsAttribute#barHeight(value: Length)} of a vertical **Tabs**, the tab bar can be scrolled.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -65,8 +64,7 @@ declare enum BarMode {
   Scrollable = 0,
 
   /**
-   * The width of each tab is determined by equally dividing the number of tabs by the bar width
-   *     (or bar height in the vertical layout).
+   * All **TabBars** evenly share the **barWidth** (or the **barHeight** for a vertical **Tabs**).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -77,7 +75,8 @@ declare enum BarMode {
 }
 
 /**
- * Enumerates the animation modes for switching between tabs.
+ * Enumerates the animation forms for switching **TabContent** when a
+ * [TabBar]{@link TabContentAttribute#tabBar(options: string | Resource | CustomBuilder | TabBarOptions)} tab is tapped.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -86,9 +85,10 @@ declare enum BarMode {
  * @since 12 dynamic
  */
 declare enum AnimationMode {
-
   /**
-   * Loads the content of the target page before starting the switching animation.
+   * Loads the content of the target page first, and then starts the switching animation. This is suitable for scenarios
+   * where the content must be loaded before the animation is displayed, avoiding blank content during the animation. It
+   * is recommended for scenarios where content loads quickly and a smooth transition is required.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -99,8 +99,10 @@ declare enum AnimationMode {
   CONTENT_FIRST = 0,
 
   /**
-   * Starts the switching animation before loading the content of the target page. This mode works only when neither the
-   * height or width of tabs is set to **auto**.
+   * Starts the switching animation first, and then loads the content of the target page. For this to take effect, both
+   * the height and width of **Tabs** must not be set to **auto**. This is suitable for scenarios where the user
+   * operation must be responded to immediately and the animation starts quickly. It is recommended for scenarios where
+   * content loads slowly but quick visual feedback is desired.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -111,10 +113,11 @@ declare enum AnimationMode {
   ACTION_FIRST = 1,
 
   /**
-   * Disables the default switching animation. Note that this mode is ineffective when the **changeIndex** API of
-   * **TabsController** is used to switch content.
+   * Disables the default animation. This enum value does not take effect when the
+   * [changeIndex]{@link TabsController#changeIndex} API of **TabsController** is called to switch **TabContent**.
    *
-   * To disable the animation under this scenario, set **animationDuration** to **0**.
+   * You can set [animationDuration]{@link TabsAttribute#animationDuration} to **0** to switch without animation when
+   * calling the **changeIndex** API of **TabsController**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -138,8 +141,8 @@ declare enum AnimationMode {
 
   /**
    * Jumps to the vicinity of the target page without animation first, then jumps to the target page with animation, and
-   * finally loads the content of the target page. This mode works only when neither the height or width of tabs is set
-   * to **auto**.
+   * finally loads the content of the target page. For this to take effect, both the **height** and **width** of
+   * **Tabs** must not be set to **auto**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -159,10 +162,9 @@ declare enum AnimationMode {
  * @since 7 dynamic
  */
 declare enum BarPosition {
-
   /**
-   * If the **vertical** attribute is set to **true**, the tab is on the left of the container. If the **vertical**
-   * attribute is set to **false**, the tab is on the top of the container.
+   * When **vertical** is set to **true**, the tab is on the left of the container; when **vertical** is set to
+   * **false**, the tab is at the top of the container.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -172,8 +174,8 @@ declare enum BarPosition {
   Start,
 
   /**
-   * If the **vertical** attribute is set to **true**, the tab is on the right of the container. If the **vertical**
-   * attribute is set to **false**, the tab is at the bottom of the container.
+   * When **vertical** is set to **true**, the tab is on the right of the container; when **vertical** is set to
+   * **false**, the tab is at the bottom of the container.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -184,8 +186,26 @@ declare enum BarPosition {
 }
 
 /**
- * Enumerates the tab layout styles of the tab bar when not scrolling in scrollable mode.
+ * Enumerates the tab layout modes when the tab bar is not scrolled in
+ * [Scrollable]{@link TabsAttribute#barMode(value: BarMode, options?: ScrollableBarModeOptions)} mode.
  *
+ * | Name         | Value | Description                                     |
+ * | ---------- | -- | ---------------------------------------- |
+ * | ALWAYS_CENTER | 0 | When the tab content exceeds the tab bar width, the tab bar is scrollable.
+ *
+ * When the tab content does not exceed the tab bar width, the tab bar is not scrollable and the tabs are compactly
+ * centered.|
+ * | ALWAYS_AVERAGE_SPLIT | 1 | When the tab content exceeds the tab bar width, the tab bar is scrollable.
+ *
+ * When the tab content does not exceed the tab bar width, the tab bar is not scrollable and all tabs evenly share the
+ * tab bar width.|
+ * | SPACE_BETWEEN_OR_CENTER      | 2 | When the tab content exceeds the tab bar width, the tab bar is scrollable.
+ *
+ * When the tab content does not exceed the tab bar width but exceeds half of the tab bar width, the tab bar is not
+ * scrollable and the tabs are compactly centered.
+ *
+ * When the tab content does not exceed half of the tab bar width, the tab bar is not scrollable, the tabs are centered,
+ * the spacing between tabs is equal, and the total width of all tabs occupies half of the tab bar width.|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -194,7 +214,6 @@ declare enum BarPosition {
  * @since 10 dynamic
  */
 declare enum LayoutStyle {
-
   /**
    * If the tab content exceeds the tab bar width, the tabs are scrollable.
    *
@@ -207,7 +226,6 @@ declare enum LayoutStyle {
    * @since 10 dynamic
    */
   ALWAYS_CENTER = 0,
-
   /**
    * If the tab content exceeds the tab bar width, the tabs are scrollable.
    * If not, the tabs are not scrollable, and the width of the tab bar is evenly distributed among all tabs.
@@ -219,7 +237,6 @@ declare enum LayoutStyle {
    * @since 10 dynamic
    */
   ALWAYS_AVERAGE_SPLIT = 1,
-
   /**
    *  If the tab content exceeds the tab bar width, the tabs are scrollable.
    *
@@ -348,8 +365,8 @@ declare enum TabsNestedScrollMode {
 }
 
 /**
- * Defines a tab controller, which is used to control switching of tabs. One **TabsController** cannot control multiple
- * **Tabs** components.
+ * Defines the controller of the **Tabs** component, used to control the **Tabs** component to perform tab switching. A
+ * single **TabsController** cannot control multiple **Tabs** components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -357,9 +374,8 @@ declare enum TabsNestedScrollMode {
  * @since 7 dynamic
  */
 declare class TabsController {
-
   /**
-   * A constructor used to create a **TabsController** object.
+   * Constructor of **TabsController**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -369,10 +385,17 @@ declare class TabsController {
   constructor();
 
   /**
-   * Switches to the specified tab.
+   * Controls **Tabs** to switch to a specified tab. Use this API when you need to implement tab switching through
+   * buttons, drop-down menus, or other controls, for example, tapping the "Previous"/"Next" button to switch tabs.
    *
-   * @param { number } value - Index of the tab. The value starts from 0.<br>**NOTE**<br>If this parameter is set to a
-   *     value less than 0 or greater than the maximum number, the default value **0** is used.
+   * > **NOTE**
+   * >
+   * > When **animationMode** is set to [AnimationMode.NO_ANIMATION]{@link TabsAttribute#animationMode}, the default
+   * > animation does not take effect when this API is called to switch **TabContent**. You can set
+   * > [animationDuration]{@link TabsAttribute#animationDuration} to **0** to switch without animation.
+   *
+   * @param { number } value - Index of the tab, starting from 0. Value range: [0, total number of tabs - 1]. If the
+   *     value is out of range, it is processed as 0.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -381,25 +404,27 @@ declare class TabsController {
   changeIndex(value: number): void;
 
   /**
-   * Preloads child nodes. After this API is called, all specified child nodes will be loaded at once. Therefore, for
-   * performance considerations, it is recommended that you load child nodes in batches.
+   * Controls the preloading of specified child nodes in **Tabs**. After this API is called, all specified child nodes
+   * are loaded at once. Therefore, for performance considerations, it is recommended to load child nodes in batches.
+   * This API is applicable to scenarios where certain tabs need to be loaded in advance to improve switching
+   * performance, for example, when the content of some tabs is complex or resource-intensive, preloading can be used to
+   * optimize user experience.
    *
    * > **NOTE**
    * >
-   * > - **preloadItems** of **Tabs** needs to be called after **Tabs** is created. You are advised to control the first
-   * > preloading in the [onAppear]{@link CommonMethod#onAppear} lifecycle of **Tabs**.
+   * > - The **preloadItems** API of **Tabs** must be called after **Tabs** is created. For the first preloading, it is
+   * > recommended to control it in the [onAppear]{@link CommonMethod#onAppear} lifecycle of **Tabs**.
    * >
-   * > - If the **TabsController** object is not bound to any **Tabs** component, a JavaScript exception will be thrown
-   * > when this API is called. Therefore, you are advised to use **try-catch** to handle potential exceptions when
-   * > calling this API.
+   * > - If the **TabsController** object is not bound to any **Tabs** component, calling this API directly throws a JS
+   * > exception. Therefore, when using this API, it is recommended to catch the exception through try-catch.
    * >
-   * > - When using **preloadItems** to preload tabs, you are advised to use **ComponentContent** to customize the
-   * > content displayed on the tab bar. For details, see
-   * > [Example 10](docroot://reference/apis-arkui/arkui-ts/ts-container-tabcontent.md#example-10-setting-tabbar-using-componentcontent).
+   * > - When using **preloadItems** to preload tab pages, if you need to customize the content displayed on the tab
+   * > bar, it is recommended to use **ComponentContent**. For a usage example, see
+   * > [Example 10](docroot://reference/apis-arkui/arkui-ts/ts-container-tabcontent.md#example-10-preloading-child-nodes-using-componentcontent).
    *
-   * @param { Optional<Array<number>> } indices - Array of indexes of the child nodes to preload.<br>The default value
-   *     is an empty array.
-   * @returns { Promise<void> } Promise used to return the value.
+   * @param { Optional<Array<number>> } indices - Array of indices of the child nodes to be preloaded.<br/>Default
+   *     value: empty array.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter invalid. Possible causes:
    *     <br> 1. The parameter type is not Array<number>.
    *     <br> 2. The parameter is an empty array.
@@ -413,16 +438,19 @@ declare class TabsController {
   preloadItems(indices: Optional<Array<number>>): Promise<void>;
 
   /**
-   * Sets the translation distance of the tab bar.
+   * Sets the translation distance of the tab bar. This API is applicable to scenarios where the tab bar position needs
+   * to be adjusted dynamically, such as the slide-to-hide/show effect of the tab bar and immersive experience achieved
+   * by scrolling the page together with the tab bar.
    *
    * > **NOTE**
    * >
-   * > When a **Tabs** component is bound to a scrollable container using APIs like
-   * > [bindTabsToScrollable](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#bindtabstoscrollable13)
-   * > or bindTabsToNestedScrollable](../arkts-apis-uicontext-uicontext.md#bindtabstonestedscrollable13), scrolling the
-   * > container will trigger the display and hide animations of the tab bar for all **Tabs** components bound to it. In
-   * > this case, calling the **setTabBarTranslate** API has no effect. Therefore, avoid using **bindTabsToScrollable**,
-   * > **bindTabsToNestedScrollable**, and **setTabBarTranslate** simultaneously.
+   * > After the **Tabs** component is bound to a scrollable container component through APIs such as
+   * > [bindTabsToScrollable](@link bindtabstoscrollable13) or
+   * > [bindTabsToNestedScrollable](@link bindtabstonestedscrollable13),
+   * > scrolling the scrollable container component triggers the show/hide animation of the tab bar of all **Tabs**
+   * > components bound to it. In this case, the tab bar translation distance set by calling **setTabBarTranslate**
+   * > becomes invalid. Therefore, it is not recommended to use **bindTabsToScrollable**,
+   * > **bindTabsToNestedScrollable**, and **setTabBarTranslate** at the same time.
    *
    * @param { TranslateOptions } translate - Translation distance of the tab bar.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -434,19 +462,24 @@ declare class TabsController {
   setTabBarTranslate(translate: TranslateOptions): void;
 
   /**
-   * Sets the opacity of the tab bar.
+   * Sets the opacity of the tab bar. This API is suitable for scenarios where the tab bar display transparency needs to
+   * be adjusted, such as the fade-in and fade-out effect of the tab bar and reducing the visual interference of the tab
+   * bar to highlight content.
    *
    * > **NOTE**
    * >
-   * > When a **Tabs** component is bound to a scrollable container using APIs like
-   * > [bindTabsToScrollable](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#bindtabstoscrollable13)
-   * > or bindTabsToNestedScrollable](../arkts-apis-uicontext-uicontext.md#bindtabstonestedscrollable13), scrolling the
-   * > container will trigger the display and hide animations of the tab bar for all **Tabs** components bound to it. In
-   * > this case, any **TabBar** opacity set via the **setTabBarOpacity** API will be overridden. Therefore, avoid using
-   * > **bindTabsToScrollable**, **bindTabsToNestedScrollable**, and **setTabBarOpacity** simultaneously.
+   * > After the **Tabs** component is bound to a scrollable container component using APIs such as
+   * > [bindTabsToScrollable](@link bindTabsToScrollable) or
+   * > [bindTabsToNestedScrollable](@link bindTabsToNestedScrollable),
+   * > when the scrollable container component is swiped, the show and hide animations of the tab bar of all **Tabs**
+   * > components bound to it are triggered, and the tab bar opacity set by calling **setTabBarOpacity** becomes
+   * > invalid. Therefore, it is not recommended to use **bindTabsToScrollable**, **bindTabsToNestedScrollable**, and
+   * > **setTabBarOpacity** at the same time.
    *
-   * @param { number } opacity - Opacity of the tab bar. The value range is [0.0, 1.0]. A value less than 0.0 is handed
-   *     as **0.0**. A value greater than **1.0** is handed as **1.0**.<br> Default value: **1.0**.
+   * @param { number } opacity - Opacity of the tab bar. The value **1.0** indicates fully opaque, and the value 0.0
+   *     indicates fully transparent. The value range is [0.0, 1.0]. If the set value is less than 0.0, it is processed
+   *     as 0.0. If the set value is greater than 1.0, it is processed as 1.0.
+   *     <br> Default value: **1.0**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -470,7 +503,7 @@ declare class TabsController {
 
 /**
  * Provides parameters for configuring the **Tabs** component, including tab positions, the current index of the
- * displayed tab, the **Tabs** controller, and [universal attributes]{@link common} for the **TabBar**.
+ * displayed tab, the **Tabs** controller, and [universal attributes]{@link ./common} for the **TabBar**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -480,11 +513,12 @@ declare class TabsController {
  * @noninterop
  */
 declare interface TabsOptions {
-
   /**
-   * Position of the **Tabs** component.
+   * Position of **Tabs**. The specific position of the tab is affected by the **vertical** attribute: when **vertical**
+   * is **true**, **Start** is on the left and **End** is on the right; when **vertical** is **false**, **Start** is at
+   * the top and **End** is at the bottom.
    *
-   * Default value: **BarPosition.Start**
+   * Default value: **BarPosition.Start**.
    *
    * @default BarPosition.Start [since 11]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -501,20 +535,21 @@ declare interface TabsOptions {
    *
    * **NOTE**
    *
-   * A value less than 0 evaluates to the default value.
+   * When set to a value less than 0, the default value is used.
    *
-   * The value ranges from 0 to the number of **TabContent** nodes minus 1.
+   * The value range is [0, number of child nodes of **TabContent** - 1].
    *
-   * When the tab is switched by changing the index, the tab switching animation does not take effect. When
-   * **changeIndex** of **TabController** is used for tab switching, the tab switching animation is enabled by default.
-   * You can disable the animation by setting **animationDuration** to **0**.
+   * When **index** is directly modified to switch pages, the switching animation does not take effect. When
+   * [changeIndex]{@link TabsController#changeIndex} of **TabsController** is used, the switching animation takes effect
+   * by default. You can set [animationDuration]{@link TabsAttribute#animationDuration} to **0** to disable the
+   * animation.
    *
-   * Since API version 10, this parameter supports two-way binding through
-   * [$$](docroot://ui/state-management/arkts-two-way-sync.md).
+   * Since API version 10, this parameter supports two-way binding with
+   * [$](docroot://ui/state-management/arkts-two-way-sync.md) variables.
    *
-   * When the **Tabs** component is rebuilt, system resources are switched (for example, system font or theme changes),
-   * or component attributes change, the **Tab** component will switch to the one specified by **index**. To prevent
-   * this behavior, you are advised to use two-way binding.
+   * When **Tabs** is rebuilt, system resources are switched (such as system font switching or system light/dark mode
+   * switching), or component attributes change, the page corresponding to index is jumped to. If you do not want to
+   * jump in the preceding cases, use two-way binding.
    *
    * @default 0 [since 11]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -525,7 +560,7 @@ declare interface TabsOptions {
   index?: number;
 
   /**
-   * Tab controller.
+   * **Tabs** controller.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -535,34 +570,38 @@ declare interface TabsOptions {
   controller?: TabsController;
 
   /**
-   * [Universal attributes]{@link common} of the tab bar.
+   * Used to set the [universal attributes]{@link ./common} of tab bar, used to uniformly manage the style, layout, and
+   * other universal attributes of tab bar through **CommonModifier**. Pass this parameter when you need to dynamically
+   * modify the universal attributes of **TabBar** or implement state management of attributes. When it is not passed,
+   * tab bar uses the default style and layout without additional universal attribute settings.
    *
    * **NOTE**
    *
-   * If this parameter is dynamically set to **undefined**, the current state will be preserved, and universal
-   * attributes will not be reset.
+   * When dynamically set to undefined, the current state remains unchanged and the universal attributes are not reset.
    *
-   * If the setting switches from one **CommonModifier** to another, overlapping attributes will be overwritten, while
-   * non-overlapping attributes will coexist without resetting the attributes of the previous **CommonModifier**.
+   * When switching from one **CommonModifier** to another, duplicate attributes are overwritten, and non-duplicate
+   * attributes take effect at the same time without resetting the universal attributes of the previous
+   * **CommonModifier**.
    *
    * The [barWidth]{@link TabsAttribute#barWidth}, [barHeight]{@link TabsAttribute#barHeight(value: Length)},
    * [barBackgroundColor]{@link TabsAttribute#barBackgroundColor},
    * [barBackgroundBlurStyle]{@link TabsAttribute#barBackgroundBlurStyle(style: BlurStyle, options: BackgroundBlurStyleOptions)},
-   * and [barBackgroundEffect]{@link TabsAttribute#barBackgroundEffect} attributes of **Tabs** will overwrite the
+   * and [barBackgroundEffect]{@link TabsAttribute#barBackgroundEffect} attributes of **Tabs** override the
    * [width]{@link CommonMethod#width(value: Length)}, [height]{@link CommonMethod#height(value: Length)},
    * [backgroundColor]{@link CommonMethod#backgroundColor(color: Optional<ResourceColor>)},
    * [backgroundBlurStyle]{@link CommonMethod#backgroundBlurStyle(style: Optional<BlurStyle>, options?: BackgroundBlurStyleOptions)},
    * and [backgroundEffect]{@link CommonMethod#backgroundEffect(options: Optional<BackgroundEffectOptions>)} attributes
-   * of **CommonModifier**.
+   * of CommonModifier.
    *
-   * The [align]{@link CommonMethod#align(value: Alignment)} attribute works only in
+   * The [align]{@link CommonMethod#align(value: Alignment)} attribute takes effect only in
    * [BarMode.Scrollable]{@link TabsAttribute#barMode(value: BarMode.Scrollable, options: ScrollableBarModeOptions)}
-   * mode. In addition, for a horizontal **Tabs** component, it only takes effect when
-   * [nonScrollableLayoutStyle]{@link ScrollableBarModeOptions} is set to an invalid value or is not set.
+   * mode, and when **Tabs** is horizontal, it takes effect only when
+   * [nonScrollableLayoutStyle]{@link ScrollableBarModeOptions} is not set or is set to an abnormal value.
    *
-   * When set to the bottom tab style,
+   * The
    * [tabBar]{@link TabContentAttribute#tabBar(content: ComponentContent | SubTabBarStyle | BottomTabBarStyle | string | Resource | CustomBuilder |  TabBarOptions)}
-   * attribute of the [TabContent]{@link tab_content} component does not support the dragging feature.
+   * attribute of the [TabContent]{@link ./tab_content} component does not support the drag function when it is in the
+   * bottom tab style.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -574,18 +613,17 @@ declare interface TabsOptions {
 }
 
 /**
- * The **Tabs** component is a container component that allows users to switch between content views through tabs. Each
- * tab page corresponds to a content view.
+ * A container component that switches between content views via tabs, with each tab corresponding to a content view. It
+ * is suitable for scenarios that require quick switching between different content views, such as the bottom navigation
+ * bar of an app, top tab switching, and sidebar navigation. Using the **Tabs** component simplifies the implementation
+ * of multi-view navigation and improves user switching efficiency.
  *
  * > **NOTE**
  * >
- * > -
- * >
- * > - Since API version 11, this component supports the safe area avoidance feature. The default value of the
- * > [expandSafeArea]{@link CommonMethod#expandSafeArea} attribute is
- * > **expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])**. You can override the default behavior by
- * > rewriting this attribute. For versions earlier than API version 11, you need to manually implement safe area
- * > avoidance together with the **expandSafeArea** attribute.
+ * > - Since API version 11, this component supports the safe area avoidance feature. The default value of its
+ * > [expandSafeArea]{@link CommonMethod#expandSafeArea} attribute is expandSafeArea([SafeAreaType.SYSTEM],
+ * > [SafeAreaEdge.BOTTOM]). Developers can override this attribute to change the default behavior. For versions earlier
+ * > than API version 11, the **expandSafeArea** attribute must be used to manually implement safe area avoidance.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -594,12 +632,12 @@ declare interface TabsOptions {
  * @noninterop
  */
 interface TabsInterface {
-
   /**
-   * Create a **Tabs** container.
+   * Creates a **Tabs** container.
    *
    * @param { object } value [since 7 - 14]
-   * @param { TabsOptions } [options] - Options of the **Tabs** component. [since 15]
+   * @param { TabsOptions } [options] - Component parameter of **Tabs**. Default value: **undefined**, which means the
+   *     default configuration is used when no parameter is set. [since 15]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -610,7 +648,7 @@ interface TabsInterface {
 }
 
 /**
- * Describes the divider style.
+ * Defines a divider style object.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -620,15 +658,14 @@ interface TabsInterface {
  * @noninterop
  */
 interface DividerStyle {
-
   /**
-   * Width of the divider. It cannot be set in percentage.
+   * Line width of the divider (percentage setting is not supported).
    *
    * Default value: **0.0**
    *
    * Unit: vp
    *
-   * Value range: [0, +∞)
+   * Value range: [0, +∞). When the value is set to less than 0, the default value is used.
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -653,13 +690,13 @@ interface DividerStyle {
   color?: ResourceColor;
 
   /**
-   * Distance between the divider and the top of the sidebar. It cannot be set in percentage.
+   * Distance between the divider and the top of the sidebar (percentage setting is not supported).
    *
    * Default value: **0.0**
    *
    * Unit: vp
    *
-   * Value range: [0, +∞)
+   * Value range: [0, +∞). When the value is set to less than 0, the default value is used.
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -671,13 +708,13 @@ interface DividerStyle {
   startMargin?: Length;
 
   /**
-   * Distance between the divider and the bottom of the sidebar. It cannot be set in percentage.
+   * Distance between the divider and the bottom of the sidebar (percentage setting is not supported).
    *
    * Default value: **0.0**
    *
    * Unit: vp
    *
-   * Value range: [0, +∞)
+   * Value range: [0, +∞). When the value is set to less than 0, the default value is used.
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -690,7 +727,7 @@ interface DividerStyle {
 }
 
 /**
- * Describes the animation information of the **Tabs** component.
+ * Defines a collection of animation-related information of the **Tabs** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -699,14 +736,10 @@ interface DividerStyle {
  * @since 11 dynamic
  */
 declare interface TabsAnimationEvent {
-
   /**
-   * Offset of the currently displayed element relative to the start position of the **Tabs** component along the main
-   * axis.
-   *
-   * Unit: vp.
-   *
-   * Default value: **0**.
+   * Offset of the currently displayed element of **Tabs** relative to the start position of **Tabs** along the main
+   * axis. Unit: vp. Default value: **0**. A positive value indicates an offset to the right (horizontal) or downward (
+   * vertical), and a negative value indicates an offset to the left (horizontal) or upward (vertical).
    *
    * @default 0.0 vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -718,11 +751,9 @@ declare interface TabsAnimationEvent {
   currentOffset: number;
 
   /**
-   * Offset of the target element relative to the start position of the **Tabs** component along the main axis.
-   *
-   * Unit: vp.
-   *
-   * Default value: **0**.
+   * Offset of the animation target element of **Tabs** relative to the start position of **Tabs** along the main axis.
+   * Unit: vp. Default value: **0**. A positive value indicates an offset to the right (horizontal) or downward (
+   * vertical), and a negative value indicates an offset to the left (horizontal) or upward (vertical).
    *
    * @default 0.0 vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -734,9 +765,10 @@ declare interface TabsAnimationEvent {
   targetOffset: number;
 
   /**
-   * Hands-off velocity at the beginning of the animation. Unit: vp/s.
-   *
-   * Default value: **0**.
+   * Release velocity of **Tabs** when the release animation starts. Unit: vp/s. Default value: **0**. A positive value
+   * indicates sliding to the right (horizontal) or downward (vertical), and a negative value indicates sliding to the
+   * left (horizontal) or upward (vertical). A larger velocity value indicates faster sliding. This parameter can be
+   * used to implement the inertial scrolling effect.
    *
    * @default 0.0 vp/s
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -749,9 +781,8 @@ declare interface TabsAnimationEvent {
 }
 
 /**
- * Implements a **BarGridColumnOptions** object for setting the visible area of the tab bar in grid mode, including the
- * column margin and gutter, as well as the number of columns occupied by tabs under small, medium, and large screen
- * sizes.
+ * Defines an object for setting the grid layout of the tab bar, including the column margin and gutter in grid mode,
+ * and the number of columns occupied by tabs on small, medium, and large screens.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -760,13 +791,11 @@ declare interface TabsAnimationEvent {
  * @since 10 dynamic
  */
 interface BarGridColumnOptions {
-
   /**
-   * Number of columns occupied by a tab on a screen whose width is greater than or equal to 320 vp but less than 600
-   * vp.
+   * Number of columns occupied by tabs on a small screen. A non-negative even number or -1 (-1 indicates that the tabs
+   * occupy the full width of the tab bar). A small screen is greater than or equal to 320 vp but less than 600 vp.
    *
-   * The value must be a non-negative even number. The default value is **-1**, indicating that the tab takes up the
-   * entire width of the tab bar.
+   * Default value: **-1**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -777,11 +806,10 @@ interface BarGridColumnOptions {
   sm?: number;
 
   /**
-   * Number of columns occupied by a tab on a screen whose width is greater than or equal to 600 vp but less than 800
-   * vp.
+   * Number of columns occupied by tabs on a medium screen. A non-negative even number or -1 (-1 indicates that the tabs
+   * occupy the full width of the tab bar). A medium screen is greater than or equal to 600 vp but less than 800 vp.
    *
-   * The value must be a non-negative even number. The default value is **-1**, indicating that the tab takes up the
-   * entire width of the tab bar.
+   * Default value: **-1**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -792,11 +820,10 @@ interface BarGridColumnOptions {
   md?: number;
 
   /**
-   * Number of columns occupied by a tab on a screen whose width is greater than or equal to 840 vp but less than 1024
-   * vp.
+   * Number of columns occupied by tabs on a large screen. A non-negative even number or -1 (-1 indicates that the tabs
+   * occupy the full width of the tab bar). A large screen is greater than or equal to 840 vp but less than 1024 vp.
    *
-   * The value must be a non-negative even number. The default value is **-1**, indicating that the tab takes up the
-   * entire width of the tab bar.
+   * Default value: **-1**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -807,9 +834,7 @@ interface BarGridColumnOptions {
   lg?: number;
 
   /**
-   * Column margin in grid mode. It cannot be set in percentage.
-   *
-   * Default value: **24.0**
+   * Column margin in grid mode. Percentage setting is not supported. Value range: [0, +∞). Default value: **24.0**
    *
    * Unit: vp
    *
@@ -822,9 +847,7 @@ interface BarGridColumnOptions {
   margin?: Dimension;
 
   /**
-   * Column gutter (that is, gap between columns) in grid mode. It cannot be set in percentage.
-   *
-   * Default value: **24.0**
+   * Column gutter in grid mode. Percentage setting is not supported. Value range: [0, +∞). Default value: **24.0**
    *
    * Unit: vp
    *
@@ -838,7 +861,7 @@ interface BarGridColumnOptions {
 }
 
 /**
- * Implements a **ScrollableBarModeOptions** object.
+ * Defines a layout style object of the tab bar in Scrollable mode.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -847,15 +870,14 @@ interface BarGridColumnOptions {
  * @since 10 dynamic
  */
 interface ScrollableBarModeOptions {
-
   /**
-   * Left and right margin of the tab bar in scrollable mode. It cannot be set in percentage.
+   * Left and right margins of the tab bar in Scrollable mode (percentage setting is not supported).
    *
    * Default value: **0.0**
    *
    * Unit: vp
    *
-   * Value range: [0, +∞)
+   * Value range: [0, +∞). When the value is set to less than 0, the default value is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -866,7 +888,7 @@ interface ScrollableBarModeOptions {
   margin?: Dimension;
 
   /**
-   * Tab layout mode of the tab bar when not scrolling in scrollable mode.
+   * Arrangement of tabs when not scrolling in Scrollable mode. This attribute is valid only in horizontal mode.
    *
    * Default value: **LayoutStyle.ALWAYS_CENTER**
    *
@@ -880,7 +902,17 @@ interface ScrollableBarModeOptions {
 }
 
 /**
- * Provides an interface for the options for the floating bar width of the tab width at different breakpoints.
+ * Defines the width of the tab bar under different **Tabs** widths.
+ *
+ * > **NOTE**
+ * >
+ * > - [barWidth]{@link TabsAttribute#barWidth} takes precedence over this API. When neither **barWidth** nor this API
+ * > takes effect, the tab bar width uses the default calculation rule.
+ * >
+ * > - The default calculation rule of the tab bar width is as follows. When the number of child nodes is 4, the maximum
+ * > tab bar width is 328 vp. When the number of child nodes is greater than or equal to 5, the maximum tab bar width is
+ * > 360 vp. When the **Tabs** width is greater than or equal to 1140 vp, the tab bar width and height are scaled up by
+ * > 1.15 times.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -889,9 +921,8 @@ interface ScrollableBarModeOptions {
  * @since 26.0.0 dynamic
  */
 interface FloatingTabBarWidth {
-
   /**
-   * The bar width of the small devices. It cannot be set in percentage.
+   * Width of the tab bar when the **Tabs** width is less than 440 vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -900,9 +931,9 @@ interface FloatingTabBarWidth {
    * @since 26.0.0 dynamic
    */
   smallBarWidth?: Length;
-
   /**
-   * The bar width of the medium devices. It cannot be set in percentage.
+   * Width of the tab bar when the **Tabs** width is between 440 vp and 600 vp, or when the width is between 600 vp and
+   * 840 vp and the height-to-width ratio is less than 0.8.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -911,9 +942,9 @@ interface FloatingTabBarWidth {
    * @since 26.0.0 dynamic
    */
   mediumBarWidth?: Length;
-
   /**
-   * The bar width of the large devices. It cannot be set in percentage.
+   * Width of the tab bar when the **Tabs** width is greater than 840 vp, or when the width is between 600 vp and 840 vp
+   * and the height-to-width ratio is greater than 0.8.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -925,7 +956,7 @@ interface FloatingTabBarWidth {
 }
 
 /**
- * Provides an interface for the options for the floating bar mode.
+ * Defines the floating style of the tab bar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -934,9 +965,9 @@ interface FloatingTabBarWidth {
  * @since 26.0.0 dynamic
  */
 interface FloatingTabBarStyle {
-
   /**
-   * The bar width of the tab width at different breakpoints.
+   * Width of the tab bar at different **Tabs** widths. For the default width calculation rule, see
+   * [FloatingTabBarWidth]{@link FloatingTabBarWidth}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -945,9 +976,13 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   barWidth?: FloatingTabBarWidth;
-
   /**
-   * The width of the left and right margins of the bar. It cannot be set in percentage.
+   * Left and right margins in the default width calculation rule of the tab bar.
+   *
+   * Value range: [0, +∞)
+   *
+   * When the **Tabs** width is less than 600 vp, the default value is 16 vp. When the **Tabs** width is between 600 vp
+   * and 840 vp, the default value is 24 vp. When the **Tabs** width is greater than 840 vp, the default value is 32 vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -956,9 +991,12 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   barSideMargin?: Length;
-
   /**
-   * The distance between the bar and the bottom of tab. It cannot be set in percentage.
+   * Distance from the tab bar to the bottom of the **Tabs**.
+   *
+   * Value range: [0, +∞)
+   *
+   * Default value: 28 vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -967,9 +1005,10 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   barBottomMargin?: Length;
-
   /**
-   * The color of the mask.
+   * Color of the mask. The mask display area is rendered with a transparency gradient based on the mask color, with the
+   * opacity decreasing from bottom to top. In light mode, the default value is **#CCF1F3F5**, displayed as white. In
+   * dark mode, the default value is **#99000000**, displayed as black.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -978,9 +1017,9 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   maskColor?: ResourceColor;
-
   /**
-   * The height of the mask. It cannot be set in percentage.
+   * Height of the mask. The upper edge of the mask display is 16 vp higher than the upper edge of the tab bar by
+   * default.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -989,9 +1028,13 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   maskHeight?: Length;
-
   /**
-   * Whether to adapt to the handedness.
+   * Whether to follow the left-right layout of the operating hand.
+   *
+   * The value **true** means to follow the left-right layout of the operating hand; the value **false** means not to
+   * follow the left-right layout of the operating hand.
+   *
+   * Default value: **false**
    *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1001,9 +1044,8 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   adaptToHandedness?: boolean;
-
   /**
-   * The style of the material.
+   * Immersive material style of the tab bar backplate.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1015,13 +1057,13 @@ interface FloatingTabBarStyle {
 }
 
 /**
- * Defines the callback triggered when the tab switching animation starts.
+ * Defines the callback triggered when the page transition animation starts.
  *
- * @param { number } index - Index of the currently displayed element. The index is zero-based.
- * @param { number } targetIndex - Index of the target element to switch to. The index is zero-based.
- * @param { TabsAnimationEvent } extraInfo - Extra information of the animation, including the offset of the currently
- *     displayed element and target element relative to the start position of the **Tabs** along the main axis, and the
- *     hands-off velocity.
+ * @param { number } index - Index of the currently displayed element. The index starts from 0.
+ * @param { number } targetIndex - Index of the target element of the switching animation. The index starts from 0.
+ * @param { TabsAnimationEvent } extraInfo - Animation-related information, including the displacement of the currently
+ *     displayed element and the target element relative to the start position of **Tabs** along the main axis, and the
+ *     release velocity.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1031,11 +1073,11 @@ interface FloatingTabBarStyle {
 declare type OnTabsAnimationStartCallback = (index: number, targetIndex: number, extraInfo: TabsAnimationEvent) => void;
 
 /**
- * Defines the callback triggered when the tab switching animation ends.
+ * Defines the callback triggered when the page transition animation ends.
  *
- * @param { number } index - Index of the currently displayed element. The index is zero-based.
- * @param { TabsAnimationEvent } extraInfo - Extra information of the animation, which is the offset of the currently
- *     displayed element relative to the start position of the **Tabs** along the main axis.
+ * @param { number } index - Index of the currently displayed element, starting from 0.
+ * @param { TabsAnimationEvent } extraInfo - Animation information, which returns only the offset of the currently
+ *     displayed element relative to the start position of **Tabs** along the main axis.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1045,12 +1087,12 @@ declare type OnTabsAnimationStartCallback = (index: number, targetIndex: number,
 declare type OnTabsAnimationEndCallback = (index: number, extraInfo: TabsAnimationEvent) => void;
 
 /**
- * Defines the callback triggered on a frame-by-frame basis during a swipe-based page turn.
+ * Defines the callback triggered on a frame-by-frame basis when the page is turned by a swipe.
  *
- * @param { number } index - Index of the currently displayed element. The index is zero-based.<br>Value range:
- *     [0, Index value — 1]
- * @param { TabsAnimationEvent } extraInfo - Extra information of the animation, which is the offset of the currently
- *     displayed element relative to the start position of the **Tabs** along the main axis.
+ * @param { number } index - Index of the currently displayed element, starting from 0. <br/>Value range:
+ *     [0, total number of tabs - 1]
+ * @param { TabsAnimationEvent } extraInfo - Animation-related information, which returns only the offset of the
+ *     currently displayed element relative to the start position of **Tabs** along the main axis.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1060,15 +1102,15 @@ declare type OnTabsAnimationEndCallback = (index: number, extraInfo: TabsAnimati
 declare type OnTabsGestureSwipeCallback = (index: number, extraInfo: TabsAnimationEvent) => void;
 
 /**
- * Defines the callback invoked when the custom tab transition animation starts.
+ * Callback invoked when the custom page switching animation of **Tabs** starts.
  *
- * @param { number } from - Index of the currently displayed tab before the animation starts. The index is zero-based.<
- *     br>Value range: [0, Index value — 1]. If the value exceeds the index value or is less than 0, no transition
- *     animation is displayed.
- * @param { number } to - Index of the target tab before the animation starts. The index is zero-based.<br>Value range:
- *     [0, Index value — 1]. If the value exceeds the index value or is less than 0, no transition animation is
- *     displayed.
- * @returns { TabContentAnimatedTransition | undefined } Information about the custom tab switching animation.
+ * @param { number } from - Index of the currently displayed page when the animation starts. The index starts from 0.<br
+ *     />Value range: [0, total number of tabs - 1]. If the value exceeds the maximum index or is less than 0, no
+ *     transition animation is applied.
+ * @param { number } to - Index of the target page when the animation starts. The index starts from 0.<br/>Value range:
+ *     [0, total number of tabs - 1]. If the value exceeds the maximum index or is less than 0, no transition animation
+ *     is applied.
+ * @returns { TabContentAnimatedTransition | undefined } Information about the custom switching animation.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1078,12 +1120,13 @@ declare type OnTabsGestureSwipeCallback = (index: number, extraInfo: TabsAnimati
 declare type TabsCustomContentTransitionCallback = (from: number, to: number) => TabContentAnimatedTransition | undefined;
 
 /**
- * Defines the callback invoked when a new page is about to be displayed.
+ * Custom callback for intercepting **Tabs** page switching, triggered when a new page is about to be displayed.
  *
- * @param { number } currentIndex - Index of the active tab. The index starts from 0.
- * @param { number } comingIndex - Index of the new tab to be displayed.
- * @returns { boolean } The return value **true** means that the tab can switch to the new page.
- *     <br>The value **false** means that the tab cannot switch to the new page and will remain on the current page.
+ * @param { number } currentIndex - Index of the currently displayed page. The index starts from 0.
+ * @param { number } comingIndex - Index of the new page to be displayed. The index starts from 0.
+ * @returns { boolean } When the return value of the callback handler is **true**, **Tabs** can switch to the new page.<
+ *     br/>When the return value of the callback handler is **false**, **Tabs** cannot switch to the new page and still
+ *     displays the original page content.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1093,43 +1136,45 @@ declare type TabsCustomContentTransitionCallback = (from: number, to: number) =>
 declare type OnTabsContentWillChangeCallback = (currentIndex: number, comingIndex: number) => boolean;
 
 /**
- * Defines the callback triggered when content in the **Tabs** component scrolls.
+ * Triggered when the **Tabs** is swiped.
+ *
  * > **NOTE**
  * >
- * > - For example, when the index of the currently selected tab page is **0**, during a transition animation from page
- * > 0 to page 1, the callback is triggered for all pages within the viewport on every frame. When pages 0 and 1 are
- * > both in the viewport, the callback is triggered twice per frame. The first callback has **selectedIndex** as **0**,
- * > **index** as **0**, **position** as the ratio of how much page 0 has moved relative to its position before the
- * > animation started on the current frame, and **mainAxisLength** as the length of page 0 on the main axis. The second
- * > callback has **selectedIndex** as **0**, **index** as **1**, **position** as the ratio of how much page 1 has moved
- * > relative to page 0 before the animation started on the current frame, and **mainAxisLength** as the length of page
- * > 1 on the main axis.
+ * > - For example, when the index of the currently selected tab is 0, during a transition animation from page 0 to page
+ * > 1, the callback is triggered for all pages within the viewport on every frame. When pages 0 and 1 are both in the
+ * > viewport, the callback is triggered twice per frame. The first callback has **selectedIndex** as **0**, **index**
+ * > as **0**, **position** as the ratio of how much page 0 has moved relative to its position before the animation
+ * > started on the current frame, and **mainAxisLength** as the length of page 0 on the main axis. The second callback
+ * > has **selectedIndex** as **0**, **index** as **1**, **position** as the ratio of how much page 1 has moved relative
+ * > to page 0 before the animation started on the current frame, and **mainAxisLength** as the length of page 1 on the
+ * > main axis.
  * >
  * > - If the animation curve is a spring interpolation curve, during the transition animation from page 0 to page 1,
  * > due to the position and velocity when the user lifts their finger off the screen, animation may overshoot and slide
  * > past to page 2, then bounce back to page 1. Throughout this process, a callback is triggered for pages 1 and 2
  * > within the viewport on every frame.
  *
- * @param { number } selectedIndex - Index of the currently selected page. For example, if the index of the currently
- *     selected tab page is **0**, the value of **selectedIndex** in each callback is **0** during the animation of
- *     switching from page 0 to page 1.
- * @param { number } index - Index of a page in the viewport. For example, if there are two pages (page 0 and page 1) in
- *     the viewport during page transition, the callback is triggered twice in each frame. In the first callback, the
- *     index is 0. In the second callback, the index is 1.
- * @param { number } position - Position of the page specified by **index** relative to the start position of the
- *     **Tabs** main axis (start position of the page corresponding to **selectedIndex**). For example, in a horizontal
- *     **Tabs** component, with the currently selected tab index being 0, if a frame occurs where page 0 occupies 30% of
- *     the viewport and page 1 occupies 70%, two callbacks will be triggered for that frame during the animation from
- *     page 0 to page 1 (switching left). In the first callback, the value of **position** is **-0.7**, indicating that
- *     page 0 in the current frame is on the left of the start position of the main axis of **Tabs**, and its left edge
- *     is 70% of the viewport away from the starting position (meaning page 0 has moved left by 70% of the viewport). In
- *     the second callback, the value of **position** is **0.3**, indicating that page 1 in the current frame is on the
- *     right of the start position of the main axis of **Tabs**, and its left edge is 30% of the viewport away from the
- *     starting position (meaning page 1 has moved left by 70% of the viewport).
- * @param { number } mainAxisLength - Length of the page specified by **index** along the main axis, in vp. For example,
- *     if the index of a callback is **0** and the **mainAxisLength** of this callback is **360**, the length of page 0
- *     of the current frame in the main axis direction is 360 vp. This parameter indicates the page width for horizontal
- *     tabs, and the page height for vertical tabs.
+ * @param { number } selectedIndex - Index of the currently selected page. For example, when the index of the currently
+ *     selected tab is 0, during a transition animation from page 0 to page 1, **selectedIndex** is **0** in every
+ *     callback.
+ * @param { number } index - Index of the page within the viewport. For example, during page swiping, when pages 0 and 1
+ *     are both in the viewport, the callback is triggered twice per frame. The first callback has **index** as **0**,
+ *     and the second callback has **index** as **1**.
+ * @param { number } position - Ratio of how much the page indicated by **index** has moved relative to the start
+ *     position of the **Tabs** main axis (the start position of the page corresponding to **selectedIndex**). For
+ *     example, in a horizontal **Tabs**, when the index of the currently selected tab is 0, during a transition
+ *     animation from page 0 to page 1 by swiping left, if on a certain frame pages 0 and 1 occupy 30% and 70% of the
+ *     viewport respectively, the callback is triggered twice on the current frame. The first callback has **position**
+ *     as **-0.7**, indicating that page 0 is on the left of the start position of the **Tabs** main axis on the current
+ *     frame, and the left edge of page 0 is 70% of the viewport away from the start position of the **Tabs** main axis,
+ *     that is, page 0 has moved left by 70% of the viewport. The second callback has **position** as **0.3**,
+ *     indicating that page 1 is on the right of the start position of the **Tabs** main axis on the current frame, and
+ *     the left edge of page 1 is 30% of the viewport away from the start position of the **Tabs** main axis. In fact,
+ *     page 1 has also moved left by 70% of the viewport.
+ * @param { number } mainAxisLength - Length of the page corresponding to **index** on the main axis, in vp. For
+ *     example, if **index** is **0** in a callback and **mainAxisLength** is **360** in that callback, the length of
+ *     page 0 on the main axis on the current frame is 360 vp. For a horizontal **Tabs**, this represents the page
+ *     width; for a vertical **Tabs**, this represents the page height.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1333,10 +1378,12 @@ declare interface TabsBreakpointType<T> {
   lg?: T;
 }
 
+
+
 /**
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link common}, the following events are supported.
+ * In addition to the [universal events]{@link ./common}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1345,18 +1392,22 @@ declare interface TabsBreakpointType<T> {
  * @noninterop
  */
 declare class TabsAttribute extends CommonMethod<TabsAttribute> {
-
   /**
-   * Sets whether to use vertical tabs.
+   * Sets whether the **Tabs** is vertical. A horizontal **Tabs** (default) is suitable for scenarios such as bottom
+   * navigation bars and top tab switching; a vertical **Tabs** is suitable for scenarios such as sidebar navigation and
+   * settings page categories.
    *
-   * @param { boolean } value - Whether to use vertical tabs.<br>The value **true** means to use vertical tabs, and
-   *     **false** means to use horizontal tabs.<br>Default value: **false**<br>If set to have a height of **auto**,
-   *     horizontal tabs auto-adapt the height to child components, which is calculated as follows: Tab bar height +
-   *     Divider width + Tab content height + Top and bottom paddings + Top and bottom border widths.<br>If set to have
-   *     a width of **auto**, vertical tabs auto-adapt the width to child components, which is calculated as follows:
-   *     Tab bar width + Divider width + Tab content width + Left and right paddings + Left and right border widths.<br>
-   *     To avoid animation jitter when switching between tabs, maintain a consistent size for child components on each
-   *     tab.
+   * @param { boolean } value - Whether the **Tabs** is vertical.<br/>Default value: **false**, indicating a horizontal
+   *     **Tabs**; **true** indicates a vertical **Tabs**.<br/>When **height** of a horizontal **Tabs** is set to
+   *     **auto**, the component height of the **Tabs** adapts to the height of its child components, that is, the
+   *     height of
+   *     [tabBar]{@link TabContentAttribute#tabBar(options: string | Resource | CustomBuilder | TabBarOptions)} + the
+   *     width of the **divider** + the height of **TabContent** + the top and bottom **padding** values of the **Tabs**
+   *     component + the top and bottom border widths of the **Tabs** component.<br/>When **width** of a vertical
+   *     **Tabs** is set to **auto**, the component width of the **Tabs** adapts to the width of its child components,
+   *     that is, the width of **tabBar** + the width of the **divider** + the width of **TabContent** + the left and
+   *     right **padding** values + the left and right **border** widths.<br/>Keep the sizes of child components on each
+   *     page as consistent as possible to avoid the page switching animation jumping when swiping pages.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1366,9 +1417,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   vertical(value: boolean): TabsAttribute;
 
   /**
-   * Sets the position of the **Tabs** component.
+   * Sets the tab position of **Tabs**.
    *
-   * @param { BarPosition } value - Position of the **Tabs** component.<br>Default value: **BarPosition.Start**
+   * @param { BarPosition } value - Sets the tab position of **Tabs**. The specific position of the tab is affected by
+   *     the **vertical** attribute: when **vertical** is **true**, **Start** is on the left and **End** is on the
+   *     right; when **vertical** is **false**, **Start** is at the top and **End** is at the bottom.<br/>Default value:
+   *     **BarPosition.Start**
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1378,10 +1432,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barPosition(value: BarPosition): TabsAttribute;
 
   /**
-   * Sets whether the tabs are scrollable.
+   * Sets whether the page can be switched by swiping the page. When used with custom navigation buttons or tab bar tabs
+   * to control switching, it is recommended to set this parameter to false to avoid conflicts between swipe gestures
+   * and custom navigation logic.
    *
-   * @param { boolean } value - Whether the tabs are scrollable.<br>**true** (default): The tabs are scrollable.<br>
-   *     **false**: The tabs are not scrollable.
+   * @param { boolean } value - Whether the page can be switched by swiping the page.<br/>Default value: **true**, the
+   *     page can be switched by swiping the page. When set to **false**, the page cannot be switched by swiping.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1391,10 +1447,10 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   scrollable(value: boolean): TabsAttribute;
 
   /**
-   * Sets the tab bar layout mode to **BarMode.Fixed**.
+   * Sets the tab bar layout mode to BarMode.Fixed.
    *
-   * @param { BarMode.Fixed } value - The width of each tab is determined by equally dividing the number of tabs by the
-   *     bar width (or bar height in the vertical layout).
+   * @param { BarMode.Fixed } value - All tab bars evenly share the bar width (evenly share the bar height in vertical
+   *     mode).
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1407,11 +1463,10 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   /**
    * Sets the tab bar layout mode to **BarMode.Scrollable**.
    *
-   * @param { BarMode.Scrollable } value - The width of each tab is determined by the actual layout. The tabs are
-   *     scrollable in the following case: In horizontal layout, the total width exceeds the tab bar width; in vertical
-   *     layout, the total height exceeds the tab bar height.
-   * @param { ScrollableBarModeOptions } [options] - Layout style of the tab bar in scrollable mode.<br>**NOTE**<br>This
-   *     parameter is effective only when the tab bar is in scrollable mode.
+   * @param { BarMode.Scrollable } value - All tab bars use the actual layout width and can be scrolled when the total
+   *     width (**barWidth** of horizontal **Tabs**, **barHeight** of vertical **Tabs**) is exceeded.
+   * @param { ScrollableBarModeOptions } [options] - Layout style of the tab bar in Scrollable mode.<br/>**Note:** <br/>
+   *     Valid only in Scrollable and horizontal mode.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1422,11 +1477,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barMode(value: BarMode.Scrollable, options: ScrollableBarModeOptions): TabsAttribute;
 
   /**
-   * Sets the tab bar layout mode.
+   * Sets the layout mode of the tab bar. The Fixed mode is suitable for scenarios with a fixed and small number of
+   * tabs; the Scrollable mode is suitable for scenarios with a large number of tabs or unfixed text length.
    *
-   * @param { BarMode } value - Layout mode.<br>Default value: **BarMode.Fixed**
-   * @param { ScrollableBarModeOptions } [options] - Layout style of the tab bar in scrollable mode.<br>**NOTE**<br>This
-   *     parameter is effective only when the tab bar is in horizontal scrollable mode. [since 10]
+   * @param { BarMode } value - Layout mode.<br/>Default value: **BarMode.Fixed**
+   * @param { ScrollableBarModeOptions } [options] - Layout style of the tab bar in Scrollable mode.<br/>**Note:** <br/>
+   *     This parameter is valid only when **value** is **Scrollable** and the mode is horizontal.<br/> [since 10]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1439,24 +1495,24 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * Sets the width of the tab bar. If the set value is less than 0 or greater than the width of the **Tabs** component,
    * the default value is used.
    *
-   * @param { number } value - Width of the tab bar.<br>Default value:<br>If the tab bar has the **vertical** attribute
-   *     set to **false** and does not have [SubTabBarStyle]{@link SubTabBarStyle} or
-   *     [BottomTabBarStyle]{@link BottomTabBarStyle} specified, the default value is the width of the **Tabs**
-   *     component.<br>If neither **SubTabBarStyle** nor **BottomTabBarStyle** is set, and the **vertical** attribute is
-   *     **true**, the default value is 56 vp.<br>If **SubTabBarStyle** is set, and the **vertical** attribute is
-   *     **false**, the default value is the width of the **Tabs** component.<br>If **SubTabBarStyle** is set, and the
-   *     **vertical** attribute is **true**, the default value is 56 vp.<br>If **BottomTabBarStyle** is set, and the
-   *     **vertical** attribute is **true**, the default value is 96 vp.<br>If **BottomTabBarStyle** is set, and the
-   *     **vertical** attribute is **false**, the default value is the width of the **Tabs** component. [since 7 - 7]
-   * @param { Length } value - Width of the tab bar.<br>Default value:<br>If the tab bar has the **vertical** attribute
-   *     set to **false** and does not have [SubTabBarStyle]{@link SubTabBarStyle} or
-   *     [BottomTabBarStyle]{@link BottomTabBarStyle} specified, the default value is the width of the **Tabs**
-   *     component.<br>If neither **SubTabBarStyle** nor **BottomTabBarStyle** is set, and the **vertical** attribute is
-   *     **true**, the default value is 56 vp.<br>If **SubTabBarStyle** is set, and the **vertical** attribute is
-   *     **false**, the default value is the width of the **Tabs** component.<br>If **SubTabBarStyle** is set, and the
-   *     **vertical** attribute is **true**, the default value is 56 vp.<br>If **BottomTabBarStyle** is set, and the
-   *     **vertical** attribute is **true**, the default value is 96 vp.<br>If **BottomTabBarStyle** is set, and the
-   *     **vertical** attribute is **false**, the default value is the width of the **Tabs** component. [since 8]
+   * @param { number } value - Width of the tab bar.<br/>Default value:<br/>If [SubTabBarStyle]{@link SubTabBarStyle}
+   *     and [BottomTabBarStyle]{@link BottomTabBarStyle} are not set for the tab bar and the **vertical** attribute is
+   *     **false**, the default value is the width of the **Tabs**.<br/>If **SubTabBarStyle** and **BottomTabBarStyle**
+   *     are not set for the tab bar and the **vertical** attribute is **true**, the default value is 56 vp.<br/>If
+   *     **SubTabBarStyle** is set and the **vertical** attribute is **false**, the default value is the width of the
+   *     **Tabs**.<br/>If **SubTabBarStyle** is set and the **vertical** attribute is **true**, the default value is 56
+   *     vp.<br/>If **BottomTabBarStyle** is set and the **vertical** attribute is **true**, the default value is 96 vp.
+   *     <br/>If **BottomTabBarStyle** is set and the **vertical** attribute is **false**, the default value is the
+   *     width of the **Tabs**. [since 7 - 7]
+   * @param { Length } value - Width of the tab bar.<br/>Default value:<br/>If [SubTabBarStyle]{@link SubTabBarStyle}
+   *     and [BottomTabBarStyle]{@link BottomTabBarStyle} are not set for the tab bar and the **vertical** attribute is
+   *     **false**, the default value is the width of the **Tabs**.<br/>If **SubTabBarStyle** and **BottomTabBarStyle**
+   *     are not set for the tab bar and the **vertical** attribute is **true**, the default value is 56 vp.<br/>If
+   *     **SubTabBarStyle** is set and the **vertical** attribute is **false**, the default value is the width of the
+   *     **Tabs**.<br/>If **SubTabBarStyle** is set and the **vertical** attribute is **true**, the default value is 56
+   *     vp.<br/>If **BottomTabBarStyle** is set and the **vertical** attribute is **true**, the default value is 96 vp.
+   *     <br/>If **BottomTabBarStyle** is set and the **vertical** attribute is **false**, the default value is the
+   *     width of the **Tabs**. [since 8]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1466,35 +1522,35 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barWidth(value: Length): TabsAttribute;
 
   /**
-   * Sets the height of the tab bar. For horizontal **Tabs** components, you can set the height to **'auto'** to allow
-   * the tab bar to automatically adapt to the height of its child components. If the height is set to a value less than
-   * 0 or greater than the height of the **Tabs** component, the default value is used.
+   * Sets the height value of the tab bar. For a horizontal **Tabs**, height can be set to 'auto' so that the tab bar
+   * adaptively fits the child component height. If height is set to a value less than 0 or greater than the **Tabs**
+   * height, it is displayed by default value.
    *
-   * In versions earlier than API version 14, setting **barHeight** to a fixed value prevents the tab bar from extending
-   * beyond the bottom safe area. Since API version 14, the [safeAreaPadding]{@link CommonMethod#safeAreaPadding}
-   * attribute is supported. When **safeAreaPadding** is set to 0 or is not explicitly set, the tab bar is allowed to
-   * extend beyond the bottom safe area.
+   * In versions earlier than API version 14, if **barHeight** is set to a fixed value, the tab bar cannot extend the
+   * bottom safe area. Starting from API version 14, it can be used together with the
+   * [safeAreaPadding]{@link CommonMethod#safeAreaPadding} attribute. When **safeAreaPadding** does not set bottom or
+   * bottom is set to 0, the safe area can be extended.
    *
-   * @param { number } value - Height of the tab bar.<br>Default value:<br>If no style is set or **CustomBuilder** is
-   *     used to set a custom style for the **TabBar**, and **vertical** is set to **false**, the default value is 56
-   *     vp.<br>If no style is set or **CustomBuilder** is used to set a custom style for the **TabBar**, and
-   *     **vertical** is set to **true**, the default value is the height of the **Tabs** component.<br>If
-   *     [SubTabBarStyle]{@link SubTabBarStyle} is set, and the **vertical** attribute is **false**, the default value
-   *     is 56 vp.<br>If **SubTabBarStyle** is set, and the **vertical** attribute is **true**, the default value is the
-   *     height of the **Tabs** component.<br>If [BottomTabBarStyle]{@link BottomTabBarStyle} is set, and the
-   *     **vertical** attribute is **true**, the default value is the height of the **Tabs** component.<br>If
-   *     **BottomTabBarStyle** is set, and the **vertical** attribute is **false**, the default value is 56 vp in
-   *     versions earlier than API version 12 and 48 vp since API version 12. [since 7 - 7]
-   * @param { Length } value - Height of the tab bar.<br>Default value:<br>If no style is set or **CustomBuilder** is
-   *     used to set a custom style for the **TabBar**, and **vertical** is set to **false**, the default value is 56
-   *     vp.<br>If no style is set or **CustomBuilder** is used to set a custom style for the **TabBar**, and
-   *     **vertical** is set to **true**, the default value is the height of the **Tabs** component.<br>If
-   *     [SubTabBarStyle]{@link SubTabBarStyle} is set, and the **vertical** attribute is **false**, the default value
-   *     is 56 vp.<br>If **SubTabBarStyle** is set, and the **vertical** attribute is **true**, the default value is the
-   *     height of the **Tabs** component.<br>If [BottomTabBarStyle]{@link BottomTabBarStyle} is set, and the
-   *     **vertical** attribute is **true**, the default value is the height of the **Tabs** component.<br>If
-   *     **BottomTabBarStyle** is set, and the **vertical** attribute is **false**, the default value is 56 vp in
-   *     versions earlier than API version 12 and 48 vp since API version 12. [since 8]
+   * @param { number } value - Height value of the tab bar.<br/>Default value:<br/>When the style is not set or a custom
+   *     style is set through **CustomBuilder** and the **vertical** attribute is **false**, the default value is 56vp.<
+   *     br/>When the style is not set or a custom style is set through **CustomBuilder** and the **vertical** attribute
+   *     is **true**, the default value is the height of the **Tabs**.<br/>When the
+   *     [SubTabBarStyle]{@link SubTabBarStyle} style is set and the **vertical** attribute is **false**, the default
+   *     value is 56vp.<br/>When the **SubTabBarStyle** style is set and the **vertical** attribute is **true**, the
+   *     default value is the height of the **Tabs**.<br/>When the [BottomTabBarStyle]{@link BottomTabBarStyle} style is
+   *     set and the **vertical** attribute is **true**, the default value is the height of the **Tabs**.<br/>When the
+   *     BottomTabBarStyle style is set and the **vertical** attribute is **false**, the default value is 56vp. Starting
+   *     from API version 12, the default value changes to 48vp. [since 7 - 7]
+   * @param { Length } value - Height value of the tab bar.<br/>Default value:<br/>When the style is not set or a custom
+   *     style is set through **CustomBuilder** and the **vertical** attribute is **false**, the default value is 56vp.<
+   *     br/>When the style is not set or a custom style is set through **CustomBuilder** and the **vertical** attribute
+   *     is **true**, the default value is the height of the **Tabs**.<br/>When the
+   *     [SubTabBarStyle]{@link SubTabBarStyle} style is set and the **vertical** attribute is **false**, the default
+   *     value is 56vp.<br/>When the **SubTabBarStyle** style is set and the **vertical** attribute is **true**, the
+   *     default value is the height of the **Tabs**.<br/>When the [BottomTabBarStyle]{@link BottomTabBarStyle} style is
+   *     set and the **vertical** attribute is **true**, the default value is the height of the **Tabs**.<br/>When the
+   *     BottomTabBarStyle style is set and the **vertical** attribute is **false**, the default value is 56vp. Starting
+   *     from API version 12, the default value changes to 48vp. [since 8]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1504,24 +1560,24 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barHeight(value: Length): TabsAttribute;
 
   /**
-   * Sets the height of the tab bar. For horizontal **Tabs** components, you can set the height to **'auto'** to allow
-   * the tab bar to automatically adapt to the height of its child components; you can also set **noMinHeightLimit** to
-   * **true** so that the adaptive height can be less than the default tab bar height. If the height is set to a value
-   * less than 0 or greater than the height of the **Tabs** component, the default value is used.
+   * Sets the height value of the tab bar. For horizontal **Tabs**, you can set height to 'auto' so that the tab bar
+   * adapts to the height of its child components, and set **noMinHeightLimit** to true so that the adaptive height can
+   * be smaller than the default height of the **TabBar**. If height is set to a value smaller than 0 or greater than
+   * the height of **Tabs**, it is displayed by default value.
    *
-   * @param { Length } height - Height of the tab bar.<br>Default value:<br>If no style is set or **CustomBuilder** is
-   *     used to set a custom style for the **TabBar**, and **vertical** is set to **false**, the default value is 56
-   *     vp.<br>If no style is set or **CustomBuilder** is used to set a custom style for the **TabBar**, and
-   *     **vertical** is set to **true**, the default value is the height of the **Tabs** component.<br>If
-   *     [SubTabBarStyle]{@link SubTabBarStyle} is set, and the **vertical** attribute is **false**, the default value
-   *     is 56 vp.<br>If **SubTabBarStyle** is set, and the **vertical** attribute is **true**, the default value is the
-   *     height of the **Tabs** component.<br>If [BottomTabBarStyle]{@link BottomTabBarStyle} is set, and the
-   *     **vertical** attribute is **true**, the default value is the height of the **Tabs** component.<br>If
-   *     **BottomTabBarStyle** is set, and the **vertical** attribute is **false**, the default value is 48 vp.
-   * @param { boolean } noMinHeightLimit - Whether to remove the minimum height limit of the tab bar when **height** is
-   *     set to **'auto'**. The default value is **false**.<br>**NOTE**<br>**true**: removes the minimum height limit,
-   *     allowing the height to be less than the default value.<br>**false**: enforces the minimum height limit, meaning
-   *     the height cannot be less than the default value.
+   * @param { Length } height - Height value of the tab bar.<br/>Default value:<br/>If no style is set or a custom style
+   *     is set through **CustomBuilder** and **vertical** is **false**, the default value is 56vp.<br/>If no style is
+   *     set or a custom style is set through **CustomBuilder** and **vertical** is **true**, the default value is the
+   *     height of **Tabs**.<br/>If the [SubTabBarStyle]{@link SubTabBarStyle} style is set and **vertical** is
+   *     **false**, the default value is 56vp.<br/>If the **SubTabBarStyle** style is set and **vertical** is **true**,
+   *     the default value is the height of **Tabs**.<br/>If the [BottomTabBarStyle]{@link BottomTabBarStyle} style is
+   *     set and **vertical** is **true**, the default value is the height of **Tabs**.<br/>If the BottomTabBarStyle
+   *     style is set and **vertical** is **false**, the default value is 48vp.
+   * @param { boolean } noMinHeightLimit - Whether to cancel the minimum height limit of the tab bar when height is set
+   *     to 'auto'. The default value is **false**.<br/>**Note:** <br/>The value true means to cancel the minimum height
+   *     limit of the tab bar, that is, the height value of the tab bar can be smaller than the default value.<br/>The
+   *     value false means to limit the minimum height of the tab bar, that is, the minimum height value of the tab bar
+   *     is equal to the default value.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1532,15 +1588,15 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barHeight(height: Length, noMinHeightLimit: boolean): TabsAttribute;
 
   /**
-   * Sets the tab switching animation curve for the **Tabs** component. For details about commonly used curves, refer to
-   * the [Curve]{@link Curve} enum. Custom interpolation curve objects can also be created using the APIs provided in
-   * the [interpolation calculation]{@link @ohos.curves:curves} module.
+   * Sets the animation curve for page turning of the **Tabs**. For common curves, see [Curve]{@link Curve}. You can
+   * also create a custom interpolation curve object through the APIs provided by the
+   * [interpolation calculation]{@link @ohos.curves:curves} module.
    *
-   * @param { Curve | ICurve } curve - Tab switching animation curve.<br>Default value:<br>When pages are turned by
-   *     swiping in **TabContent**, the default value is **interpolatingSpring(-1, 1, 228, 30)**.<br>When pages are
-   *     turned by tapping tabs or calling the **changeIndex** API of **TabsController**, the default value is
-   *     **cubicBezierCurve(0.2, 0.0, 0.1, 1.0)**.<br>When a custom animation curve is set, it applies to all tab
-   *     switching animations��whether triggered by swiping, tapping a tab, or calling the **changeIndex** API.
+   * @param { Curve | ICurve } curve - Animation curve for page turning of the **Tabs**.<br/>Default value:<br/>When a
+   *     **TabContent** is swiped to turn pages, the default value is **interpolatingSpring(-1, 1, 228, 30)**.<br/>When
+   *     a tab bar tab is tapped or the **changeIndex** API of **TabsController** is called to turn pages, the default
+   *     value is **cubicBezierCurve(0.2, 0.0, 0.1, 1.0)**.<br/>When a custom animation curve is set, the set animation
+   *     curve is used for both swiping to turn pages and tapping a tab or calling **changeIndex** to turn pages.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1551,25 +1607,24 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   animationCurve(curve: Curve | ICurve): TabsAttribute;
 
   /**
-   * Sets the duration of the tab switching animation for the **Tabs** component.
+   * Sets the duration of the page switching animation for **Tabs**.
    *
-   * If **animationCurve** is not set, **animationDuration** only controls the duration of tab switching animations
-   * triggered by tapping a tab or calling the **changeIndex** API, and page-turning animations triggered by swiping in
-   * **TabContent**, the duration is determined by the intrinsic parameters of the default curve
-   * **interpolatingSpring(-1, 1, 228, 30)**.
+   * When animationCurve is not set, the duration of the page switching animation curve interpolatingSpring(-1, 1, 228,
+   * 30) for swiping **TabContent** is affected only by the curve's own parameters. Therefore, animationDuration can
+   * only control the animation duration for switching **TabContent** by tapping the tab bar tab or calling the
+   * **changeIndex** API of **TabsController**.
    *
-   * For details about curves unaffected by **animationDuration**, see
-   * [Interpolation Calculation]{@link @ohos.curves:curves}. These curves include curves of type
-   * [springMotion]{@link @ohos.curves:curves.springMotion},
+   * For curves not controlled by animationDuration, see the [Interpolation calculation]{@link @ohos.curves:curves}
+   * module, such as [springMotion]{@link @ohos.curves:curves.springMotion},
    * [responsiveSpringMotion]{@link @ohos.curves:curves.responsiveSpringMotion}, and
    * [interpolatingSpring]{@link @ohos.curves:curves.interpolatingSpring}.
    *
-   * @param { number } value - Duration of the tab switching animation.<br>Default value:<br>API version 10 and earlier
-   *     versions: If this parameter is set to **null** or is not set, the default value **0**, which means no animation
-   *     for tab switching. If this parameter is set to **undefined** or a value less than 0, the default value is
-   *     **300**.<br>API version 11 and later versions: If this parameter is set to an invalid value or is not set, the
-   *     default value is **0** when the tab bar is set to **BottomTabBarStyle** and **300** when the tab bar is set to
-   *     any other style.<br>Unit: ms<br>Value range: [0, +∞).
+   * @param { number } value - Animation duration for page switching of **Tabs**.<br/>Default value:<br/>Since API
+   *     version 10, when this attribute is not set or is set to null, the default value is 0, that is, no animation is
+   *     applied to page switching of **Tabs**. When it is set to a value less than 0 or undefined, the default value is
+   *     300.<br/>Since API version 11, when this attribute is not set or is set to an abnormal value, and tab bar is
+   *     set to the BottomTabBarStyle style, the default value is 0. When tab bar is set to another style, the default
+   *     value is 300.<br/>Unit: ms<br/>Value range: [0, +∞)
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1579,16 +1634,17 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   animationDuration(value: number): TabsAttribute;
 
   /**
-   * Sets the animation mode for tab switching initiated by clicking a specific tab or by calling the **changeIndex**
-   * API of **TabsController**.
+   * Sets the animation form for switching **TabContent** when a tab bar tab is tapped or the **changeIndex** API of
+   * **TabsController** is called.
    *
    * > **NOTE**
    * >
    * > This attribute cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
-   * @param { Optional<AnimationMode> } mode - Animation mode for tab switching initiated by clicking a specific tab or
-   *     by calling the **changeIndex** API of **TabsController**.<br>Default value: **AnimationMode.CONTENT_FIRST**,
-   *     which means the target page content is loaded first, followed by the animation.
+   * @param { Optional<AnimationMode> } mode - Animation form for switching **TabContent** when a tab bar tab is tapped
+   *     or the **changeIndex** API of **TabsController** is called.<br/>Default value: **AnimationMode.CONTENT_FIRST**,
+   *     which means that when a tab bar tab is tapped or the **changeIndex** API of **TabsController** is called to
+   *     switch TabContent, the content of the target page is loaded first, and then the switching animation starts.
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1599,14 +1655,16 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   animationMode(mode: Optional<AnimationMode>): TabsAttribute;
 
   /**
-   * Sets the edge effect used when the boundary of the scrolling area is reached.
+   * Sets the edge swipe effect. When the content is swiped to the edge, a rebound action is performed based on the
+   * specified edge effect type: the Spring mode uses a spring curve to implement an elastic rebound effect, the Fade
+   * mode uses gradient opacity to provide visual feedback, and the None mode does not perform any edge effect. The edge
+   * effect is triggered when the swiped content exceeds the container boundary.
    *
    * > **NOTE**
    * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 17.
    *
-   * @param { Optional<EdgeEffect> } edgeEffect - Effect used when the boundary of the scrolling area is reached.<br>
-   *     Default value: **EdgeEffect.Spring**
+   * @param { Optional<EdgeEffect> } edgeEffect - Edge swipe effect.<br/>Default value: EdgeEffect.Spring
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1617,29 +1675,25 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   edgeEffect(edgeEffect: Optional<EdgeEffect>): TabsAttribute;
 
   /**
-   * Triggered after the active tab changes.
+   * Triggered after the tab is switched.
    *
-   * This event is triggered when any of the following occurs:
+   * This event is triggered when any of the following conditions is met:
    *
-   * 1. After completing a swipe-triggered tab switching animation.
-   *
-   * 2. After the active tab changes by calling the [changeIndex]{@link TabsController#changeIndex} API of [Controller]{@link TabsController}.
-   *
-   * 3. After the active tab changes by updating the index through the bound [state variable](docroot://ui/state-management/arkts-state.md).
-   *
-   * 4. After the active tab changes by tapping a tab in the tab bar.
+   * 1. Triggered after the component sliding animation ends when the page is switched by swiping.
+   * 2. Triggered after the tab is switched by calling [changeIndex]{@link TabsController#changeIndex} through the [controller]{@link TabsController}.
+   * 3. Triggered after the tab is switched when the **index** attribute value constructed by the [state variable](docroot://ui/state-management/arkts-state.md) is dynamically changed.
+   * 4. Triggered after the tab is switched when a tab bar tab is tapped.
    *
    * > **NOTE**
    * >
-   * > When a custom tab is used, relying solely on the **onChange** event for synchronization between tabs and swipe
-   * > gestures may result in delayed visual updates, since it is triggered after the swipe-triggered tab switching
-   * > animation is completed. For smooth animations, listen for the active tab index in
-   * > [onAnimationStart]{@link TabsAttribute#onAnimationStart} and update the tab index accordingly. For details about
-   * > the implementation, see
+   * > When a custom tab is used, linking in the **onChange** event may cause the tab linkage to be executed only after
+   * > the swipe page is switched, resulting in a delayed custom tab switching effect. It is recommended that you listen
+   * > for and refresh the current index in [onAnimationStart]{@link TabsAttribute#onAnimationStart} to ensure that the
+   * > animation is triggered in a timely manner. For details, see
    * > [Example 3](docroot://reference/apis-arkui/arkui-ts/ts-container-tabs.md#example-3-implementing-custom-tab-switching-synchronization).
    *
-   * @param { function } event - Index of the active tab. The index starts from 0. [since 7 - 17]
-   * @param { Callback<number> } event - Index of the active tab. The index starts from 0. [since 18]
+   * @param { function } event - Index of the currently displayed tab, starting from 0. [since 7 - 17]
+   * @param { Callback<number> } event - Index of the currently displayed tab, starting from 0. [since 18]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -1716,12 +1770,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onUnselected(event: Callback<number>): TabsAttribute;
 
   /**
-   * Triggered when the transition animation starts. If [animationDuration]{@link TabsAttribute#animationDuration} is
-   * set to **0** and [scrollable]{@link TabsAttribute#scrollable} is set to **false**, this callback is not triggered.
+   * Triggered when the switching animation starts. When [animationDuration]{@link TabsAttribute#animationDuration} is
+   * **0**, the animation is disabled, and when [scrollable]{@link TabsAttribute#scrollable} is **false**, this callback
+   * is not triggered.
    *
-   * @param { function } handler - Callback triggered when the transition animation starts. [since 11 - 17]
-   * @param { OnTabsAnimationStartCallback } handler - Callback triggered when the transition animation
-   *     starts. [since 18]
+   * @param { function } handler - Callback triggered when the switching animation starts. [since 11 - 17]
+   * @param { OnTabsAnimationStartCallback } handler - Callback triggered when the switching animation starts. [since 18]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1732,13 +1786,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onAnimationStart(handler: OnTabsAnimationStartCallback): TabsAttribute;
 
   /**
-   * Triggered when the tab switching animation is completed, including cases where the gesture is interrupted during
-   * animation. This event is not triggered when **animationDuration** is set to **0**, which effectively disables the
-   * animation.
+   * Triggered when the switching animation ends, including when the gesture is interrupted during the animation. When
+   * [animationDuration]{@link TabsAttribute#animationDuration} is **0** (animation disabled), this callback is not
+   * triggered.
    *
-   * @param { function } handler - Callback triggered upon animation completion or interruption. [since 11 - 17]
-   * @param { OnTabsAnimationEndCallback } handler - Callback triggered upon animation completion or
-   *     interruption. [since 18]
+   * @param { function } handler - Callback invoked when the switching animation ends. [since 11 - 17]
+   * @param { OnTabsAnimationEndCallback } handler - Callback invoked when the switching animation ends. [since 18]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1749,12 +1802,17 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onAnimationEnd(handler: OnTabsAnimationEndCallback): TabsAttribute;
 
   /**
-   * Triggered on a frame-by-frame basis during swipe gestures for tab switching.
+   * Triggered frame by frame during the swipe of the page, used to listen for the real-time swipe state of the
+   * currently displayed page.
    *
-   * @param { function } handler - Triggered on a frame-by-frame basis during swipe gestures for tab
-   *     switching. [since 11 - 17]
-   * @param { OnTabsGestureSwipeCallback } handler - Triggered on a frame-by-frame basis during swipe gestures for tab
-   *     switching. [since 18]
+   * > **NOTE**
+   * >
+   * > When [customContentTransition]{@link TabsAttribute#customContentTransition} is used to customize the switching
+   * > animation, this event is not triggered.
+   *
+   * @param { function } handler - Callback triggered frame by frame during the swipe of the page. [since 11 - 17]
+   * @param { OnTabsGestureSwipeCallback } handler - Callback triggered frame by frame during the swipe of the
+   *     page. [since 18]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1765,13 +1823,15 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onGestureSwipe(handler: OnTabsGestureSwipeCallback): TabsAttribute;
 
   /**
-   * Sets whether the tabs fade out when they exceed the container width. It is recommended that this attribute be used
-   * together with the **barBackgroundColor** attribute. If **barBackgroundColor** is not defined, the default fade
-   * effect shows a white gradient at the container's edge.
+   * Sets whether tabs fade out when they exceed the container width. It is recommended to use this attribute together
+   * with [barBackgroundColor]{@link TabsAttribute#barBackgroundColor}. When the **barBackgroundColor** attribute is not
+   * defined, a white fading effect is displayed at the end of the tab by default.
    *
-   * @param { boolean } value - Whether the tabs fade out when they exceed the container width.<br>**true** (default):
-   *     The tab fades out when they exceed the container width.<br> **false**: The tabs are clipped without any fade
-   *     effect when they exceed the container width.
+   * @param { boolean } value - Whether tabs fade out when they exceed the container width.<br />Default value:
+   *     **true**, tabs fade out when they exceed the container width. When set to **false**, tabs are directly
+   *     truncated when they exceed the container width. If the
+   *     [barBackgroundColor]{@link TabsAttribute#barBackgroundColor} attribute is not set, the default white fading
+   *     effect is still displayed at the end of the tab.
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1782,10 +1842,11 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   fadingEdge(value: boolean): TabsAttribute;
 
   /**
-   * Sets the divider between the **TabBar** and **TabContent** components.
+   * Sets the style of the divider that separates the tab bar from the **TabContent**. If a visual separation is
+   * required between the tab bar and the **TabContent**, a divider can be added through this attribute.
    *
-   * @param { DividerStyle | null } value - Divider style. By default, the divider is not displayed.<br>
-   *     **DividerStyle**: divider style.<br>**null**: No divider is displayed.
+   * @param { DividerStyle | null } value - Style of the divider. By default, no divider is displayed.<br/>DividerStyle:
+   *     style of the divider;<br/>null: no divider is displayed.
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1796,12 +1857,13 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   divider(value: DividerStyle | null): TabsAttribute;
 
   /**
-   * Sets whether the tab bar overlaps the **TabContent** component with a blurred background effect.
+   * Sets whether the tab bar is blurred behind and overlaid on the **TabContent**. This is suitable for scenarios that
+   * require an immersive UI effect.
    *
-   * @param { boolean } value - Whether the tab bar overlaps the **TabContent** component with a blurred background
-   *     effect. **true**: The tab bar overlaps the **TabContent** component with a blurred background effect, and the
-   *     default blur style of the tab bar is set to **'BlurStyle.COMPONENT_THICK'**.<br> **false**: There is no blur or
-   *     overlap effect.<br>Default value: **false**.
+   * @param { boolean } value - Whether the tab bar is blurred behind and overlaid on the TabContent. When barOverlap is
+   *     set to true, the tab bar is blurred behind and overlaid on the TabContent, and the default blur material
+   *     [BlurStyle]{@link BlurStyle} value of the tab bar is changed to 'BlurStyle.COMPONENT_THICK'. When barOverlap is
+   *     set to false, there is no blur or overlay effect.<br />Default value: false
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1814,7 +1876,9 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   /**
    * Sets the background color of the tab bar.
    *
-   * @param { ResourceColor } value - Background color of the tab bar.<br>Default value: **Color.Transparent**
+   * @param { ResourceColor } value - Background color of the tab bar.<br/>**Note:**<br/>It is recommended to use this
+   *     attribute together with [fadingEdge]{@link TabsAttribute#fadingEdge} to avoid the white fade effect at the end
+   *     of the tab.<br/>Default value: **Color.Transparent**, transparent
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1825,11 +1889,11 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barBackgroundColor(value: ResourceColor): TabsAttribute;
 
   /**
-   * Sets the visible area of the tab bar in grid mode. For details, see **BarGridColumnOptions**. This attribute is
-   * effective only in horizontal mode. It is not applicable to
-   * [XS, XL, and XXL devices](docroot://ui/arkts-layout-development-grid-layout.md#breakpoints).
+   * Sets the visible area of the tab bar in a grid-based manner. For details, see BarGridColumnOptions. This attribute
+   * is valid only in horizontal mode and is not applicable to XS, XL, and XXL devices (see
+   * [Grid Container Breakpoints](docroot://ui/arkts-layout-development-grid-layout.md#breakpoints)).
    *
-   * @param { BarGridColumnOptions } value - Visible area of the tab bar in grid mode.
+   * @param { BarGridColumnOptions } value - Sets the visible area of the tab bar in a grid-based manner.
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1840,36 +1904,41 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barGridAlign(value: BarGridColumnOptions): TabsAttribute;
 
   /**
-   * Defines a custom tab page transition animation.
+   * Customizes the page switching animation of **Tabs**. This is applicable when you need personalized tab switching
+   * effects, such as flipping, fade in and fade out, and scaling.
    *
    * Instructions:
    *
-   * 1. When a custom animation is used, the default transition animation of the **Tabs** component is disabled,
-   *    and the tab pages cannot be switched by swipe gestures.
-   * 2. Setting this attribute to **undefined** disables the custom transition animation and reverts to the component's
-   *     default transition animation.
-   * 3. Currently, the custom animation cannot be interrupted.
-   * 4. Currently, the custom animation can be triggered only in two scenarios: clicking a tab and
-   *     calling the TabsController.changeIndex() API.
-   * 5. When a custom animation is used, all events except **onGestureSwipe** of the **Tabs** component are supported.
-   * 6. The triggering time of the **onChange** and **onAnimationEnd** events needs to be specified.
-   *     If the second custom animation is triggered during the execution of the first custom animation,
-   *     the **onChange** and **onAnimationEnd** events of the first custom animation are triggered
-   *     when the second custom animation starts.
-   * 7. When a custom animation is used, the layout mode of the page involved in the animation is changed to **Stack**.
-   *     If the **zIndex** attribute is not set for related pages, the **zIndex** values of all pages are the same.
-   *     In this case, the pages are rendered in the order in which they are added to the component tree (that is,
-   *     the sequence of page indexes). In light of this, to control the rendering levels of pages, set the **zIndex**
-   *     attribute of the pages.
+   * 1. When a custom switching animation is used, the default switching animation of the **Tabs** component is
+   *    disabled, and the page cannot be swiped along with the finger.
+   * 2. When this attribute is set to **undefined**, the custom switching animation is not used, and the default
+   *    switching animation of the component is used instead.
+   * 3. The custom switching animation does not support interruption.
+   * 4. Currently, the custom switching animation can be triggered only in two scenarios: tapping a tab and calling
+   *    the **TabsController.changeIndex()** API.
+   * 5. When the custom switching animation is used, all events supported by the **Tabs** component are available
+   *    except **onGestureSwipe**.
+   * 6. The triggering timing of the [onChange]{@link TabsAttribute#onChange} and
+   *    [onAnimationEnd]{@link TabsAttribute#onAnimationEnd} events requires special explanation:
+   *    if a second custom animation is triggered while the first custom animation is still in progress,
+   *    the **onChange** and **onAnimationEnd** events of the first custom animation are triggered
+   *    when the second custom animation starts.
+   * 7. When the custom animation is used, the layout mode of the pages participating in the animation is
+   *    changed to [Stack]{@link ./stack} layout. If the developer does not proactively set the
+   *    [zIndex]{@link CommonMethod#zIndex} attribute of the related pages, all pages have the same **zIndex** value,
+   *    and the rendering hierarchy of the pages is determined by their order in the component tree (that is,
+   *    the order of the page index values). Therefore, the developer needs to proactively modify the **zIndex**
+   *    attribute of the pages to control the rendering hierarchy.
    * 8. This attribute cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * > **NOTE**
    * >
-   * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
+   * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
-   * @param { function } delegate - Callback invoked when the custom tab transition animation starts. [since 11 - 17]
-   * @param { TabsCustomContentTransitionCallback } delegate - Callback invoked when the custom tab transition animation
-   *     starts. [since 18]
+   * @param { function } delegate - Callback invoked when the custom **Tabs** page switching animation
+   *     starts. [since 11 - 17]
+   * @param { TabsCustomContentTransitionCallback } delegate - Callback invoked when the custom **Tabs** page switching
+   *     animation starts. [since 18]
    * @returns { TabsAttribute } The attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1880,13 +1949,14 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   customContentTransition(delegate: TabsCustomContentTransitionCallback): TabsAttribute;
 
   /**
-   * Sets the background blur style of the tab bar.
+   * Sets the background blur material of the tab bar. This is applicable to scenarios where a blur background effect
+   * needs to be added to the tab bar.
    *
    * > **NOTE**
    * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 12.
    *
-   * @param { BlurStyle } value - Background blur style of the tab bar.<br>Default value: **BlurStyle.NONE**
+   * @param { BlurStyle } value - Background blur material of the tab bar.<br />Default value: **BlurStyle.NONE**
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1899,7 +1969,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   /**
    * Sets the mode for flipping pages using the mouse wheel.
    *
-   * @param { Optional<PageFlipMode> } mode - Mode for flipping pages using the mouse wheel.<br>Default value:
+   * @param { Optional<PageFlipMode> } mode - Mode for flipping pages using the mouse wheel.<br/>Default value:
    *     **PageFlipMode.CONTINUOUS**
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1911,12 +1981,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   pageFlipMode(mode: Optional<PageFlipMode>): TabsAttribute;
 
   /**
-   * Defines the blur style to apply between the background and content of a tab bar. It encapsulates various blur
-   * radius, mask color, mask opacity, saturation, and brightness values through enum values.
+   * Sets the background blur capability of the tab bar, encapsulating different blur radii, mask colors, mask opacity,
+   * saturation, and brightness through enum values.
    *
-   * @param { BlurStyle } style - Settings of the background blur style, including the blur radius, mask color, mask
-   *     opacity, saturation, and brightness.
-   * @param { BackgroundBlurStyleOptions } options - Background blur options.
+   * @param { BlurStyle } style - Background blur style. The blur style encapsulates five parameters: blur radius, mask
+   *     color, mask opacity, saturation, and brightness.
+   * @param { BackgroundBlurStyleOptions } options - Background blur options, used to customize the blur effect.
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1927,10 +1997,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barBackgroundBlurStyle(style: BlurStyle, options: BackgroundBlurStyleOptions): TabsAttribute;
 
   /**
-   * Sets the background effect of the tab bar, including the blur radius, brightness, saturation, and color.
+   * Sets the background attributes of the tab bar, including the background blur radius, brightness, saturation, and
+   * color. This is applicable to scenarios where fine-grained control over the tab bar background visual effect is
+   * required.
    *
-   * @param { BackgroundEffectOptions } options - Background effect options, including the blur radius, brightness,
-   *     saturation, and color.
+   * @param { BackgroundEffectOptions } options - Sets the background attributes of the tab bar, including the blur
+   *     radius, brightness, saturation, and color.
    * @returns { TabsAttribute } the attribute of the tabs
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1941,12 +2013,15 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barBackgroundEffect(options: BackgroundEffectOptions): TabsAttribute;
 
   /**
-   * Sets the maximum number of child components to cache and the caching mode. If this attribute is not set, all child
-   * components are cached by default and are not released after being cached.
+   * Sets the maximum number of cached child components and the cache mode. If this attribute is not set, all child
+   * components are cached by default and are not released after caching. You are advised to set the value of **count**
+   * based on the number of tabs and the complexity of the child component content.
    *
-   * @param { number } count - Maximum number of child components to cache. If the value is out of the range, the
-   *     unnecessary child components are automatically released.<br>Value range: [0, +∞)
-   * @param { TabsCacheMode } mode - Caching mode for child components.<br>Default value:
+   * @param { number } count - Maximum number of cached child components.<br/>Value range:
+   *     [0, +∞). If the value is set to a number less than 0, the child components are not subject to cache management.
+   *     When the number of cached child components exceeds this value, the child components that are no longer
+   *     needed are automatically released.
+   * @param { TabsCacheMode } mode - Cache mode of the child components.<br/>Default value:
    *     **TabsCacheMode.CACHE_BOTH_SIDE**
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1958,28 +2033,27 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   cachedMaxCount(count: number, mode: TabsCacheMode): TabsAttribute;
 
   /**
-   * Triggered when a new page is about to be displayed.
+   * Customizes the capability of intercepting **Tabs** page switching. This callback is triggered when a new page is
+   * about to be displayed.
    *
-   * This event is triggered when any of the following occurs:
+   * This event is triggered when any of the following conditions is met:
    *
-   * 1. When the user swipes through the **TabContent** to switch to a new page.
-   *
-   * 2. When **TabsController.changeIndex** is called to switch to a new page.
-   *
-   * 3. When the **index** attribute is changed to switch to a new page.
-   *
-   * 4. When the user taps a tab on the tab bar to switch to a new page.
-   *
-   * 5. When the user presses the left or
-   *     right arrow key on the keyboard to switch to a new page while the tab bar has focus.
+   * 1. A new page is switched to by swiping the **TabContent**.
+   * 2. Triggered when a new page is switched to through the
+   *    **TabsController**.[changeIndex]{@link TabsController#changeIndex} API.
+   * 3. Triggered when a new page is switched to by dynamically changing the **index** attribute value.
+   * 4. Triggered when a new page is switched to by tapping a tab bar tab.
+   * 5. Triggered when a new page is switched to through the left and right arrow keys on
+   *    the keyboard after a tab bar tab gains focus.
    *
    * > **NOTE**
    * >
-   * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
+   * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
-   * @param { function } handler - Callback triggered when a new page is about to be displayed. [since 12 - 17]
-   * @param { OnTabsContentWillChangeCallback } handler - Callback triggered when a new page is about to be
-   *     displayed. [since 18]
+   * @param { function } handler - Callback for customizing the **Tabs** page switching interception capability,
+   *     triggered when a new page is about to be displayed. [since 12 - 17]
+   * @param { OnTabsContentWillChangeCallback } handler - Callback for customizing the **Tabs** page switching
+   *     interception capability, triggered when a new page is about to be displayed. [since 18]
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2008,15 +2082,12 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   onContentDidScroll(handler: OnTabsContentDidScrollCallback | undefined): TabsAttribute;
 
   /**
-   * Sets the nested scrolling mode of the **Tabs** component and its parent component. If this API is not called, the
-   * default nested scrolling mode is [SELF_ONLY]{@link TabsNestedScrollMode}.
+   * Sets the nested scrolling mode between the **Tabs** component and its parent component. If not set, the default
+   * nested scrolling mode is [SELF_ONLY]{@link TabsNestedScrollMode}.
    *
-   * **Model constraint**: This API can be used only in the stage model.
-   *
-   * @param { TabsNestedScrollMode | undefined } value - Nested scrolling mode of the **Tabs** component and its parent
-   *     container.<br>When this parameter is set to **undefined**, the scrolling is contained within the **Tabs**
-   *     component, and no scroll chaining occurs, that is, the parent component does not scroll when the component
-   *     scrolling reaches the boundary.
+   * @param { TabsNestedScrollMode | undefined } value - Nested scrolling mode between the **Tabs** component and its
+   *     parent component.<br/>When set to undefined, the **Tabs** component scrolls on its own and does not interact
+   *     with the parent component.
    * @returns { TabsAttribute } -the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2027,9 +2098,17 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   nestedScroll(value: TabsNestedScrollMode | undefined): TabsAttribute;
 
   /**
-   * Enable floating style for bar.
+   * Sets the floating style of the tab bar.
    *
-   * @param { Optional<FloatingTabBarStyle> } style - floating style for bar.
+   * > **NOTE**
+   * >
+   * > The floating style allows the tab bar to be displayed in a floating manner at the bottom of the **Tabs**. This
+   * > API takes effect only when [barOverlap]{@link TabsAttribute#barOverlap(value: boolean)} is **true**,
+   * > [vertical]{@link TabsAttribute#vertical} is **false**, and [barPosition]{@link TabsAttribute#barPosition} is
+   * > **BarPosition.End**.
+   *
+   * @param { Optional<FloatingTabBarStyle> } style - Floating style configuration of the tab bar.<br/>When set to
+   *     **undefined**, the floating style is canceled and the default style is restored.
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2058,8 +2137,8 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * The sidebar tab bar position is not affected by the **vertical** attribute.
    * It is always on the start or end side of the Tabs container, regardless of the **vertical** setting.
    *
-   * @param { Optional<BarPosition> } position - Position of the sidebar tab bar.
-   *     <br>Default value: **BarPosition.Start**.
+   * @param { Optional<BarPosition> } position - Position of the sidebar tab bar.Start**.
+   *     <br>Default value: **BarPosition.
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2134,7 +2213,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarSelectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
- 
+
   /**
    * Sets the selected color of the tab text in sidebar mode.
    *
@@ -2147,7 +2226,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarSelectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
- 
+
   /**
    * Sets the unselected color of the tab icon in sidebar mode.
    *
@@ -2160,7 +2239,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarUnselectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
- 
+
   /**
    * Sets the unselected color of the tab text in sidebar mode.
    *
@@ -2173,7 +2252,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarUnselectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
- 
+
   /**
    * Sets the selected color of the tab board in sidebar mode.
    *
@@ -2262,6 +2341,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * This attribute takes effect only when the tab bar is displayed as a sidebar.
    *
    * @param { Optional<ResourceColor> } value - Background color of the sidebar tab bar.
+   *     <br>Default value: **Color.Transparent**.
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2345,7 +2425,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
 }
 
 /**
- * Provides the information about the custom tab switching animation.
+ * Defines the information about the custom switching animation of **Tabs**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2355,18 +2435,17 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
  * @since 11 dynamic
  */
 declare interface TabContentAnimatedTransition {
-
   /**
-   * Timeout for the custom tab switching animation. The timer starts when the switching begins. If this timeframe
-   * passes without you calling the **finishTransition** API in
-   * [TabContentTransitionProxy]{@link TabContentTransitionProxy}, the component will assume that the custom animation
-   * has ended and will proceed directly with subsequent operations.
+   * Timeout duration of the custom switching animation. If the developer has not called the **finishTransition** API of
+   * [TabContentTransitionProxy]{@link TabContentTransitionProxy} to notify the **Tabs** component that the custom
+   * animation has ended after this duration elapses, the component considers the custom animation ended and directly
+   * performs subsequent operations.
    *
    * Default value: **1000**
    *
    * Unit: ms
    *
-   * Value range: [0, +∞)
+   * Value range: [0, +∞). If a value less than 0 is set, the default value is used.
    *
    * @default 1000 ms
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2379,7 +2458,7 @@ declare interface TabContentAnimatedTransition {
   timeout?: number;
 
   /**
-   * Content of the custom tab switching animation.
+   * Specific content of the custom switching animation.
    *
    * @type { function } [since 11 - 17]
    * @type { Callback<TabContentTransitionProxy> } [since 18]
@@ -2395,9 +2474,9 @@ declare interface TabContentAnimatedTransition {
 
 /**
  * Implements the proxy object returned during the execution of the custom switching animation of the **Tabs**
- * component. You can use this object to obtain the start and target pages for the custom tab switching animation. In
- * addition, you can call the **finishTransition** API of this object to notify the **Tabs** component of the ending of
- * the custom animation.
+ * component. You can use this object to obtain the information about the start and target pages of the custom
+ * animation. You can also call the **finishTransition** API of this object to notify the **Tabs** component that the
+ * custom animation has finished playing.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2407,9 +2486,8 @@ declare interface TabContentAnimatedTransition {
  * @since 11 dynamic
  */
 declare interface TabContentTransitionProxy {
-
   /**
-   * Zero-based index of the source page in the custom animation.
+   * Index of the start page of the custom animation. The index starts from 0.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2421,7 +2499,7 @@ declare interface TabContentTransitionProxy {
   from: number;
 
   /**
-   * Zero-based index of the target page in the custom animation.
+   * Index of the target page of the custom animation. The index starts from 0.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2433,7 +2511,7 @@ declare interface TabContentTransitionProxy {
   to: number;
 
   /**
-   * Notifies the **Tabs** component that the custom animation has finished playing.
+   * Notifies the **Tabs** component that the custom animation of this page has ended.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2446,40 +2524,38 @@ declare interface TabContentTransitionProxy {
 }
 
 /**
- * The **Tabs** component is a container component that allows users to switch between content views through tabs. Each
- * tab page corresponds to a content view.
+ * A container component that switches between content views via tabs, with each tab corresponding to a content view. It
+ * is suitable for scenarios that require quick switching between different content views, such as the bottom navigation
+ * bar of an app, top tab switching, and sidebar navigation. Using the **Tabs** component simplifies the implementation
+ * of multi-view navigation and improves user switching efficiency.
  *
  * > **NOTE**
  * >
- * > -
- * >
- * > - Since API version 11, this component supports the safe area avoidance feature. The default value of the
- * > [expandSafeArea]{}
- * > **expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])**. You can override the default behavior by
- * > rewriting this attribute. For versions earlier than API version 11, you need to manually implement safe area
- * > avoidance together with the **expandSafeArea** attribute.
+ * > - Since API version 11, this component supports the safe area avoidance feature. The default value of its
+ * > [expandSafeArea]{@link CommonMethod#expandSafeArea} attribute is expandSafeArea([SafeAreaType.SYSTEM],
+ * > [SafeAreaEdge.BOTTOM]). Developers can override this attribute to change the default behavior. For versions earlier
+ * > than API version 11, the **expandSafeArea** attribute must be used to manually implement safe area avoidance.
  *
  * ###### Child Components
  *
- * Only the child component [TabContent]{@link tab_content} and rendering control types
+ * Only the child component [TabContent]{@link ./tab_content} and the rendering control types
  * [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) and
- * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md) are supported. You are advised not to
- * use custom components as child components. If **if/else** or **ForEach** is used, only **TabContent** can be used as
- * the child component. You are advised not to use custom components as child components.
+ * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md) are supported. Custom components are not
+ * recommended as child components. In addition, under **if/else** and **ForEach**, only **TabContent** is supported as
+ * the child component, and custom components are not recommended as child components.
  *
  * > **NOTE**
  * >
- * > If the child component has the **visibility** attribute set to **None** or **Hidden**, it is hidden but still takes
- * > up space in the layout.
+ * > When the universal attribute [visibility]{@link CommonMethod#visibility} of a **Tabs** child component is set to
+ * > None or Hidden, the corresponding child component is not displayed but still occupies space in the viewport.
  * >
- * > When a displayed **Tabs** child component **TabContent** is hidden, it is not destroyed. For details about how to
- * > implement lazy loading and release on the page, see
+ * > A displayed **Tabs** child component **TabContent** is not destroyed when it is subsequently hidden. If page lazy
+ * > loading and release are required, see
  * > [Example 13](docroot://reference/apis-arkui/arkui-ts/ts-container-tabs.md#example-13-implementing-lazy-loading-and-resource-release-of-pages).
  * >
- * >
- * > If [height]{@link CommonMethod#height(value: Length)} is set to **auto** for **Tabs**, the tab height can be
- * > automatically adjusted based on that of the child component. When [width]{@link CommonMethod#width(value: Length)}
- * > is set to **auto**, the tab width can be automatically adjusted based on that of the child component.
+ * > When [height]{@link CommonMethod#height(value: Length)} of **Tabs** is set to auto, the height adapts to the child
+ * > component height. When [width]{@link CommonMethod#width(value: Length)} is set to auto, the width adapts to the
+ * > child component width.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

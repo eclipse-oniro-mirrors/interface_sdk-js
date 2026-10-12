@@ -125,8 +125,40 @@ declare namespace formAgent {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   function getAvailableFormHostServices(): Promise<Array<formInfo.PeerFormHostServiceInfo>>;
+
+  /**
+   * 请求发布一张卡片到远端设备的卡片使用方服务。使用Promise异步回调。
+   *
+   * @permission ohos.permission.AGENT_REQUIRE_FORM
+   * @param { formInfo.PeerFormHostServiceInfo } peerServiceInfo - 远端卡片使用方服务信息。
+   * @param { Want } want - 发布请求，需包含以下字段。
+   *     <br>bundleName: 目标卡片所属应用的bundleName
+   *     <br>abilityName: 目标卡片所属应用的Ability
+   *     <br>parameters:
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片的模块名称
+   * @param { formBindingData.FormBindingData } [formBindingData] - 用于更新的卡片数据。
+   * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise对象，返回跨设备发布卡片的结果。
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501020 - Remote form service is unavailable.
+   * @throws { BusinessError } 16501021 - The peer form application is not installed or the version is too old.
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed.
+   * @throws { BusinessError } 16501017 - There is no space to publish the form.
+   * @throws { BusinessError } 16501018 - This form does not support publishing.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function requestPublishFormCrossDevice(peerServiceInfo: formInfo.PeerFormHostServiceInfo, want: Want,
+    formBindingData?: formBindingData.FormBindingData): Promise<formInfo.PublishFormCrossDeviceResult>;
 }
 export default formAgent;

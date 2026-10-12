@@ -1140,8 +1140,8 @@ export declare interface AccessibilityElement {
    */
   error?: string;
   /**
-   * Whether the element can gain focus (here it refers to accessibility focus, which is different from input focus). 
-   * The value **true** indicates that the element can gain focus, and **false** indicates the opposite.
+   * Whether the element is focusable. The value **true** indicates that the element is focusable, and **false** 
+   * indicates the opposite.
    * 
    * Default value: **false**.
    *
@@ -1219,8 +1219,8 @@ export declare interface AccessibilityElement {
    */
   isHint?: boolean;
   /**
-   * Whether the element has gained focus (here it refers to accessibility focus, which is different from input focus). 
-   * The value **true** indicates that the element has gained focus, and **false** indicates the opposite.
+   * Whether the element is focused. The value **true** indicates that the element is focused, and **false** indicates 
+   * the opposite.
    * 
    * Default value: **false**.
    *

@@ -450,7 +450,7 @@ declare namespace pointer {
     MIDDLE_BTN_EAST_WEST = 44,
 
     /**
-     * 后台运行中动画光标(拓展1)
+     * 后台运行中动画光标（拓展1）
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -459,7 +459,7 @@ declare namespace pointer {
     RUNNING_LEFT = 45,
 
     /**
-     * 后台运行中动画光标(拓展2)
+     * 后台运行中动画光标（拓展2）
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -486,7 +486,7 @@ declare namespace pointer {
     SCREENRECORDER_CURSOR = 48,
 
     /**
-     * 悬浮光标。手写笔进入空鼠模式时使用该光标，无法直接设置 。<br>空鼠模式支持通过手写笔在空中转动来控制屏幕上虚拟光标的移动，并借助笔身按键实现上下翻页功能，用于演示PPT、隔空操作等场景。
+     * 悬浮光标。手写笔进入空鼠模式时使用该光标，无法直接设置。<br>空鼠模式支持通过手写笔在空中转动来控制屏幕上虚拟光标的移动，并借助笔身按键实现上下翻页功能，用于演示PPT、隔空操作等场景。
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -495,7 +495,7 @@ declare namespace pointer {
     LASER_CURSOR = 49,
 
     /**
-     * 点击光标。手写笔进入空鼠模式时使用该光标，无法直接设置 。<br>空鼠模式支持通过手写笔在空中转动来控制屏幕上虚拟光标的移动，并借助笔身按键实现上下翻页功能，用于演示PPT、隔空操作等场景。
+     * 点击光标。手写笔进入空鼠模式时使用该光标，无法直接设置。<br>空鼠模式支持通过手写笔在空中转动来控制屏幕上虚拟光标的移动，并借助笔身按键实现上下翻页功能，用于演示PPT、隔空操作等场景。
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -504,7 +504,7 @@ declare namespace pointer {
     LASER_CURSOR_DOT = 50,
 
     /**
-     * 激光笔光标。手写笔进入空鼠模式时使用该光标，无法直接设置 。<br>空鼠模式支持通过手写笔在空中转动来控制屏幕上虚拟光标的移动，并借助笔身按键实现上下翻页功能，用于演示PPT、隔空操作等场景。
+     * 激光笔光标。手写笔进入空鼠模式时使用该光标，无法直接设置。<br>空鼠模式支持通过手写笔在空中转动来控制屏幕上虚拟光标的移动，并借助笔身按键实现上下翻页功能，用于演示PPT、隔空操作等场景。
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -516,6 +516,8 @@ declare namespace pointer {
      * 自定义光标，开发者可使用
      * [setCustomCursor]{@link pointer.setCustomCursor(windowId: int, cursor: CustomCursor, config: CursorConfig)}设置自定义光
      * 标，不支持使用[setPointerStyle]{@link pointer.setPointerStyle(windowId: int, pointerStyle: PointerStyle)}直接设置。
+     * 自定义光标样式，通过接口设置。该参数用于getPointerStyle在特定场景（在设置自定义光标样式的窗口上获取样式）下返回数据，不能作为
+     * setCustomCursor、setPointerStyle接口入参使用。
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -668,7 +670,8 @@ declare namespace pointer {
    *
    * @param { int } speed - 鼠标移动速度，取值范围[1, 20]，默认为10。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置鼠标移动速度成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -683,7 +686,8 @@ declare namespace pointer {
    *
    * @param { int } speed - 鼠标移动速度，取值范围[1, 20]，默认为10。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -697,7 +701,7 @@ declare namespace pointer {
    * 使用同步方式设置鼠标移动速度。
    *
    * @param { int } speed - 鼠标移动速度，取值范围[1, 20]，默认为10。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -711,7 +715,8 @@ declare namespace pointer {
    * 获取鼠标移动速度，使用callback异步回调。
    *
    * @param { AsyncCallback<int> } callback - 回调函数。当获取鼠标移动速度成功，err为undefined，number为鼠标移动速度，取值范围[1, 20]；否则为错误对象。
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -725,7 +730,8 @@ declare namespace pointer {
    * 获取当前鼠标移动速度，使用Promise异步回调。
    *
    * @returns { Promise<int> } Promise对象，返回鼠标移动速度。
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 9 dynamic
@@ -736,8 +742,8 @@ declare namespace pointer {
   /**
    * 使用同步方式获取当前鼠标移动速度。
    *
-   * @returns { int } 返回鼠标移动速度，范围[1, 20]。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { int } 返回鼠标移动速度，取值范围[1, 20]。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -784,7 +790,7 @@ declare namespace pointer {
    * [setCursor]{@link @ohos.arkui.UIContext:CursorController#setCursor}。
    *
    * @param { int } windowId - 窗口ID。取值范围为大于等于0的整数。<br>窗口ID合法并且对应窗口存在时，可以设置窗口的鼠标光标样式。<br>窗口ID合法但窗口不存在时，也可以设置鼠标光标样式。<br>设置
-   * 结果可通过[getPointerStyleSync]{@link pointer.getPointerStyleSync}获取。
+   * 结果可通过[getPointerStyleSync]{@link pointer.getPointerStyleSync(windowId: int)}获取。
    * @param { PointerStyle } pointerStyle - 鼠标样式。不能传入DEVELOPER_DEFINED_ICON作为参数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
@@ -829,7 +835,8 @@ declare namespace pointer {
    * 查询指定窗口的鼠标样式类型，如向东箭头、向西箭头、向南箭头、向北箭头等。此接口仅支持获取本应用进程内窗口的鼠标样式类型。
    *
    * @param { int } windowId - 窗口ID。取值范围为大于等于-1的整数，取值为-1时表示全局窗口。<br>窗口ID合法并且对应窗口存在时，返回窗口的鼠标光标样式。<br>窗口ID合法但窗口不存在时，默认返回全局
-   * 鼠标光标样式。<br>如果通过[setPointerStyleSync]{@link pointer.setPointerStyleSync}接口为不存在的窗口设置了鼠标光标样式，使用本接口可以正常获取到该光标样式。
+   * 鼠标光标样式。<br>如果通过[setPointerStyleSync]{@link pointer.setPointerStyleSync(windowId: int, pointerStyle: PointerStyle)}
+   * 接口为不存在的窗口设置了鼠标光标样式，使用本接口可以正常获取到该光标样式。
    * @returns { PointerStyle } 返回鼠标样式类型。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
@@ -846,7 +853,9 @@ declare namespace pointer {
    * @param { AsyncCallback<void> } callback - 回调函数。当设置鼠标光标显示状态成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported. [since 18]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 18]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -860,7 +869,9 @@ declare namespace pointer {
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported. [since 18]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 18]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -914,14 +925,14 @@ declare namespace pointer {
 
   /**
    * 设置鼠标光标颜色，使用callback异步回调。
-   * 
+   *
    * > **说明**：
    * >
    * > 设置和调试时，需连接外部设备，如鼠标、蓝牙等。
    *
    * @param { int } color - 鼠标光标颜色，默认为黑色：0x000000。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -933,14 +944,14 @@ declare namespace pointer {
 
   /**
    * 设置鼠标光标颜色，使用Promise异步回调。
-   * 
+   *
    * > **说明**：
    * >
    * > 设置和调试时，需连接外部设备，如鼠标、蓝牙等。
    *
    * @param { int } color - 鼠标光标颜色，默认为黑色：0x000000。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -952,13 +963,13 @@ declare namespace pointer {
 
   /**
    * 设置鼠标光标颜色，使用同步方式进行设置。
-   * 
+   *
    * > **说明**：
    * >
    * > 设置和调试时，需连接外部设备，如鼠标、蓝牙等。
    *
    * @param { int } color - 鼠标光标颜色，默认为黑色：0x000000。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -972,7 +983,7 @@ declare namespace pointer {
    * 获取鼠标光标颜色，使用callback异步回调。
    *
    * @param { AsyncCallback<int> } callback - 回调函数。当获取鼠标光标颜色成功，err为undefined，number是获取的鼠标光标颜色；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -986,7 +997,7 @@ declare namespace pointer {
    * 获取当前鼠标光标颜色，使用Promise异步回调。
    *
    * @returns { Promise<int> } Promise对象，返回鼠标光标颜色。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -998,7 +1009,7 @@ declare namespace pointer {
    * 获取鼠标光标颜色，使用同步方式返回结果。
    *
    * @returns { int } 鼠标光标颜色。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1011,7 +1022,7 @@ declare namespace pointer {
    *
    * @param { int } size - 鼠标光标大小，范围为[1, 7]，默认为1。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1026,7 +1037,7 @@ declare namespace pointer {
    *
    * @param { int } size - 鼠标光标大小，范围为[1, 7]，默认为1。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1040,7 +1051,7 @@ declare namespace pointer {
    * 设置鼠标光标大小，使用同步方式进行设置。
    *
    * @param { int } size - 鼠标光标大小，范围为[1, 7]，默认为1。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1054,7 +1065,7 @@ declare namespace pointer {
    * 获取鼠标光标大小，使用callback异步回调。
    *
    * @param { AsyncCallback<int> } callback - 回调函数。当获取鼠标光标大小成功，err为undefined，number是获取的鼠标光标大小，范围为[1, 7]；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1068,7 +1079,7 @@ declare namespace pointer {
    * 获取当前鼠标光标大小，使用Promise异步回调。
    *
    * @returns { Promise<int> } Promise对象，返回鼠标光标大小，范围为[1, 7]。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1080,7 +1091,7 @@ declare namespace pointer {
    * 获取鼠标光标大小，使用同步方式返回结果。
    *
    * @returns { int } 鼠标光标大小，范围为[1, 7]。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1093,7 +1104,7 @@ declare namespace pointer {
    *
    * @param { PrimaryButton } primary - 鼠标主键类型。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置鼠标主键成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1108,7 +1119,7 @@ declare namespace pointer {
    *
    * @param { PrimaryButton } primary - 鼠标主键类型。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1122,7 +1133,7 @@ declare namespace pointer {
    * 获取当前鼠标主键，使用callback异步回调。
    *
    * @param { AsyncCallback<PrimaryButton> } callback - 回调函数。当获取当前鼠标主键成功，err为undefined，PrimaryButton为获取到的键值；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1136,7 +1147,7 @@ declare namespace pointer {
    * 获取当前鼠标主键，使用Promise异步回调。
    *
    * @returns { Promise<PrimaryButton> } Promise对象，返回鼠标主键。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1151,7 +1162,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 鼠标悬停滚动开关状态。true代表开关开启，false代表开关关闭，默认开启。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置鼠标悬停滚动开关状态成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1166,7 +1177,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 鼠标悬停滚动开关状态。true代表开关开启，false代表开关关闭，默认开启。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1181,7 +1192,7 @@ declare namespace pointer {
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当获取鼠标悬停滚动开关状态成功，err为undefined，true代表开关开启，false代表开关关闭，默认开启；否则为错误对
    * 象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1195,7 +1206,7 @@ declare namespace pointer {
    * 获取当前鼠标悬停滚动开关状态，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示鼠标悬停滚动开关开启；返回false表示鼠标悬停滚动开关关闭。默认开启。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1208,9 +1219,9 @@ declare namespace pointer {
   /**
    * 设置鼠标滚动行数，使用callback异步回调。
    *
-   * @param { int } rows - 鼠标滚动行数，范围[1, 100]，默认为3。
+   * @param { int } rows - 鼠标滚动行数，取值范围[1, 100]，默认为3。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置鼠标滚动行数成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1223,9 +1234,9 @@ declare namespace pointer {
   /**
    * 设置鼠标滚动行数，使用Promise异步回调。
    *
-   * @param { int } rows - 鼠标滚动行数，范围[1, 100]，默认为3。
+   * @param { int } rows - 鼠标滚动行数，取值范围[1, 100]，默认为3。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1239,7 +1250,7 @@ declare namespace pointer {
    * 获取鼠标滚动行数，使用callback异步回调。
    *
    * @param { AsyncCallback<int> } callback - 回调函数。当获取鼠标滚动行数成功，err为undefined，number为获取到的滚动行数；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1253,7 +1264,7 @@ declare namespace pointer {
    * 获取当前鼠标滚动行数，使用Promise异步回调。
    *
    * @returns { Promise<int> } Promise对象，返回鼠标滚动行数。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1268,7 +1279,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 滚轴开关开启的状态，true代表开启，false代表关闭，默认为开启。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板滚轴开关成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1283,7 +1294,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 滚轴开关开启的状态，true代表开启，false代表关闭，默认为开启。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1298,7 +1309,7 @@ declare namespace pointer {
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板滚轴能力开启状态成功，err为undefined，state是true代表开启，false代表关闭，默认开启；否则为错
    * 误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1312,7 +1323,7 @@ declare namespace pointer {
    * 获取触控板滚轴能力开启状态，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示触控板滚轴能力开启；返回false表示触控板滚轴能力关闭。默认为开启。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1327,7 +1338,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - state为触控板滚轴的方向。<br>true与手指滑动的方向一致，false与手指滑动的方向相反。<br>默认为true。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板滚轴方向成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1342,7 +1353,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - state为触控板滚轴的方向。<br>true与手指滑动的方向一致，false与手指滑动的方向相反。<br>默认为true。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1355,8 +1366,9 @@ declare namespace pointer {
   /**
    * 获取触控板滚轴方向，使用callback异步回调。
    *
-   * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板滚轴方向成功，err为undefined，state是true与手指滑动的方向一致；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error. [since 10 - 26.0.0]
+   * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板滚轴方向成功，err为undefined，state为true表示与手指滑动的方向一致；否则为错误对象。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 10 - 26.0.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1371,7 +1383,8 @@ declare namespace pointer {
    * 获取触控板滚轴方向，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示触控板滚轴方向与手指滑动的方向一致；返回false表示触控板滚轴方向与手指滑动的方向相反。默认为true。
-   * @throws { BusinessError } 202 - SystemAPI permission error. [since 10 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 10 - 26.0.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1387,7 +1400,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 触控板轻触功能开关开启状态。 true代表轻触开启，false代表轻触关闭，默认开启。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板轻触功能开关成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1402,7 +1415,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 触控板轻触功能开关开启状态， true代表轻触开启，false代表轻触关闭，默认开启。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1417,7 +1430,7 @@ declare namespace pointer {
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板轻触功能开启状态成功，err为undefined，state是true代表开启，false代表关闭，默认开启；否则为错
    * 误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1431,7 +1444,7 @@ declare namespace pointer {
    * 获取触控板轻触功能开启状态，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示触控板轻触功能开启；返回false表示触控板轻触功能关闭。默认开启。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1444,9 +1457,9 @@ declare namespace pointer {
   /**
    * 设置触控板光标移动速度，使用callback异步回调。
    *
-   * @param { int } speed - speed代表光标移动速度。speed取值范围[1,11]，默认6。
+   * @param { int } speed - speed代表光标移动速度。speed取值范围[1, 11]，默认6。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板光标移动速度成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1459,9 +1472,9 @@ declare namespace pointer {
   /**
    * 设置触控板光标移动速度，使用Promise异步回调。
    *
-   * @param { int } speed - speed代表光标移动速度。speed取值范围[1,11]，默认6。
+   * @param { int } speed - speed代表光标移动速度。speed取值范围[1, 11]，默认6。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1475,7 +1488,7 @@ declare namespace pointer {
    * 获取触控板光标移动速度，使用callback异步回调。
    *
    * @param { AsyncCallback<int> } callback - 回调函数。当获取触控板光标移动速度成功，err为undefined，number是获取的触控板光标移动速度；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1488,8 +1501,8 @@ declare namespace pointer {
   /**
    * 获取触控板光标移动速度，使用Promise异步回调。
    *
-   * @returns { Promise<int> } Promise对象，返回触控板光标移动速度，speed取值范围[1,11]。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { Promise<int> } Promise对象，返回触控板光标移动速度，speed取值范围[1, 11]。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1504,7 +1517,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 触控板双指捏合功能开关开启状态。 true代表开启，false代表关闭，默认开启。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板双指捏合功能开关成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1519,7 +1532,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 触控板双指捏合功能开关开启状态。 true代表开启，false代表关闭，默认开启。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1534,7 +1547,7 @@ declare namespace pointer {
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板双指捏合功能开启状态成功，err为undefined，state是true代表功能开启，false代表功能关闭，默认开
    * 启；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1548,7 +1561,7 @@ declare namespace pointer {
    * 获取触控板双指捏合功能开启状态，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示触控板双指捏合功能开启；返回false表示触控板双指捏合功能关闭。默认开启。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1563,7 +1576,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 触控板多指滑动开关开启状态。 true代表多指滑动开启，false代表多指滑动关闭，默认开启。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板多指滑动功能开关成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1578,7 +1591,7 @@ declare namespace pointer {
    *
    * @param { boolean } state - 触控板多指滑动功能开关开启状态。 true代表多指滑动开启，false代表多指滑动关闭，默认开启。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1593,7 +1606,7 @@ declare namespace pointer {
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板多指滑动功能开启状态成功，err为undefined，state是true代表多指滑动开启，false代表多指滑动关
    * 闭，默认开启；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1607,7 +1620,7 @@ declare namespace pointer {
    * 获取触控板多指滑动功能开启状态，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示触控板多指滑动功能开启；返回false表示触控板多指滑动功能关闭。默认开启。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1625,7 +1638,7 @@ declare namespace pointer {
    * ：双指轻击或双指按压触控板、或按压触控板右键区域。<br>- TOUCHPAD_TWO_FINGER_TAP_OR_LEFT_BUTTON<sup>20+</sup>：双指轻击或双指按压触控板、或按压触控板左键区域。
    * <br>默认值为TOUCHPAD_TWO_FINGER_TAP_OR_RIGHT_BUTTON。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板右键菜单类型成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1643,7 +1656,7 @@ declare namespace pointer {
    * ：双指轻击或双指按压触控板、或按压触控板右键区域。<br>- TOUCHPAD_TWO_FINGER_TAP_OR_LEFT_BUTTON<sup>20+</sup>：双指轻击或双指按压触控板、或按压触控板左键区域。
    * <br>默认值为TOUCHPAD_TWO_FINGER_TAP_OR_RIGHT_BUTTON。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1657,7 +1670,7 @@ declare namespace pointer {
    * 获取触控板右键菜单类型，使用callback异步回调。
    *
    * @param { AsyncCallback<RightClickType> } callback - 回调函数。当获取触控板右键菜单类型成功，err为undefined，对象是触控板右键菜单类型；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1671,7 +1684,7 @@ declare namespace pointer {
    * 获取触控板右键菜单类型，使用Promise异步回调。
    *
    * @returns { Promise<RightClickType> } Promise对象，返回触控板右键菜单类型。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1741,7 +1754,7 @@ declare namespace pointer {
    *
    * @param { boolean } isOpen - 双击拖拽开关的状态，true代表开启，false代表关闭。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置触控板双击拖拽开关状态成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1756,7 +1769,7 @@ declare namespace pointer {
    *
    * @param { boolean } isOpen - 双击拖拽开关的状态，true代表开启，false代表关闭。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1770,7 +1783,7 @@ declare namespace pointer {
    * 获取触控板双击拖拽开关的开启状态，使用callback异步回调。
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当获取触控板双击拖拽开关的开启状态成功，err为undefined，返回true代表开启，返回false代表关闭；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1784,7 +1797,7 @@ declare namespace pointer {
    * 获取触控板双击拖拽开关的开启状态，使用Promise异步回调。
    *
    * @returns { Promise<boolean> } Promise对象。返回true表示触控板双击拖拽功能开启；返回false表示触控板双击拖拽功能关闭。
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 14 dynamic
@@ -1798,8 +1811,9 @@ declare namespace pointer {
    * @permission ohos.permission.INPUT_DEVICE_CONTROLLER
    * @param { boolean } inverted - inverted为鼠标滚轮滚动的方向。<br>true与鼠标滚轮滚动的手指方向一致，false与鼠标滚轮滚动的手指方向相反。<br>默认为true。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
@@ -1812,8 +1826,9 @@ declare namespace pointer {
    *
    * @permission ohos.permission.INPUT_DEVICE_CONTROLLER
    * @returns { Promise<boolean> } Promise对象。返回true表示鼠标滚轮滚动方向与手指方向一致；返回false表示鼠标滚轮滚动方向与手指方向相反。默认为true。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.

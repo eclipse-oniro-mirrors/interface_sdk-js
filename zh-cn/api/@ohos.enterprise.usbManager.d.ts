@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * 本模块提供USB管理能力。
@@ -269,6 +270,78 @@ declare namespace usbManager {
      * @since 26.0.0
      */
     descriptor?: Descriptor;
+  }
+
+  /**
+   * 表示USB设备标识信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface UsbDevice {
+    /**
+     * 厂商ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    vendorId: number;
+ 
+    /**
+     * 产品ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    productId: number;
+ 
+    /**
+     * 序列号。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    serial: string;
+  }
+ 
+  /**
+   * 挂载策略。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum MountPolicy {
+    /**
+     * 可读可写挂载。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    MOUNT_READ_WRITE = 0,
+ 
+    /**
+     * 只读挂载。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    MOUNT_READ_ONLY = 1,
+ 
+    /**
+     * 未挂载。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    UNMOUNT = 2
   }
 
   /**
@@ -710,6 +783,158 @@ declare namespace usbManager {
    * @since 26.0.0
    */
   function getDisallowedPermissiveUsbDevices(admin: Want | null): Array<PermissiveUsbDeviceType>;
+
+  /**
+   * 获取USB设备的序列号。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { number } busNum - USB设备的总线号。
+   * @param { number } devAddress - USB设备的地址。
+   * @returns { string } USB设备的序列号。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201055 - Failed to obtain the USB serial number.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getUsbSerialNumber(busNum: number, devAddress: number): string;
+ 
+  /**
+   * 增加支持CD/DVD刻录的USB设备列表。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - 要添加的USB设备类型的数组。
+   *     <br>最大长度为10000且不能为空。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit. The maximum length of usbDevices is
+   *     10000. Remove some devices from the list and try again.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function addAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
+ 
+  /**
+   * 将USB设备从支持CD/DVD刻录的USB设备列表中移除。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - 要删除的USB设备类型的数组。
+   *     <br>最大长度为10000且不能为空。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit. The maximum length of usbDevices is
+   *     10000. Remove some devices from the list and try again.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function removeAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
+ 
+  /**
+   * 获取支持CD/DVD刻录的USB设备列表。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { common.QueryPolicy } [queryPolicy] - queryPolicy表示查询的策略。
+   *     <br>默认值：common.QueryPolicy.SELF。
+   * @returns { Array<UsbDevice> } 允许的USB设备数组。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Array<UsbDevice>;
+ 
+  /**
+   * 设置外置存储挂载使能状态。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { boolean } enable - 启用或禁用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setExternalStorageInterceptEnable(enable: boolean): void;
+ 
+  /**
+   * 查询外置存储挂载使能状态。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { common.QueryPolicy } [queryPolicy] - queryPolicy表示查询的策略。
+   *     <br>默认值：common.QueryPolicy.SELF。
+   * @returns { boolean } 启用或禁用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function isExternalStorageInterceptEnable(queryPolicy?: common.QueryPolicy): boolean;
+ 
+  /**
+   * 设置外部存储设备的挂载策略。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { string } volumeId - 卷ID。
+   * @param { MountPolicy } policy - 挂载策略。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201056 - Invalid external storage mount policy.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setExternalStorageDeviceMountPolicy(volumeId: string, policy: MountPolicy): void;
+ 
+  /**
+   * 获取当前设备的卷信息。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @returns { Array<common.ExternalStorageDeviceInfo> } Array of device disk information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getExternalStorageDeviceInfos(): Array<common.ExternalStorageDeviceInfo>;
 }
 
 export default usbManager;

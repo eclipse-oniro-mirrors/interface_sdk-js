@@ -14,7 +14,7 @@
   */
 
 /**
- * @file 记忆链接
+ * @file 元数据绑定
  * @kit MultimodalAwarenessKit
  */
 
@@ -22,7 +22,7 @@ import type image from '@ohos.multimedia.image';
 import type { Callback } from './@ohos.base';
  
 /**
- * 本模块提供记忆链接能力调用，用于向图片加入和解析元数据信息，实现信息传递，包括编码内容传递、订阅事件和取消订阅事件。记忆链接允许系统应用获取第三方应用的编码内容，
+ * 本模块提供元数据绑定能力调用，用于向图片加入和解析元数据信息，实现信息传递，包括编码内容传递、订阅事件和取消订阅事件。元数据绑定允许系统应用获取第三方应用的编码内容，
  * <br>支持实时事件监听和回调机制，适用于需要在图片中存储和传递元数据的场景，可用于防伪、版权保护等场景，为开发者提供灵活的信息嵌入和解析机制。
  *
  * @syscap SystemCapability.MultimodalAwareness.MetadataBinding
@@ -100,7 +100,7 @@ declare namespace metadataBinding {
    *
    * @param { string } type - 事件类型，固定传入'operationSubmitMetadata'，表示系统应用获取编码内容。
    * @param { string } bundleName - 应用包名，用于标识注册订阅事件的第三方应用。在事件发生时，系统将通过此包名识别并通知对应的注册应用。需确保传入的包名为有效的应用包名。
-   * @param { Callback<number> } callback - 回调函数，用于返回事件码。当事件值为1时表示截图事件，目前仅支持截图事件，取值范围：1（截图事件）。注意：回调函数应快速执行，
+   * @param { Callback<int> } callback - 回调函数，用于返回事件码。当事件值为1时表示截图事件，目前仅支持截图事件，取值范围：1（截图事件）。注意：回调函数应快速执行，
    *     <br>避免阻塞UI线程。
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100004 - Subscribe Failed. Possible causes:
@@ -111,14 +111,14 @@ declare namespace metadataBinding {
    * @atomicservice
    * @since 18 dynamic
    */
-  function on(type: 'operationSubmitMetadata', bundleName: string, callback: Callback<number>): void;
+  function on(type: 'operationSubmitMetadata', bundleName: string, callback: Callback<int>): void;
  
   /**
    * 取消订阅系统获取编码内容的事件。需先调用on('operationSubmitMetadata')方法订阅事件，未订阅时调用不产生效果。取消订阅后，应用将不再接收编码内容传递事件。
    *
    * @param { string } type - 事件类型，固定传入'operationSubmitMetadata'，表示系统应用获取编码内容。
    * @param { string } bundleName - 应用包名，标识注册应用的包名，需与订阅时传入的包名一致。
-   * @param { Callback<number> } [callback] - 回调函数，用于返回事件码。需要取消监听的回调函数，需与订阅时传入的回调函数一致。建议在订阅时保存回调函数引用，
+   * @param { Callback<int> } [callback] - 回调函数，用于返回事件码。需要取消监听的回调函数，需与订阅时传入的回调函数一致。建议在订阅时保存回调函数引用，
    *     <br>在取消订阅时使用同一引用。若不填，则取消当前监听该事件的所有回调函数。
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100005 - Unsubscribe Failed. Possible causes:
@@ -128,7 +128,7 @@ declare namespace metadataBinding {
    * @atomicservice
    * @since 18 dynamic
    */
-  function off(type: 'operationSubmitMetadata', bundleName: string, callback?: Callback<number>): void;
+  function off(type: 'operationSubmitMetadata', bundleName: string, callback?: Callback<int>): void;
 
   /**
    * 订阅系统获取编码内容的事件。
