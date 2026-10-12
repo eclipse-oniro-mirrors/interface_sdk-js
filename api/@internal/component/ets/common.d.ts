@@ -1524,7 +1524,13 @@ declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodD
 declare const Builder: MethodDecorator & BuilderMethodDecorator;
 
 /**
- * Defining LocalBuilder MethodDecorator
+ * \@LocalBuilder provides the same functionality as the local \@Builder, and can better determine the parent-child
+ * relationships of components and state management than the local \@Builder. It is applicable to scenarios where the
+ * parent-child relationships of components need to be maintained in custom build functions and state management
+ * synchronization needs to be kept.
+ *
+ * For details about the development guide, see
+ * [\@LocalBuilder Decorator: Maintaining Component Relationships](docroot://ui/state-management/arkts-localBuilder.md).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1819,14 +1825,14 @@ declare interface IMonitorValue<T> {
 }
 
 /**
- * Define SyncMonitor MethodDecorator. Decorator path parameters are the same as defined for Monitor.
- * The function decorator is functionally equivalent to the UIUtils.addMonitor API with isSynchronous enabled.
- * SyncMonitor must contain at least one path item, with multiple path items separated by commas.
- * Path items are either observed attribute names or array item indices.The path in SyncMonitor
- * supports wildcard at the end of a path item, but path items must never appear at the beginning or
- * in the middle of a path. All other paths using one or more wildcard are invalid.
+ * \@SyncMonitor is used for state management V2 to synchronously listen to the changes of state variables, enabling
+ * deep listening for state variables. It is applicable to scenarios where precise listening to deep state changes, such
+ * as changes in nested object properties and in elements in an array, is required. This addresses the issue that
+ * traditional listening methods cannot detect changes in deep-level properties, thereby improving the accuracy of state
+ * management and development efficiency.
  *
- * Functions decorated with @SyncMonitor can be used in @ObservedV2 objects and @ComponentV2.
+ * For details, see
+ * [\@SyncMonitor Decorator: Synchronous Listening for Value Changes of the State Variables](docroot://ui/state-management/arkts-new-syncmonitor.md).
  *
  * @throws { BusinessError } 130001 - The path is invalid.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2071,7 +2077,19 @@ declare const LocalStorageProp: (value: string) => PropertyDecorator;
 declare function getContext(component?: Object): Context;
 
 /**
- * Defining Reusable ClassDecorator.
+ * To reduce the performance overhead caused by repeatedly creating and destroying custom components, you can use
+ * \@Reusable to decorate custom components decorated by \@Component, thereby implementing component reuse.
+ * \@Reusable supports identifying different types of reusable components through **reuseId**, provides the
+ * **aboutToReuse** callback to receive reuse parameters, and supports configuring memory optimization policies. This
+ * decorator is applicable to scenarios that require repeatedly creating and destroying components, such as list
+ * scrolling and frequent switching of component display and hiding.
+ *
+ * See the development guide:
+ * [\@Reusable Decorator: Reusing V1 Components](docroot://ui/state-management/arkts-reusable.md).
+ *
+ * options: Parameters of the reusable custom component, used to configure the memory optimization policy. If this
+ * parameter is not specified, no memory optimization policy is applied. You are advised to configure this parameter
+ * in scenarios where components are frequently created and destroyed to achieve memory optimization.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2115,9 +2133,13 @@ declare const Reusable: ClassDecorator & ((options: ReusableOptions) => ClassDec
 declare const ReusableV2: ClassDecorator & ((options: ReusableOptions) => ClassDecorator);
 
 /**
- * ReuseId callback type. It is used to compute reuseId.
+ * Triggered to obtain the reuse ID.
  *
- * @returns { string }
+ * @returns { string } Reuse ID specified by the developer.
+ *     <br>If no reuse ID is specified or an empty string `''` is used, the custom component name is used by default.
+ *     <br>Before API version 26.0.0, when the callback does not explicitly return a string literal, the actual reuse ID
+ *     is the custom component name and the callback return value does not take effect. Since API version 26.0.0, the
+ *     actual return value of the callback is used as the reuse ID.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -2127,7 +2149,8 @@ declare const ReusableV2: ClassDecorator & ((options: ReusableOptions) => ClassD
 declare type ReuseIdCallback = () => string;
 
 /**
- * Defining the reusable configuration parameters.
+ * Reuse options, used to configure the reuse ID. Components with the same reuse ID are reused with each other,
+ * improving the precision of reuse matching.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2137,7 +2160,16 @@ declare type ReuseIdCallback = () => string;
  */
 declare interface ReuseOptions {
   /**
-   * Defining reuseId function. The default reuseId is the custom component name.
+   * Reuse ID. V2 custom components with the same reuse ID are reused with each other. The default reuse ID is the
+   * custom component name.
+   *
+   * Before API version 26.0.0, when reuseId is not a callback method that explicitly returns a string literal, the
+   * actual reuse ID is the name of the custom component. For example, the actual reuse ID of
+   * `Child().reuse({ reuseId: () => getReuseId() })` is `"Child"`.
+   *
+   * Since API version 26.0.0, a reuseId that does not explicitly return a string literal is supported as the actual
+   * reuse ID. For example, the actual reuse ID of `Child().reuse({ reuseId: () => getReuseId() })` is the return value
+   * of `getReuseId()`.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -25796,11 +25828,18 @@ declare class CommonMethod<T> {
    */
   reuseId(id: string): T;
 
-   /**
-   * Reuse id is used for identify the reuse type of each @ComponentV2 custom component, which can give user control of sub-component recycle and reuse.
+  /**
+   * Sets reuse options for V2 custom components decorated by
+   * **\@ReusableV2**. Components with the same reuse ID are reused with each other, improving the precision of reuse
+   * matching.
    *
-   * @param { ReuseOptions } options - The configuration parameter for reusable custom component.
-   * @returns { T }
+   * > **NOTE**
+   * >
+   * > This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
+   * @param { ReuseOptions } options - Reuse options, used to configure the reuse ID, which is specified by the
+   *     developer.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27754,7 +27793,7 @@ declare type Blender = import('../api/@ohos.graphics.uiEffect').default.Blender;
 declare type ComponentContent<T = Object> = import('../api/arkui/ComponentContent').ComponentContent<T>;
 
 /**
- * Theme.
+ * Defines the **Theme** object.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -27789,10 +27828,25 @@ declare type PromptActionDialogController = import('../api/@ohos.promptAction').
  */
 declare class CustomComponent extends BaseCustomComponent {
   /**
-   * aboutToReuse Method
+   * When a reusable custom component is re-added to the node tree from the reuse cache, the **aboutToReuse** lifecycle
+   * callback is triggered, and the construction parameters of the component are passed to this callback.
    *
-   * @param { object } params - Custom component init params. [since 10 - 19]
-   * @param { Record<string, Object | undefined | null> } params - Custom component init params. [since 20]
+   * > **NOTE**
+   * >
+   * > * Avoid repeatedly assigning values to state variables that are automatically updated, such as **@Link**\/
+   * > **@ObjectLink**\/**@Prop**, in **aboutToReuse()**.
+   * >
+   * > * In sliding scenarios, component reuse usually requires this callback function to update the state variables of
+   * > the component. Therefore, avoid time-consuming operations in this callback function, otherwise frame loss and lag
+   * > may occur. For best practices, see
+   * > [Optimizing Time-Consuming Operations in the Main Thread - Component Reuse Callback](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-time-optimization-of-the-main-thread#section20815336174316).
+   *
+   * @param { object } params - Construction parameters of the custom component. The key is the name of the component
+   *     member variable passed in from outside during reuse, and the value is the corresponding parameter value passed
+   *     in from outside during reuse. [since 10 - 19]
+   * @param { Record<string, Object | undefined | null> } params - Construction parameters of the custom component. The
+   *     key is the name of the component member variable passed in from outside during reuse, and the value is the
+   *     corresponding parameter value passed in from outside during reuse. [since 20]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27845,8 +27899,11 @@ declare class CustomComponent extends BaseCustomComponent {
  */
 declare class CustomComponentV2 extends BaseCustomComponent {
   /**
-   * aboutToReuse Method for @ComponentV2, it is executed when fetching instance of custom component from RecyclePool.
-   * It is different from the @Reusable in CustomComponent, there is no param parameter in this callback.
+   * When a reusable custom component of state management V2 is re-added to the node tree from the reuse cache, the
+   * **aboutToReuse** lifecycle callback is triggered. In frequently invoked scenarios, avoid performing time-consuming
+   * operations in it, otherwise frame loss and lag may occur.
+   *
+   * For details, see [\@ReusableV2](docroot://ui/state-management/arkts-new-reusableV2.md).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27870,7 +27927,8 @@ declare class CustomComponentV2 extends BaseCustomComponent {
  */
 declare class BaseCustomComponent extends CommonAttribute {
   /**
-   * Customize the pop-up content constructor and it is migrated from class CustomComponent.
+   * The **build()** function is used to define the declarative UI description of a custom component. Every custom
+   * component must define a **build()** function.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -27882,10 +27940,24 @@ declare class BaseCustomComponent extends CommonAttribute {
   build(): void;
 
   /**
-   * aboutToAppear Method and it is migrated from class CustomComponent.
+   * Invoked after a new instance of the custom component is created and before its **build()** function is executed.
+   * You can change [state variables](docroot://ui/state-management/arkts-state-management-glossary.md#state-variable)
+   * in the **aboutToAppear** function, and the changes will take effect in the subsequent execution of the **build()**
+   * function. The **aboutToAppear** lifecycle of a custom component that implements
+   * [custom layout]{@link BaseCustomComponent#onMeasureSize} is triggered during the layout process. For details
+   * about how to use it, see
+   * [Custom Component Lifecycle](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md).
    *
-   * The aboutToAppear function is executed after a new instance of the custom component is created, before its build()
-   * function is executed.
+   * > **NOTE**
+   * >
+   * > * In this callback function, it is recommended that you only perform initialization logic for the current node
+   * > component. Avoid high-time-consuming operations that may block the main thread. For high-time-consuming
+   * > operations, consider caching or asynchronous solutions. For best practices, see
+   * > [Optimizing Performance of UI Components: Avoiding Time-Consuming Operations During the Lifecycle of Custom Components](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-ui-component-performance-optimization#section18755173594714).
+   * >
+   * > * In scenarios where components need to be frequently created and destroyed, this callback will be called
+   * > frequently. For best practices, see
+   * > [Optimizing Time-Consuming Operations in the Main Thread: Component Lifecycle Callback](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-time-optimization-of-the-main-thread#section418843713435).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -27897,9 +27969,21 @@ declare class BaseCustomComponent extends CommonAttribute {
   aboutToAppear?(): void;
 
   /**
-   * aboutToDisappear Method and it is migrated from class CustomComponent.
+   * Executed when the custom component is destructed and destroyed. Do not change state variables in the
+   * **aboutToDisappear** function. In particular, modifying the \@Link variable may cause unstable app behavior. For
+   * details about how to use it, see
+   * [Custom Component Lifecycle](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md). It is not
+   * recommended to trigger logic such as [creating a custom dialog box]{@link CustomDialogController#open} after the
+   * **aboutToDisappear** function is called, because this may cause abnormal app behavior due to the loss of component
+   * tree information, for example, [\@Consume](docroot://ui/state-management/arkts-provide-and-consume.md) cannot find
+   * the corresponding [\@Provide](docroot://ui/state-management/arkts-provide-and-consume.md), or the dialog box
+   * displays a blank screen without components.
    *
-   * The aboutToDisappear function executes before a custom component is destroyed.
+   * > **NOTE**
+   * >
+   * > In scenarios where components need to be frequently created and destroyed, this callback will be called
+   * > frequently. For best practices, see
+   * > [Optimizing Time-Consuming Operations in the Main Thread: Component Lifecycle Callback](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-time-optimization-of-the-main-thread#section418843713435).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -27911,7 +27995,11 @@ declare class BaseCustomComponent extends CommonAttribute {
   aboutToDisappear?(): void;
 
   /**
-   * aboutToRecycle Method and it is migrated from class CustomComponent.
+   * Invoked before a reusable component is added to the reuse cache from the node tree. When the component is
+   * subsequently reused from the reuse cache, the
+   * [aboutToReuse](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md#abouttoreuse10) lifecycle
+   * callback is triggered. In frequently invoked scenarios, avoid performing time-consuming operations in it, otherwise
+   * frame loss and lag may occur.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27923,17 +28011,17 @@ declare class BaseCustomComponent extends CommonAttribute {
 
   /**
    * Invoked before the **build()** function of a new instance of the custom component is executed, to obtain the
-   * **Theme** object of the component context. You can change state variables in **onWillApplyTheme**. The change will
-   * take effect when you execute the **build()** function next time.
-   *
-   * > * * Note: * *
-   * > Since API version 18, this API can be used in the status management V2 component.
+   * **Theme** object of the component context. Unlike **aboutToAppear**, **onWillApplyTheme** is used to initialize
+   * state variables based on the **Theme** object, while **aboutToAppear** is used for general initialization logic.
+   * You can change state variables in **onWillApplyTheme**, and the changes will take effect in the subsequent execution
+   * of the **build()** function.
    *
    * > **NOTE**
-   *
+   * >
    * > Since API version 18, this API is supported in the components of V2.
    *
-   * @param { Theme } theme - Current theme object of the custom component.
+   * @param { Theme } theme - **Theme** object currently in effect for the custom component. In the callback, you can use
+   *     this object to obtain resources such as theme colors to update the style variables of the component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27989,11 +28077,12 @@ declare class BaseCustomComponent extends CommonAttribute {
    * @since 10 dynamic
    */
   onMeasureSize?(selfLayoutInfo: GeometryInfo, children: Array<Measurable>, constraint: ConstraintSizeOptions): SizeResult;
-
   /**
    * Invoked each time a router-managed page (a custom component decorated with
    * [\@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)) is displayed, including scenarios
-   * such as route navigation and the application returning to the foreground.
+   * such as route redirection and the app entering the foreground. It is recommended that you avoid performing time-
+   * consuming operations that block the main thread in this callback function, so as not to affect page display
+   * performance.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -28008,7 +28097,7 @@ declare class BaseCustomComponent extends CommonAttribute {
    * such as route navigation and the application moving to the background.
    *
    * > **NOTE**
-   *
+   * >
    * > To ensure smooth UI responsiveness, avoid executing time-consuming operations within the callback function that
    * > may block the main thread. For resource-intensive tasks such as camera resource deallocation, consider
    * > implementing asynchronous solutions. For best practices, see
@@ -28022,14 +28111,12 @@ declare class BaseCustomComponent extends CommonAttribute {
   onPageHide?(): void;
 
   /**
-   * onFormRecycle Method, this is only for ArkTS form, if form was marked recyclable by form user, when system memory
-   * is low,
-   * it will be recycled after calling this method, you should return a string of params that you wish to be saved, it
-   * will be
-   * passed back as params in onFormRecover, in which you can recover the form, it is migrated from class
-   * CustomComponent.
+   * Invoked when the widget is recycled. The widget provider can return the data to be saved by the widget manager. This
+   * data is passed back to the widget provider using the
+   * [onFormRecover](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md#onformrecover11) API when the
+   * widget is recovered.
    *
-   * @returns { string } status data of ArkTS form UI, this data will be passed in when recover form later
+   * @returns { string } Data that the widget provider requests the widget manager to save.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28040,10 +28127,11 @@ declare class BaseCustomComponent extends CommonAttribute {
   onFormRecycle?(): string;
 
   /**
-   * onFormRecover Method, this is only for ArkTS form, it is migrated from class CustomComponent.
+   * Invoked when the widget is recovered. The widget provider can obtain the data saved by the widget manager during
+   * widget recycling. This data can be saved to the widget manager using the
+   * [onFormRecycle](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md#onformrecycle11) callback.
    *
-   * @param { string } statusData - indicate status data of ArkTS form UI, which is acquired by calling onFormRecycle,
-   *     it is used to recover form
+   * @param { string } statusData - Data saved by the widget manager during widget recycling.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28054,12 +28142,17 @@ declare class BaseCustomComponent extends CommonAttribute {
   onFormRecover?(statusData: string): void;
 
   /**
-   * Invoked when a user clicks the back button on a router-managed page (a custom component decorated with
-   * [\@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)). The value **true** means that
-   * the page executes its own return logic, and **false** (default) means that the default return logic is used.
+   * Takes effect on a router-managed page (a custom component decorated with
+   * [\@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)) and is triggered when the user
+   * clicks the back button. The value **true** indicates that the page handles the back logic by itself and does not
+   * perform page routing; the value **false** indicates that the default routing back logic is used. If no return value
+   * is set, it is processed as **false**. Typical use cases include: blocking the back action to prompt the user to
+   * save when the page has unsaved edits, and popping up a custom confirmation dialog box to replace the default system
+   * back behavior.
    *
-   * @returns { void | boolean } Action of the back button. The value **true** means that the page executes its own
-   *     return logic, and **false** (default) means that the default return logic is used.
+   * @returns { void | boolean } Action of the back button. The value **true** indicates that the page handles the back
+   *     logic by itself without page routing, and **false** indicates that the default routing back logic is used. If
+   *     no value is returned, **false** is used.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -28068,8 +28161,7 @@ declare class BaseCustomComponent extends CommonAttribute {
   onBackPress?(): void | boolean;
 
   /**
-   * PageTransition Method and it is migrated from class CustomComponent.
-   * Implement Animation when enter this page or move to other pages.
+   * Defines the transition animations for page entry and page exit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -28156,9 +28248,9 @@ declare class BaseCustomComponent extends CommonAttribute {
   queryRouterPageInfo(): RouterPageInfo | undefined;
 
   /**
-   * The callback method after the custom component is built and it is migrated from class CustomComponent.
-   *
-   * Triggered when the custom component has been built.
+   * Invoked after the **build()** function of the custom component is executed. You can use this callback for actions
+   * that do not directly affect the UI, such as tracking data reporting. For details, see
+   * [Custom Component Lifecycle](docroot://ui/state-management/arkts-page-custom-components-lifecycle.md).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28181,9 +28273,13 @@ declare class BaseCustomComponent extends CommonAttribute {
   getDialogController(): PromptActionDialogController | undefined;
 
   /**
-   * Triggered when the Entry custom component has been pushed with singleton mode.
+   * Invoked when a page in the routing stack is moved to the top of the stack in the singleton mode of
+   * [RouterMode]{@link @ohos.router:router.RouterMode}. This callback takes effect only for custom components decorated
+   * with [\@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry) within the
+   * [router]{@link @ohos.router:router} page stack.
    *
-   * @param { ESObject } param - New parameters pushed with singleton mode.
+   * @param { ESObject } param - Data passed to the target page during routing. It is consistent with the data passed by
+   *     the **params** field in **router.pushUrl()**, and its structure is defined by the developer.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
