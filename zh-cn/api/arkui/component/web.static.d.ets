@@ -1084,6 +1084,54 @@ export declare enum RenderExitReason {
  * @since 23 static
  */
 export type OnContextMenuHideCallback = () => void;
+
+/**
+ * The callback of context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>see the default options parameter.
+ *     <br>Default value: For details.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+/**
+ * Enum type of context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum WebContextMenuItemId {
+    /**
+     * Copy link to highlight menu item.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    MENU_COPY_LINK = 11
+}
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface WebContextMenuOptions {
+    /**
+     * Whether the context menu item is enabled.
+     * Default value: Default value: false.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    enable?: boolean;
+}
 /**
  * Enum type supplied to {@link error} when onSslErrorEventReceive being called.
  *
@@ -2176,6 +2224,34 @@ export declare class WebContextMenuParam {
      * @since 23 static
      */
     getContextMenuMediaType(): ContextMenuDataMediaType;
+
+    /**
+     * Checks whether the currently selected text can be used to generate a Text Fragment link.
+     *
+     * @returns { boolean } Return whether can generate a Text Fragment link.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    shouldOfferLinkToText(): boolean;
+    /**
+     * Returns a Text Fragment link URL that points to the currently highlighted text.
+     *
+     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    getTextFragmentGeneratedLink(): string;
+    /**
+     * Checks whether the current web page has a Text Fragment highlight.
+     *
+     * @returns { boolean } Return whether has a Text Fragment highlight.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    isOverTextFragment(): boolean;
 }
 /**
  * Defines the context menu result, related to {@link WebContextMenuResult} method.
@@ -2279,6 +2355,23 @@ export declare class WebContextMenuResult {
      * @since 24 static
      */
     saveImage(): void;
+
+    /**
+     * Copies a Text Fragment link pointing to the currently highlighted text to the system clipboard.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    copyLinkToTextMenu(): void;
+    /**
+     * Removes all Text Fragment highlights from the current web page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    removeFragments(): void;
 }
 /**
  * Encompassed message information as parameters to {@link onConsole} method.
@@ -5382,6 +5475,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default onContextMenuHide(callback: OnContextMenuHideCallback | undefined): this;
+
+    /**
+     * Triggered when the context menu item status is updated by the kernel asynchronously.
+     *
+     * @param { OnContextMenuUpdateCallback | undefined } callback - The triggered function when the context menu item
+     *     status is updated by the kernel asynchronously.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onContextMenuUpdate(callback: OnContextMenuUpdateCallback | undefined): this;
     /**
      * 设置有声视频的自动播放是否需要用户手动点击，静音视频播放不受该接口管控。当该属性未显式设置时，默认有声视频的自动播放需要用户手动点击。
      *

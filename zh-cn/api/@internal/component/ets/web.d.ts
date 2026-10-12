@@ -1538,6 +1538,55 @@ declare enum RenderExitReason {
 type OnContextMenuHideCallback = () => void;
 
 /**
+ * 上下文菜单项状态更新的回调类型。
+ *
+ * @param { WebContextMenuItemId } menuItemId - 上下文菜单项的ID。
+ * @param { WebContextMenuOptions } [options] - 上下文菜单项的选项。
+ *     <br>默认值：见options的默认值。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+
+/**
+ * 枚举上下文菜单项的ID。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare enum WebContextMenuItemId {
+  /**
+   * 复制指向高亮文本的链接菜单项。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  MENU_COPY_LINK = 11
+}
+
+/**
+ * 定义上下文菜单项的选项。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare interface WebContextMenuOptions {
+  /**
+   * 上下文菜单项是否可用。
+   * 默认值：默认值：false。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  enable?: boolean;
+}
+
+/**
  * onSslErrorEventReceive接口返回的SSL错误的具体原因。
  *
  * @syscap SystemCapability.Web.Webview.Core
@@ -2930,6 +2979,42 @@ declare class WebContextMenuParam {
    * @since 22 dynamic
    */
   getContextMenuMediaType(): ContextMenuDataMediaType;
+
+  /**
+   * 检查当前选中的文本是否可用于生成Text Fragment链接。Text Fragment链接是包含**#:~:text=**片段的URL，用于在打开链接时滚动到并高亮特定文本段落。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口，以决定是否显示"复制指向高亮的链接"菜单项。结果与Chromium的**ShouldOfferLinkToText**行为一致。
+   *
+   * @returns { boolean } **true**表示当前选中文本可用于生成Text Fragment链接；**false**表示不可用。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  shouldOfferLinkToText(): boolean;
+
+  /**
+   * 获取指向当前网页高亮文本的Text Fragment链接URL。返回的URL包含符合W3C Text Fragments规范的**#:~:text=**片段。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用shouldOfferLinkToText()检查当前选中文本是否支持链接生成。若选中文本不支持链接生成，返回空字符串。
+   *
+   * @returns { string } 包含**#:~:text=**片段、符合W3C Text Fragments规范的Text Fragment链接URL。若当前选中文本不支持链接生成，返回空字符串。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  getTextFragmentGeneratedLink(): string;
+
+  /**
+   * 检查当前网页是否存在Text Fragment高亮。使用此接口判断是否应显示"移除高亮"和"重新分享链接"菜单项。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。结果与Chromium的**GetExistingSelectors**行为一致。
+   *
+   * @returns { boolean } **true**表示当前页面存在Text Fragment高亮；**false**表示不存在。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  isOverTextFragment(): boolean;
 }
 
 /**
@@ -3105,6 +3190,36 @@ declare class WebContextMenuResult {
    * @since 24 dynamic
    */
   saveImage(): void;
+
+  /**
+   * 将指向当前高亮文本的Text Fragment链接复制到系统剪贴板。复制的URL包含符合W3C Text Fragments规范的**#:~:text=**片段。剪贴板内容与getTextFragmentGeneratedLink()返回的URL相同。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用shouldOfferLinkToText()检查当前选中文本是否支持链接生成。若选中文本不支持链接生成，此方法不会向剪贴板写入内容。
+   *
+   * > **说明：**
+   * >
+   * > 完成操作后，应调用closeContextMenu()关闭菜单，未调用可能导致菜单资源未正确释放。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  copyLinkToTextMenu(): void;
+
+  /**
+   * 移除当前网页上所有Text Fragment高亮，恢复原始文本样式。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用isOverTextFragment()检查是否存在高亮。若不存在高亮，此方法不做任何操作。
+   *
+   * > **说明：**
+   * >
+   * > 完成操作后，应调用closeContextMenu()关闭菜单，未调用可能导致菜单资源未正确释放。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  removeFragments(): void;
 }
 
 /**
@@ -7245,6 +7360,19 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 11 dynamic
    */
   onContextMenuHide(callback: OnContextMenuHideCallback): WebAttribute;
+
+  /**
+   * 注册回调，在内核异步更新上下文菜单项状态时调用。内核完成异步处理后触发该回调，通知应用更新菜单项的显示状态。
+   *
+   * shouldOfferLinkToText()方法返回同步初始值，此回调提供异步最终值，两者互补。
+   *
+   * @param { OnContextMenuUpdateCallback } callback - 接收菜单项ID和选项的回调函数。
+   * @returns { WebAttribute } 返回WebAttribute对象，支持链式调用。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
   /**
    * 设置有声视频的自动播放是否需要用户手动点击，静音视频播放不受该接口管控。当该属性未显式设置时，默认需要用户手动点击。
