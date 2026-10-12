@@ -4059,8 +4059,10 @@ declare namespace webview {
          * Trim memory by different memory pressure level.
          *
          * @param { PressureLevel } level - The memory pressure level for the ArkWeb.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Parameter string is too long. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Parameter string is too long.
+         *     3. Parameter verification failed.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
