@@ -21,6 +21,7 @@
     "SystemCapability.Security.CryptoFramework.Key",
     "SystemCapability.Security.CryptoFramework.Key.SymKey",
     "SystemCapability.Security.CryptoFramework.Cipher",
-    "SystemCapability.Applications.Settings.Core.Lite"
+    "SystemCapability.Applications.Settings.Core.Lite",
+    "SystemCapability.Sensors.Sensor.Slim"
   ]
 }

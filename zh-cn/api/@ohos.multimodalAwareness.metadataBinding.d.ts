@@ -38,7 +38,7 @@ declare namespace metadataBinding {
    * @param { image.PixelMap } srcImage - 待编码的原始图片，用于嵌入metadata信息。
    * @param { string } metadata - 嵌入的信息。字符串编码格式建议使用UTF-8，长度不应超过128Bytes，且避免包含不可打印字符。
    * @returns { Promise<image.PixelMap> } Promise对象。返回嵌入信息的图片。
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100002 - Encode process fail. Possible causes:
    *     <br>1. Image processing error.
@@ -55,7 +55,7 @@ declare namespace metadataBinding {
    *
    * @param { image.PixelMap } encodedImage - 带有信息的图片，需为通过encodeImage接口处理过的编码图片。
    * @returns { Promise<string> } Promise对象。返回从图片解析出的信息。
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100003 - Decode process fail. Possible causes:
    *     <br>1. Image is not an encoded Image.
@@ -72,7 +72,7 @@ declare namespace metadataBinding {
    *
    * @param { string } bundleName - 应用包名，需为已安装应用的包名。
    * @returns { Promise<string> } Promise对象。返回当前所在页面的applink信息。
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @syscap SystemCapability.MultimodalAwareness.MetadataBinding
    * @systemapi

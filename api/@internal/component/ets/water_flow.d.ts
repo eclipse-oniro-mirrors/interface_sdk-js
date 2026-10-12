@@ -563,6 +563,17 @@ interface WaterFlowInterface {
 }
 
 /**
+ * Provides the placeholder description for an item of a scrollable component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
+
+/**
  * In addition to [universal attributes]{@link ./common} and
  * [universal attributes of scrollable components](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#attributes),
  * the following attributes are supported:
@@ -964,6 +975,35 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @since 11 dynamic
    */
   onScrollIndex(event: (first: number, last: number) => void): WaterFlowAttribute;
+
+  /**
+   * Sets a scroll placeholder provider for the **WaterFlow** component. When the framework predicts
+   * that creating the next item within the remaining frame budget would overrun the frame, it first
+   * displays a placeholder for that item and creates the real item across frames on the UI thread.
+   *
+   * The provider returns the placeholder description of an item: **id** refers to a template
+   * registered through [getPlaceholderRegister()]{@link @ohos.arkui.UIContext#getPlaceholderRegister}.register
+   * and **size** is a layout suggestion. If the provider returns **undefined**, or the returned
+   * **id** is missing or not registered, the system default placeholder is used and scrolling is
+   * not interrupted.
+   *
+   * <br>**NOTE**<br>
+   * 1. This attribute is opt-in: if it is not set, the **WaterFlow** component keeps the current
+   * behavior, including the semantics of **syncLoad**.
+   * 2. The placeholder template must be a global, parameterless
+   * **@Builder({ isPlaceholder: true })** function that performs read-only static rendering.
+   * 3. After the real item has been created, it is re-laid out under the normal layout constraints of
+   * the water flow item and replaces the placeholder, keeping the scroll anchor.
+   *
+   * @param { PlaceholderProvider } [provider] - Placeholder provider of the item at the given index.
+   * @returns { WaterFlowAttribute } The attribute of the water flow.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  scrollPlaceholder(provider?: PlaceholderProvider): WaterFlowAttribute;
 }
 
 /**

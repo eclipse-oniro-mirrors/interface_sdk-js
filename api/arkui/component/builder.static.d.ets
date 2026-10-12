@@ -40,7 +40,24 @@ import { Callback } from '@ohos.base';
   AnnotationTargets.LAMBDA,
   AnnotationTargets.INTERFACE_METHOD
 ])
-export declare @interface Builder {}
+export declare @interface Builder {
+  /**
+   * Whether the **@Builder** function is a scroll placeholder template.
+   *
+   * <br>**NOTE**<br>
+   * A scroll placeholder template must be a global, parameterless function that performs read-only
+   * static rendering: it must not access reactive state, register gestures, or register business
+   * callbacks. It is registered through placeholderRegister.register and referenced by the
+   * **scrollPlaceholder** attribute of scrollable components.
+   *
+   * <br>Default value: **false**
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  isPlaceholder: boolean = false;
+}
 
 /**
  * Defines BuilderParam Annotation.

@@ -102,8 +102,10 @@ declare namespace userStatus {
    * @param { 'userAgeGroupDetected' } type - Event type. The value **userAgeGroupDetected** indicates the event of
    *     enabling age group detection.
    * @param { Callback<UserClassification> } callback - Callback used to return the detection result.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -129,8 +131,10 @@ declare namespace userStatus {
    * @param { 'userAgeGroupDetected' } type - Event type. The value **userAgeGroupDetected** indicates the event of
    *     enabling age group detection.
    * @param { Callback<UserClassification> } [callback] - Callback used to return the detection result.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -148,8 +152,10 @@ declare namespace userStatus {
    * Subscribe to age group detection feature.
    *
    * @param { Callback<UserClassification> } callback - Indicates the callback for getting the event data.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -168,8 +174,10 @@ declare namespace userStatus {
    * Unsubscribe to age group detection feature.
    *
    * @param { Callback<UserClassification> } [callback] - Indicates the callback for getting the event data.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -1032,8 +1040,10 @@ declare namespace userStatus {
    * @param { DeviceInfo[] } [deviceInfo] - List of devices to enable user status monitoring.
    * @returns { int } Returns the registered callback ID.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as a invalid Node-API status.
@@ -1057,8 +1067,10 @@ declare namespace userStatus {
    * @param { Callback<UserStatusData> } [callback] - Callback used to return user status data.
    * @returns { int } Returns 0 if the operation succeeds; otherwise, returns a non-zero value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.

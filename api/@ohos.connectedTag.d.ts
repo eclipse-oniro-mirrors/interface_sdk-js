@@ -231,7 +231,7 @@ declare namespace connectedTag {
    * @syscap SystemCapability.Communication.ConnectedTag
    * @since 8 dynamic
    */
-  function on(type: "notify", callback: Callback<number>): void;
+  function on(type: 'notify', callback: Callback<number>): void;
 
   /**
    * Unregisters the NFC field strength state events.
@@ -243,7 +243,7 @@ declare namespace connectedTag {
    * @syscap SystemCapability.Communication.ConnectedTag
    * @since 8 dynamic
    */
-  function off(type: "notify", callback?:Callback<number>): void;
+  function off(type: 'notify', callback?:Callback<number>): void;
 
   /**
    * Enumerates the NFC field strength states.
