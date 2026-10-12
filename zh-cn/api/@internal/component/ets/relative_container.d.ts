@@ -178,7 +178,7 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  LEFT = 0,
+  LEFT,
 
   /**
    * 屏障在其所有[referencedId]{@link BarrierStyle}的最右侧。
@@ -189,7 +189,7 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  RIGHT = 1,
+  RIGHT,
 
   /**
    * 屏障在其所有[referencedId]{@link BarrierStyle}的最上方。
@@ -200,7 +200,7 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  TOP = 2,
+  TOP,
 
   /**
    * 屏障在其所有[referencedId]{@link BarrierStyle}的最下方。
@@ -211,18 +211,11 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  BOTTOM = 3
+  BOTTOM
 }
 
 /**
  * 定义支持镜像模式的屏障线的方向。
- * 
- * | 名称 |  值  | 说明                       |
- * | ------ | -- | ----------------------------- |
- * | START  | 0  |屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的起始侧，LTR模式时为最左侧，RTL模式时为最右侧。|
- * | END    | 1  | 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的结束侧，LTR模式时为最右侧，RTL模式时为最左侧。|
- * | TOP    | 2  | 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的最上方。|
- * | BOTTOM | 3  | 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的最下方。|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

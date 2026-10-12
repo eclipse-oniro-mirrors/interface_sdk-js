@@ -64,8 +64,9 @@ export declare interface EllipseAttribute extends CommonShapeMethod {
 	 * @param { EllipseOptions } [options] - 椭圆绘制尺寸。<br/>异常值undefined和null按照无效值处理，本次设置不生效。
 	 * @returns { EllipseAttribute } 返回EllipseAttribute实例。
 	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+	 * @unpublished
 	 * @stagemodelonly
-	 * @since 26.0.0 staticonly
+	 * @since 26.0.1 staticonly
 	 */
  	default setEllipseOptions(options?: EllipseOptions): this;
     /**
@@ -101,8 +102,9 @@ export declare function Ellipse(
  * @param { CustomBuilderT<EllipseAttribute> } style - 设置组件属性的回调。
  * @returns { EllipseAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

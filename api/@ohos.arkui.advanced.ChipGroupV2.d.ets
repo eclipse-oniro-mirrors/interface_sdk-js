@@ -14,6 +14,17 @@
  */
 
 /**
+ * The **ChipGroupV2** component provides a chip group container that supports single or multiple selection, custom
+ * styles and spacing, and custom suffix content. It is suitable for scenarios such as file or resource content
+ * categorization, tag selection, and filtering, helping you quickly build visually appealing and interactive chip group
+ * UIs.
+ *
+ * This component is implemented based on
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
+ * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1),
+ * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
+ * longer limited to the component level. With state management V2, you can control component data and state more
+ * flexibly, achieving more efficient UI refresh.
  * @file
  * @kit ArkUI
  */
@@ -246,8 +257,6 @@ export declare class ChipGroupV2Item {
      *
      * When the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -265,8 +274,6 @@ export declare class ChipGroupV2Item {
      *
      * When the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -278,8 +285,6 @@ export declare class ChipGroupV2Item {
 
     /**
      * **ChipV2** text.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -298,8 +303,6 @@ export declare class ChipGroupV2Item {
      *
      * When the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -316,8 +319,6 @@ export declare class ChipGroupV2Item {
      * Default value: no suffix symbol icon displayed.
      *
      * When the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -337,8 +338,6 @@ export declare class ChipGroupV2Item {
      * Default value: **false**
      *
      * When the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -362,8 +361,6 @@ export declare class ChipGroupV2Item {
      *
      * When the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -384,8 +381,6 @@ export declare class ChipGroupV2Item {
      * Default value: empty string.
      *
      * When the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -417,8 +412,6 @@ export declare class ChipGroupV2Item {
      *
      * When the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @default auto
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -443,8 +436,7 @@ export declare class ChipGroupV2Item {
 }
 
 /**
- * Defines the array class of the **ChipGroupV2** item, which inherits from Array<
- * [ChipGroupV2Item]{@link ChipGroupV2Item}>.
+ * Defines the array class of the **ChipGroupV2** item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -610,8 +602,6 @@ export declare class ChipGroupV2ItemStyle {
      *
      * If the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -626,8 +616,6 @@ export declare class ChipGroupV2ItemStyle {
      * Default value: **$r('sys.color.ohos_id_color_button_normal')**
      *
      * If the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -644,8 +632,6 @@ export declare class ChipGroupV2ItemStyle {
      * Default value: **$r('sys.color.ohos_id_color_text_primary')**
      *
      * If the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -664,8 +650,6 @@ export declare class ChipGroupV2ItemStyle {
      *
      * If the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -682,8 +666,6 @@ export declare class ChipGroupV2ItemStyle {
      * Default value: **$r('sys.color.ohos_id_color_emphasize')**
      *
      * If the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -702,8 +684,6 @@ export declare class ChipGroupV2ItemStyle {
    * [materialFilter]{@link CommonMethod#materialFilter} effect.
    *
    * Default value: **undefined**, no material style is applied.
-   *
-   * Decorator: **@Trace**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -724,8 +704,6 @@ export declare class ChipGroupV2ItemStyle {
    * [materialFilter]{@link CommonMethod#materialFilter} effect.
    *
    * Default value: **undefined**, no material style is applied.
-   *
-   * Decorator: **@Trace**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -852,8 +830,6 @@ export declare class ChipGroupV2Space {
      *
      * If the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -870,8 +846,6 @@ export declare class ChipGroupV2Space {
      * Unit: vp
      *
      * If the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -890,8 +864,6 @@ export declare class ChipGroupV2Space {
      * Unit: vp
      *
      * If the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1200,8 +1172,6 @@ export declare class ChipGroupV2Padding {
      *
      * If the value is **undefined**, the default value is used.
      *
-     * Decorator: **@Trace**
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -1219,8 +1189,6 @@ export declare class ChipGroupV2Padding {
      * Unit: vp
      *
      * If the value is **undefined**, the default value is used.
-     *
-     * Decorator: **@Trace**
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1309,17 +1277,7 @@ export declare struct ChipGroupV2IconGroupSuffix {
 }
 
 /**
- * The **ChipGroupV2** component provides a chip group container that supports single or multiple selection, custom
- * styles and spacing, and custom suffix content. It is suitable for scenarios such as file or resource content
- * categorization, tag selection, and filtering, helping you quickly build visually appealing and interactive chip group
- * UIs.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1),
- * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
- * longer limited to the component level. With state management V2, you can control component data and state more
- * flexibly, achieving more efficient UI refresh.
+ * Creates a **ChipGroupV2** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

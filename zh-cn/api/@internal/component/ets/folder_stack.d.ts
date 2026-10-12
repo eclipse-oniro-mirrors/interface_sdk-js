@@ -327,7 +327,7 @@ declare interface HoverEventParam {
 declare const FolderStack: FolderStackInterface;
 
 /**
- * Defines FolderStack Component instance.
+ * 定义FolderStack组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

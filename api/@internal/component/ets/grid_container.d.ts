@@ -149,14 +149,6 @@ declare interface GridContainerOptions {
  * numbers of columns and offsets. It is suitable for responsive page layouts, multi-column content display, dashboard
  * layouts, and other scenarios.
  *
- * > **NOTE**
- * >
- * > This component is deprecated since API version 9. You are advised to use the new components
- * > [GridCol]{@link ./grid_col} and [GridRow]{@link ./grid_row} instead.
- * >
- * > This component is supported since API version 7. New APIs added in later versions are marked with superscripts to
- * > indicate their starting version.
- *
  * @interface GridContainerInterface
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7 dynamiconly
@@ -198,14 +190,6 @@ declare class GridContainerAttribute extends ColumnAttribute {}
  * dividing the container width into a specified number of columns, allowing child components to occupy different
  * numbers of columns and offsets. It is suitable for responsive page layouts, multi-column content display, dashboard
  * layouts, and other scenarios.
- *
- * > **NOTE**
- * >
- * > This component is deprecated since API version 9. You are advised to use the new components
- * > [GridCol]{@link ./grid_col} and [GridRow]{@link ./grid_row} instead.
- * >
- * > This component is supported since API version 7. New APIs added in later versions are marked with superscripts to
- * > indicate their starting version.
  *
  * ## Child Components
  *

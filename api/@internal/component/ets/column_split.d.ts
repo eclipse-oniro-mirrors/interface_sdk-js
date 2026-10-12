@@ -106,13 +106,13 @@ interface ColumnSplitDividerStyle {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod} the following attributes are supported.
  * 
  * > **NOTE**
  * >
  * > The default value of [shape clipping]{@link CommonMethod#clip(value: boolean)} of the **ColumnSplit** component is **true**.
  *
- * The [universal events]{@link ./common} are supported.
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

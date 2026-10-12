@@ -14,6 +14,11 @@
  */
 
 /**
+ * ChipGroupV2组件提供操作块群组容器，支持单选或多选、自定义样式和间距、以及尾部自定义内容。该组件适用于文件或资源内容的分类、标签选择、筛选等场景，可帮助开发者快速构建美观且交互丰富的标签组界面。
+ *
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
+ * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
+ * 件层级。借助状态管理（V2），开发者可以更灵活地控制组件的数据和状态，实现更高效的用户界面刷新。
  * @file
  * @kit ArkUI
  */
@@ -43,8 +48,8 @@ import {
 import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
-* ChipGroupV2ItemConfig定义每个ChipV2的非通用属性配置。
-*
+ * ChipGroupV2ItemConfig定义每个ChipV2的非通用属性配置。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -208,7 +213,7 @@ export interface ChipGroupV2ItemConfig {
 
 /**
  * ChipGroupV2Item定义了ChipGroupV2组件中的单个操作块项。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -391,7 +396,7 @@ export declare class ChipGroupV2Item {
 }
 
 /**
- * ChipGroupV2Items定义了ChipGroupV2项的数组类，继承自Array<[ChipGroupV2Item]{@link ChipGroupV2Item}>。
+ * ChipGroupV2Items定义了ChipGroupV2项的数组类。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -416,7 +421,7 @@ export declare class ChipGroupV2Items extends Array<ChipGroupV2Item> {
 
 /**
  * ChipGroupV2ItemStyleConfig定义了ChipV2的共通属性配置。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1191,23 +1196,13 @@ export declare struct ChipGroupV2IconGroupSuffix {
 }
 
 /**
- * ChipGroupV2组件提供操作块群组容器，支持单选或多选、自定义样式和间距、以及尾部自定义内容。该组件适用于文件或资源内容的分类、标签选择、筛选等场景，可帮助开发者快速构建美观且交互丰富的标签组界面。
- *
- * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
- * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
- * 件层级。借助状态管理（V2），开发者可以更灵活地控制组件的数据和状态，实现更高效的用户界面刷新。
+ * 创建ChipGroupV2组件。
  *
  * > **说明：**
  * >
  * > - 如果ChipGroupV2设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
  * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ChipGroupV2本身。
  * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ChipGroupV2设置通用属性和通用事件。
- *
- * ## 导入模块
- *
- * ```ts
- * import { ChipV2Size, ChipGroupV2 } from '@kit.ArkUI';
- * ```
  *
  * ## 子组件
  * 

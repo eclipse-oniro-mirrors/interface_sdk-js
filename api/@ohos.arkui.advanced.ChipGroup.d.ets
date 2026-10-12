@@ -14,6 +14,10 @@
 */
 
 /**
+ * The **ChipGroup** component provides chip group capabilities, supporting single-selection or multi-selection modes,
+ * customizable styles, icons, and spacing, as well as selected state management and event callbacks. It is suitable for
+ * various scenarios such as file categorization, resource filtering, tag selection, and content grouping, helping
+ * developers quickly implement selection functionality while delivering a consistent visual and interactive experience.
  * @file
  * @kit ArkUI
  */
@@ -71,8 +75,6 @@ export interface IconOptions {
 
 /**
  * Defines the configuration options for suffix icons.
- * 
- * Inherits from [IconOptions]{@link IconOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -201,11 +203,11 @@ export interface LabelOptions {
  * > When the **suffixSymbol** parameter is passed in, **allowClose** does not take effect. When the **suffixImageIcon**
  * > parameter is passed in but **suffixSymbol** is not, **allowClose** does not take effect. When neither
  * > **suffixSymbol** nor **suffixImageIcon** is passed in, **allowClose** determines whether the close icon is
- * > displayed. **suffixIcon** is deprecated. Use **suffixImageIcon** instead.
+ * > displayed.
  * >
  * > **suffixSymbol** and **suffixImageIcon** are both suffix icons, and only one of them can be configured for the same
  * > chip item. If both are configured, only the one with the higher priority takes effect (priority: **suffixSymbol** >
- * > **suffixImageIcon**). **suffixIcon** is deprecated. Use **suffixImageIcon** instead.
+ * > **suffixImageIcon**).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -911,15 +913,8 @@ export interface ChipGroupPaddingOptions {
 }
 
 /**
- * The **ChipGroup** component provides chip group capabilities, supporting single-selection or multi-selection modes,
- * customizable styles, icons, and spacing, as well as selected state management and event callbacks. It is suitable for
- * various scenarios such as file categorization, resource filtering, tag selection, and content grouping, helping
- * developers quickly implement selection functionality while delivering a consistent visual and interactive experience.
- *
- * > **NOTE**
- * >
- * > With **SymbolGlyphModifier**, neither modifying the animation type with **symbolEffect** nor setting the effect
- * > strategy with [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy} is supported.
+ * Defines the suffix area icon of a ChipGroup. It is used in the configurable suffix property,
+ * which displays custom content at the far right of the ChipGroup component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -970,10 +965,7 @@ export declare struct IconGroupSuffix {
 }
 
 /**
- * The **ChipGroup** component provides chip group capabilities, supporting single-selection or multi-selection modes,
- * customizable styles, icons, and spacing, as well as selected state management and event callbacks. It is suitable for
- * various scenarios such as file categorization, resource filtering, tag selection, and content grouping, helping
- * developers quickly implement selection functionality while delivering a consistent visual and interactive experience.
+ * Creates a **ChipGroup** component.
  *
  * > **NOTE**
  * >

@@ -115,7 +115,6 @@ interface PathInterface {
    *     size. The default width and height are automatically calculated based on the path content.
    *     <br>The abnormal values **undefined** and **null** are processed as invalid values, and this setting does not
    *     take effect.
-   *     <br>**Note:** Since API version 18, the PathOptions parameter must be used in the stage model. [since 18]
    * @returns { PathAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -134,8 +133,6 @@ interface PathInterface {
    *     size. The default width and height are automatically calculated based on the path content.
    *     <br>Abnormal values **undefined** and **null** are processed as invalid values, and this setting does not
    *     take effect.
-   *     <br>**Note:** Since API version 18, when the **PathOptions** parameter is used, it can be used only in the
-   *     stage model. [since 18]
    * @returns { PathAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -147,7 +144,7 @@ interface PathInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common} and [universal drawing attributes]{@link ./common}, the
+ * In addition to the [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod}, the
  * following attributes are supported:
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
