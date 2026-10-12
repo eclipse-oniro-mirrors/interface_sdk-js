@@ -4288,15 +4288,12 @@ declare interface AnimateParam {
    * >
    * > - **PlayMode.Normal** and **PlayMode.Alternate** are recommended. Under these settings, the first round of the
    * > animation is played forwards. If **PlayMode.Reverse** or **PlayMode.AlternateReverse** is used, the first round
-   * > of
-   * > the animation is played backwards. In this case, the animation jumps to the end state and then starts from 
+   * > of the animation is played backwards. In this case, the animation jumps to the end state and then starts from
    * > there.
    * >
    * > - When using **PlayMode.Alternate** or **PlayMode.AlternateReverse**, make sure the final state of the animation 
-   * > is
-   * > the same as the value of the state variable. In other words, make sure the last round of the animation is 
-   * > played
-   * > forwards. When **PlayMode.Alternate** is used, **iterations** must be set to an odd number. When
+   * > is the same as the value of the state variable. In other words, make sure the last round of the animation is
+   * > played forwards. When **PlayMode.Alternate** is used, **iterations** must be set to an odd number. When
    * > **PlayMode.AlternateReverse** is used, **iterations** must be set to an even number.
    * >
    * > - **PlayMode.Reverse** is not recommended. Under this setting, the animation jumps to the end state at the
@@ -9102,8 +9099,13 @@ declare enum SheetSize {
    * 
    * **Note:**
    * 
-   * 1. FIT_CONTENT means that the half-modal container height adapts to the layout of the root node of the child builder. In this scenario, the height of the root node of the builder cannot use a percentage, because the two cannot depend on each other's layout.
-   * 2. If the half-modal uses the SheetSize.FIT_CONTENT adaptive mode and its type is set to a centered dialog box or a follow-hand dialog box, in API version 22 and earlier, the maximum height is displayed when the height is greater than the maximum height, and the minimum height is displayed when the height is less than the minimum height.
+   * 1. FIT_CONTENT means that the half-modal container height adapts to the layout of the root node of the child
+   * builder. In this scenario, the height of the root node of the builder cannot use a percentage, because the
+   * two cannot depend on each other's layout.
+   * 2. If the half-modal uses the SheetSize.FIT_CONTENT adaptive mode and its type is set to a centered dialog
+   * box or a follow-hand dialog box, in API version 22 and earlier, the maximum height is displayed when the
+   * height is greater than the maximum height, and the minimum height is displayed when the height is less
+   * than the minimum height.
    * 
    * Starting from API version 23, the maximum height is displayed when the height is greater than the maximum height, 
    * and the actual adaptive height takes effect when the height is less than the minimum height.
@@ -13454,13 +13456,22 @@ declare interface SheetOptions extends BindOptions {
    * 
    * **Note:**
    * 
-   * 1. Since API version 14, when a bottom sheet is in landscape orientation, the maximum height is 8 vp from the top of the screen if there is no status bar, and 8 vp from the status bar if there is a status bar.
+   * 1. Since API version 14, when a bottom sheet is in landscape orientation, the maximum height is 8 vp from the top
+   * of the screen if there is no status bar, and 8 vp from the status bar if there is a status bar.
    * 2. For a bottom sheet, this attribute does not take effect when detents is set.
    * 3. For a bottom sheet in portrait orientation, the maximum height is 8 vp from the status bar.
-   * 4. For center sheets and follow-hand sheets, setting the type to SheetSize.LARGE or SheetSize.MEDIUM does not take effect, and the default height of 560 vp is displayed.
-   * 5. For center sheets and follow-hand sheets, the minimum height is 320 vp and the maximum height is 90% of the short side of the window.
-   * 6. For center sheets and follow-hand sheets, when the height is set using Length, the maximum height is displayed if the height is greater than the maximum height, and the minimum height is displayed if the height is less than the minimum height.
-   * 7. If the sheet uses the SheetSize.FIT_CONTENT adaptive mode and the type is set to center sheet or follow-hand sheet, in API version 22 and earlier, the maximum height is displayed when the height is greater than the maximum height, and the minimum height is displayed when the height is less than the minimum height. Since API version 23, the maximum height is displayed when the height is greater than the maximum height, and the actual adaptive height takes effect when the height is less than the minimum height.
+   * 4. For center sheets and follow-hand sheets, setting the type to SheetSize.LARGE or SheetSize.MEDIUM does not
+   * take effect, and the default height of 560 vp is displayed.
+   * 5. For center sheets and follow-hand sheets, the minimum height is 320 vp and the maximum height is 90% of the
+   * short side of the window.
+   * 6. For center sheets and follow-hand sheets, when the height is set using Length, the maximum height is displayed
+   * if the height is greater than the maximum height, and the minimum height is displayed if the height is less than
+   * the minimum height.
+   * 7. If the sheet uses the SheetSize.FIT_CONTENT adaptive mode and the type is set to center sheet or follow-hand
+   * sheet, in API version 22 and earlier, the maximum height is displayed when the height is greater than the maximum
+   * height, and the minimum height is displayed when the height is less than the minimum height.
+   * Since API version 23, the maximum height is displayed when the height is greater than the maximum height, and the
+   * actual adaptive height takes effect when the height is less than the minimum height.
    * 8. For the side sheet style, only the full-screen height is supported.
    * 9. For the full-screen modal style, only the full-screen height is supported.
    * 
@@ -13533,13 +13544,13 @@ declare interface SheetOptions extends BindOptions {
    * initial height.
    * 
    * The panel can be slid by hand to switch detents. After release, whether it slides to the target detent is 
-   * determined by two conditions: velocity and distance. If the velocity exceeds the threshold, the sheet slides to the
-   * target detent in the direction consistent with the hand velocity. If the velocity is below the threshold, the 
+   * determined by two conditions: velocity and distance. If the velocity exceeds the threshold, the sheet slides to
+   * the target detent in the direction consistent with the hand velocity. If the velocity is below the threshold, the 
    * distance condition is introduced: when the displacement distance is greater than 1/2 of the distance between the 
    * current position and the target position, the sheet slides to the target detent in the direction consistent with 
-   * the hand velocity; when the displacement distance is less than 1/2 of the distance between the current position and
-   * the target position, the sheet returns to the current detent. Velocity threshold: 1000 px/s. Distance threshold: 50
-   * %.
+   * the hand velocity; when the displacement distance is less than 1/2 of the distance between the current position
+   * and the target position, the sheet returns to the current detent. Velocity threshold: 1000 px/s.
+   * Distance threshold: 50%.
    * 
    * **Atomic service API:** This API is supported in atomic services since API version 12.
    *
@@ -13553,7 +13564,7 @@ declare interface SheetOptions extends BindOptions {
 
   /**
    * Blur background of the sheet panel. Different BlurStyle enum values correspond to blur effects of different 
-   * intensities (for example, Thin for slight blur, Regular for normal blur, and Thick for heavy blur). By default, 
+   * intensities (for example, Thin for slight blur, Regular for normal blur, and Thick for heavy blur). By default,
    * there is no blur background.
    * 
    * **Atomic service API:** This API is supported in atomic services since API version 12.
@@ -13581,7 +13592,8 @@ declare interface SheetOptions extends BindOptions {
    * **Note:**
    * 
    * 1. Resource must be of the boolean type.
-   * 2. The full-screen modal style (CONTENT_COVER) does not support displaying the close button, and this attribute does not take effect.
+   * 2. The full-screen modal style (CONTENT_COVER) does not support displaying the close button, and this
+   * attribute does not take effect.
    * 
    * **Atomic service API:** This API is supported in atomic services since API version 12.
    *
@@ -13605,7 +13617,8 @@ declare interface SheetOptions extends BindOptions {
    * 2. 600 vp <= width < 840 vp: bottom, center, follow-hand, side, and full-screen. The default style is center.
    * 3. Width >= 840 vp: bottom, center, follow-hand, side, and full-screen. The default style is follow-hand.
    * 4. Since API version 20, when the window width is greater than 600 vp, preferType can be set to SheetType.SIDE.
-   * 5. Since API version 20, preferType can be set to SheetType.CONTENT_COVER, which supports the full-screen modal style.
+   * 5. Since API version 20, preferType can be set to SheetType.CONTENT_COVER, which supports the full-screen modal
+   * style.
    * 
    * **Atomic service API:** This API is supported in atomic services since API version 12.
    *
