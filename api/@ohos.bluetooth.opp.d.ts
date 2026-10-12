@@ -51,13 +51,8 @@ declare namespace opp {
   interface OppServerProfile {
     /**
      * Subscribe the event reported when the file transfer status changes.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 16 - 24]
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
      * @param { 'transferStateChange' } type - Type of transport state change event to listen for.
      * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event.
      * @throws { BusinessError } 201 - Permission denied.
@@ -75,6 +70,25 @@ declare namespace opp {
      * @since 16 dynamic
      */
     on(type: 'transferStateChange', callback: Callback<OppTransferInformation>): void;
+
+    /** 
+     * Subscribe the event reported when the file transfer status changes. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH 
+     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. 
+     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @throws { BusinessError } 2900001 - Service stopped. 
+     * @throws { BusinessError } 2900003 - Bluetooth disabled. 
+     * @throws { BusinessError } 2900004 - Profile not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @systemapi 
+     * @stagemodelonly 
+     * @since 26.0.1 static 
+     */ 
+    onTransferStateChange(callback: Callback<OppTransferInformation>): void;
 
     /**
      * Unsubscribe the event reported when the file transfer status changes.
@@ -100,13 +114,8 @@ declare namespace opp {
 
     /**
      * Subscribe to the event of receiving a file transfer request.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 16 - 24]
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
      * @param { 'receiveIncomingFile' } type - Type of the event for receiving a file request to listen for.
      * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event.
      * @throws { BusinessError } 201 - Permission denied.
@@ -124,6 +133,25 @@ declare namespace opp {
      * @since 16 dynamic
      */
     on(type: 'receiveIncomingFile', callback: Callback<OppTransferInformation>): void;
+
+    /** 
+     * Subscribe to the event of receiving a file transfer request. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH 
+     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. 
+     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @throws { BusinessError } 2900001 - Service stopped. 
+     * @throws { BusinessError } 2900003 - Bluetooth disabled. 
+     * @throws { BusinessError } 2900004 - Profile not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @systemapi 
+     * @stagemodelonly 
+     * @since 26.0.1 static 
+     */ 
+    onReceiveIncomingFile(callback: Callback<OppTransferInformation>): void;
 
     /**
      * Unsubscribe to the event of receiving a file transfer request.
@@ -222,13 +250,8 @@ declare namespace opp {
 
     /**
      * Obtains the information about the file that is being transferred.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 16 - 24]
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
      * @returns { Promise<OppTransferInformation> } Returns the promise object.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.

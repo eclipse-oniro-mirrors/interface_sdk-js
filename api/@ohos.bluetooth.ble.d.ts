@@ -128,12 +128,8 @@ declare namespace ble {
 
   /**
    * Obtains the list of devices in the connected status.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Array<string> } Returns the list of device address.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -150,12 +146,8 @@ declare namespace ble {
 
   /**
    * Obtains the list of devices in the connected status.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 21 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { BleProfile } profile - The profile in the BLE protocol.
    *     It is used to obtain the connected devices corresponding to the profile.
    * @returns { Array<string> } Returns the list of device address.
@@ -531,12 +523,8 @@ declare namespace ble {
 
   /**
    * Subscribe BLE scan result.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'BLEDeviceFind' } type - Type of the scan result event to listen for.
    * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -551,6 +539,21 @@ declare namespace ble {
    * @since 10 dynamic
    */
   function on(type: 'BLEDeviceFind', callback: Callback<Array<ScanResult>>): void;
+
+  /** 
+   * Subscribe BLE scan result. 
+   * 
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event. 
+   * @throws { BusinessError } 201 - Permission denied. 
+   * @throws { BusinessError } 801 - Capability not supported. 
+   * @throws { BusinessError } 2900099 - Operation failed. 
+   * @syscap SystemCapability.Communication.Bluetooth.Core 
+   * @stagemodelonly 
+   * @crossplatform 
+   * @since 26.0.1 static 
+   */ 
+  function onBLEDeviceFind(callback: Callback<Array<ScanResult>>): void;
 
   /**
    * Unsubscribe BLE scan result.
@@ -869,12 +872,8 @@ declare namespace ble {
 
     /**
      * Subscribe characteristic read event.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'characteristicRead' } type - Type of the characteristic read event to listen for.
      * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read
      *     event.
@@ -889,6 +888,21 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'characteristicRead', callback: Callback<CharacteristicReadRequest>): void;
+
+    /** 
+     * Subscribe characteristic read event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read 
+     *     event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
+    onCharacteristicRead(callback: Callback<CharacteristicReadRequest>): void;
 
     /**
      * Unsubscribe characteristic read event.
@@ -911,12 +925,8 @@ declare namespace ble {
 
     /**
      * Subscribe characteristic write event.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'characteristicWrite' } type - Type of the characteristic write event to listen for.
      * @param { Callback<CharacteristicWriteRequest> } callback -
      *     Callback used to listen for the characteristic write event.
@@ -931,6 +941,21 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'characteristicWrite', callback: Callback<CharacteristicWriteRequest>): void;
+
+    /** 
+     * Subscribe characteristic write event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write 
+     *     event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
+    onCharacteristicWrite(callback: Callback<CharacteristicWriteRequest>): void;
 
     /**
      * Unsubscribe characteristic write event.
@@ -953,12 +978,8 @@ declare namespace ble {
 
     /**
      * Subscribe descriptor read event.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'descriptorRead' } type - Type of the descriptor read event to listen for.
      * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event.
      * @throws { BusinessError } 201 - Permission denied.
@@ -972,6 +993,20 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'descriptorRead', callback: Callback<DescriptorReadRequest>): void;
+
+    /** 
+     * Subscribe descriptor read event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
+    onDescriptorRead(callback: Callback<DescriptorReadRequest>): void;
 
     /**
      * Unsubscribe descriptor read event.
@@ -993,12 +1028,8 @@ declare namespace ble {
 
     /**
      * Subscribe descriptor write event.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'descriptorWrite' } type - Type of the descriptor write event to listen for.
      * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event.
      * @throws { BusinessError } 201 - Permission denied.
@@ -1012,6 +1043,20 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'descriptorWrite', callback: Callback<DescriptorWriteRequest>): void;
+
+	  /** 
+     * Subscribe descriptor write event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
+    onDescriptorWrite(callback: Callback<DescriptorWriteRequest>): void;
 
     /**
      * Unsubscribe descriptor write event.
@@ -1033,12 +1078,8 @@ declare namespace ble {
 
     /**
      * Subscribe server connection state changed event.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'connectionStateChange' } type - Type of the connection state changed event to listen for.
      * @param { Callback<BLEConnectionChangeState> } callback -
      *     Callback used to listen for the connection state changed event.
@@ -1053,6 +1094,21 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'connectionStateChange', callback: Callback<BLEConnectionChangeState>): void;
+
+	  /** 
+     * Subscribe server connection state changed event. 
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<BLEConnectionChangeState> } callback - 
+     *     Callback used to listen for the connection state changed event. 
+     * @throws { BusinessError } 201 - Permission denied. 
+     * @throws { BusinessError } 801 - Capability not supported. 
+     * @syscap SystemCapability.Communication.Bluetooth.Core 
+     * @stagemodelonly 
+     * @crossplatform 
+     * @since 26.0.1 static 
+     */ 
+    onConnectionStateChange(callback: Callback<BLEConnectionChangeState>): void;
 
     /**
      * Unsubscribe server connection state changed event.
@@ -2061,12 +2117,8 @@ declare namespace ble {
     stopScan(): Promise<void>;
     /**
      * Subscribe BLE scan result.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real. Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 15 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEDeviceFind' } type - Type of the scan result event to listen for.
      * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
      * @throws { BusinessError } 201 - Permission denied.
@@ -2081,6 +2133,21 @@ declare namespace ble {
      * @since 15 dynamic
      */
     on(type: 'BLEDeviceFind', callback: Callback<ScanReport>): void;
+
+    /**
+     * Subscribe BLE scan result.
+     * 
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 2900099 - Operation failed.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onBLEDeviceFind(callback: Callback<ScanReport>): void;
 
     /**
      * Unsubscribe BLE scan result.
