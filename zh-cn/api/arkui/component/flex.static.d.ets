@@ -148,8 +148,9 @@ export declare interface FlexAttribute extends CommonMethod {
  	 * @param { FlexOptions } [value] - Flex constructor options
  	 * @returns { FlexAttribute } Returns the instance of the FlexAttribute.
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setFlexOptions(value?: FlexOptions): this;
     /**
@@ -191,8 +192,9 @@ export declare function Flex(
  * @param { CustomBuilder } [content_] - container
  * @returns { FlexAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

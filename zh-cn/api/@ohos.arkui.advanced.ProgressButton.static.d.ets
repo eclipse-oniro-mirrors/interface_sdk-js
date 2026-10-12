@@ -15,6 +15,7 @@
  */
 
 /**
+ * 文本下载按钮，可显示具体下载进度。
  * @file
  * @kit ArkUI
  */
@@ -24,7 +25,7 @@ import { ResourceColor, ResourceStr, Length } from '@ohos.arkui.component';
 import { Builder } from '@ohos.arkui.component';
 import { LengthMetrics } from 'arkui.Graphics';
 /**
- * 文本下载按钮，可显示具体的下载进度。
+ * 创建ProgressButton组件。
  *
  * 设备行为差异：该接口在Wearable设备上使用时，应用程序运行异常，异常信息中提示接口未定义，在其他设备中可正常调用。
  *

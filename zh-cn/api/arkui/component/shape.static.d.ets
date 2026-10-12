@@ -321,8 +321,9 @@ export declare interface ShapeAttribute extends CommonMethod {
      * @param { PixelMap } [value] - Shape constructor options
      * @returns { ShapeAttribute } Returns the instance of the ShapeAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setShapeOptions(value?: PixelMap): this;
     /**
@@ -362,8 +363,9 @@ export declare function Shape(
  * @param { CustomBuilder } [content_] - container
  * @returns { ShapeAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

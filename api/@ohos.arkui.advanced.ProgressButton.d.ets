@@ -14,26 +14,23 @@
  */
 
 /**
+ * The **ProgressButton** component is a text-based download button with a progress indicator that shows the download
+ * progress.
  * @file
  * @kit ArkUI
  */
 
 /**
- * The **ProgressButton** component is a text-based download button with a progress indicator that shows the download
- * progress.
+ * Creates a **ProgressButton** component.
  *
  * > **NOTE**
  * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **ProgressButton** component has [universal attributes]{@link CommonMethod} and
+ * > - If the **ProgressButton** component has [universal attributes]{@link CommonMethod} or
  * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
  * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **ProgressButton** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **ProgressButton** component.
- *
- * The [universal events]{@link CommonMethod} are not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -64,8 +61,7 @@ export declare struct ProgressButton {
    *
    * The default value is an empty string.
    *
-   * Note: The text is truncated with an ellipsis (...) if it exceeds the maximum display width of the component. The
-   * Resource type is supported since API version 20.
+   * Note: The text is truncated with an ellipsis (...) if it exceeds the maximum display width of the component.
    *
    * @type { string }. [since 10 - 19]
    * @type { ResourceStr }. [since 20]

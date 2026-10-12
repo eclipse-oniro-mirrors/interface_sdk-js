@@ -14,6 +14,8 @@
  */
 
 /**
+ * 分段按钮组件用于创建页签型、单选或多选的胶囊型分段按钮，支持文本、图标、Symbol等多种选项类型及图文混合配置，可自定义字体、颜色、圆角等样式。页签型分段按钮适用于页签切换场景，单选胶囊型分段按钮适用于单选切换场景，多选胶囊型分段按
+ * 钮适用于多选筛选场景。
  * @file
  * @kit ArkUI
  */
@@ -48,8 +50,6 @@ export interface SegmentButtonV2ItemOptions {
    *
    * 默认值：undefined
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -63,8 +63,6 @@ export interface SegmentButtonV2ItemOptions {
    *
    * 默认值：undefined
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -77,8 +75,6 @@ export interface SegmentButtonV2ItemOptions {
    * 分段按钮选项的HM Symbol类型图标。
    *
    * 默认值：undefined
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -97,8 +93,6 @@ export interface SegmentButtonV2ItemOptions {
    *
    * 值为undefined时，按默认值处理。
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -111,8 +105,6 @@ export interface SegmentButtonV2ItemOptions {
    * 分段按钮选项文本属性样式修改器。
    *
    * 默认值：undefined
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -127,8 +119,6 @@ export interface SegmentButtonV2ItemOptions {
    *
    * 默认值：undefined
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -141,8 +131,6 @@ export interface SegmentButtonV2ItemOptions {
    * 分段按钮选项HM Symbol类型图标属性样式修改器。
    *
    * 默认值：undefined
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -159,8 +147,6 @@ export interface SegmentButtonV2ItemOptions {
    *
    * 值为undefined时，按默认值处理。
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -176,8 +162,6 @@ export interface SegmentButtonV2ItemOptions {
    *
    * 值为undefined时，按默认值处理。
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -192,8 +176,6 @@ export interface SegmentButtonV2ItemOptions {
    * 默认值："auto"
    *
    * 值为undefined时，按默认值处理。
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -247,8 +229,6 @@ export declare class SegmentButtonV2Item {
    *
    * 默认值：undefined
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -263,8 +243,6 @@ export declare class SegmentButtonV2Item {
    *
    * 默认值：undefined
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -278,8 +256,6 @@ export declare class SegmentButtonV2Item {
    * 分段按钮选项的HM Symbol类型图标。
    *
    * 默认值：undefined
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -299,8 +275,6 @@ export declare class SegmentButtonV2Item {
    *
    * 值为undefined时，按默认值处理。
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -314,8 +288,6 @@ export declare class SegmentButtonV2Item {
    * 分段按钮选项文本属性样式修改器。
    *
    * 默认值：undefined
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -331,8 +303,6 @@ export declare class SegmentButtonV2Item {
    *
    * 默认值：undefined
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -346,8 +316,6 @@ export declare class SegmentButtonV2Item {
    * 分段按钮选项HM Symbol类型图标属性样式修改器。
    *
    * 默认值：undefined
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -365,8 +333,6 @@ export declare class SegmentButtonV2Item {
    *
    * 值为undefined时，按默认值处理。
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -383,8 +349,6 @@ export declare class SegmentButtonV2Item {
    *
    * 值为undefined时，按默认值处理。
    *
-   * 装饰器类型：@Trace
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -400,8 +364,6 @@ export declare class SegmentButtonV2Item {
    * 默认值："auto"
    *
    * 值为undefined时，按默认值处理。
-   *
-   * 装饰器类型：@Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -438,10 +400,8 @@ export declare class SegmentButtonV2Item {
 }
 
 /**
-* 分段按钮选项集合。
-*
- * 继承自 Array\<[SegmentButtonV2Item]{@link SegmentButtonV2Item}>
-*
+ * 分段按钮选项集合。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -476,9 +436,8 @@ export declare class SegmentButtonV2Items extends Array<SegmentButtonV2Item> {
 }
 
 /**
- * 分段按钮组件用于创建页签型、单选或多选的胶囊型分段按钮，支持文本、图标、Symbol等多种选项类型及图文混合配置，可自定义字体、颜色、圆角等样式。页签型分段按钮适用于页签切换场景，单选胶囊型分段按钮适用于单选切换场景，多选胶囊型分段按
- * 钮适用于多选筛选场景。
-*
+ * 创建页签型分段按钮。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1195,9 +1154,8 @@ export declare struct TabSegmentButtonV2 {
 }
 
 /**
- * 分段按钮组件用于创建页签型、单选或多选的胶囊型分段按钮，支持文本、图标、Symbol等多种选项类型及图文混合配置，可自定义字体、颜色、圆角等样式。页签型分段按钮适用于页签切换场景，单选胶囊型分段按钮适用于单选切换场景，多选胶囊型分段按
- * 钮适用于多选筛选场景。
-*
+ * 创建单选胶囊型分段按钮。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1914,9 +1872,8 @@ export declare struct CapsuleSegmentButtonV2 {
 }
 
 /**
- * 分段按钮组件用于创建页签型、单选或多选的胶囊型分段按钮，支持文本、图标、Symbol等多种选项类型及图文混合配置，可自定义字体、颜色、圆角等样式。页签型分段按钮适用于页签切换场景，单选胶囊型分段按钮适用于单选切换场景，多选胶囊型分段按
- * 钮适用于多选筛选场景。
-*
+ * 创建多选胶囊型分段按钮。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

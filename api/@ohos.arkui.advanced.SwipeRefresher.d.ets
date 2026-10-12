@@ -23,19 +23,12 @@
  *
  * > **NOTE**
  * >
- * > - This component and its child components are supported since API version 10. Updates will be marked with a
- * > superscript to indicate their
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **SwipeRefresher** component has [universal attributes]{@link CommonMethod} and
+ * > - If the **SwipeRefresher** component has [universal attributes]{@link CommonMethod} or
  * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
  * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **SwipeRefresher** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **SwipeRefresher** component.
- *
- * The [universal events]{@link CommonMethod} are not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -53,8 +46,7 @@ export declare struct SwipeRefresher {
    *
    * **NOTE**
    *
-   * If the text length exceeds the column width, it will be truncated. The Resource type is supported since API version
-   * 20.
+   * If the text length exceeds the column width, it will be truncated.
    *
    * @type { string } [since 10 - 19]
    * @type { ?ResourceStr } [since 20]

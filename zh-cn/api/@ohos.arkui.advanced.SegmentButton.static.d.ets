@@ -16,6 +16,8 @@
   */
 
 /**
+ * 分段按钮组件包含页签类分段按钮和胶囊类分段按钮。页签类分段按钮适用于页面或内容区域的切换场景；胶囊类分段按钮适用于单选或多选的选择场景，包含胶囊类单选分段按钮和胶囊类多选分段按钮。该组件支持自定义文本颜色、字体大小、字体粗细、背景色、
+ * 图片尺寸、内边距、背景模糊材质等外观属性，支持仅文本、仅图标和图标+文本三种按钮样式，并提供无障碍朗读、布局方向镜像、自定义圆角、属性动画等能力，适用于需要快速构建符合设计规范的分段选择界面的场景。
  * @file
  * @kit ArkUI
  */
@@ -53,8 +55,8 @@ import {
 import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
-* 文本按钮信息。
-*
+ * 文本按钮信息。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -114,12 +116,12 @@ interface SegmentButtonTextItem {
 }
 
 /**
-* 图标按钮信息。
-*
-* > **说明：**
-* >
-* > 未选中态的图标`icon`和选中态的图标`selectedIcon`都需设置，单独设置无效。
-*
+ * 图标按钮信息。
+ *
+ * > **说明：**
+ * >
+ * > 未选中态的图标`icon`和选中态的图标`selectedIcon`都需设置，单独设置无效。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -219,8 +221,8 @@ interface SegmentButtonIconItem {
 }
 
 /**
-* 图标与文本按钮信息。
-*
+ * 图标与文本按钮信息。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -330,8 +332,8 @@ interface SegmentButtonIconTextItem {
 }
 
 /**
-* 不支持百分比类型的长度的联合类型。
-*
+ * 不支持百分比类型的长度的联合类型。
+ *
  * @unionmember { PX }
  * @unionmember { VP }
  * @unionmember { FP }
@@ -345,13 +347,8 @@ interface SegmentButtonIconTextItem {
 declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
 
 /**
-* 边框圆角模式枚举，用于控制分段按钮的圆角计算方式。
-*
-* | 名称    |值 | 说明                             |
-* | ------- | - |-------------------------------- |
-* | DEFAULT | 0 |默认模式，框架自动计算边框圆角。 |
-* | CUSTOM  | 1 |自定义模式，开发者设置边框圆角。 |
-*
+ * 边框圆角模式枚举，用于控制分段按钮的圆角计算方式。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -381,8 +378,8 @@ declare enum BorderRadiusMode {
 }
 
 /**
-* 用于定义分段按钮组件可自定义的属性。
-*
+ * 用于定义分段按钮组件可自定义的属性。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -669,16 +666,16 @@ interface CommonSegmentButtonOptions {
 }
 
 /**
-* 保存按钮信息的元组类型。
-*
-* > **说明：**
-* >
-* > 分段按钮组件仅支持2到5个按钮。
-*
-* > **说明：**
-* >
-* > 分段按钮组件仅支持2到5个按钮。
-*
+ * 保存按钮信息的元组类型。
+ *
+ * > **说明：**
+ * >
+ * > 分段按钮组件仅支持2到5个按钮。
+ *
+ * > **说明：**
+ * >
+ * > 分段按钮组件仅支持2到5个按钮。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -687,8 +684,8 @@ interface CommonSegmentButtonOptions {
 declare type ItemRestriction<T> = Array<T>;
 
 /**
-* 用于保存按钮信息的元组的联合类型。
-*
+ * 用于保存按钮信息的元组的联合类型。
+ *
  * @unionmember { ItemRestriction<SegmentButtonTextItem> }
  * @unionmember { ItemRestriction<SegmentButtonIconItem> }
  * @unionmember { ItemRestriction<SegmentButtonIconTextItem> }
@@ -703,10 +700,8 @@ declare type SegmentButtonItemTuple =
   ItemRestriction<SegmentButtonIconTextItem>;
 
 /**
-* 用于构建页签类的SegmentButtonOptions对象。
-*
-* 继承[CommonSegmentButtonOptions]{@link CommonSegmentButtonOptions}。
-*
+ * 用于构建页签类的SegmentButtonOptions对象。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -726,10 +721,8 @@ interface TabSegmentButtonConstructionOptions extends CommonSegmentButtonOptions
 }
 
 /**
-* 用于构建胶囊类的SegmentButtonOptions对象。
-*
-* 继承[CommonSegmentButtonOptions]{@link CommonSegmentButtonOptions}。
-*
+ * 用于构建胶囊类的SegmentButtonOptions对象。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -766,8 +759,8 @@ interface CapsuleSegmentButtonConstructionOptions extends CommonSegmentButtonOpt
 }
 
 /**
-* 页签类分段按钮选项。继承自[TabSegmentButtonConstructionOptions]{@link TabSegmentButtonConstructionOptions}。
-*
+ * 页签类分段按钮选项。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -793,8 +786,8 @@ interface TabSegmentButtonOptions extends TabSegmentButtonConstructionOptions {
 }
 
 /**
-* 胶囊类分段按钮选项。继承自[CapsuleSegmentButtonConstructionOptions]{@link CapsuleSegmentButtonConstructionOptions}。
-*
+ * 胶囊类分段按钮选项。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -820,8 +813,8 @@ interface CapsuleSegmentButtonOptions extends CapsuleSegmentButtonConstructionOp
 }
 
 /**
-* 构造参数用于SegmentButtonItemOptions。
-*
+ * 构造参数用于SegmentButtonItemOptions。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -931,8 +924,8 @@ interface SegmentButtonItemOptionsConstructorOptions {
 }
 
 /**
-* 分段按钮中按钮的选项。
-*
+ * 分段按钮中按钮的选项。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1056,12 +1049,12 @@ declare class SegmentButtonItemOptions {
 }
 
 /**
-* 用于保存按钮信息的数组。
-*
-* > **说明：**
-* >
-* > SegmentButtonItemOptionsArray仅支持保存2到5个按钮信息元素。
-*
+ * 用于保存按钮信息的数组。
+ *
+ * > **说明：**
+ * >
+ * > SegmentButtonItemOptionsArray仅支持保存2到5个按钮信息元素。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1260,12 +1253,12 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
 }
 
 /**
-* > **说明：**
-* >
-* > 不支持设置字体类型。
-*
-* 分段按钮选项类用于提供初始数据和自定义属性。
-*
+ * > **说明：**
+ * >
+ * > 不支持设置字体类型。
+ *
+ * 分段按钮选项类用于提供初始数据和自定义属性。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1632,8 +1625,8 @@ declare class SegmentButtonOptions {
 }
 
 /**
-* 分段按钮组件，包含页签类分段按钮、胶囊类单选分段按钮和胶囊类多选分段按钮。
-*
+ * 创建页签类分段按钮或胶囊类分段按钮。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1737,4 +1730,5 @@ export {
   SegmentButtonItemTuple,
   SegmentButtonItemOptionsConstructorOptions,
   SegmentButtonItemOptions,
-  BorderRadiusMode;
+  BorderRadiusMode
+}

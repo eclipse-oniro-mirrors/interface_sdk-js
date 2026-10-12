@@ -34,9 +34,7 @@
  *
  * > **NOTE**
  * >
- * > - This component can only be used in the stage model.
- * >
- * > - If [universal attributes]{@link CommonMethod} and
+ * > - If [universal attributes]{@link CommonMethod} or
  * > [universal events]{@link CommonMethod} are set for **SwipeRefresherV2**, the compilation
  * > toolchain will generate an additional node \_\_Common\_\_ and mount the universal attributes or universal events on
  * > \_\_Common\_\_, rather than directly applying them to **SwipeRefresherV2** itself. This may cause the set universal

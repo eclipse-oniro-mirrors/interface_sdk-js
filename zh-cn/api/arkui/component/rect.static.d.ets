@@ -208,8 +208,9 @@ export declare interface RectAttribute extends CommonShapeMethod {
  	 * @param { RectOptions | RoundedRectOptions } [options] - Rect构造选项。
  	 * @returns { RectAttribute } 返回RectAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setRectOptions(options?: RectOptions | RoundedRectOptions): this;
     /**
@@ -246,8 +247,9 @@ export declare function Rect(
  * @param { CustomBuilderT<RectAttribute> } style - the callback to set up component's attributes.
  * @returns { RectAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

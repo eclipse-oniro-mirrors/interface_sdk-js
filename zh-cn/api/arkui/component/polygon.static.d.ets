@@ -78,8 +78,9 @@ export declare interface PolygonAttribute extends CommonShapeMethod {
 	 * @param { PolygonOptions } [options] - Polygon绘制区域。<br/>异常值undefined和null按照无效值处理，本次设置不生效。
 	 * @returns { PolygonAttribute } 返回PolygonAttribute实例。
 	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+	 * @unpublished
 	 * @stagemodelonly
-	 * @since 26.0.0 staticonly
+	 * @since 26.0.1 staticonly
 	 */
  	default setPolygonOptions(options?: PolygonOptions): this;
     /**
@@ -115,8 +116,9 @@ export declare function Polygon(
  * @param { CustomBuilderT<PolygonAttribute> } style - 设置组件属性的回调。
  * @returns { PolygonAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

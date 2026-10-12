@@ -28,9 +28,6 @@
  *
  * > **NOTE**
  * >
- * > * This component is supported since API version 9. New APIs in later versions are marked with a superscript to
- * > indicate their initial version.
- * >
  * > * In the **RelativeContainer** component, when [width]{@link CommonMethod#width(value: Length)} and
  * > [height]{@link CommonMethod#height(value: Length)} are not set, the layout behavior of the corresponding attributes
  * > is the same as when they are set to 100%.
@@ -240,18 +237,6 @@ declare enum BarrierDirection {
 
 /**
  * Enumerates the directions of barriers with mirror mode support.
- *
- * | Name|  Value | Description                      |
- * | ------ | -- | ----------------------------- |
- * | START  | 0  |The barrier is on the start side of all its |
- * |        |    |[referencedId]{@link LocalizedBarrierStyle}, that is, the |
- * |        |    |leftmost side in LTR mode and the rightmost side in RTL mode.|
- * | END    | 1  | The barrier is on the end side of all its [referencedId]{@link LocalizedBarrierStyle}, that is, the |
- * |        |    |rightmost side in LTR mode and the leftmost side in RTL mode.|
- * | TOP    | 2  | The barrier is at the top of all the referenced components specified by |
- * |        |    |[referencedId]{@link LocalizedBarrierStyle}.|
- * | BOTTOM | 3  | The barrier is at the bottom of all the referenced components specified by |
- * |        |    |[referencedId]{@link LocalizedBarrierStyle}.|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -509,9 +494,6 @@ declare class RelativeContainerAttribute extends CommonMethod<RelativeContainerA
  * [alignRules]{@link CommonMethod#alignRules(value: AlignRuleOption)}.
  *
  * > **NOTE**
- * >
- * > * This component is supported since API version 9. New APIs in later versions are marked with a superscript to
- * > indicate their initial version.
  * >
  * > * In the **RelativeContainer** component, when [width]{@link CommonMethod#width(value: Length)} and
  * > [height]{@link CommonMethod#height(value: Length)} are not set, the layout behavior of the corresponding attributes

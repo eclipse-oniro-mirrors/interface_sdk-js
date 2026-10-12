@@ -21,14 +21,6 @@
 /**
  * Enumerates video seek modes.
  *
- * | Name | Value | Description |
- * | ---------------- |--| ---------------------------- |
- * | PreviousKeyframe |0| Seeks to the nearest keyframe before the current playback position. |
- * | NextKeyframe |1| Seeks to the nearest keyframe after the current playback position. |
- * | ClosestKeyframe |2| Seeks to the keyframe closest to the current playback position. |
- * | Accurate |3| Seeks precisely to the specified time point, regardless of whether it is a keyframe. |
- * |          |  |This mode is highly accurate but may require decoding more frames. |
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -37,7 +29,7 @@
  */
 declare enum SeekMode {
   /**
-   * Seek to the nearest previous keyframe.
+   * Seeks to the nearest keyframe before the current playback position. 
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -48,7 +40,7 @@ declare enum SeekMode {
   PreviousKeyframe,
 
   /**
-   * Seek to the nearest next keyframe.
+   * Seeks to the nearest keyframe after the current playback position. 
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -59,7 +51,7 @@ declare enum SeekMode {
   NextKeyframe,
 
   /**
-   * Seek to the nearest keyframe.
+   * Seeks to the keyframe closest to the current playback position. 
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -70,7 +62,8 @@ declare enum SeekMode {
   ClosestKeyframe,
 
   /**
-   * Seek to a specific frame, regardless of whether the frame is a keyframe.
+   * Seeks precisely to the specified time point, regardless of whether it is a keyframe.
+   * This mode is highly accurate but may require decoding more frames. 
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -1210,7 +1203,7 @@ declare class VideoAttribute extends CommonMethod<VideoAttribute> {
  * > When the **Video** component uses [expandSafeArea]{@link CommonMethod#expandSafeArea} to expand the safe area, the
  * > video display content area of the component cannot be expanded.
  *
- * ###### Required Permissions
+ * ## Required Permissions
  *
  * To use online videos, you must apply for the ohos.permission.INTERNET permission. For details about how to apply for
  * a permission, see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).

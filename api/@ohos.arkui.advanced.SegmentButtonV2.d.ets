@@ -14,6 +14,12 @@
  */
 
 /**
+ * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
+ * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
+ * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
+ * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
+ * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
+ * filtering scenarios.
  * @file api/@ohos.arkui.advanced.SegmentedButton.d.ts
  * @kit ArkUI
  */
@@ -214,6 +220,7 @@ export type OnSelectedIndexChange = (selectedIndex: number) => void;
 export type OnSelectedIndexesChange = (selectedIndexes: number[]) => void;
 
 /**
+ * **SegmentButtonV2** component option class, used to define properties such as the text and icon of a single segmented button item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -366,8 +373,6 @@ export declare class SegmentButtonV2Item {
      * 
      * If the value is **undefined**, the default value is used.
      * 
-     * **Decorator:** @Trace
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -405,8 +410,6 @@ export declare class SegmentButtonV2Item {
 
 /**
  * Represents items of the **SegmentButtonV2** component.
- * 
- * This parameter is inherited from Array\<[SegmentButtonV2Item]{@link SegmentButtonV2Item}>.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -442,12 +445,7 @@ export declare class SegmentButtonV2Items extends Array<SegmentButtonV2Item> {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
- * filtering scenarios.
+ * Creates a tab segmented button.
  *
  * > **NOTE**
  * >
@@ -1206,12 +1204,7 @@ export declare struct TabSegmentButtonV2 {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
- * filtering scenarios.
+ * Creates a single-selection capsule segmented button.
  *
  * > **NOTE**
  * >
@@ -1970,12 +1963,7 @@ export declare struct CapsuleSegmentButtonV2 {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
- * filtering scenarios.
+ * Creates a multi-selection capsule segmented button.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
