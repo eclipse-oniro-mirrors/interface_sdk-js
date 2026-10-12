@@ -751,42 +751,6 @@ declare namespace sendablePhotoAccessHelper {
      */
     readonly coverUri: string;
     /**
-     * Risk type of share album.
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamiconly
-     */
-    readonly shareRiskType?: string;
-    /**
-     * Risk status of share album.
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamiconly
-     */
-    readonly shareRiskStatus?: ShareAlbumRiskStatus;
-    /**
-     * CloudId of album.
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamiconly
-     */
-    readonly cloudId?: string;
-    /**
-     * The owner of share album.
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamiconly
-     */
-    readonly shareAlbumOwner?: string;
-    /**
      * Obtains media assets. This API uses a promise to return the result.
      *
      * @permission ohos.permission.READ_IMAGEVIDEO
@@ -850,6 +814,42 @@ declare namespace sendablePhotoAccessHelper {
      * @since 12 dynamiconly
      */
     readonly videoCount?: number;
+    /**
+     * Risk type of share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskType?: string;
+    /**
+     * Risk status of share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskStatus?: ShareAlbumRiskStatus;
+    /**
+     * CloudId of album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly cloudId?: string;
+    /**
+     * The owner of share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareAlbumOwner?: string;
     /**
      * Commits the modification on the album attributes to the database. This API uses a promise to return the result.
      *
