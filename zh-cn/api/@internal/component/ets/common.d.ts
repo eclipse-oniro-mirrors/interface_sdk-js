@@ -6644,7 +6644,13 @@ declare class TransitionEffect<
 }
 
 /**
- * Define Preview property
+ * @Preview参数对象。
+ * 
+ * 设置@Preview的参数，指定预览设备的相关属性，如不同设备、不同屏幕状态等。
+ * 
+ * > **说明：**
+ * >
+ * > PreviewParams中只支持使用与定义参数类型相匹配的入参，否则所有的@Preview的参数都将被置为默认值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -6655,7 +6661,7 @@ declare class TransitionEffect<
  */
 interface PreviewParams {
   /**
-   * Define Preview title
+   * 组件预览标题，默认为自定义组件名称。仅支持英文和数字，不支持中文和特殊字符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -6666,7 +6672,7 @@ interface PreviewParams {
   title?: string;
 
   /**
-   * Define Preview width
+   * 预览设备的宽度，单位：px，默认为1080px。取值范围为[20, 3000]内的整数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -6677,7 +6683,7 @@ interface PreviewParams {
   width?: number;
 
   /**
-   * Define Preview height
+   * 预览设备的高度，单位：px，默认为2340px。取值范围为[20, 3000]内的整数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -6688,7 +6694,7 @@ interface PreviewParams {
   height?: number;
 
   /**
-   * Define Preview locale
+   * 预览设备的语言区域，如zh_CN、en_US等，默认为zh_CN。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -6699,7 +6705,7 @@ interface PreviewParams {
   locale?: string;
 
   /**
-   * Define Preview colorMode
+   * 显示的亮暗模式，取值为light或dark，tv设备默认为dark，其他设备默认为light，wearable设备仅支持dark。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -6710,7 +6716,8 @@ interface PreviewParams {
   colorMode?: string;
 
   /**
-   * 定义预览设备类型
+   * 组件预览渲染的设备类型，默认为Phone。
+   * 设备类型枚举值参考[deviceTypes标签](docroot:./../../../quick-start/module-configuration-file.md#devicetypes标签)。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -6722,7 +6729,7 @@ interface PreviewParams {
   deviceType?: string;
 
   /**
-   * 定义预览dpi
+   * 预览设备的屏幕DPI值，默认为480。取值范围为[120, 640]内的整数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -6734,7 +6741,7 @@ interface PreviewParams {
   dpi?: number;
 
   /**
-   * Define Preview orientation
+   * 预览设备的横竖屏状态，取值为portrait或landscape，默认为portrait。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -6745,7 +6752,7 @@ interface PreviewParams {
   orientation?: string;
 
   /**
-   * Define Preview roundScreen
+   * 预览的屏幕形状是否为圆形，默认为false。true为圆形，false为非圆形。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 11]
@@ -21013,7 +21020,15 @@ declare class CommonMethod<T> {
   /**
    * 设置组件自身的宽度，缺省时使用子组件自身内容需要的宽度。若子组件的宽大于父组件的宽，则子组件会溢出显示在父组件外部。
    *
-   * 从API version 10开始，该接口支持calc计算特性。
+   * >  **说明：**
+   * >
+   * > - 在[TextInput](./ts-basic-components-textinput.md)组件中，width设置auto表示自适应文本宽度。
+   * >
+   * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
+   * >
+   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，width设置auto表示自适应子组件。
+   * >
+   * > - 从API version 10开始，该接口支持calc计算特性。
    *
    * @param { Length } value - 要设置的组件宽度。
    * <br>单位：vp
@@ -21049,7 +21064,11 @@ declare class CommonMethod<T> {
   /**
    * 设置组件自身的高度，缺省时使用子组件自身内容需要的高度。若子组件的高大于父组件的高，则子组件会溢出显示在父组件外部。
    *
-   * 从API version 10开始，该接口支持calc计算特性。
+   * >  **说明：**
+   * >
+   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，height设置auto表示自适应子组件。
+   * >
+   * > - 从API version 10开始，该接口支持calc计算特性。
    *
    * @param { Length } value - 要设置的组件高度。
    * <br>单位：vp
@@ -21114,7 +21133,7 @@ declare class CommonMethod<T> {
   customProperty(name: string, value: Optional<Object>): T;
 
   /**
-   * 控制组件扩展其安全区域。
+   * 控制组件扩展其安全区域，实现沉浸式效果。
    *
    * >  **说明：**
    * >
@@ -21133,25 +21152,24 @@ declare class CommonMethod<T> {
    * >
    * > - 组件延伸到避让区时，在避让区的事件如点击事件等可能会被系统拦截，优先给状态栏等系统组件响应。
    * >
-   * > -
-   * 滚动类容器内的组件不建议设置expandSafeArea属性，如果设置，需要按照组件嵌套关系，将当前节点到滚动类祖先容器间所有直接节点设置expandSafeArea属性，否则expandSafeArea属性在滚动后可能会失效，写
-   * 法参考[示例7](#示例7滚动类容器扩展安全区)。
+   * > - 滚动类容器内的组件不建议设置expandSafeArea属性，如果设置，需要按照组件嵌套关系，将当前节点到滚动类祖先容器间所有直接节点设置expandSafeArea属性，
+   * 否则expandSafeArea属性在滚动后可能会失效，写法参考[示例7](#示例7滚动类容器扩展安全区)。
    * >
    * > - expandSafeArea属性仅作用于当前组件，不会向父组件或子组件传递，因此使用过程中，所有相关组件均需配置。
    * >
-   * > -
-   * 同时设置expandSafeArea和position属性时，position属性会优先生效，expandSafeArea属性会后生效。对于未设置position、offset等绘制属性的组件，如果其边界未与避让区重叠，设置exp
-   * andSafeArea属性将不生效，如弹窗和半模态组件。
+   * > - 同时设置expandSafeArea和position属性时，position属性会优先生效，expandSafeArea属性会后生效。
+   * 对于未设置position、offset等绘制属性的组件，如果其边界未与避让区重叠，设置expandSafeArea属性将不生效，如弹窗和半模态组件。
    * >
    * > - 对于expandSafeArea属性无法生效的场景，若要将组件部署在避让区，需要手动调整组件的坐标。
    *
-   * @param { Array<SafeAreaType> } types - 配置扩展安全区域的类型。未添加Metadata配置项时，页面不避让挖孔，CUTOUT类型不生效。
-   *     <br>默认值： [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD]。
-   *     <br>非法值：按默认值处理。
-   * @param { Array<SafeAreaEdge> } edges - 配置扩展安全区域的边缘。
-   *     <br>默认值： [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]。
-   *     <br>非法值：按默认值处理。扩展至所有避让区域。
-   * @returns { T } Current component.
+   * @param { Array<SafeAreaType> } types - 配置扩展安全区域的类型。默认值包含SafeAreaType.CUTOUT，
+   * 但未添加[Metadata](docroot:../../apis-ability-kit/js-apis-bundleManager-metadata.md)配置项时，页面不避让挖孔，CUTOUT类型不生效。
+   * <br>默认值：[SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD] 
+   * <br>非法值：按默认值处理。
+   * @param { Array<SafeAreaEdge> } edges - 配置扩展安全区域的边缘，默认扩展至所有避让区域。
+   * <br>默认值：[SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]。
+   * <br>非法值：按默认值处理。
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -21179,7 +21197,7 @@ declare class CommonMethod<T> {
    *     />默认值：[LayoutSafeAreaType.SYSTEM]，扩展至所有安全区域，比如：状态栏，导航栏和组件级安全区（safeAreaPadding）。<br/>非法值：按默认值处理。
    * @param { Array<LayoutSafeAreaEdge> } [edges] - 扩展布局安全区的边缘，并且支持镜像能力。<br />默认值：[LayoutSafeAreaEdge.ALL]，扩展组件所有边缘。<br
    *     />非法值：按默认值处理。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -21261,7 +21279,7 @@ declare class CommonMethod<T> {
    * 从API version 10开始，该接口支持calc计算特性。
    *
    * @param { SizeOptions } value - 设置宽高尺寸。
-   *     <br>异常值：参数为undefined时，属性设置不生效；其它异常值时，size属性恢复到不配置时的默认行为。
+   * <br>异常值：参数为undefined时，属性设置不生效；其它异常值时，size属性恢复到不配置时的默认行为。
    * <br>单位：vp
    * @returns { T } 返回当前组件对象，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -21381,7 +21399,7 @@ declare class CommonMethod<T> {
    * > 从API version 23开始，支持 [attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。
    *
    * @param { ChainWeightOptions } chainWeight - 设置了chainWeight属性的组件与同一条链上的兄弟组件在水平或竖直方向的尺寸会按照设置的权重进行分配，分配时会忽略组件本身尺寸设置，按分配的权重自适应占满剩余空间。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -21396,7 +21414,7 @@ declare class CommonMethod<T> {
    * 从API version 10开始，该接口支持calc计算特性。
    *
    * @param { Padding | Length } value - 设置组件的内边距。
-   *     <br>参数为Length类型时，四个方向内边距同时生效。
+   * <br>参数为Length类型时，四个方向内边距同时生效。
    * <br>默认值：0
    * <br>单位：vp
    * <br>padding设置百分比时，上下左右内边距均以父容器的width作为基础值。 [since 7 - 11]
@@ -21579,25 +21597,23 @@ declare class CommonMethod<T> {
   backgroundColor(color: Optional<ResourceColor | ColorMetrics>): T;
 
   /**
-   * 指定当前组件在指定方向上的像素取整对齐方式，某方向不设置时默认在该方向进行四舍五入取整。
+   * 指定当前组件在指定方向上的像素取整对齐方式，使用后组件边界坐标将按指定策略取整，从而避免因浮点数绘制产生的视觉异常（如1px缝隙、组件重叠、分割线消失）。从API version 12开始，某方向不设置时默认在该方向进行四舍五入取整。
    *
    * > **说明：**
    * >
-   * > - 在API version 11，本接口采用半像素对齐方式（即0\~0.25取0，0.25\~0.75取0.5，0.75\~1.0取1）。从API version
-   * 12开始，本接口采用四舍五入的取整方式，并支持组件级关闭像素取整的能力。
+   * > - 在API version 11，本接口采用半像素对齐方式（即0\~0.25取0，0.25\~0.75取0.5，0.75\~1.0取1）。该方式通过保留0.5像素值来减少连续取整可能带来的累积误差。从API version 12开始，未设置取整策略的方向默认采用四舍五入的取整方式，并支持通过PixelRoundCalcPolicy.NO_FORCE_ROUND关闭指定方向的像素取整。
    * >
-   * > - 从API version
-   * 12开始，该接口支持在[attributeModifier](ts-universal-attributes-attribute-modifier.md#attributemodifier)中调用。
+   * > - 从API version12开始，该接口支持在[attributeModifier](ts-universal-attributes-attribute-modifier.md#attributemodifier)中调用。
    *
    * 正常计算时，上下方向与组件高度相对应，左右方向（镜像的起始方向称为左）与宽度相对应。为方便描述将两组方向称为左上和右下。
    *
    * - 计算当前组件左上角坐标： 左上角相对父容器偏移量。
    * - 计算当前组件右下角坐标： 左上角相对于父容器偏移量 + 组件自身尺寸。
-   * - 重新计算当前组件尺寸： 右下角坐标四舍五入取整 - 左上角坐标四舍五入取整。
+   * - 重新计算当前组件尺寸： 右下角坐标四舍五入取整 - 左上角坐标四舍五入取整（API version 11采用半像素对齐方式，API version 12采用四舍五入方式）。
    *
-   * @param { PixelRoundPolicy } value - 指定当前组件边界取整策略。<br/>**说明：**<br/>该属性用于因浮点数绘制产生视觉异常的场景。取整结果不仅和组件的宽高有关，也与组件的位置有关。即使设置组件的宽高相同，由于以浮点数描述的组件位置不同，舍入后组件的最终宽高也
-   *     可能不同。
-   * @returns { T } Current component.
+   * @param { PixelRoundPolicy } value - 指定当前组件边界取整策略。[PixelRoundPolicy]{@link PixelRoundPolicy}包含start、top、end、bottom四个可选属性，分别对应组件前部、上部、尾部、底部边界。每个属性可设置[PixelRoundCalcPolicy]{@link PixelRoundCalcPolicy}枚举值。设置PixelRoundCalcPolicy.NO_FORCE_ROUND可关闭对应方向上的像素取整，未设置的属性默认按四舍五入规则取整。
+   *     <br>**说明：**<br/>该属性用于因浮点数绘制产生视觉异常的场景。取整结果不仅和组件的宽高有关，也与组件的位置有关。即使设置组件的宽高相同，由于以浮点数描述的组件位置不同，舍入后组件的最终宽高也可能不同。
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -22081,7 +22097,7 @@ declare class CommonMethod<T> {
    *
    * @param { BorderOptions } value - <br>统一边框样式设置接口。<br/>**说明：** <br/>边框宽度默认值为0，即不显示边框。<br/>从API version
    *     9开始，父节点的border显示在子节点内容之上。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -22095,7 +22111,7 @@ declare class CommonMethod<T> {
    *
    * @param { BorderStyle | EdgeStyles } value - 设置元素的边框样式。<br/>默认值：BorderStyle.Solid
    *     - Border style.<br>Default value: **BorderStyle.Solid**.[since 9]
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -22111,7 +22127,7 @@ declare class CommonMethod<T> {
    * @param { Length | EdgeWidths } value - [since 9 - 11]
    * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - Border width. This parameter cannot be set in
    *     percentage. [since 12]
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -22122,11 +22138,24 @@ declare class CommonMethod<T> {
 
   /**
    * 设置边框的颜色。
+   * 
+   * > **说明：**
+   * >
+   * > 当使用border统一设置边框且color参数缺省时，需将borderColor设置在border之后调用才能生效。
    *
-   * @param { ResourceColor } value - [since 7 - 8]
-   * @param { ResourceColor | EdgeColors } value - [since 9 - 11]
-   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - Border color.<br>Default value: **Color.Black**
-   * @returns { T } Current component.
+   * @param { ResourceColor } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
+   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
+   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
+   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 7 - 8]
+   * @param { ResourceColor | EdgeColors } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
+   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
+   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
+   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 9 - 11]
+   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
+   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
+   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
+   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 12]
+   * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -22137,15 +22166,25 @@ declare class CommonMethod<T> {
 
   /**
    * 设置边框的圆角半径。
+   * 
+   * > **说明：**
+   * >
+   * > 当使用border统一设置边框且radius参数缺省时，需将borderRadius设置在border之后调用才能生效。
    *
-   * @param { Length } value - [since 7 - 8]
-   * @param { Length | BorderRadiuses } value - [since 9 - 11]
-   * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - Radius of the border corners. The value can be
-   *     expressed as a percentage of the component's width. When combined with the [clip]{@link CommonMethod#clip}
-   *     attribute, this setting clips child components to prevent them from extending beyond the component's
-   *     boundaries.
-   *     [since 12]
-   * @returns { T } Current component.
+   * @param { Length } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
+   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
+   * <br>**说明：**
+   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 7 - 8]
+   * @param { Length | BorderRadiuses } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
+   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
+   * <br>**说明：** 
+   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 9 - 11]
+   * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
+   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
+   * <br>**说明：** 
+   * <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
+   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 12]
+   * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -22157,14 +22196,18 @@ declare class CommonMethod<T> {
   /**
    * 设置边框的圆角半径和绘制圆角的模式。
    *
-   * **注意**
-   * 1. **RenderStrategy.FAST**：当前组件及其子组件将直接以圆角效果绘制到画布上。
-   * 2. **RenderStrategy.OFFSCREEN**：当前组件及其子组件将首先渲染到一个离屏画布，然后进行圆角裁剪，最后绘制到主画布上。
+   * > **说明：**
+   * >
+   * > 当使用border统一设置边框且radius参数缺省时，需将borderRadius设置在border之后调用才能生效。
    *
    * @param { Length | BorderRadiuses | LocalizedBorderRadiuses } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度。设置圆角后，可搭配clip属性进行裁剪，避免子组件超出组件自身。
    * @param { RenderStrategy } [type] - 设置组件绘制圆角的模式。
-   *     <br>默认值： **RenderStrategy.FAST**。
-   * @returns { T } Current component.
+   * <br>默认值：RenderStrategy.FAST。
+   * <br>可选值：
+   * <br>- RenderStrategy.FAST：快速绘制模式，适用于常规圆角场景，性能更优。若组件包含模糊等复杂视觉效果，使用该模式可能导致圆角裁剪异常。
+   * <br>- RenderStrategy.OFFSCREEN：离屏绘制模式，适用于包含模糊等复杂视觉效果的圆角场景，可正确渲染圆角但性能开销较大。
+   * <br>默认值： **RenderStrategy.FAST**。
+   * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -23776,30 +23819,15 @@ declare class CommonMethod<T> {
   scale(options: Optional<ScaleOptions>): T;
 
   /**
-   * Default number of occupied columns, indicating the number of occupied grid columns when the number of columns (span) of the corresponding size is not set in the useSizeType attribute.
+   * 默认占用列数。
    *
-   * @param { number } value
+   * @param { number } value - 默认占用列数，指useSizeType属性没有设置对应尺寸的列数（span）时，占用的栅格列数，需为非负整数。传入负数或超出GridContainer总列数时，使用默认值1。
+   * <br>**说明：**<br>- 调用该属性时，其父组件或祖先组件必须是GridContainer。<br>- 设置了栅格span属性，组件的宽度由栅格布局决定。
+   * <br>默认值：1
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Default number of occupied columns, indicating the number of occupied grid columns when the number of columns (span) of the corresponding size is not set in the useSizeType attribute.
-   *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Default number of occupied columns, indicating the number of occupied grid columns when the number of columns (span) of the corresponding size is not set in the useSizeType attribute.
-   *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
+   * @crossplatform [since 10]
+   * @atomicservice [since 11]
    * @since 11 dynamiconly
    * @deprecated since 14
    * @useinstead grid_col/GridColInterface and grid_row/GridRowInterface
@@ -23807,33 +23835,19 @@ declare class CommonMethod<T> {
   gridSpan(value: number): T;
 
   /**
-   * The default offset column number indicates the number of offset columns of the current component in the start direction of the parent component when the useSizeType attribute does not set the offset of the corresponding dimension. That is,
-   * the current component is located in the nth column.
+   * 默认偏移列数。
    *
-   * @param { number } value
+   * @param { number } value - 默认偏移列数，指useSizeType属性没有设置对应尺寸的偏移（offset）时，当前组件沿着父组件Start方向偏移的列数，即组件起始位置相对于父组件Start方向偏移n列，需为非负整数。
+   * 传入负数时，使用默认值0。当useSizeType设置了对应尺寸的offset时，gridOffset设置无效。
+   * <br>**说明：**<br>- 调用该属性时，其父组件或祖先组件必须是GridContainer。
+   * <br>- 配置该属性后，当前组件在父组件水平方向的布局不再跟随父组件原有的布局方式，而是沿着父组件的Start方向偏移一定位移。
+   * <br>- 偏移位移&nbsp;=&nbsp;（列宽&nbsp;+&nbsp;间距）\*&nbsp;偏移列数。
+   * <br>- 设置了偏移(gridOffset)的组件之后的兄弟组件会根据该组件进行相对布局。
+   * <br>默认值：0
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * The default offset column number indicates the number of offset columns of the current component in the start direction of the parent component when the useSizeType attribute does not set the offset of the corresponding dimension. That is,
-   * the current component is located in the nth column.
-   *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * The default offset column number indicates the number of offset columns of the current component in the start direction of the parent component when the useSizeType attribute does not set the offset of the corresponding dimension. That is,
-   * the current component is located in the nth column.
-   *
-   * @param { number } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
+   * @crossplatform [since 10]
+   * @atomicservice [since 11]
    * @since 11 dynamiconly
    * @deprecated since 14
    * @useinstead grid_col/GridColInterface and grid_row/GridRowInterface
@@ -24066,7 +24080,7 @@ declare class CommonMethod<T> {
    *
    * @param { number } value - 设置父容器在主轴方向上的剩余空间分配给此属性所在组件的比例。<br/>取值范围：[0, +∞)<br/>默认值：0<br/>设置异常值时，该属性为默认值。
    *     <br>取值应为≥0的整数。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -24089,7 +24103,7 @@ declare class CommonMethod<T> {
    *     <br/>[constraintSize]{@link constraintSize}限制组件的尺寸范围.
    *     Column和Row即使设置了constraintSize，在未设置主轴尺寸width/height/size时仍遵守默认布局行为，在主轴上自适应子组件尺寸，此时flexShrink不生效.<br/>设置异常值时，该属性为
    *     默认值。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -24100,11 +24114,12 @@ declare class CommonMethod<T> {
   flexShrink(value: number): T;
 
   /**
-   * 设置组件的基准尺寸。
+   * 设置组件的基准尺寸。仅作为Flex、Column、Row和DynamicLayout容器的子组件时支持设置此属性。设置后组件会以该基准尺寸作为初始尺寸参与布局计算。当父容器为Column、Row时，需设置主轴方向的尺寸。Column和Row在未设置主轴尺寸（width/height/size）时仍遵守默认布局行
+   * 为，在主轴上自适应子组件尺寸，此时可能影响flexBasis的效果。
    *
    * @param { number | string } value - 设置组件在父容器主轴方向上的基准尺寸。<br/>默认值：'auto'（表示组件在主轴方向上的基准尺寸为组件原本的大小）。<br/>string类型可选值：可以转化为数字的字符串（如'10'）或带长度单位的字符串（如'10px'）或
    *     'auto'，不允许设置百分比字符串。<br/>number：取值范围(0,+∞)，单位为vp。<br/>异常值：默认为'auto'。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -24119,7 +24134,7 @@ declare class CommonMethod<T> {
    * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row}, or
    *     [GridRow]{@link GridRow})布局容器中的alignItems设置。<br/>[GridCol]{@link
    *     GridCol}可以绑定alignSelf属性来改变它自身在交叉轴方向上的布局。<br/>默认值：ItemAlign.Auto
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -24134,7 +24149,7 @@ declare class CommonMethod<T> {
    *
    * @param { LocalizedAlignment } alignment - 指定设置在Stack组件中子组件的对齐规则。<br/>默认值：LocalizedAlignment.CENTER
    *     。说明：当传入异常值时，按默认值处理。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -24145,14 +24160,14 @@ declare class CommonMethod<T> {
   layoutGravity(alignment: LocalizedAlignment): T;
 
   /**
-   * 设置当前组件在布局容器中显示的优先级。
+   * 设置当前组件在Row/Column/Flex(单行)容器中显示的优先级，优先级由数值的整数部分决定，整数部分越大优先级越高。
+   * 适用于响应式布局中根据父容器空间动态显示/隐藏子组件的场景。例如，在不同屏幕尺寸下优先显示重要内容，隐藏次要内容。
    *
-   * @param { number } value - 设置当前组件在布局容器中显示的优先级。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link Row}/[Column]{@link
-   *     Column}/[Flex(单行)]{@link Flex}容器组件中生效。<br/> 小数点后的数字不作优先级区分，即区间为[x, x +
-   *     1)内的数字视为相同优先级。例如：1.0与1.9为同一优先级。<br/>子组件的displayPriority均不大于1时，优先级没有区别。<br/>当子组件的displayPriority大于1时，displayPriority
-   *     数值越大，优先级越高。若父容器空间不足，隐藏低优先级子组件。若某一优先级的子组件被隐藏，则优先级更低的子组件也都被隐藏
-   *     <br>取值限定为整数。
-   * @returns { T } Current component.
+   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link Row}/[Column]{@link
+   *     Column}/[Flex(单行)]{@link Flex}容器组件中生效。<br>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用（如在Flex容器中根据空间大小动态显示内容）。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。
+   *     <br/> 小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。例如：0.5和1.0优先级相同（均不大于1）；1.5和1.9优先级相同（整数部分均为1）；2.0和2.9优先级相同（整数部分均为2），且高于1.x的优先级。
+   *     <br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -24197,7 +24212,7 @@ declare class CommonMethod<T> {
    *
    * @param { Direction } value - 设置当前组件绘制区域内主轴方向上的布局。<br/>属性配置为auto的时候，按照系统语言方向进行布局。<br/>该属性在Column组件上不生效。<br/>默认值：Direction.Auto
    *     <br/>direction取undefined或null时按默认值处理。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -24241,7 +24256,7 @@ declare class CommonMethod<T> {
    *     components-text.md#textalign)。<br/>不支持textAlign属性的组件则无法设置水平方向的文字对齐。<br/>默认值：Alignment.Center<br/>**说明：**
    *     <br/>该属性在[Stack](ts-container-stack.md)组件上支持镜像能力，在其他组件上不支持镜像能力。<br/>在Stack中该属性与alignContent效果一致，只能设置子组件在当前组件内的对
    *     齐方式。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -24274,7 +24289,7 @@ declare class CommonMethod<T> {
    *     <br/>Alignment类型不支持镜像能力；LocalizedAlignment类型支持镜像能力，选择LocalizedAlignment中的枚举值，根据direction或系统语言方向的改变实现镜像切换。其中dire
    *     ction的优先级高于系统语言方向，当设置direction且不为auto时，LocalizedAlignment的镜像按照direction进行布局；当设置direction为auto或未设置时，LocalizedAli
    *     gnment的镜像按照系统语言方向进行布局。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -24300,13 +24315,13 @@ declare class CommonMethod<T> {
    * > - 当父组件为[RelativeContainer]{@link RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
    * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
    *
-   * @param { Position } value - [since 7 - 11]
-   * @param { Position | Edges | LocalizedEdges } value - Absolute positioning that determines the child component's
-   *     position relative to the parent's content area. The content area of the parent component is calculated by
-   *     subtracting the [border]{@link border}, [padding]{@link padding}, and [safeAreaPadding]{@link safeAreaPadding}
-   *     values from the parent component's total size. This resulting content area defines the available layout space
-   *     for child components. This attribute does not take effect when it is set to an abnormal value. [since 12].
-   * @returns { T } Current component.
+   * @param { Position } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
+   * 父组件大小减去[border]{@link border}、[padding]{@link padding}、[safeAreaPadding]{@link safeAreaPadding}后提供给子组件可布局的内容区域大小。
+   * <br/>设置异常值时该属性不生效。[since 7 - 11]
+   * @param { Position | Edges | LocalizedEdges } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
+   * 父组件大小减去[border]{@link border}、[padding]{@link padding}、[safeAreaPadding]{@link safeAreaPadding}后提供给子组件可布局的内容区域大小。
+   * <br/>设置异常值时该属性不生效。[since 12].
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -24318,17 +24333,19 @@ declare class CommonMethod<T> {
   /**
    * 设置元素在位置定位时的锚点，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
    *
-   * @param { Position } value - [since 7 - 11]
-   * @param { Position | LocalizedPosition } value - Positioning anchor that offsets an element from the position
-   *     specified by [position]{@link position} or [offset]{@link offset}
-   *     **.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})** has the same effect as
-   *     **.position({x: value1 - value3, y: value2 - value4})**. The same applies to **offset**.
-   *     <br>If **.markAnchor({x: value1, y: value2})** is set separately, the effect is the same as that of
-   *     **.offset({x: -value1, y: -value2})**.
-   *     <br>API version 9 and earlier: The default value is **{x: 0, y: 0}**.
-   *     <br>API version 10: no default value.
-   *     <br>This attribute does not take effect when it is set to an abnormal value. [since 12]
-   * @returns { T } Current component.
+   * @param { Position } value - 设置元素在位置定位时的锚点，基于position或offset的初始位置，进行进一步的偏移调整。
+   * <br/>设置.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})，效果等于设置.position({x: value1 - value3, y: value2 - value4})，offset同理。
+   * <br/>单独设置.markAnchor({x: value1, y: value2})，效果等于设置.offset({x: -value1, y: -value2})。
+   * <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+   * <br/>API version 10：无默认值。 
+   * <br/>设置异常值时该属性不生效。[since 7 - 11]
+   * @param { Position | LocalizedPosition } value - 设置元素在位置定位时的锚点，基于position或offset的初始位置，进行进一步的偏移调整。
+   * <br/>设置.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})，效果等于设置.position({x: value1 - value3, y: value2 - value4})，offset同理。
+   * <br/>单独设置.markAnchor({x: value1, y: value2})，效果等于设置.offset({x: -value1, y: -value2})。
+   * <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+   * <br/>API version 10：无默认值。 
+   * <br/>设置异常值时该属性不生效。 [since 12]
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -24340,20 +24357,19 @@ declare class CommonMethod<T> {
   /**
    * 相对偏移，组件相对原本的布局位置进行偏移。和position一起使用时，position生效，offset不生效，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
    *
-   * @param { Position } value - [since 7 - 11]
-   * @param { Position | Edges | LocalizedEdges } value - Offset of the component relative to its original layout
-   *     position. The **offset** attribute does not affect the layout of the parent container. It adjusts the component
-   *     position only during drawing.
-   *     If of the [Position]{@link Position} type, this parameter sets the offset relative to the upper
-   *     left corner of the component. If of the [Edges]{@link Edges} type, this parameter sets the offset
-   *     relative to the four edges of the component. **{x: x, y: y}** has the same effect as **{left: x, top: y}** and
-   *     **{right: -x, bottom: -y}**. The [LocalizedEdges]{@link LocalizedEdges} type supports the mirror mode:
-   *     **start** is equivalent to **x** with left-to-right scripts and **-x** with right-to-left scripts.
-   *     <br>API version 9 and earlier: The default value is **{x: 0, y: 0}**.
-   *     <br>Default unit: vp
-   *     <br>API version 10: no default value.
-   *     <br>This attribute does not take effect when it is set to an abnormal value. [since 12]
-   * @returns { T } Current component.
+   * @param { Position } value - 相对偏移，组件基于原本的布局位置进行偏移。offset属性不影响父组件布局，仅在绘制时调整位置。
+   * <br/>Position类型基于组件自身左上角偏移。
+   * <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+   * <br/>默认单位：vp
+   * <br/>API version 10：无默认值。
+   * <br/>设置异常值时该属性不生效。[since 7 - 11]
+   * @param { Position | Edges | LocalizedEdges } value - 相对偏移，组件基于原本的布局位置进行偏移。offset属性不影响父组件布局，仅在绘制时调整位置。
+   * <br/>Position类型基于组件自身左上角偏移，Edges类型基于组件自身四边偏移。 offset属性设置{x: x, y: y}与设置{left: x, top: y}以及{right: -x, bottom: -y}效果相同，类型LocalizedEdges支持镜像模式：LTR模式下start等同于x，RTL模式下start等同于-x。
+   * <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+   * <br/>默认单位：vp
+   * <br/>API version 10：无默认值。
+   * <br/>设置异常值时该属性不生效。[since 12]
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -24378,9 +24394,16 @@ declare class CommonMethod<T> {
   enabled(value: boolean): T;
 
   /**
-   * Sets the number of occupied columns and offset columns for a specific device width type.
+   * 设置在特定设备宽度类型下的占用列数和偏移列数。
    *
-   * @param { object } value
+   * @param { object } value - 设置在特定设备宽度类型下的占用列数和偏移列数，span：占用列数（需为非负整数）。传入负数或超出GridContainer总列数时，使用默认值；offset：偏移列数（需为非负整数）。传入负数时，使用默认值0。
+   * <br>当值为number类型时，仅设置列数，当格式如{"span":&nbsp;1,&nbsp;"offset":&nbsp;0}时，指同时设置占用列数与偏移列数。
+   * <br>-&nbsp;xs：指设备宽度类型为SizeType.XS（<320vp）时的占用列数和偏移列数。
+   * <br>-&nbsp;sm：指设备宽度类型为SizeType.SM（320vp-600vp）时的占用列数和偏移列数。
+   * <br>-&nbsp;md：指设备宽度类型为SizeType.MD（600vp-840vp）时的占用列数和偏移列数。
+   * <br>-&nbsp;lg：指设备宽度类型为SizeType.LG（≥840vp）时的占用列数和偏移列数。
+   * <br>各尺寸类型的详细断点配置请参见[GridContainer](ts-container-gridcontainer.md)。
+   * <br>**说明：**<br>- 调用该属性时，其父组件或祖先组件必须是GridContainer。
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @since 7 dynamiconly
@@ -24399,7 +24422,7 @@ declare class CommonMethod<T> {
    * attributeModifier}动态设置属性方法。
    *
    * @param { AlignRuleOption } value - 指定设置在相对布局组件中子组件的对齐规则。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form
@@ -24414,7 +24437,7 @@ declare class CommonMethod<T> {
    * [attributeModifier]{@link attributeModifier}动态设置属性方法。
    *
    * @param { LocalizedAlignRuleOptions } alignRule - 指定设置在相对布局组件中子组件的对齐规则。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -24430,7 +24453,7 @@ declare class CommonMethod<T> {
    * @param { Axis } direction - 链的方向。
    * @param { ChainStyle } style - 链的样式。
    * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -24442,14 +24465,17 @@ declare class CommonMethod<T> {
    * 指定当前组件的宽高比，aspectRatio=width/height。
    * - 仅设置width、aspectRatio时，height=width/aspectRatio。
    * - 仅设置height、aspectRatio时，width=height*aspectRatio。
-   * - 同时设置width、height和aspectRatio时，height不生效，height=width/aspectRatio。
+   * - 同时设置width、height和aspectRatio时，height会被重新计算为width/aspectRatio，显式设置的height值不生效。
+   * 
+   * 适用于需要保持固定宽高比的组件，例如图片展示、视频播放器、响应式布局中保持比例等场景。
    *
    * 设置aspectRatio属性后，组件宽高会受父组件内容区大小限制，[constraintSize]{@link constraintSize}的优先级高于aspectRatio。
+   * 当constraintSize设置的maxWidth/maxHeight约束与aspectRatio计算结果冲突时，组件将优先遵循constraintSize的maxWidth/maxHeight约束，此时aspectRatio可能无法生效。
    *
    * @param { number } value - 指定当前组件的宽高比。<br/>API version 9及以前，默认值为：1.0。<br/>API version
    *     10：无默认值。<br/>**说明：**<br/>该属性在不设置值或者设置非法值(小于等于0)时不生效。<br/>例如，Row只设置宽度且没有子组件，aspectRatio不设置值或者设置成负数时，此时Row高度为0。
    *     <br>取值限定为整数。
-   * @returns { T } Current component.
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
