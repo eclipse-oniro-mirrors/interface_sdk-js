@@ -1180,6 +1180,50 @@ declare namespace observer {
    */
   function offIccAccountInfoChange(callback?: Callback<void>): void;
 
+    /**
+   * Callback when the call forwarding status is updated. This callback is invoked when the unconditional call
+   * forwarding status of a specified card updates and the observer is added to monitor the updates.
+   *
+   * @permission ohos.permission.GET_TELEPHONY_STATE
+   * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
+   *     <br>- **0**: card slot 1.
+   *     <br>- **1**: card slot 2.
+   * @param { Callback<boolean> } callback - Callback used to return the result. The value **true** indicates
+   *     calltransfer enabled, and **false** indicates calltransfer disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 8300001 - Invalid parameter value.
+   * @throws { BusinessError } 8300002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 8300003 - System internal error.
+   * @throws { BusinessError } 8300999 - Unknown error code.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @systemapi Hide this for inner system use.
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function onCallTransferChange(slotId: int, callback: Callback<boolean>): void;
+  
+  /**
+   * Cancel callback when the call forwarding status is updated.
+   *
+   * @permission ohos.permission.GET_TELEPHONY_STATE
+   * @param { Callback<boolean> } [callback] - Indicates the callback to unsubscribe from the callTransferChange event.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 8300001 - Invalid parameter value.
+   * @throws { BusinessError } 8300002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 8300003 - System internal error.
+   * @throws { BusinessError } 8300999 - Unknown error code.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @systemapi Hide this for inner system use.
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function offCallTransferChange(callback?: Callback<boolean>): void;
+  
   /**
    * Enumerates SIM card types and states.
    *
