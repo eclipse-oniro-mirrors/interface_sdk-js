@@ -24,7 +24,7 @@ let outputPath = '';
 let mode = '';
 let sdkPath = '';
 let subdirs = [];
-const deletedExports = new Set();
+const deletedExportsByFile = new Map();
 
 const CONFIG_PATH = path.resolve(__dirname, 'package_tools/src/dependence/arktsconfig.json');
 const ES2PANDA_LIB_PATH = '/build-tools/koala-wrapper/build/lib/es2panda';
@@ -347,7 +347,7 @@ function findCommentStartLine(lines, statementStartLine) {
  * @returns {void}
  */
 function processTagAndApiMode(node, filePath, fileContent, nodePositionArr) {
-  processNestedDeclarations(node, nodePositionArr, fileContent);
+  processNestedDeclarations(node, nodePositionArr, fileContent, filePath);
 }
 
 /**
@@ -357,9 +357,10 @@ function processTagAndApiMode(node, filePath, fileContent, nodePositionArr) {
  * @param {arkts.AstNode} node - AST 节点
  * @param {Array<{startLine: number, startCol: number, endLine: number, endCol: number}>} nodePositionArr - 待删除位置数组
  * @param {string} fileContent - 文件原始文本内容
+ * @param {string} filePath - 当前文件路径
  * @returns {void}
  */
-function collectUnpublishedNodePosition(node, nodePositionArr, fileContent) {
+function collectUnpublishedNodePosition(node, nodePositionArr, fileContent, filePath) {
   const jsdocStr = arkts.getJsdocStringFromDeclaration(node);
   const hasUnpublished = !!jsdocStr && jsdocStr !== 'Empty Jsdoc' && /@unpublished/g.test(jsdocStr);
   if (!hasUnpublished) {
@@ -386,25 +387,38 @@ function collectUnpublishedNodePosition(node, nodePositionArr, fileContent) {
       endCol: stmtEndCol,
     });
   }
-  collectDeletedExportName(node, fileContent);
+  collectDeletedExportName(node, fileContent, filePath);
   return true;
 }
 
 /**
- * 从被删除的声明节点中提取导出名并记录到 deletedExports
+ * 从被删除的声明节点中提取导出名并记录到 deletedExportsByFile
  * 仅记录顶层 export 声明的名称，用于后续清理悬空 import
+ * 当声明带装饰器（如 @Retention、@Component）时，AST 节点的 startPosition 指向装饰器行，
+ * 需要向下扫描直到找到实际的声明行
  * @param {arkts.AstNode} node - AST 节点
  * @param {string} fileContent - 文件原始文本内容
+ * @param {string} filePath - 当前文件路径
  * @returns {void}
  */
-function collectDeletedExportName(node, fileContent) {
+function collectDeletedExportName(node, fileContent, filePath) {
   const lines = fileContent.split(/\r?\n/);
   const startLine = node.startPosition.line();
   if (startLine < 0 || startLine >= lines.length) { return; }
-  const line = lines[startLine];
-  const match = line.match(/(?:export\s+)?(?:declare\s+)?(?:class|interface|enum|struct|type|function|namespace)\s+(\w+)/);
-  if (match) {
-    deletedExports.add(match[1]);
+  // 当声明带装饰器（如@Retention）时，startPosition指向装饰器行而非export声明行，
+  // 需要从startLine向下搜索到endLine，找到真正包含声明关键字的行
+  const endLine = node.endPosition.line();
+  const declRegex = /(?:export\s+)?(?:declare\s+)?(?:@interface|enum|const|let|var|class|interface|enum|struct|type|function|namespace|default)\s+(\w+)/;
+  for (let i = startLine; i <= endLine && i < lines.length; i++) {
+    const match = lines[i].match(declRegex);
+    if (match) {
+      const fileName = path.basename(filePath);
+      if (!deletedExportsByFile.has(fileName)) {
+        deletedExportsByFile.set(fileName, new Set());
+      }
+      deletedExportsByFile.get(fileName).add(match[1]);
+      return;
+    }
   }
 }
 
@@ -413,10 +427,11 @@ function collectDeletedExportName(node, fileContent) {
  * @param {arkts.AstNode} node - AST 节点
  * @param {Array<{startLine: number, startCol: number, endLine: number, endCol: number}>} nodePositionArr - 待删除位置数组
  * @param {string} fileContent - 文件原始文本内容
+ * @param {string} filePath - 当前文件路径
  * @returns {void}
  */
-function processNestedDeclarations(node, nodePositionArr, fileContent) {
-  arkts.visitEachChild(node, (child) => processAllNodesForTagAndApi(child, nodePositionArr, fileContent));
+function processNestedDeclarations(node, nodePositionArr, fileContent, filePath) {
+  arkts.visitEachChild(node, (child) => processAllNodesForTagAndApi(child, nodePositionArr, fileContent, filePath));
 }
 
 /**
@@ -426,8 +441,8 @@ function processNestedDeclarations(node, nodePositionArr, fileContent) {
  * @param {string} fileContent - 文件原始文本内容
  * @returns {arkts.AstNode} 原始节点（不做修改）
  */
-function processAllNodesForTagAndApi(node, nodePositionArr, fileContent) {
-  const wasDeleted = collectUnpublishedNodePosition(node, nodePositionArr, fileContent);
+function processAllNodesForTagAndApi(node, nodePositionArr, fileContent, filePath) {
+  const wasDeleted = collectUnpublishedNodePosition(node, nodePositionArr, fileContent, filePath);
 
   if (wasDeleted) {
     return node;
@@ -439,9 +454,9 @@ function processAllNodesForTagAndApi(node, nodePositionArr, fileContent) {
 
   const children = getChildNodes(node);
   if (children.length > 0) {
-    children.forEach((child) => processAllNodesForTagAndApi(child, nodePositionArr, fileContent));
+    children.forEach((child) => processAllNodesForTagAndApi(child, nodePositionArr, fileContent, filePath));
   } else {
-    arkts.visitEachChild(node, (child) => processAllNodesForTagAndApi(child, nodePositionArr, fileContent));
+    arkts.visitEachChild(node, (child) => processAllNodesForTagAndApi(child, nodePositionArr, fileContent, filePath));
   }
   return node;
 }
@@ -506,8 +521,15 @@ function getCopyrightComment(text) {
  * @returns {string} @file/@kit 注释文本，未找到返回空字符串
  */
 function getFileAndKitComment(text) {
-  const match = text.match(/\/\*\*\s*\*\s*@file[\s\S]*?@kit[\s\S]*?\*\//);
-  return match ? match[0] : '';
+  // 逐个提取 /** ... */ 注释块，返回第一个同时包含 @file 和 @kit 的块
+  const blockRegex = /\/\*\*[\s\S]*?\*\//g;
+  let block;
+  while ((block = blockRegex.exec(text)) !== null) {
+    if (/@file/.test(block[0]) && /@kit/.test(block[0])) {
+      return block[0];
+    }
+  }
+  return '';
 }
 
 /**
@@ -562,7 +584,7 @@ function copyFileToOutput(url) {
  * @returns {void}
  */
 function writeFile(url, data) {
-  const relativePath = path.relative(inputDir,url);
+  const relativePath = path.relative(inputDir, url);
   const newFilePath = path.resolve(outputPath, relativePath).replace(/\.static\.d\.ets$/, '.d.ets');
   const dirPath = path.dirname(newFilePath);
   if (!fs.existsSync(dirPath)) {
@@ -589,7 +611,7 @@ function cleanupOutputFiles() {
     let content = fs.readFileSync(filePath, 'utf-8');
     const originalContent = content;
 
-    content = removeDanglingImports(content);
+    content = removeDanglingImports(content, filePath);
 
     if (isEmptyFile(content, filePath)) {
       fs.rmSync(filePath, { force: true });
@@ -603,49 +625,197 @@ function cleanupOutputFiles() {
 }
 
 /**
- * 移除引用已删除导出名的 import/export 语句
+ * 解析 { A, B as C } 中的名称列表，返回原始名数组（去掉 as 别名）
+ * @param {string} namesStr - 大括号内的名称字符串
+ * @returns {string[]} 原始名数组
+ */
+function parseExportNames(namesStr) {
+  return namesStr.split(',').map(s => s.trim().split(/\s+as\s+/)[0].trim());
+}
+
+/**
+ * 从 import/export 的模块说明符中提取文件名（basename），用于查找 deletedExportsByFile
+ * 支持以下路径形式：
+ *   - 相对路径 './@ohos.multimodalInput.mouseEvent' → basename '@ohos.multimodalInput.mouseEvent'
+ *   - @ohos.* 绝对路径 '@ohos.arkui.component' → 直接作为文件名（@ohos.* 本身全局唯一）
+ *   - arkui.* 路径 'arkui.BuilderNode' → 取最后一段 'BuilderNode' 作为文件名
+ *   - @kit.* 路径 → 无法解析，返回 null
+ * @param {string} moduleSpecifier - 模块路径字符串
+ * @returns {string|null} 文件名，无法解析时返回 null
+ */
+function resolveModuleFileName(moduleSpecifier) {
+  if (moduleSpecifier.startsWith('@kit.')) {
+    // @kit.* 是 kit 再导出文件，无法对应到具体声明文件，保守保留
+    return null;
+  }
+  let base;
+  if (moduleSpecifier.startsWith('.')) {
+    // 相对路径：取 basename
+    base = path.basename(moduleSpecifier);
+  } else if (moduleSpecifier.startsWith('@ohos.')) {
+    // @ohos.* 路径本身就是全局唯一的文件名前缀
+    base = moduleSpecifier;
+  } else {
+    // arkui.* 等用点号分隔目录层级的路径，取最后一段作为文件名
+    base = moduleSpecifier.split('.').pop();
+  }
+  const candidates = [
+    base,
+    base + '.d.ets',
+    base + '.d.ts',
+    base + '.ets',
+    base + '.ts',
+  ];
+  for (const candidate of candidates) {
+    if (deletedExportsByFile.has(candidate)) {
+      return candidate;
+    }
+  }
+  return null;
+}
+
+/**
+ * 获取指定来源文件被删除的导出名集合
+ * @param {string} fileName - 文件名（basename）
+ * @returns {Set<string>} 被删除的导出名集合
+ */
+function getDeletedExportsForFile(fileName) {
+  return deletedExportsByFile.get(fileName) || new Set();
+}
+
+/**
+ * 构建当前文件内「本地名 → {来源文件, 来源导出名}」映射，用于清理本地再导出
+ * export { ... } 中引用了已删除声明的名称。仅记录来源可解析（@kit.* 除外）的导入。
  * @param {string} content - 文件内容
+ * @returns {Map<string, {sourceFile: string, sourceName: string}>} 本地名 → 来源信息映射
+ */
+function buildNameToSourceMap(content) {
+  const map = new Map();
+  const addNamed = (namesStr, sourceFile) => {
+    for (const part of namesStr.split(',')) {
+      const trimmed = part.trim();
+      if (!trimmed) { continue; }
+      const asMatch = trimmed.match(/^(\w+)\s+as\s+(\w+)$/);
+      if (asMatch) {
+        map.set(asMatch[2], { sourceFile, sourceName: asMatch[1] });
+      } else if (/^\w+$/.test(trimmed)) {
+        map.set(trimmed, { sourceFile, sourceName: trimmed });
+      }
+    }
+  };
+  let m;
+  const namedRe = /^[ \t]*import\s+(?:(\w+)\s*,\s*)?\{([\s\S]*?)\}\s*from\s*['"]([^'"]+)['"]\s*;?[ \t]*\r?$/gm;
+  while ((m = namedRe.exec(content)) !== null) {
+    const sourceFile = resolveModuleFileName(m[3]);
+    if (sourceFile === null) { continue; }
+    if (m[1]) { map.set(m[1], { sourceFile, sourceName: m[1] }); }
+    addNamed(m[2], sourceFile);
+  }
+  const defaultRe = /^[ \t]*import\s+(\w+)\s+from\s*['"]([^'"]+)['"]\s*;?[ \t]*\r?$/gm;
+  while ((m = defaultRe.exec(content)) !== null) {
+    const sourceFile = resolveModuleFileName(m[2]);
+    if (sourceFile === null) { continue; }
+    map.set(m[1], { sourceFile, sourceName: m[1] });
+  }
+  return map;
+}
+
+/**
+ * 判断本地再导出（export { X }）中的名称是否应被删除：
+ *   - 名称在当前文件自己的被删集合中（本地声明被删），或
+ *   - 名称来自某个来源文件，且该来源文件删除了对应导出名（kit 再导出场景）
+ * @param {string} name - 导出名（本地绑定名）
+ * @param {Set<string>} currentDeletedSet - 当前文件被删除的导出名集合
+ * @param {Map<string, {sourceFile: string, sourceName: string}>} nameToSource - 本地名 → 来源映射
+ * @returns {boolean} 是否应删除
+ */
+function isLocalExportNameDeleted(name, currentDeletedSet, nameToSource) {
+  if (currentDeletedSet.has(name)) { return true; }
+  const src = nameToSource.get(name);
+  if (src) {
+    return getDeletedExportsForFile(src.sourceFile).has(src.sourceName);
+  }
+  return false;
+}
+
+/**
+ * 移除引用已删除导出名的 import/export 语句
+ * 采用全文正则（多行感知）逐块处理，支持多行 import { ... } / import X, { ... } /
+ * export { ... } / export { ... } from '...'；仅当导出名在对应来源文件中被删除时才移除，
+ * 避免跨文件同名误删。kit 文件的本地 export { ... } 通过本文件 import 建立的
+ * 名称→来源映射，按来源被删集合清理。
+ * @param {string} content - 文件内容
+ * @param {string} filePath - 当前文件路径
  * @returns {string} 清理后的内容
  */
-function removeDanglingImports(content) {
-  return content.split(/\r?\n/).map(line => {
-    const trimmed = line.trim();
+function removeDanglingImports(content, filePath) {
+  const currentFileName = path.basename(filePath);
+  const currentDeletedSet = getDeletedExportsForFile(currentFileName);
+  const nameToSource = buildNameToSourceMap(content);
 
-    // Named imports: import { X, Y } from 'module'
-    const namedMatch = trimmed.match(/^(\s*import\s*\{)([^}]*)(\}\s*from\s*['"][^'"]+['"]\s*;?\s*)$/);
-    if (namedMatch) {
-      const names = namedMatch[2].split(',').map(s => {
-        const baseName = s.trim().split(/\s+as\s+/)[0].trim();
-        return baseName;
-      });
-      const keptNames = names.filter(name => !deletedExports.has(name));
-      if (keptNames.length === 0) { return ''; }
-      if (keptNames.length === names.length) { return line; }
-      return namedMatch[1] + keptNames.join(', ') + namedMatch[3];
+  // import [default,] { named } from 'module'（多行感知）
+  content = content.replace(
+    /^([ \t]*import\s+)(?:(\w+)\s*,\s*)?(\{[\s\S]*?\})\s*from\s*['"]([^'"]+)['"]\s*;?[ \t]*\r?$/gm,
+    (whole, lead, defaultName, brace, modSpec) => {
+      const sourceFileName = resolveModuleFileName(modSpec);
+      if (sourceFileName === null) { return whole; }
+      const deletedSet = getDeletedExportsForFile(sourceFileName);
+      const names = parseExportNames(brace.slice(1, -1));
+      const keptNamed = names.filter(n => !deletedSet.has(n));
+      const keptDefault = defaultName && !deletedSet.has(defaultName) ? defaultName : null;
+      if (!keptDefault && keptNamed.length === 0) { return ''; }
+      if (keptDefault && keptNamed.length === names.length) { return whole; }
+      let body;
+      if (keptDefault && keptNamed.length > 0) {
+        body = `${keptDefault}, { ${keptNamed.join(', ')} }`;
+      } else if (keptDefault) {
+        body = keptDefault;
+      } else {
+        body = `{ ${keptNamed.join(', ')} }`;
+      }
+      return `${lead}${body} from '${modSpec}';`;
     }
+  );
 
-    // Default import: import X from 'module'
-    const defaultMatch = trimmed.match(/^(\s*import\s+)(\w+)(\s+from\s*['"][^'"]+['"]\s*;?\s*)$/);
-    if (defaultMatch) {
-      if (deletedExports.has(defaultMatch[2])) { return ''; }
-      return line;
+  // import default from 'module'（无大括号）
+  content = content.replace(
+    /^([ \t]*import\s+)(\w+)\s+from\s*['"]([^'"]+)['"]\s*;?[ \t]*\r?$/gm,
+    (whole, lead, name, modSpec) => {
+      const sourceFileName = resolveModuleFileName(modSpec);
+      if (sourceFileName === null) { return whole; }
+      const deletedSet = getDeletedExportsForFile(sourceFileName);
+      return deletedSet.has(name) ? '' : whole;
     }
+  );
 
-    // delete export
-    const exportMatch = trimmed.match(/^(\s*export\s*\{)([^}]*)(\}\s*;?\s*)$/);
-    if (exportMatch) {
-      const names = exportMatch[2].split(',').map(s => {
-        const baseName = s.trim().split(/\s+as\s+/)[0].trim();
-        return baseName;
-      });
-      const keptNames = names.filter(name => !deletedExports.has(name));
-      if (keptNames.length === 0) { return ''; }
-      if (keptNames.length === names.length) { return line; }
-      return exportMatch[1] + keptNames.join(', ') + exportMatch[3];
+  // export { named } from 'module'（多行感知再导出）
+  content = content.replace(
+    /^([ \t]*export\s+)(\{[\s\S]*?\})\s*from\s*['"]([^'"]+)['"]\s*;?[ \t]*\r?$/gm,
+    (whole, lead, brace, modSpec) => {
+      const sourceFileName = resolveModuleFileName(modSpec);
+      if (sourceFileName === null) { return whole; }
+      const deletedSet = getDeletedExportsForFile(sourceFileName);
+      const names = parseExportNames(brace.slice(1, -1));
+      const kept = names.filter(n => !deletedSet.has(n));
+      if (kept.length === 0) { return ''; }
+      if (kept.length === names.length) { return whole; }
+      return `${lead}{ ${kept.join(', ')} } from '${modSpec}';`;
     }
+  );
 
-    return line;
-  }).join('\n');
+  // export { named }（多行感知本地再导出，按来源被删集合清理）
+  content = content.replace(
+    /^([ \t]*export\s+)(\{[\s\S]*?\})[ \t]*;?[ \t]*\r?$/gm,
+    (whole, lead, brace) => {
+      const names = parseExportNames(brace.slice(1, -1));
+      const kept = names.filter(n => !isLocalExportNameDeleted(n, currentDeletedSet, nameToSource));
+      if (kept.length === 0) { return ''; }
+      if (kept.length === names.length) { return whole; }
+      return `${lead}{ ${kept.join(', ')} };`;
+    }
+  );
+
+  return content;
 }
 
 /**
@@ -664,7 +834,7 @@ function isEmptyFile(content, filePath) {
   if (copyright) { text = text.replace(copyright, ''); }
   const fileKit = getFileAndKitComment(text);
   if (fileKit) { text = text.replace(fileKit, ''); }
-  text = text.replace(/'use static'\s*/g, '');
+  text = text.replace(/'use static'\s*;?/g, '');
   text = text.replace(/^\s*import\s+.*$/gm, '');
   text = text.trim();
 
