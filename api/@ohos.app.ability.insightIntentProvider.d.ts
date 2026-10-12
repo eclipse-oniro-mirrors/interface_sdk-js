@@ -21,7 +21,8 @@
 import type insightIntent from './@ohos.app.ability.insightIntent';
 
 /**
- * Insight intent Provider.
+ * This module provides management capabilities for intent providers, such as proactively sending the execution
+ * result of a specified intent.
  * @namespace insightIntentProvider
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly

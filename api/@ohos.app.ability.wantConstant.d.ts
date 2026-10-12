@@ -219,7 +219,9 @@ declare namespace wantConstant {
     PARAMS_STREAM = 'ability.params.stream',
 
     /**
-     * Index of an application clone.
+     * Indicates the index of an app clone. An app clone refers to multiple independent instances of the same
+     * application. The system assigns a unique index to each instance to distinguish different application instances. In
+     * application jump scenarios, developers can set this parameter to specify the target app clone.
      *
      * @syscap SystemCapability.Ability.AbilityBase
      * @atomicservice
@@ -341,7 +343,8 @@ declare namespace wantConstant {
     CREATE_APP_INSTANCE_KEY = 'ohos.extra.param.key.createAppInstance',
 
     /**
-     * Clone index of the caller.
+     * Indicates the app clone index of the caller application. For details, see
+     * [Creating an App Clone](docroot://quick-start/app-clone.md).
      *
      * @syscap SystemCapability.Ability.AbilityBase
      * @since 14 dynamic
@@ -373,12 +376,17 @@ declare namespace wantConstant {
     APP_LAUNCH_TRUSTLIST = 'ohos.params.appLaunchTrustList',
 
     /**
-     * Page stack information of the atomic service being launched. This parameter takes effect only when the caller is
-     * a UIAbilityContext and the callee is an atomic service.
+     * Indicates the page stack information of the atomic service to be started, which is used to specify the target page
+     * to navigate to. The value is page stack information of the string type. Developers can obtain the current page
+     * stack information through UIAbilityContext and pass it. This field takes effect only when the caller is a
+     * UIAbilityContext and the callee is an atomic service.
      *
-     * For example, if an atomic service contains a home page and a second page, and you want to directly launch the
-     * second page, you can pass the page stack information of the second page through this field when launching the
-     * atomic service.
+     * For example, an atomic service contains a home page and a second page. If you want to directly start the second
+     * page of the atomic service, you can pass the page stack information of the second page through this field when
+     * starting the atomic service.
+     *
+     * **Note:** Since API version 26.0.0, if the caller has the ohos.permission.START_ABILITY_TO_PAGE permission, this
+     * field also takes effect when the target is not an atomic service.
      *
      * @syscap SystemCapability.Ability.AbilityBase
      * @atomicservice

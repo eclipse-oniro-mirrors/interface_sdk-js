@@ -266,7 +266,7 @@ declare namespace insightIntentDriver {
   }
 
   /**
-   * 查询洞察意图实体时的Param。
+   * 意图实体查询参数，用于筛选设备上符合条件的意图实体。
    *
    * @typedef QueryParam
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -1423,8 +1423,8 @@ declare namespace insightIntentDriver {
    * ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS。
    *
    * @permission ohos.permission.EXECUTE_INSIGHT_INTENT
-   * @param { QueryParam } param - 查询参数。
-   * @returns { Promise<Array<Record<string, Object>>> } - Returns the insight intent entity information.
+   * @param { QueryParam } param - 意图实体参数，描述意图实体的查询条件，用于查询应用中符合条件的意图实体。
+   * @returns { Promise<Array<Record<string, Object>>> } - Promise对象，返回应用返回的意图实体数组。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
@@ -1441,8 +1441,8 @@ declare namespace insightIntentDriver {
    * 查询意图实体信息。
    *
    * @permission ohos.permission.EXECUTE_INSIGHT_INTENT
-   * @param { QueryParam } param - 查询参数。
-   * @returns { Promise<Array<Record<string, RecordData>>> } - Returns the insight intent entity information.
+   * @param { QueryParam } param - 意图实体参数，描述意图实体的查询条件，用于查询应用中符合条件的意图实体。
+   * @returns { Promise<Array<Record<string, RecordData>>> } - Promise对象，返回应用返回的意图实体数组。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.

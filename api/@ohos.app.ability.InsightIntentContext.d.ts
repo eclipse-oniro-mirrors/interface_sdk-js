@@ -23,7 +23,7 @@ import type insightIntent from './@ohos.app.ability.insightIntent';
 import type Want from './@ohos.app.ability.Want';
 
 /**
- * The module provides the context for intent execution. It is used as a property in both the
+ * The module provides the intent execution context. It is used as a property in both the
  * [intent execution base class]{@link @ohos.app.ability.InsightIntentExecutor:InsightIntentExecutor} and
  * [base class decorated with @InsightIntentEntry]{@link @ohos.app.ability.InsightIntentEntryExecutor:InsightIntentEntryExecutor}
  * , offering essential capabilities for intent implementation, for example, starting

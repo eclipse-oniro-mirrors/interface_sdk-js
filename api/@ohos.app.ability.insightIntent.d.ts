@@ -36,8 +36,8 @@ import { RecordData } from './@ohos.base';
  */
 declare namespace insightIntent {
   /**
-   * Enumerates the intent execution modes. It specifies the mode of execution passed when the intent is triggered by a
-   * system entry point. The supported execution modes for each intent are defined during intent development.
+   * Intent execution mode. Indicates the mode passed when a system entry triggers intent execution. The execution modes
+   * supported by each intent are defined during intent development.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -275,7 +275,7 @@ declare namespace insightIntent {
   }
 
   /**
-   * Enumerates the return results of intent execution.
+   * Return result of intent execution.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -345,7 +345,7 @@ declare namespace insightIntent {
     flags?: int;
 
     /**
-     * Interaction information returned after the intent execution completes.
+     * Interactive information returned after intent execution.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi

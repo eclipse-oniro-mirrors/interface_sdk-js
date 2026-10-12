@@ -286,7 +286,8 @@ declare namespace insightIntentDriver {
   }
 
   /**
-   * Param when query insight intent entity.
+   * Intent entity query parameters, used to filter intent entities on the device that meet matching
+   * conditions.
    *
    * @typedef QueryParam
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -410,7 +411,7 @@ declare namespace insightIntentDriver {
   function execute(param: ExecuteParam, callback: AsyncCallback<insightIntent.ExecuteResult>): void;
 
   /**
-   * Executes a call to an intent. This API uses an asynchronous callback to return the result.
+   * Executes a call to an intent. This API uses a promise to return the result.
    * When the caller is in the background, the ohos.permission.START_ABILITIES_FROM_BACKGROUND permission is required.
    * When [ExecuteMode]{@link @ohos.app.ability.insightIntent:insightIntent.ExecuteMode}of the intent call is set to
    * UI_ABILITY_BACKGROUND, the ohos.permission.ABILITY_BACKGROUND_COMMUNICATION permission is required.
@@ -1044,10 +1045,10 @@ declare namespace insightIntentDriver {
   }
 
   /**
-   * Describes the parameters supported by the
+   * PageIntentInfo is used to describe the parameters supported by the
    * [@InsightIntentPage]{@link @ohos.app.ability.InsightIntentDecorator:InsightIntentPage}
-   *  decorator, such as the
-   * [NavDestination]{@link ./@internal/component/ets/nav_destination} name
+   *  decorator, for example, the
+   * [navDestination]{@link ./@internal/component/ets/nav_destination} name
    * of the target page.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -1320,7 +1321,8 @@ declare namespace insightIntentDriver {
     readonly entityCategory: string;
 
     /**
-     * Data format of intent entity parameters.
+     * Data format declaration of the intent entity parameters, used to define the data format of entity parameters
+     * during intent invocation.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
@@ -1330,7 +1332,8 @@ declare namespace insightIntentDriver {
     readonly parameters: Record<string, Object>;
 
     /**
-     * The parameters of intent entity.
+     * Data format declaration of the intent entity parameters, used to define the data format of entity parameters
+     * during intent invocation.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
@@ -1481,8 +1484,10 @@ declare namespace insightIntentDriver {
    * ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS is required.
    *
    * @permission ohos.permission.EXECUTE_INSIGHT_INTENT
-   * @param { QueryParam } param - Query parameter.
-   * @returns { Promise<Array<Record<string, Object>>> } - Returns the insight intent entity information.
+   * @param { QueryParam } param - Intent entity parameters, which describe the query conditions of the intent entity
+   *     and are used to query the intent entities that meet the conditions in the application.
+   * @returns { Promise<Array<Record<string, Object>>> } - Promise object that returns the array of intent entities
+   *     returned by the application.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
@@ -1499,8 +1504,10 @@ declare namespace insightIntentDriver {
    *  Query insight intent entity information.
    *
    * @permission ohos.permission.EXECUTE_INSIGHT_INTENT
-   * @param { QueryParam } param - Query parameter.
-   * @returns { Promise<Array<Record<string, RecordData>>> } - Returns the insight intent entity information.
+   * @param { QueryParam } param - Intent entity parameters, which describe the query conditions of the intent entity
+   *     and are used to query the intent entities that meet the conditions in the application.
+   * @returns { Promise<Array<Record<string, RecordData>>> } - Promise object that returns the array of intent entities
+   *     returned by the application.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.

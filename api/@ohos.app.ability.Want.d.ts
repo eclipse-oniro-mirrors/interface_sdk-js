@@ -49,9 +49,9 @@ export default class Want {
   bundleName?: string;
 
   /**
-   * Ability name of the application. It represents the ability name of the target application in the application launch
-   *  scenario. If both **bundleName** and **abilityName** are specified in a Want object, the Want object can match a 
-   * specific ability. The value of **abilityName** must be unique in an application.
+   * Name of the Ability component of the application. In the application startup scenario, indicates the name of the
+   * Ability component of the launched party. If both **bundleName** and **abilityName** are specified in the Want, the
+   * Want can directly match the specified Ability. The **abilityName** must be unique within an application.
    *
    * @syscap SystemCapability.Ability.AbilityBase
    * @crossplatform [since 10]
@@ -165,8 +165,9 @@ export default class Want {
    * For details about the constants of **Params** in **want**, see 
    * [wantConstant]{@link ./@ohos.app.ability.wantConstant:wantConstant}.
    * 
-   * Note that a maximum of 100 KB data that can be transferred by using **WantParams**. If the data volume exceeds 100 
-   * KB, transfer data in [WriteRawDataBuffer]{@link ./@ohos.rpc:rpc.writeRawDataBuffer} or 
+   * Note that the maximum data that can be transferred by using **WantParams** is 200 KB since API version 23, and
+   * 100 KB in API version 22 and earlier. If the data volume exceeds the limit, transfer data in
+   * [WriteRawDataBuffer]{@link ./@ohos.rpc:rpc.writeRawDataBuffer} or
    * [uri]{@link ./@ohos.uri:uri} mode.
    * 
    * The values of **parameters** must be of the following basic data types: String, Number, Boolean, Object, undefined,
@@ -219,8 +220,9 @@ export default class Want {
    * For details about the constants of **Params** in **want**, see 
    * [wantConstant]{@link ./@ohos.app.ability.wantConstant:wantConstant}.
    * 
-   * Note that a maximum of 100 KB data that can be transferred by using **WantParams**. If the data volume exceeds 100 
-   * KB, transfer data in [WriteRawDataBuffer]{@link ./@ohos.rpc:rpc.writeRawDataBuffer} or 
+   * Note that the maximum data that can be transferred by using **WantParams** is 200 KB since API version 23, and
+   * 100 KB in API version 22 and earlier. If the data volume exceeds the limit, transfer data in
+   * [WriteRawDataBuffer]{@link ./@ohos.rpc:rpc.writeRawDataBuffer} or
    * [uri]{@link ./@ohos.uri:uri} mode.
    * 
    * The values of **parameters** must be of the following basic data types: String, Number, Boolean, Object, undefined,
