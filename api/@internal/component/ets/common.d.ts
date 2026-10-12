@@ -1797,9 +1797,9 @@ declare const SyncMonitor: MonitorDecorator;
 
 /**
  * The **AnimatableArithmetic** API defines animation calculation rules for non-number data types. To animate non-number
- * data (such as arrays, structs, and colors), you need to implement the addition, subtraction, multiplication, and
- * equality checking functions in the **AnimatableArithmetic\<T\>** API. This enables the data to participate in
- * animation interpolation calculations and to detect whether the data has changed. In other words, the non-number data
+ * data (such as arrays, structs, and colors), you need to implement the addition, subtraction, multiplication, and 
+ * equality checking functions in the **AnimatableArithmetic\<T\>** API. This enables the data to participate in 
+ * animation interpolation calculations and to detect whether the data has changed. In other words, the non-number data 
  * is defined as types that implement the **AnimatableArithmetic\<T\>** API.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4135,7 +4135,7 @@ declare interface AnimateParam {
    * 
    * Default value: **1000**
    * 
-   * Note: 1. Before API 26.0.0, the maximum animation duration for an ArkTS widget is 1,000 ms; values exceeding this
+   * Note: 1. Before API 26.0.0, the maximum animation duration for an ArkTS widget is 1,000 ms; values exceeding this 
    * limit are clamped to 1,000 ms. Starting from API version 26.0.0, the maximum animation duration for an ArkTS widget
    * is adjusted to 2,000 ms.
    * 
@@ -4153,10 +4153,10 @@ declare interface AnimateParam {
    */
   duration?: number;
   /**
-   * Animation playback speed. A larger value indicates faster animation playback, and a smaller value indicates slower
+   * Animation playback speed. A larger value indicates faster animation playback, and a smaller value indicates slower 
    * animation playback. The value **0** means that there is no animation.
    * 
-   * When the value is set to **+∞**, the animation completes in the current frame, and the animation end callback is
+   * When the value is set to **+∞**, the animation completes in the current frame, and the animation end callback is 
    * executed immediately.
    * 
    * Default value: **1.0**
@@ -4208,20 +4208,20 @@ declare interface AnimateParam {
    * **"cubic-bezier(x1, y1, x2, y2)"**: Cubic Bezier curve. The values of **x1** and **x2** must be within the range of
    * [0, 1], as in **"cubic-bezier(0.42, 0.0, 0.58, 1.0)"**.
    * 
-   * **"steps(number, step-position)"**: Step curve. **number** is required and must be a positive integer.
-   * **step-position** is optional and the values **start** and **end** are supported; defaults to end, as in
+   * **"steps(number, step-position)"**: Step curve. **number** is required and must be a positive integer. 
+   * **step-position** is optional and the values **start** and **end** are supported; defaults to end, as in 
    * **"steps(3, start)"**.
    * 
-   * **"interpolating-spring(velocity,mass,stiffness,damping)"**: For details about the parameters, see
+   * **"interpolating-spring(velocity,mass,stiffness,damping)"**: For details about the parameters, see 
    * [curves.interpolatingSpring]{@link @ohos.curves:curves.interpolatingSpring}.
    * 
-   * **"responsive-spring-motion(response,dampingFraction,overlapDuration)"**: For details about the parameters, see
+   * **"responsive-spring-motion(response,dampingFraction,overlapDuration)"**: For details about the parameters, see 
    * [curves.responsiveSpringMotion]{@link @ohos.curves:curves.responsiveSpringMotion}.
    * 
-   * **"spring(velocity,mass,stiffness,damping)"**: For details about the parameters, see
+   * **"spring(velocity,mass,stiffness,damping)"**: For details about the parameters, see 
    * [curves.springCurve]{@link @ohos.curves:curves.springCurve}.
    * 
-   * **"spring-motion(response,dampingFraction,overlapDuration)"**: For details about the parameters, see
+   * **"spring-motion(response,dampingFraction,overlapDuration)"**: For details about the parameters, see 
    * [curves.springMotion]{@link @ohos.curves:curves.springMotion}.
    * 
    * Default value: **Curve.EaseInOut**
@@ -4245,9 +4245,9 @@ declare interface AnimateParam {
    * Value range: (-∞, +∞)
    * 
    * Note: 1. A non-negative **delay** defers the start of the animation. A negative **delay** plays the animation ahead
-   * of schedule. If the absolute value of **delay** is less than the actual animation duration, the animation starts
-   * its first frame from the state at the absolute value. If the absolute value of **delay** is greater than or equal
-   * to the actual animation duration, the animation starts its first frame from the end state. The actual animation
+   * of schedule. If the absolute value of **delay** is less than the actual animation duration, the animation starts 
+   * its first frame from the state at the absolute value. If the absolute value of **delay** is greater than or equal 
+   * to the actual animation duration, the animation starts its first frame from the end state. The actual animation 
    * duration is equal to the duration of a single animation multiplied by the number of animation playback times.
    * 
    * 2. Floating-point values are floored to integers. For example, if the value set is 1.2, **1** will be used.
@@ -4261,8 +4261,8 @@ declare interface AnimateParam {
   delay?: number;
 
   /**
-   * Number of times that the animation is played. By default, the animation is played once. The value **-1** indicates
-   * that the animation is played for an unlimited number of times. The value **0** indicates that there is no
+   * Number of times that the animation is played. By default, the animation is played once. The value **-1** indicates 
+   * that the animation is played for an unlimited number of times. The value **0** indicates that there is no 
    * animation.
    * 
    * Default value: **1**
@@ -4286,7 +4286,7 @@ declare interface AnimateParam {
    * 
    * > **Notes about PlayMode**:
    * >
-   * > - **PlayMode.Normal** and **PlayMode.Alternate** are recommended. Under these settings, the first round of the
+   * > - **PlayMode.Normal** and **PlayMode.Alternate** are recommended. Under these settings, the first round of the 
    * > animation is played forwards. If **PlayMode.Reverse** or **PlayMode.AlternateReverse** is used, the first round
    * > of the animation is played backwards. In this case, the animation jumps to the end state and then starts from
    * > there.
@@ -4296,7 +4296,7 @@ declare interface AnimateParam {
    * > played forwards. When **PlayMode.Alternate** is used, **iterations** must be set to an odd number. When
    * > **PlayMode.AlternateReverse** is used, **iterations** must be set to an even number.
    * >
-   * > - **PlayMode.Reverse** is not recommended. Under this setting, the animation jumps to the end state at the
+   * > - **PlayMode.Reverse** is not recommended. Under this setting, the animation jumps to the end state at the 
    * > beginning, and its final state will be different from the value of the state variable.
    *
    * @default PlayMode.Normal
@@ -4309,11 +4309,11 @@ declare interface AnimateParam {
   playMode?: PlayMode;
 
   /**
-   * Callback invoked when the animation playback is complete. If the UIAbility moves from the foreground to the
-   * background, any finite loop animation that is still in progress will be immediately terminated, triggering the
+   * Callback invoked when the animation playback is complete. If the UIAbility moves from the foreground to the 
+   * background, any finite loop animation that is still in progress will be immediately terminated, triggering the 
    * completion callback.
    * 
-   * If the transition animation is disabled in the developer options and **tempo** is set to **+∞**, the callback is
+   * If the transition animation is disabled in the developer options and **tempo** is set to **+∞**, the callback is 
    * executed immediately when the animation playback is complete.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4387,10 +4387,10 @@ interface ICurve {
  */
 declare interface MotionPathOptions {
   /**
-   * Motion path of the translation animation. The
-   * [svg path string](docroot://reference/apis-arkui/arkui-ts/ts-drawing-components-path.md#svg-path-syntax) is used.
-   * In the value, **start** and **end** can be used in place of the start point and end point, for example,
-   * **'Mstart.x start.y L50 50 Lend.x end.y Z'**. For details, see
+   * Motion path of the translation animation. The 
+   * [svg path string](docroot://reference/apis-arkui/arkui-ts/ts-drawing-components-path.md#svg-path-syntax) is used. 
+   * In the value, **start** and **end** can be used in place of the start point and end point, for example, 
+   * **'Mstart.x start.y L50 50 Lend.x end.y Z'**. For details, see 
    * [Path Drawing](docroot://ui/ui-js-components-svg-path.md).
    * 
    * If this parameter is set to an empty string, the path animation is not set.
@@ -4438,7 +4438,7 @@ declare interface MotionPathOptions {
   to?: number;
 
   /**
-   * Whether to rotate along the path. The value **true** means to rotate along the path, and **false** means the
+   * Whether to rotate along the path. The value **true** means to rotate along the path, and **false** means the 
    * opposite.
    * 
    * Default value: **false**
@@ -4459,8 +4459,8 @@ declare interface MotionPathOptions {
  * >
  * > **motionPath** is effective only when **type** is set to **SharedTransitionEffectType.Exchange**.
  * >
- * > When **type** is set to **SharedTransitionEffectType.Exchange**, the effect focuses on smooth transition of the
- * > position and size of matching shared elements, which can be visually observed through the component's border. The
+ * > When **type** is set to **SharedTransitionEffectType.Exchange**, the effect focuses on smooth transition of the 
+ * > position and size of matching shared elements, which can be visually observed through the component's border. The 
  * > transition, however, does not involve content properties, which will abruptly change to the target page's values 
  * > at
  * > the end of the animation. For example, if a **Text** component has different **fontSize** values on two pages, 
@@ -4495,7 +4495,7 @@ declare interface sharedTransitionOptions {
    * 
    * You are advised to specify the curve using the **Curve** or **ICurve** type.
    * 
-   * For the string type, this parameter indicates an animation interpolation curve. For available values, see the
+   * For the string type, this parameter indicates an animation interpolation curve. For available values, see the 
    * **curve** parameter in [AnimateParam]{@link AnimateParam}.
    * 
    * Default value: **Curve.Linear**
@@ -4572,7 +4572,7 @@ declare interface sharedTransitionOptions {
  */
 declare interface GeometryTransitionOptions {
   /**
-   * Whether to apply the animation to components that are always in the component tree. It is effective only in the
+   * Whether to apply the animation to components that are always in the component tree. It is effective only in the 
    * **if** syntax. The value **true** means to apply the animation to components that are always in the component tree,
    * and **false** means the opposite.
    * 
@@ -4587,13 +4587,13 @@ declare interface GeometryTransitionOptions {
    */
   follow?: boolean;
   /**
-   * Strategy for the hierarchical position movement of **in** / **out** components in the component tree during the
+   * Strategy for the hierarchical position movement of **in** / **out** components in the component tree during the 
    * shared element transition process. Default value: **TransitionHierarchyStrategy.ADAPTIVE**.
    * 
-   * The setting significantly affects the front-to-back overlap relationship of the **in** / **out** components in
+   * The setting significantly affects the front-to-back overlap relationship of the **in** / **out** components in 
    * comparison to other components. Exercise caution with it under normal conditions.
    * 
-   * You are advised to adjust this setting only when there is an error in the component overlap relationship observed
+   * You are advised to adjust this setting only when there is an error in the component overlap relationship observed 
    * during the shared element transition process.
    *
    * @default TransitionHierarchyStrategy.ADAPTIVE
@@ -4611,7 +4611,7 @@ declare interface GeometryTransitionOptions {
  * 
  * > **NOTE**
  * >
- * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
+ * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18. 
  * > While historical version information is preserved for anonymous objects, there may be cases where the outer 
  * > element
  * > 's @since version number is higher than inner elements'. This does not affect interface usability.
@@ -4628,7 +4628,7 @@ declare interface LinearGradientOptions {
    * Start angle of the linear gradient. When the angle is 0 degrees, the gradient direction is from bottom to top (that
    * is, 0 o'clock direction). A positive value indicates a clockwise rotation from the origin, (0, 0).
    * 
-   * Value range: (-∞, +∞). Positive values indicate clockwise rotation, and negative values indicate counterclockwise
+   * Value range: (-∞, +∞). Positive values indicate clockwise rotation, and negative values indicate counterclockwise 
    * rotation.
    * 
    * Default value: **180**
@@ -4646,8 +4646,8 @@ declare interface LinearGradientOptions {
   angle?: number | string;
 
   /**
-   * Direction of the linear gradient. It does not take effect when **angle** is set to a non-undefined value.
-   * **GradientDirection.None** uses the default direction.
+   * Direction of the linear gradient. It does not take effect when **angle** is set to a non-undefined value. 
+   * **GradientDirection.None** uses the default direction. 
    * 
    * Default value: **GradientDirection.Bottom**.
    *
@@ -4661,11 +4661,11 @@ declare interface LinearGradientOptions {
   direction?: GradientDirection;
 
   /**
-   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically
-   * skipped. **ResourceColor** indicates the color. **number** represents the stop position of the color, with a range
-   * of [0, 1.0]. Values less than 0 are treated as **0**, and values greater than 1.0 are treated as **1.0**. **0**
-   * indicates the start of the gradient; **1.0** indicates the end. To achieve multi-color gradients, the **number**
-   * parameters in the array should be set in ascending order. If a later number is less than a previous one, it is
+   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically 
+   * skipped. **ResourceColor** indicates the color. **number** represents the stop position of the color, with a range 
+   * of [0, 1.0]. Values less than 0 are treated as **0**, and values greater than 1.0 are treated as **1.0**. **0** 
+   * indicates the start of the gradient; **1.0** indicates the end. To achieve multi-color gradients, the **number** 
+   * parameters in the array should be set in ascending order. If a later number is less than a previous one, it is 
    * treated as equal to the previous value.
    * 
    * Default value: **[]**, meaning no gradient effect.
@@ -4702,7 +4702,7 @@ declare interface LinearGradientOptions {
  * 
  * > **NOTE**
  * >
- * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
+ * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18. 
  * > While historical version information is preserved for anonymous objects, there may be cases where the outer 
  * > element
  * > 's @since version number is higher than inner elements'. This does not affect interface usability.
@@ -4711,10 +4711,10 @@ declare interface LinearGradientOptions {
  * >
  * > When using the **metricsColors** parameter, take note of the following:
  * >
- * > [ColorMetrics]{@link Graphics:ColorMetrics} represents the fill color, which can be constructed with a specified
- * > color gamut attribute using the [colorWithSpace]{@link Graphics:ColorMetrics#colorWithSpace} API. **number**
- * > represents the position of the specified color, with a value range of [0, 1.0]. **0** indicates the start of the
- * > container where the gradient color is set, and **1.0** indicates the end of the container. To achieve multi-color
+ * > [ColorMetrics]{@link Graphics:ColorMetrics} represents the fill color, which can be constructed with a specified 
+ * > color gamut attribute using the [colorWithSpace]{@link Graphics:ColorMetrics#colorWithSpace} API. **number** 
+ * > represents the position of the specified color, with a value range of [0, 1.0]. **0** indicates the start of the 
+ * > container where the gradient color is set, and **1.0** indicates the end of the container. To achieve multi-color 
  * > gradients, the **number** parameters in the array should be set in ascending order. If a later number is less 
  * > than
  * > a previous one, it is treated as equal to the previous value.
@@ -4739,13 +4739,13 @@ declare interface SweepGradientOptions {
   center: [Length, Length];
 
   /**
-   * Start point of the sweep gradient.
+   * Start point of the sweep gradient. 
    * 
    * Default value: **0**.
    * 
    * When specified as a string, valid values are pure numbers or numbers followed by units: "deg" (degrees), "rad" (
    * radians), "grad" (gradians), or "turn" (turns). Examples: "90", "90deg", "1.57rad". The value is limited to 0 to 36
-   * 0 degrees after unit conversion. Values less than 0 degrees are treated as 0 degrees; values greater than 360
+   * 0 degrees after unit conversion. Values less than 0 degrees are treated as 0 degrees; values greater than 360 
    * degrees are treated as 360 degrees.
    *
    * @default 0 [since 18]
@@ -4758,13 +4758,13 @@ declare interface SweepGradientOptions {
   start?: number | string;
 
   /**
-   * End point of the sweep gradient.
+   * End point of the sweep gradient. 
    * 
    * Default value: **0**.
    * 
    * When specified as a string, valid values are pure numbers or numbers followed by units: "deg" (degrees), "rad" (
    * radians), "grad" (gradians), or "turn" (turns). Examples: "90", "90deg", "1.57rad". The value is limited to 0 to 36
-   * 0 degrees after unit conversion. Values less than 0 degrees are treated as 0 degrees; values greater than 360
+   * 0 degrees after unit conversion. Values less than 0 degrees are treated as 0 degrees; values greater than 360 
    * degrees are treated as 360 degrees.
    *
    * @default 0 [since 18]
@@ -4781,7 +4781,7 @@ declare interface SweepGradientOptions {
    * 
    * When specified as a string, valid values are pure numbers or numbers followed by units: "deg" (degrees), "rad" (
    * radians), "grad" (gradians), or "turn" (turns). Examples: "90", "90deg", "1.57rad". The value is limited to 0 to 36
-   * 0 degrees after unit conversion. Values less than 0 degrees are treated as 0 degrees; values greater than 360
+   * 0 degrees after unit conversion. Values less than 0 degrees are treated as 0 degrees; values greater than 360 
    * degrees are treated as 360 degrees.
    *
    * @default 0 [since 18]
@@ -4794,11 +4794,11 @@ declare interface SweepGradientOptions {
   rotation?: number | string;
 
   /**
-   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically
+   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically 
    * skipped. **ResourceColor** represents the color. **number** represents the stop position of the color, with a range
-   * of [0, 1.0]. Values less than 0 are treated as **0**, and values greater than 1.0 are treated as **1.0**. **0**
-   * indicates the start of the gradient; **1.0** indicates the end. To achieve multi-color gradients, the **number**
-   * parameters in the array should be set in ascending order. If a later number is less than a previous one, it is
+   * of [0, 1.0]. Values less than 0 are treated as **0**, and values greater than 1.0 are treated as **1.0**. **0** 
+   * indicates the start of the gradient; **1.0** indicates the end. To achieve multi-color gradients, the **number** 
+   * parameters in the array should be set in ascending order. If a later number is less than a previous one, it is 
    * treated as equal to the previous value.
    * 
    * Default value: **[]**, meaning no gradient effect.
@@ -4830,8 +4830,8 @@ declare interface SweepGradientOptions {
   repeating?: boolean;
 
   /**
-   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically
-   * skipped. When specified, **metricsColors** overrides **colors**. The color gamut attributes must be consistent
+   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically 
+   * skipped. When specified, **metricsColors** overrides **colors**. The color gamut attributes must be consistent 
    * across color stops. The value is considered invalid if mixed color gamut attributes are detected. The default value
    * is transparent.
    *
@@ -4849,7 +4849,7 @@ declare interface SweepGradientOptions {
  * 
  * > **NOTE**
  * >
- * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
+ * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18. 
  * > While historical version information is preserved for anonymous objects, there may be cases where the outer 
  * > element
  * > 's @since version number is higher than inner elements'. This does not affect interface usability.
@@ -4858,11 +4858,11 @@ declare interface SweepGradientOptions {
  * >
  * > When using the **colors** parameter, take note of the following:
  * >
- * > [ResourceColor]{@link ResourceColor} indicates the color, and **number** indicates the color's position, which
- * > ranges from 0 to 1.0: **0** indicates the start of the container, and **1.0** indicates the end of the container.
+ * > [ResourceColor]{@link ResourceColor} indicates the color, and **number** indicates the color's position, which 
+ * > ranges from 0 to 1.0: **0** indicates the start of the container, and **1.0** indicates the end of the container. 
  * > To create a gradient with multiple color stops, you are advised to set the **number** values in ascending order. 
  * > If
- * > a value of **number** in an array is smaller than that in the previous one, it is considered as equal to the
+ * > a value of **number** in an array is smaller than that in the previous one, it is considered as equal to the 
  * > previous value.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4887,7 +4887,7 @@ declare interface RadialGradientOptions {
   /**
    * Radius of the radial gradient.
    * 
-   * Value range:
+   * Value range: 
    * [0, +∞). A value less than 0 is treated as **0**. If the value is **undefined**, the system adaptively determines
    * the gradient radius.
    *
@@ -4902,11 +4902,11 @@ declare interface RadialGradientOptions {
   radius: Length;
 
   /**
-   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically
+   * Array of color stops, each of which consists of a color and its stop position. Invalid colors are automatically 
    * skipped. **ResourceColor** represents the color. **number** represents the stop position of the color, with a range
-   * of [0, 1.0]. Values less than 0 are treated as **0**, and values greater than 1.0 are treated as **1.0**. **0**
-   * indicates the start of the gradient; **1.0** indicates the end. To achieve multi-color gradients, the **number**
-   * parameters in the array should be set in ascending order. If a later number is less than a previous one, it is
+   * of [0, 1.0]. Values less than 0 are treated as **0**, and values greater than 1.0 are treated as **1.0**. **0** 
+   * indicates the start of the gradient; **1.0** indicates the end. To achieve multi-color gradients, the **number** 
+   * parameters in the array should be set in ascending order. If a later number is less than a previous one, it is 
    * treated as equal to the previous value.
    * 
    * Default value: **[]**, meaning no gradient effect.
@@ -5087,7 +5087,7 @@ declare interface ScaleOptions {
   z?: number;
 
   /**
-   * X coordinate of the transformation center point (anchor). The value can be of the string type, for example,
+   * X coordinate of the transformation center point (anchor). The value can be of the string type, for example, 
    * **'50'** and **'50%'**.
    * 
    * Unit: vp
@@ -5101,7 +5101,7 @@ declare interface ScaleOptions {
   centerX?: number | string;
 
   /**
-   * Y coordinate of the transformation center point (anchor). The value can be of the string type, for example,
+   * Y coordinate of the transformation center point (anchor). The value can be of the string type, for example, 
    * **'50'** and **'50%'**.
    * 
    * Unit: vp
@@ -5673,7 +5673,7 @@ declare interface RotateOptions {
   z?: number;
 
   /**
-   * X coordinate of the transformation center point (anchor). The value can be of the string type, for example,
+   * X coordinate of the transformation center point (anchor). The value can be of the string type, for example, 
    * **'50'** and **'50%'**.
    * 
    * Unit: vp
@@ -5687,7 +5687,7 @@ declare interface RotateOptions {
   centerX?: number | string;
 
   /**
-   * Y coordinate of the transformation center point (anchor). The value can be of the string type, for example,
+   * Y coordinate of the transformation center point (anchor). The value can be of the string type, for example, 
    * **'50'** and **'50%'**.
    * 
    * Unit: vp
@@ -5719,12 +5719,12 @@ declare interface RotateOptions {
 
   /**
    * Z-axis coordinate of the camera. The value indicates the viewing distance, that is, the distance between the camera
-   * and the z=0 plane. The positive and negative values of the parameter determine the camera observation direction.
-   * When perspective is set to 0, the system automatically calculates a proper camera Z-axis position. The value is
+   * and the z=0 plane. The positive and negative values of the parameter determine the camera observation direction. 
+   * When perspective is set to 0, the system automatically calculates a proper camera Z-axis position. The value is 
    * negative.
    * 
-   * The rotation axis and center point are defined based on the
-   * [component coordinate system](docroot://ui/arkui-glossary.md#component-coordinate-system). When the component
+   * The rotation axis and center point are defined based on the 
+   * [component coordinate system](docroot://ui/arkui-glossary.md#component-coordinate-system). When the component 
    * moves, the coordinate system does not follow it.
    * 
    * Default value: **0**.
@@ -5878,12 +5878,12 @@ declare interface RotateAngleOptions {
  
   /**
    * Z-axis coordinate of the camera. The value indicates the viewing distance, that is, the distance between the camera
-   * and the z=0 plane. The positive and negative values of the parameter determine the camera observation direction.
-   * When perspective is set to 0, the system automatically calculates a proper camera Z-axis position. The value is
+   * and the z=0 plane. The positive and negative values of the parameter determine the camera observation direction. 
+   * When perspective is set to 0, the system automatically calculates a proper camera Z-axis position. The value is 
    * negative.
    * 
-   * The rotation axis and center point are defined based on the
-   * [component coordinate system](docroot://ui/arkui-glossary.md#component-coordinate-system). When the component
+   * The rotation axis and center point are defined based on the 
+   * [component coordinate system](docroot://ui/arkui-glossary.md#component-coordinate-system). When the component 
    * moves, the coordinate system does not follow it.
    * 
    * Default value: **0**.
@@ -5908,13 +5908,13 @@ declare interface RotateAngleOptions {
  * 
  * > **NOTE**
  * >
- * > 1. When set to a value of the **TransitionOptions** type, the **transition** attribute must work with
- * > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto). The animation duration,
+ * > 1. When set to a value of the **TransitionOptions** type, the **transition** attribute must work with 
+ * > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto). The animation duration, 
  * > curve, and delay follow the settings in **animateTo**.
  * >
- * > 2. If the value of the **TransitionOptions** type has only **type** specified, the transition effect will take on
- * > the default opacity. For example, **{type: TransitionType.Insert}** produces the same effect as
- * > **{type: TransitionType.Insert, opacity: 0}**. If a specific style is specified, the transition effect will not
+ * > 2. If the value of the **TransitionOptions** type has only **type** specified, the transition effect will take on 
+ * > the default opacity. For example, **{type: TransitionType.Insert}** produces the same effect as 
+ * > **{type: TransitionType.Insert, opacity: 0}**. If a specific style is specified, the transition effect will not 
  * > take on the default opacity.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5930,7 +5930,7 @@ declare interface TransitionOptions {
    * 
    * **NOTE**
    * 
-   * If **type** is not specified, the default value **TransitionType.All** is used, which means that the transition
+   * If **type** is not specified, the default value **TransitionType.All** is used, which means that the transition 
    * effect works for both component addition and deletion.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5957,7 +5957,7 @@ declare interface TransitionOptions {
    */
   opacity?: number;
   /**
-   * Translation of the component during transition, which is the value of the start point of insertion and the end
+   * Translation of the component during transition, which is the value of the start point of insertion and the end 
    * point of deletion.
    * 
    * -**x**: distance to translate along the x-axis.
@@ -5979,13 +5979,13 @@ declare interface TransitionOptions {
    * - **x**: scale factor along the x-axis.
    * - **y**: scale factor along the y-axis.
    * - **z**: scale factor along the z-axis (not effective for the current 2D graphics).
-   * - **centerX** and **centerY**: scale center point. The default values are both **"50%"**, indicating the center
+   * - **centerX** and **centerY**: scale center point. The default values are both **"50%"**, indicating the center 
    * point of the page.
    * - If the center point is (0, 0), it refers to the upper left corner of the component.
    * 
    * **NOTE**
    * 
-   * If **centerX** or **centerY** is set to an invalid string (for example, **"illegalString"**), the default value
+   * If **centerX** or **centerY** is set to an invalid string (for example, **"illegalString"**), the default value 
    * **"0"** is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5995,13 +5995,13 @@ declare interface TransitionOptions {
    */
   scale?: ScaleOptions;
   /**
-   * Rotation of the component during transition, which is the value of the start point of insertion and the end point
+   * Rotation of the component during transition, which is the value of the start point of insertion and the end point 
    * of deletion.
    * 
    * - **x**: X-component of the rotation vector.
    * - **y**: Y-component of the rotation vector.
    * - **z**: Z-component of the rotation vector.
-   * - **centerX** and **centerY**: rotation center point. The default values are both **"50%"**, indicating the center
+   * - **centerX** and **centerY**: rotation center point. The default values are both **"50%"**, indicating the center 
    * point of the page.
    * - If the center point is (0, 0), it refers to the upper left corner of the component.
    *
@@ -6049,7 +6049,7 @@ declare enum TransitionEdge {
   BOTTOM = 1,
 
   /**
-   * Start edge of the window, which is the left edge for left-to-right scripts and the right edge for right-to-left
+   * Start edge of the window, which is the left edge for left-to-right scripts and the right edge for right-to-left 
    * scripts.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6062,7 +6062,7 @@ declare enum TransitionEdge {
   START = 2,
 
   /**
-   * End edge of the window, which is the right edge for left-to-right scripts and the left edge for right-to-left
+   * End edge of the window, which is the right edge for left-to-right scripts and the left edge for right-to-left 
    * scripts.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6218,7 +6218,7 @@ declare class TransitionEffect<
   static readonly IDENTITY: TransitionEffect<"identity">;
 
   /**
-   * Applies a transition effect with the opacity changing from 0 to 1 when the component appears and from 1 to 0 when
+   * Applies a transition effect with the opacity changing from 0 to 1 when the component appears and from 1 to 0 when 
    * the component disappears. This is equivalent to **TransitionEffect.opacity(0)**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6231,10 +6231,10 @@ declare class TransitionEffect<
   static readonly OPACITY: TransitionEffect<"opacity">;
 
   /**
-   * Applies a transition effect of sliding in from the start edge when the component appears and sliding out from the
-   * end edge when the component disappears. This means sliding in from the left edge and sliding out from the right
+   * Applies a transition effect of sliding in from the start edge when the component appears and sliding out from the 
+   * end edge when the component disappears. This means sliding in from the left edge and sliding out from the right 
    * edge for left-to-right scripts, and sliding in from the right edge and sliding out from the left edge for right-to-
-   * left scripts. This is equivalent to
+   * left scripts. This is equivalent to 
    * **TransitionEffect.asymmetric(TransitionEffect.move(TransitionEdge.START), TransitionEffect.move(TransitionEdge.END))**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6253,9 +6253,9 @@ declare class TransitionEffect<
   >;
 
   /**
-   * Applies a transition effect of sliding in from the right with first scaling down and then scaling up when the
-   * component appears and sliding out from the left with first scaling down and then scaling up when the component
-   * disappears. This transition effect comes with its own animation parameters, which can also be overridden. The
+   * Applies a transition effect of sliding in from the right with first scaling down and then scaling up when the 
+   * component appears and sliding out from the left with first scaling down and then scaling up when the component 
+   * disappears. This transition effect comes with its own animation parameters, which can also be overridden. The 
    * default animation duration is 600 milliseconds, with a specified animation curve of cubicBezierCurve(0.24, 0.0, 0.5
    * 0, 1.0) and a minimum scale factor of 0.8.
    *
@@ -6651,9 +6651,9 @@ declare interface ItemDragInfo {
 
 /**
  * Enum of using the effects template mode.
- * 
+ *
  * **Effect Template: **
- * 
+ *
  * |  Device Type   | Fuzzy Radius (Unit: px)  | Saturation                |  Brightness |  Color |
  * | -------- | ---- | ---------------------- | -------- | -------- |
  * | Mobile device | 0   | 0 | 0 | '#ffffffff', displayed as white.|
@@ -6847,34 +6847,34 @@ declare interface DragItemInfo {
  * 
  * > **NOTE**
  * >
- * > - Since API version 10, you can use
- * > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto) in
+ * > - Since API version 10, you can use 
+ * > [animateTo](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#animateto) in 
  * > [UIContext]{@link @ohos.arkui.UIContext} to specify the UI execution context.
  * >
  * > - Avoid using **animateTo** in **aboutToAppear** or **aboutToDisappear**.
  * >
- * > - When **animateTo** is called in
- * > [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear), the
+ * > - When **animateTo** is called in 
+ * > [aboutToAppear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttoappear), the 
  * > component's build method is not executed yet, and internal components are not created. This means the animation 
  * > has
  * > no initial values to work with and will not function as expected.
  * >
- * > - During
+ * > - During 
  * > [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear), 
  * > the
  * > component is being destroyed, so animations should not be used.
  * >
- * > - When a component appears or disappears, you can add animation effects through the [transition]{@link common}
+ * > - When a component appears or disappears, you can add animation effects through the [transition]{@link common} 
  * > attribute.
  * >
- * > - For attributes not supported by component transitions, see
+ * > - For attributes not supported by component transitions, see 
  * > 
  * > [Example 2](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#example-2-enabling-component-disappearance-after-animation-completion)
  * > and use **animateTo** to implement the component disappearance effect after animation completion.
  * >
- * > - In certain scenarios, using **animateTo** with
- * > [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2) may
- * > produce unexpected results. For details, see
+ * > - In certain scenarios, using **animateTo** with 
+ * > [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2) may 
+ * > produce unexpected results. For details, see 
  * > 
  * > [Using animateTo Failed in State Management V2](docroot://ui/state-management/arkts-new-local.md#using-animateto-failed-in-state-management-v2).
  *
@@ -7785,7 +7785,7 @@ declare enum BlurStyle {
  */
 declare enum BlurStyleActivePolicy {
   /**
-   * The blur effect changes according to the window's focus state; it is inactive when the window is not in focus and
+   * The blur effect changes according to the window's focus state; it is inactive when the window is not in focus and 
    * active when the window is in focus.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7997,8 +7997,8 @@ declare interface BackgroundBlurStyleOptions extends BlurStyleOptions {
   policy?: BlurStyleActivePolicy;
 
   /**
-   * Background color when the blur effect does not take effect. This parameter must be used together with the
-   * **policy** parameter. When **policy** is set to a value that disables the blur effect, the blur effect on the
+   * Background color when the blur effect does not take effect. This parameter must be used together with the 
+   * **policy** parameter. When **policy** is set to a value that disables the blur effect, the blur effect on the 
    * components is removed. If **inactiveColor** is specified, it is applied as the component background color.
    *
    * @default Color.Transparent
@@ -8033,10 +8033,10 @@ declare interface ForegroundBlurStyleOptions extends BlurStyleOptions {}
  */
 declare interface BlurOptions {
   /**
-   * Grayscale blur, with two parameters in the value range of [0, 127]. The color gradation of the black and white in
+   * Grayscale blur, with two parameters in the value range of [0, 127]. The color gradation of the black and white in 
    * the image is adjusted to create different shades of gray. The first parameter indicates the brightness of the black
-   * color, and the second parameter indicates the darkness of the white color. A larger value indicates a more obvious
-   * adjustment effect (the black and white colors become grayer). The valid value range is 0–127. For example, if the
+   * color, and the second parameter indicates the darkness of the white color. A larger value indicates a more obvious 
+   * adjustment effect (the black and white colors become grayer). The valid value range is 0–127. For example, if the 
    * value specified is (20,20), the RGB value [0, 0, 0] (black) is converted to [20, 20, 20], RGB value [255, 255, 255]
    * (white) is converted to [235, 235, 235] (255-20), and the color pixels remain unchanged.
    *
@@ -8050,7 +8050,7 @@ declare interface BlurOptions {
 }
 
 /**
- * Provides parameters for system adaptive adjustments. By default, the system performs adaptive adjustments based on
+ * Provides parameters for system adaptive adjustments. By default, the system performs adaptive adjustments based on 
  * chip performance.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8062,10 +8062,10 @@ declare interface BlurOptions {
  */
 declare interface SystemAdaptiveOptions {
   /**
-   * Whether to disable system adaptive adjustment. Whenever possible, do not include this parameter. This parameter
+   * Whether to disable system adaptive adjustment. Whenever possible, do not include this parameter. This parameter 
    * only affects low-computing-power devices, the definition of which is determined by the device manufacturer. On low-
    * computing-power devices, the system automatically decides whether to adjust effects (such as blur) to lower-
-   * computing-power alternatives based on conditions including computing power and load. To disable this feature, set
+   * computing-power alternatives based on conditions including computing power and load. To disable this feature, set 
    * this parameter to **true**.
    * 
    * Default value: **false**
@@ -8220,7 +8220,7 @@ declare interface BackgroundEffectOptions {
   color?: ResourceColor;
 
   /**
-   * Adaptive color mode used for the background blur effect. Default value: **DEFAULT** . When set to **AVERAGE**, the
+   * Adaptive color mode used for the background blur effect. Default value: **DEFAULT** . When set to **AVERAGE**, the 
    * adaptive color mode takes effect only when the color has transparency.
    *
    * @default AdaptiveColor.DEFAULT
@@ -8258,8 +8258,8 @@ declare interface BackgroundEffectOptions {
   policy?: BlurStyleActivePolicy;
 
   /**
-   * Background color when the blur effect does not take effect. This parameter must be used together with the
-   * **policy** parameter. When **policy** is set to a value that disables the blur effect, the blur effect on the
+   * Background color when the blur effect does not take effect. This parameter must be used together with the 
+   * **policy** parameter. When **policy** is set to a value that disables the blur effect, the blur effect on the 
    * components is removed. If **inactiveColor** is specified, it is applied as the component background color.
    *
    * @default Color.Transparent
@@ -8544,7 +8544,7 @@ declare interface ShadowOptions {
    * 
    * Unit: px
    * 
-   * **NOTE**  
+   * **NOTE**
    * 
    * Before API version 26.0.0, when a value less than 0 is set, it is processed as 0, in which case no shadow is drawn.
    * Starting from API version 26.0.0, the set value is the final value. When the value is 0, the shadow is still drawn;
@@ -8553,7 +8553,7 @@ declare interface ShadowOptions {
    * To use a value in vp, call [vp2px]{@link @ohos.arkui.UIContext:UIContext.vp2px} to convert it.
    * 
    * If radius is of the Resource type, the value passed in must be of the number type.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -8566,7 +8566,7 @@ declare interface ShadowOptions {
    * Shadow type.
    * 
    * Default value: COLOR 
-   * 
+   *
    * @default ShadowType.COLOR
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -8581,7 +8581,7 @@ declare interface ShadowOptions {
    * 
    * The default value is black. 
    * 
-   * **NOTE** 
+   * **NOTE**
    * 
    * Starting from API version 11, this interface supports using ColoringStrategy to implement smart color picking. The 
    * smart color picking feature is not supported in ArkTS cards or [textShadow]{@link TextAttribute#textShadow}.
@@ -8591,7 +8591,7 @@ declare interface ShadowOptions {
    * 
    * The 'average' string can be used to trigger the smart average color picking mode, and the 'primary' string can be 
    * used to trigger the smart primary color mode.
-   * 
+   *
    * @type { ?(Color | string | Resource) } [since 7 - 10]
    * @type { ?(Color | string | Resource| ColoringStrategy) } [since 11]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8609,12 +8609,12 @@ declare interface ShadowOptions {
    * 
    * Unit: px
    * 
-   * **NOTE** 
+   * **NOTE**
    * 
    * To use a value in vp, call [vp2px]{@link @ohos.arkui.UIContext:UIContext.vp2px} to convert it.
    * 
    * If offsetX is of the Resource type, the value passed in must be of the number type.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -8630,12 +8630,12 @@ declare interface ShadowOptions {
    * 
    * Unit: px
    * 
-   * **NOTE** 
+   * **NOTE**
    * 
    * To use a value in vp, call [vp2px]{@link @ohos.arkui.UIContext:UIContext.vp2px} to convert it.
    * 
    * If offsetY is of the Resource type, the value passed in must be of the number type.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -8653,7 +8653,7 @@ declare interface ShadowOptions {
    * **NOTE**
    * 
    * This field does not take effect in [textShadow]{@link TextAttribute#textShadow}.
-   * 
+   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9037,7 +9037,7 @@ declare enum SheetSize {
    * 
    * This value is invalid for a centered dialog box or a follow-hand dialog box, in which case the default height 560 
    * vp is used.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -9055,7 +9055,7 @@ declare enum SheetSize {
    * 
    * This value is invalid for a centered dialog box or a follow-hand dialog box, in which case the default height 560 
    * vp is used.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -11583,7 +11583,7 @@ declare enum DragResult {
  * 
  * > **NOTE**
  * >
- * > In the **blendMode** enums, **s** indicates the source pixel, **d** indicates the target pixel, **sa** indicates
+ * > In the **blendMode** enums, **s** indicates the source pixel, **d** indicates the target pixel, **sa** indicates 
  * > the opacity of the source pixel, **da** indicates the opacity of the target pixel, **r** indicates the pixel 
  * > after
  * > blending, and **ra** indicates the opacity of the pixel after blending.
@@ -11976,7 +11976,7 @@ declare enum BlendApplyType {
   OFFSCREEN = 1,
 
   /**
-   * When an offscreen canvas is created, an initial background canvas is copied first, and then the content of this
+   * When an offscreen canvas is created, an initial background canvas is copied first, and then the content of this 
    * component and its child components is drawn on the offscreen canvas. The content is then blended on the canvas.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -12856,7 +12856,7 @@ declare interface BindOptions {
    * 
    * When the systemMaterial attribute is set, the effect of this attribute may be overwritten. It is not recommended to
    * use this attribute together with systemMaterial.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12868,7 +12868,7 @@ declare interface BindOptions {
   /**
    * Callback invoked when the semi-modal page is displayed (after the animation ends). If not set, the callback is not 
    * triggered.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12880,7 +12880,7 @@ declare interface BindOptions {
   /**
    * Callback invoked when the semi-modal page is dismissed (after the animation ends). If not set, the callback is not 
    * triggered.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12895,7 +12895,7 @@ declare interface BindOptions {
    * triggered after the display animation ends. Both can be used at the same time. To do preparation work before the 
    * animation starts, use onWillAppear. To update the UI after the animation ends, use onAppear. If not set, the 
    * callback is not triggered.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13326,7 +13326,7 @@ declare interface DismissSheetAction {
 
   /**
    * Returns the operation type for exiting the current semi-modal page.
-   * 
+   *
    * **Note:**
    * 
    * DismissReason.SLIDE takes effect only for the side popup style of the semi-modal page, indicating exit by swiping 
@@ -13386,7 +13386,7 @@ declare interface BlurSnapshotOptions {
    * After the sheet is pulled up, this parameter value can be switched dynamically.
    * 
    * Default value: false
-   * 
+   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -13429,7 +13429,7 @@ declare interface SheetOptions extends BindOptions {
    * actual adaptive height takes effect when the height is less than the minimum height.
    * 8. For the side sheet style, only the full-screen height is supported.
    * 9. For the full-screen modal style, only the full-screen height is supported.
-   * 
+   *
    * @default SheetSize.LARGE
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13452,7 +13452,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * When the detents attribute of the sheet panel is set to multiple different heights and takes effect, the drag bar 
    * is displayed by default. When detents is not set to multiple detents, the drag bar is not displayed by default.
-   * 
+   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13470,7 +13470,7 @@ declare interface SheetOptions extends BindOptions {
    * **Note:**
    * 
    * When enableOutsideInteractive is set to true, maskColor does not take effect.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13500,7 +13500,7 @@ declare interface SheetOptions extends BindOptions {
    * the hand velocity; when the displacement distance is less than 1/2 of the distance between the current position
    * and the target position, the sheet returns to the current detent. Velocity threshold: 1000 px/s.
    * Distance threshold: 50%.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13513,7 +13513,7 @@ declare interface SheetOptions extends BindOptions {
    * Blur background of the sheet panel. Different BlurStyle enum values correspond to blur effects of different 
    * intensities (for example, Thin for slight blur, Regular for normal blur, and Thick for heavy blur). By default,
    * there is no blur background.
-   * 
+   *
    * @default BlurStyle.NONE
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13539,7 +13539,7 @@ declare interface SheetOptions extends BindOptions {
    * 1. Resource must be of the boolean type.
    * 2. The full-screen modal style (CONTENT_COVER) does not support displaying the close button, and this
    * attribute does not take effect.
-   * 
+   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13562,7 +13562,7 @@ declare interface SheetOptions extends BindOptions {
    * 4. Since API version 20, when the window width is greater than 600 vp, preferType can be set to SheetType.SIDE.
    * 5. Since API version 20, preferType can be set to SheetType.CONTENT_COVER, which supports the full-screen modal
    * style.
-   * 
+   *
    * @type { ?(SheetType.CENTER | SheetType.POPUP) } [since 11 - 11]
    * @type { ?SheetType } [since 12]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -13583,7 +13583,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The full-screen modal style (CONTENT_COVER) does not support displaying the title bar, and this attribute does not 
    * take effect. By default, there is no title.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13616,7 +13616,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * It is recommended to use this in the 
    * [secondary confirmation](docroot://ui/arkts-sheet-page.md#secondary-confirmation-capability) scenario.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13647,7 +13647,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * It is recommended to use this in the 
    * [secondary confirmation](docroot://ui/arkts-sheet-page.md#secondary-confirmation-capability) scenario.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13677,7 +13677,7 @@ declare interface SheetOptions extends BindOptions {
    * dismissed by default during pull-down dismissal.
    * 
    * For the side sheet style, springBack takes effect in the side-swipe dismissal scenario.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13695,7 +13695,7 @@ declare interface SheetOptions extends BindOptions {
    * and a mask is displayed. If this attribute is not set, the bottom sheet and center sheet do not allow interaction 
    * by default, and the follow-hand sheet allows interaction by default. When set to true, maskColor does not take 
    * effect.
-   * 
+   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13710,7 +13710,7 @@ declare interface SheetOptions extends BindOptions {
    * sheet style is used.
    * 
    * Percentage parameter: sets the width of the sheet as a percentage of the parent element width.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13736,7 +13736,7 @@ declare interface SheetOptions extends BindOptions {
    * For a bottom sheet, the bottom border width does not take effect. When the systemMaterial attribute is set, the 
    * effect of this attribute may be overridden. Using it together with systemMaterial is not recommended. The value 
    * range is non-negative numbers. Setting a negative value does not take effect. 
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13757,7 +13757,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * For a bottom sheet, the bottom border color does not take effect. When the systemMaterial attribute is set, the 
    * effect of this attribute may be overridden. Using it together with systemMaterial is not recommended. 
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13777,7 +13777,7 @@ declare interface SheetOptions extends BindOptions {
    * **Note:**
    * 
    * For a bottom sheet, the bottom border style does not take effect. 
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13799,7 +13799,7 @@ declare interface SheetOptions extends BindOptions {
    * When the systemMaterial attribute is set, the effect of this attribute may be overridden. Using it together with 
    * systemMaterial is not recommended. The full-screen modal style (CONTENT_COVER) does not support shadows, and this 
    * attribute does not take effect.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13818,7 +13818,7 @@ declare interface SheetOptions extends BindOptions {
    * other sheets, only the final height is returned when the sheet is pulled up.
    * 
    * The return value is in px. 
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13837,7 +13837,7 @@ declare interface SheetOptions extends BindOptions {
    * 1. During the display of the sheet, the mode attribute does not support dynamic switching. The display layers of the two modes are completely different, and the same sheet cannot be transformed from one layer to another during display. It is recommended to fix the mode value based on the requirement. 
    *  2. When SheetMode.EMBEDDED is set, setting the UIContext attribute is not supported, because the display layer effects of the two conflict with each other.
    * 3. When a sheet is started using [openBindSheet]{@link @ohos.arkui.UIContext:UIContext.openBindSheet}, if no valid targetId is passed, setting SheetMode.EMBEDDED is not supported, and the default is SheetMode.OVERLAY.
-   * 
+   *
    * @default SheetMode.OVERLAY
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13851,7 +13851,7 @@ declare interface SheetOptions extends BindOptions {
    * Sets the refresh timing of the content area when the sheet panel is slid.
    * 
    * Default value: ScrollSizeMode.FOLLOW_DETENT 
-   * 
+   *
    * @default ScrollSizeMode.FELLOW_DETEND
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13870,7 +13870,7 @@ declare interface SheetOptions extends BindOptions {
    * changes.
    * 
    * The return value is in px. 
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13887,7 +13887,7 @@ declare interface SheetOptions extends BindOptions {
    * The final width is returned when the width changes.
    * 
    * The return value is in px. 
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13902,7 +13902,7 @@ declare interface SheetOptions extends BindOptions {
    * **Note:**
    * 
    * The final style is returned when the style changes.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13921,7 +13921,7 @@ declare interface SheetOptions extends BindOptions {
    * For a sheet started using [openBindSheet]{@link @ohos.arkui.UIContext:UIContext.openBindSheet}, setting and 
    * updating this attribute is not supported. Setting this attribute is also not supported when SheetMode.EMBEDDED is 
    * set, because the display layer effects of the two conflict with each other.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13934,7 +13934,7 @@ declare interface SheetOptions extends BindOptions {
    * Sets the avoidance mode for the soft keyboard when the sheet activates the input method.
    * 
    * **Default value:** TRANSLATE_AND_SCROLL
-   * 
+   *
    * @default SheetKeyboardAvoidMode.TRANSLATE_AND_SCROLL
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13959,7 +13959,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The bottom sheet style, follow-hand sheet style, side sheet style, and full-screen modal style do not respond to 
    * the hover state. The subwindow mode does not support the hover state.
-   * 
+   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13980,7 +13980,7 @@ declare interface SheetOptions extends BindOptions {
    * **Note:**
    * 
    * The side sheet style and full-screen sheet style do not support the hover state area setting.
-   * 
+   *
    * @default HoverModeAreaType.BOTTOM_SCREEN
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13996,7 +13996,7 @@ declare interface SheetOptions extends BindOptions {
    * set to a positive number, the setting does not take effect and falls back to the default value 0vp.
    * 
    * Default value: the x-axis coordinate is 0vp, and the y-axis coordinate is 0vp.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -14016,7 +14016,7 @@ declare interface SheetOptions extends BindOptions {
    * 2. Only the bottom edge takes effect: [EffectEdge]{@link EffectEdge}.END.
    * 3. Both edges take effect: [EffectEdge]{@link EffectEdge}.START | [EffectEdge]{@link EffectEdge}.END (value 3).
    * 4. Neither edge takes effect: [EffectEdge]{@link EffectEdge}.START & [EffectEdge]{@link EffectEdge}.END (value 0).
-   * 
+   *
    * @default 3
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14041,7 +14041,7 @@ declare interface SheetOptions extends BindOptions {
    * 3. When the radius is set as a percentage, the width of the sheet is used as the reference.
    * 4. When the corner radius is greater than half of the sheet width, the corner radius takes the value of half of the sheet width.
    * 5. When the sheet height is too small and the corner radius is set too large, the display may be abnormal.
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14060,7 +14060,7 @@ declare interface SheetOptions extends BindOptions {
    * 1. The value range of this API is the range of the detents array. If the set value is outside the detents range, this API does not take effect.
    * 2. When SheetSize.FIT_CONTENT is set, this API does not take effect.
    * 3. It is not recommended to use gesture-based detent switching and this API-based detent switching at the same time. When both take effect, the detent switching behavior may be unpredictable.
-   * 
+   *
    * @default detents[0]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14084,7 +14084,7 @@ declare interface SheetOptions extends BindOptions {
    * 
    * 1) If the attribute value is true, the sheet is translated in the mirror direction of the set placement until it can be fully displayed.
    * 2) If the attribute value is false, among the four directions, the direction that can fully display the sheet width and has the largest remaining height is selected, and the sheet height is adjusted to fit the current direction to ensure that the sheet can be placed, while keeping the alignment corresponding to the preset placement unchanged. 
-   * 
+   *
    * @default Placement.Bottom
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14105,7 +14105,7 @@ declare interface SheetOptions extends BindOptions {
    * true: allows it to cover the target node.
    * 
    * false: does not allow it to cover the target node.
-   * 
+   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14127,7 +14127,7 @@ declare interface SheetOptions extends BindOptions {
    * 3. It is not recommended to nest another sheet with showInSubWindow set to true inside a sheet with showInSubWindow set to true, because the sheet may affect the behavior of other components.
    * 4. It is not recommended to use picker components such as CalendarPicker, CalendarPickerDialog, DatePickerDialog, TextPickerDialog, and TimePickerDialog in a sheet with showInSubWindow set to true, because the sheet affects the behavior of these components.
    * 5. During the display of the sheet, this attribute does not support dynamic switching.
-   * 
+   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14152,7 +14152,7 @@ declare interface SheetOptions extends BindOptions {
    * enableFloatingDragBar is always false.
    * 
    * The side sheet style does not support the floating drag bar.
-   * 
+   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14168,7 +14168,7 @@ declare interface SheetOptions extends BindOptions {
    * Setting this attribute for other sheet styles does not take effect.
    * 
    * Default value: ModalTransition.DEFAULT
-   * 
+   *
    * @default ModalTransition.DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14186,7 +14186,7 @@ declare interface SheetOptions extends BindOptions {
    * **Note:** When the sheet has blur set, setting OFFSCREEN (off-screen mode) can resolve the abnormal display effect 
    * in the top or top corner area of the sheet. The popup style does not support setting the component corner rendering
    * mode.
-   * 
+   *
    * @default RenderStrategy.FAST
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14207,7 +14207,7 @@ declare interface SheetOptions extends BindOptions {
    * shadow [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}. Using it together with the 
    * preceding APIs is not recommended. For a usage example, see 
    * [Example 10 (Setting the System Material for a Half-Modal)](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-sheet-transition.md#example-10-setting-the-system-material-for-a-half-modal).
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14224,7 +14224,7 @@ declare interface SheetOptions extends BindOptions {
    * effect animation.
    * 
    * Default value: EdgeLightMode.EDGELIGHT_DISABLED
-   * 
+   *
    * @default EdgeLightMode.EDGELIGHT_DISABLED
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -14245,7 +14245,7 @@ declare interface SheetOptions extends BindOptions {
    * to true on the POPUP type, the setting does not take effect.
    * 
    * Default value: undefined, which disables blur optimization
-   * 
+   *
    * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -14621,7 +14621,7 @@ declare enum DismissReason {
   SLIDE_DOWN = 3,
 
   /**
-   * Swiping left or right on the screen. By default, swiping right dismisses the popup, while swiping left is used in
+   * Swiping left or right on the screen. By default, swiping right dismisses the popup, while swiping left is used in 
    * the mirror scenario. This setting is not user-defined.
    * 
    * **NOTE**
@@ -18729,7 +18729,7 @@ declare interface ClickEffect {
    * 
    * **NOTE**
    * 
-   * When **level** is **undefined** or **null**, **ClickEffect** uses the effect corresponding to
+   * When **level** is **undefined** or **null**, **ClickEffect** uses the effect corresponding to 
    * **ClickEffectLevel.LIGHT** with a scaling ratio as described below.
    *
    * @default ClickEffectLevel.LIGHT
@@ -20827,7 +20827,7 @@ declare class CommonMethod<T> {
   backgroundImagePosition(value: Position | Alignment): T;
 
   /**
-   * Defines the background material blur style. It encapsulates various blur radius, mask color, mask opacity,
+   * Defines the background material blur style. It encapsulates various blur radius, mask color, mask opacity, 
    * saturation, and brightness values through enum values.
    *
    * @param { BlurStyle } value - Settings of the background blur style, including the blur radius, mask color, mask
@@ -20845,8 +20845,8 @@ declare class CommonMethod<T> {
   backgroundBlurStyle(value: BlurStyle, options?: BackgroundBlurStyleOptions): T;
 
   /**
-   * Defines the background material blur style. It encapsulates various blur radius, mask color, mask opacity,
-   * saturation, and brightness values through enum values. Compared to
+   * Defines the background material blur style. It encapsulates various blur radius, mask color, mask opacity, 
+   * saturation, and brightness values through enum values. Compared to 
    * [backgroundBlurStyle<sup>9+</sup>]{@link CommonMethod#backgroundBlurStyle(value: BlurStyle, options?: BackgroundBlurStyleOptions)},
    * the **style** parameter supports the **undefined** type.
    *
@@ -20898,7 +20898,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the background effect of the component, including the blur radius, brightness, saturation, and color. Compared
-   * to [backgroundEffect<sup>11+</sup>]{@link CommonMethod#backgroundEffect(options: BackgroundEffectOptions)}, the
+   * to [backgroundEffect<sup>11+</sup>]{@link CommonMethod#backgroundEffect(options: BackgroundEffectOptions)}, the 
    * **options** parameter supports the **undefined** type.
    *
    * @param { Optional<BackgroundEffectOptions> } options - Background effect of the component, including the blur
@@ -20917,7 +20917,7 @@ declare class CommonMethod<T> {
   /**
    * Background image resizable.
    * value:resizable options
-   *
+   * 
    * @param { ResizableOptions } value - Indicates the resizable options.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -21057,7 +21057,7 @@ declare class CommonMethod<T> {
   foregroundBlurStyle(value: BlurStyle, options?: ForegroundBlurStyleOptions): T;
 
   /**
-   * Applies a foreground blur style to the component. Compared to
+   * Applies a foreground blur style to the component. Compared to 
    * [foregroundBlurStyle]{@link CommonMethod#foregroundBlurStyle(value: BlurStyle, options?: ForegroundBlurStyleOptions)},
    * the **style** parameter supports the **undefined** type.
    *
@@ -21116,8 +21116,8 @@ declare class CommonMethod<T> {
   opacity(value: number | Resource): T;
 
   /**
-   * Sets the opacity of the component. Compared with
-   * [opacity](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-opacity.md#opacity), this API supports
+   * Sets the opacity of the component. Compared with 
+   * [opacity](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-opacity.md#opacity), this API supports 
    * the **undefined** type for the **opacity** parameter.
    *
    * @param { Optional<number | Resource> } opacity - Component opacity. Value range: 0 to 1. Values less than 0 are
@@ -21315,8 +21315,8 @@ declare class CommonMethod<T> {
   outline(value: OutlineOptions): T;
 
   /**
-   * Sets the outline attributes in one declaration. Compared with
-   * [outline](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-outline.md#outline), this API supports
+   * Sets the outline attributes in one declaration. Compared with 
+   * [outline](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-outline.md#outline), this API supports 
    * the **undefined** type for the **options** parameter.
    *
    * @param { Optional<OutlineOptions> } options - Outline attributes.
@@ -21347,8 +21347,8 @@ declare class CommonMethod<T> {
   outlineStyle(value: OutlineStyle | EdgeOutlineStyles): T;
 
   /**
-   * Sets the outline style. If this API is not used, a solid line is displayed by default. Compared with
-   * [outlineStyle]{@link CommonMethod#outlineStyle(value: OutlineStyle | EdgeOutlineStyles)}, this API supports the
+   * Sets the outline style. If this API is not used, a solid line is displayed by default. Compared with 
+   * [outlineStyle]{@link CommonMethod#outlineStyle(value: OutlineStyle | EdgeOutlineStyles)}, this API supports the 
    * **undefined** type for the **style** parameter.
    *
    * @param { Optional<OutlineStyle | EdgeOutlineStyles> } style - Outline style.
@@ -21379,8 +21379,8 @@ declare class CommonMethod<T> {
   outlineWidth(value: Dimension | EdgeOutlineWidths): T;
 
   /**
-   * Sets the thickness of the outline. If this API is not used, there will be no change by default. Compared with
-   * [outlineWidth]{@link CommonMethod#outlineWidth(value: Dimension | EdgeOutlineWidths)}, this API supports the
+   * Sets the thickness of the outline. If this API is not used, there will be no change by default. Compared with 
+   * [outlineWidth]{@link CommonMethod#outlineWidth(value: Dimension | EdgeOutlineWidths)}, this API supports the 
    * **undefined** type for the **width** parameter.
    *
    * @param { Optional<Dimension | EdgeOutlineWidths> } width - Outline thickness. Percentage values are not supported.<
@@ -21411,8 +21411,8 @@ declare class CommonMethod<T> {
   outlineColor(value: ResourceColor | EdgeColors | LocalizedEdgeColors): T;
 
   /**
-   * Sets the outline color. If this API is not used, the default color black will be applied. Compared with
-   * [outlineColor]{@link CommonMethod#outlineColor(value: ResourceColor | EdgeColors | LocalizedEdgeColors)}, this API
+   * Sets the outline color. If this API is not used, the default color black will be applied. Compared with 
+   * [outlineColor]{@link CommonMethod#outlineColor(value: ResourceColor | EdgeColors | LocalizedEdgeColors)}, this API 
    * supports the **undefined** type for the **color** parameter.
    *
    * @param { Optional<ResourceColor | EdgeColors | LocalizedEdgeColors> } color - Outline color.
@@ -21444,8 +21444,8 @@ declare class CommonMethod<T> {
   outlineRadius(value: Dimension | OutlineRadiuses): T;
 
   /**
-   * Sets the radius of the outline corners. If this API is not used, there will be no change by default. Compared with
-   * [outlineRadius]{@link CommonMethod#outlineRadius(value: Dimension | OutlineRadiuses)}, this API supports the
+   * Sets the radius of the outline corners. If this API is not used, there will be no change by default. Compared with 
+   * [outlineRadius]{@link CommonMethod#outlineRadius(value: Dimension | OutlineRadiuses)}, this API supports the 
    * **undefined** type for the **radius** parameter.
    *
    * @param { Optional<Dimension | OutlineRadiuses> } radius - Radius of the outline corners. Percentage values are not
@@ -21464,7 +21464,7 @@ declare class CommonMethod<T> {
   outlineRadius(radius: Optional<Dimension | OutlineRadiuses>): T;
 
   /**
-   * Sets the foreground color of the component. Components without explicit foreground color settings inherit from
+   * Sets the foreground color of the component. Components without explicit foreground color settings inherit from 
    * their parent components by default.
    *
    * @param { ResourceColor | ColoringStrategy } value - Foreground color. The value can be a specific color or a
@@ -21479,9 +21479,9 @@ declare class CommonMethod<T> {
   foregroundColor(value: ResourceColor | ColoringStrategy): T;
 
   /**
-   * Sets the foreground color of the component. Components without explicit foreground color settings inherit from
-   * their parent components by default. Compared to
-   * [foregroundColor]{@link CommonMethod#foregroundColor(value: ResourceColor | ColoringStrategy)}, the **color**
+   * Sets the foreground color of the component. Components without explicit foreground color settings inherit from 
+   * their parent components by default. Compared to 
+   * [foregroundColor]{@link CommonMethod#foregroundColor(value: ResourceColor | ColoringStrategy)}, the **color** 
    * parameter supports the **undefined** type.
    *
    * @param { Optional<ResourceColor | ColoringStrategy> } color - Foreground color. The value can be a specific color
@@ -21980,9 +21980,9 @@ declare class CommonMethod<T> {
    * 
    * > **NOTE**
    * >
-   * > - When a single page contains a large number of components with animations, use
-   * > [renderGroup]{@link CommonMethod#renderGroup(value: boolean)} to minimize frame freezing and improve animation
-   * > performance. For best practices, see
+   * > - When a single page contains a large number of components with animations, use 
+   * > [renderGroup]{@link CommonMethod#renderGroup(value: boolean)} to minimize frame freezing and improve animation 
+   * > performance. For best practices, see 
    * > 
    * > [Animation Usage Guide – Using RenderGroup](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-fair-use-animation#section1223162922415).
    * >
@@ -22016,8 +22016,8 @@ declare class CommonMethod<T> {
   transition(value: TransitionOptions | TransitionEffect): T;
 
   /**
-   * Sets the transition effects used when a component is inserted or removed. Compared with
-   * [transition]{@link CommonMethod#transition(value: TransitionOptions | TransitionEffect)}, this API provides the
+   * Sets the transition effects used when a component is inserted or removed. Compared with 
+   * [transition]{@link CommonMethod#transition(value: TransitionOptions | TransitionEffect)}, this API provides the 
    * callback when the transition animation ends.
    * 
    * > **NOTE**
@@ -22110,8 +22110,8 @@ declare class CommonMethod<T> {
   blur(value: number, options?: BlurOptions): T;
 
   /**
-   * Applies a foreground blur effect to the component. Compared to
-   * [blur]{@link CommonMethod#blur(value: number, options?: BlurOptions)}, the **blurRadius** parameter supports the
+   * Applies a foreground blur effect to the component. Compared to 
+   * [blur]{@link CommonMethod#blur(value: number, options?: BlurOptions)}, the **blurRadius** parameter supports the 
    * **undefined** type.
    *
    * @param { Optional<number> } blurRadius - Foreground blur effect to apply to the component. The input parameter is
@@ -22166,7 +22166,7 @@ declare class CommonMethod<T> {
   linearGradientBlur(value: number, options: LinearGradientBlurOptions): T;
 
   /**
-   * Applies a linear gradient foreground blur effect to the component. Compared with
+   * Applies a linear gradient foreground blur effect to the component. Compared with 
    * [linearGradientBlur<sup>12+</sup>]{@link CommonMethod#linearGradientBlur(value: number, options: LinearGradientBlurOptions)},
    * this API supports the **undefined** type.
    *
@@ -22193,17 +22193,17 @@ declare class CommonMethod<T> {
    * 
    * > **NOTE**
    * >
-   * > - Do not use this API in intra-component transitions, shared element transitions, implicit element transitions,
+   * > - Do not use this API in intra-component transitions, shared element transitions, implicit element transitions, 
    * > or particle animations. Doing so may cause unexpected results.
    * >
-   * > - The **radius** parameter of **motionBlur** must be set to **0** for the initial state. Otherwise, there may be
+   * > - The **radius** parameter of **motionBlur** must be set to **0** for the initial state. Otherwise, there may be 
    * > unexpected results during a cold start.
    * >
-   * > - This API must be used together with the **onFinish** parameter of **AnimateParam**. Its **radius** parameter
+   * > - This API must be used together with the **onFinish** parameter of **AnimateParam**. Its **radius** parameter 
    * > must be set to **0** when the animation ends; otherwise, there may be unexpected results.
    * >
-   * > - When using this API, do not frequently change the blur radius of the same component; otherwise, there may be
-   * > unexpected results. For example, if you frequently click the image in the example, the blur effect may not work
+   * > - When using this API, do not frequently change the blur radius of the same component; otherwise, there may be 
+   * > unexpected results. For example, if you frequently click the image in the example, the blur effect may not work 
    * > sometimes.
    * >
    * > - To avoid unexpected results, make sure the coordinates of the motion blur anchor point are the same as those of
@@ -22222,7 +22222,7 @@ declare class CommonMethod<T> {
   motionBlur(value: MotionBlurOptions):T;
 
   /**
-   * Applies a motion blur effect to the component being scaled or moved. Compared with
+   * Applies a motion blur effect to the component being scaled or moved. Compared with 
    * [motionBlur]{@link CommonMethod#motionBlur(value: MotionBlurOptions)}, this API supports the **undefined** type for
    * the **motionBlur** parameter.
    * 
@@ -22273,7 +22273,7 @@ declare class CommonMethod<T> {
 
   /**
    * Applies a brightness effect to the component. If this API is not used, there will be no change by default. Compared
-   * with [brightness]{@link CommonMethod#brightness(value: number)}, this API supports the **undefined** type for the
+   * with [brightness]{@link CommonMethod#brightness(value: number)}, this API supports the **undefined** type for the 
    * **brightness** parameter.
    *
    * @param { Optional<number> } brightness - Brightness effect of the component. **1**: No brightness adjustment. Less
@@ -22318,8 +22318,8 @@ declare class CommonMethod<T> {
   contrast(value: number): T;
 
   /**
-   * Applies a contrast effect to the component. If this API is not used, there will be no change by default. Compared
-   * to [contrast]{@link CommonMethod#contrast(value: number)}, the **contrast** parameter supports the **undefined**
+   * Applies a contrast effect to the component. If this API is not used, there will be no change by default. Compared 
+   * to [contrast]{@link CommonMethod#contrast(value: number)}, the **contrast** parameter supports the **undefined** 
    * type.
    *
    * @param { Optional<number> } contrast - Contrast of the component. The input parameter is a contrast value. If the
@@ -22364,8 +22364,8 @@ declare class CommonMethod<T> {
 
   /**
    * Applies a grayscale effect to the component. The grayscale rendering of the upper layer will overlay that of lower-
-   * layer child components. If this API is not used, there will be no change by default. Compared to
-   * [grayscale]{@link CommonMethod#grayscale(value: number)}, the **grayscale** parameter supports the **undefined**
+   * layer child components. If this API is not used, there will be no change by default. Compared to 
+   * [grayscale]{@link CommonMethod#grayscale(value: number)}, the **grayscale** parameter supports the **undefined** 
    * type.
    *
    * @param { Optional<number> } grayscale - Grayscale conversion ratio of the component. If the value is **1.0**, the
@@ -22403,8 +22403,8 @@ declare class CommonMethod<T> {
   colorBlend(value: Color | string | Resource): T;
 
   /**
-   * Applies a color blend effect to the component. Compared with
-   * [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}, this API supports the **undefined**
+   * Applies a color blend effect to the component. Compared with 
+   * [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}, this API supports the **undefined** 
    * type for the **color** parameter.
    *
    * @param { Optional<Color | string | Resource> } color - Color to blend with the component. The value can be a
@@ -22443,7 +22443,7 @@ declare class CommonMethod<T> {
 
   /**
    * Applies a saturation effect to the component. If this API is not used, there will be no change by default. Compared
-   * to [saturate]{@link CommonMethod#saturate(value: number)}, the **saturate** parameter supports the **undefined**
+   * to [saturate]{@link CommonMethod#saturate(value: number)}, the **saturate** parameter supports the **undefined** 
    * type.
    *
    * @param { Optional<number> } saturate - Saturation of the component. The saturation is the ratio of the chromatic
@@ -22485,8 +22485,8 @@ declare class CommonMethod<T> {
   sepia(value: number): T;
 
   /**
-   * Converts the image to a sepia tone, reducing color intensity to create a warm, vintage image style. Compared to
-   * [sepia]{@link CommonMethod#sepia(value: number)}, this API supports the **undefined** type for the **sepia**
+   * Converts the image to a sepia tone, reducing color intensity to create a warm, vintage image style. Compared to 
+   * [sepia]{@link CommonMethod#sepia(value: number)}, this API supports the **undefined** type for the **sepia** 
    * parameter.
    *
    * @param { Optional<number> } sepia - Intensity of the sepia filter. A value of 1 results in a completely sepia
@@ -22550,7 +22550,7 @@ declare class CommonMethod<T> {
   invert(value: number | InvertOptions): T;
 
   /**
-   * Inverts an image. Compared with [invert]{@link CommonMethod#invert(value: number | InvertOptions)}, this API
+   * Inverts an image. Compared with [invert]{@link CommonMethod#invert(value: number | InvertOptions)}, this API 
    * supports the **undefined** type for the **options** parameter.
    *
    * @param { Optional<number | InvertOptions> } options - How an image is inverted.
@@ -22611,8 +22611,8 @@ declare class CommonMethod<T> {
   hueRotate(value: number | string): T;
 
   /**
-   * Rotates the hue of the component. If this API is not used, there will be no change by default. Compared to
-   * [hueRotate]{@link CommonMethod#hueRotate(value: number | string)}, the **rotation** parameter supports the
+   * Rotates the hue of the component. If this API is not used, there will be no change by default. Compared to 
+   * [hueRotate]{@link CommonMethod#hueRotate(value: number | string)}, the **rotation** parameter supports the 
    * **undefined** type.
    *
    * @param { Optional<number | string> } rotation - Hue rotation angle of the component.
@@ -22662,8 +22662,8 @@ declare class CommonMethod<T> {
   useShadowBatching(value: boolean): T;
 
   /**
-   * Sets whether to render child node shadows at the same layer, enabling shadow overlap within the same layer.
-   * Compared with [useShadowBatching<sup>11+</sup>]{@link CommonMethod#useShadowBatching(value: boolean)}, this API
+   * Sets whether to render child node shadows at the same layer, enabling shadow overlap within the same layer. 
+   * Compared with [useShadowBatching<sup>11+</sup>]{@link CommonMethod#useShadowBatching(value: boolean)}, this API 
    * supports the **undefined** type for the **use** parameter.
    *
    * @param { Optional<boolean> } use - Whether to render child node shadows at the same layer.
@@ -22789,8 +22789,8 @@ declare class CommonMethod<T> {
   backdropBlur(value: number, options?: BlurOptions): T;
 
   /**
-   * Applies a background blur effect to the component. You can customize the blur radius and grayscale parameters.
-   * Compared to [backdropBlur]{@link CommonMethod#backdropBlur(value: number, options?: BlurOptions)}, the **radius**
+   * Applies a background blur effect to the component. You can customize the blur radius and grayscale parameters. 
+   * Compared to [backdropBlur]{@link CommonMethod#backdropBlur(value: number, options?: BlurOptions)}, the **radius** 
    * parameter supports the **undefined** type.
    *
    * @param { Optional<number> } radius - Background blur effect to apply to the component. The input parameter is the
@@ -22816,7 +22816,7 @@ declare class CommonMethod<T> {
    * components within the render group are frequently updated, cache invalidation may lead to performance degradation.
    * Additionally, when a render group is set and the current component's opacity is not **1**, the rendering effect may
    * differ.
-   * 
+   *
    * If this attribute is not set, no render group is formed by default.
    *
    * @param { boolean } value - Whether the current component and its child components form a render group.
@@ -22835,10 +22835,10 @@ declare class CommonMethod<T> {
   backdropBlur(radius: Optional<number>, options?: BlurOptions, sysOptions?: SystemAdaptiveOptions): T;
 
  /**
-   * Sets whether to form a render group. A render group means that the subtree composed of the current component and
-   * its child components is first rendered on an offscreen canvas and then composited with the parent component.
-   * Setting a render group allows the system to cache the rendering result, improving performance. However, if
-   * components within the render group are frequently updated, cache invalidation may lead to performance degradation.
+   * Sets whether to form a render group. A render group means that the subtree composed of the current component and 
+   * its child components is first rendered on an offscreen canvas and then composited with the parent component. 
+   * Setting a render group allows the system to cache the rendering result, improving performance. However, if 
+   * components within the render group are frequently updated, cache invalidation may lead to performance degradation. 
    * Additionally, when a render group is set and the current component's opacity is not **1**, the rendering effect may
    * differ.
    * 
@@ -22874,29 +22874,29 @@ declare class CommonMethod<T> {
   renderGroup(isGroup: Optional<boolean>): T;
 
   /**
-   * Sets whether the current component and its child components are removed from the render group of the ancestor
-   * component. If this attribute is used alone, no effect is achieved. It must be used with the
-   * [renderGroup]{@link CommonMethod#renderGroup(isGroup: Optional<boolean>)} attribute of the ancestor component.
+   * Sets whether the current component and its child components are removed from the render group of the ancestor 
+   * component. If this attribute is used alone, no effect is achieved. It must be used with the 
+   * [renderGroup]{@link CommonMethod#renderGroup(isGroup: Optional<boolean>)} attribute of the ancestor component. 
    * 
-   * Removing the current component and its children from the render group does not affect the offscreen canvas of the
-   * ancestor component, and the cache of the render group is still valid. In this way, the render group cache can be
-   * reused. If the display area of the current component occupies only a part of the display area of the render group
-   * drawing content, and the display effect of the current component and its children is frequently updated, setting
+   * Removing the current component and its children from the render group does not affect the offscreen canvas of the 
+   * ancestor component, and the cache of the render group is still valid. In this way, the render group cache can be 
+   * reused. If the display area of the current component occupies only a part of the display area of the render group 
+   * drawing content, and the display effect of the current component and its children is frequently updated, setting 
    * **excludeFromRenderGroup** helps optimize the drawing performance.
    * 
-   * If this attribute is not set, the current component and its children are not removed from the render group of the
+   * If this attribute is not set, the current component and its children are not removed from the render group of the 
    * ancestor component by default.
    * 
    * > **NOTE**
    * >
-   * > The drawing content of the component with **excludeFromRenderGroup** set to **true** and its children cannot the
-   * > component's own boundary range. Otherwise, the displayed content may be clipped. For example, if the child
-   * > component exceeds the boundary range of the current component due to attributes such as
-   * > [translate]{@link CommonMethod#translate(value: TranslateOptions)} or
-   * > [scale]{@link CommonMethod#scale(value: ScaleOptions)}, or the drawing content extend beyond its boundaries
-   * > because the current component has attributes such as
-   * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} and
-   * > [pixelStretchEffect]{@link CommonMethod#pixelStretchEffect(options: PixelStretchEffectOptions)}, the displayed
+   * > The drawing content of the component with **excludeFromRenderGroup** set to **true** and its children cannot the 
+   * > component's own boundary range. Otherwise, the displayed content may be clipped. For example, if the child 
+   * > component exceeds the boundary range of the current component due to attributes such as 
+   * > [translate]{@link CommonMethod#translate(value: TranslateOptions)} or 
+   * > [scale]{@link CommonMethod#scale(value: ScaleOptions)}, or the drawing content extend beyond its boundaries 
+   * > because the current component has attributes such as 
+   * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} and 
+   * > [pixelStretchEffect]{@link CommonMethod#pixelStretchEffect(options: PixelStretchEffectOptions)}, the displayed 
    * > content may be clipped. In such scenarios, **excludeFromRenderGroup** should not be set to **true**.
    *
    * @param { boolean | undefined } exclude - Whether to remove the current component and its child components from the
@@ -22913,7 +22913,7 @@ declare class CommonMethod<T> {
   excludeFromRenderGroup(exclude: boolean | undefined): T;
 
   /**
-   * Sets whether to freeze the component. When frozen, the component and its children are cached for repeated drawing
+   * Sets whether to freeze the component. When frozen, the component and its children are cached for repeated drawing 
    * after offscreen rendering, without updating internal attributes.
    * 
    * > **NOTE**
@@ -22936,9 +22936,9 @@ declare class CommonMethod<T> {
   freeze(value: boolean): T;
 
   /**
-   * Sets whether to freeze the component. When frozen, the component and its children are cached for repeated drawing
-   * after offscreen rendering, without updating internal attributes. Compared with
-   * [freeze]{@link CommonMethod#freeze(value: boolean)}, this API supports the **undefined** type for the **freeze**
+   * Sets whether to freeze the component. When frozen, the component and its children are cached for repeated drawing 
+   * after offscreen rendering, without updating internal attributes. Compared with 
+   * [freeze]{@link CommonMethod#freeze(value: boolean)}, this API supports the **undefined** type for the **freeze** 
    * parameter.
    * 
    * > **NOTE**
@@ -22998,7 +22998,7 @@ declare class CommonMethod<T> {
   translate(value: TranslateOptions): T;
 
   /**
-   * Translates the component. Compared with [translate]{@link CommonMethod#translate(value: TranslateOptions)}, this
+   * Translates the component. Compared with [translate]{@link CommonMethod#translate(value: TranslateOptions)}, this 
    * API supports the **undefined** type.
    *
    * @param { Optional<TranslateOptions> } translate - How the component is translated within the
@@ -23060,7 +23060,7 @@ declare class CommonMethod<T> {
   scale(value: ScaleOptions): T;
 
   /**
-   * Scales the component. Compared with [scale]{@link CommonMethod#scale(value: ScaleOptions)}, this API supports the
+   * Scales the component. Compared with [scale]{@link CommonMethod#scale(value: ScaleOptions)}, this API supports the 
    * **undefined** type.
    *
    * @param { Optional<ScaleOptions> } options - Scale ratio along the x-, y-, and z-axis. The default value is **1**.
@@ -23167,7 +23167,7 @@ declare class CommonMethod<T> {
   rotate(value: RotateOptions): T;
 
   /**
-   * Rotates the component. Compared with [rotate]{@link CommonMethod#rotate(value: RotateOptions)}, this API supports
+   * Rotates the component. Compared with [rotate]{@link CommonMethod#rotate(value: RotateOptions)}, this API supports 
    * the **undefined** type.
    *
    * @param { Optional<RotateOptions> } options - How the component is rotated within the
@@ -23202,7 +23202,7 @@ declare class CommonMethod<T> {
   rotate(options: Optional<RotateOptions>): T;
 
   /**
-   * Sets the component rotation effect. Compared with
+   * Sets the component rotation effect. Compared with 
    * [rotate]{@link CommonMethod#rotate(options: Optional<RotateOptions>)}, this API supports the **RotateAngleOptions**
    * type for the **options** parameter.
    *
@@ -23251,7 +23251,7 @@ declare class CommonMethod<T> {
   rotate(options: Optional<RotateOptions | RotateAngleOptions>): T;
 
   /**
-   * Displays the matrix transformation when 2D transformation is performed. If 3D transformation is included, the
+   * Displays the matrix transformation when 2D transformation is performed. If 3D transformation is included, the 
    * [transform3D]{@link CommonMethod#transform3D} API is required.
    *
    * @param { object } value - Transformation matrix of the component. Only the
@@ -23265,9 +23265,9 @@ declare class CommonMethod<T> {
   transform(value: object): T;
 
   /**
-   * Displays the matrix transformation when 2D transformation is performed. If 3D transformation is included, the
-   * [transform3D]{@link CommonMethod#transform3D} API is required. Compared with
-   * [transform](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-transformation.md#transform), the
+   * Displays the matrix transformation when 2D transformation is performed. If 3D transformation is included, the 
+   * [transform3D]{@link CommonMethod#transform3D} API is required. Compared with 
+   * [transform](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-transformation.md#transform), the 
    * transform<sup>18+</sup> parameter supports the undefined type.
    *
    * @param { Optional<object> } transform - Transformation matrix of the component. Only the
@@ -23285,7 +23285,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the 3D transformation matrix of the component. When 3D transformation with the perspective effect is involved,
-   * the display effect of the transform interface may be incorrect. In this case, the transform3D interface is
+   * the display effect of the transform interface may be incorrect. In this case, the transform3D interface is 
    * recommended.
    *
    * @param { Optional<Matrix4Transit> } transform - 3D transformation matrix.
@@ -23999,7 +23999,7 @@ declare class CommonMethod<T> {
   clickEffect(value: ClickEffect | null): T;
 
   /**
-   * Sets the click feedback effect of the component. Compared with
+   * Sets the click feedback effect of the component. Compared with 
    * [clickEffect]{@link CommonMethod#clickEffect(value: ClickEffect | null)}, this API supports the **undefined** type.
    *
    * @param { Optional<ClickEffect | null> } effect - Click feedback effect of the component.
@@ -24397,8 +24397,8 @@ declare class CommonMethod<T> {
   linearGradient(value: LinearGradientOptions): T;
 
   /**
-   * Creates a linear gradient. Compared to
-   * [linearGradient]{@link CommonMethod#linearGradient(value: LinearGradientOptions)}, this API supports the
+   * Creates a linear gradient. Compared to 
+   * [linearGradient]{@link CommonMethod#linearGradient(value: LinearGradientOptions)}, this API supports the 
    * **undefined** type for the **options** parameter.
    *
    * @param { Optional<LinearGradientOptions> } options - Linear gradient.
@@ -24529,8 +24529,8 @@ declare class CommonMethod<T> {
   shadow(value: ShadowOptions | ShadowStyle): T;
 
   /**
-   * Applies a shadow effect to the component. Compared to
-   * [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}, the **options** parameter supports the
+   * Applies a shadow effect to the component. Compared to 
+   * [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}, the **options** parameter supports the 
    * **undefined** type.
    *
    * @param { Optional<ShadowOptions | ShadowStyle> } options - Shadow of the component.
@@ -24571,7 +24571,7 @@ declare class CommonMethod<T> {
   edgeLight(params: EdgeLightParams | undefined): T;
 
   /**
-   * Defines how the component's content (including the content of it child components) is blended with the existing
+   * Defines how the component's content (including the content of it child components) is blended with the existing 
    * content on the canvas (possibly offscreen canvas) below.
    *
    * @param { BlendMode } value - Blend mode.
@@ -24605,9 +24605,9 @@ declare class CommonMethod<T> {
   blendMode(value: BlendMode, type?: BlendApplyType): T;
 
   /**
-   * Defines how the component's content (including the content of it child components) is blended with the existing
-   * content on the canvas (possibly offscreen canvas) below. Compared to
-   * [blendMode<sup>11+</sup>]{@link CommonMethod#blendMode(value: BlendMode, type?: BlendApplyType)}, the **mode**
+   * Defines how the component's content (including the content of it child components) is blended with the existing 
+   * content on the canvas (possibly offscreen canvas) below. Compared to 
+   * [blendMode<sup>11+</sup>]{@link CommonMethod#blendMode(value: BlendMode, type?: BlendApplyType)}, the **mode** 
    * parameter supports the **undefined** type.
    *
    * @param { Optional<BlendMode> } mode - Blend mode.
@@ -24643,8 +24643,8 @@ declare class CommonMethod<T> {
   blendMode(mode: Optional<BlendMode>, type?: BlendApplyType): T;
 
   /**
-   * Defines how the component's content (including the content of it child components) is blended with the existing
-   * content on the canvas (possibly offscreen canvas) below. This API cannot be used with
+   * Defines how the component's content (including the content of it child components) is blended with the existing 
+   * content on the canvas (possibly offscreen canvas) below. This API cannot be used with 
    * [blendMode]{@link CommonMethod#blendMode(value: BlendMode, type?: BlendApplyType)}.
    *
    * @param { BlendMode | Blender } effect - Blend mode or blender type, depending on the parameter type.
@@ -24685,8 +24685,8 @@ declare class CommonMethod<T> {
   advancedBlendMode(effect: BlendMode | Blender, type?: BlendApplyType): T;
 
   /**
-   * Sets whether to clip the areas of child components that extend beyond this component's bounds, that is, whether to
-   * perform clipping based on the edge contour of the parent container If this API is not used, the area of child
+   * Sets whether to clip the areas of child components that extend beyond this component's bounds, that is, whether to 
+   * perform clipping based on the edge contour of the parent container If this API is not used, the area of child 
    * components extending beyond the current component's bounds is not clipped by default.
    *
    * @param { boolean } value - Whether to clip the areas of child components that extend beyond the current component's
@@ -24706,9 +24706,9 @@ declare class CommonMethod<T> {
   clip(value: boolean): T;
 
   /**
-   * Sets whether to clip the areas of child components that extend beyond this component's bounds, that is, whether to
-   * perform clipping based on the edge contour of the parent container If this API is not used, the area of child
-   * components extending beyond the current component's bounds is not clipped by default. Compared with
+   * Sets whether to clip the areas of child components that extend beyond this component's bounds, that is, whether to 
+   * perform clipping based on the edge contour of the parent container If this API is not used, the area of child 
+   * components extending beyond the current component's bounds is not clipped by default. Compared with 
    * [clip<sup>12+</sup>]{@link CommonMethod#clip(value: boolean)}, this API supports the **undefined** type.
    *
    * @param { Optional<boolean> } clip - Whether to clip the areas of child components that extend beyond the current
@@ -24754,12 +24754,12 @@ declare class CommonMethod<T> {
   /**
    * Clips this component according to the specified shape (which may include position information).
    * 
-   * > **NOTE**
+   * > **NOTE** 
    * >
-   * > Different shapes support different ranges of attributes. A path is one type of shape, along with others like
+   * > Different shapes support different ranges of attributes. A path is one type of shape, along with others like 
    * > ellipses and rectangles.
    * >
-   * > Path shapes do not support setting width and height attributes. For details about the supported attributes, see
+   * > Path shapes do not support setting width and height attributes. For details about the supported attributes, see 
    * > the specific shape documentation.
    * >
    * > The [fill]{@link @ohos.arkui.shape:CommonShapeMethod#fill} attribute of shapes has no effect on the **clipShape**
@@ -24779,16 +24779,16 @@ declare class CommonMethod<T> {
   clipShape(value: CircleShape | EllipseShape | PathShape | RectShape): T;
 
   /**
-   * Clips this component according to the specified shape (which may include position information). Compared with
+   * Clips this component according to the specified shape (which may include position information). Compared with 
    * [clipShape<sup>12+</sup>]{@link CommonMethod#clipShape(value: CircleShape | EllipseShape | PathShape | RectShape)},
    * this API supports the **undefined** type.
    * 
-   * > **NOTE**
+   * > **NOTE** 
    * >
-   * > Different shapes support different ranges of attributes. A path is one type of shape, along with others like
+   * > Different shapes support different ranges of attributes. A path is one type of shape, along with others like 
    * > ellipses and rectangles.
    * >
-   * > Path shapes do not support setting width and height attributes. For details about the supported attributes, see
+   * > Path shapes do not support setting width and height attributes. For details about the supported attributes, see 
    * > the specific shape documentation.
    * >
    * > The [fill]{@link @ohos.arkui.shape:CommonShapeMethod#fill} attribute of shapes has no effect on the **clipShape**
@@ -24824,7 +24824,7 @@ declare class CommonMethod<T> {
   mask(value: ProgressMask): T;
 
   /**
-   * Adds a mask to the component to indicate the progress. Compared with
+   * Adds a mask to the component to indicate the progress. Compared with 
    * [mask<sup>12+</sup>]{@link CommonMethod#mask(value: ProgressMask)}, this API supports the **undefined** type.
    *
    * @param { Optional<ProgressMask> } mask - Mask to add to the component, which allows for dynamic adjustment of
@@ -24874,7 +24874,7 @@ declare class CommonMethod<T> {
   maskShape(value: CircleShape | EllipseShape | PathShape | RectShape): T;
 
   /**
-   * Adds a mask of the specified shape to the component. Compared with
+   * Adds a mask of the specified shape to the component. Compared with 
    * [maskShape<sup>12+</sup>]{@link CommonMethod#maskShape(value: CircleShape | EllipseShape | PathShape | RectShape)},
    * this API supports the **undefined** type.
    *
@@ -25164,8 +25164,8 @@ declare class CommonMethod<T> {
   bindContextMenuByIsShow(isShow: boolean, content: CustomBuilder | Array<MenuElement>, options?: ContextMenuOptions): T;
 
   /**
-   * Binds a full-screen modal to the component, which can be displayed when the component is touched. The content of
-   * the modal is customizable. The transition type can be set to none, slide-up and slide-down animation, and opacity
+   * Binds a full-screen modal to the component, which can be displayed when the component is touched. The content of 
+   * the modal is customizable. The transition type can be set to none, slide-up and slide-down animation, and opacity 
    * gradient animation.
    * 
    * > **NOTE**
@@ -25198,7 +25198,7 @@ declare class CommonMethod<T> {
   bindContentCover(isShow: boolean, builder: CustomBuilder, type?: ModalTransition): T;
 
   /**
-   * Binds a full-screen modal to the component, which can be displayed when the component is touched. The modal page
+   * Binds a full-screen modal to the component, which can be displayed when the component is touched. The modal page 
    * content and transition mode are configurable.
    *
    * @param { boolean } isShow - Whether to display the full-screen modal.
@@ -25249,7 +25249,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the state-specific styles for the component.
-   * 
+   *
    * > **NOTE**
    * >
    * > This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
@@ -25402,8 +25402,8 @@ declare class CommonMethod<T> {
   sphericalEffect(value: number): T;
 
   /**
-   * Applies a spherical effect to the component. Compared to
-   * [sphericalEffect<sup>12+</sup>]{@link CommonMethod#sphericalEffect(value: number)}, the **effect** parameter
+   * Applies a spherical effect to the component. Compared to 
+   * [sphericalEffect<sup>12+</sup>]{@link CommonMethod#sphericalEffect(value: number)}, the **effect** parameter 
    * supports the **undefined** type.
    *
    * @param { Optional<number> } effect - Spherical degree of the component.
@@ -25449,8 +25449,8 @@ declare class CommonMethod<T> {
   lightUpEffect(value: number): T;
 
   /**
-   * Applies a light up effect to the component. Compared to
-   * [lightUpEffect<sup>12+</sup>]{@link CommonMethod#lightUpEffect(value: number)}, the **degree** parameter supports
+   * Applies a light up effect to the component. Compared to 
+   * [lightUpEffect<sup>12+</sup>]{@link CommonMethod#lightUpEffect(value: number)}, the **degree** parameter supports 
    * the **undefined** type.
    *
    * @param { Optional<number> } degree - Light up degree of the component.
@@ -25996,8 +25996,8 @@ declare class CommonMethod<T> {
    reuse(options: ReuseOptions): T;
 
   /**
-   * Sets how the final state of the component's content is rendered during its width and height animation process. If
-   * it is not set via this API, the content size at the end of the animation is maintained, and the content always
+   * Sets how the final state of the component's content is rendered during its width and height animation process. If 
+   * it is not set via this API, the content size at the end of the animation is maintained, and the content always 
    * remains top-left aligned with the component.
    *
    * @param { RenderFit } fitMode - Sets how the final state of the component's content is rendered during its width and
@@ -26013,10 +26013,10 @@ declare class CommonMethod<T> {
   renderFit(fitMode: RenderFit): T;
 
   /**
-   * Sets how the final state of the component's content is rendered during its width and height animation process. If
-   * it is not set via this API, the content size at the end of the animation is maintained, and the content always
-   * remains top-left aligned with the component. Compared to
-   * [renderFit]{@link CommonMethod#renderFit(fitMode: RenderFit)}, this API supports the **undefined** type for the
+   * Sets how the final state of the component's content is rendered during its width and height animation process. If 
+   * it is not set via this API, the content size at the end of the animation is maintained, and the content always 
+   * remains top-left aligned with the component. Compared to 
+   * [renderFit]{@link CommonMethod#renderFit(fitMode: RenderFit)}, this API supports the **undefined** type for the 
    * **fitMode** parameter.
    *
    * @param { Optional<RenderFit> } fitMode - Sets how the final state of the component's content is rendered during its
@@ -26090,7 +26090,7 @@ declare class CommonMethod<T> {
   backgroundBrightness(params: BackgroundBrightnessOptions): T;
 
   /**
-   * Sets the background brightness of the component. Compared to
+   * Sets the background brightness of the component. Compared to 
    * [backgroundBrightness<sup>12+</sup>]{@link CommonMethod#backgroundBrightness(params: BackgroundBrightnessOptions)},
    * the **options** parameter supports the **undefined** type.
    *
@@ -26332,11 +26332,11 @@ declare class CommonMethod<T> {
   allowForceDark(value: boolean): T;
 
   /**
-   * Sets the system material for a component. Different system materials have different attribute effects. This API
-   * affects the background color ([backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}), border
+   * Sets the system material for a component. Different system materials have different attribute effects. This API 
+   * affects the background color ([backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}), border 
    * color ([borderColor]{@link CommonMethod#borderColor}), border width ([borderWidth]{@link CommonMethod#borderWidth}
    * ), and shadow ([shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}). You are advised not to use
-   * this API together with the aforementioned APIs. For details about the example, see
+   * this API together with the aforementioned APIs. For details about the example, see 
    * [Setting the System Material](docroot://reference/apis-arkui/arkts-apis-uimaterial-sys.md#example-1-setting-the-system-material).
    *
    * @param { SystemUiMaterial | undefined } material - System material object of the component. Setting it to
