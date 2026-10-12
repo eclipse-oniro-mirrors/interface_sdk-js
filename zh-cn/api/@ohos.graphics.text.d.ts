@@ -14,9 +14,7 @@
  */
 
 /**
- 文本模块
- * @file
- 文本模块
+ * @file 文本模块
  * @kit ArkGraphics2D
  */
 import type drawing from './@ohos.graphics.drawing';
