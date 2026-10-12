@@ -1713,7 +1713,6 @@ declare namespace systemManager {
    * Set the local HOTA domain of the device.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
-   * @param { Want } admin - admin indicates the enterprise admin extension ability information.
    * @param { string } domain - Indicates the local HOTA domain to set. The value must comply with
    *     domain name rules. The validation rules are as follows:
    *     1. The length must not exceed 64 characters.
@@ -1729,30 +1728,31 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200018 - This device is not an enterprise device.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
    */
-  function setLocalHotaDomain(admin: Want, domain: string): void;
+  function setLocalHotaDomain(domain: string): void;
 
   /**
    * Get local HOTA domain for device.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
-   * @param { Want } admin - admin indicates the enterprise admin extension ability information.
    * @returns { string } Returns the local HOTA domain.When the interface is not supported on the
    *     current device, return an empty string as the default value.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200018 - This device is not an enterprise device.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
    */
-  function getLocalHotaDomain(admin: Want): string;
+  function getLocalHotaDomain(): string;
 }
 
 export default systemManager;
