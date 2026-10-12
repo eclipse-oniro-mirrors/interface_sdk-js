@@ -427,11 +427,13 @@ declare namespace motion {
    * @permission ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE [since 20]
    * @param { string } type - 事件类型。固定传入'operatingHandChanged'，表示操作手状态变化。
    * @param { Callback<OperatingHandStatus> } callback - 回调函数，返回操作手状态信息。
-   * @throws { BusinessError } 201 - Permission denied. An attempt was made to subscribe operatingHandChanged
-   *     <br> event forbidden by permission: ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
    *     container-related exception;
    *     <br> 2. N-API invocation exception, invalid N-API status.
@@ -451,11 +453,13 @@ declare namespace motion {
    * @param { string } type - 事件类型。固定传入'operatingHandChanged'，表示操作手状态变化。
    * @param { Callback<OperatingHandStatus> } [callback] - 回调函数，返回操作手状态信息。需要取消监听的回调函数，需与订阅时传入的回调函数一致。
    *     <br>若不填，则取消当前监听该事件的所有回调函数。
-   * @throws { BusinessError } 201 - Permission denied. An attempt was made to unsubscribe operatingHandChanged
-   *     <br> event forbidden by permission: ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
    *     container-related exception;
    *     <br> 2. N-API invocation exception, invalid N-API status.
@@ -472,10 +476,12 @@ declare namespace motion {
    * @permission ohos.permission.ACTIVITY_MOTION [since 15 - 19]
    * @permission ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE [since 20]
    * @returns { OperatingHandStatus } 返回触控操作手状态信息。
-   * @throws { BusinessError } 201 - Permission denied. An attempt was made to get the recent operating hand
-   *     <br> status forbidden by permission: ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
    *     container-related exception;
    *     <br> 2. N-API invocation exception, invalid N-API status.
@@ -533,10 +539,12 @@ declare namespace motion {
    *
    * @permission ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE
    * @param { Callback<OperatingHandStatus> } callback - 回调函数，返回操作手状态信息。
-   * @throws { BusinessError } 201 - Permission denied. An attempt was made to subscribe operatingHandChanged
-   *     <br> event forbidden by permission: ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
    *     container-related exception;
    *     <br> 2. N-API invocation exception, invalid N-API status.
@@ -553,10 +561,12 @@ declare namespace motion {
    * @permission ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE
    * @param { Callback<OperatingHandStatus> } [callback] - 回调函数，返回操作手状态信息。需要取消监听的回调函数，需与订阅时传入的回调函数一致。
    *     <br>若不填，则取消当前监听该事件的所有回调函数。
-   * @throws { BusinessError } 201 - Permission denied. An attempt was made to unsubscribe operatingHandChanged
-   *     <br> event forbidden by permission: ohos.permission.ACTIVITY_MOTION 或 ohos.permission.DETECT_GESTURE.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31500001 - Service exception. Possible causes: 1. A system error, such as null pointer,
    *     container-related exception;
    *     <br> 2. N-API invocation exception, invalid N-API status.
