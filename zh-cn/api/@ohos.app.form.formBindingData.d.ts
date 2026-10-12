@@ -62,6 +62,36 @@ declare namespace formBindingData {
   function createFormBindingData(obj?: RecordData): FormBindingData;
 
   /**
+   * 创建一个FormBindingData对象
+   *
+   * @param { Object | string } [obj] - 卡片要展示的数据。可以是包含若干键值对的Object或者JSON格式的字符串。其中图片数据以'formImages'作为标识，内容为图片标识与图片文件描述符的键值对{'
+   *     formImages': {'key1': fd1, 'key2': fd2}}。<br>**说明：** 在[卡片刷新](docroot://form/arkts-ui-widget-interaction-overview.md)
+   *     过程中，卡片UI通过@LocalStorageProp接收卡片数据时，FormBindingData对象会序列化，即卡片数据会转换成string类型。如果卡片刷新的数据通过共享内存更新，刷新数据总
+   *     大小不超过10MB，刷新图片数量不超过30张，超出限制的图片会显示异常。
+   * @returns { FormBindingData } 基于传入的参数数据创建FormBindingData对象
+   * @syscap SystemCapability.Ability.Form
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  function createFormBindingDataEx(obj?: Object | string): FormBindingData;
+
+  /**
+   * 创建一个FormBindingData对象
+   *
+   * @param { RecordData } [obj] - 卡片要展示的数据。可以是包含若干键值对的Object或者JSON格式的字符串。其中图片数据以'formImages'作为标识，内容为图片标识与图片文件描述符的键值对{'
+   *     formImages': {'key1': fd1, 'key2': fd2}}。<br>**说明：** 在[卡片刷新](docroot://form/arkts-ui-widget-interaction-overview.md)
+   *     过程中，卡片UI通过@LocalStorageProp接收卡片数据时，FormBindingData对象会序列化，即卡片数据会转换成string类型。如果卡片刷新的数据通过共享内存更新，刷新数据总
+   *     大小不超过10MB，刷新图片数量不超过30张，超出限制的图片会显示异常。
+   * @returns { FormBindingData } 返回FormBindingData对象
+   * @syscap SystemCapability.Ability.Form
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 static
+   */
+  function createFormBindingDataEx(obj?: RecordData): FormBindingData;
+
+  /**
    * FormBindingData对象的属性定义。
    *
    * @syscap SystemCapability.Ability.Form
@@ -97,6 +127,17 @@ declare namespace formBindingData {
      * @since 23 static
      */
     proxies?: Array<ProxyData>;
+
+    /**
+     * 是否支持更多图片数据，在卡片数据使用共享内存时，当设置值为false时，最多支持正常显示的图片是20张，当设置为true时，最多支持正常显示的图片是30张。更多图片有数据总量超过10M的风险，导致卡片数据更新失败。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isSupportMoreImages?: boolean;
   }
 
   /**
