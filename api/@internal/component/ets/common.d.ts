@@ -8554,10 +8554,6 @@ declare interface ShadowOptions {
    * 
    * If radius is of the Resource type, the value passed in must be of the number type.
    * 
-   * **Atomic service API:** Starting from API version 11, this interface supports use in atomic services.
-   * 
-   * **Card capability:** Starting from API version 9, this interface supports use in ArkTS cards.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -8571,10 +8567,6 @@ declare interface ShadowOptions {
    * 
    * Default value: COLOR 
    * 
-   * **Atomic service API:** Starting from API version 11, this interface supports use in atomic services.
-   * 
-   * **Model constraint:** This interface can be used only under the stage model.
-   *
    * @default ShadowType.COLOR
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -8600,10 +8592,6 @@ declare interface ShadowOptions {
    * The 'average' string can be used to trigger the smart average color picking mode, and the 'primary' string can be 
    * used to trigger the smart primary color mode.
    * 
-   * **Atomic service API:** Starting from API version 11, this interface supports use in atomic services.
-   * 
-   * **Card capability:** Starting from API version 9, this interface supports use in ArkTS cards.
-   *
    * @type { ?(Color | string | Resource) } [since 7 - 10]
    * @type { ?(Color | string | Resource| ColoringStrategy) } [since 11]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8627,10 +8615,6 @@ declare interface ShadowOptions {
    * 
    * If offsetX is of the Resource type, the value passed in must be of the number type.
    * 
-   * **Atomic service API:** Starting from API version 11, this interface supports use in atomic services.
-   * 
-   * **Card capability:** Starting from API version 9, this interface supports use in ArkTS cards.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -8652,10 +8636,6 @@ declare interface ShadowOptions {
    * 
    * If offsetY is of the Resource type, the value passed in must be of the number type.
    * 
-   * **Atomic service API:** Starting from API version 11, this interface supports use in atomic services.
-   * 
-   * **Card capability:** Starting from API version 9, this interface supports use in ArkTS cards.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @form [since 9]
@@ -8674,10 +8654,6 @@ declare interface ShadowOptions {
    * 
    * This field does not take effect in [textShadow]{@link TextAttribute#textShadow}.
    * 
-   * **Atomic service API:** Starting from API version 12, this interface supports use in atomic services.
-   * 
-   * **Model constraint:** This interface can be used only under the stage model.
-   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9062,8 +9038,6 @@ declare enum SheetSize {
    * This value is invalid for a centered dialog box or a follow-hand dialog box, in which case the default height 560 
    * vp is used.
    * 
-   * **Atomic service API:** Since API version 11, this API is supported in atomic services.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -9082,8 +9056,6 @@ declare enum SheetSize {
    * This value is invalid for a centered dialog box or a follow-hand dialog box, in which case the default height 560 
    * vp is used.
    * 
-   * **Atomic service API:** Since API version 11, this API is supported in atomic services.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -9094,8 +9066,6 @@ declare enum SheetSize {
 
   /**
    * Specifies the half-modal height as the height that fits the content.
-   * 
-   * **Atomic service API:** Since API version 12, this API is supported in atomic services.
    * 
    * **Note:**
    * 
@@ -12249,8 +12219,6 @@ declare interface DragEvent {
    *
    * Default value: **DEFAULT**
    *
-   * **System API:** This is a system API.
-   *
    * @default DragAnimationType.DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -12889,8 +12857,6 @@ declare interface BindOptions {
    * When the systemMaterial attribute is set, the effect of this attribute may be overwritten. It is not recommended to
    * use this attribute together with systemMaterial.
    * 
-   * **Atomic service API:** Since API version 11, this API is supported in atomic services.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12903,8 +12869,6 @@ declare interface BindOptions {
    * Callback invoked when the semi-modal page is displayed (after the animation ends). If not set, the callback is not 
    * triggered.
    * 
-   * **Atomic service API:** Since API version 11, this API is supported in atomic services.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12917,8 +12881,6 @@ declare interface BindOptions {
    * Callback invoked when the semi-modal page is dismissed (after the animation ends). If not set, the callback is not 
    * triggered.
    * 
-   * **Atomic service API:** Since API version 11, this API is supported in atomic services.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12934,8 +12896,6 @@ declare interface BindOptions {
    * animation starts, use onWillAppear. To update the UI after the animation ends, use onAppear. If not set, the 
    * callback is not triggered.
    * 
-   * **Atomic service API:** Since API version 12, this API is supported in atomic services.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -12954,7 +12914,6 @@ declare interface BindOptions {
    * **NOTE**
    * 
    * Do not modify state variables in the onWillDisappear function, as this may cause unstable component behavior. 
-   * **Atomic service API:** Since API version 12, this API is supported in atomic services.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13428,10 +13387,6 @@ declare interface BlurSnapshotOptions {
    * 
    * Default value: false
    * 
-   * **Model Constraint:** This API is only available in the stage model.
-   * 
-   * **System API:** This API is a system API.
-   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -13475,8 +13430,6 @@ declare interface SheetOptions extends BindOptions {
    * 8. For the side sheet style, only the full-screen height is supported.
    * 9. For the full-screen modal style, only the full-screen height is supported.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 11.
-   *
    * @default SheetSize.LARGE
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13500,8 +13453,6 @@ declare interface SheetOptions extends BindOptions {
    * When the detents attribute of the sheet panel is set to multiple different heights and takes effect, the drag bar 
    * is displayed by default. When detents is not set to multiple detents, the drag bar is not displayed by default.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 11.
-   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13520,8 +13471,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * When enableOutsideInteractive is set to true, maskColor does not take effect.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 11.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13552,8 +13501,6 @@ declare interface SheetOptions extends BindOptions {
    * and the target position, the sheet returns to the current detent. Velocity threshold: 1000 px/s.
    * Distance threshold: 50%.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13567,8 +13514,6 @@ declare interface SheetOptions extends BindOptions {
    * intensities (for example, Thin for slight blur, Regular for normal blur, and Thick for heavy blur). By default,
    * there is no blur background.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @default BlurStyle.NONE
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13595,8 +13540,6 @@ declare interface SheetOptions extends BindOptions {
    * 2. The full-screen modal style (CONTENT_COVER) does not support displaying the close button, and this
    * attribute does not take effect.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13620,8 +13563,6 @@ declare interface SheetOptions extends BindOptions {
    * 5. Since API version 20, preferType can be set to SheetType.CONTENT_COVER, which supports the full-screen modal
    * style.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @type { ?(SheetType.CENTER | SheetType.POPUP) } [since 11 - 11]
    * @type { ?SheetType } [since 12]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -13643,8 +13584,6 @@ declare interface SheetOptions extends BindOptions {
    * The full-screen modal style (CONTENT_COVER) does not support displaying the title bar, and this attribute does not 
    * take effect. By default, there is no title.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13678,8 +13617,6 @@ declare interface SheetOptions extends BindOptions {
    * It is recommended to use this in the 
    * [secondary confirmation](docroot://ui/arkts-sheet-page.md#secondary-confirmation-capability) scenario.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13711,8 +13648,6 @@ declare interface SheetOptions extends BindOptions {
    * It is recommended to use this in the 
    * [secondary confirmation](docroot://ui/arkts-sheet-page.md#secondary-confirmation-capability) scenario.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13743,8 +13678,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * For the side sheet style, springBack takes effect in the side-swipe dismissal scenario.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13763,8 +13696,6 @@ declare interface SheetOptions extends BindOptions {
    * by default, and the follow-hand sheet allows interaction by default. When set to true, maskColor does not take 
    * effect.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13780,8 +13711,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * Percentage parameter: sets the width of the sheet as a percentage of the parent element width.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13808,8 +13737,6 @@ declare interface SheetOptions extends BindOptions {
    * effect of this attribute may be overridden. Using it together with systemMaterial is not recommended. The value 
    * range is non-negative numbers. Setting a negative value does not take effect. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13831,8 +13758,6 @@ declare interface SheetOptions extends BindOptions {
    * For a bottom sheet, the bottom border color does not take effect. When the systemMaterial attribute is set, the 
    * effect of this attribute may be overridden. Using it together with systemMaterial is not recommended. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13853,8 +13778,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * For a bottom sheet, the bottom border style does not take effect. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13877,8 +13800,6 @@ declare interface SheetOptions extends BindOptions {
    * systemMaterial is not recommended. The full-screen modal style (CONTENT_COVER) does not support shadows, and this 
    * attribute does not take effect.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13898,8 +13819,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The return value is in px. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13919,8 +13838,6 @@ declare interface SheetOptions extends BindOptions {
    *  2. When SheetMode.EMBEDDED is set, setting the UIContext attribute is not supported, because the display layer effects of the two conflict with each other.
    * 3. When a sheet is started using [openBindSheet]{@link @ohos.arkui.UIContext:UIContext.openBindSheet}, if no valid targetId is passed, setting SheetMode.EMBEDDED is not supported, and the default is SheetMode.OVERLAY.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @default SheetMode.OVERLAY
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13935,8 +13852,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * Default value: ScrollSizeMode.FOLLOW_DETENT 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @default ScrollSizeMode.FELLOW_DETEND
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -13956,8 +13871,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The return value is in px. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13975,8 +13888,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The return value is in px. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -13992,8 +13903,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The final style is returned when the style changes.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14013,8 +13922,6 @@ declare interface SheetOptions extends BindOptions {
    * updating this attribute is not supported. Setting this attribute is also not supported when SheetMode.EMBEDDED is 
    * set, because the display layer effects of the two conflict with each other.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 12.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14028,8 +13935,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * **Default value:** TRANSLATE_AND_SCROLL
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 13.
-   *
    * @default SheetKeyboardAvoidMode.TRANSLATE_AND_SCROLL
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14055,8 +13960,6 @@ declare interface SheetOptions extends BindOptions {
    * The bottom sheet style, follow-hand sheet style, side sheet style, and full-screen modal style do not respond to 
    * the hover state. The subwindow mode does not support the hover state.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 14.
-   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14078,8 +13981,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The side sheet style and full-screen sheet style do not support the hover state area setting.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 14.
-   *
    * @default HoverModeAreaType.BOTTOM_SCREEN
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14096,8 +13997,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * Default value: the x-axis coordinate is 0vp, and the y-axis coordinate is 0vp.
    * 
-   * **System API:** This API is a system API.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -14118,8 +14017,6 @@ declare interface SheetOptions extends BindOptions {
    * 3. Both edges take effect: [EffectEdge]{@link EffectEdge}.START | [EffectEdge]{@link EffectEdge}.END (value 3).
    * 4. Neither edge takes effect: [EffectEdge]{@link EffectEdge}.START & [EffectEdge]{@link EffectEdge}.END (value 0).
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 18.
-   *
    * @default 3
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14145,8 +14042,6 @@ declare interface SheetOptions extends BindOptions {
    * 4. When the corner radius is greater than half of the sheet width, the corner radius takes the value of half of the sheet width.
    * 5. When the sheet height is too small and the corner radius is set too large, the display may be abnormal.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 15.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14166,8 +14061,6 @@ declare interface SheetOptions extends BindOptions {
    * 2. When SheetSize.FIT_CONTENT is set, this API does not take effect.
    * 3. It is not recommended to use gesture-based detent switching and this API-based detent switching at the same time. When both take effect, the detent switching behavior may be unpredictable.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 15.
-   *
    * @default detents[0]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14192,8 +14085,6 @@ declare interface SheetOptions extends BindOptions {
    * 1) If the attribute value is true, the sheet is translated in the mirror direction of the set placement until it can be fully displayed.
    * 2) If the attribute value is false, among the four directions, the direction that can fully display the sheet width and has the largest remaining height is selected, and the sheet height is adjusted to fit the current direction to ensure that the sheet can be placed, while keeping the alignment corresponding to the preset placement unchanged. 
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 18.
-   *
    * @default Placement.Bottom
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14215,8 +14106,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * false: does not allow it to cover the target node.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 18.
-   *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14239,8 +14128,6 @@ declare interface SheetOptions extends BindOptions {
    * 4. It is not recommended to use picker components such as CalendarPicker, CalendarPickerDialog, DatePickerDialog, TextPickerDialog, and TimePickerDialog in a sheet with showInSubWindow set to true, because the sheet affects the behavior of these components.
    * 5. During the display of the sheet, this attribute does not support dynamic switching.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 19.
-   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14266,8 +14153,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * The side sheet style does not support the floating drag bar.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 20.
-   *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14284,8 +14169,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * Default value: ModalTransition.DEFAULT
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 20.
-   *
    * @default ModalTransition.DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14304,8 +14187,6 @@ declare interface SheetOptions extends BindOptions {
    * in the top or top corner area of the sheet. The popup style does not support setting the component corner rendering
    * mode.
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 23.
-   *
    * @default RenderStrategy.FAST
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -14327,8 +14208,6 @@ declare interface SheetOptions extends BindOptions {
    * preceding APIs is not recommended. For a usage example, see 
    * [Example 10 (Setting the System Material for a Half-Modal)](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-sheet-transition.md#example-10-setting-the-system-material-for-a-half-modal).
    * 
-   * **Atomic service API:** This API is supported in atomic services since API version 26.0.0.
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -14346,10 +14225,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * Default value: EdgeLightMode.EDGELIGHT_DISABLED
    * 
-   * **Model Constraint:** This API is only available in the stage model.
-   * 
-   * **System API:** This API is a system API.
-   *
    * @default EdgeLightMode.EDGELIGHT_DISABLED
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -14371,10 +14246,6 @@ declare interface SheetOptions extends BindOptions {
    * 
    * Default value: undefined, which disables blur optimization
    * 
-   * **Model Constraint:** This API is only available in the stage model.
-   * 
-   * **System API:** This API is a system API.
-   *
    * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
