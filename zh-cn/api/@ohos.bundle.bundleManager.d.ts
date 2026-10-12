@@ -1999,6 +1999,25 @@ declare namespace bundleManager {
   function getAllBundleInfo(bundleFlags: int, userId?: int): Promise<Array<BundleInfo>>;
 
   /**
+   * 根据给定的套餐名称和套餐标志，获取系统中所有的套餐信息。
+   * 该接口使用了一个类型的promise来返回结果。
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - 包名。
+   * @param { int } bundleFlags - Type of the bundle information to obtain.
+   *     <br>取值限定为整数。
+   * @returns { Promise<Array<BundleInfo>> } Promise 用于返回bundle信息的数组。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getAllBundleInfoInstances(bundleName: string, bundleFlags: int): Promise<Array<BundleInfo>>;
+
+  /**
    * 根据给定的appFlags获取系统中所有的ApplicationInfo。使用callback异步回调。
    *
    * @permission ohos.permission.GET_INSTALLED_BUNDLE_LIST
