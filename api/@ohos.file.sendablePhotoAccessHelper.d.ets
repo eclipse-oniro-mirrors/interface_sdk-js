@@ -786,7 +786,6 @@ declare namespace sendablePhotoAccessHelper {
      * @since 26.0.1 dynamiconly
      */
     readonly shareAlbumOwner?: string; 
-
     /**
      * Obtains media assets. This API uses a promise to return the result.
      *
