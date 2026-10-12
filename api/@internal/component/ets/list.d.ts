@@ -265,7 +265,7 @@ declare enum ChainEdgeEffect {
    * @stagemodelonly
    * @since 10 dynamic
    */
-  DEFAULT,
+  DEFAULT = 0,
 
   /**
    * When the list continues to be dragged after scrolling to the edge, the spacing between all list items increases.
@@ -276,7 +276,7 @@ declare enum ChainEdgeEffect {
    * @stagemodelonly
    * @since 10 dynamic
    */
-  STRETCH,
+  STRETCH = 1,
 }
 
 /**
@@ -364,8 +364,10 @@ declare enum ScrollSnapAlign {
 declare interface ChainAnimationOptions {
 
   /**
-   * Minimum space for chain animation.
-   * <br>Unit: same as **Length**.
+   * Minimum spacing of the chained linkage animation effect.
+   *
+   * Unit: same as **Length**. If the value is less than 0, 0 is used; if the value is greater than the spacing between
+   * list items (**space**), the spacing between list items is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -375,8 +377,10 @@ declare interface ChainAnimationOptions {
   minSpace: Length;
 
   /**
-   * Maximum space for chain animation.
-   * <br>Unit: same as **Length**.
+   * Maximum spacing of the chained linkage animation effect.
+   *
+   * Unit: same as **Length**. If the value is less than the spacing between list items (**space**), the spacing between
+   * list items is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -386,7 +390,9 @@ declare interface ChainAnimationOptions {
   maxSpace: Length;
 
   /**
-   * Conductivity of chain animation.
+   * Conduction coefficient of the chained linkage animation effect, which controls the influence range of the linkage.
+   * The value range is [0,1]. The larger the value, the more list items are affected by the chained linkage. If the
+   * value is out of range, the default value is used.
    *
    * @default 0.7
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -397,7 +403,9 @@ declare interface ChainAnimationOptions {
   conductivity?: number;
 
   /**
-   * Intensity of chain animation.
+   * Intensity of the chained linkage animation effect, which controls the displacement amplitude of list items in the
+   * chained linkage. The value range is [0,1]. The larger the value, the greater the displacement amplitude of list
+   * items in the chained linkage. If the value is out of range, the default value is used.
    *
    * @default 0.3
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -408,7 +416,9 @@ declare interface ChainAnimationOptions {
   intensity?: number;
 
   /**
-   * Edge effect of chain animation.
+   * Edge effect of the chained linkage animation effect, which controls how the spacing changes after the list scrolls
+   * to the edge. **DEFAULT** presents directional stretching and rebound feedback, and **STRETCH** presents synchronous
+   * stretching feedback of all list items.
    *
    * @default ChainEdgeEffect.DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -419,7 +429,11 @@ declare interface ChainAnimationOptions {
   edgeEffect?: ChainEdgeEffect;
 
   /**
-   * Stiffness of chain spring.
+   * Stiffness of the chained linkage animation effect, which controls the rebound speed and animation hardness.
+   *
+   * Value range: (0, +∞). The larger the value, the faster the rebound speed and the harder the animation; the smaller
+   * the value, the softer the animation. If the value is set to a value less than or equal to 0, the current value
+   * remains unchanged; if it has never been set, the default value is used.
    *
    * @default 228
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -430,7 +444,11 @@ declare interface ChainAnimationOptions {
   stiffness?: number;
 
   /**
-   * Damping of chain spring.
+   * Damping of the chained linkage animation effect, which controls the oscillation decay speed.
+   *
+   * Value range: (0, +∞). The larger the value, the faster the animation decays and the fewer the oscillations; the
+   * smaller the value, the more likely the animation is to oscillate. If the value is set to a value less than or equal
+   * to 0, the current value remains unchanged; if it has never been set, the default value is used.
    *
    * @default 30
    * @syscap SystemCapability.ArkUI.ArkUI.Full
