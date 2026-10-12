@@ -85,7 +85,7 @@ declare namespace formBindingData {
   function createFormBindingDataEx(obj?: Object | string): FormBindingData;
 
   /**
-   * Create an FormBindingData instance.
+   * Creates a **FormBindingData** object.
    *
    * @param { RecordData } [obj] - Data to be displayed on the widget. The value can be an object containing
    *     multiple key-value pairs or a JSON string. The image data is identified by **'formImages'**, and the content is
@@ -144,8 +144,11 @@ declare namespace formBindingData {
     /**
      * Indicates whether to support updating more images if the widget data is
      * updated using shared memory.
-     * When set to false, the maximum number of normally displayed images is 20.
-     * When set to true, the maximum number of normally displayed images is 30.
+     * When set to false , the maximum number of normally
+     * displayed images is 20.
+     * Default value: false.
+     * When set to true, the maximum number of normally displayed images is 30.<br>**NOTE**<br>The total size of more
+     * images may exceed 10 MB, causing the form data update to fail.
      * Default value: false.
      *
      * @syscap SystemCapability.Ability.Form
