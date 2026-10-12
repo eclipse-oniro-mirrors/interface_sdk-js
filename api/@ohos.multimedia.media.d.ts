@@ -11117,7 +11117,7 @@ declare namespace media {
      * @stagemodelonly
      * @since 26.2.0 dynamic&static
      */
-      enableHDR?: boolean
+      enableHDR?: boolean;
   }
 
   /**
