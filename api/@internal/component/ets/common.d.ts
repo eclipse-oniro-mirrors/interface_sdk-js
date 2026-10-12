@@ -8877,6 +8877,7 @@ declare enum SafeAreaEdge {
  * The alignment axis is horizontal for the top and bottom edges and vertical for the start and end edges.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -8889,6 +8890,7 @@ declare enum SafeAreaInsetAlignment {
    * For the start and end edges, this is the top.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8900,6 +8902,7 @@ declare enum SafeAreaInsetAlignment {
    * Centers content along the attachment edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8913,6 +8916,7 @@ declare enum SafeAreaInsetAlignment {
    * For the start and end edges, this is the bottom.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8925,6 +8929,7 @@ declare enum SafeAreaInsetAlignment {
  * Defines custom content and layout settings for one safe area inset edge.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -8936,7 +8941,11 @@ declare interface SafeAreaInsetEdgeConfig {
    * An empty build result clears this edge without affecting other valid edges.
    * The space reserved on this edge equals the measured content size perpendicular to the edge plus `spacing`.
    *
+   * Each edge builder must produce one root component, either a built-in or custom component.
+   * Wrap multiple components in a single container. Results of builders with multiple roots are not guaranteed.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8952,6 +8961,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * The gap is added after measuring the content and is not deducted from its measurement space.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8965,6 +8975,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * An omitted or invalid value falls back to `SafeAreaInsetAlignment.CENTER` without clearing valid content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8977,6 +8988,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * Defines the complete inset configuration for all four edges of a component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -8990,6 +9002,7 @@ declare interface SafeAreaInsetOptions {
    * without affecting other valid edges.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -9005,6 +9018,7 @@ declare interface SafeAreaInsetOptions {
    * without affecting other valid edges.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -9019,6 +9033,7 @@ declare interface SafeAreaInsetOptions {
    * without affecting other valid edges.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -9034,6 +9049,7 @@ declare interface SafeAreaInsetOptions {
    * without affecting other valid edges.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -20325,6 +20341,7 @@ declare class CommonMethod<T> {
    * @returns { T } Current component.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice

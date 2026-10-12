@@ -8550,6 +8550,7 @@ declare enum SafeAreaEdge {
  * 上、下边沿水平方向对齐；起始边、结束边沿垂直方向对齐。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -8561,6 +8562,7 @@ declare enum SafeAreaInsetAlignment {
    * 上、下边在从左到右布局时靠左，在从右到左布局时靠右；起始边、结束边靠上。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8572,6 +8574,7 @@ declare enum SafeAreaInsetAlignment {
    * 在沿边方向居中对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8584,6 +8587,7 @@ declare enum SafeAreaInsetAlignment {
    * 上、下边在从左到右布局时靠右，在从右到左布局时靠左；起始边、结束边靠下。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8596,6 +8600,7 @@ declare enum SafeAreaInsetAlignment {
  * 单个边缘内容及其布局配置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -8607,7 +8612,11 @@ declare interface SafeAreaInsetEdgeConfig {
    * 构建结果为空时清除该边，不影响其他有效边。
    * 该边预留的空间等于内容在垂直于附着边方向上的实测尺寸加上 `spacing`。
    *
+   * 每边 builder 应生成一个根组件，可以是普通组件或自定义组件。
+   * 多个组件应由容器组成单根；多根构建结果不作保证。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8622,6 +8631,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * 间隔在内容测量之后计入占用，不预先扣减内容的测量空间。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8635,6 +8645,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * 省略或传入非法值时回退为 `SafeAreaInsetAlignment.CENTER`，不清除有效内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8647,6 +8658,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * 组件四边的完整边缘内容配置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -8659,6 +8671,7 @@ declare interface SafeAreaInsetOptions {
    * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8672,6 +8685,7 @@ declare interface SafeAreaInsetOptions {
    * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8685,6 +8699,7 @@ declare interface SafeAreaInsetOptions {
    * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -8698,6 +8713,7 @@ declare interface SafeAreaInsetOptions {
    * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
@@ -20318,6 +20334,7 @@ declare class CommonMethod<T> {
    * @returns { T } 当前组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
