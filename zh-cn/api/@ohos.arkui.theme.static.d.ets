@@ -22,8 +22,6 @@
 
 import { ResourceColor } from '@ohos.arkui.component';
 
-import { ResourceColor } from './arkui/component/units';
-
 /**
  * 当前生效的主题风格对象，可从
  * [onWillApplyTheme]{@link onWillApplyTheme}中获取。

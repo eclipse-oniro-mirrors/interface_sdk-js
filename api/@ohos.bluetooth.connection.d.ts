@@ -1118,6 +1118,32 @@ declare namespace connection {
   function getCarKeyDfxData(): string;
 
   /**
+   * Obtains the real BLE address of a paired remote device based on its real BR address.
+   *
+   * This API is used to identify the BR entry and the BLE entry of the same dual-mode device in the paired
+   * device list. The input brMac is the real BR address of a paired remote device, and the return value is the
+   * real BLE address of the same remote device.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @param { string } brMac - Indicates the real BR address of the paired remote device. For example,
+   *     "11:22:33:AA:BB:FF".
+   * @returns { string } Returns the real BLE address of the remote device. For example, "11:22:33:AA:BB:FF".
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900016 - Device unpaired.
+   * @throws { BusinessError } 2900017 - No BLE address is associated with the input BR address.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getBleMacByBrMac(brMac: string): string;
+
+
+  /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
    * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
    * the type of the peer device address is real.

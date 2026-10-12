@@ -271,7 +271,7 @@ declare namespace privacyComputation {
     elemData: Uint8Array;
     /**
      * The hash algorithm used for hashing the target element. If not specified, the element
-     * data will be used with SHA256 default.
+     * data will be used with no hash algorithm default.
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -302,7 +302,7 @@ declare namespace privacyComputation {
     elemKey: Uint8Array;
     /**
      * The hash algorithm used for hashing the element key. If not specified, the element key
-     * will be used with SHA256 default.
+     * will be used with no hash algorithm default.
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel

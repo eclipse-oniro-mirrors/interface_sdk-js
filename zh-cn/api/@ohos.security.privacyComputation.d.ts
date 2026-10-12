@@ -268,7 +268,7 @@ declare namespace privacyComputation {
     elemData: Uint8Array;
     /**
      * 用于散列目标元素的散列算法。如果未指定，则元素
-     * 数据将与SHA256默认值一起使用。
+     * 数据将与无哈希算法默认值一起使用。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -299,7 +299,7 @@ declare namespace privacyComputation {
     elemKey: Uint8Array;
     /**
      * 用于散列元素键的散列算法。如果未指定，则元素键
-     * 将与SHA256默认值一起使用。
+     * 将与无哈希算法默认值一起使用。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel

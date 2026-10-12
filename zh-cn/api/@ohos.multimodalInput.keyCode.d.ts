@@ -3230,7 +3230,7 @@ export declare enum KeyCode {
   KEYCODE_FINGERPRINT_SLIDE_DOWN = 3234,
 
   /**
-   * 云台单击键。
+   * 云台模式调节键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @stagemodelonly

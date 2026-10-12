@@ -879,5 +879,16 @@ declare namespace deviceInfo {
      * @since 26.0.1 static
      */
     function apiAvailable(version: string | int): boolean;
+
+    /**
+     * 获取内核版本。
+     * 格式为'产品内核X.Y.Z'。
+     * 示例: '产品内核1.0.0'。
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    const kernelVersion: string;
 }
 export default deviceInfo;

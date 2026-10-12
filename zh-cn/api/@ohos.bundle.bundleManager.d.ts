@@ -1516,7 +1516,8 @@ declare namespace bundleManager {
    * 应用安装状态枚举。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
-   * @systemapi
+   * @systemapi [since 23 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @since 23 dynamic&static
    */
   export enum BundleInstallStatus {
@@ -1524,7 +1525,8 @@ declare namespace bundleManager {
      * 应用未安装。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
-     * @systemapi
+     * @systemapi [since 23 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_NOT_EXIST = 1,
@@ -1533,7 +1535,8 @@ declare namespace bundleManager {
      * 应用正在安装。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
-     * @systemapi
+     * @systemapi [since 23 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_INSTALLING = 2,
@@ -1542,7 +1545,8 @@ declare namespace bundleManager {
      * 应用已安装完成。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
-     * @systemapi
+     * @systemapi [since 23 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 23 dynamic&static
      */
     BUNDLE_INSTALLED = 3
@@ -4533,9 +4537,10 @@ declare namespace bundleManager {
    * @param { string } bundleName - 表示应用包名。
    * @returns { BundleInstallStatus } 返回指定应用的安装状态。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API. [since 23 - 26.0.0]
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
-   * @systemapi
+   * @systemapi [since 23 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @since 23 dynamic&static
    */
   function getBundleInstallStatus(bundleName: string): BundleInstallStatus;

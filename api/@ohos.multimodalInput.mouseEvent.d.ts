@@ -14,7 +14,7 @@
  */
 
 /**
- * The **mouseEvent** module provides mouse events reported by a device. It is inherited from 
+ * The **mouseEvent** module provides mouse events reported by a device. It is inherited from
  * [InputEvent]{@link @ohos.multimodalInput.inputEvent:InputEvent}.
  *
  * @file Mouse Event

@@ -217,8 +217,6 @@ export declare enum SourceType {
 /**
  * 修正坐标的模式。默认值为NONE。
  *
- * **系统API**: 此接口为系统接口。
- *
  * @syscap SystemCapability.MultimodalInput.Input.Core
  * @systemapi Hide this for inner system use.
  * @since 19 dynamic

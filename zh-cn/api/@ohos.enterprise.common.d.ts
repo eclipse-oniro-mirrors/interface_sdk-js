@@ -268,6 +268,114 @@ declare namespace common {
   }
 
   /**
+   * 磁盘类型
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum DiskType {
+    /**
+     * SD卡类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SD_CARD = 1,
+ 
+    /**
+     * U盘类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    USB_FLASH = 2,
+ 
+    /**
+     * CD类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    CD_DVD_BD = 3
+  }
+ 
+  /**
+   * 外置存储设备信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface ExternalStorageDeviceInfo {
+    /**
+     * 设备类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    type: DiskType;
+ 
+    /**
+     * 设备路径。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    devicePath: string;
+ 
+    /**
+     * 卷ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    volumeId: string;
+ 
+    /**
+     * 挂载状态。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    mountStatus: boolean;
+ 
+    /**
+     * 厂商ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    vendorId: number;
+ 
+    /**
+     * 产品ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    productId: number;
+ 
+    /**
+     * 序列号。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    serial: string;
+  }
+
+  /**
    * 查询企业设备管理策略
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
