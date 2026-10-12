@@ -35,7 +35,8 @@ declare namespace batteryInfo {
    * @returns { number } Operation result. The value **0** indicates that the operation is successful, and a non-zero
    *     value indicates the opposite.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 5100101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryManager.Core
    * @systemapi
@@ -50,7 +51,8 @@ declare namespace batteryInfo {
    * @returns { string } Operation result. The battery configuration is returned if the operation is successful.
    *     Otherwise, **""** is returned.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 5100101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryManager.Core
    * @systemapi
@@ -65,7 +67,8 @@ declare namespace batteryInfo {
    * @returns { boolean } Operation result. The value **true** indicates that the charging scenario is supported, and
    *     the value **false** indicates the opposite.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 5100101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryManager.Core
    * @systemapi
