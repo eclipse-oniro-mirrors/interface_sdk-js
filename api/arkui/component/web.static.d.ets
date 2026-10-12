@@ -6743,6 +6743,21 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.2.0 static
      */
     default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
+
+    /**
+     * Sets the maximum fling speed for the Web component.
+     *
+     * The value configured through this TypeScript API takes precedence over values configured through other APIs.
+     *
+     * @param { double | undefined } speedLimit - Maximum fling speed, in vp/s. If the value is less than or equal to 0,
+     *     {@code NaN}, {@code +Infinity}, or {@code -Infinity}, the default value is used: 9000 vp/s on PCs and
+     *     17000 vp/s on non-PC devices.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default flingSpeedLimit(speedLimit: double | undefined): this;
 }
 
 /**

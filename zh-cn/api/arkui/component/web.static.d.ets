@@ -6646,6 +6646,21 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.2.0 static
      */
     default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
+
+    /**
+     * 设置Web组件惯性滚动的最大速度。
+     *
+     * 通过该TypeScript API配置的值优先于通过其他API配置的值生效。
+     *
+     * @param { double | undefined } speedLimit - 惯性滚动最大速度，单位vp/s。当值小于等于0、
+     *     {@code NaN}、{@code +Infinity}或{@code -Infinity}时，使用默认值：PC设备为9000 vp/s，
+     *     非PC设备为17000 vp/s。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default flingSpeedLimit(speedLimit: double | undefined): this;
 }
 
 /**
