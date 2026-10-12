@@ -139,6 +139,7 @@ declare namespace autoStartupManager {
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
+   * @throws { BusinessError } 16000206 - The specified application is not authorized to start before the user is unlocked.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -166,6 +167,7 @@ declare namespace autoStartupManager {
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
+   * @throws { BusinessError } 16000206 - The specified application is not authorized to start before the user is unlocked.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly

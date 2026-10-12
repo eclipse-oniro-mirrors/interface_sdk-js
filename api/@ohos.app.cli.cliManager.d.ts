@@ -415,11 +415,12 @@ declare namespace cliManager {
    * Query all tool summary information. The summary information only contains the fields: name, description, version.
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolSummary>> } List of full tool summaries.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. 
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -434,11 +435,12 @@ declare namespace cliManager {
    * Query all detailed information of tools
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolInfo>> } List of full tool detail info.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. 
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -453,12 +455,13 @@ declare namespace cliManager {
    * Get detailed information of a single tool by its name
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } toolName - The name of target tool.
    * @returns { Promise<ToolInfo> } detailed information of tool.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. 
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.

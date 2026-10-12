@@ -260,7 +260,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000080 - Creating a new instance is not supported. [since 14]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @crossplatform [since 9]
+   * @crossplatform [since 9 - 13]
    * @atomicservice [since 11]
    * @since 9 dynamic
    * @since 23 static
@@ -1453,6 +1453,8 @@ declare class UIAbilityContext extends Context {
    * @atomicservice
    * @since 12 dynamic
    * @since 23 static
+   * @deprecated since 26.2.0
+   * @useinstead UIAbilityContext#backToCallerAppWithResult(abilityResult: AbilityResult, requestCode: string)
    */
   backToCallerAbilityWithResult(abilityResult: AbilityResult, requestCode: string): Promise<void>;
 

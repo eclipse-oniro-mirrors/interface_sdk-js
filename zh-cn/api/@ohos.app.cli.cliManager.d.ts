@@ -379,11 +379,12 @@ declare namespace cliManager {
    * 查询所有CLI工具的摘要信息。摘要信息仅包含名称、版本和描述字段，使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolSummary>> } Promise对象，返回工具摘要信息列表。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -398,11 +399,12 @@ declare namespace cliManager {
    * 查询所有CLI工具的详细信息，使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolInfo>> } Promise对象，返回工具详细信息列表。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -417,12 +419,13 @@ declare namespace cliManager {
    * 根据工具名称获取单个工具的详细信息，使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } toolName - 目标工具的名称。
    * @returns { Promise<ToolInfo> } Promise对象，返回工具的详细信息。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
