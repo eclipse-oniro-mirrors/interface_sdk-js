@@ -16,6 +16,11 @@
  */
 
 /**
+ * ChipGroupV2组件提供操作块群组容器，支持单选或多选、自定义样式和间距、以及尾部自定义内容。该组件适用于文件或资源内容的分类、标签选择、筛选等场景，可帮助开发者快速构建美观且交互丰富的标签组界面。
+ *
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
+ * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
+ * 件层级。借助状态管理（V2），开发者可以更灵活地控制组件的数据和状态，实现更高效的用户界面刷新。
  * @file
  * @kit ArkUI
  */
@@ -854,7 +859,7 @@ export declare struct ChipGroupV2IconGroupSuffix {
 export type ChipGroupV2SuffixBuilder = () => void;
 
 /**
- * 定义ChipGroupV2。
+ * 创建ChipGroupV2组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

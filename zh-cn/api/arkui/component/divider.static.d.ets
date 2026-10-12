@@ -112,8 +112,9 @@ export declare interface DividerAttribute extends CommonMethod {
      *
      * @returns { DividerAttribute } Returns the instance of the DividerAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setDividerOptions(): this;
     /**
@@ -154,8 +155,9 @@ export declare function Divider(): DividerAttribute;
  * @param { CustomBuilderT<DividerAttribute> } style - the callback to set up component's attributes.
  * @returns { DividerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

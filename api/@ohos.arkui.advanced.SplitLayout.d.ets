@@ -27,16 +27,10 @@
  *
  * > **NOTE**
  * >
- * > - This component can only be used in the stage model.
- * >
- * > - **SplitLayout** does not support setting [universal attributes]{@link CommonMethod} and
+ * > - **SplitLayout** does not support setting [universal attributes]{@link CommonMethod} or
  * > [universal events]{@link CommonMethod}. If set, the build toolchain will generate an additional
  * > \_\_Common\_\_ node and attach the universal attributes or universal events to \_\_Common\_\_ instead of directly
  * > applying them to **SplitLayout** itself, causing the configured attributes or events to not take effect.
- *
- * The [universal events]{@link CommonMethod} are not supported.
- *
- * [Universal attributes]{@link CommonMethod} are not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -98,9 +98,9 @@ interface ColumnSplitDividerStyle {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 支持[通用事件]{@link ./common}。
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

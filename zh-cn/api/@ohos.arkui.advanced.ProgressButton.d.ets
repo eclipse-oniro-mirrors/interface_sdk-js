@@ -14,23 +14,19 @@
  */
 
 /**
+ * 文本下载按钮，可显示具体下载进度。
  * @file
  * @kit ArkUI
  */
 
 /**
- * 文本下载按钮，可显示具体下载进度。
+ * 创建ProgressButton组件。
  * 
  * > **说明：**
  * >
  * > - 如果ProgressButton设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
  * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ProgressButton本身。
  * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ProgressButton设置通用属性和通用事件。
- * ## 导入模块
- *
- * ```ts
- * import { ProgressButton } from '@kit.ArkUI';
- * ```
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

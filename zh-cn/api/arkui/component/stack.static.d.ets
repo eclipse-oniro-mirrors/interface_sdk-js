@@ -89,15 +89,16 @@ export declare interface StackAttribute extends CommonMethod {
      * @stagemodelonly
      * @since 26.0.0 static
      */
-    default syncLoad(enable: boolean): this;
+    default syncLoad(enable: boolean | undefined): this;
     /**
      * 设置Stack选项。
      *
      * @param { StackOptions } [options] - Stack constructor options
      * @returns { StackAttribute } Returns the instance of the StackAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setStackOptions(options?: StackOptions): this;
     /**
@@ -139,8 +140,9 @@ export declare function Stack(
  * @param { CustomBuilder } [content_] - container
  * @returns { StackAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

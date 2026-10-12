@@ -16,6 +16,12 @@
   */
 
 /**
+ * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
+ * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
+ * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
+ * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
+ * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
+ * filtering scenarios.
  * @file api/@ohos.arkui.advanced.SegmentButtonV2.static.d.ets
  * @kit ArkUI
  */
@@ -175,7 +181,8 @@ export type OnSelectedIndexChange = (selectedIndex: int) => void;
 export type OnSelectedIndexesChange = (selectedIndexes: int[]) => void;
 
 /**
- * Defines segmented button item.
+ * **SegmentButtonV2** component option class, 
+ * used to define properties such as the text and icon of a single segmented button item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -216,7 +223,7 @@ export declare class SegmentButtonV2Item {
     @Trace symbol?: Resource;
 
     /**
-     * Sets whether segmented button item is enabled?
+     * Sets whether segmented button item is enabled.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -354,7 +361,7 @@ export declare class SegmentButtonV2Items extends Array<SegmentButtonV2Item> {
 }
 
 /**
- * Defines segmented button with tab style.
+ * Creates a tab segmented button.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -755,7 +762,7 @@ export declare struct TabSegmentButtonV2 {
 }
 
 /**
- * Defines the segmented button with capsule style.
+ * Creates a single-selection capsule segmented button.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1156,7 +1163,7 @@ export declare struct CapsuleSegmentButtonV2 {
 }
 
 /**
- * Defines the segmented button with capsule style.
+ * Creates a multi-selection capsule segmented button.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -102,7 +102,6 @@ interface EllipseInterface {
    *     settings. If not passed, the default size (both width and height are 0) is used.
    *     <br>The abnormal values **undefined** and **null** are handled as invalid values, and this setting does not
    *     take effect.
-   *     <br>**Note:** Since API version 18, the **EllipseOptions** parameter must be used in the stage model. [since 18]
    * @returns { EllipseAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -122,7 +121,6 @@ interface EllipseInterface {
    *     settings. If not passed, the default size (both width and height are 0) is used.
    *     <br>The abnormal values **undefined** and **null** are handled as invalid values, and the setting does not
    *     take effect.
-   *     <br>**Note:** Since API version 18, the EllipseOptions parameter must be used in the stage model. [since 18]
    * @returns { EllipseAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel

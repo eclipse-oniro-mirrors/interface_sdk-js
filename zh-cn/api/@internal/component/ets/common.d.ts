@@ -5135,7 +5135,7 @@ declare enum ChainStyle {
    * @atomicservice
    * @since 12 dynamic
    */
-  SPREAD = 0,
+  SPREAD,
 
   /**
    * 除首尾2个子组件的其他组件在约束锚点间均匀分布。
@@ -5146,7 +5146,7 @@ declare enum ChainStyle {
    * @atomicservice
    * @since 12 dynamic
    */
-  SPREAD_INSIDE = 1,
+  SPREAD_INSIDE,
 
   /**
    * 链内子组件无间隙。
@@ -5157,7 +5157,7 @@ declare enum ChainStyle {
    * @atomicservice
    * @since 12 dynamic
    */
-  PACKED = 2
+  PACKED
 }
 
 /**
