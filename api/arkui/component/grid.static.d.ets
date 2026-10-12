@@ -22,6 +22,7 @@ import { Length, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from './scroll';
 import { BarState, Color, EdgeEffect, FocusWrapMode } from './enums';
 import { ComponentBuilder, CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder';
+import { PlaceholderProvider } from '../../@ohos.arkui.placeholderRegister';
 import { AttributeModifier, Bindable, Callback, CommonMethod, UIScrollableCommonEvent } from "./common";
 
 /**
@@ -805,6 +806,34 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
    * @since 26.0.1 staticonly
    */
   default setGridOptions(scroller?: Scroller, layoutOptions?: GridLayoutOptions): this;
+
+  /**
+   * Sets a scroll placeholder provider for the **Grid** component. When the framework predicts that
+   * creating the next item within the remaining frame budget would overrun the frame, it first
+   * displays a placeholder for that item and creates the real item across frames on the UI thread.
+   *
+   * The provider returns the placeholder description of an item: **id** refers to a template
+   * registered through getPlaceholderRegister().register and **size** is a layout suggestion.
+   * If the provider returns **undefined**, or the returned **id** is missing or not registered,
+   * the system default placeholder is used and scrolling is not interrupted.
+   *
+   * <br>**NOTE**<br>
+   * 1. This attribute is opt-in: if it is not set, the **Grid** component keeps the current behavior,
+   * including the semantics of **syncLoad**.
+   * 2. The placeholder template must be a global, parameterless
+   * **@Builder({ isPlaceholder: true })** function that performs read-only static rendering.
+   * 3. After the real item has been created, it is re-laid out under the normal layout constraints of
+   * the grid item and replaces the placeholder, keeping the scroll anchor.
+   *
+   * @param { PlaceholderProvider | undefined } provider - Placeholder provider of the item at the
+   *     given index.
+   * @returns { this } The Grid attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollPlaceholder(provider: PlaceholderProvider | undefined): this;
 
   /**
    * Call attributeModifier.

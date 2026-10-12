@@ -1469,8 +1469,50 @@ declare const StorageLink: (value: string) => PropertyDecorator;
 declare const Watch: (value: string) => PropertyDecorator;
 
 /**
+ * Defining BuilderDecoratorConfig interface
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface BuilderDecoratorConfig {
+  /**
+   * Enables placeholder feature.
+   * Set to true to enable placeholder feature, set to false to disable it.
+   * The default value is false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  isPlaceholder: boolean;
+}
+
+/**
+ * Define Builder Decorator type with config.
+ *
+ * @param { BuilderDecoratorConfig } value
+ * @returns { MethodDecorator } Method Decorator
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodDecorator;
+
+/**
  * Defining Builder MethodDecorator
  *
+ * @type { MethodDecorator } [since 8 - 26.0.1]
+ * @type { MethodDecorator & BuilderMethodDecorator } [since 26.2.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1479,7 +1521,7 @@ declare const Watch: (value: string) => PropertyDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Builder: MethodDecorator;
+declare const Builder: MethodDecorator & BuilderMethodDecorator;
 
 /**
  * Defining LocalBuilder MethodDecorator
