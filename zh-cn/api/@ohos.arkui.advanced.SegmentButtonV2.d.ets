@@ -29,6 +29,39 @@ import { SizeT } from '@ohos.arkui.node';
 import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
+ * 定义分段按钮的拖拽交互模式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+export declare enum SegmentButtonV2InteractionMode {
+  /**
+   * 启用跟手拖拽。非系统材质场景仅启用跟手拖拽动画。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  FOLLOWING_DRAG = 0,
+
+  /**
+   * 启用普通拖拽。系统材质场景保留材质外观与原有材质形变，不启用与跟手相关的点光源。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  NORMAL_DRAG = 1
+}
+
+/**
 * 配置分段按钮选项参数。
 *
 * > **说明**
@@ -1124,6 +1157,25 @@ export declare struct TabSegmentButtonV2 {
   readonly backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
+   * 设置分段按钮的拖拽交互模式。
+   *
+   * 未配置时，启用系统材质的场景使用跟手拖拽，非系统材质场景使用普通拖拽，保持原有行为。
+   * 非系统材质场景显式设置普通拖拽、系统材质场景显式设置跟手拖拽，均保持原有行为。
+   * 非系统材质场景设置跟手拖拽时，不新增材质形变或点光源。
+   * 系统材质场景设置普通拖拽时，保留材质外观与原有材质形变，不启用与跟手相关的点光源。
+   * 未配置、undefined或非法值均使用默认模式。
+   *
+   * @default undefined
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  @Param
+  readonly interactionMode?: SegmentButtonV2InteractionMode;
+
+  /**
    * 设置当通过变量修改selectedIndex值时，是否开启分段按钮的属性动画。
    *
    * true表示开启分段按钮的属性动画；未配置该属性或值为false时表示不开启分段按钮的属性动画，使用组件默认的切换动画效果。
@@ -1840,6 +1892,25 @@ export declare struct CapsuleSegmentButtonV2 {
    */
   @Param
   readonly backgroundSystemMaterial?: uiMaterial.Material;
+
+  /**
+   * 设置分段按钮的拖拽交互模式。
+   *
+   * 未配置时，启用系统材质的场景使用跟手拖拽，非系统材质场景使用普通拖拽，保持原有行为。
+   * 非系统材质场景显式设置普通拖拽、系统材质场景显式设置跟手拖拽，均保持原有行为。
+   * 非系统材质场景设置跟手拖拽时，不新增材质形变或点光源。
+   * 系统材质场景设置普通拖拽时，保留材质外观与原有材质形变，不启用与跟手相关的点光源。
+   * 未配置、undefined或非法值均使用默认模式。
+   *
+   * @default undefined
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  @Param
+  readonly interactionMode?: SegmentButtonV2InteractionMode;
 
   /**
    * 设置当通过变量修改selectedIndex值时，是否开启分段按钮的属性动画。

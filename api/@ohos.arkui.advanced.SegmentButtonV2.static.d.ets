@@ -47,6 +47,33 @@ import { ImageModifier, SymbolGlyphModifier, TextModifier } from './@ohos.arkui.
 import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
+ * Defines the drag interaction mode of the segmented button.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum SegmentButtonV2InteractionMode {
+    /**
+     * Enables following drag. Without system material, only the following drag animation is enabled.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    FOLLOWING_DRAG = 0,
+
+    /**
+     * Enables normal drag. With system material, its appearance and deformation are retained without the following-specific point light.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    NORMAL_DRAG = 1
+}
+
+/**
  * Defines the options of the segmented button item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -740,6 +767,23 @@ export declare struct TabSegmentButtonV2 {
     readonly backgroundSystemMaterial?: uiMaterial.Material;
 
     /**
+     * Sets the drag interaction mode of the segmented button.
+     *
+     * If omitted, following drag is used with system material, and normal drag is used without it.
+     * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
+     * Following drag without system material does not add material deformation or light effects.
+     * Normal drag with system material retains its appearance and original material deformation without the following-specific point light.
+     * If omitted, undefined or invalid, the default mode is used.
+     *
+     * @default undefined
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    @Param
+    readonly interactionMode?: SegmentButtonV2InteractionMode;
+
+    /**
      * Enable animation when selectedIndexes change.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1139,6 +1183,23 @@ export declare struct CapsuleSegmentButtonV2 {
      */
     @Param
     readonly backgroundSystemMaterial?: uiMaterial.Material;
+
+    /**
+     * Sets the drag interaction mode of the segmented button.
+     *
+     * If omitted, following drag is used with system material, and normal drag is used without it.
+     * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
+     * Following drag without system material does not add material deformation or light effects.
+     * Normal drag with system material retains its appearance and original material deformation without the following-specific point light.
+     * If omitted, undefined or invalid, the default mode is used.
+     *
+     * @default undefined
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    @Param
+    readonly interactionMode?: SegmentButtonV2InteractionMode;
 
     /**
      * Enable animation when selectedIndexes change.

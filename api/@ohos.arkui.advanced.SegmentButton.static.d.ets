@@ -279,6 +279,33 @@ interface SegmentButtonIconTextItem {
 declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
 
 /**
+ * Defines the drag interaction mode of the segmented button.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+declare enum SegmentButtonInteractionMode {
+  /**
+   * Enables following drag. Without system material, only the following drag animation is enabled.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  FOLLOWING_DRAG = 0,
+
+  /**
+   * Enables normal drag. With system material, its appearance and deformation are retained without the following-specific point light.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  NORMAL_DRAG = 1
+}
+
+/**
  * Defines the BorderRadiusMode type.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -529,6 +556,23 @@ interface CommonSegmentButtonOptions {
    * @since 23 static
    */
   backgroundSystemMaterial?: uiMaterial.Material;
+
+  /**
+   * Sets the drag interaction mode of the segmented button.
+   *
+   * If omitted, following drag is used with system material, and normal drag is used without it.
+   * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
+   * Following drag without system material does not add material deformation or light effects.
+   * Normal drag with system material retains its appearance and original material deformation without the following-specific point light.
+   * If omitted, undefined or invalid, the default mode is used.
+   * This property has no effect in multi-select mode.
+   *
+   * @default undefined
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  interactionMode?: SegmentButtonInteractionMode;
 }
 
 /**
@@ -1208,6 +1252,23 @@ declare class SegmentButtonOptions {
   backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
+   * Sets the drag interaction mode of the segmented button.
+   *
+   * If omitted, following drag is used with system material, and normal drag is used without it.
+   * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
+   * Following drag without system material does not add material deformation or light effects.
+   * Normal drag with system material retains its appearance and original material deformation without the following-specific point light.
+   * If omitted, undefined or invalid, the default mode is used.
+   * This property has no effect in multi-select mode.
+   *
+   * @default undefined
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  interactionMode?: SegmentButtonInteractionMode;
+
+  /**
    * The constructor used to create a SegmentButtonOptions object.
    *
    * @param { TabSegmentButtonOptions | CapsuleSegmentButtonOptions } options - The options of SegmentButton.
@@ -1379,5 +1440,6 @@ export {
   SegmentButtonItemTuple,
   SegmentButtonItemOptionsConstructorOptions,
   SegmentButtonItemOptions,
+  SegmentButtonInteractionMode,
   BorderRadiusMode
 }
