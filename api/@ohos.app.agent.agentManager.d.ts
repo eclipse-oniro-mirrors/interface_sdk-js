@@ -45,8 +45,9 @@ declare namespace agentManager {
    * @param { string } agentId - The agent id to connect.
    * @param { AgentExtensionConnectCallback } callback - The callback of connection.
    * @returns { Promise<AgentProxy> } The promise to get AgentProxy.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -74,8 +75,9 @@ declare namespace agentManager {
    * @param { string } agentId - The agent id to connect.
    * @param { AgentExtensionConnectCallback } callback - The callback of connection.
    * @returns { Promise<AgentProxy> } The promise to get AgentProxy.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -106,8 +108,9 @@ declare namespace agentManager {
    * @permission ohos.permission.CONNECT_AGENT
    * @param { AgentProxy } proxy - The agent proxy to disconnect.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -122,8 +125,9 @@ declare namespace agentManager {
    *
    * @permission ohos.permission.GET_AGENT_CARD
    * @returns { Promise<Array<AgentCard>> } Returns the array of AgentCard.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -139,8 +143,9 @@ declare namespace agentManager {
    * @permission ohos.permission.GET_AGENT_CARD
    * @param { string } bundleName - The bundle name the AgentCard belongs to.
    * @returns { Promise<Array<AgentCard>> } Returns the array of AgentCard.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 18500001 - The bundle does not exist or no patch has been applied.
@@ -158,8 +163,9 @@ declare namespace agentManager {
    * @param { string } bundleName - The bundle name the AgentCard belongs to.
    * @param { string } agentId - The agent id the AgentCard belongs to.
    * @returns { Promise<AgentCard> } Returns the specified AgentCard.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 18500001 - The bundle does not exist or no patch has been applied.
@@ -177,8 +183,9 @@ declare namespace agentManager {
    * @permission ohos.permission.MODIFY_AGENT_CARD
    * @param { AgentCard } agentCard - The AgentCard information to update.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
@@ -201,8 +208,9 @@ declare namespace agentManager {
    * @param { string } bundleName - The bundle name of the AgentCard belongs to.
    * @param { string } agentId - The agent id the AgentCard belongs to.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 35600001 - The specified agentId does not exist.
@@ -222,8 +230,9 @@ declare namespace agentManager {
    * @permission ohos.permission.MODIFY_AGENT_CARD
    * @param { AgentCard } agentCard - The AgentCard information to register.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
@@ -245,8 +254,9 @@ declare namespace agentManager {
    * @permission ohos.permission.CONNECT_AGENT
    * @param { string } agentId - The agent id to notify.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 35600001 - The specified agentId does not exist.
@@ -269,7 +279,7 @@ declare namespace agentManager {
    * @param { Want } want - Indicates the service extension ability to connect.
    * @param { ConnectOptions } callback - Indicates the callback of connection.
    * @returns { long } Returns the connection id.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -298,7 +308,7 @@ declare namespace agentManager {
    * @param { AgentExtensionContext } context - The context of the current agent extension ability.
    * @param { long } connectId - The connection id returned by connectServiceExtensionAbility.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.

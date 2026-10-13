@@ -37,7 +37,8 @@ declare namespace kioskManager {
    *
    * @param { UIAbilityContext } context - 需要进入kiosk模式的UIAbility的上下文。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
    * @throws { BusinessError } 16000110 - The current application is not in Kiosk app list and cannot enter Kiosk mode.
    * @throws { BusinessError } 16000111 - The system is already in Kiosk mode and cannot enter Kiosk mode again.
@@ -56,7 +57,8 @@ declare namespace kioskManager {
    *
    * @param { UIAbilityContext } context - 需要退出kiosk模式的UIAbility的上下文。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
    * @throws { BusinessError } 16000110 - The current application is not in Kiosk app list and cannot enter Kiosk mode.
    * @throws { BusinessError } 16000112 - The current application is not in Kiosk mode and cannot exit Kiosk mode.
@@ -72,8 +74,9 @@ declare namespace kioskManager {
    * 该接口仅在Phone、PC/2in1和Tablet设备中可正常调用，在其他设备中返回801错误码。
    *
    * @returns { Promise<KioskStatus> } Promise对象，返回当前Kiosk状态信息。
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi

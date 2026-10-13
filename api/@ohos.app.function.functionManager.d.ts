@@ -141,8 +141,9 @@ declare namespace functionManager {
    *
    * @permission ohos.permission.ACCESS_FUNCTION
    * @returns { Promise<Array<FunctionInfo>> } The promise used to return available functions.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -161,8 +162,9 @@ declare namespace functionManager {
    * @param { Record<string, Object> } args - The input arguments for the function.
    * @param { InvokeOptions } [options] - The options for this invocation.
    * @returns { Promise<InvokeResult> } The promise used to return the result of function invocation.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
    * @throws { BusinessError } 35600060 - The function does not exist.
@@ -187,9 +189,9 @@ declare namespace functionManager {
    * @param { FunctionHook } hook - The hook object implementing the FunctionHook interface.
    *     The hook object must implement at least one of the optional methods.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600034 - The device is not in developer mode.
    * @throws { BusinessError } 35600035 - A hook is already registered; unregister it first.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -209,9 +211,9 @@ declare namespace functionManager {
    * @permission ohos.permission.REGISTER_AGENT_HOOK
    * @param { FunctionHook } hook - The hook object to unregister.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600036 - No hook is registered; nothing to unregister.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.

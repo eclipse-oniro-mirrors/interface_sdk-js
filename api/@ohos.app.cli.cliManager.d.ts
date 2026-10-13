@@ -458,15 +458,18 @@ declare namespace cliManager {
   /**
    * Query all tool summary information. The summary information only contains the fields: name, description, version.
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolSummary>> } List of full tool summaries.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. 
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2. System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -475,15 +478,18 @@ declare namespace cliManager {
   /**
    * Query all detailed information of tools
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolInfo>> } List of full tool detail info.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. 
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -492,17 +498,20 @@ declare namespace cliManager {
   /**
    * Get detailed information of a single tool by its name
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } toolName - The name of target tool.
    * @returns { Promise<ToolInfo> } detailed information of tool.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. 
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -518,9 +527,9 @@ declare namespace cliManager {
    * @param { string } challenge - The unique identifier get from access token manager.
    * @param { ExecOptions } [execOptions] - The options of this action.
    * @returns { Promise<CliSessionInfo> } execute result.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -547,10 +556,12 @@ declare namespace cliManager {
    * @param { string } cmd - The command to execute.
    * @param { ExecCmdOptions } [execCmdOptions] - The options of this action.
    * @returns { Promise<CliSessionInfo> } Promise used to return CliSessionInfo.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
-   *     capabilities. [since 26.0.1]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: Failed to call the API due to
+   *     limited device capabilities. [since 26.0.1]
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -577,8 +588,10 @@ declare namespace cliManager {
    * @param { string } sessionId - The session id of target command process.
    * @param { ToolEventCallback } callback - The callback to receive session events.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -601,8 +614,10 @@ declare namespace cliManager {
    * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - The session id of target command process.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -625,8 +640,10 @@ declare namespace cliManager {
    * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - The session id of target command process.
    * @returns { Promise<CliSessionInfo> } The info of target session.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -649,8 +666,10 @@ declare namespace cliManager {
    * @param { string } sessionId - The session id of target command process.
    * @param { string } message - The message to write, max length is 10240.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600033 - Failed to write message to the tool process.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
@@ -674,9 +693,9 @@ declare namespace cliManager {
    * @param { CliHook } hook - The hook object implementing the CliHook interface.
    *     The hook object must implement at least one of the optional methods.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600034 - The device is not in developer mode.
    * @throws { BusinessError } 35600035 - A hook is already registered; unregister it first.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -696,9 +715,9 @@ declare namespace cliManager {
    * @permission ohos.permission.REGISTER_AGENT_HOOK
    * @param { CliHook } hook - The hook object to unregister.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600036 - No hook is registered; nothing to unregister.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.

@@ -42,7 +42,7 @@ declare class AutoFillExtensionContext extends ExtensionContext {
    *
    * @param { CustomData } customData - Custom information for raising the modal page.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.

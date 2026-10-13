@@ -38,8 +38,9 @@ declare namespace missionManager {
    * @param { 'mission' } type - 监听的任务名称。固定值：'mission'，表示系统任务状态监听器。
    * @param { MissionListener } listener - 系统任务监听器。
    * @returns { long } 监听器的index值，由系统创建，在注册系统任务状态监听时分配，和监听器一一对应?。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -54,8 +55,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { MissionListener } listener - 系统任务监听器。
    * @returns { long } 监听器的index值，由系统创建，在注册系统任务状态监听时分配，和监听器一一对应 。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
    * @since 23 static
@@ -69,8 +71,9 @@ declare namespace missionManager {
    * @param { 'mission' } type - 取消监听的任务名称。固定值：'mission'，表示系统任务状态监听器。
    * @param { long } listenerId - 系统任务状态监器法的index值，和监听器一一对应，由on方法返回。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数，返回任务ID数组。解注册任务状态监听器成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
@@ -86,8 +89,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { long } listenerId - 系统任务状态监器法的index值，和监听器一一对应，由on方法返回。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
@@ -102,8 +106,9 @@ declare namespace missionManager {
    * @param { 'mission' } type - 取消监听的任务名称。固定值：'mission'，表示系统任务状态监听器。
    * @param { long } listenerId - 系统任务状态监听器的index值，和监听器一一对应，由on方法返回。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
@@ -119,8 +124,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { long } listenerId - 系统任务状态监听器的index值，和监听器一一对应，由on方法返回。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
@@ -135,8 +141,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<MissionInfo> } callback - 执行结果回调函数，返回任务信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -153,8 +160,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } missionId - 任务ID。
    * @returns { Promise<MissionInfo> } Promise对象，返回任务信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -171,8 +179,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } numMax - 任务信息数量上限。
    * @param { AsyncCallback<Array<MissionInfo>> } callback - 执行结果回调函数，返回任务信息数组。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -189,8 +198,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } numMax - 任务信息数量上限。
    * @returns { Promise<Array<MissionInfo>> } Promise对象，返回所有任务信息的数组。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -207,8 +217,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<MissionSnapshot> } callback - 执行结果回调函数，返回任务快照信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -225,8 +236,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } missionId - 任务ID。
    * @returns { Promise<MissionSnapshot> } Promise对象，返回任务快照信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -243,8 +255,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<MissionSnapshot> } callback - 执行结果回调函数，返回任务快照信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -265,8 +278,9 @@ declare namespace missionManager {
    * @param { string } deviceId - 设备ID，本机默认为空字符串。
    * @param { int } missionId - 任务ID。
    * @returns { Promise<MissionSnapshot> } Promise对象，返回任务快照信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -282,8 +296,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -300,8 +315,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -318,8 +334,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -336,8 +353,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -354,8 +372,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -371,8 +390,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -387,8 +407,9 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -403,8 +424,9 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
    * @since 9 dynamic
@@ -418,8 +440,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - 任务ID。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -437,8 +460,9 @@ declare namespace missionManager {
    * @param { int } missionId - 任务ID。
    * @param { StartOptions } options - 启动参数选项，用于指定任务切到前台时的窗口模式，设备ID等。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -456,8 +480,9 @@ declare namespace missionManager {
    * @param { int } missionId - 任务ID。
    * @param { StartOptions } [options] - 启动参数选项，用于指定任务切到前台时的窗口模式，设备ID等。默认为空，表示按照默认启动参数。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -474,8 +499,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - 任务ID数组。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -494,8 +520,9 @@ declare namespace missionManager {
    * @param { int } topMission - 待移动到最顶层的任务ID。传入-1表示不指定特定任务，系统按照默认逻辑将任务
    *     移动到最顶层。
    * @param { AsyncCallback<void> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -513,8 +540,9 @@ declare namespace missionManager {
    * @param { Array<int> } missionIds - 任务ID数组。
    * @param { int } topMission - 待移动到最顶层的任务ID。默认值为-1，表示不指定特定任务，系统按照默认逻辑将任务移动到最顶层。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -531,8 +559,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - 任务ID数组。
    * @param { AsyncCallback<Array<int>> } callback - 执行结果回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -549,8 +578,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - 任务ID数组。
    * @returns { Promise<Array<int>> } Promise对象，返回任务ID。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.

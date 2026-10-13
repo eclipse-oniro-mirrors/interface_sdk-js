@@ -418,15 +418,18 @@ declare namespace cliManager {
   /**
    * 查询所有CLI工具的摘要信息。摘要信息仅包含名称、版本和描述字段，使用Promise异步回调。
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolSummary>> } Promise对象，返回工具摘要信息列表。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -435,15 +438,18 @@ declare namespace cliManager {
   /**
    * 查询所有CLI工具的详细信息，使用Promise异步回调。
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolInfo>> } Promise对象，返回工具详细信息列表。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -452,17 +458,20 @@ declare namespace cliManager {
   /**
    * 根据工具名称获取单个工具的详细信息，使用Promise异步回调。
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } toolName - 目标工具的名称。
    * @returns { Promise<ToolInfo> } Promise对象，返回工具的详细信息。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -478,9 +487,9 @@ declare namespace cliManager {
    * @param { string } challenge - 从访问令牌管理器获取的唯一标识符
    * @param { ExecOptions } [execOptions] - 此操作的选项
    * @returns { Promise<CliSessionInfo> } 执行结果。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -502,10 +511,12 @@ declare namespace cliManager {
    * @param { ExecCmdOptions } [execCmdOptions] - 执行命令的可选参数。默认值：详见[ExecCmdOptions]{@link cliManager.ExecCmdOptions}的具体属性
    *     默认值。
    * @returns { Promise<CliSessionInfo> } Promise对象。返回会话信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
-   *     capabilities. [since 26.0.1]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: Failed to call the API due to
+   *     limited device capabilities. [since 26.0.1]
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -529,8 +540,10 @@ declare namespace cliManager {
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @param { ToolEventCallback } callback - CLI工具会话事件的回调函数。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -553,8 +566,10 @@ declare namespace cliManager {
    * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -577,8 +592,10 @@ declare namespace cliManager {
    * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @returns { Promise<CliSessionInfo> } The info of target session.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
@@ -602,8 +619,10 @@ declare namespace cliManager {
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @param { string } message - 要发送的消息，最大长度为10240字符。超过最大长度时抛出错误码401。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application. [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600032 - The specified session does not exist.
    * @throws { BusinessError } 35600033 - Failed to write message to the tool process.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
@@ -625,9 +644,9 @@ declare namespace cliManager {
    * @permission ohos.permission.REGISTER_AGENT_HOOK
    * @param { CliHook } hook - 实现CliHook接口的Hook对象。该对象必须实现至少一个可选方法。
    * @returns { Promise<void> } Promise对象，无返回值。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600034 - The device is not in developer mode.
    * @throws { BusinessError } 35600035 - A hook is already registered; unregister it first.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -646,9 +665,9 @@ declare namespace cliManager {
    * @permission ohos.permission.REGISTER_AGENT_HOOK
    * @param { CliHook } hook - 待取消注册的Hook对象。
    * @returns { Promise<void> } Promise对象，无返回值。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.REGISTER_AGENT_HOOK".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600036 - No hook is registered; nothing to unregister.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.

@@ -191,8 +191,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { 'abilityForegroundState' } type - Event type. It is fixed at **'abilityForegroundState'**.
    * @param { AbilityForegroundStateObserver } observer - Observer used to listen for ability start or exit events.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -207,8 +208,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AbilityForegroundStateObserver } observer - The ability foreground state observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -224,8 +226,9 @@ declare namespace abilityManager {
    * @param { AbilityForegroundStateObserver } [observer] - Observer used to listen for ability start or exit events. If this
    *     parameter is not set, all observers associated with the specified event are deregistered. If this parameter is set,
    *     only the specified observer is deregistered.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -240,8 +243,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AbilityForegroundStateObserver } [observer] - The ability foreground state observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -256,8 +260,9 @@ declare namespace abilityManager {
    * @param { Configuration } config - New configuration. You only need to configure the items to be updated.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **err** is
    *     **undefined**. Otherwise, **err** is an error object. You can perform error handling or other custom processing.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -274,8 +279,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.UPDATE_CONFIGURATION
    * @param { Configuration } config - New configuration. You only need to configure the items to be updated.
    * @returns { Promise<void> } Promise that returns no value. You can perform error handling or other custom processing.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -312,7 +318,7 @@ declare namespace abilityManager {
    * @param { AsyncCallback<Array<AbilityRunningInfo>> } callback - Callback used to return the result. If the API call is
    *     successful, **err** is **undefined** and **data** is the UIAbility running information obtained. Otherwise, **err**
    *     is an error object. You can perform error handling or other custom processing.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -330,7 +336,7 @@ declare namespace abilityManager {
    * @param { int } upperLimit - Maximum number of messages that can be obtained. The maximum value is 2<sup>31</sup>-1.
    * @returns { Promise<Array<ExtensionRunningInfo>> } Promise used to return the API call result and the ExtensionAbility
    *     running information. You can perform error handling or other custom processing.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -349,7 +355,7 @@ declare namespace abilityManager {
    * @param { AsyncCallback<Array<ExtensionRunningInfo>> } callback - Callback used to return the result. If the API call is
    *     successful, **err** is **undefined** and **data** is the ExtensionAbility running information obtained. Otherwise,
    *     **err** is an error object. You can perform error handling or other custom processing.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -366,7 +372,7 @@ declare namespace abilityManager {
    *
    * @returns { Promise<ElementName> } Promise used to return the API call result and the element name. You can perform error
    *     handling or other custom processing.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -382,7 +388,7 @@ declare namespace abilityManager {
    * @param { AsyncCallback<ElementName> } callback - Callback used to return the result. If the API call is successful,
    *     **err** is **undefined** and **data** is the top ability name obtained. Otherwise, **err** is an error object. You
    *     can perform error handling or other custom processing.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -405,7 +411,7 @@ declare namespace abilityManager {
    * @param { AsyncCallback<Record<string, Object>> } callback - Callback used to return the result. If the API call is
    *     successful, **err** is **undefined** and **data** is the shared data obtained. Otherwise, **err** is an error
    *     object. You can perform error handling or other custom processing. [since 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -421,7 +427,7 @@ declare namespace abilityManager {
    * @param { int } missionId - The missionId of target ability.
    * @param { AsyncCallback<Record<string, RecordData>> } callback - The callback is used to return the params of sharing
    *     data and result code.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system service failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -439,7 +445,7 @@ declare namespace abilityManager {
    * @returns { Promise<{ [key: string]: Object }> } The promise returned by the function. [since 10 - 10]
    * @returns { Promise<Record<string, Object>> } Promise used to return the API call result and the shared data. You can
    *     perform error handling or other custom processing. [since 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -454,7 +460,7 @@ declare namespace abilityManager {
    *
    * @param { int } missionId - The missionId of target ability.
    * @returns { Promise<Record<string, RecordData>> } The promise returned by the function.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -471,8 +477,9 @@ declare namespace abilityManager {
    * @param { int } requestCode - Request code passed in by the DLP management application.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -492,8 +499,9 @@ declare namespace abilityManager {
    * @param { AbilityResult } parameter - Information returned to the caller.
    * @param { int } requestCode - Request code passed in by the DLP management application.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -513,8 +521,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { AsyncCallback<Array<AbilityStateData>> } callback - Callback used to return the API call result and the
    *     UIAbility information. You can perform error handling or custom processing in it.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -532,8 +541,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @returns { Promise<Array<AbilityStateData>> } Promise used to return the API call result and the UIAbility information.
    *     You can perform error handling or custom processing in it.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -568,8 +578,9 @@ declare namespace abilityManager {
    * @param { string } sessionId - Session ID of the AssertFault.
    * @param { UserStatus } status - Assertion result of the user operation.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -592,7 +603,7 @@ declare namespace abilityManager {
    * @param { string } bundleName - Bundle name of the resident process.
    * @param { boolean } enable - Whether to enable or disable the resident process. **true** to enable, **false** otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1.Non empty package name needs to be provided;
    *     2.The second parameter needs to provide a Boolean type setting value.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -617,7 +628,8 @@ declare namespace abilityManager {
    *     service.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -664,8 +676,9 @@ declare namespace abilityManager {
    * @returns { Promise<int> } Promise used to return the ID of the preloaded
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility} instance for further
    *     clearing or management.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -687,8 +700,9 @@ declare namespace abilityManager {
    * @param { int } preloadId - ID of a preloaded
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility} instance.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000003 - The specified ID does not exist. Possible causes:
    *     1.The specified ID is incorrect; 2.The preloaded UIExtensionAbility has been loaded;
    *     3.The preloaded UIExtensionAbility has been destroyed;
@@ -707,8 +721,9 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
    *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -726,8 +741,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityLoadedFn } callback - Callback used to receive the ID of the preloaded
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility} instance that is loaded.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -744,8 +760,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityLoadedFn } [callback] - Callback used for unsubscription. If this parameter
    *     is not specified, all callbacks associated with the specified event in the process will be unregistered.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -762,8 +779,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityDestroyedFn } callback - Callback used to receive the ID of the preloaded
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility} instance that is destroyed.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -780,8 +798,9 @@ declare namespace abilityManager {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { PreloadedUIExtensionAbilityDestroyedFn } [callback] - Callback used for unsubscription. If this parameter is
    *     not specified, all callbacks associated with the specified event in the process will be unregistered.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Memory operation error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
