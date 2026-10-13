@@ -1032,8 +1032,7 @@ declare namespace certificateManager {
    * @permission ohos.permission.ACCESS_CERT_MANAGER
    * @param { Uint8Array } handle - 表示操作句柄，需先调用init方法获得。
    *     <br>最大长度为8字节。
-   * @param { Uint8Array } [signature] - 表示操作句柄，需先调用init方法获得。
-   *     <br>最大长度为8字节。
+   * @param { Uint8Array } [signature] - 表示用于验签操作的签名数据。签名操作时无需传入此参数。
    * @returns { Promise<CMResult> } Promise对象。执行签名操作时，返回签名的结果，返回值为[CMResult]{@link certificateManager.CMResult}对象中的
    *     outData属性；执行验签操作时，无返回值。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
