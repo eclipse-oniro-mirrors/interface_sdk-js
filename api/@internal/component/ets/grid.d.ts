@@ -1154,6 +1154,24 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   nestedScroll(value: NestedScrollOptions): GridAttribute;
 
   /**
+   * Sets the two-stage scroll snap strategy of the Grid.
+   *
+   * START, CENTER, and END align items with the start, center, and end of the viewport along the scrolling axis.
+   * A custom provider calculates the approach distance and final target through its two callbacks.
+   * NONE or undefined clears the strategy and restores the default scrolling behavior.
+   * Snapping is disabled for unsupported layouts. Targets are constrained to the legal scroll range.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Built-in alignment or custom provider.
+   * @returns { GridAttribute } The attribute of the grid.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): GridAttribute;
+
+  /**
    * Sets whether to support the scrolling gesture.
    *
    * > **NOTE**
