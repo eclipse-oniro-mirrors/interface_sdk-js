@@ -15402,7 +15402,7 @@ export declare interface PointLightStyle {
  * @stagemodelonly
  * @since 23 static
  */
-export declare interface LightSource {
+declare interface LightSource {
   /**
    * Defines the PointLight light positionX.
    *

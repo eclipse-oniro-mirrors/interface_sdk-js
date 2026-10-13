@@ -15747,7 +15747,7 @@ export declare interface PointLightStyle {
  * @stagemodelonly
  * @since 23 static
  */
-export declare interface LightSource {
+declare interface LightSource {
   /**
    * 光源相对于当前组件的X坐标。
    *

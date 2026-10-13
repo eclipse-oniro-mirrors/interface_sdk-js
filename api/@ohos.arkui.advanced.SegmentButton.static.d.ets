@@ -296,8 +296,8 @@ declare enum SegmentButtonInteractionMode {
   FOLLOWING_DRAG = 0,
 
   /**
-   * Enables normal drag. With system material, retains the background scaling, slight displacement,
-   * and selected-item deformation of following drag, without its point light.
+   * Enables normal drag. Only drag positioning and selection updates differ from following drag.
+   * System material feedback, including configured light effects, is retained.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -564,8 +564,8 @@ interface CommonSegmentButtonOptions {
    * If omitted, following drag is used with system material, and normal drag is used without it.
    * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
    * Following drag without system material does not add material deformation or light effects.
-   * Normal drag with system material retains its appearance and the background scaling, slight displacement,
-   * and selected-item deformation of following drag, without its point light.
+   * Normal drag with system material only changes drag positioning and selection updates.
+   * Material appearance, background scaling, slight displacement, selected-item deformation, and configured light effects are retained.
    * If omitted, undefined or invalid, the default mode is used.
    * This property has no effect in multi-select mode.
    *
@@ -1259,8 +1259,8 @@ declare class SegmentButtonOptions {
    * If omitted, following drag is used with system material, and normal drag is used without it.
    * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
    * Following drag without system material does not add material deformation or light effects.
-   * Normal drag with system material retains its appearance and the background scaling, slight displacement,
-   * and selected-item deformation of following drag, without its point light.
+   * Normal drag with system material only changes drag positioning and selection updates.
+   * Material appearance, background scaling, slight displacement, selected-item deformation, and configured light effects are retained.
    * If omitted, undefined or invalid, the default mode is used.
    * This property has no effect in multi-select mode.
    *
