@@ -218,8 +218,9 @@ declare namespace hidebug {
    *     is 128 bytes.
    * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-   * @since 9 dynamic
-   * @since 26.0.1 static
+   * @since 9 dynamiconly
+   * @deprecated since 26
+   * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string) : void;
 
@@ -238,8 +239,9 @@ declare namespace hidebug {
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @stagemodelonly
    * @atomicservice
-   * @since 24 dynamic
-   * @since 26.0.1 static
+   * @since 24 dynamiconly
+   * @deprecated since 26
+   * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string, needClean : boolean) : void;
 
