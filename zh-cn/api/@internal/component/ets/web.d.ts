@@ -20,6 +20,8 @@
 
 /**
  * 提供Web控制器的方法。
+ * 通过WebviewController可以控制Web组件各种行为。一个WebviewController对象只能控制一个Web组件，且必须在Web组件和
+ * WebviewController绑定后，才能调用WebviewController上的方法（静态方法除外）。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -3789,7 +3791,7 @@ declare class WebController {
   /**
    * 调整当前网页的缩放比例。
    *
-   * @param { number } factor - The zoom factor.
+   * @param { number } factor - 缩放系数。1表示恢复加载网页的默认缩放比例；小于1为缩小，大于1为放大。取值范围(0, 100]。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3810,7 +3812,7 @@ declare class WebController {
   /**
    * 异步执行JavaScript脚本，并通过回调方式返回脚本执行的结果。runJavaScript需要在loadUrl完成后，比如onPageEnd中调用。
    *
-   * @param { object } options The options with a piece of code and a callback.
+   * @param { object } options 包含脚本和回调的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3871,7 +3873,7 @@ declare class WebController {
   /**
    * 注入JavaScript对象到window对象中，并在window对象中调用该对象的方法。注入的对象在页面下一次（重新）加载前不会出现在JavaScript中。
    *
-   * @param { object } options - The option with the JavaScript object and method list.
+   * @param { object } options - 包含JavaScript对象和方法列表的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -9028,13 +9030,15 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
 /**
  * 定义 Web 组件。
  *
- * <p><strong>API Note</strong>:
+ * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  *
- * <strong>Performance Note</strong>:
- * <p>For details about how to optimize the compilation, resource loading, and JSBridge performance,
- * see [Optimizing Web Page Loading]{@link https://developer.huawei.com/consumer/en/doc/best-practices/bpta-web-develop-optimization}
- * <p>When the white screen duration is long due to complex web page parsing,
- * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
+ * <p><strong>接口说明</strong>:
+ *
+ * <strong>性能说明</strong>:
+ * <p>有关如何优化编译、资源加载和JSBridge性能的详细信息，
+ * 请参见[Web加载性能优化]{@link https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-web-develop-optimization}
+ * <p>当由于复杂的网页解析导致白屏时间较长时，
+ * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
  * </p>
  *
  * @syscap SystemCapability.Web.Webview.Core

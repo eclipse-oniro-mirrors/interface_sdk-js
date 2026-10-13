@@ -20,6 +20,9 @@
 
 /**
  * Defines methods for the web controller.
+ * Controls various behaviors of the Web component through WebviewController. A WebviewController object can control
+ * only one Web component, and methods on WebviewController (except static methods) can be called only after the Web
+ * component and WebviewController are bound.
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -9947,6 +9950,9 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
 
 /**
  * Defines Web Component.
+ * 
+ * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+ * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
  *
  * <p><strong>API Note</strong>:
  *
