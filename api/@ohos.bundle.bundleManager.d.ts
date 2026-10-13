@@ -940,6 +940,16 @@ declare namespace bundleManager {
     MODULAR_OBJECT = 39,
 
     /**
+     * [UkeyAuthExtensionAbility](docroot://reference/apis-device-certificate-kit/js-apis-UkeyAuthExtensionAbility.md):
+     * provides developers with the capability to customized UKey authentication page.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UKEY_AUTH = 40,
+
+    /**
      * The ability type is not specified. <!--Del-->It can be used in
      * [queryExtensionAbilityInfo]{@link bundleManager.queryExtensionAbilityInfo} to obtain ExtensionAbility components
      * of all types.<!--DelEnd-->
