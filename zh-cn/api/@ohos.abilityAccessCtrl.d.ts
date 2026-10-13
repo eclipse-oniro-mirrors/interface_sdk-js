@@ -650,7 +650,7 @@ declare namespace abilityAccessCtrl {
      *     <br>最大长度为1024。取值约束：列表中的tokenID必须为大于0的整数。
      *     <br>BundleInfo获取可参考：[bundleManager.getBundleInfoSync]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoSync}。
      * @param { Array<Permissions> } permissionList - 订阅的权限名列表，为空时表示订阅所有的权限状态变化。传入无效值时返回错误码12100001。
-     *     <br>最大长度为1024且不能为空。取值约束：列表中的权限名需为有效权限名，权限名长度不能超过256个字符。
+     *     <br>最大长度为1024。取值约束：列表中的权限名需为有效权限名，权限名长度不能超过256个字符。
      * @param { Callback<PermissionStateChangeInfo> } callback - 回调函数。订阅指定tokenID与指定权限名状态变更事件的回调。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.

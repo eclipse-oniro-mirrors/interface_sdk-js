@@ -799,14 +799,16 @@ declare namespace abilityAccessCtrl {
      *     the permission state changes.
      * @param { Array<int> } tokenIDList - List of token IDs to subscribe to. If left empty, it subscribes to permission
      *     status changes of all apps. The app identity can be obtained through the [accessTokenId]{@link
-     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId} field in ApplicationInfo of BundleInfo. Passing an
-     *     invalid value returns error code 12100001.
-     *     <br>The maximum length is 1024. Value constraint: Each token ID in the list must be an integer greater than 0.
-     *     <br>For BundleInfo acquisition, please refer to: [bundleManager.getBundleInfoSync]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoSync}.
-     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. Passing an invalid value
-     *     returns error code 12100001.
-     *     <br>The maximum length is 1024 and cannot be empty. Value constraint: Each permission name in the list must
-     *     be a valid permission name, and its length cannot exceed 256 characters.
+     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId} field in ApplicationInfo of BundleInfo.
+     *     Passing an invalid value returns error code 12100001.
+     *     <br>The maximum length is 1024. Value constraint: Each token ID in the list must be an integer greater than
+     *     0.
+     *     <br>For BundleInfo acquisition, please refer to:
+     *     [bundleManager.getBundleInfoSync]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoSync}.
+     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. If left empty, it
+     *     subscribes to permission state changes of all permissions. Passing an invalid value returns error code 12100001.
+     *     <br>The maximum length is 1024. Value constraint: Each permission name in the list must be a valid permission
+     *     name, and its length cannot exceed 256 characters.
      * @param { Callback<PermissionStateChangeInfo> } callback - Callback used to return the result. Callback for
      *     subscribing to the status change events of the specified tokenID and permission name.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -846,12 +848,14 @@ declare namespace abilityAccessCtrl {
      * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
      * @param { Array<int> } tokenIDList - List of token IDs to subscribe to. If left empty, it subscribes to permission
      *     status changes of all apps. The app identity can be obtained through the [accessTokenId]{@link
-     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId} field in ApplicationInfo of BundleInfo. Passing an
-     *     invalid value returns error code 12100001.
-     *     <br>The maximum length is 1024. Value constraint: Each token ID in the list must be an integer greater than 0.
-     *     <br>For BundleInfo acquisition, please refer to: [bundleManager.getBundleInfoSync]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoSync}.
-     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. Passing an invalid value
-     *     returns error code 12100001.
+     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId} field in ApplicationInfo of BundleInfo.
+     *     Passing an invalid value returns error code 12100001.
+     *     <br>The maximum length is 1024. Value constraint: Each token ID in the list must be an integer greater than
+     *     0.
+     *     <br>For BundleInfo acquisition, please refer to:
+     *     [bundleManager.getBundleInfoSync]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoSync}.
+     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. If left empty, it
+     *     subscribes to permission state changes of all permissions. Passing an invalid value returns error code 12100001.
      *     <br>The maximum length is 1024. Value constraint: Each permission name in the list must be a valid permission
      *     name, and its length cannot exceed 256 characters.
      * @param { Callback<PermissionStateChangeInfo> } callback - Callback used to return the result. Callback for
@@ -897,8 +901,8 @@ declare namespace abilityAccessCtrl {
      *
      * @param { 'selfPermissionStateChange' } type - Event type. The value is **'selfPermissionStateChange'**, which
      *     indicates the changes in the permission states specific to this application alone.
-     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. Passing an invalid value
-     *     returns error code 12100001.
+     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. If left empty, it
+     *     subscribes to permission state changes of all permissions. Passing an invalid value returns error code 12100001.
      *     <br>The maximum length is 1024. Value constraint: Each permission name in the list must be a valid permission
      *     name, and its length cannot exceed 256 characters.
      * @param { Callback<PermissionStateChangeInfo> } callback - Callback used to return the result. Callback for
@@ -942,8 +946,8 @@ declare namespace abilityAccessCtrl {
      * [offSelfPermissionStateChange]{@link abilityAccessCtrl.AtManager.offSelfPermissionStateChange}.
      * When monitoring is no longer needed, call offSelfPermissionStateChange to unsubscribe.
      *
-     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. Passing an invalid value
-     *     returns error code 12100001.
+     * @param { Array<Permissions> } permissionList - List of permission names to subscribe to. If left empty, it
+     *     subscribes to permission state changes of all permissions. Passing an invalid value returns error code 12100001.
      *     <br>The maximum length is 1024. Value constraint: Each permission name in the list must be a valid permission
      *     name, and its length cannot exceed 256 characters.
      * @param { Callback<PermissionStateChangeInfo> } callback - Callback used to return the result. Callback for
