@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file SkillInfo
  * @kit AbilityKit
  */
 

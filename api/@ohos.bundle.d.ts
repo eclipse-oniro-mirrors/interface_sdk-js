@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Bundle Module
  * @kit AbilityKit
  */
 

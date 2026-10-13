@@ -22,7 +22,7 @@
  * [getShortcutInfo]{@link ./../@ohos.bundle.launcherBundleManager:launcherBundleManager.getShortcutInfo(bundleName :string, callback: AsyncCallback<Array<ShortcutInfo>>)}
  * <!--DelEnd-->.
  *
- * @file
+ * @file ShortcutInfo
  * @kit AbilityKit
  */
 

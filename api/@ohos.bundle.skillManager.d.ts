@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file skillManager Module
  * @kit AbilityKit
  */
 
