@@ -192,7 +192,7 @@ declare namespace nearlinkConstant {
      */
     DEVICE_WATCH = 0x000400,
     /**
-     * Smart watch.
+     * Smartwatch.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly

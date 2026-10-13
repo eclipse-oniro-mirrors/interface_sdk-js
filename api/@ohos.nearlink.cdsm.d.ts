@@ -31,6 +31,9 @@ import type { Callback } from '@ohos.base';
 declare namespace cdsm {
   /**
    * Creates a CDSM client instance.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { string } address - Address of a member device in the paired and connected coordinated devices set. The
@@ -38,8 +41,12 @@ declare namespace cdsm {
    *     hexadecimal characters, and the segments are separated by colons (:).
    * @returns { CdsmClient } **CdsmClient** instance used to query and subscribe to the CDSM information of a remote
    *     device.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100050 - Coordinated Devices Set Management not supported.
@@ -74,7 +81,8 @@ declare namespace cdsm {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { CdsmInfo } Information about the coordinated devices set of a remote device.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
@@ -92,6 +100,8 @@ declare namespace cdsm {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offCdsmInfoChange]{@link cdsm.CdsmClient.offCdsmInfoChange(callback?: Callback<CdsmInfo>): void}
+     *     Unsubscribes from the CDSM information change event.
      */
     onCdsmInfoChange(callback: Callback<CdsmInfo>): void;
 
@@ -104,6 +114,8 @@ declare namespace cdsm {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onCdsmInfoChange]{@link cdsm.CdsmClient.onCdsmInfoChange(callback: Callback<CdsmInfo>): void} Subscribes to
+     *     the CDSM information change event.
      */
     offCdsmInfoChange(callback?: Callback<CdsmInfo>): void;
   }

@@ -40,12 +40,18 @@ declare namespace dataTransfer {
 
   /**
    * 注册端口通道。端口通道注册后方可用于连接远端设备，不再使用时需通过[dataTransfer.destroyPort]{@link dataTransfer.destroyPort}销毁。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { string } uuid - 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128
    *     位标识符。 不允许使用星闪标准UUID。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100020 - The UUID is already registered.
    * @throws { BusinessError } 36100021 - Port exceeds the upper limit.
@@ -60,12 +66,18 @@ declare namespace dataTransfer {
 
   /**
    * 销毁端口通道。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { string } uuid - 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128
    *     位标识符。 不允许使用星闪标准UUID。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100022 - The UUID is not registered.
    * @throws { BusinessError } 36100043 - Invalid UUID.
@@ -74,17 +86,24 @@ declare namespace dataTransfer {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @see [createPort]{@link dataTransfer.createPort(uuid: string): void} 注册端口通道。
    */
   function destroyPort(uuid: string): void;
 
   /**
    * 连接远端设备。使用Promise异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ConnectionParams } params - 指明端口的连接参数。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100043 - Invalid UUID.
@@ -93,17 +112,24 @@ declare namespace dataTransfer {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @see [disconnect]{@link dataTransfer.disconnect(params: ConnectionParams): Promise<void>} 断连远端设备。
    */
   function connect(params: ConnectionParams): Promise<void>;
 
   /**
    * 断连远端设备。需在通过[dataTransfer.connect]{@link dataTransfer.connect}成功建立连接后调用，用于断开已建立的远端设备连接。使用Promise异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ConnectionParams } params - 指明端口的连接参数。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100043 - Invalid UUID.
@@ -117,39 +143,59 @@ declare namespace dataTransfer {
 
   /**
    * 订阅端口通道连接状态变更事件。使用callback异步回调。
-   * 
+   *
    * 应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<ConnectionResult> } callback - 回调函数，返回与远端设备端口连接参数的协商结果。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @see [offConnectionStateChanged]{@link dataTransfer.offConnectionStateChanged(callback?:
+   *     Callback<ConnectionResult>): void} Unsubscribes from the connection state change event of the port channel.
    */
   function onConnectionStateChanged(callback: Callback<ConnectionResult>): void;
 
   /**
    * 取消订阅端口通道连接状态变更事件。使用callback异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<ConnectionResult> } [callback] - 回调函数，返回与远端设备端口连接参数的协商结果。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @see [onConnectionStateChanged]{@link dataTransfer.onConnectionStateChanged(callback: Callback<ConnectionResult>):
+   *     void} Subscribes to the connection state change event of the port channel.
    */
   function offConnectionStateChanged(callback?: Callback<ConnectionResult>): void;
 
   /**
    * 通过设备地址和UUID向远端设备发送数据。使用Promise异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { DataParams } params - 指明发送数据的参数，包含远端设备地址、服务UUID以及发送的数据包。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100023 - Data transmission congested.
    * @throws { BusinessError } 36100041 - Invalid address.
@@ -164,39 +210,57 @@ declare namespace dataTransfer {
 
   /**
    * 订阅端口通道数据接收事件。使用callback异步回调。
-   * 
+   *
    * 应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<DataParams> } callback - 回调函数，返回端口通道接收到的数据参数。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @see [offReadData]{@link dataTransfer.offReadData(callback?: Callback<DataParams>): void} 取消订阅端口通道数据接收事件。
    */
   function onReadData(callback: Callback<DataParams>): void;
 
   /**
    * 取消订阅端口通道数据接收事件。使用callback异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<DataParams> } [callback] - 回调函数，返回端口通道接收到的数据参数。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @see [onReadData]{@link dataTransfer.onReadData(callback: Callback<DataParams>): void} 订阅端口通道数据接收事件。
    */
   function offReadData(callback?: Callback<DataParams>): void;
 
   /**
    * 获取与远端设备之间的端口通道连接状态。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ConnectionStateParams } params - 指明端口的连接参数。
    * @returns { ConnectionState } 和远端设备的星闪端口通道连接状态。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100043 - Invalid UUID in connection parameters.

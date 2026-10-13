@@ -42,12 +42,19 @@ declare namespace ssap {
 
   /**
    * Creates an SSAP client instance.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { string } address - Address of the remote server device. The address format is **11:22:33:AA:BB:FF**.
    * @returns { Client } SSAP client instance.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100099 - Operation failed.
@@ -59,11 +66,18 @@ declare namespace ssap {
 
   /**
    * Creates an SSAP server instance.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @returns { Server } SSAP server instance.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
@@ -91,12 +105,14 @@ declare namespace ssap {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [disconnect]{@link ssap.Client.disconnect(): Promise<void>} Disconnects from the server.
      */
     connect(): Promise<void>;
 
@@ -106,12 +122,14 @@ declare namespace ssap {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [connect]{@link ssap.Client.connect(): Promise<void>} Connects to the server.
      */
     disconnect(): Promise<void>;
 
@@ -120,7 +138,8 @@ declare namespace ssap {
      * instance, use the [disconnect]{@link ssap.Client.disconnect} method.
      *
      * @permission ohos.permission.ACCESS_NEARLINK
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
@@ -134,7 +153,8 @@ declare namespace ssap {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { Promise<Service[]> } Promise used to return the result. The list of services supported by the server.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
@@ -149,7 +169,8 @@ declare namespace ssap {
      * @permission ohos.permission.ACCESS_NEARLINK
      * @param { Property } property - Server attribute.
      * @returns { Promise<Property> } Promise used to return the server attribute.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID in property.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -167,7 +188,8 @@ declare namespace ssap {
      * @param { Property } property - Server attribute.
      * @param { PropertyWriteType } writeType - Write type, which supports two modes: with and without server response.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID in property.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -187,8 +209,9 @@ declare namespace ssap {
      *     descriptor in the service on a remote device obtained during service discovery.
      * @returns { Promise<PropertyDescriptor> } Promise used to return the **PropertyDescriptor** object read from the
      *     server.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID in descriptor.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -212,8 +235,9 @@ declare namespace ssap {
      * @param { PropertyDescriptor } descriptor - Server property descriptor. The value must correspond to the
      *     descriptor in the service on a remote device obtained during service discovery.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID in descriptor.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -235,7 +259,8 @@ declare namespace ssap {
      * @param { boolean } enable - Whether to enable notification. **true**: enables notification. **false**: disables
      *     notification.
      * @returns { Promise<void> } Promise used to return the result. No return value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID in property.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -255,8 +280,9 @@ declare namespace ssap {
      * @param { boolean } enable - Whether to enable indication for property value changes. **true**: enables
      *     indication. **false**: disables indication.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100030 - The connection is not established.
      * @throws { BusinessError } 36100043 - Invalid UUID in property.
@@ -276,7 +302,8 @@ declare namespace ssap {
      * @param { int } mtu - MTU parameter.  The default value is **251**.
      *     <br>Unit: byte. Value range: [22, 1024],.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
@@ -295,8 +322,9 @@ declare namespace ssap {
      *     on a remote device obtained during service discovery.
      * @returns { Promise<Method> } Promise used to return the **Method** object corresponding to the calling result.
      *     The **result** field is the return value after the server method is executed.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -317,6 +345,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offPropertyChange]{@link ssap.Client.offPropertyChange(callback?: Callback<Property>): void} Unsubscribes
+     *     from the property change event.
      */
     onPropertyChange(callback: Callback<Property>): void;
 
@@ -329,6 +359,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onPropertyChange]{@link ssap.Client.onPropertyChange(callback: Callback<Property>): void} Subscribes to the
+     *     property change event.
      */
     offPropertyChange(callback?: Callback<Property>): void;
 
@@ -344,6 +376,8 @@ declare namespace ssap {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offEventNotify]{@link ssap.Client.offEventNotify(callback?: Callback<Event>): void} Unsubscribes from the
+     *     event notification event.
      */
     onEventNotify(callback: Callback<Event>): void;
 
@@ -357,6 +391,8 @@ declare namespace ssap {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onEventNotify]{@link ssap.Client.onEventNotify(callback: Callback<Event>): void} Subscribes to the event
+     *     notification event.
      */
     offEventNotify(callback?: Callback<Event>): void;
 
@@ -370,6 +406,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offConnectionStateChange]{@link ssap.Client.offConnectionStateChange(callback?:
+     *     Callback<ConnectionChangeState>): void} Unsubscribes from the connection status change event.
      */
     onConnectionStateChange(callback: Callback<ConnectionChangeState>): void;
 
@@ -384,6 +422,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onConnectionStateChange]{@link ssap.Client.onConnectionStateChange(callback:
+     *     Callback<ConnectionChangeState>): void} Subscribes to the connection status change event.
      */
     offConnectionStateChange(callback?: Callback<ConnectionChangeState>): void;
 
@@ -396,6 +436,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offMtuChange]{@link ssap.Client.offMtuChange(callback?: Callback<int>): void} Unsubscribes from the MTU
+     *     change event.
      */
     onMtuChange(callback: Callback<int>): void;
 
@@ -408,6 +450,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onMtuChange]{@link ssap.Client.onMtuChange(callback: Callback<int>): void} Subscribes to the MTU change
+     *     event.
      */
     offMtuChange(callback?: Callback<int>): void;
   }
@@ -432,7 +476,8 @@ declare namespace ssap {
      * @permission ohos.permission.ACCESS_NEARLINK
      * @param { Service } service - Service provided by the server. Multiple services can be added, identified by their
      *     UUIDs.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -440,6 +485,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [removeService]{@link ssap.Server.removeService(serviceUuid: string): void} Removes a service from the
+     *     server.
      */
     addService(service: Service): void;
 
@@ -450,7 +497,8 @@ declare namespace ssap {
      * @param { string } serviceUuid - NearLink service UUID, which is a string of 36 characters. The value consists of
      *     32 hexadecimal digits and four hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which
      *     indicates a 128-bit ID. The value cannot be set to a standard NearLink UUID.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID.
      * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
@@ -458,6 +506,7 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [addService]{@link ssap.Server.addService(service: Service): void} Adds a service on the server.
      */
     removeService(serviceUuid: string): void;
 
@@ -465,7 +514,8 @@ declare namespace ssap {
      * Closes the server and unregisters the callback.
      *
      * @permission ohos.permission.ACCESS_NEARLINK
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
@@ -481,7 +531,8 @@ declare namespace ssap {
      * @param { string } address - Client device address. The address format is **11:22:33:AA:BB:FF**.
      * @param { Property } property - Property whose value changes.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100041 - Invalid address.
      * @throws { BusinessError } 36100043 - Invalid UUID in property.
@@ -501,7 +552,8 @@ declare namespace ssap {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @param { ServerResponse } response - Response data for the client.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100041 - Invalid address.
      * @throws { BusinessError } 36100099 - Operation failed.
@@ -521,6 +573,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offConnectionStateChange]{@link ssap.Server.offConnectionStateChange(callback?:
+     *     Callback<ConnectionChangeState>): void} Unsubscribes from the connection status change event.
      */
     onConnectionStateChange(callback: Callback<ConnectionChangeState>): void;
 
@@ -535,6 +589,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onConnectionStateChange]{@link ssap.Server.onConnectionStateChange(callback:
+     *     Callback<ConnectionChangeState>): void} Subscribes to the connection status change event.
      */
     offConnectionStateChange(callback?: Callback<ConnectionChangeState>): void;
 
@@ -549,6 +605,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offPropertyRead]{@link ssap.Server.offPropertyRead(callback?: Callback<PropertyReadRequest>): void}
+     *     Unsubscribes from the property read request event.
      */
     onPropertyRead(callback: Callback<PropertyReadRequest>): void;
 
@@ -563,6 +621,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onPropertyRead]{@link ssap.Server.onPropertyRead(callback: Callback<PropertyReadRequest>): void} Subscribes
+     *     to the property read request event.
      */
     offPropertyRead(callback?: Callback<PropertyReadRequest>): void;
 
@@ -577,6 +637,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offPropertyWrite]{@link ssap.Server.offPropertyWrite(callback?: Callback<PropertyWriteRequest>): void}
+     *     Unsubscribes from the property write request event.
      */
     onPropertyWrite(callback: Callback<PropertyWriteRequest>): void;
 
@@ -590,6 +652,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onPropertyWrite]{@link ssap.Server.onPropertyWrite(callback: Callback<PropertyWriteRequest>): void}
+     *     Subscribes to the property write request event.
      */
     offPropertyWrite(callback?: Callback<PropertyWriteRequest>): void;
 
@@ -602,6 +666,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [offMtuChange]{@link ssap.Server.offMtuChange(callback?: Callback<int>): void} Unsubscribes from the MTU
+     *     change event.
      */
     onMtuChange(callback: Callback<int>): void;
 
@@ -614,6 +680,8 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @see [onMtuChange]{@link ssap.Server.onMtuChange(callback: Callback<int>): void} Subscribes to the MTU change
+     *     event.
      */
     offMtuChange(callback?: Callback<int>): void;
   }
