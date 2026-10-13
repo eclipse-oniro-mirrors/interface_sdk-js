@@ -401,199 +401,100 @@ export declare function clearTimeout(timeoutID?: number): void;
 export declare function canIUse(syscap: string): boolean;
 
 /**
- * Obtains all attributes of the component with the specified ID.
+ * Obtains all attributes of the component with the specified ID, excluding the information about child
+ * components.<br>This API is intended for application testing purposes only. It is recommended that you call this API
+ * after application startup and layout completion. The API requires significant processing time. Avoid using it.
  *
  * @param { string } id - ID of the component whose attributes are to be obtained.
- * @returns { string }
+ * @returns { string } JSON string of the component attribute list.<br>**Note:**<br>The string information contains the
+ *     tag and ID of the component, the position information (coordinates relative to the upper left corner of the
+ *     window), and the attribute information contained in the component (for test inspection). For the meaning of each
+ *     field in the component, see the return value description of getInspectorInfo.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 9
- * @test
- */
-/**
- * Obtains all attributes of the component with the specified ID.
- *
- * @param { string } id - ID of the component whose attributes are to be obtained.
- * @returns { string }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- * @test
- */
-/**
- * Obtains all attributes of the component with the specified ID.
- *
- * @param { string } id - ID of the component whose attributes are to be obtained.
- * @returns { string }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 9 dynamic
  * @test
  */
 export declare function getInspectorByKey(id: string): string;
 
 /**
- * Get components tree.
+ * Obtains the component tree and component attributes.<br>This API is intended for application testing purposes
+ * only. It is recommended that you call this API after application startup and layout completion. The API requires
+ * significant processing time. Avoid using it.
  *
- * @returns { Object }
+ * @returns { Object } JSON object of the component tree and component attribute list. For details about each field in
+ *     the component, see the return value description of getInspectorInfo.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 9
- * @test
- */
-/**
- * Get components tree.
- *
- * @returns { Object }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- * @test
- */
-/**
- * Get components tree.
- *
- * @returns { Object }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 9 dynamic
  * @test
  */
 export declare function getInspectorTree(): Object;
 
 /**
- * Sends an event to the component with the specified ID.
+ * Sends an event to the component with the specified ID.<br>This API is intended for application testing purposes
+ * only. It is recommended that you call this API after application startup and layout completion. The API requires
+ * significant processing time. Avoid using it.
  *
- * @param { string } id - ID of the component for which the event is to be sent.
- * @param { number } action - Type of the event to be sent. The options are as follows: Click event: 10 LongClick: 11.
- * @param { string } params - Event parameters. If there is no parameter, pass an empty string "".
- * @returns { boolean }
+ * @param { string } id - ID of the component to which the event is to be sent.
+ * @param { number } action - Type of the event to trigger. Currently supported values:
+ *     <br>-&nbsp;Click event:&nbsp;10.<br>-&nbsp;LongClick event:&nbsp;11.
+ * @param { string } params - Event parameter. The currently supported event types (Click and LongClick) require 
+ *     no additional parameter. Pass an empty string&nbsp;"".
+ * @returns { boolean } Returns **true** if the component with the specified ID is found; returns **false** otherwise.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 9
- * @test
- */
-/**
- * Sends an event to the component with the specified ID.
- *
- * @param { string } id - ID of the component for which the event is to be sent.
- * @param { number } action - Type of the event to be sent. The options are as follows: Click event: 10 LongClick: 11.
- * @param { string } params - Event parameters. If there is no parameter, pass an empty string "".
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- * @test
- */
-/**
- * Sends an event to the component with the specified ID.
- *
- * @param { string } id - ID of the component for which the event is to be sent.
- * @param { number } action - Type of the event to be sent. The options are as follows: Click event: 10 LongClick: 11.
- * @param { string } params - Event parameters. If there is no parameter, pass an empty string "".
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 9 dynamic
  * @test
  */
 export declare function sendEventByKey(id: string, action: number, params: string): boolean;
 
 /**
- * Send touch event.
+ * Sends a touch event.<br>This API is intended for application testing purposes only. It is recommended that you call
+ * this API after application startup and layout completion. The API requires significant processing time. Avoid using it.
  *
- * @param { TouchObject } event - TouchObject to be sent.
- * @returns { boolean }
+ * @param { TouchObject } event - Touch event. For details about the event parameter, see TouchObject.
+ * @returns { boolean } Returns **true** if the event is sent successfully; returns **false** otherwise.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 9
- * @test
- */
-/**
- * Send touch event.
- *
- * @param { TouchObject } event - TouchObject to be sent.
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- * @test
- */
-/**
- * Send touch event.
- *
- * @param { TouchObject } event - TouchObject to be sent.
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 9 dynamic
  * @test
  */
 export declare function sendTouchEvent(event: TouchObject): boolean;
 
 /**
- * Send key event.
+ * Sends a key event.<br>This API is intended for application testing purposes only. It is recommended that you call
+ * this API after application startup and layout completion. The API requires significant processing time. Avoid using it.
  *
- * @param { KeyEvent } event - KeyEvent to be sent.
- * @returns { boolean }
+ * @param { KeyEvent } event - Key event. For details, see KeyEvent.
+ * @returns { boolean } Returns **true** if the event is sent successfully; returns **false** otherwise.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 9
- * @test
- */
-/**
- * Send key event.
- *
- * @param { KeyEvent } event - KeyEvent to be sent.
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- * @test
- */
-/**
- * Send key event.
- *
- * @param { KeyEvent } event - KeyEvent to be sent.
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 9 dynamic
  * @test
  */
 export declare function sendKeyEvent(event: KeyEvent): boolean;
 
 /**
- * Send mouse event.
+ * Sends a mouse event.<br>This API is intended for application testing purposes only. It is recommended that you
+ * call this API after application startup and layout completion. The API requires significant processing time. Avoid
+ * using it.
  *
- * @param { MouseEvent } event - MouseEvent to be sent.
- * @returns { boolean }
+ * @param { MouseEvent } event - Mouse event. For details, see MouseEvent.
+ * @returns { boolean } Returns **true** if the event is sent successfully; returns **false** otherwise.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 9
- * @test
- */
-/**
- * Send mouse event.
- *
- * @param { MouseEvent } event - MouseEvent to be sent.
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- * @test
- */
-/**
- * Send mouse event.
- *
- * @param { MouseEvent } event - MouseEvent to be sent.
- * @returns { boolean }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 9 dynamic
  * @test
  */
 export declare function sendMouseEvent(event: MouseEvent): boolean;
+
 /**
  * Mark moduleNamespace which loaded by dynamic-import is collectable.
  *
