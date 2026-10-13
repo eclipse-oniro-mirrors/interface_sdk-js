@@ -415,9 +415,9 @@ declare namespace avSession {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *         1. The hardware does not support the capability.
-   *         2. The chip does not support the capability.
-   *         3. A dependent service feature is not supported.
+   *     1. The hardware does not support the capability.
+   *     2. The chip does not support the capability.
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 6700101 - Session service is not running.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
