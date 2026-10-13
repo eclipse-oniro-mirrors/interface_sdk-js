@@ -11337,7 +11337,7 @@ declare namespace media {
     /**
      * 取消订阅错误回调事件。用户可以指定填入错误回调方法来取消订阅。
      *
-     * @param { 'error' } type - 状态切换事件回调类型，支持的事件：'error'。
+     * @param { 'error' } type - 错误事件回调类型，支持的事件：'error'。
      * @param { ErrorCallback } callback - 录屏错误事件回调方法，不填此参数则会取消最后一次订阅事件。
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @since 12 dynamic
