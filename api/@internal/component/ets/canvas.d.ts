@@ -3992,10 +3992,10 @@ interface CanvasInterface {
 
 /**
  * In addition to the
- * [universal attributes]{@link common},
+ * [universal attributes]{@link CommonMethod},
  * the following attributes are supported.
  *
- * The [universal events]{@link common} are supported.
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

@@ -179,8 +179,9 @@ export declare interface GridColAttribute extends CommonMethod {
  	 * @param { GridColOptions } [options] - GridCol constructor options
  	 * @returns { GridColAttribute } Returns the instance of the GridColAttribute.
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setGridColOptions(options?: GridColOptions): this;
     /**
@@ -222,8 +223,9 @@ export declare function GridCol(
  * @param { CustomBuilder } [content_] - container
  * @returns { GridColAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

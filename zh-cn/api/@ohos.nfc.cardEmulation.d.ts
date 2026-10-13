@@ -111,7 +111,7 @@ declare namespace cardEmulation {
      * @since 9 dynamic
      * @since 23 static
      */
-    PAYMENT = "payment",
+    PAYMENT = 'payment',
 
     /**
      * 卡模拟应用所使用的业务是其他类型。
@@ -122,7 +122,7 @@ declare namespace cardEmulation {
      * @since 9 dynamic
      * @since 23 static
      */
-    OTHER = "other"
+    OTHER = 'other'
   }
 
   /**

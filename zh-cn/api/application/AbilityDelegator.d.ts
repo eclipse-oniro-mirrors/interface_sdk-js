@@ -98,7 +98,7 @@ export interface AbilityDelegator {
    * 新增InteropAbilityMonitor对象，用于监控此进程中指定能力的生命周期状态变化。
    *
    * @param { InteropAbilityMonitor } monitor - InteropAbilityMonitor对象。
-   * @throws { BusinessError } 16000100 - Calling InteropAbilityMonitor failed.
+   * @throws { BusinessError } 16000100 - Calling AddInteropAbilityMonitorSync failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
@@ -208,7 +208,7 @@ export interface AbilityDelegator {
    * 从应用程序内存中移除指定的InteropAbilityMonitor对象。
    *
    * @param { InteropAbilityMonitor } monitor - InteropAbilityMonitor对象。
-   * @throws { BusinessError } 16000100 - Calling removeInteropAbilityMonitorSync failed.
+   * @throws { BusinessError } 16000100 - Calling RemoveInteropAbilityMonitorSync failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice

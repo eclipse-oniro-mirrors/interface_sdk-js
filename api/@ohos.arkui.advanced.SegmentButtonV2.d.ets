@@ -14,6 +14,12 @@
  */
 
 /**
+ * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
+ * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
+ * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
+ * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
+ * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
+ * filtering scenarios.
  * @file api/@ohos.arkui.advanced.SegmentedButton.d.ts
  * @kit ArkUI
  */
@@ -137,7 +143,7 @@ export interface SegmentButtonV2ItemOptions {
     symbolModifier?: SymbolGlyphModifier;
 
     /**
-     * Accessibility text of the segmented button item. For details, see 
+     * Accessibility text of the segmented button item. For details, see
      * [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}.
      * 
      * Default value: **""**
@@ -169,7 +175,7 @@ export interface SegmentButtonV2ItemOptions {
     accessibilityDescription?: ResourceStr;
 
     /**
-     * Accessibility level of the segmented button item. For details, see 
+     * Accessibility level of the segmented button item. For details, see
      * [accessibilityLevel]{@link CommonMethod#accessibilityLevel}.
      * 
      * Default value: **"auto"**
@@ -214,6 +220,7 @@ export type OnSelectedIndexChange = (selectedIndex: number) => void;
 export type OnSelectedIndexesChange = (selectedIndexes: number[]) => void;
 
 /**
+ * **SegmentButtonV2** component option class, used to define properties such as the text and icon of a single segmented button item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -366,8 +373,6 @@ export declare class SegmentButtonV2Item {
      * 
      * If the value is **undefined**, the default value is used.
      * 
-     * **Decorator:** @Trace
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -390,7 +395,7 @@ export declare class SegmentButtonV2Item {
     constructor(options: SegmentButtonV2ItemOptions);
 
     /**
-     * Checks whether the segmented button item has text and icon configured. Difference from 
+     * Checks whether the segmented button item has text and icon configured. Difference from
      * [hasHybrid]{@link SegmentButtonV2Items#hasHybrid}: **hasHybrid** checks whether the component contains mixed icon
      * and text items, while this API checks whether a single item has text and icon configured.
      *
@@ -405,8 +410,6 @@ export declare class SegmentButtonV2Item {
 
 /**
  * Represents items of the **SegmentButtonV2** component.
- * 
- * This parameter is inherited from Array\<[SegmentButtonV2Item]{@link SegmentButtonV2Item}>.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -442,13 +445,8 @@ export declare class SegmentButtonV2Items extends Array<SegmentButtonV2Item> {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented 
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid 
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button 
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection 
- * filtering scenarios.
- * 
+ * Creates a tab segmented button.
+ *
  * > **NOTE**
  * >
  * > Since API version 26.0.0, when **backgroundSystemMaterial** is set to a system material with automatic color
@@ -489,10 +487,10 @@ export declare struct TabSegmentButtonV2 {
      * 
      * Value range: [0, items length - 1]
      * 
-     * When the value is **undefined**, no option is selected. When a valid value (including **0**) is passed, the 
+     * When the value is **undefined**, no option is selected. When a valid value (including **0**) is passed, the
      * option at the corresponding index is selected. When the value is greater than items length - 1, the item at index
      * items length - 1 is selected. When the value is less than 0, the item at index 0 is selected.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -507,7 +505,7 @@ export declare struct TabSegmentButtonV2 {
 
     /**
      * Callback invoked when the selected item of the segmented button changes.
-     * 
+     *
      * Default value: **undefined**, meaning the callback is not triggered when not set.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -520,10 +518,10 @@ export declare struct TabSegmentButtonV2 {
     $selectedIndex?: OnSelectedIndexChange;
 
     /**
-     * Callback invoked when a segmented button item is clicked. The callback parameter is of the number type, 
-     * indicating the index of the clicked option. The first item is numbered 0, and subsequent items increase 
+     * Callback invoked when a segmented button item is clicked. The callback parameter is of the number type,
+     * indicating the index of the clicked option. The first item is numbered 0, and subsequent items increase
      * sequentially.
-     * 
+     *
      * Default value: **undefined**, meaning the callback is not triggered when not set.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -544,7 +542,7 @@ export declare struct TabSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * If the set minimum font scale value is less than 0, the value **0** is used. If the set minimum font scale value 
+     * If the set minimum font scale value is less than 0, the value **0** is used. If the set minimum font scale value
      * is greater than 1, the value **1** is used. Abnormal values do not take effect by default.
      * 
      * This member is read-only and cannot be changed.
@@ -567,7 +565,7 @@ export declare struct TabSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * If the set value is less than 1, the value **1** is used. If the set value is greater than 2, the value **2** is 
+     * If the set value is less than 1, the value **1** is used. If the set value is greater than 2, the value **2** is
      * used. Abnormal values do not take effect by default.
      * 
      * This member is read-only and cannot be changed.
@@ -665,7 +663,7 @@ export declare struct TabSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -691,7 +689,7 @@ export declare struct TabSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -734,7 +732,7 @@ export declare struct TabSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * When **items** sets the **textModifier**\/**fontWeight** attribute, **itemSelectedFontWeight** does not take 
+     * When **items** sets the **textModifier**\/**fontWeight** attribute, **itemSelectedFontWeight** does not take
      * effect.
      * 
      * This member is read-only and cannot be changed.
@@ -797,7 +795,7 @@ export declare struct TabSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * When **items** sets the **iconModifier**\/**width** or **height** attribute, **itemIconSize** does not take 
+     * When **items** sets the **iconModifier**\/**width** or **height** attribute, **itemIconSize** does not take
      * effect.
      * 
      * This member is read-only and cannot be changed.
@@ -825,7 +823,7 @@ export declare struct TabSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -846,13 +844,13 @@ export declare struct TabSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * When **items** sets the **iconModifier**\/**fillColor** attribute, **itemSelectedIconFillColor** does not take 
+     * When **items** sets the **iconModifier**\/**fillColor** attribute, **itemSelectedIconFillColor** does not take
      * effect.
      * 
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -902,7 +900,7 @@ export declare struct TabSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -929,7 +927,7 @@ export declare struct TabSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -948,8 +946,8 @@ export declare struct TabSegmentButtonV2 {
      * 
      * Default value:
      * 
-     * When there are only text-only or icon-only options: 
-     * `$r('sys.float.segment_button_v2_singleline_selected_height')`; when there are mixed icon and text items: 
+     * When there are only text-only or icon-only options:
+     * `$r('sys.float.segment_button_v2_singleline_selected_height')`; when there are mixed icon and text items:
      * `$r('sys.float.segment_button_v2_doubleline_selected_height')`
      * 
      * If the value is out of range, the default value is used.
@@ -1071,7 +1069,7 @@ export declare struct TabSegmentButtonV2 {
     /**
      * Corner radius of the segmented button background.
      * 
-     * Value range: [0, +∞) 
+     * Value range: [0, +∞)
      * 
      * Default value: `$r('sys.float.segment_button_v2_background_corner_radius')`
      * 
@@ -1091,10 +1089,10 @@ export declare struct TabSegmentButtonV2 {
     /**
      * Minimum height of the segmented button.
      * 
-     * Value range: [0, +∞) 
+     * Value range: [0, +∞)
      * 
-     * Default value: when there are only text-only or icon-only options: 
-     * `$r('sys.float.segment_button_v2_singleline_background_height')`; when there are mixed icon and text items: 
+     * Default value: when there are only text-only or icon-only options:
+     * `$r('sys.float.segment_button_v2_singleline_background_height')`; when there are mixed icon and text items:
      * `$r('sys.float.segment_button_v2_doubleline_background_height')`
      * 
      * If the value is out of range, the default value is used.
@@ -1149,15 +1147,15 @@ export declare struct TabSegmentButtonV2 {
     readonly languageDirection?: Direction;
 
     /**
-     * System material of the background of the segmented button component. Different system materials have different 
+     * System material of the background of the segmented button component. Different system materials have different
      * attribute effects. After a material is passed in, the animation effect of **SegmentButtonV2** changes.
-     * 
-     * When a system material is used, the segmented button supports the capability of the background of the selected 
-     * item following the finger drag. The index of the selected item remains unchanged during the drag and is updated 
+     *
+     * When a system material is used, the segmented button supports the capability of the background of the selected
+     * item following the finger drag. The index of the selected item remains unchanged during the drag and is updated
      * when the drag ends.
-     * 
-     * Default value: no material effect. 
-     * 
+     *
+     * Default value: no material effect.
+     *
      * This member is read-only and cannot be changed.
      *
      * @type { ?uiMaterial.Material } material - System-styled material. [since 23 - 24]
@@ -1173,15 +1171,15 @@ export declare struct TabSegmentButtonV2 {
     readonly backgroundSystemMaterial?: uiMaterial.Material;
 
     /**
-     * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified 
+     * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified
      * through a variable.
-     * 
+     *
      * The value **true** enables the attribute animation of the segmented button. When this attribute is not configured
-     * or the value is **false**, the attribute animation of the segmented button is disabled and the default switching 
+     * or the value is **false**, the attribute animation of the segmented button is disabled and the default switching
      * animation effect of the component is used.
-     * 
+     *
      * Default value: **false**
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1206,13 +1204,8 @@ export declare struct TabSegmentButtonV2 {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented 
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid 
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button 
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection 
- * filtering scenarios.
- * 
+ * Creates a single-selection capsule segmented button.
+ *
  * > **NOTE**
  * >
  * > Since API version 26.0.0, when **backgroundSystemMaterial** is set to a system material with automatic color
@@ -1248,15 +1241,15 @@ export declare struct CapsuleSegmentButtonV2 {
     readonly items: SegmentButtonV2Items;
 
     /**
-     * Index of the selected option in the segmented button. The first item is numbered 0, and subsequent items are 
+     * Index of the selected option in the segmented button. The first item is numbered 0, and subsequent items are
      * numbered sequentially.
      * 
      * Value range: [0, items length - 1]
      * 
-     * When the value is **undefined**, no option is selected. When a valid value (including **0**) is passed, the 
+     * When the value is **undefined**, no option is selected. When a valid value (including **0**) is passed, the
      * option at the corresponding index is selected. When the value is greater than items length - 1, the item at index
      * items length - 1 is selected. When the value is less than 0, the item at index 0 is selected.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1271,7 +1264,7 @@ export declare struct CapsuleSegmentButtonV2 {
 
     /**
      * Callback invoked when the selected item of the segmented button changes.
-     * 
+     *
      * Default value: **undefined**, meaning the callback is not triggered when not set.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1284,10 +1277,10 @@ export declare struct CapsuleSegmentButtonV2 {
     $selectedIndex?: OnSelectedIndexChange;
 
     /**
-     * Callback invoked when a segmented button item is clicked. The callback parameter is of the number type, 
-     * indicating the index of the clicked option. The first item is numbered 0, and subsequent items are numbered 
+     * Callback invoked when a segmented button item is clicked. The callback parameter is of the number type,
+     * indicating the index of the clicked option. The first item is numbered 0, and subsequent items are numbered
      * sequentially.
-     * 
+     *
      * Default value: **undefined**, meaning the callback is not triggered when not set.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1308,7 +1301,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * If the set minimum font scale value is less than 0, the value **0** is used. If the set minimum font scale value 
+     * If the set minimum font scale value is less than 0, the value **0** is used. If the set minimum font scale value
      * is greater than 1, the value **1** is used. Abnormal values do not take effect by default.
      * 
      * This member is read-only and cannot be changed.
@@ -1331,7 +1324,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * 
      * **NOTE**
      * 
-     * If the set value is less than 1, the value **1** is used. If the set value is greater than 2, the value **2** is 
+     * If the set value is less than 1, the value **1** is used. If the set value is greater than 2, the value **2** is
      * used. Abnormal values do not take effect by default.
      * 
      * This member is read-only and cannot be changed.
@@ -1381,7 +1374,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1407,7 +1400,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1498,7 +1491,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * 
      * **Note:**
      * 
-     * When **items** sets the **textModifier**\/**fontWeight** attribute, **itemSelectedFontWeight** does not take 
+     * When **items** sets the **textModifier**\/**fontWeight** attribute, **itemSelectedFontWeight** does not take
      * effect.
      * 
      * This member is read-only and cannot be changed.
@@ -1561,7 +1554,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * 
      * **Note:**
      * 
-     * When **items** sets the **iconModifier**\/**width** or **height** attribute, **itemIconSize** does not take 
+     * When **items** sets the **iconModifier**\/**width** or **height** attribute, **itemIconSize** does not take
      * effect.
      * 
      * This member is read-only and cannot be changed.
@@ -1589,7 +1582,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1610,13 +1603,13 @@ export declare struct CapsuleSegmentButtonV2 {
      * 
      * **Note:**
      * 
-     * When **items** sets the **iconModifier**\/**fillColor** attribute, **itemSelectedIconFillColor** does not take 
+     * When **items** sets the **iconModifier**\/**fillColor** attribute, **itemSelectedIconFillColor** does not take
      * effect.
      * 
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1666,7 +1659,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1693,7 +1686,7 @@ export declare struct CapsuleSegmentButtonV2 {
      * When **backgroundSystemMaterial** is set to a system material with automatic color inversion, this attribute uses
      * a special system resource that supports color inversion, and the color automatically adapts to the inverted color
      * of the material background.
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1712,8 +1705,8 @@ export declare struct CapsuleSegmentButtonV2 {
      * 
      * Default value:
      * 
-     * When there are only text-only or icon-only options: 
-     * `$r('sys.float.segment_button_v2_singleline_selected_height')`; when there are mixed icon and text items: 
+     * When there are only text-only or icon-only options:
+     * `$r('sys.float.segment_button_v2_singleline_selected_height')`; when there are mixed icon and text items:
      * `$r('sys.float.segment_button_v2_doubleline_selected_height')`
      * 
      * If the value is out of range, the default value is used.
@@ -1835,7 +1828,7 @@ export declare struct CapsuleSegmentButtonV2 {
     /**
      * Corner radius of the segmented button background.
      * 
-     * Value range: [0, +∞) 
+     * Value range: [0, +∞)
      * 
      * Default value: `$r('sys.float.segment_button_v2_background_corner_radius')`
      * 
@@ -1855,10 +1848,10 @@ export declare struct CapsuleSegmentButtonV2 {
     /**
      * Minimum height of the segmented button.
      * 
-     * Value range: [0, +∞) 
+     * Value range: [0, +∞)
      * 
-     * Default value: when there are only text-only or icon-only options: 
-     * `$r('sys.float.segment_button_v2_singleline_background_height')`; when there are mixed icon and text items: 
+     * Default value: when there are only text-only or icon-only options:
+     * `$r('sys.float.segment_button_v2_singleline_background_height')`; when there are mixed icon and text items:
      * `$r('sys.float.segment_button_v2_doubleline_background_height')`
      * 
      * If the value is out of range, the default value is used.
@@ -1913,15 +1906,15 @@ export declare struct CapsuleSegmentButtonV2 {
     readonly languageDirection?: Direction;
 
     /**
-     * System material of the background of the segmented button component. Different system materials have different 
+     * System material of the background of the segmented button component. Different system materials have different
      * attribute effects. After a material is passed in, the animation effect of **SegmentButtonV2** changes.
-     * 
-     * When a system material is used, the segmented button supports the capability of the background of the selected 
-     * item following the finger drag. The index of the selected item remains unchanged during the drag and is updated 
+     *
+     * When a system material is used, the segmented button supports the capability of the background of the selected
+     * item following the finger drag. The index of the selected item remains unchanged during the drag and is updated
      * when the drag ends.
-     * 
-     * Default value: no material effect. 
-     * 
+     *
+     * Default value: no material effect.
+     *
      * This member is read-only and cannot be changed.
      *
      * @type { ?uiMaterial.Material } material - System-styled material. [since 23 - 24]
@@ -1937,15 +1930,15 @@ export declare struct CapsuleSegmentButtonV2 {
     readonly backgroundSystemMaterial?: uiMaterial.Material;
 
     /**
-     * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified 
+     * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified
      * through a variable.
-     * 
-     * The value **true** means to enable the attribute animation of the segmented button; when this attribute is not 
-     * configured or the value is **false**, the attribute animation of the segmented button is not enabled, and the 
+     *
+     * The value **true** means to enable the attribute animation of the segmented button; when this attribute is not
+     * configured or the value is **false**, the attribute animation of the segmented button is not enabled, and the
      * default transition animation effect of the component is used.
-     * 
+     *
      * Default value: **false**
-     * 
+     *
      * This member is read-only and cannot be changed.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1970,12 +1963,7 @@ export declare struct CapsuleSegmentButtonV2 {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented 
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid 
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button 
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection 
- * filtering scenarios.
+ * Creates a multi-selection capsule segmented button.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2004,16 +1992,16 @@ export declare struct MultiCapsuleSegmentButtonV2 {
     readonly items: SegmentButtonV2Items;
 
     /**
-     * Indexes for the selected items of the segmented button. The first item is numbered 0, and subsequent items are 
+     * Indexes for the selected items of the segmented button. The first item is numbered 0, and subsequent items are
      * numbered sequentially.
      * 
      * When the value is **undefined**, no option is selected.
      * 
      * NOTE
      * 
-     * Only valid button numbers are supported (the first button is numbered 0, and subsequent buttons are numbered 
-     * sequentially. Value range: [0, items length - 1]). If no item is selected, an empty array `[]` can be passed. 
-     * When an invalid number (less than 0 or greater than items length - 1) is passed, the corresponding option is not 
+     * Only valid button numbers are supported (the first button is numbered 0, and subsequent buttons are numbered
+     * sequentially. Value range: [0, items length - 1]). If no item is selected, an empty array `[]` can be passed.
+     * When an invalid number (less than 0 or greater than items length - 1) is passed, the corresponding option is not
      * selected.
      * 
      * This member is read-only and cannot be modified.
@@ -2041,10 +2029,10 @@ export declare struct MultiCapsuleSegmentButtonV2 {
     $selectedIndexes: OnSelectedIndexesChange;
 
     /**
-     * Callback triggered when a segmented button item is clicked. The callback parameter is of the number type, 
-     * indicating the index of the clicked option. The first item is numbered 0, and subsequent items are numbered 
+     * Callback triggered when a segmented button item is clicked. The callback parameter is of the number type,
+     * indicating the index of the clicked option. The first item is numbered 0, and subsequent items are numbered
      * sequentially.
-     * 
+     *
      * Default value: **undefined**. When not set, the callback is not triggered.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2065,7 +2053,7 @@ export declare struct MultiCapsuleSegmentButtonV2 {
      * 
      * NOTE
      * 
-     * When the set minimum font scale value is less than 0, the value **0** is used. When the set minimum font scale 
+     * When the set minimum font scale value is less than 0, the value **0** is used. When the set minimum font scale
      * value is greater than 1, the value **1** is used. Abnormal values do not take effect by default.
      * 
      * This member is read-only and cannot be modified.
@@ -2247,7 +2235,7 @@ export declare struct MultiCapsuleSegmentButtonV2 {
      * 
      * NOTE
      * 
-     * When **items** sets the **textModifier**\/**fontWeight** attribute, **itemSelectedFontWeight** does not take 
+     * When **items** sets the **textModifier**\/**fontWeight** attribute, **itemSelectedFontWeight** does not take
      * effect.
      * 
      * This member is read-only and cannot be modified.
@@ -2420,7 +2408,7 @@ export declare struct MultiCapsuleSegmentButtonV2 {
      * 
      * NOTE
      * 
-     * When **items** sets the **iconModifier**\/**fillColor** attribute, **itemSelectedIconFillColor** does not take 
+     * When **items** sets the **iconModifier**\/**fillColor** attribute, **itemSelectedIconFillColor** does not take
      * effect.
      * 
      * This member is read-only and cannot be modified.

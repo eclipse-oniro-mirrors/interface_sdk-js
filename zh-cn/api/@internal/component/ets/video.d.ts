@@ -20,13 +20,6 @@
 
 /**
  * 视频跳转模式选项。
- * 
- * | 名称             |值| 说明                         |
- * | ---------------- |--| ---------------------------- |
- * | PreviousKeyframe |0| 跳转到当前播放位置之前最近的关键帧。   |
- * | NextKeyframe     |1| 跳转到当前播放位置之后最近的关键帧。   |
- * | ClosestKeyframe  |2| 跳转到距离当前播放位置最近的关键帧。         |
- * | Accurate         |3| 精准跳转到指定时间点，不论是否为关键帧。精度高但可能需要解码更多帧。 |
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -36,7 +29,7 @@
  */
 declare enum SeekMode {
   /**
-   * Seek to the nearest previous keyframe.
+   * 跳转到当前播放位置之前最近的关键帧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -47,7 +40,7 @@ declare enum SeekMode {
   PreviousKeyframe,
 
   /**
-   * Seek to the nearest next keyframe.
+   * 跳转到当前播放位置之后最近的关键帧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -58,7 +51,7 @@ declare enum SeekMode {
   NextKeyframe,
 
   /**
-   * Seek to the nearest keyframe.
+   * 跳转到距离当前播放位置最近的关键帧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -69,7 +62,7 @@ declare enum SeekMode {
   ClosestKeyframe,
 
   /**
-   * Seek to a specific frame, regardless of whether the frame is a keyframe.
+   * 精准跳转到指定时间点，不论是否为关键帧。精度高但可能需要解码更多帧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -1107,7 +1100,7 @@ declare class VideoAttribute extends CommonMethod<VideoAttribute> {
  * >
  * > Video组件在使用[expandSafeArea]{@link CommonMethod#expandSafeArea}扩展安全区域时，组件视频显示内容区域不支持扩展。
  * 
- * ###### 权限列表
+ * ## 权限列表
  * 
  * 使用网络视频时，需要申请权限ohos.permission.INTERNET。具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  * 

@@ -14,6 +14,12 @@
  */
 
 /**
+ * ChipV2是提供丰富样式和交互能力的操作块组件，支持前缀图标、后缀图标、激活状态、关闭按钮等特性，支持Symbol和Image两种图标类型，并提供完善的无障碍访问能力。该组件适用于搜索历史记录、邮件发送列表、标签选择、过滤器、联系人
+ * 展示等场景。
+ *
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
+ * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
+ * 件层级。借助状态管理（V2），开发者可以更灵活地控制组件的数据和状态，实现更高效的用户界面刷新。
  * @file
  * @kit ArkUI
  */
@@ -194,8 +200,6 @@ export interface ChipV2ImageIconConfig {
 /**
  * ChipV2ImageIcon定义图标图片的基类。
  *
- * 继承自[ChipV2Icon]{@link ChipV2Icon}。
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -306,8 +310,6 @@ export abstract class ChipV2ImageIcon extends ChipV2Icon {
 /**
  * ChipV2SuffixImageIconConfig定义后缀图标的属性配置。
  *
- * 继承自[ChipV2ImageIconConfig]{@link ChipV2ImageIconConfig}和[ChipV2AccessibilityConfig]{@link ChipV2AccessibilityConfig}。
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -331,8 +333,6 @@ export interface ChipV2SuffixImageIconConfig extends ChipV2ImageIconConfig, Chip
 
 /**
  * ChipV2SuffixImageIcon定义后缀图标类。
- *
- * 继承自[ChipV2ImageIcon]{@link ChipV2ImageIcon}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -456,8 +456,6 @@ export abstract class ChipV2Icon {
 /**
  * ChipV2PrefixImageIconConfig定义前缀图标的属性配置。
  *
- * 继承自[ChipV2ImageIconConfig]{@link ChipV2ImageIconConfig}。
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -468,8 +466,6 @@ export interface ChipV2PrefixImageIconConfig extends ChipV2ImageIconConfig {}
 
 /**
  * ChipV2PrefixImageIcon定义前缀图标类。
- *
- * 继承自[ChipV2ImageIcon]{@link ChipV2ImageIcon}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -649,8 +645,6 @@ export declare class ChipV2Accessibility {
 /**
  * ChipV2CloseConfig用于定义ChipV2组件关闭图标的功能属性配置，包括无障碍功能属性。
  *
- * 继承自[ChipV2AccessibilityConfig]{@link ChipV2AccessibilityConfig}。
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -682,8 +676,6 @@ export interface ChipV2CloseConfig extends ChipV2AccessibilityConfig {
 
 /**
  * ChipV2CloseIcon用于定义ChipV2组件关闭图标的功能属性类，包括无障碍功能属性。
- *
- * 继承自[ChipV2Accessibility]{@link ChipV2Accessibility}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -779,8 +771,6 @@ export interface ChipV2SymbolIconConfig {
 /**
  * ChipV2SymbolIcon定义Symbol图标类。
  *
- * 继承自[ChipV2Icon]{@link ChipV2Icon}。
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -843,8 +833,6 @@ export abstract class ChipV2SymbolIcon extends ChipV2Icon {
 /**
  * ChipV2PrefixSymbolIconConfig定义前缀Symbol图标的属性配置。
  *
- * 继承自[ChipV2SymbolIconConfig]{@link ChipV2SymbolIconConfig}。
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -855,8 +843,6 @@ export interface ChipV2PrefixSymbolIconConfig extends ChipV2SymbolIconConfig {}
 
 /**
  * ChipV2PrefixSymbolIcon定义前缀Symbol图标类。
- *
- * 继承自[ChipV2SymbolIcon]{@link ChipV2SymbolIcon}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -882,8 +868,6 @@ export declare class ChipV2PrefixSymbolIcon extends ChipV2SymbolIcon {
 
 /**
  * ChipV2SuffixSymbolIconConfig定义后缀Symbol图标的属性配置。
- *
- * 继承自[ChipV2SymbolIconConfig]{@link ChipV2SymbolIconConfig}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -936,8 +920,6 @@ export interface ChipV2SuffixSymbolIconConfig extends ChipV2SymbolIconConfig {
 
 /**
  * ChipV2SuffixSymbolIcon定义后缀Symbol图标类。
- *
- * 继承自[ChipV2SymbolIcon]{@link ChipV2SymbolIcon}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1885,11 +1867,7 @@ export interface IChipV2OptionsConfig {
 @ObservedV2
 export class ChipV2Options {
   /**
-   * ChipV2前缀图标。
-   *
-   * 默认值：不显示前缀图标。
-   *
-   * 值为undefined时，按默认值处理。
+   * ChipV2文本属性。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1901,11 +1879,12 @@ export class ChipV2Options {
   public label: ChipV2Label;
 
   /**
-   * ChipV2前缀图标。
-   *
-   * 默认值：不显示前缀图标。
-   *
-   * 值为undefined时，按默认值处理。
+   * ChipV2前缀图标。<br>
+   * 默认值：不显示前缀图标。<br>
+   * 值为undefined时，按默认值处理。<br>
+   * 图标为Symbol类型时，fontColor默认值为：normalFontColor：[$r('sys.color.chip_usually_icon_color')]、activatedFontColor：[$r('sys.color.chip_active_icon_color')]。fontSize默认值为16。<br>
+   * 图标为Image类型时，fillColor默认值为：$r('sys.color.chip_usually_icon_color')，activatedFillColor默认值为：$r('sys.color.chip_active_icon_color')。
+   * fillColor和activatedFillColor对颜色的解析与Image组件保持一致，仅在图片格式为SVG时，fillColor与activatedFillColor属性才生效；非SVG图片不应用默认值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1917,13 +1896,13 @@ export class ChipV2Options {
   public prefixIcon?: ChipV2Icon;
 
   /**
-   * ChipV2后缀图标。
-   *
-   * 默认值：不显示后缀图标。
-   *
-   * 值为undefined时，按默认值处理。
-   *
-   * 说明：当suffixIcon有传入参数时，allowClose属性不生效。
+   * ChipV2后缀图标。<br>
+   * 默认值：不显示后缀图标。<br>
+   * 值为undefined时，按默认值处理。<br>
+   * 说明：当suffixIcon有传入参数时，allowClose属性不生效。<br>
+   * 图标为Symbol类型时，fontColor默认值为：normalFontColor：`[$r('sys.color.chip_usually_icon_color')]`、activatedFontColor：`[$r('sys.color.chip_active_icon_color')]`。fontSize默认值为16。<br>
+   * 图标为Image类型时，fillColor默认值为：`$r('sys.color.chip_usually_icon_color')`，activatedFillColor默认值为：`$r('sys.color.chip_active_icon_color')`。
+   * fillColor和activatedFillColor对颜色的解析与Image组件保持一致，仅在图片格式为SVG时，fillColor与activatedFillColor属性才生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2258,7 +2237,8 @@ export class ChipV2Options {
   public fontSize?: LengthMetrics;
 
   /**
-   * 设置组件系统材质样式。不同材质具有不同的效果，能够影响组件的背景色[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、边框颜色
+   * 设置组件系统材质样式。需要将组件放置在Navigation或NavDestination的标题栏，或横向Tabs的底部TabBar中，沉浸光感效果才会生效。
+   * 不同材质具有不同的效果，能够影响组件的背景色[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、边框颜色
    * [borderColor]{@link CommonMethod#borderColor}、边框宽度[borderWidth]{@link CommonMethod#borderWidth}、阴影
    * [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}效果、材质层滤镜效果
    * [materialFilter]{@link CommonMethod#materialFilter}。
@@ -2275,7 +2255,8 @@ export class ChipV2Options {
   public backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
-   * 设置组件激活状态下的系统材质样式。不同材质具有不同的效果，能够影响组件的背景色[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
+   * 设置组件激活状态下的系统材质样式。需要将组件放置在Navigation或NavDestination的标题栏，或横向Tabs的底部TabBar中，沉浸光感效果才会生效。
+   * 不同材质具有不同的效果，能够影响组件的背景色[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
    * 边框颜色[borderColor]{@link CommonMethod#borderColor}、边框宽度[borderWidth]{@link CommonMethod#borderWidth}、阴影
    * [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}效果、材质层滤镜效果
    * [materialFilter]{@link CommonMethod#materialFilter}。
@@ -2340,12 +2321,7 @@ export class ChipV2Options {
 }
 
 /**
- * ChipV2是提供丰富样式和交互能力的操作块组件，支持前缀图标、后缀图标、激活状态、关闭按钮等特性，支持Symbol和Image两种图标类型，并提供完善的无障碍访问能力。该组件适用于搜索历史记录、邮件发送列表、标签选择、过滤器、联系人
- * 展示等场景。
- *
- * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
- * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
- * 件层级。借助状态管理（V2），开发者可以更灵活地控制组件的数据和状态，实现更高效的用户界面刷新。
+ * 创建ChipV2组件。
  *
  * > **说明：**
  * >

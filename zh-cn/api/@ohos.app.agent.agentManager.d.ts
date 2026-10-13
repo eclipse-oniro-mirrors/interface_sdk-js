@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Agent智能组件管理
  * @kit AbilityKit
  */
 import Want from './@ohos.app.ability.Want';
@@ -67,8 +67,9 @@ declare namespace agentManager {
    *     [AgentExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-agent-agentExtensionAbility.md)服务端的数据、
    *     安全认证数据以及断开连接事件的回调接口。
    * @returns { Promise<AgentProxy> } Promise对象，返回的AgentProxy对象，用于从客户端向AgentExtensionAbility服务端发送数据或安全认证请求。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -105,8 +106,9 @@ declare namespace agentManager {
    *     [AgentExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-agent-agentExtensionAbility.md)时会返回其对应
    *     的proxy对象。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -121,8 +123,9 @@ declare namespace agentManager {
    *
    * @permission ohos.permission.GET_AGENT_CARD
    * @returns { Promise<Array<AgentCard>> } Promise对象，返回设备上所有的AgentCard数组。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -138,8 +141,9 @@ declare namespace agentManager {
    * @permission ohos.permission.GET_AGENT_CARD
    * @param { string } bundleName - AgentCard所属的bundle名称。
    * @returns { Promise<Array<AgentCard>> } Promise对象，返回指定bundleName内的所有AgentCard数组。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 18500001 - The bundle does not exist or no patch has been applied.
@@ -157,8 +161,9 @@ declare namespace agentManager {
    * @param { string } bundleName - AgentCard所属的bundle名称。
    * @param { string } agentId - AgentCard所属的agentId。
    * @returns { Promise<AgentCard> } Promise对象，返回指定的AgentCard。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 18500001 - The bundle does not exist or no patch has been applied.
@@ -183,8 +188,9 @@ declare namespace agentManager {
    * @permission ohos.permission.MODIFY_AGENT_CARD
    * @param { AgentCard } agentCard - 要更新的AgentCard信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
@@ -207,8 +213,9 @@ declare namespace agentManager {
    * @param { string } bundleName - 用于标识AgentCard所属的包名。
    * @param { string } agentId - 用于标识AgentCard所属的agentId。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 35600001 - The specified agentId does not exist.
@@ -230,8 +237,9 @@ declare namespace agentManager {
    * @permission ohos.permission.MODIFY_AGENT_CARD
    * @param { AgentCard } agentCard - 要注册的AgentCard信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
@@ -255,8 +263,9 @@ declare namespace agentManager {
    * @permission ohos.permission.CONNECT_AGENT
    * @param { string } agentId - 用于标识AgentCard的agentId。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.
    * @throws { BusinessError } 35600001 - The specified agentId does not exist.
@@ -281,7 +290,7 @@ declare namespace agentManager {
    * @param { ConnectOptions } callback - ConnectOptions类型的回调函数，返回服务连接成功、连接失败、断开的信息。
    * @returns { long } 返回一个连接ID，用于标识当前AgentExtensionAbility与ServiceExtensionAbility之间的连接。该连接ID可用于后续调用
    *     [disconnectServiceExtensionAbility]{@link agentManager.disconnectServiceExtensionAbility}接口断开连接。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -310,7 +319,7 @@ declare namespace agentManager {
    * @param { long } connectId - [connectServiceExtensionAbility]{@link agentManager.connectServiceExtensionAbility}返回的连
    *     接ID，用于标识要断开的目标连接。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed.
    * 2.System service failed to communicate with dependency module.

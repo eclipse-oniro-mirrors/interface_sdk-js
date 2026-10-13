@@ -1217,6 +1217,31 @@ declare namespace connection {
   function getCarKeyDfxData(): string;
 
   /**
+   * 根据配对远端设备的真实BR地址，获取配对远端设备的真实BLE地址。
+   *
+   * 该接口用于识别配对中同一双模设备的BR表项和BLE表项。
+   * 设备列表。输入brMac是配对的远程设备的真实BR地址，返回值是
+   * 同一远端设备的真实BLE地址。
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @param { string } brMac - 配对的远端设备的真实BR地址。例如：
+   *     “11:22:33:AA:BB:FF”。
+   * @returns { string } 返回远端设备的真实BLE地址。例如，“11:22:33:AA:BB:FF”。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900016 - Device unpaired.
+   * @throws { BusinessError } 2900017 - No BLE address is associated with the input BR address.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getBleMacByBrMac(brMac: string): string;
+
+  /**
    * 订阅蓝牙设备扫描结果上报事件。使用Callback异步回调。
    * 
    * 可扫描到的设备类型包括传统蓝牙设备和低功耗蓝牙设备。

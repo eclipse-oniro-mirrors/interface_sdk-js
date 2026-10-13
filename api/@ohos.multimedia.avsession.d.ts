@@ -409,16 +409,23 @@ declare namespace avSession {
    * @param { string } bundleName - Specifies the bundleName which to be started.
    * @param { string } assetId - Specifies the assetId to be started.
    * @param { CommandInfo } [info] - Specifies the specified command information.
+   * @param { ExtraInfo } [extraInfo] - Cold Start Extended Information.
    * @returns { Promise<void> } Promise that return
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *         1. The hardware does not support the capability.
+   *         2. The chip does not support the capability.
+   *         3. A dependent service feature is not supported.
    * @throws { BusinessError } 6700101 - Session service is not running.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  function startAVPlaybackForAudioZone(userId: int, bundleName: string, assetId: string, info?: CommandInfo): Promise<void>;
+  function startAVPlaybackForAudioZone(userId: int, bundleName: string, assetId: string,
+    info?: CommandInfo, extraInfo?: ExtraInfo): Promise<void>;
 
   /**
    * Get distributed avsession controller

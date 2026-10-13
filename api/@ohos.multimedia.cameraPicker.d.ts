@@ -76,6 +76,26 @@ declare namespace cameraPicker {
      * @since 23 static
      */
     videoDuration?: int;
+
+    /**
+     * Enables or disables the C2PA signature feature for the photo output.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    enableC2PA?: boolean;
+
+    /**
+     * C2PA signature configuration.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    c2PASignatureConfig?: C2PASignatureConfig;
   }
 
   /**
@@ -172,6 +192,51 @@ declare namespace cameraPicker {
    * @since 23 static
    */
   function pick(context: Context, mediaTypes: Array<PickerMediaType>, pickerProfile: PickerProfile): Promise<PickerResult>;
+
+  /**
+   * Describes the C2PA signature configuration, which includes the author name and author ID for C2PA
+   * signature generation.
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  interface C2PASignatureConfig {
+    /**
+     * Author ID for the C2PA signature. This field is optional. If not set, the author ID
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorID?: string;
+
+    /**
+     * Author name for the C2PA signature. This field is optional. If not set, the author name
+     * will not be included in the C2PA signature.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorName?: string;
+  }
+
+  /**
+   * Checks whether C2PA signature is supported.
+   *
+   * @returns { boolean } Check result for the support of C2PA signature. **true** if supported, **false**
+   *     otherwise. If the API call fails, undefined is returned.
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  function isC2PASignatureSupported(): boolean;
 }
 
 export default cameraPicker;

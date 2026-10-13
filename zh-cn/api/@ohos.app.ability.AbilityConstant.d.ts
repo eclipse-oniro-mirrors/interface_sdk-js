@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Ability相关常量
  * @kit AbilityKit
  */
 
@@ -41,9 +41,18 @@ declare namespace AbilityConstant {
    * @stagemodelonly
    * @atomicservice
    * @since 20 dynamic
-   * @since 23 static
    */
   const REASON_MESSAGE_DESKTOP_SHORTCUT = 'ReasonMessage_DesktopShortcut';
+
+  /**
+   * 通过桌面快捷方式启动。开发者如果从[LaunchParam]{@link AbilityConstant.LaunchParam}的launchReasonMessage属性中获取到该字符串，表示UIAbility是通过点击桌面快
+   * 捷方式启动的。
+   *
+   * @syscap SystemCapability.Ability.AbilityBase
+   * @stagemodelonly
+   * @since 23 static
+   */
+  const REASON_MESSAGE_DESKTOP_SHORTCUT: string;
 
   /**
    * 启动参数，主要包括Ability启动原因以及上次退出原因。Ability启动时由系统自动传入，开发者无需修改。
@@ -746,7 +755,16 @@ declare namespace AbilityConstant {
      * @since 12 dynamic
      * @since 23 static
      */
-    WINDOW_MODE_FLOATING = 102
+    WINDOW_MODE_FLOATING = 102,
+
+    /**
+     * 分屏窗口模式。仅在应用内跳转场景下生效，且仅在折叠屏设备和平板上生效。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    WINDOW_MODE_SPLIT = 105,
   }
 
   /**
@@ -867,6 +885,8 @@ declare namespace AbilityConstant {
    * 流转状态枚举值。用于表示当前应用任务流转的状态。可配合[UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}的
    * [setMissionContinueState]{@link ./application/UIAbilityContext:UIAbilityContext.setMissionContinueState(state: AbilityConstant.ContinueState, callback: AsyncCallback<void>)}
    * 方法进行设置。
+   *
+   * > **说明：** 该接口在不支持分布式业务的Wearable设备不生效。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly

@@ -278,6 +278,114 @@ declare namespace common {
   }
 
   /**
+   * Disk type.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum DiskType {
+    /**
+     * SD card type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SD_CARD = 1,
+ 
+    /**
+     * USB flash drive type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    USB_FLASH = 2,
+ 
+    /**
+     * CD type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    CD_DVD_BD = 3
+  }
+ 
+  /**
+   * External storage device information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface ExternalStorageDeviceInfo {
+    /**
+     * Device type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    type: DiskType;
+ 
+    /**
+     * Device path.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    devicePath: string;
+ 
+    /**
+     * Volume ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    volumeId: string;
+ 
+    /**
+     * Mount status.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    mountStatus: boolean;
+ 
+    /**
+     * Vendor ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    vendorId: number;
+ 
+    /**
+     * Product ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    productId: number;
+ 
+    /**
+     * Serial Number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    serial: string;
+  }
+
+  /**
    * The policy of query enterprise device management policy.
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -293,7 +401,7 @@ declare namespace common {
      * @since 26.0.1
      */
     SELF = 0,
- 
+
     /**
      * Query the policy set by all administrators.
      *
@@ -303,6 +411,63 @@ declare namespace common {
      */
     ALL = 1
   }
+
+  /**
+   * The managed feature.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum ManagedFeature {
+    /**
+     * The feature of local hota domain.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    LOCAL_HOTA_DOMAIN = 0,
+
+    /**
+     * The feature of add user extend credential.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    USER_EXTEND_CREDENTIAL = 1,
+
+    /**
+     * The feature of set device security level.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    DEVICE_SECURITY_LEVEL = 2,
+
+    /**
+     * The feature of set printer ip address policy.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    PRINTER_IP_ADDRESS_POLICY = 3
+  }
+
+  /**
+   * Checks whether a specified feature is supported.
+   *
+   * @param { ManagedFeature } feature - The feature of enterprise device management.
+   * @returns { boolean } The value **true** indicates that the specified feature is supported, and the
+   *     value **false** indicates the opposite.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function isFeatureSupported(feature: ManagedFeature): boolean;
 
   /**
    * **EnterpriseAdminExtensionContext** is the context of

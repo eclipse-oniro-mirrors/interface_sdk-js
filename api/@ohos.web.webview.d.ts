@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file WebView Controller
  * @kit ArkWeb
  */
 
@@ -27,6 +27,9 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
  * This module provides the capability to manage web modules.
+ *
+ * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+ * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
  *
  * @namespace webview
  * @syscap SystemCapability.Web.Webview.Core
@@ -2320,6 +2323,8 @@ declare namespace webview {
      * > WebCookieManager. After this API is called and set to **true**, calling applicable APIs skips the
      * > initialization of the ArkWeb kernel when initializing CookieManager. You need to initialize the ArkWeb kernel
      * > separately afterwards.
+     * > 
+     * > -Since API version 26.0.1, when set to **true**, CookieManager interfaces can be used in asynchronous threads.
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -6918,6 +6923,38 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     executeAIPageCommand(command: string): Promise<string>;
+
+    /**
+     * Sets the browser zoom factor of this web page. Both text and images are scaled simultaneously, and the page
+     * is re-laid out (reflow) to fit the width of the **Web** component.
+     * This API works independently of {@link zoom}, {@link zoomIn}, and {@link zoomOut} (visual scaling without
+     * re-layout) and {@link textZoomRatio} (text-only scaling). The zoom factor takes effect on the current web
+     * component instance only and is retained after in-page cross-document navigation.
+     *
+     * @param { number } zoomFactor - Browser zoom factor to set. The value **1** indicates that the page is not
+     *     zoomed. A value smaller than **1** indicates zoom-out, and a value greater than **1** indicates zoom-in.
+     *     <br>Value range: [0.25, 5].
+     *     <br>Values beyond this range are clamped to the boundary.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    setZoomFactor(zoomFactor: number): void;
+
+    /**
+     * Gets the current browser zoom factor of this web page.
+     *
+     * @returns { number } Current browser zoom factor. The value **1** indicates that the page is not zoomed.
+     *     <br>Value range: [0.25, 5.0]. The default value is **1**.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    getZoomFactor(): number;
   }
 
   /**
@@ -9016,6 +9053,10 @@ declare namespace webview {
     /**
      * Type of the media source.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
@@ -9024,6 +9065,10 @@ declare namespace webview {
     /**
      * Address of the media source.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9033,6 +9078,10 @@ declare namespace webview {
     /**
      * Format of the media source, which may be empty. You need to determine the format by yourself.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9101,6 +9150,10 @@ declare namespace webview {
      *
      * For details, see [NativeEmbedDataInfo]{@link NativeEmbedDataInfo}.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @atomicservice
      * @since 12 dynamic
@@ -9111,6 +9164,10 @@ declare namespace webview {
      * Position information of the surface, used to specify the display position and size of the surface during same-
      * layer rendering.
      *
+     * Read-only: No
+     * 
+     * Optional: No
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */

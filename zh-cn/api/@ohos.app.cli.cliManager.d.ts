@@ -14,13 +14,12 @@
  */
 
 /**
- CLI工具管理
- * @file
- CLI工具管理
+ * @file CLI工具管理
  * @kit AbilityKit
  */
 import { ToolInfo, ToolSummary } from './application/ToolInfo';
 import { ToolEventCallback } from './application/ToolEventCallback';
+import { CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap } from './application/CliHook';
 
 
 /**
@@ -28,7 +27,8 @@ import { ToolEventCallback } from './application/ToolEventCallback';
  *
  * @namespace cliManager
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.0]
+ * @publicapi [since 26.0.1]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -78,13 +78,34 @@ declare namespace cliManager {
      * @since 26.0.0 dynamiconly
      */
     timeout?: long;
+
+    /**
+     * 工具调用的唯一标识，由Agent分配。取值由字母、数字、'_'和'-'组成，最大长度为256。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    toolCallId?: string;
+
+    /**
+     * 对话管理（DM）会话标识，唯一标识一次Agent会话。取值由字母、数字、'_'和'-'组成，最大长度为256。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    dmSessionId?: string;
   }
 
   /**
    * 执行Shell命令的可选参数。可用于指定工作目录、环境变量、后台运行、前台执行时长、超时时长、安全策略及事件回调。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -93,7 +114,8 @@ declare namespace cliManager {
      * 命令执行的工作目录，如果不传或传空，则为根目录。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -103,7 +125,8 @@ declare namespace cliManager {
      * 命令执行的环境变量。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -111,25 +134,27 @@ declare namespace cliManager {
 
     /**
      * 表示命令是否后台执行。
-     * 
+     *
      * true：后台执行，false：前台执行。
-     * 
+     *
      * 默认值：false。
      *
      * @default false
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
     background?: boolean;
 
     /**
-     * 任务前台执行时长。取值范围：0 ~ 1000 * timeout。默认值：0。单位：ms。
+     * 命令前台执行时长，单位为毫秒。取值范围：0 ~ 1000 * timeout，默认值：0。
      *
      * @default 0
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -140,7 +165,8 @@ declare namespace cliManager {
      *
      * @default 1800
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -150,18 +176,15 @@ declare namespace cliManager {
      * 安全策略，参数格式为JSON字符串。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
     policy?: string;
 
     /**
-     * 表示命令是否作为Shell命令执行。
-     *
-     * true：作为Shell命令执行，false：不作为Shell命令执行。
-     *
-     * 默认值：true。
+     * 指示命令是否作为shell命令执行。
      *
      * @default true
      * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -188,18 +211,40 @@ declare namespace cliManager {
      * 事件回调函数，用于接收工具事件。若提供该参数，将自动订阅会话事件。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
     callback?: ToolEventCallback;
+
+    /**
+     * 工具调用的唯一标识，由Agent分配。取值由字母、数字、'_'和'-'组成，最大长度为256。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    toolCallId?: string;
+
+    /**
+     * 对话管理（DM）会话标识，唯一标识一次Agent会话。取值由字母、数字、'_'和'-'组成，最大长度为256。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    dmSessionId?: string;
   }
 
   /**
    * CLI工具执行的结果。包含CLI工具的退出码、标准输出、标准错误输出、终止信号、是否超时及执行时长。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -208,7 +253,8 @@ declare namespace cliManager {
      * 工具的退出码。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -218,7 +264,8 @@ declare namespace cliManager {
      * 工具的标准输出（stdout）。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -228,7 +275,8 @@ declare namespace cliManager {
      * 工具的标准错误输出（stderr）。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -238,7 +286,8 @@ declare namespace cliManager {
      * 工具的终止信号。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -248,7 +297,8 @@ declare namespace cliManager {
      * 工具的执行是否超时。true表示超时，false表示未超时。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -258,7 +308,8 @@ declare namespace cliManager {
      * 工具的执行时长。单位：ms。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -269,7 +320,8 @@ declare namespace cliManager {
    * 执行CLI工具时，系统会为调用方和CLI工具建立一个会话，此字段描述会话状态。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -278,7 +330,8 @@ declare namespace cliManager {
      * 会话正在进行中。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -288,7 +341,8 @@ declare namespace cliManager {
      * 会话已完成。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -298,7 +352,8 @@ declare namespace cliManager {
      * 会话发生失败。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -309,7 +364,8 @@ declare namespace cliManager {
    * 执行CLI工具时，系统会为调用方和CLI工具建立一个会话，此字段描述会话信息的格式。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -318,7 +374,8 @@ declare namespace cliManager {
      * 会话id。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -328,7 +385,8 @@ declare namespace cliManager {
      * 工具名称。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -338,7 +396,8 @@ declare namespace cliManager {
      * 会话状态。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -348,7 +407,8 @@ declare namespace cliManager {
      * 工具执行结果。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -358,15 +418,18 @@ declare namespace cliManager {
   /**
    * 查询所有CLI工具的摘要信息。摘要信息仅包含名称、版本和描述字段，使用Promise异步回调。
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolSummary>> } Promise对象，返回工具摘要信息列表。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -375,15 +438,18 @@ declare namespace cliManager {
   /**
    * 查询所有CLI工具的详细信息，使用Promise异步回调。
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @returns { Promise<Array<ToolInfo>> } Promise对象，返回工具详细信息列表。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -392,17 +458,20 @@ declare namespace cliManager {
   /**
    * 根据工具名称获取单个工具的详细信息，使用Promise异步回调。
    *
-   * @permission ohos.permission.QUERY_CLI_TOOL
+   * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } toolName - 目标工具的名称。
    * @returns { Promise<ToolInfo> } Promise对象，返回工具的详细信息。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.QUERY_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -418,9 +487,9 @@ declare namespace cliManager {
    * @param { string } challenge - 从访问令牌管理器获取的唯一标识符
    * @param { ExecOptions } [execOptions] - 此操作的选项
    * @returns { Promise<CliSessionInfo> } 执行结果。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 35600030 - No tool with the specified name exists.
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
@@ -436,18 +505,24 @@ declare namespace cliManager {
   /**
    * 执行Shell命令，返回会话信息。使用Promise异步回调。
    *
-   * @permission ohos.permission.EXEC_CLI_TOOL
+   * @permission ohos.permission.EXEC_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } cmd - 要执行的Shell命令。
    * @param { ExecCmdOptions } [execCmdOptions] - 执行命令的可选参数。默认值：详见[ExecCmdOptions]{@link cliManager.ExecCmdOptions}的具体属性
    *     默认值。
    * @returns { Promise<CliSessionInfo> } Promise对象。返回会话信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: Failed to call the API due to
+   *     limited device capabilities. [since 26.0.1]
    * @throws { BusinessError } 35600031 - Maximum number of processes has been reached.
    * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with the dependent module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -455,23 +530,26 @@ declare namespace cliManager {
 
   /**
    * 订阅指定CLI工具会话的事件。会话运行期间，CLI工具产生的标准输出、标准错误、退出或错误事件通过回调返回。
-   * 
+   *
    * > **说明：**
    * >
    * > 会话仅限创建进程管理：只有调用`execTool`创建该会话的进程可以调用本接口。其他进程即使获取到`sessionId`，调用本接口也会抛出错误码201（Permission denied）。
    *
-   * @permission ohos.permission.EXEC_CLI_TOOL
+   * @permission ohos.permission.EXEC_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @param { ToolEventCallback } callback - CLI工具会话事件的回调函数。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
-   * @throws { BusinessError } 35600032 - The session does not exist.
-   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
-   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 35600032 - The specified session does not exist.
+   * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
+   *     2. The system service failed to communicate with the dependent module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -479,22 +557,25 @@ declare namespace cliManager {
 
   /**
    * 关闭指定CLI工具会话，并强制结束对应的工具进程。
-   * 
+   *
    * > **说明：**
    * >
    * > 会话仅限创建进程管理：只有调用`execTool`创建该会话的进程可以调用本接口。其他进程即使获取到`sessionId`，调用本接口也会抛出错误码201（Permission denied）。
    *
-   * @permission ohos.permission.EXEC_CLI_TOOL
+   * @permission ohos.permission.EXEC_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
-   * @throws { BusinessError } 35600032 - The session does not exist.
-   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
-   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 35600032 - The specified session does not exist.
+   * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
+   *     2. The system service failed to communicate with the dependent module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -502,22 +583,25 @@ declare namespace cliManager {
 
   /**
    * 查询指定CLI工具会话的状态和执行结果。
-   * 
+   *
    * > **说明：**
    * >
    * > 会话仅限创建进程管理：只有调用`execTool`创建该会话的进程可以调用本接口。其他进程即使获取到`sessionId`，调用本接口也会抛出错误码201（Permission denied）。
    *
-   * @permission ohos.permission.EXEC_CLI_TOOL
+   * @permission ohos.permission.EXEC_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
-   * @returns { Promise<void> } Promise对象，返回CLI工具会话信息。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
-   * @throws { BusinessError } 35600032 - The session does not exist.
-   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
-   *     2.System service failed to communicate with dependency module.
+   * @returns { Promise<CliSessionInfo> } The info of target session.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 35600032 - The specified session does not exist.
+   * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
+   *     2. The system service failed to communicate with the dependent module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -525,28 +609,76 @@ declare namespace cliManager {
 
   /**
    * 向指定CLI工具会话对应的进程发送消息。
-   * 
+   *
    * > **说明：**
    * >
    * > 会话仅限创建进程管理：只有调用`execTool`创建该会话的进程可以调用本接口。其他进程即使获取到`sessionId`，调用本接口也会抛出错误码201（Permission denied）。
    *
-   * @permission ohos.permission.EXEC_CLI_TOOL
+   * @permission ohos.permission.EXEC_CLI_TOOL [since 26.0.0 - 26.0.0]
+   * @permission ohos.permission.EXEC_CLI_TOOL or ohos.permission.EXEC_PUBLIC_CLI_TOOL [since 26.0.1]
    * @param { string } sessionId - 目标CLI工具进程的会话ID。
    * @param { string } message - 要发送的消息，最大长度为10240字符。超过最大长度时抛出错误码401。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied, interface caller does not have permission
-   *     "ohos.permission.EXEC_CLI_TOOL".
-   * @throws { BusinessError } 202 - Not system application. Interface caller is not a system app.
-   * @throws { BusinessError } 35600032 - The session does not exist.
-   * @throws { BusinessError } 35600033 - failed to write message to tool.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 26.0.0 - 26.0.0]
+   * @throws { BusinessError } 35600032 - The specified session does not exist.
+   * @throws { BusinessError } 35600033 - Failed to write message to the tool process.
+   * @throws { BusinessError } 35600050 - System Error. 1. Failed to connect to the system service;
+   *     2. The system service failed to communicate with the dependent module.
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.0.1]
+   * @stagemodelonly
+   * @since 26.0.0 dynamiconly
+   */
+  function sendMessage(sessionId: string, message: string): Promise<void>;
+
+  /**
+   * 注册CLI Hook，用于拦截工具和命令的执行。
+   * 同一时间只能注册一个CLI Hook；若已存在已注册的Hook，再次注册将失败。本接口仅在开发者模式下可用。
+   * 如需更新已注册的Hook，请先调用unregisterCliHook取消注册，再重新注册。
+   * Hook对象必须实现CliHook中至少一个可选方法。
+   *
+   * @permission ohos.permission.REGISTER_AGENT_HOOK
+   * @param { CliHook } hook - 实现CliHook接口的Hook对象。该对象必须实现至少一个可选方法。
+   * @returns { Promise<void> } Promise对象，无返回值。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 35600034 - The device is not in developer mode.
+   * @throws { BusinessError } 35600035 - A hook is already registered; unregister it first.
    * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
-  function sendMessage(sessionId: string, message: string): Promise<void>;
+  function registerCliHook(hook: CliHook): Promise<void>;
+
+  /**
+   * 取消注册之前注册的CLI Hook。
+   * Hook对象必须与传递给registerCliHook的对象相同。若未注册Hook，调用将失败并抛出错误。
+   *
+   * @permission ohos.permission.REGISTER_AGENT_HOOK
+   * @param { CliHook } hook - 待取消注册的Hook对象。
+   * @returns { Promise<void> } Promise对象，无返回值。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 35600036 - No hook is registered; nothing to unregister.
+   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function unregisterCliHook(hook: CliHook): Promise<void>;
 }
 
 export default cliManager;
+
+export type { CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap };

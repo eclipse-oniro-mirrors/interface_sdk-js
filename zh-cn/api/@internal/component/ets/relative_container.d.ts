@@ -22,10 +22,8 @@
  * 相对布局组件，用于复杂场景中元素对齐的布局。通过设置子组件的对齐规则，实现子组件相对于容器或其他子组件的对齐，适用于需要灵活布局、减少嵌套层级的复杂界面。
  * 
  * 子组件可以通过设置[alignRules]{@link CommonMethod#alignRules(value: AlignRuleOption)}来设置自身在相对容器中的对齐规则。
- * 
+ *
  * > **说明：**
- * >
- * > * 该组件从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
  * > * 在RelativeContainer组件中，不设置[width]{@link CommonMethod#width(value: Length)}、
  * > [height]{@link CommonMethod#height(value: Length)}时，对应属性布局表现与设置为100%相同。
@@ -180,7 +178,7 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  LEFT = 0,
+  LEFT,
 
   /**
    * 屏障在其所有[referencedId]{@link BarrierStyle}的最右侧。
@@ -191,7 +189,7 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  RIGHT = 1,
+  RIGHT,
 
   /**
    * 屏障在其所有[referencedId]{@link BarrierStyle}的最上方。
@@ -202,7 +200,7 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  TOP = 2,
+  TOP,
 
   /**
    * 屏障在其所有[referencedId]{@link BarrierStyle}的最下方。
@@ -213,18 +211,11 @@ declare enum BarrierDirection {
    * @atomicservice
    * @since 12 dynamic
    */
-  BOTTOM = 3
+  BOTTOM
 }
 
 /**
  * 定义支持镜像模式的屏障线的方向。
- * 
- * | 名称 |  值  | 说明                       |
- * | ------ | -- | ----------------------------- |
- * | START  | 0  |屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的起始侧，LTR模式时为最左侧，RTL模式时为最右侧。|
- * | END    | 1  | 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的结束侧，LTR模式时为最右侧，RTL模式时为最左侧。|
- * | TOP    | 2  | 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的最上方。|
- * | BOTTOM | 3  | 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的最下方。|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -234,8 +225,7 @@ declare enum BarrierDirection {
  */
 declare enum LocalizedBarrierDirection {
   /**
-   * The barrier is on the left (for left-to-right scripts) or right (for right-to-left scripts) side of
-   * all the referenced components specified by [referencedId]{@link LocalizedBarrierStyle}.
+   * 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的起始侧，LTR模式时为最左侧，RTL模式时为最右侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -246,8 +236,7 @@ declare enum LocalizedBarrierDirection {
   START = 0,
 
   /**
-   * The barrier is on the right (for left-to-right scripts) or left (for right-to-left scripts) side of
-   * all the referenced components specified by [referencedId]{@link LocalizedBarrierStyle}.
+   * 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的结束侧，LTR模式时为最右侧，RTL模式时为最左侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -258,8 +247,7 @@ declare enum LocalizedBarrierDirection {
   END = 1,
 
   /**
-   * The barrier is at the top of all the referenced components specified by
-   * [referencedId]{@link LocalizedBarrierStyle}.
+   * 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的最上方。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -270,8 +258,7 @@ declare enum LocalizedBarrierDirection {
   TOP = 2,
 
   /**
-   * The barrier is at the bottom of all the referenced components specified by
-   * [referencedId]{@link LocalizedBarrierStyle}.
+   * 屏障在其所有[referencedId]{@link LocalizedBarrierStyle}的最下方。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -443,10 +430,8 @@ declare class RelativeContainerAttribute extends CommonMethod<RelativeContainerA
  * 相对布局组件，用于复杂场景中元素对齐的布局。通过设置子组件的对齐规则，实现子组件相对于容器或其他子组件的对齐，适用于需要灵活布局、减少嵌套层级的复杂界面。
  * 
  * 子组件可以通过设置[alignRules]{@link CommonMethod#alignRules(value: AlignRuleOption)}来设置自身在相对容器中的对齐规则。
- * 
+ *
  * > **说明：**
- * >
- * > * 该组件从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
  * > * 在RelativeContainer组件中，不设置[width]{@link CommonMethod#width(value: Length)}、
  * > [height]{@link CommonMethod#height(value: Length)}时，对应属性布局表现与设置为100%相同。
@@ -462,7 +447,7 @@ declare class RelativeContainerAttribute extends CommonMethod<RelativeContainerA
  * >
  * > * RelativeContainer中子组件的[margin]{@link CommonMethod#margin}不同于通用属性margin，指子组件到该方向上锚点的距离。例如，当alignRules设置了left锚点时，
  * > margin.left表示子组件到left锚点的距离。若alignRules未设置某个边界方向的锚点（如未设置left或right锚点），则该方向的margin不生效。
- * 
+ *
  * ## 子组件
  * 
  * 支持多个子组件。
@@ -477,7 +462,7 @@ declare class RelativeContainerAttribute extends CommonMethod<RelativeContainerA
 declare const RelativeContainer : RelativeContainerInterface;
 
 /**
- * RelativeContainerInstance
+ * 定义RelativeContainer组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

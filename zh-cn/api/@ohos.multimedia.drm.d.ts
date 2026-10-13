@@ -14,7 +14,7 @@
 */
 
 /**
- * @file
+ * @file 数字版权保护
  * @kit DrmKit
  */
 
@@ -1540,4 +1540,4 @@ declare namespace drm {
     }
   }
   
-  export default drm;
+  export default drm;

@@ -15,6 +15,8 @@
  */
 
 /**
+ * The **ProgressButton** component is a text-based download button with a progress indicator that shows the download
+ * progress.
  * @file
  * @kit ArkUI
  */
@@ -24,7 +26,7 @@ import { ResourceColor, ResourceStr, Length } from '@ohos.arkui.component';
 import { Builder } from '@ohos.arkui.component';
 import { LengthMetrics } from 'arkui.Graphics';
 /**
- * Declare Component ProgressButton
+ * Creates a **ProgressButton** component.
  * @struct { ProgressButton }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -561,7 +561,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-    SYSTEM_ROLLBACK = 51
+    SYSTEM_ROLLBACK = 51,
+ 
+    /**
+     * 内置光驱刻录功能。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SATA_ODD_BURN = 52
   }
 
   /**

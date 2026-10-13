@@ -14,7 +14,7 @@
 */
 
 /**
- * @file
+ * @file (媒体服务)
  * @kit MediaKit
  */
 
@@ -740,9 +740,13 @@ declare namespace media {
   /**
    * 从服务器获取用户可更改的系统隐私保护和应用隐私保护配置。使用Promise异步回调。
    *
+   * >**注意：**
+   * >
+   * > 此接口仅提供给创建弹窗的系统应用调用。
+   * 
    * @param { int } sessionId AVScreenCapture服务会话Id，由AVScreenCapture拉起隐私弹窗时传给应用。
    * @returns { Promise<string> } Promise对象，返回系统隐私保护和应用隐私保护状态，失败时返回空字符串。
-   * @throws { BusinessError } 202  Called from Non-System applications. Return by promise.
+   * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
    * @throws { BusinessError } 5400109 - Sessions not exist. Return by promise.
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
    * @systemapi
@@ -760,7 +764,7 @@ declare namespace media {
    *
    * @returns {  Promise<AVTranscoder>  } Promise对象。异步返回AVTranscoder实例，失败时返回null。可用于视频转码。
    * @throws {  BusinessError  } 5400101 - No memory. Return by promise. 
-   * @throws {   BusinessError   } 5400101 - No memory. Return by promise. [since 22]
+   * @throws {   BusinessError   } 5400101 - No memory. Return by promise.
    * @syscap SystemCapability.Multimedia.Media.AVTranscoder
    * @atomicservice [since 22]
    * @since 12 dynamic
@@ -1108,7 +1112,7 @@ declare namespace media {
      * 获取音频专辑封面。使用callback异步回调。
      *
      * @param { AsyncCallback<image.PixelMap | undefined> } callback - 回调函数。当获取音频专辑封面成功，err为undefined，data为获取到的PixelMap实例，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform
@@ -1117,7 +1121,7 @@ declare namespace media {
     fetchAlbumCover(callback: AsyncCallback<image.PixelMap | undefined>): void;
 
     /**
-     * 获取专辑封面。使用Promise异步回调。
+     * 获取音频专辑封面。使用Promise异步回调。
      *
      * @returns { Promise<image.PixelMap> } Promise对象。异步返回专辑封面。
      * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
@@ -1129,7 +1133,7 @@ declare namespace media {
     fetchAlbumCover(): Promise<image.PixelMap>;
 
     /**
-     * 获取专辑封面。使用Promise异步回调。
+     * 获取音频专辑封面。使用Promise异步回调。
      *
      * @returns { Promise<image.PixelMap | undefined> } Promise对象。异步返回专辑封面。
      * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
@@ -1653,6 +1657,7 @@ declare namespace media {
    * 
    * > **说明：**
    * >
+   * > - 本模块首批接口从API version 6开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
    * > - 本Interface首批接口从API version 12开始支持。
    *
    * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
@@ -1867,7 +1872,7 @@ declare namespace media {
     /**
      * 输出的缩略图颜色格式。
      * 
-     * **System API**: This is a system API.
+     * **系统接口**: 此接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @systemapi
@@ -1879,7 +1884,7 @@ declare namespace media {
     /**
      * 当视频具有镜像属性（垂直翻转或水平翻转）时，自动翻转缩略图。如果该值为false，则返回的缩略图将不会翻转。
      * 
-     * **System API**: This is a system API.
+     * **系统接口**: 此接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @systemapi
@@ -1899,7 +1904,7 @@ declare namespace media {
    */
   enum PixelFormat {
     /**
-     * RGB_565.
+     * 表示RGB_565颜色格式。
      *
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @systemapi
@@ -1909,7 +1914,7 @@ declare namespace media {
     RGB_565 = 2,
 
     /**
-     * RGBA_8888.
+     * 表示RGBA_8888颜色格式。
      *
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @systemapi
@@ -1919,7 +1924,7 @@ declare namespace media {
     RGBA_8888 = 3,
 
     /**
-     * RGB_888.
+     * 表示RGB_888颜色格式。
      *
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @systemapi
@@ -10839,7 +10844,8 @@ declare namespace media {
    */
   interface AVScreenCaptureStrategy {
     /**
-     * Defines whether to enable device-level content recording
+     * 用于指定折叠屏PC在折叠状态下录制半块屏幕还是整块屏幕。
+     * true表示折叠屏PC在折叠状态下录制整块屏幕，false表示折叠屏PC在折叠状态下录制半块屏幕。
      *
      * @default false
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -10889,6 +10895,16 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     enablePause?: boolean;
+
+    /**
+     * 表示当麦克风采集开启时，是否使能回声检测与回声消除功能。<br>
+     * true表示开启回声消除功能，false表示关闭回声消除功能，默认是false。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    enableAEC?: boolean;
   }
 
   /**
@@ -11791,7 +11807,7 @@ declare namespace media {
   }
 
   /**
-   * Enumerates the states available for the system screen recorder.
+   * 系统录屏应用录屏状态的枚举值。
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
    * @systemapi
@@ -11800,7 +11816,7 @@ declare namespace media {
    */
   enum ScreenCaptureEvent {
     /**
-     * The system screen recorder starts screen capture.
+     * 表示系统录屏应用开始录屏。
      *
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @systemapi
@@ -11809,7 +11825,7 @@ declare namespace media {
      */
     SCREENCAPTURE_STARTED = 0,
     /**
-     * The system screen recorder stops screen capture.
+     * 表示系统录屏应用停止录屏。
      *
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @systemapi
@@ -11818,7 +11834,7 @@ declare namespace media {
      */
     SCREENCAPTURE_STOPPED = 1,
     /**
-     * The system screen recorder died.
+     * 表示系统录屏服务死亡。
      *
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @systemapi

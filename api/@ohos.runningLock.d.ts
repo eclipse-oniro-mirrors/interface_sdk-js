@@ -61,6 +61,7 @@ declare namespace runningLock {
      *     value after the timer expires.
      * @throws { BusinessError } 201 - If the permission is denied.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+     *     2. Parameter verification failed.
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 9 dynamic
      * @since 23 static
@@ -243,7 +244,8 @@ declare namespace runningLock {
    *     successful, **err** is **undefined** and data is the created **RunningLock** object. Otherwise, **err** is an
    *     error object. **AsyncCallback** has encapsulated an API of the **RunningLock** class.
    * @throws { BusinessError } 201 - If the permission is denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   *     2. Parameter verification failed.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -258,7 +260,8 @@ declare namespace runningLock {
    * @param { RunningLockType } type - Type of the **RunningLock** object. The value must be an enum.
    * @returns { Promise<RunningLock> } Promise used to return the {@link RunningLock} object.
    * @throws { BusinessError } 201 - If the permission is denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   *     2. Parameter verification failed.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static

@@ -198,7 +198,7 @@ declare namespace connectedTag {
    * @syscap SystemCapability.Communication.ConnectedTag
    * @since 8 dynamic
    */
-  function on(type: "notify", callback: Callback<number>): void;
+  function on(type: 'notify', callback: Callback<number>): void;
 
   /**
    * 取消NFC场强状态事件的注册。
@@ -209,7 +209,7 @@ declare namespace connectedTag {
    * @syscap SystemCapability.Communication.ConnectedTag
    * @since 8 dynamic
    */
-  function off(type: "notify", callback?:Callback<number>): void;
+  function off(type: 'notify', callback?:Callback<number>): void;
 
   /**
    * 表示NFC场强状态的枚举。

@@ -14,7 +14,7 @@
  */
 
 /**
- * The **keyEvent** module provides key events reported by a device. It is inherited from 
+ * The **keyEvent** module provides key events reported by a device. It is inherited from
  * [InputEvent]{@link @ohos.multimodalInput.inputEvent:InputEvent}.
  *
  * @file Key Event
@@ -150,7 +150,7 @@ export declare interface KeyEvent extends InputEvent {
   unicodeChar: int;
 
   /**
-   * List of pressed keys.
+   * List of keys that are currently in the pressed state.
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @atomicservice [since 12]

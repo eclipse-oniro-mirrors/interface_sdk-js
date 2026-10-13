@@ -611,7 +611,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-    SYSTEM_ROLLBACK = 51
+    SYSTEM_ROLLBACK = 51,
+ 
+    /**
+     * Built-in optical drive burning capability.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SATA_ODD_BURN = 52
   }
 
   /**

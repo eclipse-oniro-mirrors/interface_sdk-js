@@ -245,6 +245,16 @@ declare namespace inputMethodEngine {
   const PATTERN_ONE_TIME_CODE: int;
 
   /**
+   * The numeric verification code edit box. The value is fixed at 15.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  const PATTERN_ONE_TIME_CODE_NUMBER: int;
+  
+  /**
    * The edit box is being selected.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
@@ -299,7 +309,7 @@ declare namespace inputMethodEngine {
   const OPTION_NONE: int;
 
   /**
-   * Characters are allowed.
+   * Characters are auto-capitalized.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 8 dynamic
@@ -308,7 +318,7 @@ declare namespace inputMethodEngine {
   const OPTION_AUTO_CAP_CHARACTERS: int;
 
   /**
-   * Sentences are allowed.
+   * Sentences are auto-capitalized.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 8 dynamic
@@ -608,8 +618,9 @@ declare namespace inputMethodEngine {
     hideKeyboard(): Promise<void>;
 
     /**
-     * Exits this input type. This API can be called only by the preconfigured default input method. This API uses an 
-     * asynchronous callback to return the result.
+     * Exits this input type. This API can be called only by the preconfigured default input method.
+     * On API 26.0.1 and above, it can also be called by the input method that provides system-level input capability.
+     * This API uses an asynchronous callback to return the result.
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
@@ -623,8 +634,9 @@ declare namespace inputMethodEngine {
     exitCurrentInputType(callback: AsyncCallback<void>): void;
 
     /**
-     * Exits this input type. This API can be called only by the preconfigured default input method. This API uses a 
-     * promise to return the result.
+     * Exits this input type. This API can be called only by the preconfigured default input method.
+     * On API 26.0.1 and above, it can also be called by the input method that provides system-level input capability.
+     * This API uses a promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:

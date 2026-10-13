@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 页面节点信息
  * @kit AbilityKit
  */
 
@@ -31,8 +31,10 @@ import AutoFillRect from './AutoFillRect';
  * 自动填充的页面节点信息。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
- * @systemapi
+ * @systemapi [since 11 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
+ * @atomicservice
  * @since 11 dynamic
  * @since 23 static
  */
@@ -42,8 +44,10 @@ export default interface PageNodeInfo {
    * 取值限定为整数。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -64,8 +68,10 @@ export default interface PageNodeInfo {
    * 页面节点的自动填充类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -86,8 +92,10 @@ export default interface PageNodeInfo {
    * 页面节点的值。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -97,8 +105,10 @@ export default interface PageNodeInfo {
    * 页面节点的占位符。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -130,8 +140,10 @@ export default interface PageNodeInfo {
    * 页面节点的rect。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */
@@ -141,8 +153,10 @@ export default interface PageNodeInfo {
    * 是焦点中的页面节点。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 12 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */

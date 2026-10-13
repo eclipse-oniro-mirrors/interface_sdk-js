@@ -2286,19 +2286,13 @@ declare interface CacheCountInfo {
 }
 
 /**
-/**
  * Describes a two-dimension coordinate.
  * Responsive layout fill mode, used for the WaterFlow, Grid, List, Swiper, and LazyVWaterFlowLayout components. The
  *     LazyVWaterFlowLayout component is supported since API version 26.0.0.
  *
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @stagemodelonly
  * @crossplatform
- * @crossplatform
- * @atomicservice
  * @atomicservice
  * @since 26.0.0 dynamic
  */
