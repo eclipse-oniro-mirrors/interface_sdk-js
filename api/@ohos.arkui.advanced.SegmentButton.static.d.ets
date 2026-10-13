@@ -296,7 +296,8 @@ declare enum SegmentButtonInteractionMode {
   FOLLOWING_DRAG = 0,
 
   /**
-   * Enables normal drag. With system material, its appearance and deformation are retained without the following-specific point light.
+   * Enables normal drag. With system material, retains the background scaling, slight displacement,
+   * and selected-item deformation of following drag, without its point light.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -563,7 +564,8 @@ interface CommonSegmentButtonOptions {
    * If omitted, following drag is used with system material, and normal drag is used without it.
    * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
    * Following drag without system material does not add material deformation or light effects.
-   * Normal drag with system material retains its appearance and original material deformation without the following-specific point light.
+   * Normal drag with system material retains its appearance and the background scaling, slight displacement,
+   * and selected-item deformation of following drag, without its point light.
    * If omitted, undefined or invalid, the default mode is used.
    * This property has no effect in multi-select mode.
    *
@@ -1257,7 +1259,8 @@ declare class SegmentButtonOptions {
    * If omitted, following drag is used with system material, and normal drag is used without it.
    * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
    * Following drag without system material does not add material deformation or light effects.
-   * Normal drag with system material retains its appearance and original material deformation without the following-specific point light.
+   * Normal drag with system material retains its appearance and the background scaling, slight displacement,
+   * and selected-item deformation of following drag, without its point light.
    * If omitted, undefined or invalid, the default mode is used.
    * This property has no effect in multi-select mode.
    *
