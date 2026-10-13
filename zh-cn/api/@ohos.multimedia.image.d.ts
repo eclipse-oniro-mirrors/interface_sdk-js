@@ -84,7 +84,7 @@ import type rpc from './@ohos.rpc';
  * - [Image]{@link image.Image}类，供ImageReceiver和ImageCreator使用，用于传输图片对象，其实际内容由生产者决定。如相机预览流提供的Image对象存储了YUV数据、相机拍照提供的
  * Image对象存储了JPEG文件。
  *
- * @syscap SystemCapability.Multimedia.Image.Core [since 11]
+ * @syscap SystemCapability.Multimedia.Image.Core
  * @crossplatform [since 11]
  * @form [since 12]
  * @atomicservice [since 11]
@@ -7707,7 +7707,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 设置图片的PixelMap对象。
      *
      * @param { PixelMap } pixelmap  - PixelMap对象。
-     * @throws { BusinessError } 7700204  - 参数错误。
+     * @throws { BusinessError } 7700204  - 参数错误。PixelMap对象为空或已被释放。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -11878,272 +11878,137 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
   }
 
   /**
-   * XMAGE水印模式：XMAGE水印固定位于图像底部中央。
+   * XMAGE水印模式：水印位于图像底部，取值为9。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const XMAGE_WATERMARK_MODE_AT_THE_BOTTOM = 9;
-
-  /**
-   * The XMAGE watermark is at the bottom of the photo.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const XMAGE_WATERMARK_MODE_AT_THE_BOTTOM : int;
 
   /**
-   * XMAGE水印模式：XMAGE水印会自动调整到边界位置，系统根据图像内容选择最适合的边界区域。
+   * XMAGE水印模式：水印位于图像边缘，取值为10。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const XMAGE_WATERMARK_MODE_BORDER = 10;
-
-  /**
-   * The XMAGE watermark is around the edges of the photo.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const XMAGE_WATERMARK_MODE_BORDER : int;
 
   /**
-   * 拍摄模式：专业模式。
+   * 拍摄模式：专业模式，取值为2。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_PROFESSIONAL = 2;
-
-  /**
-   * Capture mode: professional.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_PROFESSIONAL : int;
 
   /**
-   * 拍摄模式：前置摄像头夜景模式。
+   * 拍摄模式：前置摄像头夜景模式，取值为7。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_FRONT_LENS_NIGHT_VIEW = 7;
-
-  /**
-   * Capture mode: night view with front lens.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_FRONT_LENS_NIGHT_VIEW : int;
 
   /**
-   * 拍摄模式：全景模式。
+   * 拍摄模式：全景模式，取值为8。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_PANORAMA = 8;
-
-  /**
-   * Capture mode: panorama.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_PANORAMA : int;
 
   /**
-   * 拍摄模式：尾灯模式。
+   * 拍摄模式：尾灯模式，取值为9。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_TAIL_LIGHT = 9;
-
-  /**
-   * Capture mode: tail light.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_TAIL_LIGHT : int;
 
   /**
-   * 拍摄模式：轻涂鸦模式。
+   * 拍摄模式：光绘涂鸦模式，取值为10。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_LIGHT_GRAFFITI = 10;
-
-  /**
-   * Capture mode: light graffiti.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_LIGHT_GRAFFITI : int;
 
   /**
-   * 拍摄模式：缎面感水流模式。
+   * 拍摄模式：缎面感水流模式，取值为11。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_SILKY_WATER = 11;
-
-  /**
-   * Capture mode: silky water.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_SILKY_WATER : int;
 
   /**
-   * 拍摄模式：星轨模式。
+   * 拍摄模式：星轨模式，取值为12。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_STAR_TRACK = 12;
-
-  /**
-   * Capture mode: star track.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_STAR_TRACK : int;
 
   /**
-   * 拍摄模式：广角模式。
+   * 拍摄模式：大光圈模式，取值为19。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_WIDEAPERTURE = 19;
-
-  /**
-   * Capture mode: wide aperture.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_WIDEAPERTURE : int;
 
   /**
-   * 拍摄模式：动态照片模式。
+   * 拍摄模式：动态照片模式，取值为20。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_MOVING_PHOTO = 20;
-
-  /**
-   * Capture mode: moving photos.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_MOVING_PHOTO : int;
 
   /**
-   * 拍摄模式：人像模式。
+   * 拍摄模式：人像模式，取值为23。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_PORTRAIT = 23;
-
-  /**
-   * Capture mode: portrait.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_PORTRAIT : int;
 
   /**
-   * 拍摄模式：后镜头夜景模式。
+   * 拍摄模式：后镜头夜景模式，取值为42。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_REAR_LENS_NIGHT_VIEW = 42;
-
-  /**
-   * Capture mode: night view with rear lens.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_REAR_LENS_NIGHT_VIEW : int;
 
   /**
-   * 拍摄模式：超微距模式。
+   * 拍摄模式：超微距模式，取值为47。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_SUPER_MACRO = 47;
-
-  /**
-   * Capture mode: super macro.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_SUPER_MACRO : int;
 
   /**
-   * 拍摄模式：抓拍模式。
+   * 拍摄模式：抓拍模式，取值为62。
    *
    * @syscap SystemCapability.Multimedia.Image.Core
    * @stagemodelonly
-   * @since 23 dynamic
-   */
-  const CAPTURE_MODE_SNAP_SHOT = 62;
-
-  /**
-   * Capture mode: snap shot.
-   *
-   * @syscap SystemCapability.Multimedia.Image.Core
-   * @stagemodelonly
-   * @since 23 static
+   * @since 23 dynamic&static
    */
   const CAPTURE_MODE_SNAP_SHOT : int;
 
