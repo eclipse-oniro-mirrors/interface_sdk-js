@@ -2238,6 +2238,18 @@ declare namespace request {
        * @since 23 static
        */
       wantAgent?: WantAgent;
+      /**
+       * Indicates whether to hide the stop button in the live window for a background task.
+       * If the value is true, the stop button in the live window is hidden and the layout is automatically adjusted.
+       * If the value is false, the stop button is displayed.
+       * This field only takes effect for background tasks (mode is BACKGROUND).
+       * Default value: false.
+       *
+       * @syscap SystemCapability.Request.FileTransferAgent
+       * @stagemodelonly
+       * [@since](https://gitcode.com/since) 26.2.0 dynamic&static
+       */
+      hideStopButton?: boolean;
     }
 
     /**
