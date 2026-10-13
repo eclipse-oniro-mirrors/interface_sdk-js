@@ -26,7 +26,6 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace manager {
@@ -38,22 +37,9 @@ declare namespace manager {
    *     supports NearLink, and **false** indicates the opposite.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function isNearLinkSupported(): boolean;
-
-  /**
-   * Checks whether the current device supports radio frame type 4.
-   *
-   * @returns { boolean } Whether the current device supports radio frame type 4. The value **true** indicates that
-   *     the device supports radio frame type 4, and **false** indicates the opposite.
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  function isFrameType4Supported(): boolean;
 
   /**
    * Enables NearLink.
@@ -73,35 +59,10 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [disable]{@link disable(): void} Disables NearLink.
    */
   function enable(): void;
-
-  /**
-   * Enables NearLink with the specified options.
-   * Before calling this API, you may call [isNearLinkSupported]{@link isNearLinkSupported} to check
-   * whether the device supports NearLink.
-   *
-   * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
-   * @param { EnableOptions } [options] - Options used when NearLink is enabled.
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *     1. The hardware does not support the capability;
-   *     2. The chip does not support the capability;
-   *     3. A dependent service feature is not supported.
-   * @throws { BusinessError } 36100099 - Operation failed.
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @systemapi
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  function enableWithOptions(options?: EnableOptions): void;
 
   /**
    * Disables NearLink.
@@ -120,7 +81,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [enable]{@link enable(): void} Enables NearLink.
    */
@@ -139,7 +99,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getState(): NearlinkState;
@@ -163,7 +122,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getLocalAddress(): string;
@@ -185,7 +143,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getLocalName(): string;
@@ -207,7 +164,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getPairedDevices(): string[];
@@ -235,7 +191,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function setConnectionMode(mode: ConnectionMode, duration: int): Promise<void>;
@@ -258,7 +213,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function factoryReset(): Promise<void>;
@@ -276,7 +230,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offStateChange]{@link offStateChange(callback?: Callback<NearlinkState>): void} Unsubscribes from the
    *     NearLink status change event.
@@ -298,7 +251,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onStateChange]{@link onStateChange(callback: Callback<NearlinkState>): void} Subscribes to the
    *     NearLink status change event.
@@ -310,7 +262,6 @@ declare namespace manager {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum NearlinkState {
@@ -319,7 +270,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_TURNING_ON = 0,
@@ -328,7 +278,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_ON = 1,
@@ -337,7 +286,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_TURNING_OFF = 2,
@@ -346,7 +294,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_OFF = 3
@@ -358,7 +305,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum ConnectionMode {
@@ -368,7 +314,6 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     SLE_MODE_UNCONNECTABLE = 0,
@@ -378,75 +323,9 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     SLE_MODE_CONNECTABLE = 1
-  }
-
-  /**
-   * The options for enabling NearLink.
-   *
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @systemapi
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  interface EnableOptions {
-    /**
-     * Auto-connection policy to be used when NearLink is enabled.
-     * The default value is **AUTO_CONN_GENERAL**.
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    autoConnPolicy?: AutoConnectPolicy;
-  }
-
-  /**
-   * Enumerates the auto-connection policies when NearLink is enabled.
-   *
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @systemapi
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  enum AutoConnectPolicy {
-    /**
-     * All paired devices are automatically reconnected after NearLink is enabled.
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    AUTO_CONN_GENERAL = 0,
-    /**
-     * All paired devices except audio devices are automatically reconnected after NearLink is enabled.
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    AUTO_CONN_EXCEPT_AUDIO_DEVICES = 1,
-    /**
-     * All paired devices except those disconnected by the user are automatically reconnected after NearLink is enabled.
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    AUTO_CONN_EXCEPT_USER_DISCONNECTED_DEVICES = 2
   }
 }
 export default manager;

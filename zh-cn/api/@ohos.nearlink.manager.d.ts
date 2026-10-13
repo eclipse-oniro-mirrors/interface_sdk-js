@@ -25,7 +25,6 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace manager {
@@ -36,21 +35,9 @@ declare namespace manager {
    * @returns { boolean } 表示当前设备是否支持星闪。返回true：设备支持星闪。返回false：设备不支持星闪。
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function isNearLinkSupported(): boolean;
-
-  /**
-   * 查询当前设备是否支持帧类型4。
-   *
-   * @returns { boolean } 当前设备是否支持帧类型4。返回**true**表示设备支持帧类型4，返回**false**表示不支持。
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  function isFrameType4Supported(): boolean;
 
   /**
    * 打开星闪。
@@ -69,34 +56,10 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [disable]{@link disable(): void} 关闭星闪。
    */
   function enable(): void;
-
-  /**
-   * 以指定选项打开星闪。
-   * 调用此接口前，您可以调用[isNearLinkSupported]{@link isNearLinkSupported}查询设备是否支持星闪。
-   *
-   * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
-   * @param { EnableOptions } [options] - 打开星闪时使用的选项。
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *     1. The hardware does not support the capability;
-   *     2. The chip does not support the capability;
-   *     3. A dependent service feature is not supported.
-   * @throws { BusinessError } 36100099 - Operation failed.
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @systemapi
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  function enableWithOptions(options?: EnableOptions): void;
 
   /**
    * 关闭星闪。
@@ -114,7 +77,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [enable]{@link enable(): void} 打开星闪。
    */
@@ -132,7 +94,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getState(): NearlinkState;
@@ -155,7 +116,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getLocalAddress(): string;
@@ -176,7 +136,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getLocalName(): string;
@@ -197,7 +156,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getPairedDevices(): string[];
@@ -224,7 +182,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function setConnectionMode(mode: ConnectionMode, duration: int): Promise<void>;
@@ -246,7 +203,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function factoryReset(): Promise<void>;
@@ -263,7 +219,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offStateChange]{@link offStateChange(callback?: Callback<NearlinkState>): void} 取消订阅星闪开关状态变化事件。
    */
@@ -282,7 +237,6 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onStateChange]{@link onStateChange(callback: Callback<NearlinkState>): void} 订阅星闪开关状态变化事件。
    */
@@ -293,7 +247,6 @@ declare namespace manager {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum NearlinkState {
@@ -302,7 +255,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_TURNING_ON = 0,
@@ -311,7 +263,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_ON = 1,
@@ -320,7 +271,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_TURNING_OFF = 2,
@@ -329,7 +279,6 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STATE_OFF = 3
@@ -341,7 +290,6 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum ConnectionMode {
@@ -351,7 +299,6 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     SLE_MODE_UNCONNECTABLE = 0,
@@ -361,75 +308,9 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     SLE_MODE_CONNECTABLE = 1
-  }
-
-  /**
-   * 打开星闪时使用的选项。
-   *
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @systemapi
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  interface EnableOptions {
-    /**
-     * 打开星闪时使用的自动连接策略。
-     * 默认值为**AUTO_CONN_GENERAL**。
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    autoConnPolicy?: AutoConnectPolicy;
-  }
-
-  /**
-   * 表示打开星闪时的自动连接策略，为枚举值。
-   *
-   * @syscap SystemCapability.Communication.NearLink.Base
-   * @systemapi
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  enum AutoConnectPolicy {
-    /**
-     * 打开星闪后，自动回连所有已配对设备。
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    AUTO_CONN_GENERAL = 0,
-    /**
-     * 打开星闪后，自动回连除音频设备外的所有已配对设备。
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    AUTO_CONN_EXCEPT_AUDIO_DEVICES = 1,
-    /**
-     * 打开星闪后，自动回连除用户主动断连设备外的所有已配对设备。
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    AUTO_CONN_EXCEPT_USER_DISCONNECTED_DEVICES = 2
   }
 }
 export default manager;

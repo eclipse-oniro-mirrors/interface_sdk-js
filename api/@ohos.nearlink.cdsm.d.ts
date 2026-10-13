@@ -26,7 +26,6 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace cdsm {
@@ -54,7 +53,6 @@ declare namespace cdsm {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function createCdsmClient(address: string): CdsmClient;
@@ -75,7 +73,6 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface CdsmClient {
@@ -90,7 +87,6 @@ declare namespace cdsm {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getCdsmInfo(): CdsmInfo;
@@ -103,7 +99,6 @@ declare namespace cdsm {
      * @param { Callback<CdsmInfo> } callback - Callback used to return the CDSM information.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offCdsmInfoChange]{@link cdsm.CdsmClient.offCdsmInfoChange(callback?: Callback<CdsmInfo>): void}
      *     Unsubscribes from the CDSM information change event.
@@ -118,7 +113,6 @@ declare namespace cdsm {
      *     all callbacks used to listen for CDSM information change events are unregistered.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onCdsmInfoChange]{@link cdsm.CdsmClient.onCdsmInfoChange(callback: Callback<CdsmInfo>): void} Subscribes to
      *     the CDSM information change event.
@@ -131,7 +125,6 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface CdsmInfo {
@@ -141,7 +134,6 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     members: CdsmMemberInfo[];
@@ -152,7 +144,6 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface CdsmMemberInfo {
@@ -161,7 +152,6 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -170,7 +160,6 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: CdsmConnectionState;
@@ -181,7 +170,6 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum CdsmConnectionState {
@@ -190,7 +178,6 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     DISCONNECTED = 0,
@@ -199,7 +186,6 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTED = 1

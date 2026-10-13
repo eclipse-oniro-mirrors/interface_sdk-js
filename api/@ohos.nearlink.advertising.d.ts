@@ -27,7 +27,6 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace advertising {
@@ -59,7 +58,6 @@ declare namespace advertising {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function startAdvertising(advertisingParams: AdvertisingParams): Promise<int>;
@@ -85,7 +83,6 @@ declare namespace advertising {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [startAdvertising]{@link advertising.startAdvertising(advertisingParams: AdvertisingParams): Promise<int>}
    *     Starts NearLink advertising.
@@ -112,7 +109,6 @@ declare namespace advertising {
    *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function onAdvertisingStateChange(callback: Callback<AdvertisingStateChangeInfo>): void;
@@ -134,7 +130,6 @@ declare namespace advertising {
    *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onAdvertisingStateChange]{@link advertising.onAdvertisingStateChange(callback:
    *     Callback<AdvertisingStateChangeInfo>): void} Subscribes to the advertising state change event.
@@ -146,7 +141,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface AdvertisingParams {
@@ -155,7 +149,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     advertisingSettings: AdvertisingSettings;
@@ -164,7 +157,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     advertisingData: AdvertisingData;
@@ -175,7 +167,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface AdvertisingSettings {
@@ -185,7 +176,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     interval?: int;
@@ -195,7 +185,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     power?: TxPowerMode;
@@ -205,19 +194,9 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     isConnectable?: boolean;
-    /**
-     * NearLink radio frame type. The default value is **FRAME_TYPE_1**.
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -225,7 +204,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface AdvertisingData {
@@ -235,7 +213,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuids?: string[];
@@ -244,7 +221,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     manufacturerData?: ManufacturerData[];
@@ -253,7 +229,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceData?: ServiceData[];
@@ -263,7 +238,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     includeDeviceName?: boolean;
@@ -274,7 +248,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ManufacturerData {
@@ -283,7 +256,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     manufacturerId: int;
@@ -292,7 +264,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     manufacturerData: ArrayBuffer;
@@ -303,7 +274,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ServiceData {
@@ -312,7 +282,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -321,7 +290,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceData: ArrayBuffer;
@@ -332,7 +300,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum TxPowerMode {
@@ -341,7 +308,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     ADV_TX_POWER_LOW = 1,
@@ -350,7 +316,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     ADV_TX_POWER_MEDIUM = 2,
@@ -359,7 +324,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     ADV_TX_POWER_HIGH = 3
@@ -370,7 +334,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface AdvertisingStateChangeInfo {
@@ -379,7 +342,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     advertisingId: int;
@@ -388,7 +350,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: AdvertisingState;
@@ -399,7 +360,6 @@ declare namespace advertising {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum AdvertisingState {
@@ -408,7 +368,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STARTED = 1,
@@ -417,7 +376,6 @@ declare namespace advertising {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     STOPPED = 2

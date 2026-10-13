@@ -26,7 +26,6 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace dataTransfer {
@@ -35,7 +34,6 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type ConnectionState = nearlinkConstant.ConnectionState;
@@ -62,7 +60,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function createPort(uuid: string): void;
@@ -88,7 +85,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [createPort]{@link dataTransfer.createPort(uuid: string): void} 注册端口通道。
    */
@@ -115,7 +111,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [disconnect]{@link dataTransfer.disconnect(params: ConnectionParams): Promise<void>} 断连远端设备。
    */
@@ -142,7 +137,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function disconnect(params: ConnectionParams): Promise<void>;
@@ -162,7 +156,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offConnectionStateChanged]{@link dataTransfer.offConnectionStateChanged(callback?:
    *     Callback<ConnectionResult>): void} Unsubscribes from the connection state change event of the port channel.
@@ -183,7 +176,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onConnectionStateChanged]{@link dataTransfer.onConnectionStateChanged(callback: Callback<ConnectionResult>):
    *     void} Subscribes to the connection state change event of the port channel.
@@ -212,7 +204,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function writeData(params: DataParams): Promise<void>;
@@ -232,7 +223,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offReadData]{@link dataTransfer.offReadData(callback?: Callback<DataParams>): void} 取消订阅端口通道数据接收事件。
    */
@@ -252,7 +242,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onReadData]{@link dataTransfer.onReadData(callback: Callback<DataParams>): void} 订阅端口通道数据接收事件。
    */
@@ -279,7 +268,6 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function getConnectionState(params: ConnectionStateParams): ConnectionState;
@@ -289,7 +277,6 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ConnectionParams {
@@ -298,7 +285,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -307,7 +293,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     uuid: string;
@@ -316,19 +301,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     transferMode?: TransferMode;
-    /**
-     * 表示星闪帧类型。默认值为**FRAME_TYPE_1**。
-     *
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -336,7 +311,6 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface DataParams {
@@ -345,7 +319,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -354,7 +327,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     uuid: string;
@@ -364,7 +336,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     data: ArrayBuffer;
@@ -375,7 +346,6 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ConnectionResult {
@@ -384,7 +354,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -393,7 +362,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     uuid: string;
@@ -402,7 +370,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     mtu: int;
@@ -411,7 +378,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: ConnectionState;
@@ -422,7 +388,6 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ConnectionStateParams {
@@ -431,7 +396,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -440,7 +404,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     uuid: string;
@@ -451,7 +414,6 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum TransferMode {
@@ -460,7 +422,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     BASIC = 0,
@@ -469,7 +430,6 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     RELIABLE = 1

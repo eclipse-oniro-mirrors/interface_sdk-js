@@ -26,7 +26,6 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace ssap {
@@ -35,7 +34,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type ConnectionState = nearlinkConstant.ConnectionState;
@@ -59,7 +57,6 @@ declare namespace ssap {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function createClient(address: string): Client;
@@ -81,7 +78,6 @@ declare namespace ssap {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function createServer(): Server;
@@ -95,7 +91,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface Client {
@@ -110,7 +105,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [disconnect]{@link ssap.Client.disconnect(): Promise<void>} 向服务端发起断连。
      */
@@ -127,7 +121,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [connect]{@link ssap.Client.connect(): Promise<void>} 向服务端发起连接。
      */
@@ -143,7 +136,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     close(): void;
@@ -159,35 +151,9 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getServices(): Promise<Service[]>;
-
-    /**
-     * 根据服务UUID获取服务端支持的指定服务。使用Promise异步回调。
-     *
-     * 与[getServices]{@link ssap.Client.getServices}不同，本接口仅获取匹配指定UUID的服务。
-     *
-     * 仅使用传入服务的**serviceUuid**字段在服务端定位目标服务。
-     *
-     * @permission ohos.permission.ACCESS_NEARLINK
-     * @param { Service } service - 待获取的服务。仅使用**serviceUuid**字段定位目标服务。
-     * @returns { Promise<Service[]> } Promise对象，返回匹配指定UUID的服务列表。
-     * @throws { BusinessError } 201 - Permission verification failed.
-     *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 36100003 - NearLink disabled.
-     * @throws { BusinessError } 36100043 - Invalid UUID.
-     * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
-     * @throws { BusinessError } 36100099 - Operation failed.
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    getServicesByUuid(service: Service): Promise<Service[]>;
 
     /**
      * 读取服务端属性。使用Promise异步回调。
@@ -203,33 +169,9 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     readProperty(property: Property): Promise<Property>;
-
-    /**
-     * 根据属性UUID读取服务端属性。使用Promise异步回调。
-     *
-     * 与[readProperty]{@link ssap.Client.readProperty}读取单个属性不同，本接口读取匹配指定属性UUID的所有属性。
-     *
-     * @permission ohos.permission.ACCESS_NEARLINK
-     * @param { Property } property - 待读取的服务端属性。**propertyUuid**字段指定待读取的属性。
-     * @returns { Promise<Property[]> } Promise对象，返回读取到的服务端属性。
-     * @throws { BusinessError } 201 - Permission verification failed.
-     *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 36100003 - NearLink disabled.
-     * @throws { BusinessError } 36100043 - Invalid UUID.
-     * @throws { BusinessError } 36100044 - NearLink standard UUID not allowed.
-     * @throws { BusinessError } 36100099 - Operation failed.
-     * @syscap SystemCapability.Communication.NearLink.Base
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    readPropertiesByUuid(property: Property): Promise<Property[]>;
 
     /**
      * 写入服务端属性值。使用Promise异步回调。
@@ -246,7 +188,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     writeProperty(property: Property, writeType: PropertyWriteType): Promise<void>;
@@ -267,7 +208,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     readDescriptor(descriptor: PropertyDescriptor): Promise<PropertyDescriptor>;
@@ -292,7 +232,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     writeDescriptor(descriptor: PropertyDescriptor): Promise<void>;
@@ -312,7 +251,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     setPropertyNotification(property: Property, enable: boolean): Promise<void>;
@@ -335,7 +273,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     setPropertyIndication(property: Property, enable: boolean): Promise<void>;
@@ -353,7 +290,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     requestMtuSize(mtu: int): Promise<void>;
@@ -374,7 +310,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     callMethod(method: Method): Promise<Method>;
@@ -387,7 +322,6 @@ declare namespace ssap {
      * @param { Callback<Property> } callback - 回调函数，返回服务的Property。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offPropertyChange]{@link ssap.Client.offPropertyChange(callback?: Callback<Property>): void} 取消订阅属性变化事件。
      */
@@ -400,7 +334,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onPropertyChange]{@link ssap.Client.onPropertyChange(callback: Callback<Property>): void} 订阅属性变化事件。
      */
@@ -415,7 +348,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offEventNotify]{@link ssap.Client.offEventNotify(callback?: Callback<Event>): void} 取消订阅事件通知事件。
      */
@@ -429,7 +361,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onEventNotify]{@link ssap.Client.onEventNotify(callback: Callback<Event>): void} 订阅事件通知事件。
      */
@@ -443,7 +374,6 @@ declare namespace ssap {
      * @param { Callback<ConnectionChangeState> } callback - 回调函数，返回连接状态上报参数。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offConnectionStateChange]{@link ssap.Client.offConnectionStateChange(callback?:
      *     Callback<ConnectionChangeState>): void} Unsubscribes from the connection status change event.
@@ -457,7 +387,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onConnectionStateChange]{@link ssap.Client.onConnectionStateChange(callback:
      *     Callback<ConnectionChangeState>): void} Subscribes to the connection status change event.
@@ -472,7 +401,6 @@ declare namespace ssap {
      * @param { Callback<int> } callback - 回调函数，返回协商后的MTU大小。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offMtuChange]{@link ssap.Client.offMtuChange(callback?: Callback<int>): void} 取消订阅MTU变化事件。
      */
@@ -485,7 +413,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onMtuChange]{@link ssap.Client.onMtuChange(callback: Callback<int>): void} 订阅MTU变化事件。
      */
@@ -501,7 +428,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface Server {
@@ -518,7 +444,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [removeService]{@link ssap.Server.removeService(serviceUuid: string): void} 服务端删除服务。
      */
@@ -538,7 +463,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [addService]{@link ssap.Server.addService(service: Service): void} 服务端添加服务。
      */
@@ -554,7 +478,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     close(): void;
@@ -575,7 +498,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     notifyPropertyChanged(address: string, property: Property): Promise<void>;
@@ -594,7 +516,6 @@ declare namespace ssap {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     sendResponse(response: ServerResponse): void;
@@ -607,7 +528,6 @@ declare namespace ssap {
      * @param { Callback<ConnectionChangeState> } callback - 回调函数，返回连接状态上报参数。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offConnectionStateChange]{@link ssap.Server.offConnectionStateChange(callback?:
      *     Callback<ConnectionChangeState>): void} Unsubscribes from the connection status change event.
@@ -621,7 +541,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onConnectionStateChange]{@link ssap.Server.onConnectionStateChange(callback:
      *     Callback<ConnectionChangeState>): void} Subscribes to the connection status change event.
@@ -636,7 +555,6 @@ declare namespace ssap {
      * @param { Callback<PropertyReadRequest> } callback - 回调函数，返回客户端的Property读请求参数。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offPropertyRead]{@link ssap.Server.offPropertyRead(callback?: Callback<PropertyReadRequest>): void}
           *     取消订阅客户端的读属性请求事件。
@@ -650,7 +568,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onPropertyRead]{@link ssap.Server.onPropertyRead(callback: Callback<PropertyReadRequest>): void}      *     订阅客户端的读属性请求事件。
      */
@@ -664,7 +581,6 @@ declare namespace ssap {
      * @param { Callback<PropertyWriteRequest> } callback - 回调函数，返回客户端的Property写请求参数。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offPropertyWrite]{@link ssap.Server.offPropertyWrite(callback?: Callback<PropertyWriteRequest>): void}
           *     取消订阅客户端的写属性请求事件。
@@ -678,7 +594,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onPropertyWrite]{@link ssap.Server.onPropertyWrite(callback: Callback<PropertyWriteRequest>): void}
           *     订阅客户端的写属性请求事件。
@@ -693,7 +608,6 @@ declare namespace ssap {
      * @param { Callback<int> } callback - 回调函数，返回协商后的MTU大小。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [offMtuChange]{@link ssap.Server.offMtuChange(callback?: Callback<int>): void} 取消订阅MTU变化事件。
      */
@@ -706,7 +620,6 @@ declare namespace ssap {
      *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @see [onMtuChange]{@link ssap.Server.onMtuChange(callback: Callback<int>): void} 订阅MTU变化事件。
      */
@@ -718,7 +631,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface Service {
@@ -727,7 +639,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -736,7 +647,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     properties: Property[];
@@ -746,7 +656,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     methods?: Method[];
@@ -756,7 +665,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     events?: Event[];
@@ -767,7 +675,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface Property {
@@ -776,7 +683,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -785,7 +691,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     propertyUuid: string;
@@ -794,7 +699,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     value: ArrayBuffer;
@@ -803,7 +707,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     descriptors?: PropertyDescriptor[];
@@ -814,7 +717,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     operation?: int;
@@ -826,7 +728,6 @@ declare namespace ssap {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface Method {
@@ -837,7 +738,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -847,7 +747,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     methodUuid: string;
@@ -857,7 +756,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     parameter?: ArrayBuffer;
@@ -867,7 +765,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     result?: ArrayBuffer;
@@ -879,7 +776,6 @@ declare namespace ssap {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface Event {
@@ -890,7 +786,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -900,7 +795,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     eventUuid: string;
@@ -910,7 +804,6 @@ declare namespace ssap {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     parameter?: ArrayBuffer;
@@ -921,7 +814,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface PropertyDescriptor {
@@ -930,7 +822,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -939,7 +830,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     propertyUuid: string;
@@ -948,7 +838,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     value: ArrayBuffer;
@@ -957,7 +846,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     descriptorType: PropertyDescriptorType;
@@ -966,7 +854,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     isWriteable?: boolean;
@@ -977,7 +864,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface PropertyReadRequest {
@@ -986,7 +872,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -995,7 +880,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -1004,7 +888,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     propertyUuid: string;
@@ -1013,7 +896,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     requestId: int;
@@ -1024,7 +906,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface PropertyWriteRequest {
@@ -1033,7 +914,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -1042,7 +922,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     serviceUuid: string;
@@ -1051,7 +930,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     propertyUuid: string;
@@ -1060,7 +938,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     value: ArrayBuffer;
@@ -1069,7 +946,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     requestId: int;
@@ -1078,7 +954,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     writeType: PropertyWriteType;
@@ -1089,7 +964,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ServerResponse {
@@ -1098,7 +972,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -1108,7 +981,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     requestId: int;
@@ -1117,7 +989,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     value: ArrayBuffer;
@@ -1128,7 +999,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ConnectionChangeState {
@@ -1137,7 +1007,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -1146,7 +1015,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: ConnectionState;
@@ -1157,7 +1025,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum PropertyDescriptorType {
@@ -1166,7 +1033,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PROPERTY = 1,
@@ -1175,7 +1041,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CLIENT_PROPERTY_CONFIG = 2,
@@ -1184,7 +1049,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     SERVER_PROPERTY_CONFIG = 3,
@@ -1193,7 +1057,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PROPERTY_FORMAT = 4,
@@ -1202,7 +1065,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     TYPE_VENDOR = 255
@@ -1213,7 +1075,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum Operation {
@@ -1222,7 +1083,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     READABLE = 0x01,
@@ -1231,7 +1091,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     WRITE_NO_RESPONSE = 0x02,
@@ -1240,7 +1099,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     WRITE_WITH_RESPONSE = 0x04,
@@ -1249,7 +1107,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     NOTIFY = 0x08
@@ -1260,7 +1117,6 @@ declare namespace ssap {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum PropertyWriteType {
@@ -1269,7 +1125,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     WRITE = 1,
@@ -1278,7 +1133,6 @@ declare namespace ssap {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     WRITE_NO_RESPONSE = 2

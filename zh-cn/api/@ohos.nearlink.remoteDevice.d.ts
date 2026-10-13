@@ -25,7 +25,6 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  */
 declare namespace remoteDevice {
@@ -34,7 +33,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type PairingState = nearlinkConstant.PairingState;
@@ -44,7 +42,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type ConnectionState = nearlinkConstant.ConnectionState;
@@ -54,7 +51,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type DeviceClass = nearlinkConstant.DeviceClass;
@@ -64,7 +60,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type AcbState = nearlinkConstant.AcbState;
@@ -75,7 +70,6 @@ declare namespace remoteDevice {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   type ConnectionInterval = nearlinkConstant.ConnectionInterval;
@@ -94,7 +88,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100041 - Invalid address.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   function createRemoteDevice(address: string): RemoteDevice;
@@ -119,7 +112,6 @@ declare namespace remoteDevice {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offPairingRequest]{@link remoteDevice.offPairingRequest(callback?: Callback<PairingRequestParam>): void}
       *     取消订阅配对请求事件。
@@ -140,7 +132,6 @@ declare namespace remoteDevice {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onPairingRequest]{@link remoteDevice.onPairingRequest(callback: Callback<PairingRequestParam>): void}
       *     订阅配对请求事件。
@@ -162,7 +153,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offPairingStateChange]{@link remoteDevice.offPairingStateChange(callback?: Callback<PairingStateParam>):
    *     void} Unsubscribes from the pairing status change event.
@@ -183,7 +173,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onPairingStateChange]{@link remoteDevice.onPairingStateChange(callback: Callback<PairingStateParam>): void}
       *     订阅配对状态变化事件。
@@ -207,7 +196,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offConnectionStateChange]{@link remoteDevice.offConnectionStateChange(callback?:
    *     Callback<ConnectionStateParam>): void} Unsubscribes from the connection status change event.
@@ -228,7 +216,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onConnectionStateChange]{@link remoteDevice.onConnectionStateChange(callback:
    *     Callback<ConnectionStateParam>): void} Subscribes to the connection status change event.
@@ -252,7 +239,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [offAcbStateChange]{@link remoteDevice.offAcbStateChange(callback?: Callback<AcbStateParam>): void}
       *     取消订阅逻辑链路连接状态变化事件。
@@ -273,7 +259,6 @@ declare namespace remoteDevice {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @see [onAcbStateChange]{@link remoteDevice.onAcbStateChange(callback: Callback<AcbStateParam>): void}    *     订阅逻辑链路连接状态变化事件。
    */
@@ -285,7 +270,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface RemoteDevice {
@@ -300,7 +284,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     startPairing(): Promise<void>;
@@ -318,7 +301,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     startCrediblePairing(): Promise<void>;
@@ -336,7 +318,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     removePairedDevice(): Promise<void>;
@@ -354,7 +335,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     cancelDevicePairing(): Promise<void>;
@@ -374,7 +354,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     setPairingPasscode(passcode: string): Promise<void>;
@@ -394,7 +373,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     setPairingConfirmation(accept: boolean): void;
@@ -412,7 +390,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     connect(): Promise<void>;
@@ -430,7 +407,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     disconnect(): Promise<void>;
@@ -446,7 +422,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getPairingState(): PairingState;
@@ -462,7 +437,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getDeviceName(): string;
@@ -478,7 +452,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getDeviceClass(): DeviceClass;
@@ -494,7 +467,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getConnectionState(): ConnectionState;
@@ -514,7 +486,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     setDeviceAlias(alias: string): void;
@@ -532,7 +503,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getDeviceAlias(): string;
@@ -549,7 +519,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getAcbState(): AcbState;
@@ -564,7 +533,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getDeviceModel(): DeviceModel;
@@ -580,7 +548,6 @@ declare namespace remoteDevice {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getDeviceInformation(): DeviceInformation;
@@ -598,7 +565,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     getRssiValue(): Promise<int>;
@@ -616,7 +582,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     setConnectionInterval(interval: ConnectionInterval): void;
@@ -627,7 +592,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface PairingStateParam {
@@ -637,7 +601,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -646,7 +609,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     preState: PairingState;
@@ -655,7 +617,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: PairingState;
@@ -664,7 +625,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     reason: PairingReason;
@@ -673,7 +633,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     reasonMsg?: string;
@@ -684,7 +643,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum PairingReason {
@@ -693,7 +651,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_SUCCESS = 0,
@@ -702,7 +659,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_FAILURE = 1,
@@ -711,7 +667,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_ACB_CONNECTION_FAIL = 2,
@@ -720,7 +675,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_EXCEED_ACB_MAX = 3,
@@ -729,7 +683,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_REMOTE_CANCELED = 4,
@@ -738,7 +691,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_LOCAL_CANCELED = 5,
@@ -747,7 +699,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_REASON_AUTH_FAIL = 6
@@ -758,7 +709,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface PairingRequestParam {
@@ -768,7 +718,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -777,7 +726,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     passkey: string;
@@ -786,7 +734,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     pairingType: PairingType;
@@ -797,7 +744,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum PairingType {
@@ -806,7 +752,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     NO_PASSKEY_CONFIRMATION = 0,
@@ -815,7 +760,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_TYPE_PASSCODE = 1,
@@ -824,7 +768,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     PAIRING_TYPE_NUMBER_COMPARE = 2
@@ -835,7 +778,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface ConnectionStateParam {
@@ -845,7 +787,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -854,7 +795,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     preState: ConnectionState;
@@ -863,7 +803,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: ConnectionState;
@@ -872,7 +811,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     connectionReason: ConnectionReason;
@@ -881,7 +819,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     reasonMsg?: string;
@@ -892,7 +829,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   enum ConnectionReason {
@@ -901,7 +837,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_SUCCESS = 0,
@@ -910,7 +845,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_FAILURE = 1,
@@ -919,7 +853,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_LOCAL_DISCONNECT = 2,
@@ -928,7 +861,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_REMOTE_DISCONNECT = 3,
@@ -937,7 +869,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_FAIL_ACB_CONNECTION = 4,
@@ -946,7 +877,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_FAIL_SERVICE_DISCOVERY = 5,
@@ -955,7 +885,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_FAIL_NO_AVAILABLE_SERVICE = 6,
@@ -964,7 +893,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     CONNECTION_FAIL_CONNECTION_NUM_LIMITED = 7
@@ -975,7 +903,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface AcbStateParam {
@@ -984,7 +911,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     address: string;
@@ -994,7 +920,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     state: AcbState;
@@ -1006,7 +931,6 @@ declare namespace remoteDevice {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface DeviceModel {
@@ -1016,7 +940,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     modelId: string;
@@ -1027,7 +950,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     subModelId: string;
@@ -1038,7 +960,6 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     iconId: string;
@@ -1049,7 +970,6 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    */
   interface DeviceInformation {
@@ -1059,7 +979,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     manufacturerData: string;
@@ -1070,7 +989,6 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      */
     modelData: string;
