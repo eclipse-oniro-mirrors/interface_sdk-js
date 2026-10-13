@@ -4969,17 +4969,18 @@ declare namespace wifiManager {
      * 
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
-     * @stagemodeonly
+     * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
     reasonCode?: int;
 
     /**
-     * whether the disconnection is initiated by the local device when the
+     * Whether the disconnection is initiated by the local device when the
      * Wi-Fi client left the hotspot.
+     * 
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
-     * @stagemodeonly
+     * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
     locallyGenerated?: boolean;
@@ -4990,7 +4991,7 @@ declare namespace wifiManager {
      * 
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
-     * @stagemodeonly
+     * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
     rssi?: int;
