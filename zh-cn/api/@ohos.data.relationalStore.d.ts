@@ -1779,6 +1779,18 @@ declare namespace relationalStore {
      * @since 26.0.0 dynamic&static
      */
     predicate?: RdbPredicates;
+
+    /**
+     * 是否进行全量同步。true表示将云端全量数据同步到本地，
+     * false表示仅同步自上次端云同步以来的增量数据。
+     * 默认值为false。
+     *
+     * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    fullSync?: boolean;
   }
 
   /**
