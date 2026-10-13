@@ -4779,47 +4779,49 @@ declare namespace webview {
         getZoomFactor(): double;
 
         /**
-         * Sets user data for the current navigation entry.
+         * Sets a key-value pair of user data on the current navigation entry.
+         *
+         * The user data is associated with the NavigationEntry lifecycle. The current navigation entry
+         * refers to the active entry in the navigation history. When the entry is destroyed
+         * (e.g., via history navigation or clearHistory), the user data is cleared. If a value with
+         * the same key already exists, it will be overwritten.
          *
          * @param { string } key - Key of the user data.
          * @param { string } value - Value of the user data.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         *     <br>2. Incorrect parameter types.
          * @throws { BusinessError } 17100001 - Init error.
          *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 static
+         * @since 26.2.0 static
          */
         setNavigationEntryUserData(key: string, value: string): void;
 
         /**
-         * Obtains the user data of the current navigation entry by key.
+         * Obtains the user data value associated with the specified key on the current navigation entry.
          *
          * @param { string } key - Key of the user data.
-         * @returns { string } Value of the user data with the specified key.
-         *                    If the key does not exist or the capability is not enabled, an empty string is returned.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         *     <br>2. Incorrect parameter types.
+         * @returns { string } Value of the user data, or an empty string if the key does not exist.
          * @throws { BusinessError } 17100001 - Init error.
          *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 static
+         * @since 26.2.0 static
          */
         getNavigationEntryUserData(key: string): string;
 
         /**
-         * Removes the user data with the specified key from the current navigation entry.
+         * Removes the user data associated with the specified key from the current navigation entry.
+         * If the key does not exist, this API does nothing.
          *
          * @param { string } key - Key of the user data to remove.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         *     <br>2. Incorrect parameter types.
          * @throws { BusinessError } 17100001 - Init error.
          *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 static
+         * @since 26.2.0 static
          */
         removeNavigationEntryUserData(key: string): void;
     }

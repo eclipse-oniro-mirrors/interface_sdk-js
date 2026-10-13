@@ -6312,54 +6312,6 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     executeAIPageCommand(command: string): Promise<string>;
-    /**
-     * 设置当前导航条目的用户数据。该用户数据与会话中的当前导航条目绑定，在用户导航离开后返回（包括前进/后退导航和页面缓存恢复）时保留。
-     * 使用相同key再次调用本接口会覆盖先前的值。
-     *
-     * > **说明：**
-     * >
-     * > - 用户数据仅存储在内存中，不做持久化。应用或Web引擎重启后，用户数据会被清除。
-     * >
-     * > - 若**key**或**value**为空字符串，本接口不生效。
-     *
-     * @param { string } key - 用户数据的key。若为空字符串，本接口不生效。
-     * @param { string } value - 用户数据的值。若为空字符串，本接口不生效。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 17100001 - Init error.
-     *     The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic
-     */
-    setNavigationEntryUserData(key: string, value: string): void;
-    /**
-     * 获取当前导航条目中指定key的用户数据。
-     *
-     * @param { string } key - 用户数据的key。
-     * @returns { string } 指定key的用户数据值。若key不存在或能力未使能，返回空字符串。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 17100001 - Init error.
-     *     The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic
-     */
-    getNavigationEntryUserData(key: string): string;
-    /**
-     * 移除当前导航条目中指定key的用户数据。若key不存在，本接口不生效。
-     *
-     * @param { string } key - 待移除用户数据的key。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 17100001 - Init error.
-     *     The WebviewController must be associated with a Web component.
-     * @syscap SystemCapability.Web.Webview.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic
-     */
-    removeNavigationEntryUserData(key: string): void;
 
     /**
      * 调用此接口设置当前网页的浏览器级缩放倍率。文字与图片同时缩放，页面重新布局（reflow）以适应Web组件宽度。
@@ -6389,6 +6341,53 @@ declare namespace webview {
      * @since 26.2.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * 在当前导航条目上设置用户数据的键值对。
+     *
+     * 用户数据与导航入口生命周期相关联。当前导航条目
+     * 指导航历史记录中的活动条目。当条目被销毁时
+     * （例如，通过历史导航或clearHistory）清除用户数据。如果一个具有
+     * 相同的键已经存在，它将被覆盖。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @param { string } value - 用户数据的价值。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * 获取与当前导航条目上的指定键关联的用户数据值。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @returns { string } 用户数据的值，如果键不存在，则为空字符串。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * 从当前导航条目中删除与指定键关联的用户数据。
+     * 如果密钥不存在，则此API不执行任何操作。
+     *
+     * @param { string } key - 要删除的用户数据的密钥。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
   }
 
   /**
