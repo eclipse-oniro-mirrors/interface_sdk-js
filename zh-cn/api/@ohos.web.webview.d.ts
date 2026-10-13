@@ -8116,7 +8116,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    ENTER_BACKGROUND = 1,
+    ENTER_BACKGROUND,
 
     /**
      * 系统自动清理。
@@ -8124,7 +8124,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    AUTO_CLEANUP = 2
+    AUTO_CLEANUP
   }
 
   /**
