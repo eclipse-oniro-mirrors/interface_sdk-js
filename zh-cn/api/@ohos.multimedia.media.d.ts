@@ -1410,7 +1410,7 @@ declare namespace media {
     composer?: string;
 
     /**
-     * 媒体资源的时长。不支持AVRecorder设置该属性。
+     * 媒体资源的时长，单位为毫秒（ms）。不支持AVRecorder设置该属性。
      *
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1748,8 +1748,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - 需要获取的缩略图时间点与视频帧的对应关系。
      * @param { OutputSize } outputSize - 定义帧的输出大小。默认按原图大小显示。
      * @returns { Promise<image.PixelMap> } Promise对象。返回视频缩略图对象。
-     * @throws { BusinessError  } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError  } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 20 dynamic
      */
