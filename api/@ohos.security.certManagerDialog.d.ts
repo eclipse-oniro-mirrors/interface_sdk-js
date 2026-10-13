@@ -195,8 +195,10 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManagerDialog
@@ -322,10 +324,12 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<string> } Promise used to return the certificate URI. The value contains up to 256 bytes.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - The certificate management application Hap is not preinstalled in the system,
-   *     and the capability is not supported. [since 26.0.0]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system. [since 26.0.0]
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the installation operation.
@@ -355,11 +359,12 @@ declare namespace certificateManagerDialog {
    *     256 bytes.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
    *     permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. A mandatory parameter is left
-   *     unspecified.
-   *     2. Incorrect parameter type. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - The certificate management application Hap is not preinstalled in the system,
-   *     and the capability is not supported. [since 26.0.0]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. A mandatory parameter is left unspecified;
+   *     <br>2. Incorrect parameter type;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system. [since 26.0.0]
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the authorization.
@@ -382,8 +387,10 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700003 - Show the certificate detail dialog failed, such as the certificate is in an
@@ -409,8 +416,10 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the uninstallation operation.
@@ -463,7 +472,8 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<CertReference> } Promise used to return the result of the authorization certificate reference.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
    *     permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error; 4. Call other service failed. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the authorization.

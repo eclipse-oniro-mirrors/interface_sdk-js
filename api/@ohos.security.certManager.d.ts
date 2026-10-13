@@ -41,7 +41,7 @@ declare namespace certificateManager {
    */
   export enum CMErrorCode {
     /**
-     * The application does not have the permission to call the API.
+     * Permission verification failed. The application does not have the permission required to call the API.
      *
      * @syscap SystemCapability.Security.CertificateManager
      * @since 11 dynamic
@@ -726,8 +726,10 @@ declare namespace certificateManager {
    *     Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500003 - The keystore is in an invalid format or the keystore password is incorrect.
@@ -757,8 +759,10 @@ declare namespace certificateManager {
    *     [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500003 - The keystore is in an invalid format or the keystore password is incorrect.
@@ -780,8 +784,10 @@ declare namespace certificateManager {
    *     **err** is **null**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -800,8 +806,10 @@ declare namespace certificateManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -822,8 +830,10 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -862,8 +872,10 @@ declare namespace certificateManager {
    *     Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist. Possible causes:
@@ -884,8 +896,10 @@ declare namespace certificateManager {
    *     **credential** in the [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -907,8 +921,10 @@ declare namespace certificateManager {
    *     **err** is **null** and **data** is the obtained **CMHandle**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -931,8 +947,10 @@ declare namespace certificateManager {
    * @returns { Promise<CMHandle> } Promise used to return the operation result, that is, the **CMHandle** object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -955,8 +973,10 @@ declare namespace certificateManager {
    *     **err** is **null**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -974,8 +994,10 @@ declare namespace certificateManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -995,8 +1017,10 @@ declare namespace certificateManager {
    *     [CMResult]{@link certificateManager.CMResult} object. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1016,8 +1040,10 @@ declare namespace certificateManager {
    *     **err** is **null**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1031,15 +1057,17 @@ declare namespace certificateManager {
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER
    * @param { Uint8Array } handle - Handle of initialization. You need to invoke the init method to obtain the handle.
-   * @param { Uint8Array } signature - Signature data used for signature verification.  This parameter does not need to
+   * @param { Uint8Array } [signature] - Signature data used for signature verification.  This parameter does not need to
    *     be specified for signature operation.
    * @returns { Promise<CMResult> } Promise used to return the signature of a signing operation, that is, **outData** in
    *     the [CMResult]{@link certificateManager.CMResult} object. For a signature verification operation, the promise
    *     returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1059,8 +1087,10 @@ declare namespace certificateManager {
    *     **err** is **null**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1078,8 +1108,10 @@ declare namespace certificateManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1097,8 +1129,10 @@ declare namespace certificateManager {
    *     obtained, that is, **credential** in the [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -1120,8 +1154,10 @@ declare namespace certificateManager {
    *     means authorized; the value **false** means the opposite.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1155,8 +1191,10 @@ declare namespace certificateManager {
    *     [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -1206,9 +1244,10 @@ declare namespace certificateManager {
    *
    * @param { CertStoreProperty } property - Storage information about the target certificate.
    * @returns { string } Certificate storage path.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
-   *     unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed. For example, CertStoreProperty.certType
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed. For example, CertStoreProperty.certType
    *     is set to CA_CERT_USER, but CertStoreProperty.certScope is not specified.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
@@ -1230,8 +1269,10 @@ declare namespace certificateManager {
    *     certificate is installed successfully.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500003 - Indicates that the certificate is in an invalid format.
@@ -1359,8 +1400,10 @@ declare namespace certificateManager {
    *     [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500003 - The keystore is in an invalid format or the keystore password is incorrect.
@@ -1380,8 +1423,10 @@ declare namespace certificateManager {
    *     [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
@@ -1425,8 +1470,10 @@ declare namespace certificateManager {
    *     256 bytes.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1518,9 +1565,9 @@ declare namespace certificateManager {
    * @returns { Promise<CMResult> } Promise used to return the obtained USB Key credential details.
    *     The return value is the credentialDetailList attribute of the
    *     [CMResult]{@link certificateManager.CMResult} object.
-   * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported because the HUKS service is not support Ukey feature.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1557,6 +1604,10 @@ declare namespace certificateManager {
    * application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
+   * @param { CertAlgorithm } [certAlg] - Indicates the certificate algorithm type of the
+   *     system root certificate store. [since 26.2.0]
+   *     <br>Default value: Default behavior: Obtain the system certificate list of Chinese cryptographic algorithms and
+   *     international algorithms.
    * @returns { Promise<CMResult> } Promise used to return the operation result, that is, **certList** in the
    *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed.
@@ -1569,7 +1620,7 @@ declare namespace certificateManager {
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
-  function getSystemTrustedCertificateList(): Promise<CMResult>;
+  function getSystemTrustedCertificateList(certAlg?: CertAlgorithm): Promise<CMResult>;
 
   /**
    * Obtains details about a CA certificate trusted by the system. This API is called only by the certificate management
@@ -1583,8 +1634,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br>Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br>Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -1609,9 +1660,9 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br>Possible causes: the URI is null or the URI format is wrong,
-   *     <br> the certType's value is invalid or not supported.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. The URI is null or the URI format is wrong;
+   *     <br>2. The certType's value is invalid or not supported.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate does not exist.
@@ -1697,8 +1748,8 @@ declare namespace certificateManager {
    *     [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter verification failed. Possible causes:
-   *     <br>the certData parameter is empty or exceeds the maximum length .
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>The certData parameter is empty or exceeds the maximum length.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500003 - Indicates that the certificate is in an invalid format.
@@ -1742,8 +1793,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed. Possible causes:
-   *     <br>the keystore parameter is empty or exceeds the maximum length.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>The keystore parameter is empty or exceeds the maximum length.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500003 - Indicates that the certificate is in an invalid format.
@@ -1766,8 +1817,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br> Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br> Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1810,8 +1861,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br> Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br> Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1833,8 +1884,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br> Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br> Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1856,8 +1907,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br> Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br> Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1902,7 +1953,7 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>The keystore parameter is empty or exceeds the maximum length.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
@@ -1927,8 +1978,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br> Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br> Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1949,8 +2000,8 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br> The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter verification failed.
-   *     <br> Possible causes: the URI is null or the URI format is wrong.
+   * @throws { BusinessError } 401 - [Sync] Parameter error.
+   *     <br> Possible causes: The URI is null or the URI format is wrong.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - Indicates that the certificate does not exist.
@@ -1971,7 +2022,7 @@ declare namespace certificateManager {
    *     the [CMResult]{@link certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported because the HUKS service is not support Ukey feature.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error.
    * @throws { BusinessError } 17500010 - Indicates that access USB Key service failed.
@@ -2020,7 +2071,7 @@ declare namespace certificateManager {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported because the HUKS service is not support Ukey feature.
    * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 17500002 - The certificate identified by keyUri does not exist
