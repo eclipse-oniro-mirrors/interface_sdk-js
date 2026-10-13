@@ -790,6 +790,25 @@ declare class XComponentAttribute extends CommonMethod<XComponentAttribute> {
    * @since 18 dynamic
    */
   enableTransparentLayer(enabled: boolean): XComponentAttribute;
+
+  /**
+   * Sets the buffer queue count for the XComponent.
+   * Only takes effect for XComponent of type SURFACE or TEXTURE.
+   * If the value is greater than 5, it is clamped to 5;
+   * if the value is less than 2, it is clamped to 2;
+   * if a non-integer value is passed, the default value 5 is used.
+   * Modifying the buffer queue count during buffer rotation may cause frame drops.
+   *
+   * @param { number } count - Buffer queue count. The value ranges from 2 to 5.
+   *     <br>Default value: **5**.
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  bufferQueueCount(count: number): XComponentAttribute;
 }
 
 /**

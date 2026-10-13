@@ -453,6 +453,24 @@ export declare interface XComponentAttribute extends CommonMethod {
    */
   default hdrBrightness(brightness: double | undefined, type?: HdrType): this;
   /**
+   * Sets the buffer queue count for the XComponent.
+   * Only takes effect for XComponent of type SURFACE or TEXTURE.
+   * If the value is greater than 5, it is clamped to 5;
+   * if the value is less than 2, it is clamped to 2;
+   * if a non-integer value is passed, the default value 5 is used.
+   * Modifying the buffer queue count during buffer rotation may cause frame drops.
+   *
+   * @param { int } count - Buffer queue count. The value ranges from 2 to 5.
+   *     <br>
+   *     <br>The value should be an integer.
+   *     <br>The value should be an integer. Default value: **5**.
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default bufferQueueCount(count: int): this;
+  /**
    * Call attributeModifier.
    *
    * @param { AttributeModifier<XComponentAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
