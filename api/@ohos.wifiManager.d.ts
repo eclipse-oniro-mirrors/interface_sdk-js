@@ -4992,6 +4992,39 @@ declare namespace wifiManager {
      * @since 23 static
      */
     ipAddress: string;
+
+    /**
+     * The client reason code of the Wi-Fi client leaving the hotspot, as
+     * defined in the IEEE 802.11 protocol. The default value is 1.
+     * 
+     * @syscap SystemCapability.Communication.WiFi.AP.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    reasonCode?: int;
+
+    /**
+     * Whether the disconnection is initiated by the local device when the
+     * Wi-Fi client left the hotspot.
+     * 
+     * @syscap SystemCapability.Communication.WiFi.AP.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    locallyGenerated?: boolean;
+
+    /**
+     * The Received Signal Strength Indicator (RSSI) in dBm of the Wi-Fi
+     * client when it left the hotspot. The default value is -127.
+     * 
+     * @syscap SystemCapability.Communication.WiFi.AP.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    rssi?: int;
   }
 
   /**
