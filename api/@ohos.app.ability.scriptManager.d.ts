@@ -50,7 +50,7 @@ declare namespace scriptManager {
    */
   interface ArkTSScriptInfo {  
   /**
-   * Request code for identifying the current operation
+   * Request code used to identify the current operation.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly
@@ -73,7 +73,7 @@ declare namespace scriptManager {
   readonly toolCallId?: string;
 
    /**
-    * The context of the bound ability.
+    * Context of the bound ability.
     *
     * @syscap SystemCapability.Ability.AgentRuntime.Core
     * @stagemodelonly
@@ -84,7 +84,7 @@ declare namespace scriptManager {
 }
 
   /**
-   * Result of arkTS script execution.
+   * Defines the result of ArkTS script execution.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly
@@ -103,7 +103,7 @@ declare namespace scriptManager {
   code: number;
   
   /**
-   * Indicates execute result.
+   * Script execution result.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly
@@ -113,7 +113,7 @@ declare namespace scriptManager {
   result?: Record<string, Object>;
   
   /**
-   * Indicates the URIs will be authorized to the caller.
+   * List of URIs to be authorized to the caller.
    *
    * @type { ?Array<string> }
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -144,9 +144,9 @@ declare namespace scriptManager {
    * Completes the ArkTS script execution of an app and reports the execution result. This API uses a promise
    * to return the result.
    *
-   * @param { Context } context - Ability context, Used for temporary file authorization.
-   * @param { string } requestCode - Identifying the current operation. It is from ArkTSScriptInfo.requestCode.
-   * @param { ExecuteResult } result - The result of arkTS script execution.
+   * @param { Context } context - Ability context, used for temporary file authorization.
+   * @param { string } requestCode - Request code used to identify the current operation.
+   * @param { ExecuteResult } result - Execution result of the ArkTS script.
    * @returns { Promise<void> } - Promise object that returns no value.
    * @throws { BusinessError } 16000020 - The context is not ability context.
    * @throws { BusinessError } 16000003 - The specified ID does not exist.
