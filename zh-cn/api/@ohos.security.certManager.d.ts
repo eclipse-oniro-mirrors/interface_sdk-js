@@ -1564,8 +1564,6 @@ declare namespace certificateManager {
    * 获取系统信任的CA证书列表。该接口仅由证书管理应用调用。该接口使用Promise返回结果。
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
-   * @param { CertAlgorithm } [certAlg] - 表示系统根证书库的证书算法类型。 [since 26.2.0]
-   *     <br>默认值：缺省行为：获取国密和国际算法的系统证书列表。
    * @returns { Promise<CMResult> } Promise用于返回操作结果，即
    *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult}对象中的**certList**。
    * @throws { BusinessError } 201 - Permission verification failed.
@@ -1578,7 +1576,7 @@ declare namespace certificateManager {
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
-  function getSystemTrustedCertificateList(certAlg?: CertAlgorithm): Promise<CMResult>;
+  function getSystemTrustedCertificateList(): Promise<CMResult>;
 
   /**
    * 获取系统信任的CA证书详情，仅证书管理应用调用。使用Promise异步回调。
