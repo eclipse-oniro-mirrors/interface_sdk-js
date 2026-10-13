@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 鼠标光标
+ * @file 鼠标光标和光标类的外设
  * @kit InputKit
  */
 
@@ -23,7 +23,7 @@ import type { AsyncCallback } from './@ohos.base';
 import type image from './@ohos.multimedia.image';
 
 /**
- * 鼠标光标管理模块，用于查询和设置鼠标光标相关属性。
+ * 本模块提供鼠标光标和光标类型外设的管理功能，用于查询和设置鼠标光标和光标类型外设的相关属性。
  *
  * @syscap SystemCapability.MultimodalInput.Input.Pointer
  * @atomicservice [since 12]
