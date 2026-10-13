@@ -42,8 +42,8 @@ declare type Resource = import('../api/global/resource').Resource;
 /**
  * 长度类型，用于描述尺寸单位。
  *
- * @unionmember { string } 需要显式指定[像素单位]{@link ./common}，如'10px'，也可设置百分比字符串，如'100%'。<br/>**说明：** <br/>不指定像素单位时，默认单位vp，如'1
- *     0'，等同于10。
+ * @unionmember { string } 需要显式指定[像素单位]{@link ./common}，如'10px'，也可设置百分比字符串，如'100%'。<br/>**说明：** <br/>不指定像素单位时，
+ * 默认单位vp，如'10'，等同于10。
  * @unionmember { number } 默认单位vp。
  * @unionmember { Resource } 资源引用类型，引入系统资源或者应用资源中的尺寸。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -70,7 +70,7 @@ declare type PX = `${number}px`;
 /**
  * 长度类型，用于描述以vp为单位的长度。
  *
- * @unionmember { `${number}vp` } Viewport pixel unit. The unit vp can be included, for example, **'10vp'**.
+ * @unionmember { `${number}vp` } 需要指定数字或vp像素单位，如10或'10vp'
  * @unionmember { number } 需要指定数字，如10。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -243,9 +243,7 @@ declare interface LocalizedPadding {
   /**
    * 右内边距，组件内元素距组件右边界的尺寸。
    *
-   * 从右至左显示语言模式下为
-   *
-   * 左内边距，组件内元素距组件左边界的尺寸。
+   * 从右至左显示语言模式下为左内边距，组件内元素距组件左边界的尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -271,9 +269,7 @@ declare interface LocalizedPadding {
   /**
    * 左内边距，组件内元素距组件左边界的尺寸。
    *
-   * 从右至左显示语言模式下为
-   *
-   * 右内边距，组件内元素距组件右边界的尺寸。
+   * 从右至左显示语言模式下为右内边距，组件内元素距组件右边界的尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -973,8 +969,8 @@ declare type Offset = {
  *
  * @unionmember { Color } 颜色枚举值。
  * @unionmember { number } HEX格式颜色，支持rgb或者argb。示例：0xffffff，0xffff0000。number无法识别传入位数，格式选择依据值的大小，例如0x00ffffff作rgb格式解析。
- * @unionmember { string } 支持rgb、rgba或者argb的格式颜色。<br/>rgb格式颜色示例：'#ffffff'、'rgb(255, 100, 255)'。<br/>rgba格式颜色示例：'rgba(25
- *     5, 100, 255, 0.5)'。<br/>argb格式颜色示例：'#ff000000'。
+ * @unionmember { string } 支持rgb、rgba或者argb的格式颜色。<br/>rgb格式颜色示例：'#ffffff'、'rgb(255, 100, 255)'。<br/>rgba格式颜色示例：'rgba(255, 100, 255, 0.5)'。
+ * <br/>argb格式颜色示例：'#ff000000'。
  * @unionmember { Resource } 使用引入资源的方式，引入系统资源或者应用资源中的颜色。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2012,8 +2008,7 @@ declare interface AccessibilityOptions {
    * 如果聚合组件内有多个相同类型的子组件，则以组件树上该聚合组件下的第一个查找到的子组件为控制组件。
    * 如果与stateControllerRoleType同时配置，则优先匹配ID一致的组件。
    * 不支持跨进程嵌入式组件内的特定类型，例如：卡片、EmbeddedUIExtension。
-   * 默认值：无指定组件
-   * 。
+   * 默认值：无指定组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2055,8 +2050,7 @@ declare interface AccessibilityOptions {
    * 当前只支持无障碍点击操作。
    * 如果与actionControllerRoleType同时配置，则优先匹配ID一致的组件。
    * 不支持跨进程嵌入式组件内的特定类型，例如：卡片、EmbeddedUIExtension。
-   * 默认值：无指定组件
-   * 。
+   * 默认值：无指定组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2209,7 +2203,7 @@ declare interface ScrollBarMargin {
 declare interface CacheCountInfo {
   /**
    * 最小缓存数，当实际缓存数小于最小缓存数时，在滚动动画帧间空闲时隙加载缓存。小于0时按1处理。
-   * 取值范围：[0, +∞)，。
+   * 取值范围：[0, +∞)。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2220,7 +2214,7 @@ declare interface CacheCountInfo {
   minCount: number;
   /**
    * 最大缓存数，当实际缓存数大于最大缓存数时，缓存内容会回收或释放，当UI空闲时（无动画或用户操作），会加载缓存到最大缓存数。小于minCount时按minCount处理。
-   * 取值范围：[minCount, +∞)，。
+   * 取值范围：[minCount, +∞)。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
