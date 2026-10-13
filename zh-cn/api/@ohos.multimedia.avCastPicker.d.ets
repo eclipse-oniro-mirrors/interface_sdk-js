@@ -118,6 +118,19 @@ declare struct AVCastPicker {
    * @since 11 dynamic
    */
   onStateChange?: (state: AVCastPickerState) => void;
+
+  /**
+   * 表示投播组件AVCastPicker是否是独立进程。
+   * 如果没有设置这个参数，并且应用页面上存在多个投播组件AVCastPicker，每个投播组件AVCastPicker都有独立的进程。
+   * 默认值：true
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVCast
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  @Prop
+  isIndependent?: boolean;
 }
 
 export default AVCastPicker;
