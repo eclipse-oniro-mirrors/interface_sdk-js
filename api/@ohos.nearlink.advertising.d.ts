@@ -19,7 +19,6 @@
  */
 
 import type { Callback } from '@ohos.base';
-import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
  * This module provides Nearlink advertising functions, including starting and stopping advertising as well as

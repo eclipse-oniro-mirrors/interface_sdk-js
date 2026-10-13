@@ -19,7 +19,6 @@
  */
 
 import type { Callback } from '@ohos.base';
-import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
  * 本模块提供了发送星闪广播的相关功能，包括启动广播、停止广播、订阅广播状态等。
