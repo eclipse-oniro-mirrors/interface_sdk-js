@@ -39,6 +39,7 @@ declare namespace certificateManager {
    */
   export enum CMErrorCode {
     /**
+     * 表示应用程序无权限调用接口。
      *
      * @syscap SystemCapability.Security.CertificateManager
      * @since 11 dynamic
