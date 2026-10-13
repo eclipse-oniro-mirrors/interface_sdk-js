@@ -992,7 +992,17 @@ declare namespace formInfo {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    FORM_FONT_WEIGHT_SCALE_KEY = 'ohos.extra.param.key.form_font_weight_scale'
+    FORM_FONT_WEIGHT_SCALE_KEY = 'ohos.extra.param.key.form_font_weight_scale',
+
+    /**
+     * 指定卡片编辑能力的深浅模式，-1是自动，0是深色模式，1是浅色模式
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.key.form_edit_color_mode'
   }
 
   /**
