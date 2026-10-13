@@ -2438,7 +2438,7 @@ declare class ScreenCaptureHandler {
 
   /**
    * Obtains the origin of the web page. This method is used to verify the trustworthiness of the request origin, or to
-   * implement a whitelist mechanism to control which web pages can perform screen capture.
+   * implement a trustlist mechanism to control which web pages can perform screen capture.
    *
    * @returns { string } Origin of the web page that initiates the current screen capture request.
    * @syscap SystemCapability.Web.Webview.Core
