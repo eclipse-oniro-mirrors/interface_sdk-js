@@ -182,7 +182,8 @@ export interface RenderResourceFactory {
   /**
    * 根据指定场景资源参数创建一个着色器，使用Promise异步回调。
    *
-   * @param { SceneResourceParameters } params - 创建着色器的参数。详细.shader文件格式请参考.shader资源文件格式要求。
+   * @param { SceneResourceParameters } params - 创建着色器的参数。
+   *     详细.shader文件格式请参考[].shader资源文件格式要求](docroot://graphics3d/arkgraphics3D-shader-resource.md)。
    * @returns { Promise<Shader> } Promise对象，返回创建的着色器对象。
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @since 20 dynamic
