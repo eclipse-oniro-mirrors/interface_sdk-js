@@ -18,7 +18,27 @@
  * @kit ArkTS
  */
 
+import collections from './@arkts.collections';
 import lang from './@arkts.lang';
+
+/**
+ * 支持原子元素操作的ArkTS整数TypedArray类型。
+ *
+ * @unionmember { collections.Int8Array }
+ * @unionmember { collections.Uint8Array }
+ * @unionmember { collections.Int16Array }
+ * @unionmember { collections.Uint16Array }
+ * @unionmember { collections.Int32Array }
+ * @unionmember { collections.Uint32Array }
+ * @syscap SystemCapability.Utils.Lang
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamiconly
+ */
+type AtomicIntegerArray = collections.Int8Array | collections.Uint8Array |
+  collections.Int16Array | collections.Uint16Array |
+  collections.Int32Array | collections.Uint32Array;
 
 /**
  *
@@ -28,6 +48,198 @@ import lang from './@arkts.lang';
  * @since 12 dynamiconly
  */
 declare namespace utils {
+  /**
+   * 为以ArkTS ArrayBuffer为底层缓冲区的整数TypedArray提供原子操作。
+   * 与ECMAScript内置Atomics对象不同，此类通过utils模块提供，仅包含面向ArkTS TypedArray的静态方法。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamiconly
+   */
+  class Atomics {
+    /**
+     * 以原子方式将指定值与目标元素相加，并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 要相加的值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static add(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * 以原子方式执行按位与运算，并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 用于按位与运算的值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static and(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * 目标元素与预期值相等时，以原子方式替换并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } expectedValue - 用于与目标元素比较的值。
+     * @param { number } replacementValue - 比较成功时存储的值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static compareExchange(typedArray: AtomicIntegerArray, index: number, expectedValue: number,
+      replacementValue: number): number;
+    /**
+     * 以原子方式替换目标元素，并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 替换值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static exchange(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * 返回指定字节大小的原子操作是否无锁。
+     *
+     * @param { number } size - 原子操作的字节大小。
+     * @returns { boolean } 如果指定大小的原子操作无锁，则返回true；否则返回false。
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static isLockFree(size: number): boolean;
+    /**
+     * 以原子方式读取并返回目标元素。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @returns { number } 目标元素的值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static load(typedArray: AtomicIntegerArray, index: number): number;
+    /**
+     * 以原子方式执行按位或运算，并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 用于按位或运算的值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static or(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * 以原子方式存储值，并返回转换后的存储值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 要存储的值。
+     * @returns { number } 存入目标元素的转换后值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static store(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * 以原子方式从目标元素减去指定值，并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 要减去的值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static sub(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * 当指定Int32元素等于预期值时等待。
+     *
+     * @param { collections.Int32Array } typedArray - 包含目标元素的Int32Array。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 预期值。
+     * @param { number } [timeout] - 最长等待时间，单位为毫秒，默认值为正无穷。
+     * @returns { 'ok' | 'not-equal' | 'timed-out' } 等待操作的结果。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static wait(typedArray: collections.Int32Array, index: number, value: number,
+      timeout?: number): 'ok' | 'not-equal' | 'timed-out';
+    /**
+     * 通知等待指定Int32元素的线程，并返回已通知的线程数。
+     *
+     * @param { collections.Int32Array } typedArray - 包含目标元素的Int32Array。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } [count] - 要通知的最大等待线程数，默认通知全部等待线程。
+     * @returns { number } 已通知的等待线程数。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static notify(typedArray: collections.Int32Array, index: number, count?: number): number;
+    /**
+     * 以原子方式执行按位异或运算，并返回操作前的值。
+     *
+     * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
+     * @param { number } index - 目标元素的索引。
+     * @param { number } value - 用于按位异或运算的值。
+     * @returns { number } 操作前的元素值。
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static xor(typedArray: AtomicIntegerArray, index: number, value: number): number;
+  }
   /**
    * 为了解决多并发实例间的数据竞争问题，ArkTS语言基础库引入了异步锁能力。为了开发者的开发效率，AsyncLock对象支持跨并发实例引用传递。
    *
