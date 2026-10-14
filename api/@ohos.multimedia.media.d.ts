@@ -6307,6 +6307,44 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getID(): string;
+
+    /**
+     * Set the audio and video feature filtering items of the MediaSource,
+     * After the user defines the audio and video filtering items of the MediaSource,
+     * When playing or downloading MediaSource data offline,
+     * Preferentially perform a corresponding operation in the filtering feature.
+     * 
+     * @param { TrackSelectionFilter } filter - Specifies the audio and video features of the pre-downloaded streaming
+     *     media.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setTrackSelectionFilter(filter: TrackSelectionFilter): void;
+
+    /**
+     * Sets the matching character string of the MediaSource during retrieval.
+     * After a resource corresponding to the MediaSource is cached to the local host, the resource is played again,
+     * The CDN path may change. As a result, the matching fails.
+     * You can set the matching character string to solve this problem.
+     * 
+     * @param { string } key - Key value set for the MediaSource to match in the loacl cache.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRetrieveKey(key: string): void;
+
+    /**
+     * Obtains the configured audio and video feature filtering values.
+     * 
+     * @returns { TrackSelectionFilter | undefined } If the TrackSelectionFilter object exists,
+     *     the TrackSelectionFilter object is returned. Otherwise, the TrackSelectionFilter object is returned.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getTrackSelectionFilter(): TrackSelectionFilter | undefined;
   }
 
   /**
