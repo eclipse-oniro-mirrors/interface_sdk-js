@@ -224,7 +224,7 @@ declare namespace hidebug {
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string) : void;
- 
+
   /**
    * Dumps VM heap data and clears the nodeId cache.
    *
