@@ -48,7 +48,7 @@ declare namespace osAccount {
    * Obtains the OS account sub-profile manager.
    *
    * @returns { OsAccountSubProfileManager } Instance object of the OS account sub-profile manager.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Account.OsAccount
    * @systemapi
    * @stagemodelonly
@@ -60,7 +60,7 @@ declare namespace osAccount {
    * Obtains the current OS account authorization manager.
    *
    * @returns { AuthorizationManager } Instance object of the OS account authorization manager.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Account.OsAccount
    * @systemapi
    * @stagemodelonly
@@ -95,8 +95,9 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid localId.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -118,8 +119,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid localId.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -146,9 +148,11 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { long } displayId - Logical display ID.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Account not found.
      * @throws { BusinessError } 12300008 - Restricted Account.
@@ -168,8 +172,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -292,7 +297,8 @@ declare namespace osAccount {
      * @param { number } localId - ID of the target OS account.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means the
      *     account is activated; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -316,7 +322,8 @@ declare namespace osAccount {
      * @param { number } localId - ID of the target OS account.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the account is
      *     activated; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -335,8 +342,9 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the account is
      *     activated; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -405,7 +413,8 @@ declare namespace osAccount {
      *     [Constraint](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) to check.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means the
      *     specified constraint is enabled; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -432,7 +441,8 @@ declare namespace osAccount {
      *     [Constraint](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) to check.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the specified
      *     constraint is enabled; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -469,8 +479,9 @@ declare namespace osAccount {
      *     [Constraint](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) to check.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the specified
      *     constraint is enabled; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -649,7 +660,8 @@ declare namespace osAccount {
      * @param { number } localId - ID of the target OS account.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means the OS
      *     account has been verified; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -674,7 +686,8 @@ declare namespace osAccount {
      *     whether the current OS account has been verified.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the OS account has been
      *     verified; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -705,8 +718,9 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account. This parameter specifies the OS account to be checked.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the OS account has been
      *     unlocked; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -725,8 +739,9 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted. [since 24]
@@ -748,8 +763,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted. [since 24]
@@ -773,8 +789,9 @@ declare namespace osAccount {
      *     <br>The value should be an integer.
      * @param { RemoveOsAccountOptions } options - Options for removing an OS account.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted.
@@ -800,8 +817,9 @@ declare namespace osAccount {
      *     means to remove constraints.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -825,8 +843,9 @@ declare namespace osAccount {
      * @param { boolean } enable - Set or remove constraints. The value **true** means to set constraints, and **false**
      *     means to remove constraints.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -848,8 +867,9 @@ declare namespace osAccount {
      * @param { string } localName - Account name to set. The value cannot exceed 1024 characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -870,8 +890,9 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { string } localName - Account name to set. The value cannot exceed 1024 characters.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -902,7 +923,8 @@ declare namespace osAccount {
      * @permission ohos.permission.GET_LOCAL_ACCOUNT_IDENTIFIERS
      * @param { int } localId - Local ID of the target OS account.
      * @returns { Promise<string> } Promise used to return the name of the target OS account.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Account not found.
      * @throws { BusinessError } 12300008 - Restricted Account.
@@ -956,7 +978,8 @@ declare namespace osAccount {
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the number of created OS accounts. If the operation fails, **err** is an
      *     error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -972,7 +995,8 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @returns { Promise<int> } Promise used to return the number of created OS accounts.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @since 9 dynamic
@@ -1049,7 +1073,8 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.GET_LOCAL_ACCOUNT_IDENTIFIERS
      * @returns { Promise<int[]> } Promise used to return the local IDs of all non-system-level OS accounts.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
@@ -1188,7 +1213,8 @@ declare namespace osAccount {
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the ID of the OS account associated with the domain account. Otherwise,
      *     **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1207,7 +1233,8 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @param { DomainAccountInfo } domainInfo - Domain account information.
      * @returns { Promise<int> } Promise used to return the ID of the OS account associated with the domain account.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1226,7 +1253,7 @@ declare namespace osAccount {
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the maximum number of OS accounts that can be created. Otherwise, **err**
      *     is an error object.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1241,7 +1268,7 @@ declare namespace osAccount {
      * Queries the maximum number of OS accounts that can be created. This API uses a promise to return the result.
      *
      * @returns { Promise<int> } Promise used to return the result.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
@@ -1255,7 +1282,7 @@ declare namespace osAccount {
      * result.
      *
      * @returns { Promise<int> } Promise used to return the result.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
@@ -1317,7 +1344,8 @@ declare namespace osAccount {
      *     successful, **err** is **null** and **data** is all
      *     [constraints](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) obtained.
      *     Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1342,7 +1370,8 @@ declare namespace osAccount {
      * @returns { Promise<Array<string>> } Promise used to return all the
      *     [constraints](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) enabled for the
      *     OS account.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1362,8 +1391,9 @@ declare namespace osAccount {
      * @returns { Promise<Array<string>> } Promise used to return all the enabled
      *     [constraints](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) of the OS
      *     account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1383,8 +1413,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<Array<OsAccountInfo>> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is a list of all created OS accounts. Otherwise, **data** is an
      *     error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1401,8 +1432,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @returns { Promise<Array<OsAccountInfo>> } Promise used to return the information about all the OS accounts
      *     created.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
@@ -1490,8 +1522,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { long } displayId - Logical display ID.
      * @returns { Promise<int> } Promise used to return the OS account ID.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300017 - The foreground OS account is not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -1507,8 +1540,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<long> } Promise used to return the logical display ID.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300017 - The foreground OS account is not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -1526,8 +1560,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<OsAccountInfo> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the created OS account. Otherwise, **err** is an error
      *     object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted. [since 24]
@@ -1555,8 +1590,9 @@ declare namespace osAccount {
      * @param { CreateOsAccountOptions } [options] - Options for creating an OS account. By default, this parameter is
      *     left blank. [since 12]
      * @returns { Promise<OsAccountInfo> } Promise used to return the information about the created OS account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted. [since 24]
@@ -1586,12 +1622,15 @@ declare namespace osAccount {
      * @param { AsyncCallback<OsAccountInfo> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the created OS account. Otherwise, **err** is an error
      *     object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted. [since 24]
-     * @throws { BusinessError } 801 - Capability not supported. [since 12]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported. [since 12]
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid type or domainInfo.
      * @throws { BusinessError } 12300004 - Account already exists.
@@ -1621,12 +1660,15 @@ declare namespace osAccount {
      * @param { CreateOsAccountForDomainOptions } [options] - Optional parameters for creating the account. By default,
      *     this parameter is left blank. [since 12]
      * @returns { Promise<OsAccountInfo> } Promise used to return the information about the created OS account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted. [since 24]
-     * @throws { BusinessError } 801 - Capability not supported. [since 12]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported. [since 12]
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid type, domainInfo or options.
      * @throws { BusinessError } 12300004 - Account already exists.
@@ -1693,7 +1735,8 @@ declare namespace osAccount {
      * @param { AsyncCallback<OsAccountInfo> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the OS account information obtained. Otherwise, **data** is
      *     an error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @since 9 dynamiconly
@@ -1713,7 +1756,8 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS [since 9 - 9]
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.GET_LOCAL_ACCOUNTS [since 10]
      * @returns { Promise<OsAccountInfo> } Promise used to return the OS account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @since 9 dynamiconly
@@ -1727,8 +1771,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.GET_LOCAL_ACCOUNTS
      * @returns { Promise<OsAccountInfo> } Promise used to return the OS account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
@@ -1746,8 +1791,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<OsAccountInfo> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the OS account information obtained. Otherwise, **data** is
      *     an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1766,8 +1812,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<OsAccountInfo> } Promise used to return the OS account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1787,7 +1834,8 @@ declare namespace osAccount {
      * @permission ohos.permission.GET_DOMAIN_ACCOUNTS and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { number } localId - ID of the target OS account.
      * @returns { Promise<DomainAccountInfo> } Promise used to return the domain account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1804,7 +1852,8 @@ declare namespace osAccount {
      * @permission ohos.permission.GET_DOMAIN_ACCOUNTS and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<DomainAccountInfo | null> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - OS account not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -1883,8 +1932,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<OsAccountType> } Promise used to return the type of the OS account obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1906,8 +1956,9 @@ declare namespace osAccount {
      * @param { SetOsAccountTypeOptions } [options] - Options for setting the OS account type. This parameter is left
      *     empty by default.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
      *     1. The operation is restricted by the OS-account constraint.
      *     2. The required privilege for the operation has not been granted.
@@ -1967,7 +2018,8 @@ declare namespace osAccount {
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the distributed virtual device ID obtained. Otherwise, **data** is an
      *     error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -1982,7 +2034,8 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC or ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @returns { Promise<string> } Promise used to return the distributed virtual device ID obtained.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @since 9 dynamic
@@ -1998,8 +2051,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the profile photo information obtained. Otherwise, **err** is an error
      *     object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2018,8 +2072,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<string> } Promise used to return the profile photo information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2040,8 +2095,9 @@ declare namespace osAccount {
      * @param { string } photo - Profile photo information.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2062,8 +2118,9 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { string } photo - Profile photo information.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2230,8 +2287,9 @@ declare namespace osAccount {
      *     bytes.
      * @param { Callback<int> } callback - Callback used to return the ID of the OS account being activated or
      *     activated.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2254,8 +2312,9 @@ declare namespace osAccount {
      *     bytes, and must be the same as the value passed by **on()**.
      * @param { Callback<int> } callback - Callback to unregister. By default, this parameter is left empty, which
      *     unregisters all callbacks for the OS account activation states.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2278,8 +2337,9 @@ declare namespace osAccount {
      *     between the foreground and background. The source and target OS account IDs are subscribed to.
      *     <br>Note: Since API version 23, the optional field **displayId** is available, indicating the ID of the
      *     logical display where the switch event occurs.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid type.
      * @syscap SystemCapability.Account.OsAccount
@@ -2298,8 +2358,9 @@ declare namespace osAccount {
      *     foreground OS account and a background account is being performed.
      * @param { Callback<OsAccountSwitchEventData> } [callback] - Callback to unregister. By default, this parameter is
      *     left empty, which unregisters all callbacks for the **switching** event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid type.
      * @syscap SystemCapability.Account.OsAccount
@@ -2320,8 +2381,9 @@ declare namespace osAccount {
      *     between the foreground and background. The source and target OS account IDs are subscribed to.
      *     <br>Note: Since API version 23, the optional field **displayId** is available, indicating the ID of the
      *     logical display where the switch event occurs.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid type.
      * @syscap SystemCapability.Account.OsAccount
@@ -2340,8 +2402,9 @@ declare namespace osAccount {
      *     foreground OS account and a background OS account is complete.
      * @param { Callback<OsAccountSwitchEventData> } [callback] - Callback to unregister. By default, this parameter is
      *     left empty, which unregisters all callbacks for the **switched** event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid type.
      * @syscap SystemCapability.Account.OsAccount
@@ -2356,8 +2419,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { string } name - Indicates the name of subscriber.
      * @param { Callback<int> } callback - Asynchronous callback interface.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @syscap SystemCapability.Account.OsAccount
@@ -2372,8 +2436,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { string } name - Indicates the name of subscriber.
      * @param { Callback<int> } callback - Asynchronous callback interface.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @syscap SystemCapability.Account.OsAccount
@@ -2388,8 +2453,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { string } name - Indicates the name of subscriber.
      * @param { Callback<int> } [callback] - Asynchronous callback interface.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @syscap SystemCapability.Account.OsAccount
@@ -2404,8 +2470,9 @@ declare namespace osAccount {
      * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION
      * @param { string } name - Indicates the name of subscriber.
      * @param { Callback<int> } [callback] - Asynchronous callback interface.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @syscap SystemCapability.Account.OsAccount
@@ -2419,8 +2486,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { Callback<OsAccountSwitchEventData> } callback - Indicates the callback for getting the event data.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2433,8 +2501,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { Callback<OsAccountSwitchEventData> } [callback] - Indicates the callback for getting the event data.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2447,8 +2516,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { Callback<OsAccountSwitchEventData> } callback - Indicates the callback for getting the event data.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2461,8 +2531,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
      * @param { Callback<OsAccountSwitchEventData> } [callback] - Indicates the callback for getting the event data.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2478,7 +2549,7 @@ declare namespace osAccount {
      *     [constraints](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) to be subscribed
      *     to.
      * @param { Callback<ConstraintChangeInfo> } callback - Callback used to listen for the constraint change events.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - One or more constraints are invalid.
      * @syscap SystemCapability.Account.OsAccount
@@ -2495,7 +2566,7 @@ declare namespace osAccount {
      *     <br>The default value is **undefined**, indicating that all subscription records are unregistered.
      *     <br>If this parameter is not **undefined**, the subscription records associated with the callback are
      *     unsubscribed.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2509,7 +2580,7 @@ declare namespace osAccount {
      * @param { int } uid - Process UID.
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the bundle ID obtained. Otherwise, **data** is an error object.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2526,7 +2597,7 @@ declare namespace osAccount {
      *
      * @param { int } uid - Process UID.
      * @returns { Promise<int> } Promise used to return the bundle ID obtained.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2543,7 +2614,7 @@ declare namespace osAccount {
      *
      * @param { int } uid - Process UID.
      * @returns { int } Bundle ID obtained.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300002 - Invalid uid.
@@ -2562,8 +2633,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If **true** is returned, the
      *     current process belongs to the main OS account. If **false** is returned, the current process does not belong
      *     to the main OS account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2581,8 +2653,9 @@ declare namespace osAccount {
      * @returns { Promise<boolean> } Promise used to return the result. If **true** is returned, the current process
      *     belongs to the main OS account. If **false** is returned, the current process does not belong to the main OS
      *     account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
@@ -2604,8 +2677,9 @@ declare namespace osAccount {
      *     operation is successful, **err** is **null** and **data** is the
      *     [constraint](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md) source information
      *     obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2628,8 +2702,9 @@ declare namespace osAccount {
      *     information is to be obtained.
      * @returns { Promise<Array<ConstraintSourceTypeInfo>> } Promise used to return the source information of the
      *     specified [constraint](docroot://reference/apis-basic-services-kit/appendix-osAccount-constraints.md).
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -2649,9 +2724,11 @@ declare namespace osAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { DomainAccountInfo } domainAccountInfo - Domain account information.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid domain account information.
      * @throws { BusinessError } 12300003 - The OS account not found.
@@ -2684,8 +2761,9 @@ declare namespace osAccount {
      * @param { int } osAccountLocalId - Local ID of the target OS account.
      *     <br>The value range is all integers.
      * @returns { Promise<OsAccountSubProfile> } Promise used to return the created sub-profile.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300003 - The OS account not found.
      * @throws { BusinessError } 12300008 - Restricted OS account.
@@ -2708,8 +2786,9 @@ declare namespace osAccount {
      * @param { int } subProfileId - Sub-profile ID.
      *     <br>The value range is all integers.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300010 - Service busy. Possible causes: The OS account or sub-profile is being
      *     operated.
@@ -2732,8 +2811,9 @@ declare namespace osAccount {
      * @param { int } subProfileId - Sub-profile ID.
      *     <br>The value range is all integers.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300010 - Service busy. Possible causes: The OS account or sub-profile is being
      *     operated.
@@ -2753,7 +2833,7 @@ declare namespace osAccount {
      *
      * @param { OsAccountSubProfileEvent[] } events - Array of events to be subscribed to.
      * @param { Callback<OsAccountSubProfileEventData> } callback - Callback invoked when the event occurs.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid event.
      * @syscap SystemCapability.Account.OsAccount
@@ -2770,7 +2850,7 @@ declare namespace osAccount {
      *
      * @param { Callback<OsAccountSubProfileEventData> } [callback] - Callback to unsubscribe from. By default, no value
      *     is passed, which means all callbacks are unsubscribed from.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2784,7 +2864,7 @@ declare namespace osAccount {
      * result.
      *
      * @returns { Promise<int> } Promise used to return the foreground sub-profile ID of the OS account.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300401 - Sub-profile not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -2800,7 +2880,7 @@ declare namespace osAccount {
      * @param { int } osAccountLocalId - Local ID of an OS account.
      *     <br>The value range is all integers.
      * @returns { Promise<int> } Promise used to return the foreground sub-profile ID of the OS account.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300003 - OS account not found.
      * @throws { BusinessError } 12300401 - The foreground sub-profile not found.
@@ -2816,8 +2896,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.GET_LOCAL_ACCOUNT_IDENTIFIERS
      * @returns { Promise<int[]> } Promise used to return the sub-profile IDs.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -2833,8 +2914,9 @@ declare namespace osAccount {
      * @param { int } osAccountLocalId - Local ID of an OS account.
      *     <br>The value range is all integers.
      * @returns { Promise<int[]> } Promise used to return the sub-profile IDs of the specified OS account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300003 - OS account not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -2851,8 +2933,9 @@ declare namespace osAccount {
      * @param { int } subProfileId - Sub-profile ID.
      *     <br>The value should be an integer.
      * @returns { Promise<OsAccountSubProfile> } Promise used to return the sub-profile.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300401 - Sub-profile not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -2871,8 +2954,9 @@ declare namespace osAccount {
      * @param { int } subProfileId - Sub-profile ID.
      *     <br>The value should be an integer.
      * @returns { Promise<OsAccountSubProfile> } Promise used to return the sub-profile.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300401 - Sub-profile not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -2888,7 +2972,7 @@ declare namespace osAccount {
      * @param { int } subProfileId - Sub-profile ID.
      *     <br>The value should be an integer.
      * @returns { Promise<int> } Promise used to return the local ID of the OS account of the sub-profile.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300401 - Sub-profile not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -3580,8 +3664,9 @@ declare namespace osAccount {
      * @param { AcquireAuthorizationOptions } [options] - Authorization options. This parameter is left empty by
      *     default.
      * @returns { Promise<AcquireAuthorizationResult> } Promise used to return the authorization result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid privilege or options.
      * @syscap SystemCapability.Account.OsAccount
@@ -3597,7 +3682,7 @@ declare namespace osAccount {
      * @param { string } privilege - Target privilege. For details, see
      *     [configuration file](https://gitcode.com/openharmony/account_os_account/blob/master/services/accountmgr/authorization_manager/config/privileges.json).
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid privilege.
      * @syscap SystemCapability.Account.OsAccount
@@ -3614,7 +3699,7 @@ declare namespace osAccount {
      *     [configuration file](https://gitcode.com/openharmony/account_os_account/blob/master/services/accountmgr/authorization_manager/config/privileges.json).
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the current
      *     process has specified authorization, and **false** indicates the opposite.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid privilege.
      * @syscap SystemCapability.Account.OsAccount
@@ -3841,7 +3926,7 @@ declare namespace osAccount {
     /**
      * A constructor used to create an instance for user authentication.
      *
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -3853,7 +3938,7 @@ declare namespace osAccount {
      * Obtains this version number.
      *
      * @returns { int } Version number obtained.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -3869,8 +3954,9 @@ declare namespace osAccount {
      * @param { AuthType } authType - Authentication credential type.
      * @param { AuthTrustLevel } authTrustLevel - Trust level of the authentication.
      * @returns { int } Available status of the authentication capability.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -3892,8 +3978,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<ExecutorProperty> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the executor property information obtained. Otherwise,
      *     **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid request.
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
@@ -3912,8 +3999,9 @@ declare namespace osAccount {
      * @param { GetPropertyRequest } request - Request information, including the authentication credential type and
      *     property list.
      * @returns { Promise<ExecutorProperty> } Promise used to return the executor property.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid request.
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
@@ -3933,8 +4021,9 @@ declare namespace osAccount {
      * @param { Uint8Array } credentialId - Credential ID.
      * @param { Array<GetPropertyType> } keys - Property type array to be queried.
      * @returns { Promise<ExecutorProperty> } Promise used to return the executor attributes.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid keys.
      * @throws { BusinessError } 12300020 - Device hardware abnormal. [since 23]
@@ -3954,8 +4043,9 @@ declare namespace osAccount {
      *     key value to set.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -3974,8 +4064,9 @@ declare namespace osAccount {
      * @param { SetPropertyRequest } request - Request information, including the authentication credential type and the
      *     key value to set.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -3993,8 +4084,9 @@ declare namespace osAccount {
      * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
      * @param { string } remoteNetworkId - Remote network ID.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid remoteNetworkId.
      * @throws { BusinessError } 12300090 - Cross-device capability not supported. [since 20]
@@ -4016,8 +4108,9 @@ declare namespace osAccount {
      * @param { AuthTrustLevel } authTrustLevel - Trust level of the authentication result.
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
      * @returns { Uint8Array } ID of the context for canceling the authentication.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid challenge, authType or authTrustLevel.
      * @throws { BusinessError } 12300013 - Network exception. [since 12]
@@ -4063,8 +4156,9 @@ declare namespace osAccount {
      * @param { AuthOptions } options - Optional parameters for the authentication.
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
      * @returns { Uint8Array } ID of the context for canceling the authentication.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid challenge, authType, authTrustLevel or options.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -4109,8 +4203,9 @@ declare namespace osAccount {
      * @param { AuthTrustLevel } authTrustLevel - Trust level of the authentication result.
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
      * @returns { Uint8Array } ID of the authentication context, which can be used to cancel the authentication.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid challenge, authType or authTrustLevel.
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
@@ -4151,8 +4246,9 @@ declare namespace osAccount {
      * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
      * @param { Uint8Array } contextID - ID of the authentication context. The context ID is dynamically generated
      *     during the authentication process and is used to identify the authentication operation.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -4178,7 +4274,7 @@ declare namespace osAccount {
     /**
      * Creates a PIN authentication instance.
      *
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -4191,8 +4287,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.ACCESS_PIN_AUTH
      * @param { IInputer } inputer - PIN inputer, which is used to obtain the PIN.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -4209,8 +4306,9 @@ declare namespace osAccount {
      * Unregisters this PIN inputer.
      *
      * @permission ohos.permission.ACCESS_PIN_AUTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -4235,8 +4333,9 @@ declare namespace osAccount {
      * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL or ohos.permission.MANAGE_USER_IDM
      * @param { AuthType } authType - Authentication credential type.
      * @param { IInputer } inputer - Credential inputer to register.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -4255,8 +4354,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL or ohos.permission.MANAGE_USER_IDM
      * @param { AuthType } authType - Authentication credential type.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300002 - Invalid authType.
@@ -4779,9 +4879,12 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
      * @param { DomainPlugin } plugin - Domain plug-in to register.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported. [since 18]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported. [since 18]
      * @throws { BusinessError } 12300201 - The domain plugin has been registered.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
@@ -4794,9 +4897,12 @@ declare namespace osAccount {
      * Unregisters this domain plug-in.
      *
      * @permission ohos.permission.MANAGE_LOCAL_ACCOUNTS
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported. [since 18]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported. [since 18]
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 9 dynamic
@@ -4811,11 +4917,13 @@ declare namespace osAccount {
      * @param { DomainAccountInfo } domainAccountInfo - Domain account information.
      * @param { Uint8Array } credential - Credentials of the domain account.
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid domainAccountInfo or credential.
      * @throws { BusinessError } 12300003 - Domain account does not exist.
@@ -4844,9 +4952,11 @@ declare namespace osAccount {
      * @param { Uint8Array } credential - Credentials of the domain account.
      * @param { DomainAccountAuthOptions } options - Options for domain account authentication.
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid domainAccountInfo or credential.
      * @throws { BusinessError } 12300003 - Domain account does not exist.
@@ -4874,9 +4984,11 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL [since 10 - 10]
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
-     * @throws { BusinessError } 201 - Permission denied. [since 10 - 10]
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API. [since 10 - 10]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - No domain account is bound.
      * @throws { BusinessError } 12300013 - Network exception.
@@ -4901,9 +5013,11 @@ declare namespace osAccount {
      * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL [since 10 - 10]
      * @param { int } localId - Local ID of the OS account bound to the domain account.
      * @param { IUserAuthCallback } callback - Callback used to return the authentication result.
-     * @throws { BusinessError } 201 - Permission denied. [since 10 - 10]
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API. [since 10 - 10]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid localId.
      * @throws { BusinessError } 12300003 - No domain account is bound.
@@ -4930,11 +5044,13 @@ declare namespace osAccount {
      * @param { DomainAccountInfo } domainAccountInfo - Domain account information.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means that
      *     the specified domain account exists; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid domainAccountInfo.
      * @throws { BusinessError } 12300013 - Network exception.
@@ -4956,11 +5072,13 @@ declare namespace osAccount {
      * @param { DomainAccountInfo } domainAccountInfo - Domain account information.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the specified
      *     domain account exists; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid domainAccountInfo.
      * @throws { BusinessError } 12300013 - Network exception.
@@ -4984,8 +5102,9 @@ declare namespace osAccount {
      * @param { Uint8Array } token - New domain account token.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -5010,8 +5129,9 @@ declare namespace osAccount {
      * @param { DomainAccountInfo } domainAccountInfo - Domain account information.
      * @param { Uint8Array } token - New domain account token.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -5031,8 +5151,10 @@ declare namespace osAccount {
      * @param { DomainAccountInfo } oldAccountInfo - Domain account information.
      * @param { DomainAccountInfo } newAccountInfo - New domain account information.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - The new account info is invalid.
      * @throws { BusinessError } 12300003 - The old account not found.
@@ -5050,11 +5172,13 @@ declare namespace osAccount {
      * @permission ohos.permission.GET_DOMAIN_ACCOUNTS
      * @param { GetDomainAccountInfoOptions } options - Domain account information.
      * @param { AsyncCallback<DomainAccountInfo> } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Account not found.
      * @throws { BusinessError } 12300013 - Network exception.
@@ -5075,11 +5199,13 @@ declare namespace osAccount {
      * @permission ohos.permission.GET_DOMAIN_ACCOUNTS
      * @param { GetDomainAccountInfoOptions } options - Domain account information.
      * @returns { Promise<DomainAccountInfo> } Promise used to return the domain account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Account not found.
      * @throws { BusinessError } 12300013 - Network exception.
@@ -5102,10 +5228,11 @@ declare namespace osAccount {
      *     the domain plug-in.
      * @param { AsyncCallback<Uint8Array> } callback - Callback used to return the result. If the business access token
      *     is obtained successfully, **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid business parameters.
      * @throws { BusinessError } 12300003 - Domain account not found.
@@ -5125,8 +5252,9 @@ declare namespace osAccount {
      *
      * @param { Record<string, RecordData> } businessParams - Indicates the business parameters.
      * @param { AsyncCallback<Uint8Array> } callback - Indicates the result callback.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid business parameters.
      * @throws { BusinessError } 12300003 - Domain account not found.
@@ -5147,10 +5275,11 @@ declare namespace osAccount {
      * @param { Record<string, Object> } businessParams - Business parameters. The specific formats vary depending on
      *     the domain plug-in.
      * @returns { Promise<Uint8Array> } Promise used to return the business access token obtained.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid business parameters.
      * @throws { BusinessError } 12300003 - Domain account not found.
@@ -5170,8 +5299,9 @@ declare namespace osAccount {
      *
      * @param { Record<string, RecordData> } businessParams - Indicates the business parameters.
      * @returns { Promise<Uint8Array> } The promise returned by the function.
-     * @throws { BusinessError } 202 - Not system application.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid business parameters.
      * @throws { BusinessError } 12300003 - Domain account not found.
@@ -5193,11 +5323,13 @@ declare namespace osAccount {
      * @param { DomainAccountInfo } domainAccountInfo - Domain account information.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the specified
      *     domain account has expired; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Domain account not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -5268,8 +5400,10 @@ declare namespace osAccount {
      *     number.
      * @returns { Promise<DomainServerConfig> } Promise used to return the configuration of the newly added domain
      *     server.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid server config parameters.
      * @throws { BusinessError } 12300211 - Server unreachable.
@@ -5287,8 +5421,10 @@ declare namespace osAccount {
      * @param { Record<string, RecordData> } parameters - Configuration parameters of the domain server.
      * @returns { Promise<DomainServerConfig> } Promise used to return the configuration of
      *     the newly added domain server.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid server config parameters.
      * @throws { BusinessError } 12300211 - Server unreachable.
@@ -5305,8 +5441,10 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_DOMAIN_ACCOUNT_SERVER_CONFIGS
      * @param { string } configId - Server configuration ID.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300212 - Server config not found.
      * @throws { BusinessError } 12300214 - Server config has been associated with an account.
@@ -5325,8 +5463,10 @@ declare namespace osAccount {
      *     configure the connection information of the domain server. The parameters include the server address and port
      *     number.
      * @returns { Promise<DomainServerConfig> } Promise used to return the updated domain server configuration.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid server config parameters.
      * @throws { BusinessError } 12300211 - Server unreachable.
@@ -5345,8 +5485,10 @@ declare namespace osAccount {
      * @param { string } configId - Server configuration ID.
      * @param { Record<string, RecordData> } parameters - Configuration parameters of the domain server.
      * @returns { Promise<DomainServerConfig> } Promise used to return the updated domain server configuration.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid server config parameters.
      * @throws { BusinessError } 12300211 - Server unreachable.
@@ -5364,8 +5506,10 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_DOMAIN_ACCOUNT_SERVER_CONFIGS
      * @param { string } configId - Server configuration ID.
      * @returns { Promise<DomainServerConfig> } Promise used to return the domain server configuration obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300212 - Server config not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -5379,8 +5523,10 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_DOMAIN_ACCOUNT_SERVER_CONFIGS
      * @returns { Promise<Array<DomainServerConfig>> } Promise used to return the domain server configuration obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @since 18 dynamic
@@ -5394,8 +5540,10 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_DOMAIN_ACCOUNT_SERVER_CONFIGS
      * @param { DomainAccountInfo } domainAccountInfo - Information of the domain account.
      * @returns { Promise<DomainServerConfig> } Promise used to return the domain server configuration of the account.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+     *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Domain account not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -5418,7 +5566,7 @@ declare namespace osAccount {
     /**
      * A **constructor()** used to create an instance for managing the user identity.
      *
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -5433,8 +5581,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<Uint8Array> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the challenge value obtained. Otherwise, **err** is an error
      *     object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -5453,8 +5602,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_USER_IDM
      * @param { int } [accountId] - OS account ID, which is left blank by default.
      * @returns { Promise<Uint8Array> } Promise used to return the challenge value obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
      * @throws { BusinessError } 12300008 - Restricted account. [since 12]
@@ -5472,8 +5622,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_USER_IDM
      * @param { CredentialInfo } credentialInfo - Credential information to add.
      * @param { IIdmCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid credentialInfo, i.e. authType or authSubType.
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
@@ -5500,8 +5651,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_USER_IDM
      * @param { CredentialInfo } credentialInfo - Credential information to add.
      * @param { IIdmCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid credentialInfo, i.e. authType or authSubType.
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
@@ -5523,8 +5675,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_USER_IDM
      * @param { int } [accountId] - OS account ID, which is left blank by default.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: Incorrect parameter types. [since 12]
      * @throws { BusinessError } 12300001 - The system service works abnormally. [since 12]
      * @throws { BusinessError } 12300003 - Account not found. [since 12]
@@ -5541,8 +5694,9 @@ declare namespace osAccount {
      *
      * @permission ohos.permission.MANAGE_USER_IDM
      * @param { Uint8Array } challenge - Challenge value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -5560,8 +5714,9 @@ declare namespace osAccount {
      * @permission ohos.permission.MANAGE_USER_IDM
      * @param { Uint8Array } token - Authentication token.
      * @param { IIdmCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -5580,8 +5735,9 @@ declare namespace osAccount {
      * @param { Uint8Array } credentialId - Credential ID.
      * @param { Uint8Array } token - Authentication token.
      * @param { IIdmCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
@@ -5602,8 +5758,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<Array<EnrolledCredInfo>> } callback - Callback used to return the result. If the operation
      *     is successful, **err** is **null** and **data** is information about all registered credentials of the user.
      *     Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300020 - Device hardware abnormal. [since 23]
      * @syscap SystemCapability.Account.OsAccount
@@ -5622,8 +5779,9 @@ declare namespace osAccount {
      * @param { AsyncCallback<Array<EnrolledCredInfo>> } callback - Callback used to return the result. If the operation
      *     is successful, **err** is **null** and **data** is the information about all enrolled credentials of the
      *     specified type. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid authType.
      * @throws { BusinessError } 12300020 - Device hardware abnormal. [since 23]
@@ -5642,8 +5800,9 @@ declare namespace osAccount {
      *     types is obtained.
      * @returns { Promise<Array<EnrolledCredInfo>> } Promise used to return the information about all the enrolled
      *     credentials of the specified type.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid authType.
      * @throws { BusinessError } 12300020 - Device hardware abnormal. [since 23]
@@ -5663,8 +5822,9 @@ declare namespace osAccount {
      *     is obtained.
      * @returns { Promise<Array<EnrolledCredInfo>> } Promise used to return the information about all the enrolled
      *     credentials of the specified type.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid options.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -5684,8 +5844,9 @@ declare namespace osAccount {
      * @param { AuthType } authType - Credential type.
      * @param { int } [accountId] - OS account ID, which is left blank by default.
      * @returns { Promise<Uint8Array> } Promise used to return the credential ID obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - Invalid authType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -5706,8 +5867,9 @@ declare namespace osAccount {
      * @permission ohos.permission.USE_USER_IDM
      * @param { AuthType[] } credentialTypes - Credential types subscribed.
      * @param { Callback<CredentialChangeInfo> } callback - Callback used to listen for the credential change events.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300002 - One or more credential types are invalid.
      * @throws { BusinessError } 12300106 - One or more credential types are not supported.
@@ -5725,8 +5887,9 @@ declare namespace osAccount {
      * @param { Callback<CredentialChangeInfo> } [callback] - Callback used to listen for the credential change events.
      *     The default value is **undefined**, indicating that all subscription records are unregistered. If the value
      *     is not undefined, only the subscription records related to the specified callback are unregistered.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
@@ -6034,7 +6197,7 @@ declare namespace osAccount {
      * @param { AuthSubType } authSubType - Credential subtype.
      * @param { Uint8Array } data - Data (credential) to set. The data is used for authentication and operations for
      *     adding and modifying credentials.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300002 - Invalid pinSubType.

@@ -70,7 +70,8 @@ declare namespace authorization {
      * @param { Privilege } privilege - Target privilege. For available values, see [Privilege]{@link authorization.Privilege}.
      * @param { UIAbilityContext } context - The [UIAbility context]{@link ./application/UIAbilityContext:UIAbilityContext} that hosts the authorization dialog.
      * @returns { Promise<AuthorizationResult> } Promise used to return the authorization result.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300302 - User interaction is required but not allowed.
      *     Possible causes: 1. The specified UI context is invalid; 2. The application is not in the foreground.
@@ -79,7 +80,7 @@ declare namespace authorization {
      *     Possible cause: Another authorization is being processed.
      * @syscap SystemCapability.Account.OsAccount
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     requestAuthorization(privilege: Privilege, context: UIAbilityContext): Promise<AuthorizationResult>;
 

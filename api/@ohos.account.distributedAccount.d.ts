@@ -100,7 +100,8 @@ declare namespace distributedAccount {
      * @param { AsyncCallback<DistributedInfo> } callback - Callback used to return the result. If the distributed
      *     account information is obtained successfully, **err** is **undefined** and **data** is the distributed
      *     account information obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -116,7 +117,8 @@ declare namespace distributedAccount {
      * @permission ohos.permission.MANAGE_DISTRIBUTED_ACCOUNTS or ohos.permission.GET_DISTRIBUTED_ACCOUNTS or
      *     ohos.permission.DISTRIBUTED_DATASYNC
      * @returns { Promise<DistributedInfo> } Promise used to return the distributed account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @syscap SystemCapability.Account.OsAccount
      * @since 9 dynamic
@@ -136,8 +138,9 @@ declare namespace distributedAccount {
      * @param { AsyncCallback<DistributedInfo> } callback - Callback used to return the result. If the distributed
      *     account information is obtained successfully, **err** is **undefined** and **data** is the distributed
      *     account information obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300003 - Account not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -156,8 +159,9 @@ declare namespace distributedAccount {
      *     ohos.permission.GET_DISTRIBUTED_ACCOUNTS) [since 20]
      * @param { int } localId - ID of the target OS account.
      * @returns { Promise<DistributedInfo> } Promise used to return the distributed account information obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300003 - Account not found.
      * @syscap SystemCapability.Account.OsAccount
@@ -214,7 +218,8 @@ declare namespace distributedAccount {
      * @param { DistributedInfo } accountInfo - Distributed account information.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the distributed account
      *     information is updated successfully, **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -235,7 +240,8 @@ declare namespace distributedAccount {
      * @permission ohos.permission.MANAGE_DISTRIBUTED_ACCOUNTS
      * @param { DistributedInfo } accountInfo - Distributed account information.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -258,8 +264,9 @@ declare namespace distributedAccount {
      * @param { DistributedInfo } distributedInfo - Distributed account information to set.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the distributed account
      *     information is set successfully, **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -282,8 +289,9 @@ declare namespace distributedAccount {
      * @param { int } localId - ID of the target OS account.
      * @param { DistributedInfo } distributedInfo - Distributed account information to set.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Not system application.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
