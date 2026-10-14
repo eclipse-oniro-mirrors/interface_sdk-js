@@ -372,6 +372,53 @@ declare namespace insightIntent {
   }
 
   /**
+   * 定义文件实体的结构体。表示意图执行过程中涉及的关键文件对象，包括意图参数和执行结果。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface FileEntity extends IntentEntity {
+    /**
+     * 文件实体标识。固定为'OHOS_FILE_ENTITY'。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    entityId: 'OHOS_FILE_ENTITY';
+
+    /**
+     * URI列表。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    uris: Array<string>;
+
+    /**
+     * 要授予URI列表的权限。
+     *
+     * **注意**
+     *
+     * 该参数只支持“FLAG_AUTH_READ_URI_PERMISSION”、“FLAG_AUTH_WRITE_URI_PERMISSION”、“标志位认证读URI”和
+     * “FLAG_AUTH_READ_URI_PERMISSION”和“FLAG_AUTH_WRITE_URI_PERMISSION”。权限说明请参见
+     * [标志]{@link @ohos.app.ability.wantConstant:wantConstant.Flags}。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    flags?: int;
+  }
+
+  /**
    * 查询实体模式的枚举。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
