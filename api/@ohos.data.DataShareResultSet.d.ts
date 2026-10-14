@@ -252,7 +252,7 @@ export default interface DataShareResultSet {
   /**
    * Moves to the specified row in the result set.
    *
-   * @param { int } position - Position to move to, starting from 0.
+   * @param { int } position - Position to move to, starting from 0. The value ranges from 0 to rowCount-1.
    * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -268,7 +268,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the Blob type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Index of the target column, starting from 0. The value ranges from 0 to columnCount-1.
    * @returns { Uint8Array } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -284,7 +284,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the string type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Index of the target column, starting from 0. The value ranges from 0 to columnCount-1.
    * @returns { string } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -300,7 +300,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the long type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Index of the target column, starting from 0. The value ranges from 0 to columnCount-1.
    * @returns { long } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -317,7 +317,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the double type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Index of the target column, starting from 0. The value ranges from 0 to columnCount-1.
    * @returns { double  } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -360,7 +360,7 @@ export default interface DataShareResultSet {
    *
    * The column index is passed in as an input parameter.
    *
-   * @param { int } columnIndex - Column index.
+   * @param { int } columnIndex - Index of the specified column in the result set, starting from 0. The value ranges from 0 to columnCount-1.
    * @returns { string } Column name obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -376,7 +376,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the DataType type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Column index.
+   * @param { int } columnIndex - Index of the specified column in the result set, starting from 0. The value ranges from 0 to columnCount-1.
    * @returns { DataType } Data type obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
