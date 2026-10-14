@@ -2807,6 +2807,14 @@ declare namespace webview {
    * ）等。当获取的数据类型与实际存储类型不匹配时（例如对数值类型调用getString），会抛出错误码17100014。从API version 22开始，JsMessageExt还提供了getErrorDescription方法，用
    * 于获取JavaScript执行过程中的异常信息，如果返回值为object类型则统一格式化为描述字符串。
    *
+   * > **说明：**
+   * >
+   * > - 本模块首批接口从API version 9开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+   * >
+   * > - 本Class首批接口从API version 10开始支持。
+   * >
+   * > - 示例效果请以真机运行为准。
+   *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -8601,6 +8609,16 @@ declare namespace webview {
    * AdsBlockManager的核心机制基于域名后缀匹配的AllowedList/DisallowedList双层策略：DisallowedList用于禁用特定网站的广告过滤，而AllowedList具有更高优先级，可在
    * DisallowedList的范围内重新开启部分子域名的广告过滤。广告过滤规则内部解析成功后会被持久化存储，应用重启后无需重复设置；而域名黑白名单不会持久化，应用重启后需重新配置。
    *
+   * > **说明：**
+   * >
+   * > - 本模块首批接口从API version 9开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+   * >
+   * > - 本Class首批接口从API version 12开始支持。
+   * >
+   * > - 示例效果请以真机运行为准。
+   * >
+   * > - 静态方法必须在用户界面（UI）线程上使用。
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
    * @since 12 dynamic

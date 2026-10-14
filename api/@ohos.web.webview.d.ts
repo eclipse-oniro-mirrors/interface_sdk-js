@@ -2998,6 +2998,14 @@ declare namespace webview {
    * exception information during JavaScript execution. If the return value is of the object type, it is uniformly
    * formatted into a description string.
    *
+   * > **NOTE**
+   * >
+   * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+   * >
+   * > - The initial APIs of this class are supported since API version 10.
+   * >
+   * > - The sample effect is subject to the actual device.
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -9342,6 +9350,16 @@ declare namespace webview {
    * has a higher priority and can re-enable ad filtering for certain subdomains within the scope of the DisallowedList.
    * After successful internal parsing, ad filtering rules are persistently stored and do not need to be set again after
    * an app restart. However, they are not persistent and must be reconfigured after an app restart.
+   * 
+   * > **NOTE**
+   * >
+   * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+   * >
+   * > - The initial APIs of this class are supported since API version 12.
+   * >
+   * > - The sample effect is subject to the actual device.
+   * >
+   * > - Static methods must be used on the user interface (UI) thread.
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
