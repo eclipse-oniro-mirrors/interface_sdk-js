@@ -206,46 +206,6 @@ declare namespace hidebug {
   function stopJsCpuProfiling() : void;
 
   /**
-   * Dumps VM heap data.
-   *
-   * > **NOTE**
-   * >
-   * > Exporting the VM heap is time-consuming, and this API is a synchronous API. Therefore, you are advised not to
-   * > call this API in the release version. Otherwise, the application screen may freeze, affecting user experience.
-   *
-   * @param { string } filename - User-defined name of the VM heap data output file. The .heapsnapshot file is generated
-   *     in the **files** directory of the application based on the specified file name. The maximum length of a string
-   *     is 128 bytes.
-   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
-   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-   * @since 9 dynamiconly
-   * @deprecated since 26
-   * @useinstead hidebug.dumpJsRawHeapData
-   */
-  function dumpJsHeapData(filename : string) : void;
-
-  /**
-   * Dumps VM heap data and clears the nodeId cache.
-   *
-   * > **NOTE**
-   * >
-   * > Exporting the VM heap is time-consuming, and this API is a synchronous API. Therefore, you are advised not to
-   * > call this API in the release version. Otherwise, the application screen may freeze, affecting user experience.
-   *
-   * @param { string } filename - Custom name of the heap dump file. A **fileName.heapsnapshot** file will be generated
-   *     in the **files** directory of the application. The maximum length of a string is 128 bytes.
-   * @param { boolean } needClean - Whether to clear the node ID cache before dumping heap snapshots. **true**: yes;
-   *     **false**: no.
-   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-   * @stagemodelonly
-   * @atomicservice
-   * @since 24 dynamiconly
-   * @deprecated since 26
-   * @useinstead hidebug.dumpJsRawHeapData
-   */
-  function dumpJsHeapData(filename : string, needClean : boolean) : void;
-
-  /**
    * Obtains system service information.
    *
    * @permission ohos.permission.DUMP
