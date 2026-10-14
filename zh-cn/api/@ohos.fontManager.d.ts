@@ -36,7 +36,7 @@ declare namespace fontManager {
    * 
    * > **说明：**
    * > - 安装成功后，应用可以通过字体名称使用该字体。同一字体路径不可重复安装。
-   * > - 支持安装的字体文件个数最大数量为200。从26.0.1版本开始，PC/2in1支持安装的字体文件最大数量为800。
+   * > - 支持安装的字体文件个数最大数量为200。从26.0.1版本开始，PC/2in1和Tablet支持安装的字体文件最大数量为800。
    *
    * @permission ohos.permission.UPDATE_FONT
    * @param { string } path - 待安装的字体文件路径，仅支持.ttf、.ttc和.otf格式的字体文件。
@@ -226,7 +226,7 @@ declare namespace fontManager {
    * > **说明：**
    * > - 当安装应用级字体时，需先调用[onFontObserver]{@link onFontObserver}接口注册字体服务状态变化监听器。
    * > - 安装成功后，应用可以通过字体名称使用该字体。同一字体路径不可重复安装。
-   * > - PC/2in1支持安装的字体文件最大数量为800，其他设备支持安装的字体文件个数最大数量为200。
+   * > - PC/2in1和Tablet支持安装的字体文件最大数量为800，其他设备支持安装的字体文件个数最大数量为200。
    * 
    * @permission ohos.permission.UPDATE_SCOPE_FONT
    * @param { string } url - 待安装的字体文件路径，仅支持.ttf、.ttc和.otf格式的字体文件。
