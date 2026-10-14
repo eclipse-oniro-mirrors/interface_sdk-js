@@ -313,7 +313,10 @@ declare namespace accessibility {
    * @since 9 dynamic
    * @since 23 static
    */
-  function getAccessibilityExtensionList(abilityType: AbilityType, stateType: AbilityState): Promise<Array<AccessibilityAbilityInfo>>;
+  function getAccessibilityExtensionList(
+    abilityType: AbilityType,
+    stateType: AbilityState
+  ): Promise<Array<AccessibilityAbilityInfo>>;
 
   /**
    * 查询辅助应用列表。使用callback异步回调。
@@ -333,7 +336,11 @@ declare namespace accessibility {
    * @since 9 dynamic
    * @since 23 static
    */
-  function getAccessibilityExtensionList(abilityType: AbilityType, stateType: AbilityState, callback: AsyncCallback<Array<AccessibilityAbilityInfo>>): void;
+  function getAccessibilityExtensionList(
+    abilityType: AbilityType,
+    stateType: AbilityState,
+    callback: AsyncCallback<Array<AccessibilityAbilityInfo>>
+  ): void;
 
   /**
    * 查询当前系统内辅助应用列表，支持按条件查询。
