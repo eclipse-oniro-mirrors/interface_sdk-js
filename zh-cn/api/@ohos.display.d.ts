@@ -1985,7 +1985,7 @@ declare namespace display {
     /**
      * Register the callback for available area changes.
      *
-     * @param { Callback<Rect> } callback - Callback used to return the available area
+     * @param { Callback<Rect> } callback - Callback used to return the available area hjllll
      * @throws { BusinessError } 1400003 - This display manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
      * @since 23 static
