@@ -5734,6 +5734,14 @@ declare namespace huks {
      */
     HUKS_TAG_CONTEXT = HuksTagType.HUKS_TAG_TYPE_BYTES | 528,
     /**
+     * Asynchronous timeout duration in seconds, customizable by business logic.
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.0.1
+     */
+    HUKS_TAG_TIMEOUT = HuksTagType.HUKS_TAG_TYPE_UINT | 529,
+    /**
      * Whether to use the alias passed in during key generation.
      *
      * @syscap SystemCapability.Security.Huks.Core
