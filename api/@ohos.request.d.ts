@@ -2247,7 +2247,7 @@ declare namespace request {
        *
        * @syscap SystemCapability.Request.FileTransferAgent
        * @stagemodelonly
-       * [@since](https://gitcode.com/since) 26.2.0 dynamic&static
+       * @since 26.2.0 dynamic&static
        */
       hideStopButton?: boolean;
     }
