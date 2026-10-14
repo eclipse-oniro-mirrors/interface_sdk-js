@@ -1606,10 +1606,9 @@ declare namespace rpc {
     writeChar(val: int): void;
 
     /**
-     * 将字符串值写入MessageSequence实例。调用此方法后，字符串会被序列化存入缓冲区。写入时会先存储字符串长度，再存储字节数据。
+     * 将字符串值写入MessageSequence实例。
      *
      * - 此方法与[readString]{@link rpc.MessageSequence#readString}方法配对使用。
-     * - 先写入长度，再写入内容。
      * - 支持多语言字符集。
      * - 长度信息便于[readString]{@link rpc.MessageSequence#readString}确定读取边界。
      * - 注意区分字符数和字节数，中文字符占用更多字节。
@@ -1818,6 +1817,7 @@ declare namespace rpc {
      *
      * - 必须与[readStringArray]{@link rpc.MessageSequence#readStringArray(dataIn: string[])}配对使用。
      * - 读取数组长度必须与写入数组长度一致。
+     * - 数组单个元素的长度范围[0, 40960)。
      *
      * @param { string[] } stringArray - 要写入的字符串数组，数组单个元素的长度应小于40960。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1943,9 +1943,6 @@ declare namespace rpc {
     /**
      * 从MessageSequence实例中读取双精度浮点值。
      *
-     * - 返回新创建的数组，无需预先创建。
-     * - 数组元素为双精度浮点数。
-     *
      * @returns { double } 返回双精度浮点值。
      * @throws { BusinessError } 1900010 - Failed to read data from the message sequence.
      * @syscap SystemCapability.Communication.IPC.Core
@@ -1978,8 +1975,6 @@ declare namespace rpc {
 
     /**
      * 从MessageSequence实例中读取字符串值。
-     *
-     * - 先读取长度，再读取内容。
      *
      * @returns { string } 返回字符串值。
      * @throws { BusinessError } 1900010 - Failed to read data from the message sequence.
@@ -2231,8 +2226,7 @@ declare namespace rpc {
      * 从MessageSequence实例中读取字符串数组，并将其写入到创建的空数组中。
      *
      * - 需预先创建空数组且长度应与写入时的数组长度一致。
-     * - 读取后dataIn数组会被填充读取的字节数据。
-     * - 读指针向后移动相应字节数。
+     * - 读取后，dataIn数组会被填充读取的字符串数据。
      *
      * @param { string[] } dataIn - 要读取的字符串数组。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -2250,7 +2244,6 @@ declare namespace rpc {
      * 从MessageSequence实例中读取字符串数组。
      *
      * - 返回新创建的数组，无需预先创建。
-     * - 数组单个元素的长度范围[0, 40960)。
      *
      * @returns { string[] } 返回字符串数组。
      * @throws { BusinessError } 1900010 - Failed to read data from the message sequence.
@@ -2874,7 +2867,7 @@ declare namespace rpc {
     ): void;
 
     /**
-     * 以同步或异步方式向对端进程发送MessageSequence消息。如果为选项设置了异步模式，则立即收到回调，reply报文里没有内容，具体回复需要在业务侧的回调中获取。如果为选项设置了同步模式，则将在sendRequest返回
+     * 以同步或异步方式向对端进程发送MessageSequence消息。如果为选项设置了异步模式，则立即收到回调，reply报文里没有内容，具体回复需要在业务侧的回调中获取。如果为选项设置了同步模式，则将在sendMessageRequest返回
      * 时收到回调，回复内容在reply报文里。
      *
      * @param {int } code - 本次请求调用的消息码[1-16777215]，由通信双方确定。如果接口由IDL工具生成，则消息代码由IDL自动生成。
