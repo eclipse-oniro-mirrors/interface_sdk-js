@@ -12423,6 +12423,20 @@ declare namespace audio {
     * @since 26.0.0 dynamic&static
     */
     playbackCaptureUid?: int;
+
+    /**
+     * The token ID of the application that actually uses the audio capturer stream, used to display
+     * the correct application information when the microphone privacy indicator is turned on.
+     * If this field is not specified, the caller application's token ID is used by default.
+     * When this field is set, the caller must have the ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR
+     * permission; otherwise {@link createAudioCapturer} fails.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
@@ -12494,6 +12508,20 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     preferredInputDevice?: AudioDeviceDescriptor;
+
+    /**
+     * The token ID of the application that actually uses the audio capturer stream, used to display
+     * the correct application information when the microphone privacy indicator is turned on.
+     * If this field is not specified, the caller application's token ID is used by default.
+     * When this field is set, the caller must have the ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR
+     * permission; otherwise {@link createMicInAudioCapturer} fails.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**

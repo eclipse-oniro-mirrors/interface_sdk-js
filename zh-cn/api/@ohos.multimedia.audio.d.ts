@@ -12304,6 +12304,19 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     playbackCaptureUid?: int;
+
+    /**
+     * 实际使用该录音流的应用TokenId，用于在点亮麦克风隐私指示器时，显示正确的应用信息。
+     * 如果未指定该字段，默认使用调用方应用的TokenId。
+     * 设置该字段时，调用方必须具有ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR权限，
+     * 否则{@link createAudioCapturer}失败。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
@@ -12374,6 +12387,19 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     preferredInputDevice?: AudioDeviceDescriptor;
+
+    /**
+     * 实际使用该录音流的应用TokenId，用于在点亮麦克风隐私指示器时，显示正确的应用信息。
+     * 如果未指定该字段，默认使用调用方应用的TokenId。
+     * 设置该字段时，调用方必须具有ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR权限，
+     * 否则{@link createMicInAudioCapturer}失败。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
