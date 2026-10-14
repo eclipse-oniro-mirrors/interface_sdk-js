@@ -2053,8 +2053,7 @@ declare namespace uiEffect {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    static createSweepRefractionMask(param: SweepRefractionParam,
-      options?: SweepRefractionMaskOptions): Mask;
+    static createSweepRefractionMask(param: SweepRefractionParam, options?: SweepRefractionMaskOptions): Mask;
 
     /**
      * 创建一个表示扭曲光环的 Mask 实例。
