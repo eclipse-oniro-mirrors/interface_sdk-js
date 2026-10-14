@@ -4892,7 +4892,7 @@ declare namespace bundleManager {
   /**
    * Filters the application list by device mode distribution policies. This API uses a promise to return the result.
    *
-   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.SWITCH_MULTI_MODE_BUNDLE
    * @param { Array<DeviceModeDistributionPolicy> } policies - Array of DeviceModeDistributionPolicy values. The input
    *     parameter cannot be empty. All values must be within the enum value range of DeviceModeDistributionPolicy, and
    *     must include the policies for all different package types (UNIVERSAL_DIFFERENT_PACKAGE,

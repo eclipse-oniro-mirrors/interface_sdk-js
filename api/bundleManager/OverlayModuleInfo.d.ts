@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file OverlayModuleInfo
  * @kit AbilityKit
  */
 
