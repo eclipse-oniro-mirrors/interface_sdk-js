@@ -65,6 +65,26 @@ declare namespace brightness {
    * @since 23 static
    */
   function setValue(value: int, continuous: boolean): void;
+
+  /**
+   * Sets the screen brightness. This API is used for continuous brightness adjustment. To achieve a better performance,
+   * set **continuous** to **true** when you start, and set it to **false** after you finish.
+   *
+   * @param { int } value - Brightness value.
+   *     <br>Value range: [0, 255].
+   * @param { boolean } continuous - Whether the brightness adjustment is continuous. The value **true** indicates that.
+   *     <br>the brightness adjustment is continuous; **false** indicates the opposite.
+   *     <br>Default value: false.
+   * @param { int } displayId - ID of the display.
+   *     <br>Value range: [0,10000].
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4700101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.DisplayPowerManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function setValue(value: int, continuous: boolean, displayId: int): void;
 }
 
 export default brightness;
