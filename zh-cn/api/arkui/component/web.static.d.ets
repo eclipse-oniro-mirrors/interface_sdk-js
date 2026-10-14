@@ -6650,7 +6650,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.2.0 static
      */
     default caretColor(value: ResourceColor | undefined): this;
 
