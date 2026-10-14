@@ -205,9 +205,8 @@ declare enum SaveDescription {
  * >
  * > - You are advised to specify at least one of **icon** or **text**.
  * > - If neither **icon** nor **text** is specified, **SaveButton** is created with default styles as follows:
- * > **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
- * > **Capsule**.
- * >
+ * >   **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
+ * >   **Capsule**.
  * > - The **icon**, **text**, and **buttonType** parameters do not support dynamic modification.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -537,6 +536,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    * @since 21 dynamic
    */
   userCancelEvent(enabled: boolean): SaveButtonAttribute;
+
   /**
    * Sets the color of the symbol icon for the save button.
    *
