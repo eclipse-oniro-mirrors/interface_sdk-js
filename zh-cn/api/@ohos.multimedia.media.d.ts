@@ -11265,8 +11265,8 @@ declare namespace media {
      * > - 应用最多可添加5个水印。
      * > - 需在[startRecording]{@link @ohos.multimedia.media:media.AVScreenCaptureRecorder.startRecording()}接口调用前调用addWatermark接口。
      *
-     * @param { image.PixelMap } watermark - : 水印图像，取值原则：PixelMap对象不能为空。支持透明度设置。图像格式和尺寸要求请参考
-     * @param { WatermarkConfiguration } config - : 配置视频录制水印的相关参数。各字段取值范围请参考WatermarkConfiguration定义。
+     * @param { image.PixelMap } watermark - 水印图像，取值原则：PixelMap对象不能为空。支持透明度设置。图像格式和尺寸要求请参考
+     * @param { WatermarkConfiguration } config - 配置视频录制水印的相关参数。各字段取值范围请参考WatermarkConfiguration定义。
      *    需在调用startRecording接口前设置。
      * @returns { Promise<int> } Promise对象，返回所添加水印的编号ID表示添加水印成功，失败时返回错误码。
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -11337,7 +11337,7 @@ declare namespace media {
     /**
      * 取消订阅错误回调事件。用户可以指定填入错误回调方法来取消订阅。
      *
-     * @param { 'error' } type - 状态切换事件回调类型，支持的事件：'error'。
+     * @param { 'error' } type - 错误事件回调类型，支持的事件：'error'。
      * @param { ErrorCallback } callback - 录屏错误事件回调方法，不填此参数则会取消最后一次订阅事件。
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @since 12 dynamic
