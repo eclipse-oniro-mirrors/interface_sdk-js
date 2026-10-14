@@ -92,7 +92,7 @@ declare namespace application {
 
   /**
    * 创建指定模块的上下文。创建出的模块上下文中[resourceManager.Configuration]{@link @ohos.resourceManager:resourceManager.Configuration}资源继承
-   * 自入参上下文，便于开发者获取[跨HAP/HSP包资源](docroot://quick-start/resource-categories-and-access.md#访问跨HAP/HSP包资源)。使用Promise异步回调。
+   * 自入参上下文，便于开发者获取[跨HAP/HSP包资源](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/resource-categories-and-access.md#访问跨HAP/HSP包资源)。使用Promise异步回调。
    * 
    * > **说明：**
    * >
@@ -113,7 +113,7 @@ declare namespace application {
 
   /**
     * 创建指定模块的上下文。创建出的模块上下文中[resourceManager.Configuration]{@link @ohos.resourceManager:resourceManager.Configuration}资源继承
-    * 自入参上下文，便于开发者获取[跨HAP/HSP包应用资源](docroot://quick-start/resource-categories-and-access.md#访问跨HAP/HSP包资源)。
+    * 自入参上下文，便于开发者获取[跨HAP/HSP包应用资源](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/resource-categories-and-access.md#访问跨HAP/HSP包资源)。
     * 
     * > **说明：**
     * >
@@ -137,7 +137,7 @@ declare namespace application {
    * > **说明：**
    * >
    * > - 从API version 18开始，Context支持获取当前应用的进程名
-   * > [processName](docroot://reference/apis-ability-kit/js-apis-inner-application-context.md#context)。
+   * > [processName](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-ability-kit/js-apis-inner-application-context.md#context)。
    * > createModuleContext创建的Context中的processName属性与入参Context中的processName属性一致，其他属性根据入参Context、bundleName和moduleName获得相应
    * > 的属性值。
    * >
@@ -201,7 +201,7 @@ declare namespace application {
    * > **说明：**
    * >
    * > 从API version 18开始，Context支持获取当前应用的进程名
-   * > [processName](docroot://reference/apis-ability-kit/js-apis-inner-application-context.md#context)。
+   * > [processName](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-ability-kit/js-apis-inner-application-context.md#context)。
    * > createBundleContext创建的Context中的processName属性与入参Context中的processName属性一致，其他属性根据入参Context和bundleName获得相应
    * > 的属性值。
    *
@@ -248,9 +248,9 @@ declare namespace application {
   export function getApplicationContextInstance(): ApplicationContext;
 
   /**
-   * 开发者可以调用该接口将当前进程放入[备选主控进程](docroot://application-models/ability-terminology.md#candidatemasterprocess备选主控进程)链表。使用
+   * 开发者可以调用该接口将当前进程放入[备选主控进程](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/ability-terminology.md#candidatemasterprocess备选主控进程)链表。使用
    * Promise异步回调。
-   * 当[主控进程](docroot://application-models/ability-terminology.md#masterprocess主控进程)销毁后，再次启动配置了isolationProcess为true的
+   * 当[主控进程](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/ability-terminology.md#masterprocess主控进程)销毁后，再次启动配置了isolationProcess为true的
    * UIAbility/UIExtensionAbility组件时，系统会根据是否存在备选主控进程执行相应操作。
    * 
    * - 如果存在备选主控进程，系统会将备选主控进程链表首节点的进程设置为主控进程，触发
@@ -262,7 +262,7 @@ declare namespace application {
    * 
    * > **说明：**
    * >
-   * > 如果当前进程已经是[主控进程](docroot://application-models/ability-terminology.md#masterprocess主控进程)，调用该接口无效并且不会抛出错误码。
+   * > 如果当前进程已经是[主控进程](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/ability-terminology.md#masterprocess主控进程)，调用该接口无效并且不会抛出错误码。
    * >
    * > 当前进程只有运行了isolationProcess字段设为true的组件，或曾经成为过主控进程，开发者才可将其设置为备选主控进程。
    * >
@@ -300,7 +300,7 @@ declare namespace application {
   export function demoteCurrentFromCandidateMasterProcess(): Promise<void>;
 
   /**
-   * 放弃当前进程的[主控进程](docroot://application-models/ability-terminology.md#masterprocess主控进程)身份。使用Promise异步回调。
+   * 放弃当前进程的[主控进程](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/ability-terminology.md#masterprocess主控进程)身份。使用Promise异步回调。
    * 该接口仅在2in1、Tablet设备中可正常调用，在其他设备中返回801错误码。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
