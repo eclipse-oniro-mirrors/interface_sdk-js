@@ -353,11 +353,6 @@ export declare interface SaveButtonAttribute extends SecurityComponentMethod {
   /**
    * 设置保存控件的图标尺寸。
    *
-   * > **说明**
-   * >
-   * > 也可通过安全控件通用属性[iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}设置图标尺寸，此时size类型仅支持Dimension。<br/>
-   * > 本接口的size类型增加支持SizeOptions。
-   *
    * @param { Dimension | SizeOptions | undefined } size - 图标尺寸，支持像素单位（vp、px等）。
    *     <br>默认值：宽高均为16vp。<br>不支持设置百分比字符串。若设置Dimension类型入参的百分比字符串，则图标尺寸显示为默认值；
    *     若设置SizeOptions类型入参的width或height属性为百分比字符串，则图标尺寸显示为0vp。
