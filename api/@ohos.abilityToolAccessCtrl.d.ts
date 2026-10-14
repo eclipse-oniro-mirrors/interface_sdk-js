@@ -26,7 +26,6 @@ import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
  * cross-device permission management through a ticket mechanism.
  *
  * @syscap SystemCapability.Security.Asset
- * @systemapi
  * @FaAndStageModel
  * @since 26.0.0 dynamiconly
  */
@@ -35,7 +34,6 @@ declare namespace abilityToolAccessCtrl {
    * CLI command information.
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -44,7 +42,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI main command name.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -54,7 +51,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI subcommand name.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -274,7 +270,6 @@ declare namespace abilityToolAccessCtrl {
    * Permission information.
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -284,7 +279,6 @@ declare namespace abilityToolAccessCtrl {
      * Permission name.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -294,7 +288,6 @@ declare namespace abilityToolAccessCtrl {
      * Permission status.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -559,6 +552,54 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * Optional parameters for the ticket.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface TicketOpions {
+
+    /**
+     * Ticket expiration time in milliseconds.
+     * Unit: milliseconds.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ticketExpireTimeMs?: long;
+  }
+
+  /**
+   * Ticket query result.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface TicketQueryResult {
+
+    /**
+     * Permission result list.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    permissionResults: PermissionInfo[];
+
+    /**
+     * Ticket information.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ticket: string;
+  }
+
+  /**
    * Authorization status.
    *
    * @syscap SystemCapability.Security.Asset
@@ -707,6 +748,7 @@ declare namespace abilityToolAccessCtrl {
      */
     DISABLE = 0x02
   }
+
 
   /**
    * Queries tool permissions based on the specified operations.
@@ -902,6 +944,32 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.0.1 dynamiconly
    */
   export function updateRemoteGrantStatus(remoteGrantStatus: RemoteGrantStatus): Promise<void>;
+
+  /**
+   * Obtain the execution authentication ticket for CLI tools.
+   * This function retrieves the execution authentication ticket for CLI tools and their subcommands.
+   * If the user has not yet authorized the permissions required by CLI tools,
+   *    a list of permissions requiring authorization along with their status will be returned.
+   * If all permissions required by CLI tools have been authorized by the user,
+   *    the authenticated ticket will be returned.
+   *
+   * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
+   * @param { CliCmdInfo[] } cliCmdInfos - CLI command list.
+   * @param { TicketOpions } ticketOpions - generate ticket options.
+   * @returns { Promise<TicketQueryResult> } Promise used to return ${TicketQueryResult}。
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.EXEC_PUBLIC_CLI_TOOL".
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010006 - The requested operation is not allowed to be executed while the device
+   *     is locked.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketOpions: TicketOpions): Promise<TicketQueryResult>;
 }
 
 export default abilityToolAccessCtrl;
