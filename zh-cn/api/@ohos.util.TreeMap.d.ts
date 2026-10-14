@@ -331,7 +331,7 @@ declare class TreeMap<K, V> {
    */
   replace(key: K, newValue: V): boolean;
   /**
-   * 通过回调函数来遍历实例对象上的元素及其下标。
+   * 通过回调函数来遍历实例对象上的元素及其键。
    * 不会对已删除的key执行回调。
    *
    * @param { function } callbackFn - 回调函数。
@@ -347,7 +347,7 @@ declare class TreeMap<K, V> {
   forEach(callbackFn: (value?: V, key?: K, map?: TreeMap<K, V>) => void, thisArg?: Object): void;
 
   /**
-   * 通过回调函数来遍历实例对象上的元素及其下标。
+   * 通过回调函数来遍历实例对象上的元素及其键。
    * 不会对已删除的key执行回调。
    *
    * @param { TreeMapForEachCb<K, V> } callbackFn - 回调函数，用于遍历实例对象中的每个键值对并在回调中执行自定义操作。

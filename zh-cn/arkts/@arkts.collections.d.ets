@@ -826,9 +826,7 @@ declare namespace collections {
      * @param { number } start - 开始索引。如果`-array.length <= start < 0`，
      *     则从`start + array.length`开始删除。如果`start < -array.length`，则从0开始删除。
      * @returns { Array<T> } 返回一个新的包含被删除元素的**Array**对象。如果没有元素被删除，
-     *     返回一个空的**Array**对象。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     返回一个空的**Array**对象。
      * @throws { BusinessError } 10200011 - The splice method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -846,9 +844,7 @@ declare namespace collections {
      * @param { T[] } items - 从start位置开始插入的新元素。
      *     如果未传入，则仅删除Array内的元素。
      * @returns { Array<T> } 返回一个新的包含被删除元素的**Array**对象。如果没有元素被删除，
-     *     返回一个空的**Array**对象。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     返回一个空的**Array**对象。
      * @throws { BusinessError } 10200011 - The splice method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -862,10 +858,7 @@ declare namespace collections {
      *
      * @param { Object|undefined|null } value - 需要检查的值。
      * @returns { boolean } 检查结果。如果传入的参数是ArkTS Array，则返回**true**；
-     *     否则返回**false**。可能的原因：
-     *     1. 必填参数未指定。
-     *     2. 参数类型不正确。
-     *     3. 参数校验失败。
+     *     否则返回**false**。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -877,10 +870,7 @@ declare namespace collections {
      *
      * @param { T[] } items - 用于创建数组的元素集合，参数个数可以是0个、1个
      *     或多个。
-     * @returns { Array<T> } 新创建的ArkTS Array实例。可能的原因：
-     *     1. 必填参数未指定。
-     *     2. 参数类型不正确。
-     *     3. 参数校验失败。
+     * @returns { Array<T> } 新创建的ArkTS Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -896,10 +886,7 @@ declare namespace collections {
      *     取值应为整数，当输入浮点数时会向下取整。拷贝过程中包含start位置下标所在的元素。
      * @param { number } [end] - 源终止位置下标，如果`end < 0`，则会从`end + array.length`位置终止。
      *     默认为ArkTS Array的长度。取值应为整数，当输入浮点数时会向下取整。拷贝过程中不包含end位置下标所在的元素。
-     * @returns { Array<T> } 修改后的ArkTS Array。可能的原因：
-     *     1. 必填参数未指定。
-     *     2. 参数类型不正确。
-     *     3. 参数校验失败。
+     * @returns { Array<T> } 修改后的ArkTS Array。
      * @throws { BusinessError } 10200011 - The copyWithin method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -997,9 +984,7 @@ declare namespace collections {
      * @param { ArrayReduceCallback<U, T, Array<T>> } callbackFn - 一个接受四个参数的函数，用于对
      *     每个元素执行操作，并将结果作为累加值传递给下一个元素。
      * @param { U } initialValue - 用于初始化累加器的值。
-     * @returns { U } 回调函数执行后的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 回调函数执行后的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -1014,9 +999,7 @@ declare namespace collections {
      *
      * @param { ArrayReduceCallback<T, T, Array<T>> } callbackFn - 一个接受四个参数的函数，用于对
      *     每个元素执行操作，并将结果作为累加值传递给下一个元素。
-     * @returns { T } 回调函数执行后的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { T } 回调函数执行后的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3221,9 +3204,7 @@ declare namespace collections {
      * @param { U } initialValue - 作为回调函数首次调用的第一个参数的值。
      *     <br>如果未提供初始值，则使用Uint8Array的最后一个元素，
      *     <br>回调将从倒数第二个元素开始调用。
-     * @returns { U } 由最后一次调用归约函数返回的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 由最后一次调用归约函数返回的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3237,9 +3218,7 @@ declare namespace collections {
      *
      * @param { TypedArrayReduceCallback<number, number, Uint8Array> } callbackFn - 对Uint8Array中的每个元素
      *     调用的函数。
-     * @returns { number } 由最后一次调用归约函数返回的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 由最后一次调用归约函数返回的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3276,8 +3255,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Uint8Array对象。
      *
      * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
-     * @returns { Uint8Array } 新的ArkTS Uint8Array实例。可能的原因：1.必填参数未指定；
-     *     <br>2.参数类型不正确；3.参数校验失败。
+     * @returns { Uint8Array } 新的ArkTS Uint8Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -5578,9 +5556,7 @@ declare namespace collections {
      * @param { U } initialValue - 作为回调函数首次调用时第一个参数使用的值。
      *     <br>若未提供初始值，则使用Uint32Array的最后一个元素作为初始值，
      *     <br>且回调函数将从倒数第二个元素开始调用。
-     * @returns { U } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -5593,9 +5569,7 @@ declare namespace collections {
      * 反向遍历ArkTS Uint32Array，对每个元素执行归约函数，并返回最终的归约结果。
      *
      * @param { TypedArrayReduceCallback<number, number, Uint32Array> } callbackFn - 对Uint32Array中的每个元素调用的函数。
-     * @returns { number } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -5633,8 +5607,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Uint32Array对象。
      *
      * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
-     * @returns { Uint32Array } 新的ArkTS Uint32Array实例。可能的原因：1.必填参数未指定；
-     *     <br>2.参数类型不正确；3.参数校验失败。
+     * @returns { Uint32Array } 新的ArkTS Uint32Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -6146,9 +6119,7 @@ declare namespace collections {
      * @param { U } initialValue - 作为回调函数首次调用第一个参数的值。
      *     <br>如果未提供初始值，则使用Float32Array的最后一个元素，
      *     <br>并且回调函数从倒数第二个元素开始调用。
-     * @returns { U } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6161,9 +6132,7 @@ declare namespace collections {
      * 反向遍历ArkTS Float32Array，对每个元素执行归约函数，并返回最终的归约结果。
      *
      * @param { TypedArrayReduceCallback<number, number, Float32Array> } callbackFn - 对Float32Array中的每个元素调用的函数。
-     * @returns { number } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6200,8 +6169,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Float32Array对象。
      *
      * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
-     * @returns { Float32Array } 新的ArkTS Float32Array实例。可能的原因：1.必填参数未指定；
-     *     <br>2.参数类型不正确；3.参数校验失败。
+     * @returns { Float32Array } 新的ArkTS Float32Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -6248,9 +6216,7 @@ declare namespace collections {
      * 在 BitVector 尾部插入元素。
      *
      * @param { number } element - 待插入的元素，**0** 表示 bit 值 0，其余值表示 bit 值 1。
-     * @returns { boolean } 操作结果。插入成功返回 **true**，失败返回 **false**。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { boolean } 操作结果。插入成功返回 **true**，失败返回 **false**。
      * @throws { BusinessError } 10200011 - The push method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6296,9 +6262,7 @@ declare namespace collections {
      * @param { number } fromIndex - 范围起始索引，包含本索引值。如果 **fromIndex** 小于 **0** 或者
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
-     *     等于 **length**，则会抛出错误。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     等于 **length**，则会抛出错误。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The setBitsByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6311,9 +6275,7 @@ declare namespace collections {
     /**
      * 将 BitVector 中所有元素均设为特定 bit 值。
      *
-     * @param { number } element - 待设置的 bit 值。**0** 表示 bit 值 0，其余值表示 bit 值 1。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @param { number } element - 待设置的 bit 值。**0** 表示 bit 值 0，其余值表示 bit 值 1。
      * @throws { BusinessError } 10200011 - The setAllBits method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6329,9 +6291,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { BitVector } 包含所获取 bit 值的 BitVector。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { BitVector } 包含所获取 bit 值的 BitVector。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getBitsByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6346,9 +6306,7 @@ declare namespace collections {
      * 如果 **size** 大于原 BitVector 的长度，则扩充原 BitVector 的长度，多出部分的元素设置为 0。
      * 如果 **size** 小于等于原 BitVector 的长度，则将原 BitVector 按 size 长度大小裁剪。
      *
-     * @param { number } size - 需要改变的长度。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @param { number } size - 需要改变的长度。
      * @throws { BusinessError } 10200011 - The resize method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6365,9 +6323,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { number } 统计指定范围内获取指定 bit 值的数量。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 统计指定范围内获取指定 bit 值的数量。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getBitCountByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6385,9 +6341,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { number } 返回指定 bit 值首次出现时的索引值，查找失败返回 **-1**。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 返回指定 bit 值首次出现时的索引值，查找失败返回 **-1**。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6405,9 +6359,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { number } 返回指定 bit 值最后一次出现时的索引值，查找失败返回 **-1**。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 返回指定 bit 值最后一次出现时的索引值，查找失败返回 **-1**。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getLastIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6421,9 +6373,7 @@ declare namespace collections {
      * 翻转 BitVector 指定索引处的 bit 值，0 翻转为 1，1 翻转为 0。
      *
      * @param { number } index - 指定索引。如果 **index** 小于 **0** 或者大于等于 **length**，则会抛出
-     *     错误。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     错误。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
      * @throws { BusinessError } 10200011 - The flipBitByIndex method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6439,9 +6389,7 @@ declare namespace collections {
      * @param { number } fromIndex - 范围起始索引，包含本索引值。如果 **fromIndex** 小于 **0** 或者
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
-     *     等于 **length**，则会抛出错误。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     等于 **length**，则会抛出错误。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The flipBitsByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
