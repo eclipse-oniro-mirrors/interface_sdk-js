@@ -66,8 +66,7 @@ declare namespace dataShare {
      */
     isProxy?: boolean;
     /**
-     * Waiting time for starting the data provider process, in seconds. The default value is **2**. The value must be
-     * greater than 0.
+     * Waiting time for starting the data provider process, in seconds. The default value is **2**. The value must be greater than 0.
      *
      * @default 2
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
@@ -766,7 +765,7 @@ declare namespace dataShare {
      * @param { AsyncCallback<ChangeInfo> } callback - Callback to unregister. If this parameter is **undefined**,
      *     **null**, or left empty, this API unregisters all callbacks for the specified URI. If this parameter is
      *     specified, the callback must be the one registered in
-     * [on('datachange')]{@link dataShare.DataShareHelper.on(event: 'dataChange', type:SubscriptionType, uri: string, callback: AsyncCallback<ChangeInfo>)}
+     *     [on('datachange')]{@link dataShare.DataShareHelper.on(event: 'dataChange', type:SubscriptionType, uri: string, callback: AsyncCallback<ChangeInfo>)}
      *     .
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameters types.
