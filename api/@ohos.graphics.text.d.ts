@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Text Module
  * @kit ArkGraphics2D
  */
 import type drawing from './@ohos.graphics.drawing';
