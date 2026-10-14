@@ -512,6 +512,38 @@ export class FrameNode {
   isModifiable(): boolean;
 
   /**
+   * Dispatches a pointer input event to this FrameNode with an optional competition strategy.
+   * This API supports TouchEvent, MouseEvent, and AxisEvent. KeyEvent is dispatched by
+   * {@link FrameNode#dispatchKeyEvent} instead.
+   *
+   * @param { InputEventType } event - Input event to dispatch.
+   * @param { CompetitionStrategy } [competitionStrategy] - Competition strategy for dispatching the event.
+   *     By default, the event is dispatched without a competition strategy.
+   * @returns { boolean } Whether the event is successfully dispatched. Returns **true** if the event is dispatched
+   *     successfully; returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
+
+  /**
+   * Dispatches a key event to this FrameNode.
+   *
+   * @param { KeyEvent } event - Key event to be dispatched.
+   * @returns { boolean } Whether the key event is consumed. Returns **true** if the key event is consumed;
+   *     returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  dispatchKeyEvent(event: KeyEvent): boolean;
+
+  /**
    * Appends a child node to the end of this FrameNode. If this FrameNode is not modifiable, an exception is thrown.
    * When **appendChild** is called, [typeNode]{@link typeNode} validates the type or number of child nodes. If the
    * validation fails, an exception is thrown. For specific limitations, see [typeNode]{@link typeNode}.

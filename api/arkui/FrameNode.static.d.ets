@@ -25,7 +25,8 @@ import { DrawContext } from 'arkui.Graphics';
 import { ComponentContent, ReactiveComponentContent } from 'arkui.ComponentContent';
 import { BusinessError } from '@ohos.base';
 import { UIContext } from '@ohos.arkui.UIContext';
-import { UICommonEvent, UIGestureEvent, CommonAttribute, CustomProperty } from '@ohos.arkui.component';
+import { InputEventType } from 'arkui.BuilderNode';
+import { UICommonEvent, UIGestureEvent, CommonAttribute, CustomProperty, KeyEvent, CompetitionStrategy } from '@ohos.arkui.component';
 import { SwiperAttribute, SwiperController } from '@ohos.arkui.component';
 import { ScrollAttribute, Scroller, UIScrollEvent } from '@ohos.arkui.component';
 import { ListAttribute, ListOptions, UIListEvent } from '@ohos.arkui.component';
@@ -421,6 +422,34 @@ export declare class FrameNode {
    * @since 23 static
    */
   isModifiable(): boolean;
+
+  /**
+   * Dispatches a pointer input event to this FrameNode with an optional competition strategy.
+   * This API supports TouchEvent, MouseEvent, and AxisEvent. KeyEvent is dispatched by
+   * {@link FrameNode#dispatchKeyEvent} instead.
+   *
+   * @param { InputEventType } event - Input event to dispatch.
+   * @param { CompetitionStrategy } [competitionStrategy] - Competition strategy for dispatching the event.
+   *     By default, the event is dispatched without a competition strategy.
+   * @returns { boolean } Whether the event is successfully dispatched. Returns **true** if the event is dispatched
+   *     successfully; returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
+
+  /**
+   * Dispatches a key event to this FrameNode.
+   *
+   * @param { KeyEvent } event - Key event to be dispatched.
+   * @returns { boolean } Whether the key event is consumed. Returns **true** if the key event is consumed;
+   *     returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  dispatchKeyEvent(event: KeyEvent): boolean;
 
   /**
    * Add child to the end of the FrameNode's children.
