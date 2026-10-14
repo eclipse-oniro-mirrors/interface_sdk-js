@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 访问图片、视频资源的辅助函数
+ * @file 相册管理模块
  * @kit MediaLibraryKit
  */
 

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Helper functions to access image and video assets
+ * @file 基于Sendable对象的相册管理模块
  * @kit MediaLibraryKit
  */
 
