@@ -587,6 +587,16 @@ export declare class Scroller {
    * @since 26.0.0 static
    */
   getFrameNode(): FrameNode | undefined;
+  /**
+   * 获取绑定到此Scroller的可滚动组件的当前滚动状态。
+   *
+   * @returns { ScrollState } 当前滚动状态。
+   * @throws { BusinessError } 100004 - 控制器未绑定到组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  getScrollState(): ScrollState;
 }
 
 /**
