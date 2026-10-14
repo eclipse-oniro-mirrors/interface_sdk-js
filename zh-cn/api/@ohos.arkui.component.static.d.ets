@@ -114,6 +114,7 @@ export * from './arkui/component/rowSplit';
 export * from './arkui/component/saveButton';
 export * from './arkui/component/screen';
 export * from './arkui/component/scroll';
+export * from './arkui/component/scrollCommon';
 export * from './arkui/component/scrollBar';
 export * from './arkui/component/search';
 export * from './arkui/component/securityComponent';

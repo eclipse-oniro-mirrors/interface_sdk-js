@@ -982,6 +982,24 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   nestedScroll(value: NestedScrollOptions): GridAttribute;
 
   /**
+   * 设置Grid的两阶段滚动吸附策略。
+   *
+   * START、CENTER、END分别将item对齐到滚动轴方向视口的起始、中间和末尾位置。
+   * 自定义提供方通过calculateApproachOffset计算趋近距离，通过calculateSnapOffset计算最终目标。
+   * 设置为NONE或undefined时清除策略，恢复默认滚动行为。
+   * 不支持的布局不启用吸附。吸附目标受合法滚动范围限制。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐策略或自定义提供方。
+   * @returns { GridAttribute } Grid组件的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): GridAttribute;
+
+  /**
    * 设置是否支持滚动手势。
    *
    * @param { boolean } value - 是否支持滚动手势。设置为true时可以通过手指或者鼠标滚动，设置为false时无法通过手指或者鼠标滚动，但不影响控制器[Scroller]{@link Scroller}的滚动
