@@ -273,7 +273,7 @@ declare namespace AbilityConstant {
 
   /**
    * Ability启动原因，该类型为枚举，可配合UIAbility的[onCreate(want, launchParam)]{@link @ohos.app.ability.UIAbility:UIAbility#onCreate}
-   * 方法根据launchParam.launchReason的不同类型执行相应操作。
+   * 方法根据[LaunchParam.launchReason]{@link AbilityConstant.LaunchParam}的不同类型执行相应操作。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -398,7 +398,7 @@ declare namespace AbilityConstant {
 
   /**
    * Ability上次退出原因，该类型为枚举，可配合UIAbility的[onCreate()]{@link @ohos.app.ability.UIAbility:UIAbility#onCreate}方法根据
-   * launchParam.lastExitReason的不同类型执行相应操作。
+   * [LaunchParam.lastExitReason]{@link AbilityConstant.LaunchParam}的不同类型执行相应操作。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -481,7 +481,7 @@ declare namespace AbilityConstant {
     /**
      * 因系统性能问题（如设备内存不足）导致的应用程序退出。
      * 
-     * **说明**：该接口即将废弃，建议使用RESOURCE_CONTROL替代。
+     * **说明**：该接口即将废弃，建议使用[RESOURCE_CONTROL]{@link AbilityConstant.LastExitReason.RESOURCE_CONTROL}替代。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
@@ -696,7 +696,7 @@ declare namespace AbilityConstant {
 
   /**
    * 启动UIAbility时窗口的创建模式，类型为枚举。可配合
-   * [startAbility]{@link ./application/UIAbilityContext:UIAbilityContext.startAbility(want: Want, options?: StartOptions)}
+   * [startAbility]{@link ./application/UIAbilityContext:UIAbilityContext#startAbility(want: Want, options?: StartOptions)}
    * 方法使用。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -835,7 +835,7 @@ declare namespace AbilityConstant {
     RECOVERY_REJECT = 4,
 
     /**
-     * Always rejected to save the status.
+     * 总是拒绝保存状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
