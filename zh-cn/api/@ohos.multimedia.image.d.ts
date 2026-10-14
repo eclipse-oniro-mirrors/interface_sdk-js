@@ -104,7 +104,7 @@ declare namespace image {
    */
   enum PixelMapFormat {
     /**
-     * 未知格式。
+     * 表示未知的像素格式。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]

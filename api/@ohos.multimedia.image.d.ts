@@ -119,7 +119,7 @@ declare namespace image {
    */
   enum PixelMapFormat {
     /**
-     * Unknown format.
+     * Indicates an unknown pixel format.
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
