@@ -1030,6 +1030,28 @@ declare namespace text {
      * @since 23 static
      */
     leftBottomRadius: double;
+
+    /**
+     * Rectangle border color.
+     * Default value: The default value is white.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    borderColor?: common2D.Color;
+
+    /**
+     * Rectangle border width.
+     * Unit: Pixel. Default value: The default value is 0.
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    borderWidth?: double;
   }
 
   /**
