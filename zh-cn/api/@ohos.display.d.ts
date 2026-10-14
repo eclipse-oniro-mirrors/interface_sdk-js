@@ -2004,8 +2004,8 @@ declare namespace display {
      * 开启当前设备屏幕的可用区域监听。当前设备屏幕有可用区域变化时，触发回调函数，返回可用区域。
      *
      * @param { Callback<Rect> } callback - 回调函数。返回改变后的可用区域。
-     * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
-     *     capabilities.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<Rect> } callback - Callback used to return the available area
      * @throws { BusinessError } 1400003 - This display manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
      * @since 23 static
