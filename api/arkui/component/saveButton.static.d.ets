@@ -370,13 +370,6 @@ export declare interface SaveButtonAttribute extends SecurityComponentMethod {
   /**
    * Sets the icon size of the **SaveButton** component.
    *
-   * > **NOTE**
-   * >
-   * > The icon size can also be set through the security component universal attribute
-   * > [iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}, where the size type supports only
-   * > Dimension.<br/>
-   * > The size type of this API additionally supports SizeOptions.
-   *
    * @param { Dimension | SizeOptions | undefined } size - Icon size. Pixel units such as vp and px are supported.
    *     <br>The default width and height are 16 vp.<br>Percentage strings are not supported. If a percentage string is
    *     passed as a Dimension parameter, the icon will be displayed with the default size. If either the **width** or
