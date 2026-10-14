@@ -30,7 +30,7 @@
  * }
  * ```
  *
- * @file PluginComponentManager
+ * @file 插件组件管理器
  * @kit ArkUI
  */
 
