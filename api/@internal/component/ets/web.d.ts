@@ -9935,7 +9935,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * Sets the color of the text input caret and selection handles of the **Web** component.
    *
    * When this attribute is not explicitly called or is reset, the caret uses the page's CSS `caret-color` result.
-   * If the CSS value is **auto** or not set, the caret uses the built-in default color (currently **#0A59F7**).
+   * If the CSS value is **auto** or not set, the caret uses the built-in default color (currently `#0A59F7`).
    * Selection handles use the current theme colors.
    *
    * > **NOTE**
@@ -9947,7 +9947,6 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * value is used. If the CSS value is **auto** or not set, the built-in default color is used.
    *
    * @param { ResourceColor } value - Color of the text input caret and selection handles.
-   *     <br>When **undefined** or **null** is passed in, this attribute is reset.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
