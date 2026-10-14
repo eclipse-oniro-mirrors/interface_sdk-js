@@ -1022,7 +1022,7 @@ declare namespace inputMonitor {
    *     the following valid information; all other information is invalid:<br/>- **actionTime**: Time when the
    *     touchscreen input event occurred, in microseconds (μs) since system startup.<br/>-
    *     [SourceType]{@link @ohos.multimodalInput.touchEvent:SourceType}: Device type of the touch source.<br/>-
-   *     [isInject]{@link @ohos.multimodalInput.touchEvent:TouchEvent}: Whether the touchscreen input event is an
+   *     [isInject]{@link @ohos.multimodalInput.touchEvent:TouchEvent#isInject}: Whether the touchscreen input event is an
    *     injected event.<br/>- **pressure**: Pressure value, with a value range of [0.0, 1.0], where **0.0** indicates
    *     not supported.<br/>- **tiltX**: Angle relative to the YZ plane, with a value range of [-90, 90], where a
    *     positive value indicates tilting to the right.<br/>- **tiltY**: Angle relative to the XZ plane, with a value
