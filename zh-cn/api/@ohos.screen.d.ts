@@ -73,18 +73,16 @@ declare namespace screen {
   function on(eventType: 'connect' | 'disconnect' | 'change', callback: Callback<long>): void;
 
   /**
-   * 开启屏幕断连事件的监听。
+   * 开启屏幕断连事件的监听。屏幕断连时，调用回调函数返回断连信息。
    *
-   * @param { 'screenDisconnect' } eventType - 监听事件。eventType为"screenDisconnect"表示屏幕断连事件。
    * @param { Callback<ScreenDisconnectInfo> } callback - 回调函数。返回屏幕断连信息，包含屏幕id和断连原因。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     <br>2. Incorrect parameter types.
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @systemapi Hide this for inner system use.
-   * @since 26.0.1 dynamic
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
    */
-  function on(eventType: 'screenDisconnect', callback: Callback<ScreenDisconnectInfo>): void;
+  function onDisconnectWithInfo(callback: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Register the callback for screen connection events.
@@ -137,16 +135,15 @@ declare namespace screen {
   /**
    * 关闭屏幕断连事件的监听。
    *
-   * @param { 'screenDisconnect' } eventType - 监听事件。eventType为"screenDisconnect"表示屏幕断连事件。
    * @param { Callback<ScreenDisconnectInfo> } [callback] - 回调函数。返回屏幕断连信息，包含屏幕id和断连原因。
    *     如果未传入该参数，则取消该事件类型所有回调的监听。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @systemapi Hide this for inner system use.
-   * @since 26.0.1 dynamic
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
    */
-  function off(eventType: 'screenDisconnect', callback?: Callback<ScreenDisconnectInfo>): void;
+  function offDisconnectWithInfo(callback?: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Unregister the callback for screen connection events.
@@ -749,7 +746,8 @@ declare namespace screen {
    *
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @systemapi Hide this for inner system use.
-   * @since 26.0.1 dynamic
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
    */
   interface ScreenDisconnectInfo {
     /**
@@ -758,7 +756,8 @@ declare namespace screen {
      * @type { long }
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @systemapi Hide this for inner system use.
-     * @since 26.0.1 dynamic
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
      */
     id: long;
 
@@ -768,7 +767,8 @@ declare namespace screen {
      * @type { string }
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @systemapi Hide this for inner system use.
-     * @since 26.0.1 dynamic
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
      */
     reason: string;
   }

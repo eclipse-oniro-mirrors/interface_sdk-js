@@ -109,20 +109,18 @@ declare namespace screen {
   function on(eventType: 'connect' | 'disconnect' | 'change', callback: Callback<long>): void;
 
   /**
-   * Subscribes to screen disconnect events.
+   * Subscribes to screen disconnect events, When a screen is disconnected,
+   * the callback is invoked to return the disconnection information.
    *
-   * @param { 'screenDisconnect' } eventType - Event type. The value **screenDisconnect** indicates an event
-   *     indicating that the screen is disconnected.
    * @param { Callback<ScreenDisconnectInfo> } callback - Callback used to return the screen disconnect information,
    *     including the screen ID and disconnection reason.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     <br>2. Incorrect parameter types.
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @systemapi Hide this for inner system use.
-   * @since 26.0.1 dynamic
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
    */
-  function on(eventType: 'screenDisconnect', callback: Callback<ScreenDisconnectInfo>): void;
+  function onDisconnectWithInfo(callback: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Register the callback for screen connection events.
@@ -176,18 +174,16 @@ declare namespace screen {
   /**
    * Unsubscribes from screen disconnect events.
    *
-   * @param { 'screenDisconnect' } eventType - Event type. The value **screenDisconnect** indicates an event
-   *     indicating that the screen is disconnected.
    * @param { Callback<ScreenDisconnectInfo> } [callback] - Callback used to return the screen disconnect information,
    *     including the screen ID and disconnection reason. If not provided, all callbacks for the given event type
    *     will be removed.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @systemapi Hide this for inner system use.
-   * @since 26.0.1 dynamic
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
    */
-  function off(eventType: 'screenDisconnect', callback?: Callback<ScreenDisconnectInfo>): void;
+  function offDisconnectWithInfo(callback?: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Unregister the callback for screen connection events.
@@ -821,7 +817,8 @@ declare namespace screen {
    *
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @systemapi Hide this for inner system use.
-   * @since 26.0.1 dynamic
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
    */
   interface ScreenDisconnectInfo {
     /**
@@ -830,7 +827,8 @@ declare namespace screen {
      * @type { long }
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @systemapi Hide this for inner system use.
-     * @since 26.0.1 dynamic
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
      */
     id: long;
 
@@ -840,7 +838,8 @@ declare namespace screen {
      * @type { string }
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @systemapi Hide this for inner system use.
-     * @since 26.0.1 dynamic
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
      */
     reason: string;
   }
