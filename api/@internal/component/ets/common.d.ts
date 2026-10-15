@@ -19951,9 +19951,8 @@ declare class CommonMethod<T> {
    * > - When a component extends into a non-safe area, events in the non-safe area, such as click events, may be
    * > intercepted by the system and preferentially responded to by system components such as the status bar.
    * >
-
- * > - It is not recommended to set the **expandSafeArea** attribute on components in a scrollable
- * > container. If it is
+   * > - It is not recommended to set the **expandSafeArea** attribute on components in a scrollable
+   * > container. If it is
    * > set, the **expandSafeArea** attribute must be set on all direct nodes from the current node to the scrollable
    * > ancestor container according to the component nesting relationship. Otherwise, the **expandSafeArea** attribute
    * > may become invalid after scrolling.
@@ -19971,7 +19970,7 @@ declare class CommonMethod<T> {
    *
    * @param { Array<SafeAreaType> } types - Types of the safe areas to expand. By default, SafeAreaType.CUTOUT is
    *     included. However, if the Metadata configuration item is not added, the page does not avoid the
- *     cutout, and the
+   *     cutout, and the
    *     CUTOUT type does not take effect.<br>Default value: [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT,
    *     SafeAreaType.KEYBOARD]<br>Invalid value: handled by default.
    * @param { Array<SafeAreaEdge> } edges - Edges of the safe areas to expand. By default, the component expands to
@@ -23264,11 +23263,12 @@ declare class CommonMethod<T> {
    * component size on the main axis, in which case flexShrink does not take effect. Setting this attribute triggers
    * a second layout. In scenarios with strict performance requirements, use **layoutWeight** instead.
    *
-   * When
-   * [getInspectorByKey](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-component-id.md#getinspectorbykey9)
-   * is used to obtain the **flexShrink** attribute, if the node does not have **flexShrink** set, the default value
-   * of **1** is returned by default (consistent with the default value of the Flex container, but different from
-   * the default value **0** of the Column and Row containers).
+   * >  **NOTE**
+   * >
+   * > When [getInspectorByKey](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-component-id.md#getinspectorbykey9)
+   * > is used to obtain the **flexShrink** attribute, if the node does not have **flexShrink** set, the default value
+   * > of **1** is returned by default (consistent with the default value of the Flex container, but different from
+   * > the default value **0** of the Column and Row containers).
    *
    * @param { number } value - Sets the proportion of the compressed size allocated to the component to which this
    *     attribute belongs when the parent container space is insufficient. The value 0 indicates that the component
@@ -23674,7 +23674,19 @@ declare class CommonMethod<T> {
   enabled(value: boolean): T;
 
   /**
-   * Sets the number of occupied columns and offset columns for a specific device width type.
+   * Sets the column count and offset column count under a specific device width type. 
+   * span: column count (must be a non-negative integer). 
+   * When passing a negative number or a value exceeding the total column count of GridContainer, use the default value. offset: offset column count (must be a non-negative integer). 
+   * When passing a negative number, use the default value 0.
+   * <br>When the value is of the number type, only the column count is set. 
+   * When the value is in the format {"span":&nbsp;1,&nbsp;"offset":&nbsp;0}, both the column count and the offset column count are set.
+   * <br>-&nbsp;xs: refers to the column count and offset column count when the device width type is SizeType.XS (<320vp).
+   * <br>-&nbsp;sm: refers to the column count and offset column count when the device width type is SizeType.SM (320vp-600vp).
+   * <br>-&nbsp;md: refers to the column count and offset column count when the device width type is SizeType.MD (600vp-840vp).
+   * <br>-&nbsp;lg: refers to the column count and offset column count when the device width type is SizeType.LG (≥840vp).
+   * <br>For details about the breakpoint configuration of each size type, see [GridContainer](ts-container-gridcontainer.md).
+   * <br>**NOTE**
+   * <br>- When calling this attribute, its parent component or ancestor component must be GridContainer.
    *
    * @param { object } value
    * @returns { T }
@@ -26980,7 +26992,7 @@ declare interface PixelRoundPolicy {
    * pixelRound is not set or when a value other than the PixelRoundCalcPolicy enum is set.
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26996,7 +27008,7 @@ declare interface PixelRoundPolicy {
    * pixelRound is not set or when a value other than the PixelRoundCalcPolicy enum is set.
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27012,7 +27024,7 @@ declare interface PixelRoundPolicy {
    * pixelRound is not set or when a value other than the PixelRoundCalcPolicy enum is set.
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27028,7 +27040,7 @@ declare interface PixelRoundPolicy {
    * pixelRound is not set or when a value other than the PixelRoundCalcPolicy enum is set.
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27147,7 +27159,7 @@ declare interface MotionBlurOptions {
  */
 declare interface LayoutBorderInfo {
   /**
-   * Edge widths in different directions of the component.
+   * Border width type, used to describe the width of the component border in different directions.<br>Unit: vp.
    *
    * @type { EdgeWidths }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27159,7 +27171,7 @@ declare interface LayoutBorderInfo {
   borderWidth: EdgeWidths;
 
   /**
-   * Margin values in different directions of the component.
+   * Margin type, used to describe the margin of the component in different directions.<br>Unit: vp.
    *
    * @type { Margin }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27171,7 +27183,7 @@ declare interface LayoutBorderInfo {
   margin: Margin,
 
   /**
-   * Padding values in different directions of the component.
+   * Padding type, used to describe the padding of the component in different directions.<br>Unit: vp.
    *
    * @type { Padding }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27195,7 +27207,7 @@ declare interface LayoutBorderInfo {
  */
 declare interface LayoutInfo {
   /**
-   * Position coordinates of the child component.
+   * Position coordinates of the child component. Unit: vp.
    *
    * @type { Position }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27207,7 +27219,7 @@ declare interface LayoutInfo {
   position: Position,
 
   /**
-   * Constraint size of the child component.
+   * Constraint size of the child component. Value principle: **minWidth** ≤ **maxWidth**, **minHeight** ≤ **maxHeight**; unit: vp.
    *
    * @type { ConstraintSizeOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27279,7 +27291,7 @@ declare type AreaChangeCallback = (oldValue: Area, newValue: Area) => void;
  */
 declare interface LayoutChild {
   /**
-   * Sub component name.
+   * Name of the child component. 
    *
    * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27291,7 +27303,7 @@ declare interface LayoutChild {
   name: string,
 
   /**
-   * Sub component id.
+   * ID of the child component.  
    *
    * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27303,7 +27315,8 @@ declare interface LayoutChild {
   id: string,
 
   /**
-   * Sub component constraint.
+   * Constraint size of the child component. Value principle: **minWidth** ≤ **maxWidth**, **minHeight** ≤ **maxHeight**. 
+   * Unit: vp.
    *
    * @type { ConstraintSizeOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27315,7 +27328,7 @@ declare interface LayoutChild {
   constraint: ConstraintSizeOptions,
 
   /**
-   * Sub component border info.
+   * Provides the border information of the child component.
    *
    * @type { LayoutBorderInfo }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27327,7 +27340,7 @@ declare interface LayoutChild {
   borderInfo: LayoutBorderInfo,
 
   /**
-   * Sub component position.
+   * Position coordinates of the child component. Unit: vp. 
    *
    * @type { Position }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27339,9 +27352,11 @@ declare interface LayoutChild {
   position: Position,
 
   /**
-   * Call this measure method in onMeasure callback to supply sub component size.
+   * Applies specified size constraints to child components.
    *
-   * @param { ConstraintSizeOptions } childConstraint
+   * @param { ConstraintSizeOptions } childConstraint - Constraint information about the size range of the child component, 
+   * including constraint conditions such as **minWidth**, **maxWidth**, **minHeight**, and **maxHeight**. 
+   * Unit: vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -27351,9 +27366,11 @@ declare interface LayoutChild {
   measure(childConstraint: ConstraintSizeOptions);
 
   /**
-   * Call this layout method in onLayout callback to assign layout info to sub component.
+   * Applies the specified layout constraints to the child component.
    *
-   * @param { LayoutInfo } childLayoutInfo
+   * @param { LayoutInfo } childLayoutInfo - Layout information of the child component, 
+   * including **position** (position coordinates) and **constraint** (constraint size). 
+   * The position is used to set the **position** of the child component, and the constraint is used to pass **constraint** information to the child component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -27802,12 +27819,15 @@ declare class CustomComponent extends BaseCustomComponent {
   aboutToReuse?(params: Record<string, Object | undefined | null>): void;
 
   /**
-   * Invoked when the custom component lays out its child components. Through this callback the component
-   * receives its child component layout information and size constraint from the ArkUI framework.
-   * State variables should not be changed in this callback.
+   * When the custom component determines the positions of its child components,
+   * the ArkUI framework passes the child node information of the custom component and its own size range to the custom component through **onLayout**.
+   * Developers can lay out child components in this method.
+   * State variables are not allowed to be changed in the **onLayout** function.
    *
    * @param { Array<LayoutChild> } children - Child component layout information.
-   * @param { ConstraintSizeOptions } constraint - Size constraint of the parent component.
+   * @param { ConstraintSizeOptions } constraint - Constraint information of the parent component,
+   * including constraint conditions such as **minWidth**, **maxWidth**, **minHeight**, and **maxHeight**. Value principle: **minWidth** ≤ **maxWidth**, **minHeight** ≤ **maxHeight**.
+   * Unit: vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -27817,12 +27837,15 @@ declare class CustomComponent extends BaseCustomComponent {
   onLayout?(children: Array<LayoutChild>, constraint: ConstraintSizeOptions): void;
 
   /**
-   * Invoked when the custom component needs to determine its size. Through this callback the component
-   * receives its child component layout information and its own size constraints from the ArkUI framework.
-   * State variables should not be changed in this callback.
+   * When the custom component determines its size,
+   * the ArkUI framework passes the child node information of the custom component and its own size range to the custom component through **onMeasure**.
+   * Developers can measure child components in this method.
+   * State variables are not allowed to be changed in the **onMeasure** function.
    *
    * @param { Array<LayoutChild> } children - Child component layout information.
-   * @param { ConstraintSizeOptions } constraint - Size constraint of the parent component.
+   * @param { ConstraintSizeOptions } constraint - Constraint information of the parent component,
+   * including constraint conditions such as **minWidth**, **maxWidth**, **minHeight**, and **maxHeight**. Value principle: **minWidth** ≤ **maxWidth** and **minHeight** ≤ **maxHeight**.
+   * Unit: vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -27967,13 +27990,9 @@ declare class BaseCustomComponent extends CommonAttribute {
    *
    * > **NOTE**
    * >
-   * > - When a custom layout is created in builder mode, only **this.builder()** is allowed in the **build()** method
-   * >   of a custom component, as shown in the recommended usage in the example below.
-   * > - The size parameters of the parent component (custom component), except **aspectRatio**, are at a lower
-   * >   priority than those specified by [onMeasureSize]{@link CustomComponentV2#onMeasureSize}.
-   * > - The position parameters of the child component, except **offset**, **position**, and **markAnchor**, are at
-   * >   a lower priority than those specified by [onPlaceChildren]{@link CustomComponentV2#onPlaceChildren},
-   * >   and do not take effect.
+   * > - When using custom layout methods, you are advised to implement both **onMeasureSize** and **onPlaceChildren**. Otherwise, layout exceptions may occur.
+   * > - Lazy loading (including Repeat and **LazyForEach**) is not supported in a custom layout.
+   * > - The size information set on the parent container (custom component), except **aspectRatio**, has a lower priority than the size information set by **onMeasureSize**.
    *
    * @param { GeometryInfo } selfLayoutInfo - Information about the component's computed layout properties after
    *     measurement.<br>During the first layout, the component will use its own set attributes as the basis for layout.

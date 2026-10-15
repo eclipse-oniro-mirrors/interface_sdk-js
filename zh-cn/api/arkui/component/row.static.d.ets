@@ -113,10 +113,10 @@ export declare interface RowAttribute extends CommonMethod {
      */
     default justifyContent(value: FlexAlign | undefined): this;
     /**
-    * Defines the PointLight
+    * 为Row组件添加点光源效果，影响周围标记为可被照亮组件的光照渲染。
     *
-    * @param { PointLightStyle | undefined } value - The point light style.
-    * @returns { RowAttribute } The attribute of the row.
+    * @param { PointLightStyle | undefined } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
+    * @returns { RowAttribute } Row的属性。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @systemapi
     * @stagemodelonly

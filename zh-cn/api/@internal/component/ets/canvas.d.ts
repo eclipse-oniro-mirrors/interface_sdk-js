@@ -2370,7 +2370,7 @@ declare class CanvasRenderer extends CanvasPath {
  */
 declare class CanvasRenderingContext2D extends CanvasRenderer {
   /**
-   * 组件高度。
+   * **CanvasRenderingContext2D**的组件高度。
    *
    * 默认单位为vp。
    *
@@ -2384,7 +2384,7 @@ declare class CanvasRenderingContext2D extends CanvasRenderer {
   readonly height: number;
 
   /**
-   * 组件宽度。
+   * **CanvasRenderingContext2D**的组件宽度。
    *
    * 默认单位为vp。
    *
@@ -2707,7 +2707,7 @@ declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
    * @param { number } height - 离屏画布的高度，默认单位：vp。
    *    <br>异常值NaN和Infinity按无效值处理。
    * @param { RenderingContextSettings } settings - 用来配置OffscreenCanvasRenderingContext2D对象的参数，
-   *    见RenderingContextSettings接口描述。
+   *    当需要开启抗锯齿等高级配置时传入此参数，见RenderingContextSettings接口描述。
    *    <br>异常值undefined按RenderingContextSettings的默认值处理。
    *    <br>默认值：null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2727,7 +2727,7 @@ declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
    * @param { number } height - 离屏画布的高度，默认单位：vp。
    *    <br>异常值NaN和Infinity按无效值处理。
    * @param { RenderingContextSettings } settings - 用来配置OffscreenCanvasRenderingContext2D对象的参数，
-   *    见RenderingContextSettings接口描述。
+   *    当需要开启抗锯齿等高级配置时传入此参数，见RenderingContextSettings接口描述。
    *    <br>异常值undefined按RenderingContextSettings的默认值处理。
    *    <br>默认值：null。
    * @param { LengthMetricsUnit } [unit] - 用来配置OffscreenCanvasRenderingContext2D对象的单位模式，
@@ -2938,6 +2938,8 @@ declare class DrawingRenderingContext {
 
   /**
    * 获取绘制内容的画布对象。
+   * 仅当**DrawingRenderingContext**对象与**Canvas**组件绑定后，才可使用该接口。
+   * 获取的**Canvas**对象可用于绑定**Brush**、**Pen**等绘图工具，以绘制形状、文本和图片。
    *
    * @returns { DrawingCanvas } 绘制内容的画布对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full

@@ -164,7 +164,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。PointLightStyle对象包含光源位置、颜色、强度等参数，具体配置方式详见链接说明。仅Image、
    *     Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { RowAttribute } The attribute of the row.
+   * @returns { RowAttribute } Row的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -176,7 +176,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
    *
    * @param { Optional<boolean> } isReversed - 子组件在水平方向上的排列顺序是否反转。
    *     <br>设置true表示子组件在水平方向上反转排列（从右到左），设置false表示子组件在水平方向上正序排列（从左到右）。参数值为undefined时视为true，主轴方向反转。
-   * @returns { RowAttribute } The attribute of the row.
+   * @returns { RowAttribute } Row的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
