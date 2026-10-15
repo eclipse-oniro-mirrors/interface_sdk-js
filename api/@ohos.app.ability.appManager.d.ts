@@ -1031,8 +1031,8 @@ declare namespace appManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
-   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
-   *     the upper limit.
+   * @throws { BusinessError } 16000165 - The number of processes that have registered observers for the current
+   *     application has reached the upper limit.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 26.2.0 dynamic&static
