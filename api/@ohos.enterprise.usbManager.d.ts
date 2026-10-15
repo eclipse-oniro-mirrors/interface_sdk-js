@@ -319,7 +319,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     vendorId: number;
- 
+
     /**
      * Product ID.
      *
@@ -328,7 +328,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     productId: number;
- 
+
     /**
      * Serial Number.
      *
@@ -336,9 +336,9 @@ declare namespace usbManager {
      * @stagemodelonly
      * @since 26.0.1
      */
-    serial: string;
+    serial?: string;
   }
- 
+
   /**
    * Mounting strategy.
    *
@@ -355,7 +355,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     MOUNT_READ_WRITE = 0,
- 
+
     /**
      * Read-only mounting.
      *
@@ -364,7 +364,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     MOUNT_READ_ONLY = 1,
- 
+
     /**
      * Not mounted.
      *
@@ -873,15 +873,18 @@ declare namespace usbManager {
   function getUsbSerialNumber(busNum: number, devAddress: number): string;
 
   /**
-   * Add the list of USB devices that support CD/DVD burning.
+   * Add the list of USB devices that support CD/DVD burning.This API uses a promise to return the result.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
    * @param { Array<UsbDevice> } usbDevices - Array of USB device types to be added.
    *     <br>The maximum length is 10000 and cannot be empty.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -892,18 +895,21 @@ declare namespace usbManager {
    * @stagemodelonly
    * @since 26.0.1
    */
-  function addAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
- 
+  function addAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): Promise<void>;
+
   /**
-   * Remove the list of USB devices that support CD/DVD burning.
+   * Remove the list of USB devices that support CD/DVD burning.This API uses a promise to return the result.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
    * @param { Array<UsbDevice> } usbDevices - Array of USB device types to be removed.
    *     <br>The maximum length is 10000 and cannot be empty.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -914,15 +920,15 @@ declare namespace usbManager {
    * @stagemodelonly
    * @since 26.0.1
    */
-  function removeAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
- 
+  function removeAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): Promise<void>;
+
   /**
-   * Obtain the list of USB devices that support CD/DVD burning.
+   * Obtain the list of USB devices that support CD/DVD burning.This API uses a promise to return the result.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
    * @param { common.QueryPolicy } [queryPolicy] - queryPolicy indicates the policy of query.
    *     <br>Default value: common.QueryPolicy.SELF.
-   * @returns { Array<UsbDevice> } Array of allowed USB devices.
+   * @returns { Promise<Array<UsbDevice>> } Promise used to return Array<UsbDevice>.The array of allowed USB devices.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -932,8 +938,8 @@ declare namespace usbManager {
    * @stagemodelonly
    * @since 26.0.1
    */
-  function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Array<UsbDevice>;
- 
+  function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Promise<Array<UsbDevice>>;
+
   /**
    * Set the enabling status of external storage device mounting.
    *
@@ -950,7 +956,7 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function setExternalStorageInterceptEnable(enable: boolean): void;
- 
+
   /**
    * Query the enabling status of external storage device mounting.
    *
@@ -968,7 +974,7 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function isExternalStorageInterceptEnable(queryPolicy?: common.QueryPolicy): boolean;
- 
+
   /**
    * Set the mounting policy for external storage devices.
    *
@@ -987,7 +993,7 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function setExternalStorageDeviceMountPolicy(volumeId: string, policy: MountPolicy): void;
- 
+
   /**
    * Obtain the volume information of the current device.
    *
