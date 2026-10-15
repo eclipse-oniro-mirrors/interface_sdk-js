@@ -241,9 +241,11 @@ declare namespace userAuth {
      * 执行用户认证，使用callback方式作为异步方法。
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @param { AuthType } type - 认证类型，当前只支持"FACE_ONLY"。<br/>ALL为预留参数。当前版本暂不支持ALL类型的认证。
-     * @param { SecureLevel } level - 安全级别，对应认证的安全级别，有效值为"S1"（最低）、"S2"、"S3"、"S4"（最高）。<br/>具备3D人脸识别能力的设备支持"S3"及以下安全级别的认证。
-     *     <br/>具备2D人脸识别能力的设备支持"S2"及以下安全级别的认证。
+     * @param { AuthType } type - 认证类型，当前只支持"FACE_ONLY"。
+     *     <br>ALL为预留参数。当前版本暂不支持ALL类型的认证。
+     * @param { SecureLevel } level - 安全级别，对应认证的安全级别，有效值为"S1"（最低）、"S2"、"S3"、"S4"（最高）。
+     *     <br>具备3D人脸识别能力的设备支持"S3"及以下安全级别的认证。
+     *     <br>具备2D人脸识别能力的设备支持"S2"及以下安全级别的认证。
      * @param { AsyncCallback<number> } callback - 回调函数。number表示认证结果，参见
      *     [AuthenticationResult]{@link userAuth.AuthenticationResult}。
      * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -257,9 +259,11 @@ declare namespace userAuth {
      * 执行用户认证，使用promise方式作为异步方法。
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @param { AuthType } type - 认证类型，当前只支持"FACE_ONLY"。<br/>ALL为预留参数。当前版本暂不支持ALL类型的认证。
-     * @param { SecureLevel } level - 安全级别，对应认证的安全级别，有效值为"S1"（最低）、"S2"、"S3"、"S4"（最高）。<br/>具备3D人脸识别能力的设备支持"S3"及以下安全级别的认证。
-     *     <br/>具备2D人脸识别能力的设备支持"S2"及以下安全级别的认证。
+     * @param { AuthType } type - 认证类型，当前只支持"FACE_ONLY"。
+     *     <br>ALL为预留参数。当前版本暂不支持ALL类型的认证。
+     * @param { SecureLevel } level - 安全级别，对应认证的安全级别，有效值为"S1"（最低）、"S2"、"S3"、"S4"（最高）。
+     *     <br>具备3D人脸识别能力的设备支持"S3"及以下安全级别的认证。
+     *     <br>具备2D人脸识别能力的设备支持"S2"及以下安全级别的认证。
      * @returns { Promise<number> } 返回携带一个number的Promise。number 为认证结果，参见
      *     [AuthenticationResult]{@link userAuth.AuthenticationResult}。
      * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -811,8 +815,7 @@ declare namespace userAuth {
    */
   enum AuthTrustLevel {
     /**
-     * 认证结果的信任等级级别1，表示该认证方案能够识别用户个体，具备基本的活体检测能力（如简单的动作检测）。安全强度较低，认证结果可能存在一定风险。适用于业务风控、一般个人数据查询、非敏感信息访问等低安全场景。建议配合其他安全措施使
-     * 用。
+     * 认证结果的信任等级级别1，表示该认证方案能够识别用户个体，具备基本的活体检测能力。安全强度较低，认证结果可能存在一定风险。适用于业务风控、一般个人数据查询、非敏感信息访问等低安全场景。建议配合其他安全措施使用。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @atomicservice [since 12]
@@ -822,7 +825,7 @@ declare namespace userAuth {
     ATL1 = 10000,
 
     /**
-     * 认证结果的信任等级级别2，表示该认证方案能够精确识别用户个体，具备标准的活体检测能力（如眨眼、点头等动作检测）。安全强度中等，可有效防御简单的伪造攻击。适用于维持设备解锁状态、应用登录、一般敏感操作确认等中等安全场景。
+     * 认证结果的信任等级级别2，表示该认证方案能够精确识别用户个体，具备标准的活体检测能力。安全强度中等，可有效防御简单的伪造攻击。适用于维持设备解锁状态、应用登录、一般敏感操作确认等中等安全场景。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @atomicservice [since 12]
@@ -832,8 +835,7 @@ declare namespace userAuth {
     ATL2 = 20000,
 
     /**
-     * 认证结果的信任等级级别3，表示该认证方案能够精确识别用户个体，具备较强的活体检测能力（如3D人脸识别、多帧分析等）。安全强度较高，可有效防御照片、视频等常见伪造攻击。适用于设备解锁、重要敏感操作确认、企业级应用登录等较高安全场
-     * 景。3D人脸识别设备可支持此等级。
+     * 认证结果的信任等级级别3，表示该认证方案能够精确识别用户个体，具备较强的活体检测能力。安全强度较高，可有效防御照片、视频等常见伪造攻击。适用于设备解锁、重要敏感操作确认、企业级应用登录等较高安全场景。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @atomicservice [since 12]
@@ -843,8 +845,7 @@ declare namespace userAuth {
     ATL3 = 30000,
 
     /**
-     * 认证结果的信任等级级别4，表示该认证方案能够高精度识别用户个体，具备很强的活体检测能力（如深度分析、多维度验证等）。安全强度最高，可有效防御各类高级伪造攻击。适用于小额支付、金融交易、高敏感数据访问等高安全场景。仅少数高安全认
-     * 证方案可支持此等级。
+     * 认证结果的信任等级级别4，表示该认证方案能够高精度识别用户个体，具备很强的活体检测能力。安全强度最高，可有效防御各类高级伪造攻击。适用于小额支付、金融交易、高敏感数据访问等高安全场景。仅少数高安全认证方案可支持此等级。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @atomicservice [since 12]
@@ -862,13 +863,16 @@ declare namespace userAuth {
    * @unionmember { 'result' } If the first parameter of
    *     [on]{@link userAuth.AuthInstance.on} is **result**,
    *     the [callback]{@link userAuth.AuthEvent.callback } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **result**, the [callback]{@link userAuth.AuthEvent.callback }
-   *     [on]{@link userAuth.AuthInstance.on}接口第一个参数为"result"时，[callback]{@link userAuth.AuthEvent.callback}回调返回认证的结果信息。
+   *     [on]{@link userAuth.AuthInstance.on} is **result**, the [callback]{@link userAuth.AuthEvent.callback } If the
+   *     first parameter of [on]{@link userAuth.AuthInstance.on} is **result**, the
+   *     [callback]{@link userAuth.AuthEvent.callback } [on]{@link userAuth.AuthInstance.on}接口第一个参数为"result"时，
+   *     [callback]{@link userAuth.AuthEvent.callback}回调返回认证的结果信息。
    * @unionmember { 'tip' } If the first parameter of
    *     [on]{@link userAuth.AuthInstance.on} is **tip**, the
    *     [callback]{@link userAuth.AuthEvent.callback } If the first parameter of [on]{@link userAuth.AuthInstance.on}
-   *     is **tip**, the [callback]{@link userAuth.AuthEvent.callback } [on]{@link userAuth.AuthInstance.on}接口第一个参数为"tip
-   *     "时，[callback]{@link userAuth.AuthEvent.callback}回调返回认证操作中的提示信息。
+   *     is **tip**, the [callback]{@link userAuth.AuthEvent.callback } If the first parameter of
+   *     [on]{@link userAuth.AuthInstance.on} is **tip**, the [callback]{@link userAuth.AuthEvent.callback }
+   *     [on]{@link userAuth.AuthInstance.on}接口第一个参数为"tip"时，[callback]{@link userAuth.AuthEvent.callback}回调返回认证操作中的提示信息。
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @since 9 dynamiconly
    * @deprecated since 11
@@ -1459,7 +1463,7 @@ declare namespace userAuth {
 
     /**
      * 是否跳过已冻结的认证方式自动切换至其他方式的认证。若无可切换的认证方式则关闭控件，返回认证冻结错误码。
-     *
+     * 
      * - true：生物认证冻结时，跳过倒计时界面直接切换到其他方式的认证（如从冻结的指纹切换到PIN）。适用于希望快速完成认证的场景。
      * - false（默认）：不跳过，用户需要等待冻结倒计时结束后才能继续尝试该认证方式或手动切换。
      *
@@ -2369,9 +2373,8 @@ declare namespace userAuth {
   /**
    * 获取远程认证页面参数的回调函数类型。该类型用于远程认证场景，在需要获取远程认证界面的配置参数时，系统会调用此回调函数。
    *
-   * @param { Uint8Array } challenge - 随机挑战值，可用于防重放攻击。字节，可传Uint8Array([])。建议使用
+   * @param { Uint8Array } challenge - 随机挑战值，可用于防重放攻击。最大长度为32字节，可传Uint8Array([])。建议使用
    *     [加解密算法库框架]{@link @ohos.security.cryptoFramework:cryptoFramework}生成的随机数作为挑战值，以增强安全性。
-   *     <br>最大长度为32。
    * @returns { WidgetParam } 用户认证界面配置参数。包含认证界面的标题、导航按钮文本等配置信息。
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2472,7 +2475,10 @@ declare namespace userAuth {
   function queryReusableAuthResult(authParam: AuthParam): Uint8Array;
 
   /**
-   * 枚举用户识别状态。
+   * 用户识别状态枚举。
+   * 
+   * **设备行为差异：** 该接口仅在Car设备中可正常调用，在其他设备类型中返回null。
+   * 
    *
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @stagemodelonly
@@ -2521,7 +2527,7 @@ declare namespace userAuth {
    */
   interface UserRecognitionResult {
     /**
-     * 识别状态。取值请参见{@link userAuth.UserRecognitionStatus}。
+     * 识别状态。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2531,8 +2537,7 @@ declare namespace userAuth {
     status: UserRecognitionStatus;
 
     /**
-     * 识别出的用户ID，非负整数。
-     * 取值限定为整数。
+     * 识别的系统用户ID，为非负整数。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2542,7 +2547,7 @@ declare namespace userAuth {
     userId: int;
 
     /**
-     * 识别出的用户信息。
+     * 识别用户的信息。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2552,9 +2557,7 @@ declare namespace userAuth {
     userInfo: string;
 
     /**
-     * 认证信任级别。仅在状态为
-     * {@link userAuth.UserRecognitionStatus.MATCH}时有效。具体取值请参见
-     * {@link userAuth.AuthTrustLevel}。
+     * 认证信任等级。仅在status为MATCH时有效。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2565,9 +2568,9 @@ declare namespace userAuth {
   }
 
   /**
-   * 定义接收用户识别结果的回调。
+   * 用户识别结果回调类型。
    *
-   * @param { UserRecognitionResult } result - 识别结果。
+   * @param { UserRecognitionResult } result - 用户识别结果。
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @stagemodelonly
    * @atomicservice
@@ -2576,8 +2579,11 @@ declare namespace userAuth {
   type UserRecognitionResultCallback = (result: UserRecognitionResult) => void;
 
   /**
-   * 提供用户识别结果查询和订阅接口，使用
-   * {@link userAuth.getUserRecognitionMgr}获取**UserRecognitionMgr**实例。
+   * 提供查询和订阅用户识别结果的接口。通过[getUserRecognitionMgr]{@link userAuth.getUserRecognitionMgr}获取实例。
+   * 
+   * > **说明：**
+   * >
+   * > 每次调用getUserRecognitionMgr返回新的UserRecognitionMgr实例。on和off需使用同一实例。
    *
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @stagemodelonly
@@ -2586,9 +2592,9 @@ declare namespace userAuth {
    */
   interface UserRecognitionMgr {
     /**
-     * 获取最新的用户识别结果。该接口使用promise返回结果。
+     * 获取最新的用户识别结果。使用Promise异步回调。
      *
-     * @returns { Promise<UserRecognitionResult> } Promise用于返回识别结果。
+     * @returns { Promise<UserRecognitionResult> } Promise对象，返回用户识别结果。
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2598,9 +2604,9 @@ declare namespace userAuth {
     getUserRecognitionResult(): Promise<UserRecognitionResult>;
 
     /**
-     * 订阅用户识别变更事件。
+     * 订阅用户识别结果变化事件。
      *
-     * @param { UserRecognitionResultCallback } callback - 接收识别结果的回调。
+     * @param { UserRecognitionResultCallback } callback - 用户识别结果回调。
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2610,10 +2616,10 @@ declare namespace userAuth {
     onUserRecognitionChange(callback: UserRecognitionResultCallback): void;
 
     /**
-     * 取消订阅用户识别变更事件。
+     * 取消订阅用户识别结果变化事件。
      *
-     * @param { UserRecognitionResultCallback } [callback] - 取消注册的回调。如果未指定该参数，
-     *     则取消订阅所有已注册的回调。
+     * @param { UserRecognitionResultCallback } [callback] - 要取消的回调。仅可取消通过本实例
+     *     [onUserRecognitionChange]{@link userAuth.UserRecognitionMgr.on}订阅的回调；不指定则取消本实例下所有已注册的回调。
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @stagemodelonly
@@ -2624,14 +2630,10 @@ declare namespace userAuth {
   }
 
   /**
-   * 获取一个{@link userAuth.UserRecognitionMgr}实例，用于查询和订阅用户
-   * 识别结果。
-   *
-   * > **说明**
-   * > 每次调用都会返回一个新的**UserRecognitionMgr**实例。需使用同一实例进行订阅和取消订阅。
+   * 获取[UserRecognitionMgr]{@link userAuth.UserRecognitionMgr}实例，用于查询和订阅用户识别结果。每次调用返回新的UserRecognitionMgr实例。
    *
    * @permission ohos.permission.ACCESS_USER_PASSIVE_RECOGNITION
-   * @returns { UserRecognitionMgr | null } 用户识别管理器实例。如果设备不支持此能力则返回null。
+   * @returns { UserRecognitionMgr | null } 用户识别管理实例。如果设备不支持此能力则返回null。
    * @throws { BusinessError } 201 - Permission denied.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @stagemodelonly
