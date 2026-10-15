@@ -5200,7 +5200,7 @@ declare namespace window {
 
     /**
      * 是否屏蔽快捷栏图标及Hover缩略图。
-     * 如果为true，则当前窗口不会再快捷栏上显示图标及Hover缩略图。
+     * 如果为true，则当前窗口不会在快捷栏上显示图标及Hover缩略图。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
      * @default false
