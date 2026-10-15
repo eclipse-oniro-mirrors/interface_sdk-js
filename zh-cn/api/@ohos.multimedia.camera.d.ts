@@ -7148,11 +7148,11 @@ declare namespace camera {
    * [AutoExposure]{@link camera.AutoExposure}、[WhiteBalance]{@link camera.WhiteBalance}、[Focus]{@link camera.Focus}、
    * [Zoom]{@link camera.Zoom}、[ColorManagement]{@link camera.ColorManagement}、
    * [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}、[Macro]{@link camera.Macro}、
-   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md)、
-   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md)、
-   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md)、
-   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md)、
-   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md)。
+   * [ManualExposure]{@link camera.ManualExposure}、
+   * [ManualFocus]{@link camera.ManualFocus}、
+   * [ManualIso]{@link camera.ManualIso}、
+   * [OIS]{@link camera.OIS}、
+   * [Aperture]{@link camera.Aperture}。
    * 
    * 普通拍照模式会话类，提供了对闪光灯、曝光、白平衡、对焦、变焦、色彩空间、微距、手动曝光、手动对焦、手动ISO、光学防抖及光圈的操作。
    * 
