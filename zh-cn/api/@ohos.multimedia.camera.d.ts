@@ -2861,7 +2861,7 @@ declare namespace camera {
   }
 
   /**
-   * Describes the LCD flash information.
+   * 描述LCD闪光灯信息。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -2870,7 +2870,7 @@ declare namespace camera {
    */
   interface LcdFlashStatus {
     /**
-     * Whether the LCD flash is required. **true** if required, **false** otherwise.
+     * 是否需要LCD闪光灯。**true**表示需要，**false**表示不需要。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -2880,7 +2880,7 @@ declare namespace camera {
     readonly isLcdFlashNeeded: boolean;
 
     /**
-     * LCD flash compensation.
+     * LCD闪光灯补偿值。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -2933,9 +2933,9 @@ declare namespace camera {
     isFlashModeSupported(flashMode: FlashMode): boolean;
 
     /**
-     * Checks whether the LCD flash is supported.
+     * 检测是否支持LCD闪光灯。
      *
-     * @returns { boolean } Check result for the support of the LCD flash. **true** if supported, **false** otherwise.
+     * @returns { boolean } 检测是否支持LCD闪光灯的结果。**true**表示支持，**false**表示不支持。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3609,8 +3609,8 @@ declare namespace camera {
   }
 
   /**
-   * Describes the focus tracking information, which is obtained by calling VideoSessionForSys.
-   * [on('focusTrackingInfoAvailable')]{@link camera.VideoSession.on(type: 'focusTrackingInfoAvailable', callback: Callback<FocusTrackingInfo>)}.
+   * 描述焦点跟踪信息，通过调用VideoSessionForSys的
+   * [on('focusTrackingInfoAvailable')]{@link camera.VideoSession.on(type: 'focusTrackingInfoAvailable', callback: Callback<FocusTrackingInfo>)}获取。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -3619,7 +3619,7 @@ declare namespace camera {
    */
   interface FocusTrackingInfo {
     /**
-     * Tracing mode.
+     * 跟踪模式。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -3629,7 +3629,7 @@ declare namespace camera {
     trackingMode: FocusTrackingMode;
 
     /**
-     * Tracking region.
+     * 跟踪区域。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -3667,11 +3667,11 @@ declare namespace camera {
     isFocusModeSupported(afMode: FocusMode): boolean;
 
     /**
-     * Checks whether the focus assist is supported.
+     * 检测是否支持对焦辅助。
      *
-     * @returns { boolean } Check result for the support of the focus assist. **true** if supported, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @returns { boolean } 检测是否支持对焦辅助的结果。**true**表示支持，**false**表示不支持。
+     *     接口调用失败会返回错误码，错误码定义见
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3682,12 +3682,12 @@ declare namespace camera {
     isFocusAssistSupported(): boolean;
 
     /**
-     * Checks whether a focus range type is supported.
+     * 检测是否支持指定的对焦范围类型。
      *
-     * @param { FocusRangeType } type - Focus range type.
-     * @returns { boolean } Check result for the support of the focus range type. **true** if supported, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @param { FocusRangeType } type - 对焦范围类型。
+     * @returns { boolean } 检测是否支持指定对焦范围类型的结果。**true**表示支持，**false**表示不支持。
+     *     接口调用失败会返回错误码，错误码定义见
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
@@ -3701,12 +3701,12 @@ declare namespace camera {
     isFocusRangeTypeSupported(type: FocusRangeType): boolean;
 
     /**
-     * Checks whether a focus drive type is supported.
+     * 检测是否支持指定的对焦驱动类型。
      *
-     * @param { FocusDrivenType } type - Focus drive type.
-     * @returns { boolean } Check result for the support of the focus drive type. **true** if supported, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @param { FocusDrivenType } type - 对焦驱动类型。
+     * @returns { boolean } 检测是否支持指定对焦驱动类型的结果。**true**表示支持，**false**表示不支持。
+     *     接口调用失败会返回错误码，错误码定义见
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
@@ -3809,10 +3809,9 @@ declare namespace camera {
     getFocalLength(): double;
 
     /**
-     * Checks whether the focus assist is enabled.
+     * 查询是否已开启对焦辅助。
      *
-     * @returns { boolean } Check result for whether the focus assist is enabled. **true** if enabled, **false**
-     *     otherwise.
+     * @returns { boolean } 查询是否已开启对焦辅助的结果。**true**表示已开启，**false**表示未开启。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3823,11 +3822,10 @@ declare namespace camera {
     getFocusAssist(): boolean;
 
     /**
-     * Sets the focus assist. Before the setting, call
-     * [isFocusAssistSupported]{@link camera.FocusQuery.isFocusAssistSupported} to check whether the device supports the
-     * focus assist.
+     * 设置对焦辅助。设置之前，需要先调用
+     * [isFocusAssistSupported]{@link camera.FocusQuery.isFocusAssistSupported}检测设备是否支持对焦辅助。
      *
-     * @param { boolean } enabled - Whether to enable or disable focus assist. **true** to enable, **false** otherwise.
+     * @param { boolean } enabled - 是否开启或关闭对焦辅助。**true**表示开启，**false**表示关闭。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -3839,9 +3837,9 @@ declare namespace camera {
     setFocusAssist(enabled: boolean): void;
 
     /**
-     * Obtains the focus range type in use.
+     * 获取当前使用的对焦范围类型。
      *
-     * @returns { FocusRangeType } Focus range type.
+     * @returns { FocusRangeType } 对焦范围类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3852,11 +3850,10 @@ declare namespace camera {
     getFocusRange(): FocusRangeType;
 
     /**
-     * Sets a focus range type. Before the setting, call
-     * [isFocusRangeTypeSupported]{@link camera.FocusQuery.isFocusRangeTypeSupported} to check whether the focus range
-     * type is supported.
+     * 设置对焦范围类型。设置之前，需要先调用
+     * [isFocusRangeTypeSupported]{@link camera.FocusQuery.isFocusRangeTypeSupported}检测是否支持该对焦范围类型。
      *
-     * @param { FocusRangeType } type - Focus range type.
+     * @param { FocusRangeType } type - 对焦范围类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
@@ -3872,9 +3869,9 @@ declare namespace camera {
     setFocusRange(type: FocusRangeType): void;
 
     /**
-     * Obtains the focus drive type in use.
+     * 获取当前使用的对焦驱动类型。
      *
-     * @returns { FocusDrivenType } Focus drive type.
+     * @returns { FocusDrivenType } 对焦驱动类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3885,11 +3882,10 @@ declare namespace camera {
     getFocusDriven(): FocusDrivenType;
 
     /**
-     * Sets a focus drive type. Before the setting, call
-     * [isFocusDrivenTypeSupported]{@link camera.FocusQuery.isFocusDrivenTypeSupported} to check whether the focus drive
-     * type is supported.
+     * 设置对焦驱动类型。设置之前，需要先调用
+     * [isFocusDrivenTypeSupported]{@link camera.FocusQuery.isFocusDrivenTypeSupported}检测是否支持该对焦驱动类型。
      *
-     * @param { FocusDrivenType } type - Focus drive type.
+     * @param { FocusDrivenType } type - 对焦驱动类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types;
@@ -3931,7 +3927,7 @@ declare namespace camera {
   }
 
   /**
-   * Manual Focus Query object.
+   * 手动对焦查询对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice
@@ -3939,9 +3935,9 @@ declare namespace camera {
    */
   interface ManualFocusQuery {
     /**
-     * Checks whether a focus distance is supported.
+     * 检测是否支持对焦距离设置。
      *
-     * @returns { boolean } Is focus distance supported.
+     * @returns { boolean } 是否支持对焦距离。**true**表示支持，**false**表示不支持。
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice
@@ -3951,7 +3947,7 @@ declare namespace camera {
   }
 
   /**
-   * ManualFocus object.
+   * 手动对焦对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 23]
@@ -3962,10 +3958,9 @@ declare namespace camera {
    */
   interface ManualFocus extends ManualFocusQuery {
     /**
-     * Gets current focus distance, ranging from 0.0 to 1.0, with 0.0 being shortest
-     * distance at which the lens can focus and 1.0 the furthest. The default value is 1.0.
+     * 获取当前对焦距离，取值范围为0.0到1.0，0.0表示镜头可对焦的最近距离，1.0表示最远距离。默认值为1.0。
      *
-     * @returns { double } The current focus distance.
+     * @returns { double } 当前的对焦距离。
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws { BusinessError } 7400102 - Operation not allowed, the inputDevice or the session is abnormal. [since 24]
@@ -3979,10 +3974,9 @@ declare namespace camera {
     getFocusDistance(): double;
 
     /**
-     * Sets focus distance. Possible distance values range from 0.0 to 1.0, with 0.0 being shortest
-     * distance at which the lens can focus and 1.0 the furthest. The default value is 1.0.
+     * 设置对焦距离。取值范围为0.0到1.0，0.0表示镜头可对焦的最近距离，1.0表示最远距离。默认值为1.0。
      *
-     * @param { double } distance - Focus distance.
+     * @param { double } distance - 对焦距离。
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 23]
      * @throws { BusinessError } 7400103 - Session not config.
@@ -4255,8 +4249,7 @@ declare namespace camera {
   }
 
   /**
-   * Provides APIs to check whether a camera device supports manual ISO setting and obtain the ISO range supported by
-   * the device.
+   * 提供了查询相机设备是否支持手动ISO设置以及获取设备支持的ISO范围的方法。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 23]
@@ -4267,11 +4260,11 @@ declare namespace camera {
    */
   interface ManualIsoQuery {
     /**
-     * Checks whether manual ISO setting is supported.
+     * 检测是否支持手动ISO设置。
      *
-     * @returns { boolean } Check result for the support of manual ISO setting. **true** if supported, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @returns { boolean } 检测是否支持手动ISO设置的结果。**true**表示支持，**false**表示不支持。
+     *     接口调用失败会返回错误码，错误码定义见
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4282,11 +4275,11 @@ declare namespace camera {
     isManualIsoSupported(): boolean;
 
     /**
-     * Obtains the supported ISO range.
+     * 获取支持的ISO范围。
      *
-     * @returns { Array<int> } ISO range. The value range is [50, 100, ..., 6400]. The actual value depends on the
-     *     bottom-layer capability. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @returns { Array<int> } ISO范围。取值范围为[50, 100, ..., 6400]，实际值取决于底层能力。
+     *     接口调用失败会返回错误码，错误码定义见
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4297,9 +4290,9 @@ declare namespace camera {
     getIsoRange(): Array<int>;
 
     /**
-     * Get a array of supported standard ISO sensitivity values, as defined in ISO 12232:2006.
+     * 获取支持的标准ISO感光度值数组，标准定义参考ISO 12232:2006。
      *
-     * @returns { int[] } The array of ISO sensitivity values.
+     * @returns { int[] } ISO感光度值数组。
      * @throws {BusinessError} 7400102 - Operation not allowed, the inputDevice or the session is abnormal.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4310,7 +4303,7 @@ declare namespace camera {
   }
 
   /**
-   * ManualIso object.
+   * 手动ISO对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 23]
@@ -4321,9 +4314,9 @@ declare namespace camera {
    */
   interface ManualIso extends ManualIsoQuery {
     /**
-     * Gets current ISO.
+     * 获取当前ISO值。
      *
-     * @returns { int } The current ISO.
+     * @returns { int } 当前的ISO值。
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws {BusinessError} 7400102 - Operation not allowed, the inputDevice or the session is abnormal. [since 24]
@@ -4337,10 +4330,9 @@ declare namespace camera {
     getIso(): int;
 
     /**
-     * Sets ISO sensitivity value, within the range of getSupportedIsoRange. This control can not be effective if
-     * ExposureMode is set to EXPOSURE_MODE_LOCKED.
+     * 设置ISO感光度值，取值需在getSupportedIsoRange返回的范围内。如果曝光模式设置为EXPOSURE_MODE_LOCKED，此设置不生效。
      *
-     * @param { int } iso - ISO
+     * @param { int } iso - ISO感光度值。
      * @throws { BusinessError } 202 - Not System Application. [since 12 - 23]
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 23]
      * @throws { BusinessError } 7400103 - Session not config.
@@ -7036,7 +7028,7 @@ declare namespace camera {
   }
 
   /**
-   * Imaging mode query object.
+   * 成像模式查询对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -7045,10 +7037,10 @@ declare namespace camera {
    */
   interface ImagingModeQuery {
     /**
-     * Checks whether a camera imaging mode is supported.
+     * 检测是否支持指定的相机成像模式。
      *
-     * @param { CameraImagingMode } mode - Imaging mode.
-     * @returns { boolean } Is the imaging mode supported.
+     * @param { CameraImagingMode } mode - 成像模式。
+     * @returns { boolean } 是否支持该成像模式。**true**表示支持，**false**表示不支持。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -7060,7 +7052,7 @@ declare namespace camera {
   }
 
   /**
-   * Implements imaging mode.
+   * 实现成像模式功能。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -7069,9 +7061,9 @@ declare namespace camera {
    */
   interface ImagingMode extends ImagingModeQuery {
     /**
-     * Gets current imaging mode.
+     * 获取当前成像模式。
      *
-     * @returns { CameraImagingMode } The current imaging mode.
+     * @returns { CameraImagingMode } 当前的成像模式。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -7082,9 +7074,9 @@ declare namespace camera {
     getImagingMode(): CameraImagingMode;
 
     /**
-     * Sets imaging mode.
+     * 设置成像模式。
      *
-     * @param { CameraImagingMode } mode - Target imaging mode.
+     * @param { CameraImagingMode } mode - 目标成像模式。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -7148,11 +7140,11 @@ declare namespace camera {
    * [AutoExposure]{@link camera.AutoExposure}、[WhiteBalance]{@link camera.WhiteBalance}、[Focus]{@link camera.Focus}、
    * [Zoom]{@link camera.Zoom}、[ColorManagement]{@link camera.ColorManagement}、
    * [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}、[Macro]{@link camera.Macro}、
-   * [ManualExposure]{@link camera.ManualExposure}、
-   * [ManualFocus]{@link camera.ManualFocus}、
-   * [ManualIso]{@link camera.ManualIso}、
-   * [OIS]{@link camera.OIS}、
-   * [Aperture]{@link camera.Aperture}。
+   * [ManualExposure](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md)、
+   * [ManualFocus](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualFocus.md)、
+   * [ManualIso](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualIso.md)、
+   * [OIS](docroot://reference/apis-camera-kit/arkts-apis-camera-OIS.md)、
+   * [Aperture](docroot://reference/apis-camera-kit/arkts-apis-camera-Aperture.md)。
    * 
    * 普通拍照模式会话类，提供了对闪光灯、曝光、白平衡、对焦、变焦、色彩空间、微距、手动曝光、手动对焦、手动ISO、光学防抖及光圈的操作。
    * 
@@ -9413,7 +9405,7 @@ declare namespace camera {
   }
 
   /**
-   * Provides APIs to obtain the manual exposure range supported.
+   * 提供了获取支持的手动曝光范围的方法。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 12 - 23]
@@ -9424,9 +9416,9 @@ declare namespace camera {
    */
   interface ManualExposureQuery {
     /**
-     * Obtains the supported manual exposure durations.
+     * 获取支持的手动曝光时长列表。
      *
-     * @returns { Array<int> } Array of manual exposure durations supported, in ms.
+     * @returns { Array<int> } 支持的手动曝光时长数组，单位为ms。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12]
@@ -9438,9 +9430,9 @@ declare namespace camera {
     getSupportedExposureRange(): Array<int>;
 
     /**
-     * Gets the supported manual exposure duration range, units: microseconds.
+     * 获取支持的手动曝光时长范围，单位：微秒。
      *
-     * @returns { Array<int> } The array of manual exposure range.
+     * @returns { Array<int> } 手动曝光时长范围数组。
      * @throws { BusinessError } 7400102 - Operation not allowed, session or inputdevice maybe abnormal.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -9450,9 +9442,9 @@ declare namespace camera {
     getSupportedExposureDurationRange(): Array<int>;
 
     /**
-     * Get exposure bias step.
+     * 获取曝光补偿步长。
      *
-     * @returns { double } exposure bias step.
+     * @returns { double } 曝光补偿步长。
      * @throws { BusinessError } 7400102 - Operation not allowed, session or inputdevice maybe abnormal.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -9464,8 +9456,8 @@ declare namespace camera {
   }
 
   /**
-   * ManualExposure extends [ManualExposureQuery]{@link camera.ManualExposureQuery}
-   * Provides APIs to obtain and set the exposure duration.
+   * ManualExposure继承自[ManualExposureQuery]{@link camera.ManualExposureQuery}。
+   * 提供了获取和设置曝光时长的方法。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 11 - 23]
@@ -9476,9 +9468,9 @@ declare namespace camera {
    */
   interface ManualExposure extends ManualExposureQuery {
     /**
-     * Obtains the manual exposure duration in use.
+     * 获取当前手动曝光时长。
      *
-     * @returns { int } The current exposure value, in units of ms
+     * @returns { int } 当前的曝光值，单位为ms。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12]
@@ -9490,9 +9482,9 @@ declare namespace camera {
     getExposure(): int;
 
     /**
-     * Gets current exposure value.
+     * 获取当前曝光值。
      *
-     * @returns { int } The current exposure value, in units of microsecond
+     * @returns { int } 当前的曝光值，单位为微秒。
      * @throws { BusinessError } 7400102 - Operation not allowed, session or inputdevice maybe abnormal.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -9502,27 +9494,25 @@ declare namespace camera {
     getExposureDuration(): int;
 
     /**
-     * Sets the manual exposure duration. Before using this API, call
-     * [getSupportedExposureRange]{@link camera.ManualExposureQuery.getSupportedExposureRange} to obtain the supported
-     * manual exposure durations, in ms.
+     * 设置手动曝光时长。使用前，需要先调用
+     * [getSupportedExposureRange]{@link camera.ManualExposureQuery.getSupportedExposureRange}获取支持的手动曝光时长，单位为ms。
      *
-     * @param { int } exposure - Manual exposure duration, which must be one of the supported durations obtained by
-     *     running [getSupportedExposureRange]{@link camera.ManualExposureQuery.getSupportedExposureRange}.
+     * @param { int } exposure - 手动曝光时长，必须为
+     *     [getSupportedExposureRange]{@link camera.ManualExposureQuery.getSupportedExposureRange}返回的支持值之一。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws { BusinessError } 7400102 - Operation not allowed. [since 12]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 23 static
+   * @since 23 static
      */
     setExposure(exposure: int): void;
 
     /**
-     * Sets Exposure duration value, units: microseconds.This control is only effective if
-     * ExposureMode is set to EXPOSURE_MODE_MANUAL.
+     * 设置曝光时长值，单位：微秒。此设置仅在曝光模式设置为EXPOSURE_MODE_MANUAL时生效。
      *
-     * @param { int } exposureDuration - Exposure duration value
+     * @param { int } exposureDuration - 曝光时长值。
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @atomicservice
@@ -9755,7 +9745,7 @@ declare namespace camera {
    */
   interface IsoInfo {
     /**
-     * ISO value.
+     * ISO感光度值。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 12 - 21]
@@ -9812,7 +9802,7 @@ declare namespace camera {
   }
 
   /**
-   * Describes the illumination information.
+   * 描述光照信息。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -9821,7 +9811,7 @@ declare namespace camera {
    */
   interface LuminationInfo {
     /**
-     * Illumination. The value range is [0, 1].
+     * 光照度。取值范围为[0, 1]。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10874,14 +10864,14 @@ declare namespace camera {
   }
 
   /**
-   * HighResolutionPhotoSession extends Session, AutoExposure, Focus
-   * Implements a high-resolution photo session, which sets the parameters of the high-resolution photo mode and saves
-   * all [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
-   * 
-   * > **NOTE**
+   * HighResolutionPhotoSession继承自[Session]{@link camera.Session}、[AutoExposure]{@link camera.AutoExposure}、[Focus]{@link camera.Focus}。
+   * 实现高分辨率拍照会话，用于设置高分辨率拍照模式的参数，并保存运行相机所需的
+   * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
+   * 实例。继承自[Session]{@link camera.Session}。
+   *
+   * > **说明：**
    * >
-   * > In high-resolution photo capture scenarios, the physical camera lens must be used instead of the logical lens.
+   * > 高分辨率拍照场景下，必须使用物理相机镜头而非逻辑镜头。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -10890,17 +10880,12 @@ declare namespace camera {
    */
   interface HighResolutionPhotoSession extends Session, AutoExposure, Focus {
     /**
-     * Subscribes to HighResolutionPhotoSession error events. This API uses an asynchronous callback to return the
-     * result.
+     * 注册回调函数来监听高分辨率拍照会话的错误事件，使用callback异步回调返回结果。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
-     *     [commitConfig]{@link camera.Session.commitConfig()}, and
-     *     [addInput]{@link camera.Session.addInput}.
-     * @param { ErrorCallback } callback - Callback used to return an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode}.
+     * @param { 'error' } type - 事件类型，固定为'error'，session创建成功之后可监听该接口。session调用相关接口出现错误时会触发该事件，比如调用
+     *     [beginConfig]{@link camera.Session.beginConfig}，[commitConfig]{@link camera.Session.commitConfig()}，
+     *     [addInput]{@link camera.Session.addInput}等接口发生错误时返回错误信息。
+     * @param { ErrorCallback } callback - 回调函数，用于获取错误信息。返回错误码，错误码类型[CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10909,9 +10894,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 监听错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10920,13 +10905,10 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from HighResolutionPhotoSession error events.
+     * 注销监听高分辨率拍照会话的错误事件。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
-     *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
-     *     is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'error' } type - 事件类型，固定为'error'，session创建成功之后可监听该接口。
+     * @param { ErrorCallback } callback - 回调函数，如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10935,9 +10917,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 注销监听错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10946,12 +10928,10 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
+     * 监听相机聚焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created. This event is triggered only when the camera focus state changes in
-     *     auto focus mode.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the focus state change.
+     * @param { 'focusStateChange' } type - 事件类型，固定为'focusStateChange'，session创建成功可监听。仅当自动对焦模式时，且相机对焦状态发生改变时可触发该事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取当前对焦状态。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10960,9 +10940,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10971,13 +10951,10 @@ declare namespace camera {
     onFocusStateChange(callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change events.
+     * 注销监听相机聚焦的状态变化。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('focusStateChange')** with the
-     *     specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'focusStateChange' } type - 事件类型，固定为'focusStateChange'，session创建成功可监听。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10986,9 +10963,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10998,9 +10975,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements a macro photo session, which sets the parameters of the macro photo mode and saves all
-   * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
+   * 实现微距拍照会话，用于设置微距拍照模式的参数，并保存运行相机所需的
+   * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
+   * 实例。继承自[Session]{@link camera.Session}。
    *
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus [since 12 - 13]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus, DepthFusion [since 14 - 17]
@@ -11014,17 +10991,12 @@ declare namespace camera {
   interface MacroPhotoSession extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus,
       DepthFusion, ColorManagement {
     /**
-     * Subscribes to HighResolutionPhotoSession error events. This API uses an asynchronous callback to return the
-     * result.
+     * 监听微距拍照会话的错误事件，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
-     *     [commitConfig]{@link camera.Session.commitConfig()}, and
-     *     [addInput]{@link camera.Session.addInput}.
-     * @param { ErrorCallback } callback - Callback used to return an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode}.
+     * @param { 'error' } type - 监听事件，固定为'error'，session创建成功之后可监听该接口。session调用相关接口出现错误时会触发该事件，比如调用
+     *     [beginConfig]{@link camera.Session.beginConfig}，[commitConfig]{@link camera.Session.commitConfig()}，
+     *     [addInput]{@link camera.Session.addInput}等接口发生错误时返回错误信息。
+     * @param { ErrorCallback } callback - 回调函数，用于获取错误信息。返回错误码，错误码见[CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11033,9 +11005,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 监听错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11044,13 +11016,10 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from HighResolutionPhotoSession error events.
+     * 注销监听微距拍照会话的错误事件。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
-     *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
-     *     is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'error' } type - 监听事件，固定为'error'，session创建成功之后可监听该接口。
+     * @param { ErrorCallback } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11059,9 +11028,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 注销监听错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11070,12 +11039,10 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
+     * 监听相机聚焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created. This event is triggered only when the camera focus state changes in
-     *     auto focus mode.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the focus state change.
+     * @param { 'focusStateChange' } type - 监听事件，固定为'focusStateChange'，session创建成功可监听。仅当自动对焦模式时，且相机对焦状态发生改变时可触发该事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取当前对焦状态。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11084,9 +11051,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11095,13 +11062,10 @@ declare namespace camera {
     onFocusStateChange(callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change events.
+     * 注销监听相机聚焦的状态变化。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('focusStateChange')** with the
-     *     specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'focusStateChange' } type - 监听事件，固定为'focusStateChange'，session创建成功可监听。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11110,9 +11074,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11121,11 +11085,10 @@ declare namespace camera {
     offFocusStateChange(callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes to smooth zoom state change events. This API uses an asynchronous callback to return the result.
+     * 监听平滑变焦状态变化事件，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the smooth zoom state change.
+     * @param { 'smoothZoomInfoAvailable' } type - 监听事件，固定为'smoothZoomInfoAvailable'，session创建成功之后可监听该接口。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取平滑变焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11134,9 +11097,9 @@ declare namespace camera {
     on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Subscribes zoom info event callback.
+     * 监听变焦信息事件。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11145,14 +11108,10 @@ declare namespace camera {
     onSmoothZoomInfoAvailable(callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from smooth zoom state change events.
+     * 注销监听平滑变焦状态变化事件。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the result. This parameter is
-     *     optional. If this parameter is specified, the subscription to the specified event
-     *     **on('smoothZoomInfoAvailable')** with the specified callback is canceled. (The callback object cannot be an
-     *     anonymous function.)
+     * @param { 'smoothZoomInfoAvailable' } type - 监听事件，固定为'smoothZoomInfoAvailable'，session创建成功之后可监听该接口。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11161,9 +11120,9 @@ declare namespace camera {
     off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from zoom info event callback.
+     * 注销监听变焦信息事件。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11173,9 +11132,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements a macro video session, which sets the parameters of the macro video mode and saves all
-   * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
+   * 实现微距录像会话，用于设置微距录像模式的参数，并保存运行相机所需的
+   * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
+   * 实例。继承自[Session]{@link camera.Session}。
    *
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus [since 12 - 17]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus, ColorManagement [since 18]
@@ -11187,17 +11146,12 @@ declare namespace camera {
   interface MacroVideoSession extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect,
       ManualFocus, ColorManagement {
     /**
-     * Subscribes to HighResolutionPhotoSession error events. This API uses an asynchronous callback to return the
-     * result.
+     * 监听微距录像会话的错误事件，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
-     *     [commitConfig]{@link camera.Session.commitConfig()}, and
-     *     [addInput]{@link camera.Session.addInput}.
-     * @param { ErrorCallback } callback - Callback used to return an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode}.
+     * @param { 'error' } type - 监听事件，固定为'error'，session创建成功之后可监听该接口。session调用相关接口出现错误时会触发该事件，比如调用
+     *     [beginConfig]{@link camera.Session.beginConfig}，[commitConfig]{@link camera.Session.commitConfig()}，
+     *     [addInput]{@link camera.Session.addInput}等接口发生错误时返回错误信息。
+     * @param { ErrorCallback } callback - 回调函数，用于获取错误信息。返回错误码，错误码定义见[CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11206,9 +11160,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 监听错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11217,13 +11171,10 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from HighResolutionPhotoSession error events.
+     * 注销监听微距录像会话的错误事件。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
-     *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
-     *     is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'error' } type - 监听事件，固定为'error'，session创建成功之后可监听该接口。
+     * @param { ErrorCallback } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11232,9 +11183,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 注销监听错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11243,12 +11194,10 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
+     * 监听相机聚焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created. This event is triggered only when the camera focus state changes in
-     *     auto focus mode.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the focus state change.
+     * @param { 'focusStateChange' } type - 监听事件，固定为'focusStateChange'，session创建成功可监听。仅当自动对焦模式时，且相机对焦状态发生改变时可触发该事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取当前对焦状态。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11257,9 +11206,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11268,13 +11217,10 @@ declare namespace camera {
     onFocusStateChange(callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change events.
+     * 注销监听相机聚焦的状态变化。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('focusStateChange')** with the
-     *     specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'focusStateChange' } type - 监听事件，固定为'focusStateChange'，session创建成功可监听。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11283,9 +11229,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11294,11 +11240,10 @@ declare namespace camera {
     offFocusStateChange(callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes to smooth zoom state change events. This API uses an asynchronous callback to return the result.
+     * 监听平滑变焦状态变化事件，通过注册回调函数获取结果。使用callback异步回调。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the smooth zoom state change.
+     * @param { 'smoothZoomInfoAvailable' } type - 监听事件，固定为'smoothZoomInfoAvailable'，session创建成功之后可监听该接口。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取平滑变焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11307,9 +11252,9 @@ declare namespace camera {
     on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Subscribes zoom info event callback.
+     * 监听变焦信息事件。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11318,14 +11263,10 @@ declare namespace camera {
     onSmoothZoomInfoAvailable(callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from smooth zoom state change events.
+     * 注销监听平滑变焦状态变化事件。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the result. This parameter is
-     *     optional. If this parameter is specified, the subscription to the specified event
-     *     **on('smoothZoomInfoAvailable')** with the specified callback is canceled. (The callback object cannot be an
-     *     anonymous function.)
+     * @param { 'smoothZoomInfoAvailable' } type - 监听事件，固定为'smoothZoomInfoAvailable'，session创建成功之后可监听该接口。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，本参数可选。如果指定参数则取消对应callback（callback对象不可是匿名函数），否则取消所有callback。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11334,9 +11275,9 @@ declare namespace camera {
     off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from zoom info event callback.
+     * 注销监听变焦信息事件。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11472,9 +11413,9 @@ declare namespace camera {
 
   /**
    * LightPaintingPhotoSession extends Session, Flash, Focus, Zoom, ColorEffect
-   * Implements a light painting photo session, which sets the parameters of the light painting photo mode and saves all
-   * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
+   * 实现光绘拍照会话，用于设置光绘拍照模式的参数，并保存运行相机所需的所有
+   * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
+   * 实例。继承自[Session]{@link camera.Session}。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -11483,17 +11424,14 @@ declare namespace camera {
    */
   interface LightPaintingPhotoSession extends Session, Flash, Focus, Zoom, ColorEffect {
     /**
-     * Subscribes to HighResolutionPhotoSession error events. This API uses an asynchronous callback to return the
-     * result.
+     * 监听光绘拍照会话错误事件，使用异步回调返回结果。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
-     *     [commitConfig]{@link camera.Session.commitConfig()}, and
-     *     [addInput]{@link camera.Session.addInput}.
-     * @param { ErrorCallback } callback - Callback used to return an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode}.
+     * @param { 'error' } type - 事件类型，固定为**'error'**。创建会话后即可监听此事件。当调用会话相关API如
+     *     [beginConfig]{@link camera.Session.beginConfig}、
+     *     [commitConfig]{@link camera.Session.commitConfig()}、
+     *     [addInput]{@link camera.Session.addInput}等发生错误时触发该事件并返回错误信息。
+     * @param { ErrorCallback } callback - 回调函数，用于返回错误码，错误码定义见
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11502,9 +11440,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 监听错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取捕获会话的错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11513,13 +11451,11 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from HighResolutionPhotoSession error events.
+     * 注销监听光绘拍照会话错误事件。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
-     *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
-     *     is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'error' } type - 事件类型，固定为**'error'**。创建会话后即可监听此事件。
+     * @param { ErrorCallback } callback - 回调函数，用于返回结果。此参数为可选参数。如果指定此参数，则取消
+     *     监听指定事件**on('error')**中指定的回调。（回调对象不能为匿名函数。）
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11528,9 +11464,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 注销监听错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取捕获会话的错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11539,12 +11475,11 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
+     * 监听对焦状态变化事件，使用异步回调返回结果。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created. This event is triggered only when the camera focus state changes in
-     *     auto focus mode.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the focus state change.
+     * @param { 'focusStateChange' } type - 事件类型，固定为**'focusStateChange'**。创建会话后即可监听此事件。
+     *     仅在自动对焦模式下相机对焦状态发生变化时触发该事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于返回对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11553,9 +11488,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11564,13 +11499,11 @@ declare namespace camera {
     onFocusStateChange(callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change events.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('focusStateChange')** with the
-     *     specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'focusStateChange' } type - 事件类型，固定为**'focusStateChange'**。创建会话后即可监听此事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于返回结果。此参数为可选参数。如果指定此参数，
+     *     则取消监听指定事件**on('focusStateChange')**中指定的回调。（回调对象不能为匿名函数。）
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11579,9 +11512,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11590,11 +11523,11 @@ declare namespace camera {
     offFocusStateChange(callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes to smooth zoom state change events. This API uses an asynchronous callback to return the result.
+     * 监听平滑变焦状态变化事件，使用异步回调返回结果。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the smooth zoom state change.
+     * @param { 'smoothZoomInfoAvailable' } type - 事件类型，固定为**'smoothZoomInfoAvailable'**。创建会话后即可
+     *     监听此事件。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于返回平滑变焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11603,9 +11536,9 @@ declare namespace camera {
     on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Subscribes zoom info event callback.
+     * 监听变焦信息事件。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11614,14 +11547,12 @@ declare namespace camera {
     onSmoothZoomInfoAvailable(callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from smooth zoom state change events.
+     * 注销监听平滑变焦状态变化事件。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the result. This parameter is
-     *     optional. If this parameter is specified, the subscription to the specified event
-     *     **on('smoothZoomInfoAvailable')** with the specified callback is canceled. (The callback object cannot be an
-     *     anonymous function.)
+     * @param { 'smoothZoomInfoAvailable' } type - 事件类型，固定为**'smoothZoomInfoAvailable'**。创建会话后即可
+     *     监听此事件。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于返回结果。此参数为可选参数。如果指定此
+     *     参数，则取消监听指定事件**on('smoothZoomInfoAvailable')**中指定的回调。（回调对象不能为匿名函数。）
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11630,9 +11561,9 @@ declare namespace camera {
     off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from zoom info event callback.
+     * 注销监听变焦信息事件。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -11641,9 +11572,9 @@ declare namespace camera {
     offSmoothZoomInfoAvailable(callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Obtains the type of light painting shutter mode in use.
+     * 获取当前使用的光绘快门模式类型。
      *
-     * @returns { LightPaintingType } The light painting type in use.
+     * @returns { LightPaintingType } 当前使用的光绘类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -11654,9 +11585,9 @@ declare namespace camera {
     getLightPaintingType(): LightPaintingType;
 
     /**
-     * Sets the type of light painting shutter mode.
+     * 设置光绘快门模式类型。
      *
-     * @param { LightPaintingType } type - Light painting type to set.
+     * @param { LightPaintingType } type - 要设置的光绘类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -11668,9 +11599,9 @@ declare namespace camera {
     setLightPaintingType(type: LightPaintingType): void;
 
     /**
-     * Obtains the supported types of light painting shutter mode.
+     * 获取支持的光绘快门模式类型列表。
      *
-     * @returns { Array<LightPaintingType> } List of light painting types.
+     * @returns { Array<LightPaintingType> } 光绘类型列表。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -12020,7 +11951,7 @@ declare namespace camera {
   }
 
   /**
-   * Fluorescence photo session object.
+   * 荧光拍照会话对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -12029,10 +11960,10 @@ declare namespace camera {
    */
   interface FluorescencePhotoSession extends Session, AutoExposure, Focus, Zoom {
     /**
-     * Subscribes to error events.
+     * 监听错误事件。
      *
-     * @param { 'error' } type - Event type.
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { 'error' } type - 事件类型。
+     * @param { ErrorCallback } callback - 回调函数，用于获取捕获会话的错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12041,9 +11972,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 监听错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取捕获会话的错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12052,10 +11983,10 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 注销监听错误事件。
      *
-     * @param { 'error' } type - Event type.
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { 'error' } type - 事件类型。
+     * @param { ErrorCallback } callback - 回调函数，用于获取捕获会话的错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12064,9 +11995,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 注销监听错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取捕获会话的错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12075,10 +12006,10 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 监听对焦状态变化事件。
      *
-     * @param { 'focusStateChange' } type - Event type.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { 'focusStateChange' } type - 事件类型。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12087,9 +12018,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12098,10 +12029,10 @@ declare namespace camera {
     onFocusStateChange(callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { 'focusStateChange' } type - Event type.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { 'focusStateChange' } type - 事件类型。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12110,9 +12041,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 注销监听对焦状态变化事件。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
