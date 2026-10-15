@@ -4890,7 +4890,7 @@ declare namespace camera {
      * | AUTO           | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]     | **type** 为 **AUTO** 时支持的美颜等级。值 **0** 表示关闭美颜模式，其他正整数值表示对应的自动美颜等级。   |
      * | SKIN_SMOOTH    | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]     | **type** 为 **SKIN_SMOOTH** 时支持的美颜等级。值 **0** 表示关闭磨皮功能，其他正整数值表示对应的磨皮等级。   |
      * | FACE_SLENDER   | [0, 1, 2, 3, 4, 5]      | **type** 为 **FACE_SLENDER** 时支持的美颜等级。值 **0** 表示关闭瘦脸功能，其他正整数值表示对应的瘦脸等级。  |
-     * | SKIN_TONE      | [-1, 16242611]      | **type** 为 **SKIN_TONE** 时支持的美颜等级。值色美化功能。其他非负值表示以 RGB 表示的肤色美化等级，<br>例如 16242611，其十六进制为  0xF7D7B3，其中 F7、D7、B3 分别表示 R 通道、G 通道、B 通道的值。   |
+     * | SKIN_TONE      | [-1, 16242611]      | **type** 为 **SKIN_TONE** 时支持的美颜等级。值**-1**表示关闭肤色美化功能。其他非负值表示以RGB表示的肤色美化等级，<br>例如 16242611，其十六进制为  0xF7D7B3，其中 F7、D7、B3 分别表示 R 通道、G 通道、B 通道的值。   |
      *
      * @param { BeautyType } type - 美颜类型。
      * @returns { Array<int> } 支持的等级数组。
@@ -4955,11 +4955,11 @@ declare namespace camera {
     getBeauty(type: BeautyType): int;
 
     /**
-     * 设置美颜类型及其等级。只有当通过 [getSupportedBeautyTypes]{@link camera.BeautyQuery.getes}
+     * 设置美颜类型及其等级。只有当通过 [getSupportedBeautyTypes]{@link camera.BeautyQuery.getSupportedBeautyTypes}
      * 获取的所有[美颜类型]{@link camera.BeautyType}均被关闭时，美颜模式才会关闭。
      *
      * @param { BeautyType } type - 美颜类型。
-     * @param { int } value - 美颜等级，通过 [getSupportedBeautyRange]{@link camera.BeautyQuertyRange} 获取。
+     * @param { int } value - 美颜等级，通过 [getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange} 获取。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -6608,9 +6608,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Obtains the supported beauty types.
+     * 获取支持的美颜类型。
      *
-     * @returns { Array<BeautyType> } Array of beauty types supported.
+     * @returns { Array<BeautyType> } 支持的美颜类型数组。
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -6621,17 +6621,16 @@ declare namespace camera {
     getSupportedBeautyTypes(): Array<BeautyType>;
 
     /**
-     * Obtains the levels that can be set a beauty type. The beauty levels vary according to the device type. The
-     * following table is only an example.
-     * | Input Parameter          | Example Return Value   | Return Value Description    |
+     * 获取某个美颜类型可设置的等级。不同设备支持的美颜等级不同，下表仅为示例。
+     * | 输入参数          | 示例返回值   | 返回值描述    |
      * | ----------------| ----  | ---------|
-     * | AUTO           | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]     |Beauty levels supported when **type** is set to **AUTO**. The value **0** means that beauty mode is disabled, and other positive values mean the corresponding automatic beauty levels.   |
-     * | SKIN_SMOOTH    | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]     | Beauty levels supported when **type** is set to **SKIN_SMOOTH**. The value **0** means that the skin smoothing feature is disabled, and other positive values mean the corresponding skin smoothing levels.   |
-     * | FACE_SLENDER   | [0, 1, 2, 3, 4, 5]      | Beauty levels supported when **type** is set to **FACE_SLENDER**. The value **0** means that the face slimming feature is disabled, and other positive values mean the corresponding face slimming levels.  |
-     * | SKIN_TONE      | [-1, 16242611]      | Beauty levels supported when **type** is set to **SKIN_TONE**. The value **-1** means that the skin tone perfection feature is disabled. Other non-negative values mean the skin tone perfection levels represented by RGB,<br> for example, 16242611, which is 0xF7D7B3 in hexadecimal format, where F7, D7, and B3 represent the values of the R channel, G channel, and B channel, respectively.   |
+     * | AUTO           | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]     | **type** 为 **AUTO** 时支持的美颜等级。值 **0** 表示关闭美颜模式，其他正整数值表示对应的自动美颜等级。   |
+     * | SKIN_SMOOTH    | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]     | **type** 为 **SKIN_SMOOTH** 时支持的美颜等级。值 **0** 表示关闭磨皮功能，其他正整数值表示对应的磨皮等级。   |
+     * | FACE_SLENDER   | [0, 1, 2, 3, 4, 5]      | **type** 为 **FACE_SLENDER** 时支持的美颜等级。值 **0** 表示关闭瘦脸功能，其他正整数值表示对应的瘦脸等级。  |
+     * | SKIN_TONE      | [-1, 16242611]      | **type** 为 **SKIN_TONE** 时支持的美颜等级。值 **-1** 表示关闭肤色美化功能。其他非负值表示以 RGB 表示的肤色美化等级，<br>例如 16242611，其十六进制为 0xF7D7B3，其中 F7、D7、B3 分别表示 R 通道、G 通道、B 通道的值。   |
      *
-     * @param { BeautyType } type - Beauty type.
-     * @returns { Array<number> } Array of levels supported.
+     * @param { BeautyType } type - 美颜类型。
+     * @returns { Array<number> } 支持的等级数组。
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -6642,10 +6641,10 @@ declare namespace camera {
     getSupportedBeautyRange(type: BeautyType): Array<number>;
 
     /**
-     * Obtains the level of the beauty type in use.
+     * 获取当前使用的美颜类型等级。
      *
-     * @param { BeautyType } type - Beauty type.
-     * @returns { number } the beauty effect in use.
+     * @param { BeautyType } type - 美颜类型。
+     * @returns { number } 当前使用的美颜效果等级。
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -6656,13 +6655,13 @@ declare namespace camera {
     getBeauty(type: BeautyType): number;
 
     /**
-     * Sets a beauty type and its level. Beauty mode is turned off only when all the
-     * [beauty types]{@link camera.BeautyType} obtained through
-     * [getSupportedBeautyTypes]{@link camera.CaptureSession.getSupportedBeautyTypes} are disabled.
+     * 设置美颜类型及其等级。只有当通过
+     * [getSupportedBeautyTypes]{@link camera.CaptureSession.getSupportedBeautyTypes} 获取的所有
+     * [美颜类型]{@link camera.BeautyType} 均被关闭时，美颜模式才会关闭。
      *
-     * @param { BeautyType } type - Beauty type.
-     * @param { number } value - Beauty level, which is obtained through
-     *     [getSupportedBeautyRange]{@link camera.CaptureSession.getSupportedBeautyRange}.
+     * @param { BeautyType } type - 美颜类型。
+     * @param { number } value - 美颜等级，通过
+     *     [getSupportedBeautyRange]{@link camera.CaptureSession.getSupportedBeautyRange} 获取。
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -9262,8 +9261,8 @@ declare namespace camera {
      * 取消订阅高分辨率照片会话错误事件。
      *
      * @param { 'error' } type - 事件类型。该值固定为 **'error'**。可以在会话创建时监听该事件。
-     * @param { ErrorCallback } callback - 用于返回结果的回调。该参数为可选参数。如果这个
-     *     参数被指定，订阅指定的事件**on('error')**带有指定的回调被取消。（回调对象不能是匿名函数。）
+     * @param { ErrorCallback } callback - 用于返回结果的回调。该参数为可选参数。如果指定此参数，
+     *     则取消订阅指定事件 **on('error')** 的指定回调。（回调对象不能是匿名函数。）
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
