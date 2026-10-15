@@ -411,6 +411,11 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
   /**
    * 设置保存控件的图标尺寸。
    *
+   * > **说明**
+   * >
+   * > 在API版本10时，开发者可通过安全控件通用属性[iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}设置图标尺寸，此时size类型仅支持Dimension。<br/>
+   * > 从API版本20开始，开发者可以通过本接口设置图标尺寸，size类型增加支持SizeOptions。
+   *
    * @param { Dimension | SizeOptions } size - 图标尺寸，支持像素单位（vp、px等）。
    *     <br>不支持设置百分比字符串。若设置Dimension类型入参的百分比字符串，则图标尺寸显示为默认值；
    *     若设置SizeOptions类型入参的width或height属性为百分比字符串，则图标尺寸显示为0vp。<br/>对于保存控件提供的系统图标：<br/>- 使用Dimension类型入参时，宽
