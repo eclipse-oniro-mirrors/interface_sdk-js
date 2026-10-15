@@ -108,8 +108,7 @@ declare namespace screenshot {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
-   *     capabilities.
+   * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1400001 - Invalid display or screen.
    * @throws { BusinessError } 1400003 - This display manager service works abnormally.
    * @throws { BusinessError } 1400004 - Parameter error. Possible cause: 1.Invalid parameter range.
@@ -135,7 +134,7 @@ declare namespace screenshot {
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Incorrect parameter types.
    *     2.Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported on this device.
+   * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1400003 - This display manager service works abnormally.
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @atomicservice
@@ -148,7 +147,7 @@ declare namespace screenshot {
    * 获取屏幕截图，当前仅支持获取displayId为0的屏幕截图（如果需要对扩展屏截图，可以通过[capture]{@link screenshot.capture}接口实现），使用Promise异步回调。
    *
    * @returns { Promise<PickInfo> } Promise对象。返回一个PickInfo对象。
-   * @throws { BusinessError } 801 - Capability not supported on this device.
+   * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1400003 - This display manager service works abnormally.
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @atomicservice
@@ -416,7 +415,7 @@ declare namespace screenshot {
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 24 dynamic&static
+     * @since 26.0.0 dynamic&static
      */
     displayIntent?: DisplayIntentType;
   }
@@ -428,7 +427,7 @@ declare namespace screenshot {
    * @syscap SystemCapability.Window.SessionManager
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 24 dynamic&static
+   * @since 26.0.0 dynamic&static
    */
   enum DisplayIntentType {
     /**
@@ -437,7 +436,7 @@ declare namespace screenshot {
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 24 dynamic&static
+     * @since 26.0.0 dynamic&static
      */
     CANONICAL = 0,
 
@@ -447,7 +446,7 @@ declare namespace screenshot {
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 24 dynamic&static
+     * @since 26.0.0 dynamic&static
      */
     LOCAL = 1
   }
