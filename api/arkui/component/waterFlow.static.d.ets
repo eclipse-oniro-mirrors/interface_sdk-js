@@ -21,7 +21,8 @@ import { AttributeModifier, UIScrollableCommonEvent, ScrollableCommonMethod, Nes
 import { Builder, CustomBuilder, ComponentBuilder, CustomBuilderT } from './builder';
 import { Length, Dimension, Margin, ConstraintSizeOptions, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from "./scroll";
-import { ScrollState } from "./list";
+import { ScrollSnapAlign, ScrollState } from "./list";
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { PlaceholderProvider } from '../../@ohos.arkui.placeholderRegister';
 import { FlexDirection } from './enums';
 import { ComponentContentBase } from '../../arkui/ComponentContent';
@@ -462,6 +463,23 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @since 23 static
    */
   default layoutDirection(value: FlexDirection | undefined): this;
+
+  /**
+   * Sets the scroll snap strategy used after user scrolling in the WaterFlow.
+   *
+   * Supports top-down, segmented, and sliding-window layouts. START, CENTER, and END align items
+   * with the start, center, and end of the viewport along the scrolling axis.
+   * A custom provider calculates the approach distance and absolute final scroll target in vp.
+   * Targets are constrained to the legal scroll range. No snapping is enabled by default.
+   * NONE or undefined clears the strategy and restores the default scrolling behavior.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - Built-in alignment or custom provider.
+   * @returns { this } The WaterFlow attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 
   /**
    * Sets the number of items to be cached.

@@ -628,6 +628,25 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
   nestedScroll(value: NestedScrollOptions): WaterFlowAttribute;
 
   /**
+   * 设置用户滚动结束后WaterFlow使用的滚动吸附策略。
+   *
+   * 支持从上到下、分段和滑动窗口布局。START、CENTER、END分别将item对齐到滚动轴方向
+   * 视口的起始、中间和末尾位置。
+   * 自定义提供方计算趋近距离和最终绝对滚动目标，单位为vp。
+   * 吸附目标受合法滚动范围限制。默认不启用吸附。
+   * 设置为NONE或undefined时清除策略，恢复默认滚动行为。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐策略或自定义提供方。
+   * @returns { WaterFlowAttribute } WaterFlow组件的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): WaterFlowAttribute;
+
+  /**
    * 设置是否支持滚动手势。
    *
    * @param { boolean } value - 是否支持滚动手势。设置为true时可以通过手指或者鼠标滚动，设置为false时无法通过手指或者鼠标滚动，但不影响控制器[Scroller]{@link Scroller}的滚动
