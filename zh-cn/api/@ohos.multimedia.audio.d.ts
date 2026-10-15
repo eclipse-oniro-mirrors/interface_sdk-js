@@ -2559,10 +2559,11 @@ declare namespace audio {
   }
 
   /**
-   * 表示音频打断类型的枚举。
-   * 当用户监听到音频中断（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
-   * 此类型表示音频打断是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。关于音频打断策略的详细说明可参考文档
-   * [音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
+   * 表示音频打断强制类型的枚举。
+   * 当用户监听到音频打断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
+   * 此类型表示音频打断提示[InterruptHint]{@link audio.InterruptHint}是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
+   * 其中，INTERRUPT_HINT_RESUME对应的forceType一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
+   * 关于音频打断策略的详细说明可参考文档[音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
    *
    * @syscap SystemCapability.Multimedia.Audio.Renderer
    * @crossplatform [since 12]
@@ -2572,7 +2573,7 @@ declare namespace audio {
    */
   enum InterruptForceType {
     /**
-     * 强制打断类型，即具体操作已由系统强制执行。
+     * 强制执行类型，即打断提示[InterruptHint]{@link audio.InterruptHint}对应操作已由系统强制执行。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @crossplatform [since 12]
@@ -2582,7 +2583,7 @@ declare namespace audio {
      */
     INTERRUPT_FORCE = 0,
     /**
-     * 共享打断类型，即系统不执行具体操作，通过[InterruptHint]{@link audio.InterruptHint}建议并提示应用操作，应用可自行决策下一步处理方式。
+     * 非强制执行类型，即系统不执行对应操作，仅通过[InterruptHint]{@link audio.InterruptHint}提示应用操作，应用可自行决策下一步处理方式。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @atomicservice [since 12]
