@@ -20749,8 +20749,7 @@ declare class CommonMethod<T> {
   /**
    * 设置元素的边框线条样式。
    *
-   * @param { BorderStyle | EdgeStyles } value - 设置元素的边框样式。<br/>默认值：BorderStyle.Solid
-   *     - Border style.<br>Default value: **BorderStyle.Solid**.[since 9]
+   * @param { BorderStyle | EdgeStyles } value - 设置元素的边框样式。<br>默认值：BorderStyle.Solid
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20763,10 +20762,10 @@ declare class CommonMethod<T> {
   /**
    * 设置边框的宽度。
    *
-   * @param { Length } value - [since 7 - 8]
-   * @param { Length | EdgeWidths } value - [since 9 - 11]
-   * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - Border width. This parameter cannot be set in
-   *     percentage. [since 12]
+   * @param { Length } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br>默认值：0。[since 7 - 8]
+   * @param { Length | EdgeWidths } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br>默认值：0。[since 9 - 11]
+   * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br>默认值：0。
+   * <br>**说明：** 使用LocalizedEdgeWidths类型时，在不同语言方向下边框宽度设置会有差异，具体参见示例2。[since 12]
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20783,18 +20782,10 @@ declare class CommonMethod<T> {
    * >
    * > 当使用border统一设置边框且color参数缺省时，需将borderColor设置在border之后调用才能生效。
    *
-   * @param { ResourceColor } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
-   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
-   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
-   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 7 - 8]
-   * @param { ResourceColor | EdgeColors } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
-   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
-   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
-   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 9 - 11]
-   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
-   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
-   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
-   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 12]
+   * @param { ResourceColor } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br>默认值：Color.Black [since 7 - 8]
+   * @param { ResourceColor | EdgeColors } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br>默认值：Color.Black [since 9 - 11]
+   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br>默认值：Color.Black
+   * <br>**说明：** <br>使用LocalizedEdgeColors类型时，在不同语言方向下边框颜色设置会有差异，具体参见示例2。[since 12]
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -22818,8 +22809,9 @@ declare class CommonMethod<T> {
   /**
    * 设置父容器压缩尺寸分配给此属性所在组件的比例。当父容器为Column、Row时，需设置主轴方向的尺寸。
    *
-   * 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取flexShrink属性时，如果该节点未设置flexShrink
-   * 属性，默认返回1。
+   * > **说明：**
+   * >
+   * > 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取**flexShrink**属性时，如果该节点未设置**flexShrink**属性，默认返回**1**（与Flex容器的默认值一致，但与Column和Row容器的默认值**0**不同）。
    *
    * @param { number } value - 设置父容器压缩尺寸分配给此属性所在组件的比例。
    *     <br>取值限定为整数，父容器为 [Column]{@link Column} 、[Row]{@link Row}时， 取值范围[0,+∞).
@@ -26180,7 +26172,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26195,7 +26187,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26210,7 +26202,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26225,7 +26217,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26332,7 +26324,7 @@ declare interface MotionBlurOptions {
 }
 
 /**
- * 子组件边框信息
+ * 子组件边框信息。
  *
  * @interface LayoutBorderInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26344,7 +26336,7 @@ declare interface MotionBlurOptions {
 declare interface LayoutBorderInfo {
 
   /**
-   * 子组件边框宽度信息
+   * 边框宽度类型，用于描述组件边框不同方向的宽度。单位：vp。
    *
    * @type { EdgeWidths }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26356,7 +26348,7 @@ declare interface LayoutBorderInfo {
   borderWidth: EdgeWidths;
 
   /**
-   * 子组件外边距信息
+   * 外边距类型，用于描述组件不同方向的外边距。单位：vp。
    *
    * @type { Margin }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26368,7 +26360,7 @@ declare interface LayoutBorderInfo {
   margin: Margin;
 
   /**
-   * 子组件内边距信息
+   * 内边距类型，用于描述组件不同方向的内边距。单位：vp。
    *
    * @type { Padding }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26381,7 +26373,7 @@ declare interface LayoutBorderInfo {
 }
 
 /**
- * 子组件布局位置信息
+ * 子组件布局位置信息。
  *
  * @interface LayoutInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26393,7 +26385,7 @@ declare interface LayoutBorderInfo {
 declare interface LayoutInfo {
 
   /**
-   * 子组件位置信息
+   * 子组件位置坐标。单位：vp。
    *
    * @type { Position }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26405,7 +26397,7 @@ declare interface LayoutInfo {
   position: Position;
 
   /**
-   * 子组件布局约束
+   * 子组件约束尺寸。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    *
    * @type { ConstraintSizeOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26469,7 +26461,7 @@ declare type AreaChangeCallback = (oldValue: Area, newValue: Area) => void;
 declare interface LayoutChild {
 
   /**
-   * 子组件名字
+   * 子组件名称。
    *
    * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26481,7 +26473,7 @@ declare interface LayoutChild {
   name: string;
 
   /**
-   * 子组件id
+   * 子组件id。
    *
    * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26493,7 +26485,7 @@ declare interface LayoutChild {
   id: string;
 
   /**
-   * 子组件约束
+   * 子组件约束尺寸。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    *
    * @type { ConstraintSizeOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26505,7 +26497,7 @@ declare interface LayoutChild {
   constraint: ConstraintSizeOptions;
 
   /**
-   * 子组件边框信息
+   * 子组件边框信息。
    *
    * @type { LayoutBorderInfo }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26517,7 +26509,7 @@ declare interface LayoutChild {
   borderInfo: LayoutBorderInfo;
 
   /**
-   * 子组件位置信息
+   * 子组件位置坐标。单位：vp。
    *
    *
    * @type { Position }
@@ -26977,9 +26969,11 @@ declare class CustomComponent extends BaseCustomComponent {
   aboutToReuse?(params: Record<string, Object | undefined | null>): void;
 
   /**
-   *
+   * ArkUI框架会在自定义组件确定子组件位置时，将该自定义组件的子节点信息和自身的尺寸范围通过onLayout传递给自定义组件，开发者可在该方法中对子组件进行布局操作。
+   * 不允许在onLayout函数中改变状态变量。
+   * 
    * @param { Array<LayoutChild> } children - 子组件的布局信息。
-   * @param { ConstraintSizeOptions } constraint - 父组件的尺寸约束。
+   * @param { ConstraintSizeOptions } constraint - 父组件约束信息，包含minWidth、maxWidth、minHeight、maxHeight等约束条件。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -26989,9 +26983,11 @@ declare class CustomComponent extends BaseCustomComponent {
   onLayout?(children: Array<LayoutChild>, constraint: ConstraintSizeOptions): void;
 
   /**
+   * ArkUI框架会在自定义组件确定尺寸时，将该自定义组件的子节点信息和自身的尺寸范围通过onMeasure传递给自定义组件，开发者可在该方法中对子组件进行测量操作。
+   * 不允许在onMeasure函数中改变状态变量。
    *
    * @param { Array<LayoutChild> } children - 子组件的布局信息。
-   * @param { ConstraintSizeOptions } constraint - 父组件的尺寸约束。
+   * @param { ConstraintSizeOptions } constraint - 父组件约束信息，包含minWidth、maxWidth、minHeight、maxHeight等约束条件。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -27142,6 +27138,12 @@ declare class BaseCustomComponent extends CommonAttribute {
 
   /**
    * ArkUI框架会在自定义组件确定尺寸时，将该自定义组件的节点信息和尺寸范围通过onMeasureSize传递给该开发者。不允许在onMeasureSize函数中改变状态变量。
+   * 
+   * > **说明：**
+   * >
+   * > - 使用自定义布局方法时，推荐同时实现onMeasureSize和onPlaceChildren方法，否则可能出现布局异常。
+   * > - 自定义布局内不支持使用懒加载（包含Repeat和LazyForEach）。
+   * > - 父容器（自定义组件）上设置的尺寸信息，除aspectRatio之外，优先级小于onMeasureSize设置的尺寸信息。
    *
    * @param { GeometryInfo } selfLayoutInfo - 计算自定义组件大小后的自身布局信息。  <br/>**说明：** <br/>第一次布局时以自身设置的属性为准。
    * @param { Array<Measurable> } children - 计算子组件大小后的子组件布局信息。<br/>**说明：**

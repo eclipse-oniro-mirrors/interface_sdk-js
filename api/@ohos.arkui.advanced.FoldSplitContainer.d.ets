@@ -14,7 +14,7 @@
 */
 
 /**
- * @file Defines FoldSplitContainer component.
+ * @file
  * @kit ArkUI
  */
 
@@ -336,6 +336,10 @@ export type OnHoverStatusChangeHandler = (status: HoverModeStatus) => void;
  * > can be triggered. In the hover state layout, the crease area is avoided and the expanded area cannot cross the
  * > crease area. In the hover state, you can set not to display the expanded area. For details, see
  * > [Examples](docroot://reference/apis-arkui/arkui-ts/ohos-arkui-advanced-FoldSplitContainer.md#examples).
+ *
+ * ## Child Components
+ *
+ * Not supported
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

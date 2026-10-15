@@ -271,8 +271,6 @@ export interface SuffixIconOptions extends IconCommonOptions {
    * **"no-hide-descendants"**: The component and all its child components cannot be recognized by accessibility
    * services.
    * 
-   * Default value: **"auto"**.
-   * 
    * When the value is undefined, the default value is used.
    *
    * @default "auto"
@@ -321,8 +319,6 @@ export interface AccessibilityOptions {
    * 
    * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by accessibility
    * services.
-   * 
-   * Default value: **"auto"**
    * 
    * When the value is **undefined**, the default value is used.
    *
@@ -1142,8 +1138,6 @@ export interface ChipOptions {
    * 
    * **"no-hide-descendants"**: The component and all its child components cannot be recognized by accessibility
    * services.
-   * 
-   * Default value: **"auto"**
    * 
    * If the value is **undefined**, the default value is used.
    *

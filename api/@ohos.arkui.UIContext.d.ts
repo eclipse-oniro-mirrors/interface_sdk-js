@@ -123,8 +123,12 @@ export class Font {
 }
 
 /**
- * class MediaQuery
+ * Provides different styles for different media types.
  *
+ * > **NOTE**
+ * 
+ * > - In the following API examples, you must first use [getMediaQuery()]{@link getMediaQuery} in **UIContext** to obtain a **MediaQuery** instance, and then call the APIs using the obtained instance.
+ * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -134,10 +138,10 @@ export class Font {
 export class MediaQuery {
 
   /**
-   * Sets the media query criteria and returns the corresponding listening handle
+   * Sets the media query criteria and returns the corresponding listening handle.
    *
-   * @param { string } condition - media conditions
-   * @returns { mediaQuery.MediaQueryListener } the corresponding listening handle
+   * @param { string } condition - Media query condition. For details, see [Syntax](docroot://../../ui/arkts-layout-development-media-query.md#syntax).
+   * @returns { mediaQuery.MediaQueryListener } Listening handle to a media event, which is used to register or unregister the listening callback.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5662,10 +5666,15 @@ export class UIContext {
   getKeyboardAvoidMode(): KeyboardAvoidMode;
 
   /**
-   * Sets the pixel rounding mode of the current page.
+   * Sets the pixel rounding mode of the current page, which affects the pixel rounding timing of the entire page. 
+   * When [component-level pixel rounding]{@link pixelRound} cannot resolve pixel rounding issues, you can try the PIXEL_ROUND_AFTER_MEASURE mode.
    *
-   * @param { PixelRoundMode } mode - Pixel rounding mode.
-   *     <br>Default value:**PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH**.
+   * @param { PixelRoundMode } mode - Pixel rounding mode. Available values:
+   * - PIXEL_ROUND_ON_LAYOUT_FINISH: Performs pixel rounding after layout is complete. This mode is suitable for most scenarios.
+   * - PIXEL_ROUND_AFTER_MEASURE: Performs pixel rounding at the end of component measurement.
+   *  This mode is suitable for pixel rounding scenarios that cannot be resolved by component-level pixel rounding, but the final size may be 1px larger than that in PIXEL_ROUND_ON_LAYOUT_FINISH mode.
+   *  If an invalid value is set, the PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH mode is used.
+   * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5677,7 +5686,10 @@ export class UIContext {
   /**
    * Obtains the pixel rounding mode for this page.
    *
-   * @returns { PixelRoundMode } Pixel rounding mode of the current page.
+   * @returns { PixelRoundMode } Pixel rounding mode of the current page. The value can be:
+   * - PIXEL_ROUND_ON_LAYOUT_FINISH (value: 0): pixel rounding is performed after layout is complete.
+   * - PIXEL_ROUND_AFTER_MEASURE (value: 1): pixel rounding is performed at the end of component measurement.
+   * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

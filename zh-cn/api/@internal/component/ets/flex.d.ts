@@ -266,7 +266,7 @@ declare class FlexAttribute extends CommonMethod<FlexAttribute> {
    * 设置点光源样式，用于为Flex组件添加点光源效果，影响周围标记为可被照亮组件的光照渲染。通过PointLightStyle可配置光源的位置、颜色、强度等参数。
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置光源的位置、颜色、强度等属性，影响组件的光照效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { FlexAttribute } The attribute of the flex.
+   * @returns { FlexAttribute } Flex的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
