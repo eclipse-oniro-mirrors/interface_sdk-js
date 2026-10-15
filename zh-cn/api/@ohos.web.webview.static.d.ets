@@ -652,8 +652,10 @@ declare namespace webview {
          * Deletes all data in the specified origin.
          *
          * @param { string } origin - Index of the origin, which is obtained through {@link getOrigins}.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -666,8 +668,10 @@ declare namespace webview {
          *
          * @returns { Promise<Array<WebStorageOrigin>> } - Promise used to return the information about the origins.
          *                                                 For details, see {@link WebStorageOrigin}.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100012 - Invalid web storage origin.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -680,8 +684,10 @@ declare namespace webview {
          *
          * @param { AsyncCallback<Array<WebStorageOrigin>> } callback - Callback used to return the information about the
          *                                                              origins. For details, see {@link WebStorageOrigin}.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100012 - Invalid web storage origin.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -705,8 +711,10 @@ declare namespace webview {
          * Get the web storage quota with the origin.
          * @param { string } origin -  The origin which to be inquired.
          * @param { AsyncCallback<double> } callback - the callback of getOriginQuota.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
@@ -718,8 +726,10 @@ declare namespace webview {
          * Get the web amount of storage with the origin.
          * @param { string } origin -  The origin which to be inquired.
          * @returns { Promise<double> } - the promise returned by the function. Unit: byte.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
@@ -731,8 +741,10 @@ declare namespace webview {
          * Get the web amount of storage with the origin.
          * @param { string } origin -  The origin which to be inquired.
          * @param { AsyncCallback<double> } callback - the callback of getOriginUsage.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
