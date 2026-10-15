@@ -3112,6 +3112,7 @@ declare namespace drawing {
      * @param { string } text - 用于绘制TextBlob的文本内容。
      * @param { Font } font - 字型对象。
      * @returns { Array<TextBlob> } 创建的TextBlob对象数组。
+     * @throws { BusinessError } 25900001 - Parameter error. Possible causes: Incorrect parameter range.
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
@@ -3794,7 +3795,6 @@ declare namespace drawing {
      * @param { string } text - 待测量的文本内容，将按encoding指定的编码方式进行解析。
      * @param { TextEncoding } encoding - 指定文本编码类型。
      * @returns { number } 返回包含回退字体的文本宽度，浮点数。单位为物理像素px。
-     * @throws { BusinessError } 25900001 - Parameter error. Possible causes: Incorrect parameter range.
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
