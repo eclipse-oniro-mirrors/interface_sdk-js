@@ -98,6 +98,22 @@ declare namespace cliManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * 表示任务ID，作为本次调用拉起的工具进程及其子进程的归因主键。
+     *
+     * 任务通过归属与存活校验时，相关进程自动归因到该任务，并按任务优先级受管控；校验不通过时，
+     * 本次调用照常执行，不进行任务归因，并记录安全日志。两种情况均不影响执行结果。
+     *
+     * 取值须为通过taskManager.startTask声明的任务ID，长度范围为1~256个字符。不携带该字段时，
+     * 行为与现网一致。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
@@ -237,6 +253,22 @@ declare namespace cliManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * 表示任务ID，作为本次调用拉起的命令执行进程及其子进程的归因主键。
+     *
+     * 任务通过归属与存活校验时，相关进程自动归因到该任务，并按任务优先级受管控；校验不通过时，
+     * 本次调用照常执行，不进行任务归因，并记录安全日志。两种情况均不影响执行结果。
+     *
+     * 取值须为通过taskManager.startTask声明的任务ID，长度范围为1~256个字符。不携带该字段时，
+     * 行为与现网一致。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @publicapi [since 26.2.0]
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**

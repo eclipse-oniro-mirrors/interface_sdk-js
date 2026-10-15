@@ -100,6 +100,26 @@ declare namespace cliManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * Indicates the ID of the task, which is used as the attribution key for the tool process
+     * and its child processes launched by this call.
+     *
+     * If the task passes the ownership and liveness validation, the processes are automatically
+     * attributed to the task and managed by the system according to the task priority. If the
+     * validation fails, this call is executed as usual without task attribution, and a security
+     * log is recorded. The execution result is not affected in either case.
+     *
+     * The value must be a task ID declared via taskManager.startTask, containing 1 to 256
+     * characters. If this field is not specified, the behavior is the same as the existing
+     * behavior.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
@@ -259,6 +279,26 @@ declare namespace cliManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * Indicates the ID of the task, which is used as the attribution key for the command process
+     * and its child processes launched by this call.
+     *
+     * If the task passes the ownership and liveness validation, the processes are automatically
+     * attributed to the task and managed by the system according to the task priority. If the
+     * validation fails, this call is executed as usual without task attribution, and a security
+     * log is recorded. The execution result is not affected in either case.
+     *
+     * The value must be a task ID declared via taskManager.startTask, containing 1 to 256
+     * characters. If this field is not specified, the behavior is the same as the existing
+     * behavior.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @publicapi [since 26.2.0]
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
