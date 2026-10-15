@@ -492,7 +492,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface EthEapConfig {  
     /**
@@ -500,7 +500,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     profile: EthEapProfile;
 
@@ -509,7 +509,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     enabled: boolean;
 
@@ -518,7 +518,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     autoAuth: boolean;
 
@@ -527,7 +527,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     locked: boolean;
   }
@@ -537,7 +537,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum EthEapState {  
     /**
@@ -545,7 +545,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     STATE_IDLE = 0,
 
@@ -554,7 +554,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     STATE_AUTHENTICATING = 1,
 
@@ -563,7 +563,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     STATE_AUTHENTICATED = 2,
 
@@ -572,7 +572,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     STATE_FAILED = 3,
 
@@ -581,7 +581,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     STATE_RETRYING = 4
   }
@@ -591,7 +591,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface EthEapStateInfo {  
     /**
@@ -599,7 +599,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     state: EthEapState;
 
@@ -609,7 +609,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     retryCount: int;
 
@@ -618,7 +618,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     message?: string;
   }
@@ -638,7 +638,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function setEthEapConfig(config: EthEapConfig): void;
 
@@ -652,7 +652,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getEthEapConfig(): Promise<EthEapConfig>;
 
@@ -666,7 +666,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function deleteEthEapConfig(): Promise<void>;
 
@@ -679,7 +679,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getEthEapStateInfo(): EthEapStateInfo;
 
@@ -692,7 +692,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function onStateChange(callback: Callback<EthEapStateInfo>): void;
 
@@ -705,7 +705,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function offStateChange(callback?: Callback<EthEapStateInfo>): void;
 
@@ -714,7 +714,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum EthEapConnectAction {  
     /**
@@ -722,7 +722,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ACTION_CONNECT = 0,
     /**
@@ -730,7 +730,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     ACTION_DISCONNECT = 1
   }
@@ -753,7 +753,7 @@ declare namespace eap {
    *     required to call the API.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function connect(action: EthEapConnectAction): Promise<void>;
 }
