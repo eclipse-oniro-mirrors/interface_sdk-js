@@ -5981,14 +5981,14 @@ declare namespace webview {
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        ENTER_BACKGROUND = 1,
+        ENTER_BACKGROUND,
         /**
          * 系统自动清理。
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        AUTO_CLEANUP = 2
+        AUTO_CLEANUP
     }
 
     /**
