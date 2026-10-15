@@ -2074,6 +2074,25 @@ declare namespace ble {
     setPhy(phyValue: PhyValue): Promise<void>;
 
     /**
+     * Refreshes the service cache of a connected BLE peripheral device.
+     *
+     * The cached services of the peer device are cleared and rediscovered after the refresh. The promise is
+     * resolved when the refresh request is delivered to the service, and the rediscovery proceeds asynchronously.
+     * Call getServices to obtain the refreshed service list.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 2900099 - Operation failed.
+     * @throws { BusinessError } 2901003 - The connection is not established.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    refreshServices(): Promise<void>;
+
+    /**
      * Subscribe characteristic value changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
