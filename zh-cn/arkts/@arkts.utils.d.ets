@@ -16,6 +16,8 @@
 /**
  * @file Defines the utils for ArkTS
  * @kit ArkTS
+ *
+ * 本模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
  */
 
 import lang from './@arkts.lang';
@@ -297,7 +299,7 @@ declare namespace utils {
        */
       mode: AsyncLockMode;
       /**
-       * AsyncLockMode调用者的执行上下文标识符。
+       * AsyncLock调用者的执行上下文标识符。
        *
        * @syscap SystemCapability.Utils.Lang
        * @crossplatform [since 18]
