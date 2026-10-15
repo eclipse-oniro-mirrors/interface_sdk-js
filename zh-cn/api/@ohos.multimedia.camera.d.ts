@@ -532,7 +532,27 @@ declare namespace camera {
      * @since 18 dynamic
      * @since 23 static
      */
-    CAMERA_LENS_RETRACTED = 7400112
+    CAMERA_LENS_RETRACTED = 7400112,
+
+    /**
+     * 不支持的多摄组合。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    UNSUPPORTED_MULTI_CAMERA_COMBINATION = 7400113,
+
+    /**
+     * 参数超出范围。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    PARAM_OUT_OF_RANGE = 7400115
   }
 
   /**
@@ -13158,6 +13178,36 @@ declare namespace camera {
   type ImageType = image.Image | image.Picture;
 
   /**
+   * 表示辅助图类型的枚举。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  enum CameraAuxiliaryPhotoType {
+    /**
+     * 血氧图。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    OXYGEN = 0,
+ 
+    /**
+     * 色斑图。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    PIGMENTATION = 1
+  }
+
+  /**
    * 获取全质量图和未压缩图的对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -13175,6 +13225,26 @@ declare namespace camera {
      * @since 23 dynamic&static
      */
     main: ImageType;
+
+    /**
+     * 血氧辅助图对象，用于血氧检测分析。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    oxygenPhoto?: ImageType;
+ 
+    /**
+     * 色斑辅助图对象，用于皮肤色斑分析。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    pigmentationPhoto?: ImageType;
 
     /**
      * 释放输出资源。使用Promise异步回调。
@@ -14217,6 +14287,37 @@ declare namespace camera {
      * @since 23 static
      */
     enableMovingPhoto(enabled: boolean): void;
+
+    /**
+     * 查询设备是否支持拍摄输出指定类型的辅助图。
+     *
+     * @param { CameraAuxiliaryPhotoType } auxPhotoType - 拍照回传的目标辅助图类型。
+     * @returns { boolean } 设备是否支持回传指定类型的辅助图。true表示支持回传；false表示不支持回传。
+     * @throws { BusinessError } 7400115 - Parameter out of the range. The auxPhotoType value is invalid. Check the
+     *     CameraAuxiliaryPhotoType enum for valid values.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isAutoAuxiliaryPhotoDeliverySupported(auxPhotoType: CameraAuxiliaryPhotoType): boolean;
+ 
+    /**
+     * 启用或禁用拍照自动回传指定类型的辅助图。
+     *
+     * @param { CameraAuxiliaryPhotoType[] } auxPhotoTypes - 回传的目标辅助图类型。
+     * @param { boolean } enable - 表示是否启用拍照自动回传指定类型的辅助图。true表示启用，false表示禁用。
+     * @throws { BusinessError } 801 - Capability not supported. Check if the camera device supports the required
+     *     auxiliary photo types by using capability query APIs.
+     * @throws { BusinessError } 7400115 - Parameter out of the range. The auxPhotoType value is invalid. Check the
+     *     CameraAuxiliaryPhotoType enum for valid values.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    setAutoAuxiliaryPhotosDeliveryEnabled(auxPhotoTypes: CameraAuxiliaryPhotoType[], enable: boolean): void;
 
     /**
      * 检查是否支持指定的拍照画质优先策略。
