@@ -2360,6 +2360,10 @@ declare namespace webview {
     /**
      * Decide whether JIT is disabled, the default value is false.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2367,6 +2371,10 @@ declare namespace webview {
     disableJITCompilation?: boolean;
     /**
      * Decide whether WASM is disabled, the default value is false.
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2376,6 +2384,11 @@ declare namespace webview {
     /**
      * Decide whether WebGL is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2383,6 +2396,11 @@ declare namespace webview {
     disableWebGL?: boolean;
     /**
      * Decide whether PDFViewer is disabled, the default value is false.
+     *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2392,6 +2410,11 @@ declare namespace webview {
     /**
      * Decide whether MathML is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2400,6 +2423,11 @@ declare namespace webview {
     /**
      * Decide whether ServiceWorker is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2407,6 +2435,11 @@ declare namespace webview {
     disableServiceWorker?: boolean;
     /**
      * Decide whether NonProxyUDP is disabled, the default value is false.
+     *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
