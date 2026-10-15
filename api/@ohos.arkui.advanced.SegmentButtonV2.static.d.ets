@@ -22,7 +22,7 @@
  * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
  * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
  * filtering scenarios.
- * @file api/@ohos.arkui.advanced.SegmentButtonV2.static.d.ets
+ * @file
  * @kit ArkUI
  */
 

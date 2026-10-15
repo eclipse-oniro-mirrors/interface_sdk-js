@@ -11578,9 +11578,9 @@ export declare interface CommonMethod {
      */
     default opacity(value: double | Resource | undefined): this;
     /**
-     * Sets the border.
+     * 设置边框样式。
      *
-     * @param { BorderOptions | undefined } value
+     * @param { BorderOptions | undefined } value - 统一边框样式设置接口。<br/>**说明：** <br/>边框宽度默认值为0，即不显示边框。边框圆角半径默认值为0，即不显示圆角。边框颜色默认值为Color.Black。<br/>从API version 9开始，父节点的border显示在子节点内容之上。<br/>color、radius缺省时，为了保证borderColor、borderRadius生效，需要将borderColor、borderRadius设置在border后。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11588,10 +11588,9 @@ export declare interface CommonMethod {
      */
     default border(value: BorderOptions | undefined): this;
     /**
-     * Sets the border style.
-     * Default value: **BorderStyle.Solid**.
+     * 设置元素的边框线条样式。
      *
-     * @param { BorderStyle | EdgeStyles | undefined } value
+     * @param { BorderStyle | EdgeStyles | undefined } value - 设置元素的边框样式。<br/>默认值：BorderStyle.Solid
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11599,10 +11598,9 @@ export declare interface CommonMethod {
      */
     default borderStyle(value: BorderStyle | EdgeStyles | undefined): this;
     /**
-     * Sets the border width.
-     * Percentage values are not supported.
+     * 设置元素的边框宽度。
      *
-     * @param { Length | EdgeWidths | LocalizedEdgeWidths | undefined } value
+     * @param { Length | EdgeWidths | LocalizedEdgeWidths | undefined } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br/>默认值：0。<br/>**说明：** 使用LocalizedEdgeWidths类型时，在不同语言方向下边框宽度设置会有差异。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11610,9 +11608,9 @@ export declare interface CommonMethod {
      */
     default borderWidth(value: Length | EdgeWidths | LocalizedEdgeWidths | undefined): this;
     /**
-     * Sets the border color.
-     * Default value: **Color.Black**.
-     * @param { ResourceColor | EdgeColors | LocalizedEdgeColors | undefined } value
+     * 设置元素的边框颜色。
+     *
+     * @param { ResourceColor | EdgeColors | LocalizedEdgeColors | undefined } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br/>默认值：Color.Black<br/>**说明：** <br/>使用LocalizedEdgeColors类型时，在不同语言方向下边框颜色设置会有差异。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11620,16 +11618,11 @@ export declare interface CommonMethod {
      */
     default borderColor(value: ResourceColor | EdgeColors | LocalizedEdgeColors | undefined): this;
     /**
-     * Sets the radius of the border rounded corners.
-     *     The radius is restricted by the component size. The maximum value is half of the component width or height.
-     * NOTE
-     *    1. **RenderStrategy.FAST**: The current component and its child components will be drawn directly
-     *        onto the canvas with rounded corners applied.
-     *    2. **RenderStrategy.OFFSCREEN**: The current component and its child components will first be rendered onto
-     *        an off-screen canvas, then undergo a rounded corner clipping, and finally be drawn onto the main canvas.
-     * @param { Length | BorderRadiuses | LocalizedBorderRadiuses | undefined } value
-     * @param { RenderStrategy | undefined } [type] - Application types for drawing rounded corners.
-     *     Default value: **RenderStrategy.FAST**.
+     * 设置元素的边框圆角半径。
+     * 圆角半径受组件尺寸限制，最大值为组件宽度或高度的一半。
+     *
+     * @param { Length | BorderRadiuses | LocalizedBorderRadiuses | undefined } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。<br/>默认值：0。设置圆角后，可搭配clip属性进行裁剪，避免子组件超出组件自身。
+     * @param { RenderStrategy | undefined } [type] - 绘制圆角的应用类型。<br/>默认值：RenderStrategy.FAST。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12530,10 +12523,9 @@ export declare interface CommonMethod {
      */
     default visibility(value: Visibility | undefined): this;
     /**
-     * Sets the percentage of the parent container's remaining space that is allocated to the component.
-     * Default value: **0**.
+     * 设置组件在父容器剩余空间中所占的比例。设置该属性会触发二次布局，在对性能有严格要求的场景下建议使用layoutWeight替代。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 设置父容器在主轴方向上的剩余空间分配给此属性所在组件的比例。值为0表示不参与剩余空间分配，保持原有尺寸；值大于0时，按照比例分配父容器的剩余空间，值越大分配的空间越多。<br/>取值范围：[0, +∞)<br/>默认值：0
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12541,10 +12533,9 @@ export declare interface CommonMethod {
      */
     default flexGrow(value: double | undefined): this;
     /**
-     * Sets the percentage of the parent container's shrink size that is allocated to the component.
-     * Default value: 0 when the parent container is Column or Row, 1 when the parent container is Flex..
+     * 设置父容器空间不足时，压缩尺寸分配给此属性所在组件的比例。设置该属性会触发二次布局，在对性能有严格要求的场景下建议使用layoutWeight替代。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 设置父容器空间不足时，压缩尺寸分配给此属性所在组件的比例。<br/>默认值：0（父容器为Column或Row时），1（父容器为Flex时）
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12552,10 +12543,9 @@ export declare interface CommonMethod {
      */
     default flexShrink(value: double | undefined): this;
     /**
-     * Sets the base size of the component in the main axis of the parent container.
-     * Default value: **'auto'**.
+     * 设置组件在父容器主轴方向上的基准尺寸。
      *
-     * @param { double | string | undefined } value
+     * @param { double | string | undefined } value - 设置组件在父容器主轴方向上的基准尺寸。<br/>默认值：'auto'（表示组件在主轴方向上的基准尺寸为组件原本的大小）。<br/>string类型：不允许设置百分比字符串。可选值：可以转化为数字的字符串（如'10'）、带长度单位的字符串（如'10px'）或'auto'。传入不符合要求的字符串时，按默认值'auto'处理。<br/>number：取值范围(0, +∞)，单位为vp。<br/>设置异常值时，该属性按默认值'auto'处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12563,10 +12553,10 @@ export declare interface CommonMethod {
      */
     default flexBasis(value: double | string | undefined): this;
     /**
-     * Sets the alignment mode of the child components along the cross axis of the parent container.
-     * Default value: **ItemAlign.Auto**.
+     * 子组件在父容器交叉轴的对齐格式，设置后会覆盖父容器的alignItems设置。
+     * 当父容器为Flex时，alignSelf仅在父容器设置FlexWrap.NoWrap时生效；设置FlexWrap.Wrap或FlexWrap.WrapReverse时不生效。
      *
-     * @param { ItemAlign | undefined } value
+     * @param { ItemAlign | undefined } value - 子组件在父容器交叉轴的对齐格式，会覆盖Flex、Column、Row、DynamicLayout、GridRow布局容器中的alignItems设置。<br/>默认值：ItemAlign.Auto（表示继承父容器的对齐设置）
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12584,10 +12574,10 @@ export declare interface CommonMethod {
      */
     default layoutGravity(alignment: LocalizedAlignment | undefined): this;
     /**
-     * Sets the display priority for the component in the layout container.
-     * <br>This parameter is only effective in Row, Column, and Flex (single-line) container components.
+     * 设置当前组件在布局容器中显示的优先级。
+     * <br>仅在Row、Column、Flex(单行)容器组件中生效。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在Row/Column/Flex(单行)容器组件中生效。<br/>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。<br/>小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。<br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12712,14 +12702,13 @@ export declare interface CommonMethod {
      */
     default chainMode(direction: Axis | undefined, style: ChainStyle | undefined): this;
     /**
-     * Sets the aspect ratio of the component, which can be obtained using the following formula: width/height.
-     * <br>If only width and aspectRatio are set, the height is calculated using the following formula: width/aspectRatio.
-     * <br>If only height and aspectRatio are set, the width is calculated using the following formula: height x aspectRatio.
-     * <br>If width, height, and aspectRatio are all set, the explicitly set height is ignored, and the effective height is
-     * calculated using the following formula: width/aspectRatio.
-     * <br>This parameter takes effect only when a valid value greater than 0 is specified.
+     * 指定当前组件的宽高比，aspectRatio=width/height。
+     * <br>仅设置width、aspectRatio时，height=width/aspectRatio。
+     * <br>仅设置height、aspectRatio时，width=height*aspectRatio。
+     * <br>同时设置width、height和aspectRatio时，height会被重新计算为width/aspectRatio，显式设置的height值不生效。
+     * <br>设置aspectRatio属性后，组件宽高会受父组件内容区大小限制，constraintSize的maxWidth/maxHeight优先级高于aspectRatio。当constraintSize设置的maxWidth/maxHeight约束与aspectRatio计算结果冲突时，组件将优先遵循constraintSize的maxWidth/maxHeight约束，此时aspectRatio可能无法生效。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 指定当前组件的宽高比，取值范围(0, +∞)。<br/>API version 9及以前，默认值：1.0。<br/>API version 10及以后，默认值：无。<br/>**说明：**<br/>该属性设置为非法值（小于等于0）时不生效。API version 10及以后，未设置值时该属性不生效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

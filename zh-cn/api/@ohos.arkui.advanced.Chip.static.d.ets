@@ -961,7 +961,7 @@ export interface ChipOptions {
   onClose?: VoidCallback;
 
   /**
-   * Chip点击事件。
+   * Chip组件点击事件回调，无参数和返回值。当用户点击Chip组件时触发该回调。
    *
    * 值为undefined时，Chip不能被点击。
    *
