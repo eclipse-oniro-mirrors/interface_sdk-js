@@ -1655,6 +1655,55 @@ declare enum RenderExitReason {
 type OnContextMenuHideCallback = () => void;
 
 /**
+ * Defines the callback type for context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>Default value: See the default value of options.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+
+/**
+ * Enumerates the context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare enum WebContextMenuItemId {
+  /**
+   * Copy link to highlight menu item.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  MENU_COPY_LINK = 11
+}
+
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare interface WebContextMenuOptions {
+  /**
+   * Whether the context menu item is enabled.
+   * Default value: Default value: false.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  enable?: boolean;
+}
+
+/**
  * Enumerates the error codes returned by **onSslErrorEventReceive** API.
  *
  * @syscap SystemCapability.Web.Webview.Core
@@ -3196,6 +3245,58 @@ declare class WebContextMenuParam {
    * @since 22 dynamic
    */
   getContextMenuMediaType(): ContextMenuDataMediaType;
+
+  /**
+   * Checks whether the currently selected text can be used to generate a Text Fragment link.
+   * A Text Fragment link is a URL that contains a **#:~:text=** fragment, which directs
+   * the browser to scroll to and highlight a specific text passage when the link is opened.
+   *
+   * Use this API in the **onContextMenuShow** event callback to determine whether to display
+   * a "Copy Link to Highlight" menu item. The result is consistent with the Chromium
+   * **ShouldOfferLinkToText** behavior.
+   *
+   * @returns { boolean } **true** if the currently selected text can be used to generate
+   *     a Text Fragment link; **false** otherwise.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  shouldOfferLinkToText(): boolean;
+
+  /**
+   * Obtains a Text Fragment link URL that points to the currently highlighted text on
+   * the web page. The returned URL contains a **#:~:text=** fragment that complies with
+   * the W3C Text Fragments specification.
+   *
+   * Use this API in the **onContextMenuShow** event callback. Before calling this API,
+   * you are advised to call shouldOfferLinkToText() to check whether the current selection
+   * supports link generation. If the selection does not support link generation, an empty
+   * string is returned.
+   *
+   * @returns { string } Text Fragment link URL that contains the **#:~:text=** fragment
+   *     and complies with the W3C Text Fragments specification. If the current selection
+   *     does not support link generation, an empty string is returned.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  getTextFragmentGeneratedLink(): string;
+
+  /**
+   * Checks whether the current web page has a Text Fragment highlight.
+   * Use this API to determine whether the "Remove Highlight" and "Re-share Link"
+   * menu items should be displayed.
+   *
+   * Use this API in the **onContextMenuShow** event callback.
+   * The result is consistent with the Chromium **GetExistingSelectors** behavior.
+   *
+   * @returns { boolean } **true** if the current page has a Text Fragment highlight;
+   *     **false** otherwise.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  isOverTextFragment(): boolean;
 }
 
 /**
@@ -3383,6 +3484,47 @@ declare class WebContextMenuResult {
    * @since 24 dynamic
    */
   saveImage(): void;
+
+  /**
+   * Copies a Text Fragment link that points to the currently highlighted text to the
+   * system clipboard. The copied URL contains a **#:~:text=** fragment that complies
+   * with the W3C Text Fragments specification. The clipboard content is the same as
+   * the URL returned by getTextFragmentGeneratedLink().
+   *
+   * Use this API in the **onContextMenuShow** event callback. Before calling this API,
+   * you are advised to call shouldOfferLinkToText() to check whether the current selection
+   * supports link generation. If the selection does not support link generation, this
+   * method does not write to the clipboard.
+   *
+   * > **NOTE**
+   * >
+   * > After the operation is complete, closeContextMenu() should be called to close
+   * > the menu. Failure to do so may result in menu resources not being properly released.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  copyLinkToTextMenu(): void;
+
+  /**
+   * Removes all Text Fragment highlights from the current web page,
+   * restoring the original text style.
+   *
+   * Use this API in the **onContextMenuShow** event callback. Before calling this API,
+   * you are advised to call isOverTextFragment() to check whether a highlight exists.
+   * If no highlight exists, this method does nothing.
+   *
+   * > **NOTE**
+   * >
+   * > After the operation is complete, closeContextMenu() should be called to close
+   * > the menu. Failure to do so may result in menu resources not being properly released.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  removeFragments(): void;
 }
 
 /**
@@ -7928,6 +8070,24 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 11 dynamic
    */
   onContextMenuHide(callback: OnContextMenuHideCallback): WebAttribute;
+
+  /**
+   * Registers a callback to be invoked when the context menu item status is updated
+   * by the kernel asynchronously. The callback is triggered after the kernel completes
+   * asynchronous processing, notifying the application to update the display status of
+   * menu items.
+   *
+   * The shouldOfferLinkToText() method returns a synchronous initial value, while this
+   * callback provides the asynchronous final value. The two are complementary.
+   *
+   * @param { OnContextMenuUpdateCallback } callback - Callback function that receives
+   *     the menu item ID and options.
+   * @returns { WebAttribute } Returns the WebAttribute object to support chained calls.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
   /**
    * Sets whether autoplay of audible videos requires a user tap. Muted video playback is not affected by this API. If
