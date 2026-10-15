@@ -31,7 +31,6 @@ import Context from './application/Context';
  * @stagemodelonly
  * @since 18 dynamic
  * @since 23 static
- * 后续版本的新增接口，采用上角标单独标记接口的起始版本。
  */
 declare namespace continueManager {
   /**

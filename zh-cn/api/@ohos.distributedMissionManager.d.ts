@@ -35,7 +35,6 @@ import type { MissionParameter as _MissionParameter } from './application/Missio
  * @stagemodelonly
  * @since 9 dynamic
  * @since 23 static
- * 后续版本的新增接口，采用上角标单独标记接口的起始版本。
  */
 declare namespace distributedMissionManager {
   /**
@@ -363,7 +362,7 @@ declare namespace distributedMissionManager {
   function continueMission(parameter: ContinueDeviceInfo, options: ContinueCallback): Promise<void>;
 
   /**
-   * 通过指定包名（bundleName）的方式进行迁移任务。使用callback异步回调。
+   * 通过指定包名（bundleName）的方式将指定应用的任务从源设备迁移到目标设备。使用callback异步回调。
    *
    * @permission ohos.permission.MANAGE_MISSIONS and ohos.permission.DISTRIBUTED_DATASYNC
    * @param { ContinueMissionInfo } parameter - 迁移信息，包含源设备ID、目标设备ID、应用包名和自定义参数等字段。
@@ -390,7 +389,7 @@ declare namespace distributedMissionManager {
   function continueMission(parameter: ContinueMissionInfo, callback: AsyncCallback<void>): void;
 
   /**
-   * 通过指定包名（bundleName）的方式进行迁移任务。使用Promise异步回调。
+   * 通过指定包名（bundleName）的方式将指定应用的任务从源设备迁移到目标设备。使用Promise异步回调。
    *
    * @permission ohos.permission.MANAGE_MISSIONS and ohos.permission.DISTRIBUTED_DATASYNC
    * @param { ContinueMissionInfo } parameter - 迁移信息，包含源设备ID、目标设备ID、应用包名和自定义参数等字段。
@@ -467,7 +466,7 @@ declare namespace distributedMissionManager {
   export type ContinueDeviceInfo = _ContinueDeviceInfo;
 
   /**
-   * 作为可以
+   * 作为
    * [registerMissionListener]{@link registerMissionListener(parameter: MissionDeviceInfo, options: MissionCallback, callback: AsyncCallback<void>)}
    * 的入参，用于监听任务状态变化的回调函数，包含任务列表变化通知、任务快照通知和断开连接通知等功能。表示注册监听后建立的回调函数。
    *
