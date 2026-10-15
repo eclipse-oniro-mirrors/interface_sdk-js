@@ -39,7 +39,8 @@ declare namespace fontManager {
    * 
    * > **NOTE**
    * > - After successful installation, applications can use the font by its font name. The same font path cannot be installed repeatedly.
-   * > - A maximum of 200 font files can be installed. In version 26.0.1 and later, a maximum of 800 font files can be installed on PCs, 2-in-1 devices, and tablets.
+   * > - A maximum of 200 font files can be installed. In version 26.0.1 and later, a maximum of 800 font files can be installed on PCs,
+   *     2-in-1 devices, and tablets.
    *
    * @permission ohos.permission.UPDATE_FONT
    * @param { string } path - Path to the font file to be installed. Only font files in.ttf,.ttc, or.otf format are supported.
