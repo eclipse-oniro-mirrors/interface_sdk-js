@@ -152,8 +152,6 @@ declare namespace vibrator {
    * 适用于为用户交互提供触觉反馈、为通知/闹钟等事件提供振动提醒，或在游戏、多媒体等场景中提供沉浸式振动体验。调用成功后，设备马达将按指定效果和属性开始振动；若同一马达已有正在进行的振动，新请求将按系统优先级规则处理。同功能还提供
    * Promise版本vibrator.startVibration (#vibratorstartvibration9-1)，开发者可根据回调风格偏好选择。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @permission ohos.permission.VIBRATE
    * @param { VibrateEffect } effect - 马达振动效果，支持四种：<br>1、[VibratePreset]{@link vibrator.VibratePreset}：按照预置振动效果触发马达振动，适用于交互反馈
    *     类的短振场景（如点击长按，滑动，拖拽等），为确保与系统整体振感反馈体验风格一致，推荐使用此接口；<br>2、[VibrateFromFile]{@link vibrator.VibrateFromFile}：按照文件形式定制自定义振
@@ -184,8 +182,6 @@ declare namespace vibrator {
    * 根据指定的振动效果和振动属性触发马达振动，使用promise异步回调。
    * 适用于交互触觉反馈、事件振动提醒或游戏、多媒体等沉浸式振动场景。调用成功时Promise resolve无返回值；调用失败时Promise reject返回错误对象。若同一马达已有振动正在进行，新请求按系统优先级规则处理。同功能还
    * 提供callback版本vibrator.startVibration (#vibratorstartvibration9)，开发者可根据回调风格偏好选择。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @permission ohos.permission.VIBRATE
    * @param { VibrateEffect } effect - 马达振动效果，支持四种：<br/>1、[VibratePreset]{@link vibrator.VibratePreset}：按照预置振动效果触发马达振动，适用于交互反
@@ -267,8 +263,6 @@ declare namespace vibrator {
    * 用于停止设备上所有类型的振动（包括VibrateTime、VibratePreset、VibrateFromFile、VibrateFromPattern），适用于应用退出、页面切换等需立即终止所有振动的场景。与
    * vibrator.stopVibration (#vibratorstopvibration9)（需传入stopMode）不同，本接口无需指定停止模式，可停止包括自定义振动在内的所有振动。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @permission ohos.permission.VIBRATE
    * @param { AsyncCallback<void> } callback - 回调函数，当马达停止振动成功，err为undefined，否则为错误对象，包含错误码和错误信息。回调结果可用于确认所有振动是否成功停止。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -287,8 +281,6 @@ declare namespace vibrator {
    * Promise resolve，失败返回错误对象。与vibrator.stopVibration (#vibratorstopvibration9-1)（需传入stopMode）不同，本接口无需指定停止模式，可停止包括自定义振动在
    * 内的所有振动。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @permission ohos.permission.VIBRATE
    * @returns { Promise<void> } Promise对象。调用成功时Promise resolve，表示所有振动成功停止；调用失败时Promise reject，返回错误对象包含错误码和错误信息，可用于排查停止失败的原因。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -306,8 +298,6 @@ declare namespace vibrator {
    * 当开发者需要立即停止所有振动且不关心异步回调结果时使用此接口。适用于对实时性要求极高的场景（如紧急中断振动）。调用成功后，设备上所有正在进行的马达振动立即停止。调用失败时会抛出异常，需使用try catch捕获。与异步版本
    * [vibrator.stopVibration]{@link vibrator.stopVibration()}相比，本接口为同步接口，直接返回结果无需回调，但会阻塞主线程。建议在非UI线程中使用，或在UI线程中优先使用异步版本以
    * 避免影响交互响应。
-   *
-   * **原子化服务API**：从API version 12开始，该接口支持在原子化服务中使用。
    *
    * @permission ohos.permission.VIBRATE
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -517,8 +507,8 @@ declare namespace vibrator {
    * > **说明**
    * >
    * > 由于设备存在多样性，不同的设备可能预置不同的效果，建议使用预置效果前先使用
-   * > [vibrator.isSupportEffect]{@link vibrator.isSupportEffect(effectId: string, callback: AsyncCallback<boolean>)}<
-   * > sup>10+</sup>或[vibrator.isSupportEffectSync]{@link vibrator.isSupportEffectSync}接口查询当前设备是否支持该预置效果。
+   * > [vibrator.isSupportEffect<sup>10+</sup>]{@link vibrator.isSupportEffect(effectId: string, callback: AsyncCallback<boolean>)}
+   * > 或[vibrator.isSupportEffectSync]{@link vibrator.isSupportEffectSync}接口查询当前设备是否支持该预置效果。
    *
    * @syscap SystemCapability.Sensors.MiscDevice
    * @crossplatform [since 22]
@@ -546,8 +536,8 @@ declare namespace vibrator {
    * > **说明**
    * >
    * > 由于设备存在多样性，建议使用预置效果前先使用
-   * > [vibrator.isSupportEffect]{@link vibrator.isSupportEffect(effectId: string, callback: AsyncCallback<boolean>)}<
-   * > sup>10+</sup>或[vibrator.isSupportEffectSync]{@link vibrator.isSupportEffectSync}接口查询当前设备是否支持该预置效果。
+   * > [vibrator.isSupportEffect<sup>10+</sup>]{@link vibrator.isSupportEffect(effectId: string, callback: AsyncCallback<boolean>)}
+   * > 或[vibrator.isSupportEffectSync]{@link vibrator.isSupportEffectSync}接口查询当前设备是否支持该预置效果。
    *
    * @syscap SystemCapability.Sensors.MiscDevice
    * @crossplatform [since 22]
@@ -653,8 +643,6 @@ declare namespace vibrator {
   /**
    * 振动使用场景。不同usage值对应不同的系统振动开关管控规则，开发者需根据实际业务场景选择合适的usage值。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * <!--RP1End-->
    *
    * @syscap SystemCapability.Sensors.MiscDevice
@@ -680,8 +668,6 @@ declare namespace vibrator {
    * [startVibration]{@link vibrator.startVibration(effect: VibrateEffect, attribute: VibrateAttribute, callback: AsyncCallback<void>)}
    * 接口的attribute参数，指定马达ID、设备ID和振动使用场景。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @syscap SystemCapability.Sensors.MiscDevice
    * @crossplatform [since 22]
    * @atomicservice [since 11]
@@ -704,7 +690,6 @@ declare namespace vibrator {
     /**
      * 设备ID。默认值：-1，表示本地设备。使用场景：在多设备场景下需指定远程设备时设置此参数；不填写时默认控制本地设备。从API version 19开始，设备ID可以使用
      * [getVibratorInfoSync]{@link vibrator.getVibratorInfoSync}或[on]{@link vibrator.on_vibratorStateChange}查询。
-     * <br/>**原子化服务API**：从API version 19开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @crossplatform [since 22]
@@ -717,7 +702,6 @@ declare namespace vibrator {
     /**
      * 马达振动的使用场景。默认值：'unknown'。取值范围只允许在[Usage]{@link vibrator.Usage}提供的类型中选取。不同usage值对应不同的系统振动开关管控规则，开发者需根据实际业务场景选择合适的
      * usage值。
-     * <br/>**原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @crossplatform [since 22]
@@ -760,8 +744,6 @@ declare namespace vibrator {
 
   /**
    * 指定时长振动类型。仅对振动时长进行启动或停止控制，满足基础功能，无法对振动强度、频率等维度进行个性化设置。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @syscap SystemCapability.Sensors.MiscDevice
    * @crossplatform [since 22]
@@ -1312,8 +1294,8 @@ declare namespace vibrator {
     type: 'pattern';
 
     /**
-     * 振动事件数组。由[VibratorPatternBuilder]{@link vibrator.VibratorPatternBuilder}的addContinuousEvent和addTransientEvent方法添加后
-     * 通过build方法生成。同一VibratorPattern中多个VibratorEvent的time值不能重叠。
+     * [build]{@link vibrator.VibratorPatternBuilder#build}方法返回的[VibratorPattern]{@link vibrator.VibratorPattern}对象。
+     * 需先通过[VibratorPatternBuilder]{@link vibrator.VibratorPatternBuilder}添加振动事件后调用build方法生成。
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @crossplatform [since 22]
@@ -1421,8 +1403,8 @@ declare namespace vibrator {
   /**
    * 查询一个或所有设备的马达信息列表。适用于在触发振动前查询设备马达能力和多马达设备的马达ID，以便选择合适的马达触发振动。
    * 不传param时查询所有设备马达信息；传入VibratorInfoParam可查询指定设备或马达。返回VibratorInfo数组，包含deviceId、vibratorId、deviceName、
-   * isHdHapticSupported、isLocalVibrator等属性，可用于startVibration (#vibratorstartvibration9)和stopVibration (#
-   * vibratorstopvibration19)中指定马达和设备。
+   * isHdHapticSupported、isLocalVibrator等属性，
+   * 可用于startVibration (#vibratorstartvibration9)和stopVibration (#vibratorstopvibration19)中指定马达和设备。
    *
    * @param { VibratorInfoParam } [param] - 指出需要查询的设备和马达信息。不传param时默认查询所有设备所有马达的信息。deviceId默认值为-1（查询全部设备），vibratorId默认值为0（查询该
    *     设备的全部马达）。
