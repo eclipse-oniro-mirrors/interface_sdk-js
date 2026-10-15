@@ -700,7 +700,6 @@ interface CommonSegmentButtonOptions {
    * 系统材质场景设置普通拖拽时，仅改变拖拽位移和选中更新方式；材质外观、背板缩放、微量位移、选中项形变及已配置光效保持原有行为。
    * 未配置、undefined或非法值均使用默认模式。多选模式下该参数不生效。
    *
-   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.2.0 static
@@ -1567,7 +1566,6 @@ declare class SegmentButtonOptions {
    * 系统材质场景设置普通拖拽时，仅改变拖拽位移和选中更新方式；材质外观、背板缩放、微量位移、选中项形变及已配置光效保持原有行为。
    * 未配置、undefined或非法值均使用默认模式。多选模式下该参数不生效。
    *
-   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.2.0 static

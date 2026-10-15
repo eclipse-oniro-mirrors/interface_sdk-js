@@ -562,14 +562,15 @@ interface CommonSegmentButtonOptions {
    * Sets the drag interaction mode of the segmented button.
    *
    * If omitted, following drag is used with system material, and normal drag is used without it.
-   * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
+   * Explicit normal drag without system material and explicit following drag with system material
+   * preserve the original behavior.
    * Following drag without system material does not add material deformation or light effects.
    * Normal drag with system material only changes drag positioning and selection updates.
-   * Material appearance, background scaling, slight displacement, selected-item deformation, and configured light effects are retained.
+   * Material appearance, background scaling, slight displacement, selected-item deformation,
+   * and configured light effects are retained.
    * If omitted, undefined or invalid, the default mode is used.
    * This property has no effect in multi-select mode.
    *
-   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.2.0 static
@@ -1257,14 +1258,15 @@ declare class SegmentButtonOptions {
    * Sets the drag interaction mode of the segmented button.
    *
    * If omitted, following drag is used with system material, and normal drag is used without it.
-   * Explicit normal drag without system material and explicit following drag with system material preserve the original behavior.
+   * Explicit normal drag without system material and explicit following drag with system material
+   * preserve the original behavior.
    * Following drag without system material does not add material deformation or light effects.
    * Normal drag with system material only changes drag positioning and selection updates.
-   * Material appearance, background scaling, slight displacement, selected-item deformation, and configured light effects are retained.
+   * Material appearance, background scaling, slight displacement, selected-item deformation,
+   * and configured light effects are retained.
    * If omitted, undefined or invalid, the default mode is used.
    * This property has no effect in multi-select mode.
    *
-   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.2.0 static
