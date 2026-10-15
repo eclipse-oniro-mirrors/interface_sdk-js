@@ -24,10 +24,10 @@ import Want from './@ohos.app.ability.Want';
 import { Configuration } from './@ohos.app.ability.Configuration';
 
 /**
- * AbilityStage是一个[Module](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/application-package-overview.md#应用的多module设计机制)级别的组件管理器，用于进行Module级别的资源
+ * AbilityStage是一个[Module](docroot://quick-start/application-package-overview.md#应用的多module设计机制)级别的组件管理器，用于进行Module级别的资源
  * 预加载、线程创建等初始化操作，以及维护Module下的应用状态。AbilityStage与Module一一对应，即一个Module拥有一个AbilityStage。
  * 
- * 应用的[HAP](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/hap-package.md)/[HSP](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/in-app-hsp.md)在首次加载时会创建一个AbilityStage实例。当一
+ * 应用的[HAP](docroot://quick-start/hap-package.md)/[HSP](docroot://quick-start/in-app-hsp.md)在首次加载时会创建一个AbilityStage实例。当一
  * 个Module中存在AbilityStage和其他组件（UIAbility/ExtensionAbility组件），AbilityStage实例会早于其他组件实例创建。
  * 
  * AbilityStage拥有[onCreate()]{@link AbilityStage.onCreate}、[onDestroy()]{@link AbilityStage.onDestroy}生命周期回调和
@@ -69,7 +69,7 @@ declare class AbilityStage {
   onCreate(): void;
 
   /**
-   * 当启动模式配置为[specified](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/uiability-launch-type.md#specified启动模式)的UIAbility被拉起时，会触发该回调，并返回一个
+   * 当启动模式配置为[specified](docroot://application-models/uiability-launch-type.md#specified启动模式)的UIAbility被拉起时，会触发该回调，并返回一个
    * string作为待启动的UIAbility实例的唯一标识。同步接口，不支持异步回调。
    * 
    * 如果系统中已经有相同标识的UIAbility实例存在，则复用已有实例，否则创建新的实例。
@@ -89,7 +89,7 @@ declare class AbilityStage {
   onAcceptWant(want: Want): string;
 
   /**
-   * 当启动模式配置为[specified](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/uiability-launch-type.md#specified启动模式)的UIAbility被拉起时，会触发该回调，并返回一个
+   * 当启动模式配置为[specified](docroot://application-models/uiability-launch-type.md#specified启动模式)的UIAbility被拉起时，会触发该回调，并返回一个
    * string作为待启动的UIAbility实例的唯一标识。使用Promise异步回调。
    * 
    * 如果系统中已经有相同标识的UIAbility实例存在，则复用已有实例，否则创建新的实例。
@@ -106,7 +106,7 @@ declare class AbilityStage {
 
   /**
    * 如果UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->配置了在独立进程中运行（即
-   * [module.json5配置文件](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--
+   * [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--
    * DelEnd-->的isolationProcess字段取值为true），当该UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->被拉起时，会触发该回调，并返回一个string作为
    * 进程唯一标识。同步接口，不支持异步回调。
    * 
@@ -117,7 +117,7 @@ declare class AbilityStage {
    * 
    * <!--Del-->
    * 
-   * 仅支持sys/commonUI类型的UIExtensionAbility组件在[module.json5配置文件](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/module-configuration-file.md)配置文件中配
+   * 仅支持sys/commonUI类型的UIExtensionAbility组件在[module.json5配置文件](docroot://quick-start/module-configuration-file.md)配置文件中配
    * 置isolationProcess字段为true。
    * 
    * <!--DelEnd-->
@@ -141,7 +141,7 @@ declare class AbilityStage {
 
   /**
    * 如果UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->配置了在独立进程中运行（即
-   * [module.json5配置文件](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--
+   * [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--
    * DelEnd-->的isolationProcess字段取值为true），当该UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->被拉起时，会触发该回调，并返回一个string作为
    * 进程唯一标识。使用Promise异步回调。
    * 
@@ -149,7 +149,7 @@ declare class AbilityStage {
    * 
    * <!--Del-->
    * 
-   * 仅支持sys/commonUI类型的UIExtensionAbility组件在[module.json5配置文件](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/module-configuration-file.md)中配置
+   * 仅支持sys/commonUI类型的UIExtensionAbility组件在[module.json5配置文件](docroot://quick-start/module-configuration-file.md)中配置
    * isolationProcess字段为true。
    * 
    * <!--DelEnd-->
@@ -173,7 +173,7 @@ declare class AbilityStage {
    * >
    * > 该回调方法在实际触发时存在一定限制。例如如果开发者通过[setLanguage]{@link ./application/ApplicationContext:ApplicationContext.setLanguage}接口
    * > 设置应用的语言，即便系统语言发生变化，系统也不再触发onConfigurationUpdate回调。详见
-   * > [使用场景](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/subscribe-system-environment-variable-changes.md#使用场景)。
+   * > [使用场景](docroot://application-models/subscribe-system-environment-variable-changes.md#使用场景)。
    *
    * @param { Configuration } newConfig - 发生全局配置变更时触发回调，当前全局配置包括系统语言、深浅色模式。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
