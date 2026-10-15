@@ -293,6 +293,7 @@ declare namespace window {
      *
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @StageModelOnly
+     * @crossplatform [since 26.0.1]
      * @atomicservice [since 12]
      * @since 10 dynamic
      * @since 23 static
@@ -304,7 +305,6 @@ declare namespace window {
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @systemapi Hide this for inner system use.
      * @StageModelOnly
-     * @crossplatform [since 26.0.1]
      * @since 9 dynamic
      * @since 23 static
      */
