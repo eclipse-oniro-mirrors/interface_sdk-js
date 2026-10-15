@@ -3716,6 +3716,26 @@ declare namespace audio {
      * @since 23 static
      */
     disableSafeMediaVolume(): Promise<void>;
+
+    /**
+     * Reports user allowed result for playback capture request to audio system from specific system application.
+     * The system will continue to start playback capture or return a failure based on result.
+     * This API uses a promise to return the result.
+     *
+     * @permission ohos.permission.CAPTURE_PLAYBACK
+     * @param { long } streamId - Stream id of the capturer.
+     * @param { boolean } allowed - User allowed result, true means user allows to start playback capture,
+     *  otherwise false.
+     * @returns { Promise<void> } - Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @throws { BusinessError } 6800101 - Parameter verification failed, streamId does not exist.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    reportPlaybackCaptureUserAllowed(streamId: long, allowed: boolean): Promise<void>;
   }
 
   /**
