@@ -326,7 +326,7 @@ declare namespace abilityManager {
    * 获取关于运行扩展能力的信息。使用Promise异步回调。
    *
    * @permission ohos.permission.GET_RUNNING_INFO
-   * @param { int } upperLimit - 获取消息数量的最大限制，最大为2<sup>31</sup>-1。
+   * @param { int } upperLimit - 获取消息数量的最大限制，最大为2^31-1。
    * @returns { Promise<Array<ExtensionRunningInfo>> } Promise对象，返回接口运行结果及运行扩展能力的信息。开发者可在此进行错误处理或其他自定义处理。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -343,7 +343,7 @@ declare namespace abilityManager {
    * 获取关于运行扩展能力的信息。使用callback异步回调。
    *
    * @permission ohos.permission.GET_RUNNING_INFO
-   * @param { int } upperLimit - 获取消息数量的最大限制，最大为2<sup>31</sup>-1。
+   * @param { int } upperLimit - 获取消息数量的最大限制，最大为2^31-1。
    * @param { AsyncCallback<Array<ExtensionRunningInfo>> } callback - 回调函数。当获取运行扩展能力的信息成功，err为undefined，data为获取到的运行扩展能力信息；否则为
    *     错误对象。可进行错误处理或其他自定义处理。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -391,7 +391,7 @@ declare namespace abilityManager {
    * [onShare]{@link @ohos.app.ability.UIAbility:UIAbility.onShare(wantParam: Record<string, Object>)}回调并返回分享数据。使用
    * callback异步回调。
    *
-   * @param { int } missionId - 目标应用的missionId，最大为2<sup>31</sup>-1。
+   * @param { int } missionId - 目标应用的missionId，最大为2^31-1。
    * @param { AsyncCallback<{ [key: string]: Object }> } callback - 回调函数。当接口调用成功，err为undefined，data为获取到的分享数据；否则为错误对象。可进行错误处理或其他自
    *     定义处理。 [since 10 - 10]
    * @param { AsyncCallback<Record<string, Object>> } callback - 回调函数。当接口调用成功，err为undefined，data为获取到的分享数据；否则为错误对象。可进行错误处理或其他自
@@ -409,7 +409,7 @@ declare namespace abilityManager {
   /**
    * 系统弹框通过该接口发起原子化服务分享，调用到目标UIAbility的onShare，返回分享数据。使用callback异步回调。
    *
-   * @param { int } missionId - 目标应用的missionId，最大为231-1。
+   * @param { int } missionId - 目标应用的missionId，最大为2^31-1。
    * @param { AsyncCallback<Record<string, RecordData>> } callback - 以回调方式返回接口运行结果及分享得到的数据，可进行错误处理或其他自定义处理。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system service failed.
@@ -425,10 +425,9 @@ declare namespace abilityManager {
    * [onShare]{@link @ohos.app.ability.UIAbility:UIAbility.onShare(wantParam: Record<string, Object>)}回调并返回分享数据。使用
    * Promise异步回调。
    *
-   * @param { int } missionId - 目标应用的missionId，最大为2<sup>31</sup>-1。
-   * @returns { Promise<{ [key: string]: Object }> } The promise returned by the function. [since 10 - 10]
-   * @returns { Promise<Record<string, Object>> } Promise used to return the API call result and the shared data. You can
-   *     perform error handling or other custom processing. [since 11]
+   * @param { int } missionId - 目标应用的missionId，最大为2^31-1。
+   * @returns { Promise<{ [key: string]: Object }> } 函数返回的Promise对象。 [since 10 - 10]
+   * @returns { Promise<Record<string, Object>> } Promise对象，返回接口调用结果及分享数据。可进行错误处理或其他自定义处理。 [since 11]
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -442,8 +441,8 @@ declare namespace abilityManager {
   /**
    * 系统弹框通过该接口发起原子化服务分享，调用到目标UIAbility的onShare，返回分享数据。使用Promise异步回调。
    *
-   * @param { int } missionId - 目标应用的missionId，最大为231-1。
-   * @returns { Promise<Record<string, RecordData>> } The promise returned by the function.
+   * @param { int } missionId - 目标应用的missionId，最大为2^31-1。
+   * @returns { Promise<Record<string, RecordData>> } 函数返回的Promise对象。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -456,12 +455,8 @@ declare namespace abilityManager {
   /**
    * 该接口仅供[DLP]{@link @ohos.dlpPermission:dlpPermission}（Data Loss Prevention, 数据丢失防护）管理应用使用，其他应用禁止使用，DLP管理应用通过该接口通知沙箱应用
    * 另存为结果。使用callback异步回调。
-   * 
-   * > **说明：**
-   * >
-   * > 从API version 10开始支持，从API version 24开始废弃。
    *
-   * @param { AbilityResult } parameter - 返回给调用startAbilityForResult?接口调用方的相关信息。
+   * @param { AbilityResult } parameter - 返回给调用方的相关信息。
    * @param { int } requestCode - DLP管理应用传入的请求代码。
    * @param { AsyncCallback<void> } callback - 回调函数。当另存为结果通知成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -483,7 +478,7 @@ declare namespace abilityManager {
    * 该接口仅供[DLP]{@link @ohos.dlpPermission:dlpPermission}（Data Loss Prevention, 数据丢失防护）管理应用使用，其他应用禁止使用，DLP管理应用通过该接口通知沙箱应用
    * 另存为结果。使用Promise异步回调。
    *
-   * @param { AbilityResult } parameter - 返回给调用startAbilityForResult?接口调用方的相关信息。
+   * @param { AbilityResult } parameter - 返回给调用方的相关信息。
    * @param { int } requestCode - DLP管理应用传入的请求代码。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -625,8 +620,8 @@ declare namespace abilityManager {
    * >
    * > - 在调用本接口成功后的3秒内，再次调用本接口、
    * > [ApplicationContext.restartApp()]{@link ./application/ApplicationContext:ApplicationContext.restartApp}或
-   * > [UIAbilityContext.restartApp()]{@link ./application/UIAbilityContext:UIAbilityContext.restartApp}接口中的任一接口，系统将返回错误码1
-   * > 6000064。
+   * > [UIAbilityContext.restartApp()]{@link ./application/UIAbilityContext:UIAbilityContext.restartApp}接口中的任一接口，
+   * > 系统将返回错误码16000064。
    *
    * @param { Context } context - 当前Ability的上下文。<br>**说明**：当前仅支持
    *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}。</br>
@@ -772,9 +767,9 @@ declare namespace abilityManager {
   function offPreloadedUIExtensionAbilityDestroyed(callback?: PreloadedUIExtensionAbilityDestroyedFn): void;
 
   /**
-   * 开发者通过调用该接口判断[EmbeddedUIExtensionAbility](docroot://application-models/embeddeduiextensionability.md)是否可以在当前设备上使用。
+   * 开发者通过调用该接口判断[EmbeddedUIExtensionAbility]{@link @ohos.app.ability.EmbeddedUIExtensionAbility:EmbeddedUIExtensionAbility}是否可以在当前设备上使用。
    *
-   * @returns { boolean } 当前设备是否支持[EmbeddedUIExtensionAbility](docroot://application-models/embeddeduiextensionability.md)。返回
+   * @returns { boolean } 当前设备是否支持[EmbeddedUIExtensionAbility]{@link @ohos.app.ability.EmbeddedUIExtensionAbility:EmbeddedUIExtensionAbility}。返回
    *     true表示当前设备支持；返回false表示当前设备不支持。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly

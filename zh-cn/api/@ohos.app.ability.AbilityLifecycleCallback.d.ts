@@ -14,6 +14,11 @@
  */
 
 /**
+ * @file UIAbility生命周期回调监听器
+ * @kit AbilityKit
+ */
+
+/**
  * [UIAbility]{@link ./@ohos.app.ability.UIAbility}从创建到销毁过程其生命周期是动态变化的。AbilityLifecycleCallback模块提供监听
  * [UIAbility]{@link ./@ohos.app.ability.UIAbility}生命周期变化的能力，可用于统计每个UIAbility的运行时长、执行与UIAbility业务逻辑解耦的数据加载等场景。
  * 
@@ -27,8 +32,6 @@
  * 2. 当UIAbility生命周期变化时，应用可以通过已注册的AbilityLifecycleCallback对象接收到UIAbility生命周期的变化通知。
  * 3. 当应用不需要监听UIAbility生命周期变化时，需要通过ApplicationContext.off('abilityLifecycle')接口取消监听。
  *
- * @file UIAbility生命周期回调监听器
- * @kit AbilityKit
  */
 
 import UIAbility from './@ohos.app.ability.UIAbility';
@@ -305,7 +308,7 @@ declare class AbilityLifecycleCallback {
   /**
    * 在UIAbility的[onWindowStageDestroy]{@link ./@ohos.app.ability.UIAbility:UIAbility#onWindowStageDestroy}触发后回调。
    *
-   * @param { UIAbility } ability - 回调事件对应的UIAbility对象
+   * @param { UIAbility } ability - 回调事件对应的UIAbility对象。
    * @param { window.WindowStage } windowStage - 回调事件对应的UIAbility主窗管理器。
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @stagemodelonly
