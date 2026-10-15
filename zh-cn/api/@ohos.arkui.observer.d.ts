@@ -209,8 +209,8 @@ declare namespace uiObserver {
   export enum RouterPageState {
 
     /**
-    * page即将显示。
-    *
+     * page即将显示。
+     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -1285,16 +1285,16 @@ declare namespace uiObserver {
   * [uiObserver.on]{@link uiObserver.on( type: 'navDestinationSwitch', context: UIAbilityContext | UIContext, callback: Callback<NavDestinationSwitchInfo> )}
   * 相比，新增了observerOptions参数，即支持设置监听选项。
   *
-   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
-   * @param { UIAbilityContext | UIContext } context - 上下文信息，用以指定监听页面切换事件的范围。
-   * @param { NavDestinationSwitchObserverOptions } observerOptions - 监听选项。
-   * @param { Callback<NavDestinationSwitchInfo> } callback - 回调函数。携带NavDestinationSwitchInfo，返回页面切换事件的信息。
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
-   */
+  * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+  * @param { UIAbilityContext | UIContext } context - 上下文信息，用以指定监听页面切换事件的范围。
+  * @param { NavDestinationSwitchObserverOptions } observerOptions - 监听选项。
+  * @param { Callback<NavDestinationSwitchInfo> } callback - 回调函数。携带NavDestinationSwitchInfo，返回页面切换事件的信息。
+  * @syscap SystemCapability.ArkUI.ArkUI.Full
+  * @stagemodelonly
+  * @crossplatform
+  * @atomicservice
+  * @since 12 dynamic
+  */
   export function on(
     type: 'navDestinationSwitch',
     context: UIAbilityContext | UIContext,
