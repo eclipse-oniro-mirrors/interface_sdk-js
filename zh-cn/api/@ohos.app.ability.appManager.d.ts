@@ -40,6 +40,8 @@ import _AppForegroundStateObserver from './application/AppForegroundStateObserve
 import { AbilityFirstFrameStateObserver as _AbilityFirstFrameStateObserver } from './application/AbilityFirstFrameStateObserver';
 import { AbilityFirstFrameStateData as _AbilityFirstFrameStateData } from './application/AbilityFirstFrameStateData';
 /*** endif */
+import _FocusedApplicationObserver from './application/FocusedApplicationObserver';
+import _FocusedApplicationInfo from './application/FocusedApplicationInfo';
 
 /**
  * appManager模块提供App管理的能力，包括查询当前是否处于稳定性测试场景、查询是否为ram受限设备、获取应用程序的内存大小、获取有关运行进程的信息等。
@@ -989,6 +991,40 @@ declare namespace appManager {
   function offAbilityFirstFrameStateChange(observer?: AbilityFirstFrameStateObserver): void;
 
   /**
+   * 注册观察者以监听获焦应用变化。
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { FocusedApplicationObserver } observer - 用于监听获焦应用变化的观察者。
+   * @returns { int } 已注册观察者的ID，可以通过
+   *     [offFocusedApplicationChanged]{@link appManager.offFocusedApplicationChanged}传入该ID来注销观察者。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of processes that have registered observers for the current
+   *     application has reached the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function onFocusedApplicationChanged(observer: FocusedApplicationObserver): int;
+
+  /**
+   * 注销用于监听获焦应用变化的观察者。
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { int } observerId - 已注册观察者的ID，即
+   *     [onFocusedApplicationChanged]{@link appManager.onFocusedApplicationChanged}返回的监听器ID。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - The observer does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function offFocusedApplicationChanged(observerId: int): void;
+
+  /**
    * 获取当前所有前台应用的信息。该应用信息由[AppStateData]{@link ./application/AppStateData:AppStateData}定义。使用callback异步回调。
    *
    * @permission ohos.permission.GET_RUNNING_INFO
@@ -1900,6 +1936,24 @@ declare namespace appManager {
    * @since 23 static
    */
   export type AbilityFirstFrameStateData = _AbilityFirstFrameStateData;
+
+  /**
+   * 定义用于监听获焦应用变化的观察者。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export type FocusedApplicationObserver = _FocusedApplicationObserver;
+
+  /**
+   * 定义获焦应用变化时上报的获焦应用信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export type FocusedApplicationInfo = _FocusedApplicationInfo;
 
   /**
    * 应用多开在运行态的结构信息。
