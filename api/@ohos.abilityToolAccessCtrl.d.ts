@@ -749,7 +749,6 @@ declare namespace abilityToolAccessCtrl {
     DISABLE = 0x02
   }
 
-
   /**
    * Queries tool permissions based on the specified operations.
    * This function checks the permission status for CLI commands or APIs specified in permissionQuery.operationInfo.
@@ -959,7 +958,7 @@ declare namespace abilityToolAccessCtrl {
    * @returns { Promise<TicketQueryResult> } Promise used to return ${TicketQueryResult}。
    * @throws { BusinessError } 201 - Permission denial.
    *     The interface caller does not have permission "ohos.permission.EXEC_PUBLIC_CLI_TOOL".
-   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
