@@ -234,7 +234,7 @@ declare namespace deviceInfo {
    * 
    * The device serial number can be used as the unique identifier of a device.
    * 
-   * **Required permissions**: ohos.permission.sec.ACCESS_UDID(for system applications and enterprise applications only)
+   * **Required permissions**: ohos.permission.sec.ACCESS_UDID
    * 
    * Example: The serial number varies with the device.
    *
@@ -508,7 +508,7 @@ declare namespace deviceInfo {
    *  
    * The data length is 65 bytes (including the terminator). The UDID can be used as the unique identifier of a device.
    * 
-   * **Required permissions**: ohos.permission.sec.ACCESS_UDID(for system applications and enterprise applications only)
+   * **Required permissions**: ohos.permission.sec.ACCESS_UDID
    * 
    * Example: 9D6AABD147XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXE5536412
    *
@@ -611,7 +611,7 @@ declare namespace deviceInfo {
    * 
    * This field can be queried only on some 2-in-1 devices. The query result is empty on other devices.
    * 
-   * **Required permissions**: ohos.permission.ACCESS_DISK_PHY_INFO(for system applications and enterprise applications only)
+   * **Required permissions**: ohos.permission.ACCESS_DISK_PHY_INFO
    * 
    * Example: 2502EM400567
    *
