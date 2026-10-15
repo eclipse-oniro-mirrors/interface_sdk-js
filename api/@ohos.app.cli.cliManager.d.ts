@@ -114,6 +114,7 @@ declare namespace cliManager {
      * characters. If this field is not specified, the behavior is the same as the existing
      * behavior.
      *
+     * @default ""
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @systemapi
      * @stagemodelonly
@@ -293,6 +294,7 @@ declare namespace cliManager {
      * characters. If this field is not specified, the behavior is the same as the existing
      * behavior.
      *
+     * @default ""
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @publicapi [since 26.2.0]
      * @stagemodelonly

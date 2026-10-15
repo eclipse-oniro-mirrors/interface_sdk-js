@@ -108,6 +108,7 @@ declare namespace cliManager {
      * 取值须为通过taskManager.startTask声明的任务ID，长度范围为1~256个字符。不携带该字段时，
      * 行为与现网一致。
      *
+     * @default ""
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @systemapi
      * @stagemodelonly
@@ -263,6 +264,7 @@ declare namespace cliManager {
      * 取值须为通过taskManager.startTask声明的任务ID，长度范围为1~256个字符。不携带该字段时，
      * 行为与现网一致。
      *
+     * @default ""
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @publicapi [since 26.2.0]
      * @stagemodelonly
