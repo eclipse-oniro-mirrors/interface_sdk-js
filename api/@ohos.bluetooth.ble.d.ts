@@ -2047,21 +2047,6 @@ declare namespace ble {
     on(type: 'BLEDeviceFind', callback: Callback<ScanReport>): void;
 
     /**
-     * Subscribe BLE scan result.
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     * @throws { BusinessError } 2900099 - Operation failed.
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.0.1 static
-     */
-    onBLEDeviceFind(callback: Callback<ScanReport>): void;
-
-    /**
      * Unsubscribe BLE scan result.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
