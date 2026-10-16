@@ -1000,11 +1000,11 @@ declare namespace appManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
-   * @throws { BusinessError } 16000165 - The number of processes that have registered observers for the current
-   *     application has reached the upper limit.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function onFocusedApplicationChanged(observer: FocusedApplicationObserver): int;
 
@@ -1020,7 +1020,7 @@ declare namespace appManager {
    * @throws { BusinessError } 16300004 - The observer does not exist.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function offFocusedApplicationChanged(observerId: int): void;
 
@@ -1942,7 +1942,7 @@ declare namespace appManager {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export type FocusedApplicationObserver = _FocusedApplicationObserver;
 
@@ -1951,7 +1951,7 @@ declare namespace appManager {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export type FocusedApplicationInfo = _FocusedApplicationInfo;
 

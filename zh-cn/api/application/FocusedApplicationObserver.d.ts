@@ -27,7 +27,7 @@ import FocusedApplicationInfo from './FocusedApplicationInfo';
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 declare interface FocusedApplicationObserver {
   /**
@@ -36,7 +36,7 @@ declare interface FocusedApplicationObserver {
    * @param { FocusedApplicationInfo } info - 获焦应用信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   onFocusedApplicationChanged(info: FocusedApplicationInfo): void;
 }

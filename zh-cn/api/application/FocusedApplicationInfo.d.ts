@@ -23,7 +23,7 @@
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 declare interface FocusedApplicationInfo {
   /**
@@ -31,7 +31,7 @@ declare interface FocusedApplicationInfo {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   focusedBundleName: string;
 
@@ -41,7 +41,7 @@ declare interface FocusedApplicationInfo {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   focusedUid: int;
 }
