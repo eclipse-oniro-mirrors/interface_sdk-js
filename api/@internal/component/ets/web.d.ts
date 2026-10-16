@@ -3180,15 +3180,20 @@ declare class WebResourceResponse {
   /**
    * Sets the response data.
    *
-   * @param { string | number | Resource } data - the response data.
-   *     string type indicate strings in HTML format.
-   *     number type indicate file handle.
-   *     Resource type indicate $rawfile resource. [since 9 - 10]
-   * @param { string | number | Resource | ArrayBuffer } data - the response data.
-   *     string type indicate strings in HTML format.
-   *     number type indicate file handle.
-   *     Resource type indicate $rawfile resource.
-   *     ArrayBuffer type indicate binary data. [since 11]
+   * > **NOTE**
+   * >
+   * > - This API does not support obtaining HSP resources based on Resource objects. To obtain HSP resources,
+   * > use {@link setResponseBody} instead.
+   *
+   * @param { string | number | Resource } data - The response data.
+   *     string type indicates strings in HTML format.
+   *     number type indicates file handle.
+   *     Resource type indicates $rawfile resource. [since 9 - 10]
+   * @param { string | number | Resource | ArrayBuffer } data - The response data.
+   *     string type indicates strings in HTML format.
+   *     number type indicates file handle.
+   *     Resource type indicates $rawfile resource.
+   *     ArrayBuffer type indicates binary data. [since 11]
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 23]
    * @atomicservice [since 11]
@@ -3271,6 +3276,25 @@ declare class WebResourceResponse {
    * @since 13 dynamic
    */
   getResponseIsReady(): boolean;
+
+  /**
+   * Sets the response data.
+   *
+   * > **NOTE**
+   * >
+   * > - This API supports obtaining HSP resources based on Resource objects, which {@link setResponseData} does not
+   * > support.
+   *
+   * @param { string | number | Resource | ArrayBuffer } data - The response data.
+   *     string type indicates strings in HTML format.
+   *     number type indicates file handle.
+   *     Resource type indicates $rawfile resource or HSP resource.
+   *     ArrayBuffer type indicates binary data.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  setResponseBody(data: string | number | Resource | ArrayBuffer): void;
 }
 
 /**
