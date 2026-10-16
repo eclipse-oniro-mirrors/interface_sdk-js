@@ -360,7 +360,7 @@ declare namespace preferences {
    *
    * @param { StorageType } type - Storage type to check.
    * @returns { boolean } Returns **true** if the storage type is supported; returns **false** otherwise.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -800,10 +800,6 @@ declare namespace preferences {
      *
      * @param { AsyncCallback<Object> } callback - Callback used to return the result. If the operation is successful, 
      *     **err** is **undefined** and **value** provides all KV pairs obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 15500000 - Inner error. [since 11]
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 10]
@@ -1038,10 +1034,6 @@ declare namespace preferences {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 15500000 - Inner error. [since 11]
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 10]
@@ -1085,10 +1077,6 @@ declare namespace preferences {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 15500000 - Inner error. [since 11]
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 10]
@@ -1200,7 +1188,7 @@ declare namespace preferences {
      *     of KV pairs. The keys identify the data changed, and the values are the new values. The values support the 
      *     following data types: number, string, boolean, Array<number>, Array<string>, Array< boolean>, Uint8Array, and
      *     object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
