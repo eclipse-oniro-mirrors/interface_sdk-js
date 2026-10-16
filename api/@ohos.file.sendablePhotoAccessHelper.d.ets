@@ -815,6 +815,42 @@ declare namespace sendablePhotoAccessHelper {
      */
     readonly videoCount?: number;
     /**
+     * Risk type of share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskType?: string;
+    /**
+     * Risk status of share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskStatus?: ShareAlbumRiskStatus;
+    /**
+     * CloudId of album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly cloudId?: string;
+    /**
+     * The owner of share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareAlbumOwner?: string;
+    /**
      * Commits the modification on the album attributes to the database. This API uses a promise to return the result.
      *
      * @permission ohos.permission.WRITE_IMAGEVIDEO
@@ -1450,6 +1486,44 @@ declare namespace sendablePhotoAccessHelper {
      * @since 26.0.1 dynamiconly
      */
     getShareAlbums(options?: photoAccessHelper.FetchOptions): Promise<FetchResult<Album>>;
+  }
+
+  /**
+   * Enumerates the risk status of share album.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  const enum ShareAlbumRiskStatus {
+    /**
+     * Under review.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    UNDER_REVIEW = 0,
+    /**
+     * Low review risk.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    LOW_REVIEW_RISK = 1,
+    /**
+     * High review risk.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    HIGH_REVIEW_RISK = 2,
   }
 }
 

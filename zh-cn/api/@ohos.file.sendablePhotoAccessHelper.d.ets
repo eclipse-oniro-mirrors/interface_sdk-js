@@ -813,6 +813,42 @@ declare namespace sendablePhotoAccessHelper {
      */
     readonly videoCount?: number;
     /**
+     * 共享相册的风控类型。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskType?: string;
+    /**
+     * 共享相册的风控状态。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskStatus?: ShareAlbumRiskStatus;
+    /**
+     * 相册CloudId。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly cloudId?: string;
+    /**
+     * 共享相册的所有者。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareAlbumOwner?: string;
+    /**
      * 更新相册属性修改到数据库中。使用Promise异步回调。
      *
      * @permission ohos.permission.WRITE_IMAGEVIDEO
@@ -1438,6 +1474,44 @@ declare namespace sendablePhotoAccessHelper {
      * @since 26.0.1 dynamiconly
      */
     getShareAlbums(options?: photoAccessHelper.FetchOptions): Promise<FetchResult<Album>>;
+  }
+
+  /**
+   * 枚举共享相册的风险状态。
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  const enum ShareAlbumRiskStatus {
+    /**
+     * 正在审查中。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    UNDER_REVIEW = 0,
+    /**
+     * 审核风险低。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    LOW_REVIEW_RISK = 1,
+    /**
+     * 审核风险高。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    HIGH_REVIEW_RISK = 2,
   }
 }
 
