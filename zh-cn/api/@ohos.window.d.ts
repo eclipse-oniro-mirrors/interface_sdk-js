@@ -12888,6 +12888,26 @@ declare namespace window {
     isReceiveDragEventEnabled(): boolean;
 
     /**
+     * 设置窗口启用（禁用）拦截点击事件
+     *
+     * @param { boolean } isInterceptable - 是否可以拦截此窗口的指针事件。
+     *     **true**表示可以拦截指针事件，**false**表示相反。
+     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability.
+     *     <br>2. The chip does not support the capability.
+     *     <br>3. A dependent service feature is not supported.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     *     Possible cause: Internal IPC error.
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPointerInterceptable(isInterceptable: boolean): Promise<void>;
+
+    /**
      * 提供窗口方向、屏幕方向和屏幕角度互相转换的能力。
      * 
      * 窗口方向指窗口所在屏幕的方向，以窗口模块对横竖屏的定义方式表示，窗口的方向分别用0、1、2和3表示竖屏、反向横屏、反向竖屏和横屏四个方向，其对横竖屏的定义与
