@@ -591,7 +591,7 @@ declare namespace deviceInfo {
    * 
    * **说明** ：该字段只能在部分2in1设备上进行查询，其他设备查询结果为空。
    * 
-   * 需要权限：ohos.permission.ACCESS_DISK_PHY_INFO(该权限只允许系统应用及企业类应用申请)
+   * 需要权限：ohos.permission.ACCESS_DISK_PHY_INFO (该权限只允许系统应用及企业类应用申请)
    * 
    * 示例：2502EM400567
    *
