@@ -7852,6 +7852,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    */
   verticalScrollBarAccess(verticalScrollBar: boolean): WebAttribute;
 
+
   /**
    * 接收到apple-touch-icon URL地址时触发的回调函数。
    *
@@ -9158,6 +9159,29 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.0.0 dynamic
    */
   enableMediaNetworkProxy(enabled: boolean): WebAttribute;
+
+  /**
+   * 设置Web组件网页文本输入光标及选择手柄的颜色。
+   *
+   * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 **auto** 或未设置时，
+   * 使用内置默认光标颜色（当前为 **#0A59F7**）。选择手柄使用当前主题默认色。
+   *
+   * > **说明：**
+   * >
+   * > - 优先级为：该API设置的非零值 > 网页设置的 `caret-color` CSS属性 > 内置默认颜色。该API设置的
+   * 非零值也会覆盖网页显式设置的颜色或 transparent。
+   * >
+   * > - 精确颜色值 **#00000000** 保留为重置哨兵值。重置后使用网页CSS `caret-color`；CSS为 **auto**
+   * 或未设置时使用内置默认颜色。
+   *
+   * @param { ResourceColor } value - 网页文本输入光标及选择手柄的颜色。
+   *     <br>传入undefined或null时重置该属性。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  caretColor(value: ResourceColor): WebAttribute;
 
   /**
    * 当网页的浏览器级缩放倍率变化时触发。

@@ -22,7 +22,7 @@ import image from '../../@ohos.multimedia.image';
 import { CommonMethod, Callback, TouchEvent, MouseEvent, NestedScrollOptions, KeyEvent, HapticFeedbackMode } from './common';
 import { CustomBuilder } from './builder';
 import { Resource } from '../../global/resource';
-import { Position, ResourceStr, VoidCallback } from './units';
+import { Position, ResourceColor, ResourceStr, VoidCallback } from './units';
 import { MenuType, EditMenuOptions, TextDataDetectorConfig } from './textCommon';
 import { CopyOptions, NestedScrollMode } from './enums';
 import { PreviewMenuOptions } from './richEditor';
@@ -6835,6 +6835,27 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default enableMediaNetworkProxy(enabled: boolean | undefined): this;
+
+    /**
+     * Sets the color of the text input caret and selection handles of the Web component.
+     *
+     * When this attribute is not explicitly called or is reset, the caret uses the page's CSS `caret-color` result.
+     * If the CSS value is `auto` or not set, the caret uses the built-in default color (currently `#0A59F7`).
+     * Selection handles use the current theme colors.
+     *
+     * The priority is: a non-zero value set by this API > the `caret-color` CSS property set by the web page >
+     * the built-in default color. A non-zero value set by this API also overrides an explicit CSS color or
+     * `transparent`. The exact color value `#00000000` is reserved as the reset sentinel. After reset, the CSS
+     * `caret-color` value is used. If the CSS value is `auto` or not set, the built-in default color is used.
+     *
+     * @param { ResourceColor | undefined } value - Color of the text input caret and selection handles.
+     *     When undefined is passed in, this attribute is reset.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default caretColor(value: ResourceColor | undefined): this;
 
     /**
      * Called when the browser zoom factor of the page changes.
