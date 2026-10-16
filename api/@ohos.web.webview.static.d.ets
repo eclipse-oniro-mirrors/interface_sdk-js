@@ -6199,14 +6199,14 @@ declare namespace webview {
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        ENTER_BACKGROUND = 1,
+        ENTER_BACKGROUND,
         /**
          * The page is automatically cleaned up by the system.
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        AUTO_CLEANUP = 2
+        AUTO_CLEANUP
     }
 
     /**
