@@ -8890,7 +8890,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface AudioSeparationEffectAvailableStatus {
     /**
@@ -8900,7 +8900,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     available: boolean;
 
@@ -8912,7 +8912,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     appUid?: int;
   }
@@ -9035,7 +9035,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getAudioSeparationEffectEnabled(): boolean;
 
@@ -9074,7 +9074,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getAudioSeparationEffectAvailableStatus(): AudioSeparationEffectAvailableStatus;
 
@@ -9088,7 +9088,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onAudioSeparationEffectAvailableStatusChange(callback: Callback<AudioSeparationEffectAvailableStatus>): void;
 
@@ -9102,7 +9102,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offAudioSeparationEffectAvailableStatusChange(callback?: Callback<AudioSeparationEffectAvailableStatus>): void;    
 
@@ -15111,7 +15111,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     getAvailableStatus(): AudioLoopbackAvailableStatus;
 
@@ -15124,7 +15124,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onAvailableStatusChange(callback: Callback<AudioLoopbackAvailableStatus>): void;
 
@@ -15139,7 +15139,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offAvailableStatusChange(callback?: Callback<AudioLoopbackAvailableStatus>): void;
   }
@@ -15150,7 +15150,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface AudioLoopbackAvailableStatus {
     /**
@@ -15160,7 +15160,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     available: boolean;
 
@@ -15172,7 +15172,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     unavailableReason?: AudioLoopbackUnavailableReason;
   }
@@ -15183,7 +15183,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   enum AudioLoopbackUnavailableReason {
     /**
@@ -15192,7 +15192,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     REASON_DEVICE_NOT_SUPPORTED = 0,
 
@@ -15202,7 +15202,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     REASON_PREFERRED_AUDIO_DEVICE_TYPE_NOT_SUPPORTED = 1,
 
@@ -15213,7 +15213,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     REASON_PREFERRED_AUDIO_DEVICE_PRODUCT_NOT_SUPPORTED = 2,
 
@@ -15223,7 +15223,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     REASON_OCCUPIED_BY_OTHER = 3,
 
@@ -15233,7 +15233,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     REASON_AUDIO_PROCESS_ERROR = 4
   }
