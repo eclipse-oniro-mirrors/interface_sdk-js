@@ -40,6 +40,29 @@
  * <br>本模块为纯数据定义模块，`PanelInfo`作为面板属性配置需与其他模块的API组合使用。典型组合为：在`@ohos.inputMethodEngine`模块中，通过
  * `InputMethodAbility.createPanel()`创建面板时传入`PanelInfo`指定面板类型和状态。
  * <br>
+ * <br>```typescript
+ * <br>// 以下为阐述调用逻辑的伪代码
+ * <br>import { PanelType, PanelFlag } from '@kit.IMEKit';
+ * <br>
+ * <br>// 1. 配置固定态软键盘面板属性
+ * <br>let softKeyboardFixed = {
+ * <br>  type: PanelType.SOFT_KEYBOARD,
+ * <br>  flag: PanelFlag.FLAG_FIXED
+ * <br>};
+ * <br>
+ * <br>// 2. 配置悬浮态软键盘面板属性
+ * <br>let softKeyboardFloating = {
+ * <br>  type: PanelType.SOFT_KEYBOARD,
+ * <br>  flag: PanelFlag.FLAG_FLOATING
+ * <br>};
+ * <br>
+ * <br>// 3. 配置候选词态面板属性
+ * <br>let candidatePanel = {
+ * <br>  type: PanelType.SOFT_KEYBOARD,
+ * <br>  flag: PanelFlag.FLAG_CANDIDATE
+ * <br>};
+ * <br>```
+ * <br>
  * <br> > **说明：**
  * <br> >
  * <br> > `FLAG_CANDIDATE`（候选词态）面板的显示和隐藏不受系统控制，开发者需根据应用场景自行管理候选词面板的显隐时机。
@@ -96,7 +119,7 @@ export interface PanelInfo {
    * <br>- 当前仅用于描述软键盘类型的面板的状态，对`STATUS_BAR`类型面板设置不产生实际效果。
    * <br>- 不同状态类型下面板的显隐行为不同：`FLAG_FIXED`和`FLAG_FLOATING`由系统控制显隐，`FLAG_CANDIDATE`由开发者自行控制显隐。
    *
-   * @default FLG_FIXED
+   * @default FLAG_FIXED
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 11 dynamic
    * @since 23 static
@@ -110,7 +133,17 @@ export interface PanelInfo {
  * <br> > **说明：**
  * <br> >
  * <br> > 目前仅用于SOFT_KEYBOARD类型的面板。对STATUS_BAR类型的面板设置PanelFlag不产生实际效果。
- * <br> > PanelFlag使用建议：
+ * <br> 
+ * <br> | 名称           | 值   | 说明                                                         | 使用场景 | 使用后效果 |
+ * | -------------- | ---- | ------------------------------------------------------------ | -------- | -------- |
+ * | FLAG_FIXED     | 0    | 固定态面板类型。                                             | 适用于大多数默认输入场景，面板固定在屏幕底部。 | 面板固定在屏幕底部显示，系统控制面板的显隐。 |
+ * | FLAG_FLOATING  | 1    | 悬浮态面板类型。                                             | 适用于需要自由调整面板位置的场景（如横屏输入、多窗口环境、
+ * 平板设备）。 | 面板为悬浮窗口，可自由拖动位置，系统控制面板的显隐。 |
+ * | FLAG_CANDIDATE  | 2    | 候选词态面板类型。<br/>- 当输入面板为候选词态时，面板为显示用户输入候选词的窗口。
+ * <br/>- 系统不会主动控制候选词态面板的显示和隐藏，需要开发者根据应用场景自行控制候选词态面板的显示和隐藏。 | 适用于需要独立展示候选词的场景，如搜索联想词、
+ * 输入建议列表等。 | 面板为独立的候选词窗口，开发者需通过`Panel.show()`和`Panel.hide()`自行控制显隐。系统不主动控制其显隐。 |
+ * <br>
+ * <br>PanelFlag使用建议：
  * <br>
  * <br>- 选取原则：
  * <br> - 默认场景优先选择`FLAG_FIXED`(0)，这是最常用的面板状态，系统自动管理显隐，开发者无需额外处理。
@@ -140,7 +173,7 @@ export enum PanelFlag {
    * @since 11 dynamic
    * @since 23 static
    */
-  FLAG_FLOATING,
+  FLAG_FLOATING = 1,
 
   /**
    * 候选词态面板类型。
@@ -152,12 +185,17 @@ export enum PanelFlag {
    * @since 11 dynamic
    * @since 23 static
    */
-  FLAG_CANDIDATE
+  FLAG_CANDIDATE = 2
 }
 
 /**
  * 输入法面板类型枚举。定义面板的类别，决定面板是软键盘还是状态栏。
  * <br>
+ * <br>| 名称          | 值   | 说明         | 使用场景 |
+ * | ------------- | ---- | ------------ | -------- |
+ * | SOFT_KEYBOARD | 0    | 软键盘类型。 | 适用于需要键盘输入交互的场景，是输入法应用的主要面板类型。大多数输入法应用至少需要创建一个软键盘面板。 |
+ * | STATUS_BAR    | 1    | 状态栏类型。 | 适用于需要在屏幕顶部显示输入法状态信息（如当前输入语言、输入模式等）的场景。通常作为辅助面板与软键盘面板配合使用。 |
+ * 
  * <br>PanelType使用建议：
  * <br>
  * <br>- 选取原则：输入法应用通常需要创建一个`SOFT_KEYBOARD`面板作为主键盘界面。`STATUS_BAR`面板为可选面板，仅在需要显示输入法状态信息时创建。
@@ -186,5 +224,5 @@ export enum PanelType {
    * @since 11 dynamic
    * @since 23 static
    */
-  STATUS_BAR
+  STATUS_BAR = 1
 }
