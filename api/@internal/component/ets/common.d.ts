@@ -30360,6 +30360,21 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   scrollBarHeight(height: LengthMetrics | undefined): T;
+
+  /**
+   * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
+   * in response to arrow key presses when focused but not in active focus state.
+   *
+   * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
+   *     <br>Default value: true.
+   * @returns { T }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
 
 /**

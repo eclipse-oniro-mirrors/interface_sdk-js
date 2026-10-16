@@ -28583,6 +28583,20 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   scrollBarHeight(height: LengthMetrics | undefined): T;
+
+  /**
+   * 设置是否支持键盘方向键滚动。开启后，组件在获焦且未激活焦点态时会响应键盘方向键滚动。
+   *
+   * @param { boolean | undefined } enabled - 是否支持键盘方向键滚动。
+   *     <br>默认值：true。
+   * @returns { T }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
 
 /**

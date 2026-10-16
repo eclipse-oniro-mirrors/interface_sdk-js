@@ -15437,6 +15437,18 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @since 26.0.0 static
      */
     default scrollBarHeight(height: LengthMetrics | undefined): this;
+
+    /**
+     * 设置是否支持键盘方向键滚动。开启后，组件在获焦且未激活焦点态时会响应键盘方向键滚动。
+     *
+     * @param { boolean | undefined } enabled - 是否支持键盘方向键滚动。
+     *     <br>默认值：true。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }
 /**
  * The actual offset by which the scrollable scrolls.
