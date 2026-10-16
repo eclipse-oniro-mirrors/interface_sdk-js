@@ -323,6 +323,24 @@ declare namespace bundleResourceManager {
   function getLauncherAbilityResourceInfoList(optionsList: Array<BundleOptions>, resourceFlags: int): Promise<Array<LauncherAbilityResourceInfo>>;
 
   /**
+   * 根据给定的HAP文件路径和resourceFlags获取应用的BundleResourceInfo。使用Promise异步回调。
+   *
+   * @permission ohos.permission.GET_BUNDLE_RESOURCES
+   * @param { string } filePath - 表示存储HAP或APP的路径，支持当前应用程序的绝对路径和数据目录沙箱路径。
+   * @param { int } [resourceFlags] - 指定返回的BundleResourceInfo所包含的信息。
+   * @returns { Promise<BundleResourceInfo> } Promise对象，返回指定应用的BundleResourceInfo。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700022 - The input source file is invalid.
+   * @throws { BusinessError } 17700101 - Bundle manager service is excepted.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Resource
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getBundleResourceArchiveInfo(filePath: string, resourceFlags?: int): Promise<BundleResourceInfo>;
+
+  /**
    * 应用配置的图标和名称信息。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Resource
