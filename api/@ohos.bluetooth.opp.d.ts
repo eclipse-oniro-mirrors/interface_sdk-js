@@ -71,25 +71,6 @@ declare namespace opp {
      */
     on(type: 'transferStateChange', callback: Callback<OppTransferInformation>): void;
 
-    /** 
-     * Subscribe the event reported when the file transfer status changes. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH 
-     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. 
-     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @throws { BusinessError } 2900001 - Service stopped. 
-     * @throws { BusinessError } 2900003 - Bluetooth disabled. 
-     * @throws { BusinessError } 2900004 - Profile not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @systemapi 
-     * @stagemodelonly 
-     * @since 26.0.1 static 
-     */ 
-    onTransferStateChange(callback: Callback<OppTransferInformation>): void;
-
     /**
      * Unsubscribe the event reported when the file transfer status changes.
      *
@@ -133,25 +114,6 @@ declare namespace opp {
      * @since 16 dynamic
      */
     on(type: 'receiveIncomingFile', callback: Callback<OppTransferInformation>): void;
-
-    /** 
-     * Subscribe to the event of receiving a file transfer request. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH 
-     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. 
-     * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @throws { BusinessError } 2900001 - Service stopped. 
-     * @throws { BusinessError } 2900003 - Bluetooth disabled. 
-     * @throws { BusinessError } 2900004 - Profile not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @systemapi 
-     * @stagemodelonly 
-     * @since 26.0.1 static 
-     */ 
-    onReceiveIncomingFile(callback: Callback<OppTransferInformation>): void;
 
     /**
      * Unsubscribe to the event of receiving a file transfer request.
