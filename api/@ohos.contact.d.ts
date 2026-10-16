@@ -2150,7 +2150,7 @@ declare namespace contact {
    * @atomicservice [since 11]
    * @since 7
    * @deprecated since 26.2.0
-   * @useinstead Contact.significantDates
+   * @useinstead contact.SignificantDate
    */
   class Event {
     /**
@@ -2160,7 +2160,7 @@ declare namespace contact {
      * @atomicservice [since 11]
      * @since 7
      * @deprecated since 26.2.0
-     * @useinstead SignificantDate.dateType.DATA_TYPE_OTHER
+     * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly CUSTOM_LABEL: 0;
 
@@ -2171,7 +2171,7 @@ declare namespace contact {
      * @atomicservice [since 11]
      * @since 7
      * @deprecated since 26.2.0
-     * @useinstead SignificantDate.dateType.DATA_TYPE_ANNIVERSARY
+     * @useinstead SignificantDate.dateType.DATE_TYPE_ANNIVERSARY
      */
     static readonly EVENT_ANNIVERSARY: 1;
 
@@ -2182,7 +2182,7 @@ declare namespace contact {
      * @atomicservice [since 11]
      * @since 7
      * @deprecated since 26.2.0
-     * @useinstead SignificantDate.dateType.DATA_TYPE_OTHER
+     * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly EVENT_OTHER: 2;
 
@@ -2193,7 +2193,7 @@ declare namespace contact {
      * @atomicservice [since 11]
      * @since 7
      * @deprecated since 26.2.0
-     * @useinstead SignificantDate.dateType.DATA_TYPE_BIRTHDAY
+     * @useinstead SignificantDate.dateType.DATE_TYPE_BIRTHDAY
      */
     static readonly EVENT_BIRTHDAY: 3;
 
@@ -2204,7 +2204,7 @@ declare namespace contact {
      * @atomicservice [since 11]
      * @since 7
      * @deprecated since 26.2.0
-     * @useinstead SignificantDate.dateType.DATA_TYPE_OTHER
+     * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly INVALID_LABEL_ID: -1;
 
@@ -2279,7 +2279,7 @@ declare namespace contact {
      * @atomicservice
      * @since 26.2.0
      */
-    dateName: string;
+    dateName?: string;
   }
 
   /**
@@ -2299,7 +2299,7 @@ declare namespace contact {
      * @atomicservice
      * @since 26.2.0
      */
-    DATA_TYPE_OTHER = 0,
+    DATE_TYPE_OTHER = 0,
 
     /**
      * Birthday date type.
@@ -2309,17 +2309,17 @@ declare namespace contact {
      * @atomicservice
      * @since 26.2.0
      */
-    DATA_TYPE_BIRTHDAY = 1,
+    DATE_TYPE_BIRTHDAY = 1,
 
     /**
-     * Lunnar calendar birthday date type.
+     * Lunar calendar birthday date type.
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
      * @since 26.2.0
      */
-    DATA_TYPE_LUNAR_BIRTHDAY = 2,
+    DATE_TYPE_LUNAR_BIRTHDAY = 2,
 
     /**
      * Anniversary date type.
@@ -2329,7 +2329,7 @@ declare namespace contact {
      * @atomicservice
      * @since 26.2.0
      */
-    DATA_TYPE_ANNIVERSARY = 3
+    DATE_TYPE_ANNIVERSARY = 3
   }
 
   /**
