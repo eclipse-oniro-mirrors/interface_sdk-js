@@ -1556,7 +1556,7 @@ declare namespace media {
     composer?: string;
 
     /**
-     * Duration of the media asset. This parameter is not supported in AVRecorder settings.
+     * Duration of the media asset, in ms. This parameter is not supported in AVRecorder settings.
      *
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1901,8 +1901,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - Relationship between the thumbnail timestamp in and the video frame.
      * @param { OutputSize } outputSize - Output size of the thumbnail. By default, the original image size is used.
      * @returns { Promise<image.PixelMap> } Promise used to return the video thumbnail.
-     * @throws { BusinessError  } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError  } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 20 dynamic
      */
@@ -1917,8 +1917,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - Specify how to position the video frame
      * @param { OutputSize } [outputSize] - This field is used to define the output size of frame.
      * @returns { Promise<image.PixelMap | undefined> }  Returns the output image object
-     * @throws { BusinessError } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 23 static
      */
