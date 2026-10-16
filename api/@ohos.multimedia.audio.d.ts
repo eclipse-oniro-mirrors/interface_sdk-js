@@ -15391,7 +15391,7 @@ declare namespace audio {
      * The playback control application can determine whether to display the audio separation switch button based on the
      * status.
      * 
-     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
