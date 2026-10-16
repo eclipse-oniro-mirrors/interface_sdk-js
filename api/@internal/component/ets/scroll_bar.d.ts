@@ -169,6 +169,21 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
    * Sets whether the scrollbar supports nested scrolling. It is used in scenarios such as multi-layer scroll containers
    * and nested lists where the inner scrollable component needs to be dragged through the scrollbar and linked with the
    * parent scrolling. It takes effect only when the ScrollBar is bound to a scrollable component through a Scroller.
+   * 
+   * > **NOTE**
+   * >
+   * > When nested scrolling is enabled for the scrollbar, the scroll offset is first sent to the bound inner scrollable
+   * > component, which then passes it to the outer parent scrollable component in sequence based on the set nested
+   * > scrolling priority.
+   * >
+   * > Nested scrolling is not supported when the layout mode of the WaterFlow component is the sliding window mode
+   * > ([WaterFlowLayoutMode.SLIDING_WINDOW]{@link WaterFlowLayoutMode}).
+   * >
+   * > When the nested scrolling mode is set to
+   * > [PARALLEL]{@link NestedScrollMode}, the parent and child components scroll simultaneously. In this case, you need
+   * > to set the scrolling order of the parent and child components in
+   * > [onScrollFrameBegin]{@link ScrollAttribute#onScrollFrameBegin(event: OnScrollFrameBeginCallback)} based on the
+   * > required logic.
    *
    * @param { Optional<boolean> } enabled - Whether to perform nested scrolling. Set this parameter to **true** to pass
    *     scroll events between multiple layers of scroll containers; set it to **false** when nested scrolling is not
