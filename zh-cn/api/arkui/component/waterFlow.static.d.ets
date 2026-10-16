@@ -21,7 +21,8 @@ import { AttributeModifier, UIScrollableCommonEvent, ScrollableCommonMethod, Nes
 import { Builder, CustomBuilder, ComponentBuilder, CustomBuilderT } from './builder';
 import { Length, Dimension, Margin, ConstraintSizeOptions, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from "./scroll";
-import { ScrollState } from "./list";
+import { ScrollSnapAlign, ScrollState } from "./list";
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { FlexDirection } from './enums';
 import { ComponentContentBase } from '../../arkui/ComponentContent';
 /**
@@ -460,6 +461,23 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @since 23 static
    */
   default layoutDirection(value: FlexDirection | undefined): this;
+
+  /**
+   * 设置用户滚动结束后WaterFlow使用的滚动吸附策略。
+   *
+   * 支持从上到下、分段和滑动窗口布局。START、CENTER、END分别将item对齐到滚动轴方向
+   * 视口的起始、中间和末尾位置。
+   * 自定义提供方计算趋近距离和最终绝对滚动目标，单位为vp。
+   * 吸附目标受合法滚动范围限制。默认不启用吸附。
+   * 设置为NONE或undefined时清除策略，恢复默认滚动行为。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - 内置对齐策略或自定义提供方。
+   * @returns { this } WaterFlow组件的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 
   /**
    * 设置预加载的FlowItem数量。
