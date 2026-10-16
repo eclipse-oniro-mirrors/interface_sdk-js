@@ -75,12 +75,10 @@ declare namespace wifiManagerExt {
   function getSupportedPowerMode(): Promise<Array<PowerMode>>;
 
   /**
-    * Obtains the supported power modes. This API uses an asynchronous callback to return the result.
+   * Obtains the supported power modes. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-    * @param { AsyncCallback<Array<PowerMode>> } callback - Callback used to return the result. If the operation
-    *     succeeds, **err** is **null** and **data** is the power modes obtained. Otherwise, **err** contains the error
-    *     information and **data** is unavailable.
+   * @param { AsyncCallback<Array<PowerMode>> } callback - Callback used to return the result.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -90,10 +88,10 @@ declare namespace wifiManagerExt {
   function getSupportedPowerMode(callback: AsyncCallback<Array<PowerMode>>): void;
 
   /**
-    * Obtains the current power mode. This API uses a promise to return the result.
-    *
-    * @permission ohos.permission.GET_WIFI_INFO
-    * @returns { Promise<PowerMode> } Promise used to return the current power mode obtained.
+   * Obtains the current power mode. This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO
+   * @returns { Promise<PowerMode> } Promise used to return the current power mode obtained.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -103,12 +101,10 @@ declare namespace wifiManagerExt {
   function getPowerMode(): Promise<PowerMode>;
 
   /**
-    * Obtains the current power mode. This API uses an asynchronous callback to return the result.
+   * Obtains the current power mode. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_WIFI_INFO
-    * @param { AsyncCallback<PowerMode> } callback - Callback used to return the result. If the operation succeeds,
-    *     **err** is **null** and **data** is the current power mode obtained. Otherwise, **err** contains the error
-    *     information and **data** is unavailable.
+   * @param { AsyncCallback<PowerMode> } callback - Callback used to return the result.
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
