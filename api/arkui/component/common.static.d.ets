@@ -4190,6 +4190,161 @@ export declare enum SafeAreaEdge {
     END = 3
 }
 /**
+ * Enumerates alignment positions for safe area inset content along its attachment edge.
+ * The alignment axis is horizontal for the top and bottom edges and vertical for the start and end edges.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum SafeAreaInsetAlignment {
+    /**
+     * Aligns content to the beginning of the attachment edge.
+     * For the top and bottom edges, this is the left in a left-to-right layout and the right in a right-to-left layout.
+     * For the start and end edges, this is the top.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    START = 0,
+
+    /**
+     * Centers content along the attachment edge.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    CENTER = 1,
+
+    /**
+     * Aligns content to the end of the attachment edge.
+     * For the top and bottom edges, this is the right in a left-to-right layout and the left in a right-to-left layout.
+     * For the start and end edges, this is the bottom.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    END = 2
+}
+
+/**
+ * Defines custom content and layout settings for one safe area inset edge.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface SafeAreaInsetEdgeConfig {
+    /**
+     * Required builder for the content attached to this edge.
+     * An empty build result clears this edge without affecting other valid edges.
+     * The space reserved on this edge equals the measured content size perpendicular to the edge plus `spacing`.
+     *
+     * Each edge builder must produce one root component, either a built-in or custom component.
+     * Wrap multiple components in a single container. Results of builders with multiple roots are not guaranteed.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    content: CustomBuilder;
+
+    /**
+     * Gap between the inset content and the component content, measured inward from the attachment edge.
+     * Supported units are vp, px, fp, and lpx. The value must be finite and non-negative.
+     * Percentage values and resource values are not supported.
+     * Default value: `0vp`. An omitted or invalid value falls back to `0vp` without clearing valid content.
+     * The gap is added after measuring the content and is not deducted from its measurement space.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    spacing?: LengthMetrics;
+
+    /**
+     * Alignment of the content along the attachment edge.
+     * Default value: `SafeAreaInsetAlignment.CENTER`.
+     * If omitted, `SafeAreaInsetAlignment.CENTER` is used without clearing valid content.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    alignment?: SafeAreaInsetAlignment;
+}
+
+/**
+ * Defines the complete inset configuration for all four edges of a component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface SafeAreaInsetOptions {
+    /**
+     * Configuration of the content attached to the physical top edge.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    top?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * Configuration of the content attached to the logical end edge: right in a left-to-right layout and left
+     * in a right-to-left layout.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    end?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * Configuration of the content attached to the physical bottom edge.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    bottom?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * Configuration of the content attached to the logical start edge: left in a left-to-right layout and right
+     * in a right-to-left layout.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    start?: SafeAreaInsetEdgeConfig;
+}
+/**
  * Describe the types for expanding the safe area in layout.
  *
  * @enum { number }
@@ -11007,6 +11162,26 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default safeAreaPadding(paddingValue: Padding | LengthMetrics | LocalizedPadding | undefined): this;
+    /**
+     * Places custom content at one or more component edges and reserves component-level safe area for it.
+     * Use this attribute for edge toolbars, action areas, or placeholders. Each call replaces the complete four-edge
+     * configuration; omitted edges do not retain their previous content.
+     * Content is attached to the inner boundary of the component's ordinary `padding`. On each physical edge of the
+     * same component, the effective safe area is the greater of the declared `safeAreaPadding` and the inset extent,
+     * not their sum. Ancestor and system safe areas retain their existing accumulation rules.
+     * The effective safe area is included when calculating the component's adaptive size perpendicular to the edge.
+     *
+     * @param { SafeAreaInsetOptions } [options] - Complete four-edge configuration. Default value: `undefined`, which
+     *     resets all edges. An empty configuration also resets all edges. An omitted edge or an empty build result
+     *     clears only that edge. Unsupported `spacing` values fall back to `0vp` without clearing valid content.
+     * @returns { this } Current component.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
      * Sets the margin of the component.
      * Default value: **0**.
