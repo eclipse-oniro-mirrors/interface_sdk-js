@@ -540,21 +540,6 @@ declare namespace ble {
    */
   function on(type: 'BLEDeviceFind', callback: Callback<Array<ScanResult>>): void;
 
-  /** 
-   * Subscribe BLE scan result. 
-   * 
-   * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event. 
-   * @throws { BusinessError } 201 - Permission denied. 
-   * @throws { BusinessError } 801 - Capability not supported. 
-   * @throws { BusinessError } 2900099 - Operation failed. 
-   * @syscap SystemCapability.Communication.Bluetooth.Core 
-   * @stagemodelonly 
-   * @crossplatform 
-   * @since 26.0.1 static 
-   */ 
-  function onBLEDeviceFind(callback: Callback<Array<ScanResult>>): void;
-
   /**
    * Unsubscribe BLE scan result.
    *
@@ -889,21 +874,6 @@ declare namespace ble {
      */
     on(type: 'characteristicRead', callback: Callback<CharacteristicReadRequest>): void;
 
-    /** 
-     * Subscribe characteristic read event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read 
-     *     event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
-    onCharacteristicRead(callback: Callback<CharacteristicReadRequest>): void;
-
     /**
      * Unsubscribe characteristic read event.
      *
@@ -942,21 +912,6 @@ declare namespace ble {
      */
     on(type: 'characteristicWrite', callback: Callback<CharacteristicWriteRequest>): void;
 
-    /** 
-     * Subscribe characteristic write event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write 
-     *     event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
-    onCharacteristicWrite(callback: Callback<CharacteristicWriteRequest>): void;
-
     /**
      * Unsubscribe characteristic write event.
      *
@@ -994,20 +949,6 @@ declare namespace ble {
      */
     on(type: 'descriptorRead', callback: Callback<DescriptorReadRequest>): void;
 
-    /** 
-     * Subscribe descriptor read event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
-    onDescriptorRead(callback: Callback<DescriptorReadRequest>): void;
-
     /**
      * Unsubscribe descriptor read event.
      *
@@ -1043,20 +984,6 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'descriptorWrite', callback: Callback<DescriptorWriteRequest>): void;
-
-	  /** 
-     * Subscribe descriptor write event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
-    onDescriptorWrite(callback: Callback<DescriptorWriteRequest>): void;
 
     /**
      * Unsubscribe descriptor write event.
@@ -1094,21 +1021,6 @@ declare namespace ble {
      * @since 10 dynamic
      */
     on(type: 'connectionStateChange', callback: Callback<BLEConnectionChangeState>): void;
-
-	  /** 
-     * Subscribe server connection state changed event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLEConnectionChangeState> } callback - 
-     *     Callback used to listen for the connection state changed event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
-    onConnectionStateChange(callback: Callback<BLEConnectionChangeState>): void;
 
     /**
      * Unsubscribe server connection state changed event.
