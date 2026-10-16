@@ -3655,5 +3655,40 @@ declare namespace i18n {
      */
     second?: int;
   }
+
+  /**
+   * Obtains the `Currency` object of the specified locale environment.
+   *
+   * @param { Intl.Locale } locale - `Locale` object used to obtain currency information.
+   *                                  The value cannot be null or undefined.
+   * @returns { Currency } `Currency` object.
+   * @syscap SystemCapability.Global.I18n
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 static
+   */
+  export function getCurrency(locale: Intl.Locale): Currency;
+
+  /**
+   * Provides currency management capabilities, such as obtaining ISO 4217 currency codes.
+   *
+   * @syscap SystemCapability.Global.I18n
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 static
+   */
+  export class Currency {  
+    /**
+     * Obtains currency ISO 4217 code of this `Currency` object.
+     *
+     * @returns { string } ISO 4217 three-letter currency code. For example, the default currency of the US is USD.
+     *                     The default currency of China is CNY.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 static
+     */
+    getISO4217Code(): string;
+  }
 }
 export default i18n;
