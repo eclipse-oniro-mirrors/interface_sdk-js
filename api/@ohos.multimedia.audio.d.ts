@@ -8883,7 +8883,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @systemapi
    * @since 18 dynamic
-   * @since 23 static1
+   * @since 23 static
    */
   interface AudioEffectManager {
     /**
