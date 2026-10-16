@@ -699,14 +699,14 @@ declare class ApplicationContext extends Context {
   
   /**
    * Sets the font for this application. This API can be called only on the main thread.
-   * 
+   *
    * > **NOTE**
    * >
    * > Before calling this API, ensure that the window has been created and the page corresponding to the UIAbility has
    * > been loaded (using the
    * > [loadContent]{@link @ohos.window:window.WindowStage.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)} API in the
    * > [onWindowStageCreate()]{@link ./../@ohos.app.ability.UIAbility:UIAbility.onWindowStageCreate} lifecycle).
-   * 
+   *
    * @param { string } font - Font, which can be registered by calling
    *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}.
    * @param { boolean } enableAnimation - Whether using animation during this setting,
