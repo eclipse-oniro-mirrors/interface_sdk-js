@@ -2559,7 +2559,7 @@ declare namespace audio {
   }
 
   /**
-   * 表示音频打断强制类型的枚举。
+   * 表示音频打断是否由系统强制执行的枚举。
    * 当用户监听到音频打断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
    * 此类型表示音频打断提示[InterruptHint]{@link audio.InterruptHint}是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
    * 其中，INTERRUPT_HINT_RESUME对应的forceType一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
