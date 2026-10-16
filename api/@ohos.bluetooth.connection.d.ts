@@ -476,13 +476,8 @@ declare namespace connection {
 
   /**
    * Obtains the list of Bluetooth devices that have been paired with the current device.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Array<string> } Returns a list of paired Bluetooth devices's address.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1145,13 +1140,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bluetoothDeviceFind' } type - Type of the discovering event to listen for.
    * @param { Callback<Array<string>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1169,13 +1159,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<string>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1220,14 +1205,9 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.GET_BLUETOOTH_PEERS_MAC [since 12 - 17]
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 18 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH [since 18]
    * @param { 'discoveryResult' } type - Type of the discovering event to listen for.
    * @param { Callback<Array<DiscoveryResult>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1245,13 +1225,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<DiscoveryResult>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1296,13 +1271,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is bonded.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bondStateChange' } type - Type of the bond state event to listen for.
    * @param { Callback<BondStateParam> } callback - Callback used to listen for the bond state event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1319,13 +1289,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is bonded.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BondStateParam> } callback - Callback used to listen for the bond state event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1372,13 +1337,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event of a pairing request from a remote Bluetooth device.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'pinRequired' } type - Type of the pairing request event to listen for.
    * @param { Callback<PinRequiredParam> } callback - Callback used to listen for the pairing request event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1394,13 +1354,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event of a pairing request from a remote Bluetooth device.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<PinRequiredParam> } callback - Callback used to listen for the pairing request event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1528,11 +1483,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event of acl state changed from a remote device.
-   * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AclStateResult> } callback - Callback used to listen.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1548,11 +1500,8 @@ declare namespace connection {
 
   /**
    * Unsubscribe the event of acl state changed from a remote device.
-   * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AclStateResult> } [callback] - Callback used to listen.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
