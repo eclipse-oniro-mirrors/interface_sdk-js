@@ -449,7 +449,7 @@ export interface DataAbilityHelper {
  * 用于存储数据的PacMap类型。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.FAModel
- * @famodelonly [since 7 - 10]
+ * @FaAndStageModel [since 11]
  * @since 7 dynamic
  */
 export interface PacMap {
@@ -464,7 +464,7 @@ export interface PacMap {
    * @unionmember { Array<string | number | boolean> }
    * @unionmember { null }
    * @syscap SystemCapability.Ability.AbilityRuntime.FAModel
-   * @famodelonly [since 7 - 10]
+   * @FaAndStageModel [since 11]
    * @since 7 dynamic
    */
   [key: string]: number | string | boolean | Array<string | number | boolean> | null;

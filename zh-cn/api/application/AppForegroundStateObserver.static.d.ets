@@ -28,6 +28,7 @@ import AppStateData from './AppStateData';
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @systemapi
+ * @FaAndStageModel
  * @since 23 static
  */
 declare interface AppForegroundStateObserver {
@@ -37,6 +38,7 @@ declare interface AppForegroundStateObserver {
    * @param { AppStateData } appStateData - 应用状态信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
+   * @FaAndStageModel
    * @since 23 static
    */
   onAppStateChanged(appStateData: AppStateData): void;

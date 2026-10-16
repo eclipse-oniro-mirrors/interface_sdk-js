@@ -1772,6 +1772,37 @@ declare namespace appManager {
   function killProcessesInBatch(pids: Array<int>): Promise<void>;
 
   /**
+   *
+   * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
+   * @returns { Promise<Array<ProcessInformation>> } Promise used to return the API call result and the process running
+   *     information. You can perform error handling or custom processing in this callback.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Failed to connect to the system service;
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @since 9
+   * @deprecated since 10
+   * @useinstead appManager#getRunningProcessInformation
+   */
+  function getProcessRunningInfos(): Promise<Array<ProcessInformation>>;
+ 
+  /**
+   *
+   * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
+   * @param { AsyncCallback<Array<ProcessInformation>> } callback - Callback used to return the result. If the API call
+   *     is successful, **err** is **undefined** and **data** is the information about the running processes. Otherwise,
+   *     **err** is an error object. You can perform error handling or other custom processing.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Failed to connect to the system service;
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @since 9
+   * @deprecated since 10
+   * @useinstead appManager#getRunningProcessInformation
+   */
+  function getProcessRunningInfos(callback: AsyncCallback<Array<ProcessInformation>>): void;
+
+  /**
    * Ability状态信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
