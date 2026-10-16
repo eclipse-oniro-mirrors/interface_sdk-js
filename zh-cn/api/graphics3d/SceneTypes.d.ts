@@ -508,7 +508,7 @@ export enum ShadowAlgorithmType {
 }
 
 /**
- * 自定义几何类型，继承自GeometryDefinition。
+ * 自定义几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -679,7 +679,7 @@ export declare class CustomGeometry extends GeometryDefinition {
 }
 
 /**
- * 立方体几何类型，继承自GeometryDefinition。
+ * 立方体几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -709,7 +709,7 @@ export declare class CubeGeometry extends GeometryDefinition {
 }
 
 /**
- * 平面几何类型，继承自GeometryDefinition。
+ * 平面几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -739,7 +739,7 @@ export declare class PlaneGeometry extends GeometryDefinition {
 }
 
 /**
- * 球体几何类型，继承自GeometryDefinition。
+ * 球体几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -789,7 +789,7 @@ export declare class SphereGeometry extends GeometryDefinition {
 }
 
 /**
- * 圆柱体几何类型，继承自GeometryDefinition。
+ * 圆柱体几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * > **说明：**
  * >

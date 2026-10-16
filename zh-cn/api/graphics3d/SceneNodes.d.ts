@@ -182,7 +182,7 @@ export interface Container<T> {
 }
 
 /**
- * 3D场景由树状层次结构的节点组成，其中每个节点都实现了Node接口。继承自SceneResource。
+ * 3D场景由树状层次结构的节点组成，其中每个节点都实现了Node接口。继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Node
@@ -301,7 +301,7 @@ export interface Node extends SceneResource {
 }
 
 /**
- * 几何节点类型，用于承载可渲染的网格数据，并支持可选的形变功能，继承自Node。
+ * 几何节点类型，用于承载可渲染的网格数据，并支持可选的形变功能，继承自[Node]{@link Node}。
  *
  * @extends Node
  * @interface Geometry
@@ -362,7 +362,7 @@ export enum LightType {
 }
 
 /**
- * 光源，继承自Node。
+ * 光源，继承自[Node]{@link Node}。
  *
  * @extends Node
  * @interface Light
@@ -424,7 +424,7 @@ export interface Light extends Node {
 }
 
 /**
- * 聚光灯类型，继承自Light。
+ * 聚光灯类型，继承自[Light]{@link Light}。
  *
  * 聚光灯会朝某个方向发出锥形光，强度随着圆锥角度的衰减由innerAngle和outerAngle两个参数定义。另外与点光源类似，强度也会随着距离光源位置的增加而衰减。
  *
@@ -465,7 +465,7 @@ export interface SpotLight extends Light {
 }
 
 /**
- * 平行光类型，继承自Light。
+ * 平行光类型，继承自[Light]{@link Light}。
  *
  * @extends Light
  * @interface DirectionalLight
@@ -477,7 +477,7 @@ export interface DirectionalLight extends Light {
 }
 
 /**
- * 相机类型，Camera继承自Node。
+ * 相机类型，Camera继承自[Node]{@link Node}。
  *
  * @extends Node
  * @interface Camera
