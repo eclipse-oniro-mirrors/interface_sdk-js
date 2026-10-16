@@ -15157,7 +15157,7 @@ declare namespace audio {
      * 可用状态。
      * 播控应用基于该状态确定用户开关音频返听的反馈。
      * 
-     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
