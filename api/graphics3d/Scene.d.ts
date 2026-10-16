@@ -176,7 +176,7 @@ export interface RaycastParameters {
 }
 
 /**
- * Creates rendering resources that can be shared in multiple scenes ([Scene]{@link Scene}) that share RenderContext.
+ * Creates rendering resources that can be shared in multiple scenes ([Scene]{@link Scene}) that share [RenderContext]{@link RenderContext}.
  *
  * @interface RenderResourceFactory
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -304,7 +304,7 @@ export interface CameraParameters {
 
 /**
  * Special effect parameter configuration, which is used to specify the special effect ID required for creating a special effect.
- * It is used as the input parameter of the createEffect API to create a special effect object.
+ * It is used as the input parameter of the [createEffect]{@link SceneResourceFactory.createEffect} API to create a special effect object.
  * 
  * @interface EffectParameters
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -325,7 +325,8 @@ export interface EffectParameters {
 }
 
 /**
- * Provides APIs for creating resources, such as cameras and light sources, used in 3D scenes. This class inherits from RenderResourceFactory.
+ * Provides APIs for creating resources, such as cameras and light sources, used in 3D scenes.
+ * This class inherits from [RenderResourceFactory]{@link RenderResourceFactory}.
  *
  * @extends RenderResourceFactory
  * @interface SceneResourceFactory
@@ -537,7 +538,7 @@ export declare abstract class SoftShadowConfig {
 }
 
 /**
- * Configuration class for soft shadows using the Percentage-Closer Filtering (PCF) algorithm.
+ * Defines the PCF (Percentage-Closer Filtering) soft shadow configuration class, which inherits from [SoftShadowConfig]{@link SoftShadowConfig}.
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly

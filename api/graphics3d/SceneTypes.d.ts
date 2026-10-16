@@ -517,7 +517,7 @@ export enum ShadowAlgorithmType {
 }
 
 /**
- * A custom geometry type that inherits from GeometryDefinition.
+ * A custom geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -688,7 +688,7 @@ export declare class CustomGeometry extends GeometryDefinition {
 }
 
 /**
- * A cube geometry type that inherits from GeometryDefinition.
+ * A cube geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -720,7 +720,7 @@ export declare class CubeGeometry extends GeometryDefinition {
 }
 
 /**
- * A plane geometry type that inherits from GeometryDefinition.
+ * A plane geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -752,7 +752,7 @@ export declare class PlaneGeometry extends GeometryDefinition {
 }
 
 /**
- * A sphere geometry type that inherits from GeometryDefinition.
+ * A sphere geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -806,7 +806,7 @@ export declare class SphereGeometry extends GeometryDefinition {
 }
 
 /**
- * A cylinder geometry type that inherits from GeometryDefinition.
+ * A cylinder geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * > **NOTE**
  * >
