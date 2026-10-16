@@ -730,7 +730,8 @@ declare namespace appManager {
    * @returns { int } ID of the observer registered. You can pass this ID to
    *     [off('applicationState')]{@link appManager.off(type: 'applicationState', observerId: int)} to unregister the
    *     observer.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -745,7 +746,8 @@ declare namespace appManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { ApplicationStateObserver } observer - The application state observer.
    * @returns { int } Returns the number code of the observer.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 23 static
@@ -764,7 +766,8 @@ declare namespace appManager {
    * @returns { int } ID of the observer registered. You can pass this ID to
    *     [off('applicationState')]{@link appManager.off(type: 'applicationState', observerId: int)} to unregister the
    *     observer.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -780,7 +783,8 @@ declare namespace appManager {
    * @param { ApplicationStateObserver } observer - The application state observer.
    * @param { Array<string> } bundleNameList - The list of bundleName. The max length is 128.
    * @returns { int } Returns the number code of the observer.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 23 static
@@ -799,8 +803,9 @@ declare namespace appManager {
    * @returns { int } ID of the observer registered. You can pass this ID to
    *     [off]{@link @ohos.app.ability.appManager:appManager.off(type: 'applicationState', observerId: int)} to unregister
    *     the observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -816,8 +821,9 @@ declare namespace appManager {
    * @param { ApplicationStateObserver } observer - The application state observer.
    * @param { AppStateFilter } filter - Filter configuration for targeted monitoring.
    * @returns { int } Returns the number code of the observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Failed to connect to the system service;
    *     2. The system service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -833,8 +839,9 @@ declare namespace appManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { 'appForegroundState' } type - Event type. It is fixed at **'appForegroundState'**.
    * @param { AppForegroundStateObserver } observer - Observer used to listen for application start or exit events.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -849,8 +856,9 @@ declare namespace appManager {
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AppForegroundStateObserver } observer - The app foreground state observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -867,8 +875,9 @@ declare namespace appManager {
    *     rendering of the ability.
    * @param { string } [bundleName] - Bundle name of the ability to be listened for. If this parameter is left blank, the
    *     event is listened for all applications.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -884,8 +893,9 @@ declare namespace appManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AbilityFirstFrameStateObserver } observer - The ability first frame state observer.
    * @param { string } [bundleName] - The target bundle name.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -903,7 +913,8 @@ declare namespace appManager {
    *     [on('applicationState')]{@link appManager.on(type: 'applicationState', observer: ApplicationStateObserver)}.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the application state observer is
    *     deregistered, **err** is undefined; otherwise, **error** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -918,7 +929,8 @@ declare namespace appManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { int } observerId - Indicates the number code of the observer.
    * @param { AsyncCallback<void> } callback - The callback of off.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 23 static
@@ -934,7 +946,8 @@ declare namespace appManager {
    * @param { int } observerId - ID of the observer registered, which is the listener ID returned by
    *     [on('applicationState')]{@link appManager.on(type: 'applicationState', observer: ApplicationStateObserver)}.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -949,7 +962,8 @@ declare namespace appManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { int } observerId - Indicates the number code of the observer.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 23 static
@@ -962,8 +976,9 @@ declare namespace appManager {
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { 'appForegroundState' } type - Event type. It is fixed at **'appForegroundState'**.
    * @param { AppForegroundStateObserver } [observer] - Observer used to listen for application start or exit events.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -978,8 +993,9 @@ declare namespace appManager {
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AppForegroundStateObserver } [observer] - The app foreground state observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -994,8 +1010,9 @@ declare namespace appManager {
    * @param { 'abilityFirstFrameState' } type - Event type. It is fixed at **'abilityFirstFrameState'**.
    * @param { AbilityFirstFrameStateObserver } [observer] - Callback used for deregistration. If this parameter is left blank
    *     , all subscriptions to the specified event are canceled.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1010,8 +1027,9 @@ declare namespace appManager {
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
    * @param { AbilityFirstFrameStateObserver } [observer] - The ability first frame state observer.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1027,8 +1045,9 @@ declare namespace appManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { AsyncCallback<Array<AppStateData>> } callback - Callback used to return the API call result and an array
    *     holding the application state data. You can perform error handling or custom processing in this callback.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1045,8 +1064,9 @@ declare namespace appManager {
    *
    * @permission ohos.permission.GET_RUNNING_INFO
    * @returns { Promise<Array<AppStateData>> } Promise used to return an array holding the application state data.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1071,8 +1091,9 @@ declare namespace appManager {
    *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1100,8 +1121,9 @@ declare namespace appManager {
    * @param { boolean } clearPageStack - Whether to clear the page stack. **true** to clear, **false** otherwise.
    * @param { int } [appIndex] - Index of an application clone.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -1129,8 +1151,9 @@ declare namespace appManager {
    *     .
    * @param { AsyncCallback<void> } callback - Callback used to return the API call result. You can perform error handling or
    *     custom processing in this callback.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1191,8 +1214,9 @@ declare namespace appManager {
    * @permission ohos.permission.KILL_APP_PROCESSES or ohos.permission.CLEAN_BACKGROUND_PROCESSES [since 14]
    * @param { string } bundleName - Bundle name.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1213,7 +1237,8 @@ declare namespace appManager {
    *     of the main application are terminated. If the value is greater than 0, all processes of the specified application
    *     clone are terminated.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -1230,8 +1255,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @param { AsyncCallback<void> } callback - Callback used to return the API call result. You can perform error
    *     handling or custom processing in this callback.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1249,8 +1275,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @returns { Promise<void> } Promise used to return the API call result. You can perform error handling or custom
    *     processing in this callback.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1268,8 +1295,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @param { AsyncCallback<void> } callback - Callback used to return the API call result. You can perform error handling or
    *     custom processing in this callback.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1374,8 +1402,9 @@ declare namespace appManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { bundleManager.BundleType } bundleType - Bundle type.
    * @returns { Promise<Array<ProcessInformation>> } Promise used to return the process information.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1421,8 +1450,9 @@ declare namespace appManager {
    * @param { long } versionCode - Version number of the shared library.
    * @returns { Promise<boolean> } Promise used to return the result. **true** if the shared library is in use, **false**
    *     otherwise.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1441,8 +1471,9 @@ declare namespace appManager {
    * @param { long } versionCode - Version number of the shared library.
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. **true** if the shared library is in
    *     use, **false** otherwise.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1461,7 +1492,7 @@ declare namespace appManager {
    *     .
    * @returns { Promise<int> } Promise used to return the API call result and the memory size (in KB). You can perform error
    *     handling or custom processing in this callback.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1480,7 +1511,7 @@ declare namespace appManager {
    *     .
    * @param { AsyncCallback<int> } callback - Callback used to return the API call result and the memory size (in KB). You
    *     can perform error handling or custom processing in this callback.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1498,7 +1529,7 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @param { AsyncCallback<Array<ProcessInformation>> } callback - Callback used to return the API call result and the
    *     process running information. You can perform error handling or custom processing in this callback.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1517,7 +1548,7 @@ declare namespace appManager {
    * @param { int } userId - User ID.
    * @param { AsyncCallback<Array<ProcessInformation>> } callback - Callback used to return the API call result and the
    *     process running information. You can perform error handling or custom processing in this callback.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1534,7 +1565,7 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @returns { Promise<Array<ProcessInformation>> } Promise used to return the API call result and the process running
    *     information. You can perform error handling or custom processing in this callback.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1553,7 +1584,7 @@ declare namespace appManager {
    * @param { int } userId - User ID.
    * @returns { Promise<Array<ProcessInformation>> } Promise used to return the API call result and the process running
    *     information. You can perform error handling or custom processing in this callback.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1572,8 +1603,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @returns { Promise<boolean> } Promise used to return the result. **true** is returned if at least one user is running
    *     the specified application. **false** is returned if none of the users are running the application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1592,8 +1624,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. **true** is returned if at least one
    *     user is running the specified application. **false** is returned if none of the users are running the application.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1615,8 +1648,9 @@ declare namespace appManager {
    * @param { PreloadMode } mode - Mode used for preloading.
    * @param { int } [appIndex] - Application index of the twin application to be preloaded.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1638,8 +1672,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @returns { Promise<RunningMultiAppInfo> } Promise used to return the information about running applications with multi-
    *     app mode.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported.
@@ -1667,7 +1702,8 @@ declare namespace appManager {
    *     the main application, and a value greater than 0 means a specific application clone.
    * @returns { Promise<boolean> } Promise used to return the result. **true** is returned if at least one user is running
    *     the specified application. **false** is returned if none of the users are running the application.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1686,8 +1722,9 @@ declare namespace appManager {
    * @param { string } bundleName - Bundle name.
    * @param { int } [appCloneIndex] - Index of the application clone.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1707,8 +1744,9 @@ declare namespace appManager {
    *     [getMissionInfos]{@link @ohos.app.ability.missionManager:missionManager.getMissionInfos(deviceId: string, numMax: int, callback: AsyncCallback<Array<MissionInfo>>)}
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -1730,11 +1768,13 @@ declare namespace appManager {
    * @permission ohos.permission.GET_RUNNING_INFO
    * @param { string } bundleName - Bundle name.
    * @returns { Promise<Array<int>> } Promise used to return an array containing the PIDs.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1769,11 +1809,13 @@ declare namespace appManager {
    * @param { boolean } enable - Whether to keep the application alive or cancel its keep-alive status. **true** to keep the
    *     application alive, **false** otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16300005 - The target bundle does not exist.
    * @throws { BusinessError } 16300008 - The target bundle has no MainAbility.
@@ -1798,11 +1840,13 @@ declare namespace appManager {
    * @param { KeepAliveAppType } type - Type of the application.
    * @param { int } [userId] - User ID.
    * @returns { Promise<Array<KeepAliveBundleInfo>> } Promise used to return the array of keep-alive application information.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1827,9 +1871,11 @@ declare namespace appManager {
    * @param { boolean } enabled - Whether to keep the application alive or cancel its keep-alive status. **true** to keep,
    *     **false** otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000081 - Failed to obtain the target application information.
    * @throws { BusinessError } 16000202 - Invalid main element type.
@@ -1850,9 +1896,11 @@ declare namespace appManager {
    *
    * @permission ohos.permission.MANAGE_APP_KEEP_ALIVE
    * @returns { Promise<Array<KeepAliveBundleInfo>> } Promise used to return the array of keep-alive application information.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -1870,11 +1918,13 @@ declare namespace appManager {
    * @permission ohos.permission.KILL_APP_PROCESSES
    * @param { Array<int> } pids - Array of process IDs.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
