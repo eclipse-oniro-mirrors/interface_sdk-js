@@ -77,8 +77,8 @@ declare interface StartLineInfo {
  * 根据Grid的总偏移量，计算当前页面起始行的位置，用于快速滑动或反向滑动场景。此回调需与onGetStartIndexByIndex同时设置才能生效。
  *
  * @param { double } totalOffset - 总滚动偏移量，即Grid当中第一个GridItem的顶部与Grid顶部之间的偏移量。<br/>单位：vp
- * @returns { StartLineInfo }
- 用于记录Grid页面内起始行的位置信息。
+ * @returns { StartLineInfo } - 用于记录Grid页面内起始行的位置信息。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
  * @since 23 dynamic
@@ -86,12 +86,12 @@ declare interface StartLineInfo {
 declare type OnGetStartIndexByOffsetCallback = (totalOffset: double) => StartLineInfo;
 
 /**
-* 根据指定的目标索引，计算Grid滚动到该位置时页面内对应的起始行，用于支持[scrollToIndex]{@link Scroller#scrollToIndex}等操作。此回调需与onGetStartIndexByOffset同时设
-* 置才能生效。
-*
+ * 根据指定的目标索引，计算Grid滚动到该位置时页面内对应的起始行，用于支持[scrollToIndex]{@link Scroller#scrollToIndex}等操作。此回调需与onGetStartIndexByOffset同时设
+ * 置才能生效。
+ *
  * @param { int } targetIndex - 要滚动到的目标GridItem的索引。
- * @returns { StartLineInfo }
- 用于记录Grid页面内起始行的位置信息。
+ * @returns { StartLineInfo } - 用于记录Grid页面内起始行的位置信息。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
  * @since 23 dynamic

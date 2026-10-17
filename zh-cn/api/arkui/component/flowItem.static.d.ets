@@ -36,7 +36,7 @@ export declare interface FlowItemAttribute extends CommonMethod {
    * @returns { FlowItemAttribute } 返回FlowItemAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setFlowItemOptions(): this;
 

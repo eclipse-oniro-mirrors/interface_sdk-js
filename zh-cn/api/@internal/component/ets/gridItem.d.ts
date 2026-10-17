@@ -132,7 +132,8 @@ interface GridItemInterface {
 /**
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @FaAndStageModel @crossplatform [since 10]
+ * @FaAndStageModel
+ * @crossplatform [since 10]
  * @atomicservice [since 11]
  * @since 7 dynamic
  * @noninterop
