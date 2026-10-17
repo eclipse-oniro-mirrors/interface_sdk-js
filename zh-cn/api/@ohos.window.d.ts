@@ -12798,54 +12798,6 @@ declare namespace window {
     offFreeWindowModeChange(callback?: Callback<boolean>): void;
 
     /**
-     * 查询当前窗口是否处于指定的窗口姿态模式。
-     *
-     * @param { WindowPostureMode } mode - 窗口姿态模式。
-     * @returns { boolean } 当前窗口是否处于指定的窗口姿态模式。true表示当前窗口处于指定的窗口姿态模式，false表示不处于。
-     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause: The window is not
-     *     created or destroyed.
-     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
-     *     services of the window are not started normally.
-     * @throws { BusinessError } 1300016 - Parameter error. Possible cause: Invalid parameter range.
-     * @syscap SystemCapability.Window.SessionManager
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    isInWindowPostureMode(mode: WindowPostureMode): boolean;
-
-    /**
-     * 开启窗口所处指定姿态模式变化的监听。
-     *
-     * @param { WindowPostureMode } mode - 监听的窗口姿态模式。
-     * @param { Callback<boolean> } callback - 回调函数。当窗口所处指定窗口姿态模式变化时触发，返回当前窗口是否处于指定的窗口姿态模式，true表示处于，false表示不处于。
-     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause: The window is not
-     *     created or destroyed.
-     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
-     *     services of the window are not started normally.
-     * @throws { BusinessError } 1300016 - Parameter error. Possible cause: Invalid parameter range.
-     * @syscap SystemCapability.Window.SessionManager
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    onWindowPostureModeChange(mode: WindowPostureMode, callback: Callback<boolean>): void;
-
-    /**
-     * 关闭窗口所处指定姿态模式变化的监听。
-     *
-     * @param { WindowPostureMode } mode - 监听的窗口姿态模式。
-     * @param { Callback<boolean> } [callback] - 回调函数。返回当前窗口是否处于指定的窗口姿态模式。如果传入参数，则关闭该监听；如果不传入参数，则关闭所有注册到指定窗口姿态模式的监听。
-     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause: The window is not
-     *     created or destroyed.
-     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
-     *     services of the window are not started normally.
-     * @throws { BusinessError } 1300016 - Parameter error. Possible cause: Invalid parameter range.
-     * @syscap SystemCapability.Window.SessionManager
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    offWindowPostureModeChange(mode: WindowPostureMode, callback?: Callback<boolean>): void;
-
-    /**
      * 给特定场景下的窗口增加转场动画。
      * 
      * 当前只支持在应用主窗下使用。
