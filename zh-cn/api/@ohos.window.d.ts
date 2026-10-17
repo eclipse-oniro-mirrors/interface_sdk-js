@@ -4135,8 +4135,6 @@ declare namespace window {
    * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause: The window is not a main window.
    * @throws { BusinessError } 1300008 - Invalid display. Possible cause:
    *     1. DisplayId is a negative number or not exists.
-   * @throws { BusinessError } 1300016 - Parameter error. Possible cause:
-   *     1. The userId is not exist.
    * @syscap SystemCapability.Window.SessionManager
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
@@ -4236,7 +4234,7 @@ declare namespace window {
    *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
-   * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause: 
+   * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
    *     1. The window to be adjusted cannot be found: not created, has been destroyed or not belong to current process;
    *     2. The target main window specified by insertAfter cannot be found: not created or has been destroyed.
    * @throws { BusinessError } 1300003 - This window manager service works abnormally.
@@ -7395,7 +7393,6 @@ declare namespace window {
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
-     *     Possible cause: The window is not created.
      * @syscap SystemCapability.Window.SessionManager
      * @since 22 dynamic
      */
@@ -7430,7 +7427,6 @@ declare namespace window {
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
-     *     Possible cause: The window is not created or destroyed.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
      * @since 22 dynamic
@@ -7465,7 +7461,6 @@ declare namespace window {
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
-     *     Possible cause: The window is not created.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
      * @since 22 dynamic
@@ -8324,7 +8319,6 @@ declare namespace window {
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
-     *     Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 14 dynamic
@@ -8353,7 +8347,6 @@ declare namespace window {
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
-     *     Possible cause: The window is not created.
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 14 dynamic
