@@ -875,7 +875,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *
    * @param { double | Resource | undefined } offset - 内容区域起始偏移量。<br/>默认值：0<br/>参数类型为number时单位为vp。 <br/>设置异常值如负数、非数字
    *     Resource与undefined时，按默认值处理。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -891,7 +891,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *
    * @param { double | Resource | undefined } offset - 内容区末尾偏移量。<br/>默认值：0<br/>参数类型为number时单位为vp。 <br/>设置异常值如负数、非数字
    *     Resource与undefined时，按默认值处理。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -970,7 +970,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *     [0, +∞)，设置为小于0的值时，按1处理。 <br>当参数类型为CacheCountInfo时，表示预加载的最大最小范围。<br/>取值为undefined时，按默认行为处理。
    * @param { boolean | undefined } show - 被预加载的ListItem是否需要显示。<br/>true：显示预加载的ListItem。<br/>false：不显示预加载的ListItem。<br
    *     />取值为undefined时，不显示预加载的ListItem。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1002,7 +1002,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * 设置链式联动动效选项。
    *
    * @param { ChainAnimationOptions | undefined } value - 链式联动动效选项。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -1061,7 +1061,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * > - 多列场景使用LazyForEach生成子组件时，需确保LazyForEach全部生成ListItemGroup组件或者全部生成ListItem组件。
    *
    * @param { ChildrenMainSize | undefined } value - 该对象用来维护子组件在主轴方向的大小信息。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1101,7 +1101,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *     [Repeat](docroot://ui/rendering-control/arkts-new-rendering-control-repeat.md)中使用
    *     [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)渲染控制语法生成一个不含任何子节点的空分支节点。</br>true表
    *     示支持空分支节点；false表示不支持空分支节点。</br>值为undefined时，按false处理。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1145,7 +1145,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *
    * @param { boolean | Bindable<boolean> | undefined } enabled - 是否启用编辑模式。<br/>设置为true时启用编辑模式，可以滑动多选；设置为false或
    *     undefined时关闭编辑模式，不可滑动多选。<br/>Bindable<boolean>时，支持双向绑定。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1156,7 +1156,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * 编辑模式状态变化时触发该回调。
    *
    * @param { Callback<boolean> | undefined } callback - 编辑模式状态变化时触发的回调。<br>true表示进入编辑模式，false表示退出编辑模式。<br>传入undefined时取消回调。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1168,7 +1168,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *
    * @param { FocusWrapMode | undefined } mode - 交叉轴方向键走焦模式。<br/>默认值：FocusWrapMode.DEFAULT<br/>**说明：** <br/>异常值按默认值处理，
    *     即交叉轴方向键不能换行。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1180,7 +1180,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *
    * @param { boolean | undefined } enable - 是否同步加载List区域内所有子组件。<br/>true表示同步加载，false表示异步加载。默认值：true。<br/>**说明：** <br/
    *     >设置为false时，在首次显示、不带动画scrollToIndex跳转场景，若当帧布局耗时超过50ms，会将List区域内尚未布局的子组件延后到下一帧进行布局。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1191,7 +1191,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * 设置列表项滚动限位动画速度。只在列表设置了滚动结束对齐效果后才生效。
    *
    * @param { ScrollSnapAnimationSpeed | undefined } speed - 列表滚动限位动画速度。<br/>默认值：ScrollSnapAnimationSpeed.NORMAL
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1204,7 +1204,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @param { ListBackPressBehavior | undefined } behavior - List组件的系统返回键行为选项。当前支持通过
    *     [ListBackPressBehavior]{@link ListBackPressBehavior}参数，配置系统返回键生效时，是否收起已展开的ListItem的划出组件。<br/>设置为undefined时，恢复
    *     默认行为，即系统返回键生效时，收起已展开的ListItem的划出组件。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1270,7 +1270,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @param { OnItemDragStartCallback | undefined } event - 列表元素拖拽开始时触发的回调。<br> API version 22及之前版本，该参数类型为(event:
    *     ItemDragInfo, itemIndex: number) => (() => any) | void，其中event和itemIndex参数含义参考
    *     [OnItemDragStartCallback]{@link CommonMethod#OnItemDragStartCallback}。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1379,7 +1379,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @returns { ListAttribute } 返回ListAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setListOptions(options?: ListOptions): this;
 

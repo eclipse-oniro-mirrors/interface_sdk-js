@@ -223,7 +223,7 @@ export declare interface RefreshAttribute extends CommonMethod {
    *
    * @param { double | undefined } ratio - 下拉跟手系数。数值越大，跟随手势下拉的反应越灵敏。0表示不跟随手势下拉，1表示等比例跟随手势下拉。<br/>没有设置或设置为undefined时，默认
    *     使用动态下拉跟手系数，下拉距离越大，跟手系数越小。<br/>有效值为0-1之间的值，小于0的值会被视为0，大于1的值会被视为1。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -235,7 +235,7 @@ export declare interface RefreshAttribute extends CommonMethod {
    *
    * @param { double | undefined } distance - 最大下拉距离。最大下拉距离的最小值为0，小于0按0处理。当该值小于刷新的下拉偏移量refreshOffset时，Refresh下拉离手不会触发刷
    *     新。<br/>undefined和null按没有设置此属性处理。<br/>默认值：undefined<br/>单位：vp
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -249,7 +249,7 @@ export declare interface RefreshAttribute extends CommonMethod {
    *
    * @param { Resource | undefined } distance - 最大下拉距离。<br/>默认值：undefined<br/>单位：vp<br/>取值范围：
    *     [0, +∞)，值小于0时按0处理。当该值小于刷新的下拉偏移量[refreshOffset]{@link default refreshOffset(value: double | undefined)}时，Refresh下拉离手不会触发刷新。<br/>undefined和null按没有设置此属性处理，即没有最大下拉距离限制。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -263,7 +263,7 @@ export declare interface RefreshAttribute extends CommonMethod {
    * @returns { RefreshAttribute } 返回RefreshAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setRefreshOptions(options: RefreshOptions): this;
 
@@ -282,7 +282,7 @@ export declare interface RefreshAttribute extends CommonMethod {
 /**
  * 创建Refresh容器。
  *
- * @param { RefreshOptions } 刷新组件参数。 - 刷新组件参数。
+ * @param { RefreshOptions } - 刷新组件参数。
  * @param { CustomBuilder } [content_] - 容器内容。
  * @returns { RefreshAttribute } 返回Refresh组件的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full

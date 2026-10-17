@@ -608,7 +608,7 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @returns { WaterFlowAttribute } 返回WaterFlowAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setWaterFlowOptions(options?: WaterFlowOptions): this;
 

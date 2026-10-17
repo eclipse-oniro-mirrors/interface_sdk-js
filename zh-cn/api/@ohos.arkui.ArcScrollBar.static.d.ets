@@ -68,7 +68,7 @@ export declare interface ArcScrollBarAttribute extends CommonMethod {
    * @returns { ArcScrollBarAttribute } 返回ArcScrollBarAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setArcScrollBarOptions(options: ArcScrollBarOptions): this;
 
