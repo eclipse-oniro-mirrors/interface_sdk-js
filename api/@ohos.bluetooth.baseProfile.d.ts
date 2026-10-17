@@ -336,13 +336,8 @@ declare namespace baseProfile {
 
     /**
      * Obtains the connected devices list of profile.
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Array<string> } Returns the address of connected devices list.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
@@ -382,13 +377,8 @@ declare namespace baseProfile {
 
     /**
      * Subscribe the event reported when the profile connection state changes .
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'connectionStateChange' } type - Type of the profile connection state changes event to listen for.
      * @param { Callback<StateChangeParam> } callback - Callback used to listen for event.
      * @throws { BusinessError } 201 - Permission denied.
@@ -404,13 +394,8 @@ declare namespace baseProfile {
 
     /**
      * Subscribe the event reported when the profile connection state changes .
-     * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-     * the type of the peer device address is real.
-     * Otherwise, the type of the peer device address is virtual.
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-     * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-     *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+     * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<StateChangeParam> } callback - Callback used to listen for event.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
