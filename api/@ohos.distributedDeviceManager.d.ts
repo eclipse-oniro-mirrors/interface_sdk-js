@@ -245,16 +245,21 @@ declare namespace distributedDeviceManager {
    */
   interface DeviceProfileInfoFilterOptions {
     /**
-     * Whether to request data from the cloud.
+     * Whether to obtain the device list from the cloud in real time.
+     *
+     * - **false**: Obtain the device list from the device.
+     * - **true**: Obtain the device list from the cloud.
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
      * @since 15 dynamic
      * @since 23 static
      */
-    isCloud : boolean,
+    isCloud : boolean;
     /**
-     * Device ID list.
+     * Device ID. The device ID is usually the UDID of the device. If the device does not have a UDID,
+     *     the MAC address or SN of the device is used as the device ID. This parameter is left
+     *     unspecified by default.
      *
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @systemapi
@@ -1028,21 +1033,26 @@ declare namespace distributedDeviceManager {
      * @param { object } discoverParam - Identifier of the device to discover. It specifies the type of the target to
      *     discover.
      *     <br>**discoverTargetType**: The default discovery target is device. The value is **1**.
-     * @param { object } filterOptions - Options for filtering the devices to discover. The default value is
-     *     **undefined**, which means to discover offline devices. The options include the following:
-     *     <br>- **availableStatus(0-1)**: status of the device to discover.
-     *     The value **0** means the device is untrusted.
-     *     <br>- **0**: The device is offline. The client needs to call **bindTarget** to bind the device.
-     *     <br>- **1**: The device is online and can be connected.
-     *     <br>**discoverDistance(0-100)**: distance of the device to discover, in cm.
-     *     This parameter is not used in Wi-Fi scenarios.
-     *     <br>**authenticationStatus(0-1)**: authentication status of the device to discover.
-     *     <br>- **0**: The device is not authenticated.
-     *     <br>The value **1** means the device has been authenticated.
-     *     <br>- **authorizationType(0-2)**: authorization type of the device to discover.
-     *     <br>- **0**: The device is authenticated by a temporarily agreed session key.
-     *     <br>- **1**: The device is authenticated by a key of the same account.
-     *     <br>- **2**: The device is authenticated by a credential key of different accounts.
+     * @param { object } [filterOptions] - Options for filtering the devices to discover. The default
+     *     value is **undefined**, which means to discover offline devices. The options include the
+     *     following keys (if a key is not passed in, filtering is not performed by that dimension):
+     *     <br>availableStatus(0-1): Filters devices by availability status. Values outside the range
+     *     do not take effect.
+     *     <br />- 0: The device is offline. The client needs to call **bindTarget** to bind the device.
+     *     <br />- 1: The device is online and can be connected.
+     *     <br>discoverDistance(0-100): Discovers devices within a specified distance, in cm. Values
+     *     outside the range do not take effect. This parameter is not supported when Wi-Fi is used
+     *     for device discovery. If passed in, it does not take effect.
+     *     <br />authenticationStatus(0-1): Discovers devices by authentication status. Values outside
+     *     the range do not take effect:
+     *     <br />- 0: The device is not authenticated. The client needs to call **bindTarget** for
+     *     authentication and binding.
+     *     <br />- 1: The device is authenticated and can be used for distributed services.
+     *     <br>authorizationType(0-2): Discovers devices by authorization type. Values outside the
+     *     range do not take effect:
+     *     <br />- 0: The device is authenticated by a temporarily agreed session key.
+     *     <br />- 1: The device is authenticated by a key of the same account.
+     *     <br />- 2: The device is authenticated by a credential key of different accounts.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter type;
@@ -1065,21 +1075,25 @@ declare namespace distributedDeviceManager {
      *     It specifies the type of the target to discover.
      *     <br>**discoverTargetType**: The default discovery target is device. The value is **1**.
      * @param { Record<string, int | string> } [filterOptions] - Options for filtering the devices to discover.
-     *     The default value is **undefined**, which means to discover offline devices.
-     *     The options include the following:
-     *     <br>- **availableStatus(0-1)**: status of the device to discover.
-     *     The value **0** means the device is untrusted.
-     *     <br>- **0**: The device is offline. The client needs to call **bindTarget** to bind the device.
-     *     <br>- **1**: The device is online and can be connected.
-     *     <br>**discoverDistance(0-100)**: distance of the device to discover, in cm.
-     *     This parameter is not used in Wi-Fi scenarios.
-     *     <br>**authenticationStatus(0-1)**: authentication status of the device to discover.
-     *     <br>- **0**: The device is not authenticated.
-     *     <br>The value **1** means the device has been authenticated.
-     *     <br>- **authorizationType(0-2)**: authorization type of the device to discover.
-     *     <br>- **0**: The device is authenticated by a temporarily agreed session key.
-     *     <br>- **1**: The device is authenticated by a key of the same account.
-     *     <br>- **2**: The device is authenticated by a credential key of different accounts.
+     *     The default value is **undefined**, which means to discover offline devices. The options include the
+     *     following keys (if a key is not passed in, filtering is not performed by that dimension):
+     *     <br>availableStatus(0-1): Filters devices by availability status. Values outside the range
+     *     do not take effect.
+     *     <br />- 0: The device is offline. The client needs to call **bindTarget** to bind the device.
+     *     <br />- 1: The device is online and can be connected.
+     *     <br>discoverDistance(0-100): Discovers devices within a specified distance, in cm. Values
+     *     outside the range do not take effect. This parameter is not supported when Wi-Fi is used
+     *     for device discovery. If passed in, it does not take effect.
+     *     <br />authenticationStatus(0-1): Discovers devices by authentication status. Values outside
+     *     the range do not take effect:
+     *     <br />- 0: The device is not authenticated. The client needs to call **bindTarget** for
+     *     authentication and binding.
+     *     <br />- 1: The device is authenticated and can be used for distributed services.
+     *     <br>authorizationType(0-2): Discovers devices by authorization type. Values outside the
+     *     range do not take effect:
+     *     <br />- 0: The device is authenticated by a temporarily agreed session key.
+     *     <br />- 1: The device is authenticated by a key of the same account.
+     *     <br />- 2: The device is authenticated by a credential key of different accounts.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 11600104 - Discovery unavailable.
@@ -1107,15 +1121,23 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } deviceId - Device ID. The value is a string of 1 to 255 characters.
-     * @param { object } bindParam - Authentication parameters.
-     *     You can determine the key-value pair to be passed in. By default, the following keys are carried:
-     *     <br>**bindType**: binding type, which is mandatory.
-     *     <br>The value **1** means PIN authentication.
-     *     <br>**targetPkgName**: bundle name of the target to bind.
-     *     <br>**appName**: application that attempts to bind the target.
-     *     <br>**appOperation**: reason for the application to bind the target.
-     *     <br>**customDescription**: detailed description of the operation.
-     * @param { AsyncCallback<{deviceId: string;}> } callback - Callback used to return the authentication result.
+     * @param { object } bindParam - Authentication parameters. The following keys can be passed in:
+     *     <br>bindType (number, mandatory): Binding type. The value **1** means PIN authentication.
+     *     Passing in other values will result in a parameter error.
+     *     <br />targetPkgName (string, optional): Bundle name of the target to bind. If not passed in, the
+     *     bundle name of the caller application is used by default.
+     *     <br />appName (string, optional): Application that attempts to bind the target. It is displayed
+     *     on the authentication UI to show the application that initiates the binding. If not passed in,
+     *     it is not displayed.
+     *     <br />appOperation (string, optional): Reason for the application to bind the target. It is
+     *     displayed to the user to explain the binding purpose. If not passed in, it is not displayed.
+     *     <br />customDescription (string, optional): Detailed supplement for the binding operation. It is
+     *     displayed to the user to provide a more specific operation description. If not passed in, it is
+     *     not displayed.
+     * @param { AsyncCallback<{deviceId: string;}> } callback - Callback used to return the
+     *     authentication result. When the authentication succeeds, **err** is **undefined**
+     *     and **data** is an object containing **deviceId**; when the authentication fails,
+     *     **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter type;
@@ -1135,15 +1157,24 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } deviceId - Device ID. The value is a string of 1 to 255 characters.
-     * @param { Record<string, int | string> } bindParam - Authentication parameters.
-     *     You can determine the key-value pair to be passed in. By default, the following keys are carried:
-     *     <br>**bindType**: binding type, which is mandatory.
-     *     <br>The value **1** means PIN authentication.
-     *     <br>**targetPkgName**: bundle name of the target to bind.
-     *     <br>**appName**: application that attempts to bind the target.
-     *     <br>**appOperation**: reason for the application to bind the target.
-     *     <br>**customDescription**: detailed description of the operation.
-     * @param { AsyncCallback<BindTargetResult> } callback - Callback used to return the authentication result.
+     * @param { Record<string, int | string> } bindParam - Authentication parameters. The following
+     *     keys can be passed in:
+     *     <br>bindType (number, mandatory): Binding type. The value **1** means PIN authentication.
+     *     Passing in other values will result in a parameter error.
+     *     <br />targetPkgName (string, optional): Bundle name of the target to bind. If not passed in, the
+     *     bundle name of the caller application is used by default.
+     *     <br />appName (string, optional): Application that attempts to bind the target. It is displayed
+     *     on the authentication UI to show the application that initiates the binding. If not passed in,
+     *     it is not displayed.
+     *     <br />appOperation (string, optional): Reason for the application to bind the target. It is
+     *     displayed to the user to explain the binding purpose. If not passed in, it is not displayed.
+     *     <br />customDescription (string, optional): Detailed supplement for the binding operation. It is
+     *     displayed to the user to provide a more specific operation description. If not passed in, it is
+     *     not displayed.
+     * @param { AsyncCallback<BindTargetResult> } callback - Callback used to return the
+     *     authentication result. When the authentication succeeds, **err** is **undefined**
+     *     and **data** is an object containing **deviceId**; when the authentication fails,
+     *     **err** is an error object.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 11600101 - Failed to execute the function.
@@ -1272,8 +1303,8 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'discoverSuccess' } type - Event type, which has a fixed value of **'discoverSuccess'**.
-     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - Callback invoked when a device is successfully
-     *     discovered.
+     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - Callback invoked when a device is
+     *     successfully discovered, returning the discovered device information (**DeviceBasicInfo**).
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1303,7 +1334,9 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'discoverSuccess' } type - Event type, which has a fixed value of **'discoverSuccess'**.
-     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - Callback to unregister.
+     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - Callback to unregister, returning the
+     *     discovered device information. If specified, this parameter unregisters the corresponding
+     *     callback. Otherwise, all registered discoverSuccess callbacks are unregistered.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1395,7 +1428,10 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'discoverFailure' } type - Event type, which has a fixed value of **'discoverFailure'**.
-     * @param { Callback<{ reason: int; }> } callback - Callback invoked when a device fails to be discovered.
+     * @param { Callback<{ reason: int; }> } callback - Callback invoked when a device fails to be
+     *     discovered. The callback parameter **reason** is of the number type, indicating the error
+     *     code for the discovery failure. For details about the value, see [Device Management Error
+     *     Codes](docroot://reference/apis-distributedservice-kit/errorcode-device-manager.md).
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1517,7 +1553,8 @@ declare namespace distributedDeviceManager {
     offServiceDie(callback?: Callback<ServiceDieData>): void;
 
     /**
-     * Subscribes to the reply to the UI operation result.
+     * Subscribes to the reply to the UI operation result. This API returns the result
+     * asynchronously through a callback.
      *
      * @permission ohos.permission.ACCESS_SERVICE_DM
      * @param { 'replyResult' } type - Event type, which has a fixed value of **replyResult**.
@@ -1551,7 +1588,8 @@ declare namespace distributedDeviceManager {
     onReplyResult(callback: Callback<ReplyResult>): void;
 
     /**
-     * Unsubscribes from the reply to the UI operation result.
+     * Unsubscribes from the reply to the UI operation result. This API returns the result
+     * asynchronously through a callback.
      *
      * @permission ohos.permission.ACCESS_SERVICE_DM
      * @param { 'replyResult' } type - Event type, which has a fixed value of **replyResult**.
@@ -1809,7 +1847,7 @@ declare namespace distributedDeviceManager {
     getIdentificationByDeviceIds(deviceIds: Array<string>): Array<DeviceIdentification>;
 
     /**
-     * Restores the local device name.
+     * Restores the local device name by resetting the network settings.
      *
      * @permission ohos.permission.ACCESS_SERVICE_DM
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -1827,7 +1865,7 @@ declare namespace distributedDeviceManager {
      * Query the device operating system type by device network ID.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC and ohos.permission.ACCESS_SERVICE_DM
-     * @param { string } networkId - The device's network ID
+     * @param { string } networkId - The device's network ID.
      * @returns { int } - Returns the device operating system type.
      *     Possible return:
      *     1. 10: Operating system based on OpenHarmony
