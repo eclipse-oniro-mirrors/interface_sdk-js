@@ -550,7 +550,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     SMART = 4096,
     /**
-     * 共享相册。
+     * 共享相册
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -709,7 +709,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     SHARE = 8193,
     /**
-     * 任意相册。
+     * 任意相册
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
