@@ -1407,6 +1407,44 @@ declare namespace i18n {
   export function getInstance(locale?:string): IndexUtil;
 
   /**
+   * Enumerates bilingual index modes, which determine the combination of local index and English index.
+   *
+   * @syscap SystemCapability.Global.I18n
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 static
+   */
+  export enum BilingualIndexMode {  
+    /**
+     * Full list: local index + English index.
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 static
+     */
+    FULL = 0,
+    /**
+     * Compressed English list: local index + English index compressed to 'Z'.
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 static
+     */
+    COMPRESSED_EN = 1,
+    /**
+     * Compressed local list: local index first letter + English index.
+     *
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 static
+     */
+    COMPRESSED_LOCAL = 2
+  }
+
+  /**
    * Sequence text can be grouped under the specified area,
    * and grouping index with different lengths can be specified.
    *
@@ -1449,6 +1487,42 @@ declare namespace i18n {
      * @since 23 static
      */
     getIndex(text: string): string;
+
+    /**
+     * Checks whether the specified locale supports bilingual index.
+     *
+     * @param { Intl.Locale } locale - Locale to check, in BCP 47 format (e.g., "zh-CN").
+     * @returns { boolean } true if bilingual index is supported, false otherwise.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    static isBilingualIndexSupported(locale: Intl.Locale): boolean;
+
+    /**
+     * Obtains the bilingual index list of the current locale.
+     *
+     * @param { BilingualIndexMode } [mode] - Bilingual index mode, defaults to FULL.
+     * @returns { Array<string> } Bilingual index list. The first element is '#', followed by local index list and
+     *     English index list.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 static
+     */
+    getBilingualIndexList(mode?: BilingualIndexMode): Array<string>;
+
+    /**
+     * Obtains the bilingual index of the text object.
+     *
+     * @param { string } text - Input text.
+     * @returns { string } Bilingual index of the text object. Returns '#' if no proper index is found or text is empty.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 static
+     */
+    getBilingualIndex(text: string): string;
   }
 
   /**
