@@ -12102,6 +12102,30 @@ declare namespace audio {
      * @since 24 dynamic&static
      */
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
+
+    /**
+     * Enters or exits the audio standby state.
+     * The standby state is used when there is no data during audio playback. For example, the streaming media is
+     * waiting for network download.
+     * After the audio channel enters the standby state, the audio channel remains unchanged. The cyclic thread that
+     * only requests data from the application pauses and does not receive proactively written data. The data that has
+     * been written to the system continues to be played.
+     * This interface can be invoked to enter the standby state only when the palyback stream is in
+     * {@link AudioState.STATE_RUNNING} state. The interface cna be invoked to exit only when the interface is in
+     * standby state.
+     * In the standby state, you can directly call {@link pause}, {@link stop}, {@link release} to stop the playback.
+     * but {@link start} cannot be called.
+     * Note that this interface does not change the state obtained through {@link state}.
+     * This API uses a promise to return the result.
+     * 
+     * @param { boolean } on - Enter or exit the standby state. The options are as follows: true: enter; false: exit.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 6800103 - The operation is not allowed in the current state.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    standby(on: boolean): Promise<void>;
   }
 
   /**

@@ -11934,6 +11934,24 @@ declare namespace audio {
      * @since 24 dynamic&static
      */
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
+
+    /**
+     * 进入或退出音频standby状态。
+     * standby状态主要用于音频播放过程中短暂无数据的情况，如流媒体播放等待网络下载。
+     * 进入standby状态后，音频通路保持不变，仅向应用请求数据的循环线程暂停，也不接收主动写入数据，已写入系统的数据会继续播放。
+     * 只有在播放流状态为{@link AudioState.STATE_RUNNING}时可以调用此接口进入standby状态。standby状态下才能再次调用接口退出。
+     * standby状态下也可以直接调用{@link pause}, {@link stop}, {@link release}停止播放，但不可调用{@link start}。
+     * 注意，此接口并不会改变通过{@link state}获取的状态。
+     * 使用Promise异步回调。
+     * 
+     * @param { boolean } on - 进入或退出standby状态，true表示进入，false表示退出。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 6800103 - 当前状态下不允许操作。
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    standby(on: boolean): Promise<void>;
   }
 
   /**
