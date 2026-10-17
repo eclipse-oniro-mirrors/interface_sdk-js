@@ -6448,7 +6448,7 @@ declare namespace webview {
      *
      * When enabled, the Web component automatically retries loading on network errors
      * using a retry backoff sequence: 1s → 5s → 30s → 1min → 5min → 10min → 30min.
-     * Retries stop after 7 attempts with increasing delays..
+     * Retries stop after 7 attempts with increasing delays.
      *
      * > **NOTE**
      * >
