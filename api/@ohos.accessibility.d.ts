@@ -1035,7 +1035,17 @@ export enum AccessibilityEventType {
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
    */
-  TYPE_TOUCH_GUIDE_GESTURE = 73
+  TYPE_TOUCH_GUIDE_GESTURE = 73,
+
+  /**
+   * Indicates that the page status is about to be updated.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  TYPE_PAGE_STATE_PRE_UPDATE = 74
 }
 
 /**

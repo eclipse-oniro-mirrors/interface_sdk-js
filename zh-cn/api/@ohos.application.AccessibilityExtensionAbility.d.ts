@@ -502,10 +502,11 @@ type GestureType = 'left' | 'leftThenRight' | 'leftThenUp' | 'leftThenDown' |
  *
  * @unionmember { 'pageContentUpdate' } 表示页面内容更新。
  * @unionmember { 'pageStateUpdate' } 表示页面状态更新。
+ * @unionmember { 'pageStatePreUpdate' } 表示页面状态即将更新。 [since 26.2.0]
  * @syscap SystemCapability.BarrierFree.Accessibility.Core
  * @since 9 dynamiconly
  */
-type PageUpdateType = 'pageContentUpdate' | 'pageStateUpdate';
+type PageUpdateType = 'pageContentUpdate' | 'pageStateUpdate' | 'pageStatePreUpdate';
 
 /**
  * 触摸浏览事件类型。触摸浏览是无障碍辅助功能中的一种交互模式，用户在该模式下通过触摸探索界面元素而非直接激活。
