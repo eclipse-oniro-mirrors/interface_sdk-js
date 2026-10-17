@@ -141,8 +141,8 @@ declare enum SideBarPosition {
  * > **NOTE**
  * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
- * > While historical version information is preserved for anonymous objects, there may be cases where the outer element
- * > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer element's
+ * > @since version number is higher than inner elements'. This does not affect interface usability.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -295,7 +295,7 @@ declare interface ButtonStyle {
  * > **NOTE**
  * >
  * > The APIs of this module are supported since API version 8. Updates will be marked with a superscript to indicate
- * > their
+ * > their earliest API version.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -778,8 +778,7 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
  * > - If there are three or more child components, only the first and second child components are displayed. If there
  * > is only one child component, the sidebar is displayed, and the content area is blank.
  * >
- * > - The focus navigation is performed in the content area and then in the sidebar of the **SideBarContainer**
- * > component.
+ * > - The focus navigation is performed in the content area and then in the sidebar of the **SideBarContainer** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

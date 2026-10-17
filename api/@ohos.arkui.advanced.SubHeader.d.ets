@@ -193,8 +193,8 @@ export declare class OperationOption {
   /**
    * Right button ID in the subtitle. Set this parameter when an ID needs to be set for the right button in the
    * subtitle. When omitted, this parameter is not set.
+   * Default value: **undefined**,
    * indicating that no right button ID is set in the subtitle.
-   * Default value: **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -265,9 +265,9 @@ export declare class SelectOptions {
   /**
    * Callback for when an item is selected in the dropdown menu.
    *
-   * - index: index of the selected item.
+   * @param { number } index - index of the selected item.
    *
-   * - value: value of the selected item.
+   * @param { string } value - value of the selected item.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -298,8 +298,8 @@ export declare class SelectOptions {
   /**
    * Dropdown button ID. Set this parameter when an ID needs to be set for the dropdown button. When omitted, this
    * parameter is not set.
+   * Default value: **undefined**,
    * indicating that no dropdown button ID is set.
-   * Default value: **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -684,8 +684,8 @@ export declare struct SubHeader {
 
   /**
    * Title identifier. Use this parameter when an ID needs to be set for the title.
+   * Default value: **undefined**,
    * indicating that no title identifier is set.
-   * Default value: **undefined**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -650,8 +650,8 @@ declare interface TabBarBadgeStyle {
  * > **NOTE**
  * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
- * > While historical version information is preserved for anonymous objects, there may be cases where the outer element
- * > 's @since version number is higher than inner elements'. This does not affect interface usability.
+ * > While historical version information is preserved for anonymous objects, there may be cases where the outer element's
+ * > @since version number is higher than inner elements'. This does not affect interface usability.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -784,7 +784,15 @@ declare class SubTabBarStyle {
    * the display effect of the image, see [ImageFit.Cover]{@link ImageFit}. It takes effect only in the horizontal
    * layout.
    *
-   * @param { IndicatorStyle | DrawableTabBarIndicator } value - Yes
+   * > **NOTE**
+   * > 
+   * > - **IndicatorStyle**: a solid line. By default, the animation transition effect is displayed when a tab is switched.
+   * > 
+   * > - **DrawableTabBarIndicator**: an image. By default, the animation transition effect is not displayed when a tab is switched.
+   * > If an invalid image source is passed, the common indicator style is displayed.
+   * 
+   * @param { IndicatorStyle | DrawableTabBarIndicator } value - Indicator style object for the selected subtab.
+   *     **IndicatorStyle**: common indicator style.<br>**DrawableTabBarIndicator**: image indicator style.
    * @returns { SubTabBarStyle } The **SubTabBarStyle** object itself, which is used for chain calling.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
