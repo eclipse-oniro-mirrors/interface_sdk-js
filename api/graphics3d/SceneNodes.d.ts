@@ -508,9 +508,8 @@ export interface DirectionalLight extends Light {
  *
  * A point light emits light uniformly in all directions from a single point in space.
  *
- * @extends Light
- * @interface PointLight
  * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
  * @since 26.2.0 dynamic&static
  */
 export interface PointLight extends Light {
@@ -521,8 +520,7 @@ export interface PointLight extends Light {
    * based on the light intensity.
    * The value must be greater than 0. Default value: Refer to the calculated value of intensity.
    *
-   * @type { ?double }
-   * @default need to be  decided
+   * @default need to be decided
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
    * @since 26.2.0 dynamic&static
@@ -536,8 +534,6 @@ export interface PointLight extends Light {
  * A rect light emits light from a rectangular area, simulating soft area lighting effects
  * from one side of the rectangle by default. When twoSided is enabled, light is emitted from both sides.
  *
- * @extends Light
- * @interface RectLight
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
  * @since 26.2.0 dynamic&static
@@ -548,7 +544,6 @@ export interface RectLight extends Light {
    * in the world coordinate system.
    * Default value: Default value: 1.
    *
-   * @type { ?double }
    * @default 1.0
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
@@ -561,7 +556,6 @@ export interface RectLight extends Light {
    * in the world coordinate system.
    * The value must be greater than 0.
    *
-   * @type { ?double }
    * @default 1.0
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
@@ -574,7 +568,6 @@ export interface RectLight extends Light {
    * When set to false, light is emitted only from the front side (determined by the node's rotation).
    * Default value: Default value: false.
    *
-   * @type { ?boolean }
    * @default false
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
