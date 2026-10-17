@@ -6964,7 +6964,7 @@ declare namespace window {
      *
      * @param { Orientation } orientation - 窗口显示方向的属性。
      * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible cause: Failed to convert parameter to Orientation.
+     * @throws { BusinessError } 401 - Parameter error. Possible cause: Invalid parameter value range.
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     1. The window is not created or destroyed;
      *     2. Internal task error.
@@ -7263,7 +7263,7 @@ declare namespace window {
      *
      * @param { Orientation } orientation - 窗口显示方向的属性。
      * @param { AsyncCallback<void> } callback - 回调函数。该回调函数返回调用结果是否成功，非应用旋转动效结束。
-     * @throws { BusinessError } 401 - Parameter error. Possible cause: Failed to convert parameter to Orientation.
+     * @throws { BusinessError } 401 - Parameter error. Possible cause: Invalid parameter value range.
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     1. The window is not created or destroyed;
      *     2. Internal task error.
@@ -12550,7 +12550,7 @@ declare namespace window {
      *     1. The window is not created or destroyed;
      *     2. Internal task error.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
-     * @throws { BusinessError } 1300004 - Unauthorized operation.
+     * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause: Invalid window type. Only main windows are supported.
      * @throws { BusinessError } 1300016 - Parameter error. Possible cause:
      *     1. Invalid parameter range;
      *     2. Invalid parameter length.
@@ -12576,7 +12576,7 @@ declare namespace window {
      *     1. The window is not created or destroyed;
      *     2. Internal task error.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
-     * @throws { BusinessError } 1300004 - Unauthorized operation.
+     * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause: Invalid window type. Only main windows are supported.
      * @throws { BusinessError } 1300016 - Parameter error. Possible cause: 1. Invalid parameter range.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -12837,7 +12837,7 @@ declare namespace window {
      */
     isTopmost?: boolean;
     /**
-     * 子窗口模态类型，仅当子窗口启用模态属性时生效。不设置，则默认为WINDOW_MODALITY。
+     * 子窗口模态类型，仅当子窗口启用模态属性（即isModal为true）时可设置并生效，否则设置该参数会抛异常。不设置，则默认为WINDOW_MODALITY。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
