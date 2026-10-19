@@ -7791,7 +7791,7 @@ declare interface ForegroundEffectOptions {
 declare interface PickerTextStyle {
 
   /**
-   * Define the text color of picker.
+   * 选择器文本颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7800,7 +7800,7 @@ declare interface PickerTextStyle {
    * @since 10
    */
   /**
-   * Font color.
+   * 文本颜色，用于自定义选择器中文字的颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7812,8 +7812,8 @@ declare interface PickerTextStyle {
   color?: ResourceColor;
 
   /**
-   * Define the text font of picker.
-   * Only support size and weight.
+   * 选择器文本字体样式。
+   * 仅支持size和weight。
    *
    * @type { ?Font }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7822,7 +7822,7 @@ declare interface PickerTextStyle {
    * @since 10
    */
   /**
-   * Text style.
+   * 文本样式，包括字体大小、字体粗细、字体族等属性。
    *
    * @type { ?Font }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7835,7 +7835,7 @@ declare interface PickerTextStyle {
 }
 
 /**
- * Provide an interface for the button style of picker
+ * 提供选择器按钮样式的接口。
  *
  * @interface PickerDialogButtonStyle
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7847,7 +7847,7 @@ declare interface PickerTextStyle {
 declare interface PickerDialogButtonStyle {
 
   /**
-   * Describes the button style.
+   * 描述按钮样式。
    *
    * @type { ?ButtonType }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7859,7 +7859,7 @@ declare interface PickerDialogButtonStyle {
   type?: ButtonType;
 
   /**
-   * Describes the button style.
+   * 描述按钮样式。
    *
    * @type { ?ButtonStyleMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7871,7 +7871,7 @@ declare interface PickerDialogButtonStyle {
   style?: ButtonStyleMode;
 
   /**
-   * Describes the button role.
+   * 描述按钮角色。
    *
    * @type { ?ButtonRole }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7883,7 +7883,7 @@ declare interface PickerDialogButtonStyle {
   role?: ButtonRole;
 
   /**
-   * Describes the button text size.
+   * 描述按钮文本大小。
    *
    * @type { ?Length }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7895,7 +7895,7 @@ declare interface PickerDialogButtonStyle {
   fontSize?: Length;
 
   /**
-   * Describes the button text color.
+   * 描述按钮文本颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7907,7 +7907,7 @@ declare interface PickerDialogButtonStyle {
   fontColor?: ResourceColor;
 
   /**
-   * Describes the button font weight.
+   * 描述按钮字体粗细。
    *
    * @type { ?(FontWeight | number | string) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7919,7 +7919,7 @@ declare interface PickerDialogButtonStyle {
   fontWeight?: FontWeight | number | string;
 
   /**
-   * Describes the button font style.
+   * 描述按钮字体样式。
    *
    * @type { ?FontStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7931,7 +7931,7 @@ declare interface PickerDialogButtonStyle {
   fontStyle?: FontStyle;
 
   /**
-   * Describes the button font family.
+   * 描述按钮字体族。
    *
    * @type { ?(Resource | string) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7943,7 +7943,7 @@ declare interface PickerDialogButtonStyle {
   fontFamily?: Resource | string;
 
   /**
-   * Describes the button background color.
+   * 描述按钮背景颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7955,7 +7955,7 @@ declare interface PickerDialogButtonStyle {
   backgroundColor?: ResourceColor;
 
   /**
-   * Describes the button border radius.
+   * 圆角半径，用于设置按钮的圆角大小。
    *
    * @type { ?(Length | BorderRadiuses) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7967,7 +7967,7 @@ declare interface PickerDialogButtonStyle {
   borderRadius?: Length | BorderRadiuses;
 
   /**
-   * Define whether the button default to responding to the Enter key
+   * 控制弹出弹窗后，Enter键是否默认由该按钮响应。
    *
    * @type { ?boolean }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16996,7 +16996,7 @@ declare enum AvailableLayoutArea {
 }
 
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -17007,7 +17007,7 @@ declare enum AvailableLayoutArea {
 declare class ContentTransitionEffect {
 
   /**
-   * When the content changes, there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @type { ContentTransitionEffect }
    * @static
@@ -17020,7 +17020,7 @@ declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes, there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @type { ContentTransitionEffect }
    * @static
@@ -21067,9 +21067,9 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Sets the border image of the component.
+   * 设置组件的边框图片。
    *
-   * @param { BorderImageOption } value - 
+   * @param { BorderImageOption } value - 边框图片或边框渐变。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform
@@ -30193,7 +30193,7 @@ declare enum HoverModeAreaType {
 }
 
 /**
- * Defines a range of dates.
+ * 日期区间，用于描述起止日期区间。
  *
  * @interface DateRange
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30205,7 +30205,7 @@ declare enum HoverModeAreaType {
 declare interface DateRange {
 
   /**
-   * Defines the start date of the date range.
+   * 设置日期区间的开始日期，应不晚于结束日期。不传入、日期格式错误、日期超出系统支持范围或start晚于end时，该日期区间无效。
    *
    * @type { ?Date }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30217,7 +30217,7 @@ declare interface DateRange {
   start?: Date;
 
   /**
-   * Defines the end date of the date range.
+   * 设置日期区间的结束日期。不传入、日期格式错误、日期超出系统支持范围或end早于start时，该日期区间无效。
    *
    * @type { ?Date }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
