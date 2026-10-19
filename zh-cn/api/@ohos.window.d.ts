@@ -11778,8 +11778,10 @@ declare namespace window {
      * 置preferMultiWindowOrientation属性为"landscape_auto"。
      *
      * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 1300002  - 该窗口状态异常。可能原因：窗口未创建或已销毁。
-     * @throws { BusinessError } 1300003  - 窗口管理器服务运行异常。可能原因：内部错误。
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     *     The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
+     *     Internal task error.
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 12 dynamic
@@ -11892,8 +11894,10 @@ declare namespace window {
      * 置preferMultiWindowOrientation属性为"landscape_auto"。
      *
      * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 1300002  - 该窗口状态异常。可能原因：窗口未创建或已销毁。
-     * @throws { BusinessError } 1300003  - 窗口管理器服务运行异常。可能原因：内部错误。
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     *     The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
+     *     Internal task error.
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 12 dynamic
