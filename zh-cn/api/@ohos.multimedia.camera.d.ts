@@ -597,7 +597,7 @@ declare namespace camera {
   }
 
   /**
-   * Defines the effect parameters used to preheat an image.
+   * 定义用于预热图像的效果参数。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -606,9 +606,9 @@ declare namespace camera {
    */
   interface SettingParam {
     /**
-     * Skin smoothing level, which is obtained through
-     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value **1**
-     * indicates level-1 smoothing.
+     * 磨皮级别，通过
+     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}获取。例如，值**1**
+     * 表示1级磨皮。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -618,9 +618,9 @@ declare namespace camera {
     skinSmoothLevel: int;
 
     /**
-     * Face slimming level, which is obtained through
-     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value **1**
-     * indicates level-1 slimming.
+     * 瘦脸级别，通过
+     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}获取。例如，值**1**
+     * 表示1级瘦脸。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -630,9 +630,9 @@ declare namespace camera {
     faceSlender: int;
 
     /**
-     * Skin tone perfection level, which is obtained through
-     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}. For example, the value
-     * **0xBF986C** indicates a specific color.
+     * 美肤级别，通过
+     * [Beauty.getSupportedBeautyRange]{@link camera.BeautyQuery.getSupportedBeautyRange}获取。例如，值
+     * **0xBF986C**表示特定颜色。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -4474,9 +4474,9 @@ declare namespace camera {
     getZoomPointInfos(): Array<ZoomPointInfo>;
 
     /**
-     * Checks whether zoom center point is supported.
+     * 检查是否支持变焦中心点。
      *
-     * @returns { boolean } Is the zoom center point supported.
+     * @returns { boolean } 是否支持变焦中心点。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config, only throw in session usage.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4553,7 +4553,7 @@ declare namespace camera {
     setSmoothZoom(targetRatio: double, mode?: SmoothZoomMode): void;
 
     /**
-     * Instructs the bottom layer to prepare for zooming, for example, powering on the sensor.
+     * 指示底层准备变焦，例如给传感器上电。
      *
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -4565,7 +4565,7 @@ declare namespace camera {
     prepareZoom(): void;
 
     /**
-     * Instructs the bottom layer to unprepare for zooming.
+     * 指示底层取消变焦准备。
      *
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -4577,9 +4577,9 @@ declare namespace camera {
     unprepareZoom(): void;
 
     /**
-     * Sets zoom center point.
+     * 设置变焦中心点。
      *
-     * @param { Point } point - Target zoom center point.
+     * @param { Point } point - 目标变焦中心点。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -4590,9 +4590,9 @@ declare namespace camera {
     setZoomCenterPoint(point: Point): void;
 
     /**
-     * Gets zoom center point.
+     * 获取变焦中心点。
      *
-     * @returns { Point } The current zoom center point.
+     * @returns { Point } 当前变焦中心点。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5816,10 +5816,10 @@ declare namespace camera {
     release(): Promise<void>;
 
     /**
-     * Set usage for the capture session.
+     * 设置会话的使用类型。
      *
-     * @param { UsageType } usage - The capture session usage.
-     * @param { boolean } enabled - Enable usage for session if TRUE.
+     * @param { UsageType } usage - 拍照会话使用类型。
+     * @param { boolean } enabled - 是否为会话启用该使用类型。true表示启用，false表示不启用。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400102 - Operation not allowed.
@@ -5833,10 +5833,10 @@ declare namespace camera {
     setUsage(usage: UsageType, enabled: boolean): void;
 
     /**
-     * Get the supported camera output capability set.
+     * 获取支持相机输出能力集合。
      *
-     * @param { CameraDevice } camera - Camera device.
-     * @returns { Array<CameraOutputCapability> } The array of the output capability.
+     * @param { CameraDevice } camera - 相机设备。
+     * @returns { Array<CameraOutputCapability> } 输出能力数组。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -5848,9 +5848,9 @@ declare namespace camera {
     getCameraOutputCapabilities(camera: CameraDevice): Array<CameraOutputCapability>;
 
     /**
-     * Sets key-value pairs parameters for the session.
+     * 设置会话的键值对参数。
      *
-     * @param { Record<string, string> } kvpairs - The pairs of tag name and value in camera metadata.
+     * @param { Record<string, string> } kvpairs - 相机元数据中标签名和值的键值对。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400102 - Operation not allowed.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -5863,10 +5863,10 @@ declare namespace camera {
     setParameters(kvpairs: Record<string, string>): void;
 
     /**
-     * Gets the values of the given key in camera metadata.
+     * 获取相机元数据中指定键的值。
      *
-     * @param { string } key - Tag name in camera metadata.
-     * @returns { Array<string> } The values of the key in camera metadata.
+     * @param { string } key - 相机元数据中的标签名。
+     * @returns { Array<string> } 相机元数据中该键对应的值数组。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400102 - Operation not allowed.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -5879,9 +5879,9 @@ declare namespace camera {
     getParameters(key: string): Array<string>;
 
     /**
-     * Gets the supported keys in camera metadata.
+     * 获取相机元数据中支持的键。
      *
-     * @returns { Array<string> } The supported keys in camera metadata.
+     * @returns { Array<string> } 相机元数据中支持的键数组。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -5893,10 +5893,10 @@ declare namespace camera {
     getSupportedKeys(): Array<string>;
 
     /**
-     * Gets the active value of the given key in camera metadata.
+     * 获取相机元数据中指定键的当前生效值。
      *
-     * @param { string } key - Tag name in camera metadata.
-     * @returns { string } The active value of the key in camera metadata.
+     * @param { string } key - 相机元数据中的标签名。
+     * @returns { string } 相机元数据中该键的当前生效值。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400102 - Operation not allowed.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -6921,7 +6921,7 @@ declare namespace camera {
 
   /**
    * TripodDetectionResult extends [SceneFeatureDetectionResult]{@link camera.SceneFeatureDetectionResult}
-   * Describes the tripod detection result.
+   * 描述三脚架检测结果。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -6930,7 +6930,7 @@ declare namespace camera {
    */
   interface TripodDetectionResult extends SceneFeatureDetectionResult {
     /**
-     * Tripod status.
+     * 三脚架状态。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -7692,9 +7692,9 @@ declare namespace camera {
   }
 
   /**
-   * Implements a video session for system applications, which sets the parameters of the normal video mode and saves
-   * all [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
+   * 为系统应用实现视频会话，用于设置普通视频模式的参数，并保存运行相机所需的所有
+   * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}实例。
+   * 此接口继承自[Session]{@link camera.Session}。
    *
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro [since 11 - 14]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation [since 15 - 17]
@@ -7818,9 +7818,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 订阅错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取拍照会话错误信息。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -7838,9 +7838,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 取消订阅错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取拍照会话错误信息。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -7862,9 +7862,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 订阅对焦状态变化事件回调。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -7882,9 +7882,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 取消订阅对焦状态变化事件回调。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -7906,9 +7906,9 @@ declare namespace camera {
     on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Subscribes zoom info event callback.
+     * 订阅变焦信息事件回调。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取变焦信息。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -7926,9 +7926,9 @@ declare namespace camera {
     off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from zoom info event callback.
+     * 取消订阅变焦信息事件回调。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - 回调函数，用于获取变焦信息。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -7950,9 +7950,9 @@ declare namespace camera {
      on(type: 'controlCenterEffectStatusChange', callback: AsyncCallback<ControlCenterStatusInfo>): void;
 
      /**
-      * Subscribes to control center effect status change callback.
+      * 订阅控制中心效果状态变化回调。
       *
-      * @param { AsyncCallback<ControlCenterStatusInfo> } callback - Callback used to get control center effect status.
+      * @param { AsyncCallback<ControlCenterStatusInfo> } callback - 用于获取控制中心效果状态的回调函数。
       * @syscap SystemCapability.Multimedia.Camera.Core
       * @since 23 static
       */
@@ -7972,9 +7972,9 @@ declare namespace camera {
      off(type: 'controlCenterEffectStatusChange', callback?: AsyncCallback<ControlCenterStatusInfo>): void;
 
      /**
-      * Unsubscribes to control center effect status change callback.
+      * 取消订阅控制中心效果状态变化回调。
       *
-      * @param { AsyncCallback<ControlCenterStatusInfo> } [callback] - Callback used to get control center effect
+      * @param { AsyncCallback<ControlCenterStatusInfo> } [callback] - 用于获取控制中心效果状态的回调函数。
       *     status.
       * @syscap SystemCapability.Multimedia.Camera.Core
       * @since 23 static
@@ -7996,11 +7996,10 @@ declare namespace camera {
     on(type: 'macroStatusChanged', callback: AsyncCallback<boolean>): void;
 
     /**
-     * Subscribes camera macro status event callback.
+     * 订阅相机微距状态事件回调。
      *
-     * @param { AsyncCallback<boolean> } callback - Callback used to return macro detection result,
-     *     true indicating macro scene is detected and can be enabled, false indicating no macro scene is detected,
-     *     and macro should be disabled.
+     * @param { AsyncCallback<boolean> } callback - 用于返回微距检测结果的回调函数。返回 **true** 表示检测到微距场景，
+     *     可以启用微距功能；返回 **false** 表示未检测到微距场景，应关闭微距功能。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -8022,22 +8021,20 @@ declare namespace camera {
     off(type: 'macroStatusChanged', callback?: AsyncCallback<boolean>): void;
 
     /**
-     * Unsubscribes camera macro status event callback.
+     * 取消订阅相机微距状态事件回调。
      *
-     * @param { AsyncCallback<boolean> } [callback] - Callback used to return macro detection result,
-     *     true indicating macro scene is detected and can be enabled, false indicating no macro scene is detected,
-     *     and macro should be disabled.
+     * @param { AsyncCallback<boolean> } [callback] - 用于返回微距检测结果的回调函数。返回 **true** 表示检测到微距场景，
+     *     可以启用微距功能；返回 **false** 表示未检测到微距场景，应关闭微距功能。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
     offMacroStatusChanged(callback?: AsyncCallback<boolean>): void;
 
     /**
-     * Subscribes to LCD flash status change events. This API uses an asynchronous callback to return the result.
+     * 订阅 LCD 闪光灯状态变化事件。此接口通过异步回调返回结果。
      *
-     * @param { 'lcdFlashStatus' } type - Event type. The value is fixed at **'lcdFlashStatus'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<LcdFlashStatus> } callback - Callback used to return the LCD flash status change.
+     * @param { 'lcdFlashStatus' } type - 事件类型，固定为 **'lcdFlashStatus'**。创建会话后可监听此事件。
+     * @param { AsyncCallback<LcdFlashStatus> } callback - 用于接收 LCD 闪光灯状态变化信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8046,9 +8043,9 @@ declare namespace camera {
     on(type: 'lcdFlashStatus', callback: AsyncCallback<LcdFlashStatus>): void;
 
     /**
-     * Subscribes to lcd flash status.
+     * 订阅 LCD 闪光灯状态。
      *
-     * @param { AsyncCallback<LcdFlashStatus> } callback - Callback used to get the lcd flash status.
+     * @param { AsyncCallback<LcdFlashStatus> } callback - 用于获取 LCD 闪光灯状态的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8057,13 +8054,12 @@ declare namespace camera {
     onLcdFlashStatus(callback: AsyncCallback<LcdFlashStatus>): void;
 
     /**
-     * Unsubscribes from LCD flash status change events.
+     * 取消订阅 LCD 闪光灯状态变化事件。
      *
-     * @param { 'lcdFlashStatus' } type - Event type. The value is fixed at **'lcdFlashStatus'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<LcdFlashStatus> } callback - Callback used to return the result. This parameter is
-     *     optional. If this parameter is specified, the subscription to the specified event **on('lcdFlashStatus')**
-     *     with the specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'lcdFlashStatus' } type - 事件类型，固定为 **'lcdFlashStatus'**。创建会话后可监听此事件。
+     * @param { AsyncCallback<LcdFlashStatus> } callback - 用于接收结果的回调函数。此参数可选。
+     *     如果指定此参数，则取消订阅通过 **on('lcdFlashStatus')** 注册的、使用该回调函数的事件。
+     *     回调函数不能是匿名函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8072,9 +8068,9 @@ declare namespace camera {
     off(type: 'lcdFlashStatus', callback?: AsyncCallback<LcdFlashStatus>): void;
 
     /**
-     * Unsubscribes from lcd flash status.
+     * 取消订阅 LCD 闪光灯状态。
      *
-     * @param { AsyncCallback<LcdFlashStatus> } [callback] - Callback used to get the lcd flash status.
+     * @param { AsyncCallback<LcdFlashStatus> } [callback] - 用于获取 LCD 闪光灯状态的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8098,9 +8094,9 @@ declare namespace camera {
     on(type: 'autoDeviceSwitchStatusChange', callback: AsyncCallback<AutoDeviceSwitchStatus>): void;
 
     /**
-     * Subscribes to auto device switch status event callback.
+     * 订阅自动设备切换状态事件回调。
      *
-     * @param { AsyncCallback<AutoDeviceSwitchStatus> } callback - Callback used to return the result.
+     * @param { AsyncCallback<AutoDeviceSwitchStatus> } callback - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -8119,20 +8115,20 @@ declare namespace camera {
     off(type: 'autoDeviceSwitchStatusChange', callback?: AsyncCallback<AutoDeviceSwitchStatus>): void;
 
     /**
-     * Unsubscribes to auto device switch status event callback.
+     * 取消订阅自动设备切换状态事件回调。
      *
-     * @param { AsyncCallback<AutoDeviceSwitchStatus> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<AutoDeviceSwitchStatus> } [callback] - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
     offAutoDeviceSwitchStatusChange(callback?: AsyncCallback<AutoDeviceSwitchStatus>): void;
 
     /**
-     * Subscribes to focus tracking information events. This API uses an asynchronous callback to return the result.
+     * 订阅对焦跟踪信息事件。此接口通过异步回调返回结果。
      *
-     * @param { 'focusTrackingInfoAvailable' } type - Event type. The value is fixed at
-     *     **'focusTrackingInfoAvailable'**. The event can be listened for when a VideoSessionForSys object is created.
-     * @param { Callback<FocusTrackingInfo> } callback - Callback used to return the focus tracking information.
+     * @param { 'focusTrackingInfoAvailable' } type - 事件类型，固定为 **'focusTrackingInfoAvailable'**。
+     *     创建 VideoSessionForSys 对象后可监听此事件。
+     * @param { Callback<FocusTrackingInfo> } callback - 用于接收对焦跟踪信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8141,9 +8137,9 @@ declare namespace camera {
     on(type: 'focusTrackingInfoAvailable', callback: Callback<FocusTrackingInfo>): void;
 
     /**
-     * Subscribes to focus tracking info event callback.
+     * 订阅对焦跟踪信息事件。
      *
-     * @param { Callback<FocusTrackingInfo> } callback - Callback used to get the focus tracking info.
+     * @param { Callback<FocusTrackingInfo> } callback - 用于接收对焦跟踪信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8152,13 +8148,13 @@ declare namespace camera {
     onFocusTrackingInfoAvailable(callback: Callback<FocusTrackingInfo>): void;
 
     /**
-     * Unsubscribes from focus tracking information events.
+     * 取消订阅对焦跟踪信息事件。
      *
-     * @param { 'focusTrackingInfoAvailable' } type - Event type. The value is fixed at
-     *     **'focusTrackingInfoAvailable'**. The event can be listened for when a VideoSessionForSys object is created.
-     * @param { Callback<FocusTrackingInfo> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('focusTrackingInfoAvailable')**
-     *     with the specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'focusTrackingInfoAvailable' } type - 事件类型，固定为 **'focusTrackingInfoAvailable'**。
+     *     创建 VideoSessionForSys 对象后可监听此事件。
+     * @param { Callback<FocusTrackingInfo> } callback - 用于接收结果的回调函数。此参数可选。
+     *     如果指定此参数，则取消订阅通过 **on('focusTrackingInfoAvailable')** 注册的、使用该回调函数的事件。
+     *     回调函数不能是匿名函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8167,9 +8163,9 @@ declare namespace camera {
     off(type: 'focusTrackingInfoAvailable', callback?: Callback<FocusTrackingInfo>): void;
 
     /**
-     * Unsubscribes from focus tracking info event callback.
+     * 取消订阅对焦跟踪信息事件。
      *
-     * @param { Callback<FocusTrackingInfo> } [callback] - Callback used to get the focus tracking info.
+     * @param { Callback<FocusTrackingInfo> } [callback] - 用于接收结果的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8178,10 +8174,10 @@ declare namespace camera {
     offFocusTrackingInfoAvailable(callback?: Callback<FocusTrackingInfo>): void;
 
     /**
-     * Subscribes to effect suggestion change events.
+     * 订阅效果建议事件回调。
      *
-     * @param { 'effectSuggestionChange' } type - Event type.
-     * @param { AsyncCallback<EffectSuggestionType> } callback - Callback used to return the result.
+     * @param { 'effectSuggestionChange' } type - 事件类型。
+     * @param { AsyncCallback<EffectSuggestionType> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8190,9 +8186,9 @@ declare namespace camera {
     on(type: 'effectSuggestionChange', callback: AsyncCallback<EffectSuggestionType>): void;
 
     /**
-     * Subscribes to effect suggestion change events.
+     * 订阅效果建议事件回调。
      *
-     * @param { AsyncCallback<EffectSuggestionType> } callback - Callback used to return the result.
+     * @param { AsyncCallback<EffectSuggestionType> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8201,10 +8197,10 @@ declare namespace camera {
     onEffectSuggestionChange(callback: AsyncCallback<EffectSuggestionType>): void;
 
     /**
-     * Unsubscribes from effect suggestion change events.
+     * 取消订阅效果建议事件回调。
      *
      * @param { 'effectSuggestionChange' } type - Event type.
-     * @param { AsyncCallback<EffectSuggestionType> } callback - Callback used to return the result.
+     * @param { AsyncCallback<EffectSuggestionType> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8213,9 +8209,9 @@ declare namespace camera {
     off(type: 'effectSuggestionChange', callback?: AsyncCallback<EffectSuggestionType>): void;
 
     /**
-     * Unsubscribes from effect suggestion change events.
+     * 取消订阅效果建议事件回调。
      *
-     * @param { AsyncCallback<EffectSuggestionType> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<EffectSuggestionType> } [callback] - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8224,12 +8220,11 @@ declare namespace camera {
     offEffectSuggestionChange(callback?: AsyncCallback<EffectSuggestionType>): void;
 
     /**
-     * Subscribes to camera light status changes. This API uses an asynchronous callback to return the result.
+     * 订阅相机补光灯状态变化事件。此接口通过异步回调返回结果。
      *
-     * @param { 'lightStatusChange' } type - Event type. The value is fixed at **'lightStatusChange'**.
-     *     <br>The event can
-     *     be listened for when a VideoSessionForSys object is created.
-     * @param { AsyncCallback<LightStatus> } callback - Callback used to return the light status information.
+     * @param { 'lightStatusChange' } type - 事件类型，固定为 **'lightStatusChange'**。
+     *     创建 VideoSessionForSys 对象后可监听此事件。
+     * @param { AsyncCallback<LightStatus> } callback - 用于接收补光灯状态信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8238,9 +8233,9 @@ declare namespace camera {
     on(type: 'lightStatusChange', callback: AsyncCallback<LightStatus>): void;
 
     /**
-     * Subscribes camera light status event callback.
+     * 订阅相机补光灯状态变化事件。
      *
-     * @param { AsyncCallback<LightStatus> } callback - Callback used to return the result.
+     * @param { AsyncCallback<LightStatus> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8249,14 +8244,13 @@ declare namespace camera {
     onLightStatusChange(callback: AsyncCallback<LightStatus>): void;
 
     /**
-     * Unsubscribes from camera light status changes.
+     * 取消订阅相机补光灯状态变化事件。
      *
-     * @param { 'lightStatusChange' } type - Event type. The value is fixed at **'lightStatusChange'**.
-     *     <br>The event can
-     *     be listened for when a VideoSessionForSys object is created.
-     * @param { AsyncCallback<LightStatus> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('lightStatusChange')** with the
-     *     specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'lightStatusChange' } type - 事件类型，固定为 **'lightStatusChange'**。
+     *     创建 VideoSessionForSys 对象后可监听此事件。
+     * @param { AsyncCallback<LightStatus> } callback - 用于接收结果的回调函数。此参数可选。
+     *     如果指定此参数，则取消订阅通过 **on('lightStatusChange')** 注册的、使用该回调函数的事件。
+     *     回调函数不能是匿名函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8265,9 +8259,9 @@ declare namespace camera {
     off(type: 'lightStatusChange', callback?: AsyncCallback<LightStatus>): void;
 
     /**
-     * Unsubscribes camera light status event callback.
+     * 取消订阅相机补光灯状态变化事件。
      *
-     * @param { AsyncCallback<LightStatus> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<LightStatus> } [callback] - 用于接收结果的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8291,9 +8285,9 @@ declare namespace camera {
     on(type: 'systemPressureLevelChange', callback: AsyncCallback<SystemPressureLevel>): void;
 
     /**
-     * Subscribes to system pressure level event callback.
+     * 订阅系统压力状态事件回调。
      *
-     * @param { AsyncCallback<SystemPressureLevel> } callback - Callback used to return the result.
+     * @param { AsyncCallback<SystemPressureLevel> } callback - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -8312,19 +8306,19 @@ declare namespace camera {
     off(type: 'systemPressureLevelChange', callback?: AsyncCallback<SystemPressureLevel>): void;
 
     /**
-     * Unsubscribes to system pressure level event callback.
+     * 取消订阅系统压力状态事件回调。
      *
-     * @param { AsyncCallback<SystemPressureLevel> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<SystemPressureLevel> } [callback] - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
     offSystemPressureLevelChange(callback?: AsyncCallback<SystemPressureLevel>): void;
 
     /**
-     * Gets session functions.
+     * 获取会话功能列表。
      *
-     * @param { CameraOutputCapability } outputCapability - CameraOutputCapability to set.
-     * @returns { Array<VideoFunctions> } List of session functions.
+     * @param { CameraOutputCapability } outputCapability - 要设置的CameraOutputCapability。
+     * @returns { Array<VideoFunctions> } 会话功能列表。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
@@ -8336,9 +8330,9 @@ declare namespace camera {
     getSessionFunctions(outputCapability: CameraOutputCapability): Array<VideoFunctions>;
 
     /**
-     * Gets session conflict functions.
+     * 获取会话冲突功能列表。
      *
-     * @returns { Array<VideoConflictFunctions> } List of session conflict functions.
+     * @returns { Array<VideoConflictFunctions> } 会话冲突功能列表。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8418,9 +8412,9 @@ declare namespace camera {
     offExposureInfoChange(callback?: Callback<ExposureInfo>): void;
 
     /**
-     * Subscribes aperture info event callback.
+     * 订阅光圈信息事件回调。
      *
-     * @param { Callback<ApertureInfo> } callback - Callback used to get the aperture info.
+     * @param { Callback<ApertureInfo> } callback - 用于获取光圈信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -8430,9 +8424,9 @@ declare namespace camera {
     onApertureInfoChange(callback: Callback<ApertureInfo>): void;
 
     /**
-     * Unsubscribes from aperture info event callback.
+     * 取消订阅光圈信息事件回调。
      *
-     * @param { Callback<ApertureInfo> } [callback] - Callback used to get the aperture info.
+     * @param { Callback<ApertureInfo> } [callback] - 用于获取光圈信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10606,10 +10600,10 @@ declare namespace camera {
 
   /**
    * SlowMotionVideoSession extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect
-   * Implements a slow-motion video session, which sets the parameters of the slow-motion video mode and saves all
+   * 实现慢动作录像会话，设置慢动作录像模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * instances required to run the camera. It inherits from [Session]{@link camera.Session}.
-   * 
+   * 实例。继承自[Session]{@link camera.Session}。
+   *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
    * @since 12 dynamic
@@ -10617,17 +10611,14 @@ declare namespace camera {
    */
   interface SlowMotionVideoSession extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect {
     /**
-     * Subscribes to HighResolutionPhotoSession error events. This API uses an asynchronous callback to return the
-     * result.
+     * 订阅HighResolutionPhotoSession错误事件。使用callback异步回调。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created. This event is triggered and the error message is returned when an error occurs during the
-     *     calling of a session-related API such as
-     *     [beginConfig]{@link camera.Session.beginConfig},
-     *     [commitConfig]{@link camera.Session.commitConfig()}, and
-     *     [addInput]{@link camera.Session.addInput}.
-     * @param { ErrorCallback } callback - Callback used to return an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode}.
+     * @param { 'error' } type - 事件类型。固定为**'error'**。session创建成功后可监听该事件。当调用会话相关接口如
+     *     [beginConfig]{@link camera.Session.beginConfig}、
+     *     [commitConfig]{@link camera.Session.commitConfig()}、
+     *     [addInput]{@link camera.Session.addInput}等发生错误时触发该事件并返回错误信息。
+     * @param { ErrorCallback } callback - 回调函数，用于返回错误码，错误码类型
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10636,9 +10627,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 订阅错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the capture session errors.
+     * @param { ErrorCallback } callback - 回调函数，用于获取会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10647,13 +10638,11 @@ declare namespace camera {
     onError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from HighResolutionPhotoSession error events.
+     * 取消订阅HighResolutionPhotoSession错误事件。
      *
-     * @param { 'error' } type - Event type. The value is fixed at **'error'**. The event can be listened for when a
-     *     session is created.
-     * @param { ErrorCallback } callback - Callback used to return the result. This parameter is optional. If this
-     *     parameter is specified, the subscription to the specified event **on('error')** with the specified callback
-     *     is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'error' } type - 事件类型，固定为**'error'**。session创建成功后可监听该事件。
+     * @param { ErrorCallback } [callback] - 回调函数，用于返回结果。此参数为可选参数。
+     *     如果指定此参数，则取消订阅指定事件**on('error')**中指定的callback。（callback对象不可是匿名函数。）
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10662,9 +10651,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 取消订阅错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the capture session errors.
+     * @param { ErrorCallback } [callback] - 回调函数，用于获取拍照会话错误信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10673,12 +10662,11 @@ declare namespace camera {
     offError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to focus state change events. This API uses an asynchronous callback to return the result.
+     * 订阅对焦状态变化事件。使用callback异步回调。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created. This event is triggered only when the camera focus state changes in
-     *     auto focus mode.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the focus state change.
+     * @param { 'focusStateChange' } type - 事件类型，固定为**'focusStateChange'**。
+     *     session创建成功后可监听该事件。仅在自动对焦模式下相机对焦状态发生变化时触发该事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于返回对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10687,9 +10675,9 @@ declare namespace camera {
     on(type: 'focusStateChange', callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes focus state change event callback.
+     * 订阅对焦状态变化事件回调。
      *
-     * @param { AsyncCallback<FocusState> } callback - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10698,13 +10686,12 @@ declare namespace camera {
     onFocusStateChange(callback: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change events.
+     * 取消订阅对焦状态变化事件。
      *
-     * @param { 'focusStateChange' } type - Event type. The value is fixed at **'focusStateChange'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<FocusState> } callback - Callback used to return the result. This parameter is optional.
-     *     If this parameter is specified, the subscription to the specified event **on('focusStateChange')** with the
-     *     specified callback is canceled. (The callback object cannot be an anonymous function.)
+     * @param { 'focusStateChange' } type - 事件类型，固定为**'focusStateChange'**。session创建成功后可监听该事件。
+     * @param { AsyncCallback<FocusState> } callback - 回调函数，用于接收对焦状态。此参数可选。
+     *     如果指定此参数，则取消订阅通过 **on('focusStateChange')** 注册的、使用该回调函数的事件。
+     *     回调函数不能是匿名函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10713,9 +10700,9 @@ declare namespace camera {
     off(type: 'focusStateChange', callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Unsubscribes from focus state change event callback.
+     * 取消订阅对焦状态变化事件回调。
      *
-     * @param { AsyncCallback<FocusState> } [callback] - Callback used to get the focus state change.
+     * @param { AsyncCallback<FocusState> } [callback] - 回调函数，用于获取对焦状态变化。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10724,11 +10711,11 @@ declare namespace camera {
     offFocusStateChange(callback?: AsyncCallback<FocusState>): void;
 
     /**
-     * Subscribes to smooth zoom state change events. This API uses an asynchronous callback to return the result.
+     * 订阅平滑变焦状态变化事件。此接口通过异步回调返回结果。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the smooth zoom state change.
+     * @param { 'smoothZoomInfoAvailable' } type - 事件类型，固定为**'smoothZoomInfoAvailable'**。
+     *     创建会话后可监听此事件。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 用于接收平滑变焦状态变化信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10737,9 +10724,9 @@ declare namespace camera {
     on(type: 'smoothZoomInfoAvailable', callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Subscribes zoom info event callback.
+     * 订阅变焦信息事件回调。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10748,14 +10735,13 @@ declare namespace camera {
     onSmoothZoomInfoAvailable(callback: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from smooth zoom state change events.
+     * 取消订阅平滑变焦状态变化事件。
      *
-     * @param { 'smoothZoomInfoAvailable' } type - Event type. The value is fixed at **'smoothZoomInfoAvailable'**. The
-     *     event can be listened for when a session is created.
-     * @param { AsyncCallback<SmoothZoomInfo> } callback - Callback used to return the result. This parameter is
-     *     optional. If this parameter is specified, the subscription to the specified event
-     *     **on('smoothZoomInfoAvailable')** with the specified callback is canceled. (The callback object cannot be an
-     *     anonymous function.)
+     * @param { 'smoothZoomInfoAvailable' } type - 事件类型，固定为**'smoothZoomInfoAvailable'**。
+     *     创建会话后可监听此事件。
+     * @param { AsyncCallback<SmoothZoomInfo> } callback - 用于接收结果的回调函数。此参数可选。
+     *     如果指定此参数，则取消订阅通过**on('smoothZoomInfoAvailable')**注册的、使用该回调函数的事件。
+     *     回调函数不能是匿名函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10764,9 +10750,9 @@ declare namespace camera {
     off(type: 'smoothZoomInfoAvailable', callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Unsubscribes from zoom info event callback.
+     * 取消订阅变焦信息事件回调。
      *
-     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - Callback used to get the zoom info.
+     * @param { AsyncCallback<SmoothZoomInfo> } [callback] - 回调函数，用于获取变焦信息。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10775,11 +10761,10 @@ declare namespace camera {
     offSmoothZoomInfoAvailable(callback?: AsyncCallback<SmoothZoomInfo>): void;
 
     /**
-     * Checks whether the device supports slow-motion detection.
-     * 
-     * @returns { boolean } Check result for the support of slow-motion detection. **true** if supported, **false**
-     *     otherwise. If the operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * 检查设备是否支持慢动作检测。
+     *
+     * @returns { boolean } 慢动作检测支持情况。支持时返回**true**，否则返回**false**。如果操作失败，则返回
+     *     [CameraErrorCode]{@link camera.CameraErrorCode}中定义的错误码。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config. [since 12 - 18]
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -10790,9 +10775,9 @@ declare namespace camera {
     isSlowMotionDetectionSupported(): boolean;
 
     /**
-     * Sets an area for slow-motion detection.
-     * 
-     * @param { Rect } area - Area.
+     * 设置慢动作检测区域。
+     *
+     * @param { Rect } area - 检测区域。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect. [since 12 - 18]
      * @throws { BusinessError } 7400103 - Session not config. [since 12 - 18]
@@ -10804,11 +10789,10 @@ declare namespace camera {
     setSlowMotionDetectionArea(area: Rect): void;
 
     /**
-     * Subscribes to slow-motion status change events. This API uses an asynchronous callback to return the result.
+     * 订阅慢动作状态变化事件。此接口通过异步回调返回结果。
      *
-     * @param { 'slowMotionStatus' } type - Event type. The value is fixed at **'slowMotionStatus'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<SlowMotionStatus> } callback - Callback used to return the slow-motion status change.
+     * @param { 'slowMotionStatus' } type - 事件类型，固定为**'slowMotionStatus'**。创建会话后可监听此事件。
+     * @param { AsyncCallback<SlowMotionStatus> } callback - 用于接收慢动作状态变化信息的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10817,9 +10801,9 @@ declare namespace camera {
     on(type: 'slowMotionStatus', callback: AsyncCallback<SlowMotionStatus>): void;
 
     /**
-     * Subscribes slow motion status callback.
+     * 订阅慢动作状态回调。
      *
-     * @param { AsyncCallback<SlowMotionStatus> } callback - Callback used to get the slow motion status.
+     * @param { AsyncCallback<SlowMotionStatus> } callback - 用于获取慢动作状态的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10828,15 +10812,12 @@ declare namespace camera {
     onSlowMotionStatus(callback: AsyncCallback<SlowMotionStatus>): void;
 
     /**
-     * Unsubscribes from slow-motion status change events.
+     * 取消订阅慢动作状态变化事件。
      *
-     * @param { 'slowMotionStatus' } type - Event type. The value is fixed at **'slowMotionStatus'**. The event can be
-     *     listened for when a session is created.
-     * @param { AsyncCallback<SlowMotionStatus> } callback - Callback used to return the result. This parameter is
-     *     optional. If this parameter is specified, the subscription to the specified event **on('slowMotionStatus')**
-     *     with the specified callback is canceled. (The callback object cannot be an anonymous function.) If the
-     *     operation fails, an error code defined in
-     *     [CameraErrorCode]{@link camera.CameraErrorCode} is returned.
+     * @param { 'slowMotionStatus' } type - 事件类型，固定为**'slowMotionStatus'**。创建会话后可监听此事件。
+     * @param { AsyncCallback<SlowMotionStatus> } callback - 用于接收结果的回调函数。此参数可选。
+     *     如果指定此参数，则取消订阅通过**on('slowMotionStatus')**注册的、使用该回调函数的事件。
+     *     回调函数不能是匿名函数。如果操作失败，则返回[CameraErrorCode]{@link camera.CameraErrorCode}中定义的错误码。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -10845,9 +10826,9 @@ declare namespace camera {
     off(type: 'slowMotionStatus', callback?: AsyncCallback<SlowMotionStatus>): void;
 
     /**
-     * Unsubscribes slow motion status callback.
+     * 取消订阅慢动作状态回调。
      *
-     * @param { AsyncCallback<SlowMotionStatus> } [callback] - Callback used to get the slow motion status.
+     * @param { AsyncCallback<SlowMotionStatus> } [callback] - 用于获取慢动作状态的回调函数。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12057,7 +12038,7 @@ declare namespace camera {
   }
 
   /**
-   * Video Functions object.
+   * 视频功能对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -12090,7 +12071,7 @@ declare namespace camera {
   }
 
   /**
-   * Video Conflict Functions object.
+   * 视频冲突功能对象。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -12147,7 +12128,7 @@ declare namespace camera {
   }
 
   /**
-   * Defines the PiP status data.
+   * 定义画中画状态数据。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -12156,7 +12137,7 @@ declare namespace camera {
    */
   interface SketchStatusData {
     /**
-     * Status of PiP. The options are 0 (stopped), 1 (started), 2 (stopping), and 3 (starting).
+     * 画中画状态。取值为0（已停止）、1（已开始）、2（正在停止）、3（正在开始）。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12166,7 +12147,7 @@ declare namespace camera {
     status: int;
 
     /**
-     * Zoom ratio of PiP.
+     * 画中画变焦比。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -12176,7 +12157,7 @@ declare namespace camera {
     sketchRatio: double;
 
     /**
-     * Offset of PiP.
+     * 画中画偏移。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14716,9 +14697,9 @@ declare namespace camera {
     getVideoRotation(deviceDegree?: int): ImageRotation;
 
     /**
-     * Confirm if auto deferred video enhancement is supported in the specific device.
+     * 确认特定设备是否支持自动延迟视频增强。
      *
-     * @returns { boolean } TRUE if auto deferred video enhancement is supported.
+     * @returns { boolean } 如果支持自动延迟视频增强，返回TRUE。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14729,9 +14710,9 @@ declare namespace camera {
     isAutoDeferredVideoEnhancementSupported(): boolean;
 
     /**
-     * Confirm if auto deferred video enhancement is enabled.
+     * 确认是否启用了自动延迟视频增强。
      *
-     * @returns { boolean } TRUE if auto deferred video enhancement is enabled.
+     * @returns { boolean } 如果启用了自动延迟视频增强，返回TRUE。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14742,9 +14723,9 @@ declare namespace camera {
     isAutoDeferredVideoEnhancementEnabled(): boolean;
 
     /**
-     * Enable auto deferred video enhancement if needed.
+     * 如有需要，启用自动延迟视频增强。
      *
-     * @param { boolean } enabled - Status of auto deferred video enhancement.
+     * @param { boolean } enabled - 自动延迟视频增强的状态。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -14756,9 +14737,9 @@ declare namespace camera {
     enableAutoDeferredVideoEnhancement(enabled: boolean): void;
 
     /**
-     * Get supported video rotations.
+     * 获取支持的视频旋转角度。
      *
-     * @returns { Array<ImageRotation> } The array of supported video rotations.
+     * @returns { Array<ImageRotation> } 支持的视频旋转角度数组。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14768,9 +14749,9 @@ declare namespace camera {
     getSupportedRotations(): Array<ImageRotation>;
 
     /**
-     * Determine whether video rotation is supported.
+     * 判断是否支持视频旋转。
      *
-     * @returns { boolean } Is video rotation supported.
+     * @returns { boolean } 是否支持视频旋转。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14780,9 +14761,9 @@ declare namespace camera {
     isRotationSupported(): boolean;
 
     /**
-     * Set a video rotation.
+     * 设置视频旋转角度。
      *
-     * @param { ImageRotation } rotation - The rotation angle.
+     * @param { ImageRotation } rotation - 旋转角度。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14793,9 +14774,9 @@ declare namespace camera {
     setRotation(rotation: ImageRotation): void;
 
     /**
-     * Determine whether auto frame rate is supported.
+     * 判断是否支持自动帧率。
      *
-     * @returns { boolean } Is auto frame rate supported.
+     * @returns { boolean } 是否支持自动帧率。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14805,9 +14786,9 @@ declare namespace camera {
     isAutoVideoFrameRateSupported(): boolean;
 
     /**
-     * Enable auto frame rate for video capture.
+     * 启用视频录制的自动帧率。
      *
-     * @param { boolean } enabled - enable auto frame rate if TRUE.
+     * @param { boolean } enabled - 为TRUE时启用自动帧率。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400103 - Session not config.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -14818,10 +14799,10 @@ declare namespace camera {
     enableAutoVideoFrameRate(enabled: boolean): void;
 
     /**
-     * Subscribes deferred video enhancement info callback.
+     * 订阅延迟视频增强信息回调。
      *
-     * @param { 'deferredVideoEnhancementInfo' } type - Event type.
-     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } callback - Callback used to return the result.
+     * @param { 'deferredVideoEnhancementInfo' } type - 事件类型。
+     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14830,9 +14811,9 @@ declare namespace camera {
     on(type: 'deferredVideoEnhancementInfo', callback: AsyncCallback<DeferredVideoEnhancementInfo>): void;
 
     /**
-     * Subscribes deferred video enhancement info callback.
+     * 订阅延迟视频增强信息回调。
      *
-     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } callback - Callback used to return the result.
+     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14841,10 +14822,10 @@ declare namespace camera {
     onDeferredVideoEnhancementInfo(callback: AsyncCallback<DeferredVideoEnhancementInfo>): void;
 
     /**
-     * Unsubscribes from deferred video enhancement info callback.
+     * 取消订阅延迟视频增强信息回调。
      *
-     * @param { 'deferredVideoEnhancementInfo' } type - Event type.
-     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } callback - Callback used to return the result.
+     * @param { 'deferredVideoEnhancementInfo' } type - 事件类型。
+     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } callback - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14853,9 +14834,9 @@ declare namespace camera {
     off(type: 'deferredVideoEnhancementInfo', callback?: AsyncCallback<DeferredVideoEnhancementInfo>): void;
 
     /**
-     * Unsubscribes from deferred video enhancement info callback.
+     * 取消订阅延迟视频增强信息回调。
      *
-     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<DeferredVideoEnhancementInfo> } [callback] - 回调函数，用于返回结果。
      * @throws { BusinessError } 202 - Not System Application.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -14865,7 +14846,7 @@ declare namespace camera {
 
     /**
      * 监听录像开始，通过注册回调函数获取结果。使用callback异步回调。
-     * 
+     *
      * > **说明：**
      * >
      * > 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
@@ -14879,9 +14860,9 @@ declare namespace camera {
     on(type: 'frameStart', callback: AsyncCallback<void>): void;
 
     /**
-     * Subscribes frame start event callback.
+     * 订阅帧开始事件回调。
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -14889,7 +14870,7 @@ declare namespace camera {
 
     /**
      * 注销监听录像开始。
-     * 
+     *
      * > **说明：**
      * >
      * > 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
@@ -14903,9 +14884,9 @@ declare namespace camera {
     off(type: 'frameStart', callback?: AsyncCallback<void>): void;
 
     /**
-     * Unsubscribes from frame start event callback.
+     * 取消订阅帧开始事件回调。
      *
-     * @param { AsyncCallback<void> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<void> } [callback] - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -14923,9 +14904,9 @@ declare namespace camera {
     on(type: 'frameEnd', callback: AsyncCallback<void>): void;
 
     /**
-     * Subscribes frame end event callback.
+     * 订阅帧结束事件回调。
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -14943,9 +14924,9 @@ declare namespace camera {
     off(type: 'frameEnd', callback?: AsyncCallback<void>): void;
 
     /**
-     * Unsubscribes from frame end event callback.
+     * 取消订阅帧结束事件回调。
      *
-     * @param { AsyncCallback<void> } [callback] - Callback used to return the result.
+     * @param { AsyncCallback<void> } [callback] - 回调函数，用于返回结果。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -14969,9 +14950,9 @@ declare namespace camera {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
-     * Subscribes to error events.
+     * 订阅错误事件。
      *
-     * @param { ErrorCallback } callback - Callback used to get the video output errors.
+     * @param { ErrorCallback } callback - 用于接收视频输出错误信息的回调函数。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -14989,9 +14970,9 @@ declare namespace camera {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Unsubscribes from error events.
+     * 取消订阅错误事件。
      *
-     * @param { ErrorCallback } [callback] - Callback used to get the video output errors.
+     * @param { ErrorCallback } [callback] - 用于接收视频输出错误信息的回调函数。
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @since 23 static
      */
@@ -15010,9 +14991,9 @@ declare namespace camera {
     getActiveProfile(): VideoProfile;
 
     /**
-     * Get supported video meta types.
+     * 获取支持的视频元数据类型。
      *
-     * @returns { Array<VideoMetaType> } The array of supported video meta type.
+     * @returns { Array<VideoMetaType> } 支持的视频元数据类型数组。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
@@ -15023,10 +15004,10 @@ declare namespace camera {
     getSupportedVideoMetaTypes(): Array<VideoMetaType>;
 
     /**
-     * Attach a meta surface to VideoOutput.
+     * 将元数据surface附加到VideoOutput。
      *
-     * @param { string } surfaceId - Surface object id used for receiving meta infos.
-     * @param { VideoMetaType } type - Video meta type.
+     * @param { string } surfaceId - 用于接收元数据信息的Surface对象id。
+     * @param { VideoMetaType } type - 视频元数据类型。
      * @throws { BusinessError } 202 - Not System Application.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
@@ -17256,7 +17237,7 @@ declare namespace camera {
   }
 
   /**
-   * Enum for auxiliary status.
+   * 辅助镜头状态枚举。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -17265,7 +17246,7 @@ declare namespace camera {
    */
   enum AuxiliaryStatus {
     /**
-     * Auxiliary locked.
+     * 辅助镜头已锁定。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -17275,7 +17256,7 @@ declare namespace camera {
     LOCKED = 0,
 
     /**
-     * Turn on auxiliary.
+     * 开启辅助镜头。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -17285,7 +17266,7 @@ declare namespace camera {
     ON = 1,
 
     /**
-     * Turn off auxiliary.
+     * 关闭辅助镜头。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
@@ -17296,7 +17277,7 @@ declare namespace camera {
    }
 
   /**
-   * Enum for auxiliary type.
+   * 辅助镜头类型枚举。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -17305,7 +17286,7 @@ declare namespace camera {
    */
   enum AuxiliaryType {
     /**
-     * Contract lens.
+     * 辅助镜头。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
