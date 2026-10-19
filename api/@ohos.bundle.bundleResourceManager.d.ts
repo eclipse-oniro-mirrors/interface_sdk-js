@@ -361,6 +361,27 @@ declare namespace bundleResourceManager {
   function getLauncherAbilityResourceInfoList(optionsList: Array<BundleOptions>, resourceFlags: int): Promise<Array<LauncherAbilityResourceInfo>>;
 
   /**
+   * Obtains the resource information based on the given file path and resource flags.
+   *     This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.GET_BUNDLE_RESOURCES
+   * @param { string } filePath - Path where the file is stored.
+   *     The path must be the relative path of the current bundle's data directory.
+   * @param { int } [resourceFlags] - Type of the resource information to obtain. For details, see
+   *     [ResourceFlag]{@link bundleResourceManager.ResourceFlag}.
+   * @returns { Promise<BundleResourceInfo> } Promise used to return the BundleResourceInfo.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700022 - The input source file is invalid.
+   * @throws { BusinessError } 17700101 - Bundle manager service is excepted.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Resource
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getBundleResourceArchiveInfo(filePath: string, resourceFlags?: int): Promise<BundleResourceInfo>;
+
+  /**
    * Defines the icon and name of an application.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Resource
