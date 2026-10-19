@@ -397,8 +397,6 @@ declare namespace hiAppEvent {
    * Configures the application event logging function, such as setting the logging switch and directory storage quota.
    *
    * @param { ConfigOption } config - Configuration items for application event logging.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11103001 - Invalid max storage quota value. Possibly caused by incorrectly formatted.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
@@ -559,8 +557,10 @@ declare namespace hiAppEvent {
    * @param { AppEventInfo } info - Application event object. You are advised to avoid the conflict between the custom
    *     event name and the system event name constant defined in [Event]{@link hiAppEvent.event}. [since 11]
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -591,8 +591,10 @@ declare namespace hiAppEvent {
    * @param { AppEventInfo } info - Application event object. You are advised to avoid the conflict between the custom
    *     event name and the system event name constant defined in [Event]{@link hiAppEvent.event}.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -652,8 +654,6 @@ declare namespace hiAppEvent {
    *     **hiAppEvent.event.RESOURCE_OVERLIMIT**).<br>**Note**: Since API version 20, the
    *     [resource leak event](docroot://dfx/hiappevent-watcher-resourceleak-events.md) is supported.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -699,8 +699,10 @@ declare namespace hiAppEvent {
    *     follows:<br>- The parameter name contains a maximum of 1024 characters, which is of the string type and cannot
    *     be empty.<br>- The parameter value is of the ParamType and contains a maximum of 1024 characters.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 15 dynamic
@@ -815,8 +817,6 @@ declare namespace hiAppEvent {
      *
      * @param { int } size - Data size threshold, in bytes. The value range is [0, 2^31-1]. If the value is out of the
      *     range, an exception is thrown.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types.
      * @throws { BusinessError } 11104001 - Invalid size value. Possibly caused by the size value is less than or equal
      *     to zero.
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -833,8 +833,6 @@ declare namespace hiAppEvent {
      *
      * @param { int } size - Number of events. The value range is (0, 2^31-1]. If the value is out of the range, an
      *     exception is thrown.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types.
      * @throws { BusinessError } 11104001 - Invalid size value. Possibly caused by the size value is less than or equal
      *     to zero.
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -1111,8 +1109,6 @@ declare namespace hiAppEvent {
    *
    * @param { Watcher } watcher - Event watcher.
    * @returns { AppEventPackageHolder } Subscription data holder. If the subscription fails, **null** is returned.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11102001 - Invalid watcher name. Possible causes: 1. Contain invalid characters;
    *     <br>2. Length is invalid.
    * @throws { BusinessError } 11102002 - Invalid filtering event domain. Possible causes: 1. Contain invalid
@@ -1133,8 +1129,6 @@ declare namespace hiAppEvent {
    * Removes an event watcher.
    *
    * @param { Watcher } watcher - Event watcher.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11102001 - Invalid watcher name. Possible causes: 1. Contain invalid characters;
    *     <br>2. Length is invalid.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -1163,8 +1157,10 @@ declare namespace hiAppEvent {
    *     digits (0 to 9), letters (a to z)(A to Z), underscore (_), and dollar sign ($). It must not start with a digit.
    * @param { string } value - Value of a user ID. It can contain a maximum of 256 characters. If the value is **null**
    *     or left empty, the user ID is cleared.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1179,8 +1175,10 @@ declare namespace hiAppEvent {
    * @param { string } name - Key of a user ID. The value is string that contains a maximum of 256 characters, including
    *     digits (0 to 9), letters (a to z)(A to Z), underscore (_), and dollar sign ($). It must not start with a digit.
    * @returns { string } Value of a user ID. If no user ID is found, an empty string is returned.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1197,8 +1195,10 @@ declare namespace hiAppEvent {
    *     with a digit.
    * @param { string } value - Value of a user property. It can contain a maximum of 1024 characters. If the value is
    *     **null** or left empty, the user property is cleared.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1214,8 +1214,10 @@ declare namespace hiAppEvent {
    *     including digits (0 to 9), letters (a to z)(A to Z), underscore (_), and dollar sign ($). It must not start
    *     with a digit.
    * @returns { string } Value of a user property. If no user ID is found, an empty string is returned.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1480,8 +1482,6 @@ declare namespace hiAppEvent {
    * @returns { long } ID of the data processor of the reported event, which uniquely identifies the data processor and
    *     can be used to remove the data processor. If the operation fails, **-1** is returned. If the operation is
    *     successful, a value greater than **0** is returned.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 11 dynamic
@@ -1517,8 +1517,6 @@ declare namespace hiAppEvent {
    * @param { long } id - ID of a data processor. The value must be greater than **0**. The value is obtained by calling
    *     [addProcessor]{@link hiAppEvent.addProcessor} or
    *     [addProcessorFromConfig]{@link hiAppEvent.addProcessorFromConfig}.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 11 dynamic
@@ -2039,8 +2037,11 @@ declare namespace hiAppEvent {
    * @returns { Promise<void> } Promise that returns no value.
    *     <br>For details about the event configuration policy, see [EventPolicy]{@link hiAppEvent.EventPolicy}. If the
    *     configuration policy is incorrect, the API returns a failure message.
-   *     <br>- If the parameter type is incorrect, error code 401 is returned.
    *     <br>- If the parameter specifications are incorrect, the error information is output in HiLog logs.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 22 dynamic
