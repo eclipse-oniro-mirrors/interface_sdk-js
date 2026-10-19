@@ -13484,7 +13484,7 @@ declare namespace window {
      *     1. The window is not created or destroyed;
      *     2. Internal task error.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
-     * @throws { BusinessError } 1300004 - Unauthorized operation.
+     * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause: Invalid window type. Only main windows are supported.
      * @throws { BusinessError } 1300016 - Parameter error. Possible cause:
      *     1. Invalid parameter range;
      *     2. Invalid parameter length.
@@ -13512,7 +13512,7 @@ declare namespace window {
      *     1. The window is not created or destroyed;
      *     2. Internal task error.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
-     * @throws { BusinessError } 1300004 - Unauthorized operation.
+     * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause: Invalid window type. Only main windows are supported.
      * @throws { BusinessError } 1300016 - Parameter error. Possible cause: 1. Invalid parameter range.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -13790,8 +13790,8 @@ declare namespace window {
      */
     isTopmost?: boolean;
     /**
-     * Modality type of the child window. This parameter takes effect only when the modal property is enabled for the
-     * child window. **WINDOW_MODALITY** means window-modal, and **APPLICATION_MODALITY** means application-modal. The
+     * The modal type of the child window can be set and takes effect only when the modal property is enabled for the child window (that is, `isModal` is `true`); 
+     * otherwise, setting this parameter throws an exception. **WINDOW_MODALITY** means window-modal, and **APPLICATION_MODALITY** means application-modal. The
      * default value is **WINDOW_MODALITY**.
      *
      * @syscap SystemCapability.Window.SessionManager
