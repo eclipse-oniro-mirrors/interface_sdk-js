@@ -366,17 +366,17 @@ declare namespace bundleResourceManager {
 
   /**
    * Obtains the resource information based on the given file path and resource flags.
-   *     This API uses a promise to return the result.
+   * This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_RESOURCES
-   * @param { string } filePath - Path where the file is stored.
+   * @param { string } filePath - Path where the file  is stored.
    *     The path must be the relative path of the current bundle's data directory.
-   * @param { int } [resourceFlags] - Type of the resource information to obtain. For details, see
+   * @param { int } [resourceFlags] - Type of the resource information to obtain. For details.  see
    *     [ResourceFlag]{@link bundleResourceManager.ResourceFlag}.
    * @returns { Promise<BundleResourceInfo> } Promise used to return the BundleResourceInfo.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
-   * @throws { BusinessError } 17700022 - The input source file is invalid.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system api.
+   * @throws { BusinessError } 17700022 - The filePath is invalid.
    * @throws { BusinessError } 17700101 - Bundle manager service is excepted.
    * @syscap SystemCapability.BundleManager.BundleFramework.Resource
    * @systemapi
