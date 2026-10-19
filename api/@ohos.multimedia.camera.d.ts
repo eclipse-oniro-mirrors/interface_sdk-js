@@ -1400,7 +1400,8 @@ declare namespace camera {
      * @param { CameraDevice } camera - Camera device.
      * @returns { boolean } Check result for the support of prelaunch. **true** if supported, **false** otherwise.
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 12]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 12]
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi
      * @since 10 dynamic
