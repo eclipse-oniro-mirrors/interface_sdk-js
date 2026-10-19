@@ -150,7 +150,7 @@ declare namespace distributedData {
     const MAX_VALUE_LENGTH = 4194303;
 
     /**
-     * 设备密钥长度，单位字节。
+     * 最大设备密钥长度，单位字节。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @since 7 dynamiconly
@@ -723,7 +723,7 @@ declare namespace distributedData {
     appendChild(child: FieldNode): boolean;
 
     /**
-     * 表示Fieldnode的默认值。
+     * 表示FieldNode的默认值。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
      * @since 8 dynamiconly
@@ -1653,7 +1653,7 @@ declare namespace distributedData {
     /**
      * 获取与指定Query对象匹配的键值对列表，使用callback异步回调。
      *
-     * @param { Query } query - 表示要匹配的键前缀。
+     * @param { Query } query - 表示查询对象。
      * @param { AsyncCallback<Entry[]> } callback - 回调函数。返回与指定Query对象匹配的键值对列表。
      * @returns { Entry[] } Returns the list of key-value pairs matching the specified {@code Query} object.
      * @throws Throws this exception if any of the following errors occurs: {@code INVALID_ARGUMENT},
@@ -2283,8 +2283,8 @@ declare namespace distributedData {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string[] } deviceIds - 需要同步DeviceKVStore数据库的设备networkId列表。
-     * @param { number } delayMs - 可选参数，允许延时时间，单位：ms（毫秒），默认为0。
      * @param { SyncMode } mode - 同步模式。
+     * @param { number } delayMs - 可选参数，允许延时时间，单位：ms（毫秒），默认为0。
      * @throws Throws this exception if no DeviceKVStore database is available.
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @since 8 dynamiconly
@@ -2394,8 +2394,8 @@ declare namespace distributedData {
     /**
      * 通过指定Options和storeId，创建并获取KVStore数据库，使用Promise异步回调。
      *
-     * @param { Options } options - 创建KVStore实例的配置信息。
      * @param { string } storeId - 数据库唯一标识符，长度不大于[MAX_STORE_ID_LENGTH]{@link distributedData.Constants}。
+     * @param { Options } options - 创建KVStore实例的配置信息。
      * @returns { Promise<T>, <T extends KVStore> } Promise对象。返回创建的KVStore数据库实例。
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @since 7 dynamiconly
@@ -2407,8 +2407,8 @@ declare namespace distributedData {
     /**
      * 通过指定Options和storeId，创建并获取KVStore数据库，使用callback异步回调。
      *
-     * @param { Options } options - 创建KVStore实例的配置信息。
      * @param { string } storeId - 数据库唯一标识符，长度不大于[MAX_STORE_ID_LENGTH]{@link distributedData.Constants}。
+     * @param { Options } options - 创建KVStore实例的配置信息。
      * @param { AsyncCallback<T> } callback - 回调函数。返回创建的KVStore数据库实例。
      * @returns { void } Returns a {@code KVStore}, or {@code SingleKVStore}.
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
@@ -2422,8 +2422,7 @@ declare namespace distributedData {
      * 通过storeId的值关闭指定的KVStore数据库，使用callback异步回调。
      *
      * @param { string } appId - 所调用数据库方的包名。
-     * @param { string } storeId - Unique identifier of the 要关闭的KVStore数据库。 The length cannot exceed
-     *     [MAX_STORE_ID_LENGTH]{@link distributedData.Constants}.
+     * @param { string } storeId - 要关闭的数据库唯一标识符，长度不大于[MAX_STORE_ID_LENGTH]{@link distributedData.Constants}。
      * @param { KVStore } kvStore - 要关闭的KVStore数据库。
      * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws Throws this exception if any of the following errors
@@ -2441,8 +2440,7 @@ declare namespace distributedData {
      * 通过storeId的值关闭指定的KVStore数据库，使用Promise异步回调。
      *
      * @param { string } appId - 所调用数据库方的包名。
-     * @param { string } storeId - Unique identifier of the 要关闭的KVStore数据库。 The length cannot exceed
-     *     [MAX_STORE_ID_LENGTH]{@link distributedData.Constants}.
+     * @param { string } storeId - 要关闭的数据库唯一标识符，长度不大于[MAX_STORE_ID_LENGTH]{@link distributedData.Constants}。
      * @param { KVStore } kvStore - 要关闭的KVStore数据库。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws Throws this exception if any of the following errors
