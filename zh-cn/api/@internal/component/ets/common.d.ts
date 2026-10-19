@@ -26085,27 +26085,6 @@ declare class CommonMethod<T> {
 
   /**
    * Sets whether to enable accessibility grouping.
-   *
-   * @param { boolean } value - set group with accessibility, default value is false.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Sets whether to enable accessibility grouping.
-   *
-   * @param { boolean } value - set group with accessibility, default value is false.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sets whether to enable accessibility grouping.
    * 
    * <p><strong>NOTE</strong>
    * <br>Whether to enable accessibility grouping. When accessibility grouping is enabled,
@@ -26117,9 +26096,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityGroup(value: boolean): T;
 
@@ -26151,27 +26130,6 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the accessibility text.
-   *
-   * @param { string } value - set accessibility text, default value is "".
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Sets the accessibility text.
-   *
-   * @param { string } value - set accessibility text, default value is "".
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sets the accessibility text.
    * When a component does not contain a text attribute, you can use this API to set an accessibility
    * text attribute, so that accessibility services can announce the specified content for the component.
    * 
@@ -26180,9 +26138,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityText(value: string): T;
 
@@ -26372,29 +26330,6 @@ declare class CommonMethod<T> {
   /**
    * Sets the accessibility level.
    * This property determines whether the component can be recognized by accessibility services.
-   *
-   * @param { string } value - set accessibility level, default value is auto.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Sets the accessibility level.
-   * This property determines whether the component can be recognized by accessibility services.
-   *
-   * @param { string } value - set accessibility level, default value is auto.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sets the accessibility level.
-   * This property determines whether the component can be recognized by accessibility services.
    * <p>
    * Accessibility level, which is used to decide whether a component can be identified by the accessibility service.
    * <br>The options are as follows:
@@ -26414,9 +26349,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityLevel(value: string): T;
 
