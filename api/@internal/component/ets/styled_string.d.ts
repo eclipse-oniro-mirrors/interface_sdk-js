@@ -2356,6 +2356,17 @@ declare class ImageAttachment {
    * @since 26.0.1 dynamiconly
    */
   readonly resizable?: ResizableOptions;
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  readonly imageTag?: string;
 }
 
 /**
@@ -2486,6 +2497,17 @@ declare interface ResourceImageAttachmentOptions {
    * @since 26.0.1 dynamiconly
    */
   resizable?: ResizableOptions;
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
@@ -2586,6 +2608,17 @@ declare interface ImageAttachmentInterface {
    * @since 26.0.1 dynamiconly
    */
   resizable?: ResizableOptions;
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**

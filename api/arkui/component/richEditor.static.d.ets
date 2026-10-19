@@ -985,7 +985,16 @@ export declare interface RichEditorImageSpanResult {
         int,
         int
     ];
+    /**
+     * Image text tag.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    imageTag?: string;
 }
+
 /**
  * Defines the image span.
  *
@@ -1186,7 +1195,16 @@ export declare interface RichEditorImageSpanOptions {
      * @since 23 static
      */
     onHover?: OnHoverCallback;
+    /**
+     * Image text tag.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    imageTag?: string;
 }
+
 /**
  * Defines the builder span options of RichEditor.
  *
