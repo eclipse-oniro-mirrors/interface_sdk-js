@@ -14,20 +14,6 @@
  */
 
 /**
- * ###### 使用说明
- *
- * 调用模块接口前，需要完成如下配置：
- *
- * 1. 申请ohos.permission.ACCESS_BLUETOOTH权限。如何配置和申请权限，具体操作请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)和[向用户申请授权](docroot://security/AccessToken/request-user-authorization.md)。
- * 2. 在module.json5文件中配置action字段"action.ohos.pull.listener"，用于需要被代理拉起的手机侧应用进程。
- *
- * 典型调用流程：
- *
- * 1. 调用openProxyChannel打开代理通道，获取channelId。
- * 2. 调用sendData发送数据，并根据业务需求订阅事件：调用on('receiveData')接收对端数据，调用on('channelStateChange')感知通道连接状态变化（断连、恢复等）。两者可同时订阅，建议在数据传输场景中同时使用，以便通道异常时及时暂停发送并处理断连恢复逻辑。
- * 3. 使用完毕后，调用off('receiveData')/off('channelStateChange')取消订阅。
- * 4. 调用closeProxyChannel关闭代理通道释放资源。
- *
  * @file 代理通道管理
  * @kit DistributedServiceKit
  */
@@ -43,6 +29,20 @@ import { Callback } from './@ohos.base';
  * - 应用状态感知和唤醒：代理通道使能并收到穿戴设备侧应用数据后，代理模块根据module.json5中配置的action字段（如'action.ohos.pull.listener'）识别目标应用，并代理拉起对应手机侧应用进程以处理数
  * 据，无需应用常驻前台即可接收数据，节省系统资源。
  * - 全链路状态监控：通过回调实时感知代理通道全生命周期的连接状态变化，帮助手机侧应用及时响应连接异常并调整业务策略，提升数据传输可靠性。包括连接恢复、异常断连、配对关系删除等事件。
+ *
+ * ###### 使用说明
+ *
+ * 调用模块接口前，需要完成如下配置：
+ *
+ * 1. 申请ohos.permission.ACCESS_BLUETOOTH权限。如何配置和申请权限，具体操作请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)和[向用户申请授权](docroot://security/AccessToken/request-user-authorization.md)。
+ * 2. 在module.json5文件中配置action字段"action.ohos.pull.listener"，用于需要被代理拉起的手机侧应用进程。
+ *
+ * 典型调用流程：
+ *
+ * 1. 调用openProxyChannel打开代理通道，获取channelId。
+ * 2. 调用sendData发送数据，并根据业务需求订阅事件：调用on('receiveData')接收对端数据，调用on('channelStateChange')感知通道连接状态变化（断连、恢复等）。两者可同时订阅，建议在数据传输场景中同时使用，以便通道异常时及时暂停发送并处理断连恢复逻辑。
+ * 3. 使用完毕后，调用off('receiveData')/off('channelStateChange')取消订阅。
+ * 4. 调用closeProxyChannel关闭代理通道释放资源。
  *
  * @syscap SystemCapability.DistributedSched.AppCollaboration
  * @stagemodelonly

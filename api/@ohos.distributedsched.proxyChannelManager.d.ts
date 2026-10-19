@@ -14,20 +14,6 @@
  */
 
 /**
- * ###### Instructions
- *
- * Before calling the APIs of this module, complete the following configurations:
- *
- * 1. You have requested the **ohos.permission.ACCESS_BLUETOOTH** permission. For details about how to configure and apply for permissions, see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md) and [Requesting User Authorization](docroot://security/AccessToken/request-user-authorization.md).
- * 2. In the **module.json5** file, you have configured the **action** field **action.ohos.pull.listener** for the phone app process that needs to be started by the proxy module.
- *
- * The typical calling process is as follows:
- *
- * 1. Call **openProxyChannel** to open the proxy channel and obtain the channel ID.
- * 2. Call **sendData** to send data, and subscribe to events based on service requirements. Call **on('receiveData')** to receive data from the peer end, and call **on('channelStateChange')** to monitor channel connection state changes (such as disconnection and recovery). You can subscribe to both events at the same time. It is recommended to use them together in data transmission scenarios so that data sending can be paused promptly and disconnection recovery logic can be handled when the channel is abnormal.
- * 3. After using the event, call **off('receiveData')** or **off('channelStateChange')** to unsubscribe from the event.
- * 4. Call **closeProxyChannel** to close the proxy channel and release resources.
- *
  * @file Proxy Channel Management
  * @kit DistributedServiceKit
  */
@@ -38,11 +24,11 @@ import { Callback } from './@ohos.base';
  * based on DSoftBus. It supports data exchange between phones and wearables, providing users with a seamless device
  * interconnection experience. It also simplifies cross-device communication for developers, eliminating the need to
  * handle underlying communication protocols and process wakeup logic. Use scenarios: During collaboration between the
- * phone app and wearable app, if the phone app is not running in the foreground, its downlink messages are forwarded to
- * the notification server and then sent to the wearable through the proxy module. When the wearable sends data to the
- * phone, the proxy module can dynamically wake up the corresponding app process on the phone to receive and process the
- * data. The core functions of this module include proxy channel management, data route management, application state
- * awareness and wakeup, and link state monitoring.
+ * phone app and wearable app, if the phone app is not running in the foreground, its downlink messages are forwarded
+ * to the notification server and then sent to the wearable through the proxy module. When the wearable sends data to
+ * the phone, the proxy module can dynamically wake up the corresponding app process on the phone to receive and
+ * process the data. The core functions of this module include proxy channel management, data route management,
+ * application state awareness and wakeup, and link state monitoring.
  *
  * - Proxy channel management: Manages bidirectional data channels established between phones and wearables via the
  * Bluetooth Basic Rate (BR) protocol. This ensures reliable cross-device data communication without the need to
@@ -57,7 +43,29 @@ import { Callback } from './@ohos.base';
  * This allows the app to receive data without having to stay in the foreground, thereby saving system resources.
  * - Link state monitoring: Monitors the connection status changes of the proxy channel throughout its lifecycle in real
  * time through callbacks. This helps the phone app respond to connection exceptions in a timely manner and adjust
- * service policies, thereby improving data transmission reliability.
+ * service policies, thereby improving data transmission reliability. Connection exceptions include connection
+ * restoration, abnormal disconnection, and pairing relationship deletion.
+ *
+ * ## Instructions
+ *
+ * Before calling the APIs of this module, complete the following configurations:
+ *
+ * 1. You have requested the **ohos.permission.ACCESS_BLUETOOTH** permission. For details about how to configure and
+ * apply for permissions, see [Declaring Permissions](../../security/AccessToken/declare-permissions.md) and
+ * [Requesting User Authorization](../../security/AccessToken/request-user-authorization.md).
+ * 2. In the **module.json5** file, you have configured the **action** field **action.ohos.pull.listener** for the
+ * phone app process that needs to be started by the proxy module.
+ *
+ * The typical calling process is as follows:
+ *
+ * 1. Call **openProxyChannel** to open the proxy channel and obtain the channel ID.
+ * 2. Call **sendData** to send data, and subscribe to events based on service requirements. Call **on('receiveData')**
+ * to receive data from the peer end, and call **on('channelStateChange')** to monitor channel connection state changes
+ * (such as disconnection and recovery). You can subscribe to both events at the same time. You are advised to use them
+ * together in data transmission scenarios so that data sending can be paused promptly and disconnection recovery logic
+ * can be handled when the channel is abnormal.
+ * 3. After using the event, call **off('receiveData')** or **off('channelStateChange')** to unsubscribe from the event.
+ * 4. Call **closeProxyChannel** to close the proxy channel and release resources.
  *
  * @syscap SystemCapability.DistributedSched.AppCollaboration
  * @stagemodelonly
@@ -75,13 +83,13 @@ declare namespace proxyChannelManager {
    * the proxy channel is no longer needed.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { ChannelInfo } channelInfo - Link type of the proxy channel, MAC address of the peer device, and UUID of
-   *     the listening service on the peer device.
-   * @returns { Promise<int> } Promise used to return the result. When the proxy channel is opened successfully, the
-   *     promise is resolved, and the channelId of the proxy channel is returned. The value ranges from 1 to 2147483647.
-   *     The lifecycle of the channelId is the same as that of the proxy channel. If the proxy is not closed, passing
-   *     the same input parameters returns the same channelId. If the operation fails, the promise is rejected with
-   *     error information. For details about the error codes, see the error code table.
+   * @param { ChannelInfo } channelInfo - Proxy channel information, including the link type, MAC address of the peer
+   *     device, and service UUID of the peer device.
+   * @returns { Promise<int> } Promise used to return the result. If the proxy channel is successfully opened, the
+   *     return value of **resolve** is the channel ID, and value range is [1, 2147483647]. The lifecycle of the
+   *     channel ID is the same as that of the proxy channel. If the proxy channel is not closed, the same input
+   *     parameter will return the same channel ID. If the proxy channel fails to be opened, the return value of
+   *     **reject** is an error message. For details about the error codes, see the error code table.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
@@ -100,19 +108,19 @@ declare namespace proxyChannelManager {
   function openProxyChannel(channelInfo: ChannelInfo): Promise<int>;
 
   /**
-   * Closes an opened proxy channel. This is applicable to scenarios where the phone-side app no longer needs to
-   * communicate with the wearable device-side app, such as actively releasing channel resources after completing a data
-   * synchronization task. This method must be used in pair with
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. Call this method to close the channel and release
-   * resources after use. After the channel is closed, the registered **receiveData** and **channelStateChange**
-   * callbacks are automatically unsubscribed, and data being transmitted is interrupted. Failure to close the proxy
-   * channel in a timely manner may cause channel resource leakage.
+   * Closes a proxy channel that has been opened. This method is applicable to scenarios where the mobile app no longer
+   * needs to communicate with the wearable app, for example, when the channel resources need to be released after a
+   * data synchronization task is complete. This method must be used together with
+   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. After using the proxy channel, call this method to
+   * close the channel and release resources. After the channel is closed, the registered **receiveData** and
+   * **channelStateChange** callbacks will be automatically unregistered, and the data that is being transmitted will
+   * be interrupted. If the proxy channel is not closed in a timely manner, a channel resource leak may occur.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - Channel ID obtained when opening the proxy channel. The value range is 1 to 2147483647.
-   *     Using an invalid or closed channelId returns error code 32390004. If the value is out of range, error code 3239
-   *     0006 is returned. The channelId takes effect only when the proxy channel is available, and becomes unavailable
-   *     after the channel is closed or disconnected.
+   * @param { int } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
@@ -129,25 +137,26 @@ declare namespace proxyChannelManager {
   function closeProxyChannel(channelId: int): void;
 
   /**
-   * Sends data to the peer end. This API uses a promise to return the result. This is applicable to scenarios where the
-   * phone-side app sends instructions or data to the wearable device-side app through the proxy channel, such as
-   * sending configuration updates or notification messages. This method can be called to send data only after
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} successfully opens a proxy channel. When the proxy
-   * channel is in an unavailable state (such as [ChannelState]{@link proxyChannelManager.ChannelState}.
-   * CHANNEL_WAIT_RESUME, CHANNEL_EXCEPTION_SOFTWARE_FAILED, or CHANNEL_BR_NO_PAIRED), calling this method will fail. It
-   * is recommended to subscribe to the
+   * Sends data to the peer end. This API uses a promise to return the result. This method is applicable to scenarios
+   * where a phone app sends instructions or data to a wearable app through the proxy channel, for example, sending
+   * configuration updates and notifications. This method can be called to send data only after the proxy channel is
+   * successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. This method will
+   * fail to be called if the proxy channel is unavailable (for example, in the
+   * [ChannelState]{@link proxyChannelManager.ChannelState}.CHANNEL_WAIT_RESUME, **CHANNEL_EXCEPTION_SOFTWARE_FAILED**,
+   * or **CHANNEL_BR_NO_PAIRED** state). You are advised to subscribe to the
    * [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
-   * event to monitor the channel state, pause data sending when the channel is unavailable, and resume sending after
-   * the channel recovers. Data is transmitted to the peer device through the established proxy channel via the
-   * Bluetooth BR link. The maximum data length is 4096 bytes. Exceeding this limit will return error code 32390103.
+   * event to monitor the channel status. When the channel is unavailable, suspend data transmission. When the channel
+   * recovers, resume data transmission. Data is transmitted to the peer device through the established proxy channel
+   * over the BR link. The maximum data length is 4096 bytes. If the data length exceeds 4096 bytes, error code 32390103
+   * will be returned.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - Channel ID obtained when opening the proxy channel. The value range is 1 to 2147483647.
-   *     Using an invalid or closed channelId returns error code 32390004, and exceeding the value range returns error
-   *     code 32390006. The channelId takes effect only when the proxy channel is available and becomes unavailable
-   *     after the channel is closed or disconnected.
-   * @param { ArrayBuffer } data - Binary data to send to the peer end. The data format is defined by the app layer,
-   *     with a maximum length of 4096 bytes. Exceeding the length limit returns error code 32390103.
+   * @param { int } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { ArrayBuffer } data - Binary data sent to the peer device. The data format is defined by the app layer.
+   *     The maximum length is 4096 bytes. If the length exceeds the upper limit, error code 32390103 is returned.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -167,28 +176,28 @@ declare namespace proxyChannelManager {
   function sendData(channelId: int, data: ArrayBuffer): Promise<void>;
 
   /**
-   * Subscribes to data receive events. This API uses an asynchronous callback to return the result. This is applicable
-   * to scenarios where the phone-side app needs to continuously receive data reported by the wearable device-side app,
-   * such as receiving data from the wearable device-side app. The proxy module receives data from the peer end based on
-   * the peer UUID configured when **openProxyChannel** is called, and passes the received wearable device-side app data
-   * to the subscriber through the callback. You must call
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a proxy channel before
-   * subscribing to data receive events. If you need to proxy-wake the phone-side app process to receive and process
-   * peer data, configure the **action** field as **action.ohos.pull.listener** in the **module.json5** file before use.
-   * After subscribing, call
+   * Subscribes to data receiving events. This API uses an asynchronous callback to return the result. This method is
+   * applicable when the phone app needs to continuously receive data reported by the wearable app, for example,
+   * receiving the wearable app data. The proxy module receives data from the peer device based on the peer UUID
+   * configured when **openProxyChannel** is called, and transfers the received wearable app data to the subscriber
+   * through a callback. You can subscribe to data receiving events only after the proxy channel is successfully opened
+   * by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. To enable the proxy channel to wake up
+   * the phone app process to receive and process data from the peer device, set the **action** field to
+   * **action.ohos.pull.listener** in the **module.json5** file. After the subscription, call
    * [off('receiveData')]{@link proxyChannelManager.off(type: 'receiveData', channelId: number, callback?: Callback<DataInfo>)}
-   * to unsubscribe and prevent the callback from being triggered continuously.
+   * to cancel the subscription to prevent the callback from being continuously triggered.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'receiveData' } type - Event type. The value **receiveData** indicates the data receiving event.
-   * @param { number } channelId - Channel ID obtained when opening a proxy channel. The value range is 1 to 2147483647.
-   *     Using an invalid or closed channelId returns error code 32390004. If the value is out of range, error code 3239
-   *     0006 is returned. The channelId takes effect only when the proxy channel is available, and becomes unavailable
-   *     after the channel is closed or disconnected.
-   * @param { Callback<DataInfo> } callback - Callback invoked to return the data received through the proxy channel.
-   *     The callback parameter is a [DataInfo]{@link proxyChannelManager.DataInfo} object, which contains channelId (
-   *     channel ID) and data (received byte data). Data can be received only after a proxy channel is opened by calling
-   *     openProxyChannel. If registered multiple times, only the last registration takes effect.
+   * @param { number } channelId -  Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<DataInfo> } callback - Callback used to receive data from the proxy channel. The callback
+   *     parameter is a [DataInfo]{@link proxyChannelManager.DataInfo} object, which contains the
+   *     **channelId** (channel ID) and **data** (received data, in bytes) fields. You can receive data only after the
+   *     proxy channel is opened by calling **openProxyChannel**. If the callback function is registered multiple times,
+   *     only the last registered one takes effect.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -202,24 +211,23 @@ declare namespace proxyChannelManager {
   function on(type: 'receiveData', channelId: number, callback: Callback<DataInfo>): void;
 
   /**
-   * Unsubscribes from data receive events and no longer receives data through the callback. This is applicable to
-   * scenarios where the phone-side app no longer needs to receive data from the wearable device-side app, such as when
-   * the user switches to another functional module. You must call
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a proxy channel before
-   * unsubscribing. This method must be used in pair with
-   * [on('receiveData')]{@link proxyChannelManager.on(type: 'receiveData', channelId: number, callback: Callback<DataInfo>)}
-   * to cancel the data receive callback previously registered through **on('receiveData')**.
+   * Unsubscribes from data receiving events. Data will no longer be received through a callback. This method is
+   * applicable when the phone app no longer needs to receive data from the wearable app, for example, when the user
+   * switches to another function module. You can unsubscribe from data receiving events only after the proxy channel
+   * is successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. This method must
+   * be used together with [on('receiveData')]{@link proxyChannelManager.on(type: 'receiveData', channelId: number, callback: Callback<DataInfo>)}
+   * to unregister the data receiving callback registered using **on('receiveData')**.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'receiveData' } type - Event type. The value **receiveData** indicates the data receiving event.
-   * @param { number } channelId - Channel ID obtained when opening the proxy channel, with a value range of 1 to 214748
-   *     3647. Using an invalid or closed channelId returns error code 32390004, and exceeding the value range returns
-   *     error code 32390006. The channelId takes effect only when the proxy channel is available, and becomes
-   *     unavailable after the channel is closed or disconnected.
-   * @param { Callback<DataInfo> } [callback] - Callback for the data receive event. Default behavior: when this
-   *     parameter is not passed, all data receive event subscriptions are unsubscribed. The callback passed must be the
-   *     last one registered via the on method to unsubscribe that callback; passing any other callback will not take
-   *     effect.
+   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<DataInfo> } [callback] - Registered callback. If this parameter is not passed, all data
+   *     receiving events are unsubscribed from. This parameter is not passed by default. The callback last registered
+   *     using **on** needs to be passed to unsubscribe from the data receiving events. If any other callback function
+   *     is passed, the unsubscription will fail.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -233,27 +241,27 @@ declare namespace proxyChannelManager {
   function off(type: 'receiveData', channelId: number, callback?: Callback<DataInfo>): void;
 
   /**
-   * Subscribes to data receive events. This API uses an asynchronous callback to return the result. This is applicable
-   * to scenarios where the phone-side app needs to continuously receive data reported by the wearable device-side app,
-   * such as receiving data from the wearable device-side app. The proxy module receives data from the peer end based on
-   * the peer UUID configured when **openProxyChannel** is called, and passes the received wearable device-side app data
-   * to the subscriber through the callback. You must call
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a proxy channel before
-   * subscribing to data receive events. If you need to proxy-wake the phone-side app process to receive and process
-   * peer data, configure the **action** field as **action.ohos.pull.listener** in the **module.json5** file before use.
-   * After subscribing, call
+   * Subscribes to data receiving events. This API uses an asynchronous callback to return the result. This method is
+   * applicable when the phone app needs to continuously receive data reported by the wearable app, for example,
+   * receiving the wearable app data. The proxy module receives data from the peer device based on the peer UUID
+   * configured when **openProxyChannel** is called, and transfers the received wearable app data to the subscriber
+   * through a callback. You can subscribe to data receiving events only after the proxy channel is successfully opened
+   * by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. To enable the proxy channel to wake up
+   * the phone app process to receive and process data from the peer device, set the **action** field to
+   * **action.ohos.pull.listener** in the **module.json5** file. After the subscription, call
    * [off('receiveData')]{@link proxyChannelManager.off(type: 'receiveData', channelId: number, callback?: Callback<DataInfo>)}
-   * to unsubscribe and prevent the callback from being triggered continuously.
+   * to cancel the subscription to prevent the callback from being continuously triggered.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - Channel ID obtained when opening a proxy channel. The value range is 1 to 2147483647.
-   *     Using an invalid or closed channelId returns error code 32390004. If the value is out of range, error code 3239
-   *     0006 is returned. The channelId takes effect only when the proxy channel is available, and becomes unavailable
-   *     after the channel is closed or disconnected.
-   * @param { Callback<DataInfo> } callback - Callback invoked to return the data received through the proxy channel.
-   *     The callback parameter is a [DataInfo]{@link proxyChannelManager.DataInfo} object, which contains channelId (
-   *     channel ID) and data (received byte data). Data can be received only after a proxy channel is opened by calling
-   *     openProxyChannel. If registered multiple times, only the last registration takes effect.
+   * @param { number } channelId -  Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<DataInfo> } callback - Callback used to receive data from the proxy channel. The callback
+   *     parameter is a [DataInfo]{@link proxyChannelManager.DataInfo} object, which contains the
+   *     **channelId** (channel ID) and **data** (received data, in bytes) fields. You can receive data only after the
+   *     proxy channel is opened by calling **openProxyChannel**. If the callback function is registered multiple times,
+   *     only the last registered one takes effect.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -267,23 +275,22 @@ declare namespace proxyChannelManager {
   function onReceiveData(channelId: int, callback: Callback<DataInfo>): void;
 
   /**
-   * Unsubscribes from data receive events and no longer receives data through the callback. This is applicable to
-   * scenarios where the phone-side app no longer needs to receive data from the wearable device-side app, such as when
-   * the user switches to another functional module. You must call
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a proxy channel before
-   * unsubscribing. This method must be used in pair with
-   * [on('receiveData')]{@link proxyChannelManager.on(type: 'receiveData', channelId: number, callback: Callback<DataInfo>)}
-   * to cancel the data receive callback previously registered through **on('receiveData')**.
+   * Unsubscribes from data receiving events. Data will no longer be received through a callback. This method is
+   * applicable when the phone app no longer needs to receive data from the wearable app, for example, when the user
+   * switches to another function module. You can unsubscribe from data receiving events only after the proxy channel
+   * is successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}. This method must
+   * be used together with [on('receiveData')]{@link proxyChannelManager.on(type: 'receiveData', channelId: number, callback: Callback<DataInfo>)}
+   * to unregister the data receiving callback registered using **on('receiveData')**.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - Channel ID obtained when opening the proxy channel, with a value range of 1 to 214748
-   *     3647. Using an invalid or closed channelId returns error code 32390004, and exceeding the value range returns
-   *     error code 32390006. The channelId takes effect only when the proxy channel is available, and becomes
-   *     unavailable after the channel is closed or disconnected.
-   * @param { Callback<DataInfo> } [callback] - Callback for the data receive event. Default behavior: when this
-   *     parameter is not passed, all data receive event subscriptions are unsubscribed. The callback passed must be the
-   *     last one registered via the on method to unsubscribe that callback; passing any other callback will not take
-   *     effect.
+   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<DataInfo> } [callback] - Registered callback. If this parameter is not passed, all data
+   *     receiving events are unsubscribed from. This parameter is not passed by default. The callback last registered
+   *     using **on** needs to be passed to unsubscribe from the data receiving events. If any other callback function
+   *     is passed, the unsubscription will fail.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -297,30 +304,30 @@ declare namespace proxyChannelManager {
   function offReceiveData(channelId: int, callback?: Callback<DataInfo>): void;
 
   /**
-   * Subscribes to channel state events. This API uses an asynchronous callback to return the result. This is applicable
-   * to scenarios where the phone-side app needs to monitor the proxy channel connection state in real time, such as
-   * pausing data sending after detecting channel disconnection and automatically retrying services after channel
-   * recovery. The proxy module monitors Bluetooth BR link state changes in real time, and reports **ChannelStateInfo**
-   * through the callback when events such as connection recovery, abnormal disconnection, and pairing relationship
-   * deletion occur. You must call [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a
-   * proxy channel before subscribing to channel state events. After subscribing, call
-   * [off('channelStateChange')]{@link proxyChannelManager.off(type: 'channelStateChange', channelId: number, callback?: Callback<ChannelStateInfo>)}
-   * to unsubscribe and prevent the callback from being triggered continuously. After calling
-   * [closeProxyChannel]{@link proxyChannelManager.closeProxyChannel} to close the channel, the registered
-   * **channelStateChange** callback is automatically unsubscribed.
+   * Subscribes to channel state change events. This API uses an asynchronous callback to return the result. This
+   * method is applicable to scenarios where the phone app needs to detect the proxy channel connection state in real
+   * time. For example, the app can pause data transmission after the channel is disconnected and automatically retry
+   * services after the channel is reconnected. The proxy module monitors the BR link status in real time. When an
+   * event such as connection restoration, abnormal disconnection, or pairing relationship deletion occurs, the proxy
+   * module reports **ChannelStateInfo** using a callback. You can subscribe to channel state change events only after
+   * the proxy channel is successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}.
+   * After the subscription, call [off('channelStateChange')]{@link proxyChannelManager.off(type: 'channelStateChange', channelId: number, callback?: Callback<ChannelStateInfo>)}
+   * to cancel the subscription to prevent the callback from being continuously triggered. After the channel is closed
+   * by calling [closeProxyChannel]{@link proxyChannelManager.closeProxyChannel}, the registered **channelStateChange**
+   * callback will be automatically unsubscribed from.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'channelStateChange' } type - Event type. The value **channelStateChange** indicates the channel state
    *     change event.
-   * @param { number } channelId - Channel ID obtained when opening the proxy channel. The value range is 1 to 214748364
-   *     7. Using an invalid or closed channelId returns error code 32390004, and exceeding the value range returns
-   *     error code 32390006. The channelId takes effect only when the proxy channel is available, and becomes
-   *     unavailable after the channel is closed or disconnected.
-   * @param { Callback<ChannelStateInfo> } callback - Callback invoked to return the proxy channel state change
+   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<ChannelStateInfo> } callback - Callback used to receive the proxy channel state change
    *     information. The callback parameter is a [ChannelStateInfo]{@link proxyChannelManager.ChannelStateInfo} object,
-   *     which contains channelId (channel ID) and state (channel connection state). The proxy channel must be opened
-   *     through openProxyChannel before receiving the channel state. If registered multiple times, only the last
-   *     registered callback takes effect.
+   *     which contains the **channelId** (channel ID) and **state** (channel connection status) fields. You can receive
+   *     the channel state information only after the proxy channel is opened by calling **openProxyChannel**. If the
+   *     callback function is registered for multiple times, only the last registered callback function takes effect.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -334,24 +341,23 @@ declare namespace proxyChannelManager {
   function on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>): void;
 
   /**
-   * Unsubscribes from channel state events. This is applicable to scenarios where the phone-side app no longer needs to
-   * listen for proxy channel connection state changes, such as when the user exits the relevant service page or
-   * completes the data transmission process. You must call
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a proxy channel before
-   * unsubscribing. This method must be used in pair with
-   * [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
-   * to cancel the channel state callback previously registered through **on('channelStateChange')**.
+   * Unsubscribes from channel state change events. This method is applicable when the phone app no longer needs to
+   * listen for the proxy channel connection state change events, for example, when the user exits the related service
+   * page or the data transmission process is completed. You can unsubscribe from data receiving events only after the
+   * proxy channel is successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}.
+   * This method must be used together with [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
+   * to unregister the channel state change callback registered using **on('channelStateChange')**.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { 'channelStateChange' } type - Sets the subscription type. The value is fixed to **'channelStateChange'**.
-   * @param { number } channelId - Channel ID obtained when opening a proxy channel. Value range: 1 to 2147483647. Using
-   *     an invalid or closed channelId returns error code 32390004, and exceeding the value range returns error code 32
-   *     390006. The channelId takes effect only when the proxy channel is available and becomes unavailable after the
-   *     channel is closed or disconnected.
-   * @param { Callback<ChannelStateInfo> } [callback] - Registered callback. Default behavior: if this parameter is not
-   *     passed, all channel state event subscriptions are unsubscribed. The callback passed must be the one last
-   *     registered through the **on** method to unsubscribe from that callback; passing any other callback will not
-   *     take effect.
+   * @param { 'channelStateChange' } type - Event type. The value is fixed to **'channelStateChange'**.
+   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<ChannelStateInfo> } [callback] - Registered callback. If this parameter is not passed, all
+   *     channel state events are unsubscribed from. This parameter is not passed by default. The callback last
+   *     registered using **on** needs to be passed to unsubscribe from the channel state events. If any other callback
+   *     function is passed, the unsubscription will fail.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -365,28 +371,28 @@ declare namespace proxyChannelManager {
   function off(type: 'channelStateChange', channelId: number, callback?: Callback<ChannelStateInfo>): void;
 
   /**
-   * Subscribes to channel state events. This API uses an asynchronous callback to return the result. This is applicable
-   * to scenarios where the phone-side app needs to monitor the proxy channel connection state in real time, such as
-   * pausing data sending after detecting channel disconnection and automatically retrying services after channel
-   * recovery. The proxy module monitors Bluetooth BR link state changes in real time, and reports **ChannelStateInfo**
-   * through the callback when events such as connection recovery, abnormal disconnection, and pairing relationship
-   * deletion occur. You must call [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a
-   * proxy channel before subscribing to channel state events. After subscribing, call
-   * [off('channelStateChange')]{@link proxyChannelManager.off(type: 'channelStateChange', channelId: number, callback?: Callback<ChannelStateInfo>)}
-   * to unsubscribe and prevent the callback from being triggered continuously. After calling
-   * [closeProxyChannel]{@link proxyChannelManager.closeProxyChannel} to close the channel, the registered
-   * **channelStateChange** callback is automatically unsubscribed.
+   * Subscribes to channel state change events. This API uses an asynchronous callback to return the result. This
+   * method is applicable to scenarios where the phone app needs to detect the proxy channel connection state in real
+   * time. For example, the app can pause data transmission after the channel is disconnected and automatically retry
+   * services after the channel is reconnected. The proxy module monitors the BR link status in real time. When an
+   * event such as connection restoration, abnormal disconnection, or pairing relationship deletion occurs, the proxy
+   * module reports **ChannelStateInfo** using a callback. You can subscribe to channel state change events only after
+   * the proxy channel is successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}.
+   * After the subscription, call [off('channelStateChange')]{@link proxyChannelManager.off(type: 'channelStateChange', channelId: number, callback?: Callback<ChannelStateInfo>)}
+   * to cancel the subscription to prevent the callback from being continuously triggered. After the channel is closed
+   * by calling [closeProxyChannel]{@link proxyChannelManager.closeProxyChannel}, the registered **channelStateChange**
+   * callback will be automatically unsubscribed from.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - Channel ID obtained when opening the proxy channel. The value range is 1 to 214748364
-   *     7. Using an invalid or closed channelId returns error code 32390004, and exceeding the value range returns
-   *     error code 32390006. The channelId takes effect only when the proxy channel is available, and becomes
-   *     unavailable after the channel is closed or disconnected.
-   * @param { Callback<ChannelStateInfo> } callback - Callback invoked to return the proxy channel state change
+   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<ChannelStateInfo> } callback - Callback used to receive the proxy channel state change
    *     information. The callback parameter is a [ChannelStateInfo]{@link proxyChannelManager.ChannelStateInfo} object,
-   *     which contains channelId (channel ID) and state (channel connection state). The proxy channel must be opened
-   *     through openProxyChannel before receiving the channel state. If registered multiple times, only the last
-   *     registered callback takes effect.
+   *     which contains the **channelId** (channel ID) and **state** (channel connection status) fields. You can receive
+   *     the channel state information only after the proxy channel is opened by calling **openProxyChannel**. If the
+   *     callback function is registered for multiple times, only the last registered callback function takes effect.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -400,23 +406,22 @@ declare namespace proxyChannelManager {
   function onChannelStateChange(channelId: int, callback: Callback<ChannelStateInfo>): void;
 
   /**
-   * Unsubscribes from channel state events. This is applicable to scenarios where the phone-side app no longer needs to
-   * listen for proxy channel connection state changes, such as when the user exits the relevant service page or
-   * completes the data transmission process. You must call
-   * [openProxyChannel]{@link proxyChannelManager.openProxyChannel} to successfully open a proxy channel before
-   * unsubscribing. This method must be used in pair with
-   * [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
-   * to cancel the channel state callback previously registered through **on('channelStateChange')**.
+   * Unsubscribes from channel state change events. This method is applicable when the phone app no longer needs to
+   * listen for the proxy channel connection state change events, for example, when the user exits the related service
+   * page or the data transmission process is completed. You can unsubscribe from data receiving events only after the
+   * proxy channel is successfully opened by calling [openProxyChannel]{@link proxyChannelManager.openProxyChannel}.
+   * This method must be used together with [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
+   * to unregister the channel state change callback registered using **on('channelStateChange')**.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - Channel ID obtained when opening a proxy channel. Value range: 1 to 2147483647. Using
-   *     an invalid or closed channelId returns error code 32390004, and exceeding the value range returns error code 32
-   *     390006. The channelId takes effect only when the proxy channel is available and becomes unavailable after the
-   *     channel is closed or disconnected.
-   * @param { Callback<ChannelStateInfo> } [callback] - Registered callback. Default behavior: if this parameter is not
-   *     passed, all channel state event subscriptions are unsubscribed. The callback passed must be the one last
-   *     registered through the **on** method to unsubscribe from that callback; passing any other callback will not
-   *     take effect.
+   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
+   *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
+   *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
+   * @param { Callback<ChannelStateInfo> } [callback] - Registered callback. If this parameter is not passed, all
+   *     channel state events are unsubscribed from. This parameter is not passed by default. The callback last
+   *     registered using **on** needs to be passed to unsubscribe from the channel state events. If any other callback
+   *     function is passed, the unsubscription will fail.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 32390004 - ChannelId is invalid or unavailable.
@@ -430,7 +435,7 @@ declare namespace proxyChannelManager {
   function offChannelStateChange(channelId: int, callback?: Callback<ChannelStateInfo>): void;
 
   /**
-   * Represents the received data information, including the channel ID and data.
+   * Represents the received data, including the channel ID and data.
    *
    * @syscap SystemCapability.DistributedSched.AppCollaboration
    * @stagemodelonly
@@ -439,7 +444,7 @@ declare namespace proxyChannelManager {
    */
   interface DataInfo {
     /**
-     * Channel ID of the proxy channel. The value range is 1 to 2147483647.
+     * Proxy channel ID. The value ranges from 1 to 2147483647.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -449,7 +454,7 @@ declare namespace proxyChannelManager {
     channelId: int;
 
     /**
-     * Received byte data. The maximum length is 4096 bytes.
+     * Received data, in bytes. The maximum value is **4096**.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -469,8 +474,7 @@ declare namespace proxyChannelManager {
    */
   enum LinkType {
     /**
-     * Bluetooth BR protocol, used for establishing a bidirectional data channel with a wearable device over a Bluetooth
-     * BR link.
+     * BR protocol, which is used to establish a bidirectional data channel with a wearable device through a BR link.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -481,8 +485,8 @@ declare namespace proxyChannelManager {
   }
 
   /**
-   * Input parameters of the function for opening a proxy channel, including the link type of the proxy channel, the MAC
-   * address of the peer device, and the UUID of the listening service.
+   * Represents the proxy channel information, including the link type of the proxy channel, MAC address of the peer
+   * device, and service UUID.
    *
    * @syscap SystemCapability.DistributedSched.AppCollaboration
    * @stagemodelonly
@@ -492,7 +496,7 @@ declare namespace proxyChannelManager {
   interface ChannelInfo {
     /**
      * Link type of the proxy channel. For details about the value range, see
-     * [LinkType]{@link proxyChannelManager.LinkType}. Currently, only **LINK_BR** (Bluetooth BR protocol) is supported.
+     * [LinkType]{@link proxyChannelManager.LinkType}. Currently, only **LINK_BR** (BR protocol) is supported.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -502,9 +506,9 @@ declare namespace proxyChannelManager {
     linkType: LinkType;
 
     /**
-     * MAC address of the peer device, in the format of XX:XX:XX:XX:XX:XX, where XX is a hexadecimal character (0-9, A-
-     * F, or a-f). The peer device must be paired. Error code 32390002 is returned if the device is not paired. Error
-     * code 32390006 is returned if the format does not meet the requirements.
+     * MAC address of the peer device, in the format of **XX:XX:XX:XX:XX:XX**, where **XX** is a hexadecimal character
+     * (0 to 9, A to F, or a to f). The peer device must have been paired. If not, error code 32390002 will be returned.
+     * If the format does not meet requirements, error code 32390006 will be returned.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -514,8 +518,9 @@ declare namespace proxyChannelManager {
     peerDevAddr: string;
 
     /**
-     * UUID of the service listened on by the peer device, in the standard UUID string format, for example, xxxxxxxx-
-     * xxxx-xxxx-xxxx-xxxxxxxxxxxx. Error code 32390006 is returned if the format does not meet the requirements.
+     * Service UUID of the peer device. The value is a standard UUID string, for example,
+     * **xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx**. If the format does not meet requirements,
+     * error code 32390006 will be returned.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -555,8 +560,8 @@ declare namespace proxyChannelManager {
     CHANNEL_RESUME = 1,
 
     /**
-     * The channel is unavailable due to a software exception, for example, an internal protocol stack error or resource
-     * allocation failure. Check the logs to locate the specific cause.
+     * The channel is unavailable due to a software exception, such as an internal protocol stack error or resource
+     * allocation failure. You are advised to check the logs to locate the cause.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -586,7 +591,7 @@ declare namespace proxyChannelManager {
    */
   interface ChannelStateInfo {
     /**
-     * Channel ID of the proxy channel. The value range is 1 to 2147483647.
+     * Proxy channel ID. The value ranges from 1 to 2147483647.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -596,9 +601,9 @@ declare namespace proxyChannelManager {
     channelId: int;
 
     /**
-     * Connection state of the channel. For the value range, see [ChannelState]{@link proxyChannelManager.ChannelState}.
-     * You are advised to adjust service policies based on different state values, for example, suspending data
-     * transmission when the channel is disconnected and retrying services after the channel is restored.
+     * Channel connection states. For details, see [ChannelState]{@link proxyChannelManager.ChannelState}. You are
+     * advised to adjust service policies based on different status values. For example, suspend data transmission when
+     * the channel is disconnected and retry services after the channel is reconnected.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
