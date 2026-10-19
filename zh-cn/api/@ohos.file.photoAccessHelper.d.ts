@@ -12329,7 +12329,7 @@ declare namespace photoAccessHelper {
   }
 
   /**
-   * MediaAssetChangeRequest implements [MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}.
+   * MediaAssetChangeRequest类实现了[MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}接口。
    * 
    * 资产变更请求。
    * 
@@ -13502,7 +13502,7 @@ declare namespace photoAccessHelper {
   }
 
   /**
-   * MediaAlbumChangeRequest implements [MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}.
+   * MediaAlbumChangeRequest类实现了[MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}接口。
    * 
    * 相册变更请求。
    * 
