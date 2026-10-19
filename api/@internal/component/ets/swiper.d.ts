@@ -207,8 +207,8 @@ declare class SwiperController {
    *
    * @param { number } offset - Drag distance to be simulated.<br/>A positive value indicates dragging toward the start
    *     of the main axis (leftward in horizontal layout and upward in vertical layout); a negative value indicates
-   *     dragging toward the end of the main axis (rightward in horizontal layout and downward in vertical layout).<br/>.
-   *     <br>Unit: vp<br/>. Value range: (-∞, +∞).
+   *     dragging toward the end of the main axis (rightward in horizontal layout and downward in vertical layout).<br/>
+   *     Unit: vp<br/>Value range: (-∞, +∞).
    * @returns { boolean } Whether to consume the passed drag distance.
    *     <br>**true** means to consume any passed drag distance; **false** means not to consume the passed drag distance
    *     because it is not in the drag simulation or has been dragged to the boundary.
@@ -1707,8 +1707,8 @@ declare class SwiperAttribute extends CommonMethod<SwiperAttribute> {
    * the **duration** setting. To have the animation duration managed by **duration**, you should select a different
    * curve for the **curve** attribute.
    *
-   * @param { number } value - Animation duration for switching between child components.<br/>Default value: **400**<br/
-   *     >Unit: ms<br/>Value range: [0, +∞). If a value less than 0 is set, the default value is used.
+   * @param { number } value - Animation duration for switching between child components.<br/>Default value: **400**
+   *     <br/>Unit: ms<br/>Value range: [0, +∞). If a value less than 0 is set, the default value is used.
    * @returns { SwiperAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]

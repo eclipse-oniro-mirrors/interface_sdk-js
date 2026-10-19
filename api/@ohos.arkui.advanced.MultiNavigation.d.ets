@@ -578,7 +578,7 @@ export declare class MultiNavPathStack extends NavPathStack {
    *
    * @param { number } index - Index of the navigation destination page.
    *     <br>Value range: [0, +∞).
-   * @returns { unknown | undefined } **Object**: Returns the parameter information of the corresponding
+   * @returns { Object | undefined } **Object**: Returns the parameter information of the corresponding
    *     **NavDestination** page. The specific fields are determined by the **param** passed in **pushPath** or
    *     **pushPathByName**.<br/>**undefined**: Returns **undefined** when the passed **index** is invalid.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
