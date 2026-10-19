@@ -613,7 +613,7 @@ declare class UiDriver {
    * 
    * > **说明：**
    * >
-   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[create<sup>9+</sup>]{@link Driver.create}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[create<sup>9+</sup>]{@link Driver#create}替代。
    *
    * @returns { UiDriver } - 返回构造的UiDriver对象。
    * @syscap SystemCapability.Test.UiTest
@@ -2953,7 +2953,7 @@ declare class Component {
  }
 
 /**
- * Driver类为UiTest测试框架的总入口。提供控件匹配/查找、按键注入、坐标点击/滑动、截图等能力。通过[Driver.create()]{@link Driver.create}创建实例。
+ * Driver类为UiTest测试框架的总入口。提供控件匹配/查找、按键注入、坐标点击/滑动、截图等能力。通过[Driver.create()]{@link Driver#create}创建实例。
  * 该类提供的方法除Driver.create()和Driver.createUIEventObserver()以外的所有方法都使用Promise方式作为异步方法，需使用await方式调用。
  *
  * @syscap SystemCapability.Test.UiTest
@@ -3347,9 +3347,6 @@ declare class Driver {
    *
    * @param { Point } point - 手指接触屏幕的坐标点。
    * @param { TouchOptions } [options] - 触摸操作选项。仅支持设置[TouchOptions]{@link TouchOptions}中的pressure属性，设置其他属性将抛出17000007参数校验失败的错误。默认值继承[TouchOptions]{@link TouchOptions}各属性默认值。
-   *     只有''属性适用于此方法。
-   *     设置其他属性将导致BusinessError 17000007。
-   *     <br>默认值：参考TouchOptions的默认值。
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000007 - Parameter verification failed.
@@ -3395,9 +3392,6 @@ declare class Driver {
    *
    * @param { Point } point - 手指接触屏幕的坐标点。
    * @param { TouchOptions } [options] - 触摸操作选项。仅支持设置[TouchOptions]{@link TouchOptions}中的duration和pressure属性，设置其他属性将抛出17000007参数校验失败的错误。默认值继承[TouchOptions]{@link TouchOptions}各属性默认值。
-   *     只有“持续时间”和“压力”属性适用于此方法。
-   *     设置其他属性将导致BusinessError 17000007。
-   *     <br>默认值：参考TouchOptions的默认值。
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000007 - Parameter verification failed.
@@ -3432,9 +3426,6 @@ declare class Driver {
    * @param { Point } from - 手指接触屏幕的坐标点。
    * @param { Point } to - 手指离开屏幕的坐标点。
    * @param { TouchOptions } [options] - 触摸操作选项。仅支持设置[TouchOptions]{@link TouchOptions}中的speed和pressure属性，设置其他属性将抛出17000007参数校验失败的错误。默认值继承[TouchOptions]{@link TouchOptions}各属性默认值。
-   *     只有“速度”和“压力”属性适用于此方法。
-   *     设置其他属性将导致BusinessError 17000007。
-   *     <br>默认值：参考TouchOptions的默认值。
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000007 - Parameter verification failed.
@@ -3470,9 +3461,6 @@ declare class Driver {
    * @param { Point } from - 手指接触屏幕的坐标点。
    * @param { Point } to - 手指离开屏幕的坐标点。
    * @param { TouchOptions } [options] - 触摸操作选项。仅支持设置[TouchOptions]{@link TouchOptions}中的pressure、speed和duration属性，设置其他属性将抛出17000007参数校验失败的错误。默认值继承[TouchOptions]{@link TouchOptions}各属性默认值。
-   *     只有“压力”、“速度”和“持续时间”属性适用于此方法。
-   *     设置其他属性将导致BusinessError 17000007。
-   *     <br>默认值：参考TouchOptions的默认值。
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000007 - Parameter verification failed.
