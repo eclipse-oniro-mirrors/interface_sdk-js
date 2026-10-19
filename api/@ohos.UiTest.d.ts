@@ -3513,7 +3513,7 @@ declare class Driver {
    *     [sandbox path](docroot://file-management/app-sandbox-directory.md) of the current application.
    * @returns { Promise<boolean> } - Promise used to return whether the screenshot operation is successful.
    *     The value **true** indicates the screenshot operation is successful, and **false** indicates the opposite.
-   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3537,7 +3537,7 @@ declare class Driver {
    * @returns { Promise<boolean> } Promise used to return whether the screenshot operation is successful. The value
    *     **true** indicates that the screen capture operation is successful, and the value **false** indicates the
    *     opposite.
-   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4004,7 +4004,7 @@ declare class Driver {
    *     The default value is the entire screen.
    * @returns { Promise<boolean> } - Promise used to return whether the screenshot operation is successful.
    *     The value **true** indicates the screenshot operation is successful, and **false** indicates the opposite.
-   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
