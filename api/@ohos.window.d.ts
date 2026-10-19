@@ -5297,7 +5297,7 @@ declare namespace window {
      * @default false
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     minimizeOnStart?: boolean;
 
@@ -5306,10 +5306,10 @@ declare namespace window {
      * If true, the current window will not display its icon and hover thumbnail preview on the dock.
      * This parameter only takes effect within the same application.
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     excludeFromDock?: boolean;
 
@@ -5318,10 +5318,10 @@ declare namespace window {
      * If true, the current window will not be displayed in the multitasking center.
      * This parameter only takes effect within the same application.
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     excludeFromRecent?: boolean;
   }

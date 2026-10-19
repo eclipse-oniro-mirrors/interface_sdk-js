@@ -5077,6 +5077,12 @@ declare namespace window {
      * @since 26.0.0 dynamic&static
      */
     isWindowLimitsForcible?: boolean;
+
+    minizeOnStart?: boolean;
+
+    excludeFromDock?: boolean;
+
+    excludeFromRecent?: boolean;
   }
 
   /**
