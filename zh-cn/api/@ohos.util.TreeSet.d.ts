@@ -270,9 +270,10 @@ declare class TreeSet<T> {
   forEach(callbackFn: (value?: T, key?: T, set?: TreeSet<T>) => void, thisArg?: Object): void;
 
   /**
-   * 通过回调函数来遍历实例对象上的元素。
+   * 通过回调函数来遍历实例对象上的元素。回调函数依次接收value、key和set参数，其中key与value相同，set默认指向当前实例。
+   * 不建议使用thisArg改变回调函数上下文：箭头函数的this不受thisArg影响，普通函数不应依赖thisArg。
    *
-   * @param { TreeSetForEachCb<T> } callbackFn - 遍历实例对象中每个元素时调用的回调函数，开发者可在回调中对元素及其下标进行自定义处理。
+   * @param { TreeSetForEachCb<T> } callbackFn - 遍历实例对象中每个元素时调用的回调函数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform
    * @atomicservice

@@ -771,7 +771,7 @@ declare namespace util {
     /**
      * 改变缓存容量。如果新容量小于等于 **0**，则抛出异常。
      *
-     * @param { number } newCapacity - 缓存的新容量。
+     * @param { number } newCapacity - 缓存的新容量，取值范围为 [0, 2147483647]。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1585,7 +1585,7 @@ declare namespace util {
     expand(value: ScopeType): ScopeHelper;
 
     /**
-     * 判断一个范围是否在此 **Scope** 范围内。
+     * 判断一个值是否在此 **Scope** 范围内。
      *
      * @param { ScopeType } value - 指定的值。
      * @returns { boolean } 检查结果。如果值在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
@@ -1925,7 +1925,8 @@ declare namespace util {
      */
     isAnyArrayBuffer(value: Object): boolean;
     /**
-     * 判断入参是否为 ArrayBufferView 类型。
+     * 判断入参是否为 ArrayBufferView 类型。ArrayBufferView 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
+     * Uint8ClampedArray、Uint32Array、Float32Array、Float64Array 和 DataView。
      *
      * @param { Object } value - 要检查的对象。
      * @returns { boolean } 检查结果。如果入参为 ArrayBufferView 类型，则返回 **true**；否则返回 **false**。
@@ -2302,7 +2303,8 @@ declare namespace util {
      */
     isSymbolObject(value: Object): boolean;
     /**
-     * 判断入参是否为 TypedArray 类型。
+     * 判断入参是否为 TypedArray 类型。TypedArray 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
+     * Uint8ClampedArray、Uint16Array、Uint32Array、Float32Array、Float64Array、BigInt64Array 和 BigUint64Array。
      *
      * @param { Object } value - 要检查的对象。
      * @returns { boolean } 检查结果。如果入参为 TypedArray 类型，则返回 **true**；否则返回 **false**。
@@ -2468,7 +2470,8 @@ declare namespace util {
      */
     write(chunk: string | Uint8Array): string;
     /**
-     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。
+     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。如果传入 **chunk**，则将其作为最后一部分数据进行解码；
+     * 如果未传入 **chunk**，则仅返回内部缓存中不完整字节序列的解码结果，不再处理新数据。
      *
      * @param { string | Uint8Array } [chunk] - 要解码的字符串。默认值为 **undefined**。
      * @returns { string } 解码后的字符串。
