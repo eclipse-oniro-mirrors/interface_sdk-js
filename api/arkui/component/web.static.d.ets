@@ -6865,6 +6865,18 @@ export declare interface WebAttribute extends CommonMethod {
      */
     default blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig | undefined): this;
     /**
+     * Enables or disables the blank screen monitor. When the monitor is enabled, the onMonitoredBlankScreen callback
+     * will be triggered after blank screen is monitored.
+     *
+     * @param { boolean | undefined } enable - Whether to enable the blank screen monitor. The value **true** means to
+     *     enable the monitor, and **false** means to disable it.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default enableBlankScreenMonitor(enable: boolean | undefined): this;
+    /**
      * Set whether to enable the back-to-top feature for web component when the status bar is touched.
      *
      * @param { boolean | undefined } backToTop {@code true} means enable the back-to-top feature,
