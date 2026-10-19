@@ -3779,8 +3779,7 @@ declare namespace text {
    * >
    * > The figure shows the typesetting boundaries for the string "j" or "E".
    * >
-   * > !
-   * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+   * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @crossplatform [since 24]
