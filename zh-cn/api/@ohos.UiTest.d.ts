@@ -3799,7 +3799,7 @@ declare class Driver {
   fling(direction: UiDirection, speed: int, displayId: int): Promise<void>;
 
   /**
-   * 在指定坐标点注入鼠标点击动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，Key值为2072时，按下Ctrl并进行鼠标点击动作。
+   * 在指定坐标点注入鼠标点击动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，键码值为2072时，按下Ctrl并进行鼠标点击动作。
    *
    * @param { Point } p - 鼠标点击的坐标。
    * @param { MouseButton } btnId - 按下的鼠标按钮。
@@ -3834,7 +3834,7 @@ declare class Driver {
   mouseMoveTo(p: Point): Promise<void>;
 
   /**
-   * 在指定坐标点注入鼠标滚轮滑动动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，Key值为2072时，按下Ctrl并进行鼠标滚轮滑动动作。
+   * 在指定坐标点注入鼠标滚轮滑动动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，键码值为2072时，按下Ctrl并进行鼠标滚轮滑动动作。
    *
    * @param { Point } p - 鼠标点击的坐标。
    * @param { boolean } down - 滚轮滑动方向是否向下。true表示向下滑动。false表示向上滚动。
@@ -3905,7 +3905,7 @@ declare class Driver {
   createUIEventObserver(): UIEventObserver;
 
   /**
-   * 在指定坐标点注入鼠标双击动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，Key值为2072时，按下Ctrl并进行鼠标双击动作。
+   * 在指定坐标点注入鼠标双击动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，键码值为2072时，按下Ctrl并进行鼠标双击动作。
    *
    * @param { Point } p - 鼠标双击的坐标。
    * @param { MouseButton } btnId - 按下的鼠标按钮。
@@ -3924,7 +3924,7 @@ declare class Driver {
   mouseDoubleClick(p: Point, btnId: MouseButton, key1?: int, key2?: int): Promise<void>;
 
   /**
-   * 在指定坐标点注入鼠标长按动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，Key值为2072时，按下Ctrl并进行鼠标长按动作。
+   * 在指定坐标点注入鼠标长按动作，支持同时按下对应键盘组合键。使用Promise异步回调。例如，键码值为2072时，按下Ctrl并进行鼠标长按动作。
    *
    * @param { Point } p - 鼠标长按的坐标。
    * @param { MouseButton } btnId - 按下的鼠标按钮。
@@ -3944,7 +3944,7 @@ declare class Driver {
   mouseLongClick(p: Point, btnId: MouseButton, key1?: number, key2?: number): Promise<void>;
 
   /**
-   * 在指定坐标点注入鼠标长按动作，支持同时按下对应键盘组合键，支持指定长按时长。使用Promise异步回调。例如，Key值为2072时，按下Ctrl并进行鼠标长按动作。
+   * 在指定坐标点注入鼠标长按动作，支持同时按下对应键盘组合键，支持指定长按时长。使用Promise异步回调。例如，键码值为2072时，按下Ctrl并进行鼠标长按动作。
    *
    * @param { Point } p - 鼠标长按的坐标。
    * @param { MouseButton } btnId - 按下的鼠标按钮。
