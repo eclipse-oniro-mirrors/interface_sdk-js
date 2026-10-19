@@ -323,7 +323,7 @@ declare namespace bundleResourceManager {
   function getLauncherAbilityResourceInfoList(optionsList: Array<BundleOptions>, resourceFlags: int): Promise<Array<LauncherAbilityResourceInfo>>;
 
   /**
-   * 根据给定的HAP文件路径和resourceFlags获取应用的BundleResourceInfo。使用Promise异步回调。
+   * 根据给定的filePath文件路径和resourceFlags资源标志获取资源信息。使用Promise异步回调。
    *
    * @permission ohos.permission.GET_BUNDLE_RESOURCES
    * @param { string } filePath - 表示存储HAP或APP的路径，支持当前应用程序的绝对路径和数据目录沙箱路径。
