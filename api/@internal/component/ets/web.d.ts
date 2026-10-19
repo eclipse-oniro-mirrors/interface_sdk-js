@@ -9257,8 +9257,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > - You can set the up, down, left, and right directions, or set the forward and backward nested scrolling modes to
    * > implement scrolling linkage with the parent component.
    * >
-   * > - Containers that support nested scrolling: [Grid]{@link ./grid}, [List]{@link ./list}, [Scroll]{@link ./scroll},
-   * > [Swiper]{@link ./swiper}, [Tabs]{@link ./tabs}, [WaterFlow]{@link ./water_flow}, [Refresh]{@link ./refresh} and
+   * > - Containers that support nested scrolling: [Grid]{@link Grid}, [List]{@link List}, [Scroll]{@link Scroll},
+   * > [Swiper]{@link Swiper}, [Tabs]{@link Tabs}, [WaterFlow]{@link WaterFlow}, [Refresh]{@link Refresh} and
    * > [bindSheet]{@link CommonMethod#bindSheet}.
    * >
    * > - Input sources that support nested scrolling: gestures, mouse device, and touchpad.
