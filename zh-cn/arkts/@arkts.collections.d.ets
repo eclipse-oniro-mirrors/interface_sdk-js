@@ -1483,7 +1483,7 @@ declare namespace collections {
      * 如果`begin < -arrayBuffer.byteLength`，则从0开始。
      * @param { number } [end] - 结束索引（不包括该元素）。如果`end < 0`，则会到`end + arrayBuffer.byteLength`位置结束。
      * 如果`end > arrayBuffer.byteLength`，则截取到arrayBuffer.byteLength位置。默认为原ArkTS ArrayBuffer的长度。
-     * @returns { ArrayBuffer } collections.ArrayBuffer。
+     * @returns { ArrayBuffer } collections.ArrayBuffer，包含原ArkTS ArrayBuffer指定范围的内容。
      * @throws { BusinessError } 10200011 - The slice method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -2093,7 +2093,6 @@ declare namespace collections {
    * > **说明**
    * >
    * > - 此模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
-   * > **装饰器类型**：\@Sendable
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -2670,7 +2669,6 @@ declare namespace collections {
    * > **说明**
    * >
    * > - 此模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
-   * > **装饰器类型：** \@Sendable
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -5039,7 +5037,6 @@ declare namespace collections {
    * > **说明**
    * >
    * > - 此模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
-   * > **装饰器**：\@Sendable
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]

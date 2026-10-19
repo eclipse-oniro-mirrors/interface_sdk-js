@@ -63,7 +63,9 @@ declare namespace json {
   /**
    * 定义Sendable JSON解析的转换结果函数类型。
    *
-   * 该类型用于描述JSON转换回调；当前[parseSendable]{@link json.parseSendable}仅接受undefined，传入函数会抛出TypeError。
+   * 用于Sendable JSON解析转换结果的函数类型，与[ArkTSUtils.ASON.Transformer]{@link json.Transformer}一致：this、value及返回值均为
+   * ISendable（而非Object），因为[parseSendable]{@link json.parseSendable}的产物为可跨线程共享的Sendable对象。
+   * 当前[parseSendable]{@link json.parseSendable}仅接受undefined，传入函数会抛出TypeError。
    *
    * @param { ISendable } this - 解析中的键值对所属的ISendable对象。
    * @param { string } key - 属性名。
