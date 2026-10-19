@@ -3311,7 +3311,7 @@ export declare enum KeyCode {
   KEYCODE_PTZ_APERTURE_RIGHT = 3243,
 
   /**
-   * 返回桌面。
+   * 返回桌面的按键。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @stagemodelonly
