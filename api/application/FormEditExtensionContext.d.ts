@@ -10,7 +10,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ *FormEditExtensionContext limitations under the License.
  */
 
 /**
@@ -24,7 +24,7 @@ import type { AbilityResult } from '../ability/abilityResult';
 
 /**
  * **FormEditExtensionContext**, inherited from 
- * [UIExtensionContext]{@link ./application/UIExtensionContext:UIExtensionContext}, is the context of 
+ * [UIExtensionContext]{@link ./UIExtensionContext:UIExtensionContext}, is the context of 
  * [FormEditExtensionAbility]{@link @ohos.app.form.FormEditExtensionAbility:FormEditExtensionAbility}.
  * 
  * > **NOTE**
