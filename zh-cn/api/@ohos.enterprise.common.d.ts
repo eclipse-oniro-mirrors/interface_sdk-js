@@ -444,7 +444,61 @@ declare namespace common {
      * @stagemodelonly
      * @since 26.0.1
      */
-    PRINTER_IP_ADDRESS_POLICY = 3
+    PRINTER_IP_ADDRESS_POLICY = 3,
+
+    /**
+     * 光驱刻录
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    OPTICAL_DISC_DRIVE_BURN = 4,
+
+    /**
+     * 精确定时器
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXACT_TIMER = 5,
+
+    /**
+     * 资源豁免
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXEMPTION_RESOURCE = 6,
+
+    /**
+     * x键
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    X_KEY = 7,
+
+    /**
+     * 系统回退
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SYSTEM_ROLLBACK = 8,
+
+    /**
+     * 超级隐私模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SUPER_PRIVACY = 9
   }
 
   /**

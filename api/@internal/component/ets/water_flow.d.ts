@@ -755,6 +755,25 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
   nestedScroll(value: NestedScrollOptions): WaterFlowAttribute;
 
   /**
+   * Sets the scroll snap strategy used after user scrolling in the WaterFlow.
+   *
+   * Supports top-down, segmented, and sliding-window layouts. START, CENTER, and END align items
+   * with the start, center, and end of the viewport along the scrolling axis.
+   * A custom provider calculates the approach distance and absolute final scroll target in vp.
+   * Targets are constrained to the legal scroll range. No snapping is enabled by default.
+   * NONE or undefined clears the strategy and restores the default scrolling behavior.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Built-in alignment or custom provider.
+   * @returns { WaterFlowAttribute } The WaterFlow attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): WaterFlowAttribute;
+
+  /**
    * Sets whether to support the scrolling gesture.
    *
    * > **NOTE**

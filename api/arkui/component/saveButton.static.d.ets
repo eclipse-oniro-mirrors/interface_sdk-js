@@ -181,11 +181,9 @@ export declare enum SaveDescription {
  * > **NOTE**
  * >
  * > - You are advised to specify at least one of **icon** or **text**.
- * >
  * > - If neither **icon** nor **text** is specified, **SaveButton** is created with default styles as follows:
- * > **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
- * > **Capsule**.
- * >
+ * >   **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
+ * >   **Capsule**.
  * > - The **icon**, **text**, and **buttonType** parameters do not support dynamic modification.
  *
  * @interface SaveButtonOptions
@@ -522,7 +520,6 @@ export declare interface SaveButtonAttribute extends SecurityComponentMethod {
    */
   symbolFontWeight(fontWeight: int | FontWeight | string | Resource | undefined): this;
 }
-
 
 /**
  * Creates a **SaveButton** component with an icon, text, and background. When the user taps the save button for the

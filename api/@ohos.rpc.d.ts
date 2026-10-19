@@ -611,7 +611,9 @@ declare namespace rpc {
     /**
      * Writes a **Sequenceable** object to this **MessageParcel** object.
      *
-     * @param { Sequenceable } val - **Sequenceable** object to write.
+     * @param { Sequenceable } val - **Sequenceable** object to write. It is advised that you ensure data integrity when
+     *     implementing the **marshalling** and **unmarshalling** methods. The data structures for serialization and
+     *     deserialization must be consistent.
      * @returns { boolean } Returns **true** if the data is written successfully; returns **false** otherwise.
      * @syscap SystemCapability.Communication.IPC.Core
      * @since 7 dynamiconly
@@ -1204,7 +1206,7 @@ declare namespace rpc {
     /**
      * Reads raw data from this **MessageParcel** object.
      *
-     * @param { number } size - Size of the raw data to read.
+     * @param { number } size - Size of the original data to read, in bytes.
      * @returns { number[] } Raw data obtained, in bytes.
      * @syscap SystemCapability.Communication.IPC.Core
      * @since 8 dynamiconly
@@ -1763,7 +1765,7 @@ declare namespace rpc {
      *     1.The parameter is an empty array;
      *     2.The number of parameters is incorrect;
      *     3.The parameter type does not match;
-     *     4.The element does not exist in the array.
+     *     4.The element does not exist in the array;
      *     5.The type of the element in the array is incorrect.
      * @throws { BusinessError } 1900009 - Failed to write data to the message sequence.
      * @syscap SystemCapability.Communication.IPC.Core
@@ -3080,7 +3082,8 @@ declare namespace rpc {
      * @param { MessageSequence } data - **MessageSequence** object holding the data to send.
      * @param { MessageSequence } reply - **MessageSequence** object that receives the response.
      * @param { MessageOption } options - Request sending mode, which can be synchronous (default) or asynchronous.
-     * @param { AsyncCallback<RequestResult> } callback - Callback for receiving the sending result.
+     * @param { AsyncCallback<RequestResult> } callback - Callback used to return the result. When the message is sent
+     *     successfully, the data returned by the server can be read from **RequestResult**.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.The number of parameters is incorrect;
      *     2.The parameter type does not match;
@@ -3913,7 +3916,7 @@ declare namespace rpc {
     /**
      * Obtains the UID of the remote process.
      *
-     * @returns { int } Return the UID of the {@link RemoteProxy} object.
+     * @returns { int } UID of the remote process obtained.
      * @syscap SystemCapability.Communication.IPC.Core
      * @since 7 dynamic
      * @since 23 static
@@ -4160,7 +4163,7 @@ declare namespace rpc {
 
     /**
      * Sends a **MessageParcel** message to the remote process in synchronous or asynchronous mode. If the asynchronous
-     *     mode is set in **options**, the API returns immediately and **reply** is empty. The specific response need
+     *     mode is set in **options**, the API returns immediately and **reply** is empty. The specific response needs
      *     to be obtained from the callback on the service side. If the synchronous mode is set in **options**, the
      *     response is returned when **sendRequest** returns, and **reply** contains the response content.
      *
@@ -4825,7 +4828,7 @@ declare namespace rpc {
      * > - Before writing an **Ashmem** object, you need to call
      * > [mapReadWriteAshmem]{@link rpc.Ashmem#mapReadWriteAshmem()} for mapping.
      *
-     * @param { number } size - Size of the data to read.
+     * @param { number } size - Size of the data to read, in bytes.
      * @param { number } offset - Start position of the data to read in the memory region associated with this
      *     **Ashmem** object.
      * @returns { number[] } Data read.

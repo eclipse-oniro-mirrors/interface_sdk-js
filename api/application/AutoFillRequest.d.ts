@@ -197,7 +197,7 @@ export interface FillRequestCallback {
    * Called when an auto-fill request is successfully processed.
    *
    * @param { FillResponse } response - Information about the response to the auto-fill request.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Mandatory parameters are left unspecified.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
@@ -211,7 +211,7 @@ export interface FillRequestCallback {
   /**
    * Called when an auto-fill request fails to be processed.
    *
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -226,7 +226,7 @@ export interface FillRequestCallback {
    *
    * @param { string } [fillContent] - Content returned to the input method framework when the auto-fill request is
    *     canceled. [since 12]
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br>1.The input parameter is not valid parameter;
@@ -243,7 +243,7 @@ export interface FillRequestCallback {
    * Sets the size and position of an auto-fill pop-up.
    *
    * @param { AutoFillPopupConfig } autoFillPopupConfig - Size and position of the auto-fill pop-up.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Mandatory parameters are left unspecified.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
@@ -268,7 +268,7 @@ export interface SaveRequestCallback {
   /**
    * Called when a saving request is successfully processed.
    *
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -281,7 +281,7 @@ export interface SaveRequestCallback {
   /**
    * Called when a saving request fails to be processed.
    *
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi

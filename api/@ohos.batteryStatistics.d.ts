@@ -154,7 +154,8 @@ declare namespace batteryStats {
    *     [BatteryStatsInfo]{@link batteryStats.BatteryStatsInfo}>. Otherwise, **err** is an error object.
    *     **AsyncCallback** has encapsulated an API of the **BatteryStatsInfo** class.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 4600101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryStatistics
    * @systemapi
@@ -169,7 +170,8 @@ declare namespace batteryStats {
    * @param { int } uid - Application UID.
    * @returns { double } Power consumption of the application with this UID, in unit of mAh.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 4600101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryStatistics
    * @systemapi
@@ -185,7 +187,8 @@ declare namespace batteryStats {
    * @returns { double } Proportion of the power consumption of an application with this UID, which ranges
    *     from 0.00 to 1.00.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 4600101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryStatistics
    * @systemapi
@@ -201,7 +204,8 @@ declare namespace batteryStats {
    * @returns { double } Power consumption of the hardware unit corresponding to the power consumption type, in unit
    *     of mAh.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 4600101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryStatistics
    * @systemapi
@@ -217,7 +221,8 @@ declare namespace batteryStats {
    * @returns { double } Proportion of the power consumption of the hardware unit corresponding to the power consumption
    *     type, which ranges from 0.00 to 1.00.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * 2.Incorrect parameter types.
    * @throws { BusinessError } 4600101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.BatteryStatistics
    * @systemapi

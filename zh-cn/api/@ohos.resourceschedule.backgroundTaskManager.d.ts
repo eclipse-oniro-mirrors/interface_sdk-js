@@ -1224,6 +1224,40 @@ declare namespace backgroundTaskManager {
   function startBackgroundRunning(context: Context, request: ContinuousTaskRequest): Promise<ContinuousTaskNotification>;
 
   /**
+   * 申请长时任务，一个UIAbility（FA模型则为ServiceAbility）下支持通过本接口申请多个长时任务，使用Promise异步回调。
+   * 
+   * 通过本接口申请长时任务时，支持与已存在的长时任务合并通知，具体请参考[ContinuousTaskRequest]{@link backgroundTaskManager.ContinuousTaskRequest}。
+   * 
+   * 同一时间最多可存在10个长时任务，长时任务申请成功后，会有通知栏消息，没有提示音。
+   * 
+   * 如果通过本接口申请的一个长时任务中同时包含多种类型，且包含数据传输类型，则在通知栏会发送2个长时任务通知，一个为数据传输类型，另一个为其他类型的合并通知。
+   * 任意一个通知被移除时，长时任务取消，且另一个通知也会同步移除。
+   * 
+   * 通过本接口申请长时任务时，支持包含数据传输类型的长时任务直接发送进度模版通知，可选择通知是否有进度环，进度为100时是否响铃，具体请参考[ProgressInfo]{@link backgroundTaskManager.ProgressInfo}。
+   * 也可以通过[updateDataTransferProgress()]{@link backgroundTaskManager.updateDataTransferProgress}接口更新长时任务通知
+   *
+   * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
+   * @param { Context } context - 应用运行的上下文。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
+   *     <br> **说明：** Stage模型中，仅支持UIAbility申请。
+   * @param { ContinuousTaskRequest } request - 长时任务请求信息，包括长时任务主类型、子类型等。
+   * @returns { Promise<int> } Promise对象，返回长时任务ID
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9800001 - Memory operation failed.
+   * @throws { BusinessError } 9800004 - System service operation failed.
+   * @throws { BusinessError } 9800005 - Continuous task verification failed.
+   * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
+   * @throws { BusinessError } 9800007 - Continuous task storage failed.
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type.
+   * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  function startContinuousTask(context: Context, request: ContinuousTaskRequest): Promise<int>;
+
+  /**
    * 更新长时任务，使用Promise异步回调。更新成功后仅显示通知栏消息，不播放提示音。适用于应用功能切换（如从音视频播放切换到录音）等需要调整长时任务以匹配新业务的场景。
    * 
    * 更新长时任务前，可以通过[getAllContinuousTasks]{@link backgroundTaskManager.getAllContinuousTasks(context: Context)}

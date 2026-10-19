@@ -26,6 +26,7 @@ import {
   NotificationExtensionSubscriptionInfo as _NotificationExtensionSubscriptionInfo
 } from './notification/NotificationExtensionSubscriptionInfo';
 import { NotificationInfo as _NotificationInfo } from './notification/NotificationInfo';
+import image from './@ohos.multimedia.image';
 
 /**
  * 本模块提供管理通知扩展的能力，具体包括：打开通知扩展订阅设置界面、订阅和取消订阅通知扩展、获取和设置通知授权状态。
@@ -278,6 +279,48 @@ declare namespace notificationExtensionSubscription {
    * @since 26.2.0 dynamic&static
    */
   function subscribeNotification(priorityStrategy?: int): Promise<void>;
+
+  /**
+   * 查询本应用中“已获取的本机通知”列表中开关状态为开的应用图标。使用Promise异步回调。
+   *
+   * @permission ohos.permission.SUBSCRIBE_NOTIFICATION
+   * @param { string } bundleName - 包名。
+   * @returns { Promise<image.PixelMap> } Promise对象，返回应用图标。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
+   *		2.Memory operation error. 3.Failed to obtain or decode the application icon.
+   * @throws { BusinessError } 1600003 - Failed to connect to the service.
+   * @throws { BusinessError } 1600022 - The specified bundle is invaild. Possible cause: 1.The application is not in the list. 2.The application is disabled.
+   * @syscap SystemCapability.Notification.Notification
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getUserGrantedBundleIcon(bundleName: string): Promise<image.PixelMap>;
+ 
+  /**
+   * 关闭本应用中“已获取的本机通知”列表中指定应用的开关状态。使用promise异步回调。
+   *
+   * @permission ohos.permission.SUBSCRIBE_NOTIFICATION
+   * @param { GrantedBundleInfo } bundle - 应用的包信息。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *  required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *  <br>1. The hardware does not support the capability.
+   *  <br>2. The chip does not support the capability.
+   *  <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
+   *		2.Memory operation error. 3.Database operation failed.
+   * @throws { BusinessError } 1600003 - Failed to connect to the service.
+   * @throws { BusinessError } 1600022 - The specified bundle is invaild.
+   * @syscap SystemCapability.Notification.Notification
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   * @see [getUserGrantedEnabledBundles] {@link notificationExtensionSubscription#getUserGrantedEnabledBundles()}
+   *		获取本应用中“已获取的本机通知”通知开关开启的应用列表。
+   */
+  function disableUserGrantedByBundle(bundle: GrantedBundleInfo): Promise<void>;
 
   /**
    * 表示通知扩展订阅的类型。

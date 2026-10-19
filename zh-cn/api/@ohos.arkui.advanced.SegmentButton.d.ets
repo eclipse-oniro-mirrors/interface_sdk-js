@@ -360,6 +360,39 @@ interface SegmentButtonIconTextItem {
 declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
 
 /**
+ * 定义分段按钮的拖拽交互模式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum SegmentButtonInteractionMode {
+  /**
+   * 启用跟手拖拽。非系统材质场景仅启用跟手拖拽动画。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  FOLLOWING_DRAG = 0,
+
+  /**
+   * 启用普通拖拽。仅改变拖拽位移和选中更新方式；系统材质的外观、形变及已配置光效保持原有行为。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  NORMAL_DRAG = 1
+}
+
+/**
 * 边框圆角模式枚举，用于控制分段按钮的圆角计算方式。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -759,6 +792,23 @@ interface CommonSegmentButtonOptions {
    * @since 23 dynamic
    */
   backgroundSystemMaterial?: uiMaterial.Material;
+
+  /**
+   * 设置分段按钮的拖拽交互模式。
+   *
+   * 未配置时，启用系统材质的场景使用跟手拖拽，非系统材质场景使用普通拖拽，保持原有行为。
+   * 非系统材质场景显式设置普通拖拽、系统材质场景显式设置跟手拖拽，均保持原有行为。
+   * 非系统材质场景设置跟手拖拽时，不新增材质形变或点光源。
+   * 系统材质场景设置普通拖拽时，仅改变拖拽位移和选中更新方式；材质外观、背板缩放、微量位移、选中项形变及已配置光效保持原有行为。
+   * 未配置、undefined或非法值均使用默认模式。多选模式下该参数不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  interactionMode?: SegmentButtonInteractionMode;
 }
 
 /**
@@ -1618,6 +1668,23 @@ declare class SegmentButtonOptions {
   backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
+   * 设置分段按钮的拖拽交互模式。
+   *
+   * 未配置时，启用系统材质的场景使用跟手拖拽，非系统材质场景使用普通拖拽，保持原有行为。
+   * 非系统材质场景显式设置普通拖拽、系统材质场景显式设置跟手拖拽，均保持原有行为。
+   * 非系统材质场景设置跟手拖拽时，不新增材质形变或点光源。
+   * 系统材质场景设置普通拖拽时，仅改变拖拽位移和选中更新方式；材质外观、背板缩放、微量位移、选中项形变及已配置光效保持原有行为。
+   * 未配置、undefined或非法值均使用默认模式。多选模式下该参数不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  interactionMode?: SegmentButtonInteractionMode;
+
+  /**
    * 构造函数。
    *
    * @param { TabSegmentButtonOptions | CapsuleSegmentButtonOptions } options - 页签类或者胶囊类分段按钮信息。
@@ -1850,5 +1917,6 @@ export {
   SegmentButtonItemArray,	 
   SegmentButtonItemOptionsConstructorOptions,	 
   SegmentButtonItemOptions,	 
+  SegmentButtonInteractionMode,
   BorderRadiusMode	 
 };

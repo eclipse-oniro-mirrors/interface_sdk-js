@@ -3272,6 +3272,7 @@ declare namespace drawing {
      * @param { string } text - Content to be used for drawing the text blob.
      * @param { Font } font - Font object.
      * @returns { Array<TextBlob> } An array of TextBlob objects.
+     * @throws { BusinessError } 25900001 - Parameter error. Possible causes: Incorrect parameter range.
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
@@ -3977,7 +3978,6 @@ declare namespace drawing {
      * @param { string } text - Text content to be measured.
      * @param { TextEncoding } encoding - Text encoding.
      * @returns { number } Width of the text including fallback fonts. The value is a floating point number.
-     * @throws { BusinessError } 25900001 - Parameter error. Possible causes: Incorrect parameter range.
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @since 26.0.1 dynamiconly

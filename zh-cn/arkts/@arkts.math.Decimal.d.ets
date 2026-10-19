@@ -16,6 +16,8 @@
 /**
  * @file 定义ArkTS的Decimal类型。Decimal支持任意精度的十进制运算。
  * @kit ArkTS
+ *
+ * 本模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
  */
 
 /**
@@ -61,9 +63,9 @@ type Modulo = int;
 /**
  * 表示用于构建Decimal的参数类型。
  *
- * @unionmember { string }
- * @unionmember { double }
- * @unionmember { Decimal }
+ * @unionmember { string } 构造时可接受的数字格式字符串。
+ * @unionmember { double } 有限数字值。
+ * @unionmember { Decimal } Decimal对象。
  * @syscap SystemCapability.Utils.Lang
  * @crossplatform [since 18]
  * @atomicservice
@@ -83,7 +85,7 @@ type Value = string | double | Decimal;
  */
 export interface DecimalConfig {
   /**
-   * 运算结果的最大有效位数。
+   * 运算结果的最大有效位数，取值范围为[1, 1e9]。
    * 默认值：20。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -106,7 +108,7 @@ export interface DecimalConfig {
    */
   rounding?: Rounding;
   /**
-   * 指数表示法的负指数值的极限值，若Decimal的负指数小于等于该值时，使用科学计数法表示。
+   * 指数表示法的负指数值的极限值，取值范围为[-9e15, 0]；若Decimal的负指数小于等于该值时，使用科学计数法表示。
    * 默认值：-7。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -117,7 +119,7 @@ export interface DecimalConfig {
    */
   toExpNeg?: double;
   /**
-   * 指数表示法的正指数值的极限值，若Decimal的正指数大于等于该值时，使用科学计数法表示。
+   * 指数表示法的正指数值的极限值，取值范围为[0, 9e15]；若Decimal的正指数大于等于该值时，使用科学计数法表示。
    * 默认值：21。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -128,7 +130,7 @@ export interface DecimalConfig {
    */
   toExpPos?: double;
   /**
-   * 负指数极限，若Decimal的指数值小于该值，会下溢到零。
+   * 负指数极限，取值范围为[-9e15, 0]；若Decimal的指数值小于该值，会下溢到零。
    * 默认值：-9e15。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -139,7 +141,7 @@ export interface DecimalConfig {
    */
   minE?: double;
   /**
-   * 正指数极限，若Decimal的指数值大于该值，会溢出至无穷大。
+   * 正指数极限，取值范围为[0, 9e15]；若Decimal的指数值大于该值，会溢出至无穷大。
    * 默认值：9e15。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -150,7 +152,7 @@ export interface DecimalConfig {
    */
   maxE?: double;
   /**
-   * 确定是否使用加密安全伪随机数生成的值。
+   * 确定是否使用加密安全伪随机数生成的值。当前不支持使用该能力。
    * 默认值：false。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -288,7 +290,7 @@ declare class Decimal {
   ceil(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将参数n截断为整数部分。
+   * 返回一个新的Decimal对象，其值是将当前Decimal截断为整数部分。
    *
    * @returns { Decimal } the Decimal type
    * @syscap SystemCapability.Utils.Lang
@@ -593,7 +595,7 @@ declare class Decimal {
   atan(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的双曲余弦的倒数。
+   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲余弦值。
    *
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
@@ -606,7 +608,7 @@ declare class Decimal {
   acosh(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的双曲正弦的倒数。
+   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲正弦值。
    *
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
@@ -619,7 +621,7 @@ declare class Decimal {
   asinh(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的双曲正切的倒数。
+   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲正切值。
    *
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
@@ -887,7 +889,7 @@ declare class Decimal {
   /**
    * 将Decimal转换为八进制表示的字符串，可按照significantDigits设置有效数字。
    *
-   * @param { double } significantDigits {double | string | Decimal}
+   * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
    * @returns { string } the string type
    * @throws { BusinessError } 10200001 - The value of `significantDigits` is out of range.
    * @syscap SystemCapability.Utils.Lang
@@ -901,7 +903,7 @@ declare class Decimal {
   /**
    * 将Decimal转换为八进制表示的字符串，可按照significantDigits设置有效数字，可按照rounding设置舍入模式。
    *
-   * @param { double } significantDigits {double | string | Decimal}
+   * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
    * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
    * @returns { string } the string type
    * @throws { BusinessError } 10200001 - The value of `significantDigits | rounding` is out of range.
@@ -1396,7 +1398,7 @@ declare class Decimal {
   static add(x: Value, y: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值为参数的和。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值为参数的和。按照precision设置有效位数，按照rounding设置舍入模式。未传入参数时会抛出运行时异常。
    *
    * 仅对结果进行舍入，不对中间计算结果进行舍入。
    *
@@ -1668,7 +1670,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的双曲余弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
+   * @param { Value } n {double | string | Decimal} 需要求双曲函数的数值。
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
@@ -1700,7 +1702,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的双曲正切值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
+   * @param { Value } n {double | string | Decimal} 需要求双曲函数的数值。
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
@@ -1765,7 +1767,7 @@ declare class Decimal {
   static atan(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是n的双曲余弦的倒数。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是n的反双曲余弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal}
    * @returns { Decimal } the Decimal type
@@ -1782,9 +1784,9 @@ declare class Decimal {
   static acosh(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是n的双曲正弦的倒数。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是n的反双曲正弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
+   * @param { Value } n {double | string | Decimal} 需要求反双曲函数的数值。
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
@@ -1801,7 +1803,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的反双曲正切值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
+   * @param { Value } n {double | string | Decimal} 需要求反双曲函数的数值。
    * @returns { Decimal } the Decimal type
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
@@ -1850,7 +1852,7 @@ declare class Decimal {
   static hypot(...n: Value[]): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是所有参数中的最大值。
+   * 返回一个新的Decimal对象，其值是所有参数中的最大值。未传入参数时会抛出运行时异常。
    *
    * @param { Value[] } n {double | string | Decimal}
    * @returns { Decimal } the Decimal type
@@ -1866,7 +1868,7 @@ declare class Decimal {
   static max(...n: Value[]): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是所有参数中的最小值。
+   * 返回一个新的Decimal对象，其值是所有参数中的最小值。未传入参数时会抛出运行时异常。
    *
    * @param { Value[] } n {double | string | Decimal}
    * @returns { Decimal } the Decimal type
@@ -1920,8 +1922,8 @@ declare class Decimal {
    * NaN  其他情况
    *
    * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type [since 12 - 17]
-   * @returns { double } the Decimal type [since 18]
+   * @returns { Decimal } 参数的符号判断结果 [since 12 - 17]
+   * @returns { double } 参数的符号判断结果 [since 18]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.

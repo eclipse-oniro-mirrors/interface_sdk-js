@@ -545,7 +545,7 @@ declare namespace workScheduler {
      */
     CHARGING_PLUGGED_ANY = 0,
     /**
-     * 表示这个触发条件是直流充电器连接。
+     * 表示这个触发条件是交流充电器连接。
      *
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @stagemodelonly

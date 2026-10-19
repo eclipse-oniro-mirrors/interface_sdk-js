@@ -246,7 +246,7 @@ declare namespace dialogSession {
    *
    * @param { string } dialogSessionId - Session ID.
    * @returns { DialogSessionInfo } Session information.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
@@ -265,7 +265,7 @@ declare namespace dialogSession {
    * @param { string } dialogSessionId - Query information by dialog session id.
    * @returns { DialogSessionInfo | null } Returns the session info when the target DialogSessionInfo of
    *     dialogSessionId exists. Returns null if the target DialogSessionInfo of dialogSessionId not exist.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -283,7 +283,7 @@ declare namespace dialogSession {
    * @param { Want } targetWant - Target of the request.
    * @param { boolean } isAllowed - Whether the target ability can be started. **true** if allowed, **false** otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
@@ -305,7 +305,7 @@ declare namespace dialogSession {
    * @param { boolean } isAllowed - Whether the target ability can be started. **true** if allowed, **false** otherwise.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, **err** is
    *     **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.

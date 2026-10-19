@@ -25,6 +25,7 @@ import particleAbility from '@ohos.ability.particleAbility';
 import abilityAccessCtrl, {
   Context, PermissionRequestResult, Permissions
 } from '@ohos.abilityAccessCtrl';
+import abilityToolAccessCtrl from '@ohos.abilityToolAccessCtrl';
 import Ability from '@ohos.app.ability.Ability';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
@@ -34,6 +35,7 @@ import AbilityStage from '@ohos.app.ability.AbilityStage';
 import ActionExtensionAbility from '@ohos.app.ability.ActionExtensionAbility';
 import ApplicationStateChangeCallback from '@ohos.app.ability.ApplicationStateChangeCallback';
 import appManager from '@ohos.app.ability.appManager';
+import taskManager from '@ohos.app.agent.taskManager';
 import appRecovery from '@ohos.app.ability.appRecovery';
 import AutoFillExtensionAbility from '@ohos.app.ability.AutoFillExtensionAbility';
 import autoFillManager from '@ohos.app.ability.autoFillManager';
@@ -152,7 +154,7 @@ export {
   CompletionHandlerForAtomicService, CompletionHandlerForAbilityStartCallback, AbilityStartFailureCode, FailureCode, InteropAbilityLifecycleCallback,
   systemConfiguration, AgentExtensionAbility, AgentUIExtensionAbility, agentConstant, agentManager, hyperSnapManager, cliManager, pluginBundleManager,
   functionManager, appMemoryOptimizer, CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap,
-  FunctionHook, InvokeFunctionParam, FunctionResultWrap
+  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl
 };
 
 /*** if arkts static */
@@ -190,6 +192,7 @@ import UIAbility, {
 } from '@ohos.app.ability.UIAbility';
 import abilityManager from '@ohos.app.ability.abilityManager';
 import appManager from '@ohos.app.ability.appManager';
+import taskManager from '@ohos.app.agent.taskManager';
 import application from '@ohos.app.ability.application';
 import appRecovery from '@ohos.app.ability.appRecovery';
 import autoFillManager from '@ohos.app.ability.autoFillManager';
@@ -264,6 +267,6 @@ export {
   StartupTask, startupManager, systemConfiguration, PhotoEditorExtensionAbility, AgentExtensionAbility, 
   AgentUIExtensionAbility, agentConstant, agentManager, InsightIntentLink, InsightIntentPage, InsightIntentFunctionMethod, InsightIntentFunction, 
   InsightIntentEntry, LinkParamCategory, LinkIntentParamMapping, InsightIntentEntity, InsightIntentEntryExecutor, InsightIntentForm, hyperSnapManager, 
-  pluginBundleManager, errorManager, appMemoryOptimizer
+  pluginBundleManager, errorManager, appMemoryOptimizer, taskManager
 };
 /*** endif */

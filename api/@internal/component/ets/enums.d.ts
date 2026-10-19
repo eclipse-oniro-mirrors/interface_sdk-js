@@ -6795,5 +6795,16 @@ declare enum ImmersiveStrategy {
    * @atomicservice
    * @since 26.2.0 dynamic
    */
-  AVOID_FLOAT_NAV = 1
+  AVOID_FLOAT_NAV = 1,
+
+  /**
+   * Expands the TitleBar and ToolBar of Navigation/NavDestination as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  NAVIGATION_EXPAND_SAFE_AREA = 8
 }

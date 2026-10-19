@@ -205,9 +205,8 @@ declare enum SaveDescription {
  * >
  * > - You are advised to specify at least one of **icon** or **text**.
  * > - If neither **icon** nor **text** is specified, **SaveButton** is created with default styles as follows:
- * > **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
- * > **Capsule**.
- * >
+ * >   **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
+ * >   **Capsule**.
  * > - The **icon**, **text**, and **buttonType** parameters do not support dynamic modification.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -461,6 +460,14 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
   /**
    * Sets the icon size of the **SaveButton** component.
    *
+   * > **NOTE**
+   * >
+   * > In API version 10, developers can set the icon size through the security component universal attribute
+   * > [iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}, where the size type supports only
+   * > Dimension.<br/>
+   * > Since API version 20, developers can set the icon size through this API, and the size type additionally
+   * > supports SizeOptions.
+   *
    * @param { Dimension | SizeOptions } size - Icon size. Pixel units such as vp and px are supported.
    *     <br>The default width and height are 16 vp.<br>Percentage strings are not supported. If a percentage string is
    *     passed as a Dimension parameter, the icon
@@ -537,6 +544,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    * @since 21 dynamic
    */
   userCancelEvent(enabled: boolean): SaveButtonAttribute;
+
   /**
    * Sets the color of the symbol icon for the save button.
    *

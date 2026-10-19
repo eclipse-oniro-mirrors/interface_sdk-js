@@ -487,7 +487,7 @@ declare namespace buffer {
      * 比较当前Buffer对象与目标Buffer或Uint8Array对象，并返回在排序中的结果。
      *
      * @param { Buffer | Uint8Array } target - 要比较的实例对象。
-     * @param { number } [targetStart] - target实例中开始的偏移量。默认值：0。
+     * @param { number } [targetStart] - target实例中开始的偏移量。取值范围：>= 0且<= target的字节长度。默认值：0。
      * @param { number } [targetEnd] - target实例中结束的偏移量（不包含结束位置）。默认值：目标对象的字节长度。
      * @param { number } [sourceStart] - this实例中开始的偏移量。默认值：0。
      * @param { number } [sourceEnd] - this实例中结束的偏移量（不包含结束位置）。默认值：当前对象的字节长度。
@@ -986,7 +986,7 @@ declare namespace buffer {
     readUIntLE(offset: int, byteLength: int): long;
 
     /**
-     * 截取当前对象指定位置的数据并返回。
+     * 截取当前对象指定位置的数据并返回。返回的Buffer与原Buffer共享内存，修改任一对象都会影响另一个对象。
      *
      * @param { int } [start] - 截取开始位置。默认值：0。
      * @param { int } [end] - 截取结束位置（不包含结束位置）。默认值：当前对象的字节长度。在传入null时返回空Buffer。
@@ -1334,7 +1334,7 @@ declare namespace buffer {
      *
      * @param { long } value - 写入Buffer的数据。
      * @param { int } offset - 偏移量。默认值：0。取值范围：0 <= offset <= Buffer.length - byteLength。
-     * @param { int } byteLength - 要写入的字节数。
+     * @param { int } byteLength - 要写入的字节数，取值范围：1 <= byteLength <= 6。
      * @returns { int } 偏移量offset加上写入的字节数。
      * @throws { BusinessError } 10200001 - The value of "[param]" is out of range. It must be >= [left range] and <=
      *     [right range]. Received value is: [param]
@@ -1525,7 +1525,7 @@ declare namespace buffer {
   }
 
   /**
-   * 将数据处理为blob类型。
+   * 将数据处理为不可变的blob类型，用于封装大量二进制数据。
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]

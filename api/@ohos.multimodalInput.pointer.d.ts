@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Mouse Pointer
+ * @file Mouse Pointer and pointer-type external devices
  * @kit InputKit
  */
 
@@ -23,7 +23,8 @@ import type { AsyncCallback } from './@ohos.base';
 import type image from './@ohos.multimedia.image';
 
 /**
- * This module provides mouse cursor management, used to query and set mouse cursor related properties.
+ * This module provides management of the mouse cursor and cursor type external devices, and is used to query and
+ * set the related attributes of the mouse cursor and cursor type external devices.
  *
  * @syscap SystemCapability.MultimodalInput.Input.Pointer
  * @atomicservice [since 12]

@@ -30,6 +30,40 @@ import { SizeT } from '@ohos.arkui.node';
 import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
+ * Defines the drag interaction mode of the segmented button.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+export declare enum SegmentButtonV2InteractionMode {
+    /**
+     * Enables following drag. Without system material, only the following drag animation is enabled.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    FOLLOWING_DRAG = 0,
+
+    /**
+     * Enables normal drag. Only drag positioning and selection updates differ from following drag.
+     * System material feedback, including configured light effects, is retained.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    NORMAL_DRAG = 1
+}
+
+/**
  * Defines segmented button item options.
  * 
  * > **Description**
@@ -1171,6 +1205,27 @@ export declare struct TabSegmentButtonV2 {
     readonly backgroundSystemMaterial?: uiMaterial.Material;
 
     /**
+     * Sets the drag interaction mode of the segmented button.
+     *
+     * If omitted, following drag is used with system material, and normal drag is used without it.
+     * Explicit normal drag without system material and explicit following drag with system material
+     * preserve the original behavior.
+     * Following drag without system material does not add material deformation or light effects.
+     * Normal drag with system material only changes drag positioning and selection updates.
+     * Material appearance, background scaling, slight displacement, selected-item deformation,
+     * and configured light effects are retained.
+     * If omitted, undefined or invalid, the default mode is used.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    @Param
+    readonly interactionMode?: SegmentButtonV2InteractionMode;
+
+    /**
      * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified
      * through a variable.
      *
@@ -1928,6 +1983,27 @@ export declare struct CapsuleSegmentButtonV2 {
      */
     @Param
     readonly backgroundSystemMaterial?: uiMaterial.Material;
+
+    /**
+     * Sets the drag interaction mode of the segmented button.
+     *
+     * If omitted, following drag is used with system material, and normal drag is used without it.
+     * Explicit normal drag without system material and explicit following drag with system material
+     * preserve the original behavior.
+     * Following drag without system material does not add material deformation or light effects.
+     * Normal drag with system material only changes drag positioning and selection updates.
+     * Material appearance, background scaling, slight displacement, selected-item deformation,
+     * and configured light effects are retained.
+     * If omitted, undefined or invalid, the default mode is used.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    @Param
+    readonly interactionMode?: SegmentButtonV2InteractionMode;
 
     /**
      * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified

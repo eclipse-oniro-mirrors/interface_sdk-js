@@ -189,7 +189,7 @@ declare namespace taskpool {
      * >
      * > - 调用该接口时，请确保处理数据的回调函数已在宿主线程注册。
      *
-     * @param { Object[] } args - 作为已注册回调函数入参的数据，支持的参数类型请参考
+     * @param { Object[] } args - 作为已注册回调函数入参的数据，可传输对象默认转移；支持的参数类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @throws { BusinessError } 10200022 - The function is not called in the TaskPool thread.
@@ -234,7 +234,7 @@ declare namespace taskpool {
      *
      * @param { Object[] | ArrayBuffer[] } cloneList - - 传入数组的类型必须为
      *     [Sendable支持的数据类型](docroot://arkts-utils/arkts-sendable.md#sendable支持的数据类型)或ArrayBuffer。<br>- 所有传入
-     *     **cloneList**的[Sendable class](docroot://arkts-utils/arkts-sendable.md#sendable-class)实例或ArrayBuffer类型对象，
+     *     **cloneList**的对象所持有的[Sendable class](docroot://arkts-utils/arkts-sendable.md#sendable-class)实例或ArrayBuffer类型对象，
      *     在线程间传输的行为都会变成拷贝传递，即修改传输后的对象不会对原有对象产生任何影响。
      * @throws { BusinessError } 10200029 - An ArrayBuffer cannot be set as both a transfer list and a clone list.
      * @syscap SystemCapability.Utils.Lang
@@ -966,7 +966,7 @@ declare namespace taskpool {
   function executePeriodically(period: number, task: Task, priority?: Priority): void;
 
   /**
-   * 周期执行泛型任务，使用Promise异步回调。
+   * 周期执行泛型任务。
    * executePeriodically任务的类型校验与GenericsTask的构造类型相关联，参数类型和返回值类型需与new GenericsTask时指定的类型保持一致。
    *
    * @param { number } period - 周期时长。单位：ms。period值必须要大于等于0。

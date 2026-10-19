@@ -63,8 +63,9 @@ declare namespace json {
   /**
    * 定义Sendable JSON解析的转换结果函数类型。
    *
-   * 作为[parseSendable]{@link json.parseSendable}的参数时，解析得到的Sendable对象的每个成员都会调用该函数，
-   * 可在解析过程中进行自定义数据处理或转换。
+   * 用于Sendable JSON解析转换结果的函数类型，与[ArkTSUtils.ASON.Transformer]{@link json.Transformer}一致：this、value及返回值均为
+   * ISendable（而非Object），因为[parseSendable]{@link json.parseSendable}的产物为可跨线程共享的Sendable对象。
+   * 当前[parseSendable]{@link json.parseSendable}仅接受undefined，传入函数会抛出TypeError。
    *
    * @param { ISendable } this - 解析中的键值对所属的ISendable对象。
    * @param { string } key - 属性名。
@@ -226,9 +227,9 @@ declare namespace json {
    *
    * 使用说明：
    * <ul>
-   * <li>取值范围在"0"到"4294967294"之间的数字字符串键会作为元素下标存储；任意属性数量下所有键值均可完整访问与枚举。</li>
+   * <li>取值范围在"0"到"4294967294"之间且不含前导零、符号、小数或指数形式的数字字符串键会作为元素下标存储；"4294967295"及其他形式作为普通属性名。</li>
    * <li>重复键以后值为准，且枚举位置保持在首次出现的位置。</li>
-   * <li>当options.parseReturnType为{@link ParseReturnType.MAP}时，返回支持任意条数增删的collections.Map；
+   * <li>当options.parseReturnType为{@link ParseReturnType.MAP}时，返回键始终为字符串、支持任意条数增删的collections.Map；
    * 为{@link ParseReturnType.OBJECT}（默认）时，返回不可扩展的Sendable对象，其已有属性可更新、不可新增或删除。</li>
    * </ul>
    *

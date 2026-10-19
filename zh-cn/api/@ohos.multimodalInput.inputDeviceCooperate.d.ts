@@ -112,6 +112,7 @@ declare namespace inputDeviceCooperate {
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate#prepareCooperate
+   * @useinstead ohos.cooperate/cooperate#unprepareCooperate
    */
   function enable(enable: boolean, callback: AsyncCallback<void>): void;
 
@@ -129,6 +130,7 @@ declare namespace inputDeviceCooperate {
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate#prepareCooperate
+   * @useinstead ohos.cooperate/cooperate#unprepareCooperate
    */
   function enable(enable: boolean): Promise<void>;
 

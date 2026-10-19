@@ -3993,7 +3993,7 @@ declare namespace avMusicTemplate {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    queryKeyWord?: string;
+    queryKeyWords?: string;
  
     /**
      * Audio extras.
@@ -4543,7 +4543,7 @@ declare namespace avMusicTemplate {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    PLAY_KARAOKE = 'playKaroke',
+    PLAY_KARAOKE = 'playKaraoke',
  
     /**
      * K song playlist on-demand
@@ -4552,7 +4552,7 @@ declare namespace avMusicTemplate {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    PLAY_KARAOKE_LIST = 'playKarokeList'
+    PLAY_KARAOKE_LIST = 'playKaraokeList'
   }
 
   /**

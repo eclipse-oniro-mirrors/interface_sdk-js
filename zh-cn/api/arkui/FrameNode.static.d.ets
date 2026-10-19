@@ -26,7 +26,8 @@ import { DrawContext } from 'arkui.Graphics';
 import { ComponentContent, ReactiveComponentContent } from 'arkui.ComponentContent';
 import { BusinessError } from '@ohos.base';
 import { UIContext } from '@ohos.arkui.UIContext';
-import { UICommonEvent, UIGestureEvent, CommonAttribute, CustomProperty } from '@ohos.arkui.component';
+import { UICommonEvent, UIGestureEvent, CommonAttribute, CustomProperty, KeyEvent, CompetitionStrategy } from '@ohos.arkui.component';
+import { InputEventType } from 'arkui.BuilderNode';
 import { SwiperAttribute, SwiperController } from '@ohos.arkui.component';
 import { ScrollAttribute, Scroller, UIScrollEvent } from '@ohos.arkui.component';
 import { ListAttribute, ListOptions, UIListEvent } from '@ohos.arkui.component';
@@ -453,6 +454,34 @@ export declare class FrameNode {
    * @since 23 static
    */
   isModifiable(): boolean;
+
+  /**
+   * 向当前FrameNode派发输入事件，并可指定竞争策略。支持TouchEvent、MouseEvent和AxisEvent。
+   * KeyEvent请使用[dispatchKeyEvent]{@link FrameNode#dispatchKeyEvent}派发。
+   *
+   * @param { InputEventType } event - 需要派发的输入事件。
+   * @param { CompetitionStrategy } [competitionStrategy] - 派发事件时使用的竞争策略。
+   * @returns { boolean } 是否成功派发事件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 static
+   */
+  dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
+
+  /**
+   * 向当前FrameNode派发按键事件。
+   *
+   * @param { KeyEvent } event - 需要派发的按键事件。
+   * @returns { boolean } 按键事件是否被消费。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 static
+   */
+  dispatchKeyEvent(event: KeyEvent): boolean;
 
   /**
    * 在FrameNode最后一个子节点后添加新的子节点。当前FrameNode如果不可修改，抛出异常信息。

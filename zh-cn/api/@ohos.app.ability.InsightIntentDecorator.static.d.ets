@@ -321,6 +321,15 @@ export @interface InsightIntentPage {
   keywords: string[] = [];
 
   /**
+   * 表示该意图所需的权限。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  permissions: string[] = [];
+
+  /**
    * 表示意图参数的数据格式声明，用于意图调用时定义入参的数据格式。取值参见
    * [各垂域意图Schema](https://developer.huawei.com/consumer/cn/doc/service/intents-schema-0000001901962713)。与ArkTS-Dyn不同，
    * ArkTS-Sta场景下的parameters字段为字符串类型，需赋值`Record<string, RecordData>`类型变量的名称。
@@ -485,6 +494,15 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   keywords: string[] = [];
+
+  /**
+   * 表示该意图所需的权限。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  permissions: string[] = [];
 
   /**
    * 表示意图参数的数据格式声明，用于意图调用时定义入参的数据格式。取值参见
@@ -731,6 +749,15 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   keywords: string[] = [];
+
+  /**
+   * 表示该意图所需的权限。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  permissions: string[] = [];
 
   /**
    * 表示意图参数的数据格式声明，用于意图调用时定义入参的数据格式。取值参见

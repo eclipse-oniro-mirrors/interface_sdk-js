@@ -899,7 +899,7 @@ declare type EdgeOutlineStyles = {
   top?: OutlineStyle;
 
   /**
-   * 	Style of the right outline.
+   * Style of the right outline.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1327,7 +1327,7 @@ declare interface Edges {
 }
 
 /**
- * Defines the offset relative to the four edges. If both **top** and** bottom **are set, only **top** takes effect.
+ * Defines the offset relative to the four edges. If both **top** and **bottom** are set, only **top** takes effect.
  *     If both **start** and **end** are set, only **start** takes effect.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2049,8 +2049,7 @@ declare interface AccessibilityOptions {
    * If this API is configured together with **stateControllerRoleType**, the component with a matching ID is
    * prioritized.
    * Specific types in cross-process embedded components are not supported, such as widgets and **EmbeddedUIExtension**.
-   * Default value: no specified component
-   * .
+   * Default value: no specified component.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2099,8 +2098,7 @@ declare interface AccessibilityOptions {
    * If this API is configured together with **actionControllerRoleType**, the component with a matching ID is
    * prioritized.
    * Specific types in cross-process embedded components are not supported, such as widgets and **EmbeddedUIExtension**.
-   * Default value: no specified component
-   * .
+   * Default value: no specified component.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2286,19 +2284,11 @@ declare interface CacheCountInfo {
 }
 
 /**
-/**
  * Describes a two-dimension coordinate.
- * Responsive layout fill mode, used for the WaterFlow, Grid, List, Swiper, and LazyVWaterFlowLayout components. The
- *     LazyVWaterFlowLayout component is supported since API version 26.0.0.
- *
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
  * @stagemodelonly
  * @crossplatform
- * @crossplatform
- * @atomicservice
  * @atomicservice
  * @since 26.0.0 dynamic
  */

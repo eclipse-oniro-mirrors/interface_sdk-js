@@ -125,7 +125,8 @@ declare class Queue<T> {
   forEach(callbackFn: (value: T, index?: number, Queue?: Queue<T>) => void, thisArg?: Object): void;
 
   /**
-   * 在遍历队列对象中每一个元素的过程中，对每个元素执行回调函数。
+   * 在遍历队列对象中每一个元素的过程中，对每个元素执行回调函数。回调函数依次接收value、index和Queue参数，
+   * 其中index从0开始递增，Queue参数默认指向当前实例。
    *
    * @param { QueueForEachCb<T> } callbackFn - 对每个元素执行的回调函数。
    * @syscap SystemCapability.Utils.Lang

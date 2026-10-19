@@ -26,6 +26,7 @@ import {
   NotificationExtensionSubscriptionInfo as _NotificationExtensionSubscriptionInfo
 } from './notification/NotificationExtensionSubscriptionInfo';
 import { NotificationInfo as _NotificationInfo } from './notification/NotificationInfo';
+import image from './@ohos.multimedia.image';
 
 /**
  * The **notificationExtensionSubscription** module provides capabilities for managing notification extension, including
@@ -308,6 +309,51 @@ declare namespace notificationExtensionSubscription {
   function subscribeNotification(priorityStrategy?: int): Promise<void>;
 
   /**
+   * Queries the icons of apps whose switch is turned on in the list of obtained local notifications in this app.
+   * This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.SUBSCRIBE_NOTIFICATION
+   * @param { string } bundleName - Bundle name.
+   * @returns { Promise<image.PixelMap> } Promise used to return the application icon.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
+   * 	2.Memory operation error. 3.Failed to obtain or decode the application icon.
+   * @throws { BusinessError } 1600003 - Failed to connect to the service.
+   * @throws { BusinessError } 1600022 - The specified bundle is invaild. Possible cause: 1.The application is not in the list.
+   * 	2.The application is disabled.
+   * @syscap SystemCapability.Notification.Notification
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getUserGrantedBundleIcon(bundleName: string): Promise<image.PixelMap>;
+ 
+  /**
+   * Disables the switch status of a specified app in the list of obtained local notifications in this app.
+   * This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.SUBSCRIBE_NOTIFICATION
+   * @param { GrantedBundleInfo } bundle - Describes the bundle information of the authorized application.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *  required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *  <br>1. The hardware does not support the capability.
+   *  <br>2. The chip does not support the capability.
+   *  <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
+   * 	2.Memory operation error. 3.Database operation failed.
+   * @throws { BusinessError } 1600003 - Failed to connect to the service.
+   * @throws { BusinessError } 1600022 - The specified bundle is invaild.
+   * @syscap SystemCapability.Notification.Notification
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   * @see [getUserGrantedEnabledBundles] {@link notificationExtensionSubscription#getUserGrantedEnabledBundles()}
+   *		Obtains the list of apps for which the **Allow access to notifications on this device** switch is turned on.
+   */
+  function disableUserGrantedByBundle(bundle: GrantedBundleInfo): Promise<void>;
+
+  /*
    * Describes the type that enables notification extension subscription.
    *
    * @syscap SystemCapability.Notification.Notification

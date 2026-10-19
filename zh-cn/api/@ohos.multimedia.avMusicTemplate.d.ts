@@ -497,6 +497,18 @@ declare namespace avMusicTemplate {
    */
   type FavoriteMediaEntityEvent = (actionType: MediaFavoriteType, mediaEntity: MediaEntity) => Promise<OperResult>;
 
+   /**
+   * 带有事件和参数的通用处理函数。
+   *
+   * @param { string } command - 请求事件。
+   * @param { string } args - 请求事件。
+   * @returns { Promise<OperResult> } Promise用于返回OperResult。
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+   type CustomCommandEvent = (command: string, args: string) => Promise<OperResult>;
+
   /**
    * 调用[avMusicTemplate.createAVMusicTemplate]{@link avMusicTemplate.createAVMusicTemplate}获取实例后，可获取其ID，启动音频模板界面，并配置数据获取
    * 方法。随后，同步数据给模板控制方，以完成后续操作。
@@ -1215,6 +1227,34 @@ declare namespace avMusicTemplate {
     offFavoriteMediaEntity(callback?: FavoriteMediaEntityEvent): void;
 
     /**
+     * 注册自定义命令回调。
+     *
+     * @param { CustomCommandEvent } callback - 用于处理（'sendCustomCommand'）事件的回调。
+     * @throws { BusinessError } 801 - Capability not supported.function onCustomCommand
+     *     can not work correctly due to limited device capabilities.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000012 - AVMusicTemplate error.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onCustomCommand(callback: CustomCommandEvent): void;
+
+    /**
+     * 取消注册自定义命令回调。
+     *
+     * @param { CustomCommandEvent } [callback] - 用于处理（'sendCustomCommand'）事件的回调。
+     * @throws { BusinessError } 801 - Capability not supported.function offCustomCommand
+     *     can not work correctly due to limited device capabilities.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000012 - AVMusicTemplate error.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offCustomCommand(callback?: CustomCommandEvent): void;
+
+    /**
      * 向音频模板控制方同步用户信息。使用Promise异步回调。
      *
      * @param { UserInfo } userInfo - 用户信息。
@@ -1793,6 +1833,21 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     favoriteMediaEntity(actionType: MediaFavoriteType, mediaEntity: MediaEntity): Promise<OperResult>;
+
+    /**
+     * 将自定义命令发送到AVMusicTemplate
+     *
+     * @param { string } command - 发送的命令名称。
+     * @param { string } args - 发送的命令名称。
+     * @returns { Promise<OperResult> } Promise用于返回OperResult。
+     * @throws { BusinessError } 35000003 - Template listener not registered.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000006 - AVMusicTemplateController does not exist.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    sendCustomCommand(command: string, args: string): Promise<OperResult>;
 
     /**
      * 注册用户信息改变的回调。使用callback异步回调。
@@ -3715,6 +3770,15 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     playMode?: string;
+
+    /**
+     * 资源的扩展数据。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    extras?: string
   }
 
   /**
@@ -3766,7 +3830,184 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     extras?: string;
+  }
 
+  /**
+   * 搜播的音频项目的定义。
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SearchPlayKaraokeItem {  
+    /**
+     * 音频的唯一标识。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    entityId: string;
+  
+    /**
+     * 音频的名称。
+     * 此值为空时，应用仅根据{@link entityId}查找音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    entityName?: string;
+  }
+
+  /**
+   * 搜播K歌信息的定义
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SearchPlayKaraokeInfo {
+  
+    /**
+     * 搜播列表。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    items?: SearchPlayKaraokeItem[];
+  
+    /**
+     * 歌曲名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    songName?: string;
+  
+    /**
+     * 歌手名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    artist?: string;
+  
+    /**
+     * 专辑名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    albumName?: string;
+  
+    /**
+     * 榜单名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    billBoard?: string;
+  
+    /**
+     * 场景。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    scene?: string;
+  
+    /**
+     * 风格。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    genre?: string;
+  
+    /**
+     * 乐器。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    instrument?: string;
+  
+    /**
+     * 语言。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    language?: string;
+  
+    /**
+     * 年代。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    decade?: string;
+  
+    /**
+     * 情感。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    mood?: string;
+  
+    /**
+     * 性别。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    gender?: string;
+  
+    /**
+     * 搜索关键字。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    queryKeyWords?: string;
+  
+    /**
+     * 音频额外信息。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    extra?: string;
   }
 
   /**
@@ -3797,6 +4038,15 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     videoInfo?: SearchPlayVideoInfo;
+
+    /**
+     * 搜播K歌信息的定义
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    karaokeInfo?: SearchPlayKaraokeInfo;
   }
 
 
@@ -4271,7 +4521,43 @@ declare namespace avMusicTemplate {
      * @stagemodelonly
      * @since 23 dynamic&static
      */
-    PLAY_VIDEO = 'playVideo'
+    PLAY_VIDEO = 'playVideo',
+
+    /**
+     * 播放音乐列表。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_MUSIC_LIST = 'playMusicList',
+
+    /**
+     * 播放视频列表。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_VIDEO_LIST = 'playVideoList',
+    
+    /**
+     * K歌点播
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_KARAOKE = 'playKaraoke',
+ 
+    /**
+     * K歌歌单点播
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_KARAOKE_LIST = 'playKaraokeList'
   }
 
   /**

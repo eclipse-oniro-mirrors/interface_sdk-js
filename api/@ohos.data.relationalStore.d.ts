@@ -1895,6 +1895,20 @@ declare namespace relationalStore {
      * @since 26.0.0 dynamic&static
      */
     predicate?: RdbPredicates;
+
+    /**
+     * Specifies whether to perform full synchronization. When set to true,
+     * all data is synchronizd from the cloud to the local device.
+     * When set to false (default), only incremental
+     * changes since the last synchronization are applied.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    fullSync?: boolean;
   }
 
   /**

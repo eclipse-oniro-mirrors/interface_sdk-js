@@ -288,7 +288,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     vendorId: number;
- 
+
     /**
      * 产品ID。
      *
@@ -297,7 +297,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     productId: number;
- 
+
     /**
      * 序列号。
      *
@@ -305,9 +305,9 @@ declare namespace usbManager {
      * @stagemodelonly
      * @since 26.0.1
      */
-    serial: string;
+    serial?: string;
   }
- 
+
   /**
    * 挂载策略。
    *
@@ -324,7 +324,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     MOUNT_READ_WRITE = 0,
- 
+
     /**
      * 只读挂载。
      *
@@ -333,7 +333,7 @@ declare namespace usbManager {
      * @since 26.0.1
      */
     MOUNT_READ_ONLY = 1,
- 
+
     /**
      * 未挂载。
      *
@@ -803,17 +803,20 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function getUsbSerialNumber(busNum: number, devAddress: number): string;
- 
+
   /**
    * 增加支持CD/DVD刻录的USB设备列表。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
    * @param { Array<UsbDevice> } usbDevices - 要添加的USB设备类型的数组。
    *     <br>最大长度为10000且不能为空。
+   * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -824,18 +827,21 @@ declare namespace usbManager {
    * @stagemodelonly
    * @since 26.0.1
    */
-  function addAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
- 
+  function addAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): Promise<void>;
+
   /**
    * 将USB设备从支持CD/DVD刻录的USB设备列表中移除。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
    * @param { Array<UsbDevice> } usbDevices - 要删除的USB设备类型的数组。
    *     <br>最大长度为10000且不能为空。
+   * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -846,15 +852,15 @@ declare namespace usbManager {
    * @stagemodelonly
    * @since 26.0.1
    */
-  function removeAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): void;
- 
+  function removeAllowedOpticalDiscDriveBurnUsbDevices(usbDevices: Array<UsbDevice>): Promise<void>;
+
   /**
    * 获取支持CD/DVD刻录的USB设备列表。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
    * @param { common.QueryPolicy } [queryPolicy] - queryPolicy表示查询的策略。
    *     <br>默认值：common.QueryPolicy.SELF。
-   * @returns { Array<UsbDevice> } 允许的USB设备数组。
+   * @returns { Promise<Array<UsbDevice>> } 允许的USB设备数组，使用Promise异步回调。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -864,8 +870,8 @@ declare namespace usbManager {
    * @stagemodelonly
    * @since 26.0.1
    */
-  function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Array<UsbDevice>;
- 
+  function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Promise<Array<UsbDevice>>;
+
   /**
    * 设置外置存储挂载使能状态。
    *
@@ -882,7 +888,7 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function setExternalStorageInterceptEnable(enable: boolean): void;
- 
+
   /**
    * 查询外置存储挂载使能状态。
    *
@@ -900,7 +906,7 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function isExternalStorageInterceptEnable(queryPolicy?: common.QueryPolicy): boolean;
- 
+
   /**
    * 设置外部存储设备的挂载策略。
    *
@@ -919,7 +925,7 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function setExternalStorageDeviceMountPolicy(volumeId: string, policy: MountPolicy): void;
- 
+
   /**
    * 获取当前设备的卷信息。
    *

@@ -200,7 +200,8 @@ declare class Vector<T> {
   /**
    * 通过回调函数操作Vector中的元素，用回调函数返回的元素替换原元素。
    *
-   * @param { function } callbackFn - 回调函数，用于操作Vector中的元素，并用操作后的结果替换原元素。
+   * @param { function } callbackFn - 回调函数，用于操作Vector中的元素，并用操作后的结果替换原元素。回调函数依次接收value、index和vector参数，
+   *     分别表示当前元素的值、元素下标和当前调用replaceAllElements方法的Vector实例。
    * @param { Object } thisArg - callbackFn被调用时用作this值，默认值为当前实例对象。
    * @syscap SystemCapability.Utils.Lang
    * @since 8 dynamiconly
@@ -210,7 +211,8 @@ declare class Vector<T> {
   /**
    * 通过回调函数来遍历Vector实例对象上的元素以及元素对应的下标。
    *
-   * @param { function } callbackFn - 回调函数，用于遍历Vector中的每个元素。
+   * @param { function } callbackFn - 回调函数，用于遍历Vector中的每个元素。回调函数依次接收value、index和vector参数，
+   *     分别表示当前元素的值、元素下标和当前调用forEach方法的Vector实例。
    * @param { Object } thisArg - callbackFn被调用时用作this值，默认值为当前实例对象。
    * @syscap SystemCapability.Utils.Lang
    * @since 8 dynamiconly

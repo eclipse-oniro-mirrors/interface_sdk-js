@@ -794,6 +794,7 @@ declare namespace wifiManager {
    * @throws {BusinessError} 2501000 - Operation failed.
    * @throws {BusinessError} 2501001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.STA
+   * @atomicservice [since 26.0.1]
    * @since 15 dynamic
    * @since 23 static
    */
@@ -4185,6 +4186,35 @@ declare namespace wifiManager {
   }
 
   /**
+   * Special Wi-Fi info
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SpecialWifiInfo {
+    /**
+     * The network ID of the connected Wi-Fi
+     * 
+     * @syscap SystemCapability.Communication.WiFi.STA
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    networkId: int;
+
+    /**
+     * Whether the connected Wi-Fi is CEAIR airplane Wi-Fi
+     * 
+     * @syscap SystemCapability.Communication.WiFi.STA
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isCeairPlaneWifi?: boolean;
+  }
+
+  /**
    * Describes the WAPI pre-shared key Type.
    * @enum { int }
    * @syscap SystemCapability.Communication.WiFi.Core
@@ -4962,6 +4992,39 @@ declare namespace wifiManager {
      * @since 23 static
      */
     ipAddress: string;
+
+    /**
+     * The client reason code of the Wi-Fi client leaving the hotspot, as
+     * defined in the IEEE 802.11 protocol. The default value is 1.
+     * 
+     * @syscap SystemCapability.Communication.WiFi.AP.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    reasonCode?: int;
+
+    /**
+     * Whether the disconnection is initiated by the local device when the
+     * Wi-Fi client left the hotspot.
+     * 
+     * @syscap SystemCapability.Communication.WiFi.AP.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    locallyGenerated?: boolean;
+
+    /**
+     * The Received Signal Strength Indicator (RSSI) in dBm of the Wi-Fi
+     * client when it left the hotspot. The default value is -127.
+     * 
+     * @syscap SystemCapability.Communication.WiFi.AP.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    rssi?: int;
   }
 
   /**
@@ -5649,6 +5712,22 @@ declare namespace wifiManager {
    * @since 26.0.0 dynamic&static
    */
   function getWifiCapability(capability: WifiCapability): boolean;
+
+  /**
+   * Get special Wi-Fi info
+   *
+   * @permission ohos.permission.GET_WIFI_INFO
+   * @returns { SpecialWifiInfo } Returns the special Wi-Fi info.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 2501000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getSpecialWifiInfo(): SpecialWifiInfo;
 
   /**
    * Query whether Wi-Fi is available

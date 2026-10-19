@@ -46,7 +46,7 @@ declare namespace scriptManager {
    */
   interface ArkTSScriptInfo {  
   /**
-   * 用于标识当前操作的请求码
+   * 用于标识当前操作的请求码。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly

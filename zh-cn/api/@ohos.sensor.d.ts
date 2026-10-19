@@ -65,7 +65,6 @@ declare namespace sensor {
   enum SensorId {
     /**
      * 加速度传感器类型，用于测量设备的加速度。
-     * <br/>**原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Sensors.Sensor
      * @atomicservice [since 11]
@@ -76,7 +75,6 @@ declare namespace sensor {
 
     /**
      * 陀螺仪传感器类型，用于测量设备的旋转角速度。
-     * <br/>**原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Sensors.Sensor
      * @atomicservice [since 11]
@@ -161,7 +159,6 @@ declare namespace sensor {
 
     /**
      * 方向传感器类型，用于测量设备的旋转方向角度。
-     * <br/>**原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Sensors.Sensor
      * @atomicservice [since 11]
@@ -1380,8 +1377,6 @@ declare namespace sensor {
    * 订阅加速度传感器数据。使用callback异步回调。加速度传感器用于测量设备在X、Y、Z三个方向上的加速度，包含重力加速度分量。适用于需要感知设备运动状态、实现屏幕旋转、游戏操控、计步等场景。
    * 调用后，系统会按设定频率通过callback持续上报加速度数据。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @permission ohos.permission.ACCELEROMETER
    * @param { SensorId.ACCELEROMETER } type - 传感器类型，该值固定为SensorId.ACCELEROMETER。
    * @param { Callback<AccelerometerResponse> } callback - 回调函数，异步上报的传感器数据固定为AccelerometerResponse。
@@ -1484,8 +1479,6 @@ declare namespace sensor {
 
   /**
    * 订阅校准的陀螺仪传感器数据。使用callback异步回调。陀螺仪传感器用于测量设备绕X、Y、Z轴的旋转角速度，适用于设备旋转检测、姿态跟踪、游戏操控等场景。调用后，系统会按设定频率通过callback持续上报角速度数据。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @permission ohos.permission.GYROSCOPE
    * @param { SensorId.GYROSCOPE } type - 传感器类型，该值固定为SensorId.GYROSCOPE。
@@ -1635,8 +1628,6 @@ declare namespace sensor {
    * > **说明**：
    * >
    * > 调用本接口的应用或服务可以通过提示用户使用8字校准法来提高应用获取的方向传感器的精度，此传感器理论误差正负5度，具体的精度根据不同的驱动及算法实现可能存在差异。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @param { SensorId.ORIENTATION } type - 传感器类型，该值固定为SensorId.ORIENTATION。
    * @param { Callback<OrientationResponse> } callback - 回调函数，异步上报的传感器数据固定为OrientationResponse。
@@ -2014,7 +2005,7 @@ declare namespace sensor {
    * > 计步器传感器数据仅在设备重启时清零，不会每天清零，重启前上报的步数数据为累加值。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
-   * @param { SensorId.PEDOMETER } type - Sensor type. 传感器类型，该值固定为SensorId.PEDOMETER。
+   * @param { SensorId.PEDOMETER } type - 传感器类型，该值固定为SensorId.PEDOMETER。
    * @param { Callback<PedometerResponse> } callback - 回调函数，异步上报的传感器数据固定为PedometerResponse。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     <br> required to call the API.
@@ -2175,8 +2166,6 @@ declare namespace sensor {
   /**
    * 取消订阅加速度传感器数据。当不再需要接收加速度传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @permission ohos.permission.ACCELEROMETER
    * @param { SensorId.ACCELEROMETER } type - 传感器类型，该值固定为SensorId.ACCELEROMETER。
    * @param { Callback<AccelerometerResponse> } callback - 回调函数，需要取消订阅的回调函数，若无此参数，则取消订阅当前类型的所有回调函数。
@@ -2192,8 +2181,6 @@ declare namespace sensor {
 
   /**
    * 取消订阅加速度传感器数据。当不再需要接收加速度传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
-   *
-   * **原子化服务API**：从API version 19开始，该接口支持在原子化服务中使用。
    *
    * @permission ohos.permission.ACCELEROMETER
    * @param { SensorId.ACCELEROMETER } type - 传感器类型，该值固定为SensorId.ACCELEROMETER。
@@ -2294,7 +2281,7 @@ declare namespace sensor {
    * 取消订阅气压计传感器数据。当不再需要接收气压计传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
    *
    * @param { SensorId.BAROMETER } type - 传感器类型，该值固定为SensorId.BAROMETER。
-   * @param { Callback<BarometerResponse> } 回调函数，需要取消订阅的回调函数，若无此参数，则取消订阅当前类型的所有回调函数。
+   * @param { Callback<BarometerResponse> } [callback] - 回调函数，需要取消订阅的回调函数，若无此参数，则取消订阅当前类型的所有回调函数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br> 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Sensors.Sensor
@@ -2343,8 +2330,6 @@ declare namespace sensor {
   /**
    * 取消订阅陀螺仪传感器数据。当不再需要接收陀螺仪传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @permission ohos.permission.GYROSCOPE
    * @param { SensorId.GYROSCOPE } type - 传感器类型，该值固定为SensorId.GYROSCOPE。
    * @param { Callback<GyroscopeResponse> } callback - 回调函数，需要取消订阅的回调函数，若无此参数，则取消订阅当前类型的所有回调函数。
@@ -2360,8 +2345,6 @@ declare namespace sensor {
 
   /**
    * 取消订阅陀螺仪传感器数据。当不再需要接收陀螺仪传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
-   *
-   * **原子化服务API**：从API version 19开始，该接口支持在原子化服务中使用。
    *
    * @permission ohos.permission.GYROSCOPE
    * @param { SensorId.GYROSCOPE } type - 传感器类型，该值固定为SensorId.GYROSCOPE。
@@ -2573,8 +2556,6 @@ declare namespace sensor {
   /**
    * 取消订阅方向传感器数据。当不再需要接收方向传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @param { SensorId.ORIENTATION } type - 传感器类型，该值固定为SensorId.ORIENTATION。
    * @param { Callback<OrientationResponse> } callback - 回调函数，需要取消订阅的回调函数，若无此参数，则取消订阅当前类型的所有回调函数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -2587,9 +2568,7 @@ declare namespace sensor {
 
   /**
    * 取消订阅方向传感器数据。当不再需要接收方向传感器数据时调用此接口取消订阅。off取消订阅必须与on订阅成对出现。
-   *
-   * **原子化服务API**：从API version 19开始，该接口支持在原子化服务中使用。
-   *
+   
    * @param { SensorId.ORIENTATION } type - 传感器类型，该值固定为SensorId.ORIENTATION。
    * @param { SensorInfoParam } [sensorInfoParam] - 传感器传入设置参数，可指定deviceId和sensorIndex，用于取消指定设备上指定传感器的订阅。不传入时默认取消本地设备该类型所有传感器的订阅。
    * @param { Callback<OrientationResponse> } [callback] - 回调函数，需要取消订阅的回调函数，若无此参数，则取消订阅当前类型的所有回调函数。
@@ -2783,8 +2762,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ACCELEROMETER]
-   * > {@link sensor.on(type: SensorId.ACCELEROMETER, callback: Callback<AccelerometerResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.ACCELEROMETER]{@link sensor.on(type: SensorId.ACCELEROMETER, callback: Callback<AccelerometerResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -2804,8 +2783,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ACCELEROMETER_UNCALIBRATED]
-   * > {@link sensor.on(type: SensorId.ACCELEROMETER_UNCALIBRATED, callback: Callback<AccelerometerUncalibratedResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.ACCELEROMETER_UNCALIBRATED]{@link sensor.on(type: SensorId.ACCELEROMETER_UNCALIBRATED,
+   *  callback: Callback<AccelerometerUncalibratedResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -2825,8 +2805,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.AMBIENT_LIGHT]
-   * > {@link sensor.on(type: SensorId.AMBIENT_LIGHT, callback: Callback<LightResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.AMBIENT_LIGHT]{@link sensor.on(type: SensorId.AMBIENT_LIGHT, callback: Callback<LightResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_AMBIENT_LIGHT } type - 要订阅的环境光传感器类型为SENSOR_TYPE_ID_AMBIENT_LIGHT。
@@ -2845,8 +2825,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.AMBIENT_TEMPERATURE]
-   * > {@link sensor.on(type: SensorId.AMBIENT_TEMPERATURE, callback: Callback<AmbientTemperatureResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.AMBIENT_TEMPERATURE]{@link sensor.on(type: SensorId.AMBIENT_TEMPERATURE, callback: Callback<AmbientTemperatureResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_AMBIENT_TEMPERATURE } type - 要订阅的环境温度传感器类型为SENSOR_TYPE_ID_AMBIENT_TEMPERATURE。
@@ -2865,8 +2845,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.BAROMETER]
-   * > {@link sensor.on(type: SensorId.BAROMETER, callback: Callback<BarometerResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.BAROMETER]{@link sensor.on(type: SensorId.BAROMETER, callback: Callback<BarometerResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_BAROMETER } type - 要订阅的气压计传感器类型为SENSOR_TYPE_ID_BAROMETER。
@@ -2885,8 +2865,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GRAVITY]
-   * > {@link sensor.on(type: SensorId.GRAVITY, callback: Callback<GravityResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.GRAVITY]{@link sensor.on(type: SensorId.GRAVITY, callback: Callback<GravityResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_GRAVITY } type - 要订阅的重力传感器类型为SENSOR_TYPE_ID_GRAVITY。
@@ -2905,8 +2885,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GYROSCOPE]
-   * > {@link sensor.on(type: SensorId.GYROSCOPE, callback: Callback<GyroscopeResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.GYROSCOPE]{@link sensor.on(type: SensorId.GYROSCOPE, callback: Callback<GyroscopeResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.GYROSCOPE
@@ -2926,8 +2906,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GYROSCOPE_UNCALIBRATED]
-   * > {@link sensor.on(type: SensorId.GYROSCOPE_UNCALIBRATED, callback: Callback<GyroscopeUncalibratedResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.GYROSCOPE_UNCALIBRATED]{@link sensor.on(type: SensorId.GYROSCOPE_UNCALIBRATED,
+   *  callback: Callback<GyroscopeUncalibratedResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.GYROSCOPE
@@ -2947,8 +2928,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HALL]
-   * > {@link sensor.on(type: SensorId.HALL, callback: Callback<HallResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.HALL]{@link sensor.on(type: SensorId.HALL, callback: Callback<HallResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_HALL } type - 要订阅的霍尔传感器类型为SENSOR_TYPE_ID_HALL。
@@ -2967,8 +2948,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HEART_RATE]
-   * > {@link sensor.on(type: SensorId.HEART_RATE, callback: Callback<HeartRateResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.HEART_RATE]{@link sensor.on(type: SensorId.HEART_RATE, callback: Callback<HeartRateResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.HEALTH_DATA
@@ -2988,8 +2969,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HUMIDITY]
-   * > {@link sensor.on(type: SensorId.HUMIDITY, callback: Callback<HumidityResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.HUMIDITY]{@link sensor.on(type: SensorId.HUMIDITY, callback: Callback<HumidityResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_HUMIDITY } type - 要订阅的湿度传感器类型为SENSOR_TYPE_ID_HUMIDITY。
@@ -3008,8 +2989,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.LINEAR_ACCELEROMETER]
-   * > {@link sensor.on(type: SensorId.LINEAR_ACCELEROMETER, callback: Callback<LinearAccelerometerResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.LINEAR_ACCELEROMETER]{@link sensor.on(type: SensorId.LINEAR_ACCELEROMETER, callback: Callback<LinearAccelerometerResponse>,
+   *  options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3029,8 +3011,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.MAGNETIC_FIELD]
-   * > {@link sensor.on(type: SensorId.MAGNETIC_FIELD, callback: Callback<MagneticFieldResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.MAGNETIC_FIELD]{@link sensor.on(type: SensorId.MAGNETIC_FIELD, callback: Callback<MagneticFieldResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_MAGNETIC_FIELD } type - 要订阅的磁场传感器类型为SENSOR_TYPE_ID_MAGNETIC_FIELD。
@@ -3049,8 +3031,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.MAGNETIC_FIELD_UNCALIBRATED]
-   * > {@link sensor.on(type: SensorId.MAGNETIC_FIELD_UNCALIBRATED, callback: Callback<MagneticFieldUncalibratedResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.MAGNETIC_FIELD_UNCALIBRATED]{@link sensor.on(type: SensorId.MAGNETIC_FIELD_UNCALIBRATED,
+   *  callback: Callback<MagneticFieldUncalibratedResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_MAGNETIC_FIELD_UNCALIBRATED } type - 要订阅的未校准磁场传感器类型为SENSOR_TYPE_ID_MAGNETIC_FIELD_UNCALIBRATED。
@@ -3069,8 +3052,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ORIENTATION]
-   * > {@link sensor.on(type: SensorId.ORIENTATION, callback: Callback<OrientationResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.ORIENTATION]{@link sensor.on(type: SensorId.ORIENTATION, callback: Callback<OrientationResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_ORIENTATION } type - 要订阅的方向传感器类型为SENSOR_TYPE_ID_ORIENTATION。
@@ -3089,8 +3072,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PEDOMETER]
-   * > {@link sensor.on(type: SensorId.PEDOMETER, callback: Callback<PedometerResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.PEDOMETER]{@link sensor.on(type: SensorId.PEDOMETER, callback: Callback<PedometerResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
@@ -3110,8 +3093,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PEDOMETER_DETECTION]
-   * > {@link sensor.on(type: SensorId.PEDOMETER_DETECTION, callback: Callback<PedometerDetectionResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.PEDOMETER_DETECTION]{@link sensor.on(type: SensorId.PEDOMETER_DETECTION, callback: Callback<PedometerDetectionResponse>, options?: Options)}
    * > 替代。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
@@ -3131,8 +3114,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PROXIMITY]
-   * > {@link sensor.on(type: SensorId.PROXIMITY, callback: Callback<ProximityResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.PROXIMITY]{@link sensor.on(type: SensorId.PROXIMITY, callback: Callback<ProximityResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_PROXIMITY } type - 要订阅的接近光传感器类型为SENSOR_TYPE_ID_PROXIMITY。
@@ -3151,8 +3134,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ROTATION_VECTOR]
-   * > {@link sensor.on(type: SensorId.ROTATION_VECTOR, callback: Callback<RotationVectorResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.ROTATION_VECTOR]{@link sensor.on(type: SensorId.ROTATION_VECTOR, callback: Callback<RotationVectorResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_ROTATION_VECTOR } type - 要订阅的旋转矢量传感器类型为SENSOR_TYPE_ID_ROTATION_VECTOR。
@@ -3171,8 +3154,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.SIGNIFICANT_MOTION]
-   * > {@link sensor.on(type: SensorId.SIGNIFICANT_MOTION, callback: Callback<SignificantMotionResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.SIGNIFICANT_MOTION]{@link sensor.on(type: SensorId.SIGNIFICANT_MOTION, callback: Callback<SignificantMotionResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_SIGNIFICANT_MOTION } type - 要订阅的有效运动传感器类型为SENSOR_TYPE_ID_SIGNIFICANT_MOTION。
@@ -3191,8 +3174,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.WEAR_DETECTION]
-   * > {@link sensor.on(type: SensorId.WEAR_DETECTION, callback: Callback<WearDetectionResponse>, options?: Options)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.on.WEAR_DETECTION]{@link sensor.on(type: SensorId.WEAR_DETECTION, callback: Callback<WearDetectionResponse>, options?: Options)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_WEAR_DETECTION } type - 要订阅的佩戴检测传感器类型为SENSOR_TYPE_ID_WEAR_DETECTION。
@@ -3211,8 +3194,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ACCELEROMETER]
-   * > {@link sensor.once(type: SensorId.ACCELEROMETER, callback: Callback<AccelerometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.ACCELEROMETER]{@link sensor.once(type: SensorId.ACCELEROMETER, callback: Callback<AccelerometerResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3230,8 +3213,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ACCELEROMETER_UNCALIBRATED]
-   * > {@link sensor.once(type: SensorId.ACCELEROMETER_UNCALIBRATED, callback: Callback<AccelerometerUncalibratedResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.ACCELEROMETER_UNCALIBRATED]{@link sensor.once(type: SensorId.ACCELEROMETER_UNCALIBRATED,
+   *  callback: Callback<AccelerometerUncalibratedResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3249,8 +3233,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.AMBIENT_LIGHT]
-   * > {@link sensor.once(type: SensorId.AMBIENT_LIGHT, callback: Callback<LightResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.AMBIENT_LIGHT]{@link sensor.once(type: SensorId.AMBIENT_LIGHT, callback: Callback<LightResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_AMBIENT_LIGHT } type - 环境光传感器类型为SENSOR_TYPE_ID_AMBIENT_LIGHT。
@@ -3267,8 +3251,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.AMBIENT_LIGHT]
-   * > {@link sensor.once(type: SensorId.AMBIENT_LIGHT, callback: Callback<LightResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.AMBIENT_TEMPERATURE]{@link sensor.once(type: SensorId.AMBIENT_TEMPERATURE, callback: Callback<AmbientTemperatureResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_AMBIENT_TEMPERATURE } type - 环境温度传感器类型为SENSOR_TYPE_ID_AMBIENT_TEMPERATURE。
@@ -3285,8 +3269,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.BAROMETER]
-   * > {@link sensor.once(type: SensorId.BAROMETER, callback: Callback<BarometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.BAROMETER]{@link sensor.once(type: SensorId.BAROMETER, callback: Callback<BarometerResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_BAROMETER } type - 气压计传感器类型为SENSOR_TYPE_ID_BAROMETER。
@@ -3303,8 +3287,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GRAVITY]
-   * > {@link sensor.once(type: SensorId.GRAVITY, callback: Callback<GravityResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.GRAVITY]{@link sensor.once(type: SensorId.GRAVITY, callback: Callback<GravityResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_GRAVITY } type - 重力传感器类型为SENSOR_TYPE_ID_GRAVITY。
@@ -3321,8 +3305,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GYROSCOPE]
-   * > {@link sensor.once(type: SensorId.GYROSCOPE, callback: Callback<GyroscopeResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.GYROSCOPE]{@link sensor.once(type: SensorId.GYROSCOPE, callback: Callback<GyroscopeResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.GYROSCOPE
@@ -3340,8 +3324,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GYROSCOPE_UNCALIBRATED]
-   * > {@link sensor.once(type: SensorId.GYROSCOPE_UNCALIBRATED, callback: Callback<GyroscopeUncalibratedResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.GYROSCOPE_UNCALIBRATED]{@link sensor.once(type: SensorId.GYROSCOPE_UNCALIBRATED, callback: Callback<GyroscopeUncalibratedResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.GYROSCOPE
@@ -3360,8 +3344,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HALL]
-   * > {@link sensor.once(type: SensorId.HALL, callback: Callback<HallResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.HALL]{@link sensor.once(type: SensorId.HALL, callback: Callback<HallResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_HALL } type - 霍尔传感器类型为SENSOR_TYPE_ID_HALL。
@@ -3378,8 +3362,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HEART_RATE]
-   * > {@link sensor.once(type: SensorId.HEART_RATE, callback: Callback<HeartRateResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.HEART_RATE]{@link sensor.once(type: SensorId.HEART_RATE, callback: Callback<HeartRateResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.HEART_RATE
@@ -3397,8 +3381,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HUMIDITY]
-   * > {@link sensor.once(type: SensorId.HUMIDITY, callback: Callback<HumidityResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.HUMIDITY]{@link sensor.once(type: SensorId.HUMIDITY, callback: Callback<HumidityResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_HUMIDITY } type - 湿度传感器类型为SENSOR_TYPE_ID_HUMIDITY。
@@ -3415,8 +3399,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.LINEAR_ACCELEROMETER]
-   * > {@link sensor.once(type: SensorId.LINEAR_ACCELEROMETER, callback: Callback<LinearAccelerometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.LINEAR_ACCELEROMETER]{@link sensor.once(type: SensorId.LINEAR_ACCELEROMETER, callback: Callback<LinearAccelerometerResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3435,8 +3419,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.MAGNETIC_FIELD]
-   * > {@link sensor.once(type: SensorId.MAGNETIC_FIELD, callback: Callback<MagneticFieldResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.MAGNETIC_FIELD]{@link sensor.once(type: SensorId.MAGNETIC_FIELD, callback: Callback<MagneticFieldResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_MAGNETIC_FIELD } type - 磁场传感器类型为SENSOR_TYPE_ID_MAGNETIC_FIELD。
@@ -3453,8 +3437,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.MAGNETIC_FIELD_UNCALIBRATED]
-   * > {@link sensor.once(type: SensorId.MAGNETIC_FIELD_UNCALIBRATED, callback: Callback<MagneticFieldUncalibratedResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.MAGNETIC_FIELD_UNCALIBRATED]{@link sensor.once(type: SensorId.MAGNETIC_FIELD_UNCALIBRATED,
+   *  callback: Callback<MagneticFieldUncalibratedResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_MAGNETIC_FIELD_UNCALIBRATED } type - 未校准磁场传感器类型为SENSOR_TYPE_ID_MAGNETIC_FIELD_UNCALIBRATED。
@@ -3472,8 +3457,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ORIENTATION]
-   * > {@link sensor.once(type: SensorId.ORIENTATION, callback: Callback<OrientationResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.ORIENTATION]{@link sensor.once(type: SensorId.ORIENTATION, callback: Callback<OrientationResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_ORIENTATION } type - 方向传感器类型为SENSOR_TYPE_ID_ORIENTATION。
@@ -3490,8 +3475,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PEDOMETER]
-   * > {@link sensor.once(type: SensorId.PEDOMETER, callback: Callback<PedometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.PEDOMETER]{@link sensor.once(type: SensorId.PEDOMETER, callback: Callback<PedometerResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
@@ -3509,8 +3494,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PEDOMETER_DETECTION]
-   * > {@link sensor.once(type: SensorId.PEDOMETER_DETECTION, callback: Callback<PedometerDetectionResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.PEDOMETER_DETECTION]{@link sensor.once(type: SensorId.PEDOMETER_DETECTION, callback: Callback<PedometerDetectionResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
@@ -3528,8 +3513,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PROXIMITY]
-   * > {@link sensor.once(type: SensorId.PROXIMITY, callback: Callback<ProximityResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.PROXIMITY]{@link sensor.once(type: SensorId.PROXIMITY, callback: Callback<ProximityResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_PROXIMITY } type - 接近光传感器类型为SENSOR_TYPE_ID_PROXIMITY。
@@ -3546,8 +3531,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ROTATION_VECTOR]
-   * > {@link sensor.once(type: SensorId.ROTATION_VECTOR, callback: Callback<RotationVectorResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.ROTATION_VECTOR]{@link sensor.once(type: SensorId.ROTATION_VECTOR, callback: Callback<RotationVectorResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_ROTATION_VECTOR } type - 旋转矢量传感器类型为SENSOR_TYPE_ID_ROTATION_VECTOR。
@@ -3564,8 +3549,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.SIGNIFICANT_MOTION]
-   * > {@link sensor.once(type: SensorId.SIGNIFICANT_MOTION, callback: Callback<SignificantMotionResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.SIGNIFICANT_MOTION]{@link sensor.once(type: SensorId.SIGNIFICANT_MOTION, callback: Callback<SignificantMotionResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_SIGNIFICANT_MOTION } type - 有效运动传感器类型为SENSOR_TYPE_ID_SIGNIFICANT_MOTION。
@@ -3582,8 +3567,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.WEAR_DETECTION]
-   * > {@link sensor.once(type: SensorId.WEAR_DETECTION, callback: Callback<WearDetectionResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.once.WEAR_DETECTION]{@link sensor.once(type: SensorId.WEAR_DETECTION, callback: Callback<WearDetectionResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_WEAR_DETECTION } type - 佩戴检测传感器类型为SENSOR_TYPE_ID_WEAR_DETECTION。
@@ -3600,8 +3585,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ACCELEROMETER]
-   * > {@link sensor.off(type: SensorId.ACCELEROMETER, callback?: Callback<AccelerometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.ACCELEROMETER]{@link sensor.off(type: SensorId.ACCELEROMETER, callback?: Callback<AccelerometerResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3619,8 +3604,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ACCELEROMETER_UNCALIBRATED]
-   * > {@link sensor.off(type: SensorId.ACCELEROMETER_UNCALIBRATED, callback?: Callback<AccelerometerUncalibratedResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.ACCELEROMETER_UNCALIBRATED]{@link sensor.off(type: SensorId.ACCELEROMETER_UNCALIBRATED,
+   *  callback?: Callback<AccelerometerUncalibratedResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3639,8 +3625,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.AMBIENT_LIGHT]
-   * > {@link sensor.off(type: SensorId.AMBIENT_LIGHT, callback?: Callback<LightResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.AMBIENT_LIGHT]{@link sensor.off(type: SensorId.AMBIENT_LIGHT, callback?: Callback<LightResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_AMBIENT_LIGHT } type - 要取消订阅的环境光传感器类型为SENSOR_TYPE_ID_AMBIENT_LIGHT。
@@ -3657,8 +3643,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.AMBIENT_TEMPERATURE]
-   * > {@link sensor.off(type: SensorId.AMBIENT_TEMPERATURE, callback?: Callback<AmbientTemperatureResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.AMBIENT_TEMPERATURE]{@link sensor.off(type: SensorId.AMBIENT_TEMPERATURE, callback?: Callback<AmbientTemperatureResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_AMBIENT_TEMPERATURE } type - 要取消订阅的环境温度传感器类型为SENSOR_TYPE_ID_AMBIENT_TEMPERATURE。
@@ -3675,8 +3661,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.BAROMETER]
-   * > {@link sensor.off(type: SensorId.BAROMETER, callback?: Callback<BarometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.BAROMETER]{@link sensor.off(type: SensorId.BAROMETER, callback?: Callback<BarometerResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_BAROMETER } type - 要取消订阅的气压计传感器类型为SENSOR_TYPE_ID_BAROMETER。
@@ -3693,8 +3679,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GRAVITY]
-   * > {@link sensor.off(type: SensorId.GRAVITY, callback?: Callback<GravityResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.GRAVITY]{@link sensor.off(type: SensorId.GRAVITY, callback?: Callback<GravityResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_GRAVITY } type - 要取消订阅的重力传感器类型为SENSOR_TYPE_ID_GRAVITY。
@@ -3711,8 +3697,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GYROSCOPE]
-   * > {@link sensor.off(type: SensorId.GYROSCOPE, callback?: Callback<GyroscopeResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.GYROSCOPE]{@link sensor.off(type: SensorId.GYROSCOPE, callback?: Callback<GyroscopeResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.GYROSCOPE
@@ -3730,8 +3716,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.GYROSCOPE_UNCALIBRATED]
-   * > {@link sensor.off(type: SensorId.GYROSCOPE_UNCALIBRATED, callback?: Callback<GyroscopeUncalibratedResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.GYROSCOPE_UNCALIBRATED]{@link sensor.off(type: SensorId.GYROSCOPE_UNCALIBRATED, callback?: Callback<GyroscopeUncalibratedResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.GYROSCOPE
@@ -3749,8 +3735,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HALL]
-   * > {@link sensor.off(type: SensorId.HALL, callback?: Callback<HallResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.HALL]{@link sensor.off(type: SensorId.HALL, callback?: Callback<HallResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_HALL } type - 要取消订阅的霍尔传感器类型为SENSOR_TYPE_ID_HALL。
@@ -3767,8 +3753,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HEART_RATE]
-   * > {@link sensor.off(type: SensorId.HEART_RATE, callback?: Callback<HeartRateResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.HEART_RATE]{@link sensor.off(type: SensorId.HEART_RATE, callback?: Callback<HeartRateResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.HEALTH_DATA
@@ -3786,8 +3772,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.HUMIDITY]
-   * > {@link sensor.off(type: SensorId.HUMIDITY, callback?: Callback<HumidityResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.HUMIDITY]{@link sensor.off(type: SensorId.HUMIDITY, callback?: Callback<HumidityResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_HUMIDITY } type - 要取消订阅的湿度传感器类型为SENSOR_TYPE_ID_HUMIDITY。
@@ -3804,8 +3790,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.LINEAR_ACCELEROMETER]
-   * > {@link sensor.off(type: SensorId.LINEAR_ACCELEROMETER, callback?: Callback<LinearAccelerometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.LINEAR_ACCELEROMETER]{@link sensor.off(type: SensorId.LINEAR_ACCELEROMETER, callback?: Callback<LinearAccelerometerResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACCELEROMETER
@@ -3823,8 +3809,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.MAGNETIC_FIELD]
-   * > {@link sensor.off(type: SensorId.MAGNETIC_FIELD, callback?: Callback<MagneticFieldResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.MAGNETIC_FIELD]{@link sensor.off(type: SensorId.MAGNETIC_FIELD, callback?: Callback<MagneticFieldResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_MAGNETIC_FIELD } type - 要取消订阅的磁场传感器类型为SENSOR_TYPE_ID_MAGNETIC_FIELD。
@@ -3841,8 +3827,9 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.MAGNETIC_FIELD_UNCALIBRATED]
-   * > {@link sensor.off(type: SensorId.MAGNETIC_FIELD_UNCALIBRATED, callback?: Callback<MagneticFieldUncalibratedResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.MAGNETIC_FIELD_UNCALIBRATED]{@link sensor.off(type: SensorId.MAGNETIC_FIELD_UNCALIBRATED,
+   *  callback?: Callback<MagneticFieldUncalibratedResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_MAGNETIC_FIELD_UNCALIBRATED } type - 要取消订阅的未校准磁场传感器类型为SENSOR_TYPE_ID_MAGNETIC_FIELD_UNCALIBRATED。
@@ -3859,8 +3846,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ORIENTATION]
-   * > {@link sensor.off(type: SensorId.ORIENTATION, callback?: Callback<OrientationResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.ORIENTATION]{@link sensor.off(type: SensorId.ORIENTATION, callback?: Callback<OrientationResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_ORIENTATION } type - 要取消订阅的方向传感器类型为SENSOR_TYPE_ID_ORIENTATION。
@@ -3877,8 +3864,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PEDOMETER]
-   * > {@link sensor.off(type: SensorId.PEDOMETER, callback?: Callback<PedometerResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.PEDOMETER]{@link sensor.off(type: SensorId.PEDOMETER, callback?: Callback<PedometerResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
@@ -3896,8 +3883,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PEDOMETER_DETECTION]
-   * > {@link sensor.off(type: SensorId.PEDOMETER_DETECTION, callback?: Callback<PedometerDetectionResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.PEDOMETER_DETECTION]{@link sensor.off(type: SensorId.PEDOMETER_DETECTION, callback?: Callback<PedometerDetectionResponse>)}
    * > 替代。
    *
    * @permission ohos.permission.ACTIVITY_MOTION
@@ -3915,8 +3902,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.PROXIMITY]
-   * > {@link sensor.off(type: SensorId.PROXIMITY, callback?: Callback<ProximityResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.PROXIMITY]{@link sensor.off(type: SensorId.PROXIMITY, callback?: Callback<ProximityResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_PROXIMITY } type - 要取消订阅的接近光传感器类型为SENSOR_TYPE_ID_PROXIMITY。
@@ -3933,8 +3920,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.ROTATION_VECTOR]
-   * > {@link sensor.off(type: SensorId.ROTATION_VECTOR, callback?: Callback<RotationVectorResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.ROTATION_VECTOR]{@link sensor.off(type: SensorId.ROTATION_VECTOR, callback?: Callback<RotationVectorResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_ROTATION_VECTOR } type - 要取消订阅的旋转矢量传感器类型为SENSOR_TYPE_ID_ROTATION_VECTOR。
@@ -3951,8 +3938,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.SIGNIFICANT_MOTION]
-   * > {@link sensor.off(type: SensorId.SIGNIFICANT_MOTION, callback?: Callback<SignificantMotionResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.SIGNIFICANT_MOTION]{@link sensor.off(type: SensorId.SIGNIFICANT_MOTION, callback?: Callback<SignificantMotionResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_SIGNIFICANT_MOTION } type - 要取消订阅的有效运动传感器类型为SENSOR_TYPE_ID_SIGNIFICANT_MOTION。
@@ -3969,8 +3956,8 @@ declare namespace sensor {
    *
    * > **说明**：
    * >
-   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用[sensor.on.WEAR_DETECTION]
-   * > {@link sensor.off(type: SensorId.WEAR_DETECTION, callback?: Callback<WearDetectionResponse>)}
+   * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
+   * > [sensor.off.WEAR_DETECTION]{@link sensor.off(type: SensorId.WEAR_DETECTION, callback?: Callback<WearDetectionResponse>)}
    * > 替代。
    *
    * @param { SensorType.SENSOR_TYPE_ID_WEAR_DETECTION } type - 要取消订阅的佩戴检测传感器类型为SENSOR_TYPE_ID_WEAR_DETECTION。
@@ -4354,8 +4341,8 @@ declare namespace sensor {
    * > **说明**：
    * >
    * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
-   * > [sensor.getGeomagneticInfo]
-   * > {@link sensor.getGeomagneticInfo(locationOptions: LocationOptions, timeMillis: long, callback: AsyncCallback<GeomagneticResponse>)}
+   * > [sensor.getGeomagneticInfo]{@link sensor.getGeomagneticInfo(locationOptions: LocationOptions, timeMillis: long,
+   *  callback: AsyncCallback<GeomagneticResponse>)}
    * > 替代。
    *
    * @param { LocationOptions } locationOptions - 地理位置。
@@ -4374,8 +4361,8 @@ declare namespace sensor {
    * > **说明**：
    * >
    * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
-   * > [sensor.getGeomagneticInfo]{@link sensor.getGeomagneticInfo(locationOptions: LocationOptions, timeMillis: long)}替
-   * > 代。
+   * > [sensor.getGeomagneticInfo]{@link sensor.getGeomagneticInfo(locationOptions: LocationOptions, timeMillis: long)}
+   * > 替代。
    *
    * @param { LocationOptions } locationOptions - 地理位置。
    * @param { number } timeMillis - 表示获取磁偏角的时间，单位：ms（毫秒）。
@@ -4722,8 +4709,8 @@ declare namespace sensor {
    * > **说明**：
    * >
    * > 从API version 8 开始支持，从API version 9 开始废弃，建议使用
-   * > [sensor.transformRotationMatrix]
-   * > {@link sensor.transformRotationMatrix(inRotationVector: Array<double>, coordinates: CoordinatesOptions, callback: AsyncCallback<Array<double>>)}
+   * > [sensor.transformRotationMatrix]{@link sensor.transformRotationMatrix(inRotationVector: Array<double>, coordinates: CoordinatesOptions,
+   *  callback: AsyncCallback<Array<double>>)}
    * > 替代。
    *
    * @param { Array<number> } inRotationVector - 表示旋转矩阵。
@@ -5020,8 +5007,6 @@ declare namespace sensor {
   /**
    * 设置传感器上报频率及传感器选择参数。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice [since 11]
    * @since 8 dynamic
@@ -5044,7 +5029,6 @@ declare namespace sensor {
 
     /**
      * 传感器传入设置参数，可指定deviceId、sensorIndex，用于多传感器场景下选择目标传感器。
-     * <br/>**原子化服务API**：从API version 19开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Sensors.Sensor
      * @atomicservice
@@ -5056,8 +5040,6 @@ declare namespace sensor {
 
   /**
    * 传感器上报频率模式，提供预定义的频率档位，方便开发者快速设置常用的上报频率。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @syscap SystemCapability.Sensors.Sensor
    * @unionmember { 'game' } 游戏模式，用于指定传感器上报频率。频率值：20000000ns（即20ms），适用于对数据延迟敏感的游戏类应用。该频率被设置在硬件支持的频率范围内时会生效，值固定为'game'字符串。
@@ -5297,8 +5279,6 @@ declare namespace sensor {
   /**
    * 传感器数据的精度挡位。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice
    * @since 11 dynamic
@@ -5349,8 +5329,6 @@ declare namespace sensor {
   /**
    * 传感器数据的时间戳与精度信息基类，所有传感器Response类型均继承于此。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice [since 11]
    * @since 8 dynamic
@@ -5380,8 +5358,6 @@ declare namespace sensor {
 
   /**
    * 加速度传感器数据，继承于[Response]{@link sensor.Response}。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice [since 11]
@@ -5558,8 +5534,6 @@ declare namespace sensor {
   /**
    * 方向传感器数据，继承于[Response]{@link sensor.Response}。
    *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
-   *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice [since 11]
    * @since 8 dynamic
@@ -5644,8 +5618,6 @@ declare namespace sensor {
 
   /**
    * 陀螺仪传感器数据，继承于[Response]{@link sensor.Response}。
-   *
-   * **原子化服务API**：从API version 11开始，该接口支持在原子化服务中使用。
    *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice [since 11]
@@ -6240,8 +6212,6 @@ declare namespace sensor {
 
   /**
    * 传感器传入设置参数，多传感器情况下通过deviceId、sensorIndex控制指定传感器。
-   *
-   * **原子化服务API**：从API version 19开始，该接口支持在原子化服务中使用。
    *
    * @syscap SystemCapability.Sensors.Sensor
    * @atomicservice

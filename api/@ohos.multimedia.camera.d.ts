@@ -1383,6 +1383,18 @@ declare namespace camera {
     createControlCenterSession(): ControlCenterSession;
 
     /**
+     * Gets the height of the control center.
+     *
+     * @returns { double } The height of the control center.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getControlCenterHeight(): double;
+
+    /**
      * Checks whether a camera device supports prelaunch.
      *
      * @param { CameraDevice } camera - Camera device.

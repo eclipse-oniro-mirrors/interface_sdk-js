@@ -200,6 +200,44 @@ declare namespace cloudSync {
   }
 
   /**
+   * 枚举Gallery的端云同步类型。
+   *
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum SyncType {
+    /**
+     * 正常同步。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    NORMAL = 0,
+    /**
+     * 强制同步。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    FORCE = 1,
+    /**
+     * 强制缩略图同步。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    FORCE_THM = 2
+  }
+
+  /**
    * 端云同步过程。
    *
    * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -411,6 +449,42 @@ declare namespace cloudSync {
      * @since 23 static
      */
     stop(callback: AsyncCallback<void>): void;
+    /**
+     * 启动端云同步。该接口使用promise返回结果。
+     *
+     * @permission ohos.permission.CLOUDFILE_SYNC
+     * @param { SyncType } type 云同步的同步类型。
+     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 22400001 - Cloud status not ready.
+     * @throws { BusinessError } 22400002 - Network unavailable.
+     * @throws { BusinessError } 22400003 - Low battery level.
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    startWithType(type: SyncType): Promise<void>;
+    /**
+     * 启动端云同步。该接口使用异步回调返回结果。
+     *
+     * @permission ohos.permission.CLOUDFILE_SYNC
+     * @param { Callback<void> } callback 启动端云同步回调。
+     * @param { SyncType } type 云同步的同步类型。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 22400001 - Cloud status not ready.
+     * @throws { BusinessError } 22400002 - Network unavailable.
+     * @throws { BusinessError } 22400003 - Low battery level.
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    startWithType(callback: Callback<void>, type: SyncType): void;
   }
 
   /**

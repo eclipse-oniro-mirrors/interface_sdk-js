@@ -535,10 +535,21 @@ interface ImageInterface {
   (src: PixelMap | ResourceStr | DrawableDescriptor | ImageContent): ImageAttribute;
 
   /**
-   * Set src to obtain images
+   * Obtains an image. You can use the **reloadKey** parameter to trigger image reloading. When the value of
+   * **reloadKey** changes, the image will be reloaded without using the cache.
    *
-   * @param { PixelMap | ResourceStr | DrawableDescriptor | ImageContent } src
-   * @param { string } [reloadKey]
+   * @param { PixelMap | ResourceStr | DrawableDescriptor | ImageContent } src - Data source of the image. Local and
+   *     online sources are supported. For details about how to reference an image, see
+   *     [Loading Image Resources](docroot://ui/arkts-graphics-display.md#loading-image-resources).<br>For details about
+   *     how to use **PixelMap**, **ResourceStr**, and **DrawableDescriptor**, see the **src** parameter description of
+   *     [Image](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-image.md#image-1).<br>
+   *     [ImageContent]{@link ImageContent}: image content.<br>**NOTE**<br>- ArkTS widgets support GIF animations, but
+   *     the animations only play once on display.<br>- ArkTS widgets do not support the strings with the **http://** or
+   *     **file://** prefix.
+   * @param { string } [reloadKey] - Image reloading key. When the value of **reloadKey** changes, the image will be
+   *     reloaded without using the cache. This is applicable to scenarios where the image source address remains
+   *     unchanged but the image content has been updated (for example, the local image content is rewritten).<br>
+   *     Default value: **""**
    * @returns { ImageAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -570,11 +581,23 @@ interface ImageInterface {
   (src: PixelMap | ResourceStr | DrawableDescriptor, imageAIOptions: ImageAIOptions): ImageAttribute;
 
   /**
-   * Set src and ai options to obtain images
+   * Obtains an image. The [ImageAIOptions]{@link ImageAIOptions} parameter allows you to set AI image analysis options.
+   * You can use the **reloadKey** parameter to trigger image reloading. When the value of **reloadKey** changes, the
+   * image will be reloaded without using the cache.
    *
-   * @param { PixelMap | ResourceStr | DrawableDescriptor } src
-   * @param { ImageAIOptions } [imageAIOptions]
-   * @param { string } [reloadKey]
+   * @param { PixelMap | ResourceStr | DrawableDescriptor } src - Data source of the image. Local and online sources
+   *     are supported. For details about how to reference an image, see
+   *     [Loading Image Resources](docroot://ui/arkts-graphics-display.md#loading-image-resources).<br>For details about
+   *     how to use **PixelMap**, **ResourceStr**, and **DrawableDescriptor**, see the **src** parameter description of
+   *     [Image](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-image.md#image-1).<br>**NOTE**<br>- ArkTS
+   *     widgets support GIF animations, but the animations only play once on display.<br>- ArkTS widgets do not support
+   *     the strings with the **http://** or **file://** prefix.
+   * @param { ImageAIOptions } [imageAIOptions] - AI image analysis options. You can configure the analysis type or bind
+   *     an analyzer controller through this parameter.
+   * @param { string } [reloadKey] - Image reloading key. When the value of **reloadKey** changes, the image will be
+   *     reloaded without using the cache. This is applicable to scenarios where the image source address remains
+   *     unchanged but the image content has been updated (for example, the local image content is rewritten).<br>
+   *     Default value: **""**
    * @returns { ImageAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

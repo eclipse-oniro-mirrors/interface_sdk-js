@@ -258,7 +258,7 @@ export declare interface UIExtensionComponentAttribute extends CommonMethod {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   setUIExtensionComponentOptions(want: Want, options?: UIExtensionOptions): this;
   /**
@@ -360,7 +360,7 @@ export declare function UIExtensionComponent(
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function UIExtensionComponent(

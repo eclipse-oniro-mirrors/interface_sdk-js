@@ -8546,6 +8546,183 @@ declare enum SafeAreaEdge {
 }
 
 /**
+ * 沿边方向的内容对齐方式。
+ * 上、下边沿水平方向对齐；起始边、结束边沿垂直方向对齐。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum SafeAreaInsetAlignment {
+  /**
+   * 对齐到沿边方向的起点。
+   * 上、下边在从左到右布局时靠左，在从右到左布局时靠右；起始边、结束边靠上。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  START = 0,
+
+  /**
+   * 在沿边方向居中对齐。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  CENTER = 1,
+
+  /**
+   * 对齐到沿边方向的终点。
+   * 上、下边在从左到右布局时靠右，在从右到左布局时靠左；起始边、结束边靠下。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  END = 2
+}
+
+/**
+ * 单个边缘内容及其布局配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface SafeAreaInsetEdgeConfig {
+  /**
+   * 用于创建该边内容的必填构建函数。
+   * 构建结果为空时清除该边，不影响其他有效边。
+   * 该边预留的空间等于内容在垂直于附着边方向上的实测尺寸加上 `spacing`。
+   *
+   * 每边 builder 应生成一个根组件，可以是普通组件或自定义组件。
+   * 多个组件应由容器组成单根；多根构建结果不作保证。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  content: CustomBuilder;
+
+  /**
+   * 边缘内容与主体内容之间、指向容器内部的间隔。
+   * 支持的单位为 vp、px、fp、lpx，取值须为非负有限值；不支持百分比或资源值。
+   * 默认值：`0vp`。省略或传入非法值时回退为 `0vp`，不清除有效内容。
+   * 间隔在内容测量之后计入占用，不预先扣减内容的测量空间。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  spacing?: LengthMetrics;
+
+  /**
+   * 内容沿附着边的对齐方式。
+   * 默认值：`SafeAreaInsetAlignment.CENTER`。
+   * 省略或传入非法值时回退为 `SafeAreaInsetAlignment.CENTER`，不清除有效内容。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  alignment?: SafeAreaInsetAlignment;
+}
+
+/**
+ * 组件四边的完整边缘内容配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface SafeAreaInsetOptions {
+  /**
+   * 附着在物理上边的内容配置。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  top?: SafeAreaInsetEdgeConfig;
+
+  /**
+   * 附着在逻辑结束边的内容配置：从左到右布局时为右边，从右到左布局时为左边。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  end?: SafeAreaInsetEdgeConfig;
+
+  /**
+   * 附着在物理下边的内容配置。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  bottom?: SafeAreaInsetEdgeConfig;
+
+  /**
+   * 附着在逻辑起始边的内容配置：从左到右布局时为左边，从右到左布局时为右边。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  start?: SafeAreaInsetEdgeConfig;
+}
+
+/**
  * 扩展布局安全区域的枚举类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -20144,6 +20321,28 @@ declare class CommonMethod<T> {
   safeAreaPadding(paddingValue: Padding | LengthMetrics | LocalizedPadding): T;
 
   /**
+   * 在组件的一个或多个边缘放置自定义内容，并按其实际占用为主体内容留出组件级安全区域。
+   * 适用于边缘工具栏、操作区或占位内容。再次调用时整体替换四边配置，未提供的边不保留旧内容。
+   * 内容从宿主普通 `padding` 的内边界附着；同宿主同物理边的有效安全区取已有 `safeAreaPadding`
+   * 与边缘内容占用的较大值，不将两者相加。跨祖先和系统安全区沿用既有累计规则。
+   * 计算组件在垂直于附着边方向上的自适应尺寸时，会计入有效安全区。
+   *
+   * @param { SafeAreaInsetOptions } [options] - 四边完整配置。默认值：`undefined`，重置四边。
+   *     传入 `null`、非对象或没有有效边的对象时也重置四边。
+   *     单边结构或 `content` 非法、构建结果为空时只清除该边；`spacing` 非法时回退为 `0vp`，
+   *     `alignment` 非法时回退为 `SafeAreaInsetAlignment.CENTER`，两者均不清除该边的有效内容。
+   * @returns { T } 当前组件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  safeAreaInset(options?: SafeAreaInsetOptions): T;
+
+  /**
    * 设置组件的外边距属性。在计算位置时外边距视为组件大小的一部分，从而影响组件位置。
    *
    * 从API version 10开始，该接口支持calc计算特性。
@@ -24679,27 +24878,6 @@ declare class CommonMethod<T> {
   keyboardShortcut(value: string | FunctionKey, keys: Array<ModifierKey>, action?: () => void): T;
 
   /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
    * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
    * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
@@ -24716,9 +24894,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityGroup(value: boolean): T;
 
@@ -24750,27 +24928,6 @@ declare class CommonMethod<T> {
   accessibilityGroup(isGroup: boolean, accessibilityOptions: AccessibilityOptions): T;
 
   /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
    *
    * @param { string } value - 无障碍文本，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。
@@ -24782,9 +24939,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityText(value: string): T;
 
@@ -24956,27 +25113,6 @@ declare class CommonMethod<T> {
   accessibilityDescription(description: Resource): T;
 
   /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍重要性。该属性用于控制某个组件是否可被无障碍辅助服务所识别。
    *
    * @param { string } value - 无障碍重要性，用于控制某个组件是否可被无障碍辅助服务所识别。<br/>支持的值为：<br/>
@@ -24990,9 +25126,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityLevel(value: string): T;
 
@@ -28384,6 +28520,20 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   scrollBarHeight(height: LengthMetrics | undefined): T;
+
+  /**
+   * 设置是否支持键盘方向键滚动。开启后，组件在获焦且未激活焦点态时会响应键盘方向键滚动。
+   *
+   * @param { boolean | undefined } enabled - 是否支持键盘方向键滚动。
+   *     <br>默认值：true。
+   * @returns { T }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
 
 /**

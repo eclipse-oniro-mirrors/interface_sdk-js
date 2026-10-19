@@ -260,7 +260,7 @@ declare class TreeSet<T> {
    * 通过回调函数来遍历实例对象上的元素。
    *
    * @param { function } callbackFn - 遍历实例对象中每个元素时调用的回调函数，开发者可在回调中对元素及其下标进行自定义处理。
-   * @param { Object } [thisArg] - callbackFn被调用时用作this值。当需要在回调函数中使用特定的this上下文（如访问外部对象属性）时传入此参数。不传入时默认值为undefined。
+   * @param { Object } [thisArg] - callbackFn被调用时用作this值。ArkTS中箭头函数的this取自外层作用域，普通函数不支持使用this；如需访问外部对象，请在箭头函数中直接引用。不传入时默认值为undefined。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -270,9 +270,10 @@ declare class TreeSet<T> {
   forEach(callbackFn: (value?: T, key?: T, set?: TreeSet<T>) => void, thisArg?: Object): void;
 
   /**
-   * 通过回调函数来遍历实例对象上的元素。
+   * 通过回调函数来遍历实例对象上的元素。回调函数依次接收value、key和set参数，其中key与value相同，set默认指向当前实例。
+   * 不建议使用thisArg改变回调函数上下文：箭头函数的this不受thisArg影响，普通函数不应依赖thisArg。
    *
-   * @param { TreeSetForEachCb<T> } callbackFn - 遍历实例对象中每个元素时调用的回调函数，开发者可在回调中对元素及其下标进行自定义处理。
+   * @param { TreeSetForEachCb<T> } callbackFn - 遍历实例对象中每个元素时调用的回调函数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform
    * @atomicservice

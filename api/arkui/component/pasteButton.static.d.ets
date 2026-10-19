@@ -68,13 +68,11 @@ export declare enum PasteDescription {
  * > **NOTE**
  * >
  * > - You are advised to specify at least one of **icon** or **text**.
- *
  * > - If neither **icon** nor **text** is specified, **PasteButton** is created with default styles as follows:
- * > **PasteIconStyle** defaults to **LINES**, **PasteDescription** to **PASTE**, and **ButtonType** to **Capsule**.
- *
+ * >   **PasteIconStyle** defaults to **LINES**, **PasteDescription** to **PASTE**, and **ButtonType** to **Capsule**.
  * > - The **icon**, **text**, and **buttonType** parameters do not support dynamic modification. Styles and properties
- * > of security components are verified by the system upon creation. Dynamic changes may cause the component to
- * > violate specifications for security components and invalidate authorization.
+ * >   of security components are verified by the system upon creation. Dynamic changes may cause the component to
+ * >   violate specifications for security components and invalidate authorization.
  *
  * @interface PasteButtonOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -155,14 +153,18 @@ export declare enum PasteButtonOnClickResult {
  *     and clipboard reading operations can proceed. A return value of **TEMPORARY_AUTHORIZATION_FAILED** means the
  *     authorization failed, and you must not attempt to read clipboard content.
  * @param { BusinessError<void> } [error] - Error code and message when the component is clicked.
- *     <br>Default value: undefined.
- *     <br>Use the **result** parameter to determine the authorization status.<br>Error code 1 indicates an internal
- *     system error. Check the system status and try again.<br>Error code
- *     2 indicates property configuration errors, including but not limited to:<br>1. The font or icon size is too
- *     small.<br>2. The font or icon color is similar to the component background color.<br>3. The font or icon color is
- *     too transparent.<br>4. The padding is negative.<br>5. The component is obscured by other components or windows.
- *     <br>6. Text extends beyond the component background area.<br>7. The component exceeds the window or screen
- *      bounds.<br>8. The component size is too large.<br>9. The component text is truncated and not fully displayed.
+ *     Default value: undefined. Use the **result** parameter to determine the authorization status.
+ *     <br>Error code 1 indicates an internal system error. Check the system status and try again.
+ *     <br>Error code 2 indicates property configuration errors, including but not limited to:
+ *     <br>1. The font or icon size is too small.
+ *     <br>2. The font or icon color is similar to the component background color.
+ *     <br>3. The font or icon color is too transparent.
+ *     <br>4. The padding is negative.
+ *     <br>5. The component is obscured by other components or windows.
+ *     <br>6. Text extends beyond the component background area.
+ *     <br>7. The component exceeds the window or screen bounds.
+ *     <br>8. The component size is too large.
+ *     <br>9. The component text is truncated and not fully displayed.
  *     <br>10. Improper settings of some security component properties prevent the component from displaying correctly.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -172,9 +174,10 @@ export type PasteButtonCallback
   = (event: ClickEvent, result: PasteButtonOnClickResult, error?: BusinessError<void>) => void;
 
 /**
- * This component can only inherit the [universal attributes of security components]{@link ./securityComponent}.
+ * Universal attributes are not supported. This component can only inherit the
+ * [universal attributes of security components]{@link ./securityComponent}.
  *
- * <br>Only the following events are supported.
+ * Universal events are not supported. Only the following events are supported.
  *
  * @extends SecurityComponentMethod
  * @interface PasteButtonAttribute
@@ -188,9 +191,10 @@ export declare interface PasteButtonAttribute extends SecurityComponentMethod {
    * application obtains temporary permission to read clipboard content.
    *
    * > **NOTE**
-   * > - You may want to learn the
+   * >
+   * > You may want to learn the
    * > [restrictions on security component
-   * styles](docroot://security/AccessToken/security-component-overview.md#constraints)
+   * > styles](docroot://security/AccessToken/security-component-overview.md#constraints)
    * > to avoid authorization failures caused by incompliant styles.
    *
    * @param { PasteButtonCallback | undefined } event - Callback for the click event, used to handle the authorization

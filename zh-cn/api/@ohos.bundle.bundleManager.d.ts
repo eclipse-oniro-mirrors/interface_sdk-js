@@ -1999,6 +1999,24 @@ declare namespace bundleManager {
   function getAllBundleInfo(bundleFlags: int, userId?: int): Promise<Array<BundleInfo>>;
 
   /**
+   * 根据给定的包名和包标志，获取系统中所有的包信息。
+   * 该接口使用了一个类型的promise来返回结果。
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - 包名。
+   * @param { int } bundleFlags - 包信息中需要包含的类型，取值限定为整数。
+   * @returns { Promise<Array<BundleInfo>> } Promise 用于返回bundle信息的数组。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getAllBundleInfoInstances(bundleName: string, bundleFlags: int): Promise<Array<BundleInfo>>;
+
+  /**
    * 根据给定的appFlags获取系统中所有的ApplicationInfo。使用callback异步回调。
    *
    * @permission ohos.permission.GET_INSTALLED_BUNDLE_LIST
@@ -4636,44 +4654,6 @@ declare namespace bundleManager {
    */
   function filterBundleListByDeviceModeDistributionPolicies(
     policies: Array<DeviceModeDistributionPolicy>): Promise<void>;
-
-  /**
-   * 启用或禁用备用模块。
-   *
-   * @permission ohos.permission.INSTALL_BUNDLE
-   * @param { string } bundleName - Bundle name.
-   * @param { string } moduleName - 模块名称。
-   * @param { boolean } isEnabled - 是否启用备份模块。**true**表示启用，**false**否则。
-   * @returns { Promise<void> } 不返回任何值的Promise。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
-   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
-   * @throws { BusinessError } 17700002 - The specified moduleName is not existed.
-   * @syscap SystemCapability.BundleManager.BundleFramework.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function setAlternateModuleEnabled(bundleName: string, moduleName: string, isEnabled: boolean): Promise<void>;
-
-  /**
-   * 查询备用模块使能状态。
-   *
-   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-   * @param { string } bundleName - Bundle name.
-   * @param { string } moduleName - 模块名称。
-   * @returns { Promise<boolean> } Promise用于返回结果。
-   *     **true**表示开启，**false**表示关闭。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
-   * @throws { BusinessError } 17700001 - The specified bundleName is not found.
-   * @throws { BusinessError } 17700002 - The specified moduleName is not existed.
-   * @syscap SystemCapability.BundleManager.BundleFramework.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function isAlternateModuleEnabled(bundleName: string, moduleName: string): Promise<boolean>;
 
   /**
    * 获取指定应用的包扩展策略信息。

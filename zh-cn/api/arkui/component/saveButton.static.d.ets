@@ -181,10 +181,8 @@ export declare enum SaveDescription {
  * > **说明**
  * >
  * > - 建议icon或text至少传入一个。
- * >
  * > - 如果icon、text都不传入，**SaveButton**将使用默认样式创建，默认样式：
- * > **SaveIconStyle**默认样式为**FULL_FILLED**；**SaveDescription**默认样式为**DOWNLOAD**；**ButtonType**默认样式为**Capsule**。
- * >
+ * >   **SaveIconStyle**默认样式为**FULL_FILLED**；**SaveDescription**默认样式为**DOWNLOAD**；**ButtonType**默认样式为**Capsule**。
  * > - **icon**、**text**和**buttonType**不支持动态修改。
  *
  * @interface SaveButtonOptions

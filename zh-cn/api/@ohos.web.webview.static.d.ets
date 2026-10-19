@@ -28,7 +28,9 @@ import type print from './@ohos.print';
 import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
-  * This module provides the capability to manage web modules.
+  * 本模块提供管理Web模块的能力。
+  *
+  * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
   *
   * @namespace webview
   * @syscap SystemCapability.Web.Webview.Core
@@ -652,8 +654,10 @@ declare namespace webview {
          * Deletes all data in the specified origin.
          *
          * @param { string } origin - Index of the origin, which is obtained through {@link getOrigins}.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -666,8 +670,10 @@ declare namespace webview {
          *
          * @returns { Promise<Array<WebStorageOrigin>> } - Promise used to return the information about the origins.
          *                                                 For details, see {@link WebStorageOrigin}.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100012 - Invalid web storage origin.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -680,8 +686,10 @@ declare namespace webview {
          *
          * @param { AsyncCallback<Array<WebStorageOrigin>> } callback - Callback used to return the information about the
          *                                                              origins. For details, see {@link WebStorageOrigin}.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100012 - Invalid web storage origin.
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -705,8 +713,10 @@ declare namespace webview {
          * Get the web storage quota with the origin.
          * @param { string } origin -  The origin which to be inquired.
          * @param { AsyncCallback<double> } callback - the callback of getOriginQuota.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
@@ -718,8 +728,10 @@ declare namespace webview {
          * Get the web amount of storage with the origin.
          * @param { string } origin -  The origin which to be inquired.
          * @returns { Promise<double> } - the promise returned by the function. Unit: byte.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
@@ -731,8 +743,10 @@ declare namespace webview {
          * Get the web amount of storage with the origin.
          * @param { string } origin -  The origin which to be inquired.
          * @param { AsyncCallback<double> } callback - the callback of getOriginUsage.
-         * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-         * <br>2. Incorrect parameter types. 3.Parameter verification failed.
+         * @throws { BusinessError } 401 - Parameter error. Possible causes:
+         *     1. Mandatory parameters are left unspecified.
+         *     2. Incorrect parameter types.
+         *     3. Parameter verification failed.
          * @throws { BusinessError } 17100011 - Invalid origin.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
@@ -2320,6 +2334,10 @@ declare namespace webview {
     /**
      * Decide whether JIT is disabled, the default value is false.
      *
+     * 只读：否
+     * 
+     * 可选：是
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2328,6 +2346,10 @@ declare namespace webview {
     /**
      * Decide whether WASM is disabled, the default value is false.
      *
+     * 只读：否
+     * 
+     * 可选：是
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2335,6 +2357,11 @@ declare namespace webview {
     disableWebAssembly?: boolean;
     /**
      * Decide whether WebGL is disabled, the default value is false.
+     *
+     *
+     * 只读：否
+     * 
+     * 可选：是
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2346,6 +2373,11 @@ declare namespace webview {
      * 内置PDF解析引擎在解析复杂二进制格式和嵌入式脚本时容易存在漏洞，攻击者可构造特殊PDF文件利用字体解析或内存破坏漏洞控制应用主进程。
      * 禁用后无法在ArkWeb中加载PDF。非文档办公类App建议禁用，引导用户使用外部应用打开PDF。
      *
+     *
+     * 只读：否
+     * 
+     * 可选：是
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2353,6 +2385,11 @@ declare namespace webview {
     disablePDFViewer?: boolean;
     /**
      * Decide whether MathML is disabled, the default value is false.
+     *
+     *
+     * 只读：否
+     * 
+     * 可选：是
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2362,6 +2399,11 @@ declare namespace webview {
     /**
      * Decide whether ServiceWorker is disabled, the default value is false.
      *
+     *
+     * 只读：否
+     * 
+     * 可选：是
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2369,6 +2411,11 @@ declare namespace webview {
     disableServiceWorker?: boolean;
     /**
      * Decide whether NonProxyUDP is disabled, the default value is false.
+     *
+     *
+     * 只读：否
+     * 
+     * 可选：是
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -6050,14 +6097,14 @@ declare namespace webview {
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        ENTER_BACKGROUND = 1,
+        ENTER_BACKGROUND,
         /**
          * 系统自动清理。
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        AUTO_CLEANUP = 2
+        AUTO_CLEANUP
     }
 
     /**

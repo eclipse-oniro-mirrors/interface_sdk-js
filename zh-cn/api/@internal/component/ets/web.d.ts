@@ -20,6 +20,8 @@
 
 /**
  * 提供Web控制器的方法。
+ * 通过WebviewController可以控制Web组件各种行为。一个WebviewController对象只能控制一个Web组件，且必须在Web组件和
+ * WebviewController绑定后，才能调用WebviewController上的方法（静态方法除外）。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -1538,6 +1540,55 @@ declare enum RenderExitReason {
 type OnContextMenuHideCallback = () => void;
 
 /**
+ * 上下文菜单项状态更新的回调类型。
+ *
+ * @param { WebContextMenuItemId } menuItemId - 上下文菜单项的ID。
+ * @param { WebContextMenuOptions } [options] - 上下文菜单项的选项。
+ *     <br>默认值：见options的默认值。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+
+/**
+ * 枚举上下文菜单项的ID。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare enum WebContextMenuItemId {
+  /**
+   * 复制指向高亮文本的链接菜单项。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  MENU_COPY_LINK = 11
+}
+
+/**
+ * 定义上下文菜单项的选项。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare interface WebContextMenuOptions {
+  /**
+   * 上下文菜单项是否可用。
+   * 默认值：默认值：false。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  enable?: boolean;
+}
+
+/**
  * onSslErrorEventReceive接口返回的SSL错误的具体原因。
  *
  * @syscap SystemCapability.Web.Webview.Core
@@ -2010,7 +2061,7 @@ declare class SslErrorHandler {
   /**
    * 通知Web组件取消此请求，并根据参数abortLoading决定是否停止加载。
    *
-   * @param { boolean } abortLoading - 是否在取消请求后停止加载页面。
+   * @param { boolean } abortLoading - SSL错误页场景，拒绝错误证书后是否终止页面加载。
    *     <br>true表示停止加载页面，false表示继续加载页面。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 20 dynamic
@@ -2050,6 +2101,23 @@ declare class ClientAuthenticationHandler {
   /**
    * 通知Web组件使用指定的凭据（从证书管理模块获得）。
    *
+   * > **说明：**
+   * >
+   * > authUri参数需通过系统证书管理器获取，需配置ohos.permission.ACCESS_CERT_MANAGER权限。
+   * 
+   * 支持的证书签名算法以及密钥长度详见下表。
+   * | 签名算法     | 密钥长度   | 
+   * | ------- | ------ |
+   * | SSL_SIGN_RSA_PKCS1_SHA256 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA384 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA512 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA256 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA384 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA512 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_ECDSA_SECP256R1_SHA256 | 256 | 
+   * | SSL_SIGN_ECDSA_SECP384R1_SHA384 | 384 | 
+   * | SSL_SIGN_ECDSA_SECP521R1_SHA512 | 521 | 
+   * 
    * @param { string } authUri - 凭据的关键值。
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice [since 11]
@@ -2243,7 +2311,7 @@ declare class ScreenCaptureHandler {
   constructor();
 
   /**
-   * 获取网页来源。用于验证请求来源的可信度，或实现白名单机制以控制哪些网页可以进行屏幕捕获。
+   * 获取网页来源。用于校验发起请求的网页来源，开发者可通过来源允许列表控制哪些网页允许发起屏幕捕获请求。
    *
    * @returns { string } 当前发起屏幕捕获请求的网页的来源。
    * @syscap SystemCapability.Web.Webview.Core
@@ -2930,6 +2998,42 @@ declare class WebContextMenuParam {
    * @since 22 dynamic
    */
   getContextMenuMediaType(): ContextMenuDataMediaType;
+
+  /**
+   * 检查当前选中的文本是否可用于生成Text Fragment链接。Text Fragment链接是包含**#:~:text=**片段的URL，用于在打开链接时滚动到并高亮特定文本段落。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口，以决定是否显示"复制指向高亮的链接"菜单项。结果与Chromium的**ShouldOfferLinkToText**行为一致。
+   *
+   * @returns { boolean } **true**表示当前选中文本可用于生成Text Fragment链接；**false**表示不可用。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  shouldOfferLinkToText(): boolean;
+
+  /**
+   * 获取指向当前网页高亮文本的Text Fragment链接URL。返回的URL包含符合W3C Text Fragments规范的**#:~:text=**片段。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用shouldOfferLinkToText()检查当前选中文本是否支持链接生成。若选中文本不支持链接生成，返回空字符串。
+   *
+   * @returns { string } 包含**#:~:text=**片段、符合W3C Text Fragments规范的Text Fragment链接URL。若当前选中文本不支持链接生成，返回空字符串。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  getTextFragmentGeneratedLink(): string;
+
+  /**
+   * 检查当前网页是否存在Text Fragment高亮。使用此接口判断是否应显示"移除高亮"和"重新分享链接"菜单项。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。结果与Chromium的**GetExistingSelectors**行为一致。
+   *
+   * @returns { boolean } **true**表示当前页面存在Text Fragment高亮；**false**表示不存在。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  isOverTextFragment(): boolean;
 }
 
 /**
@@ -3105,6 +3209,36 @@ declare class WebContextMenuResult {
    * @since 24 dynamic
    */
   saveImage(): void;
+
+  /**
+   * 将指向当前高亮文本的Text Fragment链接复制到系统剪贴板。复制的URL包含符合W3C Text Fragments规范的**#:~:text=**片段。剪贴板内容与getTextFragmentGeneratedLink()返回的URL相同。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用shouldOfferLinkToText()检查当前选中文本是否支持链接生成。若选中文本不支持链接生成，此方法不会向剪贴板写入内容。
+   *
+   * > **说明：**
+   * >
+   * > 完成操作后，应调用closeContextMenu()关闭菜单，未调用可能导致菜单资源未正确释放。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  copyLinkToTextMenu(): void;
+
+  /**
+   * 移除当前网页上所有Text Fragment高亮，恢复原始文本样式。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用isOverTextFragment()检查是否存在高亮。若不存在高亮，此方法不做任何操作。
+   *
+   * > **说明：**
+   * >
+   * > 完成操作后，应调用closeContextMenu()关闭菜单，未调用可能导致菜单资源未正确释放。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  removeFragments(): void;
 }
 
 /**
@@ -3789,7 +3923,7 @@ declare class WebController {
   /**
    * 调整当前网页的缩放比例。
    *
-   * @param { number } factor - The zoom factor.
+   * @param { number } factor - 缩放系数。1表示恢复加载网页的默认缩放比例；小于1为缩小，大于1为放大。取值范围(0, 100]。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3810,7 +3944,7 @@ declare class WebController {
   /**
    * 异步执行JavaScript脚本，并通过回调方式返回脚本执行的结果。runJavaScript需要在loadUrl完成后，比如onPageEnd中调用。
    *
-   * @param { object } options The options with a piece of code and a callback.
+   * @param { object } options 包含脚本和回调的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3871,7 +4005,7 @@ declare class WebController {
   /**
    * 注入JavaScript对象到window对象中，并在window对象中调用该对象的方法。注入的对象在页面下一次（重新）加载前不会出现在JavaScript中。
    *
-   * @param { object } options - The option with the JavaScript object and method list.
+   * @param { object } options - 包含JavaScript对象和方法列表的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -7261,6 +7395,19 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onContextMenuHide(callback: OnContextMenuHideCallback): WebAttribute;
 
   /**
+   * 注册回调，在内核异步更新上下文菜单项状态时调用。内核完成异步处理后触发该回调，通知应用更新菜单项的显示状态。
+   *
+   * shouldOfferLinkToText()方法返回同步初始值，此回调提供异步最终值，两者互补。
+   *
+   * @param { OnContextMenuUpdateCallback } callback - 接收菜单项ID和选项的回调函数。
+   * @returns { WebAttribute } 返回WebAttribute对象，支持链式调用。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
+
+  /**
    * 设置有声视频的自动播放是否需要用户手动点击，静音视频播放不受该接口管控。当该属性未显式设置时，默认需要用户手动点击。
    *
    * @param { boolean } access - 设置有声视频的自动播放是否需要用户手动点击。
@@ -7704,6 +7851,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 9 dynamic
    */
   verticalScrollBarAccess(verticalScrollBar: boolean): WebAttribute;
+
 
   /**
    * 接收到apple-touch-icon URL地址时触发的回调函数。
@@ -9013,6 +9161,29 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   enableMediaNetworkProxy(enabled: boolean): WebAttribute;
 
   /**
+   * 设置Web组件网页文本输入光标及选择手柄的颜色。
+   *
+   * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 **auto** 或未设置时，
+   * 使用内置默认光标颜色（当前为 **#0A59F7**）。选择手柄使用当前主题默认色。
+   *
+   * > **说明：**
+   * >
+   * > - 优先级为：该API设置的非零值 > 网页设置的 `caret-color` CSS属性 > 内置默认颜色。该API设置的
+   * 非零值也会覆盖网页显式设置的颜色或 transparent。
+   * >
+   * > - 精确颜色值 **#00000000** 保留为重置哨兵值。重置后使用网页CSS `caret-color`；CSS为 **auto**
+   * 或未设置时使用内置默认颜色。
+   *
+   * @param { ResourceColor } value - 网页文本输入光标及选择手柄的颜色。
+   *     <br>传入undefined或null时重置该属性。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  caretColor(value: ResourceColor): WebAttribute;
+
+  /**
    * 当网页的浏览器级缩放倍率变化时触发。
    *
    * @param { OnZoomChangeCallback } callback - 浏览器级缩放倍率变化时触发的回调。该回调仅由浏览器级缩放
@@ -9023,18 +9194,35 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.2.0 dynamic
    */
   onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
+
+  /**
+   * 设置Web组件惯性滚动的最大速度。
+   *
+   * 通过该TypeScript API配置的值优先于通过其他API配置的值生效。
+   *
+   * @param { number } speedLimit - 惯性滚动最大速度，单位vp/s。当值小于等于0、
+   *     {@code NaN}、{@code +Infinity}或{@code -Infinity}时，使用默认值：PC设备为9000 vp/s，
+   *     非PC设备为17000 vp/s。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  flingSpeedLimit(speedLimit: number): WebAttribute;
 }
 
 /**
  * 定义 Web 组件。
  *
- * <p><strong>API Note</strong>:
+ * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  *
- * <strong>Performance Note</strong>:
- * <p>For details about how to optimize the compilation, resource loading, and JSBridge performance,
- * see [Optimizing Web Page Loading]{@link https://developer.huawei.com/consumer/en/doc/best-practices/bpta-web-develop-optimization}
- * <p>When the white screen duration is long due to complex web page parsing,
- * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
+ * <p><strong>接口说明</strong>:
+ *
+ * <strong>性能说明</strong>:
+ * <p>有关如何优化编译、资源加载和JSBridge性能的详细信息，
+ * 请参见[Web加载性能优化]{@link https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-web-develop-optimization}
+ * <p>当由于复杂的网页解析导致白屏时间较长时，
+ * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
  * </p>
  *
  * @syscap SystemCapability.Web.Webview.Core

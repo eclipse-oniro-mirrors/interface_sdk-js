@@ -1222,7 +1222,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * >
    * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 22.
    *
-   * @param { Optional<Callback<NavDestinationActiveReason>> } callback - Indicates callback when destination is active.
+   * @param { Optional<Callback<NavDestinationActiveReason>> } callback - Reason why the **NavDestination** component switches from active to inactive.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1241,8 +1241,7 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * >
    * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 22.
    *
-   * @param { Optional<Callback<NavDestinationActiveReason>> } callback - Indicates callback when destination is
-   *     inactive.
+   * @param { Optional<Callback<NavDestinationActiveReason>> } callback - Reason why the **NavDestination** component switches from active to inactive.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1285,8 +1284,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
    * >
    * > - This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 22.
    *
-   * @param { Optional<Callback<ESObject>> } callback - Indicates callback when destination be pushed with singleton
-   *     mode.
+   * @param { Optional<Callback<ESObject>> } callback - Callback triggered by **onNewParam**,
+   *     with the parameter being the data passed to the target page during navigation.
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

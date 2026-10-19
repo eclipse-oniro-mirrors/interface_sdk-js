@@ -21,7 +21,7 @@
  * [BundleInfo]{@link BundleInfo} -> [HapModuleInfo]{@link HapModuleInfo} -> [AbilityInfo]{@link AbilityInfo} or 
  * [ExtensionAbilityInfo]{@link ExtensionAbilityInfo:ExtensionAbilityInfo}.)
  *
- * @file
+ * @file Skill
  * @kit AbilityKit
  */
 

@@ -152,7 +152,11 @@ export class MediaQuery {
 }
 
 /**
- * Provides APIs for registering the component layout and drawing display completion callbacks.
+ * Provides the capability to register callbacks for component layout and component draw-to-display completion
+ * notifications. "Draw-to-display" means that the drawing commands of the node are sent to the graphics service and
+ * have been successfully displayed. For example, you can obtain the precise component size after layout is complete, or
+ * perform operations such as screenshot capture or animation synchronization after draw-to-display is complete. This
+ * is suitable for scenarios where precise awareness of component layout and drawing timing is required.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -162,7 +166,9 @@ export class MediaQuery {
 export class UIInspector {
 
   /**
-   * Registers a callback for layout and drawing display completion notifications for a specific component.
+   * Registers callbacks for component layout and component draw-to-display completion notifications. For example, you
+   * can obtain the precise component size after layout is complete, or perform operations such as screenshot capture
+   * or animation synchronization after draw-to-display is complete.
    * @param { string } id - ID of the target component, set using the universal attributes [id]{@link CommonMethod#id}
    *     or [key]{@link CommonMethod#key}.
    * @returns { inspector.ComponentObserver } Component observer, which is used to register or unregister listeners
@@ -176,17 +182,21 @@ export class UIInspector {
   createComponentObserver(id: string): inspector.ComponentObserver;
 
   /**
-   * Registers a callback for layout and drawing display completion notifications for a specific component.
-   * <br>Display refers to the process of sending the drawing command of a node to the graphics service and completing
-   * <br>the display. Compared with createComponentObserver, this API supports the input of **UniqueID** (the unique ID
+   * Registers callbacks for component layout and component draw-to-display completion notifications. "Draw-to-display"
+   * means that the drawing commands of the node are sent to the graphics service and have been successfully displayed.
+   * For example, you can obtain the precise component size after layout is complete, or perform operations such as
+   * screenshot capture or animation synchronization after draw-to-display is complete.
+   * <br>Compared with createComponentObserver, this API additionally supports the input of **UniqueID** (the unique ID
    * <br>allocated by the system to a node).
    *
-   * @param { string | number } id - When the type is string, it indicates the ID of the specified component, set using
-   *     the universal attributes [id]{@link CommonMethod#id} or [key]{@link CommonMethod#key}.
-   *     <br>When the type is number, it indicates the unique ID of the node allocated by the system, obtained through
-   *     <br>[getUniqueId]{@link FrameNode#getUniqueId}. When using the unique ID to create a listener handle,
-   *     <br>ensure that the node corresponding to the unique ID exists. Otherwise, the listener does not take effect.
-   *     <br>The value of the parameter in the number type is an integer ranging from 1 to 2147483647.
+   * @param { string | number } id - When the type is string, this parameter specifies the component ID, which is set
+   *     through the universal attribute [id]{@link CommonMethod#id} or [key]{@link CommonMethod#key}. When using a
+   *     component ID to create a listener handle, ensure that the component corresponding to the ID already exists;
+   *     otherwise, the listener will not take effect. When the type is number, this parameter specifies the UniqueID,
+   *     which is a unique identifier assigned by the system to a node and can be obtained through
+   *     [getUniqueId]{@link FrameNode#getUniqueId}. When using a UniqueID to create a listener handle, ensure that the
+   *     node corresponding to the UniqueID already exists; otherwise, the listener will not take effect. The value
+   *     range of the number type is an integer from 1 to 2147483647.
    * @returns { inspector.ComponentObserver } Component observer, which is used to register or unregister listeners
    *     for completion of component layout or drawing display.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3244,7 +3254,10 @@ export class Magnifier {
 }
 
 /**
- * interface AtomicServiceBar
+ * The AtomicServiceBar interface provides the ability to set properties of the atomic service menu bar, including the
+ * visibility, background color, title content, title font style, and icon color, and also supports obtaining menu bar
+ * layout information and listening for layout changes. It is suitable for scenarios where you need to customize the
+ * appearance and behavior of the menu bar in atomic services.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3255,9 +3268,14 @@ export class Magnifier {
 export interface AtomicServiceBar {
 
   /**
-   * Set the visibility of the bar, except the icon.
+   * Sets whether the atomic service menu bar is visible.
+   * <br>Since API version 12, the atomic service menu bar is hidden by default and replaced with a floating button.
+   * <br>When setVisible() is called in atomic services, the visible parameter is ignored, and menu bar cannot be
+   * <br>displayed or hidden.
    *
-   * @param { boolean } visible - whether this bar is visible.
+   * @param { boolean } visible - Whether the atomic service menu bar is visible. The value true means the atomic
+   *     service menu bar is visible, and false means the opposite. Since API version 12, this parameter will be ignored
+   *     in atomic services.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -3266,9 +3284,15 @@ export interface AtomicServiceBar {
   setVisible(visible: boolean): void;
 
   /**
-   * Set the background color of the bar.
+   * Sets the background color of the atomic service menu bar.
+   * <br>Since API version 12, the background of the atomic service menu bar is hidden by default.
+   * <br>When setBackgroundColor() is called in atomic services, the color parameter is ignored, and the background
+   * <br>color of the menu bar cannot be set.
    *
-   * @param { Nullable< Color | number | string> } color - the color to set, undefined indicates using default.
+   * @param { Nullable< Color | number | string> } color - Color of the atomic service menu bar. The value undefined
+   *     means to use the default color. A number value indicates a HEX color in RGB or ARGB format, for example,
+   *     0xffffff. A string value indicates a color in RGB or ARGB format, for example, '#ffffff'. Since API version 12,
+   *     this parameter will be ignored in atomic services.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3277,9 +3301,13 @@ export interface AtomicServiceBar {
   setBackgroundColor(color: Nullable< Color | number | string>): void;
 
   /**
-   * Set the title of the bar.
+   * Sets the title content of the atomic service menu bar.
+   * <br>Since API version 12, the title of the atomic service menu bar is hidden by default.
+   * <br>When setTitleContent() is called in atomic services, the content parameter is ignored, and the menu bar title
+   * <br>cannot be set.
    *
-   * @param { string } content - the content of the bar.
+   * @param { string } content - Title content of the atomic service menu bar. Since API version 12, this parameter
+   *     will be ignored in atomic services.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3288,9 +3316,13 @@ export interface AtomicServiceBar {
   setTitleContent(content: string): void;
 
   /**
-   * Set the font style of the bar's title.
+   * Sets the font style of the atomic service menu bar title.
+   * <br>Since API version 12, the title of the atomic service menu bar is hidden by default.
+   * <br>When setTitleFontStyle() is called in atomic services, the font parameter is ignored, and the font style of
+   * <br>the menu bar title, such as italic, cannot be set.
    *
-   * @param { FontStyle } font - the font style of the bar's title.
+   * @param { FontStyle } font - Font style of the atomic service menu bar title. Since API version 12, this parameter
+   *     will be ignored in atomic services.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3299,9 +3331,15 @@ export interface AtomicServiceBar {
   setTitleFontStyle(font: FontStyle): void;
 
   /**
-   * Set the color of the icon on the bar.
+   * Sets the color of the atomic service menu bar icon.
+   * <br>Since API version 12, the atomic service menu bar is hidden by default and replaced with a floating button.
+   * <br>When setIconColor() is called in atomic services, the color parameter is ignored, and the menu bar icon color
+   * <br>cannot be set.
    *
-   * @param { Nullable< Color | number | string> } color - the color to set to icon, undefined indicates using default.
+   * @param { Nullable< Color | number | string> } color - Color of the atomic service menu bar. The value undefined
+   *     means to use the default color. A number value indicates a HEX color in RGB or ARGB format, for example,
+   *     0xffffff. A string value indicates a color in RGB or ARGB format, for example, '#ffffff'. Since API version 12,
+   *     this parameter will be ignored in atomic services.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3310,7 +3348,8 @@ export interface AtomicServiceBar {
   setIconColor(color: Nullable< Color | number | string>): void;
 
   /**
-   * Get size and position of the bar.
+   * Obtains the layout information of the atomic service menu bar relative to the window.
+   * <br>The menu bar position reflected in the layout information already takes its left and right margins into account.
    *
    * @returns { Frame } The size and position of bar in vp relative to window.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3322,10 +3361,13 @@ export interface AtomicServiceBar {
   getBarRect(): Frame;
 
   /**
-   * When size and position of the bar changed, callback will be called.
+   * Callback triggered when the size or position of the atomic service menu bar (AtomicServiceMenuBar, the menu capsule
+   * in the upper-right corner) changes. It returns the latest layout information of the menu bar. The layout
+   * information includes the size and position of the menu bar, with the left and right margins taken into account for
+   * the position.
    *
-   * @param { Callback<Frame> } callback - Callback that param contains the Frame.
-   *     The parameters of the callback function cannot be undefined or null.
+   * @param { Callback<Frame> } callback - Callback used to return the new layout information when the
+   *     AtomicServiceMenuBar layout changes.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6163,6 +6205,19 @@ export class UIContext {
    * @since 13 dynamic
    */
   getWindowHeightBreakpoint(): HeightBreakpoint;
+
+  /**
+   * Checks whether the window information has been initialized.
+   *
+   * @returns { boolean } Returns **true** if valid window width and height information has been initialized,
+   *     returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  isWindowInfoInitialized(): boolean;
 
   /**
    * Creates a sheet whose content is as defined in **bindSheetContent** and displays the sheet. This API uses a promise

@@ -28,6 +28,9 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
  * This module provides the capability to manage web modules.
  *
+ * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+ * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
+ *
  * @namespace webview
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -2995,6 +2998,14 @@ declare namespace webview {
    * exception information during JavaScript execution. If the return value is of the object type, it is uniformly
    * formatted into a description string.
    *
+   * > **NOTE**
+   * >
+   * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+   * >
+   * > - The initial APIs of this class are supported since API version 10.
+   * >
+   * > - The sample effect is subject to the actual device.
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -3657,13 +3668,18 @@ declare namespace webview {
    */
   interface SecurityParams {
     /**
-     * Whether to disable JIT compilation. true means disabled, and false means the opposite. Default value: false.
-     * To optimize performance, the V8 engine compiles hot code into machine code. Most browser vulnerabilities
-     * (such as Type Confusion) are exploited by manipulating the JIT optimization process. Disabling it does not affect
-     * web page functions, but the performance of complex JavaScript code decreases by about 17%. It is recommended that
-     * this feature be disabled if possible. For pure display and non-computing-intensive pages (such as news and
-     * documents), it is recommended that this feature not be disabled.
-     *
+     * Whether to disable JIT compilation. true indicates disabled, and false indicates not disabled.
+     * Default value: false.JIT compilation is a technology that dynamically compiles program code into machine code at
+     * runtime. To improve code execution performance, the V8 engine compiles hot code into machine code. Most browser
+     * vulnerabilities (such as Type Confusion) are implemented by manipulating the JIT optimization process.
+     * Disabling it does not affect web page functionality, but the performance of complex JS code decreases by about
+     * 17%. It is recommended to disable this feature when conditions permit. For purely display-oriented,
+     * non-computation-intensive pages (such as news and documents), it is recommended to disable it.
+     * 
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3676,6 +3692,10 @@ declare namespace webview {
      * (such as news and documents), it is recommended that this feature be disabled. Disabling it may affect web
      * page functions that depend on video encoding and decoding and complex encryption.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3689,6 +3709,10 @@ declare namespace webview {
      * to fall back to CPU rendering, which may result in a lower frame rate.It is recommended that this feature be
      * disabled for sensitive services such as financial payment, instant messaging, and government systems.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3702,6 +3726,10 @@ declare namespace webview {
      * this feature be disabled for non-document office apps and users be guided to use external
      * apps to open PDF files.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3714,6 +3742,10 @@ declare namespace webview {
      * Disabling it prevents proper parsing and rendering of <math> tag content, which may affect formula layout
      * on a small number of science websites that have not been adapted for JavaScript. Disabling it is recommended.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3727,6 +3759,10 @@ declare namespace webview {
      * push notifications from working, and removes preloading capabilities. It is recommended that this feature
      * be disabled in industries that have high requirements on session freshness, such as banking and securities.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3740,6 +3776,10 @@ declare namespace webview {
      * such as video calls and real-time intercom. It is recommended that this feature be disabled in scenarios
      * such as anonymous social networking, global services, and forcible proxy.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -9339,6 +9379,16 @@ declare namespace webview {
    * has a higher priority and can re-enable ad filtering for certain subdomains within the scope of the DisallowedList.
    * After successful internal parsing, ad filtering rules are persistently stored and do not need to be set again after
    * an app restart. However, they are not persistent and must be reconfigured after an app restart.
+   * 
+   * > **NOTE**
+   * >
+   * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+   * >
+   * > - The initial APIs of this class are supported since API version 12.
+   * >
+   * > - The sample effect is subject to the actual device.
+   * >
+   * > - Static methods must be used on the user interface (UI) thread.
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice

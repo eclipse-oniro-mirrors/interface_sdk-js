@@ -968,6 +968,40 @@ declare namespace observer {
   function offCCallStateChange(callback?: Callback<CCallStateInfo>): void;
 
   /**
+   * Callback when the VoIP call state is updated. This callback is invoked when
+   * a third-party VoIP application's call state changes and the observer is added
+   * to monitor the updates.
+   *
+   * @permission ohos.permission.MANAGE_CALL_FOR_DEVICES
+   * @param { Callback<VoIPCallStateInfo> } callback - Indicates the callback for
+   *     getting the VoIP call state information.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 8800001 - Invalid parameter value.
+   * @throws { BusinessError } 8800002 - Service connection failed.
+   * @throws { BusinessError } 8800003 - System internal error.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function onVoIPStateChange(callback: Callback<VoIPCallStateInfo>): void;
+ 
+  /**
+   * Cancel callback when the VoIP call state is updated.
+   *
+   * @permission ohos.permission.MANAGE_CALL_FOR_DEVICES
+   * @param { Callback<VoIPCallStateInfo> } [callback] - Indicates the callback for
+   *     getting the VoIP call state information.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 8800001 - Invalid parameter value.
+   * @throws { BusinessError } 8800002 - Service connection failed.
+   * @throws { BusinessError } 8800003 - System internal error.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function offVoIPStateChange(callback?: Callback<VoIPCallStateInfo>): void;
+
+  /**
    * Registers an observer for SIM card status change events. This API uses an asynchronous callback to return the
    * result.
    *
@@ -1490,6 +1524,177 @@ declare namespace observer {
      * @since 23 static
      */
     SIM_SIM_PUK = 12
+  }
+
+  /**
+   * Indicates VoIP call state information.
+   *
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  export interface VoIPCallStateInfo {
+    /**
+     * Indicates the name of the VoIP application.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    appName: string;
+ 
+    /**
+     * Indicates the contact name of the VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    contactName: string;
+ 
+    /**
+     * Indicates the type of the VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    callType: VoIPCallType;
+ 
+    /**
+     * Indicates the state of the VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    callState: VoIPCallState;
+ 
+    /**
+     * Indicates whether the VoIP application supports answering the current call as a voice call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    isVoiceAnswerSupported: boolean;
+  }
+ 
+  /**
+   * Enum for VoIP call type.
+   *
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  export enum VoIPCallType {
+    /**
+     * Indicates a voice call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    VOICE = 0,
+ 
+    /**
+     * Indicates a video call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    VIDEO = 1
+  }
+ 
+  /**
+   * Enum for VoIP call state.
+   *
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  export enum VoIPCallState {
+    /**
+     * Indicates the VoIP call is idle.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    IDLE = 0,
+ 
+    /**
+     * Indicates an incoming VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    INCOMING = 1,
+ 
+    /**
+     * Indicates an outgoing VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    OUTGOING = 2,
+ 
+    /**
+     * Indicates a dialing VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    DIALING =3,
+ 
+    /**
+     * Indicates an answered VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    ANSWERED = 4,
+ 
+    /**
+     * Indicates an active VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    ACTIVE = 5,
+ 
+    /**
+     * Indicates a holding VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    HOLDING = 6,
+ 
+    /**
+     * Indicates a disconnecting VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    DISCONNECTING = 7,
+ 
+    /**
+     * Indicates a disconnected VoIP call.
+     *
+     * @syscap SystemCapability.Telephony.StateRegistry
+     * @FaAndStageModel
+     * @since 26.0.1 dynamic&static
+     */
+    DISCONNECTED = 8
   }
 
   /**
