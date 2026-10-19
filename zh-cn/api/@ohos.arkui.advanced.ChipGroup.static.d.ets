@@ -1,4 +1,3 @@
-
 'use static';
 /*
 * Copyright (C) 2025 Huawei Device Co., Ltd.
@@ -16,6 +15,7 @@
 */
 
 /**
+ * ChipGroup组件提供操作块群组能力，支持单选或多选模式，可自定义样式、图标和间距，支持选中状态管理和事件回调。适用于文件分类、资源筛选、标签选择、内容分组等多种场景，帮助开发者快速实现选择功能，提供统一的视觉和交互体验。
  * @file
  * @kit ArkUI
  */
@@ -31,8 +31,8 @@ import { SymbolGlyphModifier } from './@ohos.arkui.modifier';
 import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
-* IconOptions定义图标的共通属性。
-*
+ * IconOptions定义图标的共通属性。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -64,10 +64,8 @@ export interface IconOptions {
 }
 
 /**
-* 后缀图标选项的类型。
-*
-* 继承自[IconOptions]{@link IconOptions}。
-*
+ * 后缀图标选项的类型。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -144,8 +142,8 @@ export interface SuffixImageIconOptions extends IconOptions {
 }
 
 /**
-* [ChipGroup]{@link ChipGroup}定义标签选项。
-*
+ * [ChipGroup]{@link ChipGroup}定义标签选项。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -165,12 +163,12 @@ export interface ChipItemLabelOptions {
 }
 
 /**
-* ChipGroupItemOptions定义每个Chip的非通用属性。
-*
-* > **说明：**
-* >
-* > 当传入`suffixIcon`参数时，`allowClose`不生效；未传入`suffixIcon`参数时，`allowClose`决定是否显示移除图标。
-*
+ * ChipGroupItemOptions定义每个Chip的非通用属性。
+ *
+ * > **说明：**
+ * >
+ * > 当传入`suffixIcon`参数时，`allowClose`不生效；未传入`suffixIcon`参数时，`allowClose`决定是否显示移除图标。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -329,14 +327,14 @@ export interface ChipGroupItemOptions {
 }
 
 /**
-* ChipItemStyle定义了Chip的共通属性。
-*
-* > **说明：**
-* >
-* > 1. 操作块的大小有两种类型，一种是ChipSize，提供NORMAL和SMALL两种尺寸供选择；另一种是SizeOptions。
-* >
-* > 2. backgroundColor、selectedBackgroundColor传入undefined时，显示默认背景颜色，传入非法值时，背景色透明。
-*
+ * ChipItemStyle定义了Chip的共通属性。
+ *
+ * > **说明：**
+ * >
+ * > 1. 操作块的大小有两种类型，一种是ChipSize，提供NORMAL和SMALL两种尺寸供选择；另一种是SizeOptions。
+ * >
+ * > 2. backgroundColor、selectedBackgroundColor传入undefined时，显示默认背景颜色，传入非法值时，背景色透明。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -416,8 +414,8 @@ export interface ChipItemStyle {
 }
 
 /**
-* ChipGroupSpaceOptions 定义了ChipGroup左右内边距，以及Chip与Chip之间的间距。
-*
+ * ChipGroupSpaceOptions 定义了ChipGroup左右内边距，以及Chip与Chip之间的间距。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -485,8 +483,8 @@ export interface ChipGroupSpaceOptions {
 }
 
 /**
-* 定义了尾部builder接口，针对背板大小及颜色设置限制。
-*
+ * 定义了尾部builder接口，针对背板大小及颜色设置限制。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -582,8 +580,8 @@ export interface IconItemOptions {
 }
 
 /**
-* ChipGroup的尾部图标选项类型。
-*
+ * ChipGroup的尾部图标选项类型。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -668,8 +666,8 @@ export interface SymbolItemOptions {
 }
 
 /**
-* ChipGroupPaddingOptions定义了ChipGroup的上下内边距，用于控制其整体高度。
-*
+ * ChipGroupPaddingOptions定义了ChipGroup的上下内边距，用于控制其整体高度。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -707,8 +705,8 @@ export interface ChipGroupPaddingOptions {
 }
 
 /**
-* Defines IconGroupSuffix.
-*
+ * 用于定义ChipGroup的后缀区域图标属性，在ChipGroup组件最右侧显示自定义内容的可配置suffix属性中使用。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -752,8 +750,8 @@ export declare struct IconGroupSuffix {
 }
 
 /**
-* 用于构造chipGroup尾部图标的构造器。
-*
+ * 用于构造chipGroup尾部图标的构造器。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -763,8 +761,8 @@ export declare struct IconGroupSuffix {
 export type ChipGroupSuffixBuilder = () => void;
 
 /**
-* ChipGroup组件提供操作块群组，用于文件或资源内容的分类等场景。
-*
+ * 创建ChipGroup组件。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

@@ -209,7 +209,7 @@ export declare interface ListItemGroupAttribute extends CommonMethod {
    * > - 必须同时给所在的List组件设置childrenMainSize属性才可以正常生效。
    *
    * @param { ChildrenMainSize | undefined } value - 该对象用来维护子组件在主轴方向的大小信息。<br/>取值undefined时，没有childrenMainSize。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -223,7 +223,7 @@ export declare interface ListItemGroupAttribute extends CommonMethod {
    * @returns { ListItemGroupAttribute } 返回ListItemGroupAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setListItemGroupOptions(options?: ListItemGroupOptions): this;
 

@@ -27,7 +27,9 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
+ * @since 26.0.1 static
  */
 declare namespace dataTransfer {
   /**
@@ -35,7 +37,9 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type ConnectionState = nearlinkConstant.ConnectionState;
 
@@ -43,13 +47,20 @@ declare namespace dataTransfer {
    * Registers a port channel. A port channel can be used to connect to a remote device only after being registered. If
    * the port channel is no longer needed after use, call [dataTransfer.destroyPort]{@link dataTransfer.destroyPort} to
    * destroy it.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { string } uuid - NearLink service UUID, which is a string of 36 characters. The value consists of 32
    *     hexadecimal digits and four hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates
    *     a 128-bit ID. The value cannot be set to a standard NearLink UUID.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100020 - The UUID is already registered.
    * @throws { BusinessError } 36100021 - Port exceeds the upper limit.
@@ -58,19 +69,28 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function createPort(uuid: string): void;
 
   /**
    * Destroys the port channel.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { string } uuid - NearLink service UUID, which is a string of 36 characters. The value consists of 32
    *     hexadecimal digits and four hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates
    *     a 128-bit ID. The value cannot be set to a standard NearLink UUID.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100022 - The UUID is not registered.
    * @throws { BusinessError } 36100043 - Invalid UUID.
@@ -78,18 +98,28 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [createPort]{@link dataTransfer.createPort(uuid: string): void} Registers a port channel.
    */
   function destroyPort(uuid: string): void;
 
   /**
    * Connects to a remote device. This API uses a promise to return the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ConnectionParams } params - Connection parameters of the port.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100043 - Invalid UUID.
@@ -97,7 +127,11 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [disconnect]{@link dataTransfer.disconnect(params: ConnectionParams): Promise<void>} Disconnects from the
+   *     remote device.
    */
   function connect(params: ConnectionParams): Promise<void>;
 
@@ -105,12 +139,19 @@ declare namespace dataTransfer {
    * Disconnects from the remote device. This method is called to disconnect from the remote device after it is
    * successfully connected using [dataTransfer.connect]{@link dataTransfer.connect}. This API uses a promise to return
    * the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ConnectionParams } params - Connection parameters of the port.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100043 - Invalid UUID.
@@ -118,7 +159,9 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function disconnect(params: ConnectionParams): Promise<void>;
 
@@ -127,42 +170,69 @@ declare namespace dataTransfer {
    * return the result.
    *
    * The app must have the **ohos.permission.ACCESS_NEARLINK** permission to receive this event.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<ConnectionResult> } callback - Callback used to return the negotiation result of port connection
    *     parameters with a remote device.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offConnectionStateChanged]{@link dataTransfer.offConnectionStateChanged(callback?:
+   *     Callback<ConnectionResult>): void} Unsubscribes from the connection state change event of the port channel.
    */
   function onConnectionStateChanged(callback: Callback<ConnectionResult>): void;
 
   /**
    * Unsubscribes from the connection state change event of the port channel. This API uses an asynchronous callback to
    * return the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<ConnectionResult> } [callback] - Callback used to return the result of port connection parameter
    *     negotiation with a remote device.
    *     <br>If this parameter is set, the current callback is unregistered. If this parameter is not specified, all
    *     callbacks corresponding to the event are unregistered.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onConnectionStateChanged]{@link dataTransfer.onConnectionStateChanged(callback: Callback<ConnectionResult>):
+   *     void} Subscribes to the connection state change event of the port channel.
    */
   function offConnectionStateChanged(callback?: Callback<ConnectionResult>): void;
 
   /**
    * Sends data to a remote device using the device address and UUID. This API uses a promise to return the result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { DataParams } params - Parameters for sending data, including the remote device address, service UUID, and
    *     data packet to send.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100023 - Data transmission congested.
    * @throws { BusinessError } 36100041 - Invalid address.
@@ -171,7 +241,9 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function writeData(params: DataParams): Promise<void>;
 
@@ -179,41 +251,68 @@ declare namespace dataTransfer {
    * Subscribes to the port channel data receiving event. This API uses an asynchronous callback to return the result.
    *
    * The app must have the **ohos.permission.ACCESS_NEARLINK** permission to receive this event.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<DataParams> } callback - Callback used to return the parameters for data received by the port
    *     channel.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offReadData]{@link dataTransfer.offReadData(callback?: Callback<DataParams>): void} Unsubscribes from the
+   *     data receiving event of the port channel.
    */
   function onReadData(callback: Callback<DataParams>): void;
 
   /**
    * Unsubscribes from the port channel data receiving event. This API uses an asynchronous callback to return the
    * result.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @param { Callback<DataParams> } [callback] - Callback used to return the parameters for data received by the port
    *     channel.
    *     <br>If this parameter is set, the current callback is unregistered. If this parameter is not specified, all
    *     callbacks corresponding to the event are unregistered.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onReadData]{@link dataTransfer.onReadData(callback: Callback<DataParams>): void} Subscribes to the data
+   *     receiving event of the port channel.
    */
   function offReadData(callback?: Callback<DataParams>): void;
 
   /**
    * Obtains the port channel connection state with a remote device.
+   * Before calling this API, you may call
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
+   * supports NearLink.
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ConnectionStateParams } params - Connection parameters of the port.
    * @returns { ConnectionState } NearLink port channel connection state with a remote device.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @throws { BusinessError } 36100043 - Invalid UUID in connection parameters.
@@ -221,7 +320,9 @@ declare namespace dataTransfer {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function getConnectionState(params: ConnectionStateParams): ConnectionState;
 
@@ -230,7 +331,9 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ConnectionParams {
     /**
@@ -238,7 +341,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -248,7 +353,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     uuid: string;
     /**
@@ -256,9 +363,20 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     transferMode?: TransferMode;
+    /**
+     * NearLink radio frame type. The default value is **FRAME_TYPE_1**.
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -266,7 +384,9 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface DataParams {
     /**
@@ -274,7 +394,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -284,7 +406,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     uuid: string;
     /**
@@ -295,7 +419,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     data: ArrayBuffer;
   }
@@ -305,7 +431,9 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ConnectionResult {
     /**
@@ -313,7 +441,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -323,15 +453,20 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     uuid: string;
     /**
      * Negotiated packet size of data to be sent and received, in bytes. The value range is [0, 65535].
+     * The value should be an integer.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     mtu: int;
     /**
@@ -339,7 +474,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     state: ConnectionState;
   }
@@ -349,7 +486,9 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ConnectionStateParams {
     /**
@@ -357,7 +496,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -367,7 +508,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     uuid: string;
   }
@@ -377,7 +520,9 @@ declare namespace dataTransfer {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum TransferMode {
     /**
@@ -386,7 +531,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     BASIC = 0,
     /**
@@ -395,7 +542,9 @@ declare namespace dataTransfer {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     RELIABLE = 1
   }

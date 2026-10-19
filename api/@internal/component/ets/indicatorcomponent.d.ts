@@ -19,7 +19,10 @@
  */
 
 /**
- * Provides methods for switching components.
+ * Controller of the **Indicator** component. You can bind this object to the **Indicator** component to control page
+ * turning. By passing the same **IndicatorComponentController** instance to the constructor of the
+ * **IndicatorComponent** and the **indicator** attribute of the **Swiper** component, you can bind the **Indicator**
+ * and **Swiper** components for linkage.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -30,7 +33,7 @@
  */
 declare class IndicatorComponentController {
   /**
-   * constructor.
+   * A constructor used to create an **IndicatorComponentController** object.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -42,7 +45,9 @@ declare class IndicatorComponentController {
   constructor();
 
   /**
-   * Called when the next child component is displayed.
+   * Moves to the next indicator. When bound to a **Swiper** component, it also controls the **Swiper** to switch to the
+   * next page. This is applicable to scenarios where the indicator switching is controlled through buttons or other
+   * interaction methods.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -54,7 +59,9 @@ declare class IndicatorComponentController {
   showNext():void;
 
   /**
-   * Called when the previous subcomponent is displayed.
+   * Moves to the previous indicator. When bound to a **Swiper** component, it also controls the **Swiper** to switch to
+   * the previous page. This is applicable to scenarios where the indicator switching is controlled through buttons or
+   * other interaction methods.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -65,12 +72,15 @@ declare class IndicatorComponentController {
    */
   showPrevious():void;
 
-   /**
-   * Controlling IndicatorComponent to change to the specified subcomponent.
+  /**
+   * Navigates to the specified indicator. Before using this method, ensure that the controller has been bound to the
+   * **Indicator** component. This is applicable to scenarios where you need to jump to a specified indicator.
    *
-   * @param { number } index - The index of item to be redirected.
-   * @param { boolean } [useAnimation] - If true, swipe to index item with animation. If false, swipe to index item without animation. 
-   *      The default value is false.
+   * @param { number } index - Index value of the specified indicator.<br/>**Note:** <br/>If the set value is less than
+   *     0 or greater than the maximum indicator index, 0 is used.
+   * @param { boolean } [useAnimation] - Whether to use an animation for when the target index is reached. The value
+   *     **true** means to use an animation, and **false** means the opposite.
+   *     <br>Default value: **false**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -84,7 +94,6 @@ declare class IndicatorComponentController {
 /**
  * Provides an interface for indicator.
  *
- * @interface IndicatorComponentInterface
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -93,7 +102,7 @@ declare class IndicatorComponentController {
  * @since 15 dynamic
  */
 interface IndicatorComponentInterface {
-   
+
   /**
    * Called when a indicator is set.
    *
@@ -112,7 +121,6 @@ interface IndicatorComponentInterface {
 /**
  * Defines the IndicatorComponent attribute functions.
  *
- * @extends CommonMethod<IndicatorComponentAttribute>
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -121,7 +129,7 @@ interface IndicatorComponentInterface {
  * @since 15 dynamic
  */
 declare class IndicatorComponentAttribute extends CommonMethod<IndicatorComponentAttribute> {
- /**
+  /**
    * Called when the index value of the displayed subcomponent is set in the container.
    *
    * @param { number } index

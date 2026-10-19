@@ -54,6 +54,19 @@ declare namespace a2dp {
   function createA2dpSrcProfile(): A2dpSourceProfile;
 
   /**
+   * Create the instance of a2dp sink profile.
+   *
+   * @returns { A2dpSinkProfile } Returns the instance of profile.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function createA2dpSnkProfile(): A2dpSinkProfile;
+
+  /**
    * Manager a2dp source profile.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -308,6 +321,7 @@ declare namespace a2dp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     getCurrentFullCodecInfo(deviceId: string): CodecInfoList[];
 
@@ -420,6 +434,90 @@ declare namespace a2dp {
   }
 
   /**
+   * Manage a2dp sink profile.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface A2dpSinkProfile extends BaseProfile {
+    /**
+     * Initiate an a2dp sink connection to a remote device.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
+     *     Detailed error messages can be used to assist in locating the problem.
+     * @throws { BusinessError } 2904000 - The a2dp sink service is not running.
+     * @throws { BusinessError } 2904002 - The connection is rejected due to the connection policy.
+     *      For example connection limit restrictions.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    connect(deviceId: string): void;
+
+    /**
+     * Disconnect the a2dp sink connection with the remote device.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
+     *     Detailed error messages can be used to assist in locating the problem.
+     * @throws { BusinessError } 2904000 - The a2dp sink service is not running.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    disconnect(deviceId: string): void;
+
+    /**
+     * Obtain the playing state of device.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @returns { PlayingState } Returns the playing state.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
+     *     Detailed error messages can be used to assist in locating the problem.
+     * @throws { BusinessError } 2904001 - The a2dp sink not connected.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getPlayingState(deviceId: string): PlayingState;
+  }
+
+  /**
    * Describes the codec information.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -464,6 +562,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecBitRate?: CodecBitRate;
     /**
@@ -471,6 +570,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecFrameLength?: CodecFrameLength;
   }
@@ -480,6 +580,7 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 19 dynamic
+   * @since 26.0.1 static
    */
   interface CodecInfoList {
     /**
@@ -487,6 +588,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecType: CodecType;
     /**
@@ -494,6 +596,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecBitsPerSampleArray: CodecBitsPerSample[];
     /**
@@ -501,6 +604,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecChannelModeArray: CodecChannelMode[];
     /**
@@ -508,6 +612,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecSampleRateArray: CodecSampleRate[];
     /**
@@ -515,6 +620,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecBitRateArray: CodecBitRate[];
     /**
@@ -522,6 +628,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     codecFrameLengthArray: CodecFrameLength[];
   }
@@ -757,6 +864,7 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 19 dynamic
+   * @since 26.0.1 static
    */
   enum CodecBitRate {
     /**
@@ -764,6 +872,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_96000 = 0,
     /**
@@ -771,6 +880,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_128000 = 1,
     /**
@@ -778,6 +888,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_192000 = 2,
     /**
@@ -785,6 +896,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_256000 = 3,
     /**
@@ -792,6 +904,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_320000 = 4,
     /**
@@ -799,6 +912,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_480000 = 5,
     /**
@@ -806,6 +920,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_640000 = 6,
     /**
@@ -813,6 +928,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_960000 = 7,
     /**
@@ -820,6 +936,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_ABR = 8,
     /**
@@ -827,6 +944,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 21 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_1500000 = 9,
     /**
@@ -834,6 +952,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 21 dynamic
+     * @since 26.0.1 static
      */
     CODEC_BIT_RATE_2300000 = 10
   }
@@ -843,6 +962,7 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 19 dynamic
+   * @since 26.0.1 static
    */
   enum CodecFrameLength {
     /**
@@ -850,6 +970,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_FRAME_LENGTH_5MS = 0,
     /**
@@ -857,6 +978,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
+     * @since 26.0.1 static
      */
     CODEC_FRAME_LENGTH_10MS = 1
   }

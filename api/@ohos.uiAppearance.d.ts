@@ -22,9 +22,10 @@ import type { AsyncCallback } from './@ohos.base';
 
 /**
  * This module provides basic capabilities for obtaining system appearance configurations, including color mode (dark/
- * light) settings, font size scale factors, and font weight scale factors.
- *
- * > **NOTE**
+ * light) settings, font size scale factors, and font weight scale factors. It is applicable to scenarios where the
+ * application UI style needs to be dynamically adjusted based on the system appearance configuration (such as dark/
+ * light mode switching), as well as adapting to the system font size and font weight scale settings. This helps
+ * applications maintain consistency with the system appearance and improves user experience.
  *
  * @syscap SystemCapability.ArkUI.UiAppearance
  * @systemapi hide this for inner system use [since 10 - 19]
@@ -33,10 +34,13 @@ import type { AsyncCallback } from './@ohos.base';
  * @since 10 dynamic
  */
 declare namespace uiAppearance {
-
   /**
-   * Enumerates the color modes.
+   * Enumerates the color modes, used to configure the dark or light mode of the system.
    *
+   * | Name| Value| Description|
+   * | -- | -- | -- |
+   * | ALWAYS_DARK | 0 | The system is always in dark mode.|
+   * | ALWAYS_LIGHT | 1 | The system is always in light mode.|
    *
    * @syscap SystemCapability.ArkUI.UiAppearance
    * @systemapi hide this for inner system use [since 10 - 19]
@@ -45,7 +49,6 @@ declare namespace uiAppearance {
    * @since 10 dynamic
    */
   enum DarkMode {
-
     /**
      * Always display with dark mode.
      *
@@ -110,12 +113,14 @@ declare namespace uiAppearance {
   function setDarkMode(mode: DarkMode): Promise<void>;
 
   /**
-   * Obtains the current system dark mode configuration.
+   * Obtains the current system color mode configuration. This API is applicable to scenarios where the application UI
+   * theme needs to be dynamically adapted based on the system appearance mode, such as implementing automatic switching
+   * between dark and light theme styles within the application.
    *
    * <!--Del-->
    *
    * > **NOTE**
-   *
+   * >
    * > This API is a system API in API version 19 and earlier. Using this API requires the
    * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
    * > permission.
@@ -156,12 +161,15 @@ declare namespace uiAppearance {
   function setFontScale(fontScale: number): Promise<void>;
 
   /**
-   * Obtains the current font size scale factor.
+   * Obtains the current font size scale factor. This scale is the ratio of the font size configured by the user in
+   * system settings to the default font size. For the value range, refer to the system font size settings. You can
+   * adjust the font size within the application based on this scale factor to accommodate the user's font size
+   * preferences.
    *
    * <!--Del-->
    *
    * > **NOTE**
-   *
+   * >
    * > This API is a system API in API version 19 and earlier. Using this API requires the
    * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
    * > permission.
@@ -200,12 +208,15 @@ declare namespace uiAppearance {
   function setFontWeightScale(fontWeightScale: number): Promise<void>;
 
   /**
-   * Obtains the current font weight scale factor.
+   * Obtains the current font weight scale factor. This scale is the ratio of the font weight configured by the user in
+   * system settings to the default font weight. For the value range, refer to the system font weight settings. You can
+   * adjust the font weight within the application based on this scale factor to accommodate the user's font weight
+   * preferences.
    *
    * <!--Del-->
    *
    * > **NOTE**
-   *
+   * >
    * > This API is a system API in API version 19 and earlier. Using this API requires the
    * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
    * > permission.
@@ -225,5 +236,4 @@ declare namespace uiAppearance {
    */
   function getFontWeightScale(): number;
 }
-
 export default uiAppearance;

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Internationalization
  * @kit LocalizationKit
  */
 
@@ -238,8 +238,8 @@ declare namespace i18n {
 
     /**
      * Obtains the current system language. To listen for system language changes, enable listening for
-     * [COMMON_EVENT_LOCALE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
-     * . For details, see
+     * [COMMON_EVENT_LOCALE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}.
+     * For details, see
      * [System Language and Region](docroot://internationalization/i18n-system-language-region.md#how-to-develop).
      *
      * @returns { string } Language ID.
@@ -273,8 +273,8 @@ declare namespace i18n {
 
     /**
      * Obtains the current system country/region. To listen for system region changes, enable listening for
-     * [COMMON_EVENT_LOCALE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
-     * . For details, see
+     * [COMMON_EVENT_LOCALE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}.
+     * For details, see
      * [System Language and Region](docroot://internationalization/i18n-system-language-region.md#how-to-develop).
      *
      * @returns { string } Country/region ID.
@@ -320,7 +320,7 @@ declare namespace i18n {
 
     /**
      * Obtains the current system locale. To listen for system locale changes, enable listening for
-     * [COMMON_EVENT_LOCALE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [COMMON_EVENT_LOCALE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * . For details, see
      * [System Language and Region](docroot://internationalization/i18n-system-language-region.md#how-to-develop).
      *
@@ -352,7 +352,7 @@ declare namespace i18n {
 
     /**
      * Checks whether the 24-hour clock is used. To listen for system time format changes, enable listening for
-     * [COMMON_EVENT_TIME_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_time_changed)
+     * [COMMON_EVENT_TIME_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_TIME_CHANGED}
      * . For details, see [User Preference](docroot://internationalization/i18n-user-preferences.md#how-to-develop).
      *
      * @returns { boolean } Whether the 24-hour clock is used. The value **true** indicates that the 24-hour clock is
@@ -1366,14 +1366,13 @@ declare namespace i18n {
      * @param { int } year - Year to set.
      * @param { int } month - Month to set. Note: The month starts from **0**. For example, **0** indicates January.
      * @param { int } date - Day to set.
-     * @param { int } hour - Hour to set. The default value is the current system time.
-     * @param { int } minute - Minute to set. The default value is the current system time.
-     * @param { int } second - Second to set. The default value is the current system time.
+     * @param { int } [hour] - Hour to set. The default value is the current system time.
+     * @param { int } [minute] - Minute to set. The default value is the current system time.
+     * @param { int } [second] - Second to set. The default value is the current system time.
      * @syscap SystemCapability.Global.I18n
      * @crossplatform [since 10]
      * @atomicservice [since 12]
      * @since 8 dynamic
-     * @since 23 static
      */
     set(year: int, month: int, date:int, hour?: int, minute?: int, second?: int): void;
 
@@ -1754,6 +1753,41 @@ declare namespace i18n {
   export function getInstance(locale?:string): IndexUtil;
 
   /**
+   * Enumerates bilingual index modes, which determine the combination of local index and English index.
+   *
+   * @syscap SystemCapability.Global.I18n
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  export enum BilingualIndexMode {
+    /**
+     * Full list: local index + English index.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    FULL = 0,
+    /**
+     * Compressed English list: local index + English index compressed to 'Z'.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    COMPRESSED_EN = 1,
+    /**
+     * Compressed local list: local index first letter + English index.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    COMPRESSED_LOCAL = 2
+  }
+
+  /**
    * Provides index management capabilities, such as obtaining the locale index list and text index values.
    *
    * @syscap SystemCapability.Global.I18n
@@ -1800,6 +1834,42 @@ declare namespace i18n {
      * @since 23 static
      */
     getIndex(text: string): string;
+
+    /**
+     * Checks whether the specified locale supports bilingual index.
+     *
+     * @param { Intl.Locale } locale - Locale to check, in BCP 47 format (e.g., "zh-CN").
+     * @returns { boolean } true if bilingual index is supported, false otherwise.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @since 26.2.0 dynamic
+     */
+    static isBilingualIndexSupported(locale: Intl.Locale): boolean;
+
+    /**
+     * Obtains the bilingual index list of the current locale.
+     *
+     * @param { BilingualIndexMode } [mode] - Bilingual index mode, defaults to FULL.
+     * @returns { Array<string> } Bilingual index list. The first element is '#', followed by local index list and
+     *     English index list.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    getBilingualIndexList(mode?: BilingualIndexMode): Array<string>;
+
+    /**
+     * Obtains the bilingual index of the text object.
+     *
+     * @param { string } text - Input text.
+     * @returns { string } Bilingual index of the text object. Returns '#' if no proper index is found or text is empty.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    getBilingualIndex(text: string): string;
   }
 
   /**
@@ -2883,7 +2953,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     latitude: double;
 
@@ -2893,7 +2963,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     longitude: double;
 
@@ -4576,6 +4646,40 @@ declare namespace i18n {
      * @since 26.0.0 dynamic
      */
     second?: int;
+  }
+
+  /**
+   * Obtains the **currency** object of the specified locale environment.
+   *
+   * @param { Intl.Locale } locale - **Locale Object.** Obtains region-related parameters.
+   * @returns { Currency } **Currency** object.
+   * @syscap SystemCapability.Global.I18n
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  export function getCurrency(locale: Intl.Locale): Currency;
+
+  /**
+   * Provides currency management capabilities, such as obtaining ISO 4217 currency codes.
+   *
+   * @syscap SystemCapability.Global.I18n
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  export class Currency {
+    /**
+     * Obtains currency ISO 4217 code of this **Currency** object.
+     *
+     * @returns { string } ISO 4217 three-letter currency code. For example, the default currency of the US is USD.
+     *                     The default currency of China is CNY.
+     * @syscap SystemCapability.Global.I18n
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    getISO4217Code(): string;
   }
 }
 export default i18n;

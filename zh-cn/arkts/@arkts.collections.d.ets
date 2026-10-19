@@ -23,44 +23,22 @@ import lang from './@arkts.lang'
 /*** endif */
 
 /**
- * 内建Array类型。
- *
- * @syscap SystemCapability.Utils.Lang
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamiconly
- */
-type BuiltinArray<T> = Array<T>;
-
-/**
- * 内建Map类型。
- *
- * @syscap SystemCapability.Utils.Lang
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamiconly
- */
-type BuiltinMap<K, V> = Map<K, V>;
-
-/**
  * 本模块提供的ArkTS容器集，可以用于并发场景下的高性能数据传递。功能与JavaScript内建的对应容器类似，但ArkTS容器实例无法通过`"."`或者`"[]"`添加或更新属性。
  * ArkTS容器在多个并发实例间传递时，其默认行为是引用传递，支持多个并发实例可以同时操作同一个容器实例。另外，也支持拷贝传递，即每个并发实例持有一个ArkTS容器实例。
  * ArkTS容器并不是线程安全的，内部使用了fail-fast（快速失败）机制：当检测多个并发实例同时对容器进行结构性改变时，会触发异常。因此，在多线程读写容器时，容器使用方需要使用ArkTS提供的异步锁机制保证ArkTS容器的安全访问。
- * 当前ArkTS容器集主要包含以下几种容器：[Array]{@link ./arkts/@arkts.collections:collections},
- * [Map]{@link ./arkts/@arkts.collections:collections}, [Set]{@link ./arkts/@arkts.collections:collections}, TypedArray
- * ([Int8Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint8Array]{@link ./arkts/@arkts.collections:collections},
- * [Int16Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint16Array]{@link ./arkts/@arkts.collections:collections},
- * [Int32Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint32Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint8ClampedArray]{@link ./arkts/@arkts.collections:collections} and
- * [Float32Array]{@link ./arkts/@arkts.collections:collections}),
- * [ArrayBuffer]{@link ./arkts/@arkts.collections:collections},
- * [BitVector]{@link ./arkts/@arkts.collections:collections}, and
- * [ConcatArray]{@link ./arkts/@arkts.collections:collections}.
+ * 当前ArkTS容器集主要包含以下几种容器：[Array]{@link collections.Array},
+ * [Map]{@link collections.Map}, [Set]{@link collections.Set}, TypedArray
+ * ([Int8Array]{@link collections.Int8Array},
+ * [Uint8Array]{@link collections.Uint8Array},
+ * [Int16Array]{@link collections.Int16Array},
+ * [Uint16Array]{@link collections.Uint16Array},
+ * [Int32Array]{@link collections.Int32Array},
+ * [Uint32Array]{@link collections.Uint32Array},
+ * [Uint8ClampedArray]{@link collections.Uint8ClampedArray} and
+ * [Float32Array]{@link collections.Float32Array}),
+ * [ArrayBuffer]{@link collections.ArrayBuffer},
+ * [BitVector]{@link collections.BitVector}, and
+ * [ConcatArray]{@link collections.ConcatArray}.
  *
  * > **说明**
  * >
@@ -181,15 +159,15 @@ declare namespace collections {
     (value: ElementType, index: number, array: ArrayType) => boolean;
 
   /**
-   * ArkTS Array判定函数类型，被Array类的'retainAll'接口使用，用来判断数组元素是否满足测试条件。
+   * ArkTS Array断言函数类型，被Array类的'retainAll'接口使用，用来判断数组元素是否满足测试条件。
    *
    * @param { ElementType } value - 当前正在处理的元素。
-   * @returns { boolean } 判定函数的结果，若当前元素满足判定函数则为真，否则为假。
+   * @returns { boolean } 断言函数的结果，若当前元素满足断言函数则为真，否则为假。
    * @syscap SystemCapability.Utils.Lang
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   type ArrayElementPredicateFn<ElementType> = (value: ElementType) => boolean;
 
@@ -695,13 +673,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     containsAll(elements: Array<T>): boolean;
     /**
-     * 检查指定内建Array中的所有元素是否均包含在此ArkTS Array中。
+     * 检查指定JavaScript内建Array中的所有元素是否均包含在此ArkTS Array中。
      *
-     * @param { BuiltinArray<T> } elements - 要检查的内建Array。
+     * @param { readonly T[] } elements - 要检查的JavaScript内建Array。
      * @returns { boolean } 检查结果。如果指定的所有元素均包含在此Array中，则返回**true**；
      *     否则返回**false**。
      * @throws { BusinessError } 10200011 - The containsAll method cannot be bound.
@@ -710,9 +688,9 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    containsAll(elements: BuiltinArray<T>): boolean;
+    containsAll(elements: readonly T[]): boolean;
     /**
      * 仅保留此ArkTS Array中包含在指定ArkTS Array中的元素。
      *
@@ -725,13 +703,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     retainAll(elements: Array<T>): boolean;
     /**
-     * 仅保留此ArkTS Array中包含在指定内建Array中的元素。
+     * 仅保留此ArkTS Array中包含在指定JavaScript内建Array中的元素。
      *
-     * @param { BuiltinArray<T> } elements - 允许保留元素的内建Array。
+     * @param { readonly T[] } elements - 允许保留元素的JavaScript内建Array。
      * @returns { boolean } 操作结果。如果从此Array中移除了任意元素，则返回**true**；
      *     否则返回**false**。
      * @throws { BusinessError } 10200011 - The retainAll method cannot be bound.
@@ -740,13 +718,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    retainAll(elements: BuiltinArray<T>): boolean;
+    retainAll(elements: readonly T[]): boolean;
     /**
-     * 仅保留此ArkTS Array中满足指定判定函数的元素。
+     * 仅保留此ArkTS Array中满足指定断言函数的元素。
      *
-     * @param { ArrayElementPredicateFn<T> } predicate - 用于测试每个元素的判定函数。
+     * @param { ArrayElementPredicateFn<T> } predicate - 用于测试每个元素的断言函数。
      * @returns { boolean } 操作结果。如果从此Array中移除了任意元素，则返回**true**；
      *     否则返回**false**。
      * @throws { BusinessError } 10200011 - The retainAll method cannot be bound.
@@ -755,7 +733,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     retainAll(predicate: ArrayElementPredicateFn<T>): boolean;
     /**
@@ -848,9 +826,7 @@ declare namespace collections {
      * @param { number } start - 开始索引。如果`-array.length <= start < 0`，
      *     则从`start + array.length`开始删除。如果`start < -array.length`，则从0开始删除。
      * @returns { Array<T> } 返回一个新的包含被删除元素的**Array**对象。如果没有元素被删除，
-     *     返回一个空的**Array**对象。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     返回一个空的**Array**对象。
      * @throws { BusinessError } 10200011 - The splice method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -868,9 +844,7 @@ declare namespace collections {
      * @param { T[] } items - 从start位置开始插入的新元素。
      *     如果未传入，则仅删除Array内的元素。
      * @returns { Array<T> } 返回一个新的包含被删除元素的**Array**对象。如果没有元素被删除，
-     *     返回一个空的**Array**对象。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     返回一个空的**Array**对象。
      * @throws { BusinessError } 10200011 - The splice method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -884,10 +858,7 @@ declare namespace collections {
      *
      * @param { Object|undefined|null } value - 需要检查的值。
      * @returns { boolean } 检查结果。如果传入的参数是ArkTS Array，则返回**true**；
-     *     否则返回**false**。可能的原因：
-     *     1. 必填参数未指定。
-     *     2. 参数类型不正确。
-     *     3. 参数校验失败。
+     *     否则返回**false**。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -899,10 +870,7 @@ declare namespace collections {
      *
      * @param { T[] } items - 用于创建数组的元素集合，参数个数可以是0个、1个
      *     或多个。
-     * @returns { Array<T> } 新创建的ArkTS Array实例。可能的原因：
-     *     1. 必填参数未指定。
-     *     2. 参数类型不正确。
-     *     3. 参数校验失败。
+     * @returns { Array<T> } 新创建的ArkTS Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -918,10 +886,7 @@ declare namespace collections {
      *     取值应为整数，当输入浮点数时会向下取整。拷贝过程中包含start位置下标所在的元素。
      * @param { number } [end] - 源终止位置下标，如果`end < 0`，则会从`end + array.length`位置终止。
      *     默认为ArkTS Array的长度。取值应为整数，当输入浮点数时会向下取整。拷贝过程中不包含end位置下标所在的元素。
-     * @returns { Array<T> } 修改后的ArkTS Array。可能的原因：
-     *     1. 必填参数未指定。
-     *     2. 参数类型不正确。
-     *     3. 参数校验失败。
+     * @returns { Array<T> } 修改后的ArkTS Array。
      * @throws { BusinessError } 10200011 - The copyWithin method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -975,7 +940,7 @@ declare namespace collections {
     /**
      * 测试ArkTS Array是否存在满足指定条件的元素。
      *
-     * @param { ArrayPredicateFn<T, Array<T> } predicate - 用于测试的断言函数。
+     * @param { ArrayPredicateFn<T, Array<T>> } predicate - 用于测试的断言函数。
      * @returns { boolean } 检查结果。如果存在满足指定条件的元素，则返回**true**；
      *     否则返回**false**。
      * @throws { BusinessError } 10200011 - The some method cannot be bound.
@@ -1013,15 +978,13 @@ declare namespace collections {
     toLocaleString(): string;
     /**
      * 此API与
-     * [reduceRight]{@link collections.Array#reduceRight(callbackFn: ArrayReduceCallback<T, T, Array<T>>)}方法类似，
+     * [reduceRight]{@link collections.Array.reduceRight(callbackFn: ArrayReduceCallback<T, T, Array<T>>)}方法类似，
      * 但它接受一个初始值作为第二个参数，用于在Array从右到左顺序遍历开始前初始化累加器。
      *
      * @param { ArrayReduceCallback<U, T, Array<T>> } callbackFn - 一个接受四个参数的函数，用于对
      *     每个元素执行操作，并将结果作为累加值传递给下一个元素。
      * @param { U } initialValue - 用于初始化累加器的值。
-     * @returns { U } 回调函数执行后的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 回调函数执行后的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -1036,9 +999,7 @@ declare namespace collections {
      *
      * @param { ArrayReduceCallback<T, T, Array<T>> } callbackFn - 一个接受四个参数的函数，用于对
      *     每个元素执行操作，并将结果作为累加值传递给下一个元素。
-     * @returns { T } 回调函数执行后的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { T } 回调函数执行后的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -1173,7 +1134,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     containsValue(value: V): boolean;
     /**
@@ -1206,7 +1167,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remove(key: K): V | undefined;
     /**
@@ -1265,7 +1226,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     put(key: K, value: V): V | undefined;
     /**
@@ -1278,22 +1239,22 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     putAll(from: Map<K, V>): void;
     /**
-     * 使用指定内建Map中的键值对更新该Map。
+     * 使用指定JavaScript内建Map中的键值对更新该Map。
      *
-     * @param { BuiltinMap<K, V> } from - 提供键值对的内建Map。
+     * @param { ReadonlyMap<K, V> } from - 提供键值对的JavaScript内建Map。
      * @throws { BusinessError } 10200011 - The putAll method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification exception
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    putAll(from: BuiltinMap<K, V>): void;
+    putAll(from: ReadonlyMap<K, V>): void;
     /**
      * 向该Map添加或更新一个指定的键值对。
      *
@@ -1473,14 +1434,14 @@ declare namespace collections {
     has(value: T): boolean;
   }
   /**
-   * ArkTS TypedArray（[Int8Array]{@link ./arkts/@arkts.collections:collections}、
-   * [Uint8Array]{@link ./arkts/@arkts.collections:collections}、
-   * [Int16Array]{@link ./arkts/@arkts.collections:collections}、
-   * [Uint16Array]{@link ./arkts/@arkts.collections:collections}、
-   * [Int32Array]{@link ./arkts/@arkts.collections:collections}、
-   * [Uint32Array]{@link ./arkts/@arkts.collections:collections}、
-   * [Uint8ClampedArray]{@link ./arkts/@arkts.collections:collections}、
-   * [Float32Array]{@link ./arkts/@arkts.collections:collections}）的底层数据结构。
+   * ArkTS TypedArray（[Int8Array]{@link collections.Int8Array}、
+   * [Uint8Array]{@link collections.Uint8Array}、
+   * [Int16Array]{@link collections.Int16Array}、
+   * [Uint16Array]{@link collections.Uint16Array}、
+   * [Int32Array]{@link collections.Int32Array}、
+   * [Uint32Array]{@link collections.Uint32Array}、
+   * [Uint8ClampedArray]{@link collections.Uint8ClampedArray}、
+   * [Float32Array]{@link collections.Float32Array}）的底层数据结构。
    *
    * > **说明**
    * >
@@ -1534,7 +1495,7 @@ declare namespace collections {
   }
 
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -2127,7 +2088,7 @@ declare namespace collections {
  }
 
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -2704,7 +2665,7 @@ declare namespace collections {
  }
 
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -3243,9 +3204,7 @@ declare namespace collections {
      * @param { U } initialValue - 作为回调函数首次调用的第一个参数的值。
      *     <br>如果未提供初始值，则使用Uint8Array的最后一个元素，
      *     <br>回调将从倒数第二个元素开始调用。
-     * @returns { U } 由最后一次调用归约函数返回的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 由最后一次调用归约函数返回的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3259,9 +3218,7 @@ declare namespace collections {
      *
      * @param { TypedArrayReduceCallback<number, number, Uint8Array> } callbackFn - 对Uint8Array中的每个元素
      *     调用的函数。
-     * @returns { number } 由最后一次调用归约函数返回的最终结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 由最后一次调用归约函数返回的最终结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3298,8 +3255,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Uint8Array对象。
      *
      * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
-     * @returns { Uint8Array } 新的ArkTS Uint8Array实例。可能的原因：1.必填参数未指定；
-     *     <br>2.参数类型不正确；3.参数校验失败。
+     * @returns { Uint8Array } 新的ArkTS Uint8Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -3309,7 +3265,7 @@ declare namespace collections {
  }
 
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -3908,7 +3864,7 @@ declare namespace collections {
     static of(...items: number[]): Int16Array;
  }
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -4493,7 +4449,7 @@ declare namespace collections {
     static of(...items: number[]): Uint16Array;
  }
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -5078,7 +5034,7 @@ declare namespace collections {
     static of(...items: number[]): Int32Array;
  }
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明**
    * >
@@ -5600,9 +5556,7 @@ declare namespace collections {
      * @param { U } initialValue - 作为回调函数首次调用时第一个参数使用的值。
      *     <br>若未提供初始值，则使用Uint32Array的最后一个元素作为初始值，
      *     <br>且回调函数将从倒数第二个元素开始调用。
-     * @returns { U } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -5615,9 +5569,7 @@ declare namespace collections {
      * 反向遍历ArkTS Uint32Array，对每个元素执行归约函数，并返回最终的归约结果。
      *
      * @param { TypedArrayReduceCallback<number, number, Uint32Array> } callbackFn - 对Uint32Array中的每个元素调用的函数。
-     * @returns { number } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -5655,8 +5607,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Uint32Array对象。
      *
      * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
-     * @returns { Uint32Array } 新的ArkTS Uint32Array实例。可能的原因：1.必填参数未指定；
-     *     <br>2.参数类型不正确；3.参数校验失败。
+     * @returns { Uint32Array } 新的ArkTS Uint32Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -5666,7 +5617,7 @@ declare namespace collections {
  }
 
   /**
-   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}实现。
+   * 一种线性数据结构，底层基于[ArkTS ArrayBuffer]{@link collections.ArrayBuffer}实现。
    *
    * > **说明：**
    * >
@@ -6168,9 +6119,7 @@ declare namespace collections {
      * @param { U } initialValue - 作为回调函数首次调用第一个参数的值。
      *     <br>如果未提供初始值，则使用Float32Array的最后一个元素，
      *     <br>并且回调函数从倒数第二个元素开始调用。
-     * @returns { U } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { U } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6183,9 +6132,7 @@ declare namespace collections {
      * 反向遍历ArkTS Float32Array，对每个元素执行归约函数，并返回最终的归约结果。
      *
      * @param { TypedArrayReduceCallback<number, number, Float32Array> } callbackFn - 对Float32Array中的每个元素调用的函数。
-     * @returns { number } 由归约函数最后一次调用返回的结果。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 由归约函数最后一次调用返回的结果。
      * @throws { BusinessError } 10200011 - The reduceRight method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6222,8 +6169,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Float32Array对象。
      *
      * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
-     * @returns { Float32Array } 新的ArkTS Float32Array实例。可能的原因：1.必填参数未指定；
-     *     <br>2.参数类型不正确；3.参数校验失败。
+     * @returns { Float32Array } 新的ArkTS Float32Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -6270,9 +6216,7 @@ declare namespace collections {
      * 在 BitVector 尾部插入元素。
      *
      * @param { number } element - 待插入的元素，**0** 表示 bit 值 0，其余值表示 bit 值 1。
-     * @returns { boolean } 操作结果。插入成功返回 **true**，失败返回 **false**。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { boolean } 操作结果。插入成功返回 **true**，失败返回 **false**。
      * @throws { BusinessError } 10200011 - The push method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6318,9 +6262,7 @@ declare namespace collections {
      * @param { number } fromIndex - 范围起始索引，包含本索引值。如果 **fromIndex** 小于 **0** 或者
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
-     *     等于 **length**，则会抛出错误。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     等于 **length**，则会抛出错误。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The setBitsByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6333,9 +6275,7 @@ declare namespace collections {
     /**
      * 将 BitVector 中所有元素均设为特定 bit 值。
      *
-     * @param { number } element - 待设置的 bit 值。**0** 表示 bit 值 0，其余值表示 bit 值 1。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @param { number } element - 待设置的 bit 值。**0** 表示 bit 值 0，其余值表示 bit 值 1。
      * @throws { BusinessError } 10200011 - The setAllBits method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6351,9 +6291,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { BitVector } 包含所获取 bit 值的 BitVector。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { BitVector } 包含所获取 bit 值的 BitVector。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getBitsByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6368,9 +6306,7 @@ declare namespace collections {
      * 如果 **size** 大于原 BitVector 的长度，则扩充原 BitVector 的长度，多出部分的元素设置为 0。
      * 如果 **size** 小于等于原 BitVector 的长度，则将原 BitVector 按 size 长度大小裁剪。
      *
-     * @param { number } size - 需要改变的长度。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @param { number } size - 需要改变的长度。
      * @throws { BusinessError } 10200011 - The resize method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6387,9 +6323,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { number } 统计指定范围内获取指定 bit 值的数量。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 统计指定范围内获取指定 bit 值的数量。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getBitCountByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6407,9 +6341,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { number } 返回指定 bit 值首次出现时的索引值，查找失败返回 **-1**。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 返回指定 bit 值首次出现时的索引值，查找失败返回 **-1**。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6427,9 +6359,7 @@ declare namespace collections {
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
      *     等于 **length**，则会抛出错误。
-     * @returns { number } 返回指定 bit 值最后一次出现时的索引值，查找失败返回 **-1**。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     * @returns { number } 返回指定 bit 值最后一次出现时的索引值，查找失败返回 **-1**。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The getLastIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6443,9 +6373,7 @@ declare namespace collections {
      * 翻转 BitVector 指定索引处的 bit 值，0 翻转为 1，1 翻转为 0。
      *
      * @param { number } index - 指定索引。如果 **index** 小于 **0** 或者大于等于 **length**，则会抛出
-     *     错误。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     错误。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
      * @throws { BusinessError } 10200011 - The flipBitByIndex method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6461,9 +6389,7 @@ declare namespace collections {
      * @param { number } fromIndex - 范围起始索引，包含本索引值。如果 **fromIndex** 小于 **0** 或者
      *     大于等于 **toIndex**，则会抛出错误。
      * @param { number } toIndex - 范围终止索引，不包含本索引值。如果 **toIndex** 小于 **0** 或者大于
-     *     等于 **length**，则会抛出错误。可能的原因：
-     *     1.必填参数未指定。
-     *     2.参数类型不正确。
+     *     等于 **length**，则会抛出错误。
      * @throws { BusinessError } 10200001 - The value of fromIndex or toIndex is out of range.
      * @throws { BusinessError } 10200011 - The flipBitsByRange method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 自动填充类型
  * @kit AbilityKit
  */
 
@@ -22,6 +22,8 @@
  * 表示提供自动填充类型的枚举。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+ * @systemapi [since 11 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @atomicservice
  * @since 11 dynamic
@@ -29,11 +31,13 @@
  */
 export enum AutoFillType {
   /**
-   * 表示未指定的类型。
+   * 未指定的类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
@@ -43,30 +47,36 @@ export enum AutoFillType {
    * 密码类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
   PASSWORD = 1,
 
   /**
-   * 用户名的类型。
+   * 用户名类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */
   USER_NAME = 2,
 
   /**
-   * 新密码的类型。
+   * 新密码类型。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
-   * @systemapi
+   * @systemapi [since 11 - 24]
+   * @publicapi [since 26.0.0]
    * @stagemodelonly
+   * @atomicservice
    * @since 11 dynamic
    * @since 23 static
    */

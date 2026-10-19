@@ -495,6 +495,10 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * 支持的单位包括px、vp、%或有效数字，默认单位为vp，使用方法参见
    * [示例2](docroot://reference/apis-arkui/arkui-ts/ts-container-waterflow.md#示例2自动计算列数)。
    *
+   * 非repeat形式的模板串中每项仅支持'数字+fr'、'数字+px'、'数字+%'三种格式，不支持vp（如columnsTemplate('100vp 100vp')）。需要按固定vp尺寸自动计算列数时，应使用repeat(auto-fill, track-size)。
+   *
+   * 设置为'0fr'时，该列的列宽为0，该列FlowItem不显示。设置为其他非法值时，按固定1列处理。
+   *
    * @param { string } value - 当前瀑布流组件布局列的数量。<br/>默认值：'1fr'
    * @returns { WaterFlowAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -555,6 +559,10 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    *
    * 可使用rowsTemplate('repeat(auto-fill,track-size)')根据给定的行高track-size自动计算行数，其中repeat、auto-fill为关键字，track-size为可设置的高度，支持的
    * 单位包括px、vp、%或有效数字，默认单位为vp。
+   *
+   * 非repeat形式的模板串中每项仅支持'数字+fr'、'数字+px'、'数字+%'三种格式，不支持vp（如rowsTemplate('100vp 100vp')）。需要按固定vp尺寸自动计算行数时，应使用repeat(auto-fill, track-size)。
+   *
+   * 设置为'0fr'时，该行的行高为0，该行FlowItem不显示。设置为其他非法值时，按固定1行处理。
    *
    * @param { string } value - 当前瀑布流组件布局行的数量。<br/>默认值：'1fr'
    * @returns { WaterFlowAttribute }
@@ -618,6 +626,25 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @since 10 dynamic
    */
   nestedScroll(value: NestedScrollOptions): WaterFlowAttribute;
+
+  /**
+   * 设置用户滚动结束后WaterFlow使用的滚动吸附策略。
+   *
+   * 支持从上到下、分段和滑动窗口布局。START、CENTER、END分别将item对齐到滚动轴方向
+   * 视口的起始、中间和末尾位置。
+   * 自定义提供方计算趋近距离和最终绝对滚动目标，单位为vp。
+   * 吸附目标受合法滚动范围限制。默认不启用吸附。
+   * 设置为NONE或undefined时清除策略，恢复默认滚动行为。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐策略或自定义提供方。
+   * @returns { WaterFlowAttribute } WaterFlow组件的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): WaterFlowAttribute;
 
   /**
    * 设置是否支持滚动手势。

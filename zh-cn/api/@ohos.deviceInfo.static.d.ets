@@ -490,30 +490,30 @@ declare namespace deviceInfo {
     get sdkApiVersion(): int;
 
     /**
-     * 系统软件Minor API版本。从API 26.0.0 版本开始，系统API版本格式：sdkApiVersion.sdkMinorApiVersion.sdkPatchApiVersion。
+     * 从API版本26.0.0起，为配合语义化版本号，新增次版本号的定义，即中间字段的值，值为整型数。完整版本号由sdkApiVersion.sdkMinorApiVersion.sdkPatchApiVersion共同构成。
      *
      * 示例：
-     * 如果系统API版本为26.0.2，则sdkMinorApiVersion为0。
-     * 如果系统API版本为26.1.2，则sdkMinorApiVersion为1。
+     * 例如系统软件的API版本为26.0.1，则sdkMinorApiVersion为0。
+     * 例如系统软件的API版本为26.1.0，则sdkMinorApiVersion为1。
      *
      * @returns { int }
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     get sdkMinorApiVersion(): int;
 
     /**
-     * 系统软件Patch API版本。从API 26.0.0 版本开始，系统API版本格式：sdkApiVersion.sdkMinorApiVersion.sdkPatchApiVersion。
+     * 从API版本26.0.0起，为配合语义化版本号，新增修订版本号的定义，即第三个字段的值，值为整型数。完整版本号由sdkApiVersion.sdkMinorApiVersion.sdkPatchApiVersion共同构成。
      *
      * 示例：
-     * 如果系统API版本为26.2.0，则sdkPatchApiVersion为0。
-     * 如果系统API版本为26.2.1，则sdkPatchApiVersion为1。
+     * 例如系统软件的API版本为26.0.1，则sdkPatchApiVersion为1。
+     * 例如系统软件的API版本为26.1.0，则sdkPatchApiVersion为0。
      *
      * @returns { int }
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     get sdkPatchApiVersion(): int;
     
@@ -876,8 +876,19 @@ declare namespace deviceInfo {
      * @returns { boolean } 布尔值。返回true表示当前设备API版本大于等于入参版本号；返回false代表当前设备API版本小于入参版本号，或传入的版本号格式非法、该版本不存在。
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     function apiAvailable(version: string | int): boolean;
+
+    /**
+     * 获取内核版本。
+     * 格式为'产品内核X.Y.Z'。
+     * 示例: '产品内核1.0.0'。
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    const kernelVersion: string;
 }
 export default deviceInfo;

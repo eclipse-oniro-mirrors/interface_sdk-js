@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 意图框架基础定义
  * @kit AbilityKit
  */
 
@@ -35,7 +35,7 @@ import { RecordData } from './@ohos.base';
  */
 declare namespace insightIntent {
   /**
-   * 意图执行模式。表示系统入口触发意图执行时传递的执行模式，每个意图支持的执行模式在意图开发时定义。
+   * 意图执行模式。表示系统入口触发意图执行时传递的模式，每个意图支持的执行模式在意图开发时定义。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -94,7 +94,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface InteractionUI {
     /**
@@ -103,7 +103,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionUIType: string;
   }
@@ -114,7 +114,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface InteractionModalUIExtension extends InteractionUI {
     /**
@@ -123,7 +123,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionUIType: 'MODAL_UIEXTENSION';
 
@@ -133,7 +133,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     bundleName: string;
 
@@ -143,7 +143,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     moduleName: string;
 
@@ -153,7 +153,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     abilityName: string;
 
@@ -163,7 +163,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     uiExtensionType: string;
 
@@ -173,7 +173,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     uri: string;
 
@@ -183,7 +183,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     parameters: Record<string, Object>;
 
@@ -193,18 +193,67 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     parameters: Record<string, RecordData>;
   }
 
+   /**
+   * 定义当意图执行完成时TEXT要显示为交互界面的信息，不支持分布式。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface InteractionText extends InteractionUI {
+    /**
+     * 交互界面的类型，固定为'TEXT'。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    interactionUIType: 'TEXT';
+
+    /**
+     * 传递给目标Text的参数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    parameters: Record<string, Object>;
+
+    /**
+     * 传递给目标Text的参数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    parameters: Record<string, RecordData>;
+
+    /**
+     * 按钮列表。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    buttons?: Array<string>;
+  }
   /**
    * 定义当前意图执行完成后返回的交互信息，包括下一个要触发的意图和要显示的交互界面。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface InteractionInfo {
     /**
@@ -213,7 +262,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionUI?: InteractionUI;
   }
@@ -291,7 +340,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionInfo?: InteractionInfo;
   }
@@ -320,6 +369,53 @@ declare namespace insightIntent {
      * @since 26.0.0 static
      */
     entityId: string;
+  }
+
+  /**
+   * 定义文件实体的结构体。表示意图执行过程中涉及的关键文件对象，包括意图参数和执行结果。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface FileEntity extends IntentEntity {
+    /**
+     * 文件实体标识。固定为'OHOS_FILE_ENTITY'。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    entityId: 'OHOS_FILE_ENTITY';
+
+    /**
+     * URI列表。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    uris: Array<string>;
+
+    /**
+     * 要授予URI列表的权限。
+     *
+     * **注意**
+     *
+     * 该参数只支持“FLAG_AUTH_READ_URI_PERMISSION”、“FLAG_AUTH_WRITE_URI_PERMISSION”、“标志位认证读URI”和
+     * “FLAG_AUTH_READ_URI_PERMISSION”和“FLAG_AUTH_WRITE_URI_PERMISSION”。权限说明请参见
+     * [标志]{@link @ohos.app.ability.wantConstant:wantConstant.Flags}。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    flags?: int;
   }
 
   /**
@@ -462,7 +558,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionInfo?: InteractionInfo;
   }
@@ -502,6 +598,66 @@ declare namespace insightIntent {
      * @since 23 dynamic&static
      */
     FUNCTION = 1
+  }
+
+  /**
+   * 表示意图执行信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface InsightIntentExecutionInfo {
+    /**
+     * 表示意图名称。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    intentName: string;
+
+    /**
+     * 表示意图实例的唯一ID。该值应为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    instanceId: int;
+
+    /**
+     * 表示意图调用方的应用包名。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerBundleName: string;
+
+    /**
+     * 表示调用方的Token ID。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerTokenId: string;
+
+    /**
+     * 表示调用方的UID。该值应为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerUid: int;
   }
 }
 

@@ -29,7 +29,7 @@
  */
 export declare class ComposeTitleBarMenuItem {
   /**
-   * Icon resource.
+   * Icon resource. If the **symbolStyle** attribute is also set, **symbolStyle** takes precedence.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -40,8 +40,8 @@ export declare class ComposeTitleBarMenuItem {
   value: ResourceStr;
 
   /**
-   * Symbol icon resource, which has higher priority than **value**. This parameter is not available for the **item**
-   * attribute.
+   * Symbol icon resource, which takes precedence over **value**. This attribute is not supported for the avatar on the
+   * left of the item. If not set, the icon resource specified by the **value** attribute is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -52,7 +52,8 @@ export declare class ComposeTitleBarMenuItem {
   symbolStyle?: SymbolGlyphModifier;
 
   /**
-   * Icon label.
+   * Icon label description, used to set auxiliary text information for the icon. When **accessibilityText** is not set,
+   * **label** can serve as the default value for the accessibility text.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -63,15 +64,11 @@ export declare class ComposeTitleBarMenuItem {
   label?: ResourceStr;
 
   /**
-   * Whether to enable the item.
+   * Whether to enable. Default value: **false**.
    *
-   * Default value: **false**
+   * The value **true** indicates enabled, and **false** indicates disabled.
    *
-   * **true**: The item is enabled.
-   *
-   * **false**: The item is disabled.
-   *
-   * This property cannot be triggered by the **item** property.
+   * The **item** parameter does not support triggering the **isEnabled** attribute.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -82,7 +79,7 @@ export declare class ComposeTitleBarMenuItem {
   isEnabled?: boolean;
 
   /**
-   * Action to perform. This parameter is not available for the **item** attribute.
+   * Callback invoked when a menu item is tapped. The **item** parameter does not support triggering the action event.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -93,13 +90,12 @@ export declare class ComposeTitleBarMenuItem {
   action?: () => void;
 
   /**
-   * Accessibility text, that is, accessible label name. If a component does not contain text information, it will not
-   * be announced by the screen reader when selected. In this case, the screen reader user cannot know which component
-   * is selected. To solve this problem, you can set accessibility text for components without text information. When
-   * such a component is selected, the screen reader announces the specified accessibility text, informing the user
-   * which component is selected.
+   * Accessibility text of the custom button on the right of the title bar. When a component has no text attribute, the
+   * screen reader does not announce it. After this attribute is set, the screen reader can announce the content,
+   * helping users understand the selected component. The **item** attribute does not support setting this attribute.
    *
-   * Default value: value of the **label** property if it is set and an empty string otherwise.
+   * Default value: when **label** is set, the default value is the content of the **label** attribute of the current
+   * item; when **label** is not set, the default value is an empty string.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -110,12 +106,12 @@ export declare class ComposeTitleBarMenuItem {
   accessibilityText?: ResourceStr;
 
   /**
-   * Accessible description. You can provide comprehensive text explanations to help users understand the operation they
-   * are about to perform and its potential consequences, especially when these cannot be inferred from the component's
-   * attributes and accessibility text alone. If a component contains both text information and the accessible
-   * description, the text is announced first and then the accessible description, when the component is selected.
+   * Accessibility description of the custom button on the right of the title bar, used to explain the component
+   * function and operation consequences to users in detail. When the component is selected, the system announces the
+   * text attribute first, and then the accessibility description. The item attribute does not support setting this
+   * attribute.
    *
-   * Default value: **"Double-tap to activate"**
+   * Default value: "Double-tap with one finger to execute".
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -126,20 +122,21 @@ export declare class ComposeTitleBarMenuItem {
   accessibilityDescription?: ResourceStr;
 
   /**
-   * Accessibility level. It determines whether the component can be recognized by accessibility services.
+   * Accessibility level of the custom button on the right of the title bar, which controls whether the current item can
+   * be recognized by accessibility services. This applies only to **items** in **menuItems**, not to the item
+   * parameter.
    *
-   * The options are as follows:
+   * Supported values:
    *
-   * **"auto"**: It is treated as "yes" by the system.
+   * **"auto"**: equivalent to **"yes"**.
    *
-   * **"yes"**: The component can be recognized by accessibility services.
+   * **"yes"**: can be recognized by accessibility services.
    *
-   * **"no"**: The component cannot be recognized by accessibility services.
+   * **"no"**: cannot be recognized by accessibility services.
    *
-   * **"no-hide-descendants"**: Neither the component nor its child components can be recognized by accessibility
-   * services.
+   * **"no-hide-descendants"**: neither the current item nor its child components can be recognized.
    *
-   * Default value: **"auto"**
+   * Default value: **"auto"**. The item parameter does not support setting this attribute.
    *
    * @default "auto".The options are as follows:<br/>
    *     "auto":The value is converted to "yes" or "no" based on the component.
@@ -157,8 +154,10 @@ export declare class ComposeTitleBarMenuItem {
 }
 
 /**
- * **ComposeTitleBar** represents a common title bar that contains a title, subtitle (optional), and profile picture (
- * optional). It can come with a Back button for switching between pages of different levels.
+ * **ComposeTitleBar** is a standard title bar component that supports setting a title, avatar (optional), and subtitle
+ * (optional). It can be used on first-level pages, as well as second-level and higher pages to display a back button.
+ * It helps quickly build a unified-style title bar, simplifies page development, supports flexible menu item
+ * configuration and icon customization, and helps developers quickly implement navigation and operation entry points.
  *
  * > **NOTE**
  * >
@@ -166,7 +165,7 @@ export declare class ComposeTitleBarMenuItem {
  * >
  * > - If the **ComposeTitleBar** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **ComposeTitleBar** component itself. As a result, the configured universal attributes and
  * > universal events may fail to take effect or behave as intended. For this reason, avoid using universal attributes
  * > and events with the **ComposeTitleBar** component.
@@ -180,7 +179,7 @@ export declare class ComposeTitleBarMenuItem {
 @Component
 export declare struct ComposeTitleBar {
   /**
-   * A single menu item for the profile picture on the left.
+   * Single menu item for the left avatar. When not set, no avatar is displayed on the left side of the title bar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -191,7 +190,7 @@ export declare struct ComposeTitleBar {
   item?: ComposeTitleBarMenuItem;
 
   /**
-   * Title.
+   * Title text of the title bar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -202,7 +201,7 @@ export declare struct ComposeTitleBar {
   title: ResourceStr;
 
   /**
-   * Subtitle.
+   * Subtitle. When not set, no subtitle is displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -213,7 +212,7 @@ export declare struct ComposeTitleBar {
   subtitle?: ResourceStr;
 
   /**
-   * List of menu items on the right.
+   * List of menu items on the right side. When not set, no menu items are displayed on the right side of the title bar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

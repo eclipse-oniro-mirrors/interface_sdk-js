@@ -587,6 +587,16 @@ export declare class Scroller {
    * @since 26.0.0 static
    */
   getFrameNode(): FrameNode | undefined;
+  /**
+   * 获取绑定到此Scroller的可滚动组件的当前滚动状态。
+   *
+   * @returns { ScrollState } 当前滚动状态。
+   * @throws { BusinessError } 100004 - 控制器未绑定到组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  getScrollState(): ScrollState;
 }
 
 /**
@@ -1120,7 +1130,7 @@ export declare interface ScrollAttribute extends ScrollableCommonMethod {
    *
    * @param { boolean | undefined } value - 是否支持滚动手势。设置为true时可以通过手指或者鼠标滚动，设置为false时无法通过手指或者鼠标滚动，但不影响控制器
    *     [Scroller]{@link Scroller}的滚动接口。<br/>默认值：true<br/>取值为undefined时，按默认值处理。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1145,7 +1155,7 @@ export declare interface ScrollAttribute extends ScrollableCommonMethod {
    * 限位动画期间[onWillScroll]{@link onWillScroll}事件上报的滚动操作来源类型为ScrollSource.FLING。
    *
    * @param { ScrollSnapOptions | undefined } value - Scroll组件的限位滚动模式。<br/>取值为undefined时，按默认值处理。
-   * @returns { this }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1182,7 +1192,7 @@ export declare interface ScrollAttribute extends ScrollableCommonMethod {
    * @returns { ScrollAttribute } 返回ScrollAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setScrollOptions(scroller?: Scroller): this;
 

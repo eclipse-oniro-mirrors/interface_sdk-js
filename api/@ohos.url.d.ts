@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file URL String Parsing
  * @kit ArkTS
  */
 
@@ -463,6 +463,30 @@ declare namespace url {
          * @since 23 static
          */
         toString(): string;
+    }
+
+    /**
+     * The URLUtil class provides utility methods related to URLs.
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    class URLUtil {
+        /**
+         * Serializes the specified URLParams object into a string, in which spaces are
+         * percent-encoded as %20 (instead of '+').
+         *
+         * @param { URLParams } urlParams - The URLParams object to serialize.
+         * @returns { string } Returns the serialized string in which spaces are encoded as %20.
+         * @syscap SystemCapability.Utils.Lang
+         * @stagemodelonly
+         * @crossplatform
+         * @atomicservice
+         * @since 26.2.0 dynamiconly
+         */
+        static toString(urlParams: URLParams): string;
     }
 
     /**

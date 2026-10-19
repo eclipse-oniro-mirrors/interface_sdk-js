@@ -26,7 +26,9 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
+ * @since 26.0.1 static
  */
 declare namespace remoteDevice {
   /**
@@ -34,7 +36,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type PairingState = nearlinkConstant.PairingState;
 
@@ -43,7 +47,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type ConnectionState = nearlinkConstant.ConnectionState;
 
@@ -52,7 +58,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type DeviceClass = nearlinkConstant.DeviceClass;
 
@@ -61,7 +69,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type AcbState = nearlinkConstant.AcbState;
 
@@ -71,20 +81,29 @@ declare namespace remoteDevice {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   type ConnectionInterval = nearlinkConstant.ConnectionInterval;
 
   /**
    * 创建远端设备实例。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { string } address - 远端设备地址。地址格式参考：11:22:33:AA:BB:FF。
    * @returns { RemoteDevice } 远端设备实例。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100041 - Invalid address.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function createRemoteDevice(address: string): RemoteDevice;
 
@@ -96,27 +115,45 @@ declare namespace remoteDevice {
    * 只有授予了ohos.permission.NEARLINK_ACCESS权限的系统应用程序才能访问此事件。
    * 如果应用被赋予了ohos.permission.GET_NEARLINK_PEER_MAC权限。
    * 回调返回真实设备地址，否则返回随机设备地址。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<PairingRequestParam> } callback - 用于监听配对请求事件的回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offPairingRequest]{@link remoteDevice.offPairingRequest(callback?: Callback<PairingRequestParam>): void}
+      *     取消订阅配对请求事件。
    */
   function onPairingRequest(callback: Callback<PairingRequestParam>): void;
 
   /**
    * 取消订阅来自远端星闪设备的配对请求事件。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<PairingRequestParam> } [callback] - 用于监听配对请求事件的回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onPairingRequest]{@link remoteDevice.onPairingRequest(callback: Callback<PairingRequestParam>): void}
+      *     订阅配对请求事件。
    */
   function offPairingRequest(callback?: Callback<PairingRequestParam>): void;
 
@@ -124,26 +161,44 @@ declare namespace remoteDevice {
    * 订阅配对状态变化事件。使用callback异步回调。
    *
    * 应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<PairingStateParam> } callback - 回调函数，返回订阅的配对状态变化结果。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offPairingStateChange]{@link remoteDevice.offPairingStateChange(callback?: Callback<PairingStateParam>):
+   *     void} Unsubscribes from the pairing status change event.
    */
   function onPairingStateChange(callback: Callback<PairingStateParam>): void;
 
   /**
    * 取消订阅配对状态变化事件。使用callback异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<PairingStateParam> } [callback] - 回调函数，返回订阅的配对状态变化结果。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onPairingStateChange]{@link remoteDevice.onPairingStateChange(callback: Callback<PairingStateParam>): void}
+      *     订阅配对状态变化事件。
    */
   function offPairingStateChange(callback?: Callback<PairingStateParam>): void;
 
@@ -153,26 +208,44 @@ declare namespace remoteDevice {
    * 不同，本接口监听设备层级的连接状态变化。
    *
    * 应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<ConnectionStateParam> } callback - 回调函数，返回订阅的连接状态变化事件上报结果。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offConnectionStateChange]{@link remoteDevice.offConnectionStateChange(callback?:
+   *     Callback<ConnectionStateParam>): void} Unsubscribes from the connection status change event.
    */
   function onConnectionStateChange(callback: Callback<ConnectionStateParam>): void;
 
   /**
    * 取消订阅连接状态变化事件。使用callback异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<ConnectionStateParam> } [callback] - 回调函数，返回订阅的连接状态变化事件上报结果。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onConnectionStateChange]{@link remoteDevice.onConnectionStateChange(callback:
+   *     Callback<ConnectionStateParam>): void} Subscribes to the connection status change event.
    */
   function offConnectionStateChange(callback?: Callback<ConnectionStateParam>): void;
 
@@ -182,26 +255,43 @@ declare namespace remoteDevice {
    * 监听设备层级连接状态不同，本接口监听逻辑链路层级的连接状态。
    *
    * 应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<AcbStateParam> } callback - 回调函数，返回订阅的逻辑链路连接状态变化事件上报结果。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offAcbStateChange]{@link remoteDevice.offAcbStateChange(callback?: Callback<AcbStateParam>): void}
+      *     取消订阅逻辑链路连接状态变化事件。
    */
   function onAcbStateChange(callback: Callback<AcbStateParam>): void;
 
   /**
    * 取消订阅逻辑链路连接状态变化事件。使用callback异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<AcbStateParam> } [callback] - 回调函数，返回订阅的逻辑链路连接状态变化事件上报结果。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onAcbStateChange]{@link remoteDevice.onAcbStateChange(callback: Callback<AcbStateParam>): void}    *     订阅逻辑链路连接状态变化事件。
    */
   function offAcbStateChange(callback?: Callback<AcbStateParam>): void;
 
@@ -211,7 +301,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface RemoteDevice {
     /**
@@ -219,12 +311,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     startPairing(): Promise<void>;
 
@@ -233,14 +328,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     startCrediblePairing(): Promise<void>;
 
@@ -249,14 +347,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     removePairedDevice(): Promise<void>;
 
@@ -265,14 +366,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     cancelDevicePairing(): Promise<void>;
 
@@ -282,15 +386,18 @@ declare namespace remoteDevice {
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @param { string } passcode - 用户输入的配对通行码，必须为六位数字。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100045 - Passcode must be a 6-digit number.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     setPairingPasscode(passcode: string): Promise<void>;
 
@@ -301,14 +408,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @param { boolean } accept - 配对确认。true：接受配对。false：拒绝配对。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     setPairingConfirmation(accept: boolean): void;
 
@@ -317,14 +427,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     connect(): Promise<void>;
 
@@ -333,14 +446,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     disconnect(): Promise<void>;
 
@@ -349,12 +465,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { PairingState } 和远端设备的配对状态。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getPairingState(): PairingState;
 
@@ -363,12 +482,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { string } 远端设备名称。最大长度为30个字符。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getDeviceName(): string;
 
@@ -377,12 +499,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { DeviceClass } 远端设备类型。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getDeviceClass(): DeviceClass;
 
@@ -391,12 +516,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { ConnectionState } 本端设备和远端设备的连接状态。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getConnectionState(): ConnectionState;
 
@@ -406,15 +534,18 @@ declare namespace remoteDevice {
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @param { string } alias - 远端设备别名。个字符，不能为空。
      *     <br>最大长度为64。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100046 - String exceeds maximum length.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     setDeviceAlias(alias: string): void;
 
@@ -423,14 +554,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
      * @returns { string } 远端设备别名。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getDeviceAlias(): string;
 
@@ -440,12 +574,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { AcbState } 和远端设备的逻辑链路连接状态。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getAcbState(): AcbState;
 
@@ -453,13 +590,15 @@ declare namespace remoteDevice {
      * 获取远端设备型号。
      *
      * @returns { DeviceModel } 远端设备的型号。
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getDeviceModel(): DeviceModel;
 
@@ -468,12 +607,15 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { DeviceInformation } 远端设备的设备信息。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getDeviceInformation(): DeviceInformation;
 
@@ -482,14 +624,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @returns { Promise<int> } Promise对象，返回RSSI值。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     getRssiValue(): Promise<int>;
 
@@ -498,14 +643,17 @@ declare namespace remoteDevice {
      *
      * @permission ohos.permission.MANAGE_NEARLINK
      * @param { ConnectionInterval } interval - 要设置的连接间隔。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     setConnectionInterval(interval: ConnectionInterval): void;
   }
@@ -515,7 +663,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface PairingStateParam {
     /**
@@ -524,7 +674,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -532,7 +684,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     preState: PairingState;
     /**
@@ -540,7 +694,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     state: PairingState;
     /**
@@ -548,7 +704,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     reason: PairingReason;
     /**
@@ -556,7 +714,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     reasonMsg?: string;
   }
@@ -566,7 +726,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum PairingReason {
     /**
@@ -574,7 +736,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_SUCCESS = 0,
     /**
@@ -582,7 +746,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_FAILURE = 1,
     /**
@@ -590,7 +756,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_ACB_CONNECTION_FAIL = 2,
     /**
@@ -598,7 +766,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_EXCEED_ACB_MAX = 3,
     /**
@@ -606,7 +776,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_REMOTE_CANCELED = 4,
     /**
@@ -614,7 +786,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_LOCAL_CANCELED = 5,
     /**
@@ -622,7 +796,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_REASON_AUTH_FAIL = 6
   }
@@ -632,7 +808,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface PairingRequestParam {
     /**
@@ -641,7 +819,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -649,7 +829,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     passkey: string;
     /**
@@ -657,7 +839,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     pairingType: PairingType;
   }
@@ -667,7 +851,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum PairingType {
     /**
@@ -675,7 +861,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     NO_PASSKEY_CONFIRMATION = 0,
     /**
@@ -683,7 +871,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_TYPE_PASSCODE = 1,
     /**
@@ -691,7 +881,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PAIRING_TYPE_NUMBER_COMPARE = 2
   }
@@ -701,7 +893,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ConnectionStateParam {
     /**
@@ -710,7 +904,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -718,7 +914,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     preState: ConnectionState;
     /**
@@ -726,7 +924,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     state: ConnectionState;
     /**
@@ -734,7 +934,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     connectionReason: ConnectionReason;
     /**
@@ -742,7 +944,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     reasonMsg?: string;
   }
@@ -752,7 +956,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum ConnectionReason {
     /**
@@ -760,7 +966,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_SUCCESS = 0,
     /**
@@ -768,7 +976,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_FAILURE = 1,
     /**
@@ -776,7 +986,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_LOCAL_DISCONNECT = 2,
     /**
@@ -784,7 +996,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_REMOTE_DISCONNECT = 3,
     /**
@@ -792,7 +1006,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_FAIL_ACB_CONNECTION = 4,
     /**
@@ -800,7 +1016,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_FAIL_SERVICE_DISCOVERY = 5,
     /**
@@ -808,7 +1026,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_FAIL_NO_AVAILABLE_SERVICE = 6,
     /**
@@ -816,7 +1036,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CONNECTION_FAIL_CONNECTION_NUM_LIMITED = 7
   }
@@ -826,7 +1048,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface AcbStateParam {
     /**
@@ -834,7 +1058,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
 
@@ -843,7 +1069,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     state: AcbState;
   }
@@ -854,7 +1082,9 @@ declare namespace remoteDevice {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface DeviceModel {
     /**
@@ -863,7 +1093,9 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     modelId: string;
 
@@ -873,7 +1105,9 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     subModelId: string;
 
@@ -883,7 +1117,9 @@ declare namespace remoteDevice {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     iconId: string;
   }
@@ -893,7 +1129,9 @@ declare namespace remoteDevice {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface DeviceInformation {
     /**
@@ -902,7 +1140,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     manufacturerData: string;
 
@@ -912,7 +1152,9 @@ declare namespace remoteDevice {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     modelData: string;
   }

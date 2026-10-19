@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file Web Controller
  * @kit ArkWeb
  */
 import webview from '../../@ohos.web.webview';
@@ -22,7 +22,7 @@ import image from '../../@ohos.multimedia.image';
 import { CommonMethod, Callback, TouchEvent, MouseEvent, NestedScrollOptions, KeyEvent, HapticFeedbackMode } from './common';
 import { CustomBuilder } from './builder';
 import { Resource } from '../../global/resource';
-import { Position, ResourceStr, VoidCallback } from './units';
+import { Position, ResourceColor, ResourceStr, VoidCallback } from './units';
 import { MenuType, EditMenuOptions, TextDataDetectorConfig } from './textCommon';
 import { CopyOptions, NestedScrollMode } from './enums';
 import { PreviewMenuOptions } from './richEditor';
@@ -1083,6 +1083,54 @@ export declare enum RenderExitReason {
  * @since 23 static
  */
 export type OnContextMenuHideCallback = () => void;
+
+/**
+ * The callback of context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>see the default options parameter.
+ *     <br>Default value: For details.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+/**
+ * Enum type of context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum WebContextMenuItemId {
+    /**
+     * Copy link to highlight menu item.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    MENU_COPY_LINK = 11
+}
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface WebContextMenuOptions {
+    /**
+     * Whether the context menu item is enabled.
+     * Default value: Default value: false.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    enable?: boolean;
+}
 /**
  * Enum type supplied to {@link error} when onSslErrorEventReceive being called.
  *
@@ -2191,6 +2239,34 @@ export declare class WebContextMenuParam {
      * @since 23 static
      */
     getContextMenuMediaType(): ContextMenuDataMediaType;
+
+    /**
+     * Checks whether the currently selected text can be used to generate a Text Fragment link.
+     *
+     * @returns { boolean } Return whether can generate a Text Fragment link.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    shouldOfferLinkToText(): boolean;
+    /**
+     * Returns a Text Fragment link URL that points to the currently highlighted text.
+     *
+     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    getTextFragmentGeneratedLink(): string;
+    /**
+     * Checks whether the current web page has a Text Fragment highlight.
+     *
+     * @returns { boolean } Return whether has a Text Fragment highlight.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    isOverTextFragment(): boolean;
 }
 /**
  * Defines the context menu result, related to {@link WebContextMenuResult} method.
@@ -2294,6 +2370,23 @@ export declare class WebContextMenuResult {
      * @since 24 static
      */
     saveImage(): void;
+
+    /**
+     * Copies a Text Fragment link pointing to the currently highlighted text to the system clipboard.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    copyLinkToTextMenu(): void;
+    /**
+     * Removes all Text Fragment highlights from the current web page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    removeFragments(): void;
 }
 /**
  * Encompassed message information as parameters to {@link onConsole} method.
@@ -2490,11 +2583,16 @@ export declare class WebResourceResponse {
     /**
      * Sets the response data.
      *
-     * @param { string | int | Resource | ArrayBuffer } data - the response data.
-     *                                                         string type indicate strings in HTML format.
-     *                                                         number type indicate file handle.
-     *                                                         Resource type indicate $rawfile resource.
-     *                                                         ArrayBuffer type indicate binary data.
+     * > **NOTE**
+     * >
+     * > - This API does not support obtaining HSP resources based on Resource objects.
+     * > To obtain HSP resources, use {@link setResponseBody} instead.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource.
+     *     ArrayBuffer type indicates binary data.
      * @syscap SystemCapability.Web.Webview.Core
      * @since 23 static
      */
@@ -2555,6 +2653,24 @@ export declare class WebResourceResponse {
      * @since 23 static
      */
     getResponseIsReady(): boolean;
+    /**
+     * Sets the response data.
+     *
+     * > **NOTE**
+     * >
+     * > - This API supports obtaining HSP resources based on Resource objects,
+     * > which {@link setResponseData} does not support.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource or HSP resource.
+     *     ArrayBuffer type indicates binary data.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    setResponseBody(data: string | int | Resource | ArrayBuffer): void;
 }
 /**
  * Defines the Web's request/response header.
@@ -2616,7 +2732,7 @@ export declare class WebResourceError {
       *
       * @returns { int } Return the custom error code of the Web resource.
       * @syscap SystemCapability.Web.Webview.Core
-      * @since 26.1.0 static
+      * @since 26.0.1 static
       */
     getCustomErrorCode(): int;
 }
@@ -5429,6 +5545,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default onContextMenuHide(callback: OnContextMenuHideCallback | undefined): this;
+
+    /**
+     * Triggered when the context menu item status is updated by the kernel asynchronously.
+     *
+     * @param { OnContextMenuUpdateCallback | undefined } callback - The triggered function when the context menu item
+     *     status is updated by the kernel asynchronously.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onContextMenuUpdate(callback: OnContextMenuUpdateCallback | undefined): this;
   /**
    * Sets whether video playback must be started by user gestures. This API is not applicable to muted videos. When
    * this attribute is not explicitly set, users need to click the video to play it by default.
@@ -6707,6 +6835,55 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default enableMediaNetworkProxy(enabled: boolean | undefined): this;
+
+    /**
+     * Sets the color of the text input caret and selection handles of the Web component.
+     *
+     * When this attribute is not explicitly called or is reset, the caret uses the page's CSS `caret-color` result.
+     * If the CSS value is `auto` or not set, the caret uses the built-in default color (currently `#0A59F7`).
+     * Selection handles use the current theme colors.
+     *
+     * The priority is: a non-zero value set by this API > the `caret-color` CSS property set by the web page >
+     * the built-in default color. A non-zero value set by this API also overrides an explicit CSS color or
+     * `transparent`. The exact color value `#00000000` is reserved as the reset sentinel. After reset, the CSS
+     * `caret-color` value is used. If the CSS value is `auto` or not set, the built-in default color is used.
+     *
+     * @param { ResourceColor | undefined } value - Color of the text input caret and selection handles.
+     *     When undefined is passed in, this attribute is reset.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default caretColor(value: ResourceColor | undefined): this;
+
+    /**
+     * Called when the browser zoom factor of the page changes.
+     *
+     * @param { OnZoomChangeCallback | undefined } callback - Function triggered when the browser zoom factor
+     *     of the page changes. The callback is triggered only by browser zoom changes (for example,
+     *     setZoomFactor); page display scale changes (pinch zoom) are notified by onScaleChange instead.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
+
+    /**
+     * Sets the maximum fling speed for the Web component.
+     *
+     * The value configured through this TypeScript API takes precedence over values configured through other APIs.
+     *
+     * @param { double | undefined } speedLimit - Maximum fling speed, in vp/s. If the value is less than or equal to 0,
+     *     {@code NaN}, {@code +Infinity}, or {@code -Infinity}, the default value is used: 9000 vp/s on PCs and
+     *     17000 vp/s on non-PC devices.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default flingSpeedLimit(speedLimit: double | undefined): this;
 }
 
 /**
@@ -6869,6 +7046,18 @@ export declare interface EmbedOptions {
      * @since 23 static
      */
     supportCssDisplayChange?: boolean;
+    /**
+     * Whether the same-layer rendering component supports CSS transform rotate and skew.
+     * When set to true, the same-layer rendering component correctly handles CSS transform rotate/skew.
+     * When set to false or not set, retains the original behavior.
+     * This attribute takes effect only when `enableNativeEmbedMode` is enabled and cannot be dynamically modified.
+     *
+     * @default false
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    supportTransformRotateAndSkew?: boolean;
 }
 /**
  * Enum type supplied to {@link gestureFocusMode} for setting the web gesture focus mode.
@@ -7346,3 +7535,40 @@ export declare enum AISessionResultType {
  * @since 26.0.0 static
  */
 export type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * The callback of onZoomChange.
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - callback information of onZoomChange.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * Defines the triggered when the browser zoom factor of the page changed.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface OnZoomChangeEvent {
+  /**
+   * Browser zoom factor of the page before the change.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  oldZoomFactor: double;
+
+  /**
+   * Browser zoom factor of the page after the change.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  newZoomFactor: double;
+}

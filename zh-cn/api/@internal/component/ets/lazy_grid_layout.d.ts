@@ -223,6 +223,8 @@ declare class LazyVGridLayoutAttribute extends LazyGridLayoutAttribute<LazyVGrid
    * auto-fit模式和auto-stretch模式只支持track-size为一个有效列宽值，并且auto-stretch模式中的track-size只支持px、vp和有效数字，不支持%。auto-fill模式支持一个或多个有效列
    * 宽，如columnsTemplate('repeat(auto-fill, 20)')、columnsTemplate('repeat(auto-fill, 20 80px)')。
    *
+   * 非repeat形式的模板串中每项仅支持'数字+fr'、'数字+px'、'数字+%'三种格式，不支持vp（如columnsTemplate('100vp 100vp')）。需要按固定vp尺寸自动计算列数时，应使用repeat(auto-fill, track-size)。
+   *
    * 使用效果可以参考[示例3](docroot://reference/apis-arkui/arkui-ts/ts-container-lazyvgridlayout.md#示例3设置自适应列数)。
    *
    * 设置为'0fr'时，该列的列宽为0，不显示子组件。设置为其他非法值时，子组件显示为固定1列。
@@ -236,6 +238,33 @@ declare class LazyVGridLayoutAttribute extends LazyGridLayoutAttribute<LazyVGrid
    * @since 19 dynamic
    */
   columnsTemplate(value: string): LazyVGridLayoutAttribute;
+
+  /**
+   * 设置当前网格布局列的数量、固定列宽或最小列宽值，不设置时默认1列。
+   *
+   * 当template设置为string类型时，使用方法参考
+   * [columnsTemplate(value: string)]{@link LazyVGridLayoutAttribute#columnsTemplate(value: string)}。
+   *
+   * 当template设置为ItemFillPolicy类型时，将根据LazyVGridLayout内容区宽度对应的
+   * [断点类型](docroot://ui/arkts-layout-development-grid-layout.md#栅格容器断点)确定列数。
+   * 
+   * 断点判断使用的内容区宽度：内容区宽度 = 组件宽度 − 左右内边距（padding）− 占用布局的左右边框（border）宽度。
+   *
+   * 例如，ItemFillPolicy的fillType属性设置为PresetFillType.BREAKPOINT_DEFAULT时，在内容区宽度属于sm及更小的断点区间时显示2列，属于md断点区间时显示3列，属于lg及更大的断点区间时显示5列，且每列均为1fr。
+   * 
+   * > **说明：**
+   * >
+   * > string类型和ItemFillPolicy类型设置的是同一个属性，多次设置时以最后一次设置为准。
+   *
+   * @param { string | ItemFillPolicy } template - 当前网格布局列的数量。
+   * @returns { LazyVGridLayoutAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  columnsTemplate(template: string | ItemFillPolicy): LazyVGridLayoutAttribute;
 }
 
 /**

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Business Ability Router
  * @kit AbilityKit
  */
 
@@ -119,8 +119,9 @@ declare namespace businessAbilityRouter {
    * @param { BusinessAbilityFilter } filter - Indicates the filter containing the business ability info to be queried.
    * @param { AsyncCallback<Array<BusinessAbilityInfo>> } callback - The callback of querying business ability info
    *                                                                 result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -140,8 +141,9 @@ declare namespace businessAbilityRouter {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { BusinessAbilityFilter } filter - Indicates the filter containing the business ability info to be queried.
    * @returns { Promise<Array<BusinessAbilityInfo>> } Returns a list of business ability info objects.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

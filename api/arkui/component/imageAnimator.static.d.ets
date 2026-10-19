@@ -24,6 +24,7 @@ import { Resource } from "../../global/resource";
 import { AnimationStatus, FillMode } from "./enums";
 import { ComponentBuilder, CustomBuilderT, Builder } from './builder';
 import { AttributeModifier, CommonMethod, PixelMap } from "./common";
+import { ImageInterpolation } from "./image";
 
 /**
  * Defines the ImageFrameInfo Interface.
@@ -113,7 +114,7 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @unpublished
    * @stagemodelonly
-   * @since 26.1.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setImageAnimatorOptions(): this;
 
@@ -224,6 +225,20 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
   default monitorInvisibleArea(monitorInvisibleArea: boolean | undefined): this;
 
   /**
+    * Sets the interpolation effect of the frame images. This attribute mitigates aliasing during image scaling. This
+    * attribute is not applicable to SVG images.
+    *
+    * @param { ImageInterpolation | undefined } value - Interpolation effect of the frame images. The value is treated
+    *     as ImageInterpolation.Low. Default value: If this parameter is set to undefined, change to 
+    *     ImageInterpolation.Low.
+    * @returns { ImageAnimatorAttribute }
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.1 static
+    */
+  default interpolation(value: ImageInterpolation | undefined): this;
+
+  /**
    * Status callback, which is triggered when the animation starts to play.
    *
    * @param { function | undefined } event
@@ -311,7 +326,7 @@ export declare function ImageAnimator(): ImageAnimatorAttribute;
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @unpublished
  * @stagemodelonly
- * @since 26.1.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

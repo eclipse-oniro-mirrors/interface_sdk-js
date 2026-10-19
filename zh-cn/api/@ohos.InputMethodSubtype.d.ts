@@ -46,6 +46,17 @@
  * <br>本模块为纯数据定义模块，`InputMethodSubtype`作为子类型描述数据需与其他模块的API组合使用。典型组合场景为：在`@ohos.inputMethod`模块中，通过`InputMethodSetting`查询和切换子类
  * 型；在`@ohos.inputMethodEngine`模块中，通过`InputMethodAbility`监听子类型切换事件。
  * <br>
+ * <br>```javascript
+ * <br>// 以下为阐述调用逻辑的伪代码
+ * <br>
+ * <br>// 1. 查询输入法子类型列表（@ohos.inputMethod模块组合）
+ * <br>let setting = inputMethod.getSetting();
+ * <br>let subtypes = setting.listInputMethodSubtype(inputMethodProperty);
+ * <br>
+ * <br>// 2. 切换到指定子类型
+ * <br>inputMethod.switchCurrentInputMethodSubtype(targetSubtype);
+ * <br>```
+ * <br>
  * <br> > **说明：**
  * <br> >
  * <br> > `InputMethodSubtype`对象由系统框架创建和返回，开发者通过其他模块的查询接口获取，不可自行构造。
@@ -119,7 +130,7 @@ export default interface InputMethodSubtype {
   readonly language: string;
 
   /**
-   * 输入法子类型的图标，可以通过iconId查询获取。
+   * 输入法子类型的图标。规格限制：当前不可通过该参数获取或显示子类型图标。
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 9 dynamic
@@ -150,3 +161,52 @@ export default interface InputMethodSubtype {
    */
   extra?: object;
 }
+
+/**
+ * <br> ### 参数使用建议
+ * <br>
+ * <br>name参数：
+ * <br>- 含义/功能：输入法子类型所属应用的包名，用于标识该子类型属于哪个输入法应用。
+ * <br>- 取值范围：与输入法应用在module.json5中配置的bundleName保持一致的字符串。
+ * <br>- 注意事项：name必须与输入法应用的bundleName严格一致（包括大小写），否则系统无法正确匹配子类型与输入法应用。开发者可通过查看输入法应用的module.json5配置文件获取正确的包名。
+ * <br>
+ * <br>id参数：
+ * <br>- 含义/功能：输入法子类型的id，用于在同一输入法应用内唯一标识一个子类型。
+ * <br>- 取值范围：与输入法应用在module.json5中配置的subtype id保持一致的字符串。
+ * <br>- 相关参数间的配合/制约关系：`name`和`id`共同唯一标识一个输入法子类型。`name`标识所属输入法应用，`id`标识该应用内的具体子类型。切换子类型时（如通过`switchCurrentInputMethodSubtype`），
+ * 需同时提供`name`和`id`匹配的`InputMethodSubtype`对象。
+ * <br>
+ * <br>locale参数：
+ * <br>- 含义/功能：输入法子类型的区域标识，遵循ICU Locale格式。
+ * <br>- 取值范围：ICU Locale格式或POSIX格式的字符串。ICU标准格式为'语言代码_国家代码'（如'zh_CN'、'en_US'、'ja_JP'），
+ * POSIX风格为'语言代码-国家代码'（如'zh-CN'、'en-US'、'ja-JP'）。语言代码遵循ISO 639标准（两字母小写代码），国家代码遵循ISO 3166标准（两字母大写代码）。
+ * <br>- 格式样例：'zh-CN'（中文简体，中国）、'en-US'（英文，美国）、'zh-TW'（中文繁体，台湾）、'ja-JP'（日文，日本）。
+ * <br>
+ * <br>language参数：
+ * <br>- 含义/功能：输入法子类型的语言标识，是locale的语言代码部分。
+ * <br>- 取值范围：ISO 639标准的语言代码字符串，如'zh'（中文）、'en'（英文）、'ja'（日文）等。
+ * <br>- 相关参数间的配合/制约关系：`language`与`locale`存在关联——`language`是`locale`的语言代码部分。例如locale为'zh-CN'时，language通常为'zh'。两者应保持一致，language不应与locale中的语言代码矛盾。
+ * <br>
+ * <br>mode参数：
+ * <br>- 含义/功能：输入法子类型的模式，描述键盘的大小写状态。
+ * <br>- 使用场景：可选参数。不填写时，输入法应用使用默认模式。当需要指定键盘的大写或小写模式时填写，如密码输入场景下指定'lower'模式。
+ * <br>- 使用后效果：设置'upper'时，输入法应用据此将键盘切换为大写模式；设置'lower'时切换为小写模式。
+ * <br>- 取值范围：'upper'（大写）或'lower'（小写）。
+ * <br>
+ * <br>label参数：
+ * <br>- 含义/功能：输入法子类型的标签，用于在UI界面展示子类型名称。
+ * <br>- 使用场景：可选参数。不填写时，系统可能使用子类型的language或locale作为默认显示名称。当需要在设置页面或切换列表中展示更具可读性的子类型名称时填写。
+ * <br>- 相关参数间的配合/制约关系：`label`与`labelId`存在关联——两者均用于子类型的标签显示。`label`为直接的文本标签，`labelId`为资源ID标签，支持多语言国际化。如果同时设置，优先使用`labelId`加载的国际化文本。
+ * <br>
+ * <br>labelId参数：
+ * <br>- 含义/功能：输入法子类型的标签资源号，用于通过资源ID加载标签文本。
+ * <br>- 使用场景：可选参数。当需要支持多语言场景下子类型标签的国际化显示时使用，比`label`更适合多语言环境。
+ * <br>- 取值范围：number类型的资源ID值。
+ * <br>
+ * <br>icon和iconId参数：
+ * <br>- 规格限制：当前不可通过这两个参数获取或显示子类型图标。
+ * <br>
+ * <br>extra参数：
+ * <br>- 规格限制：从API version 10开始为非必填参数。
+ * 
+ */

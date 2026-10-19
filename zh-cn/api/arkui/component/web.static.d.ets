@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file Web控制器
  * @kit ArkWeb
  */
 import webview from '../../@ohos.web.webview';
@@ -22,7 +22,7 @@ import image from '../../@ohos.multimedia.image';
 import { CommonMethod, Callback, TouchEvent, MouseEvent, NestedScrollOptions, KeyEvent, HapticFeedbackMode } from './common';
 import { CustomBuilder } from './builder';
 import { Resource } from '../../global/resource';
-import { Position, ResourceStr, VoidCallback } from './units';
+import { Position, ResourceColor, ResourceStr, VoidCallback } from './units';
 import { MenuType, EditMenuOptions, TextDataDetectorConfig } from './textCommon';
 import { CopyOptions, NestedScrollMode } from './enums';
 import { PreviewMenuOptions } from './richEditor';
@@ -1084,6 +1084,54 @@ export declare enum RenderExitReason {
  * @since 23 static
  */
 export type OnContextMenuHideCallback = () => void;
+
+/**
+ * The callback of context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>see the default options parameter.
+ *     <br>Default value: For details.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+/**
+ * Enum type of context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum WebContextMenuItemId {
+    /**
+     * Copy link to highlight menu item.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    MENU_COPY_LINK = 11
+}
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface WebContextMenuOptions {
+    /**
+     * Whether the context menu item is enabled.
+     * Default value: Default value: false.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    enable?: boolean;
+}
 /**
  * Enum type supplied to {@link error} when onSslErrorEventReceive being called.
  *
@@ -2176,6 +2224,34 @@ export declare class WebContextMenuParam {
      * @since 23 static
      */
     getContextMenuMediaType(): ContextMenuDataMediaType;
+
+    /**
+     * Checks whether the currently selected text can be used to generate a Text Fragment link.
+     *
+     * @returns { boolean } Return whether can generate a Text Fragment link.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    shouldOfferLinkToText(): boolean;
+    /**
+     * Returns a Text Fragment link URL that points to the currently highlighted text.
+     *
+     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    getTextFragmentGeneratedLink(): string;
+    /**
+     * Checks whether the current web page has a Text Fragment highlight.
+     *
+     * @returns { boolean } Return whether has a Text Fragment highlight.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    isOverTextFragment(): boolean;
 }
 /**
  * Defines the context menu result, related to {@link WebContextMenuResult} method.
@@ -2279,6 +2355,23 @@ export declare class WebContextMenuResult {
      * @since 24 static
      */
     saveImage(): void;
+
+    /**
+     * Copies a Text Fragment link pointing to the currently highlighted text to the system clipboard.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    copyLinkToTextMenu(): void;
+    /**
+     * Removes all Text Fragment highlights from the current web page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    removeFragments(): void;
 }
 /**
  * Encompassed message information as parameters to {@link onConsole} method.
@@ -2540,6 +2633,24 @@ export declare class WebResourceResponse {
      * @since 23 static
      */
     getResponseIsReady(): boolean;
+    /**
+     * Sets the response data.
+     *
+     * > **NOTE**
+     * >
+     * > - This API supports obtaining HSP resources based on Resource objects,
+     * > which {@link setResponseData} does not support.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource or HSP resource.
+     *     ArrayBuffer type indicates binary data.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    setResponseBody(data: string | int | Resource | ArrayBuffer): void;
 }
 /**
  * Defines the Web's request/response header.
@@ -2596,6 +2707,14 @@ export declare class WebResourceError {
      * @since 23 static
      */
     getErrorCode(): int;
+    /**
+      * Gets the custom error code of the Web resource.
+      *
+      * @returns { int } Return the custom error code of the Web resource.
+      * @syscap SystemCapability.Web.Webview.Core
+      * @since 26.0.1 static
+      */
+    getCustomErrorCode(): int;
 }
 /**
  * Defines the js geolocation request.
@@ -5382,6 +5501,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default onContextMenuHide(callback: OnContextMenuHideCallback | undefined): this;
+
+    /**
+     * Triggered when the context menu item status is updated by the kernel asynchronously.
+     *
+     * @param { OnContextMenuUpdateCallback | undefined } callback - The triggered function when the context menu item
+     *     status is updated by the kernel asynchronously.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onContextMenuUpdate(callback: OnContextMenuUpdateCallback | undefined): this;
     /**
      * 设置有声视频的自动播放是否需要用户手动点击，静音视频播放不受该接口管控。当该属性未显式设置时，默认有声视频的自动播放需要用户手动点击。
      *
@@ -6608,6 +6739,52 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default onInputmethodAttached(callback: OnInputmethodAttachedCallback | undefined): this;
+
+    /**
+     * 设置Web组件网页文本输入光标及选择手柄的颜色。
+     *
+     * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 `auto` 或未设置时，
+     * 使用内置默认光标颜色（当前为 `#0A59F7`）。选择手柄使用当前主题默认色。
+     *
+     * 优先级为：该API设置的非零值 > 网页设置的 `caret-color` CSS属性 > 内置默认颜色。
+     * 该API设置的非零值也会覆盖CSS显式颜色或 `transparent`。精确颜色值 `#00000000` 保留为重置哨兵值。
+     * 重置后使用CSS `caret-color` 的结果；CSS为 `auto` 或未设置时，使用内置默认颜色。
+     *
+     * @param { ResourceColor | undefined } value - 网页文本输入光标及选择手柄的颜色。
+     *     传入undefined时重置该属性。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default caretColor(value: ResourceColor | undefined): this;
+
+    /**
+     * 当网页的浏览器级缩放倍率变化时触发。
+     *
+     * @param { OnZoomChangeCallback | undefined } callback - 浏览器级缩放倍率变化时触发的回调。该回调仅由浏览器级
+     *     缩放变化（例如{@link setZoomFactor}）触发；页面显示比例变化（捏合缩放）由{@link onScaleChange}通知。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
+
+    /**
+     * 设置Web组件惯性滚动的最大速度。
+     *
+     * 通过该TypeScript API配置的值优先于通过其他API配置的值生效。
+     *
+     * @param { double | undefined } speedLimit - 惯性滚动最大速度，单位vp/s。当值小于等于0、
+     *     {@code NaN}、{@code +Infinity}或{@code -Infinity}时，使用默认值：PC设备为9000 vp/s，
+     *     非PC设备为17000 vp/s。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default flingSpeedLimit(speedLimit: double | undefined): this;
 }
 
 /**
@@ -6770,6 +6947,18 @@ export declare interface EmbedOptions {
      * @since 23 static
      */
     supportCssDisplayChange?: boolean;
+    /**
+     * Whether the same-layer rendering component supports CSS transform rotate and skew.
+     * When set to true, the same-layer rendering component correctly handles CSS transform rotate/skew.
+     * When set to false or not set, retains the original behavior.
+     * This attribute takes effect only when `enableNativeEmbedMode` is enabled and cannot be dynamically modified.
+     *
+     * @default false
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    supportTransformRotateAndSkew?: boolean;
 }
 /**
  * Enum type supplied to {@link gestureFocusMode} for setting the web gesture focus mode.
@@ -7247,3 +7436,40 @@ export declare enum AISessionResultType {
  * @since 26.0.0 static
  */
 export type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * 浏览器级缩放倍率变化时触发的回调类型。
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * 描述网页浏览器级缩放倍率变化的信息。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface OnZoomChangeEvent {
+  /**
+   * 变化前的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  oldZoomFactor: double;
+
+  /**
+   * 变化后的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  newZoomFactor: double;
+}

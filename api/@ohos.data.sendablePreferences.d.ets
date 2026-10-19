@@ -117,7 +117,9 @@ declare namespace sendablePreferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500000 - Inner error.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
@@ -141,7 +143,9 @@ declare namespace sendablePreferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500000 - Inner error.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
@@ -163,7 +167,9 @@ declare namespace sendablePreferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500000 - Inner error.
    * @throws { BusinessError } 15500010 - Failed to delete the user preferences persistence file.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
@@ -189,7 +195,9 @@ declare namespace sendablePreferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500000 - Inner error.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
@@ -213,7 +221,9 @@ declare namespace sendablePreferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500000 - Inner error.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.

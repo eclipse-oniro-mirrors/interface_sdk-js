@@ -75,7 +75,7 @@ declare namespace restrictions {
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     X_KEY = 1,
 
@@ -93,7 +93,7 @@ declare namespace restrictions {
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     PACKET_FILTERING = 3,
 
@@ -102,7 +102,7 @@ declare namespace restrictions {
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     SUDO = 4,
 
@@ -552,7 +552,34 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.0
      */
-    OTA_UPDATE = 50
+    OTA_UPDATE = 50,
+
+    /**
+     * 系统回退。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SYSTEM_ROLLBACK = 51,
+ 
+    /**
+     * 内置光驱刻录功能。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SATA_ODD_BURN = 52,
+ 
+    /**
+     * 超级隐私模式。禁用后无法打开超级隐私模式。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SUPER_PRIVACY = 53
   }
 
   /**

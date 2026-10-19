@@ -26,14 +26,16 @@ import stationary from '@ohos.stationary';
 import userStatus from '@ohos.multimodalAwareness.userStatus';
 import spatialAwareness from '@ohos.multimodalAwareness.spatialAwareness';
 import carAwareness from '@ohos.multimodalAwareness.carAwareness';
+import behaviorAwareness from '@ohos.multimodalAwareness.behaviorAwareness';
 
-export { deviceStatus, metadataBinding, motion, onScreen, stationary, userStatus, spatialAwareness, carAwareness};
+export { deviceStatus, metadataBinding, motion, onScreen, stationary, userStatus, spatialAwareness, carAwareness, behaviorAwareness};
 
 /*** if arkts static */
 import deviceStatus from '@ohos.multimodalAwareness.deviceStatus';
 import metadataBinding from '@ohos.multimodalAwareness.metadataBinding';
 import motion from '@ohos.multimodalAwareness.motion';
 import userStatus from '@ohos.multimodalAwareness.userStatus';
+import behaviorAwareness from '@ohos.multimodalAwareness.behaviorAwareness';
 
-export { deviceStatus, metadataBinding, motion, userStatus};
+export { deviceStatus, metadataBinding, motion, userStatus, behaviorAwareness};
 /*** endif */

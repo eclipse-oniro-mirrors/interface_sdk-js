@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Ability运行信息
  * @kit AbilityKit
  */
 
@@ -71,7 +71,7 @@ export interface AbilityRunningInfo {
   processName: string;
 
   /**
-   * Ability的启动时间。
+   * Ability的启动时间，单位：ms。
    *
    * @default ability start time
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

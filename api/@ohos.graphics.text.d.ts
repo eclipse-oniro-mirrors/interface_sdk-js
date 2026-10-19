@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Text Module
  * @kit ArkGraphics2D
  */
 import type drawing from './@ohos.graphics.drawing';
@@ -1102,6 +1102,7 @@ declare namespace text {
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @crossplatform [since 24]
+   * @form [since 26.0.1]
    * @atomicservice [since 22]
    * @since 12 dynamic
    * @since 23 static
@@ -1113,6 +1114,7 @@ declare namespace text {
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @crossplatform [since 24]
+     * @form [since 26.0.1]
      * @atomicservice [since 22]
      * @since 12 dynamic
      * @since 23 static
@@ -1123,6 +1125,7 @@ declare namespace text {
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @crossplatform [since 24]
+     * @form [since 26.0.1]
      * @atomicservice [since 22]
      * @since 12 dynamic
      * @since 23 static
@@ -1135,6 +1138,7 @@ declare namespace text {
      * range supported by the font file itself. The default value is **false**.
      *
      * @syscap SystemCapability.Graphics.Drawing
+     * @form [since 26.0.1]
      * @atomicservice
      * @since 24 dynamic&static
      */

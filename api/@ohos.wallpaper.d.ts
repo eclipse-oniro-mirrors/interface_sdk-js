@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Wallpaper
  * @kit BasicServicesKit
  */
 
@@ -733,6 +733,7 @@ declare namespace wallpaper {
    * @param { WallpaperResourceType } resourceType - indicates the resource type of the wallpaper.
    * @param { string } [uri] - indicates the wallpaper resource address.
    * @syscap SystemCapability.MiscServices.Wallpaper
+   * @systemapi Hide this for inner system use.
    * @since 23 static
    */
   type WallpaperChangeObserver = (wallpaperType: WallpaperType, resourceType: WallpaperResourceType, uri?: string) => void;

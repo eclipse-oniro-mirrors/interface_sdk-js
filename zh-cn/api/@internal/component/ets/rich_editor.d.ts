@@ -103,7 +103,7 @@ declare enum RichEditorSpanType {
   MIXED = 2,
 
   /**
-   * Span类型为BuilderSpan。
+   * Span类型为自定义布局。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -114,7 +114,7 @@ declare enum RichEditorSpanType {
   BUILDER = 3,
 
   /**
-   * 注册此类型的菜单，但未注册TEXT、IMAGE、MIXED、BUILDER菜单时，文字类型、图像类型、图文混合类型、BuilderSpan类型都会触发并显示此类型对应的菜单。
+   * 注册此类型的菜单，但未注册TEXT、IMAGE、MIXED、BUILDER菜单时，文字类型、图像类型、图文混合类型、自定义布局类型都会触发并显示此类型对应的菜单。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -235,7 +235,7 @@ declare interface RichEditorSpanPosition {
   spanIndex: number;
 
   /**
-   * Span内容在RichEditor内的起始和结束位置。
+   * Span内容在RichEditor内的起始和结束位置，取值范围为[起始位置, 结束位置)，结束位置对应的Span不包含在内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -418,8 +418,8 @@ declare interface RichEditorTextStyle {
    * 
    * 设置 Font Feature 属性，Font Feature 是 OpenType 字体的高级排版能力，如支持连字、数字等宽等特性，一般用在自定义字体中，其能力需要字体本身支持。
    * 
-   * 更多 Font Feature 能力介绍可参考 https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop 和 https://sparanoid.com/lab/
-   * opentype-features/
+   * 更多 Font Feature 能力介绍可参考[font-feature-settings property](https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop)和
+   * [OpenType Features](https://sparanoid.com/lab/opentype-features/)。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -820,6 +820,17 @@ declare interface RichEditorImageSpanStyle {
    * @since 11 dynamic
    */
   layoutStyle?: RichEditorLayoutStyle;
+
+  /**
+   * 图片拉伸选项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  resizable?: ResizableOptions;
 }
 
 /**
@@ -910,6 +921,25 @@ declare interface RichEditorSymbolSpanStyle {
  * 在RichEditorTextStyle中，fontWeight是设置字体粗细的输入参数。
  * 
  * 而在RichEditorTextStyleResult中，会将之前设置的字体粗细转换为数字后返回。
+ * 
+ * 转换关系如下：
+ * | RichEditorTextStyle中的fontWeight | RichEditorTextStyleResult中的fontWeight |
+ * | ---- | ----------------------------------- |
+ * | 100   | 0 |
+ * | 200   | 1 |
+ * | 300   | 2 |
+ * | 400   | 3 |
+ * | 500   | 4 |
+ * | 600   | 5 |
+ * | 700   | 6 |
+ * | 800   | 7 |
+ * | 900   | 8 |
+ * | Lighter   | 12 |
+ * | Normal   | 10 |
+ * | Regular   | 14 |
+ * | Medium   | 13 |
+ * | Bold   | 9 |
+ * | Bolder   | 11 |
  * 
  * RichEditorSymbolSpanStyle和RichEditorSymbolSpanStyleResult中fontWeight的转换关系，与RichEditorTextStyle和
  * RichEditorTextStyleResult中fontWeight的转换关系一致。
@@ -1123,7 +1153,7 @@ declare interface RichEditorParagraphResult {
   style: RichEditorParagraphStyle;
 
   /**
-   * 段落起始和结束位置。
+   * 段落起始和结束位置，取值范围为[起始位置, 结束位置)，结束位置对应的内容不包含在内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1258,7 +1288,7 @@ declare interface RichEditorTextSpanResult {
   textStyle: RichEditorTextStyleResult;
 
   /**
-   * 文本Span内容里有效内容的起始和结束位置。
+   * 文本Span内容里有效内容的起始和结束位置，取值范围为[起始位置, 结束位置)，结束位置对应的内容不包含在内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1386,6 +1416,17 @@ declare interface RichEditorImageSpanStyleResult {
    * @since 12 dynamic
    */
   layoutStyle?: RichEditorLayoutStyle;
+
+  /**
+   * 图片拉伸选项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  resizable?: ResizableOptions;
 }
 
 /**
@@ -1443,7 +1484,7 @@ declare interface RichEditorImageSpanResult {
   imageStyle: RichEditorImageSpanStyleResult;
 
   /**
-   * Span里图片的起始和结束位置。
+   * Span里图片的起始和结束位置，取值范围为[起始位置, 结束位置)，结束位置对应的内容不包含在内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1521,7 +1562,7 @@ declare interface RichEditorRange {
   start?: number;
 
   /**
-   * 文本的结束位置，省略或者超出文本范围时表示无穷大。
+   * 文本的结束位置，与start共同表示选中文本的范围[start, end)，结束位置对应的内容不包含在内，省略或者超出文本范围时表示无穷大。
    *
    * @default text length
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1737,7 +1778,7 @@ declare interface RichEditorImageSpanOptions {
 }
 
 /**
- * 设置builder的偏移位置和样式。
+ * 设置builder插入的偏移位置和样式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1789,6 +1830,112 @@ declare interface RichEditorBuilderSpanOptions {
    * @crossplatform
    * @atomicservice
    * @since 23 dynamic
+   */
+  accessibilitySpanOptions?: AccessibilitySpanOptions;
+}
+
+/**
+ * 定义**RichEditor**中BuilderSpan的身份与位置信息。
+ *
+ * > **说明：**
+ * >
+ * > 当**RichEditor**组件使用[RichEditorStyledStringOptions]{@link RichEditorStyledStringOptions}构造时，不支持此接口。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface BuilderSpanInfo {
+  /**
+   * 开发者自定义的追踪标识，用于跟踪BuilderSpan。框架不强制唯一性约束，由开发者自行保证唯一性。
+   * 未传入时，值为**undefined**。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  id?: string;
+
+  /**
+   * BuilderSpan在文本内容中的当前偏移位置。
+   * 该值由框架维护，随文本内容变化动态更新。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  offset?: number;
+}
+
+/**
+ * 定义**RichEditor**的BuilderSpan对象，提供身份识别与生命周期感知能力。
+ *
+ * > **说明：**
+ * >
+ * > 当**RichEditor**组件使用[RichEditorStyledStringOptions]{@link RichEditorStyledStringOptions}构造时，不支持此接口。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface RichEditorBuilderSpan {
+  /**
+   * 自定义组件构造器。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  builder: CustomBuilder;
+
+  /**
+   * BuilderSpan挂载到**RichEditor**时触发的回调。
+   * 回调接收一个[BuilderSpanInfo]{@link BuilderSpanInfo}对象，包含id和offset。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  onAttach?: Callback<BuilderSpanInfo>;
+
+  /**
+   * BuilderSpan从**RichEditor**中被移除时触发的回调。
+   * 包括通过deleteSpans API删除、IME键盘删除、剪切操作以及普通Undo降级等删除场景。
+   * 回调接收一个[BuilderSpanInfo]{@link BuilderSpanInfo}对象，包含id和offset。
+   *
+   * > **说明：**
+   * >
+   * > 在拖拽撤销（undoStyle=KEEP_STYLE）场景中，onDetach回调不会被触发，
+   * > 因为BuilderSpan正在被恢复而非被删除。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  onDetach?: Callback<BuilderSpanInfo>;
+
+  /**
+   * 无障碍朗读功能属性。缺省时，取[AccessibilitySpanOptions]{@link AccessibilitySpanOptions}的默认值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
    */
   accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -2002,7 +2149,7 @@ declare interface RichEditorSymbolSpanOptions {
  */
 declare interface RichEditorSelection {
   /**
-   * 选中范围。
+   * 选中范围，取值范围为[起始位置, 结束位置)，结束位置对应的内容不包含在内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2103,7 +2250,7 @@ declare interface RichEditorDeleteValue {
   direction: RichEditorDeleteDirection;
 
   /**
-   * 删除内容长度。
+   * 删除内容长度，删除范围为[offset, offset + length)，结束位置对应的内容不包含在内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2455,7 +2602,7 @@ declare class RichEditorBaseController implements TextEditControllerEx {
    * 3. 组件内无菜单时，接口调用后也无菜单显示。
    *
    * @param { number } selectionStart - 选中开始位置。
-   * @param { number } selectionEnd - 选中结束位置。
+   * @param { number } selectionEnd - 选中结束位置，选中范围为[selectionStart, selectionEnd)，结束位置对应的内容不包含在内。
    * @param { SelectionOptions } [options] - 选择项配置，用于控制选中操作时的菜单弹出策略。
    *     <br>当需要自定义菜单弹出行为（如强制显示或隐藏菜单）时传入此参数；
    *     <br>省略时默认使用MenuPolicy.DEFAULT，遵循系统默认菜单弹出策略。
@@ -2699,6 +2846,32 @@ declare class RichEditorController extends RichEditorBaseController {
   addBuilderSpan(value: CustomBuilder, options?: RichEditorBuilderSpanOptions): number;
 
   /**
+   * 在**RichEditor**中添加自定义布局（BuilderSpan），提供身份识别与生命周期感知能力。
+   *
+   * > **说明：**
+   * >
+   * > - BuilderSpan对象中的[onAttach]{@link RichEditorBuilderSpan#onAttach}和
+   * > [onDetach]{@link RichEditorBuilderSpan#onDetach}回调接收一个[BuilderSpanInfo]{@link BuilderSpanInfo}
+   * > 对象，包含span的id和offset。
+   * >
+   * > - 当**RichEditor**组件使用[RichEditorStyledStringOptions]{@link RichEditorStyledStringOptions}构造时，
+   * > 不支持此接口。
+   * >
+   * > - 撤销/重做不会还原BuilderSpan对象。通过撤销还原时，被移除的BuilderSpan会降级为空格文本Span。
+   *
+   * @param { RichEditorBuilderSpan } value - BuilderSpan对象，包含构造器、生命周期回调和无障碍配置。
+   * @param { BuilderSpanInfo } [info] - BuilderSpan的身份与位置信息。**info.id**用于标识BuilderSpan，
+   *     **info.offset**用于指定插入位置。省略时，BuilderSpan追加到末尾且id为undefined。
+   * @returns { number } 添加完成的builderSpan在所有Span中的索引位置。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): number;
+
+  /**
    * 在RichEditor中添加图标小符号（SymbolSpan）。如果组件光标闪烁，插入后光标位置更新为新插入SymbolSpan的后面。
    * 
    * SymbolSpan暂不支持手势、复制操作和拖拽处理。
@@ -2775,6 +2948,32 @@ declare class RichEditorController extends RichEditorBaseController {
   getSpans(value?: RichEditorRange): Array<RichEditorImageSpanResult | RichEditorTextSpanResult>;
 
   /**
+   * 获取指定范围内BuilderSpan的身份与位置信息。
+   *
+   * > **说明：**
+   * >
+   * > - 当**RichEditor**组件使用[RichEditorStyledStringOptions]{@link RichEditorStyledStringOptions}构造时，
+   * > 不支持此接口。
+   * >
+   * > - 通过接口[addBuilderSpan]{@link RichEditorController#addBuilderSpan}创建的BuilderSpan，
+   * > 返回的[BuilderSpanInfo]{@link BuilderSpanInfo}中id为**undefined**（匿名）。
+   * >
+   * > - 返回的[BuilderSpanInfo]{@link BuilderSpanInfo}中的**offset**字段反映当前实际偏移位置，
+   * > 随文本内容变化动态更新。
+   *
+   * @param { RichEditorRange } [value] - 目标BuilderSpan的范围。
+   *     <br>省略时，返回所有BuilderSpan信息。
+   * @returns { Array<BuilderSpanInfo> } BuilderSpan身份与位置信息数组。
+   *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回**undefined**。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo>;
+
+  /**
    * 获取指定范围的段落信息。
    *
    * @param { RichEditorRange } [value] - 需要获取段落的范围。
@@ -2846,13 +3045,6 @@ declare class RichEditorController extends RichEditorBaseController {
  */
 declare type RichEditorSpan = RichEditorImageSpanResult | RichEditorTextSpanResult;
 
-/**
- * # Objects to Import
- * 
- * ```ts
- * controller: RichEditorStyledStringController = new RichEditorStyledStringController();
- * ```
- */
 /**
  * 使用属性字符串构建的RichEditor组件的控制器，继承自[RichEditorBaseController]{@link RichEditorBaseController}。
  * 
@@ -2939,7 +3131,7 @@ declare class RichEditorStyledStringController extends RichEditorBaseController 
  * @crossplatform [since 11]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
   /**
@@ -3280,7 +3472,7 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * 
    * 该接口依赖设备底层具有文本识别能力，否则设置不会生效。
    *
-   * @param { boolean | undefined } enable - 是否启用选择文本识别，true表示启用，false表示不启用。
+   * @param { boolean | undefined } enable - 是否启用文本选择AI菜单功能，true表示启用，false表示不启用。
    *     <br>默认值：true。
    *     <br>设置为undefined或null时，取默认值。
    * @returns { RichEditorAttribute }
@@ -3326,9 +3518,9 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
   caretColor(value: ResourceColor): RichEditorAttribute;
 
   /**
-   * 设置文本选中的底板颜色。如果未设置不透明度，默认为20%不透明度。
+   * 设置文本选中高亮颜色。如果未设置不透明度或设置为完全不透明，默认使用20%不透明度。
    *
-   * @param { ResourceColor } value - 文本选中的底板颜色。<br/>默认为20%不透明度。
+   * @param { ResourceColor } value - 文本选中高亮颜色。<br/>默认为20%不透明度。
    * @returns { RichEditorAttribute } The attribute of the rich editor.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3392,8 +3584,8 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * >
    * > 从API version 18开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    *
-   * @param { Callback<RichEditorChangeValue, boolean> } callback - The triggered function before text content is about
-   *     to change.
+   * @param { Callback<RichEditorChangeValue, boolean> } callback - [RichEditorChangeValue](#richeditorchangevalue12)为
+   *     图文变化信息；boolean表示当前图文是否允许被更改，true：允许图文被更改；false：不允许图文被更改。
    * @returns { RichEditorAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3412,7 +3604,7 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * >
    * > 从API version 18开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    *
-   * @param { OnDidChangeCallback } callback - The triggered function after content changed.
+   * @param { OnDidChangeCallback } callback - 图文变化后触发的回调，用于获取变化前后的内容范围。
    * @returns { RichEditorAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3900,7 +4092,7 @@ declare type SubmitCallback = (enterKey: EnterKeyType, event: SubmitEvent) => vo
  * 自定义选择菜单弹出时触发的回调事件。
  *
  * @param { number } start - 选中内容的起始位置。
- * @param { number } end - 选中内容的终止位置。
+ * @param { number } end - 选中内容的终止位置，选中范围为[start, end)，结束位置对应的内容不包含在内。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3913,7 +4105,7 @@ declare type MenuOnAppearCallback = (start: number, end: number) => void;
  * 自定义选择菜单显示或隐藏时触发的回调事件。
  *
  * @param { number } start - 选中内容的起始位置。
- * @param { number } end - 选中内容的终止位置。
+ * @param { number } end - 选中内容的终止位置，选中范围为[start, end)，结束位置对应的内容不包含在内。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3959,10 +4151,11 @@ declare type OnHoverCallback = (status: boolean, event: HoverEvent) => void;
  * @crossplatform [since 11]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 interface RichEditorInterface {
   /**
+   * 创建富文本组件时调用。
    *
    * @param { RichEditorOptions } value - 富文本组件初始化选项。
    * @returns { RichEditorAttribute }
@@ -4016,6 +4209,6 @@ declare const RichEditorInstance: RichEditorAttribute;
  * @crossplatform [since 11]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 declare const RichEditor: RichEditorInterface;

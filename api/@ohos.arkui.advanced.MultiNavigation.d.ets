@@ -31,9 +31,8 @@ import base from '@ohos.base';
  * @noninterop
  */
 export declare enum SplitPolicy {
-
   /**
-   * Home page. Displayed in full-screen mode.
+   * Home page type. Displayed in full-screen mode. Used as the navigation start page of an app.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -44,7 +43,8 @@ export declare enum SplitPolicy {
   HOME_PAGE = 0,
 
   /**
-   * Detail page. Displayed in split-screen mode.
+   * Detail page type. Displayed in split-screen mode. Used for detail pages, forming a left-right split-screen layout
+   * with the home page on large-screen devices.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -55,7 +55,8 @@ export declare enum SplitPolicy {
   DETAIL_PAGE = 1,
 
   /**
-   * Full-screen page. Displayed in full-screen mode.
+   * Full-screen page type. Displayed in full-screen mode. Used for pages that require full-screen display, such as
+   * video playback and image browsing.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -67,15 +68,22 @@ export declare enum SplitPolicy {
 }
 
 /**
- * **MultiNavigation** is a component designed for multi-column display and routing navigation on large-screen devices.
+ * The **MultiNavigation** component is a component that supports multi-column navigation, providing multi-layer page
+ * stack management capabilities. It uses **MultiNavPathStack** to uniformly manage the navigation stacks of different
+ * page types such as the home page, detail page, and full-screen page. It supports intelligent routing strategies such
+ * as left-to-right stack clearing, making it suitable for complex navigation scenarios on large-screen devices such as
+ * tablets and foldables, optimizing the page transition experience and improving user operation efficiency.
  *
  * > **NOTE**
- *
- * > Due to the nested stack structure of **MultiNavigation**, calling APIs explicitly stated as unsupported in this
- * > document or APIs not listed in the supported API list (such as **getParent**, **setInterception**, and
- * > **pushDestination**) may lead to unpredictable issues.
- *
- * > In scenarios with deep nesting, **MultiNavigation** may encounter routing animation issues.
+ * >
+ * > - Due to the multi-level page stack structure of **MultiNavigation** (the home page, detail page, and full-screen
+ * > page each maintain their own sub-stacks, which are managed by **MultiNavPathStack**), calling APIs that are
+ * > explicitly stated as unsupported in this document or APIs not listed in the supported API list (such as
+ * > [getParent]{@link NavPathStack#getParent}, [setInterception]{@link NavPathStack#setInterception},
+ * > [pushDestination]{@link NavPathStack#pushDestination(info: NavPathInfo, animated?: boolean)}, etc.) may cause
+ * > unexpected issues.
+ * >
+ * > - In deep nesting scenarios, **MultiNavigation** may experience abnormal routing animation effects.
  *
  * @struct { MultiNavigation }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -87,9 +95,8 @@ export declare enum SplitPolicy {
  */
 @Component
 export declare struct MultiNavigation {
-
   /**
-   * Navigation stack.
+   * Route stack.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -101,7 +108,7 @@ export declare struct MultiNavigation {
   multiStack: MultiNavPathStack;
 
   /**
-   * Routing rules for loading the target page.
+   * Routing rule for loading the target page.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -113,7 +120,10 @@ export declare struct MultiNavigation {
   navDestination: NavDestinationBuildFunction;
 
   /**
-   * Callback invoked when the mode of the **MultiNavigation** component changes.
+   * Callback invoked when the **MultiNavigation** mode changes. Pass in this callback when specific business logic (
+   * such as adjusting the page layout or updating the UI state) needs to be executed upon a navigation mode change. If
+   * not passed in, the navigation mode change event is not listened for, and no callback is triggered upon a navigation
+   * mode change.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -124,7 +134,8 @@ export declare struct MultiNavigation {
   onNavigationModeChange?: OnNavigationModeChangeCallback;
 
   /**
-   * Callback invoked when the home page is on the top of the navigation stack.
+   * Callback invoked when the home page is at the top of the stack. If not passed in, the home page top-of-stack state
+   * change is not listened for.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -136,9 +147,10 @@ export declare struct MultiNavigation {
 }
 
 /**
- * Implements a navigation stack of the **MultiNavigation** component. Currently, this stack can be created only by the
- * user and cannot be obtained through callbacks. Do not use events or APIs such as **onReady** of **NavDestination** to
- * obtain the navigation stack and perform stack operations, as this may lead to unpredictable issues.
+ * The route stack of **MultiNavigation** can only be created by the user and cannot be obtained through callbacks. Do
+ * not use events or APIs such as [onReady]{@link NavDestinationAttribute#onReady} of
+ * [NavDestination]{@link ./@internal/component/ets/nav_destination} to obtain **NavPathStack** and perform stack
+ * operations, as this may cause unpredictable issues.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -148,9 +160,8 @@ export declare struct MultiNavigation {
  * @noninterop
  */
 export declare class MultiNavPathStack extends NavPathStack {
-
   /**
-   * Creates an instance of MultiNavPathStack.
+   * Creates a **MultiNavPathStack** route stack instance.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -164,9 +175,12 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Pushes the specified navigation destination page to the navigation stack.
    *
    * @param { NavPathInfo } info - Information about the navigation destination page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
-   * @param { SplitPolicy } [policy] - Policy for the current page being pushed. Default value: **DETAIL_PAGE**.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
+   * @param { SplitPolicy } [policy] - Policy for the current page pushed to the stack.<br/>Default value:
+   *     **DETAIL_PAGE**
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -180,8 +194,10 @@ export declare class MultiNavPathStack extends NavPathStack {
    * **NavigationOptions**.
    *
    * @param { NavPathInfo } info - Information about the navigation destination page.
-   * @param { NavigationOptions } [options] - Stack operation settings. Only the **animated** field is supported.
-   * @param { SplitPolicy } [policy] - Policy for the current page being pushed. Default value: **DETAIL_PAGE**.
+   * @param { NavigationOptions } [options] - Page stack operation options. Only the **animated** field is supported;
+   *     other fields are ignored. The default animation configuration is used when this parameter is omitted.
+   * @param { SplitPolicy } [policy] - Policy for the current page pushed to the stack.<br/>Default value:
+   *     **DETAIL_PAGE**
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -194,11 +210,16 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Pushes the navigation destination page specified by **name** to the navigation stack, passing the data specified by
    * **param**.
    *
-   * @param { string } name - Name of the navigation destination page.
-   * @param { Object } param - Detailed parameters of the navigation destination page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
-   * @param { SplitPolicy } [policy] - Policy for the current page being pushed. Default value: **DETAIL_PAGE**.
+   * @param { string } name - **NavDestination** page name, which must be consistent with the page name registered in
+   *     **NavDestinationBuildFunction**.
+   * @param { Object } param - Detailed parameters of the **NavDestination** page, used to pass custom data to the
+   *     target page. For details about the field specifications, see the **NavDestination** documentation.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
+   * @param { SplitPolicy } [policy] - Policy for the current page pushed to the stack.<br/>Default value:
+   *     **DETAIL_PAGE**
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -212,12 +233,19 @@ export declare class MultiNavPathStack extends NavPathStack {
    * **param**. This API uses the **onPop** callback to handle the result returned when the page is popped out of the
    * stack.
    *
-   * @param { string } name - Name of the navigation destination page.
-   * @param { Object } param - Detailed parameters of the navigation destination page.
-   * @param { base.Callback<PopInfo> } [onPop] - Callback used to handle the return result.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
-   * @param { SplitPolicy } [policy] - Policy for the current page being pushed. Default value: **DETAIL_PAGE**.
+   * @param { string } name - Name of the **NavDestination** page. It must be consistent with the page name registered
+   *     in **NavDestinationBuildFunction**.
+   * @param { Object } param - Detailed parameters of the **NavDestination** page, used to pass custom data to the
+   *     target page. For details about the field specifications, see the **NavDestination** documentation.
+   * @param { base.Callback<PopInfo> } [onPop] - Callback invoked when the page is popped from the stack to process the
+   *     return result. If this parameter is omitted, the callback is not triggered. Data can be passed to this callback
+   *     through the result parameter of the **pop**, **popToName**, and **popToIndex** methods.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
+   * @param { SplitPolicy } [policy] - Policy for the current page pushed to the stack.<br/>Default value:
+   *     **DETAIL_PAGE**
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -232,8 +260,10 @@ export declare class MultiNavPathStack extends NavPathStack {
    * the split policy of the original top page.
    *
    * @param { NavPathInfo } info - Information about the navigation destination page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -247,7 +277,8 @@ export declare class MultiNavPathStack extends NavPathStack {
    * settings through **NavigationOptions**. The new page inherits the split policy of the original top page.
    *
    * @param { NavPathInfo } info - Information about the navigation destination page.
-   * @param { NavigationOptions } [options] - Stack operation settings. Only the **animated** field is supported.
+   * @param { NavigationOptions } [options] - Page stack operation options. Only the **animated** field is supported.
+   *     Other fields are ignored. If this parameter is omitted, the default animation configuration is used.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -261,9 +292,12 @@ export declare class MultiNavPathStack extends NavPathStack {
    * inherits the split policy of the original top page.
    *
    * @param { string } name - Name of the navigation destination page.
-   * @param { Object } param - Detailed parameters of the navigation destination page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { Object } param - **NavDestination** page detailed parameters, used to pass custom data to the target page.
+   *     For specific field specifications, see the **NavDestination** documentation.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -275,8 +309,8 @@ export declare class MultiNavPathStack extends NavPathStack {
   /**
    * Removes the navigation destination pages specified by **indexes** from the navigation stack.
    *
-   * @param { Array<number> } indexes - Array of indexes of the navigation destination pages to remove.<br>Value range
-   *     of the number type: [0, +∞).
+   * @param { Array<number> } indexes - Array of index values of the **NavDestination** pages to be deleted.<br/>Value
+   *     range of the number type: [0, +∞). The operation does not take effect if the value is out of range.
    * @returns { number } Number of the navigation destination pages removed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -289,7 +323,7 @@ export declare class MultiNavPathStack extends NavPathStack {
   /**
    * Removes the navigation destination page specified by **name** from the navigation stack.
    *
-   * @param { string } name - Name of the navigation destination page to be removed.
+   * @param { string } name - Name of the **NavDestination** page to be deleted.
    * @returns { number } Number of the navigation destination pages removed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -303,13 +337,16 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Pops the top element out of the navigation stack.
    *
    * > **NOTE**
-   *
+   * >
    * > If [keepBottomPage]{@link MultiNavPathStack#keepBottomPage} is called with **true**, the bottom page of the
    * > navigation stack is retained.
    *
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
-   * @returns { NavPathInfo | undefined } Information about the navigation destination page at the top of the stack.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
+   * @returns { NavPathInfo | undefined } Information about the **NavDestination** page at the top of the stack. If the
+   *     stack is empty, **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -323,14 +360,19 @@ export declare class MultiNavPathStack extends NavPathStack {
    * result.
    *
    * > **NOTE**
-   *
+   * >
    * > If [keepBottomPage]{@link MultiNavPathStack#keepBottomPage} is called with **true**, the bottom page of the
    * > navigation stack is retained.
    *
-   * @param { Object } [result] - Custom processing result on the page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
-   * @returns { NavPathInfo | undefined } Information about the navigation destination page at the top of the stack.
+   * @param { Object } [result] - Custom page processing result. The specific content is defined by the developer. It is
+   *     recommended to include a clear business identifier and processing result data. This result will be passed to
+   *     the **onPop** callback function set when pushing to the stack. If omitted, no result data is passed.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
+   * @returns { NavPathInfo | undefined } Information about the **NavDestination** page at the top of the stack. If the
+   *     stack is empty, **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -344,8 +386,10 @@ export declare class MultiNavPathStack extends NavPathStack {
    * stack is at the top of the stack.
    *
    * @param { string } name - Name of the navigation destination page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @returns { number } Returns the index of the first navigation destination page that matches **name** from the
    *     bottom of the navigation stack; returns **-1** if no such a page is found.
    *     <br>Value range: [-1, +∞).
@@ -362,9 +406,13 @@ export declare class MultiNavPathStack extends NavPathStack {
    * stack is at the top of the stack. This API uses the **onPop** callback to pass in the page processing result.
    *
    * @param { string } name - Name of the navigation destination page.
-   * @param { Object } result - Custom processing result on the page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { Object } result - Custom page processing result. The specific content is defined by the developer. It is
+   *     recommended to include a clear business identifier and processing result data. This result will be passed to
+   *     the **onPop** callback function set when the page is pushed onto the stack.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @returns { number } Returns the index of the first navigation destination page that matches **name** from the
    *     bottom of the navigation stack; returns **-1** if no such a page is found.
    *     <br>Value range: [-1, +∞).
@@ -377,11 +425,15 @@ export declare class MultiNavPathStack extends NavPathStack {
   popToName(name: string, result: Object, animated?: boolean): number;
 
   /**
-   * Returns the navigation stack to the page specified by **index**.
+   * Pops the route stack back to the **NavDestination** page specified by **index**. If **index** is invalid (out of
+   * range), no pop operation is performed.
    *
-   * @param { number } index - Index of the navigation destination page.<br>Value range: [0, +∞).
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { number } index - Position index of the **NavDestination** page.<br/>Value range:
+   *     [0, +∞). The operation does not take effect when the value is out of range.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -391,13 +443,18 @@ export declare class MultiNavPathStack extends NavPathStack {
   popToIndex(index: number, animated?: boolean): void;
 
   /**
-   * Returns the navigation stack to the page specified by **index** and invokes the **onPop** callback to pass the page
-   * processing result.
+   * Pops the route stack back to the **NavDestination** page specified by **index**, and triggers the **onPop**
+   * callback to return the page processing result. If **index** is invalid (out of range), no pop operation is
+   * performed.
    *
-   * @param { number } index - Index of the navigation destination page.<br>Value range: [0, +∞).
-   * @param { Object } result - Custom processing result on the page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { number } index - Index of the navigation destination page.
+   *     <br>Value range: [0, +∞).
+   * @param { Object } result - Custom page processing result. The specific content is defined by the developer. It is
+   *     recommended to include an explicit business identifier and processing result data.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -411,13 +468,32 @@ export declare class MultiNavPathStack extends NavPathStack {
    * top of the stack.
    *
    * > **NOTE**
-   *
-   * > Depending on the type of page found, **MultiNavigation** performs different actions:
-   *
+   * >
+   * > Depending on the first page found with the specified name, **MultiNavigation** performs different processing:
+   * >
+   * > 1) If the found page is the topmost home page or full-screen page, no processing is performed.
+   * >
+   * > 2) If the found page is a detail page corresponding to the topmost home page, the corresponding detail page is
+   * > moved to the top of the stack.
+   * >
+   * > 3) If the found page is a non-topmost home page, the home page and all its corresponding detail pages are moved
+   * > to the top of the stack, with the relative stack relationship of the detail pages unchanged.
+   * >
+   * > 4) If the found page is a non-topmost detail page, the home page and all its corresponding detail pages are moved
+   * > to the top of the stack, and the target detail page is moved to the top of all its corresponding detail pages.
+   * >
+   * > 5) If the found page is a non-topmost full-screen page, the full-screen page is moved to the top of the stack.
+   * >
+   * > **Scenario summary:** When the page is already at the top of the stack, no operation is performed. When a detail
+   * > page is at the top of the stack, only that detail page is moved. When a non-topmost home page or detail page is
+   * > moved, its associated detail page group is also moved. When a non-topmost full-screen page is moved, only itself
+   * > is moved.
    *
    * @param { string } name - Name of the navigation destination page.
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @returns { number } Returns the index of the first navigation destination page that matches **name** from the
    *     bottom of the navigation stack; returns **-1** if no such a page is found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -432,13 +508,30 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Moves the navigation destination page specified by **index** to the top of the navigation stack.
    *
    * > **NOTE**
+   * >
+   * > Depending on the page found at the specified index, **MultiNavigation** performs different processing:
+   * >
+   * > 1) If the specified index points to the topmost home page or full-screen page, no processing is performed.
+   * >
+   * > 2) If the specified index points to a detail page corresponding to the topmost home page, the corresponding
+   * > detail page is moved to the top of the stack.
+   * >
+   * > 3) If the specified index points to a non-topmost home page, the home page and all its corresponding detail pages
+   * > are moved to the top of the stack, with the relative stack relationship of the detail pages unchanged.
+   * >
+   * > 4) If the specified index points to a non-topmost detail page, the home page and all its corresponding detail
+   * > pages are moved to the top of the stack, and the target detail page is moved to the top of all its corresponding
+   * > detail pages.
+   * >
+   * > 5) If the specified index points to a non-topmost full-screen page, the full-screen page is moved to the top of
+   * > the stack.
    *
-   * > Depending on the type of page found, **MultiNavigation** performs different actions:
-   *
-   *
-   * @param { number } index - Index of the navigation destination page.<br>Value range: [0, +∞).
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { number } index - Position index of the **NavDestination** page.<br/>Value range:
+   *     [0, +∞). The operation does not take effect if the value is out of range.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -451,12 +544,14 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Clears the navigation stack.
    *
    * > **NOTE**
-   *
+   * >
    * > If [keepBottomPage]{@link MultiNavPathStack#keepBottomPage} is called with **true**, the bottom page of the
    * > navigation stack is retained.
    *
-   * @param { boolean } [animated] - Whether to support the transition animation.<br>Default value: **true**.<br>
-   *     **true**: The transition animation is supported.<br>**false**: The transition animation is not supported.
+   * @param { boolean } [animated] - Whether to support the transition animation.
+   *     <br>Default value: **true**.
+   *     <br>**true**: The transition animation is supported.
+   *     <br>**false**: The transition animation is not supported.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -468,7 +563,8 @@ export declare class MultiNavPathStack extends NavPathStack {
   /**
    * Obtains the names of all navigation destination pages in the navigation stack.
    *
-   * @returns { Array<string> } Names of all navigation destination pages in the navigation stack.
+   * @returns { Array<string> } Returns the names of all **NavDestination** pages in the stack. The array elements are
+   *     arranged from the bottom to the top of the stack.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -480,9 +576,11 @@ export declare class MultiNavPathStack extends NavPathStack {
   /**
    * Obtains the parameter information of the navigation destination page specified by **index**.
    *
-   * @param { number } index - Index of the navigation destination page.<br>Value range: [0, +∞).
-   * @returns { unknown | undefined } **Object**: parameter information of the matching navigation destination page.
-   *     <br>**undefined**: returned when an invalid index is provided.
+   * @param { number } index - Index of the navigation destination page.
+   *     <br>Value range: [0, +∞).
+   * @returns { unknown | undefined } **Object**: Returns the parameter information of the corresponding
+   *     **NavDestination** page. The specific fields are determined by the **param** passed in **pushPath** or
+   *     **pushPathByName**.<br/>**undefined**: Returns **undefined** when the passed **index** is invalid.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -532,10 +630,23 @@ export declare class MultiNavPathStack extends NavPathStack {
   size(): number;
 
   /**
-   * Disables or enables the transition animation in the **MultiNavigation** component.
+   * Disables (**true**) or enables (**false**) all transition animations in the current **MultiNavigation**. This is
+   * suitable for scenarios where page switching performance needs to be improved or custom transition effects need to
+   * be implemented.
    *
-   * @param { boolean } disable - Whether to disable the transition animation.<br>Default value: **false**.<br>**true**:
-   *     The transition animation is disabled.<br>**false**: The transition animation is not disabled.
+   * > **NOTE**
+   * >
+   * > This configuration affects the animation effects of the following stack operation methods: **pushPath**,
+   * > **pushPathByName**, **replacePath**, **replacePathByName**, **pop**, **popToName**, **popToIndex**,
+   * > **moveToTop**, **moveIndexToTop**, and **clear**. The configuration takes effect immediately and remains
+   * > effective throughout the lifecycle of **MultiNavigation**. It is recommended to call **disableAnimation(true)**
+   * > to disable animations before batch stack operations to improve performance, and call **disableAnimation(false)**
+   * > to restore animations after the operations are complete.
+   *
+   * @param { boolean } disable - Whether to disable the transition animation.
+   *     <br>Default value: **false**.
+   *     <br>**true**:The transition animation is disabled.
+   *     <br>**false**: The transition animation is not disabled.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -545,10 +656,11 @@ export declare class MultiNavPathStack extends NavPathStack {
   disableAnimation(disable: boolean): void;
 
   /**
-   * Switches the display mode of the current top detail page in the stack.
+   * Switches the display mode of the detail page at the top of the current stack. This is suitable for scenarios such
+   * as video playback and image browsing that require full-screen display.
    *
-   * @param { boolean } [isFullScreen] - Whether to enable full-screen mode. The default value is **false**. The value
-   *     **true** means to enable full-screen mode, and **false** means to enable split-screen mode.
+   * @param { boolean } [isFullScreen] - Whether to switch to full-screen mode.<br/>Default value: false<br/>**true**:
+   *     full-screen mode; **false**: split-screen mode.
    * @returns { boolean } Whether the switching is successful.
    *     <br>**true**: The switching is successful.
    *     <br>**false**: The switching failed.
@@ -563,8 +675,10 @@ export declare class MultiNavPathStack extends NavPathStack {
   /**
    * Sets the draggable range for the home page width. If not set, the width defaults to 50% and is not draggable.
    *
-   * @param { number } minPercent - Minimum width percentage of the home page.<br>Value range: [0, 100]
-   * @param { number } maxPercent - Maximum width percentage of the home page.<br>Value range: [0, 100]
+   * @param { number } minPercent - Minimum main page width percentage.<br/>Value range: [0, 100], and must be less than
+   *     or equal to **maxPercent**.
+   * @param { number } maxPercent - Maximum main page width percentage.<br/>Value range: [0, 100], and must be greater
+   *     than or equal to **minPercent**.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -577,14 +691,17 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Sets whether to retain the bottom page when the **pop** or **clear** APIs is called.
    *
    * > **NOTE**
+   * >
+   * > **MultiNavigation** also pushes the home page onto the stack as a **NavDestination** page, so calling the **pop**
+   * > or **clear** API will also pop the bottom page of the stack.
+   * >
+   * > When an app calls this API and sets it to **true**, **MultiNavigation** retains the bottom page of the stack when
+   * > the **pop** and **clear** APIs are called.
    *
-   * > **MultiNavigation** treats the home page as a navigation destination page in the stack. By default, calling
-   * > **pop** or **clear** will also remove the bottom page.
-   * > > If this API is called with **TRUE**, **MultiNavigation** will retain the bottom page when the **pop** or
-   * > **clear** API is called.
-   *
-   * @param { boolean } keepBottom - Whether to retain the bottom page.<br>Default value: **false**.<br>**true**: The
-   *     bottom page is retained.<br>**false**: The bottom page is not retained.
+   * @param { boolean } keepBottom - Whether to retain the bottom page.
+   *     <br>Default value: **false**.
+   *     <br>**true**: The bottom page is retained.
+   *     <br>**false**: The bottom page is not retained.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -597,19 +714,21 @@ export declare class MultiNavPathStack extends NavPathStack {
    * Sets a placeholder page.
    *
    * > **NOTE**
+   * >
+   * > The placeholder page is a special page type. After being set by the app, it forms a left-right multi-column
+   * > layout with the home page by default on large-screen devices that support multi-column display, that is, the home
+   * > page on the left and the placeholder page on the right.
+   * >
+   * > When the app drawable area is less than 600 vp, a foldable switches from the expanded state to the folded state,
+   * > or a tablet switches from landscape to portrait orientation, the placeholder page is automatically popped from
+   * > the stack, and only the home page is displayed.
+   * >
+   * > When the app drawable area is greater than or equal to 600 vp, a foldable switches from the folded state to the
+   * > expanded state, or a tablet switches from portrait to landscape orientation, the placeholder page is
+   * > automatically added to form a multi-column layout.
    *
-   * > The placeholder page is a special page type. When set, it forms a default split-screen effect with the home page
-   * > on some large-screen devices, that is, the left side is the home page, and the right side is the placeholder
-   * > page.
-   *
-   * > In scenarios where the application's drawable area is less than 600 vp, or when a foldable screen switches from
-   * > the expanded state to the folded state, or when a tablet switches from landscape to portrait mode, the
-   * > placeholder page will be automatically removed, resulting in only the home page being shown.
-   * > > Conversely, when the application's drawable area is greater than or equal to 600 vp, or when a foldable screen
-   * > switches from the folded state to the expanded state, or when a tablet switches from portrait to landscape mode,
-   * > the placeholder page will be automatically added to form a split-screen.
-   *
-   * @param { NavPathInfo } info - Information about the placeholder page.
+   * @param { NavPathInfo } info - Page information of the placeholder page, used to set the placeholder page. On a
+   *     large-screen device, the placeholder page and the main page form a left-right column layout.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -623,7 +742,8 @@ export declare class MultiNavPathStack extends NavPathStack {
  * Represents the function used by the **MultiNavigation** component to load navigation destination pages.
  *
  * @param { string } name - ID of the navigation destination page.
- * @param { object } [param] - Parameters passed when the page is created during navigation.
+ * @param { object } [param] - Parameter passed when creating a page through route navigation. Default: no parameter is
+ *     passed when not provided.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Basic Definitions of InsightIntent Framework
  * @kit AbilityKit
  */
 
@@ -36,8 +36,8 @@ import { RecordData } from './@ohos.base';
  */
 declare namespace insightIntent {
   /**
-   * Enumerates the intent execution modes. It specifies the mode of execution passed when the intent is triggered by a
-   * system entry point. The supported execution modes for each intent are defined during intent development.
+   * Intent execution mode. Indicates the mode passed when a system entry triggers intent execution. The execution modes
+   * supported by each intent are defined during intent development.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -97,7 +97,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface InteractionUI {
     /**
@@ -106,7 +106,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionUIType: string;
   }
@@ -118,7 +118,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface InteractionModalUIExtension extends InteractionUI {
     /**
@@ -127,7 +127,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionUIType: 'MODAL_UIEXTENSION';
 
@@ -137,7 +137,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     bundleName: string;
 
@@ -147,7 +147,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     moduleName: string;
 
@@ -157,7 +157,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     abilityName: string;
 
@@ -167,7 +167,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     uiExtensionType: string;
 
@@ -177,7 +177,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     uri: string;
 
@@ -187,7 +187,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     parameters: Record<string, Object>;
 
@@ -197,9 +197,60 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     parameters: Record<string, RecordData>;
+  }
+
+  /**
+   * Defines the information of the Text to be displayed as the interaction UI after the current
+   * intent execution completes. Does not support distributed scenarios.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface InteractionText extends InteractionUI {
+    /**
+     * Type of the interaction UI. The value is fixed to 'TEXT'.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    interactionUIType: 'TEXT';
+
+    /**
+     * Parameters passed to the target TEXT.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic
+     */
+    parameters: Record<string, Object>;
+
+    /**
+     * Parameters passed to the target TEXT.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    parameters: Record<string, RecordData>;
+
+    /**
+     * Buttons passed to the target TEXT.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    buttons?: Array<string>;
   }
 
   /**
@@ -209,7 +260,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface InteractionInfo {
     /**
@@ -218,13 +269,13 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionUI?: InteractionUI;
   }
 
   /**
-   * Enumerates the return results of intent execution.
+   * Return result of intent execution.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -294,12 +345,12 @@ declare namespace insightIntent {
     flags?: int;
 
     /**
-     * Interaction information returned after the intent execution completes.
+     * Interactive information returned after intent execution.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionInfo?: InteractionInfo;
   }
@@ -329,6 +380,62 @@ declare namespace insightIntent {
      * @since 26.0.0 static
      */
     entityId: string;
+  }
+
+  /**
+   * Defines the struct of a file entity. It represents key file objects involved during intent execution, including
+   * intent parameters and execution results.
+   *
+   * You can define file entities by implementing this interface. The child class must be decorated with
+   * [@InsightIntentEntity](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintententity)
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface FileEntity extends IntentEntity {
+    /**
+     * ID of the file entity. The value is fixed to 'OHOS_FILE_ENTITY'.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    entityId: 'OHOS_FILE_ENTITY';
+
+    /**
+     * List of file URIs.
+     *
+     * **Note**
+     *
+     * The FLAG_AUTH_READ_URI_PERMISSION permission on the URI is granted by default. For details about the
+     * permission, see [Flags]{@link @ohos.app.ability.wantConstant:wantConstant.Flags}.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    uris: Array<string>;
+
+    /**
+     * Permission to be granted to the URI list.
+     *
+     * **Note**
+     *
+     * This parameter supports only FLAG_AUTH_READ_URI_PERMISSION, FLAG_AUTH_WRITE_URI_PERMISSION, and
+     * FLAG_AUTH_READ_URI_PERMISSION|FLAG_AUTH_WRITE_URI_PERMISSION. For details about the permissions, see
+     * [Flags]{@link @ohos.app.ability.wantConstant:wantConstant.Flags}.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    flags?: int;
   }
 
   /**
@@ -473,7 +580,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     interactionInfo?: InteractionInfo;
   }
@@ -513,6 +620,68 @@ declare namespace insightIntent {
      * @since 23 dynamic&static
      */
     FUNCTION = 1
+  }
+
+  /**
+   * The insight intent execute information.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface InsightIntentExecutionInfo {
+    /**
+     * Intent name.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    intentName: string;
+
+    /**
+     * Unique ID of an intent instance.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    instanceId: int;
+
+    /**
+     * The caller bundle name of the intent.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerBundleName: string;
+
+    /**
+     * Token ID of the caller.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerTokenId: string;
+
+    /**
+     * UID of the caller.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerUid: int;
   }
 }
 

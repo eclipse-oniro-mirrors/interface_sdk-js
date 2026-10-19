@@ -23,14 +23,10 @@
  * 应用可以获取同一账号下的可信设备，注册监听器以接收跨设备数据，并通过会话通道向指定设备发送数据。适用于需要跨设备协作和
  * 多设备数据传递的场景，可降低跨设备交互的开发复杂度。
  *
- * > **说明：**
- * >
- * > 本模块接口为系统接口，仅可在Stage模型下使用。
- *
  * @syscap SystemCapability.Communication.SoftBus.Core
  * @systemapi
  * @stagemodelonly
- * @since 26.1.0 dynamic&static
+ * @since 26.0.1 dynamic&static
  */
 declare namespace conversation {
 
@@ -40,7 +36,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   interface DeviceNodeInfo {
     /**
@@ -49,7 +45,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     networkId: string;
 
@@ -59,7 +55,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     deviceName: string;
 
@@ -69,7 +65,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     deviceTypeId: int;
 
@@ -79,7 +75,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     nearby: boolean;
 
@@ -90,7 +86,7 @@ declare namespace conversation {
      * @syscap SystemCapability.Communication.SoftBus.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     udid: string;
   }
@@ -105,7 +101,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   type DataCallback = (deviceId: string, msg: ArrayBuffer) => void;
 
@@ -122,7 +118,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getTrustedDevices(): DeviceNodeInfo[];
 
@@ -156,7 +152,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function postConversationData(
     deviceId: string,
@@ -190,7 +186,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function registerConversationListener(
     bundleName: string,
@@ -219,7 +215,7 @@ declare namespace conversation {
    * @syscap SystemCapability.Communication.SoftBus.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function unregisterConversationListener(bundleName: string, abilityName: string): void;
 }

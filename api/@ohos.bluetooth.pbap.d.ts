@@ -18,7 +18,7 @@
  * @kit ConnectivityKit
  */
 
-import type { AsyncCallback } from './@ohos.base';
+import type { AsyncCallback, Callback } from './@ohos.base';
 import type baseProfile from './@ohos.bluetooth.baseProfile';
 import type constant from './@ohos.bluetooth.constant';
 
@@ -27,6 +27,7 @@ import type constant from './@ohos.bluetooth.constant';
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @since 11 dynamic
+ * @since 26.0.1 static
  */
 declare namespace pbap {
   /**
@@ -34,6 +35,7 @@ declare namespace pbap {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   type BaseProfile = baseProfile.BaseProfile;
 
@@ -43,6 +45,7 @@ declare namespace pbap {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   type AccessAuthorization = constant.AccessAuthorization;
 
@@ -52,6 +55,7 @@ declare namespace pbap {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   enum ShareType {
     /**
@@ -60,6 +64,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     SHARE_NAME_AND_PHONE_NUMBER = 0,
     /**
@@ -68,6 +73,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     SHARE_ALL = 1,
     /**
@@ -76,6 +82,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     SHARE_NOTHING = 2
   }
@@ -89,14 +96,29 @@ declare namespace pbap {
    * @throws { BusinessError } 801 - Capability not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function createPbapServerProfile(): PbapServerProfile;
+
+  /**
+   * create the instance of PBAP client profile.
+   *
+   * @returns { PbapClientProfile } Returns the instance of pbap client profile.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function createPbapClientProfile(): PbapClientProfile;
 
   /**
    * Manager PBAP server profile.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   interface PbapServerProfile extends BaseProfile {
     /**
@@ -116,6 +138,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     disconnect(deviceId: string): void;
 
@@ -138,6 +161,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setShareType(deviceId: string, type: ShareType, callback: AsyncCallback<void>): void;
 
@@ -160,6 +184,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setShareType(deviceId: string, type: ShareType): Promise<void>;
 
@@ -181,6 +206,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getShareType(deviceId: string, callback: AsyncCallback<ShareType>): void;
 
@@ -202,6 +228,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getShareType(deviceId: string): Promise<ShareType>;
 
@@ -224,6 +251,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setPhoneBookAccessAuthorization(
       deviceId: string,
@@ -250,6 +278,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setPhoneBookAccessAuthorization(deviceId: string, authorization: AccessAuthorization): Promise<void>;
 
@@ -271,6 +300,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getPhoneBookAccessAuthorization(deviceId: string, callback: AsyncCallback<AccessAuthorization>): void;
 
@@ -292,8 +322,197 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getPhoneBookAccessAuthorization(deviceId: string): Promise<AccessAuthorization>;
+  }
+
+  /**
+   * Manage the PBAP client profile.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface PbapClientProfile extends BaseProfile {
+    /**
+     * Connect the PBAP client connection with the remote device.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
+     *     Detailed error messages can be used to assist in locating the problem.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    connect(deviceId: string): void;
+
+    /**
+     * Disconnect the PBAP client connection with the remote device.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
+     *     Detailed error messages can be used to assist in locating the problem.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    disconnect(deviceId: string): void;
+
+    /**
+     * Get the PBAP phone book sync state, only the synchronization sub-state is reported.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @returns { SyncStateType } Returns the phone book sync state.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900004 - Profile not supported.
+     * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
+     *     Detailed error messages can be used to assist in locating the problem.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSyncState(deviceId: string): SyncStateType;
+
+    /**
+     * Subscribe to the event reported when the phone book sync state changes.
+     * Only the synchronization sub-state is reported.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<SyncStateChangeParam> } callback - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onSyncStateChange(callback: Callback<SyncStateChangeParam>): void;
+
+    /**
+     * Unsubscribe to the event reported when the phone book sync state changes.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<SyncStateChangeParam> } [callback] - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed.
+     *     A non-system application calls a system API.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offSyncStateChange(callback?: Callback<SyncStateChangeParam>): void;
+  }
+
+  /**
+   * Information about the phone book sync state change.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SyncStateChangeParam {
+    /**
+     * The address of the remote device.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    deviceId: string;
+    /**
+     * Phone book sync state.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    state: SyncStateType;
+  }
+
+  /**
+   * Phone book sync state type.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum SyncStateType {
+    /**
+     * Phone book sync is idle (not started, e.g. connected but not downloading).
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PHONEBOOK_STATE_IDLE = 0,
+    /**
+     * Phone book is downloading.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PHONEBOOK_STATE_DOWNLOADING = 1,
+    /**
+     * Phone book download completed.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PHONEBOOK_STATE_DOWNLOADED = 2,
+    /**
+     * Phone book download error.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PHONEBOOK_STATE_DOWNLOAD_ERROR = 3
   }
 }
 

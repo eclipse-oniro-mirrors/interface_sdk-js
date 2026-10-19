@@ -14,21 +14,19 @@
  */
 
 /**
- * The module defines the bundle information. An application can obtain its own bundle information through 
- * [bundleManager.getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}
- * , with [bundleFlags]{@link @ohos.bundle.bundleManager:bundleManager.BundleFlag} set to the information to be 
- * contained in the returned [BundleInfo]{@link BundleInfo}.
- *
- * @file
+ * @file BundleInfo
  * @kit AbilityKit
  */
 
 import { ApplicationInfo } from './ApplicationInfo';
 import { HapModuleInfo, RouterItem } from './HapModuleInfo';
+import { Validity } from './AppProvisionInfo';
 import bundleManager from './../@ohos.bundle.bundleManager';
 
 /**
- * 应用包信息。
+ * 应用包信息，可以通过[bundleManager.getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}获取
+ * 自身的应用包信息，其中参数[bundleFlags]{@link @ohos.bundle.bundleManager:bundleManager.BundleFlag}指定所返回的
+ * [BundleInfo]{@link ./BundleInfo}中所包含的信息。
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @crossplatform [since 20]
@@ -104,9 +102,8 @@ export interface BundleInfo {
   readonly targetVersion: int;
 
   /**
-   * 应用程序的配置信息，通过调用
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_APPLICATION获取。
+   * 应用程序的配置信息，通过调用[getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，
+   * bundleFlags参数传入GET_BUNDLE_INFO_WITH_APPLICATION获取。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -116,9 +113,8 @@ export interface BundleInfo {
   readonly appInfo: ApplicationInfo;
 
   /**
-   * 应用程序的配置信息，通过调用
-   * [getBundleInfoForSelf]{@link ./../@ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_APPLICATION获取。
+   * 应用程序的配置信息，通过调用[getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，
+   * bundleFlags参数传入GET_BUNDLE_INFO_WITH_APPLICATION获取。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform
@@ -127,9 +123,8 @@ export interface BundleInfo {
   readonly appInfo: ApplicationInfo | null;
 
   /**
-   * 模块的配置信息，通过调用
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_HAP_MODULE获取。
+   * 模块的配置信息，通过调用[getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，
+   * bundleFlags参数传入GET_BUNDLE_INFO_WITH_HAP_MODULE获取。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -141,9 +136,9 @@ export interface BundleInfo {
 
   /**
    * 应用运行时需向系统申请的权限集合的详细信息，通过调用
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION获取。reqPermissionDetails数组和permissionGrantStates数组的索引顺序一一对
-   * 应，即reqPermissionDetails[2]的授权状态为permissionGrantStates[2]。
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，bundleFlags参数传入
+   * GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION获取。reqPermissionDetails数组和permissionGrantStates数组的索引顺序一一对应，即
+   * reqPermissionDetails[2]的授权状态为permissionGrantStates[2]。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -154,10 +149,9 @@ export interface BundleInfo {
   readonly reqPermissionDetails: Array<ReqPermissionDetail>;
 
   /**
-   * 申请权限的授予状态，通过调用
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION获取。reqPermissionDetails数组和permissionGrantStates数组的索引顺序一一对
-   * 应，即reqPermissionDetails[2]的授权状态为permissionGrantStates[2]。
+   * 申请权限的授予状态，通过调用[getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，
+   * bundleFlags参数传入GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION获取。reqPermissionDetails数组和permissionGrantStates数组的索引顺序一一对应，
+   * 即reqPermissionDetails[2]的授权状态为permissionGrantStates[2]。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -168,9 +162,8 @@ export interface BundleInfo {
   readonly permissionGrantStates: Array<bundleManager.PermissionGrantState>;
 
   /**
-   * 应用包的签名信息，通过调用
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_SIGNATURE_INFO获取。
+   * 应用包的签名信息，通过调用[getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，
+   * bundleFlags参数传入GET_BUNDLE_INFO_WITH_SIGNATURE_INFO获取。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform [since 20]
@@ -180,9 +173,8 @@ export interface BundleInfo {
   readonly signatureInfo: SignatureInfo;
 
   /**
-   * 应用包的签名信息，通过调用
-   * [getBundleInfoForSelf]{@link ./../@ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_SIGNATURE_INFO获取。
+   * 应用包的签名信息，通过调用[getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，
+   * bundleFlags参数传入GET_BUNDLE_INFO_WITH_SIGNATURE_INFO获取。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @crossplatform
@@ -216,8 +208,8 @@ export interface BundleInfo {
 
   /**
    * 应用的路由表配置，由hapModulesInfo下的routerMap信息，根据RouterItem中的name字段进行去重后合并得到。通过调用
-   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf(bundleFlags: int)}接
-   * 口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_HAP_MODULE和GET_BUNDLE_INFO_WITH_ROUTER_MAP获取。
+   * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口，bundleFlags参数传入
+   * GET_BUNDLE_INFO_WITH_HAP_MODULE和GET_BUNDLE_INFO_WITH_ROUTER_MAP获取。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @atomicservice
@@ -247,7 +239,6 @@ export interface BundleInfo {
 
   /**
    * 应用包的构建版本号，用于标识相同发布版本下的不同构建版本包，对应[app.json5](docroot://quick-start/app-configuration-file.md)中配置的buildVersion字段。
-   * **模型约束：** 此接口仅可在Stage模型下使用。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
@@ -255,6 +246,37 @@ export interface BundleInfo {
    * @since 23 dynamic&static
    */
   readonly buildVersion?: string;
+
+  /**
+   * 定义设备模式分发策略枚举，用于指定应用程序如何分发到设备上。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  readonly sandboxCreatorBundleName?: string;
+
+  /**
+   * 定义设备模式分发策略的枚举，用于指定应用程序如何
+   * 分布在设备上。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly deviceModeDistributionPolicy?: bundleManager.DeviceModeDistributionPolicy;
+
+  /**
+   * 双模式（2in1/平板）场景下的应用沙箱策略。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appSandboxPolicy?: bundleManager.AppSandboxPolicy;
 }
 
 /**
@@ -327,7 +349,7 @@ export interface ReqPermissionDetail {
 }
 
 /**
- * 描述权限使用的场景和时机。
+ * 描述权限的使用场景和时机，帮助开发者合理申请和使用权限。
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @crossplatform [since 20]
@@ -360,7 +382,7 @@ export interface UsedScene {
 }
 
 /**
- * 描述应用包的签名信息。
+ * 描述应用包的签名信息，可标识应用来源、确保应用完整性，并用于应用安全校验与识别。
  *
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @crossplatform [since 20]
@@ -410,6 +432,16 @@ export interface SignatureInfo {
    * @since 23 static
    */
   readonly certificate?: string;
+
+  /**
+   * 签名证书文件的有效期。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly validity?: Validity;
 }
 
 /**
@@ -429,7 +461,7 @@ export interface AppCloneIdentity {
    */
   readonly bundleName: string;
   /**
-   * 应用包的分身索引信息。
+   * 应用包的分身索引信息。取值为整数，范围：[0-5]，0表示主应用，1-5等表示分身应用。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @since 14 dynamic
@@ -561,7 +593,6 @@ export interface BundleOptions {
 
   /**
    * 应用包名。默认值为空字符串。
-   * **模型约束：** 此接口仅可在Stage模型下使用。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -572,7 +603,6 @@ export interface BundleOptions {
 
   /**
    * Ability所属的模块名称。默认值为空字符串。
-   * **模型约束：** 此接口仅可在Stage模型下使用。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -583,7 +613,6 @@ export interface BundleOptions {
 
   /**
    * Ability名称。默认值为空字符串。
-   * **模型约束：** 此接口仅可在Stage模型下使用。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
@@ -591,4 +620,85 @@ export interface BundleOptions {
    * @since 23 dynamic&static
    */
   abilityName?: string;
+}
+
+/**
+ * 应用分身偏好设置，用于配置应用启动时主应用和分身应用的选择策略。
+ *
+ * @syscap SystemCapability.BundleManager.BundleFramework.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.0 dynamic&static
+ */
+export interface AppClonePreference {
+  /**
+   * 表示应用分身偏好设置的模式。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  mode: bundleManager.AppClonePreferenceMode;
+
+  /**
+   * 表示应用分身索引。<br>当mode取值为AppClonePreferenceMode.CLONE_APP时为必填参数，用于指定具体的分身应用，取值范围为1~5的整数（系统最多支持5个分身）。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  appIndex?: int;
+}
+
+/**
+ * 定义扩展策略信息。
+ *
+ * @syscap SystemCapability.BundleManager.BundleFramework.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamic&static
+ */
+export interface BundleExtensionPolicyInfo {
+  /**
+   * 应用的Bundle名称。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly bundleName: string;
+
+  /**
+   * 应用的索引。
+   * 取值限定为整数。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appIndex: int;
+
+  /**
+   * 应用的设备模式分布策略。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly deviceModeDistributionPolicy: bundleManager.DeviceModeDistributionPolicy;
+
+  /**
+   * 应用沙箱策略。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly appSandboxPolicy: bundleManager.AppSandboxPolicy;
 }

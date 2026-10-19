@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
-  * @file
+  * @file WebView Controller
   * @kit ArkWeb
   */
 import { Resource } from './global/resource';
@@ -29,6 +29,9 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
   * This module provides the capability to manage web modules.
+  *
+  * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+  * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
   *
   * @namespace webview
   * @syscap SystemCapability.Web.Webview.Core
@@ -1237,6 +1240,10 @@ declare namespace webview {
          * Instead, the web engine will be initialized either when the web component is created
          * or when initializeWebEngine is called.
          *
+         * > **NOTE**
+         * >
+         * > -Since API version 26.0.1, when set to **true**, CookieManager interfaces can be used in asynchronous threads.
+         *
          * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
          * @static
          * @syscap SystemCapability.Web.Webview.Core
@@ -2353,6 +2360,10 @@ declare namespace webview {
     /**
      * Decide whether JIT is disabled, the default value is false.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2360,6 +2371,10 @@ declare namespace webview {
     disableJITCompilation?: boolean;
     /**
      * Decide whether WASM is disabled, the default value is false.
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2369,6 +2384,11 @@ declare namespace webview {
     /**
      * Decide whether WebGL is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2376,6 +2396,11 @@ declare namespace webview {
     disableWebGL?: boolean;
     /**
      * Decide whether PDFViewer is disabled, the default value is false.
+     *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2385,6 +2410,11 @@ declare namespace webview {
     /**
      * Decide whether MathML is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2393,6 +2423,11 @@ declare namespace webview {
     /**
      * Decide whether ServiceWorker is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2400,6 +2435,11 @@ declare namespace webview {
     disableServiceWorker?: boolean;
     /**
      * Decide whether NonProxyUDP is disabled, the default value is false.
+     *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -4741,6 +4781,38 @@ declare namespace webview {
          * @since 26.0.0 static
          */
         executeAIPageCommand(command: string): Promise<string>;
+
+        /**
+         * Sets the browser zoom factor of this web page. Both text and images are scaled simultaneously, and the page
+         * is re-laid out (reflow) to fit the width of the **Web** component.
+         * This API works independently of {@link zoom}, {@link zoomIn}, and {@link zoomOut} (visual scaling without
+         * re-layout) and {@link textZoomRatio} (text-only scaling). The zoom factor takes effect on the current web
+         * component instance only and is retained after in-page cross-document navigation.
+         *
+         * @param { double } zoomFactor - Browser zoom factor to set. The value **1** indicates that the page is not
+         *     zoomed. A value smaller than **1** indicates zoom-out, and a value greater than **1** indicates zoom-in.
+         *     <br>Value range: [0.25, 5].
+         *     <br>Values beyond this range are clamped to the boundary.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        setZoomFactor(zoomFactor: double): void;
+
+        /**
+         * Gets the current browser zoom factor of this web page.
+         *
+         * @returns { double } Current browser zoom factor. The value **1** indicates that the page is not zoomed.
+         *     <br>Value range: [0.25, 5.0]. The default value is **1**.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.2.0 static
+         */
+        getZoomFactor(): double;
     }
 
     /**
@@ -5711,7 +5783,7 @@ declare namespace webview {
          *     <br>The value should be an integer.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 static
+         * @since 26.0.1 static
          */
         setCustomErrorCode(customErrorCode: int): void;
         /**
@@ -5720,7 +5792,7 @@ declare namespace webview {
          * @returns { int } Return the custom error code that was set for this response.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 static
+         * @since 26.0.1 static
          */
         getCustomErrorCode(): int;
     }
@@ -5796,7 +5868,7 @@ declare namespace webview {
          *     error code directly to the application through onErrorReceive.
          * @throws { BusinessError } 17100021 - The resource handler is invalid.
          * @syscap SystemCapability.Web.Webview.Core
-         * @since 26.1.0 static
+         * @since 26.0.1 static
          */
         didFail(code: WebNetErrorList, completeIfNoResponse: boolean, customErrorCode: int): void;
     }
@@ -6127,14 +6199,14 @@ declare namespace webview {
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        ENTER_BACKGROUND = 1,
+        ENTER_BACKGROUND,
         /**
          * The page is automatically cleaned up by the system.
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        AUTO_CLEANUP = 2
+        AUTO_CLEANUP
     }
 
     /**
@@ -6191,16 +6263,18 @@ declare namespace webview {
          * Plays this video.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        play: ZeroParamFn<>;
+        play: ZeroParamFn<void>;
         /**
          * Pauses playback.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        pause: ZeroParamFn<>;
+        pause: ZeroParamFn<void>;
         /**
          * Seeks to a specific time point in the media.
          *
@@ -6233,23 +6307,26 @@ declare namespace webview {
          * Releases this player.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        release: ZeroParamFn<>;
+        release: ZeroParamFn<void>;
         /**
          * Enables the player to enter full screen mode.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        enterFullscreen: ZeroParamFn<>;
+        enterFullscreen: ZeroParamFn<void>;
         /**
          * Enables the player to exit full screen mode.
          *
          * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
          * @since 23 static
          */
-        exitFullscreen: ZeroParamFn<>;
+        exitFullscreen: ZeroParamFn<void>;
         /**
          * Resumes the player and its status information.
          *
@@ -6326,6 +6403,10 @@ declare namespace webview {
         /**
          * Type of the media source.
          *
+         * Read-only: No
+         *
+         * Optional: No
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
@@ -6333,12 +6414,20 @@ declare namespace webview {
         /**
          * Address of the media source.
          *
+         * Read-only: No
+         *
+         * Optional: No
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         source: string;
         /**
          * Format of the media source, which may be empty. You need to determine the format by yourself.
+         *
+         * Read-only: No
+         *
+         * Optional: No
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
@@ -6405,12 +6494,21 @@ declare namespace webview {
          * rendering at the same layer.<br>For details, see
          * [NativeEmbedDataInfo]{@link ./@internal/component/ets/web:NativeEmbedDataInfo}.
          *
+         * Read-only: No
+         *
+         * Optional: No
+         *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
         id: string;
         /**
-         * Position of the surface.
+         * Position information of the surface, used to specify the display position and size of the surface during same-
+         * layer rendering.
+         *
+         * Read-only: No
+         *
+         * Optional: No
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static

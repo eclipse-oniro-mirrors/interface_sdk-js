@@ -142,7 +142,7 @@ export declare interface GridItemAttribute extends CommonMethod {
    * 该属性需要在设置[多态样式]{@link common}前使用才能生效选中态样式。
    *
    * @param { boolean | Bindable<boolean> | undefined } value
-   * @returns { GridItemAttribute }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -167,7 +167,7 @@ export declare interface GridItemAttribute extends CommonMethod {
    * @returns { GridItemAttribute } 返回GridItemAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setGridItemOptions(value?: GridItemOptions): this;
 

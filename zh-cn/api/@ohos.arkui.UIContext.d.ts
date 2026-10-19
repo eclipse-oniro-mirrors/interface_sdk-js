@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -120,8 +120,12 @@ export class Font {
 }
 
 /**
-* class MediaQuery
-*
+ * 提供根据不同媒体类型定义不同的样式。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMediaQuery()]{@link getMediaQuery}方法获取MediaQuery实例，再通过此实例调用对应方法。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -131,10 +135,10 @@ export class Font {
 export class MediaQuery {
 
   /**
-   * Sets the media query criteria and returns the corresponding listening handle
+   * 设置媒体查询的查询条件，并返回对应的监听句柄。
    *
-   * @param { string } condition - media conditions
-   * @returns { mediaQuery.MediaQueryListener } the corresponding listening handle
+   * @param { string } condition - 媒体查询的匹配条件，具体可参考[媒体查询语法规则](docroot:../../ui/arkts-layout-development-media-query.md#语法规则)。
+   * @returns { mediaQuery.MediaQueryListener } 媒体事件监听句柄，用于注册和去注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -160,7 +164,7 @@ export class UIInspector {
   /**
    * 注册组件布局和组件绘制送显完成回调通知。例如，开发者可在组件布局完成后获取组件精确尺寸，或在送显完成后执行截图、动画同步等操作。
    *
-   * @param { string } id - 指定组件id，该id通过通用属性[id]{@link CommonMethod#id}或者[key]{@link CommonMethod#key}设置。
+   * @param { string } id - 指定组件id，该id通过通用属性id或者key设置。
    * @returns { inspector.ComponentObserver } 组件回调事件监听句柄，用于注册和取消注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -171,10 +175,9 @@ export class UIInspector {
   createComponentObserver(id: string): inspector.ComponentObserver;
 
   /**
-   * 注册组件布局和组件绘制送显完成回调通知。送显指节点的绘制命令发送到图形服务并完成显示。例如，开发者可在组件布局完成后获取组件精确尺寸，或在送显完成后执行截图、动画同步等操作。
-   * 相比createComponentObserver，新增支持传入UniqueID（系统为节点分配的唯一标识）。
+   * 注册组件布局和组件绘制送显完成回调通知。例如，开发者可在组件布局完成后获取组件精确尺寸，或在送显完成后执行截图、动画同步等操作。
    *
-   * @param { string | number } id - 类型为string时，为指定的组件id，该id通过通用属性[id]{@link CommonMethod#id}或者[key]{@link CommonMethod#key}设置。使用组件id创建监听句柄时，请确保该id对应的组件已经存在，否则后续监听无法生效。类型为number时，为系统为节点分配的唯一标识UniqueID，UniqueID通过getUniqueId获取。使用UniqueID创建监听句柄时，请确保UniqueID对应的节点已经存在，否则后续监听无法生效。number的取值范围为1~2147483647的整数。
+   * @param { string | number } id - 指定组件id，该id通过通用属性id或者key设置。
    * @returns { inspector.ComponentObserver } 组件回调事件监听句柄，用于注册和取消注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -186,8 +189,30 @@ export class UIInspector {
 }
 
 /**
-* class Router
-*
+ * 提供通过不同的url访问不同的页面，包括跳转到应用内的指定页面、同应用内的某个页面替换当前页面、返回上一页面或指定的页面等。
+ * Router还支持命名路由跳转、页面栈管理、参数传递、返回确认对话框等能力，适用于需要统一管理页面导航流程、处理页面间数据传递的场景，与UIContext集成使用可实现灵活的路由控制。
+ * 
+ * Router基于页面栈机制管理页面导航，页面栈支持的最大容量为32个页面。当调用pushUrl时，目标页面会被压入栈顶；调用replaceUrl时，当前页面会被弹出栈并销毁，目标页面压入栈顶；调用back时，栈顶页面会被弹出。
+ * 
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 10开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
+ * >
+ * > - 以下API需先使用UIContext中的[getRouter()](arkts-apis-uicontext-uicontext.md#getrouter)方法获取到Router对象，再通过该对象调用对应方法。
+ * >
+ * > - Router提供了以下两种路由方式：
+ * >
+ * >   - **普通路由**（[pushUrl](#pushurl)/[replaceUrl](#replaceurl)）：通过url路径标识目标页面，适用于简单的页面跳转场景。
+ * >
+ * >   - **命名路由**（[pushNamedRoute](#pushnamedroute)/[replaceNamedRoute](#replacenamedroute)）：
+ * >     通过name标识目标页面，在跳转之前需要将目标跳转页面通过import将页面进行加载，适用于跨包跳转场景。
+ * >
+ * >   建议在页面路径可能变化或需要统一管理路由的场景下使用命名路由，其他场景使用普通路由。根据是否需要返回上一页来选择使用哪个方法。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -197,11 +222,10 @@ export class UIInspector {
 export class Router {
 
   /**
-   * Navigates to a specified page in the application.
+   * 跳转到应用内的指定页面。使用callback异步回调。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 跳转页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -218,10 +242,16 @@ export class Router {
   pushUrl(options: router.RouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a specified page in the application. This API uses a promise to return the result.
+   * 跳转到应用内的指定页面，使用Promise异步回调。
+   * 
+   * > **说明：** 
+   * >
+   * > pushUrl()会在页面栈顶部添加新页面，页面栈深度+1（上限32页，超限报错误码100003），后续可调用back()返回到上一页面或调用replaceUrl()替换当前页面。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.RouterOptions } options - 跳转页面描述信息，包含url（目标页面路径）和params（传递的参数）等字段。
+   * **说明：** 页面栈最大支持32个页面，建议跳转前通过[getStackSize](#getstacksize23)（从API version 23开始支持）检查当前栈大小，避免超出限制导致跳转失败（错误码100003）。
+   * API version 23之前可使用[getLength](#getlengthdeprecated)检查。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -238,12 +268,12 @@ export class Router {
   pushUrl(options: router.RouterOptions): Promise<void>;
 
   /**
-   * Navigates to a specified page in the application.
+   * 跳转到应用内的指定页面。使用callback异步回调。与[pushUrl](#pushurl-1)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -260,11 +290,12 @@ export class Router {
   pushUrl(options: router.RouterOptions, mode: router.RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a specified page in the application. This API uses a promise to return the result.
+   * 跳转到应用内的指定页面，使用Promise异步回调。与[pushUrl](#pushurl)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.RouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -281,11 +312,10 @@ export class Router {
   pushUrl(options: router.RouterOptions, mode: router.RouterMode): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面。使用callback异步回调。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -303,10 +333,15 @@ export class Router {
   replaceUrl(options: router.RouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面，使用Promise异步回调。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @returns { Promise<void> } Promise that returns no value.
+   * > **说明：**
+   * >
+   * > replaceUrl()会替换页面栈栈顶页面，页面栈深度维持不变。与pushUrl()的核心差异：pushUrl()入栈新页面、栈深度 + 1，replaceUrl()不改变栈深度。
+   * > 被替换的页面会直接销毁，无法通过back()回退访问。适用场景：登录成功跳转首页（避免回退至登录页）、页面重定向、临时中转页面跳转等。
+   *
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -324,12 +359,12 @@ export class Router {
   replaceUrl(options: router.RouterOptions): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面。使用callback异步回调。与[replaceUrl](#replaceurl-1)相比，新增了mode参数，即支持设置替换页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @param { router.RouterMode } mode - 替换页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -347,11 +382,12 @@ export class Router {
   replaceUrl(options: router.RouterOptions, mode: router.RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用应用内的某个页面替换当前页面，并销毁被替换的页面，使用Promise异步回调。与[replaceUrl](#replaceurl)相比，新增了mode参数，即支持设置替换页面使用的模式。
    *
-   * @param { router.RouterOptions } options - Description of the new page.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.RouterOptions } options - 替换页面描述信息。
+   * @param { router.RouterMode } mode - 替换页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -369,13 +405,15 @@ export class Router {
   replaceUrl(options: router.RouterOptions, mode: router.RouterMode): Promise<void>;
 
   /**
-   * Returns to the previous page or a specified page.
+   * 返回上一页面或指定的页面。
    *
-   * @param { router.RouterOptions } options - Description of the target page. The **url** parameter specifies the URL
-   *     of the page to return to. If the page with the specified URL does not exist in the navigation stack, no action
-   *     is performed. If the navigation stack contains the corresponding URL, the application returns to the page with.
-   *     the largest index.<br>If no URL is set, the application returns to the previous page, and the page is not
-   *     rebuilt. The page in the page stack is not reclaimed. It will be reclaimed after being popped up.
+   * > **说明：**
+   * >
+   * > 如果之前调用了showAlertBeforeBackPage()开启了返回询问对话框，则调用back()时会弹出确认对话框：用户选择"取消"则back()不执行，选择"确认"则继续执行；
+   * > 可通过hideAlertBeforeBackPage()关闭返回询问对话框。
+   *
+   * @param { router.RouterOptions } options - 返回页面描述信息。当需要返回到指定的页面时传入此参数（通过url指定目标页面）；当只需返回上一页时可以不传入此参数。
+   * url指定返回的目标页面：若页面栈中存在该url，则返回至index最大的同名页面；若不存在则不响应操作。若url未设置，则返回上一页（页面不会重新构建，出栈后会被回收）。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -385,11 +423,11 @@ export class Router {
   back(options?: router.RouterOptions): void;
 
   /**
-   * Returns to the specified page.
+   * 返回指定的页面。
    *
-   * @param { number } index - Index of the target page to navigate to.
-   *     <br>Value range: [0, +∞).
-   * @param { Object } [params] - Parameters carried when returning to the page.
+   * @param { number } index - 返回目标页面的索引值，从0开始计数（注意：与[getStateByIndex](#getstatebyindex12)的index参数不同，后者从1开始计数）。
+   *     <br>取值范围：[0, +∞)。如果index超出页面栈范围或不存在对应页面，则不响应用户操作。
+   * @param { Object } [params] - 页面返回时携带的参数。不传入时不携带参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -399,7 +437,13 @@ export class Router {
   back(index: number, params?: Object): void;
 
   /**
-   * Clears all historical pages and retains only the current page at the top of the stack.
+   * 清空页面栈中的所有历史页面，仅保留当前页面作为栈顶页面。
+   *
+   * > **说明：**
+   * >
+   * > 调用 clear()方法会清空全部历史页面栈，最终仅保留当前页面，页面栈深度变为1。此时栈内无历史记录，back()回退接口将失效；
+   * > 但pushUrl()、replaceUrl()等跳转方法仍可正常使用，支持新增页面或替换当前页面。
+   * > 该操作具备不可逆特性，执行完成后用户无法回访任何历史页面，建议仅在退出登录、切换账号等业务场景下使用，调用前务必持久化存储关键页面状态数据。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -410,9 +454,13 @@ export class Router {
   clear(): void;
 
   /**
-   * Obtains the number of pages in the current stack.
+   * 获取当前在页面栈内的页面数量。
    *
-   * @returns { string } Number of pages in the stack. The maximum value is **32**.
+   * > **说明：**
+   * >
+   * > 从API version 10开始支持，从 API version 23开始废弃，建议使用[getStackSize](#getstacksize23)替代。
+   *
+   * @returns { string } 页面数量，页面栈支持最大数值是32。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -424,9 +472,9 @@ export class Router {
   getLength(): string;
 
   /**
-   * Obtains information about the current page state.
+   * 获取当前页面栈内的页面数量。
    *
-   * @returns { number } Number of pages in the stack. The maximum value is **32**.
+   * @returns { number } 页面数量，页面栈支持最大数值是32。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -436,9 +484,9 @@ export class Router {
   getStackSize(): number;
 
   /**
-   * Obtains information about the current page state.
+   * 获取当前页面的状态信息。
    *
-   * @returns { router.RouterState } Page routing state.
+   * @returns { router.RouterState } 页面状态信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -448,12 +496,11 @@ export class Router {
   getState(): router.RouterState;
 
   /**
-   * Obtains page information by index.
+   * 通过索引值获取对应页面的状态信息。
    *
-   * @param { number } index - Index of the target page.
-   *     <br>Value range: [1, +∞).
-   * @returns { router.RouterState | undefined } State information about the target page. **undefined** if the specified
-   *     index does not exist.
+   * @param { number } index - 表示要获取的页面索引，从1开始计数（注意：与[back](#back12)的index参数不同，后者从0开始计数）。
+   *     <br>取值范围：[1, +∞)。索引不存在时返回undefined。
+   * @returns { router.RouterState | undefined } 返回页面状态信息。索引不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -463,10 +510,10 @@ export class Router {
   getStateByIndex(index: number): router.RouterState | undefined;
 
   /**
-   * Obtains page information by url.
+   * 通过url获取匹配指定url的页面的状态信息。
    *
-   * @param { string } url - URL of the target page.
-   * @returns { Array<router.RouterState> } Page routing state.
+   * @param { string } url - 表示要获取对应页面信息的url，需使用应用内页面路径格式。如果页面栈中没有对应url的页面，返回空数组。
+   * @returns { Array<router.RouterState> } 页面状态信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -476,9 +523,11 @@ export class Router {
   getStateByUrl(url: string): Array<router.RouterState>;
 
   /**
-   * Pop up alert dialog to ask whether to back.
+   * 开启页面返回询问对话框。调用此方法后，当用户触发返回操作（如点击返回键、调用back方法）时，系统会先弹出确认对话框询问用户是否返回；用户确认后才会执行返回操作，取消则留在当前页面。
+   * 适用于表单填写页面（防止用户误触返回导致内容丢失）、重要操作确认页面（如支付、提交订单等）、内容编辑页面（用户可能有未保存的修改时）等场景。
+   * 与hideAlertBeforeBackPage()方法成对使用：调用本方法开启对话框后，建议在适当时机调用hideAlertBeforeBackPage()关闭对话框。
    *
-   * @param { router.EnableAlertOptions } options - Description of the dialog box.
+   * @param { router.EnableAlertOptions } options - 文本弹窗信息描述，包含message（弹窗提示内容）等参数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -493,7 +542,7 @@ export class Router {
   showAlertBeforeBackPage(options: router.EnableAlertOptions): void;
 
   /**
-   * Hide alert before back page.
+   * 禁用页面返回询问对话框。适用于用户已完成保存操作可以安全返回、页面状态切换后不再需要返回确认、需要动态控制返回行为等场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -504,9 +553,9 @@ export class Router {
   hideAlertBeforeBackPage(): void;
 
   /**
-   * Obtains information about the current page params.
+   * 获取发起跳转的页面往当前页传入的参数。参数在页面跳转时通过RouterOptions或NamedRouterOptions的params字段传递。
    *
-   * @returns { Object } Parameters passed from the page that initiates redirection to the current page.
+   * @returns { Object } 发起跳转的页面往当前页传入的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -516,11 +565,10 @@ export class Router {
   getParams(): Object;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面。使用callback异步回调。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -537,10 +585,10 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面，使用Promise异步回调。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息，包含name（命名路由名称）和params（传递的参数）等字段。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -557,12 +605,12 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions): Promise<void>;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面。使用callback异步回调。与[pushNamedRoute](#pushnamedroute-1)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面跳转结果回调函数。<br/>当页面跳转成功时，error为undefined。当页面跳转失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -579,11 +627,12 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions, mode: router.RouterMode, callback: AsyncCallback<void>): void;
 
   /**
-   * Navigates to a page using the named route. This API uses a promise to return the result.
+   * 跳转到指定的命名路由页面，使用Promise异步回调。与[pushNamedRoute](#pushnamedroute)相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
-   * @param { router.NamedRouterOptions } options - Page routing parameters.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.NamedRouterOptions } options - 跳转页面描述信息。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -600,11 +649,10 @@ export class Router {
   pushNamedRoute(options: router.NamedRouterOptions, mode: router.RouterMode): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用指定的命名路由页面替换当前页面，并销毁被替换的页面。使用callback异步回调。
    *
-   * @param { router.NamedRouterOptions } options - Description of the new page.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 替换页面描述信息。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -621,10 +669,10 @@ export class Router {
   replaceNamedRoute(options: router.NamedRouterOptions, callback: AsyncCallback<void>): void;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用指定的命名路由页面替换当前页面，并销毁被替换的页面，使用Promise异步回调。适用于大型应用中使用命名路由管理页面、路由路径可能变化时避免硬编码URL、模块化开发中各模块独立管理自己的命名路由等场景。
    *
-   * @param { router.NamedRouterOptions } options - Description of the new page.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { router.NamedRouterOptions } options - 替换页面描述信息。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - if the number of parameters is less than 1 or the type of the url parameter is not
    *     string.
    * @throws { BusinessError } 100001 - The UI execution context is not found. This error code is thrown only in the
@@ -639,12 +687,12 @@ export class Router {
   replaceNamedRoute(options: router.NamedRouterOptions): Promise<void>;
 
   /**
-   * Replaces the current page with another one in the application. The current page is destroyed after replacement.
+   * 用指定的命名路由页面替换当前页面，并销毁被替换的页面。使用callback异步回调。与[replaceNamedRoute](#replacenamedroute-1)相比，新增了mode参数，即支持设置替换页面使用的模式。
    *
-   * @param { router.NamedRouterOptions } options - Description of the new page.
-   * @param { router.RouterMode } mode - Routing mode.
-   * @param { AsyncCallback<void> } callback - - Callback for the router navigation result.<br>If the navigation succeeds,
-   *     **error** is **undefined**. If the navigation fails, **error** is the error object returned by the system.
+   * @param { router.NamedRouterOptions } options - 替换页面描述信息。
+   * @param { router.RouterMode } mode - 替换页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @param { AsyncCallback<void> } callback - 页面替换结果回调函数。<br/>当页面替换成功时，error为undefined。当页面替换失败时，error为系统返回的错误对象。
    * @throws { BusinessError } 401 - if the number of parameters is less than 1 or the type of the url parameter is not
    *     string.
    * @throws { BusinessError } 100001 - The UI execution context is not found. This error code is thrown only in the
@@ -663,8 +711,9 @@ export class Router {
    * router.NamedRouterOptions)}相比，新增了mode参数，即支持设置跳转页面使用的模式。
    *
    * @param { router.NamedRouterOptions } options - 替换页面描述信息。
-   * @param { router.RouterMode } mode - 跳转页面使用的模式。
-   * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
+   * @param { router.RouterMode } mode - 跳转页面使用的模式，可选Standard（标准模式）或Single（单例模式）。
+   * 建议根据页面栈管理需求选择：Standard模式适用于常规页面跳转；Single模式可避免相同页面重复入栈，适合登录页、主页等单例场景。
+   * @returns { Promise<void> } Promise对象。无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -708,7 +757,7 @@ export interface TargetInfo {
    * 指定popup或menu绑定的目标节点。<br/>**说明：** <br/>
    * 1. 当id是number时，对应组件实例的UniqueID，此id由系统保证唯一性。<br/>
    * 2. 当id是string时，对应[通用属性id]{@link CommonMethod#id}所指定的组件
-   *    此id的唯一性需由开发者确保，但实际可能会有多个。
+   *    此id的唯一性需由开发者确保，但实际可能会有多个相同id的组件的可能性。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -719,8 +768,8 @@ export interface TargetInfo {
   id: string | number;
 
   /**
-   * 目标节点所在的自定义组件的UniqueID。当上述id指定为string类型时，可通过此属性圈定范围。
-   * 方便开发者在一定范围内保证id: string的唯一性。
+   * 目标节点所在的自定义组件的UniqueID。当上述id指定为string类型且需要在指定自定义组件范围内查找目标节点时，可通过此属性圈定范围，
+   * 方便开发者在一定范围内保证id: string的唯一性。默认不指定自定义组件范围。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -732,8 +781,8 @@ export interface TargetInfo {
 }
 
 /**
-* 背景取色参数配置。
-*
+ * 背景亮度采样参数配置。背景亮度采样用于定期从组件背景区域取色，根据亮度阈值判定背景的明暗程度，以支持组件自适应明暗风格等场景。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
@@ -742,9 +791,9 @@ export interface TargetInfo {
 export interface BackgroundLuminanceSamplingConfigs {
 
   /**
-   * 取色间隔，单位为毫秒，最小值180ms。
-   *
-   * 默认值：500
+   * 取色间隔，单位为毫秒，取值范围：≥180ms。传入小于180ms的值时，自动修正为180ms。当需要更频繁的背景取色响应时可设置较小值（如180-300ms），当需要节省系统资源时可设置较大值（如500-1000ms）。
+   * 
+   * 默认值：500ms
    *
    * @default 500
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -755,8 +804,9 @@ export interface BackgroundLuminanceSamplingConfigs {
   samplingInterval?: number;
 
   /**
-   * 浅色亮度阈值：[0, 255]内的整数，设置的深色亮度阈值应小于浅色亮度阈值。
-   *
+   * 浅色亮度阈值：[0, 255]内的整数，设置的浅色亮度阈值应大于深色亮度阈值，若浅色亮度阈值不大于深色亮度阈值，将抛出异常。当需要调整浅色判定灵敏度时可自定义此值，低于默认值220的设置使浅色判定更宽松，高于默认值的设置使浅色判定
+   * 更严格。
+   * 
    * 默认值：220
    *
    * @default 220
@@ -768,8 +818,8 @@ export interface BackgroundLuminanceSamplingConfigs {
   brightThreshold?: number;
 
   /**
-   * 深色亮度阈值：[0, 255]内的整数，设置的深色亮度阈值应小于浅色亮度阈值。
-   *
+   * 深色亮度阈值：[0, 255]内的整数，设置的深色亮度阈值应小于浅色亮度阈值。当需要调整深色判定灵敏度时可自定义此值，高于默认值150的设置使深色判定更宽松，低于默认值的设置使深色判定更严格。
+   * 
    * 默认值：150
    *
    * @default 150
@@ -781,9 +831,9 @@ export interface BackgroundLuminanceSamplingConfigs {
   darkThreshold?: number;
 
   /**
-   * 相对组件的取色区域偏移，以组件自身的左上点为基准进行偏移计算。
-   *
-   * 默认使用组件自身区域
+   * 相对组件的采样区域偏移，以组件自身的左上点为基准进行偏移计算。取色区域建议设置在可见范围内，避免偏移超出组件可见区域导致采样结果不准确。
+   * 
+   * 默认取色区域与所配置组件区域一致（即不设置偏移时，取色区域等于组件自身区域）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -1369,43 +1419,41 @@ export class PromptAction {
 }
 
 /**
- * 提供统一的Dialog API。
+ * 提供统一的Dialog API，可创建并显示固定样式弹出框、自定义样式弹出框，并支持更新与关闭弹出框。适用于应用中需要弹出提示、确认、选择等弹出框交互的场景。
+ * 
+ * > **说明：**
+ * >
+ * > 以下API需先使用UIContext中的[getDialogPresenter()](arkts-apis-uicontext-uicontext.md#getdialogpresenter)方法获取到DialogPresenter对象，再通过该对象调用对应方法。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.1.0 dynamic
+ * @since 26.0.1 dynamic
  */
 export class DialogPresenter {
   /**
-   * 提供一个固定样式的对话框。
+   * 提供一个固定样式的弹出框，返回对话结果。使用Promise异步回调。适用于使用系统统一样式展示提示或确认信息的场景。
    *
-   * @param { dialog.DialogStyleOptions } [options] - 对话框选项。
-   * @returns { Promise<DialogResult> } 用于返回对话结果的Promise。
+   * @param { dialog.DialogStyleOptions } [options] - 固定样式弹出框的配置选项，用于配置弹出框的标题、副标题、消息、按钮及工作表项等内容。弹出框样式（背景、对齐、蒙层、避让等）
+   *      继承自[dialog.DialogBaseOptions](js-apis-dialog.md#dialogbaseoptions)。<br/>**说明：** dialog.DialogBaseOptions中的isModal与showInSubWindow不能同时设置为true。
+   * @returns { Promise<DialogResult> } Promise对象，返回对话结果，包含弹出框ID。
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
    * @throws { BusinessError } 103308 - The dialog cannot be opened due to subwindow create failure.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   present(options?: dialog.DialogStyleOptions): Promise<DialogResult>;
 
   /**
-   * 提供一个自定义样式的对话框，其中包含所提供的内容。
+   * 提供一个自定义样式的弹出框，其中包含所提供的内容，返回对话结果，使用Promise异步回调。适用于需要自定义弹出框内容、布局和样式的场景。
    *
-   * content参数通过联合类型接受CustomBuilder或ComponentContent：
-   * -CustomBuilder：自定义对话框内容的生成器函数。
-   * - ComponentContent：支持状态驱动更新的ComponentContent。
-   *
-   * > **说明**
-   * > isModal = true和showInSubWindow = true不能同时使用。
-   *
-   * @param { CustomBuilder | CustomBuilderWithId | ComponentContent<Object> } content - 自定义对话框内容。
-   * @param { dialog.DialogCustomOptions } [options] - 自定义对话框选项。
-   * @returns { Promise<DialogResult> } 用于返回对话结果的Promise。
+   * @param { CustomBuilder | CustomBuilderWithId | ComponentContent<Object> } content - 自定义弹出框内容，支持三种类型：CustomBuilder（自定义内容的生成器函数）、CustomBuilderWithId（支持传入ID的生成器函数）、ComponentContent（支持状态驱动更新的组件内容）。
+   * @param { dialog.DialogCustomOptions } [options] - 自定义弹出框的配置选项，用于配置弹出框的背景、对齐、蒙层、避让等样式，继承自dialog.DialogBaseOptions。
+   * @returns { Promise<DialogResult> } Promise对象，返回对话结果，包含弹出框ID。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103302 - Dialog content already exist. The ComponentContent has already been opened.
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
@@ -1414,39 +1462,40 @@ export class DialogPresenter {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   present(content: CustomBuilder | CustomBuilderWithId | ComponentContent<Object>, options?: dialog.DialogCustomOptions): Promise<DialogResult>;
 
   /**
-   * 更新已呈现的自定义对话框。
+   * 更新已弹出的自定义弹出框，无返回结果。使用Promise异步回调。适用于弹出框已弹出后需要动态更新其样式或位置的交互场景。
    *
-   * @param { ComponentContent<Object> } content - 用于标识对话框的内容。
-   * @param { dialog.DialogBaseOptions } [options] - 要更新的选项。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @param { ComponentContent<Object> } content - 用于标识弹出框的组件内容。
+   * @param { dialog.DialogBaseOptions } [options] - 要更新的弹出框选项。目前仅支持更新alignment、offset、autoCancel、maskColor。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103303 - Dialog content not found. The ComponentContent cannot be found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   update(content: ComponentContent<Object>, options?: dialog.DialogBaseOptions): Promise<void>;
 
   /**
-   * 关闭对话框。
-   * 接受对话ID（由当前返回）或ComponentContent引用。
+   * 关闭弹出框，无返回结果。使用Promise异步回调。适用于在用户完成交互后关闭弹出框的场景。
+   * 
+   * 接受弹出框ID（由[present](#present)返回的[DialogResult](js-apis-dialog.md#dialogresult)中的dialogId）或[ComponentContent](./js-apis-arkui-ComponentContent.md)引用作为target，关闭对应的弹出框。
    *
-   * @param { int | ComponentContent<Object> } target - 要取消的对话ID或组件内容。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @param { int | ComponentContent<Object> } target - 要关闭的弹出框ID或组件内容。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103303 - Dialog content not found. The ComponentContent cannot be found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   dismiss(target: int | ComponentContent<Object>): Promise<void>;
 }
@@ -1531,12 +1580,8 @@ export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, nod
 export declare type GestureListenerCallback = (info: GestureTriggerInfo) => void;
 
 /**
-* Defines the PageInfo type.
-* The value of routerPageInfo indicates the information of the router page, or undefined if the
-* frameNode does not have router page information. And the value of navDestinationInfo indicates
-* the information of the navDestination, or undefined if the frameNode does not have navDestination
-* information.
-*
+ * Router和NavDestination等页面信息，若无对应的Router或NavDestination页面信息，则对应属性为undefined。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1546,7 +1591,8 @@ export declare type GestureListenerCallback = (info: GestureTriggerInfo) => void
 export interface PageInfo {
 
   /**
-   * the property of router page information.
+   * Router页面信息，包含当前Router页面的路由状态和页面信息。当页面为Router页面时，可通过此属性获取对应的Router页面信息；
+   * 若当前页面不是Router页面，则该属性为undefined。若无对应的Router页面信息，则该属性为undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1557,7 +1603,8 @@ export interface PageInfo {
   routerPageInfo?: observer.RouterPageInfo;
 
   /**
-   * the property of navDestination information.
+   * NavDestination页面信息，包含当前NavDestination页面的导航状态和页面信息。当页面为NavDestination页面时，可通过此属性获取对应的NavDestination页面信息；
+   * 若当前页面不是NavDestination页面，则该属性为undefined。若无对应的NavDestination页面信息，则该属性为undefined。
    *
    * @type { ?observer.NavDestinationInfo }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1570,9 +1617,8 @@ export interface PageInfo {
 }
 
 /**
-* the property of OverlayManager.
-*
- * @interface OverlayManagerOptions
+* 初始化OverlayManager时所用参数。
+* 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1582,7 +1628,8 @@ export interface PageInfo {
 export interface OverlayManagerOptions {
 
   /**
-   * the render property of overlay node.
+   * 是否渲染overlay根节点，true表示渲染overlay根节点，false表示不渲染overlay根节点，默认值为true。
+   * 通过将该参数设置为false，可以解决OverlayManager显示在PhotoPickerComponent上层时，PhotoPickerComponent无法选中照片的问题。
    *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1594,7 +1641,7 @@ export interface OverlayManagerOptions {
   renderRootOverlay?: boolean;
 
   /**
-   * Set whether support backPressed event or not.
+   * 是否支持通过侧滑手势关闭OverlayManager下的ComponentContent，true表示可以通过侧滑关闭，false表示不可以通过侧滑关闭，默认值为false。
    *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1604,6 +1651,20 @@ export interface OverlayManagerOptions {
    * @since 19 dynamic
    */
   enableBackPressedEvent?: boolean;
+
+  /**
+   * 拦截Overlay侧滑返回事件的回调。
+   * 说明：
+   * 1. 注册该回调且enableBackPressedEvent设置为true时，侧滑返回事件不会自动关闭Overlay，而是调用该回调决定事件是否向下层组件传递。
+   * 2. 返回true表示拦截该事件（事件被消费，不会向下层传递）；返回false表示不拦截，事件将向下层组件透传。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  onBackPress?: OnOverlayBackPressCallback;
 }
 
 /**
@@ -2712,7 +2773,7 @@ export class UIObserver {
 }
 
 /**
-* Swiper组件的内容区信息。
+* Swiper组件的内容区信息，包含Swiper组件标识、唯一标识符及当前显示状态的子组件信息，用于获取Swiper运行时的内容区状态。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2723,7 +2784,7 @@ export class UIObserver {
 export interface SwiperContentInfo {
 
   /**
-   * Swiper组件的id。
+   * Swiper组件通过通用属性id设置的标识符，由开发者指定。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2734,7 +2795,7 @@ export interface SwiperContentInfo {
   id: string;
 
   /**
-   * Swiper子组件的唯一标识符。
+   * Swiper组件的唯一标识符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2757,7 +2818,7 @@ export interface SwiperContentInfo {
 }
 
 /**
-* Swiper子组件的信息。
+* Swiper子组件的信息，包含子组件的唯一标识符和索引，可通过SwiperContentInfo获取。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2768,7 +2829,7 @@ export interface SwiperContentInfo {
 export interface SwiperItemInfo {
 
   /**
-   * SwiperItem的uniqueId值。
+   * Swiper子组件的唯一标识符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2779,7 +2840,7 @@ export interface SwiperItemInfo {
   uniqueId: number;
 
   /**
-   * Swiper子组件在Swiper中的索引。
+   * Swiper子组件在Swiper中的索引，取值从0开始，最大值为Swiper子组件数量-1。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2791,7 +2852,7 @@ export interface SwiperItemInfo {
 }
 
 /**
- * 提供获取组件绘制区域坐标和大小的能力。
+ * 提供获取组件绘制区域坐标、大小、平移、缩放、旋转及仿射矩阵等属性信息的能力，适用于需要查询组件绘制区域信息的场景，帮助开发者获取组件布局结果。
  *
  * > **说明：**
  * >
@@ -2813,11 +2874,15 @@ export class ComponentUtils {
    * > **说明：**
    * >
    * > 该接口需要在目标组件布局完成以后获取目标组件区域大小信息，建议在[布局回调]{@link @ohos.arkui.inspector:inspector}中使用该接口。如果组件动态创建但未挂载组件树，则无法通过该接口获取正常的
-   * > 组件信息。因为组件在未挂载组件树的情况下，一般未经过UI框架正常的测量与布局，此时请确保组件正常挂载组件树后再尝试获取组件信息。
+   * > 组件信息。因为此时组件一般未经过UI框架的测量与布局，请确保组件已挂载到组件树后再尝试获取组件信息。
+   * >
+   * > 该接口返回的组件位置为布局位置，某些属性计算不支持，如位置设置类[offset]{@link CommonMethod#offset}、[markAnchor]{@link CommonMethod#markAnchor}、[Edges]{@link Edges}
+   * 和[LocalizedEdges]{@link LocalizedEdges}类型的[position]{@link CommonMethod#position}，以及图形变换类[rotate]{@link CommonMethod#rotate}、
+   * [translate]{@link CommonMethod#translate}、[scale]{@link CommonMethod#scale}、[transform]{@link CommonMethod#transform}。
+   * 可使用替代接口[getPositionToWindowWithTransform]{@link FrameNode#getPositionToWindowWithTransform}，获取组件相对于窗口且带有绘制属性的位置偏移。
    *
-   * @param { string } id - 组件唯一标识id。
-   * @returns { componentUtils.ComponentInfo } Size, position, translation, scaling, rotation, and affine matrix
-   *     information of the component.
+   * @param { string } id - 组件唯一标识id，需确保该id对应的组件已挂载到组件树且完成布局。
+   * @returns { componentUtils.ComponentInfo } 组件大小、位置、平移、缩放、旋转及仿射矩阵属性信息。
    * @throws { BusinessError } 100001 - UI execution context not found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3034,9 +3099,10 @@ export class Magnifier {
 export interface AtomicServiceBar {
 
   /**
-   * Set the visibility of the bar, except the icon.
+   * 通过该方法设置原子化服务menuBar是否可见。
    *
-   * @param { boolean } visible - whether this bar is visible.
+   * @param { boolean } visible - 原子化服务menuBar是否可见。true表示设置menuBar可见，false表示设置menuBar不可见。
+   *         从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -3045,9 +3111,10 @@ export interface AtomicServiceBar {
   setVisible(visible: boolean): void;
 
   /**
-   * Set the background color of the bar.
+   * 通过该方法设置原子化服务menuBar的背景颜色。
    *
-   * @param { Nullable< Color | number | string> } color - the color to set, undefined indicates using default.
+   * @param { Nullable< Color | number | string> } color - 原子化服务menuBar的背景颜色，undefined代表使用默认颜色。
+   *         number为HEX格式颜色，支持rgb或者argb，示例：0xffffff。string为rgb或者argb格式颜色，示例：'#ffffff'。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3056,9 +3123,9 @@ export interface AtomicServiceBar {
   setBackgroundColor(color: Nullable< Color | number | string>): void;
 
   /**
-   * Set the title of the bar.
+   * 通过该方法设置原子化服务menuBar的标题内容。
    *
-   * @param { string } content - the content of the bar.
+   * @param { string } content - 原子化服务menuBar中的标题内容。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3067,9 +3134,9 @@ export interface AtomicServiceBar {
   setTitleContent(content: string): void;
 
   /**
-   * Set the font style of the bar's title.
+   * 通过该方法设置原子化服务menuBar标题的字体样式。
    *
-   * @param { FontStyle } font - the font style of the bar's title.
+   * @param { FontStyle } font - 原子化服务menuBar标题中的字体样式。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3078,9 +3145,10 @@ export interface AtomicServiceBar {
   setTitleFontStyle(font: FontStyle): void;
 
   /**
-   * Set the color of the icon on the bar.
+   * 通过该方法设置原子化服务menuBar图标的颜色。
    *
-   * @param { Nullable< Color | number | string> } color - the color to set to icon, undefined indicates using default.
+   * @param { Nullable< Color | number | string> } color - 原子化服务menuBar图标的颜色，undefined代表使用默认颜色。
+   *         number为HEX格式颜色，支持rgb或者argb，示例：0xffffff。string为rgb或者argb格式颜色，示例：'#ffffff'。从API version 12开始，在原子化服务中该参数将被忽略。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice [since 12]
@@ -3089,9 +3157,9 @@ export interface AtomicServiceBar {
   setIconColor(color: Nullable< Color | number | string>): void;
 
   /**
-   * Get size and position of the bar.
+   * 获取原子化服务menuBar相对窗口的布局信息。
    *
-   * @returns { Frame } The size and position of bar in vp relative to window.
+   * @returns { Frame } 原子化服务menuBar的大小和位置。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3101,10 +3169,10 @@ export interface AtomicServiceBar {
   getBarRect(): Frame;
 
   /**
-   * 当appbar的组件大小发生变化时会触发调用。
+   * 当原子化服务menuBar（即AtomicServiceMenuBar，右上角菜单功能胶囊）的大小或位置发生变化时，触发注册的回调，返回menuBar最新的布局信息。
+   * 该布局信息包含了menuBar的大小和位置，其中位置已考虑左右margin的影响。
    *
-   * @param { Callback<Frame> } callback - 回调函数的参数为Frame。当传入的callback为undefined时表示取消监听appbar组件的大小变化。
-   *     回调函数触发时，回调函数的参数不可能为undefined或者null。
+   * @param { Callback<Frame> } callback - AtomicServiceMenuBar布局变化时的回调，返回变化后的布局信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3171,7 +3239,7 @@ export interface GestureTriggerInfo {
 }
 
 /**
- * 该参数用于指定需要监听的手势回调阶段（传入空数组将无效），仅当手势触发指定阶段时才会发送通知。
+ * 该参数用于指定需要监听的手势回调阶段（传入空数组时不监听任何手势回调阶段），仅当手势触发指定阶段时才会发送通知。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3182,7 +3250,7 @@ export interface GestureTriggerInfo {
 export interface GestureObserverConfigs {
 
   /**
-   * 手势事件对象。
+   * 需要监听的手势回调阶段。传入空数组将无效，仅当手势触发指定阶段时才会发送通知。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3194,7 +3262,19 @@ export interface GestureObserverConfigs {
 }
 
 /**
- * Represents a dynamic synchronization scene.
+ * 提供组件自定义场景下相关帧率的配置。
+ * 
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 12开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
+ * >
+ * > - 以下接口需先使用UIContext中的
+ * >   [requireDynamicSyncScene](arkts-apis-uicontext-uicontext.md#requiredynamicsyncscene12)方法获取DynamicSyncScene对象，
+ * >   再通过此实例调用对应方法。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3204,7 +3284,9 @@ export interface GestureObserverConfigs {
 export class DynamicSyncScene {
 
   /**
-   * Sets the FrameRateRange of the DynamicSyncScene.
+   * 设置期望帧率范围。
+   * 
+   * 最终结果不一定是设置的帧率，会由系统能力做综合决策，尽量满足开发者的设置帧率。
    *
    * @param { ExpectedFrameRateRange } range - The range of frameRate.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3215,7 +3297,7 @@ export class DynamicSyncScene {
   setFrameRateRange(range: ExpectedFrameRateRange): void;
 
   /**
-   * Gets the FrameRateRange of the DynamicSyncScene.
+   * 获取期望帧率范围。
    *
    * @returns { ExpectedFrameRateRange } The range of frameRate.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3252,6 +3334,10 @@ export class SwiperDynamicSyncScene extends DynamicSyncScene {
 
 /**
  * 提供Marquee组件动态帧率的配置能力，支持在Marquee组件运行动画时动态调节帧率，优化性能和功耗，适用于需要在跑马灯场景中平衡动画流畅度和系统资源消耗的场景。
+ *
+ * > **说明：**
+ * >
+ * > - MarqueeDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext}，对应[Marquee]{@link ./@internal/component/ets/marquee}的动态帧率场景。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3292,12 +3378,12 @@ export class DragController {
    * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。 <br/> **说明：** <br/>不支持全局builder。如果builder中使用了
    *     [Image]{@link image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link ImageAttribute#syncLoad}为true。该builder只用于生成当次拖拽中显示的图
    *     片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
-   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息对象，用于指定发起拖拽的触摸点、拖拽过程中携带的数据、额外信息等拖拽配置信息。
    * @param { AsyncCallback<{ event: DragEvent, extraParams: string }> } callback - Callback used to return the result.<br>
    *     - **event**: drag event information that includes only the drag result.<br>- **extraParams**: extra
    *     information about the drag event. [since 11 - 11]
-   * @param { AsyncCallback<dragController.DragEventParam> } callback - 拖拽结束返回结果的回调<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>-
-   *     extraParams：拖拽事件额外信息。 [since 12]
+   * @param { AsyncCallback<dragController.DragEventParam> } callback - 拖拽结束返回结果的回调，回调参数包括err和data：err表示错误信息，data表示拖拽事件结果；
+   * data.event为拖拽事件信息，仅包括拖拽结果，data.extraParams为拖拽事件额外信息。 [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3315,12 +3401,15 @@ export class DragController {
   /**
    * 主动发起拖拽能力，传入拖拽发起后跟手效果所拖拽的对象以及携带拖拽信息。通过Promise返回拖拽事件结果。
    *
-   * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。
-   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。当仅需通过builder生成当次拖拽中显示的图片时，使用CustomBuilder；当需要同时提供pixelMap、builder或extraInfo等拖拽项信息时，使用DragItemInfo。
+   * <br> **说明：** <br>CustomBuilder不支持全局builder。如果builder中使用了Image组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link ImageAttribute#syncLoad}为true。
+   * 该builder只用于生成当次拖拽中显示的图片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息对象。
    * @returns { Promise<{ event: DragEvent, extraParams: string }> } Callback used to return the result.
    *     <br>- **event**: drag event information that includes only the drag result.
    *     <br>- **extraParams**: extra information about the drag event. [since 11 - 11]
-   * @returns { Promise<dragController.DragEventParam> } A Promise with the drag event information. [since 12]
+   * @returns { Promise<dragController.DragEventParam> } Promise对象。resolve返回拖拽结束结果：
+   * <br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。reject返回错误信息。 [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3507,9 +3596,15 @@ export class MeasureUtils {
 }
 
 /**
- * 提供控制焦点的能力，如清除、移动和激活焦点等功能。
+ * 提供控制焦点的能力，如清除、移动和激活焦点等功能，适用于需要管理页面或组件焦点状态、控制焦点流转的场景，可帮助开发者优化键盘等输入方式下的焦点交互体验。
  *
  * > **说明：**
+ *
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > - 本Class首批接口从API version 12开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
  * >
  * > 以下API需先使用UIContext中的[getFocusController()]{@link UIContext#getFocusController}方法获取FocusController实例，再通过该实例调用对应方法。
  *
@@ -3533,7 +3628,7 @@ export class FocusController {
   clearFocus(): void;
 
   /**
-   * 通过组件的id将焦点转移到组件树对应的实体节点，当前帧生效。
+   * 通过组件的id将焦点转移到组件树对应的实体节点，当前帧生效，适用于需要在表单校验、页面初始化或键盘操作流程中主动将焦点定位到指定组件的场景。
    *
    * @param { string } key - 节点对应的[组件标识]{@link common}。
    * @throws { BusinessError } 150001 - the component cannot be focused.
@@ -3561,7 +3656,7 @@ export class FocusController {
   activate(isActive: boolean, autoInactive?: boolean): void;
 
   /**
-   * 返回UI实例的焦点激活态。
+   * 返回UI实例的焦点激活态。适用于需要根据当前焦点激活状态决定是否启用方向键走焦或更新焦点提示的场景。
    *
    * 焦点激活态可参考[基础概念：焦点激活态](docroot://ui/arkts-common-events-focus-event.md#基础概念)。
    *
@@ -3589,7 +3684,7 @@ export class FocusController {
   setAutoFocusTransfer(isAutoFocusTransfer: boolean): void;
 
   /**
-   * 设置按键事件处理的优先级。
+   * 设置按键事件处理的优先级，适用于父子组件都需要处理按键事件时，开发者需要控制按键事件优先分发策略的场景。
    *
    * @param { KeyProcessingMode } mode - 按键处理模式。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3611,7 +3706,7 @@ export class FocusController {
 export type PointerStyle = pointer.PointerStyle;
 
 /**
- * 提供光标样式设置的能力。
+ * 提供鼠标光标样式设置的能力，支持恢复默认鼠标光标样式、设置系统鼠标光标样式以及设置自定义鼠标光标样式，适用于需要根据界面交互状态动态调整鼠标光标显示效果的场景，有助于提升界面交互提示的清晰度。
  *
  * > **说明：**
  * >
@@ -3629,6 +3724,10 @@ export class CursorController {
 
   /**
    * 恢复默认的光标样式。
+   *
+   * > **说明：**
+   * >
+   * > 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3659,12 +3758,14 @@ export class CursorController {
    *
    * > **说明：**
    * >
-   * > 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
+   * > - 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
+   * > - 仅支持设置静态图片，不支持设置动态图片。
    *
    * @param { image.PixelMap } value - 自定义鼠标光标样式的像素图。最大尺寸为256*256px，超过该尺寸时设置自定义鼠标光标样式不生效。
-   * @param { int } [focusX] - 自定义光标的焦点X坐标。焦点指的是鼠标实际点击的位置，焦点设置为(0, 0)时表示图片左上角为实际点击位置。<br/>默认值：0<br/>单位：px<br/>取值范围：
-   *     [0, +∞)
-   * @param { int } [focusY] - 自定义光标的焦点Y坐标。<br/>默认值：0<br/>单位：px<br/>取值范围：[0, +∞)
+   * @param { int } [focusX] - 自定义光标焦点的X坐标。以光标图片左上角为原点，向右为正方向。该焦点将在显示时与系统鼠标指针的屏幕坐标对齐，鼠标的点击、拖拽等操作均以此点为准。
+   * <br>默认值：0<br>单位：px<br>取值范围：[0, 图片宽度]，超出取值范围时按默认值处理。
+   * @param { int } [focusY] - 自定义光标焦点的Y坐标。以光标图片左上角为原点，向下为正方向。结合focusX共同确定图像内代表实际交互位置的点。
+   * <br>默认值：0<br>单位：px<br>取值范围：[0, 图片高度]，超出取值范围时按默认值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -3674,13 +3775,15 @@ export class CursorController {
 }
 
 /**
- * class ContextMenuController
- *
- * 提供控制菜单关闭的能力。
+ * 提供控制菜单关闭的能力。开发者可以通过此接口在特定场景下（如定时关闭、点击外部区域关闭等）主动关闭菜单。
  *
  * > **说明：**
  * >
+ * > - 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
  * > - 本Class首批接口从API version 12开始支持。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
  *
  * > - 以下API需先使用UIContext中的[getContextMenuController()]{@link UIContext#getContextMenuController}方法获取
  * > ContextMenuController实例，再通过此实例调用对应方法。
@@ -3694,7 +3797,7 @@ export class CursorController {
 export declare class ContextMenuController {
 
   /**
-   * 关闭菜单
+   * 关闭当前通过bindContextMenu展示的菜单。若当前无菜单展示，调用本方法无效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3725,7 +3828,11 @@ export abstract class FrameCallback {
   /**
    * 在下一帧进行渲染时，该方法将被执行。
    *
-   * @param { number } frameTimeInNano - 下一帧渲染开始执行的时间，以纳秒为单位。<br/>取值范围：[0, +∞)
+   * 继承FrameCallback类并重写该方法后，可配合[UIContext]{@link @ohos.arkui.UIContext}中的
+   * [postFrameCallback]{@link UIContext#postFrameCallback}和
+   * [postDelayedFrameCallback]{@link UIContext#postDelayedFrameCallback}使用。
+   * 
+   * @param { number } frameTimeInNano - 下一帧渲染开始执行的时间，以纳秒为单位，由系统回调时传入，开发者无需手动传入。<br>取值范围：[0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3735,9 +3842,10 @@ export abstract class FrameCallback {
   onFrame(frameTimeInNano: number): void;
 
   /**
-   * 在下一帧渲染结束时，如果距离下一个Vsync信号到来还有1ms以上的剩余时间，该方法将被执行，否则将顺延至后面的帧。
+   * 下一帧渲染任务结束后，若当前时间到下一个VSync信号的剩余时间大于1ms，则执行该回调；若剩余时间小于等于1ms，则将回调顺延至后续某一帧，待当前时间到下一个VSync信号的剩余时间大于1ms时执行。
+   * 若当前没有已请求的下一帧，系统会自动请求一帧。
    *
-   * @param { number } timeLeftInNano - 这一帧剩余的空闲时间，以纳秒为单位。<br/>取值范围：[0, +∞)
+   * @param { number } timeLeftInNano - 这一帧剩余的空闲时间，以纳秒为单位，由系统回调时传入，开发者无需手动传入。<br>取值范围：[0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4021,7 +4129,7 @@ export class ComponentSnapshot {
    * @param { NodeIdentity } end - 范围结束的组件的ID。
    * @param { boolean } isStartRect - 范围是否以开始组件的外接矩形为准。<br/>true表示以开始组件的外接矩形为准，false表示以结束组件的外接矩形为准。<br/>默认值为true。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数，不支持region参数。
-   * @returns { Promise<image.PixelMap> } Result of the snapshot.
+   * @returns { Promise<image.PixelMap> } 截图返回的结果。
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 100001 - Invalid ID detected.
    * @throws { BusinessError } 160003 - Unsupported color space or dynamic range mode in snapshot options. [since 23]
@@ -4579,9 +4687,7 @@ export class UIContext {
    * >
    * > 返回的UIContext对象可能指向一个已销毁的UI实例，通常在由已销毁的实例抛出异步任务时出现。建议通过[isAvailable]{@link UIContext#isAvailable}接口判断其有效性。
    *
-   * @returns { UIContext | undefined } UIContext of the current
-   *     [calling scope](docroot://ui/arkts-global-interface.md#basic-concepts). Returns **undefined** if the calling
-   *     scope is ambiguous.
+   * @returns { UIContext | undefined } 当前[调用作用域](../../ui/arkts-global-interface.md#基本概念)的UIContext，调用作用域不明确时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4831,7 +4937,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   getDialogPresenter(): DialogPresenter;
 
@@ -5138,9 +5244,11 @@ export class UIContext {
   getKeyboardAvoidMode(): KeyboardAvoidMode;
 
   /**
-   * 设置当前页面的像素取整模式。
+   * 设置当前页面的像素取整模式，影响整个页面的像素取整时机。通常在使用[组件级像素取整]{@link pixelRound}无法解决像素取整问题时，可尝试采用PIXEL_ROUND_AFTER_MEASURE模式。
    *
-   * @param { PixelRoundMode } mode - 像素取整模式。<br />默认值：PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH<br/>设置异常值时，该属性为默认值。
+   * @param { PixelRoundMode } mode - 像素取整模式，可选值：<br>- PIXEL_ROUND_ON_LAYOUT_FINISH：在布局完成后进行像素取整，适合大多数场景。
+   *      <br>- PIXEL_ROUND_AFTER_MEASURE：在组件测量大小结束后进行像素取整，适用于使用组件级像素取整无法解决的像素取整问题场景，但最终大小相比PIXEL_ROUND_ON_LAYOUT_FINISH模式可能扩大1px。
+   *      <br>设置异常值时，按PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH模式处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5150,9 +5258,9 @@ export class UIContext {
   setPixelRoundMode(mode: PixelRoundMode): void;
 
   /**
-   * 获取当前应用的像素取整模式。
+   * 获取当前页面的像素取整模式。
    *
-   * @returns { PixelRoundMode } Pixel rounding mode of the current page.
+   * @returns { PixelRoundMode } - 当前页面的像素取整模式，取值包括：<br>- PIXEL_ROUND_ON_LAYOUT_FINISH（对应数值：0）：在布局完成后进行像素取整。<br>- PIXEL_ROUND_AFTER_MEASURE（对应数值：1）：在组件测量大小结束后进行像素取整。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5176,9 +5284,9 @@ export class UIContext {
   dispatchKeyEvent(node: number | string, event: KeyEvent): boolean;
 
   /**
-   * Get AtomicServiceBar.
+   * 获取AtomicServiceBar对象，通过该对象设置原子化服务menuBar的属性。
    *
-   * @returns { Nullable<AtomicServiceBar> } The atomic service bar.
+   * @returns { Nullable<AtomicServiceBar> } 如果是原子化服务则返回AtomicServiceBar类型，否则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6504,8 +6612,12 @@ export const enum GestureListenerType {
 }
 
 /**
-* 自定义键盘接续特性的枚举。
-*
+ * 指定自定义键盘切换时是否接续。
+ *
+ * 设置为接续，切换输入框时，自定义键盘不会收起和重新拉起。
+ *
+ * 设置为不接续，切换输入框时，自定义键盘会收起并重新拉起。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -6515,7 +6627,7 @@ export const enum GestureListenerType {
 export const enum CustomKeyboardContinueFeature {
 
   /**
-   * 使能自定义键盘接续。
+   * 接续。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6526,7 +6638,7 @@ export const enum CustomKeyboardContinueFeature {
   ENABLED = 0,
 
   /**
-   * 关闭自定义键盘接续。
+   * 不接续。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -287,7 +287,11 @@ declare namespace config {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  function enableAbilityWithCallback(name: string, capability: Array<accessibility.Capability>, connectCallback: ConnectCallback): Promise<void>;
+  function enableAbilityWithCallback(
+    name: string,
+    capability: Array<accessibility.Capability>,
+    connectCallback: ConnectCallback
+  ): Promise<void>;
 
   /**
    * 关闭辅助扩展，需与[config.enableAbility]{@link config.enableAbility}或

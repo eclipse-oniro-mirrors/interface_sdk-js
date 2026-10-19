@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file ComponentSnapshot
  * @kit ArkUI
  */
 
@@ -75,7 +75,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component width].
+     * Value range: [0, Component width]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -90,7 +91,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component width].
+     * Value range: [0, Component width]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -105,7 +107,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component height].
+     * Value range: [0, Component height]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -120,7 +123,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component height].
+     * Value range: [0, Component height]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -158,7 +162,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component width].
+     * Value range: [0, Component width]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -175,7 +180,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component width].
+     * Value range: [0, Component width]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -192,7 +198,8 @@ declare namespace componentSnapshot {
      *
      * Unit: px.
      *
-     * Value range: [0, Component height].
+     * Value range: [0, Component height]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -203,11 +210,14 @@ declare namespace componentSnapshot {
     top: number;
 
     /**
-     * Y-coordinate of the lower right corner of the rectangular region.
+     * For LTR layouts: Y-coordinate of the lower right corner of the rectangular region.
+     *
+     * For RTL layouts: Y-coordinate of the lower left corner of the rectangular region.
      *
      * Unit: px.
      *
-     * Value range: [0, Component height].
+     * Value range: [0, Component height]. If the value is out of range, the snapshot fails and error code 401 is
+     * returned.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -219,7 +229,8 @@ declare namespace componentSnapshot {
   }
 
   /**
-   * Defines the snapshot region rect type.
+   * Represents the region of a component to be captured in a snapshot. It can take one of the following types:
+   * SnapshotRegion or LocalizedSnapshotRegion.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -242,8 +253,8 @@ declare namespace componentSnapshot {
     /**
      * Color space used for the snapshot.
      *
-     * If the target component's color space is known, specify it through **colorSpace** and set **isAuto** to **false**
-     * to achieve optimal snapshot quality.
+     * If the color space used by the component to be captured is known, you can specify it through **colorSpace**
+     * and set **isAuto** to **false** to achieve the expected snapshot effect.
      *
      * The value can be **DISPLAY_P3**, **SRGB**, or **DISPLAY_BT2020_SRGB** in
      * [colorSpaceManager.ColorSpace]{@link @ohos.graphics.colorSpaceManager:colorSpaceManager.ColorSpace}.
@@ -376,9 +387,9 @@ declare namespace componentSnapshot {
   interface SnapshotSizeLimitation {
 
     /**
-     * Maximum width of a component screenshot.
+     * Maximum width for the component snapshot.
      *
-     * Value range: (-∞, +∞)
+     * Value range: [0, +∞).
      *
      * Unit: px.
      *
@@ -391,9 +402,9 @@ declare namespace componentSnapshot {
     maxWidth: int;
 
     /**
-     * Maximum height of a component screenshot.
+     * Maximum height for the component snapshot.
      *
-     * Value range: (-∞, +∞)
+     * Value range: [0, +∞).
      *
      * Unit: px.
      *
@@ -428,7 +439,9 @@ declare namespace componentSnapshot {
      * **NOTE**
      *
      * Avoid capturing images that are excessively large, ideally not larger than the screen size. If the size of the
-     * image to capture exceeds device-specific underlying limits, the capture will fail.
+     * image to capture exceeds device-specific underlying limits, the capture will fail. The underlying limit varies
+     * by device. You can obtain the specific limit through the
+     * [getSizeLimitation]{@link @ohos.arkui.UIContext:ComponentSnapshot#getSizeLimitation} API.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -575,8 +588,8 @@ declare namespace componentSnapshot {
    * > output snapshot does not represent the component in the way it looks when the loading is successfully completed.
    *
    * @param { CustomBuilder } builder - Builder of the custom component.<br>Note: The global builder is not supported.<
-   *     br>If the root component of the builder has a width or height of zero, the snapshot operation will fail with
-   *     error code 100001.
+   *     br>If the width and height of the root component of the builder are both 0, the snapshot operation fails
+   *     and error code 100001 is thrown.
    * @param { AsyncCallback<image.PixelMap> } callback - Callback used to return the result. The coordinates and size of
    *     the offscreen component's drawing area can be obtained through the callback.
    * @param { number } [delay] - Delay time for triggering the screenshot command. When the layout includes an image
@@ -615,8 +628,8 @@ declare namespace componentSnapshot {
 
   /**
    * Renders a custom component in the application background and outputs its snapshot. This API uses a promise to
-   * return the result. The coordinates and size of the offscreen component's drawing area can be obtained through the
-   * callback.
+   * return the result. The coordinates and size of the offscreen component's drawing area can be obtained through
+   * the promise.
    *
    * > **NOTE**
    * >
@@ -635,8 +648,8 @@ declare namespace componentSnapshot {
    * > output snapshot does not represent the component in the way it looks when the loading is successfully completed.
    *
    * @param { CustomBuilder } builder - Builder of the custom component.<br>Note: The global builder is not supported.<
-   *     br>If the root component of the builder has a width or height of zero, the snapshot operation will fail with
-   *     error code 100001.
+   *     br>If the width and height of the root component of the builder are both 0, the snapshot operation fails
+   *     and error code 100001 is thrown.
    * @param { number } [delay] - Delay time for triggering the screenshot command. When the layout includes an image
    *     component, it is necessary to set a delay time to allow the system to decode the image resources. The decoding
    *     time is subject to the resource size. In light of this, whenever possible, use pixel map resources that do not
@@ -682,8 +695,12 @@ declare namespace componentSnapshot {
    * > update, the re-rendered content will not be included in the obtained snapshot.
    *
    * @param { string } id - [ID]{@link common} of the target component.
-   * @param { SnapshotOptions } [options] - Custom settings of the snapshot.
-   * @returns { image.PixelMap } Promise used to return the result.
+   * @param { SnapshotOptions } [options] - Custom options related to the snapshot, which are passed when custom
+   *     snapshot behavior is needed, for example, setting the scale ratio, waiting for rendering to complete,
+   *     snapshot area, color space, or dynamic range. Default snapshot configuration is used when this parameter
+   *     is not passed.
+   * @returns { image.PixelMap } **PixelMap** object of the component snapshot, which represents the captured
+   *     component image.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.

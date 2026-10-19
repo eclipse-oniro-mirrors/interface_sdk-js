@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Kiosk Mode Management
  * @kit AbilityKit
  */
 
@@ -42,7 +42,8 @@ declare namespace kioskManager {
    *
    * @param { UIAbilityContext } context - Context of the UIAbility that needs to enter kiosk mode.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
    * @throws { BusinessError } 16000110 - The current application is not in Kiosk app list and cannot enter Kiosk mode.
    * @throws { BusinessError } 16000111 - The system is already in Kiosk mode and cannot enter Kiosk mode again.
@@ -62,7 +63,8 @@ declare namespace kioskManager {
    *
    * @param { UIAbilityContext } context - Context of the UIAbility that needs to exit kiosk mode.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
    * @throws { BusinessError } 16000110 - The current application is not in Kiosk app list and cannot enter Kiosk mode.
    * @throws { BusinessError } 16000112 - The current application is not in Kiosk mode and cannot exit Kiosk mode.
@@ -78,8 +80,9 @@ declare namespace kioskManager {
    * the application that has entered Kiosk mode. This API uses a promise to return the result.
    *
    * @returns { Promise<KioskStatus> } Promise used to return the kiosk mode status information.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Failed to connect to the system service.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi

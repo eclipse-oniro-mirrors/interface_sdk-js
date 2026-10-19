@@ -14,18 +14,59 @@
  */
 
 /**
- * The **inputMethodList** module is oriented to system applications and input method applications.
- * It provides APIs for implementing an input method list. This list displays the default input method subtypes and
- * third-party input methods. Users can use this list to switch from the default input method to another input method.
+ * The **@ohos.inputMethodList** module is a UI control module oriented to system apps and input method apps. It
+ * provides an input method list dialog component.
  * <br>
- * <br> > **NOTE**
+ * <br>This module is a declarative UI component module. It provides the `InputMethodListDialog`
+ * custom dialog component, which is used to display the default input method subtypes and the list of
+ * third-party input method apps. It optionally provides an entry for switching input method modes
+ * (such as one-handed mode and full-screen mode).
+ * <br>
+ * <br>Through the dialog component provided by this module, users can view all input methods installed in the current
+ * system in the input method list and switch from the default input method to another input method. For preset system
+ * input methods, mode options (such as one-handed mode and full-screen mode) can also be displayed in the list for
+ * users to switch the display mode of the input method keyboard.
+ * <br>
+ * <br>This module is used when a system app or an input method app needs to provide an entry for
+ * input method switching. Typical scenarios include the input method management page in the system settings app,
+ * the settings interface of an input method app, or other system-level interfaces that require users to select and
+ * switch input methods. This component can be called only by system apps and input method apps. The `patternOptions`
+ * parameter is supported only by preset system input methods.
+ * <br>
+ * <br>The relationship between this module and other modules in the input method framework is as follows:
+ * <br>
+ * <br>- [@ohos.inputMethod]{@link @ohos.inputMethod:inputMethod}: Targeted at general foreground apps. Provides input
+ * method control and management capabilities (such as showing/hiding the soft keyboard and switching input methods).
+ * It can switch input methods through the `switchInputMethod` API, and is suitable for scenarios that do not require
+ * an interactive selection interface.
+ * <br>- [@ohos.inputMethodEngine]{@link @ohos.inputMethodEngine:inputMethodEngine}:
+ * Targeted at input method apps. Provides input method server capabilities such as creating soft keyboard windows and
+ * inserting/deleting characters.
+ * <br>- **@ohos.inputMethodList** (this module): Targeted at system apps and input method apps.
+ * Provides a visualized input method list dialog component, and is suitable for scenarios that require
+ * an interactive selection interface.
+ * <br>
+ * <br> > NOTE
  * <br> >
- * <br> > This component is supported since API version 11.
- * Updates will be marked with a superscript to indicate their earliest API version.
+ * <br> > This component is supported since API version 11. New APIs in later versions are marked with a superscript to
+ * <br> > indicate their initial version.
+ * <br> > This module contains the following key components and interfaces:
  * <br>
- * <br>###### Child Components
+ * | Interface/Struct | Description |
+ * |---|---|
+ * | InputMethodListDialog | Input method list dialog component, declared using the `@CustomDialog` decorator.
+ * Displays the input method list and an optional mode switching entry, which is the core UI component of this module.
+ * A `CustomDialogController` must be passed in to control the opening and closing of the dialog,
+ * and `PatternOptions` can be optionally passed in to configure the mode switching feature. |
+ * | PatternOptions | Input method mode option configuration interface, which defines the resource array of
+ * mode options, the index of the mode selected by default, and the mode switching callback.
+ * Only preset system input methods support passing in this parameter. |
+ * | Pattern | Icon definition interface for a single input method mode,
+ * containing two resource properties: the default icon and the selected-state icon. |
  * <br>
- * <br>Not supported
+ * <br>Using `InputMethodListDialog` requires the combination of multiple APIs: create a `CustomDialogController` >
+ * configure `PatternOptions` (optional) > build `InputMethodListDialog` in the builder of `CustomDialogController` >
+ * open the dialog through `CustomDialogController.open()`.
  * <br>
  * <br>###### Attributes
  * <br>
@@ -34,61 +75,6 @@
  * <br>######  Events
  * <br>
  * <br>The [universal events]{@link ./@internal/component/ets/common} are not supported.
- * <br>
- * <br>##  Example
- * <br>
- * <br>```ts
- * <br>import { Pattern, PatternOptions } from '@kit.IMEKit';
- * <br>
- * <br>@Entry
- * <br>// Configure the component.
- * <br>@Component
- * <br>struct SettingsItem {
- * <br>  @State defaultPattern: number = 1;
- * <br>  private oneHandAction: PatternOptions = {
- * <br>    defaultSelected: this.defaultPattern,
- * <br>    patterns: [ // Icons in patterns can be used only after the corresponding icon resources have been added to
- * the resource directory of the project.
- * <br>      {
- * <br>        icon: $r('app.media.hand_icon'), // Icon resource for the input method mode option, for example,
- * the icon for the one-handed mode.
- * <br>        selectedIcon: $r('app.media.hand_icon_selected') // Icon resource for the input method mode option in
- * the selected state, for example, the icon for the one-handed mode in the selected state.
- * <br>      },
- * <br>      {
- * <br>        icon: $r('app.media.hand_icon1'),
- * <br>        selectedIcon: $r('app.media.hand_icon_selected1')
- * <br>      },
- * <br>      {
- * <br>        icon: $r('app.media.hand_icon2'),
- * <br>        selectedIcon: $r('app.media.hand_icon_selected2'),
- * <br>      }],
- * <br>    action:(index: number)=>{
- * <br>      console.info(`pattern is changed, current is ${index}`);
- * <br>      this.defaultPattern = index;
- * <br>    }
- * <br>  };
- * <br>  private listController: CustomDialogController = new CustomDialogController({
- * <br>    builder: InputMethodListDialog({ patternOptions: this.oneHandAction }),
- * <br>    customStyle: true,
- * <br>    maskColor: '#00000000'
- * <br>  });
- * <br>
- * <br>  build() {
- * <br>    Column() {
- * <br>      Flex({ direction: FlexDirection.Column,
- * <br>        alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
- * <br>        Text("Input Method List").fontSize(20)
- * <br>      }
- * <br>    }
- * <br>    .width("13%")
- * <br>    .id('bindInputMethod')
- * <br>    .onClick((event?: ClickEvent) => {
- * <br>      this.listController.open();
- * <br>    })
- * <br>  }
- * <br>}
- * <br>```
  *
  * @file Input Method List
  * @kit IMEKit
@@ -100,6 +86,7 @@
  /*** endif */
 
 /**
+ * Represents the configuration of input method mode options, used to define the switching options for keyboard modes.
  *
  * @syscap SystemCapability.MiscServices.InputMethodFramework
  * @since 11 dynamic
@@ -107,7 +94,21 @@
  */
 export interface PatternOptions {
   /**
-   * Optional. Default selected pattern.
+   * Index of the mode selected by default, corresponding to the index value in the patterns array.
+   * <br>
+   * <br>Usage scenario: Use this parameter when the default input method needs to preset an initially selected
+   * keyboard mode.
+   * <br>
+   * <br>Use effect: After being set, the mode option corresponding to this index is selected by default when the input
+   * method list dialog opens.
+   * <br>
+   * <br>Value range: [0, **patterns.length** - 1]. If the value is out of this range, it does not take effect,
+   * and no mode option is selected when the dialog opens.
+   * <br>
+   * <br>Default value: If not set, no mode option is selected when the dialog opens.
+   * <br>
+   * <br>Note: This index value must be within the valid range of the **patterns** array; otherwise,
+   * the setting does not take effect.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 11 dynamic
@@ -115,7 +116,17 @@ export interface PatternOptions {
    */
   defaultSelected?: int;
   /**
-   * Mandatory. Resource of the pattern option.
+   * Array of mode option resources. Each **Pattern** defines the icon and selected-state icon of a keyboard mode.
+   * <br>
+   * <br>Usage scenario: Configure this parameter when the default input method needs to provide multiple keyboard
+   * modes (such as one-handed mode and full-screen mode) for users to choose from.
+   * <br>
+   * <br>Use effect: After being set, all mode options defined in this array are displayed
+   * in the default input method area of the input method list dialog for users to select.
+   * <br>
+   * <br>Note: The **icon** and **selectedIcon** of each **Pattern** in the **patterns** array must be valid
+   * [Resource]{@link Resource} resource references. It is recommended that you configure at least two mode options to
+   * provide a meaningful selection function.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 11 dynamic
@@ -123,7 +134,18 @@ export interface PatternOptions {
    */
   patterns: Array<Pattern>;
   /**
-   * Mandatory. Callback invoked when the pattern option changes.
+   * Callback function invoked when the mode option changes.
+   * <br>
+   * <br>Usage scenario: Set this callback when corresponding logic (such as updating the keyboard layout or saving
+   * user preferences) needs to be executed when the user switches the keyboard mode.
+   * <br>
+   * <br>Use effect: When the user taps a mode option in the input method list dialog, the system invokes this callback
+   * and passes the index value of the selected mode in the **patterns** array.
+   * <br>
+   * <br>Note: The callback parameter index is the index value of the selected mode in the **patterns** array,
+   * consistent with the value range of **defaultSelected**. In the callback, **defaultSelected** can be updated
+   * based on the index value to keep the selected state consistent with the user's choice the next time the
+   * dialog opens.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 11 dynamic
@@ -133,6 +155,9 @@ export interface PatternOptions {
 }
 
 /**
+ * Represents the definition of the icon resources for input method mode options, used to configure the visual
+ * representation of keyboard modes in the dialog. Available only to the current input method (that is, the preset
+ * system input method).
  *
  * @syscap SystemCapability.MiscServices.InputMethodFramework
  * @since 11 dynamic
@@ -140,7 +165,17 @@ export interface PatternOptions {
  */
 export interface Pattern {
   /**
-   * Mandatory. Default icon.
+   * Icon resource for the default (unselected) state of the input method mode option.
+   * <br>
+   * <br>Usage scenarios: Identify the visual representation of each keyboard mode when it is unselected,
+   * allowing users to recognize different mode options in the dialog.
+   * <br>
+   * <br>Use effect: After setting, this icon is displayed for the mode option in the dialog
+   * when it is in the unselected state.
+   * <br>
+   * <br>Note: A Resource type reference such as **$r('app.media.xxx')** must be used,
+   * and the corresponding icon resource file must be added to the project's resource directory.
+   * Image resources of the string and PixelMap types are not supported.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 11 dynamic
@@ -148,7 +183,18 @@ export interface Pattern {
    */
   icon: Resource;
   /**
-   * Mandatory. Icon for the selected option.
+   * Icon resource for the selected state of the input method mode option.
+   * <br>
+   * <br>Usage scenarios: Identify the visual representation of each keyboard mode when it is selected,
+   * forming a selected/unselected visual distinction with **icon** to help users recognize the currently selected mode.
+   * <br>
+   * <br>Use effect: After setting, this icon is displayed for the mode option in the dialog when it is in the selected
+   * state.
+   * <br>
+   * <br>Usage with related parameters: **selectedIcon** should remain visually consistent with **icon**,
+   * differing only by the selected state indicator (such as adding highlighting or a border),
+   * so users can recognize the currently selected mode. The **icon** and **selectedIcon** in each **Pattern**
+   * must be set at the same time; neither can be omitted.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 11 dynamic
@@ -160,7 +206,34 @@ export interface Pattern {
 /**
  * InputMethodListDialog({controller: CustomDialogController, patternOptions?: PatternOptions})
  * <br>
- * <br>Implements a dialog box showing the input method list.
+ * <br>Represents the input method list dialog component. It displays the list of input method apps installed in the
+ * current system in the form of a dialog, allowing users to switch between input methods.
+ * For the default input method, it also provides an entry for 
+ * switching keyboard modes (such as one-handed mode and full-screen mode).
+ * <br>
+ * <br>Usage scenarios: This component is used when a system app or an input method app needs to provide users with a
+ * visualized input method selection and switching feature. For example, in the system settings app, users are allowed
+ * to select different input methods, or in an input method app, users are allowed to switch to another input method or
+ * switch the keyboard mode of the current input method.
+ * <br>
+ * <br>Use effect: After this component is invoked, an input method list dialog is displayed. After the user selects an
+ * input method in the dialog, the system switches to the specified input method. If the user selects a mode option of
+ * the default input method, the system displays the keyboard layout in the specified mode.
+ * <br>
+ * <br>Differences between similar APIs and selection principles: Compared with the
+ * [inputMethod.switchInputMethod]{@link @ohos.inputMethod:inputMethod.switchInputMethod} API, this component provides a
+ * visualized input method selection interface, which is suitable for scenarios that require an interactive selection
+ * interface. The **switchInputMethod** API is suitable for scenarios where the input method is switched
+ * programmatically without requiring manual selection by the user.
+ * <br>
+ * <br>Usage restrictions: This component can be called only by system apps and input method apps.
+ * The **patternOptions** parameter is supported only by preset input methods.
+ * <br>
+ * <br>NOTE
+ * <br>
+ * <br>- Preconditions: Create a [CustomDialogController]{@link CustomDialogController} instance and associate it with
+ * **InputMethodListDialog**, and then open the dialog through the **open()** method of the **controller**.
+ * <br>- This component does not support universal attributes and universal events.
  *
  * @syscap SystemCapability.MiscServices.InputMethodFramework
  * @since 11 dynamic

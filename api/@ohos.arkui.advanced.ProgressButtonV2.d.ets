@@ -14,6 +14,15 @@
  */
 
 /**
+ * The **ProgressButtonV2** component is a text-based download button with a progress indicator that shows the download
+ * progress.
+ *
+ * This component is implemented based on
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
+ * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1),
+ * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
+ * longer limited to the component level. With state management V2, you can control the data and states of the text
+ * download button more flexibly through this component, achieving more efficient UI refresh.
  * @file
  * @kit ArkUI
  */
@@ -22,7 +31,8 @@ import { LengthMetrics } from './@ohos.arkui.node';
 import { ColorMetrics } from './@ohos.arkui.node';
 
 /**
- * Declare Component ProgressButtonV2
+ * Creates a **ProgressButtonV2** component.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice

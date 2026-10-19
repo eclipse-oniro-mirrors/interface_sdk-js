@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Background Task Management
  * @kit BackgroundTasksKit
  */
 
@@ -366,7 +366,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     progressInfo?: ProgressInfo;
 
@@ -376,7 +376,7 @@ declare namespace backgroundTaskManager {
      * @param { ProgressInfo | undefined } value
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     set progressInfo(value: ProgressInfo | undefined);
 
@@ -386,7 +386,7 @@ declare namespace backgroundTaskManager {
      * @returns { ProgressInfo | undefined } notify progress data.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 static
+     * @since 26.0.1 static
      */
     get progressInfo(): ProgressInfo | undefined;
   }
@@ -396,7 +396,7 @@ declare namespace backgroundTaskManager {
    *
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   export interface ProgressInfo {  
     /**
@@ -404,7 +404,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     title: string;
     /**
@@ -412,7 +412,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     fileName: string;
     /**
@@ -421,7 +421,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     progressValue?: int;
     /**
@@ -429,7 +429,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     isMute?: boolean;
   }
@@ -439,7 +439,7 @@ declare namespace backgroundTaskManager {
    *
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   export interface DataTransferProgress {  
     /**
@@ -448,7 +448,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     continuousTaskId: int;
 
@@ -458,7 +458,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     wantAgent?: WantAgent;
 
@@ -467,7 +467,7 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     progressInfo: ProgressInfo;
   }
@@ -1266,12 +1266,52 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
    * @throws { BusinessError } 9800007 - Continuous task storage failed.
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type. [since 26.0.1]
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @atomicservice [since 26.0.0]
    * @since 21 dynamic
    * @since 24 static
    */
   function startBackgroundRunning(context: Context, request: ContinuousTaskRequest): Promise<ContinuousTaskNotification>;
+
+  /**
+   * Requests a continuous task. This API allows a UIAbility (ServiceAbility in the FA model) to request multiple
+   * continuous tasks and uses a promise to return the result. When using this API to request a continuous task, its
+   * notification can be combined with that of an existing continuous task. For details, see
+   * [ContinuousTaskRequest]{@link backgroundTaskManager.ContinuousTaskRequest}.
+   *
+   * A maximum of 10 continuous tasks can be created simultaneously. Upon successful creation of a continuous task, a
+   * notification will be sent without a prompt tone.
+   *
+   * If a continuous task requested via this API includes multiple task types (including data transmission tasks), two
+   * notifications will appear in the notification panel: one for the data transmission task and the other for the
+   * remaining tasks. Removing either notification will cancel the continuous task and remove the other notification.
+   * The continuous task notification ID returned by the API is the ID of the data transmission type, which is used to
+   * update the data transmission progress.
+   *
+   * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
+   * @param { Context } context - Application context.
+   *     <br>For details about the application context of the FA model, see
+   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
+   *     UIAbility in the stage model and the ServiceAbility in the FA model.
+   * @param { ContinuousTaskRequest } request - Request information of a continuous task, including the main type and
+   *     subtype.
+   * @returns { Promise<int> } Promise used to return the continuous task ID.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9800001 - Memory operation failed.
+   * @throws { BusinessError } 9800004 - System service operation failed.
+   * @throws { BusinessError } 9800005 - Continuous task verification failed.
+   * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
+   * @throws { BusinessError } 9800007 - Continuous task storage failed.
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type.
+   * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  function startContinuousTask(context: Context, request: ContinuousTaskRequest): Promise<int>;
 
   /**
    * Updates continuous tasks of multiple types. This API uses a promise to return the result. After a continuous task 
@@ -1348,6 +1388,7 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
    * @throws { BusinessError } 9800007 - Continuous task storage failed.
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type. [since 26.0.1]
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @atomicservice [since 26.0.0]
    * @since 21 dynamic
@@ -1368,7 +1409,7 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 9800007 - Continuous task storage failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function updateDataTransferProgress(context: Context, progressInfo: DataTransferProgress): void;
 
@@ -2165,6 +2206,17 @@ declare namespace backgroundTaskManager {
      * @since 26.0.0 dynamic&static
      */
     MODE_NEARLINK = 14,
+
+    /**
+     * USB.
+     * 
+     * Use scenario: An application transitions into the background during the process of audio play using USB.
+     * 
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    MODE_USB_CONNECTION = 16
   }
 
   
@@ -2751,7 +2803,25 @@ declare namespace backgroundTaskManager {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    SYSTEM_CANCEL_USER_UNAUTHORIZED = 14
+    SYSTEM_CANCEL_USER_UNAUTHORIZED = 14,
+
+    /**
+     * A continuous task of the **NEARLINK** type is requested, but nearlink is not in use.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_CANCEL_NOT_USE_NEARLINK = 15,
+
+    /**
+     * A continuous task of the **USB_CONNECTION** type is requested, but USB device is not in use.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_CANCEL_NOT_USE_USB = 16
   }
 
   /**
@@ -2950,6 +3020,15 @@ declare namespace backgroundTaskManager {
      * @since 26.0.0 dynamic&static
      */
     SYSTEM_SUSPEND_USER_UNAUTHORIZED = 19,
+
+    /**
+     * A continuous task of the **USB_CONNECTION** type is requested, but USB device is not in use.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_SUSPEND_USB_NOT_USED = 20
   }
 
   /**
@@ -3006,16 +3085,11 @@ declare namespace backgroundTaskManager {
      * 
      * When the following common events are received, the related authorization records will be cleared:
      * 
-     * [COMMON_EVENT_PACKAGE_ADDED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_package_added)
-     * , 
-     * [COMMON_EVENT_PACKAGE_REMOVED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_package_removed)
-     * , 
-     * [COMMON_EVENT_BUNDLE_REMOVED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_bundle_removed)
-     * , 
-     * [COMMON_EVENT_PACKAGE_FULLY_REMOVED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_package_fully_removed)
-     * , 
-     * [COMMON_EVENT_PACKAGE_CHANGED](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_package_changed)
-     * .
+     * [COMMON_EVENT_PACKAGE_ADDED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_PACKAGE_ADDED},
+     * [COMMON_EVENT_PACKAGE_REMOVED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_PACKAGE_REMOVED},
+     * [COMMON_EVENT_BUNDLE_REMOVED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_BUNDLE_REMOVED},
+     * [COMMON_EVENT_PACKAGE_FULLY_REMOVED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_PACKAGE_FULLY_REMOVED},
+     * [COMMON_EVENT_PACKAGE_CHANGED]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_PACKAGE_CHANGED}.
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @since 22 dynamic

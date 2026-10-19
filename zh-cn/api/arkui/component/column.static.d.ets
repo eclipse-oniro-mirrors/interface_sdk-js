@@ -133,10 +133,10 @@ export declare interface ColumnAttribute extends CommonMethod {
      */
     default justifyContent(value: FlexAlign | undefined): this;
     /**
-    * Defines the PointLight
+    * 为Column组件添加点光源效果，影响周围标记为可被照亮组件的光照渲染。
     *
-    * @param { PointLightStyle | undefined } value - The point light style.
-    * @returns { ColumnAttribute } The attribute of the column.
+    * @param { PointLightStyle | undefined } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
+    * @returns { ColumnAttribute } Column的属性。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @systemapi
     * @stagemodelonly
@@ -169,8 +169,9 @@ export declare interface ColumnAttribute extends CommonMethod {
      * @param { ColumnOptions | ColumnOptionsV2 } [options] - Column constructor options
      * @returns { ColumnAttribute } Returns the instance of the ColumnAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setColumnOptions(options?: ColumnOptions | ColumnOptionsV2): this;
     /**
@@ -215,8 +216,9 @@ export declare function Column(
  * @param { CustomBuilder } [content_] - container
  * @returns { ColumnAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

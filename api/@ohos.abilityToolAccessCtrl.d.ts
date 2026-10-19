@@ -20,10 +20,12 @@
 import { Permissions }  from './permissions';
 import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
 /**
- * The namespace of abilityToolAccessCtrl
+ * This module provides permission management capabilities for tools (CLI commands and APIs), including permission
+ * query, user authorization, and remote authorization. Permission query is used to check the permission status of
+ * tools, user authorization grants permissions to tools based on user decisions, and remote authorization enables
+ * cross-device permission management through a ticket mechanism.
  *
  * @syscap SystemCapability.Security.Asset
- * @systemapi
  * @FaAndStageModel
  * @since 26.0.0 dynamiconly
  */
@@ -32,7 +34,6 @@ declare namespace abilityToolAccessCtrl {
    * CLI command information.
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -41,7 +42,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI main command name.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -51,7 +51,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI subcommand name.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -64,7 +63,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   interface RemoteControlParams {
     /**
@@ -73,7 +72,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     challenge?: string;
     /**
@@ -82,7 +81,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remoteControlTicket?: string;
     /**
@@ -91,7 +90,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     controlledDeviceName?: string;
     /**
@@ -100,7 +99,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     controllerDeviceName?: string;
     /**
@@ -109,7 +108,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     signVerifyMsg?: string;
   }
@@ -160,7 +159,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remoteInfo?: RemoteInfo;
 
@@ -192,7 +191,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   interface RemoteInfo {
 
@@ -202,7 +201,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     role: Role;
 
@@ -212,7 +211,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remoteId: string;
 
@@ -222,7 +221,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     domainId: string;
 
@@ -232,7 +231,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remoteControlParams?: RemoteControlParams;
   }
@@ -271,7 +270,6 @@ declare namespace abilityToolAccessCtrl {
    * Permission information.
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -281,7 +279,6 @@ declare namespace abilityToolAccessCtrl {
      * Permission name.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -291,7 +288,6 @@ declare namespace abilityToolAccessCtrl {
      * Permission status.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -427,7 +423,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   interface RemoteAuthPackage {
 
@@ -437,7 +433,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remoteMessage: string;
 
@@ -447,7 +443,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     challenge: string;
 
@@ -457,7 +453,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     ticket: string;
   }
@@ -499,7 +495,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   interface RemoteUserAuthResults {
 
@@ -509,7 +505,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     results: RemoteUserAuthItem[];
 
@@ -519,7 +515,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     permissionQuery: PermissionQuery;
   }
@@ -530,7 +526,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   interface RemoteUserAuthItem {
 
@@ -540,7 +536,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     permission: string;
 
@@ -550,9 +546,57 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     authResult: string;
+  }
+
+  /**
+   * Optional parameters for the ticket.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface TicketOpions {
+
+    /**
+     * Ticket expiration time in milliseconds.
+     * Unit: milliseconds.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ticketExpireTimeMs?: long;
+  }
+
+  /**
+   * Ticket query result.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface TicketQueryResult {
+
+    /**
+     * Permission result list.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    permissionResults: PermissionInfo[];
+
+    /**
+     * Ticket information.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ticket: string;
   }
 
   /**
@@ -621,7 +665,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   enum Role {
     /**
@@ -630,7 +674,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     CONTROLLER = 0x01,
 
@@ -640,7 +684,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     CONTROLLED = 0x02
   }
@@ -681,7 +725,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   enum RemoteGrantStatus {
     /**
@@ -690,7 +734,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     ENABLE = 0x01,
 
@@ -700,7 +744,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     DISABLE = 0x02
   }
@@ -779,7 +823,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export function generateControllerDevicePackage(remoteUserAuthResult: RemoteUserAuthResults[]):
     Promise<RemoteAuthPackage[]>;
@@ -804,7 +848,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export function generateControlledDevicePackage(permissionQuery: PermissionQuery[]): Promise<RemoteAuthPackage[]>;
 
@@ -828,7 +872,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export function verifyControllerDevicePackage(ticketInfo: RemoteAuthPackage[], remoteInfo: RemoteInfo):
     Promise<boolean[]>;
@@ -852,7 +896,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export function verifyControlledDevicePackage(ticketInfo: RemoteAuthPackage[]): Promise<boolean[]>;
 
@@ -873,7 +917,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export function getRemoteGrantStatus(): Promise<RemoteGrantStatus>;
 
@@ -896,9 +940,35 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   export function updateRemoteGrantStatus(remoteGrantStatus: RemoteGrantStatus): Promise<void>;
+
+  /**
+   * Obtain the execution authentication ticket for CLI tools.
+   * This function retrieves the execution authentication ticket for CLI tools and their subcommands.
+   * If the user has not yet authorized the permissions required by CLI tools,
+   *    a list of permissions requiring authorization along with their status will be returned.
+   * If all permissions required by CLI tools have been authorized by the user,
+   *    the authenticated ticket will be returned.
+   *
+   * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
+   * @param { CliCmdInfo[] } cliCmdInfos - CLI command list.
+   * @param { TicketOpions } ticketOpions - generate ticket options.
+   * @returns { Promise<TicketQueryResult> } Promise used to return ${TicketQueryResult}。
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.EXEC_PUBLIC_CLI_TOOL".
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010006 - The requested operation is not allowed to be executed while the device
+   *     is locked.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketOpions: TicketOpions): Promise<TicketQueryResult>;
 }
 
 export default abilityToolAccessCtrl;

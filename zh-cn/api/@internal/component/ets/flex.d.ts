@@ -250,9 +250,9 @@ interface FlexInterface {
 }
 
 /**
- * 支持[通用属性]{@link ./common}。
+ * 支持[通用属性]{@link CommonMethod}。
  * 
- * 支持[通用事件]{@link ./common}。
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -266,7 +266,7 @@ declare class FlexAttribute extends CommonMethod<FlexAttribute> {
    * 设置点光源样式，用于为Flex组件添加点光源效果，影响周围标记为可被照亮组件的光照渲染。通过PointLightStyle可配置光源的位置、颜色、强度等参数。
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置光源的位置、颜色、强度等属性，影响组件的光照效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { FlexAttribute } The attribute of the flex.
+   * @returns { FlexAttribute } Flex的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -292,7 +292,7 @@ declare class FlexAttribute extends CommonMethod<FlexAttribute> {
  * > - 主轴长度可设置为auto使Flex自适应子组件布局，自适应时，Flex长度受[constraintSize]{@link CommonMethod#constraintSize}属性以及父容器传递的最大最小长度限制，且
  * > constraintSize属性优先级更高。
  * 
- * ###### 子组件
+ * ## 子组件
  * 
  * 可以包含子组件。
  *
@@ -306,7 +306,7 @@ declare class FlexAttribute extends CommonMethod<FlexAttribute> {
 declare const Flex: FlexInterface;
 
 /**
- * Defines Flex Component instance.
+ * 定义Flex组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

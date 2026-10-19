@@ -31,6 +31,7 @@ import Context from './application/Context';
  *
  * @syscap SystemCapability.Communication.NetManager.Core
  * @since 10 dynamic
+ * @since 26.0.1 static
  */
 declare namespace policy {
   /**
@@ -38,6 +39,7 @@ declare namespace policy {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   type NetBearType = connection.NetBearType;
 
@@ -56,6 +58,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setBackgroundAllowed(isAllowed: boolean, callback: AsyncCallback<void>): void;
 
@@ -74,6 +77,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setBackgroundAllowed(isAllowed: boolean): Promise<void>;
 
@@ -91,6 +95,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isBackgroundAllowed(callback: AsyncCallback<boolean>): void;
 
@@ -108,6 +113,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isBackgroundAllowed(): Promise<boolean>;
 
@@ -126,6 +132,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getBackgroundPolicyByUid(uid: int, callback: AsyncCallback<NetBackgroundPolicy>): void;
 
@@ -144,6 +151,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getBackgroundPolicyByUid(uid: int): Promise<NetBackgroundPolicy>;
 
@@ -163,6 +171,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setPolicyByUid(uid: int, policy: NetUidPolicy, callback: AsyncCallback<void>): void;
 
@@ -182,6 +191,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setPolicyByUid(uid: int, policy: NetUidPolicy): Promise<void>;
 
@@ -200,6 +210,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getPolicyByUid(uid: int, callback: AsyncCallback<NetUidPolicy>): void;
 
@@ -218,6 +229,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getPolicyByUid(uid: int): Promise<NetUidPolicy>;
 
@@ -236,6 +248,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getUidsByPolicy(policy: NetUidPolicy, callback: AsyncCallback<Array<int>>): void;
 
@@ -254,6 +267,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getUidsByPolicy(policy: NetUidPolicy): Promise<Array<int>>;
 
@@ -273,6 +287,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isUidNetAllowed(uid: int, isMetered: boolean, callback: AsyncCallback<boolean>): void;
 
@@ -292,6 +307,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isUidNetAllowed(uid: int, isMetered: boolean): Promise<boolean>;
 
@@ -311,6 +327,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isUidNetAllowed(uid: int, iface: string, callback: AsyncCallback<boolean>): void;
 
@@ -330,6 +347,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isUidNetAllowed(uid: int, iface: string): Promise<boolean>;
 
@@ -348,6 +366,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setNetQuotaPolicies(quotaPolicies: Array<NetQuotaPolicy>, callback: AsyncCallback<void>): void;
 
@@ -366,6 +385,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setNetQuotaPolicies(quotaPolicies: Array<NetQuotaPolicy>): Promise<void>;
 
@@ -384,6 +404,7 @@ declare namespace policy {
    * @systemapi Hidethisfor inner system use.
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function restoreAllPolicies(iccid: string): Promise<void>;
 
@@ -401,6 +422,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getNetQuotaPolicies(callback: AsyncCallback<Array<NetQuotaPolicy>>): void;
 
@@ -417,6 +439,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getNetQuotaPolicies(): Promise<Array<NetQuotaPolicy>>;
 
@@ -437,6 +460,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function updateRemindPolicy(netType: NetBearType, simId: string, remindType: RemindType, callback: AsyncCallback<void>): void;
 
@@ -457,6 +481,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function updateRemindPolicy(netType: NetBearType, simId: string, remindType: RemindType): Promise<void>;
 
@@ -476,6 +501,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setDeviceIdleTrustlist(uids: Array<int>, isAllowed: boolean, callback: AsyncCallback<void>): void;
 
@@ -495,6 +521,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setDeviceIdleTrustlist(uids: Array<int>, isAllowed: boolean): Promise<void>;
 
@@ -512,6 +539,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getDeviceIdleTrustlist(callback: AsyncCallback<Array<int>>): void;
 
@@ -528,6 +556,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getDeviceIdleTrustlist(): Promise<Array<int>>;
 
@@ -547,6 +576,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setPowerSaveTrustlist(uids: Array<int>, isAllowed: boolean, callback: AsyncCallback<void>): void;
 
@@ -566,6 +596,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function setPowerSaveTrustlist(uids: Array<int>, isAllowed: boolean): Promise<void>;
 
@@ -583,6 +614,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getPowerSaveTrustlist(callback: AsyncCallback<Array<int>>): void;
 
@@ -599,6 +631,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getPowerSaveTrustlist(): Promise<Array<int>>;
 
@@ -617,6 +650,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function resetPolicies(simId: string, callback: AsyncCallback<void>): void;
 
@@ -635,6 +669,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function resetPolicies(simId: string): Promise<void>;
 
@@ -655,6 +690,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
+   * @since 26.0.1 static
    */
   function setNetworkAccessPolicy(uid: int, policy: NetworkAccessPolicy, isReconfirmed?: boolean): Promise<void>;
 
@@ -673,6 +709,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
+   * @since 26.0.1 static
    */
   function getNetworkAccessPolicy(uid: int): Promise<NetworkAccessPolicy>;
 
@@ -688,6 +725,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
+   * @since 26.0.1 static
    */
   function getNetworkAccessPolicy(): Promise<UidNetworkAccessPolicy>;
 
@@ -700,6 +738,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function getNetAccessPolicy(): Promise<NetAccessPolicy>;
 
@@ -724,6 +763,22 @@ declare namespace policy {
   function on(type: 'netUidPolicyChange', callback: Callback<NetUidPolicyInfo>): void;
 
   /**
+   * 注册uid策略变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<NetUidPolicyInfo> } callback - on对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onNetUidPolicyChange(callback: Callback<NetUidPolicyInfo>): void;
+
+  /**
    * 注销 policy 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
@@ -742,6 +797,22 @@ declare namespace policy {
    * @since 10 dynamic
    */
   function off(type: 'netUidPolicyChange', callback?: Callback<NetUidPolicyInfo>): void;
+
+  /**
+   * 注销uid策略变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<NetUidPolicyInfo> } [callback] - off对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offNetUidPolicyChange(callback?: Callback<NetUidPolicyInfo>): void;
 
   /**
    * 注册 rule 发生改变时的回调，使用 callback 异步回调。
@@ -764,6 +835,22 @@ declare namespace policy {
   function on(type: 'netUidRuleChange', callback: Callback<NetUidRuleInfo>): void;
 
   /**
+   * 注册uid规则变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<NetUidRuleInfo> } callback - on对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onNetUidRuleChange(callback: Callback<NetUidRuleInfo>): void;
+
+  /**
    * 注销 rule 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
@@ -784,6 +871,22 @@ declare namespace policy {
   function off(type: 'netUidRuleChange', callback?: Callback<NetUidRuleInfo>): void;
 
   /**
+   * 注销uid规则变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<NetUidRuleInfo> } [callback] - off对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offNetUidRuleChange(callback?: Callback<NetUidRuleInfo>): void;
+
+  /**
    * 注册计量 iface 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
@@ -800,6 +903,22 @@ declare namespace policy {
    * @since 10 dynamic
    */
   function on(type: 'netMeteredIfacesChange', callback: Callback<Array<string>>): void;
+
+  /**
+    * 注册计量网络接口变化的监听。
+    *
+    * @permission ohos.permission.MANAGE_NET_STRATEGY
+    * @param { Callback<Array<string>> } callback - on对应的回调函数。
+    * @throws { BusinessError } 201 - Permission denied.
+    * @throws { BusinessError } 202 - Non-system applications use system APIs.
+    * @throws { BusinessError } 2100001 - Invalid parameter value.
+    * @throws { BusinessError } 2100002 - Failed to connect to the service.
+    * @throws { BusinessError } 2100003 - System internal error.
+    * @syscap SystemCapability.Communication.NetManager.Core
+    * @systemapi Hide this for inner system use.
+    * @since 26.0.1 static
+    */
+  function onNetMeteredIfacesChange(callback: Callback<Array<string>>): void;
 
   /**
    * 注销计量 iface 发生改变时的回调，使用 callback 异步回调。
@@ -820,6 +939,22 @@ declare namespace policy {
   function off(type: 'netMeteredIfacesChange', callback?: Callback<Array<string>>): void;
 
   /**
+   * 注销计量网络接口变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<Array<string>> } [callback] - off对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offNetMeteredIfacesChange(callback?: Callback<Array<string>>): void;
+
+  /**
    * 注册计量网络策略发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
@@ -836,6 +971,22 @@ declare namespace policy {
    * @since 10 dynamic
    */
   function on(type: 'netQuotaPolicyChange', callback: Callback<Array<NetQuotaPolicy>>): void;
+
+  /**
+   * 注册配额策略变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<Array<NetQuotaPolicy>> } callback - on对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onNetQuotaPolicyChange(callback: Callback<Array<NetQuotaPolicy>>): void;
 
   /**
    * 注销计量网络策略发生改变时的回调，使用 callback 异步回调。
@@ -856,6 +1007,22 @@ declare namespace policy {
   function off(type: 'netQuotaPolicyChange', callback?: Callback<Array<NetQuotaPolicy>>): void;
 
   /**
+   * 注销配额策略变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<Array<NetQuotaPolicy>> } [callback] - off对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offNetQuotaPolicyChange(callback?: Callback<Array<NetQuotaPolicy>>): void;
+
+  /**
    * 注册后台网络策略发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
@@ -872,6 +1039,22 @@ declare namespace policy {
    * @since 10 dynamic
    */
   function on(type: 'netBackgroundPolicyChange', callback: Callback<boolean>): void;
+
+  /**
+   * 注册网络后台策略变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<boolean> } callback - on对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onNetBackgroundPolicyChange(callback: Callback<boolean>): void;
 
   /**
    * 注销后台网络策略发生改变时的回调，使用 callback 异步回调。
@@ -892,6 +1075,22 @@ declare namespace policy {
   function off(type: 'netBackgroundPolicyChange', callback?: Callback<boolean>): void;
 
   /**
+   * 注销网络后台策略变化的监听。
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<boolean> } [callback] - off对应的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offNetBackgroundPolicyChange(callback?: Callback<boolean>): void;
+
+  /**
    * 当需要设置当前应用能否使用Wi-Fi/蜂窝联网时，调用该接口可以打开当前应用的联网设置界面，以设置应用的联网权限。使用Promise异步回调。
    *
    * @param { Context } context - Stage模型的应用上下文（仅支持UIAbilityContext和ExtensionContext）。
@@ -899,6 +1098,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 22 dynamic
+   * @since 26.0.1 static
    */
   function showAppNetPolicySettings(context: Context): Promise<void>;
 
@@ -908,6 +1108,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export enum NetBackgroundPolicy {
     /**
@@ -916,6 +1117,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_BACKGROUND_POLICY_NONE = 0,
 
@@ -925,6 +1127,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_BACKGROUND_POLICY_ENABLE = 1,
 
@@ -934,6 +1137,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_BACKGROUND_POLICY_DISABLE = 2,
 
@@ -943,6 +1147,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_BACKGROUND_POLICY_TRUSTLIST = 3
   }
@@ -953,6 +1158,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface NetQuotaPolicy {
     /**
@@ -961,6 +1167,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     networkMatchRule: NetworkMatchRule;
 
@@ -970,6 +1177,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     quotaPolicy: QuotaPolicy;
   }
@@ -980,6 +1188,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface QuotaPolicy {
     /**
@@ -988,6 +1197,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     periodDuration: string;
 
@@ -997,6 +1207,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     warningBytes: long;
 
@@ -1006,6 +1217,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     limitBytes: long;
 
@@ -1015,6 +1227,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     metered: boolean;
 
@@ -1024,6 +1237,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     limitAction: LimitAction;
 
@@ -1033,6 +1247,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     lastWarningRemind?: long;
 
@@ -1042,6 +1257,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     lastLimitRemind?: long;
   }
@@ -1052,6 +1268,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface NetworkMatchRule {
     /**
@@ -1060,6 +1277,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     netType: NetBearType;
 
@@ -1073,6 +1291,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     identity: string;
 
@@ -1084,6 +1303,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     simId: string;
   }
@@ -1094,6 +1314,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface NetUidRuleInfo {
     /**
@@ -1102,6 +1323,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     uid: int;
     /**
@@ -1110,6 +1332,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     rule: NetUidRule;
   }
@@ -1120,6 +1343,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface NetUidPolicyInfo {
     /**
@@ -1128,6 +1352,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     uid: int;
     /**
@@ -1136,6 +1361,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     policy: NetUidPolicy;
   }
@@ -1146,6 +1372,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export enum LimitAction {
     /**
@@ -1154,6 +1381,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     LIMIT_ACTION_NONE = -1,
 
@@ -1163,6 +1391,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     LIMIT_ACTION_ACCESS_DISABLED = 0,
 
@@ -1172,6 +1401,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     LIMIT_ACTION_ALERT_ONLY = 1
   }
@@ -1182,6 +1412,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export enum NetUidRule {
     /**
@@ -1190,6 +1421,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_RULE_NONE = 0,
 
@@ -1199,6 +1431,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_RULE_ALLOW_METERED_FOREGROUND = 1 << 0,
 
@@ -1208,6 +1441,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_RULE_ALLOW_METERED = 1 << 1,
 
@@ -1217,6 +1451,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_RULE_REJECT_METERED = 1 << 2,
 
@@ -1226,6 +1461,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_RULE_ALLOW_ALL = 1 << 5,
 
@@ -1235,6 +1471,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_RULE_REJECT_ALL = 1 << 6
   }
@@ -1245,6 +1482,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export enum RemindType {
     /**
@@ -1253,6 +1491,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     REMIND_TYPE_WARNING = 1,
 
@@ -1262,6 +1501,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     REMIND_TYPE_LIMIT = 2
   }
@@ -1272,6 +1512,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export enum NetUidPolicy {
     /**
@@ -1280,6 +1521,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_POLICY_NONE = 0,
 
@@ -1289,6 +1531,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_POLICY_ALLOW_METERED_BACKGROUND = 1 << 0,
 
@@ -1298,6 +1541,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     NET_POLICY_REJECT_METERED_BACKGROUND = 1 << 1
   }
@@ -1308,6 +1552,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
+   * @since 26.0.1 static
    */
   export interface NetworkAccessPolicy {
     /**
@@ -1316,6 +1561,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     allowWiFi?: boolean;
     /**
@@ -1324,6 +1570,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     allowCellular?: boolean;
     /**
@@ -1332,6 +1579,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     alwaysAllowWiFi?: boolean;
     /**
@@ -1340,6 +1588,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     alwaysAllowCellular?: boolean;
   }
@@ -1350,6 +1599,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface NetAccessPolicy {
     /**
@@ -1362,6 +1612,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     allowWiFi: boolean;
     /**
@@ -1374,6 +1625,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     allowCellular: boolean;
   }
@@ -1384,6 +1636,7 @@ declare namespace policy {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
+   * @since 26.0.1 static
    */
   export interface UidNetworkAccessPolicy {
     /**
@@ -1392,6 +1645,7 @@ declare namespace policy {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     [uid: string]: NetworkAccessPolicy;
   }

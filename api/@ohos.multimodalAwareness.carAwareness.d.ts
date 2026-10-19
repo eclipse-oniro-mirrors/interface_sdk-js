@@ -14,97 +14,117 @@
  */
 
 /**
- * @file
+ * @file Car awareness
  * @kit MultimodalAwarenessKit
  */
 import { Callback } from './@ohos.base';
 
 /**
- * This module provides the capability to use car awareness
+ * This module provides car awareness capabilities, including spatial motion interaction, real-time weather recognition,
+ * and refueling status recognition.
  *
  * @syscap SystemCapability.MultimodalAwareness.CarAwareness
  * @stagemodelonly
  * @atomicservice
- * @since 26.1.0
+ * @since 26.0.1
  */
 declare namespace carAwareness {
   /**
-   * CarAwareness Capability.
+   * Enumerates the capability types supported by car awareness.
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   enum Capability {
     /**
-     * spatial motion specific capability
+     * Spatial motion capability, which supports recognizing the user's air gestures for operating the screen.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     SPATIAL_MOTION = 'SpatialMotion',
     /**
-     * spatial point specific capability
+     * Spatial point capability, which supports recognizing the in-car components pointed to by the user.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     SPATIAL_POINT = 'SpatialPoint',
     /**
-     * spatial gesture specific capability
+     * Spatial gesture capability, which supports recognizing the user's specific postures and actions.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     SPATIAL_GESTURE = 'SpatialGesture',
     /**
-     * realtime weather specific capability
+     * Real-time weather capability, which supports recognizing the weather conditions of the environment where the car
+     * is currently located.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     REALTIME_WEATHER = 'RealTimeWeather',
     /**
-     * refueling specific capability
+     * Refueling capability, which supports recognizing the start and end states of car refueling.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     REFUELING = 'Refueling',
     /**
-     * car status specific capability
+     * Car status capability, which supports obtaining vehicle-related status information.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     CAR_STATUS = 'CarStatus',
     /**
-     * car config specific capability
+     * Habit recommendation capability, which supports generating recommendations based on user habits.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
-    CAR_CFG = 'CarCfg',
+    HABIT_RECOMMENDATION = 'HabitRecommendation',
     /**
-     * habit recommendation specific capability
+     * Spatial draw capability, which supports identifying the users' air gestures during mid-air drawing.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
-    HABIT_RECOMMENDATION = 'HabitRecommendation'
+    SPATIAL_DRAW = 'SpatialDraw',
+    /**
+     * Gesture close door capability, which supports recognizing user's hand action for closing the doors.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.CarAwareness
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    GESTURE_CLOSEDOOR = 'GestureCloseDoor',
+    /**
+     * Occupant sense capability, which supports recognizing position and classification of in-car occupants.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.CarAwareness
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    OCCUPANT_SENSE = 'OccupantSense'
   }
 
   /**
@@ -112,130 +132,150 @@ declare namespace carAwareness {
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   export interface SpatialMotionInfo {
     /**
-     * Indicates timestamp .
-     * Unit: milliseconds.
+     * Timestamp of the recognition result.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     timestamp: number;
 
     /**
-     * Indicates X-coordinate of the hand on the screen.
+     * X-axis coordinate of the hand on the screen.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     pointX: number;
 
     /**
-     * Indicates Y-coordinate of the hand on the screen.
+     * Y-axis coordinate of the hand on the screen.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     pointY: number;
 
     /**
-     * Indicates hand movements on the screen.
+     * Gesture event type.
+     * - 1: invalid
+     * 0: ready
+     * 1: move
+     * 2: tap.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     event: number;
   }
 
   /**
-   * Enables spatial motion awareness and subscribes to spatial motion awareness results.
-   * If the capability is not supported, no callback will be triggered.
-   * You can obtain the supported capabilities by calling the getAllCapacityList method.
+   * Subscribes to spatial motion awareness results. If the device does not support this capability, error code 34000002
+   * is thrown. You can obtain the supported capabilities by calling the getAllCapabilityList method. The data is
+   * returned asynchronously through the callback.
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { Callback<SpatialMotionInfo> } callback - Callback for obtaining the capability data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<SpatialMotionInfo> } callback - Callback invoked to return the spatial motion awareness data.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function onSpatialMotion(callback: Callback<SpatialMotionInfo>): void;
 
   /**
-   * Disables spatial motion awareness and subscribes to spatial motion awareness results.
+   * Unsubscribes from spatial motion results.
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { Callback<SpatialMotionInfo> } [callback] - Callback for obtaining the capability data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<SpatialMotionInfo> } [callback] - Callback for spatial motion event. If a specific callback is
+   *     passed in, only the corresponding listener is unregistered; otherwise, all listeners are unregistered.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function offSpatialMotion(callback?: Callback<SpatialMotionInfo>): void;
 
   /**
-   * Interface for realtime weather response info.
+   * Interface for real-time weather response info.
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   export interface RealTimeWeatherInfo {
     /**
-     * Indicates timestamp .
-     * Unit: milliseconds.
+     * Timestamp of the recognition result.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     timestamp: number;
 
     /**
-     * Indicates current weather.
+     * Weather status.
+     * - 1: Invalid
+     * 0: Other
+     * 1: Fog
+     * 2: Dense fog
+     * 3: Snow
+     * 4: Heavy snow
+     * 5: Rain
+     * 6: Heavy rain.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     weather: number;
   }
 
   /**
-   * Enables real-time weather awareness and subscribes to real-time weather awareness results.
-   * If the capability is not supported, no callback will be triggered.
-   * You can obtain the supported capabilities by calling the getAllCapacityList method.
+   * Subscribes to real-time weather awareness results. If the device does not support this capability, error code
+   * 34000002 is thrown. You can obtain the supported capabilities by calling the getAllCapabilityList method. The data
+   * is returned asynchronously through the callback.
    *
    * @permission ohos.permission.vehicle.MMA_WEATHER
-   * @param { Callback<RealTimeWeatherInfo> } callback - Callback for obtaining the capability data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RealTimeWeatherInfo> } callback - Callback invoked to return the real-time weather awareness
+   *     data.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function onRealTimeWeather(callback: Callback<RealTimeWeatherInfo>): void;
 
   /**
-   * Disables the real-time weather awareness function.
+   * Unsubscribes from real-time weather results.
    *
    * @permission ohos.permission.vehicle.MMA_WEATHER
-   * @param { Callback<RealTimeWeatherInfo> } [callback] - Callback for obtaining the capability data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RealTimeWeatherInfo> } [callback] - Callback for the real-time weather event. If a specific
+   *     callback is passed in, only the corresponding listener is unregistered; otherwise, all listeners are
+   *     unregistered.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function offRealTimeWeather(callback?: Callback<RealTimeWeatherInfo>): void;
 
@@ -245,222 +285,238 @@ declare namespace carAwareness {
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
    * @atomicservice
-   * @since 26.1.0
+   * @since 26.0.1
    */
   export interface RefuelingInfo {
     /**
-     * Indicates timestamp .
-     * Unit: milliseconds.
+     * Timestamp of the recognition result.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0
+     * @since 26.0.1
      */
     timestamp: number;
 
     /**
-     * Indicates refueling status.
+     * Refueling status.
+     * - 1: invalid
+     * 0: idle (refueling is not started)
+     * 1: refueling started
+     * 2: refueling finished.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0
+     * @since 26.0.1
      */
     status: number;
   }
 
   /**
-   * Enables refueling awareness and subscribes to refueling awareness results.
-   * If this function is not supported, no callback will be triggered.
-   * You can obtain the supported capabilities by calling the getAllCapacityList method.
+   * Subscribes to the refueling status awareness result. If the device does not support this capability, error code
+   * 34000002 is thrown. You can obtain the supported capabilities by calling the getAllCapabilityList method. The data
+   * is returned asynchronously through the callback.
    *
    * @permission ohos.permission.vehicle.MMA_ENERGYREFILL
-   * @param { Callback<RefuelingInfo> } callback - Callback for obtaining the capability data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RefuelingInfo> } callback - Callback invoked to return the refueling recognition data.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
    * @atomicservice
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function onRefueling(callback: Callback<RefuelingInfo>): void;
 
   /**
-   * Disables refueling awareness.
+   * Unsubscribes from the refueling status result.
    *
    * @permission ohos.permission.vehicle.MMA_ENERGYREFILL
-   * @param { Callback<RefuelingInfo> } [callback] - Callback for obtaining the capability data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @param { Callback<RefuelingInfo> } [callback] - Callback for the refueling status event. If a specific callback is
+   *     passed in, only the corresponding listener is unregistered; otherwise, all listeners are unregistered.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
    * @atomicservice
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function offRefueling(callback?: Callback<RefuelingInfo>): void;
 
   /**
-   * Interface for car awareness response info.
+   * Interface for general car awareness response info.
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   export interface CarAwarenessInfo {
     /**
-     * Indicates timestamp .
-     * Unit: milliseconds.
+     * Timestamp of the recognition result.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     timestamp: number;
     /**
-     * Indicates specific capability.
+     * Indicates specific awareness capability type.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     capability: Capability;
     /**
-     * Interface for car awareness data items list information.
+     * Key-value pair of the awareness result data. Different capabilities return different fields.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     awarenessEvent?:Record<string, Object>;
   }
 
   /**
-   * Interface for car awareness information
+   * Interface for car awareness subscription options.
    *
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   export interface CarAwarenessOptions {
     /**
-     * Awareness parameters in custom key-value pairs format.
+     * Custom awareness parameter key-value pairs, used to pass in configuration items for a specific capability.
      *
      * @syscap SystemCapability.MultimodalAwareness.CarAwareness
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0
+     * @since 26.0.1
      */
     parameters?: Record<string, Object>;
   }
 
   /**
-   * Enables vehicle awareness and subscribes to vehicle awareness results.
-   * If this function is not supported, no callback will be triggered.
-   * You can use the getAllCapacityList method to obtain the supported capabilities.
+   * Subscribes to car awareness results. If the device does not support the capability, error code 34000002 is thrown.
+   * You can obtain the supported capabilities by calling the getAllCapabilityList method. The data is returned
+   * asynchronously through the callback.
    *
-   * @param { Capability } capability - Specific capability.
-   * @param { Callback<CarAwarenessInfo[]> } callback - Callback used to return obtaining corresponding capability
-   *     data.
-   * @param { CarAwarenessOptions } [options] - Indicates options to specific capability.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
+   * @param { Capability } capability - Specifies the type of the awareness capability to subscribe to.
+   * @param { Callback<CarAwarenessInfo[]> } callback - Callback used to return the array of awareness response data.
+   * @param { CarAwarenessOptions } [options] - Optional configuration items of the awareness capability.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function onCarAwareness(capability: Capability, callback: Callback<CarAwarenessInfo[]>, options?:
   CarAwarenessOptions): void;
 
   /**
-   * Unsubscribes from vehicle sensing results.
+   * Unsubscribes from the specific car awareness capability result.
    *
-   * @param { Capability } capability - Specific capability.
-   * @param { Callback<CarAwarenessInfo[]> } [callback] - Callback used to return the corresponding capability data.
-   * @param { CarAwarenessOptions } [options] - Indicates options to specific capability.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
+   * @param { Capability } capability - Specifies the type of the awareness capability to unsubscribe.
+   * @param { Callback<CarAwarenessInfo[]> } [callback] - Callback used to return specific car awareness event. If a
+   *     specific callback is passed in, only the corresponding listener is unregistered; otherwise, all listeners are
+   *     unregistered.
+   * @param { CarAwarenessOptions } [options] - Optional configuration items of the awareness capability.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function offCarAwareness(capability: Capability, callback?: Callback<CarAwarenessInfo[]>, options?:
   CarAwarenessOptions): void;
 
   /**
-   * Returns the list of all capabilities.
+   * Obtains the list of all car awareness capabilities supported by the current device.
    *
-   * @returns { Promise<Capability[]> } Promise used to return the list of all capabilities.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited
-   *     device capabilities.
+   * @returns { Promise<Capability[]> } Promise used to return the list of awareness capability enums supported by the
+   *     device.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function getAllCapabilityList(): Promise<Capability[]>;
 
   /**
-   * Updates the awareness enabling event when the app subscribes to the function.
+   * Updates the start/stop status of spatial action awareness.
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { number } event - Awareness enabling event. 0: end; 1: start.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited device
+   * @param { number } event - Start/stop status value.
+   *     0: end
+   *     1: start
+   *     The value must be an integer.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function updateSpatialActionEnableStatus(event: number): void;
 
   /**
-   * Updates the voice zone when the voice subscribes to the spatial point engine capability.
+   * Updates the voice zone information for spatial action awareness.
    *
    * @permission ohos.permission.vehicle.MMA_SPATIALACTION
-   * @param { number } zone - Voice zone. The value 3 indicates the left back, and the value 4 indicates the right back.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited device
+   * @param { number } zone - Voice zone ID.
+   *     3: rear left
+   *     4: rear right
+   *     The value must be an integer.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function updateSpatialActionZone(zone: number): void;
 
   /**
-   *    /**
-   * Disables vehicle awareness and subscribes to vehicle awareness results.
+   * Obtains the car awareness result of the specified type once.
    *
-   * @param { Capability } capability - Specific capability.
-   * @param { CarAwarenessOptions } [options] - Options for a specific function.
-   * @returns { Promise<CarAwarenessInfo[]> } Promise used to return the capability data.
-   * @throws { BusinessError } 202 - Permission check failed. A non-system application uses the system capability.
-   * @throws { BusinessError } 801 - Car awareness not supported. Function can not work correctly due to limited device
+   * @param { Capability } capability - Specifies the type of the awareness capability result to obtain.
+   * @param { CarAwarenessOptions } [options] - Optional configuration items of the awareness capability.
+   * @returns { Promise<CarAwarenessInfo[]> } Promise used to return an array of awareness result data.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
    *     capabilities.
    * @throws { BusinessError } 34000001 - Service exception.
    * @throws { BusinessError } 34000002 - Specific capability not supported.
    * @syscap SystemCapability.MultimodalAwareness.CarAwareness
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0
+   * @since 26.0.1
    */
   function getCarAwareness(capability: Capability, options?: CarAwarenessOptions): Promise<CarAwarenessInfo[]>;
 }

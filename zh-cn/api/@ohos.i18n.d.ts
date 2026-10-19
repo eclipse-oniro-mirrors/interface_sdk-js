@@ -211,7 +211,7 @@ declare namespace i18n {
 
     /**
      * 获取系统当前设置的语言。若要监听系统语言变化，可以监听
-     * [公共事件](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [公共事件]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * OHOS::EventFwk::CommonEventSupport::COMMON_EVENT_LOCALE_CHANGED，具体可参考
      * [系统语言与区域](docroot://internationalization/i18n-system-language-region.md#开发步骤)。
      *
@@ -227,7 +227,7 @@ declare namespace i18n {
 
     /**
      * 设置系统语言。若要监听系统语言变化，可以监听
-     * [公共事件](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [公共事件]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * OHOS::EventFwk::CommonEventSupport::COMMON_EVENT_LOCALE_CHANGED，具体可参考
      * [系统语言与区域](docroot://internationalization/i18n-system-language-region.md#开发步骤)。
      *     <br>**说明：** 
@@ -252,7 +252,7 @@ declare namespace i18n {
 
     /**
      * 获取系统当前设置的国家地区。若要监听系统地区变化，可以监听
-     * [公共事件](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [公共事件]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * OHOS::EventFwk::CommonEventSupport::COMMON_EVENT_LOCALE_CHANGED，具体可参考
      * [系统语言与区域](docroot://internationalization/i18n-system-language-region.md#开发步骤)。
      *
@@ -267,7 +267,7 @@ declare namespace i18n {
 
     /**
      * 设置系统地区。若要监听系统地区变化，可以监听
-     * [公共事件](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [公共事件]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * OHOS::EventFwk::CommonEventSupport::COMMON_EVENT_LOCALE_CHANGED，具体可参考
      * [系统语言与区域](docroot://internationalization/i18n-system-language-region.md#开发步骤)。
      *     <br>**说明：** 
@@ -305,7 +305,7 @@ declare namespace i18n {
 
     /**
      * 获取系统当前设置的区域对象。若要监听系统区域变化，可以监听
-     * [公共事件](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_locale_changed)
+     * [公共事件]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_LOCALE_CHANGED}
      * OHOS::EventFwk::CommonEventSupport::COMMON_EVENT_LOCALE_CHANGED，具体可参考
      * [系统语言与区域](docroot://internationalization/i18n-system-language-region.md#开发步骤)。
      *
@@ -338,7 +338,7 @@ declare namespace i18n {
 
     /**
      * 判断系统时制是否为24小时制。若要监听系统时制变化，可以监听
-     * [公共事件](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_time_changed)
+     * [公共事件]{@link @ohos.commonEventManager:commonEventManager.Support.COMMON_EVENT_TIME_CHANGED}
      * OHOS::EventFwk::CommonEventSupport::COMMON_EVENT_TIME_CHANGED，具体可参考
      * [用户偏好](docroot://internationalization/i18n-user-preferences.md#开发步骤)。
      *
@@ -1337,9 +1337,9 @@ declare namespace i18n {
      *     <br>**说明：** 
      *     <br>月份从0开始计数，0表示一月。
      * @param { int } date - 设置的日。
-     * @param { int } hour - 设置的小时。默认值：系统时间。
-     * @param { int } minute - 设置的分钟。默认值：系统时间。
-     * @param { int } second - 设置的秒。默认值：系统时间。
+     * @param { int } [hour] - 设置的小时。默认值：系统时间。
+     * @param { int } [minute] - 设置的分钟。默认值：系统时间。
+     * @param { int } [second] - 设置的秒。默认值：系统时间。
      * @syscap SystemCapability.Global.I18n
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2766,7 +2766,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     latitude: double;
  
@@ -2776,7 +2776,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic
+     * @since 26.0.1 dynamic
      */
     longitude: double;
 

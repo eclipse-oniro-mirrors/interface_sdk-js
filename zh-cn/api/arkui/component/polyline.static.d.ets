@@ -76,8 +76,9 @@ export declare interface PolylineAttribute extends CommonShapeMethod {
 	 * @param { PolylineOptions } [options] - Polyline绘制区域。<br/>异常值undefined和null按照无效值处理，本次设置不生效。
 	 * @returns { PolylineAttribute } 返回PolylineAttribute实例。
 	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+	 * @unpublished
 	 * @stagemodelonly
-	 * @since 26.0.0 staticonly
+	 * @since 26.0.1 staticonly
 	 */
  	default setPolylineOptions(options?: PolylineOptions): this;
     /**
@@ -113,8 +114,9 @@ export declare function Polyline(
  * @param { CustomBuilderT<PolylineAttribute> } style - 设置组件属性的回调。
  * @returns { PolylineAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

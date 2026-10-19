@@ -14,12 +14,14 @@
  */
 
 /**
- * @file
+ * @file Web控制器
  * @kit ArkWeb
  */
 
 /**
  * 提供Web控制器的方法。
+ * 通过WebviewController可以控制Web组件各种行为。一个WebviewController对象只能控制一个Web组件，且必须在Web组件和
+ * WebviewController绑定后，才能调用WebviewController上的方法（静态方法除外）。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -745,7 +747,7 @@ declare interface WebKeyboardOptions {
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @since 23 dynamic
  */
 declare interface UrlRegexRule {
@@ -755,7 +757,7 @@ declare interface UrlRegexRule {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @since 23 dynamic
    */
   secondLevelDomain : string;
@@ -764,7 +766,7 @@ declare interface UrlRegexRule {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @since 23 dynamic
    */
   rule : string;
@@ -1143,7 +1145,7 @@ declare enum CacheMode {
  * 设置Web的过滚动模式为关闭或开启。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 11 dynamic
  */
@@ -1152,7 +1154,7 @@ declare enum OverScrollMode {
    * Web过滚动模式关闭。适用于不需要额外滚动效果的页面，如内容高度与容器高度匹配的场景。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -1162,7 +1164,7 @@ declare enum OverScrollMode {
    * Web过滚动模式开启。适用于需要增强滚动反馈的场景，如列表页面或需要明确滚动边界指示的场景。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -1200,7 +1202,7 @@ declare enum BlurOnKeyboardHideMode {
  * Web深色模式的配置，用于控制网页内容的深色主题显示，帮助开发者根据用户偏好和系统主题提升视觉体验和可读性。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice [since 11]
  * @since 9 dynamic
  */
@@ -1209,7 +1211,7 @@ declare enum WebDarkMode {
    * Web深色模式关闭。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -1219,7 +1221,7 @@ declare enum WebDarkMode {
    * Web深色模式开启。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -1229,7 +1231,7 @@ declare enum WebDarkMode {
    * Web深色模式跟随系统。适用于Web组件主题需要与系统保持一致的场景，推荐使用此模式以提供一致的用户体验。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -1475,7 +1477,7 @@ type MouseInfoCallback = (event: NativeEmbedMouseInfo) => void;
  * onRenderExited接口返回的渲染进程退出的具体原因。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice [since 11]
  * @since 9 dynamic
  */
@@ -1502,7 +1504,7 @@ declare enum RenderExitReason {
    * 渲染进程崩溃退出，如段错误。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -1521,7 +1523,7 @@ declare enum RenderExitReason {
    * 其他原因，比如渲染进程孵化失败。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -1538,6 +1540,55 @@ declare enum RenderExitReason {
 type OnContextMenuHideCallback = () => void;
 
 /**
+ * 上下文菜单项状态更新的回调类型。
+ *
+ * @param { WebContextMenuItemId } menuItemId - 上下文菜单项的ID。
+ * @param { WebContextMenuOptions } [options] - 上下文菜单项的选项。
+ *     <br>默认值：见options的默认值。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+
+/**
+ * 枚举上下文菜单项的ID。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare enum WebContextMenuItemId {
+  /**
+   * 复制指向高亮文本的链接菜单项。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  MENU_COPY_LINK = 11
+}
+
+/**
+ * 定义上下文菜单项的选项。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare interface WebContextMenuOptions {
+  /**
+   * 上下文菜单项是否可用。
+   * 默认值：默认值：false。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  enable?: boolean;
+}
+
+/**
  * onSslErrorEventReceive接口返回的SSL错误的具体原因。
  *
  * @syscap SystemCapability.Web.Webview.Core
@@ -1550,7 +1601,7 @@ declare enum SslError {
    * 一般错误。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -1641,7 +1692,7 @@ declare enum FileSelectorMode {
  * Web布局模式的配置，用于控制Web内容的页面布局方式，帮助开发者根据屏幕尺寸和显示需求优化网页的适配性和用户体验。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 11 dynamic
  */
@@ -1650,7 +1701,7 @@ declare enum WebLayoutMode {
    * Web布局跟随系统。适用于传统网页布局场景，保持与系统默认行为一致。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -1660,7 +1711,7 @@ declare enum WebLayoutMode {
    * Web基于页面大小的自适应网页布局。适用于需要根据屏幕尺寸自动调整布局的场景，推荐用于移动端网页优化。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -2010,7 +2061,7 @@ declare class SslErrorHandler {
   /**
    * 通知Web组件取消此请求，并根据参数abortLoading决定是否停止加载。
    *
-   * @param { boolean } abortLoading - 是否在取消请求后停止加载页面。
+   * @param { boolean } abortLoading - SSL错误页场景，拒绝错误证书后是否终止页面加载。
    *     <br>true表示停止加载页面，false表示继续加载页面。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 20 dynamic
@@ -2050,6 +2101,23 @@ declare class ClientAuthenticationHandler {
   /**
    * 通知Web组件使用指定的凭据（从证书管理模块获得）。
    *
+   * > **说明：**
+   * >
+   * > authUri参数需通过系统证书管理器获取，需配置ohos.permission.ACCESS_CERT_MANAGER权限。
+   * 
+   * 支持的证书签名算法以及密钥长度详见下表。
+   * | 签名算法     | 密钥长度   | 
+   * | ------- | ------ |
+   * | SSL_SIGN_RSA_PKCS1_SHA256 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA384 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA512 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA256 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA384 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA512 | 1024（API version 18后开始支持）、2048、3072、4096 | 
+   * | SSL_SIGN_ECDSA_SECP256R1_SHA256 | 256 | 
+   * | SSL_SIGN_ECDSA_SECP384R1_SHA384 | 384 | 
+   * | SSL_SIGN_ECDSA_SECP521R1_SHA512 | 521 | 
+   * 
    * @param { string } authUri - 凭据的关键值。
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice [since 11]
@@ -2243,7 +2311,7 @@ declare class ScreenCaptureHandler {
   constructor();
 
   /**
-   * 获取网页来源。用于验证请求来源的可信度，或实现白名单机制以控制哪些网页可以进行屏幕捕获。
+   * 获取网页来源。用于校验发起请求的网页来源，开发者可通过来源允许列表控制哪些网页允许发起屏幕捕获请求。
    *
    * @returns { string } 当前发起屏幕捕获请求的网页的来源。
    * @syscap SystemCapability.Web.Webview.Core
@@ -2319,7 +2387,7 @@ declare class DataResubmissionHandler {
  * 口，并需要应用侧显式管理新窗口的URL展示与安全隔离。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice [since 11]
  * @since 9 dynamic
  */
@@ -2328,7 +2396,7 @@ declare class ControllerHandler {
    * ControllerHandler的构造函数。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -2339,7 +2407,7 @@ declare class ControllerHandler {
    *
    * @param { WebviewController } controller - 新建Web组件的WebviewController对象，如果不需要打开新窗口请设置为null。
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -2930,6 +2998,42 @@ declare class WebContextMenuParam {
    * @since 22 dynamic
    */
   getContextMenuMediaType(): ContextMenuDataMediaType;
+
+  /**
+   * 检查当前选中的文本是否可用于生成Text Fragment链接。Text Fragment链接是包含**#:~:text=**片段的URL，用于在打开链接时滚动到并高亮特定文本段落。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口，以决定是否显示"复制指向高亮的链接"菜单项。结果与Chromium的**ShouldOfferLinkToText**行为一致。
+   *
+   * @returns { boolean } **true**表示当前选中文本可用于生成Text Fragment链接；**false**表示不可用。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  shouldOfferLinkToText(): boolean;
+
+  /**
+   * 获取指向当前网页高亮文本的Text Fragment链接URL。返回的URL包含符合W3C Text Fragments规范的**#:~:text=**片段。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用shouldOfferLinkToText()检查当前选中文本是否支持链接生成。若选中文本不支持链接生成，返回空字符串。
+   *
+   * @returns { string } 包含**#:~:text=**片段、符合W3C Text Fragments规范的Text Fragment链接URL。若当前选中文本不支持链接生成，返回空字符串。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  getTextFragmentGeneratedLink(): string;
+
+  /**
+   * 检查当前网页是否存在Text Fragment高亮。使用此接口判断是否应显示"移除高亮"和"重新分享链接"菜单项。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。结果与Chromium的**GetExistingSelectors**行为一致。
+   *
+   * @returns { boolean } **true**表示当前页面存在Text Fragment高亮；**false**表示不存在。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  isOverTextFragment(): boolean;
 }
 
 /**
@@ -3105,6 +3209,36 @@ declare class WebContextMenuResult {
    * @since 24 dynamic
    */
   saveImage(): void;
+
+  /**
+   * 将指向当前高亮文本的Text Fragment链接复制到系统剪贴板。复制的URL包含符合W3C Text Fragments规范的**#:~:text=**片段。剪贴板内容与getTextFragmentGeneratedLink()返回的URL相同。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用shouldOfferLinkToText()检查当前选中文本是否支持链接生成。若选中文本不支持链接生成，此方法不会向剪贴板写入内容。
+   *
+   * > **说明：**
+   * >
+   * > 完成操作后，应调用closeContextMenu()关闭菜单，未调用可能导致菜单资源未正确释放。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  copyLinkToTextMenu(): void;
+
+  /**
+   * 移除当前网页上所有Text Fragment高亮，恢复原始文本样式。
+   *
+   * 建议在**onContextMenuShow**事件回调中使用此接口。调用此接口前，建议先调用isOverTextFragment()检查是否存在高亮。若不存在高亮，此方法不做任何操作。
+   *
+   * > **说明：**
+   * >
+   * > 完成操作后，应调用closeContextMenu()关闭菜单，未调用可能导致菜单资源未正确释放。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  removeFragments(): void;
 }
 
 /**
@@ -3490,6 +3624,20 @@ declare class WebResourceResponse {
    * @since 13 dynamic
    */
   getResponseIsReady(): boolean;
+
+  /**
+   * 设置响应数据。
+   *
+   * > **说明：**
+   * > - 该API支持基于Resource对象获取HSP资源，而 { setResponseData } 不支持该功能。
+   *
+   * @param { string | number | Resource | ArrayBuffer } data - 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄。
+   * Resource表示rawfile资源或HSP资源。ArrayBuffer表示二进制数据。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  setResponseBody(data:string | number | Resource | ArrayBuffer): void;
 }
 
 /**
@@ -3572,7 +3720,7 @@ declare class WebResourceError {
    *
    * @returns { number } 返回加载资源的自定义错误码。
    * @syscap SystemCapability.Web.Webview.Core
-   * @since 26.1.0 dynamic
+   * @since 26.0.1 dynamic
    */
   getCustomErrorCode(): number;
 }
@@ -3775,7 +3923,7 @@ declare class WebController {
   /**
    * 调整当前网页的缩放比例。
    *
-   * @param { number } factor - The zoom factor.
+   * @param { number } factor - 缩放系数。1表示恢复加载网页的默认缩放比例；小于1为缩小，大于1为放大。取值范围(0, 100]。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3796,7 +3944,7 @@ declare class WebController {
   /**
    * 异步执行JavaScript脚本，并通过回调方式返回脚本执行的结果。runJavaScript需要在loadUrl完成后，比如onPageEnd中调用。
    *
-   * @param { object } options The options with a piece of code and a callback.
+   * @param { object } options 包含脚本和回调的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3857,7 +4005,7 @@ declare class WebController {
   /**
    * 注入JavaScript对象到window对象中，并在window对象中调用该对象的方法。注入的对象在页面下一次（重新）加载前不会出现在JavaScript中。
    *
-   * @param { object } options - The option with the JavaScript object and method list.
+   * @param { object } options - 包含JavaScript对象和方法列表的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -4047,7 +4195,7 @@ declare interface WebOptions {
  *
  * @interface ScriptItem [since 11 - 11]
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 11 dynamic
  */
@@ -4056,7 +4204,7 @@ declare interface ScriptItem {
    * 需要注入、执行的JavaScript脚本。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4078,7 +4226,7 @@ declare interface ScriptItem {
    * 6.一组scriptRule中，如果其中一条不满足以上规则，则整组scriptRule都不生效。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4089,7 +4237,7 @@ declare interface ScriptItem {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @since 23 dynamic
    */
   urlRegexRules? : Array<UrlRegexRule>;
@@ -4455,7 +4603,7 @@ declare interface NativeEmbedMouseInfo {
  */
 declare interface FirstMeaningfulPaint {
   /**
-   * 导航条加载时间，单位以微秒表示。
+   * 导航开始时间，单位以微秒表示。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
@@ -4482,7 +4630,7 @@ declare interface FirstMeaningfulPaint {
  */
 declare interface LargestContentfulPaint {
   /**
-   * 导航条加载时间，单位以微秒表示。
+   * 导航开始时间，单位以微秒表示。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
@@ -5087,7 +5235,7 @@ declare interface OnRefreshAccessedHistoryEvent {
  * 定义渲染过程退出时触发。适用于需要监控渲染进程异常的场景，提升渲染稳定性和故障排查效率。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 12 dynamic
  */
@@ -5096,7 +5244,7 @@ declare interface OnRenderExitedEvent {
    * 渲染进程异常退出的具体原因。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    */
@@ -5137,7 +5285,7 @@ declare interface OnShowFileSelectorEvent {
  * 定义加载URL时触发的回调信息，包括资源URL。适用于需要监控资源加载行为的场景，提升资源管理的可见性和性能优化。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 12 dynamic
  */
@@ -5146,7 +5294,7 @@ declare interface OnResourceLoadEvent {
    * 所加载的资源文件url信息。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    */
@@ -5479,7 +5627,7 @@ declare interface OnClientAuthenticationEvent {
  * 定义网页要求用户创建窗口时触发的回调。从API version 23开始，如需获取更多窗口信息，可使用[OnWindowNewExtEvent]{@link OnWindowNewExtEvent}。
  *
  * @syscap SystemCapability.Web.Webview.Core
- * @crossplatform [since 26.1.0]
+ * @crossplatform [since 26.0.1]
  * @atomicservice
  * @since 12 dynamic
  */
@@ -5488,7 +5636,7 @@ declare interface OnWindowNewEvent {
    * true代表请求创建对话框，false代表新标签页。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    */
@@ -5498,7 +5646,7 @@ declare interface OnWindowNewEvent {
    * true代表用户触发，false代表非用户触发。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    */
@@ -5508,7 +5656,7 @@ declare interface OnWindowNewEvent {
    * 目标url。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    */
@@ -5518,7 +5666,7 @@ declare interface OnWindowNewEvent {
    * 用于设置新建窗口的WebviewController实例。
    *
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    */
@@ -6563,7 +6711,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入null或undefined时为`WebDarkMode.Off`。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -6577,7 +6725,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入null或undefined时为false。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -6641,7 +6789,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入undefined或null时为false。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
@@ -6654,7 +6802,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入undefined或null时为OverScrollMode.NEVER。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -6723,7 +6871,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入undefined或null时属性设置不生效。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7064,7 +7212,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { Callback<OnRenderExitedEvent> } callback - 渲染过程退出时触发。 [since 12]
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7123,7 +7271,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { Callback<OnResourceLoadEvent> } callback - 加载url时触发。 [since 12]
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7245,6 +7393,19 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 11 dynamic
    */
   onContextMenuHide(callback: OnContextMenuHideCallback): WebAttribute;
+
+  /**
+   * 注册回调，在内核异步更新上下文菜单项状态时调用。内核完成异步处理后触发该回调，通知应用更新菜单项的显示状态。
+   *
+   * shouldOfferLinkToText()方法返回同步初始值，此回调提供异步最终值，两者互补。
+   *
+   * @param { OnContextMenuUpdateCallback } callback - 接收菜单项ID和选项的回调函数。
+   * @returns { WebAttribute } 返回WebAttribute对象，支持链式调用。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
   /**
    * 设置有声视频的自动播放是否需要用户手动点击，静音视频播放不受该接口管控。当该属性未显式设置时，默认需要用户手动点击。
@@ -7385,7 +7546,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param {  Callback<OnWindowNewEvent> } callback - 网页要求用户创建窗口时触发的回调。 [since 12]
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7418,7 +7579,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { function } callback - 窗口请求关闭的回调函数。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7433,7 +7594,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>true表示开启，false表示不开启。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7560,7 +7721,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入null或undefined时为16。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
@@ -7691,6 +7852,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    */
   verticalScrollBarAccess(verticalScrollBar: boolean): WebAttribute;
 
+
   /**
    * 接收到apple-touch-icon URL地址时触发的回调函数。
    *
@@ -7773,7 +7935,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>默认值与系统属性关联，当系统属性`persist.web.allowWindowOpenMethod.enabled`为true时，默认值为true，如果未设置系统属性则默认值为false。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
@@ -8046,7 +8208,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入null或undefined时为`WebLayoutMode.NONE`
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -8499,7 +8661,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入undefined或null时不将JavaScript脚本注入到Web组件中。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @since 15 dynamic
    */
   runJavaScriptOnDocumentStart(scripts: Array<ScriptItem>): WebAttribute;
@@ -8519,7 +8681,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *     <br>传入undefined或null时不将JavaScript脚本注入到Web组件中。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
-   * @crossplatform [since 26.1.0]
+   * @crossplatform [since 26.0.1]
    * @since 15 dynamic
    */
   runJavaScriptOnDocumentEnd(scripts: Array<ScriptItem>): WebAttribute;
@@ -8997,18 +9159,70 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.0.0 dynamic
    */
   enableMediaNetworkProxy(enabled: boolean): WebAttribute;
+
+  /**
+   * 设置Web组件网页文本输入光标及选择手柄的颜色。
+   *
+   * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 **auto** 或未设置时，
+   * 使用内置默认光标颜色（当前为 **#0A59F7**）。选择手柄使用当前主题默认色。
+   *
+   * > **说明：**
+   * >
+   * > - 优先级为：该API设置的非零值 > 网页设置的 `caret-color` CSS属性 > 内置默认颜色。该API设置的
+   * 非零值也会覆盖网页显式设置的颜色或 transparent。
+   * >
+   * > - 精确颜色值 **#00000000** 保留为重置哨兵值。重置后使用网页CSS `caret-color`；CSS为 **auto**
+   * 或未设置时使用内置默认颜色。
+   *
+   * @param { ResourceColor } value - 网页文本输入光标及选择手柄的颜色。
+   *     <br>传入undefined或null时重置该属性。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  caretColor(value: ResourceColor): WebAttribute;
+
+  /**
+   * 当网页的浏览器级缩放倍率变化时触发。
+   *
+   * @param { OnZoomChangeCallback } callback - 浏览器级缩放倍率变化时触发的回调。该回调仅由浏览器级缩放
+   *     变化（例如{@link setZoomFactor}）触发；页面显示比例变化（捏合缩放）由{@link onScaleChange}通知。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
+
+  /**
+   * 设置Web组件惯性滚动的最大速度。
+   *
+   * 通过该TypeScript API配置的值优先于通过其他API配置的值生效。
+   *
+   * @param { number } speedLimit - 惯性滚动最大速度，单位vp/s。当值小于等于0、
+   *     {@code NaN}、{@code +Infinity}或{@code -Infinity}时，使用默认值：PC设备为9000 vp/s，
+   *     非PC设备为17000 vp/s。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  flingSpeedLimit(speedLimit: number): WebAttribute;
 }
 
 /**
  * 定义 Web 组件。
  *
- * <p><strong>API Note</strong>:
+ * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  *
- * <strong>Performance Note</strong>:
- * <p>For details about how to optimize the compilation, resource loading, and JSBridge performance,
- * see [Optimizing Web Page Loading]{@link https://developer.huawei.com/consumer/en/doc/best-practices/bpta-web-develop-optimization}
- * <p>When the white screen duration is long due to complex web page parsing,
- * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
+ * <p><strong>接口说明</strong>:
+ *
+ * <strong>性能说明</strong>:
+ * <p>有关如何优化编译、资源加载和JSBridge性能的详细信息，
+ * 请参见[Web加载性能优化]{@link https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-web-develop-optimization}
+ * <p>当由于复杂的网页解析导致白屏时间较长时，
+ * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
  * </p>
  *
  * @syscap SystemCapability.Web.Webview.Core
@@ -9257,6 +9471,21 @@ declare interface EmbedOptions {
    * @since 20 dynamic
    */
   supportCssDisplayChange?: boolean;
+  /**
+   * 同层渲染组件是否支持CSS变换旋转和倾斜。
+   *
+   * 该属性仅在enableNatvieEmbedMode开关打开时生效，不支持动态修改。
+   *
+   * 设置为**true**时，同层渲染组件可以正确处理CSS变换旋转/倾斜。
+   *
+   * 设置为**false**或未设置时，保留原始行为。
+   *
+   * @default false
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  supportTransformRotateAndSkew?: boolean;
 }
 
 /**
@@ -9702,3 +9931,40 @@ declare enum AISessionResultType {
  * @since 26.0.0 dynamic
  */
 type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * 浏览器级缩放倍率变化时触发的回调类型。
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * 描述网页浏览器级缩放倍率变化的信息。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 dynamic
+ */
+declare interface OnZoomChangeEvent {
+  /**
+   * 变化前的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  oldZoomFactor: number;
+
+  /**
+   * 变化后的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  newZoomFactor: number;
+}

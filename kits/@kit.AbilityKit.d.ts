@@ -25,6 +25,7 @@ import particleAbility from '@ohos.ability.particleAbility';
 import abilityAccessCtrl, {
   Context, PermissionRequestResult, Permissions
 } from '@ohos.abilityAccessCtrl';
+import abilityToolAccessCtrl from '@ohos.abilityToolAccessCtrl';
 import Ability from '@ohos.app.ability.Ability';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
@@ -34,6 +35,7 @@ import AbilityStage from '@ohos.app.ability.AbilityStage';
 import ActionExtensionAbility from '@ohos.app.ability.ActionExtensionAbility';
 import ApplicationStateChangeCallback from '@ohos.app.ability.ApplicationStateChangeCallback';
 import appManager from '@ohos.app.ability.appManager';
+import taskManager from '@ohos.app.agent.taskManager';
 import appRecovery from '@ohos.app.ability.appRecovery';
 import AutoFillExtensionAbility from '@ohos.app.ability.AutoFillExtensionAbility';
 import autoFillManager from '@ohos.app.ability.autoFillManager';
@@ -125,8 +127,8 @@ import AgentUIExtensionAbility from '@ohos.app.agent.AgentUIExtensionAbility';
 import agentConstant from '@ohos.app.agent.agentConstant';
 import agentManager from '@ohos.app.agent.agentManager';
 import hyperSnapManager from '@ohos.app.ability.hyperSnapManager';
-import cliManager from '@ohos.app.cli.cliManager';
-import functionManager from '@ohos.app.function.functionManager';
+import cliManager, { CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap } from '@ohos.app.cli.cliManager';
+import functionManager, { FunctionHook, InvokeFunctionParam, FunctionResultWrap } from '@ohos.app.function.functionManager';
 import pluginBundleManager from '@ohos.bundle.pluginBundleManager';
 import appMemoryOptimizer from '@ohos.app.ability.appMemoryOptimizer';
 
@@ -150,8 +152,9 @@ export {
   InsightIntentLink, InsightIntentPage, InsightIntentFunctionMethod, InsightIntentFunction, InsightIntentEntryExecutor,
   InsightIntentEntry, LinkParamCategory, CompletionHandler, AppServiceExtensionAbility, InsightIntentForm, InsightIntentEntity, kioskManager,
   CompletionHandlerForAtomicService, CompletionHandlerForAbilityStartCallback, AbilityStartFailureCode, FailureCode, InteropAbilityLifecycleCallback,
-  systemConfiguration, AgentExtensionAbility, AgentUIExtensionAbility, agentConstant, agentManager,hyperSnapManager, cliManager, pluginBundleManager,
-  functionManager, appMemoryOptimizer
+  systemConfiguration, AgentExtensionAbility, AgentUIExtensionAbility, agentConstant, agentManager, hyperSnapManager, cliManager, pluginBundleManager,
+  functionManager, appMemoryOptimizer, CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap,
+  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl
 };
 
 /*** if arkts static */
@@ -189,6 +192,7 @@ import UIAbility, {
 } from '@ohos.app.ability.UIAbility';
 import abilityManager from '@ohos.app.ability.abilityManager';
 import appManager from '@ohos.app.ability.appManager';
+import taskManager from '@ohos.app.agent.taskManager';
 import application from '@ohos.app.ability.application';
 import appRecovery from '@ohos.app.ability.appRecovery';
 import autoFillManager from '@ohos.app.ability.autoFillManager';
@@ -263,6 +267,6 @@ export {
   StartupTask, startupManager, systemConfiguration, PhotoEditorExtensionAbility, AgentExtensionAbility, 
   AgentUIExtensionAbility, agentConstant, agentManager, InsightIntentLink, InsightIntentPage, InsightIntentFunctionMethod, InsightIntentFunction, 
   InsightIntentEntry, LinkParamCategory, LinkIntentParamMapping, InsightIntentEntity, InsightIntentEntryExecutor, InsightIntentForm, hyperSnapManager, 
-  pluginBundleManager, errorManager, appMemoryOptimizer
+  pluginBundleManager, errorManager, appMemoryOptimizer, taskManager
 };
 /*** endif */

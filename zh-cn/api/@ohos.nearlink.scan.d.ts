@@ -27,20 +27,28 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
+ * @since 26.0.1 static
  */
 declare namespace scan {
   /**
-   * 发起星闪扫描。使用Promise异步回调。需先调用[scan.onDeviceFound]{@link scan.on}订阅扫描结果回调，本接口发起扫描后，扫描到的设备信息通过
-   * [scan.onDeviceFound]{@link scan.on}回调上报。扫描完成后可调用[scan.stopScan]{@link scan.stopScan}停止扫描。
+   * 发起星闪扫描。使用Promise异步回调。需先调用[scan.onDeviceFound]{@link scan.onDeviceFound}订阅扫描结果回调，本接口发起扫描后，扫描到的设备信息通过
+   * [scan.onDeviceFound]{@link scan.onDeviceFound}回调上报。扫描完成后可调用[scan.stopScan]{@link scan.stopScan}停止扫描。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @param { ScanFilters[] | null } filters - 扫描星闪广播的过滤条件集合，符合过滤条件的设备会被上报。若不使能过滤器则传入null。
    *     <br>若该参数设置为null，将扫描所有可发现的周边星闪设备，但是不建议使用此方式，可能扫描到非预期设备，并增加功耗。
    * @param { ScanOptions } [options] - 表示扫描选项。默认为低功耗模式。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100040 - Integer out of range.
    * @throws { BusinessError } 36100041 - Invalid address.
@@ -48,22 +56,33 @@ declare namespace scan {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function startScan(filters: ScanFilters[] | null, options?: ScanOptions): Promise<void>;
 
   /**
    * 停止星闪扫描。使用Promise异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100003 - NearLink disabled.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [startScan]{@link scan.startScan(filters: ScanFilters[] | null, options?: ScanOptions): Promise<void>} 发起星闪扫描。
    */
   function stopScan(): Promise<void>;
 
@@ -71,25 +90,41 @@ declare namespace scan {
    * 订阅星闪扫描结果。使用callback异步回调。
    *
    * 应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<ScanResults[]> } callback - 回调函数，返回星闪扫描结果数组对象。扫描结果默认返回随机地址；应用若具备系统权限
    *     ohos.permission.GET_NEARLINK_PEER_MAC，则返回设备真实地址。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [offDeviceFound]{@link scan.offDeviceFound(callback?: Callback<ScanResults[]>): void} 取消订阅星闪扫描结果。
    */
   function onDeviceFound(callback: Callback<ScanResults[]>): void;
 
   /**
    * 取消订阅星闪扫描结果。使用callback异步回调。
+   * 调用此接口前，您可以调用
+   * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @param { Callback<ScanResults[]> } [callback] - 回调函数，返回星闪扫描结果数组对象。
    *     <br>填写该参数则取消当前callback订阅。不填写该参数则取消该事件对应的所有回调。
-   * @throws { BusinessError } 801 - Capability not supported because the chip does not support it.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
+   * @see [onDeviceFound]{@link scan.onDeviceFound(callback: Callback<ScanResults[]>): void} 订阅星闪扫描结果。
    */
   function offDeviceFound(callback?: Callback<ScanResults[]>): void;
 
@@ -98,7 +133,9 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ScanResults {
     /**
@@ -106,7 +143,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
     /**
@@ -115,7 +154,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     rssi: int;
     /**
@@ -123,7 +164,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     data: ArrayBuffer;
     /**
@@ -131,7 +174,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     deviceName: string;
     /**
@@ -139,7 +184,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     isConnectable: boolean;
     /**
@@ -147,9 +194,20 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     deviceClass?: nearlinkConstant.DeviceClass;
+    /**
+     * 表示接收到的广播报文的帧类型。若不返回该字段，则帧类型为**FRAME_TYPE_1**。
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -157,7 +215,9 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ScanFilters {
     /**
@@ -165,7 +225,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address?: string;
 
@@ -174,7 +236,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     deviceName?: string;
 
@@ -183,7 +247,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     manufacturerId?: int;
 
@@ -192,7 +258,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     manufacturerData?: ArrayBuffer;
 
@@ -201,7 +269,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     manufacturerDataMask?: ArrayBuffer;
 
@@ -211,7 +281,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     rssi?: int;
   }
@@ -221,7 +293,9 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface ScanOptions {
     /**
@@ -229,7 +303,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     scanMode?: ScanMode;
 
@@ -239,9 +315,21 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     duration?: int;
+
+    /**
+     * 表示星闪帧类型。默认值为**FRAME_TYPE_1**。
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    frameType?: nearlinkConstant.FrameType;
   }
 
   /**
@@ -249,7 +337,9 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum ScanMode {
     /**
@@ -257,7 +347,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     SCAN_MODE_LOW_POWER = 0,
     /**
@@ -265,7 +357,9 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     SCAN_MODE_BALANCED = 1,
     /**
@@ -274,7 +368,9 @@ declare namespace scan {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     SCAN_MODE_LOW_LATENCY = 2
   }

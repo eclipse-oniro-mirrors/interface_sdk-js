@@ -569,6 +569,7 @@ declare namespace data {
    * @syscap SystemCapability.Telephony.CellularData
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function showSystemApnSettings(context: Context): Promise<void>;
 

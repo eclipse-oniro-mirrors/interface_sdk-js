@@ -23,28 +23,6 @@ import lang from './@arkts.lang'
 /*** endif */
 
 /**
- * The built-in Array type.
- *
- * @syscap SystemCapability.Utils.Lang
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamiconly
- */
-type BuiltinArray<T> = Array<T>;
-
-/**
- * The built-in Map type.
- *
- * @syscap SystemCapability.Utils.Lang
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamiconly
- */
-type BuiltinMap<K, V> = Map<K, V>;
-
-/**
  * The collections module provides ArkTS containers for efficient data transfer in concurrency scenarios. The ArkTS
  * containers provide similar functionalities as their JavaScript counterparts, except that their properties cannot be
  * added or updated through `.` or `[]`.
@@ -54,19 +32,19 @@ type BuiltinMap<K, V> = Map<K, V>;
  * ArkTS containers are not thread-safe. They adopt the fail-fast approach. An exception is thrown if multiple
  * concurrent instances make structural changes to a container instance at the same time. Therefore, in multi-thread
  * read/write scenarios, you must use the ArkTS asynchronous lock to ensure secure access to the ArkTS containers.
- * Currently, the following ArkTS containers are provided: [Array]{@link ./arkts/@arkts.collections:collections},
- * [Map]{@link ./arkts/@arkts.collections:collections}, [Set]{@link ./arkts/@arkts.collections:collections}, TypedArray
- * ([Int8Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint8Array]{@link ./arkts/@arkts.collections:collections},
- * [Int16Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint16Array]{@link ./arkts/@arkts.collections:collections},
- * [Int32Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint32Array]{@link ./arkts/@arkts.collections:collections},
- * [Uint8ClampedArray]{@link ./arkts/@arkts.collections:collections} and
- * [Float32Array]{@link ./arkts/@arkts.collections:collections}),
- * [ArrayBuffer]{@link ./arkts/@arkts.collections:collections},
- * [BitVector]{@link ./arkts/@arkts.collections:collections}, and
- * [ConcatArray]{@link ./arkts/@arkts.collections:collections}.
+ * Currently, the following ArkTS containers are provided: [Array]{@link collections.Array},
+ * [Map]{@link collections.Map}, [Set]{@link collections.Set}, TypedArray
+ * ([Int8Array]{@link collections.Int8Array},
+ * [Uint8Array]{@link collections.Uint8Array},
+ * [Int16Array]{@link collections.Int16Array},
+ * [Uint16Array]{@link collections.Uint16Array},
+ * [Int32Array]{@link collections.Int32Array},
+ * [Uint32Array]{@link collections.Uint32Array},
+ * [Uint8ClampedArray]{@link collections.Uint8ClampedArray} and
+ * [Float32Array]{@link collections.Float32Array}),
+ * [ArrayBuffer]{@link collections.ArrayBuffer},
+ * [BitVector]{@link collections.BitVector}, and
+ * [ConcatArray]{@link collections.ConcatArray}.
  *
  * > **NOTE**
  * >
@@ -197,7 +175,7 @@ declare namespace collections {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.1.0 dynamiconly
+   * @since 26.0.1 dynamiconly
    */
   type ArrayElementPredicateFn<ElementType> = (value: ElementType) => boolean;
 
@@ -712,13 +690,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     containsAll(elements: Array<T>): boolean;
     /**
-     * Checks whether all elements in a specified built-in Array are contained in this ArkTS Array.
+     * Checks whether all elements in a specified JavaScript built-in Array are contained in this ArkTS Array.
      *
-     * @param { BuiltinArray<T> } elements - Built-in Array whose elements are to be checked.
+     * @param { readonly T[] } elements - JavaScript built-in Array whose elements are to be checked.
      * @returns { boolean } Check result. The value **true** is returned if all elements are contained in this ArkTS
      *     array; otherwise, **false** is returned.
      * @throws { BusinessError } 10200011 - The containsAll method cannot be bound.
@@ -727,9 +705,9 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    containsAll(elements: BuiltinArray<T>): boolean;
+    containsAll(elements: readonly T[]): boolean;
     /**
      * Retains only the elements in this ArkTS Array that are contained in the specified ArkTS Array.
      *
@@ -742,13 +720,13 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     retainAll(elements: Array<T>): boolean;
     /**
-     * Retains only the elements in this ArkTS Array that are contained in the specified built-in Array.
+     * Retains only the elements in this ArkTS Array that are contained in the specified JavaScript built-in Array.
      *
-     * @param { BuiltinArray<T> } elements - Built-in Array whose elements are to be retained.
+     * @param { readonly T[] } elements - JavaScript built-in Array whose elements are to be retained.
      * @returns { boolean } Operation result. The value **true** is returned if any elements are removed from this ArkTS
      *     array; otherwise, **false** is returned.
      * @throws { BusinessError } 10200011 - The retainAll method cannot be bound.
@@ -757,9 +735,9 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    retainAll(elements: BuiltinArray<T>): boolean;
+    retainAll(elements: readonly T[]): boolean;
     /**
      * Retains only the elements in this ArkTS Array that satisfy the specified predicate.
      *
@@ -772,7 +750,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     retainAll(predicate: ArrayElementPredicateFn<T>): boolean;
     /**
@@ -936,7 +914,7 @@ declare namespace collections {
      *     `target + array.length`.
      * @param { number } start - Start index of the range. If a negative number is passed in, it refers to the index of
      *     **start + array.length**.
-     * @param { number } end - End index of the range. If a negative number is passed in, it refers to the index of `end
+     * @param { number } [end] - End index of the range. If a negative number is passed in, it refers to the index of `end
      *     + array.length`. The default value is the length of the ArkTS array.
      * @returns { Array<T> } ArkTS array after being modified. Possible causes:
      *     1. Mandatory parameters are left unspecified.
@@ -966,7 +944,7 @@ declare namespace collections {
      * Obtains the index of the last occurrence of the specified value in this ArkTS array.
      *
      * @param { T } searchElement - Value to search for.
-     * @param { number } fromIndex - Index from which the search starts. The default value is the ArkTS Int8Array
+     * @param { number } [fromIndex] - Index from which the search starts. The default value is the ArkTS array
      *     length minus 1 (i.e., starting from the end). If the index is greater than or equal to the length of the
      *     ArkTS array, **-1** is returned. If a negative number is passed in, it refers to the index of
      *     **fromIndex + array.length**.
@@ -996,7 +974,7 @@ declare namespace collections {
     /**
      * Checks whether this ArkTS array contains an element that meets certain conditions.
      *
-     * @param { ArrayPredicateFn<T, Array<T> } predicate - Assertion function used for the test.
+     * @param { ArrayPredicateFn<T, Array<T>> } predicate - Assertion function used for the test.
      * @returns { boolean } Check result. The value **true** is returned if an element meeting the given condition
      *     exists; otherwise, **false** is returned.
      * @throws { BusinessError } 10200011 - The some method cannot be bound.
@@ -1034,7 +1012,7 @@ declare namespace collections {
     toLocaleString(): string;
     /**
      * This API is similar to the
-     * [reduceRight]{@link collections.Array#reduceRight(callbackFn: ArrayReduceCallback<T, T, Array<T>>)} API, but it
+     * [reduceRight]{@link collections.Array.reduceRight(callbackFn: ArrayReduceCallback<T, T, Array<T>>)} API, but it
      * takes an initial value as the second parameter to initialize the accumulator before the array traversal starts
      * from right to left.
      *
@@ -1196,7 +1174,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     containsValue(value: V): boolean;
     /**
@@ -1230,7 +1208,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     remove(key: K): V | undefined;
     /**
@@ -1291,7 +1269,7 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     put(key: K, value: V): V | undefined;
     /**
@@ -1304,22 +1282,22 @@ declare namespace collections {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
     putAll(from: Map<K, V>): void;
     /**
-     * Updates this ArkTS map with key-value pairs from the specified built-in Map.
+     * Updates this ArkTS map with key-value pairs from the specified JavaScript built-in Map.
      *
-     * @param { BuiltinMap<K, V> } from - Built-in Map that provides key-value pairs.
+     * @param { ReadonlyMap<K, V> } from - JavaScript built-in Map that provides key-value pairs.
      * @throws { BusinessError } 10200011 - The putAll method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification exception
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.1.0 dynamiconly
+     * @since 26.0.1 dynamiconly
      */
-    putAll(from: BuiltinMap<K, V>): void;
+    putAll(from: ReadonlyMap<K, V>): void;
     /**
      * Adds or updates a key-value pair to this ArkTS map.
      *
@@ -1506,14 +1484,14 @@ declare namespace collections {
     has(value: T): boolean;
   }
   /**
-   * Underlying data structure of the ArkTS TypedArray ([Int8Array]{@link ./arkts/@arkts.collections:collections},
-   * [Uint8Array]{@link ./arkts/@arkts.collections:collections},
-   * [Int16Array]{@link ./arkts/@arkts.collections:collections},
-   * [Uint16Array]{@link ./arkts/@arkts.collections:collections},
-   * [Int32Array]{@link ./arkts/@arkts.collections:collections},
-   * [Uint32Array]{@link ./arkts/@arkts.collections:collections},
-   * [Uint8ClampedArray]{@link ./arkts/@arkts.collections:collections}, and
-   * [Float32Array]{@link ./arkts/@arkts.collections:collections}).
+   * Underlying data structure of the ArkTS TypedArray ([Int8Array]{@link collections.Int8Array},
+   * [Uint8Array]{@link collections.Uint8Array},
+   * [Int16Array]{@link collections.Int16Array},
+   * [Uint16Array]{@link collections.Uint16Array},
+   * [Int32Array]{@link collections.Int32Array},
+   * [Uint32Array]{@link collections.Uint32Array},
+   * [Uint8ClampedArray]{@link collections.Uint8ClampedArray}, and
+   * [Float32Array]{@link collections.Float32Array}).
    *
    * > **NOTE**
    * >
@@ -1566,7 +1544,7 @@ declare namespace collections {
   }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -2099,7 +2077,7 @@ declare namespace collections {
      * Obtains the index of the last occurrence of the specified value in this ArkTS Int8Array.
      *
      * @param { number } searchElement - Value to search for.
-     * @param { number } fromIndex - Index from which the search starts. The default value is the ArkTS Int8Array
+     * @param { number } [fromIndex] - Index from which the search starts. The default value is the ArkTS Int8Array
      *     length minus 1 (i.e., starting from the end). If the index is greater than or equal to the length of the
      *     ArkTS Int8Array, **-1** is returned. If a negative number is passed in, the search starts from the end of
      *     the ArkTS Int8Array.
@@ -2193,7 +2171,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -2709,7 +2687,7 @@ declare namespace collections {
      * Obtains the index of the last occurrence of the specified value in this ArkTS Uint8ClampedArray.
      *
      * @param { number } searchElement - Value to search for.
-     * @param { number } fromIndex - Index from which the search starts. The default value is the ArkTS
+     * @param { number } [fromIndex] - Index from which the search starts. The default value is the ArkTS
      *     Uint8ClampedArray length minus 1 (i.e., starting from the end). If the index is greater than or equal to the
      *     length of the ArkTS Uint8ClampedArray, **-1** is returned. If a negative number is passed in, the search
      *     starts from the end of the ArkTS Uint8ClampedArray.
@@ -2801,7 +2779,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -3423,7 +3401,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -4049,7 +4027,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -4670,7 +4648,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -5199,7 +5177,7 @@ declare namespace collections {
      * Obtains the index of the last occurrence of the specified value in this ArkTS Int32Array.
      *
      * @param { number } searchElement - Value to search for.
-     * @param { number } fromIndex - Index from which the search starts. The default value is the ArkTS Int32Array
+     * @param { number } [fromIndex] - Index from which the search starts. The default value is the ArkTS Int32Array
      *     length minus 1 (i.e., starting from the end). If the index is greater than or equal to the length of the
      *     ArkTS Int32Array, **-1** is returned. If a negative number is passed in, the search starts from the end
      *     of the ArkTS Int32Array.
@@ -5292,7 +5270,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -5913,7 +5891,7 @@ declare namespace collections {
  }
 
   /**
-   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link ./arkts/@arkts.collections:collections}.
+   * A linear data structure that is implemented on [ArkTS ArrayBuffer]{@link collections.ArrayBuffer}.
    *
    * > **NOTE**
    * >
@@ -6428,7 +6406,7 @@ declare namespace collections {
      * Obtains the index of the last occurrence of the specified value in this ArkTS Float32Array.
      *
      * @param { number } searchElement - Value to search for.
-     * @param { number } fromIndex - Index from which the search starts. The default value is the ArkTS Float32Array
+     * @param { number } [fromIndex] - Index from which the search starts. The default value is the ArkTS Float32Array
      *     length minus 1 (i.e., starting from the end). If the index is greater than or equal to the length of the
      *     ArkTS Float32Array, **-1** is returned. If a negative number is passed in, the search starts from the end
      *     of the ArkTS Float32Array.

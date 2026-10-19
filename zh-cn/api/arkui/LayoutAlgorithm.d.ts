@@ -16,7 +16,8 @@
 /**
  * [DynamicLayout]{@link @ohos.arkui.components.ArkDynamicLayout}组件支持的布局算法详细信息。
  * 
- * > **说明：**
+ * LayoutAlgorithm是动态布局容器的布局算法基础类型，提供了多种布局算法实现，包括线性布局、堆叠布局和网格布局。
+ * 开发者可以根据实际场景选择合适的布局算法，也可以继承CustomLayoutAlgorithm实现自定义布局。
  *
  * @file
  * @kit ArkUI
@@ -43,7 +44,9 @@ import { Position, LengthMetrics } from './Graphics';
 export interface LayoutAlgorithm {}
 
 /**
- * 自定义布局算法类。
+ * 自定义布局算法类，允许开发者实现自定义的测量和布局逻辑。
+ * 适用于需要精细控制子组件尺寸和位置的复杂布局场景，如瀑布流布局、不规则网格布局、动态流式布局等。
+ * 通过重写onMeasure和onLayout方法，开发者可以实现内置布局算法无法覆盖的布局策略。
  * 
  * > **说明：**
  * >
@@ -66,8 +69,7 @@ export class CustomLayoutAlgorithm implements LayoutAlgorithm {
      * >
      * > 在此函数中，开发者可以调用[FrameNode]{@link FrameNode:FrameNode}的
      * > [getChild()]{@link FrameNode:FrameNode#getChild(index: number)}方法获取子组件FrameNode，调用
-     * > [FrameNode]{@link FrameNode:FrameNode}的[measure()]{@link FrameNode:FrameNode#measure}方法测量子组件大小，参考DynamicLayout组
-     * > 件
+     * > [FrameNode]{@link FrameNode:FrameNode}的[measure()]{@link FrameNode:FrameNode#measure}方法测量子组件大小，参考DynamicLayout组件
      * > [示例1（自定义布局算法实现瀑布流布局）]{@link @ohos.arkui.components.ArkDynamicLayout}。
      *
      * @param { FrameNode } self - 动态布局组件在组件树上的实体节点。
@@ -181,7 +183,9 @@ interface ColumnLayoutAlgorithmOptions {
 }
  
 /**
- * 垂直方向线性布局算法类。
+ * 垂直方向线性布局算法类，用于实现子组件的垂直线性排列。
+ * 适用于需要垂直排列子组件的场景，如纵向列表、垂直堆叠的表单项、垂直菜单等。
+ * 支持设置子组件间距、水平对齐方式、垂直对齐方式和排列方向，提供类似Column组件的布局能力。
  * 
  * > **说明：**
  * >
@@ -359,7 +363,9 @@ interface RowLayoutAlgorithmOptions {
 }
  
 /**
- * 水平方向线性布局算法类。
+ * 水平方向线性布局算法类，用于实现子组件的水平线性排列。
+ * 适用于需要水平排列子组件的场景，如横向列表、工具栏、标签栏、操作按钮组等。
+ * 支持设置子组件间距、垂直对齐方式、水平对齐方式和排列方向，提供类似Row组件的布局能力。
  * 
  * > **说明：**
  * >
@@ -488,7 +494,9 @@ interface StackLayoutAlgorithmOptions {
 }
  
 /**
- * 堆叠布局算法类。
+ * 堆叠布局算法类，用于实现子组件的堆叠排列。
+ * 适用于需要子组件重叠显示的场景，如图层叠加、悬浮按钮、带背景的内容区域、卡片叠加效果等。
+ * 支持设置子组件在堆叠容器中的对齐方式，提供类似Stack组件的布局能力。
  * 
  * > **说明：**
  * >

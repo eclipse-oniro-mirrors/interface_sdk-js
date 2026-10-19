@@ -2104,6 +2104,15 @@ declare namespace print {
     PRINT_JOB_BLOCK_INTERRUPT = 35,
 
     /**
+     * The print job is restricted by EDM policy.
+     *
+     * @syscap SystemCapability.Print.PrintFramework
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PRINT_JOB_BLOCK_EDM_POLICY_RESTRICTED = 44,
+
+    /**
      * The printer is unavailable.
      *
      * @syscap SystemCapability.Print.PrintFramework
@@ -2251,7 +2260,16 @@ declare namespace print {
      * @stagemodelonly
      * @since 24 dynamic&static
      */
-    E_PRINT_SMB_INVALID_CREDENTIALS = 13100014
+    E_PRINT_SMB_INVALID_CREDENTIALS = 13100014,
+
+    /**
+     * The print operation is restricted by EDM policy.
+     * 
+     * @syscap SystemCapability.Print.PrintFramework
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    E_PRINT_EDM_POLICY_RESTRICTED = 13100015
   }
 
   /**

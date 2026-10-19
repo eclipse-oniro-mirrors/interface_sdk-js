@@ -16,6 +16,8 @@
 /**
  * @file Defines the utils for ArkTS
  * @kit ArkTS
+ *
+ * 本模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
  */
 
 import lang from './@arkts.lang';
@@ -297,7 +299,7 @@ declare namespace utils {
        */
       mode: AsyncLockMode;
       /**
-       * AsyncLockMode调用者的执行上下文标识符。
+       * AsyncLock调用者的执行上下文标识符。
        *
        * @syscap SystemCapability.Utils.Lang
        * @crossplatform [since 18]
@@ -589,7 +591,7 @@ declare namespace utils {
     /**
      * 默认构造函数用于创建一个新的SendableLruCache实例，默认容量为64。
      *
-     * @param { number } capacity - 指示缓存的自定义容量。不传时，默认值为64，最大值不能超过2147483647；小于等于0时会抛出异常。
+     * @param { number } [capacity] - 指示缓存的自定义容量。不传时，默认值为64，最大值不能超过2147483647；小于等于0时会抛出异常。
      *     建议根据实际业务数据量设置合适的容量值，以平衡缓存命中率与内存占用。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]

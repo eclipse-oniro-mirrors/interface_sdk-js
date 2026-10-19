@@ -177,8 +177,9 @@ export declare interface FolderStackAttribute extends CommonMethod {
  	 * @param { FolderStackOptions } [options] - FolderStack constructor options
  	 * @returns { FolderStackAttribute } Returns the instance of the FolderStackAttribute.
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setFolderStackOptions(options?: FolderStackOptions): this;
     /**
@@ -267,8 +268,9 @@ export declare function FolderStack(
  * @param { CustomBuilder } [content_] - container
  * @returns { FolderStackAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

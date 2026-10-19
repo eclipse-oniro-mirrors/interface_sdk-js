@@ -15,6 +15,7 @@
  */
 
 /**
+ * 文本下载按钮，可显示具体下载进度。
  * @file
  * @kit ArkUI
  */
@@ -24,13 +25,15 @@ import { ResourceColor, ResourceStr, Length } from '@ohos.arkui.component';
 import { Builder } from '@ohos.arkui.component';
 import { LengthMetrics } from 'arkui.Graphics';
 /**
- * 文本下载按钮，可显示具体的下载进度。
+ * 创建ProgressButton组件。
  *
  * 设备行为差异：该接口在Wearable设备上使用时，应用程序运行异常，异常信息中提示接口未定义，在其他设备中可正常调用。
  *
  * > **说明：**
  * >
- * > - 如果ProgressButton设置[通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ProgressButton本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ProgressButton设置通用属性和通用事件。
+ * > - 如果ProgressButton设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
+ * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ProgressButton本身。
+ * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ProgressButton设置通用属性和通用事件。
  *
  * @struct { ProgressButton }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

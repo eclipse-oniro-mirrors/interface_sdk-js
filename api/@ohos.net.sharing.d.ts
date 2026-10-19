@@ -454,6 +454,19 @@ declare namespace sharing {
   function on(type: 'sharingStateChange', callback: Callback<boolean>): void;
 
   /**
+   * Register a callback for the global network sharing state change.
+   *
+   * @permission ohos.permission.CONNECTIVITY_INTERNAL
+   * @param { Callback<boolean> } callback - the callback function that returns the status.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onSharingStateChange(callback: Callback<boolean>): void;
+
+  /**
    * Unregisters the network sharing status change event. This method uses an asynchronous callback to return the
    * result.
    *
@@ -469,6 +482,19 @@ declare namespace sharing {
    * @since 9 dynamic
    */
   function off(type: 'sharingStateChange', callback?: Callback<boolean>): void;
+
+  /**
+   * Unregister a callback for the global network sharing state change.
+   *
+   * @permission ohos.permission.CONNECTIVITY_INTERNAL
+   * @param { Callback<boolean> } [callback] - the callback function that returns the status.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offSharingStateChange(callback?: Callback<boolean>): void;
 
   /**
    * Subscribes to network sharing state changes of a specified NIC. This API uses an asynchronous callback to return
@@ -491,6 +517,19 @@ declare namespace sharing {
   function on(type: 'interfaceSharingStateChange', callback: Callback<InterfaceSharingStateInfo>): void;
 
   /**
+   * Register a callback for the interface network sharing state change.
+   *
+   * @permission ohos.permission.CONNECTIVITY_INTERNAL
+   * @param { Callback<InterfaceSharingStateInfo> } callback - the callback function that returns the message.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onInterfaceSharingStateChange(callback: Callback<InterfaceSharingStateInfo>): void;
+
+  /**
    * Unsubscribes from network sharing state changes of a specified NIC. This API uses an asynchronous callback to
    * return the result.
    *
@@ -510,6 +549,19 @@ declare namespace sharing {
   function off(type: 'interfaceSharingStateChange', callback?: Callback<InterfaceSharingStateInfo>): void;
 
   /**
+   * Unregister a callback for the interface network sharing state change.
+   *
+   * @permission ohos.permission.CONNECTIVITY_INTERNAL
+   * @param { Callback<InterfaceSharingStateInfo> } [callback] - the callback function that returns the message.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offInterfaceSharingStateChange(callback?: Callback<InterfaceSharingStateInfo>): void;
+
+  /**
    * Subscribes to upstream network changes. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
@@ -526,6 +578,19 @@ declare namespace sharing {
   function on(type: 'sharingUpstreamChange', callback: Callback<NetHandle>): void;
 
   /**
+   * Register a callback for the sharing upstream network change.
+   *
+   * @permission ohos.permission.CONNECTIVITY_INTERNAL
+   * @param { Callback<NetHandle> } callback - the callback function that returns the network handle.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function onSharingUpstreamChange(callback: Callback<NetHandle>): void;
+
+  /**
    * Unsubscribes from upstream network changes. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
@@ -540,6 +605,19 @@ declare namespace sharing {
    * @since 9 dynamic
    */
   function off(type: 'sharingUpstreamChange', callback?: Callback<NetHandle>): void;
+
+  /**
+   * Unregister a callback for the sharing upstream network change.
+   *
+   * @permission ohos.permission.CONNECTIVITY_INTERNAL
+   * @param { Callback<NetHandle> } [callback] - the callback function that returns the network handle.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
+  function offSharingUpstreamChange(callback?: Callback<NetHandle>): void;
 
   /**
    * Enumerates the network sharing states of an NIC.

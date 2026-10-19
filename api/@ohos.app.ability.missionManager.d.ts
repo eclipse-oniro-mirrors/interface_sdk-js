@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file missionManager
  * @kit AbilityKit
  */
 
@@ -47,8 +47,9 @@ declare namespace missionManager {
    * @param { MissionListener } listener - Mission status listener to register.
    * @returns { long } Index of the mission status listener, which is created by the system and allocated when the
    *     listener is registered.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -63,8 +64,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { MissionListener } listener - Indicates the MissionListener to be registered.
    * @returns { long } Returns the index number of the MissionListener.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
    * @since 23 static
@@ -78,9 +80,11 @@ declare namespace missionManager {
    * @param { 'mission' } type - Name of the target mission. The value is fixed at **'mission'**, indicating the system
    *     mission status listener.
    * @param { long } listenerId - Index of the mission status listener to deregister. It is returned by **on()**.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result and the task ID array. If the mission
+   *     status listener is deregistered successfully, err is undefined; otherwise, err is an error object.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
@@ -96,8 +100,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { long } listenerId - Indicates the listener id to be unregistered.
    * @param { AsyncCallback<void> } callback - The callback of off.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
@@ -113,8 +118,9 @@ declare namespace missionManager {
    *     mission status listener.
    * @param { long } listenerId - Index of the mission status listener to deregister. It is returned by **on()**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
@@ -130,8 +136,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { long } listenerId - Indicates the listener id to be unregistered.
    * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
@@ -146,8 +153,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<MissionInfo> } callback - Callback used to return the mission information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -164,8 +172,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } missionId - Mission ID.
    * @returns { Promise<MissionInfo> } Promise used to return the mission information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -183,8 +192,9 @@ declare namespace missionManager {
    * @param { int } numMax - Maximum number of missions whose information can be obtained.
    * @param { AsyncCallback<Array<MissionInfo>> } callback - Callback used to return the array of mission information
    *     obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -201,8 +211,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } numMax - Maximum number of missions whose information can be obtained.
    * @returns { Promise<Array<MissionInfo>> } Promise used to return the array of mission information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -219,8 +230,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<MissionSnapshot> } callback - Callback used to return the snapshot information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -237,8 +249,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } missionId - Mission ID.
    * @returns { Promise<MissionSnapshot> } Promise used to return the snapshot information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -256,8 +269,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<MissionSnapshot> } callback - Callback used to return the snapshot information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -278,8 +292,9 @@ declare namespace missionManager {
    * @param { string } deviceId - Device ID. It is a null string by default for the local device.
    * @param { int } missionId - Mission ID.
    * @returns { Promise<MissionSnapshot> } Promise used to return the snapshot information obtained.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -290,13 +305,16 @@ declare namespace missionManager {
   function getLowResolutionMissionSnapShot(deviceId: string, missionId: int): Promise<MissionSnapshot>;
 
   /**
-   * Locks a given mission. This API uses an asynchronous callback to return the result.
+   * Locks a given mission. This API is applicable to scenarios where a mission needs to be kept from being cleaned
+   * up, such as when a system management application needs to keep key missions running in the background. This API
+   * uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -308,13 +326,16 @@ declare namespace missionManager {
   function lockMission(missionId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Locks a given mission. This API uses a promise to return the result.
+   * Locks a given mission. This API is applicable to scenarios where a mission needs to be kept from being cleaned
+   * up, such as when a system management application needs to keep key missions running in the background. This API
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -326,13 +347,16 @@ declare namespace missionManager {
   function lockMission(missionId: int): Promise<void>;
 
   /**
-   * Unlocks a given mission. This API uses an asynchronous callback to return the result.
+   * Unlocks a given mission. This API is applicable to scenarios where a locked mission is allowed to be cleaned up
+   * by the system, such as when a system management application no longer needs to keep a mission running in the
+   * background. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -344,13 +368,16 @@ declare namespace missionManager {
   function unlockMission(missionId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Unlocks a given mission. This API uses a promise to return the result.
+   * Unlocks a given mission. This API is applicable to scenarios where a locked mission is allowed to be cleaned up
+   * by the system, such as when a system management application no longer needs to keep a mission running in the
+   * background. This API uses a promise to return the result.
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300001 - Mission not found.
@@ -368,8 +395,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -385,8 +413,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -401,8 +430,9 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -417,8 +447,9 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
    * @since 9 dynamic
@@ -432,8 +463,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { int } missionId - Mission ID.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -453,8 +485,9 @@ declare namespace missionManager {
    * @param { StartOptions } options - Startup parameters, which are used to specify the window mode and device ID for
    *     switching the mission to the foreground.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -475,8 +508,9 @@ declare namespace missionManager {
    *     switching the mission to the foreground. By default, no value is passed in, indicating that the default startup
    *     parameters are used.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
@@ -493,8 +527,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - Array holding the mission IDs.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -511,10 +546,12 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - Array holding the mission IDs.
-   * @param { int } topMission - ID of the mission to be moved to the top.
+   * @param { int } topMission - ID of the mission to be moved to the top. The value **-1** indicates that no specific
+   *     mission is specified and the system moves the mission to the top based on the default logic.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -532,10 +569,11 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - Array holding the mission IDs.
    * @param { int } topMission - ID of the mission to be moved to the top. The default value is **-1**, indicating that
-   *     the default mission is moved to the top.
+   *     no specific mission is specified and the system moves the mission to the top based on the default logic.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -553,8 +591,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - Array holding the mission IDs.
    * @param { AsyncCallback<Array<int>> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -572,8 +611,9 @@ declare namespace missionManager {
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - Array holding the mission IDs.
    * @returns { Promise<Array<int>> } Promise used to return an array of mission IDs.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -593,8 +633,9 @@ declare namespace missionManager {
    * @param { MissionListener } listener - Mission status listener to register.
    * @returns { long } Index of the mission status listener, which is created by the system and allocated when the
    *     listener is registered.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
@@ -614,8 +655,9 @@ declare namespace missionManager {
    * @param { long } listenerId - Index of the mission status listener to deregister. It is returned by **on()**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the API call is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.
@@ -635,8 +677,9 @@ declare namespace missionManager {
    *     mission status listener.
    * @param { long } listenerId - Index of the mission status listener to deregister. It is returned by **on()**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300002 - The specified mission listener does not exist.

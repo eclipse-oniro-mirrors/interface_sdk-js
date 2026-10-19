@@ -14,13 +14,14 @@
  */
 
 /**
- * @file
+ * @file FormAgent
  * @kit FormKit
  */
 
 import type { AsyncCallback } from './@ohos.base';
 import formBindingData from './@ohos.app.form.formBindingData';
 import type Want from './@ohos.app.ability.Want';
+import formInfo from './@ohos.app.form.formInfo';
 
 /**
  * The **FormAgent** module provides APIs related to the widget agent. Currently, you can use the APIs to request to 
@@ -52,10 +53,10 @@ declare namespace formAgent {
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
-   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed. [since 26.1.0]
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed. [since 26.0.1]
    * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out. [since 12]
-   * @throws { BusinessError } 16501017 - There is no space to publish form. [since 26.1.0]
-   * @throws { BusinessError } 16501018 - This form does not support publishing. [since 26.1.0]
+   * @throws { BusinessError } 16501017 - There is no space to publish the form. [since 26.0.1]
+   * @throws { BusinessError } 16501018 - This form does not support publishing. [since 26.0.1]
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -82,10 +83,10 @@ declare namespace formAgent {
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
-   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed. [since 26.1.0]
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed. [since 26.0.1]
    * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out. [since 12]
-   * @throws { BusinessError } 16501017 - There is no space to publish form. [since 26.1.0]
-   * @throws { BusinessError } 16501018 - This form does not support publishing. [since 26.1.0]
+   * @throws { BusinessError } 16501017 - There is no space to publish the form. [since 26.0.1]
+   * @throws { BusinessError } 16501018 - This form does not support publishing. [since 26.0.1]
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -114,5 +115,55 @@ declare namespace formAgent {
    * @since 26.0.0 dynamic&static
    */
   function updateFormCrossBundle(formId: string, formBindingData: formBindingData.FormBindingData): Promise<void>;
+
+  /**
+   * Get available form host service info list.
+   *
+   * @permission ohos.permission.AGENT_REQUIRE_FORM
+   * @returns { Promise<Array<formInfo.PeerFormHostServiceInfo>> } Promise used to return
+   *     the peer form host service info list.
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function getAvailableFormHostServices(): Promise<Array<formInfo.PeerFormHostServiceInfo>>;
+
+  /**
+   * Requests to publish a form to the form host service of the remote device.
+   *
+   * @permission ohos.permission.AGENT_REQUIRE_FORM
+   * @param { formInfo.PeerFormHostServiceInfo } peerServiceInfo - The peer form host service information.
+   * @param { Want } want - Publish request, which must contain the following fields:
+   *     <br>**bundleName**: bundle name of the target form.
+   *     <br>**abilityName**: ability of the target form.
+   *     <br>parameters:
+   *     <br>- **ohos.extra.param.key.form_dimension**: dimension of the target form.
+   *     <br>- **ohos.extra.param.key.form_name**: name of the target form.
+   *     <br>- **ohos.extra.param.key.module_name**: module name of the target form.
+   * @param { formBindingData.FormBindingData } [formBindingData] - Data to be used for the update.
+   * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise used to return the result of
+   *     publishing the form across device.
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501020 - Remote form service is unavailable.
+   * @throws { BusinessError } 16501021 - The peer form application is not installed or the version is too old.
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed.
+   * @throws { BusinessError } 16501017 - There is no space to publish the form.
+   * @throws { BusinessError } 16501018 - This form does not support publishing.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function requestPublishFormCrossDevice(peerServiceInfo: formInfo.PeerFormHostServiceInfo, want: Want,
+    formBindingData?: formBindingData.FormBindingData): Promise<formInfo.PublishFormCrossDeviceResult>;
 }
 export default formAgent;

@@ -59,16 +59,18 @@ export declare interface WithEnvAttribute {
      *
      * @returns { this } WithEnvAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     setWithEnvOptions(): this;
     /**
      * 通知WithEnv属性设置完成。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     applyAttributesFinish(): void;
 }

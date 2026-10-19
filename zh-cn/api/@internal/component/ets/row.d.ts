@@ -62,8 +62,6 @@ declare interface RowOptions {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
- * >
  * > Row未设置宽度或高度时，在主轴或交叉轴方向上自适应子组件大小。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -71,7 +69,7 @@ declare interface RowOptions {
  * @form [since 9]
  * @atomicservice [since 11]
  * @since 7 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 interface RowInterface {
   /**
@@ -119,9 +117,9 @@ interface RowInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 支持[通用事件]{@link ./common}。
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -166,7 +164,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。PointLightStyle对象包含光源位置、颜色、强度等参数，具体配置方式详见链接说明。仅Image、
    *     Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { RowAttribute } The attribute of the row.
+   * @returns { RowAttribute } Row的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -178,7 +176,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
    *
    * @param { Optional<boolean> } isReversed - 子组件在水平方向上的排列顺序是否反转。
    *     <br>设置true表示子组件在水平方向上反转排列（从右到左），设置false表示子组件在水平方向上正序排列（从左到右）。参数值为undefined时视为true，主轴方向反转。
-   * @returns { RowAttribute } The attribute of the row.
+   * @returns { RowAttribute } Row的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -194,11 +192,9 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
- * >
  * > Row未设置宽度或高度时，在主轴或交叉轴方向上自适应子组件大小。
  * 
- * ###### 子组件
+ * ## 子组件
  * 
  * 可以包含子组件。
  *
@@ -212,7 +208,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
 declare const Row: RowInterface;
 
 /**
- * Defines Row Component instance.
+ * 定义Row组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

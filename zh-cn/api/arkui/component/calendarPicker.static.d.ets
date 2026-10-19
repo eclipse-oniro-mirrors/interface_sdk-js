@@ -69,6 +69,72 @@ export declare enum CalendarAlign {
 }
 
 /**
+ * 日历选择器每周起始日的枚举类型。
+ * @enum { int }
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum CalendarFirstDayOfWeek {
+  /**
+   * 跟随系统区域变化。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  LOCAL = 0,
+  /**
+   * 周一。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  MON = 1,
+  /**
+   * 周二。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  TUE = 2,
+  /**
+   * 周三。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  WED = 3,
+  /**
+   * 周四。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  THU = 4,
+  /**
+   * 周五。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  FRI = 5,
+  /**
+   * 周六。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SAT = 6,
+  /**
+   * 周日。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SUN = 7
+}
+
+/**
  * 日历选择器组件的参数说明。
  *
  * @interface CalendarOptions
@@ -221,7 +287,19 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
   default markToday(enabled: boolean | undefined): this;
 
   /**
-     * 设置属性修改器。
+   * 设置日历选择器每周的起始日。
+   *
+   * @param { CalendarFirstDayOfWeek | undefined } value - 设置日历选择器每周的起始日。
+   *     <br/>默认值：CalendarFirstDayOfWeek.LOCAL（跟随系统区域变化）<br/>当value的值为undefined时，使用默认值。
+   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default firstDayOfWeek(value: CalendarFirstDayOfWeek | undefined): this;
+
+  /**
+      * 设置属性修改器。
      *
    * @param { AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { CalendarPickerAttribute }
@@ -517,6 +595,16 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 static
    */
   edgeLightMode?: EdgeLightMode;
+
+  /**
+   * 设置日历选择器弹窗每周的起始日。
+   *
+   * @default CalendarFirstDayOfWeek.LOCAL
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  firstDayOfWeek?: CalendarFirstDayOfWeek;
 }
 
 /**

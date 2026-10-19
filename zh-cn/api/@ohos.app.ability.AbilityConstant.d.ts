@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Ability相关常量
  * @kit AbilityKit
  */
 
@@ -41,9 +41,18 @@ declare namespace AbilityConstant {
    * @stagemodelonly
    * @atomicservice
    * @since 20 dynamic
-   * @since 23 static
    */
   const REASON_MESSAGE_DESKTOP_SHORTCUT = 'ReasonMessage_DesktopShortcut';
+
+  /**
+   * 通过桌面快捷方式启动。开发者如果从[LaunchParam]{@link AbilityConstant.LaunchParam}的launchReasonMessage属性中获取到该字符串，表示UIAbility是通过点击桌面快
+   * 捷方式启动的。
+   *
+   * @syscap SystemCapability.Ability.AbilityBase
+   * @stagemodelonly
+   * @since 23 static
+   */
+  const REASON_MESSAGE_DESKTOP_SHORTCUT: string;
 
   /**
    * 启动参数，主要包括Ability启动原因以及上次退出原因。Ability启动时由系统自动传入，开发者无需修改。
@@ -264,7 +273,7 @@ declare namespace AbilityConstant {
 
   /**
    * Ability启动原因，该类型为枚举，可配合UIAbility的[onCreate(want, launchParam)]{@link @ohos.app.ability.UIAbility:UIAbility#onCreate}
-   * 方法根据launchParam.launchReason的不同类型执行相应操作。
+   * 方法根据[LaunchParam.launchReason]{@link AbilityConstant.LaunchParam}的不同类型执行相应操作。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -389,7 +398,7 @@ declare namespace AbilityConstant {
 
   /**
    * Ability上次退出原因，该类型为枚举，可配合UIAbility的[onCreate()]{@link @ohos.app.ability.UIAbility:UIAbility#onCreate}方法根据
-   * launchParam.lastExitReason的不同类型执行相应操作。
+   * [LaunchParam.lastExitReason]{@link AbilityConstant.LaunchParam}的不同类型执行相应操作。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -472,7 +481,7 @@ declare namespace AbilityConstant {
     /**
      * 因系统性能问题（如设备内存不足）导致的应用程序退出。
      * 
-     * **说明**：该接口即将废弃，建议使用RESOURCE_CONTROL替代。
+     * **说明**：该接口即将废弃，建议使用[RESOURCE_CONTROL]{@link AbilityConstant.LastExitReason.RESOURCE_CONTROL}替代。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
@@ -687,7 +696,7 @@ declare namespace AbilityConstant {
 
   /**
    * 启动UIAbility时窗口的创建模式，类型为枚举。可配合
-   * [startAbility]{@link ./application/UIAbilityContext:UIAbilityContext.startAbility(want: Want, options?: StartOptions)}
+   * [startAbility]{@link ./application/UIAbilityContext:UIAbilityContext#startAbility(want: Want, options?: StartOptions)}
    * 方法使用。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -746,7 +755,16 @@ declare namespace AbilityConstant {
      * @since 12 dynamic
      * @since 23 static
      */
-    WINDOW_MODE_FLOATING = 102
+    WINDOW_MODE_FLOATING = 102,
+
+    /**
+     * 分屏窗口模式。仅在应用内跳转场景下生效，且仅在折叠屏设备和平板上生效。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    WINDOW_MODE_SPLIT = 105,
   }
 
   /**
@@ -817,7 +835,7 @@ declare namespace AbilityConstant {
     RECOVERY_REJECT = 4,
 
     /**
-     * Always rejected to save the status.
+     * 总是拒绝保存状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
@@ -867,6 +885,8 @@ declare namespace AbilityConstant {
    * 流转状态枚举值。用于表示当前应用任务流转的状态。可配合[UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}的
    * [setMissionContinueState]{@link ./application/UIAbilityContext:UIAbilityContext.setMissionContinueState(state: AbilityConstant.ContinueState, callback: AsyncCallback<void>)}
    * 方法进行设置。
+   *
+   * > **说明：** 该接口在不支持分布式业务的Wearable设备不生效。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly

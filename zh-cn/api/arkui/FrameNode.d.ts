@@ -157,7 +157,7 @@ declare interface InteractionEventBindingInfo {
 
   /**
    * 是否以注册节点事件（
-   * [registerNodeEvent](docroot://reference/apis-arkui/capi-arkui-nativemodule-arkui-nativenodeapi-1.md#registernodeevent)
+   * [registerNodeEvent](docroot://reference/apis-arkui/c-apis/capi-arkui-nativemodule-arkui-nativenodeapi-1.md#registernodeevent)
    * ）的方式绑定事件。
    *
    * true表示以注册节点事件的方式绑定事件，false表示没有以注册节点事件的方式绑定事件。
@@ -474,6 +474,34 @@ export class FrameNode {
   isModifiable(): boolean;
 
   /**
+   * 向当前FrameNode派发输入事件，并可指定竞争策略。支持TouchEvent、MouseEvent和AxisEvent。
+   * KeyEvent请使用[dispatchKeyEvent]{@link FrameNode#dispatchKeyEvent}派发。
+   *
+   * @param { InputEventType } event - 需要派发的输入事件。
+   * @param { CompetitionStrategy } [competitionStrategy] - 派发事件时使用的竞争策略。
+   * @returns { boolean } 是否成功派发事件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
+
+  /**
+   * 向当前FrameNode派发按键事件。
+   *
+   * @param { KeyEvent } event - 需要派发的按键事件。
+   * @returns { boolean } 按键事件是否被消费。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  dispatchKeyEvent(event: KeyEvent): boolean;
+
+  /**
    * 在FrameNode最后一个子节点后添加新的子节点。当前FrameNode如果不可修改，抛出异常信息。[typeNode]{@link typeNode}在appendChild时会校验子组件类型或个数，不满足时抛出异常信息，限制
    * 情况请查看[typeNode]{@link typeNode}描述。
    *
@@ -651,8 +679,8 @@ export class FrameNode {
   /**
    * 根据指定的计数模式获取当前FrameNode的子节点数量。
    *
-   * @param { ChildrenCountMode } [countMode] - The children count mode. Default value is ChildrenCountMode.ALL_EXPAND.
-   * @returns { int } - Returns the number of children of the current FrameNode based on the count mode.
+   * @param { ChildrenCountMode } [countMode] - 子节点计数模式。默认值为ChildrenCountMode.ALL_EXPAND。
+   * @returns { int } - 根据计数模式返回的当前FrameNode的子节点数量。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1267,7 +1295,7 @@ export class FrameNode {
    *     <br>可以通过位或计算同时指定多个状态，如：targetUIStates = UIState.PRESSED  |  UIState.FOCUSED。
    * @param { UIStatesChangeHandler } statesChangeHandler - 状态变化时的回调函数。
    * @param { boolean } [excludeInner] - 禁止内部默认状态样式处理的标志，默认值为false。内部默认状态样式处理指组件自身内置的状态样式响应（如Button按下时的默认视觉反馈）。
-   *     <br> true表示禁止内部默认状态样式处理，false不禁止内部默认状态样式处理。
+   *     <br> true表示禁止内部默认状态样式处理，false表示不禁止内部默认状态样式处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2002,7 +2030,7 @@ export namespace typeNode {
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. the type of the node is error.
    *     2. the node is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 15 and will not
-   *     be threw above API version 24. [since 15 - 24]
+   *     be thrown above API version 24. [since 15 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 23]
@@ -2253,7 +2281,7 @@ export namespace typeNode {
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node is
    *     incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 20 and will not
-   *     be threw above API version 24. [since 20 - 24]
+   *     be thrown above API version 24. [since 20 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2500,7 +2528,7 @@ export namespace typeNode {
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node
    *     is incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 20 and will not
-   *     be threw above API version 24. [since 20 - 24]
+   *     be thrown above API version 24. [since 20 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3121,7 +3149,7 @@ export namespace typeNode {
    * @throws { BusinessError } 100023 - Parameter error. Possible causes: 1. The component type of the node
    *     is incorrect. 2. The node is null or undefined. 3. The controller is null or undefined.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable. Introduced in API version 20 and will not
-   *     be threw above API version 24. [since 20 - 24]
+   *     be thrown above API version 24. [since 20 - 24]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

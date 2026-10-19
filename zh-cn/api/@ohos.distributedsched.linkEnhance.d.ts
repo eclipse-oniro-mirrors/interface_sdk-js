@@ -90,7 +90,8 @@ declare namespace linkEnhance {
      * 放资源。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390202 - The number of servers exceeds the limit.
      * @throws { BusinessError } 32390300 - Internal error.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
@@ -104,7 +105,8 @@ declare namespace linkEnhance {
      * 使用完服务时，调用`stop`停止服务，停止后可以调用`start`重新开启服务。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -117,7 +119,8 @@ declare namespace linkEnhance {
      * 对象；stop()仅停止服务，Server对象仍可重新启动。如果还需重新启动服务，使用stop()；如果业务完全结束，使用close()。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -133,7 +136,8 @@ declare namespace linkEnhance {
      *     a connection from the peer end is received.
      * @param { Callback<Connection> } callback - Registered callback, which is used to return the
      *     [Connection]{@link linkEnhance.Connection} object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -148,7 +152,8 @@ declare namespace linkEnhance {
      * @param { 'connectionAccepted' } type - 事件回调类型，支持的事件为'connectionAccepted'，收到对端连接，触发该事件。
      * @param { Callback<Connection> } [callback] - 注册的回调函数，参数为连接对象[Connection]{@link linkEnhance.Connection}。 需传入对应on方法
      *     最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -162,7 +167,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<Connection> } callback - Callback used to listen for the server is connected event.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -177,7 +183,8 @@ declare namespace linkEnhance {
      * @param { Callback<Connection> } [callback] - Registered callback, which is used to return the
      *     [Connection]{@link linkEnhance.Connection} object.
      * 
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -191,7 +198,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'serverStopped' } type - 事件回调类型，支持的事件为'serverStopped'，底层服务异常时触发。
      * @param { Callback<number> } callback - 注册的回调函数，当底层服务异常停止时触发，number为返回的错误码。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -206,7 +214,8 @@ declare namespace linkEnhance {
      * @param { 'serverStopped' } type - 事件回调类型，支持的事件为'serverStopped'，底层服务异常时触发。
      * @param { Callback<number> } [callback] - 注册的回调函数，当底层服务异常停止时触发，number为返回的错误码。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效
      *     果与传入行为一致。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -220,7 +229,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } callback - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -234,7 +244,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } [callback] - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -250,7 +261,8 @@ declare namespace linkEnhance {
    * @permission ohos.permission.DISTRIBUTED_DATASYNC
    * @param { string } name - 自定义的非空字符串，标识应用的服务名，最大长度255字节。超出长度限制或传入空字符串时返回错误码32390206。
    * @returns { Server } 创建成功的服务对象。
-   * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported
    *     because the linkEnhance function has been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -276,7 +288,8 @@ declare namespace linkEnhance {
      * 数据，当连接不再使用时调用disconnect() 断开连接。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390204 - The number of connection exceeds the limit.
      * @throws { BusinessError } 32390300 - Internal error.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
@@ -290,7 +303,8 @@ declare namespace linkEnhance {
      * 业务执行完毕后，双端任意设备可调用该接口断开连接。创建的connection对象仍有效，需要时可调用connect()重新连接。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -303,7 +317,8 @@ declare namespace linkEnhance {
      * 源，之后需重新创建Connection对象；disconnect()仅断开连接，Connection对象仍可重新连接。如果还需要重新连接，使用disconnect()；如果业务完全结束，使用close()。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -316,7 +331,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @returns { string } 对端设备的deviceId，即对端设备的BLE MAC地址。如果获取失败返回空字符串。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -329,7 +345,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { ArrayBuffer } data - 需要发送的数据，最大发送长度为1024字节。超出长度限制时返回错误码32390206。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @throws { BusinessError } 32390205 - Connection is not ready.
      * @throws { BusinessError } 32390300 - Internal error.
@@ -347,7 +364,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'connectResult' } type - 事件回调类型，支持的事件为'connectResult'，完成`connect()`调用，触发该事件。
      * @param { Callback<ConnectResult> } callback - 注册的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -361,7 +379,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'connectResult' } type - 事件回调类型，支持的事件为'connectResult'，完成`connect()`调用，触发该事件。
      * @param { Callback<ConnectResult> } [callback] - 注册的回调函数。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -374,7 +393,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ConnectResult> } callback - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -387,7 +407,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ConnectResult> } [callback] - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -401,7 +422,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'disconnected' } type - 事件回调类型，支持的事件为'disconnected'，连接被动断开或底层异常断开时，触发该事件。
      * @param { Callback<number> } callback - 注册的回调函数，连接被动断开或底层异常断开时触发，number为返回的错误码。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -416,7 +438,8 @@ declare namespace linkEnhance {
      * @param { 'disconnected' } type - 事件回调类型，支持的事件为'disconnected'，连接被动断开或底层异常断开时，触发该事件。
      * @param { Callback<number> } [callback] - 注册的回调函数，连接被动断开或底层异常断开时触发，number为返回的错误码。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默
      *     认缺省效果与传入行为一致。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -429,7 +452,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } callback - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -443,7 +467,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } [callback] - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -457,7 +482,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'dataReceived' } type - 事件回调类型，支持的事件为'dataReceived'，收到数据时，触发该事件。
      * @param { Callback<ArrayBuffer> } callback - 回调函数，用于接收对端设备发送的数据。回调参数data为接收到的数据，类型为ArrayBuffer。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -472,7 +498,8 @@ declare namespace linkEnhance {
      * @param { 'dataReceived' } type - 事件回调类型，支持的事件为'dataReceived'，收到数据时，触发该事件。
      * @param { Callback<ArrayBuffer> } [callback] - 回调函数，用于接收对端设备发送的数据。回调参数data为接收到的数据，类型为ArrayBuffer。需传入对应on方法最后一次注册的回
      *     调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -486,7 +513,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ArrayBuffer> } callback - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -499,7 +527,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ArrayBuffer> } [callback] - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -517,7 +546,8 @@ declare namespace linkEnhance {
    *     [查找设备](docroot://connectivity/bluetooth/ble-development-guide.md)。
    * @param { string } name - 连接的目标设备的服务名，非空字符串，最大长度255字节。超出长度限制或传入空字符串时返回错误码32390206。
    * @returns { Connection } 创建成功的连接对象。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported
    *     because the linkEnhance function has been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390206 - Invalid parameter.

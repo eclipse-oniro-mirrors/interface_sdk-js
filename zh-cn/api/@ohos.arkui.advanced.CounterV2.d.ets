@@ -19,14 +19,14 @@
  */
 
 /**
-* CounterV2Type指定CounterV2类型。
-*
-* 各类型CounterV2组件的展示效果可参考
-* [示例1（列表型CounterV2）]{@link @ohos.arkui.advanced.CounterV2}、
-* [示例2（紧凑型CounterV2）]{@link @ohos.arkui.advanced.CounterV2}、
-* [示例3（数值内联型CounterV2）]{@link @ohos.arkui.advanced.CounterV2}、
-* [示例4（日期内联型CounterV2）]{@link @ohos.arkui.advanced.CounterV2}。
-*
+ * CounterV2Type指定CounterV2类型。
+ *
+ * 各类型CounterV2组件的展示效果可参考
+ * [示例1（列表型CounterV2）](docroot://reference/apis-arkui/arkui-ts/ohos-arkui-advanced-CounterV2.md#示例1列表型counterv2)、
+ * [示例2（紧凑型CounterV2）](docroot://reference/apis-arkui/arkui-ts/ohos-arkui-advanced-CounterV2.md#示例2紧凑型counterv2)、
+ * [示例3（数值内联型CounterV2）](docroot://reference/apis-arkui/arkui-ts/ohos-arkui-advanced-CounterV2.md#示例3数值内联型counterv2)、
+ * [示例4（日期内联型CounterV2）](docroot://reference/apis-arkui/arkui-ts/ohos-arkui-advanced-CounterV2.md#示例4日期内联型counterv2)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -80,10 +80,9 @@ declare enum CounterV2Type {
 }
 
 /**
-* 定义CounterV2的鼠标悬浮回调类型。
-*
- * @param { boolean } 表示鼠标是否悬浮在组件上。
- *     <br>鼠标进入时为true，离开时为false。 - 表示鼠标是否悬浮在组件上。
+ * 定义CounterV2的鼠标悬浮回调类型。
+ *
+ * @param { boolean } isHover - 表示鼠标是否悬浮在组件上。
  *     <br>鼠标进入时为true，离开时为false。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -94,8 +93,8 @@ declare enum CounterV2Type {
 export type OnCounterV2HoverCallback = (isHover: boolean) => void;
 
 /**
-* CounterV2CommonOptions定义了CounterV2的共通属性和事件。
-*
+ * CounterV2CommonOptions定义了CounterV2的通用属性和事件。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -193,8 +192,8 @@ declare class CounterV2CommonOptions {
 }
 
 /**
-* 定义数值内联型CounterV2的值变化回调类型。
-*
+ * 定义数值内联型CounterV2的值变化回调类型。
+ *
  * @param { int } value - 当前显示的数值。
  *     <br>取值范围：[min, max]，其中min和max分别对应CounterV2的最小值和最大值。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -206,14 +205,14 @@ declare class CounterV2CommonOptions {
 export type OnInlineCounterV2Change = (value: int) => void;
 
 /**
-* CounterV2InlineStyleOptions定义了数值内联型CounterV2的属性和事件。
-*
+ * CounterV2InlineStyleOptions定义了数值内联型CounterV2的属性和事件。
+ *
  * 继承于[CounterV2CommonOptions]{@link CounterV2CommonOptions}，包含该接口所有属性。本节仅展示新增属性，继承属性请参见父接口。
  *
  * > **说明：**
  * >
  * > 1. min应小于等于max。若min大于max，则按max处理。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -322,11 +321,11 @@ declare class CounterV2InlineStyleOptions extends CounterV2CommonOptions {
 }
 
 /**
-* CounterV2NumberStyleOptions定义了列表型和紧凑型CounterV2的属性和事件。
-*
+ * CounterV2NumberStyleOptions定义了列表型和紧凑型CounterV2的属性和事件。
+ *
  * 继承于[CounterV2InlineStyleOptions]{@link CounterV2InlineStyleOptions}，包含该接口及
  * [CounterV2CommonOptions]{@link CounterV2CommonOptions}所有属性。本节仅展示新增属性，继承属性请参见父接口。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -421,8 +420,8 @@ declare class CounterV2NumberStyleOptions extends CounterV2InlineStyleOptions {
 }
 
 /**
-* CounterV2DateData定义了日期通用属性和方法，包括年、月、日。
-*
+ * CounterV2DateData定义了日期通用属性和方法，包括年、月、日。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -492,8 +491,8 @@ declare class CounterV2DateData {
 
 /**
  * 定义日期内联型CounterV2的日期变化回调类型。
-*
- * @param { CounterV2DateData } 当前显示的日期值。 - 当前显示的日期值。
+ *
+ * @param { CounterV2DateData } date - 当前显示的日期值。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -503,10 +502,10 @@ declare class CounterV2DateData {
 export type OnDateCounterV2ChangeCallback = (date: CounterV2DateData) => void;
 
 /**
-* CounterV2DateStyleOptions定义日期内联型CounterV2的属性和事件。
-*
+ * CounterV2DateStyleOptions定义日期内联型CounterV2的属性和事件。
+ *
  * 继承于[CounterV2CommonOptions]{@link CounterV2CommonOptions}，包含该接口所有属性。本节仅展示新增属性，继承属性请参见父接口。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -595,8 +594,8 @@ declare class CounterV2DateStyleOptions extends CounterV2CommonOptions {
 }
 
 /**
-* CounterV2Options定义CounterV2类型及样式。
-*
+ * CounterV2Options定义CounterV2类型及样式。
+ *
  * 选择不同的CounterV2类型，需要选择对应的CounterV2样式。若样式参数与类型不匹配，将使用该类型对应的默认样式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -686,19 +685,21 @@ declare class CounterV2Options {
 
 /**
  * CounterV2组件用于精确调节数值，包含列表型、紧凑型、数值内联型和日期内联型四种类型，适用于购物车数量调节、日期选择等场景。
-*
-* 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
-* [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
+ *
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
+ * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
  * 件层级。借助状态管理（V2），开发者可以通过该组件更灵活地控制CounterV2的数据和状态，实现更高效的用户界面刷新。
-*
-* > **说明：**
-* >
-* > - 如果CounterV2设置[通用属性]{@link ./@internal/component/ets/common}和[通用事件]{@link ./@internal/component/ets/common}，编译工具链会
- * > 额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到CounterV2本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议为CounterV2设置通用属性
- * > 和通用事件。
+ *
+ * > **说明：**
  * >
- * > - 该组件接口仅可在Stage模型下使用。
-*
+ * > - 如果CounterV2设置[通用属性]{@link ./@internal/component/ets/common}或[通用事件]{@link ./@internal/component/ets/common}，编译工具链会
+ * > 额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到CounterV2本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议CounterV2设置通用属性和
+ * > 通用事件。
+ *
+ * ###### 子组件
+ *
+ * 无
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

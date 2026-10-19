@@ -110,8 +110,8 @@ declare namespace FaultLogger {
    * @param { FaultType } faultType - 输入要查询的故障类型。
    * @param { AsyncCallback<Array<FaultLogInfo>> } callback - 回调函数，在回调函数中获取故障信息数组。
    *    <br>value拿到故障信息数组；value为undefined表示获取过程中出现异常，error返回错误提示字符串。
-   * @throws { BusinessError } 401 - The parameter check failed, Parameter type error
-   * @throws { BusinessError } 801 - The specified SystemCapability name was not found
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Possible causes: The specified SystemCapability name was not found.
    * @throws { BusinessError } 10600001 - The service is not started or is faulty
    * @syscap SystemCapability.HiviewDFX.Hiview.FaultLogger
    * @since 9 dynamiconly
@@ -126,8 +126,8 @@ declare namespace FaultLogger {
    * @param { FaultType } faultType - 输入要查询的故障类型。
    * @returns { Promise<Array<FaultLogInfo>> } Promise实例，可以在其then()方法中获取故障信息实例，也可以使用await。
    *    <br>value拿到故障信息数组；value为undefined表示获取过程中出现异常。
-   * @throws { BusinessError } 401 - The parameter check failed, Parameter type error
-   * @throws { BusinessError } 801 - The specified SystemCapability name was not found
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Possible causes: The specified SystemCapability name was not found.
    * @throws { BusinessError } 10600001 - The service is not started or is faulty
    * @syscap SystemCapability.HiviewDFX.Hiview.FaultLogger
    * @since 9 dynamiconly

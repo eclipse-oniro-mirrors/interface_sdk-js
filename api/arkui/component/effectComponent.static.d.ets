@@ -20,7 +20,6 @@
 
 import { ComponentBuilder, CustomBuilder, CustomBuilderT, Builder } from './builder';
 import { AttributeModifier, CommonMethod } from './common';
-import { CustomBuilder } from '@ohos.arkui.component';
 
 /**
  * Effect layer enum.
@@ -130,7 +129,7 @@ export declare interface EffectComponentAttribute extends CommonMethod {
      * @systemapi
      * @unpublished
      * @stagemodelonly
-     * @since 26.1.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setEffectComponentOptions(options?: EffectComponentOptions): this;
 }
@@ -163,7 +162,7 @@ export declare function EffectComponent(
  * @systemapi
  * @unpublished
  * @stagemodelonly
- * @since 26.1.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

@@ -101,8 +101,9 @@ export declare interface LineAttribute extends CommonShapeMethod {
 	 * @param { LineOptions } [options] - Line绘制区域。<br/>异常值undefined和null按照无效值处理，本次设置不生效。
 	 * @returns { LineAttribute } 返回LineAttribute实例。
 	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+	 * @unpublished
 	 * @stagemodelonly
-	 * @since 26.0.0 staticonly
+	 * @since 26.0.1 staticonly
 	 */
  	default setLineOptions(options?: LineOptions): this;
     /**
@@ -138,8 +139,9 @@ export declare function Line(
  * @param { CustomBuilderT<LineAttribute> } style - 设置组件属性的回调。
  * @returns { LineAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder
