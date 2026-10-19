@@ -365,14 +365,15 @@ declare namespace bundleResourceManager {
   function getLauncherAbilityResourceInfoList(optionsList: Array<BundleOptions>, resourceFlags: int): Promise<Array<LauncherAbilityResourceInfo>>;
 
   /**
-   * Obtains the resource information of an application based on the given HAP file path and resource flags. This API
-   * uses a promise to return the result.
+   * Obtains the resource information based on the given file path and resource flags.
+   *     This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_BUNDLE_RESOURCES
-   * @param { string } filePath - Path for storing HAP or APP. The absolute path of the application and the
-   *     data directory sandbox path are supported.
-   * @param { int } [resourceFlags] - Type of the resource information to obtain.
-   * @returns { Promise<BundleResourceInfo> } Promise used to return the resource information of the application obtained.
+   * @param { string } filePath - Path where the file is stored.
+   *     The path must be the relative path of the current bundle's data directory.
+   * @param { int } [resourceFlags] - Type of the resource information to obtain. For details, see
+   *     [ResourceFlag]{@link bundleResourceManager.ResourceFlag}.
+   * @returns { Promise<BundleResourceInfo> } Promise used to return the BundleResourceInfo.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
    * @throws { BusinessError } 17700022 - The input source file is invalid.
