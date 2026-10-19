@@ -6852,7 +6852,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.0.1 static
      */
     default onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback | undefined): this;
     /**
