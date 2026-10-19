@@ -337,12 +337,12 @@ declare namespace bundleResourceManager {
    * 根据给定的filePath文件路径和resourceFlags资源标志获取资源信息。使用Promise异步回调。
    *
    * @permission ohos.permission.GET_BUNDLE_RESOURCES
-   * @param { string } filePath - 表示存储HAP或APP的路径，支持当前应用程序的绝对路径和数据目录沙箱路径。
-   * @param { int } [resourceFlags] - 指定返回的BundleResourceInfo所包含的信息。
-   * @returns { Promise<BundleResourceInfo> } Promise对象，返回指定应用的BundleResourceInfo。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
-   * @throws { BusinessError } 17700022 - The input source file is invalid.
+   * @param { string } filePath - 表示存储文件的路径，路径应该是当前应用程序数据目录的路径。
+   * @param { int } [resourceFlags] - 指定返回的BundleResourceInfo所包含的信息，取值参考[ResourceFlag]{@link bundleResourceManager.ResourceFlag}。
+   * @returns { Promise<BundleResourceInfo> } Promise对象，返回BundleResourceInfo。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system api.
+   * @throws { BusinessError } 17700022 - The filePath is invalid.
    * @throws { BusinessError } 17700101 - Bundle manager service is excepted.
    * @syscap SystemCapability.BundleManager.BundleFramework.Resource
    * @systemapi
