@@ -685,7 +685,7 @@ declare class UiDriver {
    *
    * @param { By } by - 目标控件的属性要求。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws {BusinessError} 401 - if the input parameters are invalid.
+   * @throws {BusinessError} 401 - [Async] if the input parameters are invalid.
    * @throws {BusinessError} 17000002 - The API does not support concurrent calls.
    * @throws {BusinessError} 17000003 - if the assertion failed.
    * @syscap SystemCapability.Test.UiTest
@@ -1548,7 +1548,7 @@ declare interface UIEventObserver {
    *
    * @param { 'toastShow' } type - 订阅的事件类型，取值为'toastShow'。
    * @param { Callback<UIElementInfo> } callback - 事件发生时执行的回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -1561,7 +1561,7 @@ declare interface UIEventObserver {
    * 开始监听toast控件出现的事件，使用callback的形式返回结果。
    *
    * @param { Callback<UIElementInfo> } callback - 事件发生时执行的回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @since 23 static
@@ -1574,7 +1574,7 @@ declare interface UIEventObserver {
    *
    * @param { 'dialogShow' } type - 订阅的事件类型，取值为'dialogShow'。
    * @param { Callback<UIElementInfo> } callback - 事件发生时执行的回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -1587,7 +1587,7 @@ declare interface UIEventObserver {
    * 开始监听dialog控件出现的事件，使用callback的形式返回结果。
    *
    * @param { Callback<UIElementInfo> } callback - 事件发生时执行的回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @since 23 static
@@ -2062,7 +2062,7 @@ declare class On {
    * @param { string } txt - 指定控件文本，用于匹配目标控件文本。
    * @param { MatchPattern } [pattern] - 指定的文本匹配模式，默认为[EQUALS]{@link MatchPattern}。
    * @returns { On } - 返回指定目标控件文本属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2078,7 +2078,7 @@ declare class On {
    *
    * @param { string } id - 指定控件的id值。
    * @returns { On } - 返回指定目标控件id属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2094,7 +2094,7 @@ declare class On {
    *
    * @param { string } tp - 指定控件类型。
    * @returns { On } - 返回指定目标控件的控件类型属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2110,7 +2110,7 @@ declare class On {
    *
    * @param { boolean } [b] - 指定控件可点击状态。true：可点击。false：不可点击。默认为true。
    * @returns { On } - 返回指定目标控件的可点击状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2126,7 +2126,7 @@ declare class On {
    *
    * @param { boolean } [b] - 指定控件可长按点击状态。true：可长按点击。false：不可长按点击。默认为true。
    * @returns { On } - 返回指定目标控件的可长按点击状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2142,7 +2142,7 @@ declare class On {
    *
    * @param { boolean } [b] - 控件可滑动状态。true：可滑动。false：不可滑动。默认为true。
    * @returns { On } - 返回指定目标控件的可滑动状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2158,7 +2158,7 @@ declare class On {
    *
    * @param { boolean } [b] - 指定控件使能状态。true：使能。false：未使能。默认为true。
    * @returns { On } - 返回指定目标控件的使能状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2174,7 +2174,7 @@ declare class On {
    *
    * @param { boolean } [b] - 控件获焦状态。true：获焦。false：未获焦。默认为true。
    * @returns { On } - 返回指定目标控件的获焦状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2190,7 +2190,7 @@ declare class On {
    *
    * @param { boolean } [b] - 指定控件被选中状态。true：被选中。false：未被选中。默认为true。
    * @returns { On } - 返回指定目标控件的被选中状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2206,7 +2206,7 @@ declare class On {
    *
    * @param { boolean } [b] - 指定控件被勾选状态。true：被勾选。false：未被勾选。默认为true。
    * @returns { On } - 返回指定目标控件的被勾选状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2222,7 +2222,7 @@ declare class On {
    *
    * @param { boolean } [b] - 指定控件能否被勾选状态。true：能被勾选。false：不能被勾选。默认为true。
    * @returns { On } - 返回指定目标控件能否被勾选状态属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2238,7 +2238,7 @@ declare class On {
    *
    * @param { On } on - 特征控件的属性要求。 
    * @returns { On } - 返回指定目标控件位于给出的特征属性控件之前的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -2268,7 +2268,7 @@ declare class On {
    *
    * @param { On } on - 特征控件的属性要求。 
    * @returns { On } - 返回指定目标控件位于给出的特征属性控件之后的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -2298,7 +2298,7 @@ declare class On {
    *
    * @param { On } on - 特征控件的属性要求。
    * @returns { On } - 返回指定目标控件位于给出的特征属性控件内的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -2328,7 +2328,7 @@ declare class On {
    *
    * @param { string } bundleName - 应用窗口的包名。
    * @returns { On } - 返回指定目标控件位于给出的应用窗口内的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -2361,7 +2361,7 @@ declare class On {
    * @param { string } val - 控件的描述属性。 
    * @param { MatchPattern } [pattern] - 指定的文本匹配模式，默认为[EQUALS]{@link MatchPattern}。
    * @returns { On } - 返回指定目标控件description属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2377,7 +2377,7 @@ declare class On {
    * @param { string } id - 指定控件的id值。
    * @param { MatchPattern } pattern - 指定的文本匹配模式。
    * @returns { On } - 返回指定目标控件id属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2393,7 +2393,7 @@ declare class On {
    * @param { string } tp - 指定控件类型。
    * @param { MatchPattern } pattern - 指定的文本匹配模式。
    * @returns { On } - 返回指定目标控件的控件类型属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2409,7 +2409,7 @@ declare class On {
    * @param { string } val - 指定控件提示文本。  
    * @param { MatchPattern } [pattern] - 指定的文本匹配模式，默认为[EQUALS]{@link MatchPattern}。
    * @returns { On } - 返回指定目标控件hint属性的On对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2690,7 +2690,7 @@ declare class Component {
    *
    * @param { string } text - 输入的文本信息，当前支持英文、中文和特殊字符。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2712,7 +2712,7 @@ declare class Component {
    *      **说明：** InputTextMode.addition取值为true时，在控件已有文本末尾后追加指定文本。取值为false时，指定文本将覆盖控件已有文本。
    *      当输入文本中包含中文、特殊字符或文本长度超过200字符时，无论[InputTextMode]{@link InputTextMode}.paste取值为何，均以复制粘贴方式输入。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited device
    *     capabilities.
@@ -2746,7 +2746,7 @@ declare class Component {
    *
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2764,7 +2764,7 @@ declare class Component {
    *
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2797,7 +2797,7 @@ declare class Component {
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<Component> } - Promise对象，返回目标控件对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2829,7 +2829,7 @@ declare class Component {
    *
    * @param { Component } target - 目标控件。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2846,7 +2846,7 @@ declare class Component {
    *
    * @param { double } scale - 指定放大的比例。取值范围大于1。传入小于等于1的值时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2863,7 +2863,7 @@ declare class Component {
    *
    * @param { double } scale - 指定缩小的比例。取值范围为(0, 1]，不包含0，包含1。传入0或负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2909,7 +2909,7 @@ declare class Component {
    * @param { boolean } [vertical] - 默认为true，表示查找方向是纵向。false表示查找方向为横向。
    * @param { number } [offset] - 滑动起点/终点到组件边框的偏移，默认80，单位：px，取值范围：大于等于0的整数。
    * @returns { Promise<Component> } - Promise对象，返回目标控件对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2926,7 +2926,7 @@ declare class Component {
    * @param { boolean } [vertical] - 默认为true，表示查找方向是纵向。false表示查找方向为横向。
    * @param { int } [offset] - 滑动起点/终点到组件边框的偏移，默认80，单位：px。
    * @returns { Promise<Component | null> } - Promise对象，返回目标控件对象，未找到时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2983,7 +2983,7 @@ declare class Driver {
    *
    * @param { int } duration - 给定的时间，单位：ms，取值范围：大于等于0的整数。传入负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3000,7 +3000,7 @@ declare class Driver {
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<Component> } - Promise对象，返回控件对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3015,7 +3015,7 @@ declare class Driver {
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<Component | null> } - Promise对象，返回控件对象，未找到时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3028,7 +3028,7 @@ declare class Driver {
    *
    * @param { WindowFilter } filter - 目标窗口的属性。
    * @returns { Promise<UiWindow> } - Promise对象，返回目标窗口对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3042,7 +3042,7 @@ declare class Driver {
    *
    * @param { WindowFilter } filter - 目标窗口的属性。
    * @returns { Promise<UiWindow | null> } - Promise对象，返回目标窗口对象，未找到时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3056,7 +3056,7 @@ declare class Driver {
    * @param { On } on - 目标控件的属性要求。
    * @param { number } time - 查找目标控件的持续时间。单位ms，取值范围：大于等于0的整数。
    * @returns { Promise<Component> } Promise对象，返回控件对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3072,7 +3072,7 @@ declare class Driver {
    * @param { On } on - 目标控件的属性要求。
    * @param { int } time - 查找目标控件的持续时间，单位：ms，取值范围：大于等于0的整数。
    * @returns { Promise<Component | null> } - Promise对象，返回控件对象，未找到时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3085,7 +3085,7 @@ declare class Driver {
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<Array<Component>> } - Promise对象，返回控件对象的列表。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3100,7 +3100,7 @@ declare class Driver {
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<Array<Component> | null> } - Promise对象，返回控件对象的列表，未找到时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3113,7 +3113,7 @@ declare class Driver {
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000003 - Assertion failed.
@@ -3163,7 +3163,7 @@ declare class Driver {
    *
    * @param { int } keyCode - 指定的键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3182,7 +3182,7 @@ declare class Driver {
    * @param { int } displayId - 指定的屏幕ID，取值范围：大于等于0的整数。
    *      **说明：** 传入displayId不存在时，将抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3201,7 +3201,7 @@ declare class Driver {
    * @param { number } [key2] - 指定的第三个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，
    *     默认值为0。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3221,7 +3221,7 @@ declare class Driver {
    *     为0。
    * @param { int } [displayId] - 指定的屏幕ID，取值范围：大于等于0的整数，默认值为设备默认屏幕ID。传入displayId不存在时，将抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3238,7 +3238,7 @@ declare class Driver {
    * @param { int } x - 目标点的横坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @param { int } y - 目标点的纵坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3256,7 +3256,7 @@ declare class Driver {
    * @param { int } x - 目标点的横坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @param { int } y - 目标点的纵坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3274,7 +3274,7 @@ declare class Driver {
    * @param { int } x - 目标点的横坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @param { int } y - 目标点的纵坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3295,7 +3295,7 @@ declare class Driver {
    * @param { int } endy - 目的点的纵坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3316,7 +3316,7 @@ declare class Driver {
    * @param { int } endy - 目的点的纵坐标信息，取值范围：大于等于0的整数，单位：px。
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3488,7 +3488,7 @@ declare class Driver {
    *
    * @param { string } savePath - 文件保存路径。路径需为当前应用的[沙箱路径](docroot://file-management/app-sandbox-directory.md)。
    * @returns { Promise<boolean> } - Promise对象，返回截图操作是否成功完成。true：完成，false：未完成。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3506,7 +3506,7 @@ declare class Driver {
    * @param { int } displayId - 指定设备屏幕ID。取值范围：大于等于0的整数。
    *      **说明：** 传入displayId不存在时，将抛出401错误码。
    * @returns { Promise<boolean> } Promise对象，返回截图操作是否成功完成。true：完成。false：未完成。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3537,7 +3537,7 @@ declare class Driver {
    *
    * @param { DisplayRotation } rotation - 设备的显示方向。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *      2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3586,7 +3586,7 @@ declare class Driver {
    *
    * @param { boolean } enabled - 能否旋转屏幕的标识。true：可以旋转。false：不可以旋转。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3711,7 +3711,7 @@ declare class Driver {
    * @param { int } idleTime - 空闲时间的阈值。在这个时间段控件不发生变化，视为该控件空闲，单位：ms，取值范围：大于等于0的整数。传入负数时抛出401错误码。
    * @param { int } timeout - 等待空闲的最大时间，单位：ms，取值范围：大于等于0的整数。传入负数时抛出401错误码。
    * @returns { Promise<boolean> } - Promise对象，返回当前界面的所有控件是否已经空闲。true：已经空闲，false：不空闲。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3731,7 +3731,7 @@ declare class Driver {
    * @param { int } stepLen - 滑动间隔距离，取值大于等于0的整数，单位：px。为负数时抛出401错误码。
    * @param { int } speed - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3749,7 +3749,7 @@ declare class Driver {
    * @param { PointerMatrix } pointers - 滑动轨迹，包括操作手指个数和滑动坐标序列。
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<boolean> } - Promise对象，返回操作是否成功完成。true：完成，false：未完成。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3767,7 +3767,7 @@ declare class Driver {
    * @param { UiDirection } direction - 进行抛滑的方向。
    * @param { int } speed - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3787,7 +3787,7 @@ declare class Driver {
    * @param { int } displayId - 指定设备屏幕ID。取值范围：大于等于0的整数。
    *      **说明：** 传入displayId不存在时，将抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3806,7 +3806,7 @@ declare class Driver {
    * @param { int } [key1] - 指定的第一个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @param { int } [key2] - 指定的第二个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3822,7 +3822,7 @@ declare class Driver {
    *
    * @param { Point } p - 目标点的坐标。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3842,7 +3842,7 @@ declare class Driver {
    * @param { number } [key1] - 指定的第一个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。 
    * @param { number } [key2] - 指定的第二个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3862,7 +3862,7 @@ declare class Driver {
    * @param { int } [key2] - 指定的第二个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @param { int } [speed] - 鼠标滚轮滚动的速度，范围：1-500的整数，单位：格/秒。为不在范围内的非负数或为null/undefined时设为默认值20。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3879,7 +3879,7 @@ declare class Driver {
    * @param { string } savePath - 文件保存路径。路径需为当前应用的[沙箱路径](docroot://file-management/app-sandbox-directory.md)。
    * @param { Rect } [rect] - 截图区域，默认为全屏。
    * @returns { Promise<boolean> } - Promise对象，返回截图操作是否成功完成。true：成功完成，false：未成功完成。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3912,7 +3912,7 @@ declare class Driver {
    * @param { int } [key1] - 指定的第一个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @param { int } [key2] - 指定的第二个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3933,7 +3933,7 @@ declare class Driver {
    * @param { number } [key2] - 指定的第二个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值
    *     为0。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3952,7 +3952,7 @@ declare class Driver {
    * @param { int } [key2] - 指定的第二个键码值，取值范围：[KeyCode键码值]{@link @ohos.multimodalInput.keyCode:KeyCode}，默认值为0。
    * @param { int } [duration] - 长按持续的时间，取值范围为大于等于1500的整数，默认值为1500，单位：ms。取值小于1500时抛出401错误码，为null或undefined时使用默认值。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3970,7 +3970,7 @@ declare class Driver {
    * @param { Point } to - 终点坐标。
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3989,7 +3989,7 @@ declare class Driver {
    * @param { number } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码
    *     。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4009,7 +4009,7 @@ declare class Driver {
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @param { int } [duration] - 拖拽前长按持续的时间，取值范围为大于等于1500的整数，默认值为1500，单位：ms。取值小于1500时抛出401错误码，为null或undefined时使用默认值。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4044,7 +4044,7 @@ declare class Driver {
    * @param { Point } p - 输入文本的坐标点。
    * @param { string } text - 输入的文本信息，当前支持英文、中文和特殊字符。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4067,7 +4067,7 @@ declare class Driver {
    *      InputTextMode.addition取值为true时，将光标移动至文本末尾后输入指定文本。取值为false时，将在坐标点位置输入指定文本。
    *      当输入文本中包含中文、特殊字符或文本长度超过200字符时，无论[InputTextMode]{@link InputTextMode}.paste取值为何，均以复制粘贴方式输入。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 801 Capability not supported. function can not work correctly due to limited device
    *     capabilities.
@@ -4087,7 +4087,7 @@ declare class Driver {
    * @param { UiDirection } direction - 触摸板多指滑动的方向。
    * @param { TouchPadSwipeOptions } [options] - 触摸板多指滑动手势附加选项，默认取TouchPadSwipeOptions中各属性的默认值，用于设置触摸板多指滑动结束是否停留以及滑动速率，适用于在触摸板上模拟多指滑动手势的场景，如三指上滑切换任务视图等。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000005 This operation is not supported.
@@ -4104,7 +4104,7 @@ declare class Driver {
    *
    * @param { Point } point - 点击的坐标点。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4121,7 +4121,7 @@ declare class Driver {
    * @param { Point } point - 长按的坐标点。
    * @param { double } [pressure] - 手写笔长按操作的压力，默认为1.0，取值范围为0.0到1.0。取值为null或undefined时按照默认值处理，其他超出取值范围情况时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4137,7 +4137,7 @@ declare class Driver {
    *
    * @param { Point } point - 双击的坐标点。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4156,7 +4156,7 @@ declare class Driver {
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @param { double } [pressure] - 手写笔滑动操作的压力，默认为1.0，取值范围为0.0到1.0。取值为null或undefined时按照默认值处理，其他超出取值范围情况时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4176,7 +4176,7 @@ declare class Driver {
    * @param { int } [speed] - 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。
    * @param { double } [pressure] - 手写笔多点连续注入的压力，默认为1.0，取值范围为[0.0, 1.0]，包含0.0和1.0。取值为null或undefined时按照默认值处理，其他超出取值范围情况时抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4473,7 +4473,7 @@ declare class UiWindow {
    * @param { int } x - 目标点的横坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @param { int } y - 目标点的纵坐标信息，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -4493,7 +4493,7 @@ declare class UiWindow {
    * @param { int } height - 调整后窗口的高度，取值范围：大于等于0的整数，单位：px。传入不在范围内的值抛出401错误码。
    * @param { ResizeDirection } direction - 以[ResizeDirection]{@link ResizeDirection}的形式传入窗口调整的方向。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -4627,7 +4627,7 @@ declare class PointerMatrix {
    * @param { int } fingers - 多指操作中注入的手指数，取值范围：[1,10]的整数。传入不在取值范围内的值时抛出401错误码。
    * @param { int } steps - 每根手指操作的步骤数，取值范围：[1,1000]的整数。传入不在取值范围内的值时抛出401错误码。
    * @returns { PointerMatrix } - 返回构造的PointerMatrix对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -4644,7 +4644,7 @@ declare class PointerMatrix {
    * @param { int } finger - 手指的序号，取值大于等于0的整数，且不超过构造PointerMatrix对象时设置的手指数。
    * @param { int } step - 步骤的序号，取值大于等于0的整数，且不超过构造PointerMatrix对象时设置的操作的步骤数。
    * @param { Point } point - 该行为的坐标点。建议相邻的坐标点距离在10px至80px范围内。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
