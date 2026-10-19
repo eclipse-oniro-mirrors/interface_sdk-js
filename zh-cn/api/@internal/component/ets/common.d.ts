@@ -24878,27 +24878,6 @@ declare class CommonMethod<T> {
   keyboardShortcut(value: string | FunctionKey, keys: Array<ModifierKey>, action?: () => void): T;
 
   /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
    * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
    * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
@@ -24915,9 +24894,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityGroup(value: boolean): T;
 
@@ -24949,27 +24928,6 @@ declare class CommonMethod<T> {
   accessibilityGroup(isGroup: boolean, accessibilityOptions: AccessibilityOptions): T;
 
   /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
    *
    * @param { string } value - 无障碍文本，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。
@@ -24981,9 +24939,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityText(value: string): T;
 
@@ -25155,27 +25113,6 @@ declare class CommonMethod<T> {
   accessibilityDescription(description: Resource): T;
 
   /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍重要性。该属性用于控制某个组件是否可被无障碍辅助服务所识别。
    *
    * @param { string } value - 无障碍重要性，用于控制某个组件是否可被无障碍辅助服务所识别。<br/>支持的值为：<br/>
@@ -25189,9 +25126,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityLevel(value: string): T;
 
