@@ -417,22 +417,6 @@ declare namespace sharing {
   function getSharableRegexes(type: SharingIfaceType): Promise<Array<string>>;
 
   /**
-   * 获取各个共享状态的接口地址。
-   *
-   * @permission ohos.permission.GET_NETWORK_INFO
-   * @param { SharingIfaceState } state - 网络共享状态。
-   * @returns { Promise<Array<NetAddress>> } Promise用于返回${Array<NetAddress>}。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 2200001 - Invalid parameter value.
-   * @throws { BusinessError } 2200002 - Failed to connect to the service.
-   * @throws { BusinessError } 2200003 - System internal error.
-   * @syscap SystemCapability.Communication.NetManager.NetSharing
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function getSharingAddress(state: SharingIfaceState): Promise<Array<NetAddress>>;
-
-  /**
    * 注册网络共享状态变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL

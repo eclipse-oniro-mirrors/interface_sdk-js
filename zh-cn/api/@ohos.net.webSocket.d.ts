@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -195,21 +195,6 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     supportOriginPort?: boolean;
-
-
-    /**
-     * [RFC 8744]TLS握手使用的服务器名称指示（SNI）服务名称。该参数为可选参数。
-     * WebSocket WSS连接建立场景，IP：端口直连时，SNI域
-     * 可以显式指定名称。
-     * 如果不配置，则默认从WSS URL中提取域名，并填充SNI。
-     * 该参数仅对加密的WSS连接有效。对于纯文本WS连接，忽略此参数。
-     * 最大长度为253且不能为空。取值约束：有效域名。默认值：Undefined。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    serverName?: string;
   }
 
   /**
@@ -389,7 +374,7 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     protocol?: string;
-  }
+ 	}
 
   /**
    * 服务器发送的响应头。
@@ -1090,7 +1075,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     clientPort: int;
-  }
+    }
 
   /**
    * 从指定客户端接收到的消息，包括客户端的信息和数据。
@@ -1120,7 +1105,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     data: string | ArrayBuffer;
-  }
+    }
 
   /**
    * 关闭WebSocketServer连接时，订阅close事件得到的指定客户端的关闭结果。
@@ -1371,7 +1356,7 @@ declare namespace webSocket {
     /**
      * 取消订阅指定客户端连接已关闭的事件。
      *
-     * @param { ClientConnectionCloseCallback } [callback] - the callback used to return the result.
+     * @param { ClientConnectionCloseCallback } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 26.0.0 static
@@ -1423,7 +1408,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     offWebSocketServerError(callback?: ErrorCallback): void;
-  }
+    }
 
   /**
    * TLS协议类型。

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,17 +119,17 @@ declare namespace statistics {
 
   /**
    * 获取当前已处于连接状态的蜂窝网络对应的网卡从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用callback异步回调。
-   * 
-   * > **说明：**
+   *
+   * > **说明**
    * >
-   * > 本接口建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
+   * > API 26.0.0及之前的版本建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
    *
    * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -138,17 +138,18 @@ declare namespace statistics {
 
   /**
    * 获取当前已处于连接状态的蜂窝网络对应的网卡从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用Promise异步回调。
-   * 
-   * > **说明：**
-   * >
-   * > 本接口建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
    *
-   * @returns { Promise<long> } The promise returned by the function.
+   * > **说明**
+   * >
+   * > API 26.0.0及之前的版本建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
+   *
+   * @returns { Promise<long> } Promise used to return the total downlink traffic (in bytes) of the specified NIC from
+   *     the last startup to the time when the API is called.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -157,17 +158,17 @@ declare namespace statistics {
 
   /**
    * 获取当前已处于连接状态的蜂窝网络对应的网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用callback异步回调。
-   * 
-   * > **说明：**
+   *
+   * > **说明**
    * >
-   * > 本接口建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
+   * > API26.0.0及之前的版本建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
    *
    * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -176,17 +177,18 @@ declare namespace statistics {
 
   /**
    * 获取当前已处于连接状态的蜂窝网络对应的网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用Promise异步回调。
-   * 
-   * > **说明：**
-   * >
-   * > 本接口建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
    *
-   * @returns { Promise<long> } The promise returned by the function.
+   * > **说明**
+   * >
+   * > API 26.0.0及之前的版本建议在蜂窝网络处于连接状态时调用，否则会抛出2103012错误码。
+   *
+   * @returns { Promise<long> } Promise used to return the total uplink traffic (in bytes) consumed on the cellular
+   *     network since the last startup to the current moment.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -346,8 +348,7 @@ declare namespace statistics {
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { 'netStatsChange' } type - 订阅事件，固定为'netStatsChange'。
-   * @param { Callback<{ iface: string, uid?: int }> } callback - Callback invoked when the traffic
-   *     changes. [since 10 - 10]
+   * @param { Callback<{ iface: string, uid?: int }> } callback - 当流量有改变时触发回调函数。 [since 10 - 10]
    * @param { Callback<NetStatsChangeInfo> } callback - 当流量有改变时触发回调函数。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -380,8 +381,7 @@ declare namespace statistics {
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { 'netStatsChange' } type - 注销订阅事件，固定为'netStatsChange'。
-   * @param { Callback<{ iface: string, uid?: int }> } callback - Callback invoked when the traffic
-   *     changes. [since 10 - 10]
+   * @param { Callback<{ iface: string, uid?: int }> } callback - 当流量有改变时触发回调函数。 [since 10 - 10]
    * @param { Callback<NetStatsChangeInfo> } callback - 当流量有改变时触发回调函数。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -672,6 +672,51 @@ declare namespace statistics {
   function updateIfacesStats(iface: string, start: int, end: int, stats: NetStatsInfo): Promise<void>;
 
   /**
+   * 获取各网络承载类型从最近一次开机开始至接口调用时刻的下行流量总和（单位：Byte）。
+   *
+   * > **说明**
+   * > - 当前仅支持获取蜂窝和Wi-Fi两种承载类型的下行流量。
+   * > - 各承载类型流量之和可能不等于[getAllRxBytes]{@link statistics.getAllRxBytes}的结果。因为后者统计的是所有网卡，包含除蜂窝和Wi-Fi之外的其他承载类型的接口流量。
+   *
+   * @returns { Promise<NetBytesByBearType> } Promise对象，返回按承载类型索引的下行流量。
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 2103005 - Failed to read the system map.
+   * @throws { BusinessError } 2103011 - Failed to create a system map.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getRxBytesByBearType(): Promise<NetBytesByBearType>;
+
+  /**
+   * 获取各网络承载类型从最近一次开机开始至接口调用时刻的上行流量总和（单位：Byte）。
+   *
+   * > **说明**
+   * > - 当前仅支持获取蜂窝和Wi-Fi两种承载类型的上行流量。
+   * > - 各承载类型流量之和可能不等于[getAllTxBytes]{@link statistics.getAllTxBytes}的结果。因为后者统计的是所有网卡，包含除蜂窝和Wi-Fi之外的其他承载类型的接口流量。
+   *
+   * @returns { Promise<NetBytesByBearType> } Promise对象，返回按承载类型索引的上行流量。
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 2103005 - Failed to read the system map.
+   * @throws { BusinessError } 2103011 - Failed to create a system map.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getTxBytesByBearType(): Promise<NetBytesByBearType>;
+
+  /**
+   * 以[NetBearType]{@link statistics.NetBearType}为索引的流量集合（单位：Byte）。
+   *
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export type NetBytesByBearType = Partial<Record<NetBearType, long>>;
+
+  /**
    * 查询网卡历史流量参数信息。
    *
    * @syscap SystemCapability.Communication.NetManager.Core
@@ -856,7 +901,7 @@ declare namespace statistics {
      * @since 12
      */
     info: NetStatsInfo;
-  }[];
+  }[]
 
   /**
    * {@link NetStatsInfoSequenceItem}的数组。
@@ -1052,7 +1097,7 @@ declare namespace statistics {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 23 dynamic
+   * @since 23 dynamic&static
    */
   function getMonthTrafficStats(simId: int): Promise<long>;
 
@@ -1137,6 +1182,42 @@ declare namespace statistics {
      */
     DAILY_LIMIT_PERCENTAGE = 7
   }
+
+  /**
+   * An {@link NetStatsInfo} array with start time and end time.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 12 dynamic
+   */
+  export type NetStatsInfoSequence = {
+    /**
+     * 查询的开始时间(时间戳;单位：秒)。
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    startTime: int;
+    /**
+     * 查询的结束时间(时间戳;单位：秒)。
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    endTime: int;
+    /**
+     * 获取的历史流量信息。
+     * @type { NetStatsInfo }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    info: NetStatsInfo;
+  }[];
 
 }
 

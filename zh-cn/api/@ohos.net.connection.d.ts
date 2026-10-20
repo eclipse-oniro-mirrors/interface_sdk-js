@@ -1348,7 +1348,7 @@ declare namespace connection {
    * @since 26.0.1 static
    */
   function getDnsAscii(host: string, flag?: ConversionProcess): string;
-
+ 
   /**
    * 使用Punycode编码方式，将ASCII编码形式的主机名转换为Unicode编码形式，并通过可选的conversionProcess参数控制转换行为。
    *
@@ -1431,21 +1431,6 @@ declare namespace connection {
    * @since 26.0.1 static
    */
   function queryProbeResult(destination: string, duration: int): Promise<ProbeResultInfo>;
-
-  /**
-   * 更新ip地址。
-   *
-   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
-   * @param { NetHandle } netHandle - Network handle.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 2100001 - Invalid parameter value.
-   * @throws { BusinessError } 2100002 - Failed to connect to the service.
-   * @throws { BusinessError } 2100003 - System internal error.
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function renewDhcp(netHandle: NetHandle): void;
 
   /**
    * 系统当前监听的TCP、UDP端口信息。
@@ -2481,7 +2466,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export enum Socks5DnsStrategy {
+  export enum Socks5DnsStrategy {  
     /**
      * 使用SOCKS5代理时，DNS解析由系统执行。
      *
@@ -2491,7 +2476,7 @@ declare namespace connection {
      * @since 26.0.1 static
      */
     SYSTEM_MODE = 0,
-
+  
     /**
      * 使用SOCKS5代理时，DNS解析由代理服务器执行。
      *
@@ -2918,7 +2903,7 @@ declare namespace connection {
    * @since 22 dynamic
    * @since 26.0.1 static
    */
-  export interface NetIpMacInfo {
+  export interface NetIpMacInfo {  
     /**
      * IP地址相关信息。
      *
@@ -2954,7 +2939,7 @@ declare namespace connection {
    * @since 23 dynamic
    * @since 26.0.1 static
    */
-  export enum ProtocolType {
+  export enum ProtocolType {  
     /**
      * TCP网络协议。
      *
@@ -2972,7 +2957,7 @@ declare namespace connection {
      */
     PROTO_TYPE_UDP = 17
   }
-
+  
   /**
    * 网络探测数据包类型。
    *
@@ -2981,7 +2966,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export enum PacketsType {
+  export enum PacketsType {  
     /**
      * ICMP数据包类型。
      *
@@ -3011,7 +2996,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export interface TraceRouteOptions {
+  export interface TraceRouteOptions {  
     /**
      * 最大跳数，取值范围[1, 30]，默认值为30。
      *
@@ -3041,7 +3026,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export interface TraceRouteInfo {
+  export interface TraceRouteInfo {  
     /**
      * 跳数序号。
      *
@@ -3081,7 +3066,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export interface ProbeResultInfo {
+  export interface ProbeResultInfo {  
     /**
      * 丢包率，取值范围[0, 100]。例如，100表示100%丢包，50表示50%丢包。
      *
@@ -3103,64 +3088,6 @@ declare namespace connection {
      */
     rtt: int[];
   }
-
-  /**
-   * 注册修改应用代理信息的事件监听器。
-   *
-   * > **说明**
-   * > 应用调用该接口完成订阅后，应用代理配置发生变化。
-   * > （启用或禁用代理，修改代理地址、端口、旁路列表），系统立即触发
-   * > 回调，将最新的完整代理信息推送给应用。应用程序可以更新其网络
-   * > 回调中的代理逻辑。更新实时生效，无需冷启动，无需网络切换。
-   *
-   * @param { Callback<HttpProxy> } callback - 返回结果的回调。
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function onAppHttpProxy(callback: Callback<HttpProxy>): void;
-
-  /**
-   * 取消订阅`AppHttpProxy`事件。
-   *
-   * @param { Callback<HttpProxy> } [callback] - 返回结果的回调。
-   *     <br>默认值：不可辩驳。
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function offAppHttpProxy(callback?: Callback<HttpProxy>): void;
-
-  /**
-   * 注册监听器，用于更改默认代理信息。
-   *
-   * > **说明**
-   * > 应用调用此接口后，
-   * > 订阅完成后，系统代理配置发生变化。(启用或禁用代理，修改
-   * > 代理)
-   * > 地址、端口和放通列表。)**.系统立即触发回调，推送最新的全
-   * > 代理。
-   * > 关于应用程序的信息。应用程序可以在回调中更新其网络代理逻辑。更新
-   * > 生效时间
-   * > 实时，无需冷启动，无需网络切换。
-   *
-   * @param { Callback<HttpProxy> } callback - 返回结果的回调。
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function onDefaultHttpProxy(callback: Callback<HttpProxy>): void;
-
-  /**
-   * 取消订阅`defaultHttpProxy`事件。
-   *
-   * @param { Callback<HttpProxy> } [callback] - 返回结果的回调。
-   *     <br>默认值：Undefiend。
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function offDefaultHttpProxy(callback?: Callback<HttpProxy>): void;
 
 }
 

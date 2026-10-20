@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,6 @@ import type cert from './@ohos.security.cert';
  * @since 26.0.1 static
  */
 declare namespace socket {
-
   /**
    * 定义网络地址。
    * @syscap SystemCapability.Communication.NetStack
@@ -845,7 +844,7 @@ declare namespace socket {
      * @crossplatform
      * @since 26.0.1 static
      */
-    onListening(callback: Callback<void>): void;
+    onClose(callback: Callback<void>): void;
 
     /**
      * 订阅 UDPSocket connection.
@@ -855,7 +854,7 @@ declare namespace socket {
      * @crossplatform
      * @since 26.0.1 static
      */
-    onClose(callback: Callback<void>): void;
+    onListening(callback: Callback<void>): void;
 
     /**
      * 取消订阅UDPSocket连接的数据包消息事件或关闭事件。使用callback异步回调。
@@ -1649,6 +1648,7 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     offLocalSocketError(callback?: ErrorCallback): void;
+
   }
 
   /**
@@ -2000,7 +2000,7 @@ declare namespace socket {
      * @since 11 dynamic
      */
     on(type: 'connect', callback: Callback<LocalSocketConnection>): void;
-
+    
     /**
      * 订阅 LocalSocketServer connection.
      *
@@ -2185,7 +2185,7 @@ declare namespace socket {
    * @crossplatform
    * @since 26.0.1 static
    */
-  export interface SocketLingerOptions {
+  export interface SocketLingerOptions {  
     /**
      * 是否逗留（true：逗留；false：不逗留）。默认值为false。
      *
@@ -2770,6 +2770,7 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     offTcpError(callback?: ErrorCallback): void;
+
   }
 
   /**
@@ -3501,25 +3502,6 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     isBidirectionalAuthentication?: boolean;
-
-
-    /**
-     * 证书密钥别名。该参数为可选参数。
-     * 最大长度为256且不能为空。取值约束：值不能是空字符串或空白字符。仅
-     * 支持可见的ASCII字符。默认值：Undefined。
-     * <br>当指定了这个别名，底层会从中读取对应的证书和私钥
-     * 系统证书管理模块。该密钥对用于TLS握手时的协商。
-     * 互斥规则：certAlias的优先级最高。设置此参数后，证书、密钥和
-     * 密码配置项将被忽略。
-     * 阻止别名规范，当别名不存在且对应的私钥权限不是
-     * available，则TLS建链失败，返回错误。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    certAlias?: string;
   }
 
   /**
@@ -3590,36 +3572,6 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     timeout?: int;
-
-
-    /**
-     * SSL服务器主机名验证所需的主机名。
-     * sslServerHostnameVerify的默认值为true。当sslServerHostnameVerify配置为false时，域名
-     * 已禁用验证。
-     * 该场景下，使用IP地址连接时，忽略证书域名校验。
-     * 默认值：true。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    sslServerHostnameVerification?: boolean;
-
-    /**
-     * [RFC 8744]TLS握手使用的服务器名称指示（SNI）服务名称。该参数为可选参数。
-     * IP直连场景下，支持显式指定业务域名为TLS的SNI
-     * 证书验证和握手协商。
-     * 如果不设置，SNI会自动填充目的地址的域名。
-     * 该参数仅在TLS握手时有效，在TCP连接建立前配置。
-     * 最大长度为253且不能为空。取值约束：有效域名。默认值：Undefined。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    serverName?: string;
   }
 
   /**

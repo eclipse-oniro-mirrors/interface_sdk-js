@@ -18,7 +18,7 @@
  * @kit NetworkKit
  */
 
-import { Callback } from "./@ohos.base";
+import { Callback } from './@ohos.base';
 /**
  * 该模块提供了第三方客户端接入802.1X认证（一种基于端口的网络接入控制协议）流程的机制，支撑客户端的定制认证等功能。
  *
@@ -245,7 +245,7 @@ declare namespace eap {
      * @since 26.0.1 static
      */
     EAP_TLS = 2,
-
+  
     /**
      * Tunneled transport layer security
      *
@@ -525,7 +525,6 @@ declare namespace eap {
      */
     eapSubId: int;
   }
-
   /**
    * 表示802.1X以太网EAP配置，包括EAP配置文件和功能切换。
    *
@@ -533,7 +532,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface EthEapConfig {
+  interface EthEapConfig {  
     /**
      * EAP配置文件信息。
      *
@@ -578,7 +577,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  enum EthEapState {
+  enum EthEapState {  
     /**
      * 空闲：未发起鉴权。
      *
@@ -632,7 +631,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface EthEapStateInfo {
+  interface EthEapStateInfo {  
     /**
      * 当前鉴权状态。
      *
@@ -755,7 +754,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  enum EthEapConnectAction {
+  enum EthEapConnectAction {  
     /**
      * 使用保存的配置重新触发身份验证。
      *
@@ -764,7 +763,6 @@ declare namespace eap {
      * @since 26.0.1 dynamic&static
      */
     ACTION_CONNECT = 0,
-
     /**
      * 停止自动身份验证并注销底层802.1X身份验证。
      *

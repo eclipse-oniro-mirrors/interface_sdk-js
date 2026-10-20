@@ -130,14 +130,6 @@ declare namespace http {
     extraData?: string | Object | ArrayBuffer;
 
     /**
-     * Additional data of the request.
-     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    extraData?: string | RecordData | ArrayBuffer;
-
-    /**
      * 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。当指定其类型为Object时，最大长度为65536字符数。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -185,15 +177,6 @@ declare namespace http {
      * @since 23 static
      */
     header?: Object;
-
-    /**
-     * HTTP request header. default is 'content-type': 'application/json'
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @FaAndStageModel
-     * @since 26.0.1 static
-     */
-    header?: Record<string, string>;
 
     /**
      * 读取超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。
@@ -548,84 +531,6 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
-
-    /**
-     * 跟踪301/302/303重定向响应时，是否将POST方法转换为GET方法。
-     * 默认值：false。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    followRedirectPostToGet?: boolean;
-
-    /**
-     * SSL服务器主机名验证所需的主机名。
-     * sslServerHostnameVerify的默认值为true。当sslServerHostnameVerify配置为false时，域名
-     * 已禁用验证。
-     * 该场景下，使用IP地址连接时，忽略证书域名校验。
-     * 默认值：真实的。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    sslServerHostnameVerification?: boolean;
-
-    /**
-     * 是否启用证书吊销状态校验。
-     * 默认值：false。
-     * <br>true:TLS握手时进行证书吊销检查。使用OCSP或CRL检查
-     * 检查证书是否被吊销。如果检查不通过，则终止TLS连接。
-     * false：不进行证书吊销检查。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    enableCertRevocationCheck?: boolean;
-
-    /**
-     * 低限速阈值（单位：字节/秒）。
-     * 如果传输速度低于该值的时间超过lowSpeedTime，
-     * 转移就会中止。
-     * 取值限定为整数。
-     *
-     * @type { ?int }
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    lowSpeedLimit?: int;
-
-    /**
-     * 低速持续时间阈值，单位为毫秒。
-     * 如果传输速度低于lowSpeedLimit的时间超过该值，
-     * 转移就会中止。
-     * 取值限定为整数。
-     *
-     * @type { ?int }
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @crossplatform
-     * @since 26.2.0 dynamic&static
-     */
-    lowSpeedTime?: int;
-
-    /**
-     * Use specific network to send this HTTP request and receive the correponding response.
-     * Activate the target network and create the netHandle in advace.
-     * @type { ?connection.NetHandle }
-     * @syscap SystemCapability.Communication.NetStack
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 22 static
-     */
-    netHandler?: connection.NetHandle;
   }
 
   /**
@@ -1331,13 +1236,6 @@ declare namespace http {
      * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
-
-    /**
-     * This parameter sets a mime part's body content from memory data.
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    data?: string | RecordData | ArrayBuffer;
 
     /**
      * 此参数将文件路径指向的文件内容设置为表单数据，如果未指定data内容，则必须设置filePath。
@@ -2865,14 +2763,6 @@ declare namespace http {
     result: string | Object | ArrayBuffer;
 
     /**
-     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
-     * If {@link HttpRequestOptions#expectDataType} is set, the system preferentially returns this parameter.
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    result: string | RecordData | ArrayBuffer;
-
-    /**
      * 返回值类型。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -2911,15 +2801,6 @@ declare namespace http {
     header: Object;
 
     /**
-     * All headers in the response from the server.
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @FaAndStageModel
-     * @since 26.0.1 static
-     */
-    header: Record<string, string>;
-
-    /**
      * 服务器返回的原始cookies。开发者可自行处理。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -2948,35 +2829,6 @@ declare namespace http {
      * @since 26.0.1 static
      */
     connectionExtraInfo?: ConnectionExtraInfo;
-  }
-
-  /**
-   * 定义HTTP请求的HttpResponseMetadata。
-   *
-   * @syscap SystemCapability.Communication.NetStack
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  export interface HttpResponseMetadata {
-    /**
-     * HTTP请求的结果码。如果回调函数执行成功，则返回中定义的返回码。
-     * 将返回[ResponseCode]{@link http.ResponseCode}。否则，将在
-     * **err**AsyncCallback中的字段**。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    responseCode: ResponseCode;
-
-    /**
-     * 服务器响应中的所有标头。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    header: Record<string, string>;
   }
 
   /**
@@ -3098,28 +2950,6 @@ declare namespace http {
      * @since 26.0.1 static
      */
     redirectCount: int;
-
-    /**
-     * HTTP请求链路实际发送的总字节数，包括请求行、请求头和
-     * 请求体。单位为字节。
-     * 单位为：字节。取值限定为整数。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    sentTotalBytes?: int;
-
-    /**
-     * HTTP请求链路实际接收的总字节数，包括状态行、响应头、
-     * 和响应体。单位为字节。
-     * 单位为：字节。取值限定为整数。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    receivedTotalBytes?: int;
   }
 
   /**

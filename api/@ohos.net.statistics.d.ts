@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,8 +132,8 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > It is recommended to call this API when the cellular network is in the connected state. Otherwise, error code 210
-   * > 3012 will be thrown.
+   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > Otherwise, error code 2103012 will be thrown.
    *
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the traffic data is successfully
    *     obtained, **error** is **undefined**; otherwise, it is an error object.
@@ -141,7 +141,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -154,8 +154,8 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > It is recommended to call this API when the cellular network is in the connected state. Otherwise, error code 210
-   * > 3012 will be thrown.
+   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > Otherwise, error code 2103012 will be thrown.
    *
    * @returns { Promise<long> } Promise used to return the total downlink traffic (in bytes) of the specified NIC from
    *     the last startup to the time when the API is called.
@@ -163,7 +163,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -177,8 +177,8 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > It is recommended to call this API when the cellular network is in the connected state. Otherwise, error code 210
-   * > 3012 will be thrown.
+   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > Otherwise, error code 2103012 will be thrown.
    *
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the traffic data is successfully
    *     obtained, **error** is **undefined**; otherwise, it is an error object.
@@ -186,7 +186,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -199,8 +199,8 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > It is recommended to call this API when the cellular network is in the connected state. Otherwise, error code 210
-   * > 3012 will be thrown.
+   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > Otherwise, error code 2103012 will be thrown.
    *
    * @returns { Promise<long> } Promise used to return the total uplink traffic (in bytes) consumed on the cellular
    *     network since the last startup to the current moment.
@@ -208,7 +208,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -730,6 +730,64 @@ declare namespace statistics {
   function updateIfacesStats(iface: string, start: int, end: int, stats: NetStatsInfo): Promise<void>;
 
   /**
+   * Obtains the total downlink traffic (in bytes) of each network bearer type from the
+   * last startup to the time when this API is called.
+   *
+   * > **NOTE**
+   * >
+   * > - Currently, only the downlink traffic of the cellular and Wi-Fi bearer types can
+   * be obtained.
+   * > - The sum of the traffic of each bearer type may not be equal to the result of
+   * [getAllRxBytes]{@link statistics.getAllRxBytes}. The latter counts all NICs and
+   * includes interface traffic of bearer types other than cellular and Wi-Fi.
+   *
+   * @returns { Promise<NetBytesByBearType> } Promise used to return the downlink
+   *     traffic indexed by bearer type.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 2103005 - Failed to read the system map.
+   * @throws { BusinessError } 2103011 - Failed to create a system map.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getRxBytesByBearType(): Promise<NetBytesByBearType>;
+
+  /**
+   * Obtains the total uplink traffic (in bytes) of each network bearer type from the
+   * last startup to the time when this API is called.
+   *
+   * > **NOTE**
+   * >
+   * > - Currently, only the uplink traffic of the cellular and Wi-Fi bearer types can
+   *   be obtained.
+   * > - The sum of the traffic of each bearer type may not be equal to the result of
+   *   [getAllTxBytes]{@link statistics.getAllTxBytes}. The latter counts all NICs and
+   *   includes interface traffic of bearer types other than cellular and Wi-Fi.
+   *
+   * @returns { Promise<NetBytesByBearType> } Promise used to return the uplink
+   *     traffic indexed by bearer type.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 2103005 - Failed to read the system map.
+   * @throws { BusinessError } 2103011 - Failed to create a system map.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getTxBytesByBearType(): Promise<NetBytesByBearType>;
+
+  /**
+   * A collection of traffic (in bytes) indexed by
+   * [NetBearType]{@link statistics.NetBearType}.
+   *
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export type NetBytesByBearType = Partial<Record<NetBearType, long>>;
+
+  /**
    * Defines the parameters for querying historical traffic of an NIC.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
@@ -914,7 +972,7 @@ declare namespace statistics {
      * @since 12
      */
     info: NetStatsInfo;
-  }[];
+  }[]
 
   /**
    * Array of {@link NetStatsInfoSequenceItem}.
@@ -1122,6 +1180,7 @@ declare namespace statistics {
    * @since 23 dynamic&static
    */
   function getMonthTrafficStats(simId: int): Promise<long>;
+
   /**
    * Defines the fields related to the traffic plan.
    *
@@ -1203,6 +1262,42 @@ declare namespace statistics {
      */
     DAILY_LIMIT_PERCENTAGE = 7
   }
+
+  /**
+   * An {@link NetStatsInfo} array with start time and end time.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 12 dynamic
+   */
+  export type NetStatsInfoSequence = {
+    /**
+     * Start time for querying traffic.
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    startTime: int;
+    /**
+     * End time for querying traffic.
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    endTime: int;
+    /**
+     * Detailed information of statistics.
+     * @type { NetStatsInfo }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    info: NetStatsInfo;
+  }[];
 
 }
 

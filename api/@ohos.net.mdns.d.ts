@@ -17,11 +17,8 @@
  * @file MDNS Management
  * @kit NetworkKit
  */
-
 import { AsyncCallback, Callback } from './@ohos.base';
-
 import connection from './@ohos.net.connection';
-
 import Context from './application/Context';
 
 /**

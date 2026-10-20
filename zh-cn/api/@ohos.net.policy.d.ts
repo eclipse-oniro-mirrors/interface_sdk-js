@@ -747,8 +747,7 @@ declare namespace policy {
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
    * @param { 'netUidPolicyChange' } type - 订阅的事件类型。'netUidPolicyChange'：注册policy发生改变事件。
-   * @param { Callback<{ uid: number, policy: NetUidPolicy }> } callback - Callback used to return the result. It is
-   *     called when the network policy changes. [since 10 - 10]
+   * @param { Callback<{ uid: number, policy: NetUidPolicy }> } callback - 回调函数。注册 policy 发生改变时调用。 [since 10 - 10]
    * @param { Callback<NetUidPolicyInfo> } callback - 回调函数。注册 policy 发生改变时调用。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -763,10 +762,10 @@ declare namespace policy {
   function on(type: 'netUidPolicyChange', callback: Callback<NetUidPolicyInfo>): void;
 
   /**
-   * 注册uid策略变化的监听。
+   * 注册 policy 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<NetUidPolicyInfo> } callback - on对应的回调函数。
+   * @param { Callback<NetUidPolicyInfo> } callback - the callback of on.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -783,8 +782,7 @@ declare namespace policy {
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
    * @param { 'netUidPolicyChange' } type - 注销的事件类型。'netUidPolicyChange'：注销policy发生改变事件。
-   * @param { Callback<{ uid: number, policy: NetUidPolicy }> } callback - Callback used to return the result. It is
-   *     called when the network policy changes. [since 10 - 10]
+   * @param { Callback<{ uid: number, policy: NetUidPolicy }> } callback - 回调函数。注销 policy 发生改变时调用。 [since 10 - 10]
    * @param { Callback<NetUidPolicyInfo> } callback - 回调函数。注销 policy 发生改变时调用。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -799,10 +797,10 @@ declare namespace policy {
   function off(type: 'netUidPolicyChange', callback?: Callback<NetUidPolicyInfo>): void;
 
   /**
-   * 注销uid策略变化的监听。
+   * 取消注册 policy 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<NetUidPolicyInfo> } [callback] - off对应的回调函数。
+   * @param { Callback<NetUidPolicyInfo> } [callback] - the callback of off.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -819,8 +817,7 @@ declare namespace policy {
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
    * @param { 'netUidRuleChange' } type - 订阅的事件类型。'netUidRuleChange'：注册rule发生改变事件。
-   * @param { Callback<{ uid: number, rule: NetUidRule }> } callback - Callback used to return the result. It is called
-   *     when the rule changes. [since 10 - 10]
+   * @param { Callback<{ uid: number, rule: NetUidRule }> } callback - 回调函数。注册 rule 发生改变时的调用。 [since 10 - 10]
    * @param { Callback<NetUidRuleInfo> } callback - 回调函数。注册 rule 发生改变时的调用。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -835,10 +832,10 @@ declare namespace policy {
   function on(type: 'netUidRuleChange', callback: Callback<NetUidRuleInfo>): void;
 
   /**
-   * 注册uid规则变化的监听。
+   * 注册 rule 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<NetUidRuleInfo> } callback - on对应的回调函数。
+   * @param { Callback<NetUidRuleInfo> } callback - the callback of on.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -855,8 +852,7 @@ declare namespace policy {
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
    * @param { 'netUidRuleChange' } type - 注销的事件类型。'netUidRuleChange'：注销rule发生改变事件。
-   * @param { Callback<{ uid: number, rule: NetUidRule }> } callback - Callback used to return the result. It is called
-   *     when the rule changes. [since 10 - 10]
+   * @param { Callback<{ uid: number, rule: NetUidRule }> } callback - 回调函数。注销 rule 发生改变时的调用。 [since 10 - 10]
    * @param { Callback<NetUidRuleInfo> } callback - 回调函数。注销 rule 发生改变时的调用。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -871,10 +867,10 @@ declare namespace policy {
   function off(type: 'netUidRuleChange', callback?: Callback<NetUidRuleInfo>): void;
 
   /**
-   * 注销uid规则变化的监听。
+   * 取消注册 rule 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<NetUidRuleInfo> } [callback] - off对应的回调函数。
+   * @param { Callback<NetUidRuleInfo> } [callback] - the callback of off.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -905,19 +901,19 @@ declare namespace policy {
   function on(type: 'netMeteredIfacesChange', callback: Callback<Array<string>>): void;
 
   /**
-    * 注册计量网络接口变化的监听。
-    *
-    * @permission ohos.permission.MANAGE_NET_STRATEGY
-    * @param { Callback<Array<string>> } callback - on对应的回调函数。
-    * @throws { BusinessError } 201 - Permission denied.
-    * @throws { BusinessError } 202 - Non-system applications use system APIs.
-    * @throws { BusinessError } 2100001 - Invalid parameter value.
-    * @throws { BusinessError } 2100002 - Failed to connect to the service.
-    * @throws { BusinessError } 2100003 - System internal error.
-    * @syscap SystemCapability.Communication.NetManager.Core
-    * @systemapi Hide this for inner system use.
-    * @since 26.0.1 static
-    */
+   * Register metered ifaces change listener.
+   *
+   * @permission ohos.permission.MANAGE_NET_STRATEGY
+   * @param { Callback<Array<string>> } callback - the callback of on.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 26.0.1 static
+   */
   function onNetMeteredIfacesChange(callback: Callback<Array<string>>): void;
 
   /**
@@ -939,10 +935,10 @@ declare namespace policy {
   function off(type: 'netMeteredIfacesChange', callback?: Callback<Array<string>>): void;
 
   /**
-   * 注销计量网络接口变化的监听。
+   * 取消注册计量 iface 发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<Array<string>> } [callback] - off对应的回调函数。
+   * @param { Callback<Array<string>> } [callback] - the callback of off.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -973,10 +969,10 @@ declare namespace policy {
   function on(type: 'netQuotaPolicyChange', callback: Callback<Array<NetQuotaPolicy>>): void;
 
   /**
-   * 注册配额策略变化的监听。
+   * 注册计量网络策略发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<Array<NetQuotaPolicy>> } callback - on对应的回调函数。
+   * @param { Callback<Array<NetQuotaPolicy>> } callback - the callback of on.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -1007,10 +1003,10 @@ declare namespace policy {
   function off(type: 'netQuotaPolicyChange', callback?: Callback<Array<NetQuotaPolicy>>): void;
 
   /**
-   * 注销配额策略变化的监听。
+   * 取消注册计量网络策略发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<Array<NetQuotaPolicy>> } [callback] - off对应的回调函数。
+   * @param { Callback<Array<NetQuotaPolicy>> } [callback] - the callback of off.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -1041,10 +1037,10 @@ declare namespace policy {
   function on(type: 'netBackgroundPolicyChange', callback: Callback<boolean>): void;
 
   /**
-   * 注册网络后台策略变化的监听。
+   * 注册后台网络策略发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<boolean> } callback - on对应的回调函数。
+   * @param { Callback<boolean> } callback - the callback of on.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -1075,10 +1071,10 @@ declare namespace policy {
   function off(type: 'netBackgroundPolicyChange', callback?: Callback<boolean>): void;
 
   /**
-   * 注销网络后台策略变化的监听。
+   * 取消注册后台网络策略发生改变时的回调，使用 callback 异步回调。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<boolean> } [callback] - off对应的回调函数。
+   * @param { Callback<boolean> } [callback] - the callback of off.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -1091,6 +1087,42 @@ declare namespace policy {
   function offNetBackgroundPolicyChange(callback?: Callback<boolean>): void;
 
   /**
+   * 注册回调，用于当前应用监听自身的网络访问策略变更。
+   *
+   * 应用只能监听自身的网络访问权限变更。
+   * 当用户通过 **设置** > **移动网络** > **流量管理**> **应用联网**更改该应用的网络访问权限（例如开启或关闭该应用的蜂窝数据或 Wi-Fi 访问权限）时，已注册的回调将被调用，以通知应用该变更。回调返回一个 {@link NetAccessPolicy} 对象，其中包含该应用最新的 Wi-Fi 和蜂窝网络访问权限。
+   *
+   * > **说明**
+   * > - 如果同一个回调被多次注册，则只有最后一次注册生效。
+   * > - 如果注册的是不同的回调，则事件发生时所有回调都会被调用。
+   *
+   * @param { Callback<NetAccessPolicy> } callback - 用于返回结果的回调。当应用的网络访问策略发生变更时被调用。该回调接收一个 {@link NetAccessPolicy} 对象，其中包含 **allowWiFi**（是否允许 Wi-Fi 访问） 和 **allowCellular**（是否允许蜂窝数据访问）。值为 **true** 表示访问权限已开启， **false** 表示权限已关闭。
+   * @throws { BusinessError } 2100001 - Invalid parameter value. The callback is not a valid function.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error, such as nullptr.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function onAppNetAccessPolicyChange(callback: Callback<NetAccessPolicy>): void;
+
+  /**
+   * 取消订阅应用网络访问策略变更事件。取消注册后，当应用的网络访问策略发生变更时，指定的回调将不再被调用。
+   *
+   * > **说明**
+   * > 若指定 **callback** 参数，则仅注销指定的回调。若未指定 **callback** 参数，则注销 **appNetAccessPolicyChange** 事件类型注册的所有回调。如果要注销的回调尚未注册，该操作将被忽略，不会抛出错误。
+   *
+   * @param { Callback<NetAccessPolicy> } [callback] - 需要注销的回调。如果未指定该参数，则注销为指定事件类型注册的所有回调。回调类型必须与 {@link AppNetAccessPolicyChange} 中指定的类型一致。
+   * @throws { BusinessError } 2100001 - Invalid parameter value. The callback is not a valid function.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error, such as nullptr.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function offAppNetAccessPolicyChange(callback?: Callback<NetAccessPolicy>): void;
+
+  /**
    * 当需要设置当前应用能否使用Wi-Fi/蜂窝联网时，调用该接口可以打开当前应用的联网设置界面，以设置应用的联网权限。使用Promise异步回调。
    *
    * @param { Context } context - Stage模型的应用上下文（仅支持UIAbilityContext和ExtensionContext）。
@@ -1101,6 +1133,43 @@ declare namespace policy {
    * @since 26.0.1 static
    */
   function showAppNetPolicySettings(context: Context): Promise<void>;
+
+  /**
+   * 设置本应用的网络访问策略（是否允许使用Wi-Fi和蜂窝网络）。使用Promise异步回调。
+   *
+   * 该接口设置的网络管控策略与用户在设置菜单中的设置叠加生效：仅当用户设置与本接口设置均允许时，应用才可访问网络。
+   *
+   * > **说明**
+   * > - 当用户在设置菜单中关闭应用联网权限时，无论本接口设置为禁用还是启用，应用
+   * > - 当用户在设置菜单中启用应用联网权限时，若本接口设置为禁用，则最终网络状态则最终网络状态为启用。
+   * > - 接口抛出错误码不代表设置已生效，需调用[getAppNetAccessPolicy]{@link polic
+   * > - 本接口设置的联网状态在应用进程结束后失效。
+   * > - 本接口设置不会修改"设置 > 移动网络 > 移动数据 > 应用联网"界面的开关状态。
+   *
+   * @param { NetAccessPolicy } policy - 本应用的网络访问策略。
+   * @returns { Promise<void> } romise对象，无返回结果。
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function setAppNetAccessPolicy(policy: NetAccessPolicy): Promise<void>;
+
+  /**
+   * 查询本应用实际的网络访问策略（是否允许使用Wi-Fi和蜂窝网络），即调用[setAppNetAccessPolicy]{@link policy.setAppNetAccessPolicy}后应用的最新生效状态。使用Promise异步回调。
+   *
+   * > **说明**
+   * > - 本接口返回的是应用最新生效的网络访问策略，[getNetAccessPolicy]{@link policy.getNetAccessPolicy}接口返回的是"设置 > 移动网络 > 移动数据 > 应用联网"界面的开关状态，两者可能存在不一致。
+   *
+   * @returns { Promise<NetAccessPolicy> } Promise对象，返回本应用最新生效的网络访问策略。
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getAppNetAccessPolicy(): Promise<NetAccessPolicy>;
 
   /**
    * 后台网络策略。
