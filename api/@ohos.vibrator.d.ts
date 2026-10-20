@@ -559,7 +559,52 @@ declare namespace vibrator {
      * @since 18 dynamic
      * @since 23 static
      */
-    EFFECT_NOTICE_WARNING = 'haptic.notice.warning'
+    EFFECT_NOTICE_WARNING = 'haptic.notice.warning',
+
+    /**
+     * Vibration effect of the input method keyboard. The strength is 1 (minimum strength).
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH1 = 'haptic.grade.normal.strength1',
+
+    /**
+     * Vibration effect of the input method keyboard. The strength is 2.
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH2 = 'haptic.grade.normal.strength2',
+
+    /**
+     * Vibration effect of the input method keyboard. The strength is 3 (medium strength).
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH3 = 'haptic.grade.normal.strength3',
+
+    /**
+     * Vibration effect of the input method keyboard. The strength is 4.
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH4 = 'haptic.grade.normal.strength4',
+
+    /**
+     * Vibration effect of the input method keyboard. The strength is 5 (maximum strength).
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH5 = 'haptic.grade.normal.strength5'
   }
 
   /**
@@ -1334,6 +1379,18 @@ declare namespace vibrator {
      * @since 23 static
      */
     isHdHapticSupported: boolean;
+
+    /**
+     * Indicates whether vibration intensity adjustment is supported. The value **true** indicates that vibration
+     * intensity adjustment is supported, and the value **false** indicates that vibration intensity adjustment is not
+     * supported.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isSupportIntensity?: boolean;
 
     /**
      * Whether the device is a local device. The value **true** indicates that the device is a local device, and the 
