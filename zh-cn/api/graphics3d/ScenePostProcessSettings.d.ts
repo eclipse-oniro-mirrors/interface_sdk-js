@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D场景后处理设置类型声明
+ * @file
  * @kit ArkGraphics3D
  */
 

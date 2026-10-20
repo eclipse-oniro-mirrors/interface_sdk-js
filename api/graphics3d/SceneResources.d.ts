@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D scene resource type declarations
+ * @file
  * @kit ArkGraphics3D
  */
 

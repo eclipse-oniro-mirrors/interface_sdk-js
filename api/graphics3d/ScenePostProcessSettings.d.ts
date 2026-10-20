@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D scene post-process settings type declarations
+ * @file
  * @kit ArkGraphics3D
  */
 

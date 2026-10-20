@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D场景节点类型声明
+ * @file
  * @kit ArkGraphics3D
  */
 

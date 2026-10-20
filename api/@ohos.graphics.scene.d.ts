@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D scene module exports
+ * @file ArkGraphics 3D
  * @kit ArkGraphics3D
  */
 
