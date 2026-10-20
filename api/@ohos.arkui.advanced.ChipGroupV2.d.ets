@@ -1469,6 +1469,18 @@ export declare struct ChipGroupV2 {
     onChange?: Callback<Array<number>>;
 
     /**
+     * ChipGroupV2Items Change Callback Method.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    @Event
+    onItemsChange?: Callback<ChipGroupV2Items>;
+
+    /**
      * Custom builder. To display custom content on the far right of the component, configure the **suffix** attribute.
      * When using the **suffix** attribute, reference the [ChipGroupV2IconGroupSuffix]{@link ChipGroupV2IconGroupSuffix}
      * API.

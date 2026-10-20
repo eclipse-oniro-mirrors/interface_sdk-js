@@ -1380,6 +1380,18 @@ export declare struct ChipGroupV2 {
   onChange?: Callback<Array<number>>;
 
   /**
+   * ChipGroupV2Items变更回调方法。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  @Event
+  onItemsChange?: Callback<ChipGroupV2Items>;
+
+  /**
    * 支持开发者自定义builder，如需在组件最右侧显示自定义内容可配置suffix属性，使用属性suffix需引用
    * [ChipGroupV2IconGroupSuffix]{@link ChipGroupV2IconGroupSuffix}接口。
    *
