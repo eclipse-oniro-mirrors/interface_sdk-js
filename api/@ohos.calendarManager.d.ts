@@ -376,6 +376,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number } id - Event ID.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
@@ -389,6 +390,7 @@ declare namespace calendarManager {
      * @param { number } id - Event ID, which is the unique identifier of an event. If the input event ID is an integer,
      * the event is created.
      * @param {AsyncCallback<void>} callback - Callback used to return the result.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice [since 21]
      * @since 10
@@ -402,6 +404,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number[] } ids - Array of event IDs.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
@@ -414,6 +417,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number[] } ids - Array of event IDs.
      * @param {AsyncCallback<void>} callback - Callback used to return the result.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice [since 21]
      * @since 10
@@ -428,6 +432,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event } event - Event object.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
@@ -442,6 +447,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event } event - Event object.
      * @param { AsyncCallback<void> } callback - The callback of updateEvent.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
@@ -517,6 +523,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR [since 10-20]
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @returns { CalendarConfig } Calendar configuration information.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
@@ -529,6 +536,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { CalendarConfig } config - Calendar configuration information.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 23900001 – Parameter value error. [since 23]
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
@@ -542,6 +550,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { CalendarConfig } config - Calendar configuration information.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 23900001 – Parameter value error. [since 23]
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
@@ -554,6 +563,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR [since 10-20]
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @returns { CalendarAccount } Calendar account information.
+     * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
