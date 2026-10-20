@@ -284,6 +284,247 @@ declare namespace netFirewall {
   function getInterceptedRecords(userId: int, requestParam: RequestParam): Promise<InterceptedRecordPage>;
 
   /**
+   * Creates a firewall chain. Specifies priority, default actions, owner and
+   * authorized whitelist. The chain ID is assigned by the system.
+   *
+   * The maximum number of chains is MAX_CHAINS = 4 (excluding the default chain);
+   * exceeding it returns 29400008.
+   *
+   * Only system / SA / MDM applications are allowed to create chains.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { NetFirewallChainConfig } config - Chain configuration (chainId is ignored).
+   * @returns { Promise<int> } Promise used to return the assigned chain ID.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400008 - The int of firewall chains exceeds the maximum.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function createNetFirewallChain(config: NetFirewallChainConfig): Promise<int>;
+
+  /**
+   * Deletes a firewall chain. A non-empty chain returns 29400009; clear the
+   * chain rules first (or cascading delete, decided by the service policy).
+   *
+   * Only system / SA / MDM applications are allowed to delete chains.
+   * The default chain (chainId = 0) cannot be deleted.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - Chain ID. Must not be 0.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400009 - The chain is not empty.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function deleteNetFirewallChain(chainId: int): Promise<void>;
+
+  /**
+   * Updates a firewall chain: default actions, priority, owner and authorized
+   * whitelist. The change triggers one full rebuild.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - Chain ID.
+   *     <br>The value should be an integer.
+   * @param { NetFirewallChainUpdateConfig } config - New chain configuration (chainId/creatorAppId are ignored).
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function updateNetFirewallChain(chainId: int, config: NetFirewallChainUpdateConfig): Promise<void>;
+
+  /**
+   * Obtains all firewall chains. Any caller holding GET_NET_FIREWALL (permission
+   * is the gate) sees the full list, including other applications' chains -
+   * e.g. app A can discover that other apps are using the firewall and locate
+   * problems. Each item includes usageAppIds to identify the actual users.
+   *
+   * **Required permission**: ohos.permission.GET_NET_FIREWALL
+   *
+   * @permission ohos.permission.GET_NET_FIREWALL
+   * @returns { Promise<Array<NetFirewallChainInfo>> } Promise used to return the chain list.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getNetFirewallChains(): Promise<Array<NetFirewallChainInfo>>;
+
+  /**
+   * Begins a chain-level transaction. A staging area is created; rules added
+   * to this chain afterwards are not written to the DB and do not trigger a
+   * rebuild until commit.
+   *
+   * Only one transaction is allowed per chain at a time; a repeated begin
+   * returns 29400012.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - Chain ID.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @throws { BusinessError } 29400011 - The caller is not authorized for this chain.
+   * @throws { BusinessError } 29400012 - A transaction is already in progress.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function beginNetFirewallChainTransaction(chainId: int): Promise<void>;
+
+  /**
+   * Adds a firewall rule into the transaction staging area. Only valid during
+   * a transaction; does not write the DB and does not trigger a rebuild.
+   *
+   * Constraint checks are executed against the staging rules; exceeding the
+   * 2016-bit hard limit returns 29400013.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   * **Authorization**: owner / whitelist for a non-default chain
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - Chain ID. A transaction must be in progress.
+   *     <br>The value should be an integer.
+   * @param { NetFirewallRule } rule - Rule (chainId is ignored, the parameter wins;
+   *     ownerAppId is filled/validated by the service).
+   * @returns { Promise<int> } Promise used to return the rule ID generated by the system.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400011 - The caller is not authorized for this chain.
+   * @throws { BusinessError } 29400012 - No transaction is in progress for the chain.
+   * @throws { BusinessError } 29400013 - The rule bit space is full (2016 bits).
+   * @throws { BusinessError } 29400001 - The number of firewall rules exceeds the maximum.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function addNetFirewallChainRule(chainId: int, rule: NetFirewallRule): Promise<int>;
+
+  /**
+   * Commits the chain-level transaction. The staging area is written to the DB
+   * and one full rebuild is performed. After commit the transaction ends;
+   * uncommitted rules are invisible to other chains/apps until commit.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   * **Authorization**: owner / whitelist for a non-default chain
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - Chain ID. A transaction must be in progress.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400012 - No transaction is in progress for the chain.
+   * @throws { BusinessError } 29400013 - The rule bit space is full (2016 bits).
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function commitNetFirewallChainTransaction(chainId: int): Promise<void>;
+
+  /**
+   * Aborts the chain-level transaction. The staging area is discarded; the DB
+   * and the kernel remain unchanged.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   * **Authorization**: owner / whitelist for a non-default chain
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - Chain ID. A transaction must be in progress.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400012 - No transaction is in progress for the chain.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function abortNetFirewallChainTransaction(chainId: int): Promise<void>;
+
+  /**
+   * Obtains firewall rules of a specific chain with pagination and an optional
+   * owner filter. The owner can query all rules of the chain; a
+   * non-owner only receives rules whose ownerAppId equals the caller's appId.
+   *
+   * The ownerAppId input filter is effective only for the owner / system / SA / MDM;
+   * other callers have it ignored.
+   *
+   * **Required permission**: ohos.permission.GET_NET_FIREWALL
+   *
+   * @permission ohos.permission.GET_NET_FIREWALL
+   * @param { int } chainId - Chain ID.
+   *     <br>The value should be an integer.
+   * @param { RequestParam } requestParam - Pagination parameters (orderField supports rule name only).
+   * @param { int } [ownerAppId] - Owner filter (optional; permission checked by the service).
+   *     <br>The value should be an integer.
+   * @returns { Promise<FirewallRulePage> } Promise used to return the rule page.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getNetFirewallChainRules(chainId: int, requestParam: RequestParam,
+      ownerAppId?: int): Promise<FirewallRulePage>;
+
+  /**
+   * Sets the network watermark for tcp communication.
+   *
+   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } mark - Network water mark.
+   *     <br>The value should be an integer.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function setNetworkWaterMark(mark: int): void;
+
+  /**
    * Enumerates the firewall rule directions, including inbound and outbound.
    *
    * @syscap SystemCapability.Communication.NetManager.NetFirewall
@@ -366,7 +607,7 @@ declare namespace netFirewall {
      * @since 15 dynamic
      * @since 26.0.1 static
      */
-    RULE_DNS = 3,
+    RULE_DNS = 3
   }
 
   /**
@@ -780,6 +1021,285 @@ declare namespace netFirewall {
      * @since 26.0.1 static
      */
     iface?: string;
+    /**
+     * Chain ID. 0 = default chain. A non-zero value must refer to an existing,
+     * authorized chain.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    chainId?: int;
+    /**
+     * In-chain priority. Default 0. It only participates in sorting within
+     * the same chain; cross-chain priority is determined by the chain priority.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority?: int;
+    /**
+     * Rule-level log flag. Default false. When true, a hit of this rule
+     * (deny / allow first packet) generates an intercept record.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isLogEnabled?: boolean;
+    /**
+     * Rule owner appId (read-only for clients; the service fills/validates it).
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+  }
+
+  /**
+   * Defines a firewall chain configuration used by createNetFirewallChain.
+   *
+   * Note: bitStart/bitEnd are by-products of the full rebuild and are NOT
+   * exposed or persisted.
+   *
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NetFirewallChainConfig {
+    /**
+     * Chain name, max 128 characters, for identification purposes.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    name: string;
+    /**
+     * Chain priority. Smaller value = evaluated first.
+     * Range [0, 127]. The default chain has the largest priority (evaluated last).
+     * The value should be an integer.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority: int;
+    /**
+     * Default in-direction action: the fallback action when no
+     * rule in the chain matches an inbound packet.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionIn: FirewallRuleAction;
+    /**
+     * Default out-direction action: the fallback action when no
+     * rule in the chain matches an outbound packet.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionOut: FirewallRuleAction;
+    /**
+     * Chain owner appId. Defaults to creatorAppId on creation.
+     * Only system / SA / MDM can modify it via update.
+     * The value should be an integer.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+    /**
+     * Authorized whitelist appIds: applications allowed to add
+     * rules to this chain besides the owner. Empty by default.
+     * Rule-add authorization check:
+     *   default chain (chainId = 0)       -> allow
+     *   non-default chain                 -> caller appId in {ownerAppId} ∪ authorizedAppIds.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    authorizedAppIds?: Array<int>;
+  }
+
+  /**
+   * Defines a firewall chain configuration used by updateNetFirewallChain.
+   *
+   * Partial update semantics: a field that is
+   * NOT present in the parameter keeps its current value; only the fields
+   * present are applied. No need to fetch-then-echo the whole config.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NetFirewallChainUpdateConfig {
+    /**
+     * Chain name, max 128 characters, for identification purposes.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    name?: string;
+    /**
+     * Chain priority. Smaller value = evaluated first.
+     * Range [0, 127]. The default chain has the largest priority (evaluated last).
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority?: int;
+    /**
+     * Default in-direction action: the fallback action when no
+     * rule in the chain matches an inbound packet.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionIn?: FirewallRuleAction;
+    /**
+     * Default out-direction action: the fallback action when no
+     * rule in the chain matches an outbound packet.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionOut?: FirewallRuleAction;
+    /**
+     * Chain owner appId.
+     * Only system / SA / MDM can modify it.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+    /**
+     * Authorized whitelist appIds: applications allowed to add
+     * rules to this chain besides the owner.
+     * Rule-add authorization check:
+     *   default chain (chainId = 0)       -> allow
+     *   non-default chain                 -> caller appId in {ownerAppId} ∪ authorizedAppIds.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    authorizedAppIds?: Array<int>;
+  }
+
+  /**
+   * Defines a firewall chain info returned by query.
+   * Independent of the input structs: all fields of a returned chain exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NetFirewallChainInfo {
+    /**
+     * Chain ID. Assigned by the system on creation (>0).
+     * 0 = default chain, which cannot be created or deleted.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    chainId: int;
+    /**
+     * Chain name, max 128 characters, for identification purposes.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    name: string;
+    /**
+     * Chain priority. Smaller value = evaluated first.
+     * Range [0, 127]. The default chain has the largest priority (evaluated last).
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority: int;
+    /**
+     * Default in-direction action: the fallback action when no
+     * rule in the chain matches an inbound packet.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionIn: FirewallRuleAction;
+    /**
+     * Default out-direction action: the fallback action when no
+     * rule in the chain matches an outbound packet.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionOut: FirewallRuleAction;
+    /**
+     * Chain owner appId.
+     * Defaults to creatorAppId on creation; the default chain has no owner.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+    /**
+     * Authorized whitelist appIds: applications allowed to add
+     * rules to this chain besides the owner. Empty by default.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    authorizedAppIds: Array<int>;
+    /**
+     * Creator appId.
+     * The default chain has no creator.
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    creatorAppId?: int;
+    /**
+     * Current int of rules in the chain.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ruleCount: int;
+    /**
+     * Creation timestamp in ms.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    createTime: int;
+    /**
+     * AppIds that actually added rules to this chain (aggregated from the rule
+     * table's ownerAppId at query time, distinct). Answers "who is really using
+     * the firewall", in contrast to authorizedAppIds ("who is allowed to").
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    usageAppIds: Array<int>;
   }
 
   /**
@@ -863,6 +1383,46 @@ declare namespace netFirewall {
      * @since 26.0.1 static
      */
     domain?: string;
+    /**
+     * Hit rule ID (reverse lookup of matched_bit; -1 = stale event discarded).
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ruleId?: int;
+    /**
+     * Hit chain ID.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    chainId?: int;
+    /**
+     * Final action: RULE_ALLOW (connection allowed, first packet of CT_NEW only,
+     * ) / RULE_DENY.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    action?: FirewallRuleAction;
+    /**
+     * Owner appId of the hit rule.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
   }
 
   /**

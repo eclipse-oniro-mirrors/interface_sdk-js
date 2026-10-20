@@ -130,6 +130,14 @@ declare namespace http {
     extraData?: string | Object | ArrayBuffer;
 
     /**
+     * Additional data of the request.
+     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    extraData?: string | RecordData | ArrayBuffer;
+
+    /**
      * 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。当指定其类型为Object时，最大长度为65536字符数。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -177,6 +185,15 @@ declare namespace http {
      * @since 23 static
      */
     header?: Object;
+
+    /**
+     * HTTP request header. default is 'content-type': 'application/json'
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @FaAndStageModel
+     * @since 26.0.1 static
+     */
+    header?: Record<string, string>;
 
     /**
      * 读取超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。
@@ -531,6 +548,84 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
+
+    /**
+     * 跟踪301/302/303重定向响应时，是否将POST方法转换为GET方法。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    followRedirectPostToGet?: boolean;
+
+    /**
+     * SSL服务器主机名验证所需的主机名。
+     * sslServerHostnameVerify的默认值为true。当sslServerHostnameVerify配置为false时，域名
+     * 已禁用验证。
+     * 该场景下，使用IP地址连接时，忽略证书域名校验。
+     * 默认值：真实的。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    sslServerHostnameVerification?: boolean;
+
+    /**
+     * 是否启用证书吊销状态校验。
+     * 默认值：false。
+     * <br>true:TLS握手时进行证书吊销检查。使用OCSP或CRL检查
+     * 检查证书是否被吊销。如果检查不通过，则终止TLS连接。
+     * false：不进行证书吊销检查。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    enableCertRevocationCheck?: boolean;
+
+    /**
+     * 低限速阈值（单位：字节/秒）。
+     * 如果传输速度低于该值的时间超过lowSpeedTime，
+     * 转移就会中止。
+     * 取值限定为整数。
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    lowSpeedLimit?: int;
+
+    /**
+     * 低速持续时间阈值，单位为毫秒。
+     * 如果传输速度低于lowSpeedLimit的时间超过该值，
+     * 转移就会中止。
+     * 取值限定为整数。
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    lowSpeedTime?: int;
+
+    /**
+     * Use specific network to send this HTTP request and receive the correponding response.
+     * Activate the target network and create the netHandle in advace.
+     * @type { ?connection.NetHandle }
+     * @syscap SystemCapability.Communication.NetStack
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 22 static
+     */
+    netHandler?: connection.NetHandle;
   }
 
   /**
@@ -632,9 +727,9 @@ declare namespace http {
    * 自定义远程验证。
    * 该API使用Promise异步返回结果。
    *
-   * @param { ValidationContext } context - 证书验证上下文，包含证书链、主机名和IP地址等信息。
-   * @returns { boolean | Promise<boolean> } 返回布尔值表示验证是否通过。true表示验证通过，false表示验证不通过。
-   *     支持返回Promise对象，用于异步验证场景。
+   * @param { ValidationContext } context - Certificate context.
+   * @returns { boolean | Promise<boolean> } Returns a boolean value indicating whether the validation is successful.
+   *     Promise used to return the result. The value true indicates valid, and false indicates invalid.
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -646,7 +741,7 @@ declare namespace http {
    *
    * @unionmember { 'system' } 表示使用系统CA验证远端服务器身份，值固定为'system'字符串，是未配置时的默认值。
    * @unionmember { 'skip' } 表示跳过验证远端服务器身份流程，值固定为'skip'字符串。
-   * @unionmember { ValidationCallback } 表示使用自定义验证方式验证远端服务器身份。 [since 26.0.0] 
+   * @unionmember { ValidationCallback } use custom validation. [since 26.0.0]
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
    * @since 18 dynamic
@@ -670,23 +765,24 @@ declare namespace http {
   /**
    * 安全通信协议。
    *
-   * @unionmember { 'TLS' } 表示使用TLS安全通信协议，值固定为'TLS'字符串。
-   * @unionmember { 'TLCP' } 表示使用TLCP安全通信协议，值固定为'TLCP'字符串。
-   *     <br>**说明**：
-   *     <br>（1）证书支持字符串的规格：
-   *     <br> - UTF8String（英文字符集）
+   * @unionmember { 'TLS' } TLS protocol. The value is fixed to **TLS**.
+   * @unionmember { 'TLCP' } TLCP protocol. The value is fixed to **TLCP**.
+   *     <br>**NOTE**
+   *     <br>(1) The certificate supports the following string specifications:
+   *     <br> - UTF8String (English character set)
    *     <br> - PrintableString
    *     <br>  - IA5String
-   *     <br>从API Version 22开始支持：
+   *     <br>Supported since API Version 22:
    *     <br> - TeletexString
-   *     <br>（2）证书支持扩展的规格：
-   *     <br> - BasicConstraints（OID 2.5.29.19）
-   *     <br> - KeyUsage（OID2.5.29.15）
-   *     <br> - SubjectKeyIdentifier（OID2.5.29.14）
-   *     <br> - AuthorityKeyIdentifier（OID2.5.29.35）
-   *     <br>从API Version 22开始支持：
-   *     <br> - SubjectAltName（OID 2.5.29.17）
-   *     <br> - ExtendedKeyUsage（OID 2.5.29.37）<br/>
+   *     <br>(2) The certificate supports the following extended specifications:
+   *     <br> - BasicConstraints (OID 2.5.29.19)
+   *     <br> - KeyUsage (OID2.5.29.15)
+   *     <br> - SubjectKeyIdentifier (OID2.5.29.14)
+   *     <br> - AuthorityKeyIdentifier (OID2.5.29.35)
+   *     <br>Supported since API Version 22:
+   *     <br> - SubjectAltName (OID 2.5.29.17)
+   *     <br> - ExtendedKeyUsage (OID 2.5.29.37)
+   *     <br>
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
    * @since 20 dynamic
@@ -703,9 +799,11 @@ declare namespace http {
    * 
    * > 当指定的网络没有激活时，系统按照指定默认网络处理。
    *
-   * @unionmember { 'auto' } 表示HTTP请求指定默认的网络连接。
-   * @unionmember { 'primaryCellular' } 表示在蜂窝网络激活的场景下，HTTP请求指定默认的蜂窝网络连接。
-   * @unionmember { 'secondaryCellular' } 表示在双蜂窝网络激活的场景下，HTTP请求指定副卡的蜂窝网络连接。
+   * @unionmember { 'auto' } Specifies the default network connection in an HTTP request.
+   * @unionmember { 'primaryCellular' } Specifies the default cellular network connection in an HTTP request when the
+   *     cellular network is activated.
+   * @unionmember { 'secondaryCellular' } Specifies the cellular network connection of the secondary SIM card in an HTTP
+   *     request when dual cellular networks are activated.
    * @syscap SystemCapability.Communication.NetStack
    * @since 23 dynamic
    * @since 26.0.1 static
@@ -715,11 +813,11 @@ declare namespace http {
   /**
    * QueryParamObject中允许使用的单个参数值类型。
    *
-   * @unionmember { string } 字符串类型。
-   * @unionmember { int } 数字类型，会先转为字符串再参与编码。
-   * @unionmember { boolean } 布尔类型，会先转为字符串再参与编码。
-   * @unionmember { null } 空值类型，会按仅key不带`=`值的形式序列化。
-   * @unionmember { undefined } 未定义类型，会按仅key不带`=`值的形式序列化。
+   * @unionmember { string } String type.
+   * @unionmember { int } Number type, which is converted into a string before being encoded.
+   * @unionmember { boolean } Boolean type, which is converted into a string before being encoded.
+   * @unionmember { null } Null type, which is serialized in the format of only the key without the = value.
+   * @unionmember { undefined } Undefined type, which is serialized in the format of only the key without the = value.
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @crossplatform
@@ -1233,6 +1331,13 @@ declare namespace http {
      * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
+
+    /**
+     * This parameter sets a mime part's body content from memory data.
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    data?: string | RecordData | ArrayBuffer;
 
     /**
      * 此参数将文件路径指向的文件内容设置为表单数据，如果未指定data内容，则必须设置filePath。
@@ -1846,9 +1951,9 @@ declare namespace http {
     on(type: "headersReceive", callback: Callback<Object>): void;
 
     /**
-     * 注册HTTP响应头事件的观察者。
+     * 订阅HTTP Response Header事件。
      *
-     * @param { Callback<Record<string, string>> } callback - 用于返回结果的回调函数。
+     * @param { Callback<Record<string, string>> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -1870,9 +1975,9 @@ declare namespace http {
     off(type: "headersReceive", callback?: Callback<Object>): void;
 
     /**
-     * 注销HTTP响应头事件的观察者。
+     * 取消订阅HTTP Response Header事件。
      *
-     * @param { Callback<Record<string, string>> } [callback] - 用于返回结果的回调函数。
+     * @param { Callback<Record<string, string>> } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -1893,9 +1998,9 @@ declare namespace http {
     once(type: "headersReceive", callback: Callback<Object>): void;
 
     /**
-     * 注册HTTP响应头事件的一次性观察者，触发后自动移除。
+     * 订阅一次性HTTP Response Header事件。
      *
-     * @param { Callback<Record<string, string>> } callback - 用于返回结果的回调函数。
+     * @param { Callback<Record<string, string>> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -1917,9 +2022,9 @@ declare namespace http {
     on(type: "dataReceive", callback: Callback<ArrayBuffer>): void;
 
     /**
-     * 注册持续接收HTTP响应数据事件的观察者。
+     * 订阅持续接收HTTP响应数据事件。
      *
-     * @param { Callback<ArrayBuffer> } callback - 用于返回结果的回调函数。
+     * @param { Callback<ArrayBuffer> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -1940,9 +2045,9 @@ declare namespace http {
     off(type: "dataReceive", callback?: Callback<ArrayBuffer>): void;
 
     /**
-     * 注销持续接收HTTP响应数据事件的观察者。
+     * 取消订阅持续接收HTTP响应数据事件。
      *
-     * @param { Callback<ArrayBuffer> } [callback] - 用于返回结果的回调函数。
+     * @param { Callback<ArrayBuffer> } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -1963,9 +2068,9 @@ declare namespace http {
     on(type: "dataEnd", callback: Callback<void>): void;
 
     /**
-     * 注册HTTP响应数据接收结束事件的观察者。
+     * 订阅HTTP响应数据接收结束事件。
      *
-     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @param { Callback<void> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -1986,9 +2091,9 @@ declare namespace http {
     off(type: "dataEnd", callback?: Callback<void>): void;
 
     /**
-     * 注销HTTP响应数据接收结束事件的观察者。
+     * 取消订阅HTTP响应数据接收结束事件。
      *
-     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @param { Callback<void> } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -2000,10 +2105,8 @@ declare namespace http {
      * 订阅HTTP流式响应数据接收进度事件。
      *
      * @param { 'dataReceiveProgress' } type - 订阅的事件类型，'dataReceiveProgress'。
-     * @param { Callback<{ receiveSize: int, totalSize: int }> } callback - Callback used to return the result. If the
-     *     operation is successful, the callback content is a
-     *     [DataReceiveProgressInfo]{@link http.DataReceiveProgressInfo} object; otherwise, the callback content is
-     *     **undefined**. [since 10 - 10]
+     * @param { Callback<{ receiveSize: int, totalSize: int }> } callback - 回调函数。当订阅成功时，回调内容是
+     *     [DataReceiveProgressInfo]{@link http.DataReceiveProgressInfo}，订阅失败时为undefined。 [since 10 - 10]
      * @param { Callback<DataReceiveProgressInfo> } callback - 回调函数。当订阅成功时，回调内容是
      *     [DataReceiveProgressInfo]{@link http.DataReceiveProgressInfo}，订阅失败时为undefined。 [since 11]
      * @syscap SystemCapability.Communication.NetStack
@@ -2014,9 +2117,9 @@ declare namespace http {
     on(type: 'dataReceiveProgress', callback: Callback<DataReceiveProgressInfo>): void;
 
     /**
-     * 注册HTTP响应数据接收进度事件的观察者。
+     * 订阅HTTP响应数据接收进度事件。
      *
-     * @param { Callback<DataReceiveProgressInfo> } callback - 用于返回结果的回调函数。
+     * @param { Callback<DataReceiveProgressInfo> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -2040,9 +2143,9 @@ declare namespace http {
     off(type: 'dataReceiveProgress', callback?: Callback<DataReceiveProgressInfo>): void;
 
     /**
-     * 注销HTTP响应数据接收进度事件的观察者。
+     * 取消订阅HTTP响应数据接收进度事件。
      *
-     * @param { Callback<DataReceiveProgressInfo> } [callback] - 用于返回结果的回调函数。
+     * @param { Callback<DataReceiveProgressInfo> } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -2064,9 +2167,9 @@ declare namespace http {
     on(type: 'dataSendProgress', callback: Callback<DataSendProgressInfo>): void;
 
     /**
-     * 注册HTTP请求数据发送进度事件的观察者。
+     * 订阅HTTP响应数据发送进度事件。
      *
-     * @param { Callback<DataSendProgressInfo> } callback - on对应的回调函数。
+     * @param { Callback<DataSendProgressInfo> } callback - the callback of on.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -2087,9 +2190,9 @@ declare namespace http {
     off(type: 'dataSendProgress', callback?: Callback<DataSendProgressInfo>): void;
 
     /**
-     * 注销HTTP请求数据发送进度事件的观察者。
+     * 取消订阅HTTP响应数据发送进度事件。
      *
-     * @param { Callback<DataSendProgressInfo> } [callback] - off对应的回调函数。
+     * @param { Callback<DataSendProgressInfo> } [callback] - the callback of off.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @atomicservice
@@ -2762,6 +2865,14 @@ declare namespace http {
     result: string | Object | ArrayBuffer;
 
     /**
+     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
+     * If {@link HttpRequestOptions#expectDataType} is set, the system preferentially returns this parameter.
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    result: string | RecordData | ArrayBuffer;
+
+    /**
      * 返回值类型。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -2800,6 +2911,15 @@ declare namespace http {
     header: Object;
 
     /**
+     * All headers in the response from the server.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @FaAndStageModel
+     * @since 26.0.1 static
+     */
+    header: Record<string, string>;
+
+    /**
      * 服务器返回的原始cookies。开发者可自行处理。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -2828,6 +2948,35 @@ declare namespace http {
      * @since 26.0.1 static
      */
     connectionExtraInfo?: ConnectionExtraInfo;
+  }
+
+  /**
+   * 定义HTTP请求的HttpResponseMetadata。
+   *
+   * @syscap SystemCapability.Communication.NetStack
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface HttpResponseMetadata {
+    /**
+     * HTTP请求的结果码。如果回调函数执行成功，则返回中定义的返回码。
+     * 将返回[ResponseCode]{@link http.ResponseCode}。否则，将在
+     * **err**AsyncCallback中的字段**。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    responseCode: ResponseCode;
+
+    /**
+     * 服务器响应中的所有标头。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    header: Record<string, string>;
   }
 
   /**
@@ -2949,6 +3098,28 @@ declare namespace http {
      * @since 26.0.1 static
      */
     redirectCount: int;
+
+    /**
+     * HTTP请求链路实际发送的总字节数，包括请求行、请求头和
+     * 请求体。单位为字节。
+     * 单位为：字节。取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    sentTotalBytes?: int;
+
+    /**
+     * HTTP请求链路实际接收的总字节数，包括状态行、响应头、
+     * 和响应体。单位为字节。
+     * 单位为：字节。取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    receivedTotalBytes?: int;
   }
 
   /**
@@ -3226,4 +3397,4 @@ declare namespace http {
   }
 }
 
-export default http;
+export default http;

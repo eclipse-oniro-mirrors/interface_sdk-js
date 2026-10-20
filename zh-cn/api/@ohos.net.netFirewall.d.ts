@@ -249,6 +249,251 @@ declare namespace netFirewall {
   function getInterceptedRecords(userId: int, requestParam: RequestParam): Promise<InterceptedRecordPage>;
 
   /**
+   * 创建防火墙链。指定优先级、默认操作、所有者和
+   * 授权白名单。链ID由系统分配。
+   *
+   * 最大链数为MAX_CHAINS = 4（不包括默认链）；
+   * 超过它返回29400008。
+   *
+   * > **说明**
+   * > 只允许系统/ SA / MDM应用程序创建链。
+   * > **所需权限**:ohos.permission.MANAGE_NET_FIREWALL。
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { NetFirewallChainConfig } config - Chain配置（忽略chainId）。
+   * @returns { Promise<int> } Promise用于返回分配的链ID。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400008 - The int of firewall chains exceeds the maximum.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function createNetFirewallChain(config: NetFirewallChainConfig): Promise<int>;
+
+  /**
+   * 删除防火墙链。非空链返回29400009；清除
+   * 链式规则优先（或级联删除，由服务策略决定）。
+   *
+   * 只有系统/ SA / MDM应用程序才允许删除链。
+   * 默认链（chainId=0）不能删除。
+   *
+   * > **说明**
+   * > **所需权限**:ohos.permission.MANAGE_NET_FIREWALL。
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - 链ID。不能为0。
+   *     <br>取值限定为整数。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400009 - The chain is not empty.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function deleteNetFirewallChain(chainId: int): Promise<void>;
+
+  /**
+   * 更新防火墙链：默认动作、优先级、所有者和授权
+   * 白名单，该更改会触发一次完整重建。
+   *
+   * **所需权限**:ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - 链ID。
+   *     <br>取值限定为整数。
+   * @param { NetFirewallChainUpdateConfig } config - 新建链配置（忽略chainId/createtorAppId）。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function updateNetFirewallChain(chainId: int, config: NetFirewallChainUpdateConfig): Promise<void>;
+
+  /**
+   * 获取所有防火墙链。任何持有GET_NET_FIREWALL（权限）的调用方
+   * 是查看完整列表，包括其他应用程序的链-
+   * 例如，应用A可以发现其他应用正在使用防火墙，并定位
+   * 每个项目都包含了useAppIds，用于标识实际用户。
+   *
+   * **所需权限**:ohos.permission.GET_NET_FIREWALL
+   *
+   * @permission ohos.permission.GET_NET_FIREWALL
+   * @returns { Promise<Array<NetFirewallChainInfo>> } Promise用于返回链表。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getNetFirewallChains(): Promise<Array<NetFirewallChainInfo>>;
+
+  /**
+   * 开始一个链级事务。已创建暂存区；已添加规则
+   * 此链之后不会写入DB，也不会触发
+   * 重建直到提交。
+   *
+   * 每个链一次只允许一个事务；重复开始
+   * 返回29400012。
+   *
+   * > **说明**
+   * > **所需权限**:ohos.permission.MANAGE_NET_FIREWALL。
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - 链ID。
+   *     <br>取值限定为整数。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @throws { BusinessError } 29400011 - The caller is not authorized for this chain.
+   * @throws { BusinessError } 29400012 - A transaction is already in progress.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function beginNetFirewallChainTransaction(chainId: int): Promise<void>;
+
+  /**
+   * 将防火墙规则添加到事务暂存区。仅在期间有效
+   * 事务，不会写入数据库，也不会触发重建。
+   *
+   * 对暂存规则执行约束检查；
+   * 2016位硬限制返回29400013。
+   *
+   * > **说明**
+   * > **所需权限**:ohos.permission.MANAGE_NET_FIREWALL
+   * > **授权**：非默认链的所有者/白名单。
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - 链ID。事务必须正在进行中。
+   *     <br>取值限定为整数。
+   * @param { NetFirewallRule } rule - 规则(chainId被忽略，参数取胜；
+   *     ownerAppId由服务填写/验证)。
+   * @returns { Promise<int> } Promise用于返回系统生成的规则ID。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400011 - The caller is not authorized for this chain.
+   * @throws { BusinessError } 29400012 - No transaction is in progress for the chain.
+   * @throws { BusinessError } 29400013 - The rule bit space is full (2016 bits).
+   * @throws { BusinessError } 29400001 - The number of firewall rules exceeds the maximum.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function addNetFirewallChainRule(chainId: int, rule: NetFirewallRule): Promise<int>;
+
+  /**
+   * 提交链级事务。暂存区被写入数据库
+   * 并执行一次完全重建。commit后事务结束；
+   * 未提交的规则在提交之前对其他链/应用是不可见的。
+   *
+   * **所需权限**:ohos.permission.MANAGE_NET_FIREWALL
+   * **授权**：非默认链的所有者/白名单
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - 链ID。事务必须正在进行中。
+   *     <br>取值限定为整数。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400012 - No transaction is in progress for the chain.
+   * @throws { BusinessError } 29400013 - The rule bit space is full (2016 bits).
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function commitNetFirewallChainTransaction(chainId: int): Promise<void>;
+
+  /**
+   * 中止链级事务。暂存区被丢弃；数据库
+   * 和内核保持不变。
+   *
+   * **所需权限**:ohos.permission.MANAGE_NET_FIREWALL
+   * **授权**：非默认链的所有者/白名单
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } chainId - 链ID。事务必须正在进行中。
+   *     <br>取值限定为整数。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400012 - No transaction is in progress for the chain.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function abortNetFirewallChainTransaction(chainId: int): Promise<void>;
+
+  /**
+   * 获取特定链的防火墙规则，带分页，可选
+   * 所有者过滤器。拥有者可以查询链的所有规则；
+   * 非所有者仅接收其ownerAppId等于调用者的appId的规则。
+   *
+   * ownerAppId输入筛选器仅对owner/system/SA/MDM有效；
+   * 其他调用者会忽略它。
+   *
+   * > **说明**
+   * > **所需权限**:ohos.permission.GET_NET_FIREWALL。
+   *
+   * @permission ohos.permission.GET_NET_FIREWALL
+   * @param { int } chainId - 链ID。
+   *     <br>取值限定为整数。
+   * @param { RequestParam } requestParam - 分页参数（orderField只支持规则名称）。
+   * @param { int } [ownerAppId] - 所有者过滤器（可选，由业务检查权限）。
+   *     <br>取值限定为整数。
+   * @returns { Promise<FirewallRulePage> } Promise用于返回规则页面。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @throws { BusinessError } 29400010 - The specified chain does not exist.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getNetFirewallChainRules(chainId: int, requestParam: RequestParam,
+      ownerAppId?: int): Promise<FirewallRulePage>;
+
+  /**
+   * 设置tcp通信的网络水印。
+   *
+   * **所需权限**:ohos.permission.MANAGE_NET_FIREWALL
+   *
+   * @permission ohos.permission.MANAGE_NET_FIREWALL
+   * @param { int } mark - 网络水印。
+   *     <br>取值限定为整数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function setNetworkWaterMark(mark: int): void;
+
+  /**
    * 枚举类型，防火墙规则方向，包含入站、出站。
    *
    * @syscap SystemCapability.Communication.NetManager.NetFirewall
@@ -331,7 +576,7 @@ declare namespace netFirewall {
      * @since 15 dynamic
      * @since 26.0.1 static
      */
-    RULE_DNS = 3,
+    RULE_DNS = 3
   }
 
   /**
@@ -673,7 +918,7 @@ declare namespace netFirewall {
      */
     remoteIps?: Array<NetFirewallIpParams>;
     /**
-     * 协议，包含TCP：6，UDP：17，ICMP：1，ICMPv6：58。当type=RULE_IP时有效。
+     * 协议，包含TCP：6，UDP：17。当type=RULE_IP时有效。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @since 15 dynamic
@@ -721,13 +966,307 @@ declare namespace netFirewall {
      */
     interface?: string;
     /**
-     * 接口名称：仅当type取值为RULE_IP时有效，否则忽略该参数。
+     * 接口名称：当type=RULE_IP时有效，否则忽略。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @stagemodelonly
      * @since 26.0.1 static
      */
     iface?: string;
+    /**
+     * 链ID。0=默认链。非零值必须引用现有的，
+     * 授权链。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    chainId?: int;
+    /**
+     * 链内优先级。默认为0。它只参与排序
+     * 同链；跨链优先级由链优先级决定。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority?: int;
+    /**
+     * 规则级别的日志标志。默认为false。当为真时，命中此规则
+     * （拒绝/允许第一个数据包）生成拦截记录。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isLogEnabled?: boolean;
+    /**
+     * 规则所有者appId（对于客户端是只读的；服务填充/验证它）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+  }
+
+  /**
+   * 定义防火墙链配置。
+   *
+   * 注意：bitStart/bitEnd是完整重建的副产品，不是
+   * 暴露或持续存在。
+   *
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NetFirewallChainConfig {
+    /**
+     * 链名，最大128个字符，便于识别。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    name: string;
+    /**
+     * 链优先级。较小的值=首先评估。
+     * 范围【0,127】。默认链的优先级最高（最后评估）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority: int;
+    /**
+     * 默认的间接操作：当没有时，回退操作。
+     * 链中的规则匹配入站数据包。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionIn: FirewallRuleAction;
+    /**
+     * 默认出方向动作：当没有
+     * 链中的规则匹配出站数据包。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionOut: FirewallRuleAction;
+    /**
+     * 链主appId。创建时默认为createAppId。
+     * 只有系统/ SA / MDM可以通过更新对其进行修改。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+    /**
+     * 授权白名单appIds：允许添加的应用
+     * 除了所有者之外，这个链的规则。默认为空。
+     * 规则添加授权检查：
+     * 默认链(chainId = 0) ->允许
+     * 非默认链->{ownerAppId}中的调用者appId。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    authorizedAppIds?: Array<int>;
+  }
+
+  /**
+   * 定义updateNetFirewallChain使用的防火墙链配置。
+   *
+   * 部分更新语义：字段
+   * 参数中的NOT保留其当前值；只有字段
+   * 目前的应用。不需要获取-然后-回显整个配置。
+   *
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NetFirewallChainUpdateConfig {
+    /**
+     * 链名，最大128个字符，便于识别。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    name?: string;
+    /**
+     * 链优先级。较小的值=首先评估。
+     * 范围【0,127】。默认链的优先级最高（最后评估）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority?: int;
+    /**
+     * 默认的间接操作：当没有时，回退操作。
+     * 链中的规则匹配入站数据包。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionIn?: FirewallRuleAction;
+    /**
+     * 默认出方向动作：当没有
+     * 链中的规则匹配出站数据包。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionOut?: FirewallRuleAction;
+    /**
+     * 链主appId。
+     * 只有系统/ SA / MDM可以修改它。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+    /**
+     * 授权白名单appIds：允许添加的应用
+     * 除了所有者之外，这个链的规则。
+     * 添加规则授权检查：
+     * 默认链(chainId = 0) ->允许
+     * 非默认链->{ownerAppId}中的调用方appId。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    authorizedAppIds?: Array<int>;
+  }
+
+  /**
+   * 定义查询返回的防火墙链信息。
+   * 与输入结构体无关：返回链的所有字段都存在。
+   *
+   * @syscap SystemCapability.Communication.NetManager.NetFirewall
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NetFirewallChainInfo {
+    /**
+     * 链ID。由系统在创建时分配（>0）。
+     * 0=默认链，无法创建或删除。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    chainId: int;
+    /**
+     * 链名，最大128个字符，便于识别。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    name: string;
+    /**
+     * 链优先级。较小的值=首先评估。
+     * 范围【0,127】。默认链的优先级最高（最后评估）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    priority: int;
+    /**
+     * 默认的间接操作：当没有时，回退操作。
+     * 链中的规则匹配入站数据包。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionIn: FirewallRuleAction;
+    /**
+     * 默认出方向动作：当没有
+     * 链中的规则匹配出站数据包。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    defaultActionOut: FirewallRuleAction;
+    /**
+     * 链主appId。
+     * 创建时默认为createAppId；默认链没有所有者。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
+    /**
+     * 授权白名单appIds：允许添加的应用
+     * 除了所有者之外，这个链的规则。默认为空。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    authorizedAppIds: Array<int>;
+    /**
+     * 创建者appId。
+     * 默认链没有创建者。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    creatorAppId?: int;
+    /**
+     * 链中规则的当前int。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ruleCount: int;
+    /**
+     * 创建时间戳（毫秒）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    createTime: int;
+    /**
+     * 实际将规则添加到此链中的AppId（从规则聚合而来的）
+     * 表在查询时的ownerAppId，唯一。回答“谁真正在使用”
+     * 防火墙“”，而不是授权的AppId（“允许”）。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    usageAppIds: Array<int>;
   }
 
   /**
@@ -808,6 +1347,46 @@ declare namespace netFirewall {
      * @since 26.0.1 static
      */
     domain?: string;
+    /**
+     * 命中规则ID（匹配位的反向查找；-1=过时事件被丢弃）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ruleId?: int;
+    /**
+     * 命中链ID。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    chainId?: int;
+    /**
+     * 最终动作：RULE_ALLOW (允许连接，只允许CT_NEW的第一个报文，
+     * )/规则_拒绝。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    action?: FirewallRuleAction;
+    /**
+     * 命中规则的所有者appId。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.NetFirewall
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ownerAppId?: int;
   }
 
   /**

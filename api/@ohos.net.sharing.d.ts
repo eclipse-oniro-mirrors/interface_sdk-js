@@ -438,6 +438,22 @@ declare namespace sharing {
   function getSharableRegexes(type: SharingIfaceType): Promise<Array<string>>;
 
   /**
+   * Obtains the address of interfaces in each sharing state.
+   *
+   * @permission ohos.permission.GET_NETWORK_INFO
+   * @param { SharingIfaceState } state - The network sharing state.
+   * @returns { Promise<Array<NetAddress>> } Promise used to return ${Array<NetAddress>}.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2200001 - Invalid parameter value.
+   * @throws { BusinessError } 2200002 - Failed to connect to the service.
+   * @throws { BusinessError } 2200003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getSharingAddress(state: SharingIfaceState): Promise<Array<NetAddress>>;
+
+  /**
    * Registers the network sharing status change event. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL

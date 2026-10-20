@@ -48,14 +48,15 @@ declare namespace ethernet {
    * @param { AsyncCallback<InterfaceConfiguration> } callback - Callback used to return the result. Returns information
    *     about the specified network interface.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 9 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 9 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -68,14 +69,15 @@ declare namespace ethernet {
    * @param { string } iface - Network interface.
    * @returns { Promise<InterfaceConfiguration> } Promise used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 9 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 9 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -218,10 +220,11 @@ declare namespace ethernet {
    *     result. [since 10 - 10]
    * @param { Callback<InterfaceStateInfo> } callback - Callback used to return the result. [since 11]
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 10 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 10 dynamic
    */
   function on(type: 'interfaceStateChange', callback: Callback<InterfaceStateInfo>): void;
@@ -233,9 +236,10 @@ declare namespace ethernet {
    * @param { Callback<InterfaceStateInfo> } callback - Including iface Indicates the ethernet interface,
    *     and active Indicates whether the interface is active.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 26.0.1 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 26.0.1 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 26.0.1 static
    */
   function onInterfaceStateChange(callback: Callback<InterfaceStateInfo>): void;
@@ -249,10 +253,11 @@ declare namespace ethernet {
    *     result. [since 10 - 10]
    * @param { Callback<InterfaceStateInfo> } callback - Callback used to return the result. [since 11]
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 10 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 10 dynamic
    */
   function off(type: 'interfaceStateChange', callback?: Callback<InterfaceStateInfo>): void;
@@ -264,9 +269,10 @@ declare namespace ethernet {
    * @param { Callback<InterfaceStateInfo> } [callback] - Including iface Indicates the ethernet interface,
    *     and active Indicates whether the interface is active.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 26.0.1 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 26.0.1 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 26.0.1 static
    */
   function offInterfaceStateChange(callback?: Callback<InterfaceStateInfo>): void;
@@ -295,10 +301,11 @@ declare namespace ethernet {
    * @returns { Promise<Array<EthernetDeviceInfos>> } Promise used to return the result. If the operation is successful,
    *     the Ethernet device information list is returned. If the operation fails, an error code is returned.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 20 - 26.0.1]
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 20 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 20 dynamic
    * @since 26.0.1 static
    */
@@ -359,7 +366,8 @@ declare namespace ethernet {
    * Defines the network configuration for the Ethernet connection.
    *
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 9 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -368,7 +376,8 @@ declare namespace ethernet {
      * Configuration mode of the Ethernet connection.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -379,7 +388,8 @@ declare namespace ethernet {
      * be configured in Dynamic Host Configuration Protocol (DHCP) mode.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -391,7 +401,8 @@ declare namespace ethernet {
      * mode.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -403,7 +414,8 @@ declare namespace ethernet {
      * in DHCP mode.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -415,7 +427,8 @@ declare namespace ethernet {
      * in DHCP mode.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -427,7 +440,8 @@ declare namespace ethernet {
      * be configured in DHCP mode. Multiple addresses are separated by commas (,).
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -437,7 +451,8 @@ declare namespace ethernet {
      * HTTP proxy of the Ethernet connection. By default, no proxy is configured.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 10 dynamic
      * @since 26.0.1 static
      */
@@ -555,7 +570,8 @@ declare namespace ethernet {
    * Defines Ethernet device information.
    *
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 20 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 20 dynamic
    * @since 26.0.1 static
    */
@@ -564,7 +580,8 @@ declare namespace ethernet {
      * Interface name.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -574,7 +591,8 @@ declare namespace ethernet {
      * Device name.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -584,7 +602,8 @@ declare namespace ethernet {
      * Device connection mode.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -594,7 +613,8 @@ declare namespace ethernet {
      * Vendor name.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -604,7 +624,8 @@ declare namespace ethernet {
      * Supplier ID.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -614,7 +635,8 @@ declare namespace ethernet {
      * Product name.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -624,11 +646,23 @@ declare namespace ethernet {
      * Maximum connection rate.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
     maximumRate: string;
+
+    /**
+     * Link id of device.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Ethernet
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    linkId: string;
   }
 
   /**
@@ -663,4 +697,3 @@ declare namespace ethernet {
 }
 
 export default ethernet;
- 

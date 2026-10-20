@@ -17,8 +17,8 @@
  * @file Enhanced VPN Management
  * @kit NetworkKit
  */
-
 import type { Callback } from './@ohos.base';
+
 import type connection from './@ohos.net.connection';
 import type _VpnExtensionContext from './application/VpnExtensionContext';
 import type Want from './@ohos.app.ability.Want';
@@ -207,6 +207,45 @@ declare namespace vpnExtension {
   function createVpnObserver(): VpnObserver;
 
   /**
+   * Enables the VPN extension ability. This API uses a promise to return the result.
+   *
+   * @param { Want } want - Want information.
+   *     <br> Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for
+   *     the first time.
+   * @param { boolean } [systemProxyKeepalive] - Optional. Whether to enable system proxy keepalive mode
+   *     When set to true, the VPN extension will survive when the main process is killed,
+   *     and the VPN will be displayed in system settings for management.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 16000001 - The specified ability does not exist.
+   * @throws { BusinessError } 16000002 - Incorrect ability type.
+   * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
+   * @throws { BusinessError } 16000008 - The crowdtesting application expires.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16200001 - The caller has been released.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function startVpnExtensionAbility(want: Want, systemProxyKeepalive?: boolean): Promise<void>;
+
+  /**
+   * Reconnects to an existing VPN extension ability.
+   * Used when the main process restarts and needs to reconnect to the VPN extension
+   * that was started with systemProxyKeepalive enabled.
+   *
+   * @param { Want } want - Indicates the want info of the VPN extension to reconnect.
+   * @returns { Promise<VpnConnection> } Promise used to return ${VpnConnection}.
+   * @throws { BusinessError } 16000001 - The specified ability does not exist.
+   * @throws { BusinessError } 16000002 - Incorrect ability type.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+   * @syscap SystemCapability.Communication.NetManager.Vpn
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function connectToVpnExtension(want: Want): Promise<VpnConnection>;
+
+  /**
    * Defines a VPN observer object. It is used to listen for VPN-related events. Before calling **VpnObserver** APIs,
    * you need to create a VPN connection object by calling
    * [vpnExtension.createVpnObserver]{@link vpnExtension.createVpnObserver}.
@@ -275,7 +314,7 @@ declare namespace vpnExtension {
      * > You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)} to destroy the VPN and clear
      * > resources when the VPN is not needed.
-     * 
+     *
      * @permission ohos.permission.INTERNET
      * @param { VpnConfig } config - VPN configuration.
      * @returns { Promise<int> } Promise used to return the result, which is the file descriptor of the virtual network
@@ -292,6 +331,21 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     create(config: VpnConfig): Promise<int>;
+
+    /**
+     * Update the VPN configuration while the VPN is connected.
+     *
+     * @param { VpnConfig } config - VPN interface parameters.
+     * @returns { Promise<int> } Promise used to return ${int}.
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    updateVpnConfig(config: VpnConfig): Promise<int>;
+
     /**
      * Generates a unique VPN ID. This API uses a promise to return the result.
      *
@@ -329,6 +383,24 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     protect(socketFd: int): Promise<void>;
+
+    /**
+     * Protects sockets against a VPN connection. The data sent through sockets is directly transmitted over the
+     * physical network and therefore the traffic does not traverse through the VPN. This API returns the result
+     * synchronously.
+     *
+     * @param { int } socketFd - Socket file descriptor. It can be obtained through
+     *     [getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd()}.
+     *     <br>The value should be an integer.
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @throws { BusinessError } 2203004 - Invalid socket file descriptor.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    protectSync(socketFd: int): void;
 
     /**
      * Destroys a VPN. This API uses a promise to return the result.
@@ -384,7 +456,7 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     vpnId?: string;
-  
+
     /**
      * IP addresses of vNICs. Before API version 23, a maximum of 64 IP addresses are supported. Starting from API
      * version 23, a maximum of 2000 IP addresses are supported.
@@ -497,14 +569,38 @@ declare namespace vpnExtension {
      * **routes**. Before API version 23, a maximum of 64 blocked application bundle names can be configured. Since API
      * version 23, a maximum of 256 blocked application bundle names can be configured.
      *
-     * **Note**: Configure either **trustedApplications** or **blockedApplications** as they are mutually exclusive.
+     * **Note**: Configure either **trustedApplications** or **blockedApplications** as they are mutually exclusive. Defaults to an empty array if not specified.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
      * @since 26.0.1 static
      */
     blockedApplications?: Array<string>;
+
+    /**
+     * Whether local network (LAN) traffic is routed through the VPN.
+     * When set to false, traffic to local network addresses (for example, 10.0.0.0/8,
+     * 172.16.0.0/12 and 192.168.0.0/16) bypasses the VPN and is sent directly over the
+     * physical network interface. The default value is false.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isLocalNetworkRouted?: boolean;
+
+    /**
+     * Whether to force the VPN to send and receive IPv6 DNS requests.
+     * When set to true, the VPN initiates IPv6 DNS resolution and accepts IPv6 DNS
+     * responses even if the current network does not support IPv6. The default value is false.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isForceIPv6Dns?: boolean;
   }
 }
-
 export default vpnExtension;

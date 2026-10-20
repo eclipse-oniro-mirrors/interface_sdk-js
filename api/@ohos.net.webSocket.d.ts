@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -219,6 +219,21 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     supportOriginPort?: boolean;
+
+
+    /**
+     * [RFC 8744] Server Name Indication (SNI) service name used by the TLS handshake. This parameter is optional.
+     * In the WebSocket WSS connection setup scenario, when the IP address:port is directly connected, the SNI domain
+     * name can be explicitly specified.
+     * If this field is not set, the domain name is extracted from the WSS URL and filled with the SNI by default.
+     * This parameter is valid only for encrypted WSS connections. Ignore this parameter for plaintext WS connections.
+     * The maximum length is 253. Value constraint: Valid domain name. Default value: Undefined.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    serverName?: string;
   }
 
   /**
@@ -403,7 +418,7 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     protocol?: string;
- 	}
+  }
 
   /**
    * Enumerates the response headers sent by the server.
@@ -1157,7 +1172,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     clientPort: int;
-    }
+  }
 
   /**
    * Callback used to return the result, which contains:
@@ -1187,7 +1202,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     data: string | ArrayBuffer;
-    }
+  }
 
   /**
    * Callback invoked when the WebSocketServer connection is closed.
@@ -1440,6 +1455,7 @@ declare namespace webSocket {
 
     /**
      * Enables listening for events that a connection from a given client has been closed.
+     *
      * @param { ClientConnectionCloseCallback } callback - the callback function when a client connection is closed.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
@@ -1468,7 +1484,8 @@ declare namespace webSocket {
 
     /**
      * Cancels listening for events that a connection from a given client has been closed.
-     * @param { ClientConnectionCloseCallback } callback - the callback used to return the result.
+     *
+     * @param { ClientConnectionCloseCallback } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 26.0.0 static
@@ -1523,7 +1540,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     offWebSocketServerError(callback?: ErrorCallback): void;
-    }
+  }
 
   /**
    * Enumerates the TLS protocol types.

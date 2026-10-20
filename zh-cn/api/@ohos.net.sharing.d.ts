@@ -417,6 +417,22 @@ declare namespace sharing {
   function getSharableRegexes(type: SharingIfaceType): Promise<Array<string>>;
 
   /**
+   * 获取各个共享状态的接口地址。
+   *
+   * @permission ohos.permission.GET_NETWORK_INFO
+   * @param { SharingIfaceState } state - 网络共享状态。
+   * @returns { Promise<Array<NetAddress>> } Promise用于返回${Array<NetAddress>}。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2200001 - Invalid parameter value.
+   * @throws { BusinessError } 2200002 - Failed to connect to the service.
+   * @throws { BusinessError } 2200003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.NetSharing
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getSharingAddress(state: SharingIfaceState): Promise<Array<NetAddress>>;
+
+  /**
    * 注册网络共享状态变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
@@ -432,10 +448,10 @@ declare namespace sharing {
   function on(type: 'sharingStateChange', callback: Callback<boolean>): void;
 
   /**
-   * 注册全局网络共享状态变化的回调。
+   * 注册网络共享状态变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { Callback<boolean> } callback - 用于返回状态的回调函数。
+   * @param { Callback<boolean> } callback - the callback function that returns the status.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @syscap SystemCapability.Communication.NetManager.NetSharing
@@ -460,10 +476,10 @@ declare namespace sharing {
   function off(type: 'sharingStateChange', callback?: Callback<boolean>): void;
 
   /**
-   * 注销全局网络共享状态变化的回调。
+   * 取消注册网络共享状态变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { Callback<boolean> } [callback] - 用于返回状态的回调函数。
+   * @param { Callback<boolean> } [callback] - the callback function that returns the status.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @syscap SystemCapability.Communication.NetManager.NetSharing
@@ -477,8 +493,8 @@ declare namespace sharing {
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { 'interfaceSharingStateChange' } type - 订阅的事件类型。'interfaceSharingStateChange'：注册网卡网络共享状态变化事件。
-   * @param { Callback<{ type: SharingIfaceType, iface: string, state: SharingIfaceState }> } callback - Callback used
-   *     to return the result. It is called when the network sharing state of a specified NIC changes. [since 9 - 10]
+   * @param { Callback<{ type: SharingIfaceType, iface: string, state: SharingIfaceState }> } callback - 回调函数。指定网卡共享状态变化
+   *     时调用。 [since 9 - 10]
    * @param { Callback<InterfaceSharingStateInfo> } callback - 回调函数。指定网卡共享状态变化时调用。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -490,10 +506,10 @@ declare namespace sharing {
   function on(type: 'interfaceSharingStateChange', callback: Callback<InterfaceSharingStateInfo>): void;
 
   /**
-   * 注册接口网络共享状态变化的回调。
+   * 注册网卡网络共享状态变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { Callback<InterfaceSharingStateInfo> } callback - 用于返回消息的回调函数。
+   * @param { Callback<InterfaceSharingStateInfo> } callback - the callback function that returns the message.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @syscap SystemCapability.Communication.NetManager.NetSharing
@@ -507,8 +523,8 @@ declare namespace sharing {
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { 'interfaceSharingStateChange' } type - 注销的事件类型。'interfaceSharingStateChange'：注销网卡网络共享状态变化事件。
-   * @param { Callback<{ type: SharingIfaceType, iface: string, state: SharingIfaceState }> } callback - Callback used
-   *     to return the result. [since 9 - 10]
+   * @param { Callback<{ type: SharingIfaceType, iface: string, state: SharingIfaceState }> } callback - 回调函数，注销指定网卡共享状态
+   *     变化通知。 [since 9 - 10]
    * @param { Callback<InterfaceSharingStateInfo> } callback - 回调函数，注销指定网卡共享状态变化通知。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -520,10 +536,10 @@ declare namespace sharing {
   function off(type: 'interfaceSharingStateChange', callback?: Callback<InterfaceSharingStateInfo>): void;
 
   /**
-   * 注销接口网络共享状态变化的回调。
+   * 取消注册网卡网络共享状态变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { Callback<InterfaceSharingStateInfo> } [callback] - 用于返回消息的回调函数。
+   * @param { Callback<InterfaceSharingStateInfo> } [callback] - the callback function that returns the message.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @syscap SystemCapability.Communication.NetManager.NetSharing
@@ -548,10 +564,10 @@ declare namespace sharing {
   function on(type: 'sharingUpstreamChange', callback: Callback<NetHandle>): void;
 
   /**
-   * 注册共享上游网络变化的回调。
+   * 注册上行网络变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { Callback<NetHandle> } callback - 用于返回网络句柄的回调函数。
+   * @param { Callback<NetHandle> } callback - the callback function that returns the network handle.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @syscap SystemCapability.Communication.NetManager.NetSharing
@@ -576,10 +592,10 @@ declare namespace sharing {
   function off(type: 'sharingUpstreamChange', callback?: Callback<NetHandle>): void;
 
   /**
-   * 注销共享上游网络变化的回调。
+   * 取消注册上行网络变化事件，使用 callback 异步回调。
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { Callback<NetHandle> } [callback] - 用于返回网络句柄的回调函数。
+   * @param { Callback<NetHandle> } [callback] - the callback function that returns the network handle.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @syscap SystemCapability.Communication.NetManager.NetSharing

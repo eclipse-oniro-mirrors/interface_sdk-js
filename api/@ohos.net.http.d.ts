@@ -141,6 +141,15 @@ declare namespace http {
     extraData?: string | Object | ArrayBuffer;
 
     /**
+     * Additional data of the request.
+     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    extraData?: string | RecordData | ArrayBuffer;
+
+    /**
      * Type of the returned data. This parameter is not used by default. If this parameter is set, the system returns
      * the specified type of data preferentially. If the specified type is **Object**, the value can contain a maximum
      * of 65536 characters.
@@ -194,6 +203,15 @@ declare namespace http {
      * @since 23 static
      */
     header?: Object;
+
+    /**
+     * HTTP request header. default is 'content-type': 'application/json'
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @FaAndStageModel
+     * @since 26.0.1 static
+     */
+    header?: Record<string, string>;
 
     /**
      * Read timeout duration. The default value is **60000**, in ms. The input value must be an uint32_t integer.
@@ -591,6 +609,85 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
+
+    /**
+     * Whether to convert POST method to GET when following 301/302/303 redirect responses.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    followRedirectPostToGet?: boolean;
+
+    /**
+     * The host name required for SSL server host name verification.
+     * The default value of sslServerHostnameVerify is true. When sslServerHostnameVerify is set to false, domain name
+     * verification is disabled.
+     * In this scenario, the certificate domain name verification is ignored when the IP address is used for connection.
+     * Default value: true.
+     * .
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    sslServerHostnameVerification?: boolean;
+
+    /**
+     * Indicates whether to enable certificate revocation status verification.
+     * Default value: false.
+     * <br>true: The certificate revocation check is performed during the TLS handshake. The OCSP or CRL check is used
+     * to check whether the certificate is revoked. If the check fails, the TLS connection is terminated.
+     * false: The certificate revocation check is not performed.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    enableCertRevocationCheck?: boolean;
+
+    /**
+     * Low speed limit threshold in bytes per second.
+     * If the transfer speed is lower than this value for longer than lowSpeedTime,
+     * the transfer will be aborted.
+     * The value should be an integer.
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    lowSpeedLimit?: int;
+
+    /**
+     * Low speed duration threshold in milliseconds.
+     * If the transfer speed is lower than lowSpeedLimit for longer than this value,
+     * the transfer will be aborted.
+     * The value should be an integer.
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    lowSpeedTime?: int;
+
+    /**
+     * Use specific network to send this HTTP request and receive the correponding response.
+     * Activate the target network and create the netHandle in advace.
+     * @type { ?connection.NetHandle }
+     * @syscap SystemCapability.Communication.NetStack
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 22 static
+     */
+    netHandler?: connection.NetHandle;
   }
 
   /**
@@ -1346,6 +1443,14 @@ declare namespace http {
     data?: string | Object | ArrayBuffer;
 
     /**
+     * This parameter sets a mime part's body content from memory data.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    data?: string | RecordData | ArrayBuffer;
+
+    /**
      * File path of the form data. If **data** is not specified, **filePath** must be set.
      *
      * **Note**: The file format supported by the file management module must be passed. You can call
@@ -1784,7 +1889,7 @@ declare namespace http {
     requestSync(url: string, options?: HttpRequestOptions): HttpResponse;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to 
+     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to
      * return the result, which is a streaming response.
      *
      * @permission ohos.permission.INTERNET
@@ -1835,7 +1940,7 @@ declare namespace http {
     requestInStream(url: string, callback: AsyncCallback<int>): void;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to 
+     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to
      * return the result, which is a streaming response.
      *
      * @permission ohos.permission.INTERNET
@@ -1889,7 +1994,7 @@ declare namespace http {
     requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallback<int>): void;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses a promise to return the 
+     * Initiates an HTTP request containing specified options to a given URL. This API uses a promise to return the
      * result, which is a streaming response.
      *
      * @permission ohos.permission.INTERNET
@@ -2939,6 +3044,15 @@ declare namespace http {
     result: string | Object | ArrayBuffer;
 
     /**
+     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
+     * If {@link HttpRequestOptions#expectDataType} is set, the system preferentially returns this parameter.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    result: string | RecordData | ArrayBuffer;
+
+    /**
      * Type of the return value.
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -2980,6 +3094,15 @@ declare namespace http {
     header: Object;
 
     /**
+     * All headers in the response from the server.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @FaAndStageModel
+     * @since 26.0.1 static
+     */
+    header: Record<string, string>;
+
+    /**
      * Original cookies returned by the server. How to process the cookies is up to your decision.
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -3008,6 +3131,35 @@ declare namespace http {
      * @since 26.0.1 static
      */
     connectionExtraInfo?: ConnectionExtraInfo;
+  }
+
+  /**
+   * Defines the HttpResponseMetadata to an HTTP request.
+   *
+   * @syscap SystemCapability.Communication.NetStack
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface HttpResponseMetadata {
+    /**
+     * Result code for an HTTP request. If the callback function is successfully executed, a result code defined in
+     * [ResponseCode]{@link http.ResponseCode} will be returned. Otherwise, an error code will be returned in the
+     * **err** field in **AsyncCallback**.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    responseCode: ResponseCode;
+
+    /**
+     * All headers in the response from the server.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    header: Record<string, string>;
   }
 
   /**
@@ -3130,6 +3282,32 @@ declare namespace http {
      * @since 26.0.1 static
      */
     redirectCount: int;
+
+    /**
+     * Total number of bytes actually sent over the HTTP request link, including the request line, request header, and
+     * request body. The unit is byte.
+     * Unit: Byte.
+     * .
+     * . The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    sentTotalBytes?: int;
+
+    /**
+     * Total number of bytes actually received over the HTTP request link, including the status line, response header,
+     * and response body. The unit is byte.
+     * Unit: Byte.
+     * .
+     * . The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    receivedTotalBytes?: int;
   }
 
   /**

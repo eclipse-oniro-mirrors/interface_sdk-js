@@ -1534,7 +1534,7 @@ declare namespace connection {
    * @since 26.0.1 static
    */
   function getDnsAscii(host: string, flag?: ConversionProcess): string;
- 
+
   /**
    * Converts host names from ASCII to Unicode using the Punycode encoding mode and uses the optional conversionProcess
    * parameter to control the conversion behavior.
@@ -1629,6 +1629,21 @@ declare namespace connection {
    * @since 26.0.1 static
    */
   function queryProbeResult(destination: string, duration: int): Promise<ProbeResultInfo>;
+
+  /**
+   * Renew ip address.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @param { NetHandle } netHandle - Network handle.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function renewDhcp(netHandle: NetHandle): void;
 
   /**
    * Describes the information about the TCP and UDP ports that are currently listened for by the system.
@@ -2727,7 +2742,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export enum Socks5DnsStrategy {  
+  export enum Socks5DnsStrategy {
     /**
      * System DNS mode.
      *
@@ -2737,7 +2752,7 @@ declare namespace connection {
      * @since 26.0.1 static
      */
     SYSTEM_MODE = 0,
-  
+
     /**
      * Proxy DNS mode.
      *
@@ -3143,7 +3158,7 @@ declare namespace connection {
    * @since 22 dynamic
    * @since 26.0.1 static
    */
-  export interface NetIpMacInfo {  
+  export interface NetIpMacInfo {
     /**
      * IP address information.
      *
@@ -3179,7 +3194,7 @@ declare namespace connection {
    * @since 23 dynamic
    * @since 26.0.1 static
    */
-  export enum ProtocolType {  
+  export enum ProtocolType {
     /**
      * TCP network protocol.
      *
@@ -3197,7 +3212,7 @@ declare namespace connection {
      */
     PROTO_TYPE_UDP = 17
   }
-  
+
   /**
    * Defines the type of network probe data packets.
    *
@@ -3206,7 +3221,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export enum PacketsType {  
+  export enum PacketsType {
     /**
      * ICMP packet type.
      *
@@ -3236,7 +3251,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export interface TraceRouteOptions {  
+  export interface TraceRouteOptions {
     /**
      * Maximum number of jumps. The value range is [1, 30]. The default value is **30**.
      *
@@ -3266,7 +3281,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export interface TraceRouteInfo {  
+  export interface TraceRouteInfo {
     /**
      * Jump number.
      *
@@ -3307,7 +3322,7 @@ declare namespace connection {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
-  export interface ProbeResultInfo {  
+  export interface ProbeResultInfo {
     /**
      * Packet loss rate. The value range is [0, 100]. For example, 100 indicates 100% packet loss, and 50 indicates 50%
      * packet loss.
@@ -3332,6 +3347,64 @@ declare namespace connection {
      */
     rtt: int[];
   }
+
+  /**
+   * Register the event listener for changing the application proxy information.
+   *
+   * > **NOTE**
+   * > After an application invokes this API to complete subscription, the application proxy configuration changes.
+   * (Enable or disable the proxy, modify the proxy address, port, and bypass list.), the system immediately triggers a
+   * callback to push the latest complete proxy information to the application. The application can update its network
+   * proxy logic within the callback. The update takes effect in real time without cold startup or network switchover.
+   *
+   * @param { Callback<HttpProxy> } callback - Callback for returning results.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function onAppHttpProxy(callback: Callback<HttpProxy>): void;
+
+  /**
+   * Unsubscribe from the `AppHttpProxy` event.
+   *
+   * @param { Callback<HttpProxy> } [callback] - Callback of the returned result.
+   *     <br>Default value: Undefiend.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function offAppHttpProxy(callback?: Callback<HttpProxy>): void;
+
+  /**
+   * Registers the listener for changing the default proxy information.
+   *
+   * > **NOTE**
+   * > After an application invokes this interface,
+   * > After the subscription is complete, the system agent configuration changes. (Enable or disable proxy, modify
+   * proxy)
+   * > Address, port, and bypass list.) * *. The system immediately triggers the callback and pushes the latest full
+   * proxy.
+   * > Information about the application. An application can update its network proxy logic in a callback. The update
+   * takes effect on
+   * > Real-time, no cold start or network switchover required.
+   *
+   * @param { Callback<HttpProxy> } callback - Callback for returning results.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function onDefaultHttpProxy(callback: Callback<HttpProxy>): void;
+
+  /**
+   * Unsubscribe from the `defaultHttpProxy` event.
+   *
+   * @param { Callback<HttpProxy> } [callback] - Callback of the returned result.
+   *     <br>Default value: Undefiend.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function offDefaultHttpProxy(callback?: Callback<HttpProxy>): void;
 
 }
 

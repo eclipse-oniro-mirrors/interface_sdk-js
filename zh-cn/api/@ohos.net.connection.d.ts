@@ -1412,7 +1412,7 @@ declare namespace connection {
 
   /**
    * 查询网络探测结果。若出现异常（例如断网），导致发送请求失败，则接口会立即返回，不再进行后续探测。本接口使用Promise方式作为异步方法。
-   * 
+   *
    * > **说明：**
    * >
    * > 此接口用于对目标主机进行一段持续时间的网络探测，以获取丢包率和RTT信息。
@@ -1431,6 +1431,21 @@ declare namespace connection {
    * @since 26.0.1 static
    */
   function queryProbeResult(destination: string, duration: int): Promise<ProbeResultInfo>;
+
+  /**
+   * 更新ip地址。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @param { NetHandle } netHandle - Network handle.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function renewDhcp(netHandle: NetHandle): void;
 
   /**
    * 系统当前监听的TCP、UDP端口信息。
@@ -1761,9 +1776,9 @@ declare namespace connection {
     on(type: 'netAvailable', callback: Callback<NetHandle>): void;
 
     /**
-     * 注册netAvailable事件监听。
+     * Registers a listener for netAvailable events.
      *
-     * @param { Callback<NetHandle> } callback - 用于返回结果的回调函数。
+     * @param { Callback<NetHandle> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @crossplatform
      * @atomicservice
@@ -1775,8 +1790,7 @@ declare namespace connection {
      * 订阅网络阻塞状态事件。此接口需要在调用register接口之前调用。若无需接收网络状态变化的回调通知，应使用unregister取消订阅默认的网络状态变化通知。
      *
      * @param { 'netBlockStatusChange' } type - 订阅事件，固定为'netBlockStatusChange'。<br/>netBlockStatusChange：网络阻塞状态事件。
-     * @param { Callback<{ netHandle: NetHandle, blocked: boolean }> } callback - Callback used to return the
-     *     result. [since 8 - 10]
+     * @param { Callback<{ netHandle: NetHandle, blocked: boolean }> } callback - 回调函数，获取网络阻塞状态信息。 [since 8 - 10]
      * @param { Callback<NetBlockStatusInfo> } callback - 回调函数，获取网络阻塞状态信息。 [since 11]
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 8 dynamic
@@ -1804,9 +1818,9 @@ declare namespace connection {
     on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void;
 
     /**
-     * 注册netCapabilitiesChange事件监听。
+     * Registers a listener for **netCapabilitiesChange** events.
      *
-     * @param { Callback<NetCapabilityInfo> } callback - 用于返回结果的回调函数。
+     * @param { Callback<NetCapabilityInfo> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @crossplatform
      * @atomicservice
@@ -1819,8 +1833,8 @@ declare namespace connection {
      *
      * @param { 'netConnectionPropertiesChange' } type - 订阅事件，固定为'netConnectionPropertiesChange'。<br/>
      *     netConnectionPropertiesChange：网络连接信息变化事件。
-     * @param { Callback<{ netHandle: NetHandle, connectionProperties: ConnectionProperties }> } callback - Callback
-     *     used to return the result. [since 8 - 10]
+     * @param { Callback<{ netHandle: NetHandle, connectionProperties: ConnectionProperties }> } callback - 回调函数，获取网络连接属
+     *     性信息。 [since 8 - 10]
      * @param { Callback<NetConnectionPropertyInfo> } callback - 回调函数，获取网络连接属性信息。 [since 11]
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 8 dynamic
@@ -1828,9 +1842,9 @@ declare namespace connection {
     on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void;
 
     /**
-     * 注册netConnectionPropertiesChange事件监听。
+     * Registers a listener for netConnectionPropertiesChange events.
      *
-     * @param { Callback<NetConnectionPropertyInfo> } callback - 用于返回结果的回调函数。
+     * @param { Callback<NetConnectionPropertyInfo> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 26.0.1 static
      */
@@ -3089,6 +3103,64 @@ declare namespace connection {
      */
     rtt: int[];
   }
+
+  /**
+   * 注册修改应用代理信息的事件监听器。
+   *
+   * > **说明**
+   * > 应用调用该接口完成订阅后，应用代理配置发生变化。
+   * > （启用或禁用代理，修改代理地址、端口、旁路列表），系统立即触发
+   * > 回调，将最新的完整代理信息推送给应用。应用程序可以更新其网络
+   * > 回调中的代理逻辑。更新实时生效，无需冷启动，无需网络切换。
+   *
+   * @param { Callback<HttpProxy> } callback - 返回结果的回调。
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function onAppHttpProxy(callback: Callback<HttpProxy>): void;
+
+  /**
+   * 取消订阅`AppHttpProxy`事件。
+   *
+   * @param { Callback<HttpProxy> } [callback] - 返回结果的回调。
+   *     <br>默认值：不可辩驳。
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function offAppHttpProxy(callback?: Callback<HttpProxy>): void;
+
+  /**
+   * 注册监听器，用于更改默认代理信息。
+   *
+   * > **说明**
+   * > 应用调用此接口后，
+   * > 订阅完成后，系统代理配置发生变化。(启用或禁用代理，修改
+   * > 代理)
+   * > 地址、端口和放通列表。)**.系统立即触发回调，推送最新的全
+   * > 代理。
+   * > 关于应用程序的信息。应用程序可以在回调中更新其网络代理逻辑。更新
+   * > 生效时间
+   * > 实时，无需冷启动，无需网络切换。
+   *
+   * @param { Callback<HttpProxy> } callback - 返回结果的回调。
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function onDefaultHttpProxy(callback: Callback<HttpProxy>): void;
+
+  /**
+   * 取消订阅`defaultHttpProxy`事件。
+   *
+   * @param { Callback<HttpProxy> } [callback] - 返回结果的回调。
+   *     <br>默认值：Undefiend。
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function offDefaultHttpProxy(callback?: Callback<HttpProxy>): void;
 
 }
 

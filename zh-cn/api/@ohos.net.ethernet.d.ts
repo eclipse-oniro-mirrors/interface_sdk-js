@@ -45,14 +45,15 @@ declare namespace ethernet {
    * @param { string } iface - 指定网络接口。
    * @param { AsyncCallback<InterfaceConfiguration> } callback - 回调函数。返回指定网络接口信息。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 9 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 9 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -65,14 +66,15 @@ declare namespace ethernet {
    * @param { string } iface - 指定网络接口。
    * @returns { Promise<InterfaceConfiguration> } 以Promise形式返回接口信息。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 9 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 9 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -207,24 +209,25 @@ declare namespace ethernet {
    *     result. [since 10 - 10]
    * @param { Callback<InterfaceStateInfo> } callback - 回调函数。返回以太网卡状态信息。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 10 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 10 dynamic
    */
   function on(type: 'interfaceStateChange', callback: Callback<InterfaceStateInfo>): void;
 
   /**
-   * 注册以太网接口激活状态变化的回调。
+   * 注册以太网接口激活状态变化回调。
    *
    * @permission ohos.permission.GET_NETWORK_INFO
-   * @param { Callback<InterfaceStateInfo> } callback - 入参iface表示以太网接口，
-   *     active表示接口是否激活。
+   * @param { Callback<InterfaceStateInfo> } callback - 回调函数，包含iface表示以太网接口，active表示接口是否激活。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 26.0.1 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 26.0.1 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 26.0.1 static
    */
   function onInterfaceStateChange(callback: Callback<InterfaceStateInfo>): void;
@@ -238,24 +241,25 @@ declare namespace ethernet {
    *     result. [since 10 - 10]
    * @param { Callback<InterfaceStateInfo> } callback - 回调函数。返回以太网卡状态信息。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 10 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 10 dynamic
    */
   function off(type: 'interfaceStateChange', callback?: Callback<InterfaceStateInfo>): void;
 
   /**
-   * 注销以太网接口激活状态变化的回调。
+   * 注销以太网接口激活状态变化回调。
    *
    * @permission ohos.permission.GET_NETWORK_INFO
-   * @param { Callback<InterfaceStateInfo> } [callback] - 入参iface表示以太网接口，
-   *     active表示接口是否激活。
+   * @param { Callback<InterfaceStateInfo> } [callback] - 回调函数，包含iface表示以太网接口，active表示接口是否激活。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 26.0.1 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 26.0.1 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 26.0.1 static
    */
   function offInterfaceStateChange(callback?: Callback<InterfaceStateInfo>): void;
@@ -280,10 +284,11 @@ declare namespace ethernet {
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<Array<EthernetDeviceInfos>> } Promise对象，返回本次执行结果。成功返回以太网设备信息列表，失败返回对应错误码。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 20 - 26.0.1]
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 20 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 20 dynamic
    * @since 26.0.1 static
    */
@@ -344,7 +349,8 @@ declare namespace ethernet {
    * 以太网连接配置网络信息。
    *
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 9 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -353,7 +359,8 @@ declare namespace ethernet {
      * 以太网连接配置模式。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -362,7 +369,8 @@ declare namespace ethernet {
      * 以太网连接静态配置ip信息，地址值范围：0-255.0-255.0-255.0-255（DHCP模式无需配置）。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -372,7 +380,8 @@ declare namespace ethernet {
      * 以太网连接静态配置路由信息，地址值范围：0-255.0-255.0-255.0-255（DHCP模式无需配置）。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -382,7 +391,8 @@ declare namespace ethernet {
      * 以太网连接配置网关信息，地址值范围：0-255.0-255.0-255.0-255（DHCP模式无需配置）。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -392,7 +402,8 @@ declare namespace ethernet {
      * 以太网连接配置子网掩码，地址值范围：0-255.0-255.0-255.0-255（DHCP模式无需配置）。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -402,7 +413,8 @@ declare namespace ethernet {
      * 以太网连接配置dns服务地址，地址值范围：0-255.0-255.0-255.0-255（DHCP模式无需配置）多地址间用“,”隔开。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -412,7 +424,8 @@ declare namespace ethernet {
      * 以太网连接代理配置信息，默认情况下不配置任何代理信息。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 9 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 10 dynamic
      * @since 26.0.1 static
      */
@@ -529,7 +542,8 @@ declare namespace ethernet {
    * 以太网设备信息。
    *
    * @syscap SystemCapability.Communication.NetManager.Ethernet
-   * @systemapi Hide this for inner system use.
+   * @systemapi [since 20 - 26.0.1]
+   * @publicapi [since 26.2.0]
    * @since 20 dynamic
    * @since 26.0.1 static
    */
@@ -538,7 +552,8 @@ declare namespace ethernet {
      * 网络接口名。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -548,7 +563,8 @@ declare namespace ethernet {
      * 设备名称。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -558,7 +574,8 @@ declare namespace ethernet {
      * 设备连接模式。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -568,7 +585,8 @@ declare namespace ethernet {
      * 供应商名称。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -578,7 +596,8 @@ declare namespace ethernet {
      * 供应商标识号。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -588,21 +607,33 @@ declare namespace ethernet {
      * 产品名称。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
     productName: string;
 
     /**
-     * 最大连接速率。
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
-     * @systemapi Hide this for inner system use.
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
     maximumRate: string;
+
+    /**
+     * 设备的链路ID。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Ethernet
+     * @systemapi [since 20 - 26.0.1]
+     * @publicapi [since 26.2.0]
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    linkId: string;
   }
 
   /**

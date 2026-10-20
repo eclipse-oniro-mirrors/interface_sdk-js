@@ -17,8 +17,8 @@
  * @file VPN增强管理
  * @kit NetworkKit
  */
-
 import type { Callback } from './@ohos.base';
+
 import type connection from './@ohos.net.connection';
 import type _VpnExtensionContext from './application/VpnExtensionContext';
 import type Want from './@ohos.app.ability.Want';
@@ -200,6 +200,45 @@ declare namespace vpnExtension {
   function createVpnObserver(): VpnObserver;
 
   /**
+   * 使能VPN扩展能力。该接口使用promise返回结果。
+   *
+   * @param { Want } want - 想要信息。
+   *     <br>注意：从API版本22开始，当VPN启动时，可以传递**想要**中的**参数**字段
+   *     第一次。
+   * @param { boolean } [systemProxyKeepalive] - 可选，是否启用系统代理保活模式
+   *     当设置为true时，VPN扩展将在主进程被杀死时存活。
+   *     VPN将显示在系统设置中进行管理。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 16000001 - The specified ability does not exist.
+   * @throws { BusinessError } 16000002 - Incorrect ability type.
+   * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
+   * @throws { BusinessError } 16000008 - The crowdtesting application expires.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16200001 - The caller has been released.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function startVpnExtensionAbility(want: Want, systemProxyKeepalive?: boolean): Promise<void>;
+
+  /**
+   * 重新连接到现有的VPN扩展功能。
+   * 当主进程重启并需要重新连接到VPN分机时使用
+   * 是在启用了systemProxyKeepalive的情况下启动的。
+   *
+   * @param { Want } want - 指示要重新连接的VPN分机的需要信息。
+   * @returns { Promise<VpnConnection> } Promise返回连接到扩展的VpnConnection实例。
+   * @throws { BusinessError } 16000001 - The specified ability does not exist.
+   * @throws { BusinessError } 16000002 - Incorrect ability type.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+   * @syscap SystemCapability.Communication.NetManager.Vpn
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function connectToVpnExtension(want: Want): Promise<VpnConnection>;
+
+  /**
    * VPN观察者对象。用于监听VPN相关事件。在调用VpnObserver的方法前，需要先通过[vpnExtension.createVpnObserver]{@link vpnExtension.createVpnObserver}
    * 创建VPN连接对象。
    *
@@ -253,7 +292,7 @@ declare namespace vpnExtension {
 
     /**
      * 使用config创建一个VPN网络。使用Promise异步回调。
-     * 
+     *
      * > **说明：**
      * >
      * > 建议在不需要VPN网络的时候配对调用[destroy()]{@link vpnExtension.VpnConnection.destroy()}或
@@ -274,6 +313,26 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     create(config: VpnConfig): Promise<int>;
+
+    /**
+     * 生成VPN唯一标识。使用Promise异步回调。
+     *
+     * 如需使用系统多VPN能力，需调用该接口生成vpnId，配置到VpnConfig中。
+     *
+     * > **注意**
+     * >
+     * > 当前系统多VPN能力仅支持IPv4。
+     *
+     * @param { VpnConfig } config - VPN interface parameters.
+     * @returns { Promise<int> } Promise used to return ${int}.
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    updateVpnConfig(config: VpnConfig): Promise<int>;
 
     /**
      * 生成VPN唯一标识。使用Promise异步回调。
@@ -311,6 +370,24 @@ declare namespace vpnExtension {
     protect(socketFd: int): Promise<void>;
 
     /**
+     * 保护套接字不受VPN连接的影响。通过socket发送的数据直接通过
+     * 物理网络，因此流量不经过VPN。返回结果
+     * 同步进行。
+     *
+     * @param { int } socketFd - 套接字文件描述符。可以通过
+     *     [getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd()}。
+     *     <br>取值限定为整数。
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @throws { BusinessError } 2203004 - Invalid socket file descriptor.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    protectSync(socketFd: int): void;
+
+    /**
      * 销毁启动的VPN网络。使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -345,36 +422,6 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     protectProcessNet(): Promise<void>;
-
-    /**
-     * 为VPN网络添加路由
-     *
-     * @param { RouteInfo[] } routes - VPN接口的路由数组。
-     * @param { string } [vpnId] - vpn唯一标识
-     * @returns { Promise<void> } 函数返回的promise。
-     * @throws { BusinessError } 2200001 - Invalid parameter value.
-     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
-     * @throws { BusinessError } 2200003 - System internal error.
-     * @syscap SystemCapability.Communication.NetManager.Vpn
-     * @stagemodelonly
-     * @since 26.0.0 dynamic
-     */
-    addRoute(routes: RouteInfo[], vpnId?: string): Promise<void>;
-
-    /**
-     * 删除VPN网络的路由
-     *
-     * @param { RouteInfo[] } routes - VPN接口的路由数组。
-     * @param { string } [vpnId] - vpn唯一标识。
-     * @returns { Promise<void> } 函数返回的promise。
-     * @throws { BusinessError } 2200001 - Invalid parameter value.
-     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
-     * @throws { BusinessError } 2200003 - System internal error.
-     * @syscap SystemCapability.Communication.NetManager.Vpn
-     * @stagemodelonly
-     * @since 26.0.0 dynamic
-     */
-    delRoute(routes: RouteInfo[], vpnId?: string): Promise<void>;
   }
 
   /**
@@ -492,9 +539,9 @@ declare namespace vpnExtension {
     trustedApplications?: Array<string>;
 
     /**
-     * 被阻止的应用信息列表，string类型表示的包名。当配置该列表后，该列表中的应用数据不会被VPN代理，其他应用可以根据routes配置被VPN代理。API version 23前最多可配置64个被阻止的应用包名；从API 
+     * 被阻止的应用信息列表，string类型表示的包名。当配置该列表后，该列表中的应用数据不会被VPN代理，其他应用可以根据routes配置被VPN代理。API version 23前最多可配置64个被阻止的应用包名；从API
      * version 23开始最多可配置256个被阻止的应用包名。
-     * 
+     *
      * **注意**：trustedApplications和blockedApplications列表不能同时配置。
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
@@ -502,7 +549,31 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     blockedApplications?: Array<string>;
+
+    /**
+     * 本地网络（LAN）流量是否通过VPN路由。
+     * 设置为false时，到本地网络地址(例如10.0.0.0/8，
+     * 172.16.0.0/12和192.168.0.0/16)绕过VPN，直接通过
+     * 物理网络接口。默认值为false。
+     * 默认值：默认值:false。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isLocalNetworkRouted?: boolean;
+
+    /**
+     * 是否强制VPN发送和接收IPv6 DNS请求。
+     * 设置为true时，VPN发起IPv6 DNS解析并接受IPv6 DNS
+     * 即使当前网络不支持IPv6，也会响应。默认值为false。
+     * 默认值：默认值: false。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isForceIPv6Dns?: boolean;
   }
 }
-
 export default vpnExtension;

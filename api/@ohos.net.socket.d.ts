@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ import type cert from './@ohos.security.cert';
  * @since 26.0.1 static
  */
 declare namespace socket {
+
   /**
    * Define a network address.
    * @syscap SystemCapability.Communication.NetStack
@@ -877,7 +878,7 @@ declare namespace socket {
      * @crossplatform
      * @since 26.0.1 static
      */
-    onClose(callback: Callback<void>): void;
+    onListening(callback: Callback<void>): void;
 
     /**
      * Listens for data packet message events or close events of the UDPSocket connection.
@@ -887,7 +888,7 @@ declare namespace socket {
      * @crossplatform
      * @since 26.0.1 static
      */
-    onListening(callback: Callback<void>): void;
+    onClose(callback: Callback<void>): void;
 
     /**
      * Unsubscribes from **listening** events or **close** events of the **UDPSocket** object. This API uses an
@@ -1739,7 +1740,6 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     offLocalSocketError(callback?: ErrorCallback): void;
-
   }
 
   /**
@@ -2118,7 +2118,7 @@ declare namespace socket {
      * @since 11 dynamic
      */
     on(type: 'connect', callback: Callback<LocalSocketConnection>): void;
-    
+
     /**
      * Listens for connect events of the LocalSocketServer connection.
      *
@@ -2316,7 +2316,7 @@ declare namespace socket {
    * @crossplatform
    * @since 26.0.1 static
    */
-  export interface SocketLingerOptions {  
+  export interface SocketLingerOptions {
     /**
      * Whether to enable socket linger. The value true means to enable socket linger and false means the
      * opposite. The default value is **false**.
@@ -2954,7 +2954,6 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     offTcpError(callback?: ErrorCallback): void;
-
   }
 
   /**
@@ -3752,6 +3751,25 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     isBidirectionalAuthentication?: boolean;
+
+
+    /**
+     * Specifies the certificate key alias. This parameter is optional.
+     * The maximum length is 256. Value constraint: The value cannot be an empty string or a blank character. Only
+     * visible ASCII characters are supported. Default value: Undefined.
+     * <br>When this alias is specified, the underlying layer reads the corresponding certificate and private key from
+     * the system certificate management module. The key pair is used for negotiation during TLS handshake.
+     * Mutual exclusion rule: certAlias has the highest priority. After this parameter is set, the cert, key, and
+     * password configuration items are ignored.
+     * Block alias specification; When the alias does not exist and the corresponding private key permission is not
+     * available, the TLS link fails to be established and an error is returned.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    certAlias?: string;
   }
 
   /**
@@ -3824,6 +3842,36 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     timeout?: int;
+
+
+    /**
+     * The host name required for SSL server host name verification.
+     * The default value of sslServerHostnameVerify is true. When sslServerHostnameVerify is set to false, domain name
+     * verification is disabled.
+     * In this scenario, the certificate domain name verification is ignored when the IP address is used for connection.
+     * Default value: true.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    sslServerHostnameVerification?: boolean;
+
+    /**
+     * [RFC 8744] Server Name Indication (SNI) service name used by the TLS handshake. This parameter is optional.
+     * In the IP direct connection scenario, the service domain name can be explicitly specified as the SNI for TLS
+     * certificate verification and handshake negotiation.
+     * If this field is not set, the SNI is automatically filled with the domain name of the destination address.
+     * This parameter is valid only during the TLS handshake and is configured before the TCP connection is established.
+     * The maximum length is 253. Value constraint: Valid domain name. Default value: Undefined.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.2.0 dynamic&static
+     */
+    serverName?: string;
   }
 
   /**

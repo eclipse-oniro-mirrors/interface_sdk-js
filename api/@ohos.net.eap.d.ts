@@ -18,7 +18,7 @@
  * @kit NetworkKit
  */
 
-import { Callback } from './@ohos.base';
+import { Callback } from "./@ohos.base";
 /**
  * The **eap** module provides the extensible authentication mechanism to enable third-party clients to access custom 80
  * 2.1X (a port-based network access control protocol) authentication, such as Extensible Authentication Protocol (EAP)
@@ -256,7 +256,7 @@ declare namespace eap {
      * @since 26.0.1 static
      */
     EAP_TLS = 2,
-  
+
     /**
      * TTLS.
      *
@@ -536,6 +536,7 @@ declare namespace eap {
      */
     eapSubId: int;
   }
+
   /**
    * Represents the 802.1X Ethernet EAP configuration, including the EAP profile and feature toggles.
    *
@@ -543,7 +544,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface EthEapConfig {  
+  interface EthEapConfig {
     /**
      * EAP profile information.
      *
@@ -588,7 +589,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  enum EthEapState {  
+  enum EthEapState {
     /**
      * Idle: no authentication has been initiated.
      *
@@ -642,7 +643,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface EthEapStateInfo {  
+  interface EthEapStateInfo {
     /**
      * Current authentication state.
      *
@@ -765,7 +766,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  enum EthEapConnectAction {  
+  enum EthEapConnectAction {
     /**
      * Re-triggers authentication with the saved configuration.
      *
@@ -774,6 +775,7 @@ declare namespace eap {
      * @since 26.0.1 dynamic&static
      */
     ACTION_CONNECT = 0,
+
     /**
      * Stops auto authentication and logs off the underlying 802.1X authentication.
      *

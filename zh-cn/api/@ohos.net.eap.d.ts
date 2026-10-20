@@ -18,7 +18,7 @@
  * @kit NetworkKit
  */
 
-import { Callback } from './@ohos.base';
+import { Callback } from "./@ohos.base";
 /**
  * 该模块提供了第三方客户端接入802.1X认证（一种基于端口的网络接入控制协议）流程的机制，支撑客户端的定制认证等功能。
  *
@@ -526,6 +526,276 @@ declare namespace eap {
     eapSubId: int;
   }
 
+  /**
+   * 表示802.1X以太网EAP配置，包括EAP配置文件和功能切换。
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface EthEapConfig {
+    /**
+     * EAP配置文件信息。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    profile: EthEapProfile;
+
+    /**
+     * 802.1X特性是否使能。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    enabled: boolean;
+
+    /**
+     * 是否在连接网线或启动时自动启动身份验证。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    autoAuth: boolean;
+
+    /**
+     * 配置是否被锁定。锁定时，除解锁外，其他修改均被拒绝。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    locked: boolean;
+  }
+
+  /**
+   * 枚举802.1X EAP身份验证状态。
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum EthEapState {
+    /**
+     * 空闲：未发起鉴权。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_IDLE = 0,
+
+    /**
+     * 正在认证：802.1X认证正在进行中。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_AUTHENTICATING = 1,
+
+    /**
+     * Authenticated：鉴权成功。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_AUTHENTICATED = 2,
+
+    /**
+     * 失败：已达到最大重试计数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_FAILED = 3,
+
+    /**
+     * 重试：等待下一次重试。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_RETRYING = 4
+  }
+
+  /**
+   * 表示通过stateChange回调传递的802.1X EAP身份验证状态信息。
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface EthEapStateInfo {
+    /**
+     * 当前鉴权状态。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    state: EthEapState;
+
+    /**
+     * 当前重试计数（成功时重置为0）。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    retryCount: int;
+
+    /**
+     * 补充消息，如失败原因等。成功时为空。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    message?: string;
+  }
+
+  /**
+   * 设置以太网的802.1X EAP配置。配置是持久化的，并且是加密的。
+   *
+   * 任何字段更改都会触发一个自动身份验证周期，除非该功能被禁用或
+   * 认证是由企业应用占用的(那么config只有
+   * 企业应用保持控制。身份验证结果通过
+   * stateChange回调，而不是通过此API的返回。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { EthEapConfig } config - 要设置的802.1X EAP配置。敏感字段(密码、certPassword、
+   *     作为空字符串/空数组传递的certEntry表示“保留原始值”。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function setEthEapConfig(config: EthEapConfig): void;
+
+  /**
+   * 获取以太网的802.1X EAP配置。敏感字段（密码、certPassword、certEntry）
+   * 总是返回空。如果尚未存储任何配置，则以**null**进行解析。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @returns { Promise<EthEapConfig> } Promise用于返回${EthEapConfig}
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getEthEapConfig(): Promise<EthEapConfig>;
+
+  /**
+   * 删除保留的802.1X EAP配置并停止任何正在进行的自动身份验证。
+   * 幂等性：即使没有存储任何配置，也能成功解析。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @returns { Promise<void> } 当配置被删除时解析的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function deleteEthEapConfig(): Promise<void>;
+
+  /**
+   * 查询当前802.1X EAP认证状态信息。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @returns { EthEapStateInfo } 当前身份验证状态、重试次数和补充消息。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getEthEapStateInfo(): EthEapStateInfo;
+
+  /**
+   * 订阅802.1X EAP认证状态变化。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { Callback<EthEapStateInfo> } callback - 鉴权状态改变时调用的回调。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onStateChange(callback: Callback<EthEapStateInfo>): void;
+
+  /**
+   * 取消订阅802.1X EAP身份验证状态更改。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { Callback<EthEapStateInfo> } [callback] - 移除的回调。如果省略，则删除所有回调。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offStateChange(callback?: Callback<EthEapStateInfo>): void;
+
+  /**
+   * 枚举以太网802.1X EAP认证的手动连接动作。
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum EthEapConnectAction {
+    /**
+     * 使用保存的配置重新触发身份验证。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ACTION_CONNECT = 0,
+
+    /**
+     * 停止自动身份验证并注销底层802.1X身份验证。
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ACTION_DISCONNECT = 1
+  }
+
+  /**
+   * 手动触发或断开以太网的802.1X EAP认证。
+   *
+   * 当**action**为**Action_CONNECT***时，将使用保存的
+   * 配置(自动身份验证触发器的手动对应项；如果没有配置，则失败
+   * 已存储)。如果鉴权被企业应用占用，则该接口
+   * 不会中断它；结果通过stateChange回调传递。
+   * 当**action**为**Action_DISCONNECT**时，自动身份验证将停止，并且底层
+   * 802.1X认证已注销。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { EthEapConnectAction } action - 手动连接动作：重新触发认证
+   *     （**Action_CONNECT**）或断开连接(**ACTION_DISCONNECT**)。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function connect(action: EthEapConnectAction): Promise<void>;
 }
 
 export default eap;
