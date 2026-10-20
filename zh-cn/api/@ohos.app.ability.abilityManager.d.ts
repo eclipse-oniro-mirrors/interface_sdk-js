@@ -833,7 +833,7 @@ declare namespace abilityManager {
   /**
    * 预加载[UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}被销毁时的回调函数类型。
    *
-   * @param { int } preloadId - The preload UIExtensionAbility ID.
+   * @param { int } preloadId - 预加载的UIExtensionAbility实例ID。
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
    * @stagemodelonly
@@ -844,7 +844,7 @@ declare namespace abilityManager {
   /**
    * 预加载[UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}被加载时的回调函数类型。
    *
-   * @param { int } preloadId - The preload UIExtensionAbility ID.
+   * @param { int } preloadId - 预加载的UIExtensionAbility实例ID。
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
    * @stagemodelonly
