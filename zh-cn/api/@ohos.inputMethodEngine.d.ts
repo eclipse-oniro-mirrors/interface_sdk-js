@@ -53,6 +53,69 @@ import { InputMethodExtraConfig } from './@ohos.inputMethod.ExtraConfig';
  * <br>
  * <br>输入法应用的典型使用流程涉及多个API的组合调用，核心流程为：获取InputMethodAbility实例 -> 订阅inputStart事件 -> 在回调中获取KeyboardController和InputClient -> 创建
  * Panel -> 加载面板页面内容 -> 通过InputClient操作编辑框文本 -> 通过KeyboardController控制键盘显隐。
+ * <br>
+ * <br>```javascript
+ * <br>以下为阐述调用逻辑的伪代码
+ * <br>
+ * <br>// 1. 获取输入法能力对象
+ * <br>let inputMethodAbility = inputMethodEngine.getInputMethodAbility();
+ * <br>
+ * <br>// 2. 获取键盘代理对象，监听物理键盘和编辑框变化事件
+ * <br>let keyboardDelegate = inputMethodEngine.getKeyboardDelegate();
+ * <br>keyboardDelegate.on('keyDown', (event) => {
+ * <br>  return true;
+ * <br>});
+ * <br>keyboardDelegate.on('cursorContextChange', (x, y, height) => {
+ * <br>  // do something
+ * <br>});
+ * <br>keyboardDelegate.on('selectionChange', (oldBegin, oldEnd, newBegin, newEnd) => {
+ * <br>  // do something
+ * <br>});
+ * <br>
+ * <br>// 3. 订阅输入法绑定事件，获取KeyboardController和InputClient
+ * <br>inputMethodAbility.on('inputStart', (kbController, inputClient) => {
+ * <br>
+ * <br>  // 4. 创建输入法面板
+ * <br>  let panelInfo = { type: inputMethodEngine.PanelType.SOFT_KEYBOARD, flag: inputMethodEngine.PanelFlag.FLG_FIXED };
+ * <br>  let panel = inputMethodAbility.createPanel(context, panelInfo);
+ * <br>
+ * <br>  // 5. 加载面板页面内容
+ * <br>  panel.setUiContent('pages/Index');
+ * <br>
+ * <br>  // 6. 显示面板
+ * <br>  panel.show();
+ * <br>
+ * <br>  // 7. 通过InputClient操作编辑框
+ * <br>  inputClient.insertText('Hello');
+ * <br>  inputClient.deleteForward(1);
+ * <br>  inputClient.moveCursor(inputMethodEngine.CURSOR_RIGHT);
+ * <br>
+ * <br>  // 8. 通过KeyboardController隐藏键盘
+ * <br>  kbController.hide();
+ * <br>});
+ * <br>
+ * <br>// 9. 订阅输入法解绑事件
+ * <br>inputMethodAbility.on('inputStop', () => {
+ * <br>  // 销毁面板
+ * <br>  inputMethodAbility.destroyPanel(panel);
+ * <br>});
+ * <br>```
+ * <br> 
+ * <br> ## 导入模块
+ * <br>
+ * <br>```ts
+ * <br>import { inputMethodEngine } from '@kit.IMEKit';
+ * <br>``` 
+ * <br> 
+ * <br> ## 常量
+ * <br>
+ * <br>功能键常量值、编辑框常量值及光标常量值，用于输入法应用识别编辑框类型、回车键功能、光标移动方向等属性。输入法应用可根据这些常量值调整键盘布局和输入行为，例如：根据编辑框类型（PATTERN_TEXT/PATTERN_NUMBER等）切换不同的键盘布局，根据回车键功能（ENTER_KEY_TYPE_SEARCH/ENTER_KEY_TYPE_SEND等）调整回车键的显示文本和图标。
+ * <br>
+ * <br>以下常量按功能分为三类：
+ * <br>
+ * <br>- 功能键常量（ENTER_KEY_TYPE系列）：定义编辑框回车键的功能类型，输入法应用可根据功能键类型在软键盘上显示对应的按键标签（如"搜索""发送"等）。
+ * <br>- 编辑框常量（PATTERN/OPTION/FLAG/DISPLAY_MODE系列）：定义编辑框的输入类型、输入属性、状态标识和显示模式，输入法应用据此调整键盘布局和输入策略。
+ * <br>- 光标常量（CURSOR系列）：定义光标移动方向，用于[moveCursor](#movecursor9)和[moveCursorSync](#movecursorsync10)接口指定光标移动方向。
  *
  * @syscap SystemCapability.MiscServices.InputMethodFramework
  * @since 8 dynamic

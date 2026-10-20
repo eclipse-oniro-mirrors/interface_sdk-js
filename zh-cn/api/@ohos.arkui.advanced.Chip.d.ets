@@ -260,8 +260,6 @@ export interface SuffixIconOptions extends IconCommonOptions {
    *
    * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
    *
-   * 默认值："auto"。
-   *
    * 值为undefined时，按默认值处理。
    *
    * @default "auto"
@@ -310,8 +308,6 @@ export interface AccessibilityOptions {
    * "no"：当前组件不可被无障碍辅助服务所识别。
    *
    * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
-   *
-   * 默认值："auto"。
    *
    * 值为undefined时，按默认值处理。
    *
@@ -1127,8 +1123,6 @@ export interface ChipOptions {
    * "no"：当前组件不可被无障碍辅助服务所识别。
    *
    * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
-   *
-   * 默认值："auto"。
    *
    * 值为undefined时，按默认值处理。
    *

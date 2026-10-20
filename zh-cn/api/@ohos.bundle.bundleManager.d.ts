@@ -886,6 +886,16 @@ declare namespace bundleManager {
     MODULAR_OBJECT = 39,
 
     /**
+     * [UkeyAuthExtensionAbility](docroot://reference/apis-device-certificate-kit/js-apis-UkeyAuthExtensionAbility.md):
+     * 为开发者提供接入自定义UKey认证界面的能力。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UKEY_AUTH = 40,
+
+    /**
      * 不指定类型<!--Del-->，配合[queryExtensionAbilityInfo接口]{@link bundleManager.queryExtensionAbilityInfo}可以查询所有类型的
      * ExtensionAbility<!--DelEnd-->。
      *
@@ -1999,13 +2009,12 @@ declare namespace bundleManager {
   function getAllBundleInfo(bundleFlags: int, userId?: int): Promise<Array<BundleInfo>>;
 
   /**
-   * 根据给定的套餐名称和套餐标志，获取系统中所有的套餐信息。
+   * 根据给定的包名和包标志，获取系统中所有的包信息。
    * 该接口使用了一个类型的promise来返回结果。
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { string } bundleName - 包名。
-   * @param { int } bundleFlags - Type of the bundle information to obtain.
-   *     <br>取值限定为整数。
+   * @param { int } bundleFlags - 包信息中需要包含的类型，取值限定为整数。
    * @returns { Promise<Array<BundleInfo>> } Promise 用于返回bundle信息的数组。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied, non-system app called system api.

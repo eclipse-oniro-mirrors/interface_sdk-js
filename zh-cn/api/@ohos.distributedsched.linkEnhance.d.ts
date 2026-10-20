@@ -132,10 +132,8 @@ declare namespace linkEnhance {
      * 创建服务成功后，注册connectionAccepted事件的回调监听，等待对端连接。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { 'connectionAccepted' } type - Event type, which is **connectionAccepted**. This event is triggered when
-     *     a connection from the peer end is received.
-     * @param { Callback<Connection> } callback - Registered callback, which is used to return the
-     *     [Connection]{@link linkEnhance.Connection} object.
+     * @param { 'connectionAccepted' } type - 事件回调类型，支持的事件为'connectionAccepted'，收到对端连接，触发该事件。
+     * @param { Callback<Connection> } callback - 注册的回调函数，参数为连接对象[Connection]{@link linkEnhance.Connection}
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -162,11 +160,10 @@ declare namespace linkEnhance {
     off(type: 'connectionAccepted', callback?: Callback<Connection>): void;
 
     /**
-     * Registers a callback listener for **connectionAccepted** events. This API uses an asynchronous callback to return
-     * the result.
+     * 创建服务成功后，注册connectionAccepted事件的回调监听，等待对端连接。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<Connection> } callback - Callback used to listen for the server is connected event.
+     * @param { Callback<Connection> } callback - 注册的回调函数，参数为连接对象[Connection]{@link linkEnhance.Connection}
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -177,11 +174,10 @@ declare namespace linkEnhance {
     onConnectionAccepted(callback: Callback<Connection>): void;
 
     /**
-     * Unregisters the callback listener for **connectionAccepted** events. This API uses an asynchronous callback to
-     * return the result.
+     * 取消注册connectionAccepted事件的回调监听。需要在创建服务成功后调用。使用callback异步回调。
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<Connection> } [callback] - Registered callback, which is used to return the
-     *     [Connection]{@link linkEnhance.Connection} object.
+     * @param { Callback<Connection> } [callback] - 注册的回调函数，参数为连接对象[Connection]{@link linkEnhance.Connection}。 需传入对应on方法
+     *     最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
      * 
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
@@ -224,11 +220,10 @@ declare namespace linkEnhance {
     off(type: 'serverStopped', callback?: Callback<number>): void;
 
     /**
-     * Registers a callback listener for **serverStopped** events. This API uses an asynchronous callback to return the
-     * result.
+     * 在创建服务成功后，注册serverStopped回调，监听服务异常停止。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<int> } callback - Registered callback, where **int** indicates the returned error code.
+     * @param { Callback<int> } callback - 注册的回调函数，当底层服务异常停止时触发，int为返回的错误码。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -239,11 +234,11 @@ declare namespace linkEnhance {
     onServerStopped(callback: Callback<int>): void;
 
     /**
-     * Unregisters the callback listener for **serverStopped** events. This API uses an asynchronous callback to return
-     * the result.
+     * 取消注册serverStopped事件的回调监听。需要在创建服务成功后调用。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<int> } [callback] - Registered callback, where **int** indicates the returned error code.
+     * @param { Callback<int> } [callback] - 注册的回调函数，当底层服务异常停止时触发，int为返回的错误码。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效
+     *     果与传入行为一致。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -389,10 +384,11 @@ declare namespace linkEnhance {
     off(type: 'connectResult', callback?: Callback<ConnectResult>): void;
 
     /**
-     * Registers a listener for **connectResult** events. This API uses an asynchronous callback to return the result.
+     * 注册connect事件的回调监听，通过回调函数获取连接结果。使用callback进行异步回调。须在调用connect()之前注册此监听，否则无法获取连接结果；使用完毕后，建议调用off('connectResult')取消监
+     * 听，避免内存泄漏。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<ConnectResult> } callback - Registered callback.
+     * @param { Callback<ConnectResult> } callback - 注册的回调函数。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -403,10 +399,10 @@ declare namespace linkEnhance {
     onConnectResult(callback: Callback<ConnectResult>): void;
 
     /**
-     * Unregisters the listener for **connectResult** events.
+     * 取消connect事件的回调监听，使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<ConnectResult> } [callback] - Registered callback.
+     * @param { Callback<ConnectResult> } [callback] - 注册的回调函数。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -448,10 +444,10 @@ declare namespace linkEnhance {
     off(type: 'disconnected', callback?: Callback<number>): void;
 
     /**
-     * Registers a listener for **disconnected** events. This API uses an asynchronous callback to return the result.
+     * 注册disconnected事件的回调监听，连接被动断开或者底层异常断开时触发该事件。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<int> } callback - Registered callback, where **int** indicates the returned error code.
+     * @param { Callback<int> } callback - 注册的回调函数，连接被动断开或底层异常断开时触发，int为返回的错误码。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -462,11 +458,10 @@ declare namespace linkEnhance {
     onDisconnected(callback: Callback<int>): void;
 
     /**
-     * Unregisters the listener for **disconnected** events. This API uses an asynchronous callback to return the
-     * result.
+     * 取消注册disconnected事件的回调监听。连接被动断开或底层异常断开时触发该事件，使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<int> } [callback] - Registered callback, where **int** indicates the returned error code.
+     * @param { Callback<int> } [callback] - 注册的回调函数，连接被动断开或底层异常断开时触发，int为返回的错误码。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -508,11 +503,10 @@ declare namespace linkEnhance {
     off(type: 'dataReceived', callback?: Callback<ArrayBuffer>): void;
 
     /**
-     * Registers a listener for the **dataReceived** events. This API uses an asynchronous callback to return the
-     * result.
+     * 注册dataReceived事件的回调监听。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<ArrayBuffer> } callback - Registered callback.
+     * @param { Callback<ArrayBuffer> } callback - 回调函数，用于接收对端设备发送的数据。回调参数data为接收到的数据，类型为ArrayBuffer。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -523,10 +517,10 @@ declare namespace linkEnhance {
     onDataReceived(callback: Callback<ArrayBuffer>): void;
 
     /**
-     * Unregisters the listener for **dataReceived** events.
+     * 取消dataReceived事件的回调监听，使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Callback<ArrayBuffer> } [callback] - Registered callback.
+     * @param { Callback<ArrayBuffer> } [callback] - 回调函数，用于接收对端设备发送的数据。回调参数data为接收到的数据，类型为ArrayBuffer。需传入对应on方法最后一次注册的回调函数，用于取消该回调的订阅，默认缺省效果与传入行为一致。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.

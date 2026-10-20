@@ -23,7 +23,6 @@ import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
  * abilityToolAccessCtrl的命名空间
  *
  * @syscap SystemCapability.Security.Asset
- * @systemapi
  * @FaAndStageModel
  * @since 26.0.0 dynamiconly
  */
@@ -32,7 +31,6 @@ declare namespace abilityToolAccessCtrl {
    * CLI命令信息。
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -41,7 +39,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI主命令名称。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -51,7 +48,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI子命令名。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -271,7 +267,6 @@ declare namespace abilityToolAccessCtrl {
    * 权限信息。
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -281,7 +276,6 @@ declare namespace abilityToolAccessCtrl {
      * 权限名称。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -291,7 +285,6 @@ declare namespace abilityToolAccessCtrl {
      * 权限状态。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -556,6 +549,54 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * 生成票据的可选参数
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface TicketOpions {
+
+    /**
+     * 票证过期时间（毫秒）。
+     * 单位为：毫秒。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ticketExpireTimeMs?: long;
+  }
+
+  /**
+   * 票据查询结果。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface TicketQueryResult {
+
+    /**
+     * 权限结果列表。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    permissionResults: PermissionInfo[];
+
+    /**
+     * 票证信息。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ticket: string;
+  }
+
+  /**
    * 授权状态。
    *
    * @syscap SystemCapability.Security.Asset
@@ -712,7 +753,7 @@ declare namespace abilityToolAccessCtrl {
    * 当needTicket设置为true时，远程授权会生成一个票据。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { PermissionQuery } permissionQuery - 权限查询信息
+   * @param { PermissionQuery } permissionQuery - 权限查询信息。
    * @returns { Promise<PermissionQueryResult> } Promise用于返回${PermissionQueryResult}。
    * @throws { BusinessError } 201 - Permission denial.
    *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
@@ -899,6 +940,30 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.0.1 dynamiconly
    */
   export function updateRemoteGrantStatus(remoteGrantStatus: RemoteGrantStatus): Promise<void>;
+
+  /**
+   * 获取CLI工具的执行认证票据。
+   * 该函数用于获取CLI工具及子命令的执行认证票据。
+   * 如果CLI工具所需权限用户尚未授权，会返回需要授权的权限列表及权限状态。
+   * 如果CLI工具所需权限用户均授权，会返回授权的票据。
+   *
+   * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
+   * @param { CliCmdInfo[] } cliCmdInfos - CLI命令列表。
+   * @param { TicketOpions } ticketOpions - 生成票据的可选参数。
+   * @returns { Promise<TicketQueryResult> } Promise用于返回${TicketQueryResult}
+   * @throws { BusinessError } 201 - Permission denial.
+   *     The interface caller does not have permission "ohos.permission.EXEC_PUBLIC_CLI_TOOL".
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010006 - The requested operation is not allowed to be executed while the device
+   *     is locked.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketOpions: TicketOpions): Promise<TicketQueryResult>;
 }
 
 export default abilityToolAccessCtrl;

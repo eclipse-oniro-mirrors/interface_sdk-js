@@ -21,7 +21,12 @@
  * The **Stepper** component provides a step navigator, suitable for guiding users through a step-by-step task
  * completion process.
  *
- * > **NOTE**
+ * >  **NOTE**
+ * > 
+ * > - This API is supported since API version 8 and deprecated since API version 22. You are advised to use [Swiper](ts-container-swiper.md) instead.
+ * > For details, see [Example 2](#example-2-using-swiper-as-a-substitute-for-stepper).
+ * >
+ * > - This component is supported since API version 8. Updates will be marked with a superscript to indicate their earliest API version.
  *
  * @interface StepperInterface
  * @syscap SystemCapability.ArkUI.ArkUI.Full

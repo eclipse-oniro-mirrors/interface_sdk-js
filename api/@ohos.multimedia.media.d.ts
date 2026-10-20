@@ -1556,7 +1556,7 @@ declare namespace media {
     composer?: string;
 
     /**
-     * Duration of the media asset. This parameter is not supported in AVRecorder settings.
+     * Duration of the media asset, in ms. This parameter is not supported in AVRecorder settings.
      *
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1901,8 +1901,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - Relationship between the thumbnail timestamp in and the video frame.
      * @param { OutputSize } outputSize - Output size of the thumbnail. By default, the original image size is used.
      * @returns { Promise<image.PixelMap> } Promise used to return the video thumbnail.
-     * @throws { BusinessError  } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError  } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 20 dynamic
      */
@@ -1917,8 +1917,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - Specify how to position the video frame
      * @param { OutputSize } [outputSize] - This field is used to define the output size of frame.
      * @returns { Promise<image.PixelMap | undefined> }  Returns the output image object
-     * @throws { BusinessError } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 23 static
      */
@@ -10424,8 +10424,8 @@ declare namespace media {
      * Whether to enable video encoding policy to quality stable encoding.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
-     * @systemapi [since 18 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @systemapi [since 18 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 18 dynamic
      * @since 23 static
      */
@@ -10437,7 +10437,7 @@ declare namespace media {
     *
     * @syscap SystemCapability.Multimedia.Media.AVRecorder
     * @stagemodelonly
-    * @since 26.2.0 dynamic&static
+    * @since 26.0.1 dynamic&static
     */
     sqrFactor?: int;
  
@@ -11699,6 +11699,28 @@ declare namespace media {
      * @since 23 static
      */
     enableBFrame?: boolean;
+
+    /**
+     * Whether to enable video encoding policy to quality stable encoding.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    enableStableQualityMode?: boolean;
+
+    /**
+     * Set the quality parameter in StableQualityMode. The value range is [0, 51].
+     * A smaller value indicates a higher output bit rate and better quality.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    sqrFactor?: int;
   }
 
   /**

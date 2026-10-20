@@ -8844,6 +8844,40 @@ declare namespace audio {
   }
 
   /**
+   * Indicates the available status of audio separation effect.
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioSeparationEffectAvailableStatus {
+    /**
+     * Indicates the availability status.
+     * The playback control application can determine whether to display the audio separation switch button based on the
+     * status.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    available: boolean;
+
+    /**
+     * Application UID corresponding to the availability status.
+     * Generally, the value is the application displayed in the playback control application.
+     * The value should be an integer.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    appUid?: int;
+  }
+
+  /**
    * Implements audio effect management.
    * @typedef AudioEffectManager
    * @syscap SystemCapability.Multimedia.Audio.Core
@@ -8938,6 +8972,18 @@ declare namespace audio {
     setAudioSeparationEffectEnabled(enabled: boolean, uid: int, streamId?: long): Promise<void>;
 
     /**
+     * Gets the audio separation effect enabled status.
+     *
+     * @returns { boolean } Returns whether the audio separation effect is enabled.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAudioSeparationEffectEnabled(): boolean;
+
+    /**
      * Subscribes to system audio separation effect enabled state change event.
      * The audio separation effect state in system can be set by system playback controller application,
      * other applications can use this function to listen the change event.
@@ -8965,6 +9011,49 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     offAudioSeparationEffectEnabledChange(callback?: Callback<boolean>): void;
+
+    /**
+     * Obtains the availability status of the audio separation effect.
+     * The playback control application can determine whether to display the audio separation switch button based on the
+     * status.
+     *
+     * @returns { AudioSeparationEffectAvailableStatus } Returns the available status of audio separation effect.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAudioSeparationEffectAvailableStatus(): AudioSeparationEffectAvailableStatus;
+
+    /**
+     * Subscribes to the status change event of the audio separation effect.
+     * When the system detects that the current scenario is not the target scenario for audio separation, this callback
+     * function is used to notify the playback control application.
+     *
+     * @param { Callback<AudioSeparationEffectAvailableStatus> } callback - Callback function, which is used to return
+     *     the changed availablity status.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onAudioSeparationEffectAvailableStatusChange(callback: Callback<AudioSeparationEffectAvailableStatus>): void;
+
+    /**
+     * This API is used to unsubscribe from audio separation effect status change events.
+     * After you cancel the callback, the system does not trigger the callback.
+     *
+     * @param { Callback<AudioSeparationEffectAvailableStatus> } [callback] - Callback to be canceled.
+     *     <br>If the callback parameter is not transferred, all subscriptions are canceled.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offAudioSeparationEffectAvailableStatusChange(callback?: Callback<AudioSeparationEffectAvailableStatus>): void;
 
     /**
      * Sets audio separation effect volume for specific volume type.
@@ -15244,6 +15333,143 @@ declare namespace audio {
      * @since 24 static
      */
     getEqualizerPreset(): AudioLoopbackEqualizerPreset;
+
+    /**
+     * Obtains the global audio loopback available status.
+     * This feature applies only to the playback control application.
+     *
+     * @returns { AudioLoopbackavailablestatus } The available status of global loopback.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAvailableStatus(): AudioLoopbackAvailableStatus;
+
+    /**
+     * Subscribes to the global audio loopback available status change event.
+     * This feature applies only to the playback control application.
+     *
+     * @param { Callback<AudioLoopbackavailablestatus> } callback - Callback function, which is used to return the audio
+     *     loopback available status after the change.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onAvailableStatusChange(callback: Callback<AudioLoopbackAvailableStatus>): void;
+
+    /**
+     * Unsubscribes from the global audio loopback status change event.
+     * After you cancel the callback, the system does not  trigger the callback.
+     * This feature applies only to the playback control application.
+     *
+     * @param { Callback<AudioLoopbackavailablestatus> } [callback] - Callback to the canceled.
+     *     <br>If the callback parameter is not transferred, all subscriptions are canceled.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offAvailableStatusChange(callback?: Callback<AudioLoopbackAvailableStatus>): void;
+  }
+
+  /**
+   * Defines the availability status of global audio loopback.
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioLoopbackAvailableStatus {
+    /**
+     * Indicates the availability status.
+     * The playback control application can determine whether to display the audio separation switch button based on the
+     * status.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    available: boolean;
+
+    /**
+     * Unavailable reason.
+     * The playback control application determines the prompt information based on the information.
+     * <br>This parameter is available only when Status is unavailable.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    unavailableReason?: AudioLoopbackUnavailableReason;
+  }
+
+  /**
+   * Enumerates the reasons why audio loopback is unavailable.
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum AudioLoopbackUnavailableReason {
+    /**
+     * This device does not support audio loopback.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_DEVICE_NOT_SUPPORTED = 0,
+
+    /**
+     * The preferred audio device type does not support the audio loopback.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_PREFERRED_AUDIO_DEVICE_TYPE_NOT_SUPPORTED = 1,
+
+    /**
+     * The preferred audio device product does not support the audio loopback, mainly used for
+     * unsupported nearlink device scenario.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_PREFERRED_AUDIO_DEVICE_PRODUCT_NOT_SUPPORTED = 2,
+
+    /**
+     * It is occupied by other scenarios, including public audio loopback enabled and phone calls.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_OCCUPIED_BY_OTHER = 3,
+
+    /**
+     * Audio service status is abnormal.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_AUDIO_PROCESS_ERROR = 4
   }
 
   /**

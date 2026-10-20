@@ -1605,6 +1605,9 @@ declare namespace osAccount {
      * @throws { BusinessError } 12300015 - The short name already exists. [since 12]
      * @throws { BusinessError } 12300023 - The number of accounts of the specified type has reached the upper
      *     limit. [since 24]
+     * @throws { BusinessError } 12300024 - The specified OS account ID already exists.
+     *     Suggested solutions: Use a different ID, or remove the existing OS account with
+     *     the same ID and try again. [since 26.2.0]
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 7 dynamic
@@ -1678,6 +1681,9 @@ declare namespace osAccount {
      * @throws { BusinessError } 12300015 - The short name already exists. [since 12]
      * @throws { BusinessError } 12300023 - The number of accounts of the specified type has reached the upper
      *     limit. [since 24]
+     * @throws { BusinessError } 12300024 - The specified OS account ID already exists.
+     *     Suggested solutions: Use a different ID, or remove the existing OS account with
+     *     the same ID and try again. [since 26.2.0]
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -3470,6 +3476,17 @@ declare namespace osAccount {
      * @since 24 dynamic&static
      */
     token?: Uint8Array;
+
+    /**
+     * ID of the OS account to create. If this parameter is not specified, the system automatically allocates an ID.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Account.OsAccount
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    localId?: int;
   }
 
   /**

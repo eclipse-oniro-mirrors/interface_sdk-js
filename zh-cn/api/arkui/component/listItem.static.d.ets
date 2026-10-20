@@ -383,7 +383,7 @@ export declare interface ListItemAttribute extends CommonMethod {
    * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setListItemOptions(value?: ListItemOptions): this;
 

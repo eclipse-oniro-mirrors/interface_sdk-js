@@ -214,7 +214,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
    * 息请参见[PointLightStyle]{@link PointLightStyle}对象说明。
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { ColumnAttribute } The attribute of the column.
+   * @returns { ColumnAttribute } Column的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -226,7 +226,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
    *
    * @param { Optional<boolean> } isReversed - 子组件在垂直方向上的排列是否反转。
    *     <br>默认值：true。设置true表示子组件在垂直方向上反转排列，设置false表示子组件在垂直方向上正序排列。
-   * @returns { ColumnAttribute } The attribute of the column.
+   * @returns { ColumnAttribute } Column的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

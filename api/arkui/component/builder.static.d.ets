@@ -188,3 +188,25 @@ export @interface ComponentBuilder {}
  * @since 26.0.0 staticonly
  */
 export type ConstructorT<T> = (() => T);
+
+/**
+ * Indicates the begin hook handling of `@Builder` global function with placeholder.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @unpublished
+ * @since 26.2.0 staticonly
+ * @noninterop
+ */
+export declare function __aceBeginScrollPlaceholder__(): void;
+
+/**
+ * Indicates the end hook handling of `@Builder` global function with placeholder.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @unpublished
+ * @since 26.2.0 staticonly
+ * @noninterop
+ */
+export declare function __aceEndScrollPlaceholder__(): void;

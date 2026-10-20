@@ -930,7 +930,7 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
    * @returns { GridAttribute } 返回GridAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setGridOptions(scroller?: Scroller, layoutOptions?: GridLayoutOptions): this;
 
@@ -980,8 +980,7 @@ export declare abstract class ExtendableGrid implements GridAttribute {
    * @param { Scroller } [scroller]
    * @param { GridLayoutOptions } [layoutOptions]
    * @param { CustomBuilder } [content_]
-   * @returns { T }
-   Grid组件实例。
+   * @returns { T } Grid组件实例。
    * @stagemodelonly
    * @since 26.0.0 staticonly
    */
@@ -1015,8 +1014,7 @@ export declare abstract class ExtendableGrid implements GridAttribute {
    *
    * @param { Scroller } [scroller]
    * @param { GridLayoutOptions } [layoutOptions]
-   * @returns { ExtendableGrid }
-   Grid组件实例。
+   * @returns { ExtendableGrid } Grid组件实例。
    * @stagemodelonly
    * @since 26.0.0 staticonly
    */

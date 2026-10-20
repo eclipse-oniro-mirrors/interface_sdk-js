@@ -1869,6 +1869,14 @@ export declare class ImageAttachment {
    * @since 24 static
    */
   readonly supportSvg2?: boolean;
+  /**
+   * 图片文本标签。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  readonly imageTag?: string;
 }
 /**
  * ResourceStr类型图片设置项。
@@ -1956,6 +1964,14 @@ export declare interface ResourceImageAttachmentOptions {
    * @since 23 static
    */
   syncLoad?: boolean;
+  /**
+   * 图片文本标签。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  imageTag?: string;
 }
 /**
  * Defines the ImageAttachmentInterface.
@@ -2019,6 +2035,14 @@ export declare interface ImageAttachmentInterface {
    * @since 23 static
    */
   colorFilter?: ColorFilterType;
+  /**
+   * 图片文本标签。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  imageTag?: string;
 }
 /**
  * 图片设置项类型，用于设置属性字符串PixelMap类型或[ResourceStr]{@link ResourceStr}类型图片。

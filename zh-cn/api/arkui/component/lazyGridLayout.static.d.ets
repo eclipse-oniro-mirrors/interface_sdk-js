@@ -21,6 +21,7 @@ import { AttributeModifier, CommonMethod, OnVisibleIndexesChangeCallback } from 
 import { LengthMetrics } from '../Graphics';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { StickyStyle } from './list';
+import { ItemFillPolicy } from './units';
 /**
  * LazyGridLayout组件属性。
  *
@@ -170,12 +171,23 @@ export declare interface LazyVGridLayoutAttribute extends LazyGridLayoutAttribut
   default columnsTemplate(value: string | undefined): this;
 
   /**
+   * 设置当前网格布局列的数量。
+   *
+   * @param { ItemFillPolicy | undefined } template - 布局中的列数。
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default columnsTemplate(template: ItemFillPolicy | undefined): this;
+
+  /**
    * 设置LazyVGrid选项。
    *
    * @returns { LazyVGridLayoutAttribute } 返回LazyVGridLayoutAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setLazyVGridLayoutOptions(): this;
 

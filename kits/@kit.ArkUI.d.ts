@@ -114,6 +114,7 @@ import {
   SegmentButton, SegmentButtonOptions, SegmentButtonItemOptionsArray, TabSegmentButtonOptions,
   TabSegmentButtonConstructionOptions, CapsuleSegmentButtonOptions, CapsuleSegmentButtonConstructionOptions,
   SegmentButtonTextItem, SegmentButtonIconItem, SegmentButtonIconTextItem, DimensionNoPercentage, CommonSegmentButtonOptions,
+  SegmentButtonInteractionMode,
   ItemRestriction, SegmentButtonItemTuple, SegmentButtonItemArray, SegmentButtonItemOptionsConstructorOptions, SegmentButtonItemOptions, BorderRadiusMode
 } from '@ohos.arkui.advanced.SegmentButton';
 import {
@@ -286,6 +287,7 @@ import {
   SegmentButtonV2Items,
   TabSegmentButtonV2,
   CapsuleSegmentButtonV2,
+  SegmentButtonV2InteractionMode,
   MultiCapsuleSegmentButtonV2
 } from '@ohos.arkui.advanced.SegmentButtonV2';
 import { HalfScreenLaunchComponent } from '@ohos.atomicservice.HalfScreenLaunchComponent';
@@ -384,6 +386,7 @@ export {
   IDataSourcePrefetching, IPrefetcher, BasicPrefetcher,
   SegmentButtonTextItem, SegmentButtonIconItem, SegmentButtonIconTextItem, DimensionNoPercentage,
   CommonSegmentButtonOptions, ItemRestriction, SegmentButtonItemTuple, SegmentButtonItemArray,
+  SegmentButtonInteractionMode,
   SegmentButtonItemOptionsConstructorOptions, SegmentButtonItemOptions, BorderRadiusMode, DownloadFileButton,
   DownloadLayoutDirection, DownloadIconStyle, DownloadDescription, DownloadContentOptions, DownloadStyleOptions, NodeAdapter,
   Rect, RoundRect, edgeColors, edgeWidths, borderStyles, borderRadiuses, ParticleModifier,
@@ -396,6 +399,7 @@ export {
   ArcSliderValueOptions, ArcSliderValueOptionsConstructorOptions, ArcScrollBar, ArcScrollBarAttribute, OverlayManagerOptions,
   PlaceholderOptions, PlaceholderProvider,
   SegmentButtonV2ItemOptions, OnSelectedIndexChange, OnSelectedIndexesChange, SegmentButtonV2Item, SegmentButtonV2Items,
+  SegmentButtonV2InteractionMode,
   TabSegmentButtonV2, CapsuleSegmentButtonV2, MultiCapsuleSegmentButtonV2,
   AlertDialogV2, AdvancedDialogV2Button, AdvancedDialogV2ButtonOptions, AdvancedDialogV2ButtonAction, AdvancedDialogV2OnCheckedChange,
   ConfirmDialogV2, LoadingDialogV2, SelectDialogV2, TipsDialogV2, CustomContentDialogV2, PopoverDialogV2, PopoverDialogV2OnVisibleChange, PopoverDialogV2Options,

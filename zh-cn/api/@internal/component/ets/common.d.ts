@@ -8546,6 +8546,183 @@ declare enum SafeAreaEdge {
 }
 
 /**
+ * 沿边方向的内容对齐方式。
+ * 上、下边沿水平方向对齐；起始边、结束边沿垂直方向对齐。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum SafeAreaInsetAlignment {
+  /**
+   * 对齐到沿边方向的起点。
+   * 上、下边在从左到右布局时靠左，在从右到左布局时靠右；起始边、结束边靠上。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  START = 0,
+
+  /**
+   * 在沿边方向居中对齐。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  CENTER = 1,
+
+  /**
+   * 对齐到沿边方向的终点。
+   * 上、下边在从左到右布局时靠右，在从右到左布局时靠左；起始边、结束边靠下。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  END = 2
+}
+
+/**
+ * 单个边缘内容及其布局配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface SafeAreaInsetEdgeConfig {
+  /**
+   * 用于创建该边内容的必填构建函数。
+   * 构建结果为空时清除该边，不影响其他有效边。
+   * 该边预留的空间等于内容在垂直于附着边方向上的实测尺寸加上 `spacing`。
+   *
+   * 每边 builder 应生成一个根组件，可以是普通组件或自定义组件。
+   * 多个组件应由容器组成单根；多根构建结果不作保证。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  content: CustomBuilder;
+
+  /**
+   * 边缘内容与主体内容之间、指向容器内部的间隔。
+   * 支持的单位为 vp、px、fp、lpx，取值须为非负有限值；不支持百分比或资源值。
+   * 默认值：`0vp`。省略或传入非法值时回退为 `0vp`，不清除有效内容。
+   * 间隔在内容测量之后计入占用，不预先扣减内容的测量空间。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  spacing?: LengthMetrics;
+
+  /**
+   * 内容沿附着边的对齐方式。
+   * 默认值：`SafeAreaInsetAlignment.CENTER`。
+   * 省略或传入非法值时回退为 `SafeAreaInsetAlignment.CENTER`，不清除有效内容。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  alignment?: SafeAreaInsetAlignment;
+}
+
+/**
+ * 组件四边的完整边缘内容配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare interface SafeAreaInsetOptions {
+  /**
+   * 附着在物理上边的内容配置。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  top?: SafeAreaInsetEdgeConfig;
+
+  /**
+   * 附着在逻辑结束边的内容配置：从左到右布局时为右边，从右到左布局时为左边。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  end?: SafeAreaInsetEdgeConfig;
+
+  /**
+   * 附着在物理下边的内容配置。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  bottom?: SafeAreaInsetEdgeConfig;
+
+  /**
+   * 附着在逻辑起始边的内容配置：从左到右布局时为左边，从右到左布局时为右边。
+   * 默认值：`undefined`，不设置该边内容。
+   * 省略该边、传入 `undefined`、`null` 或非法边配置时清除该边原有内容，不影响其他有效边。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  start?: SafeAreaInsetEdgeConfig;
+}
+
+/**
  * 扩展布局安全区域的枚举类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -20144,6 +20321,28 @@ declare class CommonMethod<T> {
   safeAreaPadding(paddingValue: Padding | LengthMetrics | LocalizedPadding): T;
 
   /**
+   * 在组件的一个或多个边缘放置自定义内容，并按其实际占用为主体内容留出组件级安全区域。
+   * 适用于边缘工具栏、操作区或占位内容。再次调用时整体替换四边配置，未提供的边不保留旧内容。
+   * 内容从宿主普通 `padding` 的内边界附着；同宿主同物理边的有效安全区取已有 `safeAreaPadding`
+   * 与边缘内容占用的较大值，不将两者相加。跨祖先和系统安全区沿用既有累计规则。
+   * 计算组件在垂直于附着边方向上的自适应尺寸时，会计入有效安全区。
+   *
+   * @param { SafeAreaInsetOptions } [options] - 四边完整配置。默认值：`undefined`，重置四边。
+   *     传入 `null`、非对象或没有有效边的对象时也重置四边。
+   *     单边结构或 `content` 非法、构建结果为空时只清除该边；`spacing` 非法时回退为 `0vp`，
+   *     `alignment` 非法时回退为 `SafeAreaInsetAlignment.CENTER`，两者均不清除该边的有效内容。
+   * @returns { T } 当前组件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  safeAreaInset(options?: SafeAreaInsetOptions): T;
+
+  /**
    * 设置组件的外边距属性。在计算位置时外边距视为组件大小的一部分，从而影响组件位置。
    *
    * 从API version 10开始，该接口支持calc计算特性。
@@ -20749,8 +20948,7 @@ declare class CommonMethod<T> {
   /**
    * 设置元素的边框线条样式。
    *
-   * @param { BorderStyle | EdgeStyles } value - 设置元素的边框样式。<br/>默认值：BorderStyle.Solid
-   *     - Border style.<br>Default value: **BorderStyle.Solid**.[since 9]
+   * @param { BorderStyle | EdgeStyles } value - 设置元素的边框样式。<br>默认值：BorderStyle.Solid
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20763,10 +20961,10 @@ declare class CommonMethod<T> {
   /**
    * 设置边框的宽度。
    *
-   * @param { Length } value - [since 7 - 8]
-   * @param { Length | EdgeWidths } value - [since 9 - 11]
-   * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - Border width. This parameter cannot be set in
-   *     percentage. [since 12]
+   * @param { Length } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br>默认值：0。[since 7 - 8]
+   * @param { Length | EdgeWidths } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br>默认值：0。[since 9 - 11]
+   * @param { Length | EdgeWidths | LocalizedEdgeWidths } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br>默认值：0。
+   * <br>**说明：** 使用LocalizedEdgeWidths类型时，在不同语言方向下边框宽度设置会有差异，具体参见示例2。[since 12]
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -20783,18 +20981,10 @@ declare class CommonMethod<T> {
    * >
    * > 当使用border统一设置边框且color参数缺省时，需将borderColor设置在border之后调用才能生效。
    *
-   * @param { ResourceColor } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
-   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
-   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
-   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 7 - 8]
-   * @param { ResourceColor | EdgeColors } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
-   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
-   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
-   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 9 - 11]
-   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。
-   * <br>默认值：0。设置圆角后，可搭配[clip]{@link clip}属性进行裁剪，避免子组件超出组件自身。
-   * <br>**说明：** <br>使用LocalizedBorderRadiuses类型时，在不同语言方向下边框圆角半径设置会有差异，具体参见示例2。
-   * <br>设置四个不同圆角值，若某个圆角值超过高度和宽度中的最小值的一半时，按值的比例绘制异形圆角，效果参见示例4。[since 12]
+   * @param { ResourceColor } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br>默认值：Color.Black [since 7 - 8]
+   * @param { ResourceColor | EdgeColors } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br>默认值：Color.Black [since 9 - 11]
+   * @param { ResourceColor | EdgeColors | LocalizedEdgeColors } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br>默认值：Color.Black
+   * <br>**说明：** <br>使用LocalizedEdgeColors类型时，在不同语言方向下边框颜色设置会有差异，具体参见示例2。[since 12]
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -22818,8 +23008,9 @@ declare class CommonMethod<T> {
   /**
    * 设置父容器压缩尺寸分配给此属性所在组件的比例。当父容器为Column、Row时，需设置主轴方向的尺寸。
    *
-   * 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取flexShrink属性时，如果该节点未设置flexShrink
-   * 属性，默认返回1。
+   * > **说明：**
+   * >
+   * > 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取**flexShrink**属性时，如果该节点未设置**flexShrink**属性，默认返回**1**（与Flex容器的默认值一致，但与Column和Row容器的默认值**0**不同）。
    *
    * @param { number } value - 设置父容器压缩尺寸分配给此属性所在组件的比例。
    *     <br>取值限定为整数，父容器为 [Column]{@link Column} 、[Row]{@link Row}时， 取值范围[0,+∞).
@@ -24687,27 +24878,6 @@ declare class CommonMethod<T> {
   keyboardShortcut(value: string | FunctionKey, keys: Array<ModifierKey>, action?: () => void): T;
 
   /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
    * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
    * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
@@ -24724,9 +24894,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityGroup(value: boolean): T;
 
@@ -24758,27 +24928,6 @@ declare class CommonMethod<T> {
   accessibilityGroup(isGroup: boolean, accessibilityOptions: AccessibilityOptions): T;
 
   /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
    *
    * @param { string } value - 无障碍文本，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。
@@ -24790,9 +24939,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityText(value: string): T;
 
@@ -24964,27 +25113,6 @@ declare class CommonMethod<T> {
   accessibilityDescription(description: Resource): T;
 
   /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍重要性。该属性用于控制某个组件是否可被无障碍辅助服务所识别。
    *
    * @param { string } value - 无障碍重要性，用于控制某个组件是否可被无障碍辅助服务所识别。<br/>支持的值为：<br/>
@@ -24998,9 +25126,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityLevel(value: string): T;
 
@@ -26180,7 +26308,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26195,7 +26323,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26210,7 +26338,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26225,7 +26353,7 @@ declare interface PixelRoundPolicy {
    * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
    *
    * @type { ?PixelRoundCalcPolicy }
-   * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
+   * @default undefined
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -26332,7 +26460,7 @@ declare interface MotionBlurOptions {
 }
 
 /**
- * 子组件边框信息
+ * 子组件边框信息。
  *
  * @interface LayoutBorderInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26344,7 +26472,7 @@ declare interface MotionBlurOptions {
 declare interface LayoutBorderInfo {
 
   /**
-   * 子组件边框宽度信息
+   * 边框宽度类型，用于描述组件边框不同方向的宽度。单位：vp。
    *
    * @type { EdgeWidths }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26356,7 +26484,7 @@ declare interface LayoutBorderInfo {
   borderWidth: EdgeWidths;
 
   /**
-   * 子组件外边距信息
+   * 外边距类型，用于描述组件不同方向的外边距。单位：vp。
    *
    * @type { Margin }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26368,7 +26496,7 @@ declare interface LayoutBorderInfo {
   margin: Margin;
 
   /**
-   * 子组件内边距信息
+   * 内边距类型，用于描述组件不同方向的内边距。单位：vp。
    *
    * @type { Padding }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26381,7 +26509,7 @@ declare interface LayoutBorderInfo {
 }
 
 /**
- * 子组件布局位置信息
+ * 子组件布局位置信息。
  *
  * @interface LayoutInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26393,7 +26521,7 @@ declare interface LayoutBorderInfo {
 declare interface LayoutInfo {
 
   /**
-   * 子组件位置信息
+   * 子组件位置坐标。单位：vp。
    *
    * @type { Position }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26405,7 +26533,7 @@ declare interface LayoutInfo {
   position: Position;
 
   /**
-   * 子组件布局约束
+   * 子组件约束尺寸。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    *
    * @type { ConstraintSizeOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26469,7 +26597,7 @@ declare type AreaChangeCallback = (oldValue: Area, newValue: Area) => void;
 declare interface LayoutChild {
 
   /**
-   * 子组件名字
+   * 子组件名称。
    *
    * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26481,7 +26609,7 @@ declare interface LayoutChild {
   name: string;
 
   /**
-   * 子组件id
+   * 子组件id。
    *
    * @type { string }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26493,7 +26621,7 @@ declare interface LayoutChild {
   id: string;
 
   /**
-   * 子组件约束
+   * 子组件约束尺寸。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    *
    * @type { ConstraintSizeOptions }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26505,7 +26633,7 @@ declare interface LayoutChild {
   constraint: ConstraintSizeOptions;
 
   /**
-   * 子组件边框信息
+   * 子组件边框信息。
    *
    * @type { LayoutBorderInfo }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26517,7 +26645,7 @@ declare interface LayoutChild {
   borderInfo: LayoutBorderInfo;
 
   /**
-   * 子组件位置信息
+   * 子组件位置坐标。单位：vp。
    *
    *
    * @type { Position }
@@ -26977,9 +27105,11 @@ declare class CustomComponent extends BaseCustomComponent {
   aboutToReuse?(params: Record<string, Object | undefined | null>): void;
 
   /**
-   *
+   * ArkUI框架会在自定义组件确定子组件位置时，将该自定义组件的子节点信息和自身的尺寸范围通过onLayout传递给自定义组件，开发者可在该方法中对子组件进行布局操作。
+   * 不允许在onLayout函数中改变状态变量。
+   * 
    * @param { Array<LayoutChild> } children - 子组件的布局信息。
-   * @param { ConstraintSizeOptions } constraint - 父组件的尺寸约束。
+   * @param { ConstraintSizeOptions } constraint - 父组件约束信息，包含minWidth、maxWidth、minHeight、maxHeight等约束条件。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -26989,9 +27119,11 @@ declare class CustomComponent extends BaseCustomComponent {
   onLayout?(children: Array<LayoutChild>, constraint: ConstraintSizeOptions): void;
 
   /**
+   * ArkUI框架会在自定义组件确定尺寸时，将该自定义组件的子节点信息和自身的尺寸范围通过onMeasure传递给自定义组件，开发者可在该方法中对子组件进行测量操作。
+   * 不允许在onMeasure函数中改变状态变量。
    *
    * @param { Array<LayoutChild> } children - 子组件的布局信息。
-   * @param { ConstraintSizeOptions } constraint - 父组件的尺寸约束。
+   * @param { ConstraintSizeOptions } constraint - 父组件约束信息，包含minWidth、maxWidth、minHeight、maxHeight等约束条件。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @form
    * @since 9 dynamiconly
@@ -27142,6 +27274,12 @@ declare class BaseCustomComponent extends CommonAttribute {
 
   /**
    * ArkUI框架会在自定义组件确定尺寸时，将该自定义组件的节点信息和尺寸范围通过onMeasureSize传递给该开发者。不允许在onMeasureSize函数中改变状态变量。
+   * 
+   * > **说明：**
+   * >
+   * > - 使用自定义布局方法时，推荐同时实现onMeasureSize和onPlaceChildren方法，否则可能出现布局异常。
+   * > - 自定义布局内不支持使用懒加载（包含Repeat和LazyForEach）。
+   * > - 父容器（自定义组件）上设置的尺寸信息，除aspectRatio之外，优先级小于onMeasureSize设置的尺寸信息。
    *
    * @param { GeometryInfo } selfLayoutInfo - 计算自定义组件大小后的自身布局信息。  <br/>**说明：** <br/>第一次布局时以自身设置的属性为准。
    * @param { Array<Measurable> } children - 计算子组件大小后的子组件布局信息。<br/>**说明：**
@@ -28382,6 +28520,20 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   scrollBarHeight(height: LengthMetrics | undefined): T;
+
+  /**
+   * 设置是否支持键盘方向键滚动。开启后，组件在获焦且未激活焦点态时会响应键盘方向键滚动。
+   *
+   * @param { boolean | undefined } enabled - 是否支持键盘方向键滚动。
+   *     <br>默认值：true。
+   * @returns { T }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
 
 /**

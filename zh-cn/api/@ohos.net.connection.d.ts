@@ -19,10 +19,8 @@
  */
 
 import type { AsyncCallback, Callback } from './@ohos.base';
-/*** if arkts dynamic */
 import type http from './@ohos.net.http';
 import type socket from './@ohos.net.socket';
-/*** endif */
 
 /**
  * 网络连接管理提供管理网络一些基础能力，包括获取默认激活的网络、获取所有激活网络列表、获取网络能力信息等功能。
@@ -45,6 +43,7 @@ declare namespace connection {
    * @crossplatform [since 10]
    * @atomicservice [since 11]
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   type HttpRequest = http.HttpRequest;
 
@@ -55,6 +54,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   type TCPSocket = socket.TCPSocket;
 
@@ -65,6 +65,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   type UDPSocket = socket.UDPSocket;
 
@@ -337,6 +338,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function setNetExtAttribute(netHandle: NetHandle, netExtAttribute: string): Promise<void>;
 
@@ -356,6 +358,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function setNetExtAttributeSync(netHandle: NetHandle, netExtAttribute: string): void;
 
@@ -371,6 +374,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function getNetExtAttribute(netHandle: NetHandle): Promise<string>;
 
@@ -386,6 +390,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function getNetExtAttributeSync(netHandle: NetHandle): string;
 
@@ -400,6 +405,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   function isDefaultNetMetered(callback: AsyncCallback<boolean>): void;
 
@@ -413,6 +419,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   function isDefaultNetMetered(): Promise<boolean>;
 
@@ -426,6 +433,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function isDefaultNetMeteredSync(): boolean;
 
@@ -557,6 +565,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   function reportNetConnected(netHandle: NetHandle, callback: AsyncCallback<void>): void;
 
@@ -573,6 +582,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   function reportNetConnected(netHandle: NetHandle): Promise<void>;
 
@@ -589,6 +599,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   function reportNetDisconnected(netHandle: NetHandle, callback: AsyncCallback<void>): void;
 
@@ -605,6 +616,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   function reportNetDisconnected(netHandle: NetHandle): Promise<void>;
 
@@ -622,6 +634,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   function getAddressesByName(host: string, callback: AsyncCallback<Array<NetAddress>>): void;
 
@@ -638,6 +651,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
   function getAddressesByName(host: string): Promise<Array<NetAddress>>;
 
@@ -655,6 +669,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function getAddressesByNameWithOptions(host: string, option?: QueryOptions): Promise<Array<NetAddress>>;
 
@@ -667,6 +682,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   function getAppNet(callback: AsyncCallback<NetHandle>): void;
 
@@ -678,6 +694,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   function getAppNet(): Promise<NetHandle>;
 
@@ -689,6 +706,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function getAppNetSync(): NetHandle;
 
@@ -722,6 +740,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   function setAppNet(netHandle: NetHandle): Promise<void>;
 
@@ -738,6 +757,7 @@ declare namespace connection {
    * @systemapi Hidethisfor inner system use. Only used for system app.
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function setInterfaceUp(ifaceName: string): Promise<void>;
 
@@ -875,6 +895,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function refreshGlobalHttpProxy(): Promise<HttpProxy>;
 
@@ -893,6 +914,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 15 dynamic
+   * @since 26.0.1 static
    */
   function setPacUrl(pacUrl: string): void;
 
@@ -904,6 +926,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 15 dynamic
+   * @since 26.0.1 static
    */
   function getPacUrl(): string;
 
@@ -924,6 +947,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function setPacFileUrl(pacFileUrl: string): void;
 
@@ -934,6 +958,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function getPacFileUrl(): string;
 
@@ -953,6 +978,7 @@ declare namespace connection {
    * @returns { string } 返回代理信息。
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function findProxyForUrl(url: string): string;
 
@@ -967,6 +993,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use. Only used for system app.
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function setProxyMode(mode: ProxyMode): Promise<void>;
 
@@ -980,6 +1007,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use. Only used for system app.
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function getProxyMode(): Promise<ProxyMode>;
 
@@ -1003,6 +1031,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @atomicservice [since 15]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function addCustomDnsRule(host: string, ip: Array<string>, callback: AsyncCallback<void>): void;
 
@@ -1026,6 +1055,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @atomicservice [since 15]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function addCustomDnsRule(host: string, ip: Array<string>): Promise<void>;
 
@@ -1047,6 +1077,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @atomicservice [since 15]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function removeCustomDnsRule(host: string, callback: AsyncCallback<void>): void;
 
@@ -1068,6 +1099,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @atomicservice [since 15]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function removeCustomDnsRule(host: string): Promise<void>;
 
@@ -1083,6 +1115,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function clearCustomDnsRules(callback: AsyncCallback<void>): void;
 
@@ -1097,6 +1130,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function clearCustomDnsRules(): Promise<void>;
 
@@ -1139,6 +1173,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function getConnectOwnerUid(protocol: ProtocolType, local: NetAddress, remote: NetAddress): Promise<int>;
 
@@ -1166,6 +1201,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function getConnectOwnerUidSync(protocol: ProtocolType, local: NetAddress, remote: NetAddress): int;
 
@@ -1189,6 +1225,7 @@ declare namespace connection {
    * @systemapi Hide this for inner system use. Only used for system app.
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function createVlanInterface(ifName: string, vlanId: int): Promise<void>;
 
@@ -1212,6 +1249,7 @@ declare namespace connection {
    * @systemapi Hide this for inner system use. Only used for system app.
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function destroyVlanInterface(ifName: string, vlanId: int): Promise<void>;
 
@@ -1236,6 +1274,7 @@ declare namespace connection {
    * @systemapi Hide this for inner system use. Only used for system app.
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function addVlanIp(ifName: string, vlanId: int, address: LinkAddress): Promise<void>;
 
@@ -1261,6 +1300,7 @@ declare namespace connection {
    * @systemapi Hide this for inner system use. Only used for system app.
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function deleteVlanIp(ifName: string, vlanId: int, address: LinkAddress): Promise<void>;
 
@@ -1280,6 +1320,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 22 dynamic
+   * @since 26.0.1 static
    */
   function getIpNeighTable(): Promise<Array<NetIpMacInfo>>;
 
@@ -1304,6 +1345,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function getDnsAscii(host: string, flag?: ConversionProcess): string;
 
@@ -1318,6 +1360,7 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function getDnsUnicode(host: string, flag?: ConversionProcess): string;
 
@@ -1340,6 +1383,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   function getSystemNetPortStates(): Promise<NetPortStatesInfo>;
 
@@ -1362,6 +1406,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function queryTraceRoute(destination: string, option?: TraceRouteOptions): Promise<TraceRouteInfo[]>;
 
@@ -1383,6 +1428,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function queryProbeResult(destination: string, duration: int): Promise<ProbeResultInfo>;
 
@@ -1392,6 +1438,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   export interface NetPortStatesInfo {
     /**
@@ -1400,6 +1447,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpPortStatesInfo?: Array<TcpNetPortStatesInfo>;
 
@@ -1409,6 +1457,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     udpPortStatesInfo?: Array<UdpNetPortStatesInfo>;
   }
@@ -1419,6 +1468,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   export interface TcpNetPortStatesInfo {
     /**
@@ -1427,6 +1477,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpLocalIp: string;
     /**
@@ -1435,6 +1486,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpLocalPort: int;
     /**
@@ -1443,6 +1495,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpRemoteIp: string;
     /**
@@ -1451,6 +1504,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpRemotePort: int;
     /**
@@ -1459,6 +1513,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpUid: int;
     /**
@@ -1467,6 +1522,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpPid: int;
     /**
@@ -1475,6 +1531,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpState: TcpState;
   }
@@ -1485,6 +1542,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   export interface UdpNetPortStatesInfo {
     /**
@@ -1493,6 +1551,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     udpLocalIp: string;
     /**
@@ -1501,6 +1560,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     udpLocalPort: int;
     /**
@@ -1509,6 +1569,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     udpUid: int;
     /**
@@ -1517,6 +1578,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     udpPid: int;
   }
@@ -1527,6 +1589,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   export enum TcpState {
     /**
@@ -1535,6 +1598,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_ESTABLISHED = 1,
     /**
@@ -1543,6 +1607,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_SYN_SENT = 2,
     /**
@@ -1551,6 +1616,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_SYN_RECV = 3,
     /**
@@ -1559,6 +1625,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_FIN_WAIT1 = 4,
     /**
@@ -1567,6 +1634,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_FIN_WAIT2 = 5,
     /**
@@ -1575,6 +1643,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_TIME_WAIT = 6,
     /**
@@ -1583,6 +1652,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_CLOSE = 7,
     /**
@@ -1591,6 +1661,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_CLOSE_WAIT = 8,
     /**
@@ -1599,6 +1670,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_LAST_ACK = 9,
     /**
@@ -1607,6 +1679,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_LISTEN = 10,
     /**
@@ -1615,6 +1688,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     TCP_CLOSING = 11
   }
@@ -1624,6 +1698,7 @@ declare namespace connection {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   export enum ConversionProcess {
     /**
@@ -1631,6 +1706,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     NO_CONFIGURATION = 0,
     /**
@@ -1638,6 +1714,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     ALLOW_UNASSIGNED = 1,
     /**
@@ -1645,6 +1722,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     USE_STD3_ASCII_RULES = 2
   }
@@ -1683,6 +1761,17 @@ declare namespace connection {
     on(type: 'netAvailable', callback: Callback<NetHandle>): void;
 
     /**
+     * 注册netAvailable事件监听。
+     *
+     * @param { Callback<NetHandle> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.1 static
+     */
+    onNetAvailable(callback: Callback<NetHandle>): void;
+
+    /**
      * 订阅网络阻塞状态事件。此接口需要在调用register接口之前调用。若无需接收网络状态变化的回调通知，应使用unregister取消订阅默认的网络状态变化通知。
      *
      * @param { 'netBlockStatusChange' } type - 订阅事件，固定为'netBlockStatusChange'。<br/>netBlockStatusChange：网络阻塞状态事件。
@@ -1715,6 +1804,17 @@ declare namespace connection {
     on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void;
 
     /**
+     * 注册netCapabilitiesChange事件监听。
+     *
+     * @param { Callback<NetCapabilityInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.1 static
+     */
+    onNetCapabilitiesChange(callback: Callback<NetCapabilityInfo>): void;
+
+    /**
      * 订阅网络连接信息变化事件。此接口要在register接口调用前调用，不需要网络状态变化回调通知时，使用unregister取消订阅默认网络状态变化的通知。
      *
      * @param { 'netConnectionPropertiesChange' } type - 订阅事件，固定为'netConnectionPropertiesChange'。<br/>
@@ -1726,6 +1826,15 @@ declare namespace connection {
      * @since 8 dynamic
      */
     on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void;
+
+    /**
+     * 注册netConnectionPropertiesChange事件监听。
+     *
+     * @param { Callback<NetConnectionPropertyInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @since 26.0.1 static
+     */
+    onNetConnectionPropertiesChange(callback: Callback<NetConnectionPropertyInfo>): void;
 
     /**
      * 订阅网络丢失事件。此接口要在register接口调用前调用，不需要网络状态变化回调通知时，使用unregister取消订阅默认网络状态变化的通知。
@@ -1909,6 +2018,7 @@ declare namespace connection {
      * @throws { BusinessError } 2100003 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     bindSocket(socketParam: TCPSocket | UDPSocket, callback: AsyncCallback<void>): void;
 
@@ -1923,6 +2033,7 @@ declare namespace connection {
      * @throws { BusinessError } 2100003 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     bindSocket(socketParam: TCPSocket | UDPSocket): Promise<void>;
 
@@ -1941,6 +2052,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @atomicservice [since 15]
      * @since 8 dynamic
+     * @since 26.0.1 static
      */
     getAddressesByName(host: string, callback: AsyncCallback<Array<NetAddress>>): void;
 
@@ -1958,6 +2070,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @atomicservice [since 15]
      * @since 8 dynamic
+     * @since 26.0.1 static
      */
     getAddressesByName(host: string): Promise<Array<NetAddress>>;
 
@@ -1975,6 +2088,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getAddressesByNameWithOptions(host: string, option?: QueryOptions): Promise<Array<NetAddress>>;
 
@@ -1992,6 +2106,7 @@ declare namespace connection {
      * @throws { BusinessError } 2100003 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 8 dynamic
+     * @since 26.0.1 static
      */
     getAddressByName(host: string, callback: AsyncCallback<NetAddress>): void;
 
@@ -2008,6 +2123,7 @@ declare namespace connection {
      * @throws { BusinessError } 2100003 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 8 dynamic
+     * @since 26.0.1 static
      */
     getAddressByName(host: string): Promise<NetAddress>;
   }
@@ -2119,6 +2235,7 @@ declare namespace connection {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   export interface QueryOptions {
     /**
@@ -2126,6 +2243,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     family?: FamilyType;
   }
@@ -2135,6 +2253,7 @@ declare namespace connection {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   export enum FamilyType {
     /**
@@ -2142,6 +2261,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     FAMILY_TYPE_ALL = 0,
     /**
@@ -2149,6 +2269,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     FAMILY_TYPE_IPV4 = 1,
     /**
@@ -2156,6 +2277,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     FAMILY_TYPE_IPV6 = 2
   }
@@ -2313,6 +2435,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use. Only used for system app.
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   export enum ProxyMode {
     /**
@@ -2321,6 +2444,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use. Only used for system app.
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PROXY_MODE_OFF = 0,
 
@@ -2330,6 +2454,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use. Only used for system app.
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PROXY_MODE_AUTO = 1
   }
@@ -2340,6 +2465,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export enum Socks5DnsStrategy {
     /**
@@ -2348,6 +2474,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     SYSTEM_MODE = 0,
 
@@ -2357,6 +2484,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     PROXY_MODE = 1
   }
@@ -2431,6 +2559,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     isIPv4LinkValid?: boolean;
     /**
@@ -2439,6 +2568,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     isIPv6LinkValid?: boolean;
   }
@@ -2509,6 +2639,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     isExcludedRoute?: boolean;
   }
@@ -2673,6 +2804,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface Socks5Proxy {
     /**
@@ -2683,6 +2815,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     host: string;
 
@@ -2694,6 +2827,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     port: int;
 
@@ -2705,6 +2839,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     username?: string;
 
@@ -2716,6 +2851,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     password?: string;
 
@@ -2727,6 +2863,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     dnsStrategy?: Socks5DnsStrategy;
 
@@ -2755,6 +2892,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     exclusionList?: Array<string>;
   }
@@ -2764,6 +2902,7 @@ declare namespace connection {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 22 dynamic
+   * @since 26.0.1 static
    */
   export interface NetIpMacInfo {
     /**
@@ -2771,6 +2910,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 22 dynamic
+     * @since 26.0.1 static
      */
     ipAddress: NetAddress;
 
@@ -2779,6 +2919,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 22 dynamic
+     * @since 26.0.1 static
      */
     iface: string;
 
@@ -2787,6 +2928,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 22 dynamic
+     * @since 26.0.1 static
      */
     macAddress: string;
   }
@@ -2796,6 +2938,7 @@ declare namespace connection {
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   export enum ProtocolType {
     /**
@@ -2803,6 +2946,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     PROTO_TYPE_TCP = 6,
     /**
@@ -2810,6 +2954,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     PROTO_TYPE_UDP = 17
   }
@@ -2820,6 +2965,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export enum PacketsType {
     /**
@@ -2828,6 +2974,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     NETCONN_PACKETS_ICMP = 0,
 
@@ -2837,6 +2984,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     NETCONN_PACKETS_UDP = 1
   }
@@ -2847,6 +2995,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface TraceRouteOptions {
     /**
@@ -2855,6 +3004,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     maxJumpNumber?: int;
 
@@ -2864,6 +3014,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     packetsType?: PacketsType;
   }
@@ -2874,6 +3025,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface TraceRouteInfo {
     /**
@@ -2882,6 +3034,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     jumpNo: int;
 
@@ -2891,6 +3044,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     address: string;
 
@@ -2900,6 +3054,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     rtt: int[];
   }
@@ -2910,6 +3065,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface ProbeResultInfo {
     /**
@@ -2918,6 +3074,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     lossRate: int;
 
@@ -2928,6 +3085,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     rtt: int[];
   }

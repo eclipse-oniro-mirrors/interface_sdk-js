@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 图片
  * @kit ImageKit
  */
 
@@ -7996,6 +7996,16 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     setAuxiliaryPictureInfo(info: AuxiliaryPictureInfo): void;
 
     /**
+     * 获取辅助图的Pixelmap对象。
+     *
+     * @returns { PixelMap | null } 得到的PixelMap对象。当辅助图没有包含PixelMap数据时返回null
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    acquirePixelmap(): PixelMap | null;
+
+    /**
      * 释放辅助图对象，无返回值。
      * 
      * 由于图片占用内存较大，所以当AuxiliaryPicture对象使用完成后，应主动调用该方法，及时释放内存。
@@ -8087,13 +8097,35 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     FRAGMENT_MAP = 5,
     
     /**
-     * 特殊增益图（LHDR Gain Map）。
+      * 特殊增益图（LHDR Gain Map）。
+      *
+      * @syscap SystemCapability.Multimedia.Image.Core
+      * @stagemodelonly
+      * @since 26.0.0 dynamic&static
+      */
+    LHDR_GAINMAP = 10,
+
+    /**
+     * 血氧图。
+     *
+     * 记录人脸区域像素的血氧饱和度，可用于肤质分析。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    LHDR_GAINMAP = 10,
+    OXY_MAP = 11,
+
+    /**
+     * 色斑图。
+     *
+     * 记录人脸区域的色斑分布，可用于肤质分析。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    MEL_MAP = 12,
   }
 
   /**

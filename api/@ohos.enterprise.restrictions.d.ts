@@ -620,7 +620,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-    SATA_ODD_BURN = 52
+    SATA_ODD_BURN = 52,
+
+    /**
+     * Super privacy mode. Once disabled, the super privacy mode cannot be enabled.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SUPER_PRIVACY = 53
   }
 
   /**

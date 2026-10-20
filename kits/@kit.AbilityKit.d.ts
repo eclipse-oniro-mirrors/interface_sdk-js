@@ -25,6 +25,7 @@ import particleAbility from '@ohos.ability.particleAbility';
 import abilityAccessCtrl, {
   Context, PermissionRequestResult, Permissions
 } from '@ohos.abilityAccessCtrl';
+import abilityToolAccessCtrl from '@ohos.abilityToolAccessCtrl';
 import Ability from '@ohos.app.ability.Ability';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
@@ -153,7 +154,7 @@ export {
   CompletionHandlerForAtomicService, CompletionHandlerForAbilityStartCallback, AbilityStartFailureCode, FailureCode, InteropAbilityLifecycleCallback,
   systemConfiguration, AgentExtensionAbility, AgentUIExtensionAbility, agentConstant, agentManager, hyperSnapManager, cliManager, pluginBundleManager,
   functionManager, appMemoryOptimizer, CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap,
-  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager
+  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl
 };
 
 /*** if arkts static */

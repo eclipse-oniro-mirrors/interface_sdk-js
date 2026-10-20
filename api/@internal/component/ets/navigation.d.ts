@@ -649,7 +649,7 @@ declare interface NavigationOptions {
  */
 declare interface PreloadOptions {
   /**
-   * Callback when preloaded page is destroyed by the system.
+   * Callback invoked when the preloaded page is destroyed by the system.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1380,7 +1380,7 @@ declare type NavBar = 'navBar';
 /**
  * Represents the interception callback invoked before and after page redirection.
  *
- * @param { NavDestinationContext | NavBar } from - Information about the top page in the routing stack after
+ * @param { NavDestinationContext | NavBar } from - Information about the top page in the routing stack before
  *     page redirection. The value **navBar** indicates that the top page is the home page.
  * @param { NavDestinationContext | NavBar } to - Information about the top page in the routing stack after
  *     page redirection. The value **navBar** indicates that the top page is the home page.
@@ -2296,7 +2296,8 @@ declare interface NavigationToolbarOptions {
 declare interface NavigationMenuOptions {
 
   /**
-   * Options for the toolbar's more button menu.
+   * Options for the more button menu. After the setting, you can customize the
+   * background blur style and background effect of the more button.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2330,7 +2331,7 @@ declare interface MoreButtonOptions {
   backgroundBlurStyle?: BlurStyle;
 
   /**
-   * Options for the title bar background blur style.
+   * Background blur style options of the more button menu.
    *
    * **NOTE**
    *
@@ -2347,7 +2348,7 @@ declare interface MoreButtonOptions {
   backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
 
   /**
-   * Title bar background properties, including blur radius, brightness, saturation, and color.
+   * Background properties of the more button menu, including blur radius, brightness, saturation, and color.
    *
    * **NOTE**
    *
@@ -2396,10 +2397,16 @@ declare interface NavigationConfiguration {
   /**
    * Whether to clear the content stack when navigation is triggered from the primary side.
    *
-   * In Navigation split mode, when enabled, navigaiton triggered from the primary side clears old
-   * NavDestination after the Primary/Home node while preserving all NavDestinations created by
-   * the current operation.
+   * The default value is **false**. The value **true** indicates that the navigation stack clearing capability from
+   * left to right is enabled, and the value **false** indicates that the capability is disabled.
+   * 
+   * **Description of the navigation stack clearing capability from left to right:**
    *
+   * When the navigation page is displayed in split mode, if a user's operation (such as clicking a button on the page)
+   * on the home page (**NavBar** or **NavDestination**) triggers the page redirection, the system clears the pages
+   * before the first newly created page in the navigation page stack, and only the first newly created page and the
+   * pages that follow it are retained.
+   * 
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3172,7 +3179,7 @@ declare interface NavigationAnimatedTransition {
   /**
    * Callback invoked when the transition is complete.
    *
-   * **success**: whether the transition is successful.
+   * @param { boolean } success - whether the transition is successful.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3218,7 +3225,7 @@ declare interface NavigationAnimatedTransition {
   /**
    * Callback for executing the custom transition animation.
    *
-   * **transitionProxy**: proxy for the custom transition animation.
+   * @param { NavigationTransitionProxy } transitionProxy - proxy for the custom transition animation.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

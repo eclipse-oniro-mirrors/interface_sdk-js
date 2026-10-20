@@ -70,7 +70,7 @@ declare namespace appManager {
      * @since 9 dynamic
      * @since 23 static
      */
-    STATE_CREATE,
+    STATE_CREATE = 0,
 
     /**
      * The application is running in the foreground.
@@ -80,7 +80,7 @@ declare namespace appManager {
      * @since 9 dynamic
      * @since 23 static
      */
-    STATE_FOREGROUND,
+    STATE_FOREGROUND = 1,
 
     /**
      * The application is active.
@@ -90,7 +90,7 @@ declare namespace appManager {
      * @since 9 dynamic
      * @since 23 static
      */
-    STATE_ACTIVE,
+    STATE_ACTIVE = 2,
 
     /**
      * The application is running in the background.
@@ -100,7 +100,7 @@ declare namespace appManager {
      * @since 9 dynamic
      * @since 23 static
      */
-    STATE_BACKGROUND,
+    STATE_BACKGROUND = 3,
 
     /**
      * The application is being destroyed.
@@ -110,7 +110,7 @@ declare namespace appManager {
      * @since 9 dynamic
      * @since 23 static
      */
-    STATE_DESTROY
+    STATE_DESTROY = 4
   }
 
   /**
@@ -130,7 +130,7 @@ declare namespace appManager {
      * @since 10 dynamic
      * @since 23 static
      */
-    STATE_CREATE,
+    STATE_CREATE = 0,
 
     /**
      * The process is running in the foreground.
@@ -140,7 +140,7 @@ declare namespace appManager {
      * @since 10 dynamic
      * @since 23 static
      */
-    STATE_FOREGROUND,
+    STATE_FOREGROUND = 1,
 
     /**
      * At least one window in the process has focus.
@@ -150,7 +150,7 @@ declare namespace appManager {
      * @since 10 dynamic
      * @since 23 static
      */
-    STATE_ACTIVE,
+    STATE_ACTIVE = 2,
 
     /**
      * The process is running in the background.
@@ -160,7 +160,7 @@ declare namespace appManager {
      * @since 10 dynamic
      * @since 23 static
      */
-    STATE_BACKGROUND,
+    STATE_BACKGROUND = 3,
 
     /**
      * The process is destroyed.
@@ -170,7 +170,7 @@ declare namespace appManager {
      * @since 10 dynamic
      * @since 23 static
      */
-    STATE_DESTROY
+    STATE_DESTROY = 4
   }
 
   /**
@@ -192,7 +192,7 @@ declare namespace appManager {
      * @since 12 dynamic
      * @since 23 static
      */
-    PRESS_DOWN
+    PRESS_DOWN = 0
   }
 
   /**
