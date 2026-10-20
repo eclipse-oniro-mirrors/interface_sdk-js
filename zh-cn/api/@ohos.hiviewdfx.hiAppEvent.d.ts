@@ -1932,6 +1932,236 @@ declare namespace hiAppEvent {
    * @since 23 static
    */
   function configEventPolicy(policy: EventPolicy): Promise<void>;
+
+  /**
+   * 定义外部日志管理者，用于外部日志管理
+   *
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  class ExternalLogManager {
+  /**
+   * 当外部日志目录容量达到时调用此函数
+   *
+   * @param { ExternalLogContainer } container - 包含所有外部日志文件的容器
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  onCapacityReached(container: ExternalLogContainer): void;
+}
+ 
+/**
+ * 一个外部日志容器，包含所有外部日志文件。
+ *
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+class ExternalLogContainer {
+  /**
+   * 获取所有ExternalLogWrappers的集合
+   *
+   * @returns { Set<ExternalLogWrapper> } 所有ExternalLogWrappers的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getAllLogs(): Set<ExternalLogWrapper>;
+ 
+  /**
+   * 获取所有外部日志文件路径的集合
+   *
+   * @returns { Set<string> } 所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getAllLogFiles(): Set<string>;
+ 
+  /**
+   * 获取给定系统事件的所有外部日志文件路径的集合
+   *
+   * @param { string } event - 给定系统事件的字符串
+   * @returns { Set<string> } 给定系统事件的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesOfSysEvent(event: string): Set<string>;
+ 
+  /**
+   * 获取给定时间之后的所有外部日志文件路径的集合
+   *
+   * @param { long } timePoint - 给定的文件生成时间点（单位：毫秒）
+   * @returns { Set<string> } 指定时间之后的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesGeneratedAfter(timePoint: long): Set<string>;
+ 
+  /**
+   * 获取给定时间之前的所有外部日志文件路径的集合
+   *
+   * @param { long } timePoint - 给定的文件生成时间点（单位：毫秒）
+   * @returns { Set<string> } 给定时间之前的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesGeneratedBefore(timePoint: long): Set<string>;
+ 
+  /**
+   * 获取大小大于给定数量的所有外部日志文件路径的集合
+   *
+   * @param { long } sizeKb - 给定的文件大小
+   * @returns { Set<string> } 大小大于给定数量的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesLargerThan(sizeKb: long): Set<string>;
+ 
+  /**
+   * 获取大小小于给定数量的所有外部日志文件路径的集合
+   *
+   * @param { long } sizeKb - 给定的文件大小
+   * @returns { Set<string> } 大小小于给定数量的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesSmallerThan(sizeKb: long): Set<string>;
+ 
+  /**
+   * 获取所有外部日志文件的个数
+   *
+   * @returns { int } 所有外部日志文件的个数
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogNumber(): int;
+ 
+  /**
+   * 获取给定数字的最早生成的外部日志文件路径
+   *
+   * @param { int } num - 给定查询文件的个数
+   * @returns { Set<string> } 符合条件的外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getFirstGeneratedLogFiles(num: int): Set<string>;
+}
+ 
+/**
+ * 外部日志的包装器，提供各种信息。
+ *
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+class ExternalLogWrapper {
+  /**
+   * 获取文件路径
+   *
+   * @returns { string } 文件路径
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getFilePath(): string;
+ 
+  /**
+   * 获取文件的生成时间点（毫秒）
+   *
+   * @returns { long } 生成时间
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getGenerationTime(): long;
+ 
+  /**
+   * 以kb为单位获取文件大小
+   *
+   * @returns { long } 文件大小，单位为kb
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getSizeInKb(): long;
+ 
+  /**
+   * 获取文件的系统事件
+   *
+   * @returns { string } 系统事件的字符串形式
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getSysEvent(): string;
+}
+ 
+/**
+ * 注册外部日志管理者
+ *
+ * @param { ExternalLogManager } logMngr - 外部日志管理者。
+ * @throws { BusinessError } 11106001 - State error. Possible causes: 1. Log manager already registered;
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+function registerExternalLogManager(logMngr: ExternalLogManager): void;
+ 
+/**
+ * 查询外部日志管理者是否已注册
+ *
+ * @returns { boolean } 如果已经注册，则返回true，否则返回false。
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+function isExternalLogManagerRegistered(): boolean;
 }
 
 export default hiAppEvent;
