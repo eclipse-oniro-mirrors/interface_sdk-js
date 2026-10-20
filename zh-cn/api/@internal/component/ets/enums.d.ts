@@ -6603,3 +6603,32 @@ declare enum OperateIntention {
    */
   BACK_PRESS = 2
 }
+
+/**
+ * 安全区域的沉浸式策略枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum ImmersiveStrategy {
+
+  /**
+   * 扩展bindSheet的标题区作为内容区的安全区。
+   *
+   * > **NOTE**
+   * >
+   * > 通过{@link UIContext.applyDefaultImmersiveStrategy}应用此策略后，
+   * > bindSheet的{@link SheetOptions.titleBarHoverMode}默认为
+   * > {@link SheetTitleBarHoverMode.SAFE_AREA_PADDING}。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  BIND_SHEET_EXPAND_SAFE_AREA = 7,
+}
