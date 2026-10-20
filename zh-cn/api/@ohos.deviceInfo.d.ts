@@ -709,6 +709,16 @@ declare namespace deviceInfo {
    * @since 26.0.1 dynamic
    */
   const kernelVersion: string;
+
+  /**
+   * 获取系统时间。
+   * 例如：'2026-01-01 08:00:00'。
+   * 
+   * @syscap SystemCapability.Startup.SystemInfo
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  const installTime: string;
 }
 
 export default deviceInfo;
