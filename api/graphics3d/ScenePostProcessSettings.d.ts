@@ -86,7 +86,8 @@ export interface ToneMappingSettings {
 }
 
 /**
- * Describes the settings for bloom effects. It is unavailable when [RenderingPipelineType]{@link ./SceneTypes:RenderingPipelineType} is set to FORWARD_LIGHTWEIGHT.
+ * Describes the settings for bloom effects.
+ * It is unavailable when [RenderingPipelineType]{@link ./SceneTypes:RenderingPipelineType} is set to FORWARD_LIGHTWEIGHT.
 * 
  * @typedef BloomSettings
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -172,7 +173,8 @@ export interface VignetteSettings {
 }
 
 /**
- * Describes the settings for color fringing. It is unavailable when [RenderingPipelineType]{@link ./SceneTypes:RenderingPipelineType} is set to FORWARD_LIGHTWEIGHT.
+ * Describes the settings for color fringing.
+ * It is unavailable when [RenderingPipelineType]{@link ./SceneTypes:RenderingPipelineType} is set to FORWARD_LIGHTWEIGHT.
  *
  * @typedef ColorFringeSettings
  * @syscap SystemCapability.ArkUi.Graphics3D
