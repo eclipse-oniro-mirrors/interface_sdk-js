@@ -777,7 +777,7 @@ declare namespace deviceInfo {
      *
      * @syscap SystemCapability.Startup.SystemInfo
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.2.0 static
      */
     get installTime(): string;
 }
