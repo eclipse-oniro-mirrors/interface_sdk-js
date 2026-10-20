@@ -2381,7 +2381,7 @@ declare namespace formInfo {
      */
     displayId: string;
     /**
-     * 自定义数据，默认为空。
+     * 自定义数据。默认为空。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -2428,7 +2428,7 @@ declare namespace formInfo {
      */
     displayId: string;
     /**
-     * 远端卡片使用方服务的自定义数据，默认为空。
+     * 远端卡片使用方服务的自定义数据。默认为空。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
