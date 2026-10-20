@@ -32,6 +32,7 @@ import type cert from './@ohos.security.cert';
  * @syscap SystemCapability.Communication.NetStack
  * @crossplatform [since 10]
  * @since 7 dynamic
+ * @since 26.0.1 static
  */
 declare namespace socket {
   /**
@@ -40,8 +41,9 @@ declare namespace socket {
    * @stagemodelonly
    * @crossplatform [since 24]
    * @since 8 dynamic
+   * @since 26.0.1 static
    */
-  export import NetAddress = connection.NetAddress;
+  export type NetAddress = connection.NetAddress;
 
   /**
    * 存储证书的数据。
@@ -49,6 +51,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   export type X509CertRawData = cert.EncodingBlob;
 
@@ -59,6 +62,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   function constructUDPSocketInstance(): UDPSocket;
 
@@ -69,6 +73,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function constructMulticastSocketInstance(): MulticastSocket;
 
@@ -79,6 +84,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   function constructTCPSocketInstance(): TCPSocket;
 
@@ -89,6 +95,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   function constructTLSSocketInstance(): TLSSocket;
 
@@ -108,6 +115,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 12 dynamic
+   * @since 26.0.1 static
    */
   function constructTLSSocketInstance(tcpSocket: TCPSocket): TLSSocket;
 
@@ -118,6 +126,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function constructTCPSocketServerInstance(): TCPSocketServer;
 
@@ -128,6 +137,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   function constructTLSSocketServerInstance(): TLSSocketServer;
 
@@ -138,6 +148,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function constructLocalSocketInstance(): LocalSocket;
 
@@ -148,6 +159,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   function constructLocalSocketServerInstance(): LocalSocketServer;
 
@@ -157,6 +169,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface UDPSendOptions {
     /**
@@ -165,6 +178,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     data: string | ArrayBuffer;
 
@@ -174,6 +188,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     address: NetAddress;
 
@@ -183,6 +198,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     proxy?: ProxyOptions;
   }
@@ -193,6 +209,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform
    * @since 18 dynamic
+   * @since 26.0.1 static
    */
   export enum ProxyTypes {
     /**
@@ -201,6 +218,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     NONE = 0,
 
@@ -210,6 +228,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     SOCKS5 = 1
   }
@@ -220,6 +239,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform
    * @since 18 dynamic
+   * @since 26.0.1 static
    */
   export interface ProxyOptions {
     /**
@@ -228,6 +248,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     type: ProxyTypes;
 
@@ -237,6 +258,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     address: NetAddress;
 
@@ -246,6 +268,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     username?: string;
 
@@ -255,6 +278,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     password?: string;
   }
@@ -265,6 +289,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface ExtraOptionsBase {
     /**
@@ -273,6 +298,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     receiveBufferSize?: int;
 
@@ -282,6 +308,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     sendBufferSize?: int;
 
@@ -291,6 +318,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     reuseAddress?: boolean;
 
@@ -300,6 +328,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     socketTimeout?: int;
   }
@@ -310,6 +339,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface UDPExtraOptions extends ExtraOptionsBase {
     /**
@@ -318,6 +348,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     broadcast?: boolean;
   }
@@ -328,6 +359,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface SocketStateBase {
     /**
@@ -336,6 +368,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     isBound: boolean;
 
@@ -345,6 +378,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     isClose: boolean;
 
@@ -354,6 +388,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     isConnected: boolean;
   }
@@ -364,6 +399,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface SocketRemoteInfo {
     /**
@@ -372,6 +408,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     address: string;
 
@@ -386,6 +423,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     family: 'IPv4' | 'IPv6';
 
@@ -395,6 +433,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     port: int;
 
@@ -404,6 +443,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     size: int;
   }
@@ -414,6 +454,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalSocketMessageInfo {
     /**
@@ -422,6 +463,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     message: ArrayBuffer;
 
@@ -431,6 +473,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     address: string;
 
@@ -440,6 +483,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     size: int;
   }
@@ -450,6 +494,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalAddress {
     /**
@@ -458,6 +503,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     address: string;
   }
@@ -468,6 +514,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalConnectOptions {
     /**
@@ -476,6 +523,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     address: LocalAddress;
 
@@ -485,6 +533,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     timeout?: int;
   }
@@ -495,6 +544,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalSendOptions {
     /**
@@ -503,6 +553,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     data: string | ArrayBuffer;
 
@@ -512,6 +563,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     encoding?: string;
   }
@@ -523,6 +575,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface UDPSocket {
     /**
@@ -537,6 +590,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     bind(address: NetAddress, callback: AsyncCallback<void>): void;
 
@@ -552,6 +606,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     bind(address: NetAddress): Promise<void>;
 
@@ -569,6 +624,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -594,6 +650,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     send(options: UDPSendOptions, callback: AsyncCallback<void>): void;
 
@@ -619,6 +676,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     send(options: UDPSendOptions): Promise<void>;
 
@@ -631,6 +689,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     close(callback: AsyncCallback<void>): void;
 
@@ -643,6 +702,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -659,6 +719,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     getState(callback: AsyncCallback<SocketStateBase>): void;
 
@@ -675,6 +736,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -694,6 +756,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: UDPExtraOptions, callback: AsyncCallback<void>): void;
 
@@ -712,6 +775,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: UDPExtraOptions): Promise<void>;
 
@@ -729,6 +793,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<SocketMessageInfo>): void;
 
     /**
+     * 监听UDPSocket连接的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onUdpMessage(callback: Callback<SocketMessageInfo>): void;
+
+    /**
      * 取消订阅UDPSocket连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 取消订阅的事件类型。'message'：接收消息事件。
@@ -743,6 +817,16 @@ declare namespace socket {
     off(type: 'message', callback?: Callback<SocketMessageInfo>): void;
 
     /**
+     * 取消监听UDPSocket连接的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offUdpMessage(callback?: Callback<SocketMessageInfo>): void;
+
+    /**
      * 订阅UDPSocket连接的数据包消息事件或关闭事件。使用callback异步回调。
      *
      * @param { 'listening' | 'close' } type - 订阅的事件类型。<br />- 'listening'：数据包消息事件。<br />- 'close'：关闭事件。
@@ -752,6 +836,26 @@ declare namespace socket {
      * @since 7 dynamic
      */
     on(type: 'listening' | 'close', callback: Callback<void>): void;
+
+    /**
+     * 监听UDPSocket连接的数据包消息事件或关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onClose(callback: Callback<void>): void;
+
+    /**
+     * 监听UDPSocket连接的数据包消息事件或关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onListening(callback: Callback<void>): void;
 
     /**
      * 取消订阅UDPSocket连接的数据包消息事件或关闭事件。使用callback异步回调。
@@ -765,6 +869,26 @@ declare namespace socket {
     off(type: 'listening' | 'close', callback?: Callback<void>): void;
 
     /**
+     * 取消监听UDPSocket连接的数据包消息事件或关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offListening(callback?: Callback<void>): void;
+
+    /**
+     * 取消监听UDPSocket连接的数据包消息事件或关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offClose(callback?: Callback<void>): void;
+
+    /**
      * 订阅UDPSocket连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 订阅的事件类型。'error'：error事件。
@@ -776,6 +900,16 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听UDPSocket连接的error事件。
+     *
+     * @param { ErrorCallback } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onUdpError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅UDPSocket连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 取消订阅的事件类型。'error'：error事件。
@@ -785,6 +919,16 @@ declare namespace socket {
      * @since 7 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听UDPSocket连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offUdpError(callback?: ErrorCallback): void;
 
     /**
      * 获取UDPSocket的文件描述符。使用Promise异步回调。
@@ -804,6 +948,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }
@@ -815,6 +960,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface MulticastSocket extends UDPSocket {
     /**
@@ -838,6 +984,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     addMembership(multicastAddress: NetAddress, callback: AsyncCallback<void>): void;
 
@@ -861,6 +1008,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     addMembership(multicastAddress: NetAddress): Promise<void>;
 
@@ -886,6 +1034,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     dropMembership(multicastAddress: NetAddress, callback: AsyncCallback<void>): void;
 
@@ -911,6 +1060,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     dropMembership(multicastAddress: NetAddress): Promise<void>;
 
@@ -937,6 +1087,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setMulticastTTL(ttl: int, callback: AsyncCallback<void>): void;
 
@@ -963,6 +1114,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setMulticastTTL(ttl: int): Promise<void>;
 
@@ -987,6 +1139,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getMulticastTTL(callback: AsyncCallback<int>): void;
 
@@ -1011,6 +1164,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getMulticastTTL(): Promise<int>;
 
@@ -1034,6 +1188,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setLoopbackMode(flag: boolean, callback: AsyncCallback<void>): void;
 
@@ -1057,6 +1212,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setLoopbackMode(flag: boolean): Promise<void>;
 
@@ -1079,6 +1235,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getLoopbackMode(callback: AsyncCallback<boolean>): void;
 
@@ -1101,6 +1258,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getLoopbackMode(): Promise<boolean>;
 
@@ -1123,6 +1281,7 @@ declare namespace socket {
      * @stagemodelonly
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
 
@@ -1140,6 +1299,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     setReuseAddress(reuse: boolean): void;
   }
@@ -1151,6 +1311,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalSocket {
     /**
@@ -1171,6 +1332,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     bind(address: LocalAddress): Promise<void>;
 
@@ -1192,6 +1354,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     connect(options: LocalConnectOptions): Promise<void>;
 
@@ -1209,6 +1372,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     send(options: LocalSendOptions): Promise<void>;
 
@@ -1220,6 +1384,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -1234,6 +1399,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -1252,6 +1418,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
 
@@ -1269,6 +1436,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: ExtraOptionsBase): Promise<void>;
 
@@ -1284,6 +1452,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getExtraOptions(): Promise<ExtraOptionsBase>;
 
@@ -1301,6 +1470,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<string>;
 
@@ -1317,6 +1487,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<LocalSocketMessageInfo>): void;
 
     /**
+     * 监听LocalSocket连接的接收消息事件。
+     *
+     * @param { Callback<LocalSocketMessageInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalSocketMessage(callback: Callback<LocalSocketMessageInfo>): void;
+
+    /**
      * 取消订阅LocalSocket连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 取消订阅的事件类型。'message'：接收消息事件。
@@ -1327,6 +1507,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'message', callback?: Callback<LocalSocketMessageInfo>): void;
+
+    /**
+     * 取消监听LocalSocket连接的接收消息事件。
+     *
+     * @param { Callback<LocalSocketMessageInfo> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalSocketMessage(callback?: Callback<LocalSocketMessageInfo>): void;
 
     /**
      * 订阅LocalSocket的连接事件。使用callback异步回调。
@@ -1341,6 +1531,16 @@ declare namespace socket {
     on(type: 'connect', callback: Callback<void>): void;
 
     /**
+     * 监听LocalSocket连接的连接事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onConnect(callback: Callback<void>): void;
+
+    /**
      * 取消订阅LocalSocket的连接事件。使用callback异步回调。
      *
      * @param { 'connect' } type - 取消订阅的事件类型。'connect'：LocalSocket的connect事件。
@@ -1351,6 +1551,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'connect', callback?: Callback<void>): void;
+
+    /**
+     * 取消监听LocalSocket连接的连接事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offConnect(callback?: Callback<void>): void;
 
     /**
      * 订阅LocalSocket的关闭事件。使用callback异步回调。
@@ -1365,6 +1575,16 @@ declare namespace socket {
     on(type: 'close', callback: Callback<void>): void;
 
     /**
+     * 监听LocalSocket连接的关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalSocketClose(callback: Callback<void>): void;
+
+    /**
      * 取消订阅LocalSocket的关闭事件。使用callback异步回调。
      *
      * @param { 'close' } type - 取消订阅的事件类型。'close'：LocalSocket的关闭事件。
@@ -1375,6 +1595,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'close', callback?: Callback<void>): void;
+
+    /**
+     * 取消监听LocalSocket连接的关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalSocketClose(callback?: Callback<void>): void;
 
     /**
      * 订阅LocalSocket连接的error事件。使用callback异步回调。
@@ -1389,6 +1619,16 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听LocalSocket连接的error事件。
+     *
+     * @param { ErrorCallback } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalSocketError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅LocalSocket连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 取消订阅的事件类型。'error'：LocalSocket的error事件。
@@ -1399,6 +1639,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听LocalSocket连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalSocketError(callback?: ErrorCallback): void;
 
   }
 
@@ -1412,6 +1662,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalSocketConnection {
     /**
@@ -1420,6 +1671,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     clientId: int;
 
@@ -1437,6 +1689,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     send(options: LocalSendOptions): Promise<void>;
 
@@ -1448,6 +1701,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -1461,6 +1715,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<string>;
 
@@ -1477,6 +1732,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<LocalSocketMessageInfo>): void;
 
     /**
+     * 监听LocalSocketConnection的接收消息事件。
+     *
+     * @param { Callback<LocalSocketMessageInfo> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalConnMessage(callback: Callback<LocalSocketMessageInfo>): void;
+
+    /**
      * 取消订阅LocalSocketConnection连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 取消订阅的事件类型。'message'：接收消息事件。
@@ -1487,6 +1752,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'message', callback?: Callback<LocalSocketMessageInfo>): void;
+
+    /**
+     * 取消监听LocalSocketConnection的接收消息事件。
+     *
+     * @param { Callback<LocalSocketMessageInfo> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalConnMessage(callback?: Callback<LocalSocketMessageInfo>): void;
 
     /**
      * 订阅LocalSocketConnection的关闭事件。使用callback异步回调。
@@ -1501,6 +1776,16 @@ declare namespace socket {
     on(type: 'close', callback: Callback<void>): void;
 
     /**
+     * 监听LocalSocketConnection的关闭事件。
+     *
+     * @param { Callback<void> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalConnClose(callback: Callback<void>): void;
+
+    /**
      * 取消订阅LocalSocketConnection的关闭事件。使用callback异步回调。
      *
      * @param { 'close' } type - 取消订阅的事件类型。'close'：关闭事件。
@@ -1511,6 +1796,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'close', callback?: Callback<void>): void;
+
+    /**
+     * 取消监听LocalSocketConnection的关闭事件。
+     *
+     * @param { Callback<void> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalConnClose(callback?: Callback<void>): void;
 
     /**
      * 订阅LocalSocketConnection连接的error事件。使用callback异步回调。
@@ -1525,6 +1820,16 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听LocalSocketConnection的error事件。
+     *
+     * @param { ErrorCallback } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalConnError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅LocalSocketConnection连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 取消订阅的事件类型。'error'：error事件。
@@ -1535,6 +1840,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听LocalSocketConnection的error事件。
+     *
+     * @param { ErrorCallback } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalConnError(callback?: ErrorCallback): void;
 
     /**
      * 获取LocalSocketConnection连接的文件描述符。使用Promise异步回调。
@@ -1551,6 +1866,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }
@@ -1562,6 +1878,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface LocalSocketServer {
     /**
@@ -1581,6 +1898,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     listen(address: LocalAddress): Promise<void>;
 
@@ -1595,6 +1913,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -1612,6 +1931,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: ExtraOptionsBase): Promise<void>;
 
@@ -1627,6 +1947,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     getExtraOptions(): Promise<ExtraOptionsBase>;
 
@@ -1644,6 +1965,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<string>;
 
@@ -1660,6 +1982,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -1680,6 +2003,16 @@ declare namespace socket {
     on(type: 'connect', callback: Callback<LocalSocketConnection>): void;
 
     /**
+     * 监听LocalSocketServer连接的连接事件。
+     *
+     * @param { Callback<LocalSocketConnection> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onConnect(callback: Callback<LocalSocketConnection>): void;
+
+    /**
      * 取消订阅LocalSocketServer的连接事件。使用callback异步回调。
      *
      * @param { 'connect' } type - 取消订阅的事件类型。'connect'：LocalSocketServer的连接事件。
@@ -1690,6 +2023,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'connect', callback?: Callback<LocalSocketConnection>): void;
+
+    /**
+     * 取消监听LocalSocketServer连接的连接事件。
+     *
+     * @param { Callback<LocalSocketConnection> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offConnect(callback?: Callback<LocalSocketConnection>): void;
 
     /**
      * 订阅LocalSocketServer连接的error事件。使用callback异步回调。
@@ -1708,6 +2051,16 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听LocalSocketServer连接的error事件。
+     *
+     * @param { ErrorCallback } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onLocalServerError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅LocalSocketServer连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 取消订阅的事件类型。'error'：error事件。
@@ -1718,6 +2071,16 @@ declare namespace socket {
      * @since 11 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听LocalSocketServer连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offLocalServerError(callback?: ErrorCallback): void;
 
     /**
      * 获取LocalSocketServer监听端口绑定的文件描述符。使用Promise异步回调。
@@ -1734,6 +2097,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }
@@ -1744,6 +2108,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface TCPConnectOptions {
     /**
@@ -1752,6 +2117,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     address: NetAddress;
 
@@ -1761,6 +2127,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     timeout?: int;
 
@@ -1770,6 +2137,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     proxy?: ProxyOptions;
   }
@@ -1780,6 +2148,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface TCPSendOptions {
     /**
@@ -1788,6 +2157,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     data: string | ArrayBuffer;
 
@@ -1797,8 +2167,39 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     encoding?: string;
+  }
+
+  /**
+     * Socket逗留选项。
+     *
+     * - **on**：是否开启socket逗留。取值为true表示开启socket逗留，
+     * false表示不开启。
+     * - **linger**：逗留时间，单位为ms。取值范围为**0**～**65535**。
+     *
+     * 仅当**on**取值为**true**时，该参数生效。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+  export interface SocketLingerOptions {
+    /**
+     * 是否开启socket逗留。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    on: boolean;
+    /**
+     * 逗留时间，单位为ms。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    linger: int;
   }
 
   /**
@@ -1807,6 +2208,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface TCPExtraOptions extends ExtraOptionsBase {
     /**
@@ -1815,6 +2217,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     keepAlive?: boolean;
 
@@ -1824,6 +2227,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     OOBInline?: boolean;
 
@@ -1833,6 +2237,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     TCPNoDelay?: boolean;
 
@@ -1851,6 +2256,21 @@ declare namespace socket {
     socketLinger?: {on: boolean, linger: int};
 
     /**
+     * Socket逗留选项。
+     *
+     * - **on**：是否开启socket逗留。取值为true表示开启socket逗留，
+     * false表示不开启。
+     * - **linger**：逗留时间，单位为ms。取值范围为**0**～**65535**。
+     *
+     * 仅当**on**取值为**true**时，该参数生效。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    socketLinger?: SocketLingerOptions;
+
+    /**
      * 是否在TCPSocket连接中启用TCP快速打开（TCP Fast OPen， TFO），该功能允许客户端在首次握手时携带数据，从而减少连接建立的延迟，提升高频率短连接场景下的性能表现。默认为false。true：支持快速打开
      * 属性；false：不支持快速打开属性。
      *
@@ -1859,6 +2279,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     tcpFastOpen?: boolean;
   }
@@ -1870,6 +2291,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 7 dynamic
+   * @since 26.0.1 static
    */
   export interface TCPSocket {
     /**
@@ -1892,6 +2314,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     bind(address: NetAddress, callback: AsyncCallback<void>): void;
 
@@ -1915,6 +2338,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     bind(address: NetAddress): Promise<void>;
 
@@ -1941,6 +2365,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     connect(options: TCPConnectOptions, callback: AsyncCallback<void>): void;
 
@@ -1967,6 +2392,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     connect(options: TCPConnectOptions): Promise<void>;
 
@@ -1985,6 +2411,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     send(options: TCPSendOptions, callback: AsyncCallback<void>): void;
 
@@ -2003,6 +2430,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     send(options: TCPSendOptions): Promise<void>;
 
@@ -2015,6 +2443,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     close(callback: AsyncCallback<void>): void;
 
@@ -2027,6 +2456,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -2043,6 +2473,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(callback: AsyncCallback<NetAddress>): void;
 
@@ -2059,6 +2490,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(): Promise<NetAddress>;
 
@@ -2075,6 +2507,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     getState(callback: AsyncCallback<SocketStateBase>): void;
 
@@ -2091,6 +2524,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -2108,6 +2542,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(callback: AsyncCallback<int>): void;
 
@@ -2125,6 +2560,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
 
@@ -2143,6 +2579,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback<void>): void;
 
@@ -2161,6 +2598,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 7 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions): Promise<void>;
 
@@ -2178,6 +2616,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -2195,6 +2634,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<SocketMessageInfo>): void;
 
     /**
+     * 监听TCPSocket连接的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpMessage(callback: Callback<SocketMessageInfo>): void;
+
+    /**
      * 取消订阅TCPSocket连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 取消订阅的事件类型。'message'：接收消息事件。
@@ -2209,6 +2658,16 @@ declare namespace socket {
     off(type: 'message', callback?: Callback<SocketMessageInfo>): void;
 
     /**
+     * 取消监听TCPSocket连接的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpMessage(callback?: Callback<SocketMessageInfo>): void;
+
+    /**
      * 订阅TCPSocket的连接事件或关闭事件。使用callback异步回调。
      *
      * @param { 'connect' | 'close' } type - 订阅的事件类型。<br />- 'connect'：连接事件。<br />- 'close'：关闭事件。
@@ -2218,6 +2677,26 @@ declare namespace socket {
      * @since 7 dynamic
      */
     on(type: 'connect' | 'close', callback: Callback<void>): void;
+
+    /**
+     * 监听TCPSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpConnect(callback: Callback<void>): void;
+
+    /**
+     * 监听TCPSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpClose(callback: Callback<void>): void;
 
     /**
      * 取消订阅TCPSocket的连接事件或关闭事件。使用callback异步回调。
@@ -2231,6 +2710,26 @@ declare namespace socket {
     off(type: 'connect' | 'close', callback?: Callback<void>): void;
 
     /**
+     * 取消监听TCPSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpConnect(callback?: Callback<void>): void;
+
+    /**
+     * 取消监听TCPSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpClose(callback?: Callback<void>): void;
+
+    /**
      * 订阅TCPSocket连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 订阅的事件类型。'error'：error事件。
@@ -2240,6 +2739,16 @@ declare namespace socket {
      * @since 7 dynamic
      */
     on(type: 'error', callback: ErrorCallback): void;
+
+    /**
+     * 监听TCPSocket连接的error事件。
+     *
+     * @param { ErrorCallback } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpError(callback: ErrorCallback): void;
 
     /**
      * 取消订阅TCPSocket连接的error事件。使用callback异步回调。
@@ -2252,6 +2761,16 @@ declare namespace socket {
      */
     off(type: 'error', callback?: ErrorCallback): void;
 
+    /**
+     * 取消监听TCPSocket连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpError(callback?: ErrorCallback): void;
+
   }
 
   /**
@@ -2261,6 +2780,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   export interface TLSSocket {
     /**
@@ -2281,6 +2801,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     bind(address: NetAddress, callback: AsyncCallback<void>): void;
 
@@ -2302,6 +2823,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     bind(address: NetAddress): Promise<void>;
 
@@ -2314,6 +2836,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(callback: AsyncCallback<NetAddress>): void;
 
@@ -2326,6 +2849,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(): Promise<NetAddress>;
 
@@ -2338,6 +2862,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getState(callback: AsyncCallback<SocketStateBase>): void;
 
@@ -2350,6 +2875,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -2364,6 +2890,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback<void>): void;
 
@@ -2378,6 +2905,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions): Promise<void>;
 
@@ -2395,6 +2923,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -2417,6 +2946,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<SocketMessageInfo>): void;
 
     /**
+     * 监听TLSSocket连接的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsMessage(callback: Callback<SocketMessageInfo>): void;
+
+    /**
      * 取消订阅TLSSocket连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 订阅的事件类型。'message'：接收消息事件。
@@ -2429,6 +2968,16 @@ declare namespace socket {
      * @since 9 dynamic
      */
     off(type: 'message', callback?: Callback<SocketMessageInfo>): void;
+
+    /**
+     * 取消监听TLSSocket连接的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsMessage(callback?: Callback<SocketMessageInfo>): void;
 
     /**
      * 订阅TLSSocket的连接事件或关闭事件。使用callback异步回调。
@@ -2447,6 +2996,27 @@ declare namespace socket {
     on(type: 'connect' | 'close', callback: Callback<void>): void;
 
     /**
+     * 监听TLSSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @throws { BusinessError } 401 - Parameter error.
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsConnect(callback: Callback<void>): void;
+
+    /**
+     * 监听TLSSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsClose(callback: Callback<void>): void;
+
+    /**
      * 取消订阅TLSSocket的连接事件或关闭事件。使用callback异步回调。
      *
      * @param { 'connect' | 'close' } type - 订阅的事件类型。<br />- 'connect'：连接事件。<br />- 'close'：关闭事件。
@@ -2457,6 +3027,26 @@ declare namespace socket {
      * @since 9 dynamic
      */
     off(type: 'connect' | 'close', callback?: Callback<void>): void;
+
+    /**
+     * 取消监听TLSSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsConnect(callback?: Callback<void>): void;
+
+    /**
+     * 取消监听TLSSocket连接的连接或关闭事件。
+     *
+     * @param { Callback<void> } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsClose(callback?: Callback<void>): void;
 
     /**
      * 订阅TLSSocket连接的error事件。使用callback异步回调。
@@ -2475,6 +3065,16 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听TLSSocket连接的error事件。
+     *
+     * @param { ErrorCallback } callback - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅TLSSocket连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 订阅的事件类型。'error'：error事件。
@@ -2487,6 +3087,16 @@ declare namespace socket {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
+     * 取消监听TLSSocket连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - 用于返回结果的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsError(callback?: ErrorCallback): void;
+
+    /**
      * 在TLSSocket通信连接成功之后，获取本地的数字证书，该接口只适用于双向认证时，使用callback异步回调。
      *
      * @param { AsyncCallback<X509CertRawData> } callback - 回调函数，成功返回本地的证书，失败返回错误码、错误信息。
@@ -2496,6 +3106,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getCertificate(callback: AsyncCallback<X509CertRawData>): void;
 
@@ -2509,6 +3120,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getCertificate(): Promise<X509CertRawData>;
 
@@ -2521,6 +3133,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getRemoteCertificate(callback: AsyncCallback<X509CertRawData>): void;
 
@@ -2533,6 +3146,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getRemoteCertificate(): Promise<X509CertRawData>;
 
@@ -2546,6 +3160,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getProtocol(callback: AsyncCallback<string>): void;
 
@@ -2559,6 +3174,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getProtocol(): Promise<string>;
 
@@ -2573,6 +3189,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getCipherSuite(callback: AsyncCallback<Array<string>>): void;
 
@@ -2587,6 +3204,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getCipherSuite(): Promise<Array<string>>;
 
@@ -2599,6 +3217,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getSignatureAlgorithms(callback: AsyncCallback<Array<string>>): void;
 
@@ -2611,6 +3230,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     getSignatureAlgorithms(): Promise<Array<string>>;
 
@@ -2628,6 +3248,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 16 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
 
@@ -2664,6 +3285,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     connect(options: TLSConnectOptions, callback: AsyncCallback<void>): void;
 
@@ -2700,6 +3322,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     connect(options: TLSConnectOptions): Promise<void>;
 
@@ -2718,6 +3341,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     send(data: string | ArrayBuffer, callback: AsyncCallback<void>): void;
 
@@ -2736,6 +3360,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     send(data: string | ArrayBuffer): Promise<void>;
 
@@ -2751,6 +3376,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     close(callback: AsyncCallback<void>): void;
 
@@ -2766,6 +3392,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
   }
@@ -2776,6 +3403,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   export interface TLSSecureOptions {
     /**
@@ -2786,6 +3414,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     ca?: string | Array<string>;
 
@@ -2797,6 +3426,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     cert?: string | Array<string>;
 
@@ -2806,6 +3436,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     key?: string;
 
@@ -2815,6 +3446,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     password?: string;
 
@@ -2826,6 +3458,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     protocols?: Protocol | Array<Protocol>;
 
@@ -2835,6 +3468,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     useRemoteCipherPrefer?: boolean;
 
@@ -2844,6 +3478,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     signatureAlgorithms?: string;
 
@@ -2853,6 +3488,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     cipherSuite?: string;
 
@@ -2862,6 +3498,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     isBidirectionalAuthentication?: boolean;
   }
@@ -2872,6 +3509,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   export interface TLSConnectOptions {
     /**
@@ -2880,6 +3518,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     address: NetAddress;
 
@@ -2889,6 +3528,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     secureOptions: TLSSecureOptions;
 
@@ -2898,6 +3538,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     ALPNProtocols?: Array<string>;
 
@@ -2907,6 +3548,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     skipRemoteValidation?: boolean;
 
@@ -2916,6 +3558,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 18 dynamic
+     * @since 26.0.1 static
      */
     proxy?: ProxyOptions;
 
@@ -2925,6 +3568,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 22 dynamic
+     * @since 26.0.1 static
      */
     timeout?: int;
   }
@@ -2935,6 +3579,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
    * @since 9 dynamic
+   * @since 26.0.1 static
    */
   export enum Protocol {
     /**
@@ -2943,6 +3588,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     TLSv12 = "TLSv1.2",
 
@@ -2952,6 +3598,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @since 9 dynamic
+     * @since 26.0.1 static
      */
     TLSv13 = "TLSv1.3"
   }
@@ -2966,6 +3613,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface TCPSocketConnection {
     /**
@@ -2974,6 +3622,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     clientId: int;
 
@@ -2993,6 +3642,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     send(options: TCPSendOptions, callback: AsyncCallback<void>): void;
 
@@ -3012,6 +3662,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     send(options: TCPSendOptions): Promise<void>;
 
@@ -3026,6 +3677,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     close(callback: AsyncCallback<void>): void;
 
@@ -3039,6 +3691,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -3058,6 +3711,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(callback: AsyncCallback<NetAddress>): void;
 
@@ -3076,6 +3730,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(): Promise<NetAddress>;
 
@@ -3089,6 +3744,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -3107,6 +3763,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<SocketMessageInfo>): void;
 
     /**
+     * 监听TCPSocketConnection的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpConnMessage(callback: Callback<SocketMessageInfo>): void;
+
+    /**
      * 取消订阅TCPSocketConnection连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 取消订阅的事件类型。'message'：接收消息事件。
@@ -3122,6 +3788,16 @@ declare namespace socket {
     off(type: 'message', callback?: Callback<SocketMessageInfo>): void;
 
     /**
+     * 取消监听TCPSocketConnection的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpConnMessage(callback?: Callback<SocketMessageInfo>): void;
+
+    /**
      * 订阅TCPSocketConnection的关闭事件。使用callback异步回调。
      *
      * @param { 'close' } type - 订阅的事件类型。'close'：关闭事件。
@@ -3132,6 +3808,16 @@ declare namespace socket {
      * @since 10 dynamic
      */
     on(type: 'close', callback: Callback<void>): void;
+
+    /**
+     * 监听TCPSocketConnection的关闭事件。
+     *
+     * @param { Callback<void> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpConnClose(callback: Callback<void>): void;
 
     /**
      * 取消订阅TCPSocketConnection的关闭事件。使用callback异步回调。
@@ -3146,6 +3832,16 @@ declare namespace socket {
     off(type: 'close', callback?: Callback<void>): void;
 
     /**
+     * 取消监听TCPSocketConnection的关闭事件。
+     *
+     * @param { Callback<void> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpConnClose(callback?: Callback<void>): void;
+
+    /**
      * 订阅TCPSocketConnection连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 订阅的事件类型。'error'：error事件。
@@ -3157,6 +3853,15 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听TCPSocketConnection的error事件。
+     *
+     * @param { ErrorCallback } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    onTcpConnError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅TCPSocketConnection连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 取消订阅的事件类型。'error'：error事件。
@@ -3166,6 +3871,15 @@ declare namespace socket {
      * @since 10 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听TCPSocketConnection的error事件。
+     *
+     * @param { ErrorCallback } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    offTcpConnError(callback?: ErrorCallback): void;
 
     /**
      * 获取TCPSocketConnection连接的文件描述符。使用Promise异步回调。
@@ -3185,6 +3899,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }
@@ -3196,6 +3911,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface TCPSocketServer {
     /**
@@ -3218,6 +3934,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     listen(address: NetAddress, callback: AsyncCallback<void>): void;
 
@@ -3241,6 +3958,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     listen(address: NetAddress): Promise<void>;
 
@@ -3262,6 +3980,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -3281,6 +4000,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getState(callback: AsyncCallback<SocketStateBase>): void;
 
@@ -3299,6 +4019,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -3319,6 +4040,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback<void>): void;
 
@@ -3339,6 +4061,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions): Promise<void>;
 
@@ -3356,6 +4079,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -3376,6 +4100,16 @@ declare namespace socket {
     on(type: 'connect', callback: Callback<TCPSocketConnection>): void;
 
     /**
+     * 监听TCPSocketServer连接的连接事件。
+     *
+     * @param { Callback<TCPSocketConnection> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTcpServerConnect(callback: Callback<TCPSocketConnection>): void;
+
+    /**
      * 取消订阅TCPSocketServer的连接事件。使用callback异步回调。
      *
      * @param { 'connect' } type - 取消订阅的事件类型。'connect'：连接事件。
@@ -3386,6 +4120,16 @@ declare namespace socket {
      * @since 10 dynamic
      */
     off(type: 'connect', callback?: Callback<TCPSocketConnection>): void;
+
+    /**
+     * 取消监听TCPSocketServer连接的连接事件。
+     *
+     * @param { Callback<TCPSocketConnection> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTcpServerConnect(callback?: Callback<TCPSocketConnection>): void;
 
     /**
      * 订阅TCPSocketServer连接的error事件。使用callback异步回调。
@@ -3403,6 +4147,15 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听TCPSocketServer连接的error事件。
+     *
+     * @param { ErrorCallback } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    onTcpServerError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅TCPSocketServer连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 取消订阅的事件类型。'error'：error事件。
@@ -3412,6 +4165,15 @@ declare namespace socket {
      * @since 10 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听TCPSocketServer连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    offTcpServerError(callback?: ErrorCallback): void;
 
     /**
      * 获取TCPSocketServer监听端口绑定的文件描述符。使用Promise异步回调。
@@ -3431,6 +4193,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }
@@ -3445,6 +4208,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface TLSSocketConnection {
     /**
@@ -3453,6 +4217,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     clientId: int;
 
@@ -3471,6 +4236,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     send(data: string | ArrayBuffer, callback: AsyncCallback<void>): void;
 
@@ -3489,6 +4255,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     send(data: string | ArrayBuffer): Promise<void>;
 
@@ -3504,6 +4271,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     close(callback: AsyncCallback<void>): void;
 
@@ -3518,6 +4286,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -3531,6 +4300,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(callback: AsyncCallback<NetAddress>): void;
 
@@ -3543,6 +4313,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getRemoteAddress(): Promise<NetAddress>;
 
@@ -3556,6 +4327,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getRemoteCertificate(callback: AsyncCallback<X509CertRawData>): void;
 
@@ -3568,6 +4340,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getRemoteCertificate(): Promise<X509CertRawData>;
 
@@ -3583,6 +4356,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getCipherSuite(callback: AsyncCallback<Array<string>>): void;
 
@@ -3597,6 +4371,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getCipherSuite(): Promise<Array<string>>;
 
@@ -3610,6 +4385,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getSignatureAlgorithms(callback: AsyncCallback<Array<string>>): void;
 
@@ -3622,6 +4398,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getSignatureAlgorithms(): Promise<Array<string>>;
 
@@ -3639,6 +4416,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -3658,6 +4436,16 @@ declare namespace socket {
     on(type: 'message', callback: Callback<SocketMessageInfo>): void;
 
     /**
+     * 监听TLSSocketConnection的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsConnMessage(callback: Callback<SocketMessageInfo>): void;
+
+    /**
      * 取消订阅TLSSocketConnection连接的接收消息事件。使用callback异步回调。
      *
      * @param { 'message' } type - 订阅的事件类型。'message'：接收消息事件。
@@ -3673,6 +4461,16 @@ declare namespace socket {
     off(type: 'message', callback?: Callback<SocketMessageInfo>): void;
 
     /**
+     * 取消监听TLSSocketConnection的接收消息事件。
+     *
+     * @param { Callback<SocketMessageInfo> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsConnMessage(callback?: Callback<SocketMessageInfo>): void;
+
+    /**
      * 订阅TLSSocketConnection的关闭事件。使用callback异步回调。
      *
      * @param { 'close' } type - 订阅的事件类型。'close'：关闭事件。
@@ -3683,6 +4481,16 @@ declare namespace socket {
      * @since 10 dynamic
      */
     on(type: 'close', callback: Callback<void>): void;
+
+    /**
+     * 监听TLSSocketConnection的关闭事件。
+     *
+     * @param { Callback<void> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsConnClose(callback: Callback<void>): void;
 
     /**
      * 取消订阅TLSSocketConnection的关闭事件。使用callback异步回调。
@@ -3697,6 +4505,16 @@ declare namespace socket {
     off(type: 'close', callback?: Callback<void>): void;
 
     /**
+     * 取消监听TLSSocketConnection的关闭事件。
+     *
+     * @param { Callback<void> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsConnClose(callback?: Callback<void>): void;
+
+    /**
      * 订阅TLSSocketConnection连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 订阅的事件类型。'error'：error事件。
@@ -3708,6 +4526,15 @@ declare namespace socket {
     on(type: 'error', callback: ErrorCallback): void;
 
     /**
+     * 监听TLSSocketConnection的error事件。
+     *
+     * @param { ErrorCallback } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    onTlsConnError(callback: ErrorCallback): void;
+
+    /**
      * 取消订阅TLSSocketConnection连接的error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 订阅的事件类型。'error'：error事件。
@@ -3717,6 +4544,15 @@ declare namespace socket {
      * @since 10 dynamic
      */
     off(type: 'error', callback?: ErrorCallback): void;
+
+    /**
+     * 取消监听TLSSocketConnection的error事件。
+     *
+     * @param { ErrorCallback } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    offTlsConnError(callback?: ErrorCallback): void;
 
     /**
      * 获取TLSSocketConnection连接的文件描述符。使用Promise异步回调。
@@ -3736,6 +4572,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }
@@ -3746,6 +4583,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   export interface SocketMessageInfo {
     /**
@@ -3754,6 +4592,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     message: ArrayBuffer;
     /**
@@ -3762,6 +4601,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 11 dynamic
+     * @since 26.0.1 static
      */
     remoteInfo: SocketRemoteInfo;
   }
@@ -3773,6 +4613,7 @@ declare namespace socket {
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 10 dynamic
+   * @since 26.0.1 static
    */
   export interface TLSSocketServer {
     /**
@@ -3800,6 +4641,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     listen(options: TLSConnectOptions, callback: AsyncCallback<void>): void;
 
@@ -3824,6 +4666,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     listen(options: TLSConnectOptions): Promise<void>;
 
@@ -3842,6 +4685,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     close(): Promise<void>;
 
@@ -3859,6 +4703,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getState(callback: AsyncCallback<SocketStateBase>): void;
 
@@ -3875,6 +4720,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getState(): Promise<SocketStateBase>;
 
@@ -3893,6 +4739,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback<void>): void;
 
@@ -3911,6 +4758,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     setExtraOptions(options: TCPExtraOptions): Promise<void>;
 
@@ -3929,6 +4777,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getCertificate(callback: AsyncCallback<X509CertRawData>): void;
 
@@ -3946,6 +4795,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getCertificate(): Promise<X509CertRawData>;
 
@@ -3964,6 +4814,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getProtocol(callback: AsyncCallback<string>): void;
 
@@ -3981,6 +4832,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
+     * @since 26.0.1 static
      */
     getProtocol(): Promise<string>;
 
@@ -3998,6 +4850,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
+     * @since 26.0.1 static
      */
     getLocalAddress(): Promise<NetAddress>;
 
@@ -4018,6 +4871,16 @@ declare namespace socket {
     on(type: 'connect', callback: Callback<TLSSocketConnection>): void;
 
     /**
+     * 监听TLSSocketServer连接的连接事件。
+     *
+     * @param { Callback<TLSSocketConnection> } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsServerConnect(callback: Callback<TLSSocketConnection>): void;
+
+    /**
      * 取消订阅TLSSocketServer的连接事件。使用callback异步回调。
      *
      * > **说明：**
@@ -4036,6 +4899,16 @@ declare namespace socket {
     off(type: 'connect', callback?: Callback<TLSSocketConnection>): void;
 
     /**
+     * 取消监听TLSSocketServer连接的连接事件。
+     *
+     * @param { Callback<TLSSocketConnection> } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsServerConnect(callback?: Callback<TLSSocketConnection>): void;
+
+    /**
      * 订阅TLSSocketServer连接的error事件。使用callback异步回调。
      *
      * > **说明：**
@@ -4050,6 +4923,16 @@ declare namespace socket {
      * @since 10 dynamic
      */
     on(type: 'error', callback: ErrorCallback): void;
+
+    /**
+     * 监听TLSSocketServer连接的error事件。
+     *
+     * @param { ErrorCallback } callback - on对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    onTlsServerError(callback: ErrorCallback): void;
 
     /**
      * 取消订阅TLSSocketServer连接的error事件。使用callback异步回调。
@@ -4070,6 +4953,16 @@ declare namespace socket {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
+     * 取消监听TLSSocketServer连接的error事件。
+     *
+     * @param { ErrorCallback } [callback] - off对应的回调函数。
+     * @syscap SystemCapability.Communication.NetStack
+     * @crossplatform
+     * @since 26.0.1 static
+     */
+    offTlsServerError(callback?: ErrorCallback): void;
+
+    /**
      * 获取TLSSocketServer监听端口绑定的文件描述符。使用Promise异步回调。
      *
      * > **说明：**
@@ -4086,6 +4979,7 @@ declare namespace socket {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     getSocketFd(): Promise<int>;
   }

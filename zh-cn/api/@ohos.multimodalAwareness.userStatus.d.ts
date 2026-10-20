@@ -101,8 +101,10 @@ declare namespace userStatus {
    *
    * @param { string } type - 事件类型。type为“userAgeGroupDetected”，表示年龄群组检测功能。
    * @param { Callback<UserClassification> } callback - 回调函数，返回检测结果。
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -127,8 +129,10 @@ declare namespace userStatus {
    * @param { string } type - 事件类型。type为“userAgeGroupDetected”，表示年龄群组检测功能。
    * @param { Callback<UserClassification> } [callback] - 回调函数，返回检测结果。需要取消监听的回调函数，需与订阅时传入的回调函数一致。
    *     <br>若不填，则取消当前监听该事件的所有回调函数。
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -146,8 +150,10 @@ declare namespace userStatus {
    * 订阅年龄群组检测功能。
    *
    * @param { Callback<UserClassification> } callback - 回调函数，返回检测结果。
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -167,8 +173,10 @@ declare namespace userStatus {
    *
    * @param { Callback<UserClassification> } [callback] - 回调函数，返回检测结果。需要取消监听的回调函数，需与订阅时传入的回调函数一致。
    *     <br>若不填，则取消当前监听该事件的所有回调函数。
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.
@@ -1016,8 +1024,10 @@ declare namespace userStatus {
    *     <br>否则影响功能使用；其他featureId可省略此参数。如果输入空、undefined或null，则认为没有传入实际值。
    * @returns { int } 返回注册的回调ID。唯一标识对应回调函数。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as a invalid Node-API status.
@@ -1042,8 +1052,10 @@ declare namespace userStatus {
    * @param { Callback<UserStatusData> } [callback] - 表示取消指定的callback回调函数。如果输入空、undefined或null，则取消featureId订阅的所有通知事件。
    * @returns { int } 返回执行结果。返回0表示操作成功，非零值表示操作失败。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited
-   *     <br> device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
    *     <br>2. Node-API invocation exception, such as invalid Node-API status.

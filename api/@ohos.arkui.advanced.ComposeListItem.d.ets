@@ -20,7 +20,7 @@
  * 
  * ###### Events
  * 
- * The [universal events]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal events]{@link CommonMethod} are not supported.
  *
  * @file
  * @kit ArkUI
@@ -659,8 +659,8 @@ export declare class OperateItem {
  * > - This component can be used only in the stage model.
  * >
  * > - If the **ComposeListItem** component has
- * > [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler
+ * > [universal attributes]{@link CommonMethod} and
+ * > [universal events]{@link CommonMethod} configured, the compiler
  * > toolchain automatically generates an additional \_\_Common\_\_ node and mounts the universal attributes and
  * > universal events on this node rather than the **ComposeListItem** component itself. As a result, the configured
  * > universal attributes and universal events may fail to take effect or behave as intended. For this reason, avoid

@@ -38,7 +38,7 @@ declare enum ScrollBarDirection {
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
-  Vertical = 0,
+  Vertical,
 
   /**
    * 横向滚动条。
@@ -49,7 +49,7 @@ declare enum ScrollBarDirection {
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
-  Horizontal = 1
+  Horizontal,
 }
 
 /**

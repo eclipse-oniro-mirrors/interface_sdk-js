@@ -43,6 +43,15 @@ declare namespace huksExternalCrypto {
     HUKS_EXT_CRYPTO_TAG_TYPE_INT = 1 << 28,
 
     /**
+     * 表示TAG的值为无符号整数类型。
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.2.0
+     */
+    HUKS_EXT_CRYPTO_TAG_TYPE_UINT = 2 << 28,
+
+    /**
      * 表示TAG的值为字节数组。
      *
      * @syscap SystemCapability.Security.Huks.CryptoExtension
@@ -99,6 +108,15 @@ declare namespace huksExternalCrypto {
      * @since 22
      */
     HUKS_EXT_CRYPTO_TAG_PURPOSE = HuksExternalCryptoTagType.HUKS_EXT_CRYPTO_TAG_TYPE_INT | 200005,
+
+    /**
+     * 表示异步超时时间，单位为秒，可由业务逻辑自定义。
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.0.1
+     */
+    HUKS_EXT_CRYPTO_TAG_TIMEOUT = HuksExternalCryptoTagType.HUKS_EXT_CRYPTO_TAG_TYPE_UINT | 200006,
 
     /**
      * 表示获取资源ID所需的信息，格式和内容由厂商自定义。

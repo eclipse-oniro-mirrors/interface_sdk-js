@@ -326,6 +326,14 @@ export declare interface VideoOptions {
      */
     controller?: VideoController;
     /**
+     * 设置异步视频控制器，可以控制视频的播放状态。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    controllerAsync?: VideoControllerAsync;
+    /**
      * 设置图像AI分析选项，可配置分析类型或绑定一个分析控制器。
      *
      * @type { ?ImageAIOptions }
@@ -669,8 +677,9 @@ export declare interface VideoAttribute extends CommonMethod {
      * @param { VideoOptions } value - Video constructor options
      * @returns { VideoAttribute } Returns the instance of the VideoAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setVideoOptions(value: VideoOptions): this;
     /**
@@ -708,11 +717,95 @@ export declare function Video(
  * @param { CustomBuilderT<VideoAttribute> } style - the callback to set up component's attributes.
  * @returns { VideoAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder
 export declare function Video(
     style: CustomBuilderT<VideoAttribute>
 ): VideoAttribute;
+
+/**
+ * 视频播放控制器类，用于异步操作。
+ * 提供控制视频播放、时间和显示模式的方法。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare class VideoControllerAsync {
+    /**
+     * 创建一个VideoControllerAsync实例。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    constructor();
+    /**
+     * 异步开始视频播放。
+     *
+     * @returns { Promise<void> } 无返回值的Promise。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    start(): Promise<void>;
+    /**
+     * 异步暂停视频播放。
+     *
+     * @returns { Promise<void> } 无返回值的Promise。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    pause(): Promise<void>;
+    /**
+     * 异步停止视频播放。
+     *
+     * @returns { Promise<void> } 无返回值的Promise。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    stop(): Promise<void>;
+    /**
+     * 请求视频全屏显示。
+     *
+     * @param { boolean } value
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    requestFullscreen(value: boolean): void;
+    /**
+     * 退出全屏显示模式。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    exitFullscreen(): void;
+    /**
+     * 设置指定跳转模式的当前播放时间。
+     *
+     * @param { double } value - <br>单位：秒，值必须大于等于0，最大值为视频总时长。如果时长超过最大值，系统将跳转到视频末尾。
+     * @param { SeekMode } [seekMode]
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    setCurrentTime(value: double, seekMode?: SeekMode): void;
+    /**
+     * 异步重置视频控制器。
+     * 将控制器恢复到初始状态。
+     *
+     * @returns { Promise<void> } 无返回值的Promise。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    reset(): Promise<void>;
+}

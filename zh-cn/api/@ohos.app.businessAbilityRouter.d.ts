@@ -112,8 +112,9 @@ declare namespace businessAbilityRouter {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { BusinessAbilityFilter } filter - 用于按业务类型过滤的对象。
    * @param { AsyncCallback<Array<BusinessAbilityInfo>> } callback - 回调函数。返回查询到的Ability信息，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -132,8 +133,9 @@ declare namespace businessAbilityRouter {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { BusinessAbilityFilter } filter - 包含要查询的Ability信息的筛选类型。
    * @returns { Promise<Array<BusinessAbilityInfo>> } Promise对象，返回符合过滤条件的Ability信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

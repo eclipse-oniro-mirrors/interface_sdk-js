@@ -68,12 +68,10 @@ export declare enum PasteDescription {
  * > **说明**
  * >
  * > - 建议icon或text至少传入一个。
- *
  * > - 如果icon、text都不传入，**PasteButton**将使用默认样式创建，默认样式：
- * > **PasteIconStyle**默认样式为**LINES**；**PasteDescription**默认样式为**PASTE**；**ButtonType**默认样式为**Capsule**。
- *
+ * >   **PasteIconStyle**默认样式为**LINES**；**PasteDescription**默认样式为**PASTE**；**ButtonType**默认样式为**Capsule**。
  * > - **icon**、**text**和**buttonType**不支持动态修改。这是因为安全控件的样式和属性在创建时已通过系统校验，动态修改可能导致
- * > 控件样式不符合安全控件规范，从而影响授权的有效性。
+ * >   控件样式不符合安全控件规范，从而影响授权的有效性。
  *
  * @interface PasteButtonOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -151,12 +149,19 @@ export declare enum PasteButtonOnClickResult {
  * @param { PasteButtonOnClickResult } result - 剪贴板权限的授权结果。
  *     <br>返回SUCCESS表示已获得当前剪贴板内容的临时读取权限，可以继续执行读取操作；返回TEMPORARY_AUTHORIZATION_FAILED表示本次授权未成功，
  *     不应继续读取剪贴板内容。
- * @param { BusinessError<void> } [error] - 点击按钮时的错误码和错误信息。
- *     <br>默认值：undefined。
- *     <br>授权结果需通过result参数判断。<br/>错误码1表示系统内部错误。请检查系统状态后重试。<br/>错误码
- *     2表示属性设置错误，包括但不限于：<br/>1. 字体或图标设置过小。<br/>2. 字体或图标与控件背景颜色相近。<br/>3. 字体或图标颜色过于透明。
- *     <br/>4. padding为负值。<br/>5. 按钮被其他组件或窗口遮挡。<br/>6. 文本超出控件背景范围。<br/>7. 按钮超出窗口或屏幕。
- *     <br/>8. 按钮整体尺寸过大。<br/>9. 按钮文本被截断，显示不全。<br/>10. 部分安全控件相关属性的设置导致控件无法正常显示。
+ * @param { BusinessError<void> } [error] - 点击按钮时的错误码和错误信息。默认值：undefined。授权结果需通过result参数判断。
+ *     <br>错误码1表示系统内部错误。请检查系统状态后重试。
+ *     <br>错误码2表示属性设置错误，包括但不限于：
+ *     <br>1. 字体或图标设置过小。
+ *     <br>2. 字体或图标与控件背景颜色相近。
+ *     <br>3. 字体或图标颜色过于透明。
+ *     <br>4. padding为负值。
+ *     <br>5. 按钮被其他组件或窗口遮挡。
+ *     <br>6. 文本超出控件背景范围。
+ *     <br>7. 按钮超出窗口或屏幕。
+ *     <br>8. 按钮整体尺寸过大。
+ *     <br>9. 按钮文本被截断，显示不全。
+ *     <br>10. 部分安全控件相关属性的设置导致控件无法正常显示。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -165,9 +170,9 @@ export type PasteButtonCallback
   = (event: ClickEvent, result: PasteButtonOnClickResult, error?: BusinessError<void>) => void;
 
 /**
- * 该组件仅能继承[安全控件通用属性]{@link ./securityComponent}。
+ * 不支持通用属性，仅继承[安全控件通用属性]{@link ./securityComponent}。
  *
- * <br>仅支持以下事件。
+ * 不支持通用事件，仅支持以下事件。
  *
  * @extends SecurityComponentMethod
  * @interface PasteButtonAttribute
@@ -180,7 +185,8 @@ export declare interface PasteButtonAttribute extends SecurityComponentMethod {
    * 点击粘贴控件触发该回调，回调返回授权结果。授权成功后应用可临时获取读取剪贴板权限。
    *
    * > **说明**
-   * > - 为避免因控件样式不合法而导致授权失败，请开发者先了解安全控件样式的
+   * >
+   * > 为避免因控件样式不合法而导致授权失败，请开发者先了解安全控件样式的
    * > [约束与限制](docroot://security/AccessToken/security-component-overview.md#约束与限制)。
    *
    * @param { PasteButtonCallback | undefined } event - 点击事件的回调函数，用于处理粘贴控件点击后的授权结果。

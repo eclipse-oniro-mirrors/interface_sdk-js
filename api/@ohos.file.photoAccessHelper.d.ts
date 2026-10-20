@@ -739,12 +739,12 @@ declare namespace photoAccessHelper {
     GAUSSIAN_SPLAT_3D = 17,
 
     /**
-     * Recommended pet
+     * Recommended pet.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-	 * @since 26.2.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     FEATURED_SINGLE_PET = 18
   }
@@ -1296,10 +1296,10 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Parameter types or count are invalid, please check if asset is PhotoAsset, requestOptions is
      *     RequestOptions, dataHandler is a valid MediaAssetDataHandler object;
-     *     <br>2.User file service initialization failed, possible causes: 1. Database exception;
-     *     2. File system exception; 3. IPC timeout. Please check if the context is valid and retry;
+     *     <br>2.User file service initialization failed, possible causes: (1)Database exception;
+     *     (2)File system exception; (3)IPC timeout. Please check if the context is valid and retry;
      *     <br>3.Failed to initialize the dataHandler callback, possible causes:
-     *     1. Memory insufficient; 2. IPC timeout. Please retry.
+     *     (1)Memory insufficient; (2)IPC timeout. Please retry.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      * @since 23 static
@@ -1355,10 +1355,10 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Parameter types or count are invalid, please check if asset is PhotoAsset, requestOptions is
      *     RequestOptions, dataHandler is a valid MediaAssetDataHandler object;
-     *     <br>2.User file service initialization failed, possible causes: 1. Database exception;
-     *     2. File system exception; 3. IPC timeout. Please check if the context is valid and retry;
+     *     <br>2.User file service initialization failed, possible causes: (1)Database exception;
+     *     (2)File system exception; (3)IPC timeout. Please check if the context is valid and retry;
      *     <br>3.Failed to initialize the dataHandler callback, possible causes:
-     *     1. Memory insufficient; 2. IPC timeout. Please retry.
+     *     (1)Memory insufficient; (2)IPC timeout. Please retry.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      * @since 23 static
@@ -1390,9 +1390,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Parameter parsing failed, please check the number and types of parameters;
      *     <br>2.User file service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is valid and retry;
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is valid and retry;
      *     <br>3.Failed to initialize the dataHandler callback, possible causes:
-     *     1. Memory insufficient; 2. IPC timeout. Please retry.
+     *     (1)Memory insufficient; (2)IPC timeout. Please retry.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamic
      * @since 23 static
@@ -1420,7 +1420,7 @@ declare namespace photoAccessHelper {
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.User file service initialization failed, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout.
      *     Please check if the context is valid and retry;
      *     <br>2.The requestId parameter is invalid, please check if it is a valid non-empty string returned by a
      *     prior request.
@@ -1458,9 +1458,9 @@ declare namespace photoAccessHelper {
      *     <br>1.Parameter parsing failed, please check the number and types of parameters;
      *     <br>2.The dataHandler parameter must be a valid object;
      *     <br>3.User file service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is valid and retry;
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is valid and retry;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamic
      * @since 23 static
@@ -1489,7 +1489,7 @@ declare namespace photoAccessHelper {
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.User file client initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry.
+     *     (1)Database exception; (2)IPC timeout. Please retry.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 14]
      * @since 12 dynamic
@@ -1518,7 +1518,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - Scene parameters validate failed, possible causes:
-     *     1. The asset is not a cloud-enhanced composite photo asset.
+     *     The asset is not a cloud-enhanced composite photo asset.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     Possible causes:
      *     1. The database is corrupted;
@@ -1881,9 +1881,9 @@ declare namespace photoAccessHelper {
      *     <br>3.Invalid displayName.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.IPC call failed, possible causes:
-     *     1. Server internal error; 2. Database operation failed. Please retry and check logs;
+     *     (1)Server internal error; (2)Database operation failed. Please retry and check logs;
      *     <br>2.Database update failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 11]
      * @since 10 dynamic
@@ -1911,9 +1911,9 @@ declare namespace photoAccessHelper {
      *     <br>3.Invalid displayName.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.IPC call failed, possible causes:
-     *     1. Server internal error; 2. Database operation failed. Please retry and check logs;
+     *     (1)Server internal error; (2)Database operation failed. Please retry and check logs;
      *     <br>2.Database update failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 11]
      * @since 10 dynamic
@@ -2003,7 +2003,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The PhotoAsset is not a valid PhotoAsset object.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>2.Failed to open the file, please check if the file exists and the application has permission to
      *     access it.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -2030,7 +2030,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The PhotoAsset is not a valid PhotoAsset object.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>2.Failed to open the file, please check if the file exists and the application has permission to
      *     access it.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -2055,7 +2055,7 @@ declare namespace photoAccessHelper {
      *     <br>1.The fd parameter is not a valid number, please check if it is a valid file descriptor returned by
      *     getReadOnlyFd();
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 10 dynamiconly
      * @deprecated since 11
@@ -2077,7 +2077,7 @@ declare namespace photoAccessHelper {
      *     <br>1.The fd parameter is not a valid number, please check if it is a valid file descriptor returned by
      *     getReadOnlyFd();
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 10 dynamiconly
      * @deprecated since 11
@@ -2102,9 +2102,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.The PhotoAsset object is not a valid PhotoAsset;
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>3.Failed to query the thumbnail, possible causes:
-     *     1. Thumbnail does not exist; 2. Database exception. Please retry and check logs.
+     *     (1)Thumbnail does not exist; (2)Database exception. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 22]
      * @since 10 dynamic
@@ -2133,9 +2133,9 @@ declare namespace photoAccessHelper {
      *     <br>3.The size parameter is not a valid image.Size object,
      *     please check if width and height are valid numbers;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.Failed to query the thumbnail, possible causes:
-     *     1. Thumbnail does not exist; 2. Database exception. Please retry and check logs.
+     *     (1)Thumbnail does not exist; (2)Database exception. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 22]
      * @since 10 dynamic
@@ -2162,9 +2162,9 @@ declare namespace photoAccessHelper {
      *     <br>3.The size parameter is not a valid image.Size object,
      *     please check if width and height are valid numbers;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.Failed to query the thumbnail, possible causes:
-     *     1. Thumbnail does not exist; 2. Database exception. Please retry and check logs.
+     *     (1)Thumbnail does not exist; (2)Database exception. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 22]
      * @since 10 dynamic
@@ -2603,7 +2603,7 @@ declare namespace photoAccessHelper {
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 14 dynamic
      * @since 23 static
@@ -3805,7 +3805,37 @@ declare namespace photoAccessHelper {
      */
     REJECTED = 3
   }
-  
+
+  /**
+   * Enumerates the log modes of video files.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @since 22 dynamic
+   * @since 23 static
+   */
+  export enum VideoMode {
+    /**
+     * Default type.
+     *
+     * A value of **0** indicates that the video is either not in log mode or its type has not yet been determined. This
+     * value may later be updated to **1** for some videos after type determination, so it is not recommended for use in
+     * queries.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @since 22 dynamic
+     * @since 23 static
+     */
+    DEFAULT = 0,
+    /**
+     * Video file in log mode.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @since 22 dynamic
+     * @since 23 static
+     */
+    LOG_VIDEO = 1
+  }
+
   /**
    * Enumeration of fusion asset type
    *
@@ -4228,36 +4258,6 @@ declare namespace photoAccessHelper {
   }
 
   /**
-   * Enumerates the log modes of video files.
-   *
-   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-   * @since 22 dynamic
-   * @since 23 static
-   */
-  export enum VideoMode {
-    /**
-     * Default type.
-     *
-     * A value of **0** indicates that the video is either not in log mode or its type has not yet been determined. This
-     * value may later be updated to **1** for some videos after type determination, so it is not recommended for use in
-     * queries.
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @since 22 dynamic
-     * @since 23 static
-     */
-    DEFAULT = 0,
-    /**
-     * Video file in log mode.
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @since 22 dynamic
-     * @since 23 static
-     */
-    LOG_VIDEO = 1
-  }
-
-  /**
    * Options for creating an image or video asset.
    *
    * The title must meet the following requirements:
@@ -4384,9 +4384,9 @@ declare namespace photoAccessHelper {
      *
      * @returns { int } Total number of files obtained.
      * @throws { BusinessError } 13900020 - Invalid parameter. Possible causes:
-     *     <br>1.The object is not a valid instance.
+     *     <br>The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
-     *     <br>1.The query result set has been closed via close() or is in an invalid state,
+     *     <br>The query result set has been closed via close() or is in an invalid state,
      *     please re-execute the query.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
@@ -4401,9 +4401,9 @@ declare namespace photoAccessHelper {
      * @returns { boolean } **true** is returned if the cursor is in the last row of the result set; **false**
      *     otherwise.
      * @throws { BusinessError } 13900020 - Invalid parameter. Possible causes:
-     *     <br>1.The object is not a valid instance.
+     *     <br>The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
-     *     <br>1.The query result set has been closed via close() or is in an invalid state,
+     *     <br>The query result set has been closed via close() or is in an invalid state,
      *     please re-execute the query.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
@@ -4423,7 +4423,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4440,7 +4440,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4462,7 +4462,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4482,7 +4482,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4500,7 +4500,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4517,7 +4517,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4538,7 +4538,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4556,7 +4556,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4575,7 +4575,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4592,7 +4592,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The object is not a valid instance.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -4632,8 +4632,8 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:
      *     1. Parameter count exceeds the limit; 2. The current object is invalid.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
-     *     <br>1. System internal error. Possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     <br>System internal error. Possible causes:
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @atomicservice [since 20]
@@ -5168,11 +5168,11 @@ declare namespace photoAccessHelper {
      *     <br>7.The combination of album type and subtype is invalid.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Database query failed, possible causes:
-     *     1. Database connection exception; 2. Database operation error. Please retry and check logs;
+     *     (1)Database connection exception; (2)Database operation error. Please retry and check logs;
      *     <br>2.IPC call failed, the server returned an error code;
      *     <br>3.Both sandbox query and IPC query failed to retrieve data;
      *     <br>4.Failed to create the query result, possible causes:
-     *     1. Memory insufficient; 2. IPC timeout. Please retry;
+     *     (1)Memory insufficient; (2)IPC timeout. Please retry;
      *     <br>5.FetchOptions parsing failed, please check if the parameter is a valid FetchOptions type;
      *     <br>6.Parameter parsing failed, please check parameter types and count.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -5204,9 +5204,9 @@ declare namespace photoAccessHelper {
      *     <br>1.FetchOptions parsing failed, please check if the parameter is a valid FetchOptions type;
      *     <br>2.Parameter parsing failed, please check parameter types and count;
      *     <br>3.Database query failed, possible causes:
-     *     1. Database connection exception; 2. Database operation error. Please retry and check logs;
+     *     (1)Database connection exception; (2)Database operation error. Please retry and check logs;
      *     <br>4.Failed to create the query result, possible causes:
-     *     1. Memory insufficient; 2. IPC timeout. Please retry;
+     *     (1)Memory insufficient; (2)IPC timeout. Please retry;
      *     <br>5.Database query returned empty result set in async execution path.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
@@ -5406,7 +5406,7 @@ declare namespace photoAccessHelper {
      *     <br>1.The context parameter is invalid or not properly initialized, please pass a valid Context obtained
      *     from the application context;
      *     <br>2.The server returned an error during commitModify, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 10 dynamic
      * @since 23 static
@@ -5433,7 +5433,7 @@ declare namespace photoAccessHelper {
      *     <br>1.The context parameter is invalid or not properly initialized, please pass a valid Context obtained
      *     from the application context;
      *     <br>2.The server returned an error during commitModify, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 10 dynamic
      * @since 23 static
@@ -5469,7 +5469,7 @@ declare namespace photoAccessHelper {
      *     <br>4.The assets array contains elements that are not valid PhotoAsset objects;
      *     <br>5.Server returned a non-permission error code;
      *     <br>6.Failed to update album count, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>7.The assets parameter must be an array;
      *     <br>8.The assets array is empty;
      *     <br>9.The array element must be a valid PhotoAsset object.
@@ -5507,9 +5507,9 @@ declare namespace photoAccessHelper {
      *     <br>2.IPC call returned a non-permission error code;
      *     <br>3.Batch insert failed, database operation error, please retry;
      *     <br>4.Failed to update album count, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>6.The assets parameter must be an array;
      *     <br>7.The assets array is empty;
      *     <br>8.The array element must be a valid PhotoAsset object.
@@ -5548,7 +5548,7 @@ declare namespace photoAccessHelper {
      *     <br>2.IPC call returned a non-permission error code;
      *     <br>3.The assets array contains elements that are not valid PhotoAsset objects;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.The assets parameter must be an array;
      *     <br>6.The assets array is empty;
      *     <br>7.The array element must be a valid PhotoAsset object.
@@ -5586,7 +5586,7 @@ declare namespace photoAccessHelper {
      *     <br>2.IPC call returned a non-permission error code;
      *     <br>3.The assets array contains elements that are not valid PhotoAsset objects;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.The assets parameter must be an array;
      *     <br>6.The assets array is empty;
      *     <br>7.The array element must be a valid PhotoAsset object.
@@ -5708,7 +5708,7 @@ declare namespace photoAccessHelper {
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 13900012 - Permission denied
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:
-     *     <br>1.This operation is not supported for this album type.
+     *     <br>This operation is not supported for this album type.
      * @throws { BusinessError } 14000011 - System inner fail
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -5730,7 +5730,7 @@ declare namespace photoAccessHelper {
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 13900012 - Permission denied
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:
-     *     <br>1.This operation is not supported for this album type.
+     *     <br>This operation is not supported for this album type.
      * @throws { BusinessError } 14000011 - System inner fail
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -5790,7 +5790,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails.
-     *     <br>Possible causes: 1. The input parameter is not within the valid range.
+     *     <br>Possible causes: The input parameter is not within the valid range.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -5869,7 +5869,7 @@ declare namespace photoAccessHelper {
      *     <br>3.The fetchColumns in FetchOptions contain invalid column names,
      *     please refer to PhotoKeys for valid column names;
      *     <br>4.Database query failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs;
      *     <br>5.Query returned an empty result set.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
@@ -5888,7 +5888,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 13900012 - Permission denied [since 10 - 19]
      * @throws { BusinessError } 13900020 - Invalid parameter. Possible causes:
      *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs
      *     <br>2.The number of arguments is invalid;
      *     <br>3.The argument list is empty;
      *     <br>4.The object is not a valid instance;
@@ -5902,7 +5902,7 @@ declare namespace photoAccessHelper {
      *     <br>3.The fetchColumns in FetchOptions contain invalid column names,
      *     please refer to PhotoKeys for valid column names;
      *     <br>4.Database query failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs;
      *     <br>5.Query returned an empty result set.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
@@ -6095,7 +6095,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 13900012 - Permission denied [since 10 - 10]
      * @throws { BusinessError } 13900020 - Invalid parameter. Possible causes:
      *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>2.The number of arguments is invalid;
      *     <br>3.The argument list is empty;
      *     <br>4.The object is not a valid instance;
@@ -6114,7 +6114,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The extension parameter is not a valid string, please check if it is a valid file extension;
      *     <br>3.The options parameter is invalid, please check if it is a valid CreateOptions object;
      *     <br>4.Failed to create the asset, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 22]
      * @atomicservice [since 11]
@@ -6143,7 +6143,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 13900012 - Permission denied [since 10 - 10]
      * @throws { BusinessError } 13900020 - Invalid parameter. Possible causes:
      *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs
      *     <br>2.The number of arguments is invalid;
      *     <br>3.The argument list is empty;
      *     <br>4.The object is not a valid instance;
@@ -6160,7 +6160,7 @@ declare namespace photoAccessHelper {
      *     <br>1.The photoType parameter is not a valid PhotoType enum value, must be IMAGE or VIDEO;
      *     <br>2.The extension parameter is not a valid string, please check if it is a valid file extension;
      *     <br>3.Failed to create the asset, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 22]
      * @atomicservice [since 11]
@@ -6194,8 +6194,8 @@ declare namespace photoAccessHelper {
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 13900012 - Permission denied [since 10 - 10]
      * @throws { BusinessError } 13900020 - Invalid parameter. Possible causes:
-     *     <br>1.System internal error, possible causes:1. System internal error. Possible:
-     *     1. File system exception; 3. IPC timeout. Please retry and check logs
+     *     <br>1.System internal error, possible causes:
+     *     (1)File system exception; (2)IPC timeout. Please retry and check logs
      *     <br>2.The number of arguments is invalid;
      *     <br>3.The argument list is empty;
      *     <br>4.The object is not a valid instance;
@@ -6214,7 +6214,7 @@ declare namespace photoAccessHelper {
      *     <br>2.The extension parameter is not a valid string, please check if it is a valid file extension;
      *     <br>3.The options parameter is invalid, please check if it is a valid CreateOptions object;
      *     <br>4.Failed to create the asset, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 22]
      * @atomicservice [since 11]
@@ -6247,7 +6247,7 @@ declare namespace photoAccessHelper {
      *     <br>7.The title contains invalid characters or exceeds the length limit;
      *     <br>8.The server returned an invalid argument error.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
-     *     <br>1.Server returned an invalid argument error.
+     *     <br>Server returned an invalid argument error.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @stagemodelonly
      * @atomicservice
@@ -6390,7 +6390,7 @@ declare namespace photoAccessHelper {
      *     <br>3.The FetchOptions parameter is invalid, the predicates contain invalid content or the fetchColumns
      *     contain unknown column names;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.The query result is empty, the IPC or database query returned no
      *     albums (not caused by permission or system app errors).
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -6433,7 +6433,7 @@ declare namespace photoAccessHelper {
      *     <br>3.The query result is empty, the IPC or database query returned no albums (not caused by permission or
      *     system app errors);
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @crossplatform [since 12]
      * @since 10 dynamic
@@ -6472,7 +6472,7 @@ declare namespace photoAccessHelper {
      *     <br>3.The FetchOptions parameter is invalid, the predicates contain invalid content or the fetchColumns
      *     contain unknown column names;
      *     <br>4.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5.The query result is empty, the IPC or database query returned no albums (not caused by permission or
      *     system app errors).
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -6725,7 +6725,7 @@ declare namespace photoAccessHelper {
      *     <br>2.Failed to create the dialog, system internal error, please retry.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.The delete operation failed, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>2.The uriList parameter contains invalid URIs, please check if each URI is a valid file URI obtained
      *     from a valid query result;
      *     <br>3.The UI extension component reported an error, please retry.
@@ -6755,7 +6755,7 @@ declare namespace photoAccessHelper {
      *     <br>2.Failed to create the dialog, system internal error, please retry.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.The delete operation failed, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>2.The uriList parameter contains invalid URIs, please check if each URI is a valid file URI obtained
      *     from a valid query result;
      *     <br>3.The UI extension component reported an error, please retry.
@@ -6842,7 +6842,7 @@ declare namespace photoAccessHelper {
      *     <br>1.Internal error in dialog, please retry;
      *     <br>2.Dialog result missing required parameters, system internal error;
      *     <br>3.Callback processing failed, system internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @stagemodelonly
      * @atomicservice
@@ -6890,7 +6890,7 @@ declare namespace photoAccessHelper {
      *     <br>1.Internal error in dialog, please retry;
      *     <br>2.Dialog result missing required parameters, system internal error;
      *     <br>3.Callback processing failed, system internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @stagemodelonly
      * @atomicservice
@@ -6989,7 +6989,7 @@ declare namespace photoAccessHelper {
      *     <br>2.Dialog result missing required parameters, system internal error;
      *     <br>3.Dialog operation failed, please retry;
      *     <br>4.Callback processing failed, system internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @stagemodelonly
      * @since 23 dynamic
@@ -7053,7 +7053,7 @@ declare namespace photoAccessHelper {
      *     <br>2.Dialog result missing required parameters, system internal error;
      *     <br>3.Dialog operation failed, please retry;
      *     <br>4.Callback processing failed, system internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
      * @since 14 dynamic
@@ -7153,7 +7153,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.PhotoAccessHelper has been released, no need to release again;
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 10 dynamic
      * @since 23 static
@@ -7176,7 +7176,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.PhotoAccessHelper has been released, no need to release again;
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 10 dynamic
      * @since 23 static
@@ -7403,7 +7403,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1.The mediaChangeRequest parameter is not a valid MediaChangeRequest object;
      *     <br>2.Server returned an error during applyChanges, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>3.The resource change operation for the current request type is not supported.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
@@ -7752,7 +7752,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails.
-     *     <br>Possible causes: 1.The input parameter is not within the valid range.
+     *     <br>Possible causes: The input parameter is not within the valid range.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -7786,9 +7786,9 @@ declare namespace photoAccessHelper {
      *     <br>2.Invalid parameter.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 20 dynamic
      */
@@ -7843,9 +7843,9 @@ declare namespace photoAccessHelper {
      *     <br>13.Failed to get fileId from photo asset.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 23 dynamic&static
      */
@@ -7868,9 +7868,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 23800151 - Invalid parameter.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 20 dynamic
      */
@@ -7915,12 +7915,12 @@ declare namespace photoAccessHelper {
      *     <br>1.The object is not a valid instance;
      *     <br>2.The parameter type is invalid;
      *     <br>3.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 23 dynamic&static
      */
@@ -8259,9 +8259,9 @@ declare namespace photoAccessHelper {
      *     <br>2.Invalid parameter.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 20 dynamic
      */
@@ -8312,9 +8312,9 @@ declare namespace photoAccessHelper {
      *     <br>10.The listener for this resource has been registered with the same callback.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 23 dynamic&static
      */
@@ -8338,9 +8338,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 23800151 - Invalid parameter.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 20 dynamic
      */
@@ -8391,9 +8391,9 @@ declare namespace photoAccessHelper {
      *     <br>9.Observer list is empty.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Data service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is properly initialized and retry
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is properly initialized and retry
      *     <br>2.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 23 dynamic&static
      */
@@ -8715,7 +8715,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. The IPC request timed out.
-     *     <br>2. system running error
+     *     <br>2. system running error.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
      * @since 20 dynamic
@@ -8995,7 +8995,7 @@ declare namespace photoAccessHelper {
      *     supported;
      *     <br>7.The supportedMimeTypes array size exceeds the limit (max 2 after deduplication);
      *     <br>8.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 23800301 - MediaLibrary inner fail. Possible causes:
      *     <br>1.Parameter is not an array type;
      *     <br>2.Failed to get array length;
@@ -9321,7 +9321,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 23800151 - Scenario-specific parameters are incorrect. Possible causes are as follows:
-     *     <br>1. The input parameter is null or undefined.
+     *     <br>The input parameter is null or undefined.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     Possible causes:
      *     <br>1. Database corrupted;
@@ -9580,7 +9580,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<Array<PhotoAsset>> } Promise used to return Converted assets.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. Invalid Array<PhotoAsset>.
+     *     <br>Invalid Array<PhotoAsset>.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
@@ -9611,7 +9611,7 @@ declare namespace photoAccessHelper {
      *     10. The operator must be the owner of the share album when setting the cover of the album.
      *     11. The operator must be the owner of the share album when resetting the cover of the album.
      *     12. This member does not belong to the current shared album.
-     * @throws { BusinessError } 23800201 - Operation not supported. Possible causes: 1. Request must be from share album.
+     * @throws { BusinessError } 23800201 - Operation not supported. Possible causes: Request must be from share album.
      * @throws { BusinessError } 23800301 - Internal system error. You are advised to retry and check the logs.
      *     Possible causes: 1. The database is corrupted. 2. The file system is abnormal. 3. The IPC request timed out.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -11288,6 +11288,19 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 static
      */
     preferredCompatibleMode?: PreferredCompatibleMode;
+
+    /**
+     * Font color of the text displayed in the picker grid and search pages,
+     * such as recommended bubble content, categories and time labels in search.
+     * The value is an 8-digit hexadecimal color code. If the value is an invalid
+     * color format, the default font color is used and no error is thrown.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    textColor?: string;
   }
 
   /**
@@ -11937,7 +11950,7 @@ declare namespace photoAccessHelper {
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 13900042 - Unknown error
+     * @throws { BusinessError } 13900042 - Unknown error.
      * @throws { BusinessError } 23800151 - Scene parameters validate failed, possible causes:
      *     <br>1. An illegal enumeration value was passed to PhotoSelectOptions.globalMovingPhotoState.
      *     Only MOVING_PHOTO_ENABLED and MOVING_PHOTO_DISABLED are supported for configuration;
@@ -11970,7 +11983,7 @@ declare namespace photoAccessHelper {
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 13900042 - Unknown error
+     * @throws { BusinessError } 13900042 - Unknown error.
      * @throws { BusinessError } 23800151 - Scene parameters validate failed, possible causes:
      *     <br>1. An illegal enumeration value was passed to PhotoSelectOptions.globalMovingPhotoState.
      *     Only MOVING_PHOTO_ENABLED and MOVING_PHOTO_DISABLED are supported for configuration; [since 12]
@@ -12723,7 +12736,7 @@ declare namespace photoAccessHelper {
      *     <br>3. The asset parameter is not a valid PhotoAsset object;
      *     <br>4. System memory insufficient, please retry;
      *     <br>5. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 12]
      * @since 11 dynamic
@@ -12753,7 +12766,7 @@ declare namespace photoAccessHelper {
      *     <br>2. IPC communication error, please retry;
      *     <br>3. System memory insufficient, please retry;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice [since 12]
      * @since 11 dynamic
@@ -12806,7 +12819,7 @@ declare namespace photoAccessHelper {
      *     <br>2. IPC communication error, please retry;
      *     <br>3. System memory insufficient, please retry;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)PC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      */
@@ -12908,10 +12921,10 @@ declare namespace photoAccessHelper {
      *     <br>1. The context parameter is invalid or not properly initialized, please pass a valid Context obtained
      *     from the application context;
      *     <br>2. User file service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is valid and retry;
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is valid and retry;
      *     <br>3. System memory insufficient, please retry;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
      * @since 11 dynamic
@@ -12961,10 +12974,10 @@ declare namespace photoAccessHelper {
      *     <br>1. The context parameter is invalid or not properly initialized, please pass a valid Context obtained
      *     from the application context;
      *     <br>2. User file service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is valid and retry;
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is valid and retry;
      *     <br>3. The assets array contains elements that are not valid PhotoAsset objects;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5. System memory insufficient, please retry.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
@@ -12991,11 +13004,11 @@ declare namespace photoAccessHelper {
      *     <br>1. The context parameter is invalid or not properly initialized, please pass a valid Context obtained
      *     from the application context;
      *     <br>2. User file service initialization failed, possible causes:
-     *     1. Database exception; 2. IPC timeout. Please check if the context is valid and retry;
+     *     (1)Database exception; (2)IPC timeout. Please check if the context is valid and retry;
      *     <br>3. The uriList array contains elements that are not valid string URIs, each element must be a valid
      *     file URI string;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs;
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs;
      *     <br>5. System memory insufficient, please retry.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
@@ -13069,7 +13082,7 @@ declare namespace photoAccessHelper {
      *
      * @param { boolean } favoriteState - Whether to favorite the file. **true** to favorite, **false** otherwise.
      * @throws { BusinessError } 14000011 - System inner fail. Possible causes:
-     *     <br>1. This operation is not supported for assets in shared albums.
+     *     <br>This operation is not supported for assets in shared albums.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi [since 11 - 24]
      * @publicapi [since 26.0.0]
@@ -13217,10 +13230,10 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. The asset parameter is not a valid PhotoAsset object;
      *     <br>2. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
      *     <br>1. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs
      *     <br>2. A previous asset creation or modification request has not been applied yet.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
@@ -13249,9 +13262,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. The asset parameter is not a valid PhotoAsset object;
      *     <br>2. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
-     *     <br>1. A previous asset creation or modification request has not been applied yet.
+     *     <br>A previous asset creation or modification request has not been applied yet.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
      * @since 11 dynamic
@@ -13276,9 +13289,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. The asset parameter is not a valid PhotoAsset object;
      *     <br>2. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
-     *     <br>1. A previous asset creation or modification request has not been applied yet.
+     *     <br>A previous asset creation or modification request has not been applied yet.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
      * @since 11 dynamic
@@ -13339,9 +13352,9 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. The asset parameter is not a valid PhotoAsset object;
      *     <br>2. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
-     *     <br>1. A previous asset creation or modification request has not been applied yet.
+     *     <br>A previous asset creation or modification request has not been applied yet.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamic
      * @since 23 static
@@ -13361,7 +13374,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
      *     <br>1. The asset parameter is not a valid PhotoAsset object;
      *     <br>2. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
      *     <br>1. The operation type is not supported, the asset is a moving photo which does not support
      *     this operation;
@@ -13420,8 +13433,8 @@ declare namespace photoAccessHelper {
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
-     *     <br>1.System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     <br>System internal error, possible causes:
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 15 dynamic
      * @since 23 static
@@ -13745,7 +13758,7 @@ declare namespace photoAccessHelper {
      * @param { boolean } hiddenState - Hidden status of the asset.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. The asset is not exist;
+     *     <br>The asset is not exist;
      * @throws { BusinessError } 23800301 - Internal system error.It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted.
@@ -13769,7 +13782,7 @@ declare namespace photoAccessHelper {
      *     Name-only is not allowed. Or..
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. The asset is not exist;
+     *     <br>The asset is not exist;
      * @throws { BusinessError } 23800301 - Internal system error.It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted.
@@ -13916,7 +13929,7 @@ declare namespace photoAccessHelper {
      *     photoAccessHelper.getAlbums() or createAlbum();
      *     <br>3. System memory insufficient, please retry;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      * @since 23 static
@@ -14007,7 +14020,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:
-     *     <br>1. This operation is not supported for this album type.
+     *     <br>This operation is not supported for this album type.
      * @throws { BusinessError } 14000011 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -14070,7 +14083,7 @@ declare namespace photoAccessHelper {
      *     <br>2. System memory insufficient, please retry;
      *     <br>3. IPC timeout, please retry;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      */
@@ -14133,7 +14146,7 @@ declare namespace photoAccessHelper {
      *     <br>3. The album type does not support setAlbumName, only user source albums, highlights, smart portrait
      *     albums and group photos support this operation;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      * @since 23 static
@@ -14156,9 +14169,9 @@ declare namespace photoAccessHelper {
      *     <br>3. The album type does not support addAssets, only user albums and highlight albums support
      *     this operation;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
-     *     <br>1. Duplicate asset in addAssets, the asset was already added in a previous addAssets operation.
+     *     <br>Duplicate asset in addAssets, the asset was already added in a previous addAssets operation.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      * @since 23 static
@@ -14179,9 +14192,9 @@ declare namespace photoAccessHelper {
      *     <br>2. The album type does not support removeAssets, only user albums support this operation;
      *     <br>3. The assets array contains elements that are not valid PhotoAsset objects;
      *     <br>4. System internal error, possible causes:
-     *     1. Database exception; 2. File system exception; 3. IPC timeout. Please retry and check logs.
+     *     (1)Database exception; (2)File system exception; (3)IPC timeout. Please retry and check logs.
      * @throws { BusinessError } 14000016 - Operation type not support. Possible causes:
-     *     <br>1. Duplicate asset in removeAssets, the asset was already removed in a previous removeAssets operation.
+     *     <br>Duplicate asset in removeAssets, the asset was already removed in a previous removeAssets operation.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 11 dynamic
      * @since 23 static
@@ -14214,7 +14227,7 @@ declare namespace photoAccessHelper {
      * @param { Album } targetAlbum - Album to which the assets are to be moved.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:
-     *     <br>1. This operation is not supported for assets in shared albums.
+     *     <br>This operation is not supported for assets in shared albums.
      * @throws { BusinessError } 14000011 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -14441,7 +14454,7 @@ declare namespace photoAccessHelper {
      * @param { boolean } isInherited - Whether all child files or directories under an album inherit this setting.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. The ablum is not exist;
+     *     <br>The ablum is not exist;
      * @throws { BusinessError } 23800301 - Internal system error.It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted.
@@ -14468,7 +14481,7 @@ declare namespace photoAccessHelper {
      *     The album name must be unique.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. The album is not exist;
+     *     <br>The album is not exist;
      * @throws { BusinessError } 23800301 - Internal system error.It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted.
@@ -14683,7 +14696,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     1. the album is not share album.
+     *     the album is not share album.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
@@ -14805,7 +14818,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     1. The albums are not share album.
+     *     The albums are not share album.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
@@ -14842,7 +14855,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. The albums are not share album.
+     *     <br>The albums are not share album.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
@@ -14881,7 +14894,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     1. The albums are not share album.
+     *     The albums are not share album.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
@@ -14899,7 +14912,7 @@ declare namespace photoAccessHelper {
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     1. The albums are not share album.
+     *     The albums are not share album.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
@@ -15777,7 +15790,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails.
      *     <br>Possible causes:
-     *     <br>1. The input parameter is not within the valid range.
+     *     <br>The input parameter is not within the valid range.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -15801,7 +15814,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails.
      *     <br>Possible causes:
-     *     <br>1. The input parameter is not within the valid range.
+     *     <br>The input parameter is not within the valid range.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -15836,7 +15849,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails.
      *     <br>Possible causes:
-     *     <br>1. The input parameter is not within the valid range.
+     *     <br>The input parameter is not within the valid range.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -15860,7 +15873,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails.
      *     <br>Possible causes:
-     *     <br>1. The input parameter is not within the valid range.
+     *     <br>The input parameter is not within the valid range.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -16529,7 +16542,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800108 - The specified asset does not exist.
      * @throws { BusinessError } 23800151 - Scene parameters validate failed, possible causes:
-     *     1. The photoAsset does not support local AI enhancement.
+     *     The photoAsset does not support local AI enhancement.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     Possible causes:
      *     1. The database is corrupted;
@@ -17467,7 +17480,7 @@ declare namespace photoAccessHelper {
      *     behavior recordings.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - Scenario parameters fail to pass the verification.Possible causes:
-     *     1. The filter criteria or fetchColumns that are not supported by options are transferred.
+     *     The filter criteria or fetchColumns that are not supported by options are transferred.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -17508,7 +17521,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - Scenario parameters fail to pass the verification.Possible causes:
-     *     <br>1. The filter criteria or fetchColumns that are not supported by options are transferred.
+     *     <br>The filter criteria or fetchColumns that are not supported by options are transferred.
      * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
      *     <br>Possible causes:
      *     <br>1. Database corrupted;
@@ -17598,7 +17611,7 @@ declare namespace photoAccessHelper {
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 23800151 - Scene parameters validate failed, possible causes:
-   *     <br>1. userId is invalid.
+   *     <br>userId is invalid.
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
@@ -19426,7 +19439,7 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     results: string[];
-    }
+  }
 
   /**
    * Local AI-enhanced task status.

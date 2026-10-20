@@ -1327,8 +1327,8 @@ export interface Effect extends SceneResource {
    *
    * @param { string } propertyName - Name of a specified effect property.
    *     Currently, the following strings are supported:
-   *     -'exposure': exposure level of an image.
-   *     -'vibrance': natural saturation of an image.
+   *     <br>-'exposure': exposure level of an image.
+   *     <br>-'vibrance': natural saturation of an image.
    * @returns { Object | null | undefined } Effect property value. If the value fails to be obtained, null is returned.
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
@@ -1341,11 +1341,11 @@ export interface Effect extends SceneResource {
    *
    * @param { string } propertyName - Name of a specified effect property.
    *     Currently, the following strings are supported:
-   *     -'exposure': exposure level of an image.
-   *     -'vibrance': natural saturation of an image.
+   *     <br>-'exposure': exposure level of an image.
+   *     <br>-'vibrance': natural saturation of an image.
    * @param { Object | undefined } value - Value of the effect property to set.
-   *     -'exposure': The value is of the number type. The recommended value range is [-5, 5]. A larger value indicates a brighter image.
-   *     -'vibrance': The value is of the number type. The recommended value range is [-1, 1]. A larger value indicates more vivid image colors.
+   *     <br>-'exposure': The value is of the number type. The recommended value range is [-5, 5]. A larger value indicates a brighter image.
+   *     <br>-'vibrance': The value is of the number type. The recommended value range is [-1, 1]. A larger value indicates more vivid image colors.
    * @returns { boolean } Whether the operation of setting the effect property value is successful.
    *     true indicates that the setting is successful, and false indicates that the setting fails.
    * @syscap SystemCapability.ArkUi.Graphics3D

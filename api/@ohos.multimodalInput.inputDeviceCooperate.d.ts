@@ -22,7 +22,7 @@ import { AsyncCallback } from './@ohos.base';
 
 /**
  * The **inputDeviceCooperate** module implements screen hopping for two or more networked devices to share the keyboard
- * and mouse for collaborative operations.
+ * and mouse for collaborative operations. The APIs of this module are no longer maintained since API version 10.
  *
  * @syscap SystemCapability.MultimodalInput.Input.Cooperator
  * @since 9 dynamiconly
@@ -113,6 +113,7 @@ declare namespace inputDeviceCooperate {
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate#prepareCooperate
+   * @useinstead ohos.cooperate/cooperate#unprepareCooperate
    */
   function enable(enable: boolean, callback: AsyncCallback<void>): void;
 
@@ -130,6 +131,7 @@ declare namespace inputDeviceCooperate {
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate#prepareCooperate
+   * @useinstead ohos.cooperate/cooperate#unprepareCooperate
    */
   function enable(enable: boolean): Promise<void>;
 

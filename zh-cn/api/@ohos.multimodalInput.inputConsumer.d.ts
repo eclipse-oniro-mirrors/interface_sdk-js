@@ -267,7 +267,7 @@ declare namespace inputConsumer {
 
   /**
    * 订阅系统快捷键，使用callback异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > - 支持仅订阅按键的down事件，或者同时订阅按键的down事件和up事件。
@@ -291,7 +291,7 @@ declare namespace inputConsumer {
    * 订阅系统快捷键，当满足条件的组合按键输入事件发生时，使用Callback异步方式上报组合按键数据。
    *
    * @param { KeyOptions } keyOptions - 组合键选项，支持triggerType参数。
-   * @param { Callback<KeyOptions> } callback - 回调函数，返回组合按键数据
+   * @param { Callback<KeyOptions> } callback - 回调函数，返回组合按键数据。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -303,7 +303,7 @@ declare namespace inputConsumer {
 
   /**
    * 订阅组合按键（按键命令模式），支持通过triggerType指定不同的触发模式。当满足条件的组合按键输入事件发生时，使用callback异步回调。
-   * 
+   *
    * 与[inputConsumer.on('key')]{@link inputConsumer.on(type: 'key', keyOptions: KeyOptions, callback: Callback<KeyOptions>)}现有接口的区别：
    * - 本接口的keyOptions支持triggerType参数，可选择按键按下触发、重复按下触发、重复按下或抬起均会触发等模式。
    * - 本接口回调参数为KeyCommandCallback类型，同时接收KeyOptions和KeyEvent对象。
@@ -479,7 +479,7 @@ declare namespace inputConsumer {
 
   /**
    * 订阅按键按下事件。若当前应用窗口为前台焦点窗口，用户按下指定按键，会触发回调。使用callback异步回调。
-   * 
+   *
    * 订阅成功后，该按键事件的系统默认行为将被屏蔽，即不会再触发系统级的响应，如音量调节。要恢复系统响应，请使用
    * [off]{@link inputConsumer.off(type: 'keyPressed', callback?: Callback<KeyEvent>)}方法取消订阅。
    *

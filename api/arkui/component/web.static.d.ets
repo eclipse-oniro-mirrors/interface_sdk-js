@@ -22,7 +22,7 @@ import image from '../../@ohos.multimedia.image';
 import { CommonMethod, Callback, TouchEvent, MouseEvent, NestedScrollOptions, KeyEvent, HapticFeedbackMode } from './common';
 import { CustomBuilder } from './builder';
 import { Resource } from '../../global/resource';
-import { Position, ResourceStr, VoidCallback } from './units';
+import { Position, ResourceColor, ResourceStr, VoidCallback } from './units';
 import { MenuType, EditMenuOptions, TextDataDetectorConfig } from './textCommon';
 import { CopyOptions, NestedScrollMode } from './enums';
 import { PreviewMenuOptions } from './richEditor';
@@ -1083,6 +1083,54 @@ export declare enum RenderExitReason {
  * @since 23 static
  */
 export type OnContextMenuHideCallback = () => void;
+
+/**
+ * The callback of context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>see the default options parameter.
+ *     <br>Default value: For details.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+/**
+ * Enum type of context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum WebContextMenuItemId {
+    /**
+     * Copy link to highlight menu item.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    MENU_COPY_LINK = 11
+}
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare interface WebContextMenuOptions {
+    /**
+     * Whether the context menu item is enabled.
+     * Default value: Default value: false.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    enable?: boolean;
+}
 /**
  * Enum type supplied to {@link error} when onSslErrorEventReceive being called.
  *
@@ -2191,6 +2239,34 @@ export declare class WebContextMenuParam {
      * @since 23 static
      */
     getContextMenuMediaType(): ContextMenuDataMediaType;
+
+    /**
+     * Checks whether the currently selected text can be used to generate a Text Fragment link.
+     *
+     * @returns { boolean } Return whether can generate a Text Fragment link.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    shouldOfferLinkToText(): boolean;
+    /**
+     * Returns a Text Fragment link URL that points to the currently highlighted text.
+     *
+     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    getTextFragmentGeneratedLink(): string;
+    /**
+     * Checks whether the current web page has a Text Fragment highlight.
+     *
+     * @returns { boolean } Return whether has a Text Fragment highlight.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    isOverTextFragment(): boolean;
 }
 /**
  * Defines the context menu result, related to {@link WebContextMenuResult} method.
@@ -2294,6 +2370,23 @@ export declare class WebContextMenuResult {
      * @since 24 static
      */
     saveImage(): void;
+
+    /**
+     * Copies a Text Fragment link pointing to the currently highlighted text to the system clipboard.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    copyLinkToTextMenu(): void;
+    /**
+     * Removes all Text Fragment highlights from the current web page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    removeFragments(): void;
 }
 /**
  * Encompassed message information as parameters to {@link onConsole} method.
@@ -4723,6 +4816,267 @@ export declare interface BlankScreenDetectionEventInfo {
  */
 export type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 /**
+ * Enumerates the reasons for blank screen attribution, identifying the root cause of the blank screen issue across
+ * the network layer, resource layer, rendering and JavaScript layer, kernel and process layer, and container layer.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare enum BlankScreenReason {
+    /**
+     * DNS resolution failed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    DNS_RESOLVE_FAILED = 101,
+    /**
+     * Main document loading timed out.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    REQUEST_TIMED_OUT = 102,
+    /**
+     * The connection was refused.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CONNECTION_REFUSED = 103,
+    /**
+     * The connection was reset.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CONNECTION_RESET = 104,
+    /**
+     * An SSL error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    SSL_ERROR = 105,
+    /**
+     * A certificate error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CERT_ERROR = 106,
+    /**
+     * The network is disconnected.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    INTERNET_DISCONNECTED = 107,
+    /**
+     * A redirect loop occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    REDIRECT_LOOP = 108,
+    /**
+     * A proxy error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    PROXY_ERROR = 109,
+    /**
+     * Another network error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    OTHER_NETWORK_ERROR = 199,
+    /**
+     * The main document is empty.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MAIN_DOC_EMPTY = 201,
+    /**
+     * An HTTP 4xx error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    HTTP_4XX_ERROR = 202,
+    /**
+     * An HTTP 5xx error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    HTTP_5XX_ERROR = 203,
+    /**
+     * Failed to load the JavaScript global bundle.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    JS_GLOBAL_BUNDLE_LOAD_FAILED = 210,
+    /**
+     * Failed to load CSS.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CSS_LOAD_FAILED = 211,
+    /**
+     * Failed to load multiple resources.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MULTI_RESOURCE_LOAD_FAILED = 212,
+    /**
+     * The request was blocked by CORS.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CORS_BLOCKED = 213,
+    /**
+     * The request was blocked by CSP.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CSP_BLOCKED = 214,
+    /**
+     * Mixed content was blocked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MIXED_CONTENT_BLOCKED = 215,
+    /**
+     * A JavaScript runtime error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    JS_RUNTIME_ERROR = 301,
+    /**
+     * No first contentful paint occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    NO_FIRST_CONTENTFUL_PAINT = 312,
+    /**
+     * The renderer process crashed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    RENDERER_CRASHED = 401,
+    /**
+     * The renderer process was killed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    RENDERER_KILLED = 402,
+    /**
+     * The GPU process crashed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    GPU_PROCESS_CRASHED = 403,
+    /**
+     * The GPU process watchdog timed out.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    GPU_PROCESS_WATCHDOG_TIMEOUT = 404,
+    /**
+     * The web view has zero size.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    WEB_VIEW_ZERO_SIZE = 501
+}
+/**
+ * Provides the event information for blank screen monitoring attribution, including the page URL, the attribution
+ * reason, and additional details.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare interface MonitoredBlankScreenEventInfo {
+    /**
+     * URL of the page that is loading when the white screen is monitored.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    url: string;
+    /**
+     * Blank screen reason.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    reason: BlankScreenReason;
+    /**
+     * Extra message for blank screen reason.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    extraMsg: string;
+}
+/**
+ * Defines a callback triggered when the Web component monitors a blank screen and completes root cause attribution.
+ *
+ * @param { MonitoredBlankScreenEventInfo } event - Event information for blank screen monitoring attribution.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export type OnMonitorBlankScreenCallback = (event: MonitoredBlankScreenEventInfo) => void;
+/**
  * Callback with the selected text after the text selection content changes.
  *
  * @param { string } selectionText - the selected text after the text selection content changes.
@@ -5452,6 +5806,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default onContextMenuHide(callback: OnContextMenuHideCallback | undefined): this;
+
+    /**
+     * Triggered when the context menu item status is updated by the kernel asynchronously.
+     *
+     * @param { OnContextMenuUpdateCallback | undefined } callback - The triggered function when the context menu item
+     *     status is updated by the kernel asynchronously.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default onContextMenuUpdate(callback: OnContextMenuUpdateCallback | undefined): this;
   /**
    * Sets whether video playback must be started by user gestures. This API is not applicable to muted videos. When
    * this attribute is not explicitly set, users need to click the video to play it by default.
@@ -6479,6 +6845,17 @@ export declare interface WebAttribute extends CommonMethod {
      */
     default onDetectedBlankScreen(callback: OnDetectBlankScreenCallback | undefined): this;
     /**
+     * Registers a callback for blank screen monitoring attribution. The callback is triggered when the Web component
+     * monitors a blank screen and completes root cause attribution.
+     *
+     * @param { OnMonitorBlankScreenCallback | undefined } callback - Callback for blank screen monitoring attribution.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback | undefined): this;
+    /**
      * The options for blank screen detection.
      *
      * @param { BlankScreenDetectionConfig | undefined } detectConfig - the strategy config for detection.
@@ -6487,6 +6864,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig | undefined): this;
+    /**
+     * Enables or disables the blank screen monitor. When the monitor is enabled, the onMonitoredBlankScreen callback
+     * will be triggered after blank screen is monitored.
+     *
+     * @param { boolean | undefined } enable - Whether to enable the blank screen monitor. The value **true** means to
+     *     enable the monitor, and **false** means to disable it.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default enableBlankScreenMonitor(enable: boolean | undefined): this;
     /**
      * Set whether to enable the back-to-top feature for web component when the status bar is touched.
      *
@@ -6732,6 +7121,27 @@ export declare interface WebAttribute extends CommonMethod {
     default enableMediaNetworkProxy(enabled: boolean | undefined): this;
 
     /**
+     * Sets the color of the text input caret and selection handles of the Web component.
+     *
+     * When this attribute is not explicitly called or is reset, the caret uses the page's CSS `caret-color` result.
+     * If the CSS value is `auto` or not set, the caret uses the built-in default color (currently `#0A59F7`).
+     * Selection handles use the current theme colors.
+     *
+     * The priority is: a non-zero value set by this API > the `caret-color` CSS property set by the web page >
+     * the built-in default color. A non-zero value set by this API also overrides an explicit CSS color or
+     * `transparent`. The exact color value `#00000000` is reserved as the reset sentinel. After reset, the CSS
+     * `caret-color` value is used. If the CSS value is `auto` or not set, the built-in default color is used.
+     *
+     * @param { ResourceColor | undefined } value - Color of the text input caret and selection handles.
+     *     When undefined is passed in, this attribute is reset.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default caretColor(value: ResourceColor | undefined): this;
+
+    /**
      * Called when the browser zoom factor of the page changes.
      *
      * @param { OnZoomChangeCallback | undefined } callback - Function triggered when the browser zoom factor
@@ -6743,6 +7153,21 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.2.0 static
      */
     default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
+
+    /**
+     * Sets the maximum fling speed for the Web component.
+     *
+     * The value configured through this TypeScript API takes precedence over values configured through other APIs.
+     *
+     * @param { double | undefined } speedLimit - Maximum fling speed, in vp/s. If the value is less than or equal to 0,
+     *     {@code NaN}, {@code +Infinity}, or {@code -Infinity}, the default value is used: 9000 vp/s on PCs and
+     *     17000 vp/s on non-PC devices.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    default flingSpeedLimit(speedLimit: double | undefined): this;
 }
 
 /**

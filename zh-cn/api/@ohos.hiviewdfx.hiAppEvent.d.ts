@@ -395,8 +395,6 @@ declare namespace hiAppEvent {
    * 应用事件打点配置方法，支持配置打点开关和目录存储配额大小。
    *
    * @param { ConfigOption } config - 应用事件打点配置项对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11103001 - Invalid max storage quota value. Possibly caused by incorrectly formatted.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
@@ -542,8 +540,10 @@ declare namespace hiAppEvent {
    * @param { AppEventInfo } info - 应用事件对象。其中的事件名称建议避免与
    *     [Event]{@link hiAppEvent.event}中定义的系统事件名称常量冲突混淆。 [since 11]
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -571,8 +571,10 @@ declare namespace hiAppEvent {
    *
    * @param { AppEventInfo } info - 应用事件对象。其内部定义的事件名称建议避免与[Event]{@link hiAppEvent.event}中定义的系统事件名称常量产生冲突。
    * @param { AsyncCallback<void> } callback - 打点回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -624,8 +626,6 @@ declare namespace hiAppEvent {
    *     [资源泄漏事件](docroot://dfx/hiappevent-watcher-resourceleak-events.md)（hiAppEvent.event.RESOURCE_OVERLIMIT）。<br>
    *     **注意**：从API version 20开始，支持[资源泄漏事件](docroot://dfx/hiappevent-watcher-resourceleak-events.md)。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -663,8 +663,10 @@ declare namespace hiAppEvent {
    *     <br>- 参数名为string类型，要求非空，且参数名长度需在1024个字符以内。
    *     <br>- 参数值为ParamType类型，参数值长度需在1024个字符以内。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 15 dynamic
@@ -774,8 +776,6 @@ declare namespace hiAppEvent {
      * 设置每次取出的事件包的数据大小阈值。
      *
      * @param { int } size - 数据大小阈值，单位为byte。取值范围[0, 2^31-1]，超出范围会抛异常。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types.
      * @throws { BusinessError } 11104001 - Invalid size value. Possibly caused by the size value is less than or equal
      *     to zero.
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -790,8 +790,6 @@ declare namespace hiAppEvent {
      * 设置每次取出的事件包的数据条数，优先级高于setSize，和setSize同时调用时仅setRow生效。
      *
      * @param { int } size - 事件条数，单位为条。取值范围(0, 2^31-1]，超出范围会抛异常。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types.
      * @throws { BusinessError } 11104001 - Invalid size value. Possibly caused by the size value is less than or equal
      *     to zero.
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -1047,8 +1045,6 @@ declare namespace hiAppEvent {
    *
    * @param { Watcher } watcher - 事件观察者。
    * @returns { AppEventPackageHolder } 订阅数据持有者。订阅失败时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11102001 - Invalid watcher name. Possible causes: 1. Contain invalid characters;
    *     <br>2. Length is invalid.
    * @throws { BusinessError } 11102002 - Invalid filtering event domain. Possible causes: 1. Contain invalid
@@ -1069,8 +1065,6 @@ declare namespace hiAppEvent {
    * 移除事件观察者。
    *
    * @param { Watcher } watcher - 事件观察者。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11102001 - Invalid watcher name. Possible causes: 1. Contain invalid characters;
    *     <br>2. Length is invalid.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -1097,8 +1091,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户ID的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @param { string } value - 用户ID的值。长度不超过256个字符，当值为null或空字符串时，则清除用户ID。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1112,8 +1108,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户ID的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @returns { string } 用户ID的值。没有查到返回空字符串。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1127,8 +1125,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户属性的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @param { string } value - 用户属性的值。长度不超过1024个字符，当值为null或空字符串时，则清除用户属性。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1142,8 +1142,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户属性的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @returns { string } 用户属性的值。没有查到返回空字符串。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1381,8 +1383,6 @@ declare namespace hiAppEvent {
    *
    * @param { Processor } processor - 上报事件的数据处理者。
    * @returns { long } 所添加上报事件数据处理者的ID，标识唯一数据处理者，可用于移除数据处理者。 添加失败返回-1，添加成功返回大于0的值。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 11 dynamic
@@ -1412,8 +1412,6 @@ declare namespace hiAppEvent {
    *
    * @param { long } id - 上报事件数据处理者ID。值大于0。由调用[addProcessor]{@link hiAppEvent.addProcessor}或
    *     [addProcessorFromConfig]{@link hiAppEvent.addProcessorFromConfig}接口返回值所得。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 11 dynamic
@@ -1923,8 +1921,11 @@ declare namespace hiAppEvent {
    * @param { EventPolicy } policy - 系统事件配置策略。
    * @returns { Promise<void> } Promise对象，无返回结果。
    *     <br>各个事件的事件配置策略，详细规格见[EventPolicy]{@link hiAppEvent.EventPolicy}类型说明。若配置策略设置有误，会导致接口返回失败。
-   *     <br>- 参数类型设置有误，则返回401通用错误信息；
    *     <br>- 参数规格设置有误，则在hilog日志输出相关错误信息。
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 22 dynamic

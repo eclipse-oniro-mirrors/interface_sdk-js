@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file SkillInfo
  * @kit AbilityKit
  */
 
@@ -168,7 +168,7 @@ export interface SkillInfo {
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.0 dynamic&static
+ * @since 26.0.0 dynamic
  */
 export enum SkillType {
   /**
@@ -177,7 +177,7 @@ export enum SkillType {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
    */
   APP_SKILL = 0,
   /**
@@ -186,7 +186,7 @@ export enum SkillType {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
    */
   INDEPENDENT_SKILL = 1
 }

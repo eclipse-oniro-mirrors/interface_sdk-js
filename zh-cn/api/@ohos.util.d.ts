@@ -532,7 +532,7 @@ declare namespace util {
   }
 
   /**
-   * 提供比较有理数、获取分子和分母的 API。例如，可以使用 **toString()** API 将有理数转换为字符串。
+   * 提供比较有理数、获取分子和分母的 API。创建有理数时会自动约分。例如，可以使用 **toString()** API 将有理数转换为字符串。
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -541,7 +541,7 @@ declare namespace util {
    */
   class RationalNumber {
     /**
-     * 用于创建 **RationalNumber** 对象的构造函数。
+     * 用于创建 **RationalNumber** 对象的构造函数。无参构造时分子为0、分母为1。
      *
      * @param { number } numerator - 分子，为整数。
      * @param { number } denominator - 分母，为整数。
@@ -601,7 +601,7 @@ declare namespace util {
      * 将当前的 RationalNumber 对象与给定对象进行比较。
      *
      * @param { RationalNumber } another - 表示其他有理数的对象。
-     * @returns { number } 根据比较结果返回 0、1 或 -1。
+     * @returns { number } 相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -613,7 +613,7 @@ declare namespace util {
      * 将当前的 RationalNumber 对象与给定对象进行比较。
      *
      * @param { RationalNumber } another - 表示其他有理数的对象。
-     * @returns { number } 根据比较结果返回 0、1 或 -1。
+     * @returns { number } 相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -771,7 +771,7 @@ declare namespace util {
     /**
      * 改变缓存容量。如果新容量小于等于 **0**，则抛出异常。
      *
-     * @param { number } newCapacity - 缓存的新容量。
+     * @param { number } newCapacity - 缓存的新容量，取值范围为 [0, 2147483647]。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1150,7 +1150,7 @@ declare namespace util {
 
     /**
      * 获取 key 对应的值。如果该 key 不在缓存中，则调用
-     * [createDefault<sup>9+</sup>]{@link util.LRUCache.createDefault} 创建该 key。如果 **createDefault** 中指定的值
+     * [createDefault<sup>9+</sup>]{@link util.LRUCache.createDefault} 创建该 key 对应的值。如果 **createDefault** 中指定的值
      * 不为 **undefined**，则调用 [afterRemoval<sup>9+</sup>]{@link util.LRUCache.afterRemoval} 返回 **createDefault**
      * 中指定的值。
      *
@@ -1202,7 +1202,7 @@ declare namespace util {
      * 从此缓存中移除 key 及其关联的值，并返回与该 key 关联的值。如果 key 不存在，则返回 **undefined**。
      *
      * @param { K } key - 要移除的 key。
-     * @returns { V | undefined } 如果 key 存在于缓存中，则返回包含被移除键值对的 **Optional** 对象；如果 key 不存在
+     * @returns { V | undefined } 如果 key 存在于缓存中，则返回与该 key 关联的值；如果 key 不存在
      *     则返回 **undefined**；如果 **key** 传入 **null**，则抛出错误。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1585,7 +1585,7 @@ declare namespace util {
     expand(value: ScopeType): ScopeHelper;
 
     /**
-     * 判断一个范围是否在此 **Scope** 范围内。
+     * 判断一个值是否在此 **Scope** 范围内。
      *
      * @param { ScopeType } value - 指定的值。
      * @returns { boolean } 检查结果。如果值在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
@@ -1771,9 +1771,9 @@ declare namespace util {
 
   /**
    * 提供 Base64 和 Base64URL 的编解码。Base64 编码表包含 64 个字符，分别为大写字母（A-Z）、小写字母（a-z）、数字（0-9）
-   * 以及特殊字符加号（+）和斜杠（/）。编码时，原始数据按三个字节一组进行划分，每组包含一个 6 位的数字。然后使用 Base64
+   * 以及特殊字符加号（+）和斜杠（/）。编码时，原始数据按三个字节一组进行划分，每组转换为多个 6 位数字。然后使用 Base64
    * 编码表中对应的字符来表示这些数字。如果最后一组只包含一个或两个字节，则使用等号（=）进行填充。Base64URL 编码表包含
-   * 64 个字符，分别为大写字母（A-Z）、小写字母（a-z）、数字（0-9）以及特殊字符加号（+）和斜杠（/）。Base64URL 编码结果
+   * 64 个字符，分别为大写字母（A-Z）、小写字母（a-z）、数字（0-9）以及特殊字符连字符（-）和下划线（_）。Base64URL 编码结果
    * 不包含等号（=）。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -1925,7 +1925,8 @@ declare namespace util {
      */
     isAnyArrayBuffer(value: Object): boolean;
     /**
-     * 判断入参是否为 ArrayBufferView 类型。
+     * 判断入参是否为 ArrayBufferView 类型。ArrayBufferView 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
+     * Uint8ClampedArray、Uint32Array、Float32Array、Float64Array 和 DataView。
      *
      * @param { Object } value - 要检查的对象。
      * @returns { boolean } 检查结果。如果入参为 ArrayBufferView 类型，则返回 **true**；否则返回 **false**。
@@ -2302,7 +2303,8 @@ declare namespace util {
      */
     isSymbolObject(value: Object): boolean;
     /**
-     * 判断入参是否为 TypedArray 类型。
+     * 判断入参是否为 TypedArray 类型。TypedArray 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
+     * Uint8ClampedArray、Uint16Array、Uint32Array、Float32Array、Float64Array、BigInt64Array 和 BigUint64Array。
      *
      * @param { Object } value - 要检查的对象。
      * @returns { boolean } 检查结果。如果入参为 TypedArray 类型，则返回 **true**；否则返回 **false**。
@@ -2468,7 +2470,8 @@ declare namespace util {
      */
     write(chunk: string | Uint8Array): string;
     /**
-     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。
+     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。如果传入 **chunk**，则将其作为最后一部分数据进行解码；
+     * 如果未传入 **chunk**，则仅返回内部缓存中不完整字节序列的解码结果，不再处理新数据。
      *
      * @param { string | Uint8Array } [chunk] - 要解码的字符串。默认值为 **undefined**。
      * @returns { string } 解码后的字符串。
@@ -2504,7 +2507,7 @@ declare namespace util {
    */
   interface AutoFinalizer<T> {
     /**
-     * 开发者自定义的用于释放资源的回调。
+     * 开发者自定义的用于释放资源的回调。当注册对象被回收时自动触发，并将heldValue传递给onFinalization。
      *
      * @param { T } heldValue - 传递给 finalizer 的值。
      * @syscap SystemCapability.Utils.Lang
@@ -2524,7 +2527,7 @@ declare namespace util {
    */
   class AutoFinalizerCleaner<T> {
     /**
-     * 注册释放由开发者管理的资源的对象。
+     * 注册释放由开发者管理的资源的对象；当obj被回收时自动触发其onFinalization并传入heldValue。
      *
      * @param { AutoFinalizer<T> } obj - 注册到 cleaner 的对象。
      * @param { T } heldValue - 传递给 finalizer 的值。
@@ -2556,7 +2559,7 @@ declare namespace util {
     abort?: boolean;
     /**
      * 多线程安全检测的采样频率。
-     * 该值必须为整数，最小为 **100**，最大为 **2147483647**（默认 **100**）。
+     * 该值表示两次检测之间的函数调用次数，数值越大表示采样频率越低；数值越小检测越及时但性能开销越大，数值越大则可能漏检。该值必须为整数，最小为 **100**，最大为 **2147483647**（默认 **100**）。
      * 该值应为整数。
      *
      * @syscap SystemCapability.Utils.Lang
@@ -2567,7 +2570,7 @@ declare namespace util {
     frequency?: number;
 
     /**
-     * 多线程安全检测的时间间隔（分钟）。
+     * 多线程安全检测的时间间隔（分钟）。该配置仅在abort为 **false** 时生效；建议不要设置为低于5分钟的值，否则可能产生严重性能影响。
      * 只有距离上次检测的时间超过此间隔时才会再次上报错误。
      * 该值必须为 [0,1440] 范围内的整数（默认 5min）。
      *
@@ -2603,11 +2606,8 @@ declare namespace util {
     static setMultithreadingDetectionEnabled(enabled: boolean, options?: MultithreadingDetectionOptions):void;
 
     /**
-     * 注册一个回调函数，在 GC（垃圾回收）后堆内存超过临界预警阈值时触发。
+     * 注册一个回调函数，在虚拟机主线程完成GC（垃圾回收）后，按存活对象大小判断堆内存是否超过临界预警阈值时触发。堆碎片和浮动垃圾可能影响判断，无法保证在OOM（内存溢出）前一定触发。
      * 必须在主线程上调用，且仅能注册一个回调。
-     *
-     * NOTE:
-     * 无法保证在 OOM（内存溢出）前一定会触发该回调。
      *
      * @param { Callback<string> } callback - 在 GC 后内存达到阈值时触发的回调。字符串参数表示内存压力事件的类型：
      *     "LocalHeapMemPressure"、"SharedHeapMemPressure" 或 "ProcessHeapMemPressure"。
@@ -2621,7 +2621,7 @@ declare namespace util {
     static onVMHeapMemoryPressure(callback: Callback<string>, heapMemoryThreshold: HeapMemoryThreshold): boolean;
 
     /**
-     * 取消注册在 GC 后堆内存超过临界预警阈值时触发的回调。
+     * 取消注册在 GC 后堆内存超过临界预警阈值时触发的回调。必须在主线程上调用。
      *
      * @static
      * @syscap SystemCapability.Utils.Lang
@@ -2655,7 +2655,7 @@ declare namespace util {
     static enableLocalHandleDetection(): void;
 
     /**
-     * 开启或关闭 napi_ref 与全局 handle 之间关联关系的追踪。开启后，堆快照将包含 native 引用地址信息。关闭后（enable 为
+     * 开启或关闭进程级的 napi_ref 与全局 handle 之间关联关系追踪，所有线程共享该状态。开启后，堆快照将包含 native 引用地址信息。追踪会增加内存和性能开销，建议无需调试时关闭。关闭后（enable 为
      * false），将停止追踪，堆快照中不再显示 native 引用与全局 handle 之间的关联关系。
      *
      * @param { boolean } enable - 布尔标志位，指示是开启还是关闭追踪。**true** 表示开启追踪，**false** 表示关闭追踪。

@@ -307,6 +307,15 @@ export @interface InsightIntentPage {
   keywords: string[] = [];
 
   /**
+   * Indicates the permissions required by the intent.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  permissions: string[] = [];
+
+  /**
    * The parameters of intent.
    * The value is the name of a variable of type Record<string, RecordData>.
    *
@@ -460,6 +469,15 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   keywords: string[] = [];
+
+  /**
+   * Indicates the permissions required by the intent.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  permissions: string[] = [];
 
   /**
    * The parameters of intent.
@@ -689,6 +707,15 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   keywords: string[] = [];
+
+  /**
+   * Indicates the permissions required by the intent.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  permissions: string[] = [];
 
   /**
    * The parameters of intent.

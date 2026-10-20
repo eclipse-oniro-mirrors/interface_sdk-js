@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file LauncherAbilityInfo
  * @kit AbilityKit
  */
 

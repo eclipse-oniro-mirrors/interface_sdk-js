@@ -556,7 +556,7 @@ declare namespace workScheduler {
      */
     CHARGING_PLUGGED_ANY = 0,
     /**
-     * DC charging.
+     * AC charging.
      *
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @stagemodelonly

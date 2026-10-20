@@ -14,6 +14,8 @@
  */
 
 /**
+ * 分段按钮组件包含页签类分段按钮和胶囊类分段按钮。页签类分段按钮适用于页面或内容区域的切换场景；胶囊类分段按钮适用于单选或多选的选择场景，包含胶囊类单选分段按钮和胶囊类多选分段按钮。该组件支持自定义文本颜色、字体大小、字体粗细、背景色、
+ * 图片尺寸、内边距、背景模糊材质等外观属性，支持仅文本、仅图标和图标+文本三种按钮样式，并提供无障碍朗读、布局方向镜像、自定义圆角、属性动画等能力，适用于需要快速构建符合设计规范的分段选择界面的场景。
  * @file
  * @kit ArkUI
  */
@@ -356,6 +358,39 @@ interface SegmentButtonIconTextItem {
  * @since 11 dynamic
  */
 declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
+
+/**
+ * 定义分段按钮的拖拽交互模式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum SegmentButtonInteractionMode {
+  /**
+   * 启用跟手拖拽。非系统材质场景仅启用跟手拖拽动画。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  FOLLOWING_DRAG = 0,
+
+  /**
+   * 启用普通拖拽。仅改变拖拽位移和选中更新方式；系统材质的外观、形变及已配置光效保持原有行为。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  NORMAL_DRAG = 1
+}
 
 /**
 * 边框圆角模式枚举，用于控制分段按钮的圆角计算方式。
@@ -757,6 +792,23 @@ interface CommonSegmentButtonOptions {
    * @since 23 dynamic
    */
   backgroundSystemMaterial?: uiMaterial.Material;
+
+  /**
+   * 设置分段按钮的拖拽交互模式。
+   *
+   * 未配置时，启用系统材质的场景使用跟手拖拽，非系统材质场景使用普通拖拽，保持原有行为。
+   * 非系统材质场景显式设置普通拖拽、系统材质场景显式设置跟手拖拽，均保持原有行为。
+   * 非系统材质场景设置跟手拖拽时，不新增材质形变或点光源。
+   * 系统材质场景设置普通拖拽时，仅改变拖拽位移和选中更新方式；材质外观、背板缩放、微量位移、选中项形变及已配置光效保持原有行为。
+   * 未配置、undefined或非法值均使用默认模式。多选模式下该参数不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  interactionMode?: SegmentButtonInteractionMode;
 }
 
 /**
@@ -1616,6 +1668,23 @@ declare class SegmentButtonOptions {
   backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
+   * 设置分段按钮的拖拽交互模式。
+   *
+   * 未配置时，启用系统材质的场景使用跟手拖拽，非系统材质场景使用普通拖拽，保持原有行为。
+   * 非系统材质场景显式设置普通拖拽、系统材质场景显式设置跟手拖拽，均保持原有行为。
+   * 非系统材质场景设置跟手拖拽时，不新增材质形变或点光源。
+   * 系统材质场景设置普通拖拽时，仅改变拖拽位移和选中更新方式；材质外观、背板缩放、微量位移、选中项形变及已配置光效保持原有行为。
+   * 未配置、undefined或非法值均使用默认模式。多选模式下该参数不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  interactionMode?: SegmentButtonInteractionMode;
+
+  /**
    * 构造函数。
    *
    * @param { TabSegmentButtonOptions | CapsuleSegmentButtonOptions } options - 页签类或者胶囊类分段按钮信息。
@@ -1732,14 +1801,7 @@ declare class SegmentButtonOptions {
 }
 
 /**
- * 分段按钮组件包含页签类分段按钮和胶囊类分段按钮。页签类分段按钮适用于页面或内容区域的切换场景；胶囊类分段按钮适用于单选或多选的选择场景，包含胶囊类单选分段按钮和胶囊类多选分段按钮。该组件支持自定义文本颜色、字体大小、字体粗细、背景色、
- * 图片尺寸、内边距、背景模糊材质等外观属性，支持仅文本、仅图标和图标+文本三种按钮样式，并提供无障碍朗读、布局方向镜像、自定义圆角、属性动画等能力，适用于需要快速构建符合设计规范的分段选择界面的场景。
- *
- * ## 导入模块
- *
- * ```ts
- * import { SegmentButton, SegmentButtonOptions, SegmentButtonItemOptionsArray } from '@kit.ArkUI';
- * ```
+ * 创建页签类分段按钮或胶囊类分段按钮。
  *
  * ## 子组件
  *
@@ -1855,5 +1917,6 @@ export {
   SegmentButtonItemArray,	 
   SegmentButtonItemOptionsConstructorOptions,	 
   SegmentButtonItemOptions,	 
+  SegmentButtonInteractionMode,
   BorderRadiusMode	 
 };

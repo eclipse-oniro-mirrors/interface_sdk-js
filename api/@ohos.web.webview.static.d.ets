@@ -30,6 +30,9 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
   * This module provides the capability to manage web modules.
   *
+  * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+  * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
+  *
   * @namespace webview
   * @syscap SystemCapability.Web.Webview.Core
   * @since 23 static
@@ -2357,6 +2360,10 @@ declare namespace webview {
     /**
      * Decide whether JIT is disabled, the default value is false.
      *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2364,6 +2371,10 @@ declare namespace webview {
     disableJITCompilation?: boolean;
     /**
      * Decide whether WASM is disabled, the default value is false.
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2373,6 +2384,11 @@ declare namespace webview {
     /**
      * Decide whether WebGL is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2380,6 +2396,11 @@ declare namespace webview {
     disableWebGL?: boolean;
     /**
      * Decide whether PDFViewer is disabled, the default value is false.
+     *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -2389,6 +2410,11 @@ declare namespace webview {
     /**
      * Decide whether MathML is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2397,6 +2423,11 @@ declare namespace webview {
     /**
      * Decide whether ServiceWorker is disabled, the default value is false.
      *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
+     *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2404,6 +2435,11 @@ declare namespace webview {
     disableServiceWorker?: boolean;
     /**
      * Decide whether NonProxyUDP is disabled, the default value is false.
+     *
+     *
+     * Read-only: No
+     * 
+     * Optioanl: Yes
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
@@ -6163,14 +6199,14 @@ declare namespace webview {
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        ENTER_BACKGROUND = 1,
+        ENTER_BACKGROUND,
         /**
          * The page is automatically cleaned up by the system.
          *
          * @syscap SystemCapability.Web.Webview.Core
          * @since 23 static
          */
-        AUTO_CLEANUP = 2
+        AUTO_CLEANUP
     }
 
     /**

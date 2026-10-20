@@ -463,6 +463,29 @@ declare namespace url {
     }
 
     /**
+     * URL相关工具类，提供URL相关的工具方法。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    class URLUtil {
+        /**
+         * 将指定的URLParams对象序列化为字符串，其中空格被百分比编码为%20（而非'+'）。
+         *
+         * @param { URLParams } urlParams - 待序列化的URLParams对象。
+         * @returns { string } 返回序列化后的字符串，其中空格被编码为%20。
+         * @syscap SystemCapability.Utils.Lang
+         * @stagemodelonly
+         * @crossplatform
+         * @atomicservice
+         * @since 26.2.0 dynamiconly
+         */
+        static toString(urlParams: URLParams): string;
+    }
+
+    /**
      * 用于解析和构造完整URL。
      *
      * @syscap SystemCapability.Utils.Lang

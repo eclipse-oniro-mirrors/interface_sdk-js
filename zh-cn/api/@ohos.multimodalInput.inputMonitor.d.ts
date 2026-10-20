@@ -990,7 +990,7 @@ declare namespace inputMonitor {
    * 但该参数取值为50，则仅支持查询到30个触屏输入事件。
    * @returns { Promise<Array<TouchEvent>> } Promise对象，返回查询到的触屏输入事件。包含以下有效信息，其余均为无效信息：<br/>- actionTime：触屏输入事件发生的时间，表示系统
    * 启动运行至今逝去的微秒数，单位为微秒（μs）。<br/>- [SourceType]{@link @ohos.multimodalInput.touchEvent:SourceType}：触摸来源的设备类型。<br/>-
-   * [isInject]{@link @ohos.multimodalInput.touchEvent:TouchEvent}：表示该触屏输入事件是否为注入事件。<br/>- pressure：压力值，取值范围是
+   * [isInject]{@link @ohos.multimodalInput.touchEvent:TouchEvent#isInject}：表示该触屏输入事件是否为注入事件。<br/>- pressure：压力值，取值范围是
    * [0.0, 1.0]，0.0表示不支持。<br/>- tiltX：相对YZ平面的角度，取值的范围[-90, 90]，其中正值是向右倾斜。<br/>- tiltY：相对XZ平面的角度，取值的范围[-90, 90]，其中正值是
    * 向下倾斜。<br/>从API version 23开始，可以额外获取以下有效信息：<br/>- [Action]{@link @ohos.multimodalInput.touchEvent:Action}：触屏输入事件类
    * 型。<br/>- screenX：相对于屏幕左上角的X轴坐标，单位为像素，取值范围[0, 屏幕宽度]，向右递增。仅限指定应用获取。<br/>- screenY：相对于屏幕左上角的Y轴坐标，单位为像素，取值范围

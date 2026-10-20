@@ -2559,10 +2559,11 @@ declare namespace audio {
   }
 
   /**
-   * 表示音频打断类型的枚举。
-   * 当用户监听到音频中断（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
-   * 此类型表示音频打断是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。关于音频打断策略的详细说明可参考文档
-   * [音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
+   * 表示音频打断是否由系统强制执行的枚举。
+   * 当用户监听到音频打断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
+   * 此类型表示音频打断提示[InterruptHint]{@link audio.InterruptHint}是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
+   * 其中，INTERRUPT_HINT_RESUME对应的forceType一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
+   * 关于音频打断策略的详细说明可参考文档[音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
    *
    * @syscap SystemCapability.Multimedia.Audio.Renderer
    * @crossplatform [since 12]
@@ -2572,7 +2573,7 @@ declare namespace audio {
    */
   enum InterruptForceType {
     /**
-     * 强制打断类型，即具体操作已由系统强制执行。
+     * 强制执行类型，即打断提示[InterruptHint]{@link audio.InterruptHint}对应操作已由系统强制执行。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @crossplatform [since 12]
@@ -2582,7 +2583,7 @@ declare namespace audio {
      */
     INTERRUPT_FORCE = 0,
     /**
-     * 共享打断类型，即系统不执行具体操作，通过[InterruptHint]{@link audio.InterruptHint}建议并提示应用操作，应用可自行决策下一步处理方式。
+     * 非强制执行类型，即系统不执行对应操作，仅通过[InterruptHint]{@link audio.InterruptHint}提示应用操作，应用可自行决策下一步处理方式。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @atomicservice [since 12]
@@ -8884,6 +8885,39 @@ declare namespace audio {
   }
 
   /**
+   * 音频分离效果可用状态。
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioSeparationEffectAvailableStatus {
+    /**
+     * 可用状态。
+     * 播控应用可根据此状态决定是否显示音频分离开关按钮。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    available: boolean;
+
+    /**
+     * 可用状态对应的应用uid。
+     * 通常为当前播控应用中显示的应用。
+     * 取值限定为整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    appUid?: int;
+  }
+
+  /**
    * 音频效果管理，支持查询和设置系统音效模式、管理音频分离效果。适用于需要定制音频播放效果、实现人声分离、管理设备音效的场景。
    * 在使用AudioEffectManager的接口前，需要使用[getEffectManager]{@link audio.AudioManager.getEffectManager}获取AudioEffectManager实例。
    *
@@ -8994,6 +9028,18 @@ declare namespace audio {
     setAudioSeparationEffectEnabled(enabled: boolean, uid: int, streamId?: long): Promise<void>;
 
     /**
+     * 获取音频分离效果启用状态。
+     *
+     * @returns { boolean } 返回是否启用音频分离效果。
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAudioSeparationEffectEnabled(): boolean;
+
+    /**
      * 订阅系统音频分离效果使能状态变更事件。
      * 系统中的音频分离效果状态可由系统播放控制应用设定，其他应用程序可以使用本接口监听状态变更事件。
      *
@@ -9018,6 +9064,47 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     offAudioSeparationEffectEnabledChange(callback?: Callback<boolean>): void;
+
+    /**
+     * 获取音频分离效果的可用状态。
+     * 播控应用可根据此状态决定是否显示音频分离开关按钮。
+     *
+     * @returns { AudioSeparationEffectAvailableStatus } 返回音频分离效果的可用状态。
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAudioSeparationEffectAvailableStatus(): AudioSeparationEffectAvailableStatus;
+
+    /**
+     * 订阅音频分离效果可用状态变化事件。
+     * 当系统识别当前场景不是音频分离的目标场景时，将通过此回调通知播控应用。
+     *
+     * @param { Callback<AudioSeparationEffectAvailableStatus> } callback - Callback function, which is used to return
+     *     the changed availablity status.
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onAudioSeparationEffectAvailableStatusChange(callback: Callback<AudioSeparationEffectAvailableStatus>): void;
+
+    /**
+     * 取消订阅音频分离效果状态变化事件。
+     * 取消后，系统将不再触发回调。
+     *
+     * @param { Callback<AudioSeparationEffectAvailableStatus> } [callback] - 待取消的回调。
+     *     <br>如果不传callback参数，则取消所有订阅的回调。
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offAudioSeparationEffectAvailableStatusChange(callback?: Callback<AudioSeparationEffectAvailableStatus>): void;    
 
     /**
      * 设置指定音量类型的音频分离效果音量。使用Promise异步回调。
@@ -12304,6 +12391,19 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     playbackCaptureUid?: int;
+
+    /**
+     * 实际使用该录音流的应用TokenId，用于在点亮麦克风隐私指示器时，显示正确的应用信息。
+     * 如果未指定该字段，默认使用调用方应用的TokenId。
+     * 设置该字段时，调用方必须具有ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR权限，
+     * 否则{@link createAudioCapturer}失败。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
@@ -12374,6 +12474,19 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     preferredInputDevice?: AudioDeviceDescriptor;
+
+    /**
+     * 实际使用该录音流的应用TokenId，用于在点亮麦克风隐私指示器时，显示正确的应用信息。
+     * 如果未指定该字段，默认使用调用方应用的TokenId。
+     * 设置该字段时，调用方必须具有ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR权限，
+     * 否则{@link createMicInAudioCapturer}失败。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
@@ -14988,6 +15101,141 @@ declare namespace audio {
      * @since 24 static
      */
     getEqualizerPreset(): AudioLoopbackEqualizerPreset;
+
+    /**
+     * 获取全局音频返听可用状态。
+     * 此功能仅适用于播控应用。
+     *
+     * @returns { AudioLoopbackavailablestatus } 全局环回的可用状态。
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAvailableStatus(): AudioLoopbackAvailableStatus;
+
+    /**
+     * 订阅全局音频返听可用状态变化事件。
+     * 此功能仅适用于播控应用。
+     *
+     * @param { Callback<AudioLoopbackavailablestatus> } callback - 回调函数，用于返回变化后的音频返听可用状态。
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onAvailableStatusChange(callback: Callback<AudioLoopbackAvailableStatus>): void;
+
+    /**
+     * 取消订阅全局音频返听可用状态变化事件。
+     * 取消后，系统将不再触发回调。
+     * 此功能仅适用于播控应用。
+     *
+     * @param { Callback<AudioLoopbackavailablestatus> } [callback] - 待取消的回调。
+     *     <br>如果不传callback参数，则取消所有订阅的回调。
+     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offAvailableStatusChange(callback?: Callback<AudioLoopbackAvailableStatus>): void;
+  }
+
+  /**
+   * 定义全局音频返听的可用状态。
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioLoopbackAvailableStatus {
+    /**
+     * 可用状态。
+     * 播控应用基于该状态确定用户开关音频返听的反馈。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    available: boolean;
+
+    /**
+     * 不可用原因。
+     * 播控应用根据这些信息决定提示信息。
+     * <br>该参数仅在状态为不可用时存在。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    unavailableReason?: AudioLoopbackUnavailableReason;
+  }
+
+  /**
+   * 枚举音频返听功能不可用的原因。
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum AudioLoopbackUnavailableReason {
+    /**
+     * 此设备不支持音频返听功能。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_DEVICE_NOT_SUPPORTED = 0,
+
+    /**
+     * 首选音频设备类型不支持音频返听。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_PREFERRED_AUDIO_DEVICE_TYPE_NOT_SUPPORTED = 1,
+
+    /**
+     * 首选音频设备产品不支持音频返听，主要用于
+     * 不支持的星闪设备场景。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_PREFERRED_AUDIO_DEVICE_PRODUCT_NOT_SUPPORTED = 2,
+
+    /**
+     * 其他场景占用，包括公共音频返听开启和电话呼叫等。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_OCCUPIED_BY_OTHER = 3,
+
+    /**
+     * 音频服务状态异常。
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_AUDIO_PROCESS_ERROR = 4
   }
 
   /**

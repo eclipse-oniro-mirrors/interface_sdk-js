@@ -120,8 +120,12 @@ export class Font {
 }
 
 /**
-* class MediaQuery
-*
+ * 提供根据不同媒体类型定义不同的样式。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMediaQuery()]{@link getMediaQuery}方法获取MediaQuery实例，再通过此实例调用对应方法。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

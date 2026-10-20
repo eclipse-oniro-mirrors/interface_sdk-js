@@ -206,6 +206,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     minSupportTlsProtocol?: TlsProtocol;
 
@@ -215,6 +216,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     supportOriginPort?: boolean;
   }
@@ -369,6 +371,7 @@ declare namespace webSocket {
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export interface WebSocketOpenInfo {
     /**
@@ -377,6 +380,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     status: int;
 
@@ -386,6 +390,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     message: string;
 
@@ -395,6 +400,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     protocol?: string;
  	}
@@ -716,6 +722,16 @@ declare namespace webSocket {
     on(type: 'openInfo', callback: AsyncCallback<WebSocketOpenInfo>): void;
 
     /**
+     * Enables listening for the open info events of a WebSocket connection.
+     *
+     * @param { Callback<WebSocketOpenInfo> } callback - the callback used to return the result.
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    onOpenInfo(callback: Callback<WebSocketOpenInfo>): void;
+
+    /**
      * Cancels listening for the open info events of a WebSocket connection.
      *
      * @param { 'openInfo' } type - event indicating that the open info of a WebSocket connection is returned.
@@ -725,6 +741,16 @@ declare namespace webSocket {
      * @since 26.0.0 dynamic
      */
     off(type: 'openInfo', callback?: AsyncCallback<WebSocketOpenInfo>): void;
+
+    /**
+     * Cancels listening for the open info events of a WebSocket connection.
+     *
+     * @param { Callback<WebSocketOpenInfo> } [callback] - the callback used to return the result.
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    offOpenInfo(callback?: Callback<WebSocketOpenInfo>): void;
 
     /**
      * Enables listening for the message events of a WebSocket connection.
@@ -1505,6 +1531,7 @@ declare namespace webSocket {
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export enum TlsProtocol {
     /**
@@ -1513,6 +1540,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_0 = 0,
 
@@ -1522,6 +1550,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_1 = 1,
 
@@ -1531,6 +1560,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_2 = 2,
 
@@ -1540,6 +1570,7 @@ declare namespace webSocket {
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     TLS_V_1_3 = 3
   }

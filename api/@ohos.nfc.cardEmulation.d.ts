@@ -221,7 +221,7 @@ declare namespace cardEmulation {
      * @since 9 dynamic
      * @since 23 static
      */
-    PAYMENT = "payment",
+    PAYMENT = 'payment',
 
     /**
      * Other services.
@@ -232,7 +232,7 @@ declare namespace cardEmulation {
      * @since 9 dynamic
      * @since 23 static
      */
-    OTHER = "other"
+    OTHER = 'other'
   }
 
   /**

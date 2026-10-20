@@ -119,7 +119,7 @@ declare namespace mediaquery {
    * 
    * > **说明：** 
    * >
-   * > -matchMediaSync需先通过[UIContext]{@link @ohos.arkui.UIContext}中的
+   * > - matchMediaSync需先通过[UIContext]{@link @ohos.arkui.UIContext}中的
    * > [getMediaQuery]{@link UIContext#getMediaQuery}方法获取
    * > [MediaQuery]{@link @ohos.arkui.UIContext}对象，然后通过该对象进行调用。
    * >

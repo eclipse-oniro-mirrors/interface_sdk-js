@@ -14,9 +14,7 @@
  */
 
 /**
- 文本模块
- * @file
- 文本模块
+ * @file 文本模块
  * @kit ArkGraphics2D
  */
 import type drawing from './@ohos.graphics.drawing';
@@ -1011,6 +1009,26 @@ declare namespace text {
      * @since 23 static
      */
     leftBottomRadius: double;
+
+    /**
+     * 矩形边框的颜色，默认值为白色。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    borderColor?: common2D.Color;
+
+    /**
+     * 矩形边框的宽度，单位为物理像素px，默认值为0。
+     *
+     * @syscap SystemCapability.Graphics.Drawing
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    borderWidth?: double;
   }
 
   /**

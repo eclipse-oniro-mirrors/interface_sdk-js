@@ -14,6 +14,14 @@
  */
 
 /**
+ * The segment button component includes tab-style segment buttons and capsule-style segment buttons. Tab-style segment
+ * buttons are suitable for switching between pages or content areas. Capsule-style segment buttons are suitable for
+ * single-select or multi-select scenarios, including capsule-style single-select segment buttons and capsule-style
+ * multi-select segment buttons. This component supports custom appearance attributes such as text color, font size,
+ * font weight, background color, image size, padding, and background blur material. It supports three button styles:
+ * text-only, icon-only, and icon + text. It also provides capabilities such as accessibility reading, layout direction
+ * mirroring, custom rounded corners, and property animation, making it suitable for scenarios where you need to quickly
+ * build a segmented selection interface that complies with design specifications.
  * @file
  * @kit ArkUI
  */
@@ -374,13 +382,42 @@ interface SegmentButtonIconTextItem {
 declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
 
 /**
+ * Defines the drag interaction mode of the segmented button.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum SegmentButtonInteractionMode {
+  /**
+   * Enables following drag. Without system material, only the following drag animation is enabled.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  FOLLOWING_DRAG = 0,
+
+  /**
+   * Enables normal drag. Only drag positioning and selection updates differ from following drag.
+   * System material feedback, including configured light effects, is retained.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  NORMAL_DRAG = 1
+}
+
+/**
  * Enumerates the border radius modes for the **SegmentButton** component, which are used to control the border radius 
  * calculation method.
- *
- * | Name   |Value| Description                            |
- * | ------- | - |-------------------------------- |
- * | DEFAULT | 0 |Default mode, where the framework automatically calculates the border radius.|
- * | CUSTOM  | 1 |Custom mode, where the border radius is set by the developer.|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -791,6 +828,27 @@ interface CommonSegmentButtonOptions {
    * @since 23 dynamic
    */
   backgroundSystemMaterial?: uiMaterial.Material;
+
+  /**
+   * Sets the drag interaction mode of the segmented button.
+   *
+   * If omitted, following drag is used with system material, and normal drag is used without it.
+   * Explicit normal drag without system material and explicit following drag with system material
+   * preserve the original behavior.
+   * Following drag without system material does not add material deformation or light effects.
+   * Normal drag with system material only changes drag positioning and selection updates.
+   * Material appearance, background scaling, slight displacement, selected-item deformation,
+   * and configured light effects are retained.
+   * If omitted, undefined or invalid, the default mode is used.
+   * This property has no effect in multi-select mode.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  interactionMode?: SegmentButtonInteractionMode;
 }
 
 /**
@@ -839,8 +897,6 @@ declare type SegmentButtonItemArray = Array<SegmentButtonTextItem> | Array<Segme
 
 /**
  * Creates a SegmentButtonOptions object of the tab type.
- * 
- * Inherits from [CommonSegmentButtonOptions]{@link CommonSegmentButtonOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -865,8 +921,6 @@ interface TabSegmentButtonConstructionOptions extends CommonSegmentButtonOptions
 /**
  * Represents configuration options for creating a **SegmentButton** component consisting of capsule-style segment
  * buttons.
- * 
- * Inherits from [CommonSegmentButtonOptions]{@link CommonSegmentButtonOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -909,8 +963,7 @@ interface CapsuleSegmentButtonConstructionOptions extends CommonSegmentButtonOpt
 }
 
 /**
- * Provides configuration options for tab-style segment buttons. Inherits from
- * [TabSegmentButtonConstructionOptions]{@link TabSegmentButtonConstructionOptions}.
+ * Provides configuration options for tab-style segment buttons. 
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -933,8 +986,7 @@ interface TabSegmentButtonOptions extends TabSegmentButtonConstructionOptions {
 }
 
 /**
- * Provides configuration options for capsule-style segment buttons. Inherits from
- * [CapsuleSegmentButtonConstructionOptions]{@link CapsuleSegmentButtonConstructionOptions}.
+ * Provides configuration options for capsule-style segment buttons.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1687,6 +1739,27 @@ declare class SegmentButtonOptions {
   backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
+   * Sets the drag interaction mode of the segmented button.
+   *
+   * If omitted, following drag is used with system material, and normal drag is used without it.
+   * Explicit normal drag without system material and explicit following drag with system material
+   * preserve the original behavior.
+   * Following drag without system material does not add material deformation or light effects.
+   * Normal drag with system material only changes drag positioning and selection updates.
+   * Material appearance, background scaling, slight displacement, selected-item deformation,
+   * and configured light effects are retained.
+   * If omitted, undefined or invalid, the default mode is used.
+   * This property has no effect in multi-select mode.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  interactionMode?: SegmentButtonInteractionMode;
+
+  /**
    * Constructor.
    *
    * @param { TabSegmentButtonOptions | CapsuleSegmentButtonOptions } options - Configuration options for tab-style or
@@ -1811,15 +1884,8 @@ declare class SegmentButtonOptions {
 }
 
 /**
- * The segment button component includes tab-style segment buttons and capsule-style segment buttons. Tab-style segment
- * buttons are suitable for switching between pages or content areas. Capsule-style segment buttons are suitable for
- * single-select or multi-select scenarios, including capsule-style single-select segment buttons and capsule-style
- * multi-select segment buttons. This component supports custom appearance attributes such as text color, font size,
- * font weight, background color, image size, padding, and background blur material. It supports three button styles:
- * text-only, icon-only, and icon + text. It also provides capabilities such as accessibility reading, layout direction
- * mirroring, custom rounded corners, and property animation, making it suitable for scenarios where you need to quickly
- * build a segmented selection interface that complies with design specifications.
- * 
+ * Creates a tab-style or capsule-style segment button.
+ *
  * > **NOTE**
  * >
  * > - The segment button does not support [universal attributes]{@link CommonMethod}. The segment
@@ -1942,5 +2008,6 @@ export {
   SegmentButtonItemArray,
   SegmentButtonItemOptionsConstructorOptions,
   SegmentButtonItemOptions,
+  SegmentButtonInteractionMode,
   BorderRadiusMode
 };

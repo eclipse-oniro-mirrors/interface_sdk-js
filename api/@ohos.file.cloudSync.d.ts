@@ -202,6 +202,44 @@ declare namespace cloudSync {
   }
 
   /**
+   * Enumerates the device-cloud sync types for Gallery.
+   *
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum SyncType {
+    /**
+     * Normal sync.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    NORMAL = 0,
+    /**
+     * Forced sync.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    FORCE = 1,
+    /**
+     * Forced thumbnail sync.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    FORCE_THM = 2
+  }
+
+  /**
    * Represents information about the device-cloud sync progress.
    *
    * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -416,6 +454,42 @@ declare namespace cloudSync {
      * @since 23 static
      */
     stop(callback: AsyncCallback<void>): void;
+    /**
+     * Starts device-cloud sync. This API uses a promise to return the result.
+     *
+     * @permission ohos.permission.CLOUDFILE_SYNC
+     * @param { SyncType } type Sync type of cloud sync.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 22400001 - Cloud status not ready.
+     * @throws { BusinessError } 22400002 - Network unavailable.
+     * @throws { BusinessError } 22400003 - Low battery level.
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    startWithType(type: SyncType): Promise<void>;
+    /**
+     * Starts device-cloud sync. This API uses a callback to return the result.
+     *
+     * @permission ohos.permission.CLOUDFILE_SYNC
+     * @param { Callback<void> } callback Callback used to return the result.
+     * @param { SyncType } type Sync type of cloud sync.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 22400001 - Cloud status not ready.
+     * @throws { BusinessError } 22400002 - Network unavailable.
+     * @throws { BusinessError } 22400003 - Low battery level.
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    startWithType(callback: Callback<void>, type: SyncType): void;
   }
 
   /**

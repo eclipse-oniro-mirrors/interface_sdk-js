@@ -217,6 +217,7 @@ declare namespace inputEventClient {
    * Injects key events (for both single keys and combination keys).
    * Since API version 26.0.1, the caller can specify the display ID for injecting a key event.
    * If the specified display ID does not exist, the operation will not take effect.
+   * If displayId is not specified, the operation will take effect on the display group of the same user as the caller.
    *
    * @permission ohos.permission.INJECT_INPUT_EVENT [since 12]
    * @param { KeyEventData } keyEvent - Key event to inject.
@@ -236,6 +237,7 @@ declare namespace inputEventClient {
    * Injects keys (including single keys and combination keys).
    * Since API version 26.0.1, the caller can specify the display ID for injecting a key event.
    * If the specified display ID does not exist, the operation will not take effect.
+   * If displayId is not specified, the operation will take effect on the display group of the same user as the caller.
    *
    * @permission ohos.permission.INJECT_INPUT_EVENT [since 12]
    * @param { { KeyEvent } } KeyEvent - Key event to inject.
@@ -255,6 +257,7 @@ declare namespace inputEventClient {
    * Injects keys (including single keys and combination keys).
    * Since API version 26.0.1, the caller can specify the display ID for injecting a key event.
    * If the specified display ID does not exist, the operation will not take effect.
+   * If displayId is not specified, the operation will take effect on the display group of the same user as the caller.
    *
    * @permission ohos.permission.INJECT_INPUT_EVENT
    * @param { KeyEventInfo } keyEvent - the key event to be injected.
@@ -379,7 +382,8 @@ declare namespace inputEventClient {
    * @returns { Promise<KeyboardController> } Promise used to return the keyboard controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
    * @stagemodelonly
@@ -513,7 +517,8 @@ declare namespace inputEventClient {
    * @returns { Promise<MouseController> } Promise used to return the mouse controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
    * @stagemodelonly
@@ -645,7 +650,8 @@ declare namespace inputEventClient {
    * @returns { Promise<TouchController> } Promise used to return the touch controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
    * @stagemodelonly

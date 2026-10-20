@@ -5719,6 +5719,14 @@ declare namespace huks {
      */
     HUKS_TAG_CONTEXT = HuksTagType.HUKS_TAG_TYPE_BYTES | 528,
     /**
+     * 表示异步超时时间，单位为秒，可由业务逻辑自定义。
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.0.1
+     */
+    HUKS_TAG_TIMEOUT = HuksTagType.HUKS_TAG_TYPE_UINT | 529,
+    /**
      * 表示是否使用生成key时传入的别名的Tag。
      *
      * @syscap SystemCapability.Security.Huks.Core

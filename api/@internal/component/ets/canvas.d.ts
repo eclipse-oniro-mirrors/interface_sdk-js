@@ -3120,7 +3120,7 @@ declare class CanvasRenderer extends CanvasPath {
  */
 declare class CanvasRenderingContext2D extends CanvasRenderer {
   /**
-   * Component height.
+   * Component height of **CanvasRenderingContext2D**.
    *
    * Default unit: vp
    *
@@ -3134,7 +3134,7 @@ declare class CanvasRenderingContext2D extends CanvasRenderer {
   readonly height: number;
 
   /**
-   * Component width.
+   * Component width of **CanvasRenderingContext2D**.
    *
    * Default unit: vp
    *
@@ -3794,9 +3794,11 @@ declare class DrawingRenderingContext {
   get size(): Size;
 
   /**
-   * Obtains the canvas object for drawing content.
+   * Obtains the canvas object for drawing content. 
+   * This API can be used only after the **DrawingRenderingContext** object is bound to the **Canvas** component. 
+   * The obtained **Canvas** object can be used to bind drawing tools such as **Brush** and **Pen** to draw shapes, texts, and images.
    *
-   * @returns { DrawingCanvas } The canvas of the DrawingRenderingContext.
+   * @returns { DrawingCanvas } Canvas object for drawing content.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3992,10 +3994,10 @@ interface CanvasInterface {
 
 /**
  * In addition to the
- * [universal attributes]{@link common},
+ * [universal attributes]{@link CommonMethod},
  * the following attributes are supported.
  *
- * The [universal events]{@link common} are supported.
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

@@ -1275,6 +1275,45 @@ declare namespace backgroundTaskManager {
   function startBackgroundRunning(context: Context, request: ContinuousTaskRequest): Promise<ContinuousTaskNotification>;
 
   /**
+   * Requests a continuous task. This API allows a UIAbility (ServiceAbility in the FA model) to request multiple
+   * continuous tasks and uses a promise to return the result. When using this API to request a continuous task, its
+   * notification can be combined with that of an existing continuous task. For details, see
+   * [ContinuousTaskRequest]{@link backgroundTaskManager.ContinuousTaskRequest}.
+   *
+   * A maximum of 10 continuous tasks can be created simultaneously. Upon successful creation of a continuous task, a
+   * notification will be sent without a prompt tone.
+   *
+   * If a continuous task requested via this API includes multiple task types (including data transmission tasks), two
+   * notifications will appear in the notification panel: one for the data transmission task and the other for the
+   * remaining tasks. Removing either notification will cancel the continuous task and remove the other notification.
+   * The continuous task notification ID returned by the API is the ID of the data transmission type, which is used to
+   * update the data transmission progress.
+   *
+   * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
+   * @param { Context } context - Application context.
+   *     <br>For details about the application context of the FA model, see
+   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
+   *     UIAbility in the stage model and the ServiceAbility in the FA model.
+   * @param { ContinuousTaskRequest } request - Request information of a continuous task, including the main type and
+   *     subtype.
+   * @returns { Promise<int> } Promise used to return the continuous task ID.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9800001 - Memory operation failed.
+   * @throws { BusinessError } 9800004 - System service operation failed.
+   * @throws { BusinessError } 9800005 - Continuous task verification failed.
+   * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
+   * @throws { BusinessError } 9800007 - Continuous task storage failed.
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type.
+   * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  function startContinuousTask(context: Context, request: ContinuousTaskRequest): Promise<int>;
+
+  /**
    * Updates continuous tasks of multiple types. This API uses a promise to return the result. After a continuous task 
    * is successfully updated, there will be a notification message without prompt tone.
    * 

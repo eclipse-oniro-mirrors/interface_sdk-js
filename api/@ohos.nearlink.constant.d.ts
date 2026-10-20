@@ -24,6 +24,7 @@
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
+ * @atomicservice [since 26.2.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
@@ -33,6 +34,7 @@ declare namespace nearlinkConstant {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -42,6 +44,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -51,6 +54,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -60,6 +64,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -71,6 +76,7 @@ declare namespace nearlinkConstant {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -80,6 +86,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -89,6 +96,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -98,6 +106,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -107,6 +116,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -118,6 +128,7 @@ declare namespace nearlinkConstant {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -127,6 +138,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -136,6 +148,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -145,6 +158,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -154,6 +168,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -163,6 +178,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -172,6 +188,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -181,6 +198,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -190,6 +208,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -199,6 +218,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -208,15 +228,17 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     DEVICE_WATCH = 0x000400,
     /**
-     * Smart watch.
+     * Smartwatch.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -226,6 +248,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -235,6 +258,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -244,6 +268,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -253,6 +278,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -262,6 +288,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -271,6 +298,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -280,6 +308,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -289,6 +318,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -298,6 +328,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -307,6 +338,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -316,6 +348,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -325,6 +358,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -334,6 +368,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -343,6 +378,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -352,6 +388,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -361,6 +398,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -370,6 +408,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -379,6 +418,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -388,6 +428,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -397,6 +438,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -406,6 +448,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -415,6 +458,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -424,6 +468,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -433,6 +478,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -442,6 +488,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -451,6 +498,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -460,6 +508,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -469,6 +518,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -478,6 +528,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -487,6 +538,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -496,6 +548,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -505,6 +558,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -514,6 +568,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -523,6 +578,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -532,6 +588,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -541,6 +598,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -550,6 +608,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -559,6 +618,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -568,6 +628,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -577,6 +638,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -586,6 +648,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -595,6 +658,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -604,6 +668,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -615,6 +680,7 @@ declare namespace nearlinkConstant {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -624,6 +690,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -633,6 +700,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -642,6 +710,7 @@ declare namespace nearlinkConstant {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -657,6 +726,7 @@ declare namespace nearlinkConstant {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
+   * @atomicservice [since 26.2.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -667,6 +737,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -677,6 +748,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -687,6 +759,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -697,6 +770,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -707,6 +781,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -717,6 +792,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -727,6 +803,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -737,6 +814,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -747,6 +825,7 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -757,10 +836,40 @@ declare namespace nearlinkConstant {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
+     * @atomicservice [since 26.2.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
     LOW_SPEED_INTERVAL_500 = 9
+  }
+
+  /**
+   * Enumerates the NearLink radio frame types.
+   *
+   * @syscap SystemCapability.Communication.NearLink.Base
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  export enum FrameType {
+    /**
+     * Radio frame type 1, the basic frame.
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    FRAME_TYPE_1 = 1,
+    /**
+     * Radio frame type 4, the extended coverage frame.
+     *
+     * @syscap SystemCapability.Communication.NearLink.Base
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    FRAME_TYPE_4 = 4
   }
 }
 export default nearlinkConstant;

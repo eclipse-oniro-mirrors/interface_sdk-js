@@ -272,16 +272,14 @@ declare namespace wantAgent {
   function equal(agent: WantAgent, otherAgent: WantAgent): Promise<boolean>;
 
   /**
-   * Obtains a WantAgent object.
-   * This API uses an asynchronous callback to return the result.
-   * If the creation fails, a null WantAgent object is returned.
-   * 
-   * <p>**NOTE**:
-   * <br>Third-party applications can set only their own abilities.
-   * </p>
+   * Obtains a WantAgent object. This API uses an asynchronous callback to return the result. If the creation fails, a
+   * null value is returned.
    *
-   * @param { WantAgentInfo } info - Information about the WantAgent object to obtain.
-   * @param { AsyncCallback<WantAgent> } callback - Callback used to return the WantAgent object.
+   * @param { WantAgentInfo } info - Configuration information required for creating the WantAgent object, including the
+   *     target UIAbility, operation type, and request code. In **WantAgentInfo**, a third-party application is only
+   *     allowed to specify its own UIAbility.
+   * @param { AsyncCallback<WantAgent> } callback - Callback function. When the WantAgent is created successfully, err is
+   *     undefined and data is the created WantAgent; otherwise, err is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -294,15 +292,12 @@ declare namespace wantAgent {
   function getWantAgent(info: WantAgentInfo, callback: AsyncCallback<WantAgent>): void;
 
   /**
-   * Obtains a WantAgent object.
-   * This API uses a promise to return the result.
-   * If the creation fails, a null WantAgent object is returned.
-   * 
-   * <p>**NOTE**:
-   * <br>Third-party applications can set only their own abilities.
-   * </p>
+   * Creates a WantAgent instance for triggering a specified operation later. This API uses a promise to return the
+   * result. If the creation succeeds, the WantAgent object is returned; otherwise, null is returned.
    *
-   * @param { WantAgentInfo } info - Information about the WantAgent object to obtain.
+   * @param { WantAgentInfo } info - Configuration information required for creating the WantAgent object, including the
+   *     target UIAbility, operation type, and request code. In **WantAgentInfo**, a third-party application is only
+   *     allowed to specify its own UIAbility.
    * @returns { Promise<WantAgent> } Promise used to return the WantAgent object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.

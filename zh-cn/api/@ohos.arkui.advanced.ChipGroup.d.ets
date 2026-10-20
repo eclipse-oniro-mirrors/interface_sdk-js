@@ -14,6 +14,8 @@
 */
 
 /**
+ * ChipGroup组件提供操作块群组能力，支持单选或多选模式，可自定义样式、图标和间距，支持选中状态管理和事件回调。
+ * 适用于文件分类、资源筛选、标签选择、内容分组等多种场景，帮助开发者快速实现选择功能，提供统一的视觉和交互体验。
  * @file
  * @kit ArkUI
  */
@@ -26,7 +28,7 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
 
 /**
  * IconOptions定义图标的通用属性。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -68,10 +70,8 @@ export interface IconOptions {
 }
 
 /**
-* 后缀图标选项的类型。
-*
-* 继承自[IconOptions]{@link IconOptions}。
-*
+ * 后缀图标选项的类型。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -178,16 +178,16 @@ export interface LabelOptions {
 }
 
 /**
-* ChipGroupItemOptions定义每个Chip的非通用属性。
-*
-* > **说明：**
-* >
+ * ChipGroupItemOptions定义每个Chip的非通用属性。
+ *
+ * > **说明：**
+ * >
  * > 当传入`suffixSymbol`参数时，`allowClose`不生效；当传入`suffixImageIcon`参数而`suffixSymbol`没有传入参数时，`allowClose`不生效；当`suffixSymbol`和
  * > `suffixImageIcon`都没有传入参数时，`allowClose`决定是否显示关闭图标。`suffixIcon`已废弃，请使用`suffixImageIcon`。
  * >
  * > `suffixSymbol`、`suffixImageIcon`均为后缀图标，同一Chip项中只能配置其中一个。若同时配置多个，仅优先级最高的生效（优先级：`suffixSymbol` > `suffixImageIcon`）。
  * > `suffixIcon`已废弃，建议使用`suffixImageIcon`替代。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -498,8 +498,8 @@ export interface ChipItemStyle {
 }
 
 /**
-* ChipGroupSpaceOptions 定义了ChipGroup左右内边距，以及Chip与Chip之间的间距。
-*
+ * ChipGroupSpaceOptions 定义了ChipGroup左右内边距，以及Chip与Chip之间的间距。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -771,8 +771,8 @@ export interface SymbolItemOptions {
 }
 
 /**
-* ChipGroupPaddingOptions定义了ChipGroup的上下内边距，用于控制其整体高度。
-*
+ * ChipGroupPaddingOptions定义了ChipGroup的上下内边距，用于控制其整体高度。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -822,8 +822,8 @@ export interface ChipGroupPaddingOptions {
 }
 
 /**
- * ChipGroup组件提供操作块群组能力，支持单选或多选模式，可自定义样式、图标和间距，支持选中状态管理和事件回调。适用于文件分类、资源筛选、标签选择、内容分组等多种场景，帮助开发者快速实现选择功能，提供统一的视觉和交互体验。
-*
+ * 用于定义ChipGroup的后缀区域图标属性，在ChipGroup组件最右侧显示自定义内容的可配置suffix属性中使用。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -869,7 +869,7 @@ export declare struct IconGroupSuffix {
 }
 
 /**
- * ChipGroup组件提供操作块群组能力，支持单选或多选模式，可自定义样式、图标和间距，支持选中状态管理和事件回调。适用于文件分类、资源筛选、标签选择、内容分组等多种场景，帮助开发者快速实现选择功能，提供统一的视觉和交互体验。
+ * 创建ChipGroup组件。
  *
  * > **说明：**
  * >

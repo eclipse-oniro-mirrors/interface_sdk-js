@@ -81,7 +81,9 @@ export declare interface FlexOptions {
      */
     alignContent?: FlexAlign;
     /**
-     * 所有子组件在Flex容器主轴或交叉轴的间距。
+     * 所有子组件在Flex容器主轴或交叉轴的间距。当需要调整子组件之间的间距时传入此参数，不传入时子组件之间无间距。
+     * 当space.main或space.cross的值为负数，或者justifyContent设置为FlexAlign.SpaceBetween、FlexAlign.SpaceAround、FlexAlign.SpaceEvenly时，space参数不生效。其中main属性在单行或多行布局时均生效，cross属性仅在wrap为Wrap或WrapReverse（多行布局）时生效。
+     * space.main和space.cross均不支持设置百分比。
      *
      * @type { ?FlexSpaceOptions }
      * @default {main: LengthMetrics.px(0), cross: LengthMetrics.px(0)}
@@ -101,18 +103,20 @@ export declare interface FlexOptions {
  */
 export declare interface FlexSpaceOptions {
     /**
-     * Flex容器主轴上的space。
+     * Flex容器主轴上相邻子组件之间的间距。设置后，主轴方向相邻子组件之间将按指定间距进行分隔，在单行或多行布局时均生效。当space.main为负数或设置百分比，或者justifyContent设置为FlexAlign.SpaceBetween、FlexAlign.SpaceAround、FlexAlign.SpaceEvenly时，该参数不生效。
      *
      * @type { ?LengthMetrics }
+     * @default LengthMetrics.px(0)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     main?: LengthMetrics;
     /**
-     * Flex容器交叉轴上的space。
+     * Flex容器交叉轴上相邻行之间的间距。设置后，交叉轴方向相邻行之间将按指定间距进行分隔，仅在多行布局（wrap为Wrap或WrapReverse）时生效。当space.cross为负数或设置百分比，或者justifyContent设置为FlexAlign.SpaceBetween、FlexAlign.SpaceAround、FlexAlign.SpaceEvenly时，该参数不生效。
      *
      * @type { ?LengthMetrics }
+     * @default LengthMetrics.px(0)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -132,10 +136,10 @@ export declare interface FlexSpaceOptions {
  */
 export declare interface FlexAttribute extends CommonMethod {
     /**
-    * Defines the PointLight
+    * 为Flex组件添加点光源效果，影响周围标记为可被照亮组件的光照渲染。
     *
-    * @param { PointLightStyle | undefined } value - The point light style.
-    * @returns { FlexAttribute } The attribute of the flex.
+    * @param { PointLightStyle | undefined } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
+    * @returns { FlexAttribute } Flex的属性。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @systemapi
     * @stagemodelonly
@@ -148,8 +152,9 @@ export declare interface FlexAttribute extends CommonMethod {
  	 * @param { FlexOptions } [value] - Flex constructor options
  	 * @returns { FlexAttribute } Returns the instance of the FlexAttribute.
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setFlexOptions(value?: FlexOptions): this;
     /**
@@ -191,8 +196,9 @@ export declare function Flex(
  * @param { CustomBuilder } [content_] - container
  * @returns { FlexAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

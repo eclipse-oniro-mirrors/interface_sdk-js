@@ -14,6 +14,13 @@
 */
 
 /**
+ * Chip组件用于标签展示和交互场景，支持自定义样式、图标、激活态等功能，适用于搜索框历史记录、邮件发送列表等场景，可快速实现标签的创建、删除和交互能力。
+ *
+ * > **说明：**
+ * >
+ * > - 如果Chip设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
+ * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Chip本身。
+ * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Chip设置通用属性和通用事件。
  * @file
  * @kit ArkUI
  */
@@ -59,7 +66,7 @@ export declare enum ChipSize {
 
 /**
  * AccessibilitySelectedType定义Chip可指定的选中态类型，用于控制无障碍服务如何向用户传达组件的选中状态。不同的选中态类型提供了不同的语义和用户体验。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -105,12 +112,12 @@ export declare enum AccessibilitySelectedType {
 }
 
 /**
-* IconCommonOptions定义图标的共通属性。
-*
-* > **说明：**
-* >
-* > 仅在图片格式为SVG时，fillColor和activatedFillColor属性才生效。
-*
+ * IconCommonOptions定义图标的共通属性。
+ *
+ * > **说明：**
+ * >
+ * > 仅在图片格式为SVG时，fillColor和activatedFillColor属性才生效。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -185,10 +192,8 @@ export interface IconCommonOptions {
 }
 
 /**
-* SuffixIconOptions定义后缀图标的属性。
-*
-* 继承于[IconCommonOptions]{@link IconCommonOptions}。
-*
+ * SuffixIconOptions定义后缀图标的属性。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -199,7 +204,7 @@ export interface IconCommonOptions {
 export interface SuffixIconOptions extends IconCommonOptions {
 
   /**
-   * 后缀图标点击事件回调。
+   * 后缀图标点击事件回调，无参数和返回值。当用户点击后缀图标时触发该回调。
    *
    * 值为undefined时，不设定后缀图标事件。
    *
@@ -255,8 +260,6 @@ export interface SuffixIconOptions extends IconCommonOptions {
    *
    * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
    *
-   * 默认值："auto"。
-   *
    * 值为undefined时，按默认值处理。
    *
    * @default "auto"
@@ -270,10 +273,8 @@ export interface SuffixIconOptions extends IconCommonOptions {
 }
 
 /**
-* PrefixIconOptions定义前缀图标的属性。
-*
-* 继承于[IconCommonOptions]{@link IconCommonOptions}。
-*
+ * PrefixIconOptions定义前缀图标的属性。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -284,8 +285,8 @@ export interface SuffixIconOptions extends IconCommonOptions {
 export interface PrefixIconOptions extends IconCommonOptions {}
 
 /**
-* 后缀图标的无障碍朗读功能属性。
-*
+ * 后缀图标的无障碍朗读功能属性。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -307,8 +308,6 @@ export interface AccessibilityOptions {
    * "no"：当前组件不可被无障碍辅助服务所识别。
    *
    * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
-   *
-   * 默认值："auto"。
    *
    * 值为undefined时，按默认值处理。
    *
@@ -354,10 +353,8 @@ export interface AccessibilityOptions {
 }
 
 /**
-* CloseOptions用于定义Chip组件默认的关闭图标功能属性，包括无障碍功能属性，其中accessibilityText默认为"删除"。
-*
-* 继承于[AccessibilityOptions]{@link AccessibilityOptions}。
-*
+ * CloseOptions用于定义Chip组件默认的关闭图标功能属性，包括无障碍功能属性，其中accessibilityText默认为"删除"。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -390,13 +387,13 @@ export interface CloseOptions extends AccessibilityOptions {
 }
 
 /**
-* ChipSymbolGlyphOptions定义前缀图标和后缀图标的属性。
-*
-* > **说明：**
-* >
+ * ChipSymbolGlyphOptions定义前缀图标和后缀图标的属性。
+ *
+ * > **说明：**
+ * >
  * > 不支持使用[SymbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}修改动效类型及
  * > effectStrategy设置动效。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform [since 22]
@@ -439,7 +436,7 @@ export interface ChipSymbolGlyphOptions {
 
 /**
  * symbol类型后缀图标的无障碍朗读功能属性及点击事件回调。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -492,8 +489,8 @@ export interface ChipSuffixSymbolGlyphOptions {
 }
 
 /**
-* LabelMarginOptions用于定义文本与左右侧图标之间间距。
-*
+ * LabelMarginOptions用于定义文本与左右侧图标之间间距。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -551,8 +548,8 @@ export interface LabelMarginOptions {
 }
 
 /**
-* LocalizedLabelMarginOptions用于定义本地化文本与左右侧图标之间间距。
-*
+ * LocalizedLabelMarginOptions用于定义本地化文本与左右侧图标之间间距。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -610,8 +607,8 @@ export interface LocalizedLabelMarginOptions {
 }
 
 /**
-* LabelOptions定义文本属性。
-*
+ * LabelOptions定义文本属性。
+ *
  * > **说明：**
  * >
  * > 从API版本26.0.0开始，backgroundSystemMaterial设置自动反色的系统材质时，fontColor使用支持反色的特殊系统资源，文字颜色自动适配到材质背景色的反色；
@@ -961,7 +958,8 @@ export interface ChipOptions {
   backgroundColor?: ResourceColor;
 
   /**
-   * 设置组件系统材质样式。不同材质具有不同的效果，能够影响组件的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
+   * 设置组件系统材质样式。需要将组件放置在Navigation或NavDestination的标题栏，或横向Tabs的底部TabBar中，沉浸光感效果才会生效。
+   * 不同材质具有不同的效果，能够影响组件的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
    * [border]{@link CommonMethod#border}、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}等视觉属性。
    *
    * 默认值：undefined
@@ -995,7 +993,8 @@ export interface ChipOptions {
   activatedBackgroundColor?: ResourceColor;
 
   /**
-   * 设置组件激活状态下的系统材质样式。不同材质具有不同的效果，能够影响组件的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
+   * 设置组件激活状态下的系统材质样式。需要将组件放置在Navigation或NavDestination的标题栏，或横向Tabs的底部TabBar中，沉浸光感效果才会生效。适用于需要激活状态下保持或切换材质效果的交互场景，如标签选中、状态切换等。
+   * 不同材质具有不同的效果，能够影响组件的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
    * [border]{@link CommonMethod#border}、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}等视觉属性。
    *
    * 默认值：undefined
@@ -1052,7 +1051,7 @@ export interface ChipOptions {
   size?: ChipSize | SizeOptions;
 
   /**
-   * 默认关闭图标点击事件。
+   * 默认关闭图标点击事件回调，无参数和返回值。当用户点击默认关闭图标时触发该回调。
    *
    * 值为undefined时，不触发关闭图标点击事件。
    *
@@ -1067,7 +1066,7 @@ export interface ChipOptions {
   onClose?: () => void;
 
   /**
-   * Chip组件点击事件。
+   * Chip组件点击事件回调，无参数和返回值。当用户点击Chip组件时触发该回调。
    *
    * 值为undefined时，Chip不能被点击。
    *
@@ -1124,8 +1123,6 @@ export interface ChipOptions {
    * "no"：当前组件不可被无障碍辅助服务所识别。
    *
    * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
-   *
-   * 默认值："auto"。
    *
    * 值为undefined时，按默认值处理。
    *
@@ -1246,19 +1243,7 @@ export interface ChipOptions {
 }
 
 /**
- * Chip组件用于标签展示和交互场景，支持自定义样式、图标、激活态等功能，适用于搜索框历史记录、邮件发送列表等场景，可快速实现标签的创建、删除和交互能力。
- *
- * > **说明：**
- * >
- * > - 如果Chip设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
- * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Chip本身。
- * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Chip设置通用属性和通用事件。
- *
- * ## 导入模块
- *
- * ```ts
- * import { Chip, ChipOptions, ChipSize } from '@kit.ArkUI';
- * ```
+ * 创建Chip组件。
  *
  * ## 子组件
  *

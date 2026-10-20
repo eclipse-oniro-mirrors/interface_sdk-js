@@ -99,7 +99,8 @@ declare namespace linkEnhance {
      * call **close()** to destroy the **Server** object to release resources.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390202 - The number of servers exceeds the limit.
      * @throws { BusinessError } 32390300 - Internal error.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
@@ -113,7 +114,8 @@ declare namespace linkEnhance {
      * Stops the server. After the server is stopped, you can call `start` to start it again.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -129,7 +131,8 @@ declare namespace linkEnhance {
      * restarted, use **stop()**. If the server is no longer needed, use **close()**.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -147,7 +150,8 @@ declare namespace linkEnhance {
      * @param { Callback<Connection> } callback - Callback used to receive server connection events. The callback
      *     parameter **connection** is the connection object used to establish the connection. The type is
      *     [Connection]{@link linkEnhance.Connection}.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -165,7 +169,8 @@ declare namespace linkEnhance {
      * @param { Callback<Connection> } [callback] - Registered callback. The parameter is
      *     [Connection]{@link linkEnhance.Connection}. The callback last registered using **on** needs to be passed to
      *     unregister the callback. The default effect is the same as the passing behavior.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -179,7 +184,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<Connection> } callback - Callback used to listen for the server is connected event.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -194,7 +200,8 @@ declare namespace linkEnhance {
      * @param { Callback<Connection> } [callback] - Registered callback, which is used to return the
      *     [Connection]{@link linkEnhance.Connection} object.
      * 
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -211,7 +218,8 @@ declare namespace linkEnhance {
      *     is stopped abnormally.
      * @param { Callback<number> } callback - Registered callback, where **number** indicates the returned error code.
      *     This event is triggered when the server is stopped abnormally.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -229,7 +237,8 @@ declare namespace linkEnhance {
      * @param { Callback<number> } [callback] - Registered callback, where **number** indicates the returned error code.
      *     This event is triggered when the server is stopped abnormally. The callback last registered using **on**
      *     needs to be passed to unregister the callback. The default effect is the same as the passing behavior.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -243,7 +252,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } callback - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -257,7 +267,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } [callback] - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -276,7 +287,8 @@ declare namespace linkEnhance {
    * @param { string } name - **Server** object name. The value is a string of up to 255 bytes. It cannot be empty. If
    *     the length exceeds the upper limit or an empty string is passed, error code 32390206 is returned.
    * @returns { Server } **Server** object created.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported
    *     because the linkEnhance function has been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390206 - Invalid parameter.
@@ -306,7 +318,8 @@ declare namespace linkEnhance {
      * the server.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390204 - The number of connection exceeds the limit.
      * @throws { BusinessError } 32390300 - Internal error.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
@@ -321,7 +334,8 @@ declare namespace linkEnhance {
      * can call **connect()** to reconnect to the peer device if necessary.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -338,7 +352,8 @@ declare namespace linkEnhance {
      * call **disconnect()**. If the service is no longer needed, call **close()**.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -353,7 +368,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @returns { string } Device ID of the peer device, that is, the BLE MAC address of the peer device. An empty
      *     string is returned if no device ID is obtained.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
      * @since 20 dynamic
@@ -368,7 +384,8 @@ declare namespace linkEnhance {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { ArrayBuffer } data - Data to send. The maximum length is 1024 bytes. If the length exceeds the upper
      *     limit, error code 32390206 is returned.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @throws { BusinessError } 32390205 - Connection is not ready.
      * @throws { BusinessError } 32390300 - Internal error.
@@ -389,7 +406,8 @@ declare namespace linkEnhance {
      * @param { 'connectResult' } type - Event type, which is **connectResult**. This event is triggered when
      *     `connect()` is called.
      * @param { Callback<ConnectResult> } callback - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -405,7 +423,8 @@ declare namespace linkEnhance {
      *     `connect()` is called.
      * @param { Callback<ConnectResult> } [callback] - Registered callback. The callback last registered using **on**
      *     needs to be passed to unregister the callback. The default effect is the same as the passing behavior.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -418,7 +437,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ConnectResult> } callback - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -431,7 +451,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ConnectResult> } [callback] - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -447,7 +468,8 @@ declare namespace linkEnhance {
      *     connection is passively terminated or an exception occurs.
      * @param { Callback<number> } callback - Registered callback, where **number** indicates the returned error code.
      *     This event is triggered when the connection is passively terminated or an exception occurs.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -466,7 +488,8 @@ declare namespace linkEnhance {
      *     This event is triggered when the connection is passively terminated or an exception occurs. The callback last
      *     registered using **on** needs to be passed to unregister the callback. The default effect is the same as the
      *     passing behavior.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -479,7 +502,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } callback - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -493,7 +517,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<int> } [callback] - Registered callback, where **int** indicates the returned error code.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -510,7 +535,8 @@ declare namespace linkEnhance {
      *     received.
      * @param { Callback<ArrayBuffer> } callback - Callback used to receive data from the peer device. The callback
      *     parameter **data** is the received data, which is of the **ArrayBuffer** type.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -527,7 +553,8 @@ declare namespace linkEnhance {
      * @param { Callback<ArrayBuffer> } [callback] - Callback used to receive data from the peer device. The callback
      *     parameter **data** is the received data, which is of the ArrayBuffer type. The callback last registered using
      *     **on** needs to be passed to unregister the callback. The default effect is the same as the passing behavior.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -541,7 +568,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ArrayBuffer> } callback - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -554,7 +582,8 @@ declare namespace linkEnhance {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Callback<ArrayBuffer> } [callback] - Registered callback.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 32390206 - Invalid parameter.
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -577,7 +606,8 @@ declare namespace linkEnhance {
    *     cannot be empty. If the length exceeds the upper limit or an empty string is passed, error code 32390206 is
    *     returned.
    * @returns { Connection } **Connection** object created.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported
    *     because the linkEnhance function has been trimmed. [since 26.0.0]
    * @throws { BusinessError } 32390206 - Invalid parameter.

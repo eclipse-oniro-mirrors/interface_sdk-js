@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Bundle模块
  * @kit AbilityKit
  */
 

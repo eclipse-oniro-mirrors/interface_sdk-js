@@ -142,7 +142,7 @@ declare namespace systemConfiguration {
    * [ApplicationContext.onSystemConfigurationUpdated]{@link ./application/ApplicationContext:ApplicationContext.onSystemConfigurationUpdated}
    * 方法注册自定义的UpdatedCallback，来监听系统环境变化。
    *
-   * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
    * @since 24 dynamic&static

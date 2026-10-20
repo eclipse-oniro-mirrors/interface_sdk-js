@@ -204,10 +204,8 @@ declare enum SaveDescription {
  * > **说明**
  * >
  * > - 建议icon或text至少传入一个。
- * >
  * > - 如果icon、text都不传入，SaveButton将使用默认样式创建，默认样式：SaveIconStyle默认样式为FULL_FILLED；
- * > SaveDescription默认样式为DOWNLOAD；ButtonType默认样式为Capsule。
- * >
+ * >   SaveDescription默认样式为DOWNLOAD；ButtonType默认样式为Capsule。
  * > - icon、text和buttonType不支持动态修改。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -412,6 +410,11 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
 
   /**
    * 设置保存控件的图标尺寸。
+   *
+   * > **说明**
+   * >
+   * > 在API版本10时，开发者可通过安全控件通用属性[iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}设置图标尺寸，此时size类型仅支持Dimension。<br/>
+   * > 从API版本20开始，开发者可以通过本接口设置图标尺寸，size类型增加支持SizeOptions。
    *
    * @param { Dimension | SizeOptions } size - 图标尺寸，支持像素单位（vp、px等）。
    *     <br>不支持设置百分比字符串。若设置Dimension类型入参的百分比字符串，则图标尺寸显示为默认值；

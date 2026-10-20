@@ -324,7 +324,7 @@ declare namespace contextConstant {
     /**
      * UI服务扩展上下文类型。
      *
-     * @syscap SystemCapability.Ability.AbilityRuntime.Core\
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
      * @atomicservice

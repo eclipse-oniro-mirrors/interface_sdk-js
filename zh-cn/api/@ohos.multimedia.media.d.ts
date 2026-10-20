@@ -14,8 +14,8 @@
 */
 
 /**
- * @file (媒体服务)
- * @kit MediaKit
+ * @file 媒体服务
+ * @kit media
  */
 
 import { ErrorCallback, AsyncCallback, Callback, BusinessError } from './@ohos.base';
@@ -1410,7 +1410,7 @@ declare namespace media {
     composer?: string;
 
     /**
-     * 媒体资源的时长。不支持AVRecorder设置该属性。
+     * 媒体资源的时长，单位为毫秒（ms）。不支持AVRecorder设置该属性。
      *
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1748,8 +1748,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - 需要获取的缩略图时间点与视频帧的对应关系。
      * @param { OutputSize } outputSize - 定义帧的输出大小。默认按原图大小显示。
      * @returns { Promise<image.PixelMap> } Promise对象。返回视频缩略图对象。
-     * @throws { BusinessError  } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError  } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 20 dynamic
      */
@@ -1763,8 +1763,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - 需要获取的缩略图时间点与视频帧的对应关系。
      * @param { OutputSize } [outputSize] - 定义帧的输出大小。默认按原图大小显示。
      * @returns { Promise<image.PixelMap | undefined> }  Promise对象。返回视频缩略图对象。
-     * @throws { BusinessError } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 23 static
      */
@@ -11265,8 +11265,8 @@ declare namespace media {
      * > - 应用最多可添加5个水印。
      * > - 需在[startRecording]{@link @ohos.multimedia.media:media.AVScreenCaptureRecorder.startRecording()}接口调用前调用addWatermark接口。
      *
-     * @param { image.PixelMap } watermark - : 水印图像，取值原则：PixelMap对象不能为空。支持透明度设置。图像格式和尺寸要求请参考
-     * @param { WatermarkConfiguration } config - : 配置视频录制水印的相关参数。各字段取值范围请参考WatermarkConfiguration定义。
+     * @param { image.PixelMap } watermark - 水印图像，取值原则：PixelMap对象不能为空。支持透明度设置。图像格式和尺寸要求请参考
+     * @param { WatermarkConfiguration } config - 配置视频录制水印的相关参数。各字段取值范围请参考WatermarkConfiguration定义。
      *    需在调用startRecording接口前设置。
      * @returns { Promise<int> } Promise对象，返回所添加水印的编号ID表示添加水印成功，失败时返回错误码。
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -11337,7 +11337,7 @@ declare namespace media {
     /**
      * 取消订阅错误回调事件。用户可以指定填入错误回调方法来取消订阅。
      *
-     * @param { 'error' } type - 状态切换事件回调类型，支持的事件：'error'。
+     * @param { 'error' } type - 错误事件回调类型，支持的事件：'error'。
      * @param { ErrorCallback } callback - 录屏错误事件回调方法，不填此参数则会取消最后一次订阅事件。
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @since 12 dynamic

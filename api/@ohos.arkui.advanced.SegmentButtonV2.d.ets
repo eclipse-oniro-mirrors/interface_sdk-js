@@ -14,6 +14,12 @@
  */
 
 /**
+ * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
+ * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
+ * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
+ * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
+ * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
+ * filtering scenarios.
  * @file api/@ohos.arkui.advanced.SegmentedButton.d.ts
  * @kit ArkUI
  */
@@ -22,6 +28,40 @@ import { ColorMetrics, LengthMetrics } from '@ohos.arkui.node';
 import { ImageModifier, SymbolGlyphModifier, TextModifier } from '@ohos.arkui.modifier';
 import { SizeT } from '@ohos.arkui.node';
 import uiMaterial from './@ohos.arkui.uiMaterial';
+
+/**
+ * Defines the drag interaction mode of the segmented button.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+export declare enum SegmentButtonV2InteractionMode {
+    /**
+     * Enables following drag. Without system material, only the following drag animation is enabled.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    FOLLOWING_DRAG = 0,
+
+    /**
+     * Enables normal drag. Only drag positioning and selection updates differ from following drag.
+     * System material feedback, including configured light effects, is retained.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    NORMAL_DRAG = 1
+}
 
 /**
  * Defines segmented button item options.
@@ -214,6 +254,7 @@ export type OnSelectedIndexChange = (selectedIndex: number) => void;
 export type OnSelectedIndexesChange = (selectedIndexes: number[]) => void;
 
 /**
+ * **SegmentButtonV2** component option class, used to define properties such as the text and icon of a single segmented button item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -366,8 +407,6 @@ export declare class SegmentButtonV2Item {
      * 
      * If the value is **undefined**, the default value is used.
      * 
-     * **Decorator:** @Trace
-     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @crossplatform
@@ -405,8 +444,6 @@ export declare class SegmentButtonV2Item {
 
 /**
  * Represents items of the **SegmentButtonV2** component.
- * 
- * This parameter is inherited from Array\<[SegmentButtonV2Item]{@link SegmentButtonV2Item}>.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -442,12 +479,7 @@ export declare class SegmentButtonV2Items extends Array<SegmentButtonV2Item> {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
- * filtering scenarios.
+ * Creates a tab segmented button.
  *
  * > **NOTE**
  * >
@@ -1173,6 +1205,27 @@ export declare struct TabSegmentButtonV2 {
     readonly backgroundSystemMaterial?: uiMaterial.Material;
 
     /**
+     * Sets the drag interaction mode of the segmented button.
+     *
+     * If omitted, following drag is used with system material, and normal drag is used without it.
+     * Explicit normal drag without system material and explicit following drag with system material
+     * preserve the original behavior.
+     * Following drag without system material does not add material deformation or light effects.
+     * Normal drag with system material only changes drag positioning and selection updates.
+     * Material appearance, background scaling, slight displacement, selected-item deformation,
+     * and configured light effects are retained.
+     * If omitted, undefined or invalid, the default mode is used.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    @Param
+    readonly interactionMode?: SegmentButtonV2InteractionMode;
+
+    /**
      * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified
      * through a variable.
      *
@@ -1206,12 +1259,7 @@ export declare struct TabSegmentButtonV2 {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
- * filtering scenarios.
+ * Creates a single-selection capsule segmented button.
  *
  * > **NOTE**
  * >
@@ -1937,6 +1985,27 @@ export declare struct CapsuleSegmentButtonV2 {
     readonly backgroundSystemMaterial?: uiMaterial.Material;
 
     /**
+     * Sets the drag interaction mode of the segmented button.
+     *
+     * If omitted, following drag is used with system material, and normal drag is used without it.
+     * Explicit normal drag without system material and explicit following drag with system material
+     * preserve the original behavior.
+     * Following drag without system material does not add material deformation or light effects.
+     * Normal drag with system material only changes drag positioning and selection updates.
+     * Material appearance, background scaling, slight displacement, selected-item deformation,
+     * and configured light effects are retained.
+     * If omitted, undefined or invalid, the default mode is used.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamic
+     */
+    @Param
+    readonly interactionMode?: SegmentButtonV2InteractionMode;
+
+    /**
      * Whether to enable the attribute animation of the segmented button when the **selectedIndex** value is modified
      * through a variable.
      *
@@ -1970,12 +2039,7 @@ export declare struct CapsuleSegmentButtonV2 {
 }
 
 /**
- * The segmented button component is used to create tab-type, single-selection, or multi-selection capsule segmented
- * buttons. It supports multiple option types such as text, icons, and symbols, as well as graphic-text hybrid
- * configurations, and allows customization of fonts, colors, corner radii, and other styles. The tab segmented button
- * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
- * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
- * filtering scenarios.
+ * Creates a multi-selection capsule segmented button.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

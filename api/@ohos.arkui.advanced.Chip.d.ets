@@ -14,6 +14,9 @@
 */
 
 /**
+ * The **Chip** component is used for tag display and interaction scenarios. It supports custom styles, icons, activated
+ * states, and other features, and is applicable to scenarios such as search box history and email recipient lists,
+ * enabling you to quickly implement tag creation, deletion, and interaction.
  * @file
  * @kit ArkUI
  */
@@ -61,12 +64,6 @@ export declare enum ChipSize {
  * Defines the selected state types that can be specified for **Chip**. This API is used to control how the
  * accessibility service conveys the component's selected state to users. Different selected state types provide
  * different semantics and user experiences.
- *
- * | Name| Value| Description|
- * | ---- | -- | ---- |
- * | CLICKED | 0 | Click type. The chip acts as a regular clickable component, without reporting any selected state to accessibility services. Use this type when the chip triggers an action but does not maintain a selected state.|
- * | CHECKED | 1 | Checkbox type. The chip reports its selected state to accessibility services using the [accessibilityChecked]{@link CommonMethod#accessibilityChecked} attribute. Use this type for multi-select scenarios, such as tag filtering and attribute selection.|
- * | SELECTED | 2 | Radio type. The chip reports its selected state to accessibility services using the [accessibilitySelected]{@link CommonMethod#accessibilitySelected} attribute. Use this type for single-select scenarios, such as navigation bar tabs and radio buttons.|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -197,8 +194,6 @@ export interface IconCommonOptions {
 
 /**
  * Defines the suffix icon options.
- * 
- * Inherits from [IconCommonOptions]{@link IconCommonOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -276,8 +271,6 @@ export interface SuffixIconOptions extends IconCommonOptions {
    * **"no-hide-descendants"**: The component and all its child components cannot be recognized by accessibility
    * services.
    * 
-   * Default value: **"auto"**.
-   * 
    * When the value is undefined, the default value is used.
    *
    * @default "auto"
@@ -292,8 +285,6 @@ export interface SuffixIconOptions extends IconCommonOptions {
 
 /**
  * Defines the prefix icon options.
- * 
- * Inherits from [IconCommonOptions]{@link IconCommonOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -328,8 +319,6 @@ export interface AccessibilityOptions {
    * 
    * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by accessibility
    * services.
-   * 
-   * Default value: **"auto"**
    * 
    * When the value is **undefined**, the default value is used.
    *
@@ -383,8 +372,6 @@ export interface AccessibilityOptions {
 /**
  * Defines the default close icon behavior attributes for the chip, including accessibility attributes. The default 
  * value of **accessibilityText** is **"Delete"**.
- * 
- * Inherits from [AccessibilityOptions]{@link AccessibilityOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1151,8 +1138,6 @@ export interface ChipOptions {
    * 
    * **"no-hide-descendants"**: The component and all its child components cannot be recognized by accessibility
    * services.
-   * 
-   * Default value: **"auto"**
    * 
    * If the value is **undefined**, the default value is used.
    *

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Helper functions to access image and video assets
+ * @file 基于Sendable对象的相册管理模块
  * @kit MediaLibraryKit
  */
 
@@ -548,7 +548,16 @@ declare namespace sendablePhotoAccessHelper {
      * @systemapi
      * @since 12 dynamiconly
      */
-    SMART = 4096
+    SMART = 4096,
+    /**
+     * 共享相册
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    SHARE = 8192
   }
 
   /**
@@ -691,6 +700,15 @@ declare namespace sendablePhotoAccessHelper {
      */
     HIGHLIGHT_SUGGESTIONS = 4105,
     /**
+     * 共享相册
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    SHARE = 8193,
+    /**
      * 任意相册。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -812,6 +830,42 @@ declare namespace sendablePhotoAccessHelper {
      * @since 12 dynamiconly
      */
     readonly videoCount?: number;
+    /**
+     * 共享相册的风控类型。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskType?: string;
+    /**
+     * 共享相册的风控状态。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareRiskStatus?: ShareAlbumRiskStatus;
+    /**
+     * 相册CloudId。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly cloudId?: string;
+    /**
+     * 共享相册的所有者。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    readonly shareAlbumOwner?: string;
     /**
      * 更新相册属性修改到数据库中。使用Promise异步回调。
      *
@@ -1438,6 +1492,44 @@ declare namespace sendablePhotoAccessHelper {
      * @since 26.0.1 dynamiconly
      */
     getShareAlbums(options?: photoAccessHelper.FetchOptions): Promise<FetchResult<Album>>;
+  }
+
+  /**
+   * 枚举共享相册的风险状态。
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  const enum ShareAlbumRiskStatus {
+    /**
+     * 正在审查中。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    UNDER_REVIEW = 0,
+    /**
+     * 审核风险低。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    LOW_REVIEW_RISK = 1,
+    /**
+     * 审核风险高。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    HIGH_REVIEW_RISK = 2,
   }
 }
 

@@ -46,9 +46,7 @@ declare namespace inputEventClient {
   interface KeyEvent {
 
     /**
-     * 按键是否按下。
-     * 
-     * true表示按键按下，false表示按键抬起。
+     * 按键是否按下。<br>true表示按键按下，false表示按键抬起。
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
      * @systemapi hide for inner use
@@ -78,9 +76,7 @@ declare namespace inputEventClient {
     keyDownDuration: int;
 
     /**
-     * 按键是否可以被拦截。
-     * 
-     * true表示可以被拦截，false表示不可被拦截。
+     * 按键是否可以被拦截。<br>true表示可以被拦截，false表示不可被拦截。
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
      * @systemapi hide for inner use
@@ -152,8 +148,8 @@ declare namespace inputEventClient {
     touchEvent: TouchEvent;
 
     /**
-     * 是否使用全局坐标来计算注入的触屏输入事件。默认值为false，取值为false表示使用以指定屏幕左上角为原点的相对坐标系的坐标来计算注入的触屏输入事件。取值为true表示使用以主屏左上角为原点的全局坐标系的坐标来计算注入的触屏
-     * 输入事件。
+     * 是否使用全局坐标来计算注入的触屏输入事件。默认值为false，取值为false表示使用以指定屏幕左上角为原点的相对坐标系的坐标来计算注入的触屏输入事件。
+     * 取值为true表示使用以主屏左上角为原点的全局坐标系的坐标来计算注入的触屏输入事件。
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
      * @systemapi hide for inner use
@@ -206,6 +202,7 @@ declare namespace inputEventClient {
   /**
    * 按键（包括单个按键和组合键）事件注入。
    * 从API版本26.0.1开始，调用者可指定按键事件注入的displayId。若指定的displayId不存在，则操作不生效。
+   * 若未指定displayId，则操作将在与调用者同用户的屏幕组生效。
    *
    * @permission ohos.permission.INJECT_INPUT_EVENT [since 12]
    * @param { KeyEventData } keyEvent - 按键事件注入描述信息。
@@ -224,6 +221,7 @@ declare namespace inputEventClient {
   /**
    * 按键（包括单个按键和组合键）注入。
    * 从API版本26.0.1开始，调用者可指定按键事件注入的displayId。若指定的displayId不存在，则操作不生效。
+   * 若未指定displayId，则操作将在与调用者同用户的屏幕组生效。
    *
    * @permission ohos.permission.INJECT_INPUT_EVENT [since 12]
    * @param { { KeyEvent } } KeyEvent - 按键注入描述信息。
@@ -240,8 +238,9 @@ declare namespace inputEventClient {
   function injectEvent({ KeyEvent: KeyEvent }): void;
 
   /**
-   * 按键(包括单个按键和组合键)注入。
+   * 按键（包括单个按键和组合键）注入。
    * 从API版本26.0.1开始，调用者可指定按键事件注入的displayId。若指定的displayId不存在，则操作不生效。
+   * 若未指定displayId，则操作将在与调用者同用户的屏幕组生效。
    *
    * @permission ohos.permission.INJECT_INPUT_EVENT
    * @param { KeyEventInfo } keyEvent - 按键注入描述信息。

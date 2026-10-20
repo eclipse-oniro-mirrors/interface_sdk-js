@@ -23,6 +23,7 @@
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
+ * @crossplatform
  * @atomicservice
  * @since 26.0.0 dynamic
  */
@@ -64,6 +65,7 @@ export declare class WithEnvAttribute {
  * @returns { WithEnvAttribute } WithEnvAttribute对象。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
+ * @crossplatform
  * @atomicservice
  * @since 26.0.0 dynamic
  */
@@ -88,6 +90,7 @@ export declare type WithEnvInterface = () => WithEnvAttribute;
  * @type { WithEnvInterface }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
+ * @crossplatform
  * @atomicservice
  * @uicomponent
  * @since 26.0.0 dynamic
@@ -99,6 +102,7 @@ export declare const WithEnv: WithEnvInterface;
  * @type { WithEnvAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
+ * @crossplatform
  * @atomicservice
  * @uicomponent
  * @since 26.0.0 dynamic

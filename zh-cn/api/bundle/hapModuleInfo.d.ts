@@ -32,7 +32,7 @@ import { AbilityInfo } from './abilityInfo';
  * @deprecated since 9
  * @useinstead HapModuleInfo
  */
-export interface  {
+export interface HapModuleInfo {
   /**
    * 模块名称。
    *

@@ -33,6 +33,7 @@
  * 定义设备信息获取的参数选项。
  *
  * @syscap SystemCapability.Startup.SystemInfo.Lite
+ * @FaAndStageModel
  * @since 3 dynamiconly
  * @deprecated since 6
  * @reserved ["liteWearable"]
@@ -42,6 +43,7 @@ export interface DeviceResponse {
    * 品牌。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -52,6 +54,7 @@ export interface DeviceResponse {
    * 生产商。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -62,6 +65,7 @@ export interface DeviceResponse {
    * 型号。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -72,6 +76,7 @@ export interface DeviceResponse {
    * 产品代号。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -82,6 +87,7 @@ export interface DeviceResponse {
    * 系统语言。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 4 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -92,6 +98,7 @@ export interface DeviceResponse {
    * 系统地区。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 4 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -102,6 +109,7 @@ export interface DeviceResponse {
    * 可使用的窗口宽度，单位px。不同设备的可使用窗口尺寸存在差异。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -112,6 +120,7 @@ export interface DeviceResponse {
    * 可使用的窗口高度，单位px。不同设备的可使用窗口尺寸存在差异。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -122,6 +131,7 @@ export interface DeviceResponse {
    * 屏幕像素密度。表示屏幕每英寸的像素点数量，单位为dpi(dots per inch)。不同设备的屏幕像素密度存在差异。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 4 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -146,6 +156,7 @@ export interface DeviceResponse {
    * 系统API版本号。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 4 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -156,6 +167,7 @@ export interface DeviceResponse {
    * 设备类型。常见取值：phone（手机）、tablet（平板）、tv（电视）、wearable（可穿戴设备）等。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 4 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -189,8 +201,8 @@ export interface DeviceResponse {
 /**
  * 定义设备信息获取的参数选项。
  *
- * @throws { BusinessError } 200 - 返回结果中存在无法获取的信息。可能原因包括：设备不支持部分信息字段、系统权限受限或设备配置缺失。解决措施：建议检查设备兼容性、确认应用权限配置，并设置此回调以处理错误情况。
  * @syscap SystemCapability.Startup.SystemInfo.Lite
+ * @FaAndStageModel
  * @since 3 dynamiconly
  * @deprecated since 6
  * @reserved ["liteWearable"]
@@ -233,6 +245,7 @@ export interface GetDeviceOptions {
  * getInfo interface
  *
  * @syscap SystemCapability.Startup.SystemInfo.Lite
+ * @FaAndStageModel
  * @since 3 dynamiconly
  * @deprecated since 6
  * @reserved ["liteWearable"]
@@ -255,6 +268,7 @@ export default class Device {
    *
    * @param { GetDeviceOptions } options - 	定义设备信息获取的参数选项。省略时使用默认配置获取设备基本信息。
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]

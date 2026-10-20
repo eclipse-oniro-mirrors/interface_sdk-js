@@ -20,8 +20,11 @@
 import { EdgeEffectOptions, EditModeOptions, NestedScrollOptions, ItemDragInfo, ScrollableCommonMethod, CommonMethod, OnWillScrollCallback, OnScrollCallback, OnItemDragStartCallback } from './common';
 import { Length, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from './scroll';
+import { ScrollSnapAlign } from './list';
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { BarState, Color, EdgeEffect, FocusWrapMode } from './enums';
 import { ComponentBuilder, CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder';
+import { PlaceholderProvider } from '../../@ohos.arkui.placeholderRegister';
 import { AttributeModifier, Bindable, Callback, CommonMethod, UIScrollableCommonEvent } from "./common";
 
 /**
@@ -664,6 +667,22 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
   default nestedScroll(value: NestedScrollOptions | undefined): this;
 
   /**
+   * Sets the two-stage scroll snap strategy of the Grid.
+   *
+   * START, CENTER, and END align items with the start, center, and end of the viewport along the scrolling axis.
+   * A custom provider calculates the approach distance and final target through its two callbacks.
+   * NONE or undefined clears the strategy and restores the default scrolling behavior.
+   * Snapping is disabled for unsupported layouts. Targets are constrained to the legal scroll range.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - Built-in alignment or custom provider.
+   * @returns { this } The Grid attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
+
+  /**
    * Called when setting whether to enable scroll by gesture or mouse.
    *
    * @param { boolean | undefined } value
@@ -805,6 +824,34 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
    * @since 26.0.1 staticonly
    */
   default setGridOptions(scroller?: Scroller, layoutOptions?: GridLayoutOptions): this;
+
+  /**
+   * Sets a scroll placeholder provider for the **Grid** component. When the framework predicts that
+   * creating the next item within the remaining frame budget would overrun the frame, it first
+   * displays a placeholder for that item and creates the real item across frames on the UI thread.
+   *
+   * The provider returns the placeholder description of an item: **id** refers to a template
+   * registered through getPlaceholderRegister().register and **size** is a layout suggestion.
+   * If the provider returns **undefined**, or the returned **id** is missing or not registered,
+   * the system default placeholder is used and scrolling is not interrupted.
+   *
+   * <br>**NOTE**<br>
+   * 1. This attribute is opt-in: if it is not set, the **Grid** component keeps the current behavior,
+   * including the semantics of **syncLoad**.
+   * 2. The placeholder template must be a global, parameterless
+   * **@Builder({ isPlaceholder: true })** function that performs read-only static rendering.
+   * 3. After the real item has been created, it is re-laid out under the normal layout constraints of
+   * the grid item and replaces the placeholder, keeping the scroll anchor.
+   *
+   * @param { PlaceholderProvider | undefined } provider - Placeholder provider of the item at the
+   *     given index.
+   * @returns { this } The Grid attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollPlaceholder(provider: PlaceholderProvider | undefined): this;
 
   /**
    * Call attributeModifier.

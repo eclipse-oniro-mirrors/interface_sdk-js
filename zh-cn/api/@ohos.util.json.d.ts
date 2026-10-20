@@ -63,8 +63,9 @@ declare namespace json {
   /**
    * 定义Sendable JSON解析的转换结果函数类型。
    *
-   * 作为[parseSendable]{@link json.parseSendable}的参数时，解析得到的Sendable对象的每个成员都会调用该函数，
-   * 可在解析过程中进行自定义数据处理或转换。
+   * 用于Sendable JSON解析转换结果的函数类型，与[ArkTSUtils.ASON.Transformer]{@link json.Transformer}一致：this、value及返回值均为
+   * ISendable（而非Object），因为[parseSendable]{@link json.parseSendable}的产物为可跨线程共享的Sendable对象。
+   * 当前[parseSendable]{@link json.parseSendable}仅接受undefined，传入函数会抛出TypeError。
    *
    * @param { ISendable } this - 解析中的键值对所属的ISendable对象。
    * @param { string } key - 属性名。
@@ -220,23 +221,23 @@ declare namespace json {
   }
 
   /**
-   * 解析JSON字符串，生成可直接跨并发实例（Worker或TaskPool）传递、无需拷贝的Sendable对象图。
+   * 解析JSON字符串，生成可直接跨并发实例（Worker或TaskPool）传递、无需拷贝的Sendable对象。
    * 当解析后的JSON数据需要跨线程共享时，使用本接口替代[parse]{@link json.parse}：解析结果直接创建于共享堆，
    * 调用返回后即可被各并发实例访问。
    *
    * 使用说明：
    * <ul>
-   * <li>取值范围在"0"到"4294967294"之间的数字字符串键会作为元素下标存储；任意属性数量下所有键值均可完整访问与枚举。</li>
+   * <li>取值范围在"0"到"4294967294"之间且不含前导零、符号、小数或指数形式的数字字符串键会作为元素下标存储；"4294967295"及其他形式作为普通属性名。</li>
    * <li>重复键以后值为准，且枚举位置保持在首次出现的位置。</li>
-   * <li>当options.parseReturnType为{@link ParseReturnType.MAP}时，返回支持任意条数增删的Sendable Map；
+   * <li>当options.parseReturnType为{@link ParseReturnType.MAP}时，返回键始终为字符串、支持任意条数增删的collections.Map；
    * 为{@link ParseReturnType.OBJECT}（默认）时，返回不可扩展的Sendable对象，其已有属性可更新、不可新增或删除。</li>
    * </ul>
    *
    * @param { string } text - 有效的JSON字符串，需符合JSON语法规范。
    * @param { SendableTransformer } [reviver] - 用于转换结果的函数。当前仅接受undefined；传入函数将抛出TypeError（与ASON.parse一致）。默认值是undefined。
    * @param { ParseOptions } [options] - 解析的配置选项。也可传入仅含bigIntMode的既有ParseOptions对象（此时parseReturnType默认为OBJECT）。默认值是undefined。
-   * @returns { ISendable | null } 返回与JSON文本对应的Sendable对象图；当JSON文本为'null'时返回null；
-   * 当options.parseReturnType为{@link ParseReturnType.MAP}时返回Sendable Map。
+   * @returns { ISendable | null } 返回与JSON字符串对应的Sendable对象；当JSON字符串为'null'时返回null；
+   * 当options.parseReturnType为{@link ParseReturnType.MAP}时返回collections.Map。
    * @syscap SystemCapability.Utils.Lang
    * @stagemodelonly
    * @crossplatform
@@ -248,7 +249,7 @@ declare namespace json {
   /**
    * 枚举解析返回结果的类型。
    *
-   * 当parseReturnType为MAP时，解析结果为Sendable Map（JSSharedMap）而非Sendable对象（JSSharedObject）。
+   * 当parseReturnType为MAP时，解析结果为collection.Map而非Sendable对象。
    * 仅对{@link parseSendable}生效；{@link parse}会忽略该字段。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -269,7 +270,7 @@ declare namespace json {
      */
     OBJECT = 0,
     /**
-     * 解析结果为Sendable Map，支持任意条数的增删操作。
+     * 解析结果为collections.Map，支持任意条数的增删操作。
      *
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly

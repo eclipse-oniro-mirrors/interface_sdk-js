@@ -26,11 +26,11 @@ import type { AsyncCallback, Callback } from './@ohos.base';
  * 
  * 应用可调用接口实现如下功能：
  * 
- * - 注册和解除注册设备上下线变化监听。
- * - 发现周边不可信设备。
+ * - 注册和解除注册设备状态变化、设备名称变更、服务死亡等监听。
+ * - 发现周边设备。
  * - 认证和取消认证设备。
  * - 查询可信设备列表。
- * - 查询本地设备信息，包括设备名称，设备类型和设备标识等。
+ * - 查询本地设备信息，包括设备名称、设备类型和设备标识等。
  * 
  * > **说明：**
  * >
@@ -257,7 +257,7 @@ declare namespace distributedDeviceManager {
      * @since 15 dynamic
      * @since 23 static
      */
-    isCloud : boolean,
+    isCloud : boolean;
     /**
      * 表示获取指定deviceId的设备信息，deviceId一般为设备的UDID，如设备无UDID，则取其MAC或SN作为deviceId。默认为空。
      *
@@ -1037,17 +1037,19 @@ declare namespace distributedDeviceManager {
      * 发现的设备信息，并通过on('discoverFailure')注册设备发现失败回调以接收失败通知。发现完成后可调用stopDiscovering停止发现。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { object } discoverParam - 发现标识。 标识发现的目标类型。
-     *     <br>discoverTargetType: 发现目标默认为设备，值为1。
-     * @param { object } [filterOptions] - 发现设备过滤信息。可选，默认为undefined，发现未上线设备。会携带以下key值：
-     *     <br>availableStatus(0-1)：仅发现设备可信，值为0表示设备不可信。
+     * @param { object } discoverParam - 发现配置参数。用于指定发现的目标类型。
+     *     <br>discoverTargetType: 发现目标类型，取值为1，表示设备类型。传入其他值时不生效。
+     * @param { object } [filterOptions] - 发现设备过滤信息。可选。默认值为undefined，表示发现未上线的设备。
+     *     会携带以下key值（不传入某个key时，表示不按该维度进行筛选）：
+     *     <br>availableStatus(0-1)：筛选发现设备的可用状态，传入超出范围的值时不生效。
      *     <br />-0：设备离线，客户端需要通过调用bindTarget绑定设备。
      *     <br />-1：设备已在线，客户端可以进行连接。
-     *     <br>discoverDistance(0-100)：发现距离本地一定距离内的设备，单位为cm。wifi场景不传该参数。
-     *     <br>authenticationStatus(0-1)：根据不同的认证状态发现设备：
-     *     <br />-0：设备未认证。
-     *     <br />-1：设备已认证。
-     *     <br>authorizationType(0-2)：根据不同的授权类型发现设备：
+     *     <br>discoverDistance(0-100)：根据传入的距离值，发现本地周围指定距离内的设备，
+     *     单位为cm。传入超出范围的值时不生效。使用WiFi进行设备发现时不支持该参数，若传入则不生效。
+     *     <br>authenticationStatus(0-1)：根据不同的认证状态发现设备，传入超出范围的值时不生效：
+     *     <br />-0：设备未认证，客户端需要通过调用bindTarget进行认证绑定。
+     *     <br />-1：设备已认证，可用于分布式业务。
+     *     <br>authorizationType(0-2)：根据不同的授权类型发现设备，传入超出范围的值时不生效：
      *     <br />-0：根据临时协商的会话密钥认证的设备。
      *     <br />-1：基于同账号密钥进行身份验证的设备。
      *     <br />-2：基于不同账号凭据密钥认证的设备。
@@ -1070,18 +1072,20 @@ declare namespace distributedDeviceManager {
      * 发现的设备信息，并通过on('discoverFailure')注册设备发现失败回调以接收失败通知。发现完成后可调用stopDiscovering停止发现。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { Record<string, int | string> } discoverParam - 发现标识。 标识发现的目标类型。
-     *     <br>discoverTargetType: 发现目标默认为设备，值为1。
-     * @param { Record<string, int | string> } [filterOptions] - 发现设备过滤信息。可选，默认为undefined，发现未上线设备。
-     *     会携带以下key值：
-     *     <br>availableStatus(0-1)：仅发现设备可信，值为0表示设备不可信。
+     * @param { Record<string, int | string> } discoverParam - 发现配置参数。用于指定发现的目标类型。
+     *     <br>discoverTargetType: 发现目标类型，取值为1，表示设备类型。传入其他值时不生效。
+     * @param { Record<string, int | string> } [filterOptions] - 发现设备过滤信息。可选。
+     *     默认值为undefined，表示发现未上线的设备。会携带以下key值（不传入某个key时，
+     *     表示不按该维度进行筛选）：
+     *     <br>availableStatus(0-1)：筛选发现设备的可用状态，传入超出范围的值时不生效。
      *     <br />-0：设备离线，客户端需要通过调用bindTarget绑定设备。
      *     <br />-1：设备已在线，客户端可以进行连接。
-     *     <br>discoverDistance(0-100)：发现距离本地一定距离内的设备，单位为cm。wifi场景不传该参数。
-     *     <br>authenticationStatus(0-1)：根据不同的认证状态发现设备：
-     *     <br />-0：设备未认证。
-     *     <br />-1：设备已认证。
-     *     <br>authorizationType(0-2)：根据不同的授权类型发现设备：
+     *     <br>discoverDistance(0-100)：根据传入的距离值，发现本地周围指定距离内的设备，
+     *     单位为cm。传入超出范围的值时不生效。使用WiFi进行设备发现时不支持该参数，若传入则不生效。
+     *     <br>authenticationStatus(0-1)：根据不同的认证状态发现设备，传入超出范围的值时不生效：
+     *     <br />-0：设备未认证，客户端需要通过调用bindTarget进行认证绑定。
+     *     <br />-1：设备已认证，可用于分布式业务。
+     *     <br>authorizationType(0-2)：根据不同的授权类型发现设备，传入超出范围的值时不生效：
      *     <br />-0：根据临时协商的会话密钥认证的设备。
      *     <br />-1：基于同账号密钥进行身份验证的设备。
      *     <br />-2：基于不同账号凭据密钥认证的设备。
@@ -1116,13 +1120,12 @@ declare namespace distributedDeviceManager {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } deviceId - 设备标识，可从设备发现结果（startDiscovering的discoverSuccess回调返回的
      *     DeviceBasicInfo）中获取。长度范围1~255字符，超出范围时返回错误码401。
-     * @param { object } bindParam - 认证参数。由开发者自行决定传入的键值对。默认会携带以下key值：
-     *     <br>bindType 此值是绑定的类型，必填。
-     *     <br />-1：PIN码。
-     *     <br>targetPkgName 绑定目标的包名。
-     *     <br>appName 尝试绑定目标的应用程序名称。
-     *     <br>appOperation 应用程序要绑定目标的原因。
-     *     <br>customDescription 操作的详细说明。
+     * @param { object } bindParam - 认证参数。支持传入以下key值：
+     *     <br>bindType（number，必填）：绑定的类型，取值为1，表示PIN码认证。传入其他值时返回参数错误。
+     *     <br>targetPkgName（string，可选）：绑定目标的包名，不传入时默认使用调用方应用的Bundle名称。
+     *     <br>appName（string，可选）：尝试绑定目标的应用名称，用于在认证界面展示发起绑定的应用名称，不传入时不展示。
+     *     <br>appOperation（string，可选）：应用要绑定目标的原因，用于向用户展示绑定目的，不传入时不展示。
+     *     <br>customDescription（string，可选）：绑定操作的详细补充说明，用于向用户展示更具体的操作描述，不传入时不展示。
      * @param { AsyncCallback<BindTargetResult> } callback - 认证结果回调。当认证成功时，
      *     err为undefined，data为包含deviceId的对象；当认证失败时，err为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1147,14 +1150,12 @@ declare namespace distributedDeviceManager {
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } deviceId - 设备标识，可从设备发现结果（startDiscovering的discoverSuccess回调返回的
      *     DeviceBasicInfo）中获取。长度范围1~255字符，超出范围时返回错误码401。
-     * @param { Record<string, int | string> } bindParam - 认证参数。由开发者自行决定传入的键值对。
-     *     默认会携带以下key值：
-     *     <br>bindType 此值是绑定的类型，必填。
-     *     <br />-1：PIN码。
-     *     <br>targetPkgName 绑定目标的包名。
-     *     <br>appName 尝试绑定目标的应用程序名称。
-     *     <br>appOperation 应用程序要绑定目标的原因。
-     *     <br>customDescription 操作的详细说明。
+     * @param { Record<string, int | string> } bindParam - 认证参数。支持传入以下key值：
+     *     <br>bindType（number，必填）：绑定的类型，取值为1，表示PIN码认证。传入其他值时返回参数错误。
+     *     <br>targetPkgName（string，可选）：绑定目标的包名，不传入时默认使用调用方应用的Bundle名称。
+     *     <br>appName（string，可选）：尝试绑定目标的应用名称，用于在认证界面展示发起绑定的应用名称，不传入时不展示。
+     *     <br>appOperation（string，可选）：应用要绑定目标的原因，用于向用户展示绑定目的，不传入时不展示。
+     *     <br>customDescription（string，可选）：绑定操作的详细补充说明，用于向用户展示更具体的操作描述，不传入时不展示。
      * @param { AsyncCallback<BindTargetResult> } callback - 认证结果回调。当认证成功时，
      *     err为undefined，data为包含deviceId的对象；当认证失败时，err为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -1285,8 +1286,8 @@ declare namespace distributedDeviceManager {
      * 返回发现的设备信息（DeviceBasicInfo）。需在调用startDiscovering之前注册此回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { 'discoverSuccess' } type - 注册设备发现回调，以便在发现周边设备时通知应用程序，固定为discoverSuccess。
-     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - 注册设备发现的回调方法。
+     * @param { 'discoverSuccess' } type - 注册设备发现回调，以便在发现周边设备时通知应用，固定为discoverSuccess。
+     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - 注册设备发现的回调方法，返回发现的设备信息（DeviceBasicInfo）。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1317,7 +1318,8 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'discoverSuccess' } type - 取消注册设备发现回调，固定为discoverSuccess。
-     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - 指示要取消注册的设备发现回调，返回设备状态和设备信息。
+     * @param { Callback<{ device: DeviceBasicInfo; }> } callback - 指示要取消注册的设备发现回调，返回
+     *     发现的设备信息。如果指定该参数则取消对应callback，否则取消所有已注册的discoverSuccess回调。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1409,9 +1411,10 @@ declare namespace distributedDeviceManager {
      * 返回失败原因。需在调用startDiscovering之前注册此回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param { 'discoverFailure' } type - 注册设备发现失败回调，以便在发现周边设备失败时通知应用程序，固定为discoverFailure。
-     * @param { Callback<{ reason: int; }> } callback - 指示要取消注册的设备发现失败回调。
-     *     如果指定该参数则取消对应callback，否则取消所有已注册的discoverFailure回调。
+     * @param { 'discoverFailure' } type - 注册设备发现失败回调，以便在发现周边设备失败时通知应用，固定为discoverFailure。
+     * @param { Callback<{ reason: int; }> } callback - 注册设备发现失败的回调方法，返回设备发现失败
+     *     的原因。回调参数reason为整数类型，表示发现失败的错误原因码，具体取值可参见
+     *     [设备管理错误码](docroot://reference/apis-distributedservice-kit/errorcode-device-manager.md)。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1675,7 +1678,7 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.ACCESS_SERVICE_DM
      * @param { int } maxNameLength - 可显示的设备名称长度（字节数），取值范围为[18，100]，为0时表示不限制。
-     * @returns { string } 指定名称长度最大字节数的本机设备显示名。
+     * @returns { Promise<string> } 指定名称长度最大字节数的本机设备显示名。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter type;
@@ -1837,15 +1840,14 @@ declare namespace distributedDeviceManager {
     restoreLocalDeviceName(): void;
 
     /**
-     * 通过设备网络ID查询设备操作系统类型。
+     * 根据设备网络ID查询设备操作系统类型。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC and ohos.permission.ACCESS_SERVICE_DM
-     * @param { string } networkId - The device's network ID
-     * @returns { int } - Returns the device operating system type.
-     *     Possible return:
-     *     1. 10: Operating system based on OpenHarmony
-     *     2. 11: Operating system not based on OpenHarmony
-     *     3. -1: Unknown
+     * @param { string } networkId - 设备网络ID。
+     * @returns { int } - 设备操作系统类型。
+     *     - 10：基于OpenHarmony的操作系统。
+     *     - 11：非基于OpenHarmony的操作系统。
+     *     - -1：未知。
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.

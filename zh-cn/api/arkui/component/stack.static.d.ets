@@ -66,10 +66,10 @@ export declare interface StackAttribute extends CommonMethod {
      */
     default alignContent(value: Alignment | undefined): this;
     /**
-    * Sets the point light style.
+    * 为Stack组件添加点光源效果，影响周围标记为可被照亮组件的光照渲染。
     *
-    * @param { PointLightStyle | undefined } value - The point light style.
-    * @returns { StackAttribute } The attribute of the stack.
+    * @param { PointLightStyle | undefined } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
+    * @returns { StackAttribute } Stack的属性。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @systemapi
     * @stagemodelonly
@@ -89,15 +89,16 @@ export declare interface StackAttribute extends CommonMethod {
      * @stagemodelonly
      * @since 26.0.0 static
      */
-    default syncLoad(enable: boolean): this;
+    default syncLoad(enable: boolean | undefined): this;
     /**
      * 设置Stack选项。
      *
      * @param { StackOptions } [options] - Stack constructor options
      * @returns { StackAttribute } Returns the instance of the StackAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setStackOptions(options?: StackOptions): this;
     /**
@@ -139,8 +140,9 @@ export declare function Stack(
  * @param { CustomBuilder } [content_] - container
  * @returns { StackAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

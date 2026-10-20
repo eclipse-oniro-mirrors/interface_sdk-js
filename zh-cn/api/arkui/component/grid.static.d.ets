@@ -20,6 +20,8 @@
 import { EdgeEffectOptions, EditModeOptions, NestedScrollOptions, ItemDragInfo, ScrollableCommonMethod, CommonMethod, OnWillScrollCallback, OnScrollCallback, OnItemDragStartCallback } from './common';
 import { Length, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from './scroll';
+import { ScrollSnapAlign } from './list';
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { BarState, Color, EdgeEffect, FocusWrapMode } from './enums';
 import { ComponentBuilder, CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder';
 import { AttributeModifier, Bindable, Callback, CommonMethod, UIScrollableCommonEvent } from "./common";
@@ -759,6 +761,22 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
   default nestedScroll(value: NestedScrollOptions | undefined): this;
 
   /**
+   * 设置Grid的两阶段滚动吸附策略。
+   *
+   * START、CENTER、END分别将item对齐到滚动轴方向视口的起始、中间和末尾位置。
+   * 自定义提供方通过calculateApproachOffset计算趋近距离，通过calculateSnapOffset计算最终目标。
+   * 设置为NONE或undefined时清除策略，恢复默认滚动行为。
+   * 不支持的布局不启用吸附。吸附目标受合法滚动范围限制。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - 内置对齐策略或自定义提供方。
+   * @returns { this } Grid属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
+
+  /**
    * 设置是否支持滚动手势。
    *
    * > **说明：**
@@ -912,7 +930,7 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
    * @returns { GridAttribute } 返回GridAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setGridOptions(scroller?: Scroller, layoutOptions?: GridLayoutOptions): this;
 
@@ -962,8 +980,7 @@ export declare abstract class ExtendableGrid implements GridAttribute {
    * @param { Scroller } [scroller]
    * @param { GridLayoutOptions } [layoutOptions]
    * @param { CustomBuilder } [content_]
-   * @returns { T }
-   Grid组件实例。
+   * @returns { T } Grid组件实例。
    * @stagemodelonly
    * @since 26.0.0 staticonly
    */
@@ -997,8 +1014,7 @@ export declare abstract class ExtendableGrid implements GridAttribute {
    *
    * @param { Scroller } [scroller]
    * @param { GridLayoutOptions } [layoutOptions]
-   * @returns { ExtendableGrid }
-   Grid组件实例。
+   * @returns { ExtendableGrid } Grid组件实例。
    * @stagemodelonly
    * @since 26.0.0 staticonly
    */

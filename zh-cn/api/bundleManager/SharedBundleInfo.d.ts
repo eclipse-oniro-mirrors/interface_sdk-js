@@ -22,7 +22,7 @@
  * >
  * > The APIs provided by this module are system APIs.
  *
- * @file
+ * @file SharedBundleInfo
  * @kit AbilityKit
  */
 import bundleManager from '../@ohos.bundle.bundleManager';

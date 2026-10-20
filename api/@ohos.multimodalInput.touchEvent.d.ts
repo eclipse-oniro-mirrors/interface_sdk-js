@@ -14,7 +14,7 @@
  */
 
 /**
- * The **touchEvent** module provides touch events reported by a device. It is inherited from 
+ * The **touchEvent** module provides touch events reported by a device. It is inherited from
  * [InputEvent]{@link @ohos.multimodalInput.inputEvent:InputEvent}.
  *
  * @file Touch Event

@@ -21,7 +21,9 @@ import { AttributeModifier, UIScrollableCommonEvent, ScrollableCommonMethod, Nes
 import { Builder, CustomBuilder, ComponentBuilder, CustomBuilderT } from './builder';
 import { Length, Dimension, Margin, ConstraintSizeOptions, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from "./scroll";
-import { ScrollState } from "./list";
+import { ScrollSnapAlign, ScrollState } from "./list";
+import { ScrollSnapOffsetProvider } from './scrollCommon';
+import { PlaceholderProvider } from '../../@ohos.arkui.placeholderRegister';
 import { FlexDirection } from './enums';
 import { ComponentContentBase } from '../../arkui/ComponentContent';
 /**
@@ -463,6 +465,23 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
   default layoutDirection(value: FlexDirection | undefined): this;
 
   /**
+   * Sets the scroll snap strategy used after user scrolling in the WaterFlow.
+   *
+   * Supports top-down, segmented, and sliding-window layouts. START, CENTER, and END align items
+   * with the start, center, and end of the viewport along the scrolling axis.
+   * A custom provider calculates the approach distance and absolute final scroll target in vp.
+   * Targets are constrained to the legal scroll range. No snapping is enabled by default.
+   * NONE or undefined clears the strategy and restores the default scrolling behavior.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - Built-in alignment or custom provider.
+   * @returns { this } The WaterFlow attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
+
+  /**
    * Sets the number of items to be cached.
    *
    * @param { int | undefined } value - Number of water flow items to be preloaded (cached).
@@ -580,6 +599,34 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @since 26.0.1 staticonly
    */
   default setWaterFlowOptions(options?: WaterFlowOptions): this;
+
+  /**
+   * Sets a scroll placeholder provider for the **WaterFlow** component. When the framework predicts
+   * that creating the next item within the remaining frame budget would overrun the frame, it first
+   * displays a placeholder for that item and creates the real item across frames on the UI thread.
+   *
+   * The provider returns the placeholder description of an item: **id** refers to a template
+   * registered through getPlaceholderRegister().register and **size** is a layout suggestion.
+   * If the provider returns **undefined**, or the returned **id** is missing or not registered,
+   * the system default placeholder is used and scrolling is not interrupted.
+   *
+   * <br>**NOTE**<br>
+   * 1. This attribute is opt-in: if it is not set, the **WaterFlow** component keeps the current
+   * behavior, including the semantics of **syncLoad**.
+   * 2. The placeholder template must be a global, parameterless
+   * **@Builder({ isPlaceholder: true })** function that performs read-only static rendering.
+   * 3. After the real item has been created, it is re-laid out under the normal layout constraints of
+   * the water flow item and replaces the placeholder, keeping the scroll anchor.
+   *
+   * @param { PlaceholderProvider | undefined } provider - Placeholder provider of the item at the
+   *     given index.
+   * @returns { this } The WaterFlow attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  default scrollPlaceholder(provider: PlaceholderProvider | undefined): this;
 
   /**
    * Called attributeModifier.

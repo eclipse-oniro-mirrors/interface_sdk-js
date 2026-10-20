@@ -24,9 +24,9 @@
 import type { AsyncCallback } from './@ohos.base';
 
 /**
- * The shortKey module provides APIs to set the delay for starting an ability using a shortcut key.
- * For example, you can set the delay to 3 seconds so that a screenshot is taken when you press and hold the shortcut
- * key for 3 seconds.
+ * The **shortKey** module provides APIs to set the delay for starting an ability using a shortcut key. For example,
+ * you can set the delay to 3 seconds so that a screenshot is taken when you press and hold the shortcut key for
+ * 3 seconds.
  *
  * @syscap SystemCapability.MultimodalInput.Input.ShortKey
  * @systemapi hide for inner use

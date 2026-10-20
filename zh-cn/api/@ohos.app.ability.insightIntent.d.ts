@@ -35,7 +35,7 @@ import { RecordData } from './@ohos.base';
  */
 declare namespace insightIntent {
   /**
-   * 意图执行模式。表示系统入口触发意图执行时传递的执行模式，每个意图支持的执行模式在意图开发时定义。
+   * 意图执行模式。表示系统入口触发意图执行时传递的模式，每个意图支持的执行模式在意图开发时定义。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -372,6 +372,53 @@ declare namespace insightIntent {
   }
 
   /**
+   * 定义文件实体的结构体。表示意图执行过程中涉及的关键文件对象，包括意图参数和执行结果。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface FileEntity extends IntentEntity {
+    /**
+     * 文件实体标识。固定为'OHOS_FILE_ENTITY'。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    entityId: 'OHOS_FILE_ENTITY';
+
+    /**
+     * URI列表。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    uris: Array<string>;
+
+    /**
+     * 要授予URI列表的权限。
+     *
+     * **注意**
+     *
+     * 该参数只支持“FLAG_AUTH_READ_URI_PERMISSION”、“FLAG_AUTH_WRITE_URI_PERMISSION”、“标志位认证读URI”和
+     * “FLAG_AUTH_READ_URI_PERMISSION”和“FLAG_AUTH_WRITE_URI_PERMISSION”。权限说明请参见
+     * [标志]{@link @ohos.app.ability.wantConstant:wantConstant.Flags}。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    flags?: int;
+  }
+
+  /**
    * 查询实体模式的枚举。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -551,6 +598,66 @@ declare namespace insightIntent {
      * @since 23 dynamic&static
      */
     FUNCTION = 1
+  }
+
+  /**
+   * 表示意图执行信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface InsightIntentExecutionInfo {
+    /**
+     * 表示意图名称。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    intentName: string;
+
+    /**
+     * 表示意图实例的唯一ID。该值应为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    instanceId: int;
+
+    /**
+     * 表示意图调用方的应用包名。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerBundleName: string;
+
+    /**
+     * 表示调用方的Token ID。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerTokenId: string;
+
+    /**
+     * 表示调用方的UID。该值应为整数。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    callerUid: int;
   }
 }
 

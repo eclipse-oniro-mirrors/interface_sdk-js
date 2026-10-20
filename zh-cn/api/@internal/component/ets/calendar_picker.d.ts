@@ -61,6 +61,98 @@ declare enum CalendarAlign {
 }
 
 /**
+ * 日历选择器每周起始日的枚举类型。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+declare enum CalendarFirstDayOfWeek {
+  /**
+   * 跟随系统区域变化。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  LOCAL = 0,
+  /**
+   * 周一。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  MON = 1,
+  /**
+   * 周二。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  TUE = 2,
+  /**
+   * 周三。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  WED = 3,
+  /**
+   * 周四。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  THU = 4,
+  /**
+   * 周五。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  FRI = 5,
+  /**
+   * 周六。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SAT = 6,
+  /**
+   * 周日。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SUN = 7
+}
+
+/**
  * 日历选择器组件的参数说明。
  *
  * ###### start和end设置规则
@@ -352,6 +444,20 @@ declare class CalendarPickerAttribute extends CommonMethod<CalendarPickerAttribu
    * @since 19 dynamic
    */
   markToday(enabled: boolean): CalendarPickerAttribute;
+
+  /**
+   * 设置日历选择器每周的起始日。
+   *
+   * @param { CalendarFirstDayOfWeek } value - 设置日历选择器每周的起始日。
+   *     <br>默认值：CalendarFirstDayOfWeek.LOCAL（跟随系统区域变化）
+   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  firstDayOfWeek(value: CalendarFirstDayOfWeek): CalendarPickerAttribute;
 }
 
 /**
@@ -725,6 +831,18 @@ declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 dynamic
    */
   edgeLightMode?: EdgeLightMode;
+  /**
+   * 设置日历选择器弹窗每周的起始日。
+   *
+   * 默认值：**CalendarFirstDayOfWeek.LOCAL**（跟随系统区域变化）。
+   * @default CalendarFirstDayOfWeek.LOCAL
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  firstDayOfWeek?: CalendarFirstDayOfWeek;
 }
 
 /**

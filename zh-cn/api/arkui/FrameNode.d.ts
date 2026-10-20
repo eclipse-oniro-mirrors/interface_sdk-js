@@ -474,6 +474,34 @@ export class FrameNode {
   isModifiable(): boolean;
 
   /**
+   * 向当前FrameNode派发输入事件，并可指定竞争策略。支持TouchEvent、MouseEvent和AxisEvent。
+   * KeyEvent请使用[dispatchKeyEvent]{@link FrameNode#dispatchKeyEvent}派发。
+   *
+   * @param { InputEventType } event - 需要派发的输入事件。
+   * @param { CompetitionStrategy } [competitionStrategy] - 派发事件时使用的竞争策略。
+   * @returns { boolean } 是否成功派发事件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
+
+  /**
+   * 向当前FrameNode派发按键事件。
+   *
+   * @param { KeyEvent } event - 需要派发的按键事件。
+   * @returns { boolean } 按键事件是否被消费。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  dispatchKeyEvent(event: KeyEvent): boolean;
+
+  /**
    * 在FrameNode最后一个子节点后添加新的子节点。当前FrameNode如果不可修改，抛出异常信息。[typeNode]{@link typeNode}在appendChild时会校验子组件类型或个数，不满足时抛出异常信息，限制
    * 情况请查看[typeNode]{@link typeNode}描述。
    *

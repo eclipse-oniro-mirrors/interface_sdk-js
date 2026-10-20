@@ -188,7 +188,8 @@ export interface RenderResourceFactory {
    * Creates a shader based on the scene resource parameters. This API uses a promise to return the result.
    *
    * @param { SceneResourceParameters } params - Parameters for creating the shader.
-   *     For details about the .shader file format, see Requirements on the .shader File Format.
+   *     For details about the .shader file format,
+   *     see [Requirements on the .shader File Format](docroot://graphics3d/arkgraphics3D-shader-resource.md).
    * @returns { Promise<Shader> } Promise used to return the Shader object created.
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @since 20 dynamic
