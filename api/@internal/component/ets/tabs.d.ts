@@ -1054,6 +1054,109 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   systemMaterial?: UIMaterial.ImmersiveMaterial;
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  maxWidth?: Length;
+
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  offset?: Position | Edges | LocalizedEdges;
+}
+
+/**
+ * Provides an interface for the options for the top floating tab bar style.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+interface TopFloatingTabBarStyle {
+  /**
+   * The bar width.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  barWidth?: Length;
+  /**
+   * The width of the left and right margins of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  barSideMargin?: Length;
+  /**
+   * The distance between the bar and the top of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  barTopMargin?: Length;
+  /**
+   * The color of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  maskColor?: ResourceColor;
+  /**
+   * The height of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  maskHeight?: Length;
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  maxWidth?: Length;
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  offset?: Position | Edges | LocalizedEdges;
 }
 
 /**
@@ -1226,6 +1329,18 @@ declare enum TabBarStyle {
    * @since 26.2.0 dynamic
    */
   SIDEBAR_ADAPTABLE = 2,
+
+  /**
+   * The top floating tab bar style. The tab bar is always displayed at the top in a floating form.
+   * The **BarPosition** setting is ignored when this style is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  TOP = 3,
 }
 
 /**
@@ -1332,6 +1447,17 @@ declare enum TabBarDisplayMode {
    * @since 26.2.0 dynamic
    */
   SIDEBAR = 1,
+
+  /**
+   * The tab bar is displayed as a top floating bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  TOP_TABBAR = 2,
 }
 
 /**
@@ -2117,6 +2243,20 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.0.0 dynamic
    */
   barFloatingStyle(style: Optional<FloatingTabBarStyle>): TabsAttribute;
+
+  /**
+   * Enable top floating style for bar. This is effective only when **barStyle** is set to
+   * **TabBarStyle.TOP** or **TabBarStyle.TOP_ADAPTABLE**.
+   *
+   * @param { Optional<FloatingTabBarStyle> } style - top floating style for bar
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  topBarFloatingStyle(style: Optional<TopFloatingTabBarStyle>): TabsAttribute;
 
   /**
    * Sets the display style of the tab bar.
