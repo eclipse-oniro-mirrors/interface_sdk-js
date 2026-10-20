@@ -750,6 +750,89 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * Control permission status.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  enum ControlAppStatus {
+    /**
+     * Control permission is allowed.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ALLOW = 0x01,
+
+    /**
+     * Control permission is denied.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    DENY = 0x02
+  }
+
+  /**
+   * Information about an application.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface AppInfo {
+    /**
+     * Bundle name of the application.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    bundleName: string;
+    /**
+     * Index of the application.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    index: number;
+  }
+
+  /**
+   * Control permission status result for an application.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface ControlAppStatusResult {
+    /**
+     * Application information.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    appInfo: AppInfo;
+
+    /**
+     * Control permission status.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    status: ControlAppStatus;
+  }
+
+  /**
    * Queries tool permissions based on the specified operations.
    * This function checks the permission status for CLI commands or APIs specified in permissionQuery.operationInfo.
    * For each operation, it returns the permission status, authorization status, and whether a user dialog is required.
@@ -969,6 +1052,49 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.2.0 dynamiconly
    */
   export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketOpions: TicketOpions): Promise<TicketQueryResult>;
+
+  /**
+   * Queries the control permission status for the specified applications.
+   * This function checks whether each application in the input list is allowed or denied
+   * to be controlled by external tools. The result list corresponds to the input order.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { AppInfo[] } appInfo - Application information list.
+   * @returns { Promise<ControlAppStatusResult[]> } Promise used to return ${ControlAppStatusResult[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
+
+  /**
+   * Requests the control permission for the specified applications from the user.
+   * This function displays a user dialog to obtain authorization decisions for controlling
+   * each application. The result reflects the user's allow or deny decision for each app.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { Context } context - Context object for displaying the user dialog.
+   * @param { AppInfo[] } appInfo - Application information list.
+   * @returns { Promise<ControlAppStatusResult[]> } Promise used to return ${ControlAppStatusResult[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
+   *     bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
+    Promise<ControlAppStatusResult[]>;
 }
 
 export default abilityToolAccessCtrl;
