@@ -596,7 +596,7 @@ declare namespace inputEventClient {
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 4300001 - Invalid input event sequence. Possible causes: 1. The touch point is
-     *     touching the display; 2. The touch point ID is not within the valid range [0, 9].
+     *     not touching the display; 2. The touch point ID is not within the valid range [0, 9].
      * @throws { BusinessError } 4300002 - The display does not exist.
      * @throws { BusinessError } 3800001 - Input service exception.
      * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
@@ -613,8 +613,8 @@ declare namespace inputEventClient {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 4300001 - Invalid input event sequence. Possible causes: 1. The touch point is not
-     *     touching the display; 2. The touch point ID is not within the valid range [0, 9].
+     * @throws { BusinessError } 4300001 - Invalid input event sequence. Possible causes: 1. The touch point is
+     *     not touching the display; 2. The touch point ID is not within the valid range [0, 9].
      * @throws { BusinessError } 3800001 - Input service exception.
      * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
      * @stagemodelonly
@@ -630,8 +630,8 @@ declare namespace inputEventClient {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 4300001 - Invalid input event sequence. Possible causes: 1. The touch point is not
-     *     touching the display; 2. The touch point ID is not within the valid range [0, 9].
+     * @throws { BusinessError } 4300001 - Invalid input event sequence. Possible causes: 1. The touch point is
+     *     not touching the display; 2. The touch point ID is not within the valid range [0, 9].
      * @throws { BusinessError } 3800001 - Input service exception.
      * @syscap SystemCapability.MultimodalInput.Input.InputSimulator
      * @stagemodelonly
