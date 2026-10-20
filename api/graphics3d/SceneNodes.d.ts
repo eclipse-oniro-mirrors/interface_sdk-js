@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D scene node type declarations
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -183,7 +183,7 @@ export interface Container<T> {
 
 /**
  * The 3D scene consists of nodes in a tree hierarchy, where each node implements a Node interface.
- * This class inherits from SceneResource.
+ * This class inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Node
@@ -305,7 +305,7 @@ export interface Node extends SceneResource {
 }
 
 /**
- * Geometric node type that holds renderable mesh data and supports optional deformation features. It inherits from Node.
+ * Geometric node type that holds renderable mesh data and supports optional deformation features. It inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Geometry
@@ -367,7 +367,7 @@ export enum LightType {
 }
 
 /**
- * Light node, which inherits from Node.
+ * Light node, which inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Light
@@ -429,7 +429,7 @@ export interface Light extends Node {
 }
 
 /**
- * Spotlight, which inherits from Light.
+ * Spotlight, which inherits from [Light]{@link Light}.
  *
  * A spotlight emits a conical beam of light in a specific direction, with the intensity of the light decaying
  * according to the angles defined by the innerAngle and outerAngle parameters.
@@ -474,7 +474,7 @@ export interface SpotLight extends Light {
 }
 
 /**
- * Directional light, which inherits from Light.
+ * Directional light, which inherits from [Light]{@link Light}.
  *
  * @extends Light
  * @interface DirectionalLight
@@ -486,7 +486,7 @@ export interface DirectionalLight extends Light {
 }
 
 /**
- * Camera node, which inherits from Node.
+ * Camera node, which inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Camera
