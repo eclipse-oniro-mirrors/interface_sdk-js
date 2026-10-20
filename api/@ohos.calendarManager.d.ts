@@ -372,6 +372,8 @@ declare namespace calendarManager {
     /**
      * Deletes an event with the specified ID. This API uses a promise to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number } id - Event ID.
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Applications.CalendarData
@@ -382,6 +384,8 @@ declare namespace calendarManager {
     /**
      * Deletes an event with the specified ID. This API uses an asynchronous callback to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number } id - Event ID, which is the unique identifier of an event. If the input event ID is an integer,
      * the event is created.
      * @param {AsyncCallback<void>} callback - Callback used to return the result.
@@ -394,6 +398,8 @@ declare namespace calendarManager {
     /**
      * Deletes a batch of events with the specified IDs. This API uses a promise to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number[] } ids - Array of event IDs.
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Applications.CalendarData
@@ -404,6 +410,8 @@ declare namespace calendarManager {
     /**
      * Deletes a batch of events with the specified IDs. This API uses an asynchronous callback to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { number[] } ids - Array of event IDs.
      * @param {AsyncCallback<void>} callback - Callback used to return the result.
      * @syscap SystemCapability.Applications.CalendarData
@@ -416,6 +424,8 @@ declare namespace calendarManager {
      * Updates an event, with the ID of the updated event specified in Event. 
      * This API uses a promise to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event } event - Event object.
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Applications.CalendarData
@@ -428,6 +438,8 @@ declare namespace calendarManager {
      * If not, the event cannot be updated. 
      * This API uses an asynchronous callback to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event } event - Event object.
      * @param { AsyncCallback<void> } callback - The callback of updateEvent.
      * @syscap SystemCapability.Applications.CalendarData
@@ -511,6 +523,8 @@ declare namespace calendarManager {
     /**
      * Sets the calendar configuration information. This API uses a promise to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { CalendarConfig } config - Calendar configuration information.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 23900001 – Parameter value error. [since 23]
@@ -522,6 +536,8 @@ declare namespace calendarManager {
     /**
      * Sets the calendar configuration information. This API uses an asynchronous callback to return the result.
      *
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { CalendarConfig } config - Calendar configuration information.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 23900001 – Parameter value error. [since 23]
@@ -533,6 +549,8 @@ declare namespace calendarManager {
     /**
      * Obtains the calendar account information.
      *
+     * @permission ohos.permission.READ_CALENDAR [since 10-20]
+     * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @returns { CalendarAccount } Calendar account information.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
