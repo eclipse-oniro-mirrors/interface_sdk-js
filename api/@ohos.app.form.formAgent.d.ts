@@ -145,7 +145,7 @@ declare namespace formAgent {
    *     <br>- **ohos.extra.param.key.form_dimension**: dimension of the target form.
    *     <br>- **ohos.extra.param.key.form_name**: name of the target form.
    *     <br>- **ohos.extra.param.key.module_name**: module name of the target form.
-   * @param { formBindingData.FormBindingData } [formBindingData] - Data to be used for the update, By default, no value is passed.
+   * @param { formBindingData.FormBindingData } [formBindingData] - Data to be used for the update. By default, no value is passed.
    * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise used to return the result of
    *     publishing the form across device.
    * @throws { BusinessError } 201 - Permissions denied.
