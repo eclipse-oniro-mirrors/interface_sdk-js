@@ -514,6 +514,8 @@ declare namespace calendarManager {
     /**
      * Obtains the calendar configuration information.
      *
+     * @permission ohos.permission.READ_CALENDAR [since 10-20]
+     * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @returns { CalendarConfig } Calendar configuration information.
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
