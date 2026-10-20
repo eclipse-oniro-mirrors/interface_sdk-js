@@ -141,7 +141,7 @@ declare namespace formAgent {
    *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格。
    *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
    *     <br>- ohos.extra.param.key.module_name: 目标卡片的模块名称。
-   * @param { formBindingData.FormBindingData } [formBindingData] - 用于更新的卡片数据。默认为空。
+   * @param { formBindingData.FormBindingData } [formBindingData] - 用于更新的卡片数据。默认值为空。
    * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise对象，返回跨设备发布卡片的结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
