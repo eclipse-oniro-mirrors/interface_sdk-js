@@ -821,9 +821,9 @@ interface VideoInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
- * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
