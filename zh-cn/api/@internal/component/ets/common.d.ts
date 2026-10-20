@@ -14225,6 +14225,71 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.0 dynamic
    */
   blurSnapshot?: BlurSnapshotOptions;
+
+  /**
+   * 标题栏悬浮模式。
+   * 
+   * - STANDARD：标题栏与内容上下排布，无重叠。
+   * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+   * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+   * 滚动内容裁剪到安全区域。
+   * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过{@link UIContext.applyDefaultImmersiveStrategy}
+   * 成功设置{@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA}后，默认值为
+   * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare enum SheetTitleBarHoverMode {
+  /**
+   * 标准模式：标题栏与内容上下排布，无重叠。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  STANDARD = 0,
+
+  /**
+   * 堆叠模式：标题栏悬浮于内容之上。
+   * 开发者需要在内容顶部添加padding以避免遮挡。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  STACK = 1,
+
+  /**
+   * 安全区域填充模式：标题栏放置在安全区域padding区域。
+   * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SAFE_AREA_PADDING = 2
 }
 
 /**

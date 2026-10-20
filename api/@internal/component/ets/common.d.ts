@@ -14628,16 +14628,20 @@ declare interface SheetOptions extends BindOptions {
 
   /**
    * Title bar hover mode.
-   * 
    * - STANDARD: The title bar and content are arranged vertically without overlapping.
    * - STACK: The title bar overlays on top of the content. Developers need to add padding to avoid occlusion.
-   * Default value: **SheetTitleBarHoverMode.STANDARD**.
+   * - SAFE_AREA_PADDING: The title bar is placed in the safe area padding region. The content expands
+   *   into the safe area, and the scroll content is clipped to the safe area.
+   * The default value is **SheetTitleBarHoverMode.STANDARD**.
+   * After {@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA} is successfully set via
+   * {@link UIContext.applyDefaultImmersiveStrategy}, the default value is
+   * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.0.1 dynamic
    */
   titleBarHoverMode?: SheetTitleBarHoverMode;
 
@@ -14767,7 +14771,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.0.1 dynamiconly
+ * @since 26.0.1 dynamic
  */
 declare enum SheetTitleBarHoverMode {
   /**
@@ -14777,7 +14781,7 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.0.1 dynamic
    */
   STANDARD = 0,
 
@@ -14789,9 +14793,21 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.0.1 dynamic
    */
-  STACK = 1
+  STACK = 1,
+
+  /**
+   * Safe area padding mode: The title bar is placed in the safe area padding region.
+   * The content expands into the safe area, and the scroll content is clipped to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SAFE_AREA_PADDING = 2
 }
 
 /**
