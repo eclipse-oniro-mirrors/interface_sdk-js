@@ -4599,7 +4599,7 @@ declare class UiWindow {
  }
 
 /**
- * 存储多指操作中每根手指每一步动作的坐标点及其行为的二维数组。通过[create]{@link PointerMatrix.create}构造对象后，使用[setPoint]{@link PointerMatrix#setPoint}设置每个手指每步操作的坐标值，再作为参数传给[injectMultiPointerAction]{@link Driver#injectMultiPointerAction}执行多指操作。
+ * 存储多指操作中每根手指每一步动作的坐标点及其行为的二维数组。通过[create]{@link PointerMatrix#create}构造对象后，使用[setPoint]{@link PointerMatrix#setPoint}设置每个手指每步操作的坐标值，再作为参数传给[injectMultiPointerAction]{@link Driver#injectMultiPointerAction}执行多指操作。
  *
  * @syscap SystemCapability.Test.UiTest
  * @crossplatform [since 11]
