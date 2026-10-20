@@ -2413,7 +2413,7 @@ declare namespace formInfo {
      */
     displayId: string;
     /**
-     * The custom data,By default, no value is passed.
+     * The custom data. By default, no value is passed.
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -2469,7 +2469,7 @@ declare namespace formInfo {
      */
     customData?: Record<string, string>;
     /**
-     * The device Id of the peer form host service,By default, no value is passed.
+     * The device Id of the peer form host service. By default, no value is passed.
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
