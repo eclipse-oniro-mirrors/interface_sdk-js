@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D scene boids simulation type declarations
+ * @file
  * @kit ArkGraphics3D
  */
 
