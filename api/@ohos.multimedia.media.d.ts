@@ -11111,6 +11111,53 @@ declare namespace media {
   }
 
   /**
+   * This API is used to configure a rectangular area. The position of the rectangular region starts from the upper left
+   * corner, and the size is defined as the length and width of the rectangle.
+   * 
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface RectangleRegion {
+    /**
+     * Offset of the rectangle region to the left edge.
+     * Unit: Pixel. The value range is all integers.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    left: int;
+    /**
+     * Offset of the rectangle region to the top edge.
+     * Unit: Pixel. The value range is all integers.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    top: int;
+    /**
+     * Width of the rectangle region.
+     * Unit: Pixel. The value range is all integers.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    width: int;
+    /**
+     * Height of the rectangle region.
+     * Unit: Pixel. The value range is all integers.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    height: int;
+  }
+
+  /**
    * Defines the screen capture parameters.
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11493,6 +11540,22 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     setContentAutoRotation(enable: boolean): Promise<void>;
+
+    /**
+     * Used to specify the actual recording area in screen recording mode.
+     * 
+     * You can configure the area before starting screen recording or update the area during screen recording.
+     *
+     * @param { RectangleRegion } area - Rectangular area definition for recording.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
+     * @throws { BusinessError } 5400108 - The parameter check failed, parameter value out of range.
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    setCaptureArea(area: RectangleRegion): Promise<void>;
 
     /**
      * Subscribes to screen capture state changes. An application can subscribe to only one screen capture state change 
