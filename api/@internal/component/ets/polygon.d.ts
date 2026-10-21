@@ -137,8 +137,7 @@ interface PolygonInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} and
- * [common attributes of drawing components]{@link CommonMethod}, the following attributes are supported:
+ * The [universal attributes]{@link CommonMethod} and [common attributes of drawing components]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -182,7 +181,7 @@ declare class PolygonAttribute extends CommonShapeMethod<PolygonAttribute> {
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
  * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * None
  *

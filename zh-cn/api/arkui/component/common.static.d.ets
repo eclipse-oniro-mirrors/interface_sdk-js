@@ -1733,7 +1733,7 @@ export type Matrix4Transit = matrix4.Matrix4Transit;
  */
 export declare interface MotionPathOptions {
     /**
-     * 位移动画的运动路径，使用[SVG路径描述规范]{@link Path}。path中支持使
+     * 位移动画的运动路径，使用[SVG路径描述规范]{@link ./path#svg路径描述规范}。path中支持使
      * 用start和end进行起点和终点的替代，如：'Mstart.x start.y L50 50 Lend.x end.y Z'，更多说明请参考
      * [绘制路径](docroot://ui/ui-js-components-svg-path.md)。
      * 

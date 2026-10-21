@@ -98,7 +98,7 @@ interface ColumnSplitDividerStyle {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 支持[通用事件]{@link CommonMethod}。
  *
@@ -160,7 +160,7 @@ declare const ColumnSplitInstance: ColumnSplitAttribute;
 /**
  * 将子组件纵向布局，并在每个子组件之间插入横向分割线。适用于需要垂直方向上多区域布局且支持动态调整区域大小的场景，如仪表盘界面、可调节高度的上下分区布局等。通过可拖拽的分割线，用户可以灵活调整各区域高度，提升界面交互性和用户体验。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含子组件。
  * 

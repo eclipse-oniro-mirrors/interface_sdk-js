@@ -20,8 +20,8 @@
 
 /**
  * The **Blank** component is a spacer in the layout, automatically filling the remaining space along the main axis of
- * its parent container. It works only when the parent component is [Row]{@link Row}, [Column]{@link Column}, or
- * [Flex]{@link Flex}.
+ * its parent container. It works only when the parent component is [Row]{@link ./row}, [Column]{@link ./column}, or
+ * [Flex]{@link ./flex}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -36,8 +36,8 @@ interface BlankInterface {
    *
    * Since API version 10: 
    * 
-   * - When the **Blank** component is used within a [Row]{@link Row}, [Column]{@link Column}, or
-   * [Flex]{@link Flex} container, it will automatically stretch or shrink along the main axis if it does not have a
+   * - When the **Blank** component is used within a [Row]{@link ./row}, [Column]{@link ./column}, or
+   * [Flex]{@link ./flex} container, it will automatically stretch or shrink along the main axis if it does not have a
    * main axis size specified. If the **Blank** component has a main axis size specified or if the container is set to
    * adapt to the size of its child nodes, the component will not automatically stretch or shrink.
    * - Relationship between **size** and **min** of the **Blank** component on the main axis: max(min, size). 
@@ -66,7 +66,7 @@ interface BlankInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  * 
  * The [universal events]{@link CommonMethod} are supported.
  *
@@ -97,10 +97,10 @@ declare class BlankAttribute extends CommonMethod<BlankAttribute> {
 
 /**
  * The **Blank** component is a spacer in the layout, automatically filling the remaining space along the main axis of
- * its parent container. It works only when the parent component is [Row]{@link Row}, [Column]{@link Column}, or
- * [Flex]{@link Flex}.
+ * its parent container. It works only when the parent component is [Row]{@link ./row}, [Column]{@link ./column}, or
+ * [Flex]{@link ./flex}.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * No child component can be set.
  *

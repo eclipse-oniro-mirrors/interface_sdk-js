@@ -106,7 +106,7 @@ interface ColumnSplitDividerStyle {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  * 
  * > **NOTE**
  * >
@@ -200,7 +200,7 @@ declare const ColumnSplitInstance: ColumnSplitAttribute;
  * such as dashboard UIs and adjustable top-bottom split layouts. Through draggable dividers, users can flexibly adjust
  * the height of each area, enhancing UI interactivity and user experience.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Supported
  *
