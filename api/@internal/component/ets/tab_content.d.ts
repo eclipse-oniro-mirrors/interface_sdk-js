@@ -115,7 +115,7 @@ declare enum LayoutMode {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabVisibility {
 
@@ -126,7 +126,7 @@ declare enum TabVisibility {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   VISIBLE = 0,
 
@@ -137,7 +137,7 @@ declare enum TabVisibility {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   HIDDEN = 1
 }
@@ -1285,7 +1285,7 @@ declare class TabContentAttribute extends CommonMethod<TabContentAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   tabBarVisibility(visibility: TabVisibility, displayMode?: TabBarDisplayMode): TabContentAttribute;
 }

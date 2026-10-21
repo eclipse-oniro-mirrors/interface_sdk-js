@@ -100,7 +100,7 @@ export declare enum LayoutMode {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare enum TabVisibility {
  
@@ -109,7 +109,7 @@ export declare enum TabVisibility {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   VISIBLE = 0,
  
@@ -118,7 +118,7 @@ export declare enum TabVisibility {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   HIDDEN = 1
 }
@@ -902,7 +902,7 @@ export declare interface TabContentAttribute extends CommonMethod {
    * @returns { TabContentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default tabBarVisibility(visibility: TabVisibility, displayMode: TabBarDisplayMode | undefined): this;
 }

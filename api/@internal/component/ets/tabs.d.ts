@@ -298,7 +298,7 @@ declare enum TabsCacheMode {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabsSidebarDisplayStyle {
   /**
@@ -309,7 +309,7 @@ declare enum TabsSidebarDisplayStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   EMBED = 0,
 
@@ -321,7 +321,7 @@ declare enum TabsSidebarDisplayStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   DISPLACE = 1
 }
@@ -496,7 +496,7 @@ declare class TabsController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   getBarDisplayMode(): TabBarDisplayMode;
 }
@@ -1293,7 +1293,7 @@ declare type OnTabsContentDidScrollCallback = (selectedIndex: number, index: num
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabBarStyle {
   /**
@@ -1303,7 +1303,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   BOTTOM = 0,
 
@@ -1314,7 +1314,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   SIDEBAR = 1,
 
@@ -1326,7 +1326,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   SIDEBAR_ADAPTABLE = 2,
 
@@ -1353,7 +1353,7 @@ declare enum TabBarStyle {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare type TabsSidebarSearchFilterCallback = (tabIndex: number, text: string) => boolean;
 
@@ -1364,7 +1364,7 @@ declare type TabsSidebarSearchFilterCallback = (tabIndex: number, text: string) 
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare interface TabsSidebarSearchableOptions {
   /**
@@ -1374,7 +1374,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   searchText?: ResourceStr;
 
@@ -1385,7 +1385,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   placeholder?: ResourceStr;
 
@@ -1397,7 +1397,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   searchCallback?: (text: string) => void;
 
@@ -1408,7 +1408,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   searchFilter?: TabsSidebarSearchFilterCallback;
 }
@@ -1423,7 +1423,7 @@ declare interface TabsSidebarSearchableOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabBarDisplayMode {
   /**
@@ -1433,7 +1433,7 @@ declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   BOTTOM_TABBAR = 0,
 
@@ -1444,7 +1444,7 @@ declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   SIDEBAR = 1,
 
@@ -1467,7 +1467,7 @@ declare enum TabBarDisplayMode {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare interface TabsBreakpointType<T> {
   /**
@@ -1477,7 +1477,7 @@ declare interface TabsBreakpointType<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sm?: T;
 
@@ -1488,7 +1488,7 @@ declare interface TabsBreakpointType<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   md?: T;
 
@@ -1499,7 +1499,7 @@ declare interface TabsBreakpointType<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   lg?: T;
 }
@@ -2268,7 +2268,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   barStyle(style: Optional<TabBarStyle>): TabsAttribute;
 
@@ -2284,7 +2284,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarPosition(position: Optional<BarPosition>): TabsAttribute;
 
@@ -2297,7 +2297,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarHeader(header: Optional<ComponentContent>): TabsAttribute;
 
@@ -2310,7 +2310,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSearchable(searchOptions?: TabsSidebarSearchableOptions): TabsAttribute;
 
@@ -2324,7 +2324,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   barDisplayModeBreakpoint(style: Optional<TabsBreakpointType<TabBarDisplayMode>>): TabsAttribute;
 
@@ -2337,7 +2337,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   onBarDisplayModeChange(callback: Optional<Callback<TabBarDisplayMode>>): TabsAttribute;
 
@@ -2350,7 +2350,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSelectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2363,7 +2363,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSelectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2376,7 +2376,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarUnselectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2389,7 +2389,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarUnselectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2402,7 +2402,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSelectedBoardColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2417,7 +2417,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2436,7 +2436,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   minSidebarWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2455,7 +2455,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   maxSidebarWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2472,7 +2472,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   minContentWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2487,7 +2487,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarBackgroundColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2502,7 +2502,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarBackgroundBlurStyle(value: Optional<BlurStyle>): TabsAttribute;
 
@@ -2519,7 +2519,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarDivider(value: Optional<DividerStyle>): TabsAttribute;
 
@@ -2533,7 +2533,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarDisplayStyle(style: Optional<TabsSidebarDisplayStyle>): TabsAttribute;
 
