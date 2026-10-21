@@ -24,7 +24,7 @@ import type { AbilityResult } from '../ability/abilityResult';
 
 /**
  * **FormEditExtensionContext**, inherited from 
- * [UIExtensionContext]{@link ./application/UIExtensionContext:UIExtensionContext}, is the context of 
+ * [UIExtensionContext]{@link ./UIExtensionContext:UIExtensionContext}, is the context of 
  * [FormEditExtensionAbility]{@link @ohos.app.form.FormEditExtensionAbility:FormEditExtensionAbility}.
  * 
  * > **NOTE**

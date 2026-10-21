@@ -443,7 +443,6 @@ declare namespace motion {
    * @param { Callback<OperatingHandStatus> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br> 1. The hardware does not support the capability;
    *     <br> 2. The chip does not support the capability;
@@ -468,7 +467,6 @@ declare namespace motion {
    * @param { Callback<OperatingHandStatus> } [callback] - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br> 1. The hardware does not support the capability;
    *     <br> 2. The chip does not support the capability;

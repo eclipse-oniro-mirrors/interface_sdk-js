@@ -117,6 +117,49 @@ export declare enum ScrollAlign {
 }
 
 /**
+ * Enumerates the fast scroll modes for scrolling to a specified index.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export enum FastScrollMode {
+  /**
+   * No fast scroll optimization. All intermediate items are created and measured before the animation starts.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  NONE = 0,
+
+  /**
+   * Fast scroll optimization with skipping intermediate item measurement. Intermediate items are created but not
+   * measured. This mode is suitable for scenarios where the list has multiple columns and both ListItem and
+   * ListItemGroup exist. In this case, ListItem occupies only one column in a row, but ListItemGroup occupies an
+   * entire row. Therefore, the List needs to create all intermediate items to obtain the types of these items and
+   * calculate the row position of the target index.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SKIP_MEASURE = 1,
+
+  /**
+   * Fast scroll optimization with skipping intermediate item creation and measurement. Intermediate items are neither
+   * created nor measured. This mode provides maximum performance optimization. However, this mode is not suitable for
+   * the scenarios where the list has multiple columns and both ListItem and ListItemGroup exist. In this scenario,
+   * use SKIP_MEASURE.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  SKIP_CREATE_AND_MEASURE = 2
+}
+
+/**
  * Represents the offset values resulting from a scroll operation.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -182,6 +225,19 @@ export declare interface ScrollToIndexOptions {
    * @since 23 static
    */
   extraOffset?: LengthMetrics;
+
+  /**
+   * Fast scroll mode for scrolling to a specified index.
+   * When set to a value other than NONE, the scroll animation estimates the target position and skips some
+   * intermediate items during the animation. This parameter is valid only when the smooth attribute of the
+   * scrollToIndex interface is set to true.
+   * Default value: FastScrollMode.NONE.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  fastScroll?: FastScrollMode;
 }
 
 /**

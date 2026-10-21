@@ -1460,6 +1460,26 @@ declare namespace abilityAccessCtrl {
      * @since 26.0.0 dynamic&static
      */
     queryStatusByTokenID(tokenIDList: Array<int>): Promise<Array<PermissionStatusInfo>>;
+
+    /**
+     * Checks whether the specified permission is supported on the current device.
+     * This API returns the result synchronously and can be called before requesting
+     * permissions to decide whether to show the authorization dialog.
+     *
+     * @param { Permissions } permissionName - Name of the permission to be checked.
+     *     The value must be a non-empty string of no more than 256 characters.
+     *     Passing an invalid value returns error code 12100001.
+     * @returns { boolean } Returns {@code true} if the permission is supported on
+     *     the current device; returns {@code false} otherwise.
+     * @throws { BusinessError } 12100001 - Invalid parameter. The permissionName is empty
+     *     or exceeds 256 characters.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    isPermissionSupported(permissionName: Permissions): boolean;
   }
   /**
    * Enumerates the permission grant states.

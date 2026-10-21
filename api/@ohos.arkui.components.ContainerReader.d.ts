@@ -191,10 +191,9 @@ export interface ContainerReaderInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are 
- * supported:
+ * The [universal attributes]{@link CommonMethod} are supported.
  * 
- * [Universal events]{@link CommonMethod} are supported.
+ * The [Universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -248,7 +247,7 @@ export declare class ContainerReaderAttribute extends CommonMethod<ContainerRead
  * > - For more development guidance and complete examples on container breakpoints, see 
  * > [Container Breakpoint (ContainerReader)](docroot://ui/arkts-layout-development-container-reader.md).
  * 
- * ## Child Components
+ * ###### Child Components
  * 
  * Supported
  *

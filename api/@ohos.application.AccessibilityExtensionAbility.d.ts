@@ -542,10 +542,11 @@ type GestureType = 'left' | 'leftThenRight' | 'leftThenUp' | 'leftThenDown' |
  *
  * @unionmember { 'pageContentUpdate' } Page content updated.
  * @unionmember { 'pageStateUpdate' } Page state updated.
+ * @unionmember { 'pageStatePreUpdate' } Indicates that the page status is about to be updated. [since 26.2.0]
  * @syscap SystemCapability.BarrierFree.Accessibility.Core
  * @since 9 dynamiconly
  */
-type PageUpdateType = 'pageContentUpdate' | 'pageStateUpdate';
+type PageUpdateType = 'pageContentUpdate' | 'pageStateUpdate' | 'pageStatePreUpdate';
 
 /**
  * Enumerates the touch exploration event types. Touch exploration is an interaction mode in accessibility features, in 

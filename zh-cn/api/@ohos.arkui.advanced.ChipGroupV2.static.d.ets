@@ -968,6 +968,16 @@ export declare struct ChipGroupV2 {
   onChange?: Callback<Array<int>>;
 
   /**
+   * ChipGroupV2Items变更回调方法。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  @Event
+  onItemsChange?: Callback<ChipGroupV2Items>;
+
+  /**
    * 将在ChipGroupV2的后缀中渲染的构建器函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

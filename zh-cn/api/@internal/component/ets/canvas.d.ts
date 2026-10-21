@@ -19,7 +19,7 @@
  */
 
 /**
- * ## 子组件
+ * ###### 子组件
  *
  * 不支持。
  */
@@ -585,7 +585,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象。
    *
    * @param { string } d - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link path}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -599,7 +599,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象，支持配置Path2D对象的单位模式。
    *
    * @param { string } description - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link path}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
    * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。
@@ -2760,10 +2760,6 @@ declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
  * > [Drawing模块]{@link @ohos.graphics.drawing}
  * > 进行离屏绘制。
  *
- * ## 子组件
- *
- * 不支持。
- *
  * @extends CanvasRenderer [since 8 - 10]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -3099,7 +3095,7 @@ interface CanvasInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 设置组件支持AI分析，当前支持主体识别、文字识别和对象查找等功能，支持[attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。
  * 
@@ -3111,7 +3107,7 @@ interface CanvasInterface {
  * [ImageAnalyzerController.getImageAnalyzerSupportTypes]{@link ImageAnalyzerController#getImageAnalyzerSupportTypes}接口查
  * 询设备支持的分析类型。
  * 
- * 除支持[通用事件]{@link CommonMethod}外，还支持如下事件：
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -3195,7 +3191,7 @@ declare class CanvasAttribute extends CommonMethod<CanvasAttribute> {
 /**
  * 提供画布组件，用于自定义绘制图形。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 不支持。
  *
@@ -3211,10 +3207,6 @@ declare const Canvas: CanvasInterface;
 
 /**
  * 提供画布组件，用于自定义绘制图形。
- * 
- * ## 子组件
- * 
- * 不支持。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

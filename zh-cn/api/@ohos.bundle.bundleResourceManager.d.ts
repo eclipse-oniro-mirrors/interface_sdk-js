@@ -334,6 +334,24 @@ declare namespace bundleResourceManager {
   function getLauncherAbilityResourceInfoList(optionsList: Array<BundleOptions>, resourceFlags: int): Promise<Array<LauncherAbilityResourceInfo>>;
 
   /**
+   * 根据给定的filePath文件路径和resourceFlags资源标志获取资源信息。使用Promise异步回调。
+   *
+   * @permission ohos.permission.GET_BUNDLE_RESOURCES
+   * @param { string } filePath - 表示存储文件的路径，路径应该是当前应用程序数据目录的路径。
+   * @param { int } [resourceFlags] - 指定返回的BundleResourceInfo所包含的信息，取值参考[ResourceFlag]{@link bundleResourceManager.ResourceFlag}。
+   * @returns { Promise<BundleResourceInfo> } Promise对象，返回BundleResourceInfo。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system api.
+   * @throws { BusinessError } 17700022 - The filePath is invalid.
+   * @throws { BusinessError } 17700101 - Bundle manager service is excepted.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Resource
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getBundleResourceArchiveInfo(filePath: string, resourceFlags?: int): Promise<BundleResourceInfo>;
+
+  /**
    * 应用配置的图标和名称信息。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Resource

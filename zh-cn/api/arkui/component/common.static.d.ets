@@ -1733,7 +1733,7 @@ export type Matrix4Transit = matrix4.Matrix4Transit;
  */
 export declare interface MotionPathOptions {
     /**
-     * 位移动画的运动路径，使用[SVG路径描述规范]{@link Path}。path中支持使
+     * 位移动画的运动路径，使用[SVG路径描述规范]{@link ./path#svg路径描述规范}。path中支持使
      * 用start和end进行起点和终点的替代，如：'Mstart.x start.y L50 50 Lend.x end.y Z'，更多说明请参考
      * [绘制路径](docroot://ui/ui-js-components-svg-path.md)。
      * 
@@ -9495,7 +9495,7 @@ export declare enum PreviewScaleMode {
     MAINTAIN = 2
 }
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -9503,7 +9503,7 @@ export declare enum PreviewScaleMode {
  */
 export declare class ContentTransitionEffect {
   /**
-   * When the content changes,there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9513,7 +9513,7 @@ export declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes,there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11798,9 +11798,9 @@ export declare interface CommonMethod {
      */
     default borderRadius(value: Length | BorderRadiuses | LocalizedBorderRadiuses | undefined, type?: RenderStrategy | undefined): this;
     /**
-     * Sets the border image of the component.
+     * 设置组件的边框图片。
      *
-     * @param { BorderImageOption | undefined } value - Border image or border gradient.
+     * @param { BorderImageOption | undefined } value - 边框图片或边框渐变。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

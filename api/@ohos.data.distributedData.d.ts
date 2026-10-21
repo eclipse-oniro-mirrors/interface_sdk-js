@@ -1268,7 +1268,7 @@ declare namespace distributedData {
     setSuggestIndex(index: string): Query;
 
     /**
-     * Creates a **Query** object with the device ID as the key prefix.
+     * Adds the device ID as the prefix of the key.
      *
      * @param { string } deviceId - Device ID.
      * @returns { Query } **Query** object created.
@@ -1698,7 +1698,7 @@ declare namespace distributedData {
      * Obtains the KV pairs that match the specified **Query** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { Query } query - Key prefix to match.
+     * @param { Query } query - **Query** object to match.
      * @param { AsyncCallback<Entry[]> } callback - Callback used to return the KV pairs that match the specified **Query**
      *     object.
      * @returns { Entry[] } Returns the list of key-value pairs matching the specified {@code Query} object.
@@ -1848,7 +1848,7 @@ declare namespace distributedData {
     getResultSize(query: Query): Promise<number>;
 
     /**
-     * Deletes data of a device. This API uses an asynchronous callback to return the result.
+     * Deletes the data of the specified device. This API uses an asynchronous callback to return the result.
      *
      * @param { string } deviceId - ID of the target device.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
@@ -1860,7 +1860,7 @@ declare namespace distributedData {
     removeDeviceData(deviceId: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Deletes data of a device. This API uses a promise to return the result.
+     * Deletes the data of the specified device. This API uses a promise to return the result.
      *
      * @param { string } deviceId - ID of the target device.
      * @returns { Promise<void> } Promise that returns no value.
@@ -1872,7 +1872,7 @@ declare namespace distributedData {
     removeDeviceData(deviceId: string): Promise<void>;
 
     /**
-     * Synchronizes the KV store manually.
+     * Triggers database synchronization in manual synchronization mode.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string[] } deviceIds - List of **networkId**s of the devices in the same networking environment to be
@@ -2017,7 +2017,7 @@ declare namespace distributedData {
    */
   interface DeviceKVStore extends KVStore {
     /**
-     * Obtains a string value that matches the specified device ID and key. This API uses an asynchronous callback to
+     * Obtains the string value that matches the specified device ID and key. This API uses an asynchronous callback to
      * return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2034,7 +2034,7 @@ declare namespace distributedData {
     get(deviceId: string, key: string, callback: AsyncCallback<boolean | string | number | Uint8Array>): void;
 
     /**
-     * Obtains a string value that matches the specified device ID and key. This API uses a promise to return the
+     * Obtains the string value that matches the specified device ID and key. This API uses a promise to return the
      * result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2051,7 +2051,7 @@ declare namespace distributedData {
     get(deviceId: string, key: string): Promise<boolean | string | number | Uint8Array>;
 
     /**
-     * Obtains all KV pairs that match the specified device ID and key prefix. This API uses an asynchronous callback to
+     * Obtains all key-value pairs that match the specified device ID and key prefix. This API uses an asynchronous callback to
      *  return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2068,7 +2068,7 @@ declare namespace distributedData {
     getEntries(deviceId: string, keyPrefix: string, callback: AsyncCallback<Entry[]>): void;
 
     /**
-     * Obtains all KV pairs that match the specified device ID and key prefix. This API uses a promise to return the
+     * Obtains all key-value pairs that match the specified device ID and key prefix. This API uses a promise to return the
      * result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2114,7 +2114,7 @@ declare namespace distributedData {
     getEntries(query: Query): Promise<Entry[]>;
 
     /**
-     * Obtains the KV pairs that match the specified device ID and **Query** object. This API uses an asynchronous
+     * Obtains the list of key-value pairs that match the specified device ID and **Query** object. This API uses an asynchronous
      * callback to return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2130,7 +2130,7 @@ declare namespace distributedData {
     getEntries(deviceId: string, query: Query, callback: AsyncCallback<Entry[]>): void;
 
     /**
-     * Obtains the KV pairs that match the specified device ID and **Query** object. This API uses a promise to return
+     * Obtains the list of key-value pairs that match the specified device ID and **Query** object. This API uses a promise to return
      * the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2145,7 +2145,7 @@ declare namespace distributedData {
     getEntries(deviceId: string, query: Query): Promise<Entry[]>;
 
     /**
-     * Obtains a **KvStoreResultSet** object that matches the specified device ID and key prefix. This API uses an
+     * Obtains the **KvStoreResultSet** object that matches the specified device ID and key prefix. This API uses an
      * asynchronous callback to return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2163,7 +2163,7 @@ declare namespace distributedData {
     getResultSet(deviceId: string, keyPrefix: string, callback: AsyncCallback<KvStoreResultSet>): void;
 
     /**
-     * Obtains a **KvStoreResultSet** object that matches the specified device ID and key prefix. This API uses a
+     * Obtains the **KvStoreResultSet** object that matches the specified device ID and key prefix. This API uses a
      * promise to return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2212,7 +2212,7 @@ declare namespace distributedData {
     getResultSet(query: Query): Promise<KvStoreResultSet>;
 
     /**
-     * Obtains a **KvStoreResultSet** object that matches the specified device ID and **Query** object. This API uses an
+     * Obtains the KvStoreResultSet object that matches the specified device ID and Query object. This API uses an
      *  asynchronous callback to return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2228,7 +2228,7 @@ declare namespace distributedData {
     getResultSet(deviceId: string, query: Query, callback: AsyncCallback<KvStoreResultSet>): void;
 
     /**
-     * Obtains a **KvStoreResultSet** object that matches the specified device ID and **Query** object. This API uses a
+     * Obtains the **KvStoreResultSet** object that matches the specified device ID and **Query** object. This API uses a
      * promise to return the result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2335,7 +2335,7 @@ declare namespace distributedData {
     getResultSize(deviceId: string, query: Query): Promise<number>;
 
     /**
-     * Deletes data of the specified device from this KV store. This API uses an asynchronous callback to return the
+     * Deletes the data of the specified device from the current database. This API uses an asynchronous callback to return the
      * result.
      *
      * @param { string } deviceId - ID of the target device.
@@ -2350,7 +2350,7 @@ declare namespace distributedData {
     removeDeviceData(deviceId: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Deletes data of the specified device from this KV store. This API uses a promise to return the result.
+     * Deletes the data of the specified device from the current database. This API uses a promise to return the result.
      *
      * @param { string } deviceId - ID of the target device.
      * @returns { Promise<void> } Promise that returns no value.

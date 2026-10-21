@@ -172,8 +172,7 @@ interface ShapeInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod}, the
- * following attributes are supported:
+ * The [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -483,10 +482,10 @@ declare class ShapeAttribute extends CommonMethod<ShapeAttribute> {
  * > This component supports dynamic constructor parameter updates using the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
  * > [AttributeUpdater](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md) class since API version 20.
- * >
- * > **Child Components**
- * >
- * > The following child components are supported: [Rect]{@link rect}, [Path]{@link path}, [Circle]{@link circle},
+ *
+ * ###### Child Components
+ *
+ * The following child components are supported: [Rect]{@link rect}, [Path]{@link path}, [Circle]{@link circle},
  * [Ellipse]{@link ellipse}, [Polyline]{@link polyline}, [Polygon]{@link polygon}, [Image]{@link image},
  * [Text]{@link text}, [Column]{@link column}, [Row]{@link row}, and **Shape**.
  *

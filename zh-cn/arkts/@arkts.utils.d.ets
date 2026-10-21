@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Defines the utils for ArkTS
+ * @file 定义ArkTS工具
  * @kit ArkTS
  *
  * 本模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。

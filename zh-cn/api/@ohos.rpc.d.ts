@@ -1446,7 +1446,7 @@ declare namespace rpc {
      * - 在每次IPC/RPC调用后优先调用此方法。
      * - 如有异常立即处理并终止后续数据读取，异常处理后建议调用reclaim()释放MessageSequence对象。
      * - 此方法与[writeNoException]{@link rpc.MessageSequence#writeNoException}方法配对使用。
-     * - 调用顺序：服务端处理请求 → [writeNoException]{@link rpc.MessageSequence#writeNoException} → 客户端收到响应 →
+     * - 调用顺序：服务端处理请求 → [writeNoException]{@link rpc.MessageSequence#writeNoException} → 客户端收到响应 → 
      * [readException]{@link rpc.MessageSequence#readException} - 如果服务端未调用
      * [writeNoException]{@link rpc.MessageSequence#writeNoException}，调用此方法会失败。
      *
@@ -2397,14 +2397,14 @@ declare namespace rpc {
      * 将指定的匿名共享对象写入此MessageSequence。
      *
      * - 创建Ashmem对象：Ashmem.create()。
-     * - 映射内存并写入数据：[mapReadWriteAshmem]{@link rpc.Ashmem#mapReadWriteAshmem} +
+     * - 映射内存并写入数据：[mapReadWriteAshmem]{@link rpc.Ashmem#mapReadWriteAshmem} + 
      * [writeDataToAshmem]{@link rpc.Ashmem#writeDataToAshmem}。
      * - 将Ashmem写入MessageSequence：writeAshmem()。
      * - 接收端读取Ashmem：[readAshmem]{@link rpc.MessageSequence#readAshmem}。
      * - 接收端映射内存并读取数据：mapReadWriteAshmem() + readDataFromAshmem()。
      * - 此方法与readAshmem()方法配对使用。
-     * - 调用顺序：writeAshmem() → 传输MessageSequence → [readAshmem]{@link rpc.MessageSequence#readAshmem} →
-     * [mapReadWriteAshmem]{@link rpc.Ashmem#mapReadWriteAshmem} →
+     * - 调用顺序：writeAshmem() → 传输MessageSequence → [readAshmem]{@link rpc.MessageSequence#readAshmem} → 
+     * [mapReadWriteAshmem]{@link rpc.Ashmem#mapReadWriteAshmem} → 
      * [readDataFromAshmem]{@link rpc.Ashmem#readDataFromAshmem}。
      * - 使用前需先创建Ashmem对象并写入数据。
      *
@@ -2524,7 +2524,7 @@ declare namespace rpc {
      * 从MessageSequence读取原始数据。
      *
      * - 需与写入时的数据大小匹配。
-     * - 该接口是一次性接口,不允许在一次parcel通信中多次调用。
+     * - 该接口是一次性接口，不允许在一次parcel通信中多次调用。
      * - 大数据量传输时注意系统资源占用。
      * - 必须与[writeRawDataBuffer]{@link rpc.MessageSequence#writeRawDataBuffer}配对使用。
      *
@@ -2551,7 +2551,7 @@ declare namespace rpc {
      * - 必须根据实际数据类型选择正确的[TypeCode]{@link rpc.TypeCode}枚举值。
      *
      * @param { ArrayBuffer } buf - 要写入的ArrayBuffer数据，数据将根据typeCode指定的TypedArray类型进行格式化写入。
-     * @param { TypeCode } typeCode - ArrayBuffer数据具体是以哪一种TypedArray来访问和操作(会根据业务传递的类型枚举值去决定底层的写入方式，需要业务正确传递枚举值。)
+     * @param { TypeCode } typeCode - ArrayBuffer数据具体是以哪一种TypedArray来访问和操作（会根据业务传递的类型枚举值去决定底层的写入方式，需要业务正确传递枚举值。）
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.The parameter is an empty array;
      *     2.The number of parameters is incorrect;
@@ -2572,8 +2572,8 @@ declare namespace rpc {
      * - 读取typeCode必须与写入typeCode一致，顺序必须匹配。
      * - typeCode必须正确匹配，不匹配会导致数据异常或错误，建议根据业务类型选择合适的[TypeCode]{@link rpc.TypeCode}。
      *
-     * @param { TypeCode } typeCode - ArrayBuffer数据具体是以哪一种TypedArray来访问和操作(会根据业务传递的类型枚举值去决定底层的读取方式，需要业务正确传递枚举值，
-     *     读写枚举值不匹配会导致数据异常。)
+     * @param { TypeCode } typeCode - ArrayBuffer数据具体是以哪一种TypedArray来访问和操作（会根据业务传递的类型枚举值去决定底层的读取方式，需要业务正确传递枚举值，
+     *     读写枚举值不匹配会导致数据异常。）
      * @returns { ArrayBuffer } 返回ArrayBuffer类型数据，用于存储从MessageSequence读取的二进制数据，可通过TypedArray进行访问和操作。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.The number of parameters is incorrect;

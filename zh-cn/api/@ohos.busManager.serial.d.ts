@@ -594,7 +594,7 @@ declare namespace serial {
    * @param { string } deviceId - 串口设备ID，用于指定需要授权访问的串口设备。可通过接口[getSerialPortList]{@link serial.getSerialPortList}获取
    *     串口设备列表。板载串口取值为portName；USB虚拟串口取值为VID+PID+SN的组合或设备路径（如/dev/ttyUSB0）。设置后，应用将获得对指定串口设备的访问权限。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application
+   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
    * @throws { BusinessError } 35700001 - Service error.
    * @throws { BusinessError } 35700002 - Invalid parameter.
    * @throws { BusinessError } 35700008 - Permission denied.

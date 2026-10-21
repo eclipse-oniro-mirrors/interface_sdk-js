@@ -129,7 +129,7 @@ export declare interface ScrollBarAttribute extends CommonMethod {
    * @returns { ScrollBarAttribute } 返回ScrollBarAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setScrollBarOptions(value: ScrollBarOptions): this;
 
@@ -148,7 +148,7 @@ export declare interface ScrollBarAttribute extends CommonMethod {
 /**
  * 定义滚动条组件。
  *
- * @param { ScrollBarOptions } 滚动条参数 - 滚动条参数
+ * @param { ScrollBarOptions } - 滚动条参数
  * @param { CustomBuilder } [content_] - 子组件
  * @returns { ScrollBarAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

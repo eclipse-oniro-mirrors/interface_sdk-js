@@ -53,7 +53,7 @@ declare namespace distributedKVStore {
    */
   interface KVManagerConfig {
     /**
-     * 调用方的包名，不可为空且长度范围为1-256字节。
+     * 调用方的包名，不可为空且长度范围为1-256字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -90,7 +90,7 @@ declare namespace distributedKVStore {
    */
   interface Constants {
     /**
-     * 值为1024，表示数据库中Key允许的最大长度，单位字节。
+     * 值为1024，表示数据库中Key允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @crossplatform [since 24]
@@ -99,7 +99,7 @@ declare namespace distributedKVStore {
     readonly MAX_KEY_LENGTH: number;
 
     /**
-     * 值为4194303，表示数据库中Value允许的最大长度，单位字节。
+     * 值为4194303，表示数据库中Value允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @crossplatform [since 24]
@@ -108,7 +108,7 @@ declare namespace distributedKVStore {
     readonly MAX_VALUE_LENGTH: number;
 
     /**
-     * 值为896，表示设备协同数据库中Key允许的最大长度，单位字节。
+     * 值为896，表示设备协同数据库中Key允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @crossplatform [since 24]
@@ -117,7 +117,7 @@ declare namespace distributedKVStore {
     readonly MAX_KEY_LENGTH_DEVICE: number;
 
     /**
-     * 值为128，表示数据库标识符允许的最大长度，单位字节。
+     * 值为128，表示数据库标识符允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @crossplatform [since 24]
@@ -126,7 +126,7 @@ declare namespace distributedKVStore {
     readonly MAX_STORE_ID_LENGTH: number;
 
     /**
-     * 值为512000，表示最大查询长度，单位字节。
+     * 值为512000，表示最大查询长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @crossplatform [since 24]
@@ -163,7 +163,7 @@ declare namespace distributedKVStore {
     MAX_BATCH_SIZE = 128,
 
     /**
-     * 值为128，表示数据库标识符允许的最大长度，单位字节。
+     * 值为128，表示数据库标识符允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly
@@ -172,7 +172,7 @@ declare namespace distributedKVStore {
     MAX_STORE_ID_LENGTH = 128,
 
     /**
-     * 值为896，表示设备协同数据库中Key允许的最大长度，单位字节。
+     * 值为896，表示设备协同数据库中Key允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly
@@ -181,7 +181,7 @@ declare namespace distributedKVStore {
     MAX_KEY_LENGTH_DEVICE = 896,
 
     /**
-     * 值为1024，表示数据库中Key允许的最大长度，单位字节。
+     * 值为1024，表示数据库中Key允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly
@@ -190,7 +190,7 @@ declare namespace distributedKVStore {
     MAX_KEY_LENGTH = 1024,
 
     /**
-     * 值为512000，表示最大查询长度，单位字节。
+     * 值为512000，表示最大查询长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly
@@ -199,7 +199,7 @@ declare namespace distributedKVStore {
     MAX_QUERY_LENGTH = 512000,
 
     /**
-     * 值为4194303，表示数据库中Value允许的最大长度，单位字节。
+     * 值为4194303，表示数据库中Value允许的最大长度，单位：字节（Byte）。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly
@@ -248,7 +248,7 @@ declare namespace distributedKVStore {
     FLOAT = 2,
 
     /**
-     * 表示值类型为字节数组。
+     * 表示值类型为字节（Byte）数组。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -336,7 +336,7 @@ declare namespace distributedKVStore {
    */
   interface Entry {
     /**
-     * 表示键名。
+     * 表示键名。不能为空且长度范围为1-[MAX_KEY_LENGTH]{@link distributedKVStore.Constants}。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -499,7 +499,7 @@ declare namespace distributedKVStore {
    */
   enum KVStoreType {
     /**
-     * 表示多设备协同数据库。
+     * 表示多设备协同数据库。<br>**数据库特点：** 数据以设备的维度管理，不存在冲突；支持按照设备的维度查询数据。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
      * @stagemodelonly [staticonly]
@@ -509,7 +509,7 @@ declare namespace distributedKVStore {
     DEVICE_COLLABORATION,
 
     /**
-     * 表示单版本数据库。
+     * 表示单版本数据库。<br>**数据库特点：** 数据不分设备，设备之间修改相同的Key会覆盖。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -543,7 +543,7 @@ declare namespace distributedKVStore {
    */
   enum SecurityLevel {
     /**
-     * 表示数据库的安全级别为低级别，数据的泄露、篡改、破坏、销毁可能会给个人或组织导致有限的不利影响。
+     * 表示数据库的安全级别为低级别，数据的泄露、篡改、破坏、销毁可能会给个人或组织导致有限的不利影响。<br>例如，性别、国籍，用户申请记录等。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -553,7 +553,7 @@ declare namespace distributedKVStore {
     S1,
 
     /**
-     * 表示数据库的安全级别为中级别，数据的泄露、篡改、破坏、销毁可能会给个人或组织导致严重的不利影响。
+     * 表示数据库的安全级别为中级别，数据的泄露、篡改、破坏、销毁可能会给个人或组织导致严重的不利影响。<br>例如，个人详细通信地址，姓名昵称等。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -563,7 +563,7 @@ declare namespace distributedKVStore {
     S2,
 
     /**
-     * 表示数据库的安全级别为高级别，数据的泄露、篡改、破坏、销毁可能会给个人或组织导致严峻的不利影响。
+     * 表示数据库的安全级别为高级别，数据的泄露、篡改、破坏、销毁可能会给个人或组织导致严峻的不利影响。<br>例如，个人实时精确定位信息、运动轨迹等。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -574,7 +574,8 @@ declare namespace distributedKVStore {
     S3,
 
     /**
-     * 表示数据库的安全级别为关键级别，业界法律法规中定义的特殊数据类型，涉及个人的最私密领域的信息，一旦泄露、篡改、破坏、销毁可能会给个人或组织造成重大的不利影响。
+     * 表示数据库的安全级别为关键级别，业界法律法规中定义的特殊数据类型，涉及个人的最私密领域的信息，一旦泄露、篡改、破坏、销毁可能会给个人或组织造成重大的不利影响。<br>
+     * 例如，政治观点、宗教、哲学信仰、工会成员资格、基因数据、生物信息、健康、性生活状况、性取向、设备认证鉴权或个人的信用卡等财务信息。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.Core
      * @stagemodelonly [staticonly]
@@ -682,7 +683,7 @@ declare namespace distributedKVStore {
   /**
    * 用于备份数据库的配置信息。
    *
-   * @syscap SystemCapability.DistributedDataManager.KVStore.Core
+   * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
    * @stagemodelonly [staticonly]
    * @since 24 dynamic&static
    */
@@ -733,7 +734,7 @@ declare namespace distributedKVStore {
     constructor();
 
     /**
-     * 获取Value中所有字段的定义。
+     * 存放了Value中所有字段的定义。
      *
      * @returns { FieldNode } 返回Value中所有字段的定义.
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
@@ -756,7 +757,7 @@ declare namespace distributedKVStore {
     set root(root: FieldNode);
 
     /**
-     * 获取索引字段定义。
+     * 索引字段定义，只有通过此字段指定的FieldNode才会创建索引，格式为：'$.field1', '$.field2'。
      *
      * @returns { Array<string> } 返回索引字段定义.
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
@@ -779,7 +780,7 @@ declare namespace distributedKVStore {
     set indexes(indexes: Array<string>);
 
     /**
-     * 获取Schema的模式。
+     * Schema的模式，可以取值0或1，0表示COMPATIBLE模式，1表示STRICT模式。
      *
      * @returns { int } 返回Schema的模式。
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
@@ -802,7 +803,7 @@ declare namespace distributedKVStore {
     set mode(mode: int);
 
     /**
-     * 获取跳过的字节数。
+     * 支持在检查Value时，跳过skip指定的字节（Byte）数，取值范围为[0, 4 * 1024 * 1024 - 2]字节（Byte）。
      *
      * @returns { int } 返回跳过的字节数。
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
@@ -893,7 +894,7 @@ declare namespace distributedKVStore {
     set defaultValue(defaultValue: string);
 
     /**
-     * 获取数据库字段是否为空。
+     * 表示数据库字段是否可以为空。true表示此节点数据可以为空，false表示此节点数据不能为空。
      *
      * @returns { boolean } 返回数据库字段是否为空。
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
@@ -905,7 +906,7 @@ declare namespace distributedKVStore {
     get nullable(): boolean;
 
     /**
-     * 设置数据库字段是否为空.
+     * 设置数据库字段是否为空。true表示此节点数据可以为空，false表示此节点数据不能为空。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
      * @stagemodelonly [staticonly]
@@ -916,7 +917,7 @@ declare namespace distributedKVStore {
     set nullable(isnullable: boolean);
 
     /**
-     * 获取节点对应的数据类型。
+     * 表示指定节点对应的数据类型，取值为ValueType对应的枚举值。说明：暂不支持BYTE_ARRAY，使用此类型会导致getKVStore失败。
      *
      * @returns { int } 返回节点对应的数据类型.
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
@@ -928,7 +929,7 @@ declare namespace distributedKVStore {
     get type(): int;
 
     /**
-     * 设置节点对应的数据类型。
+     * 设置节点对应的数据类型。取值为ValueType对应的枚举值。暂不支持BYTE_ARRAY，使用此类型会导致getKVStore失败。
      *
      * @syscap SystemCapability.DistributedDataManager.KVStore.DistributedKVStore
      * @stagemodelonly [staticonly]
@@ -1214,8 +1215,8 @@ declare namespace distributedKVStore {
      * > 使用Schema创建数据库请参见[通过键值型数据库实现数据持久化](docroot://database/data-persistence-by-kv-store.md#开发步骤)中使用getKVStore()方法创建并获
      * > 取键值数据库示例。
      *
-     * @param { string } field - Indicates the field, which cannot contain ^.
-     * @param { long | double | string | boolean } value - Indicates the value to be compared.
+     * @param { string } field - 表示指定字段，不能包含'^'。包含'^'将导致谓词失效，查询结果会返回数据库中的所有数据。
+     * @param { long | double | string | boolean } value - 表示指定字段要匹配的值，值的类型应与Schema中定义的字段类型一致。
      * @returns { Query } 返回Query对象。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameters types;
@@ -1334,7 +1335,7 @@ declare namespace distributedKVStore {
      * > 取键值数据库示例。
      *
      * @param { string } field - 表示指定字段，不能包含'^'。包含'^'将导致谓词失效，查询结果会返回数据库中的所有数据。
-     * @param { long[] | double[] } valueList - 是
+     * @param { long[] | double[] } valueList - 表示指定的值列表。
      * @returns { Query } 返回Query对象。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameters types;
@@ -1382,7 +1383,7 @@ declare namespace distributedKVStore {
      * > 取键值数据库示例。
      *
      * @param { string } field - 表示指定字段，不能包含'^'。包含'^'将导致谓词失效，查询结果会返回数据库中的所有数据。
-     * @param { long[] | double[] } valueList - 是
+     * @param { long[] | double[] } valueList - 表示指定的值列表。
      * @returns { Query } 返回Query对象。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameters types;
@@ -3305,10 +3306,10 @@ declare namespace distributedKVStore {
     getResultSet(deviceId: string, query: Query): Promise<KVStoreResultSet>;
 
     /**
-     * 获取与指定Predicates对象匹配的KVStoreResultSet对象，使用callback异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
+     * 获取与本设备指定Predicates对象匹配的KVStoreResultSet对象，使用callback异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
      *
      * @param { dataSharePredicates.DataSharePredicates } predicates - 指示筛选条件，不允许为null。
-     * @param { AsyncCallback<KVStoreResultSet> } callback - Promise对象。返回KVStoreResultSet对象。
+     * @param { AsyncCallback<KVStoreResultSet> } callback - 回调函数，获取与指定Predicates对象匹配的KVStoreResultSet对象。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -3324,7 +3325,7 @@ declare namespace distributedKVStore {
     getResultSet(predicates: dataSharePredicates.DataSharePredicates, callback: AsyncCallback<KVStoreResultSet>): void;
 
     /**
-     * 获取与指定Predicates对象匹配的KVStoreResultSet对象，使用Promise异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
+     * 获取与本设备指定Predicates对象匹配的KVStoreResultSet对象，使用Promise异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
      *
      * @param { dataSharePredicates.DataSharePredicates } predicates - 指示筛选条件，不允许为null。
      * @returns { Promise<KVStoreResultSet> } Promise对象。返回KVStoreResultSet对象。
@@ -3343,9 +3344,18 @@ declare namespace distributedKVStore {
     getResultSet(predicates: dataSharePredicates.DataSharePredicates): Promise<KVStoreResultSet>;
 
     /**
-     * 获取与本设备指定Predicates对象匹配的KVStoreResultSet对象，使用callback异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
+     * 获取指定设备上与指定Predicates对象匹配的KVStoreResultSet对象，使用callback异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
      *
-     * @param { string } deviceId Indicates the ID of the device to which the results belong.
+     * > **说明：**
+     * >
+     * > 其中deviceId通过调用
+     * > [deviceManager.getAvailableDeviceListSync]{@link @ohos.distributedDeviceManager:distributedDeviceManager.DeviceManager.getAvailableDeviceListSync}
+     * > 方法得到。
+     * >
+     * > deviceId具体获取方式请参考
+     * > [sync接口示例]{@link distributedKVStore.SingleKVStore.sync(deviceIds: string[], mode: SyncMode, delayMs?: int)}。
+     *
+     * @param { string } deviceId - 设备的networkId，标识要查询其数据的设备，不能为空。
      * @param { dataSharePredicates.DataSharePredicates } predicates - 指示筛选条件，不允许为null。
      * @param { AsyncCallback<KVStoreResultSet> } callback - 回调函数，获取与指定Predicates对象匹配的KVStoreResultSet对象。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
@@ -3363,9 +3373,18 @@ declare namespace distributedKVStore {
     getResultSet(deviceId: string, predicates: dataSharePredicates.DataSharePredicates, callback: AsyncCallback<KVStoreResultSet>): void;
 
     /**
-     * 获取与本设备指定Predicates对象匹配的KVStoreResultSet对象，使用Promise异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
+     * 获取指定设备上与指定Predicates对象匹配的KVStoreResultSet对象，使用Promise异步回调。获取结果集后，需要及时调用closeResultSet方法关闭结果集以释放资源。
      *
-     * @param { string } deviceId Indicates the ID of the device to which the results belong.
+     * > **说明：**
+     * >
+     * > 其中deviceId通过调用
+     * > [deviceManager.getAvailableDeviceListSync]{@link @ohos.distributedDeviceManager:distributedDeviceManager.DeviceManager.getAvailableDeviceListSync}
+     * > 方法得到。
+     * >
+     * > deviceId具体获取方式请参考
+     * > [sync接口示例]{@link distributedKVStore.SingleKVStore.sync(deviceIds: string[], mode: SyncMode, delayMs?: int)}。
+     *
+     * @param { string } deviceId - 设备的networkId，标识要查询其数据的设备，不能为空。
      * @param { dataSharePredicates.DataSharePredicates } predicates - 指示筛选条件，不允许为null。
      * @returns { Promise<KVStoreResultSet> } Promise对象。返回KVStoreResultSet对象。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
@@ -3556,7 +3575,7 @@ declare namespace distributedKVStore {
     /**
      * 通过storeId的值关闭指定的分布式键值数据库，使用callback异步回调。此方法与getKVStore()方法配对使用，使用完毕的数据库应通过此方法关闭。
      *
-     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节。
+     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节（Byte）。
      * @param { string } storeId - 要关闭的数据库唯一标识符，长度范围为1-[MAX_STORE_ID_LENGTH]{@link distributedKVStore.Constants}，且只能包含字母
      *     数字或下划线_。
      * @param { AsyncCallback<void> } callback - 回调函数。当要关闭的数据库成功关闭，err为undefined，否则为错误对象。
@@ -3573,7 +3592,7 @@ declare namespace distributedKVStore {
     /**
      * 通过storeId的值关闭指定的分布式键值数据库，如果使用kvConfig参数，关闭的是指定路径下的分布式键值数据库，使用Promise异步回调。
      *
-     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节。
+     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节（Byte）。
      * @param { string } storeId - 要关闭的数据库唯一标识符，长度范围为1-[MAX_STORE_ID_LENGTH]{@link distributedKVStore.Constants}，且只能包含字母
      *     数字或下划线_。
      * @param { Options } [kvConfig] - 要关闭的数据库的配置信息，默认为空。 [since 24]
@@ -3591,7 +3610,7 @@ declare namespace distributedKVStore {
     /**
      * 通过storeId的值删除指定的分布式键值数据库，使用callback异步回调。
      *
-     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节。
+     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节（Byte）。
      * @param { string } storeId - 要删除的数据库唯一标识符，长度范围为1-[MAX_STORE_ID_LENGTH]{@link distributedKVStore.Constants}，且只能包含字母
      *     数字或下划线_。
      * @param { AsyncCallback<void> } callback - 回调函数。当要删除的数据库成功删除，err为undefined，否则为错误对象。
@@ -3609,7 +3628,7 @@ declare namespace distributedKVStore {
     /**
      * 通过storeId的值删除指定的分布式键值数据库，如果使用kvConfig参数，删除的是指定路径下的分布式键值数据库，使用Promise异步回调。
      *
-     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节。
+     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节（Byte）。
      * @param { string } storeId - 要删除的数据库唯一标识符，长度范围为1-[MAX_STORE_ID_LENGTH]{@link distributedKVStore.Constants}，且只能包含字母
      *     数字或下划线_。
      * @param { Options } [kvConfig] - 要删除的数据库的配置信息，默认为空。 [since 24]
@@ -3632,7 +3651,7 @@ declare namespace distributedKVStore {
      * [deleteKVStore]{@link distributedKVStore.KVManager.deleteKVStore(appId: string, storeId: string, callback: AsyncCallback<void>)}
      * 方法删除的分布式键值数据库的storeId，使用callback异步回调。
      *
-     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节。
+     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节（Byte）。
      * @param { AsyncCallback<string[]> } callback - 回调函数。返回所有创建的分布式键值数据库的storeId。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Parameter verification failed.
@@ -3650,7 +3669,7 @@ declare namespace distributedKVStore {
      * [deleteKVStore]{@link distributedKVStore.KVManager.deleteKVStore(appId: string, storeId: string, callback: AsyncCallback<void>)}
      * 方法删除的分布式键值数据库的storeId，使用Promise异步回调。
      *
-     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节。
+     * @param { string } appId - 应用的BundleName，不可为空且长度范围为1-256字节（Byte）。
      * @returns { Promise<string[]> } Promise对象。返回所有创建的分布式键值数据库的storeId。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Parameter verification failed.
@@ -3692,11 +3711,11 @@ declare namespace distributedKVStore {
     onDistributedDataServiceDie(deathCallback: Callback<void>): void;
 
     /**
-     * 取消订阅服务状态变更通知。必须先调用
+     * 取消订阅服务终止事件。必须先调用
      * [on('distributedDataServiceDie')]{@link distributedKVStore.KVManager.on(event: 'distributedDataServiceDie', deathCallback: Callback<void>)}
      * 订阅后，才能调用off取消订阅。参数中的deathCallback必须是已经订阅过的deathCallback，否则会取消订阅失败。
      *
-     * @param { 'distributedDataServiceDie' } event - 取消订阅的事件名，固定为'distributedDataServiceDie'，即服务状态变更事件。
+     * @param { 'distributedDataServiceDie' } event - 取消订阅的事件名，固定为'distributedDataServiceDie'，即服务终止事件。
      * @param { Callback<void> } [deathCallback] - 回调函数。如果该参数不填，那么会将之前订阅过的所有的deathCallback取消订阅。
      * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameters types;
@@ -3707,7 +3726,7 @@ declare namespace distributedKVStore {
     off(event: 'distributedDataServiceDie', deathCallback?: Callback<void>): void;
 
     /**
-     * 取消订阅服务状态变更通知。必须先调用onDistributedDataServiceDie订阅后，才能调用offDistributedDataServiceDie取消订阅。
+     * 取消订阅服务终止事件。必须先调用onDistributedDataServiceDie订阅后，才能调用offDistributedDataServiceDie取消订阅。
      * 参数中的deathCallback必须是已经订阅过的deathCallback，否则会取消订阅失败。
      *
      * @param { Callback<void> } [deathCallback] - 回调函数。如果该参数不填，那么会将之前订阅过的所有的deathCallback取消订阅。
