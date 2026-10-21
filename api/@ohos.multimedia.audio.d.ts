@@ -435,26 +435,15 @@ declare namespace audio {
    * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
    * monitoring using a fast capturer and renderer.
    *
-   * @permission ohos.permission.MICROPHONE
+   * @permission ohos.permission.MICROPHONE [since 20 - 24]
    * @param { AudioLoopbackMode } mode Audio loopback mode.
    * @returns { Promise<AudioLoopback> } Promise used to return the <b>AudioLoopback</b> instance.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Unsupported API.
+   * @throws { BusinessError } 201 - Permission denied. [since 20 - 24]
+   * @throws { BusinessError } 801 - Unsupported API. [since 20 - 24]
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @since 20 dynamic
-   */
-  /**
-   * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
-   * monitoring using a fast capturer and renderer.
-   *
-   * @param { AudioLoopbackMode } mode Audio loopback mode.
-   * @returns { Promise<AudioLoopback> } Promise used to return the <b>AudioLoopback</b> instance.
-   * @throws { BusinessError } 6800101 - Parameter verification failed.
-   * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
-   * @syscap SystemCapability.Multimedia.Audio.Capturer
-   * @since 26.0.0 dynamic
    */
   function createAudioLoopback(mode: AudioLoopbackMode): Promise<AudioLoopback>;
 
@@ -462,28 +451,16 @@ declare namespace audio {
    * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
    * monitoring using a fast capturer and renderer.
    *
-   * @permission ohos.permission.MICROPHONE
+   * @permission ohos.permission.MICROPHONE [since 23 - 24]
    * @param { AudioLoopbackMode } mode Audio loopback mode.
    * @returns { Promise<AudioLoopback | null> } Promise used to return the <b>AudioLoopback</b> instance, or
    *     null when an error happens.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Unsupported API.
+   * @throws { BusinessError } 201 - Permission denied. [since 23 - 24]
+   * @throws { BusinessError } 801 - Unsupported API. [since 23 - 24]
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @since 23 static
-   */
-  /**
-   * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
-   * monitoring using a fast capturer and renderer.
-   *
-   * @param { AudioLoopbackMode } mode - Audio loopback mode.
-   * @returns { Promise<AudioLoopback | null> } Promise used to return the <b>AudioLoopback</b> instance, or
-   *     null when an error happens.
-   * @throws { BusinessError } 6800101 - Parameter verification failed.
-   * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
-   * @syscap SystemCapability.Multimedia.Audio.Capturer
-   * @since 26.0.0 static
    */
   function createAudioLoopback(mode: AudioLoopbackMode): Promise<AudioLoopback | null>;
 
@@ -1157,30 +1134,20 @@ declare namespace audio {
     REMOTE_DAUDIO = 29,
     /**
      * Hearing aid audio device.
+     * Note: This original device type can be obtained after it is declared via
+     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}. [since 26.0.0]
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @since 20 dynamic
      * @since 23 static
-     */
-    /**
-     * Hearing aid audio device.
-     * Note: This original device type can be obtained after it is declared via
-     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}.
-     * @syscap SystemCapability.Multimedia.Audio.Device
-     * @since 26.0.0 dynamic&static
      */
     HEARING_AID = 30,
     /**
      * Nearlink device.
+     * Note: This original device type can be obtained after it is declared via
+     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}. [since 26.0.0]
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @since 20 dynamic
      * @since 23 static
-     */
-    /**
-     * Nearlink device.
-     * Note: This original device type can be obtained after it is declared via
-     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}.
-     * @syscap SystemCapability.Multimedia.Audio.Device
-     * @since 26.0.0 dynamic&static
      */
     NEARLINK = 31,
     /**
@@ -1263,27 +1230,16 @@ declare namespace audio {
    * Enumerates the available device types for communication.
    * @enum { int }
    * @syscap SystemCapability.Multimedia.Audio.Communication
-   * @since 9
-   */
-  /**
-   * Enumerates the available device types for communication.
-   * @enum { int }
-   * @syscap SystemCapability.Multimedia.Audio.Communication
-   * @crossplatform
-   * @since 12 dynamic
+   * @crossplatform [since 12]
+   * @since 9 dynamic
    * @since 23 static
    */
   enum CommunicationDeviceType {
     /**
      * Speaker.
      * @syscap SystemCapability.Multimedia.Audio.Communication
-     * @since 9
-     */
-    /**
-     * Speaker.
-     * @syscap SystemCapability.Multimedia.Audio.Communication
-     * @crossplatform
-     * @since 12 dynamic
+     * @crossplatform [since 12]
+     * @since 9 dynamic
      * @since 23 static
      */
     SPEAKER = 2
@@ -12730,17 +12686,11 @@ declare namespace audio {
    */
   interface CaptureFilterOptions {
     /**
-     * Filter by stream usages. If you want to capture voice streams, additional permission is needed.
-     * @type { Array<StreamUsage> }
-     * @permission ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO
-     * @syscap SystemCapability.Multimedia.Audio.PlaybackCapture
-     * @since 10
-     */
-    /**
      * Filter by stream usages. But not allow to capture voice streams.
      * @type { Array<StreamUsage> }
+     * @permission ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO [since 10 - 10]
      * @syscap SystemCapability.Multimedia.Audio.PlaybackCapture
-     * @since 11 dynamiconly
+     * @since 10 dynamiconly
      * @deprecated since 12
      * @useinstead OH_AVScreenCapture in native interface.
      */
@@ -14633,7 +14583,7 @@ declare namespace audio {
    * A 64-bit integer indicates that the appearance and order of the speakers for recording or playback.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @crossplatform
+   * @crossplatform [since 12]
    * @since 11 dynamic
    * @since 23 static
    */
