@@ -1457,6 +1457,9 @@ export class PromptAction {
 
 /**
  * Provides unified dialog APIs.
+ * It provides APIs for creating and displaying fixed-style and custom-style dialog boxes, updating and closing
+ * dialog boxes. It applies to scenarios where pop-up interactions such as prompts, confirmations, and selections
+ * are required within an application.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1466,10 +1469,20 @@ export class PromptAction {
  */
 export class DialogPresenter {
   /**
-   * Presents a fixed-style dialog box.
+   * Presents a fixed-style dialog box and returns the dialog result. This API uses a promise to return the result.
+   * It is applicable to scenarios where the system's unified style is used to display prompts or confirmation
+   * information.
+   *
+   * > **NOTE**
+   * >
+   * > Configuration options are used to configure the title, subtitle, message, buttons, and sheet items of the
+   * > dialog box. The dialog box style (background, alignment, mask, avoidance, etc.) inherits from
+   * > **dialog.DialogBaseOptions**. In **dialog.DialogBaseOptions**, **isModal** and **showInSubWindow** cannot be set
+   * > to **true** at the same time.
    *
    * @param { dialog.DialogStyleOptions } [options] - Dialog options.
    * @returns { Promise<DialogResult> } Promise used to return the dialog result.
+   *     The dialog ID is returned via **dialogId** in **DialogResult**.
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
    * @throws { BusinessError } 103308 - The dialog cannot be opened due to subwindow create failure.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1483,15 +1496,20 @@ export class DialogPresenter {
   /**
    * Presents a custom-style dialog box with the provided content.
    *
-   * The content parameter accepts CustomBuilder or ComponentContent via union type:
+   * It returns the dialog result via a promise. It is applicable to scenarios where the content, layout, and style
+   * of the dialog box need to be customized.
+   *
+   * The content parameter accepts three types via union type:
    * - CustomBuilder: Builder function for custom dialog content.
-   * - ComponentContent: ComponentContent supporting state-driven updates.
+   * - CustomBuilderWithId: Builder function that supports passing an ID.
+   * - ComponentContent: Component content supporting state-driven updates.
    *
    * isModal = true and showInSubWindow = true cannot be used at the same time.
    *
    * @param { CustomBuilder | CustomBuilderWithId | ComponentContent<Object> } content - Custom dialog content.
    * @param { dialog.DialogCustomOptions } [options] - Custom dialog options.
    * @returns { Promise<DialogResult> } Promise used to return the dialog result.
+   *     The dialog ID is returned via **dialogId** in **DialogResult**.
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103302 - Dialog content already exist. The ComponentContent has already been opened.
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
@@ -1505,7 +1523,12 @@ export class DialogPresenter {
   present(content: CustomBuilder | CustomBuilderWithId | ComponentContent<Object>, options?: dialog.DialogCustomOptions): Promise<DialogResult>;
 
   /**
-   * Updates a presented custom dialog box.
+   * Updates a displayed custom dialog box. This API uses a promise to return the result. It applies to interaction
+   * scenarios where the style or position of a dialog box needs to be dynamically updated after it is displayed.
+   *
+   * > **NOTE**
+   * >
+   * > Currently, only **alignment**, **offset**, **autoCancel**, and **maskColor** can be updated.
    *
    * @param { ComponentContent<Object> } content - The content used to identify the dialog.
    * @param { dialog.DialogBaseOptions } [options] - Options to update.
@@ -1523,6 +1546,8 @@ export class DialogPresenter {
   /**
    * Dismisses a dialog box.
    * Accepts either the dialog ID (returned by present) or the ComponentContent reference.
+   * This API uses a promise to return the result. It is applicable to scenarios where the dialog box needs to be
+   * closed after a user completes the interaction.
    *
    * @param { int | ComponentContent<Object> } target - The dialog ID or ComponentContent to dismiss.
    * @returns { Promise<void> } Promise that returns no value.
