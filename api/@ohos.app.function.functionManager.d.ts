@@ -78,6 +78,17 @@ declare namespace functionManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * Indicates the task ID for task attribution. The value must be the task ID specified in
+     * [startTask]{@link @ohos.app.agent.taskManager:taskManager#startTask}.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
