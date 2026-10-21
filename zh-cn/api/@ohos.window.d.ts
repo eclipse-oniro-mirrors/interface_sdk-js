@@ -4924,48 +4924,6 @@ declare namespace window {
     displayId?: long;
   }
 
-    /**
-   * `startMovingWithOptions` 的可选配置。
-   *
-   * @syscap SystemCapability.Window.SessionManager
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.0.0 dynamic&static
-   */
-  interface StartMovingOptions {
-    /**
-     * 指示在移动开始时窗口是否需要获取焦点。
-     *
-     * @default true
-     * @syscap SystemCapability.Window.SessionManager
-     * @systemapi Hide this for inner system use.
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    needFocused?: boolean;
-
-    /**
-     * 窗口在拖拽移动过程中的避让区域。
-     * 若未明确指定，系统将采用以下默认避让行为：
-     * 自由窗口状态：
-     * 1. 主窗口、子窗口和对话框窗口可被拖拽至屏幕边界之外，
-     * 且在松开鼠标/手指后会自动回弹。
-     * 2. 其他类型的窗口可被拖拽至屏幕边界之外，且不会回弹。
-     * 非自由窗口状态：
-     * 1. 系统窗口可被拖拽至主窗口边界或屏幕边界之外，且不会回弹。
-     * 2. 当主窗口处于全屏状态时，
-     * 子窗口和对话框窗口可被拖拽至主窗口边界之外，且不会回弹。
-     * 3. 当主窗口未处于全屏状态时，
-     * 子窗口和对话框窗口可被拖拽至主窗口边界之外，且在松开鼠标/手指后会自动回弹。
-     *
-     * @syscap SystemCapability.Window.SessionManager
-     * @systemapi Hide this for inner system use.
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    avoidRect?: Rect;
-  }
-
   /**
    * Optional configuration for startMovingWithOptions.
    *
@@ -11655,31 +11613,6 @@ declare namespace window {
      * @since 26.0.0 static
      */
     enableLandscapeMultiWindow(): Promise<void>;
-
-    /**
-     * 开始移动此窗口。
-     * 只有在 `onTouch` 回调函数中调用此 API，且事件类型为 `TouchType.Down` 时，窗口才会随光标移动。
-     *
-     * @param { StartMovingOptions } [startMovingOptions] - 拖拽移动过程中的移动配置。
-     * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 801 - Capability not supported.
-     *     Failed to call the API due to limited device capabilities.
-     * @throws { BusinessError } 1300001 - Repeated operation.
-     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
-     *     1. The window is not created or destroyed.
-     *     2. Internal task error.
-     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
-     * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause:
-     *     Invalid window type, main windows are not supported in non-free window mode.
-     * @throws { BusinessError } 1300016 - Parameter error.
-     *     Possible cause: Invalid parameter range.
-     * @syscap SystemCapability.Window.SessionManager
-     * @systemapi Hide this for inner system use.
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    startMovingWithOptions(startMovingOptions?: StartMovingOptions): Promise<void>;
 
     /**
      * 开始移动窗口，使用Promise异步回调。
