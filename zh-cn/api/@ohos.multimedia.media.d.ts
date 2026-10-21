@@ -520,7 +520,7 @@ declare namespace media {
    * 异步方式创建视频播放实例，使用callback异步回调。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用
    * > [createAVPlayer]{@link media.createAVPlayer(callback: AsyncCallback<AVPlayer>)}替代。
    *
    * @param { AsyncCallback<VideoPlayer> } callback - 回调函数。创建VideoPlayer实例成功时，err为undefined，data为获取到的VideoPlayer实例，否则为错误
@@ -3162,8 +3162,8 @@ declare namespace media {
      * @param { int } fd - 资源句柄，通过
      *     [resourceManager.getRawFd]{@link @ohos.resourceManager:resourceManager.ResourceManager.getRawFd(path: string, callback: _AsyncCallback<RawFileDescriptor>)}
      *     获取。
-     * @param { long } offset - 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误，默认值:0。
-     * @param { long } length - 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误，默认值:0。
+     * @param { long } offset - 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕资源解析错误，默认值:0。单位为字节（Byte）。
+     * @param { long } length - 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕资源解析错误，默认值:0。单位为字节（Byte）。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -4039,7 +4039,7 @@ declare namespace media {
      *
      * @param { 'seekDone' } type - seek生效的事件回调类型，支持的事件：'seekDone'，除SEEK_CONTINUOUS外的
      *     [SeekMode]{@link @ohos.multimedia.media:media.SeekMode}每次调用seek后都会回调此事件。
-     * @param { Callback<int> } callback - 回调函数。seek生效的事件回调方法，只会上报用户请求的time位置。<br/>**视频播放：**
+     * @param { Callback<int> } callback - 回调函数。seek生效的事件回调方法，只会上报用户请求的time位置，单位为（ms）。<br/>**视频播放：**
      *     [SeekMode]{@link @ohos.multimedia.media:media.SeekMode}会造成实际跳转位置与用户设置产生偏差，精准位置需要通过currentTime获取，事件回调的time仅代表完
      *     成用户某一次请求。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
@@ -4147,7 +4147,7 @@ declare namespace media {
      * > - 在pause状态下，缓冲结束时播放器会上报timeUpdate事件。
      *
      * @param { 'timeUpdate' } type - 时间更新的回调类型，支持的事件：'timeUpdate'。
-     * @param { Callback<int> } callback - 回调函数。返回当前时间。
+     * @param { Callback<int> } callback - 回调函数。返回当前时间，单位为（ms）。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4173,7 +4173,7 @@ declare namespace media {
      * > 直播场景不支持durationUpdate上报。
      *
      * @param { 'durationUpdate' } type - 时长更新的回调类型，支持的事件：'durationUpdate'。
-     * @param { Callback<int> } callback - 回调函数。返回资源时长。
+     * @param { Callback<int> } callback - 回调函数。返回资源时长，单位为（ms）。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -6224,7 +6224,7 @@ declare namespace media {
   /**
    * > **说明：**
    * >
-   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media}替代。
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}替代。
    * 
    * 音频播放管理类，用于管理和播放音频媒体。在调用AudioPlayer的方法前，需要先通过
    * [createAudioPlayer()]{@link @ohos.multimedia.media:media.createAudioPlayer}构建一个AudioPlayer实例。
@@ -6356,7 +6356,7 @@ declare namespace media {
      * 获取音频轨道信息。需在'dataLoad'事件成功触发后，才能调用。通过Promise获取返回值。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.getTrackDescription]{@link @ohos.multimedia.media:media.AVPlayer.getTrackDescription()}替代。
      *
      * @returns { Promise<Array<MediaDescription>> } 音频轨道信息MediaDescription数组Promise返回值。
