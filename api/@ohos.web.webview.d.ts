@@ -6968,7 +6968,7 @@ declare namespace webview {
      *     Ensure that the WebviewController is associated with a Web component before calling this API.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     setNavigationEntryUserData(key: string, value: string): void;
 
@@ -6982,7 +6982,7 @@ declare namespace webview {
      *     Ensure that the WebviewController is associated with a Web component before calling this API.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getNavigationEntryUserData(key: string): string;
 
@@ -6996,7 +6996,7 @@ declare namespace webview {
      *     Ensure that the WebviewController is associated with a Web component before calling this API.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     removeNavigationEntryUserData(key: string): void;
   }

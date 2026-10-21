@@ -6357,7 +6357,7 @@ declare namespace webview {
      *     调用该接口前，请确保WebviewController关联了Web组件。
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     setNavigationEntryUserData(key: string, value: string): void;
 
@@ -6371,7 +6371,7 @@ declare namespace webview {
      *     调用该接口前，请确保WebviewController关联了Web组件。
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getNavigationEntryUserData(key: string): string;
 
@@ -6385,7 +6385,7 @@ declare namespace webview {
      *     调用该接口前，请确保WebviewController关联了Web组件。
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     removeNavigationEntryUserData(key: string): void;
   }
