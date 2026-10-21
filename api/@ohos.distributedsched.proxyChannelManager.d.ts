@@ -46,7 +46,7 @@ import { Callback } from './@ohos.base';
  * service policies, thereby improving data transmission reliability. Connection exceptions include connection
  * restoration, abnormal disconnection, and pairing relationship deletion.
  *
- * ## Instructions
+ * ###### Instructions
  *
  * Before calling the APIs of this module, complete the following configurations:
  *
@@ -253,7 +253,7 @@ declare namespace proxyChannelManager {
    * to cancel the subscription to prevent the callback from being continuously triggered.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { number } channelId -  Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   * @param { int } channelId -  Proxy channel ID obtained when the proxy channel is opened. The value ranges from
    *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
    *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
    *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
@@ -283,7 +283,7 @@ declare namespace proxyChannelManager {
    * to unregister the data receiving callback registered using **on('receiveData')**.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   * @param { int } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
    *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
    *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
    *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
@@ -384,7 +384,7 @@ declare namespace proxyChannelManager {
    * callback will be automatically unsubscribed from.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   * @param { int } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
    *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
    *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
    *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
@@ -414,7 +414,7 @@ declare namespace proxyChannelManager {
    * to unregister the channel state change callback registered using **on('channelStateChange')**.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { number } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
+   * @param { int } channelId - Proxy channel ID obtained when the proxy channel is opened. The value ranges from
    *     1 to 2147483647. If an invalid or closed channel ID is used, error code 32390004 will be returned. If the
    *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
    *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
