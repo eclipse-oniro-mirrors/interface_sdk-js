@@ -61,11 +61,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { CalendarAccount } calendarAccount - Calendar account information.
      * @returns { Promise<Calendar> } Promise used to return the created Calendar object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -83,11 +86,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { CalendarAccount } calendarAccount - Calendar account information.
      * @param { AsyncCallback<Calendar> } callback - Callback used to return the created Calendar object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -104,11 +110,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Calendar } calendar - Calendar object to delete. The default account cannot be deleted.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -125,11 +134,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Calendar } calendar - Calendar object to delete. The default account cannot be deleted.
      * @param { AsyncCallback<void> } callback - Asynchronous callback that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -147,9 +159,12 @@ declare namespace calendarManager {
      * @param { CalendarAccount } [calendarAccount] - Calendar account information, which is used to obtain
      * a specified Calendar object. If this parameter is not set, the default Calendar object is obtained.
      * @returns { Promise<Calendar> } the promise returned by the function.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
@@ -168,11 +183,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @param { CalendarAccount } calendarAccount - Calendar account information.
      * @param { AsyncCallback<Calendar> } callback - Callback used to return the obtained Calendar object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
@@ -192,11 +210,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR [since 10-20]
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @param { AsyncCallback<Calendar> } callback - Callback used to return the obtained Calendar object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -214,9 +235,12 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR [since 10-20]
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @returns { Promise<Calendar[]> } Promise used to return an array of obtained Calendar objects.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -233,11 +257,14 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR [since 10-20]
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @param {AsyncCallback<Calendar[]>} callback - Callback used to return an array of the obtained Calendar objects.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+	 *     <br>1. The hardware does not support the capability; 
+	 *     <br>2. The chip does not support the capability; 
+	 *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -301,7 +328,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event } event - Event object.
      * @returns { Promise<number> } Promise used to return the event ID. The ID is greater than 0.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -322,7 +349,7 @@ declare namespace calendarManager {
      * @param { AsyncCallback<number> } callback - Callback used to return the event ID. The event ID is the unique
      * identifier of an event and is the auto-increment primary key of the database. If the value is less than 0,
 	 * the event creation fails; if the value is greater than 0, the event creation succeeds.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -341,7 +368,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event[] } events - Array of Event objects.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -359,7 +386,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event[] } events - Array of Event objects.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -449,7 +476,7 @@ declare namespace calendarManager {
      * to be obtained include id, type, title, startTime, endTime, isAllDay, description, timeZone, location, service,
      * attendee, reminderTime, and identifier if this parameter is left empty. The field is not returned if it is empty.
      * @returns { Promise<Event[]> } Promise used to return the result, which is an array of Event objects.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -468,7 +495,7 @@ declare namespace calendarManager {
      * @param { EventFilter } eventFilter - Filter criteria.
      * @param { (keyof Event)[] } eventKey - Filter field.
      * @param { AsyncCallback<Event[]> } callback - Callback used to return an array of events.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -489,7 +516,7 @@ declare namespace calendarManager {
      * @permission ohos.permission.READ_CALENDAR [since 10-20]
      * @permission ohos.permission.READ_CALENDAR or ohos.permission.READ_WHOLE_CALENDAR [since 21]
      * @param { AsyncCallback<Event[]> } callback - Callback used to return an array of events.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -551,7 +578,7 @@ declare namespace calendarManager {
      * default fields for filtering are id, title, startTime, endTime, instanceStartTime, instanceEndTime,
      * isAllDay, description, timeZone, location, and service. The field is not returned if it is empty.
      * @returns { Promise<Event[]> } Promise used to return the result, which is an array of Event objects.
-     * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 23]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;

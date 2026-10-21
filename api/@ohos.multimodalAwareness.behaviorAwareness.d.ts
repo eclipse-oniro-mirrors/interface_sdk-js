@@ -137,14 +137,14 @@ declare namespace behaviorAwareness {
      */
     WORKDAY_TIME = 'workdayTime',
     /**
-     * Location arrival.
+     * Location information, including the location and fence entry and exit status.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
      * @since 26.2.0 dynamic&static
      */
-    LOCATION_ARRIVE = 'locationArrive',
+    LOCATION = 'location',
     /**
      * App launch.
      *
@@ -688,6 +688,35 @@ declare namespace behaviorAwareness {
      * @since 26.2.0 dynamic&static
      */
     CUSTOM = 'custom',
+  }
+
+  /**
+   * Location status type enum. Used to distinguish entering or exiting a geofence.
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export enum LocationStatusType {
+    /**
+     * Enter geofence.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ENTER = 'enter',
+    /**
+     * Exit geofence.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EXIT = 'exit',
   }
 
   /**
@@ -1377,6 +1406,10 @@ declare namespace behaviorAwareness {
    *     awareness event. 
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -1400,6 +1433,10 @@ declare namespace behaviorAwareness {
    *     are canceled.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 32500001 - Service exception.
    * @throws { BusinessError } 32500003 - Unsubscription failed.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
@@ -1417,6 +1454,10 @@ declare namespace behaviorAwareness {
    * @param { FeedbackData } feedback - Feedback data.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi

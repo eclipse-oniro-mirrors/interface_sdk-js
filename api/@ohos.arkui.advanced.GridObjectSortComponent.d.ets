@@ -96,7 +96,7 @@ export interface GridObjectSortComponentItem {
   text: ResourceStr;
 
   /**
-   * Whether the grid object has been added. The value **true** means that the grid object has been added, and **false**
+   * Whether the grid object is selected. The value **true** means that the grid object is selected, and **false**
    * means the opposite.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -108,7 +108,7 @@ export interface GridObjectSortComponentItem {
   selected: boolean;
 
   /**
-   * Sequence number.
+   * Sequence number. The smaller the value, the higher the item is sorted.
    *
    * The value must be greater than or equal to 0.
    *
@@ -123,7 +123,8 @@ export interface GridObjectSortComponentItem {
   order: number;
 
   /**
-   * URL of the image. Required when **GridObjectSortComponentType** is set to **IMAGE_TEXT**.
+   * URL of the image, configured when **GridObjectSortComponentType** is set to **IMAGE_TEXT**. It does not take
+   * effect when the type is **TEXT**. If **symbolStyle** is also configured, **symbolStyle** prevails.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -134,8 +135,8 @@ export interface GridObjectSortComponentItem {
   url?: ResourceStr;
 
   /**
-   * Symbol resource of the image. Required when **GridObjectSortComponentType** is set to **IMAGE_TEXT**. The priority
-   * of this property is higher than that of **url**.
+   * Symbol resource of the image, configured when **GridObjectSortComponentType** is set to **IMAGE_TEXT**. It does
+   * not take effect when the type is **TEXT**. The priority of this property is higher than that of **url**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -158,7 +159,8 @@ export interface GridObjectSortComponentItem {
  */
 export interface GridObjectSortComponentOptions {
   /**
-   * Component display type: text only or image with text
+   * Component display type: text only or image with text. When it is set to **GridObjectSortComponentType.IMAGE_TEXT**,
+   * configure **url** or **symbolStyle** for the data items.
    *
    * Default value: **GridObjectSortComponentType.TEXT**
    *
@@ -172,7 +174,9 @@ export interface GridObjectSortComponentOptions {
   type?: GridObjectSortComponentType;
 
   /**
-   * Image size, in vp.
+   * Image size, in vp. This parameter takes effect only when **type** is **GridObjectSortComponentType.IMAGE_TEXT**.
+   * When it is set to **0**, a common image is displayed at the default size, and the font size of the Symbol icon
+   * is 0 vp.
    *
    * The value must be greater than or equal to 0.
    *
@@ -276,7 +280,8 @@ export declare struct GridObjectSortComponent {
   options: GridObjectSortComponentOptions;
 
   /**
-   * Data to pass. The maximum data length is 50 characters. If it is exceeded, only the first 50 characters are used.
+   * Data to pass. The maximum number of data entries is 50. If the number of data entries exceeds 50, only the
+   * first 50 entries are used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -287,7 +292,8 @@ export declare struct GridObjectSortComponent {
   dataList: Array<GridObjectSortComponentItem>;
 
   /**
-   * Callback invoked when changes are saved. The data after the changes is returned.
+   * Callback invoked when changes are saved. **select** indicates the selected data after editing, and **unselect**
+   * indicates the unselected data after editing.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

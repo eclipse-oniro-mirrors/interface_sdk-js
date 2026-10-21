@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D场景声明
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -171,7 +171,7 @@ export interface RaycastParameters {
 }
 
 /**
- * 用于创建可在共享RenderContext的多个场景（[Scene]{@link Scene}）中共享的渲染资源。
+ * 用于创建可在共享[RenderContext]{@link RenderContext}的多个场景（[Scene]{@link Scene}）中共享的渲染资源。
  *
  * @interface RenderResourceFactory
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -294,7 +294,7 @@ export interface CameraParameters {
 }
 
 /**
- * 特效参数配置，用于指定创建特效时所需的特效ID，作为createEffect接口的入参来创建特效对象。
+ * 特效参数配置，用于指定创建特效时所需的特效ID，作为[createEffect]{@link SceneResourceFactory.createEffect}接口的入参来创建特效对象。
  * 
  * @interface EffectParameters
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -314,7 +314,7 @@ export interface EffectParameters {
 }
 
 /**
- * 用于创建3D场景中资源的接口，例如相机、光源等，继承自RenderResourceFactory。
+ * 用于创建3D场景中资源的接口，例如相机、光源等，继承自[RenderResourceFactory]{@link RenderResourceFactory}。
  *
  * @extends RenderResourceFactory
  * @interface SceneResourceFactory
@@ -516,7 +516,7 @@ export declare abstract class SoftShadowConfig {
 }
 
 /**
- * PCF（Percentage Closer Filtering，百分比邻近过滤）软阴影配置类，继承自SoftShadowConfig。
+ * PCF（Percentage Closer Filtering，百分比邻近过滤）软阴影配置类，继承自[SoftShadowConfig]{@link SoftShadowConfig}。
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly

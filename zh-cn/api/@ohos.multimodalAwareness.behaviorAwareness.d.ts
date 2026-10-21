@@ -81,8 +81,8 @@ declare namespace behaviorAwareness {
     TIME_MONTHLY = 'timeMonthly',
     /** 时间点+法定工作日 */
     TIME_WORKDAY = 'timeWorkday',
-    /** 到达位置 */
-    LOCATION_ARRIVE = 'locationArrive',
+    /** 位置信息，包含位置以及进出围栏状态。 */
+    LOCATION = 'location',
     /** 打开应用 */
     APP_LAUNCH = 'appLaunch',
     /** 退出应用 */
@@ -261,6 +261,36 @@ declare namespace behaviorAwareness {
     COMPANY = 'company',
     /** 自定义 */
     CUSTOM = 'custom',
+  }
+
+  /**
+   * 位置状态类型枚举。用于区分进入或离开地理围栏。
+   *
+   * @enum { string }
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @since 26.2.0
+   * @stagemodelonly
+   * @systemapi
+   */
+  export enum LocationStatusType {
+    /**
+     * 进入地理围栏。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ENTER = 'enter',
+    /**
+     * 离开地理围栏。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EXIT = 'exit',
   }
 
   /**
@@ -519,8 +549,12 @@ declare namespace behaviorAwareness {
    *                   需保存此回调引用，用于 offPerception 时传入。
    *                   如果为 undefined 或 null，抛出 401 错误。
    * @returns { Promise<void> } 异步返回，无返回值。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用使用系统接口；
-   *                           32500001 - 服务异常；
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @since 26.2.0
    * @stagemodelonly
@@ -538,9 +572,13 @@ declare namespace behaviorAwareness {
    *
    * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } [callback] - 可选，与 onPerception 时传入的回调函数需为同一引用。不传则取消所有订阅。
    * @returns { Promise<void> } 异步返回，无返回值。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用使用系统接口；
-   *                           32500001 - 服务异常；
-   *                           32500003 - 取消订阅失败；
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500003 - Unsubscription failed.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @since 26.2.0
    * @stagemodelonly
@@ -555,8 +593,12 @@ declare namespace behaviorAwareness {
    *
    * @param { FeedbackData } feedback - 反馈数据。如果为 undefined 或 null，抛出 401 错误。
    * @returns { Promise<void> } 异步返回，无返回值。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用使用系统接口；
-   *                           32500001 - 服务异常；
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @since 26.2.0
    * @stagemodelonly

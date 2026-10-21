@@ -204,7 +204,7 @@ declare namespace picker {
      * to obtain the context, see [getHostContext]{@link @ohos.arkui.UIContext:UIContext#getHostContext}.
      *
      * @param { Context } context - Application context (only **UIAbilityContext** is supported). For details about the
-     *     application context of the stage model, see [Context]{@link ./app/context}.
+     *     application context of the stage model, see [Context]{@link ./app/context:Context}.
      * @syscap SystemCapability.FileManagement.UserFileService
      * @since 12 dynamiconly
      * @deprecated since 18
@@ -944,7 +944,7 @@ declare namespace picker {
      * [getHostContext]{@link @ohos.arkui.UIContext:UIContext#getHostContext}.
      *
      * @param { Context } context - Application context (only **UIAbilityContext** is supported). For details about the
-     *     application context of the stage model, see [Context]{@link ./app/context}.
+     *     application context of the stage model, see [Context]{@link ./app/context:Context}.
      * @syscap SystemCapability.FileManagement.UserFileService
      * @atomicservice
      * @since 12 dynamic
@@ -961,7 +961,7 @@ declare namespace picker {
      * > This method is supported on 2-in-1 devices and tablets since API version 19.
      *
      * @param { Context } context - Application context (only **UIAbilityContext** is supported). For details about the
-     *     application context of the stage model, see [Context]{@link ./app/context}.
+     *     application context of the stage model, see [Context]{@link ./app/context:Context}.
      * @param { window.Window } window - Window instance created by the application.
      * @syscap SystemCapability.FileManagement.UserFileService
      * @since 13 dynamic
@@ -1194,7 +1194,7 @@ declare namespace picker {
      * [getHostContext]{@link @ohos.arkui.UIContext:UIContext#getHostContext}.
      *
      * @param { Context } context - Application context (only **UIAbilityContext** is supported). For details about the
-     *     application context of the stage model, see [Context]{@link ./app/context}.
+     *     application context of the stage model, see [Context]{@link ./app/context:Context}.
      * @syscap SystemCapability.FileManagement.UserFileService
      * @atomicservice
      * @since 12 dynamic

@@ -677,6 +677,15 @@ export declare struct ChipGroup {
   onChange?: Callback<Array<int>>;
 
   /**
+   * Register the callback of ChipItems.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  onItemsChange?: Callback<ChipGroupItemOptions[]>;
+
+  /**
    * The builder function which will be rendered in the suffix of ChipGroup.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

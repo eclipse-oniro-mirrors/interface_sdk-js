@@ -9340,6 +9340,28 @@ declare namespace audio {
     getSoundCardInfo(): Promise<SoundCardInfo>;
 
     /**
+     * This interface is used to obtain the audio card information list, including the onboard audio card and USB audio
+     * card. Use the Promise asynchronous callback to return the query results.
+     * Application scenario: The application needs to obtain information about all audio adapters on the device,
+     * including onboard audio adapters and USB audio adapters, for asset management and monitoring.
+     *
+     * Restriction:
+     * - The application must apply for the ohos.permission.GET_AUDIO_ADAPTER_INFO permission.
+     * - This interface supports only PC devices. When a non-PC device invokes this interface, error code 801 is
+     * returned.
+     *
+     * @permission ohos.permission.GET_AUDIO_ADAPTER_INFO
+     * @returns { Promise<Array<SoundCardInfo>> } Promise used to return the sound card information list.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     * The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - The current device model does not support this function.
+     * @syscap SystemCapability.Multimedia.Audio.DeviceEnhance
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getSoundCardInfoList(): Promise<Array<SoundCardInfo>>
+
+    /**
      * Queries whether the system supports the enhanced routing functions provided by this manager,
      * including selecting input and output devices for the application or audio streams.
      * Your application is advised to call this API first to confirm system support before using
@@ -9787,6 +9809,32 @@ declare namespace audio {
     readonly muted?: boolean;
   }
 
+    /**
+   * Enumerates sound card types.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+    enum SoundCardType {
+      /**
+       * Onboard sound card.
+       *
+       * @syscap SystemCapability.Multimedia.Audio.Core
+       * @stagemodelonly
+       * @since 26.2.0 dynamic&static
+       */
+      ONBOARD = 0
+      /**
+       * USB sound card.
+       *
+       * @syscap SystemCapability.Multimedia.Audio.Core
+       * @stagemodelonly
+       * @since 26.2.0 dynamic&static
+       */
+      USB = 1
+    }
+
   /**
    * Describes sound card information.
    *
@@ -9841,6 +9889,24 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     driver: string;
+    /**
+     * Sound card ID.
+     * The maximum length is 128. Default value: Default sound card ID of the onboard sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    cardId?: string
+    /**
+     * Sound card type.
+     * Default value: The default is the onboard sound card type.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    cardType?: SoundCardType
   }
 
   /**
