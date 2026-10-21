@@ -18773,7 +18773,7 @@ declare class TouchResult {
  */
 declare interface DepthVector3 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18784,7 +18784,7 @@ declare interface DepthVector3 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18795,7 +18795,7 @@ declare interface DepthVector3 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18817,7 +18817,7 @@ declare interface DepthVector3 {
  */
 declare interface DepthVector4 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18829,7 +18829,7 @@ declare interface DepthVector4 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18840,7 +18840,7 @@ declare interface DepthVector4 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18851,7 +18851,7 @@ declare interface DepthVector4 {
   z: double;
 
   /**
-   * W component.
+   * W component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
