@@ -38,12 +38,12 @@ declare namespace formAgent {
    *
    * @permission ohos.permission.AGENT_REQUIRE_FORM
    * @param { Want } want - 发布请求，需包含以下字段。
-   *     <br>bundleName: 目标卡片所属应用的bundleName
-   *     <br>abilityName: 目标卡片所属应用的Ability
+   *     <br>bundleName: 目标卡片所属应用的bundleName。
+   *     <br>abilityName: 目标卡片所属应用的Ability。
    *     <br>parameters:
-   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格，取值原则：1-2x2、2-2x4、3-4x4等，具体规格见卡片配置
-   *     <br>- ohos.extra.param.key.form_name: 目标卡片名
-   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格，取值原则：1-2x2、2-2x4、3-4x4等，具体规格见卡片配置。
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName。
    * @param { AsyncCallback<string> } callback - 回调函数，用于异步返回卡片标识。回调参数：error为错误对象（成功时为null），data为卡片标识（string类型）。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -67,12 +67,12 @@ declare namespace formAgent {
    *
    * @permission ohos.permission.AGENT_REQUIRE_FORM
    * @param { Want } want - 发布请求，需包含以下字段。
-   *     <br>bundleName: 目标卡片所属应用的bundleName
-   *     <br>abilityName: 目标卡片所属应用的Ability
+   *     <br>bundleName: 目标卡片所属应用的bundleName。
+   *     <br>abilityName: 目标卡片所属应用的Ability。
    *     <br>parameters:
-   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格
-   *     <br>- ohos.extra.param.key.form_name: 目标卡片名
-   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格。
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName。
    * @returns { Promise<string> } Promise对象。返回卡片标识。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -135,13 +135,13 @@ declare namespace formAgent {
    * @permission ohos.permission.AGENT_REQUIRE_FORM
    * @param { formInfo.PeerFormHostServiceInfo } peerServiceInfo - 远端卡片使用方服务信息。
    * @param { Want } want - 发布请求，需包含以下字段。
-   *     <br>bundleName: 目标卡片所属应用的bundleName
-   *     <br>abilityName: 目标卡片所属应用的Ability
+   *     <br>bundleName: 目标卡片所属应用的bundleName。
+   *     <br>abilityName: 目标卡片所属应用的Ability。
    *     <br>parameters:
-   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格
-   *     <br>- ohos.extra.param.key.form_name: 目标卡片名
-   *     <br>- ohos.extra.param.key.module_name: 目标卡片的模块名称
-   * @param { formBindingData.FormBindingData } [formBindingData] - 用于更新的卡片数据。
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格。
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片的模块名称。
+   * @param { formBindingData.FormBindingData } [formBindingData] - 用于更新的卡片数据。默认值为空。
    * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise对象，返回跨设备发布卡片的结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
