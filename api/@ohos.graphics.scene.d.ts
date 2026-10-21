@@ -136,7 +136,7 @@ export { RenderTarget } from './graphics3d/SceneResources';
 /**
  * Export scene types
  * @syscap SystemCapability.ArkUi.Graphics3D
- * @since 26.2.0 dynamic&static
+ * @since 26.0.0 dynamic&static
  */
 export { ShadowAlgorithmType } from './graphics3d/SceneTypes';
 
