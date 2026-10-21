@@ -19972,7 +19972,7 @@ declare class CommonMethod<T> {
    * >
    * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
-   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，width设置auto表示自适应子组件。
+   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，width设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -20012,7 +20012,7 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，height设置auto表示自适应子组件。
+   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，height设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -20323,7 +20323,7 @@ declare class CommonMethod<T> {
   layoutWeight(value: number | string): T;
 
   /**
-   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link RelativeContainer}时生效。
+   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link ./relative_container}时生效。
    *
    * > **说明：**
    * >
@@ -23078,9 +23078,9 @@ declare class CommonMethod<T> {
    * > 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取**flexShrink**属性时，如果该节点未设置**flexShrink**属性，默认返回**1**（与Flex容器的默认值一致，但与Column和Row容器的默认值**0**不同）。
    *
    * @param { number } value - 设置父容器压缩尺寸分配给此属性所在组件的比例。
-   *     <br>取值限定为整数，父容器为 [Column]{@link Column} 、[Row]{@link Row}时， 取值范围[0,+∞).
+   *     <br>取值限定为整数，父容器为 [Column]{@link ./column} 、[Row]{@link ./row}时， 取值范围[0,+∞).
    *     <br/>
-   *     父容器为[Flex]{@link Flex}时，默认值：1
+   *     父容器为[Flex]{@link ./flex}时，默认值：1
    *     <br/>[constraintSize]{@link constraintSize}限制组件的尺寸范围.
    *     Column和Row即使设置了constraintSize，在未设置主轴尺寸width/height/size时仍遵守默认布局行为，在主轴上自适应子组件尺寸，此时flexShrink不生效.<br/>设置异常值时，该属性为
    *     默认值。
@@ -23112,7 +23112,7 @@ declare class CommonMethod<T> {
   /**
    * 子组件在父容器交叉轴的对齐格式。
    *
-   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row}, or
+   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row}, or
    *     [GridRow]{@link GridRow})布局容器中的alignItems设置。<br/>[GridCol]{@link
    *     GridCol}可以绑定alignSelf属性来改变它自身在交叉轴方向上的布局。<br/>默认值：ItemAlign.Auto
    * @returns { T } 返回当前组件。
@@ -23144,7 +23144,7 @@ declare class CommonMethod<T> {
    * 设置当前组件在Row/Column/Flex(单行)容器中显示的优先级，优先级由数值的整数部分决定，整数部分越大优先级越高。
    * 适用于响应式布局中根据父容器空间动态显示/隐藏子组件的场景。例如，在不同屏幕尺寸下优先显示重要内容，隐藏次要内容。
    *
-   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link Row}/[Column]{@link
+   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link ./row}/[Column]{@link
    *     Column}/[Flex(单行)]{@link Flex}容器组件中生效。<br>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用（如在Flex容器中根据空间大小动态显示内容）。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。
    *     <br/> 小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。例如：0.5和1.0优先级相同（均不大于1）；1.5和1.9优先级相同（整数部分均为1）；2.0和2.9优先级相同（整数部分均为2），且高于1.x的优先级。
    *     <br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
@@ -23294,14 +23294,14 @@ declare class CommonMethod<T> {
    * > **说明：**
    * >
    * > - position对位置的影响作用在组件的尺寸测量完成之后。
-   * > - 当父组件为[Row]{@link Row}、[Column]{@link Column}或[Flex]{@link
+   * > - 当父组件为[Row]{@link ./row}、[Column]{@link ./column}或[Flex]{@link
    * Flex}时，设置position的子组件不占位。在上述场景中，如果父组件包含的所有子组件均设置了position，此时父组件尺寸无法通过其他子组件确定，将基于尺寸(0, 0)进行布局测算。
    * > -
    * Position类型基于父组件内容区左上角确定位置；Edges类型基于父组件内容区四边确定位置，top/left/right/bottom分别为组件各边距离父组件内容区相应边的边距，通过边距来确定组件相对于父组件内容区的位置；Lo
    * calizedEdges类型基于父组件内容区四边确定位置，支持镜像模式。
    * > - 本属性适用于置顶显示、悬浮按钮等组件在父组件中位置固定的场景。
    * > - 本属性不支持在宽高为零的布局组件上设置。
-   * > - 当父组件为[RelativeContainer]{@link RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
+   * > - 当父组件为[RelativeContainer]{@link ./relative_container}，且子组件设置了alignRules属性时，子组件的position属性不生效。
    * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
    *
    * @param { Position } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
@@ -23406,7 +23406,7 @@ declare class CommonMethod<T> {
   }): T;
 
   /**
-   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link RelativeContainer}时生效，支持[attributeModifier]{@link
+   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link ./relative_container}时生效，支持[attributeModifier]{@link
    * attributeModifier}动态设置属性方法。
    *
    * @param { AlignRuleOption } value - 指定设置在相对布局组件中子组件的对齐规则。

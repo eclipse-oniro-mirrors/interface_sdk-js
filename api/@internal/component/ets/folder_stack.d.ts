@@ -164,7 +164,9 @@ declare type OnFoldStatusChangeCallback = (event: OnFoldStatusChangeInfo) => voi
 declare type OnHoverStatusChangeCallback = (param: HoverEventParam) => void;
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
+ *
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * > **NOTE**
  * >
@@ -363,7 +365,7 @@ declare interface HoverEventParam {
  * > [if/else: conditional rendering](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) node, the
  * > foldable screen hover capability becomes invalid.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Multiple child components are supported.
  *

@@ -102,7 +102,7 @@ export declare class DynamicLayoutAttribute extends CommonMethod<DynamicLayoutAt
  * responsive layouts (adapting to different screen sizes), multi-view mode switching (e.g., switching between list,
  * grid, and waterfall layouts), and user-defined layouts.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Child components are supported.
  *

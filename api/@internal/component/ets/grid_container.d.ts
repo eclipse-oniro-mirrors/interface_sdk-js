@@ -191,7 +191,7 @@ declare class GridContainerAttribute extends ColumnAttribute {}
  * numbers of columns and offsets. It is suitable for responsive page layouts, multi-column content display, dashboard
  * layouts, and other scenarios.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Supported
  *

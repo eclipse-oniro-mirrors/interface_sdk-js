@@ -143,7 +143,13 @@ declare type OnFoldStatusChangeCallback = (event: OnFoldStatusChangeInfo) => voi
 declare type OnHoverStatusChangeCallback = (param: HoverEventParam) => void;
 
 /**
- * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
+ * 支持[通用属性]{@link CommonMethod}。
+ *
+ * 支持[通用事件]{@link CommonMethod}。
+ *
+ * > **说明：**
+ * >
+ * > 设置offset和margin属性，可能会导致上下半屏遮挡折痕区，不建议使用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -313,7 +319,7 @@ declare interface HoverEventParam {
  * >
  * > - 当该组件的父组件为[if/else：条件渲染](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)节点时，折叠屏悬停能力将会失效。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含多个子组件。
  *

@@ -20511,7 +20511,7 @@ declare class CommonMethod<T> {
    * >  - In the [AlphabetIndexer](./ts-container-alphabet-indexer.md) component, setting **width** to
    * >    **auto** means adapting to the width of the largest index item.
    * >
-   * >  - In the [Row]{@link Row}, [Column]{@link Column}, and [RelativeContainer]{@link RelativeContainer}
+   * >  - In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
    * >    components, setting width to auto means adapting to the child components.
    *
    * @param { Length } value - Width of the component to set.<br>Unit: vp<br>When a percentage is set, the
@@ -20553,7 +20553,7 @@ declare class CommonMethod<T> {
    *
    * >  **NOTE**
    * >
-   * >  In the [Row]{@link Row}, [Column]{@link Column}, and [RelativeContainer]{@link RelativeContainer}
+   * >  In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
    * >  components, setting **width** and **height** to **auto** means that the size adapts to the size of their
    * >  child components.
    *
@@ -20941,7 +20941,7 @@ declare class CommonMethod<T> {
   /**
    * Sets the weight of the component in a chain, which is used to re-lay out components that form the chain. This
    * attribute takes effect only when the parent container is
-   * [RelativeContainer]{@link RelativeContainer}.
+   * [RelativeContainer]{@link ./relative_container}.
    *
    * **NOTE**
    *
@@ -24128,7 +24128,7 @@ declare class CommonMethod<T> {
    *     resides. The value 0 means the component does not participate in the allocation of remaining space and keeps
    *     its original size. When the value is greater than 0, the remaining space of the parent container is allocated
    *     proportionally; the larger the value, the more space is allocated.<br>Value range: [0, +∞)<br>Default value:
-   *     0<br>When the parent container is [Column]{@link Column} or [Row]{@link Row}, you need to set the size along
+   *     0<br>When the parent container is [Column]{@link ./column} or [Row]{@link ./row}, you need to set the size along
    *     the main axis (width/height/size); otherwise, the remaining space allocation effect of flexGrow may be
    *     affected.<br>[constraintSize]{@link constraintSize} restricts the size range of the component. When the
    *     component size after flexGrow expansion exceeds the maximum limit of constraintSize, it is constrained by
@@ -24163,10 +24163,10 @@ declare class CommonMethod<T> {
    *     attribute belongs when the parent container space is insufficient. The value 0 indicates that the component
    *     does not participate in compression; when the value is greater than 0, compression is performed
    *     proportionally, and a larger value indicates a larger compression amount.<br>When the parent container is
-   *     [Column]{@link Column} or [Row]{@link Row}, default value: 0, value range: [0, +∞).<br>When the parent
-   *     container is [Flex]{@link Flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
+   *     [Column]{@link ./column} or [Row]{@link ./row}, default value: 0, value range: [0, +∞).<br>When the parent
+   *     container is [Flex]{@link ./flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
    *     constraintSize} restricts the size range of the component. Even if [constraintSize]{@link constraintSize}
-   *     is set for [Column]{@link Column} and [Row]{@link Row}, when the main axis size (width/height/size) is not
+   *     is set for [Column]{@link ./column} and [Row]{@link ./row}, when the main axis size (width/height/size) is not
    *     set in the parent container, the default layout behavior is still followed, and the component size is
    *     adapted to the children on the main axis. In this case, flexShrink does not take effect.<br>When an
    *     exception value is set, this attribute uses the default value.
@@ -24212,7 +24212,7 @@ declare class CommonMethod<T> {
    * attribute is supported only by Flex, Column, Row, DynamicLayout, and GridRow containers.
    *
    * @param { ItemAlign } value - Alignment format of the child component on the cross axis of the parent container,
-   *     which overrides the alignItems setting in the [Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row},
+   *     which overrides the alignItems setting in the [Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row},
    *     DynamicLayout, and [GridRow]{@link GridRow} layout containers. Use it when a child
    *     component needs a different alignment from other child components in the parent container (typical scenarios:
    *     most child components in the parent container are center-aligned, but a specific child component needs top or
@@ -24257,7 +24257,7 @@ declare class CommonMethod<T> {
    *     range is [0, +∞).
    *     <br>Default value: **1**
    *     <br>**NOTE**<br>
-   *     Takes effect only in [Row]{@link Row}/[Column]{@link Column}/[Flex (single-line)]{@link Flex} container
+   *     Takes effect only in [Row]{@link ./row}/[Column]{@link ./column}/[Flex (single-line)]{@link Flex} container
    *     components.
    *     <br>Used when the container space is limited and the display order of components needs to be controlled or
    *     low-priority components need to be hidden (for example, dynamically displaying content based on the available
@@ -24442,7 +24442,7 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > - The effect of **position** on the position takes effect after the component's size measurement is complete.
-   * > - When the parent component is [Row]{@link Row}, [Column]{@link Column}, or [Flex]{@link Flex}, a child component
+   * > - When the parent component is [Row]{@link ./row}, [Column]{@link ./column}, or [Flex]{@link ./flex}, a child component
    * with **position** set does not occupy space. In this scenario, if all child components contained in the parent
    * component have **position** set, the parent component's size cannot be determined by other child components, and
    * layout measurement is performed based on the size (0, 0).
@@ -24456,7 +24456,7 @@ declare class CommonMethod<T> {
    * > - This attribute is applicable to scenarios where components such as top-displayed elements and floating buttons
    * have fixed positions within the parent component.
    * > - This attribute is not supported on layout components with zero width and height.
-   * > - When the parent component is [RelativeContainer]{@link RelativeContainer} and the child component has the
+   * > - When the parent component is [RelativeContainer]{@link ./relative_container} and the child component has the
    * [alignRules]{@link alignRules} attribute set, the child component's **position** attribute does not take effect.
    * > - If the parent component of the component where this attribute is located does not have a fixed width and
    * height, this component performs absolute positioning with reference to the first ancestor component that has a
@@ -24593,7 +24593,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the alignment rule for child components within the relative container. This attribute only takes effect when
-   * the parent container is [RelativeContainer]{@link RelativeContainer},
+   * the parent container is [RelativeContainer]{@link ./relative_container},
    * and supports dynamic configuration via [attributeModifier]{@link attributeModifier}.
    *
    * @param { AlignRuleOption } value - Alignment rules in the relative container.
@@ -24608,7 +24608,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the alignment rules in the relative container. This API is valid only when the container is
-   * [RelativeContainer]{@link RelativeContainer},.
+   * [RelativeContainer]{@link ./relative_container},.
    * This attribute replaces the original **left** and **right** directional parameters with **start** and **end** to
    * support proper mirroring in right-to-left (RTL) layout modes. It is recommended that you use this attribute for
    * configuring child component alignment rules in relative containers. This attribute supports dynamic configuration
