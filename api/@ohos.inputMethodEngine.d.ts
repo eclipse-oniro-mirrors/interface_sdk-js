@@ -2376,7 +2376,7 @@ declare namespace inputMethodEngine {
      * plain text implementation.
      * <br>
      * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
-     * request to fail
+     * request to fail.
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
@@ -2401,7 +2401,7 @@ declare namespace inputMethodEngine {
      * plain text implementation.
      * <br>
      * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
-     * request to fail
+     * request to fail.
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
@@ -2425,7 +2425,7 @@ declare namespace inputMethodEngine {
      * plain text implementation.
      * <br>
      * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
-     * request to fail
+     * request to fail.
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
@@ -2450,7 +2450,7 @@ declare namespace inputMethodEngine {
      * plain text implementation.
      * <br>
      * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
-     * request to fail
+     * request to fail.
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
