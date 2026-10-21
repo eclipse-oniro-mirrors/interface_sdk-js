@@ -2657,7 +2657,7 @@ declare namespace photoAccessHelper {
      * Commits the edited image or video asset. This API uses an asynchronous callback to return the result.
      *
      * The edited file is transferred to the media library based on the URI, which is **FileUri** of the edited file in
-     * the application sandbox directory. For details, see [File URI]{@link @ohos.file.fileuri:fileUri}.
+     * the application sandbox directory. For details, see [File URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * > **NOTE**
      * >
@@ -2688,7 +2688,7 @@ declare namespace photoAccessHelper {
      * Commits the edited image or video asset. This API uses a promise to return the result.
      *
      * The edited file is transferred to the media library based on the URI, which is **FileUri** of the edited file in
-     * the application sandbox directory. For details, see [File URI]{@link @ohos.file.fileuri:fileUri}.
+     * the application sandbox directory. For details, see [File URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * > **NOTE**
      * >
@@ -12748,7 +12748,7 @@ declare namespace photoAccessHelper {
      * Creates an image asset change request.
      *
      * For details about data source of the asset to be created, see
-     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri}.
+     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * @param { Context } context - Context of the ability instance.
      * @param { string } fileUri - Data source of the image asset, which is specified by a URI in the application
@@ -12801,7 +12801,7 @@ declare namespace photoAccessHelper {
      * Creates a video asset change request.
      *
      * For details about data source of the asset to be created, see
-     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri}.
+     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * @param { Context } context - Context of the ability instance.
      * @param { string } fileUri - Data source of the video asset, which is specified by a URI in the application
@@ -13243,7 +13243,7 @@ declare namespace photoAccessHelper {
 
     /**
      * Adds resources from the application sandbox based on the file URI. For details about the data source, see
-     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri}.
+     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * > **NOTE**
      * >

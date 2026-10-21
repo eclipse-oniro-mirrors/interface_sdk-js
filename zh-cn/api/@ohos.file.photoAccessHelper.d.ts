@@ -2625,7 +2625,7 @@ declare namespace photoAccessHelper {
      * 提交编辑数据以及编辑后的图片或视频。使用callback异步回调。
      * 
      * 通过uri将编辑后的文件传递给媒体库，uri是编辑后的文件在应用沙箱下的FileUri，可参考
-     * [FileUri]{@link @ohos.file.fileuri:fileUri}。
+     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}。
      * 
      * > **注意：**
      * >
@@ -2656,7 +2656,7 @@ declare namespace photoAccessHelper {
      * 提交编辑数据以及编辑后的图片或视频。使用Promise异步回调。
      * 
      * 通过uri将编辑后的文件传递给媒体库，uri是编辑后的文件在应用沙箱下的FileUri，可参考
-     * [FileUri]{@link @ohos.file.fileuri:fileUri}。
+     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}。
      * 
      * > **注意：**
      * >
@@ -12329,7 +12329,7 @@ declare namespace photoAccessHelper {
   }
 
   /**
-   * MediaAssetChangeRequest implements [MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}.
+   * MediaAssetChangeRequest类实现了[MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}接口。
    * 
    * 资产变更请求。
    * 
@@ -12382,7 +12382,7 @@ declare namespace photoAccessHelper {
      * 创建图片资产变更请求。
      * 
      * 指定待创建资产的数据来源，可参考
-     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri}.
+     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * @param { Context } context - 传入Ability实例的上下文。
      * @param { string } fileUri - fileUri - 图片资产的数据来源，在应用沙箱下的uri。示例fileUri：'file://com.example.temptest/data/storage/
@@ -12434,7 +12434,7 @@ declare namespace photoAccessHelper {
      * 创建视频资产变更请求。
      * 
      * 指定待创建资产的数据来源，可参考
-     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri}.
+     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
      *
      * @param { Context } context - 传入Ability实例的上下文。
      * @param { string } fileUri - 视频资产的数据来源，在应用沙箱下的uri。示例fileUri：'file://com.example.temptest/data/storage/
@@ -12874,7 +12874,7 @@ declare namespace photoAccessHelper {
 
     /**
      * 通过文件URI从应用沙箱添加资源，待添加资源的数据来源可参考
-     * [@ohos.file.fileuri (File URI)]{@link @ohos.file.fileuri:fileUri}.
+     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
      * 
      * > **注意：**
      * >
@@ -13502,7 +13502,7 @@ declare namespace photoAccessHelper {
   }
 
   /**
-   * MediaAlbumChangeRequest implements [MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}.
+   * MediaAlbumChangeRequest类实现了[MediaChangeRequest]{@link photoAccessHelper.MediaChangeRequest}接口。
    * 
    * 相册变更请求。
    * 
