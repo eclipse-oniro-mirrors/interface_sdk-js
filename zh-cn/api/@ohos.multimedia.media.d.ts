@@ -10917,15 +10917,6 @@ declare namespace media {
    */
   interface RectangleRegion {
     /**
-     * 矩形区域相对于左边缘的偏移量。
-     * 单位为：像素。取值限定为整数。
-     * 
-     * @syscap SystemCapability.Multimedia.Media.Core
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    left: int;
-    /**
      * 矩形区域相对于顶部边缘的偏移量。
      * 单位为：像素。取值限定为整数。
      * 
@@ -10934,6 +10925,17 @@ declare namespace media {
      * @since 26.2.0 dynamic&static
      */
     top: int;
+
+    /**
+     * 矩形区域相对于左边缘的偏移量。
+     * 单位为：像素。取值限定为整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    left: int;
+
     /**
      * 矩形区域的宽度。
      * 单位为：像素。取值限定为整数。
@@ -10943,6 +10945,7 @@ declare namespace media {
      * @since 26.2.0 dynamic&static
      */
     width: int;
+    
     /**
      * 矩形区域的高度。
      * 单位为：像素。取值限定为整数。

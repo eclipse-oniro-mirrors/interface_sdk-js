@@ -11120,15 +11120,6 @@ declare namespace media {
    */
   interface RectangleRegion {
     /**
-     * Offset of the rectangle region to the left edge.
-     * Unit: Pixel. The value range is all integers.
-     * 
-     * @syscap SystemCapability.Multimedia.Media.Core
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    left: int;
-    /**
      * Offset of the rectangle region to the top edge.
      * Unit: Pixel. The value range is all integers.
      * 
@@ -11137,6 +11128,17 @@ declare namespace media {
      * @since 26.2.0 dynamic&static
      */
     top: int;
+
+    /**
+     * Offset of the rectangle region to the left edge.
+     * Unit: Pixel. The value range is all integers.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    left: int;
+
     /**
      * Width of the rectangle region.
      * Unit: Pixel. The value range is all integers.
@@ -11146,6 +11148,7 @@ declare namespace media {
      * @since 26.2.0 dynamic&static
      */
     width: int;
+    
     /**
      * Height of the rectangle region.
      * Unit: Pixel. The value range is all integers.
