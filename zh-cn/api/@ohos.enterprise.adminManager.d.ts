@@ -835,7 +835,7 @@ declare namespace adminManager {
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { string } bundleName - 被委托应用包名。被委托应用的分发类型需为enterprise_normal和enterprise_mdm，可以通过
    *     [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口查询应用自身的
-   *     [BundleInfo]{@link ./bundleManager/BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
+   *     [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
    * @param { Array<string> } policies -
    [委托策略列表](docroot://mdm/mdm-kit-appendix.md#可委托策略列表)。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -880,7 +880,7 @@ declare namespace adminManager {
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { string } bundleName - 被委托应用包名。被委托应用的分发类型需为enterprise_normal和enterprise_mdm，可以通过
    *     [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口查询应用自身的
-   *     [BundleInfo]{@link ./bundleManager/BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
+   *     [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
    * @returns { Array<string> } 委托策略列表。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
