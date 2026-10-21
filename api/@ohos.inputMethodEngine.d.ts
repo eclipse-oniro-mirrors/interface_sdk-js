@@ -2374,6 +2374,9 @@ declare namespace inputMethodEngine {
      * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
      * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
      * plain text implementation.
+     * <br>
+     * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
+     * request to fail
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
@@ -2396,6 +2399,9 @@ declare namespace inputMethodEngine {
      * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
      * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
      * plain text implementation.
+     * <br>
+     * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
+     * request to fail
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
@@ -2417,6 +2423,9 @@ declare namespace inputMethodEngine {
      * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
      * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
      * plain text implementation.
+     * <br>
+     * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
+     * request to fail
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
@@ -2439,6 +2448,9 @@ declare namespace inputMethodEngine {
      * <br> > If the edit box currently bound to the input method application is an ArkUI rich text component, the rich
      * text content is returned. If the bound component is not an ArkUI rich text component, this API is bridged to the
      * plain text implementation.
+     * <br>
+     * <br> > The maximum total size of the richtext that can be obtained is 128KB. Exceeding this limit causes the
+     * request to fail
      *
      * @param { int } length - Text length, which cannot be less than 0.
      *     <br>The value must be an integer within [0,4096].
