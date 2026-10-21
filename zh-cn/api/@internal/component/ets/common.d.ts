@@ -28032,7 +28032,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * 设置滚动条的宽度，不支持百分比设置。宽度设置后，滚动条正常状态和按压状态宽度均为滚动条的宽度值。如果滚动条的宽度超过滚动组件主轴方向的可视尺寸，则滚动条的宽度会变为默认值4vp。
    *
-   * @param { number | string } value  - 滚动条的宽度。
+   * @param { number | string } value  - 滚动条的宽度。<br/>默认值：4<br/>单位：vp <br/>取值范围：设置为小于0的值时，按默认值
+   *     4vp处理。设置为0时，不显示滚动条。
    * @returns { T }
    *    返回当前滚动组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28048,7 +28049,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * 未通过该接口设置时，滚动条的宽度为4vp。
    *
-   * @param { number | string | Resource } value - 滚动条的宽度。
+   * @param { number | string | Resource } value - 滚动条的宽度。<br/>默认值：4<br/>单位：vp <br/>取值范围：设置为小于0的值
+   *     时，按默认值4vp处理。设置为0时，不显示滚动条。
    * @returns { T }
    *    返回当前滚动组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28510,7 +28512,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * 设置滚动容器的内容层裁剪区域。
    *
-   * 从API版本26.0.0开始，内容层裁剪区域内的子组件支持正常显示。API版本26.0.0以前的版本，当List、Grid和WaterFlow组件的内容层裁剪区域大于组件自身时，完全在组件区域外但在裁剪区域内的子组件默认不会显示。
+   * 从API版本26.0.0开始，内容层裁剪区域内的子组件支持正常显示。API版本26.0.0以前的版本，当List组件的内容层裁剪区域大于组件自身时，完全在组件区域外但在裁剪区域内的子组件默认不会显示。
    * 若需要显示，可将组件的cachedCount属性的show参数设置为true。但由于cachedCount属性设置的预加载子组件仅在空闲时隙执行，在组件大小变化、数据更新等场景下可能存在更新不及时导致闪烁的问题。
    *
    * @param { ContentClipMode | RectShape } clip - 裁剪只针对滚动容器的内容，即其子节点，背景不受影响。通过RectShape传入自定义矩形区域时仅支持设置宽高和相对于组件左上角的
