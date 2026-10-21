@@ -2804,6 +2804,36 @@ declare namespace media {
   }
 
   /**
+   * 可执行的播控指令枚举定义，
+   * 用于应用在Prepare()完成后，查询该片源是否可以执行对应的播放控制操作；
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVPlayer
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  enum PlaybackCommand {  
+    /**
+     * SEEK操作枚举值定义
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_SEEK = 0,
+    /**
+     * 调整播放速率的操作值
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_RATE = 1
+  }
+
+  /**
    * 播放管理类，用于管理和播放媒体资源。支持音视频播放、播放控制（播放、暂停、停止、跳转、倍速等）、状态管理和事件监听。在调用AVPlayer的方法前，需要先通过
    * [createAVPlayer()]{@link @ohos.multimedia.media:media.createAVPlayer(callback: AsyncCallback<AVPlayer>)}构建一个AVPlayer实例。
    * 
@@ -3513,6 +3543,24 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getMediaSources(): Array<MediaSource | undefined>;
+
+    /**
+     * 查询当前播放源下是否可以执行指定的播控命令。
+     * 该函数必须在Prepare()执行成功后才能被调用。
+     *
+     * @param { PlaybackCommand } command - 需要查询的播控指令的枚举值。
+     *     <br>取值约束：请参阅枚举回放命令。
+     * @returns { Promise<boolean> } Promise用于返回结果。
+     *     **true**表示可以执行该命令。
+     *     **false**表示不允许执行该命令。
+     * @throws { BusinessError } 5400102 - Operation not allowed.
+     *     If this function is invoked before Prepare(), it is returned.
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    checkSupportPlaybackCommand(command: PlaybackCommand): Promise<boolean>;
 
     /**
      * 媒体URL，只允许在**idle**状态下设置。
@@ -9584,6 +9632,16 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     MD_KEY_TRACK_REFERENCE_TYPE = 'track_ref_type',
+
+    /**
+     * 提取该Track是否可以正常播放的键
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    MD_KEY_TRACK_PLAYABLE = 'is_playable'
   }
 
   /**
