@@ -215,13 +215,13 @@ declare namespace relationalStore {
     status?: AssetStatus;
 
     /**
-     * 业务侧扩展。
-     * 默认值：空字符串。
+     * 资产的扩展信息，由业务侧自定义。端侧不限制长度；云侧长度上限为512字节，超出时截断保留前512字节。
+     * 默认值为空字符串。
      *
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     extension?: string;
   }
@@ -1788,7 +1788,7 @@ declare namespace relationalStore {
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     fullSync?: boolean;
   }

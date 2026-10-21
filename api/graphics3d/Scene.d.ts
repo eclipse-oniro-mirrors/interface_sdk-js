@@ -21,9 +21,30 @@
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
-import { Shader, MaterialType, Material, Animation, Environment, Image, MeshResource, Sampler, SceneResource, Effect, ImageStream } from './SceneResources';
+import { Shader, MaterialType, Material, Animation, Environment, Image, MeshResource, Sampler, SceneResource, Effect, ImageStream, RenderTarget } from './SceneResources';
 import { Camera, LightType, Light, Node, NodeType, Geometry } from './SceneNodes';
 import { Position3, Color, GeometryDefinition, RenderingPipelineType, Vec2, Vec3, Vec4, ShadowAlgorithmType } from './SceneTypes';
+import { BusinessError } from '../@ohos.base';
+
+/**
+ * render target parameters object, used to decribe render target
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTargetParameters extends SceneResourceParameters {
+  /**
+   * the size of render target
+   * 
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static 
+   */
+  size: Vec2;
+}
 
 /**
  * Scene load parameters object, used to specify additional configuration options when loading 3D model resources.
@@ -846,4 +867,29 @@ export declare class Scene {
    * @since 23 dynamic&static
    */
   cloneNode(node: Node, parent: Node, name: string): Node | null;
+
+  /**
+   * take a snapshot for the current scene;
+   * 
+   * @param { Camera[] } cameras - the camera list used to render the snapshot.
+   * @param { RenderTargetParameters[] } params - the parameters for render target list.
+   * @returns { Promise<RenderTarget[]> } Promise used to return a list of render target
+   * @throws { BusinessError } 25603001 -- Possible Cause:
+   *     -- The number of elements in the camera array exceeds the limit
+   *     -- The number of elements in the camera array or RenderTargetParameters array is 0
+   *     -- Duplicate camera objects exist in the Camera array
+   *     -- The main camera is passed into the Camera array
+   *     -- The width or height of render target given in RenderTargetParameters is less than or equal to 0
+   * @throws { BusinessError } 25603002 -- Possible Cause:
+   *     -- The number of elements in the camera array and the RenderTargetParameters array is not the same
+   * @throws { BusinessError } 25601002 -- Possible Cause:
+   *     -- Use this api after scene is destroyed
+   * @throws { BusinessError } 25601004 -- Possible Cause:
+   *     -- No enough memory to allocate offscreen render targets
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  snapshot(cameras: Camera[], params: RenderTargetParameters[]): Promise<RenderTarget[]>;
 }

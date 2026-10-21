@@ -50,7 +50,7 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum SegmentButtonV2InteractionMode {
   /**
@@ -58,7 +58,7 @@ export declare enum SegmentButtonV2InteractionMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   FOLLOWING_DRAG = 0,
 
@@ -67,7 +67,7 @@ export declare enum SegmentButtonV2InteractionMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   NORMAL_DRAG = 1
 }
@@ -877,7 +877,7 @@ export declare struct TabSegmentButtonV2 {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   @Param
   readonly interactionMode?: SegmentButtonV2InteractionMode;
@@ -1341,7 +1341,7 @@ export declare struct CapsuleSegmentButtonV2 {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   @Param
   readonly interactionMode?: SegmentButtonV2InteractionMode;

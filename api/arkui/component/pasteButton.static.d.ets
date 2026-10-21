@@ -175,7 +175,7 @@ export type PasteButtonCallback
 
 /**
  * Universal attributes are not supported. This component can only inherit the
- * [universal attributes of security components]{@link ./securityComponent}.
+ * [universal attributes of security components]{@link ./securityComponent:SecurityComponentMethod}.
  *
  * Universal events are not supported. Only the following events are supported.
  *

@@ -3822,7 +3822,7 @@ export declare class UIContext {
    * @returns { PlaceholderRegister } The scroll placeholder registry of this UI instance.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   getPlaceholderRegister(): PlaceholderRegister;
 
@@ -4393,7 +4393,7 @@ export declare class UIContext {
    *     returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   isWindowInfoInitialized(): boolean;
 
@@ -4748,6 +4748,31 @@ export declare class UIContext {
   setTextSelectionClearPolicy(policy: TextSelectionClearPolicy): void;
 
   /**
+   * Enables or disables the transPages configuration of the easy split (parallel view).
+   * When disabled, transition pages configured in transPages will participate in
+   * the right-push-left behavior instead of being fixed on the right side.
+   * This interface only takes effect in displace mode (shopping mode).
+   * The change takes effect on the next route transition, not on the current page.
+   * Default value is true (consistent with static configuration behavior).
+   *
+   * @param { boolean } enabled - true to enable transPages behavior (default), false to disable.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  setTransPageEnabled(enabled: boolean): void;
+ 
+  /**
+   * Checks whether the transPages configuration is currently enabled.
+   *
+   * @returns { boolean } Returns true if transPages behavior is enabled; returns false otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  isTransPageEnabled(): boolean;
+
+  /**
    * Get object smart gesture controller.
    *
    * @returns { SmartGestureController } object smart gesture controller.
@@ -4773,7 +4798,7 @@ export declare class UIContext {
    *     immersive strategies.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   applyDefaultImmersiveStrategy(...types: ImmersiveStrategy[]): void;
 }

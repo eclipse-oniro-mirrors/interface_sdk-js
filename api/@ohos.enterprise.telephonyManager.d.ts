@@ -30,7 +30,7 @@ import adminManager from './@ohos.enterprise.adminManager';
  * > [MDM Kit Development](docroot://mdm/mdm-kit-guide.md).
  * >
  * > The global restriction policy is provided by **restrictions**. To disable telephony globally, see
- * > [@ohos.enterprise.restrictions (Restrictions)]{@link @ohos.enterprise.restrictions:restrictions}.
+ * > [@ohos.enterprise.restrictions (restrictions)]{@link @ohos.enterprise.restrictions:restrictions}.
  *
  * @syscap SystemCapability.Customization.EnterpriseDeviceManager
  * @stagemodelonly

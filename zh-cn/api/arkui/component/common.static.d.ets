@@ -1733,7 +1733,7 @@ export type Matrix4Transit = matrix4.Matrix4Transit;
  */
 export declare interface MotionPathOptions {
     /**
-     * 位移动画的运动路径，使用[SVG路径描述规范]{@link Path}。path中支持使
+     * 位移动画的运动路径，使用[SVG路径描述规范]{@link ./path#svg路径描述规范}。path中支持使
      * 用start和end进行起点和终点的替代，如：'Mstart.x start.y L50 50 Lend.x end.y Z'，更多说明请参考
      * [绘制路径](docroot://ui/ui-js-components-svg-path.md)。
      * 
@@ -4374,7 +4374,7 @@ export declare enum SafeAreaEdge {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum SafeAreaInsetAlignment {
     /**
@@ -4384,7 +4384,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     START = 0,
 
@@ -4394,7 +4394,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     CENTER = 1,
 
@@ -4405,7 +4405,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     END = 2
 }
@@ -4416,7 +4416,7 @@ export declare enum SafeAreaInsetAlignment {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetEdgeConfig {
     /**
@@ -4430,7 +4430,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     content: CustomBuilder;
 
@@ -4443,7 +4443,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     spacing?: LengthMetrics;
 
@@ -4455,7 +4455,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     alignment?: SafeAreaInsetAlignment;
 }
@@ -4466,7 +4466,7 @@ export declare interface SafeAreaInsetEdgeConfig {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetOptions {
     /**
@@ -4477,7 +4477,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     top?: SafeAreaInsetEdgeConfig;
 
@@ -4489,7 +4489,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     end?: SafeAreaInsetEdgeConfig;
 
@@ -4501,7 +4501,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     bottom?: SafeAreaInsetEdgeConfig;
 
@@ -4513,7 +4513,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     start?: SafeAreaInsetEdgeConfig;
 }
@@ -7956,6 +7956,56 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * 标题栏悬浮模式。
+     * - STANDARD：标题栏与内容上下排布，无重叠。
+     * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+     * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+     * 滚动内容裁剪到安全区域。
+     * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过UIContext.applyDefaultImmersiveStrategy
+     * 成功设置ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA后，默认值为
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * 标准模式：标题栏与内容上下排布，无重叠。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STANDARD = 0,
+    /**
+     * 堆叠模式：标题栏悬浮于内容之上。
+     * 开发者需要在内容顶部添加padding以避免遮挡。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STACK = 1,
+    /**
+     * 安全区域填充模式：标题栏放置在安全区域padding区域。
+     * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.
@@ -9495,7 +9545,7 @@ export declare enum PreviewScaleMode {
     MAINTAIN = 2
 }
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -9503,7 +9553,7 @@ export declare enum PreviewScaleMode {
  */
 export declare class ContentTransitionEffect {
   /**
-   * When the content changes,there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9513,7 +9563,7 @@ export declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes,there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11519,7 +11569,7 @@ export declare interface CommonMethod {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
@@ -11798,9 +11848,9 @@ export declare interface CommonMethod {
      */
     default borderRadius(value: Length | BorderRadiuses | LocalizedBorderRadiuses | undefined, type?: RenderStrategy | undefined): this;
     /**
-     * Sets the border image of the component.
+     * 设置组件的边框图片。
      *
-     * @param { BorderImageOption | undefined } value - Border image or border gradient.
+     * @param { BorderImageOption | undefined } value - 边框图片或边框渐变。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15331,7 +15381,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持左键按下拖动滚动。
      * 
      * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-     *    <br>默认值：API版本26.2.0下的版本默认值为 false。API版本26.2.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+     *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15446,7 +15496,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }

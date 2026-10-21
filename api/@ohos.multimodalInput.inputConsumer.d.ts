@@ -478,7 +478,10 @@ declare namespace inputConsumer {
 
   /**
    * Subscribes to application hotkey change events. This API obtains combination key input events that meet the
-   * specified conditions, and uses an asynchronous callback to return the result.
+   * specified conditions, and uses an asynchronous callback to return the result. Before calling this API, you are
+   * advised to call [getAllSystemHotkeys]{@link inputConsumer.getAllSystemHotkeys()} first to obtain the system hotkey
+   * list and check that the combination keys to be subscribed to are not occupied by the system, preventing
+   * subscription failures.
    *
    * @param { 'hotkeyChange' } type - Event type. This parameter has a fixed value of **hotkeyChange**.
    * @param { HotkeyOptions } hotkeyOptions - Shortcut key options.

@@ -1510,18 +1510,18 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead Contact.significantDates
      */
     events?: Event[];
 
     /**
-     * 联系人的生日、周年纪念等重要日期列表。从API version 26.2.0开始，建议使用该版本。
+     * 联系人的生日、周年纪念等重要日期列表。从API version 26.1.0开始，建议使用该版本。
      *
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     significantDates?: SignificantDate[];
 
@@ -1885,7 +1885,7 @@ declare namespace contact {
    * @syscap SystemCapability.Applications.ContactsData
    * @atomicservice [since 11]
    * @since 7
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead contact.SignificantDate
    */
   class Event {
@@ -1895,7 +1895,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly CUSTOM_LABEL: 0;
@@ -1906,7 +1906,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateType.DATE_TYPE_ANNIVERSARY
      */
     static readonly EVENT_ANNIVERSARY: 1;
@@ -1917,7 +1917,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly EVENT_OTHER: 2;
@@ -1928,7 +1928,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateType.DATE_TYPE_BIRTHDAY
      */
     static readonly EVENT_BIRTHDAY: 3;
@@ -1939,7 +1939,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly INVALID_LABEL_ID: -1;
@@ -1950,7 +1950,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateValue
      */
     eventDate: string;
@@ -1961,7 +1961,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateName
      */
     labelName?: string;
@@ -1972,7 +1972,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
-     * @deprecated since 26.2.0
+     * @deprecated since 26.1.0
      * @useinstead SignificantDate.dateType
      */
     labelId?: number;
@@ -1984,7 +1984,7 @@ declare namespace contact {
    * @syscap SystemCapability.Applications.ContactsData
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0
+   * @since 26.1.0
    */
   class SignificantDate {
     /**
@@ -1993,7 +1993,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     dateType: SignificantDateType;
 
@@ -2003,7 +2003,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     dateValue: string;
 
@@ -2013,7 +2013,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     dateName?: string;
   }
@@ -2024,7 +2024,7 @@ declare namespace contact {
    * @syscap SystemCapability.Applications.ContactsData
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0
+   * @since 26.1.0
    */
   enum SignificantDateType {
     /**
@@ -2033,7 +2033,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     DATE_TYPE_OTHER = 0,
 
@@ -2043,7 +2043,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     DATE_TYPE_BIRTHDAY = 1,
 
@@ -2053,7 +2053,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     DATE_TYPE_LUNAR_BIRTHDAY = 2,
 
@@ -2063,7 +2063,7 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0
+     * @since 26.1.0
      */
     DATE_TYPE_ANNIVERSARY = 3
   }

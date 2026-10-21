@@ -5397,7 +5397,7 @@ export declare enum EdgeLightPosition {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum ImmersiveStrategy {
   /**
@@ -5411,7 +5411,7 @@ export declare enum ImmersiveStrategy {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   AVOID_CUTOUT = 0,
   /**
@@ -5419,15 +5419,37 @@ export declare enum ImmersiveStrategy {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   AVOID_FLOAT_NAV = 1,
+  /**
+   * Avoid the window control buttons, which are the close, minimize and zoom buttons.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  AVOID_WINDOW_CONTROLS = 6,
+  /**
+   * Expand the title area of bindSheet as safe area for the content region.
+   *
+   * > **NOTE**
+   * >
+   * > When this strategy is applied via UIContext.applyDefaultImmersiveStrategy,
+   * > bindSheet's SheetOptions.titleBarHoverMode defaults to
+   * > SheetTitleBarHoverMode.SAFE_AREA_PADDING.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  BIND_SHEET_EXPAND_SAFE_AREA = 7,
   /**
    * Expands the TitleBar and ToolBar of Navigation/NavDestination as safe areas for the content region.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   NAVIGATION_EXPAND_SAFE_AREA = 8
 }

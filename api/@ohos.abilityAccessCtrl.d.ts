@@ -71,6 +71,9 @@ import type _Context from './application/Context';
 import type _PermissionRequestResult from './security/PermissionRequestResult';
 
 /**
+ * Provides permission verification and management capabilities for apps, supporting permission status checks before
+ * accessing protected resources, runtime authorization requests, settings page authorization guidance, and permission
+ * status change monitoring.
  *
  * @syscap SystemCapability.Security.AccessToken
  * @FaAndStageModel
@@ -1477,9 +1480,82 @@ declare namespace abilityAccessCtrl {
      * @syscap SystemCapability.Security.AccessToken
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     isPermissionSupported(permissionName: Permissions): boolean;
+    /**
+     * Sets the automation control status for a controller app over target apps. After the call is successful,
+     * the result for each target app is returned. The status accepts DISABLED (0, deny) and ENABLED (1, allow).
+     *
+     * @permission ohos.permission.GRANT_SENSITIVE_PERMISSIONS
+     * @param { int } controllerTokenID - Token ID of the controller app.
+     *     <br>The value should be an integer.
+     * @param { Array<AutomationControlTargetParam> } targetList - List of target apps and their automation control
+     *     status.
+     *     <br>The maximum length is 1024 and cannot be empty.
+     * @returns { Promise<Array<AutomationControlSetResult>> } Promise used to return the result for each target app,
+     *     in the same order as targetList.
+     * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
+     *     permission "ohos.permission.GRANT_SENSITIVE_PERMISSIONS".
+     * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
+     * @throws { BusinessError } 12100001 - Invalid parameter. The controllerTokenID is 0, or the targetList is empty or
+     *     exceeds 1024 entries.
+     * @throws { BusinessError } 12100002 - The specified controller tokenID does not exist, or the corresponding
+     *     process is not an application process.
+     * @throws { BusinessError } 12100006 - The application specified by the controller tokenID is not allowed to
+     *     perform automation control operations.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setAutomationControlStatus(
+      controllerTokenID: int,
+      targetList: Array<AutomationControlTargetParam>
+    ): Promise<Array<AutomationControlSetResult>>;
+    /**
+     * Queries the automation control target apps for a controller app. After the call is successful,
+     * the list of target apps and their status is returned.
+     *
+     * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
+     * @param { int } controllerTokenID - Token ID of the controller app.
+     *     <br>The value should be an integer.
+     * @returns { Promise<Array<AutomationControlTargetResult>> } Promise used to return the target apps and their
+     *     automation control status.
+     * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
+     *     permission "ohos.permission.GET_SENSITIVE_PERMISSIONS".
+     * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
+     * @throws { BusinessError } 12100002 - The specified controller tokenID does not exist, or the corresponding
+     *     process is not an application process.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getAutomationControlTargets(controllerTokenID: int): Promise<Array<AutomationControlTargetResult>>;
+    /**
+     * Queries the controller apps that have automation control over a target app.
+     * Returns the list of controller app information.
+     *
+     * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
+     * @param { int } targetTokenID - Token ID of the target app.
+     *     <br>The value should be an integer.
+     * @returns { Promise<Array<AutomationControlControllerInfo>> } Promise used to return the list of controller apps
+     *     that have automation control over the specified target app.
+     * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
+     *     permission "ohos.permission.GET_SENSITIVE_PERMISSIONS".
+     * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
+     * @throws { BusinessError } 12100002 - The specified target tokenID does not exist, or the corresponding process is
+     *     not an application process.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getAutomationControlControllers(targetTokenID: int): Promise<Array<AutomationControlControllerInfo>>;
   }
   /**
    * Enumerates the permission grant states.
@@ -1844,6 +1920,156 @@ declare namespace abilityAccessCtrl {
      * @since 26.0.0 dynamic&static
      */
     grantTimestamp?: long;
+  }
+  /**
+   * Enumerates the automation control status values.
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum AutomationControlStatus {
+    /**
+     * Automation control is denied.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DISABLED = 0,
+    /**
+     * Automation control is allowed.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ENABLED = 1
+  }
+  /**
+   * Enumerates the results for setting automation control status per target app.
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum AutomationControlSetResult {
+    /**
+     * Set successfully.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUCCESS = 0,
+    /**
+     * The specified target app tokenID does not exist, or the corresponding process is not an application process.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TOKEN_ID_NOT_EXIST = 1
+  }
+  /**
+   * Represents a target app and its automation control status.
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AutomationControlTargetParam {
+    /**
+     * Token ID of the target app.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetTokenID: int;
+    /**
+     * Automation control status.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    status: AutomationControlStatus;
+  }
+  /**
+   * Represents a target app and its automation control status with bundle name.
+   * Used as the return type of getAutomationControlTargets.
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AutomationControlTargetResult {
+    /**
+     * Token ID of the target app.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetTokenID: int;
+    /**
+     * Automation control status.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    status: AutomationControlStatus;
+    /**
+     * Bundle name of the target app.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bundleName: string;
+  }
+  /**
+   * Represents a controller app that has automation control over a target app.
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AutomationControlControllerInfo {
+    /**
+     * Token ID of the controller app.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    controllerTokenID: int;
+    /**
+     * Bundle name of the controller app.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bundleName: string;
   }
 }
 export { Permissions };

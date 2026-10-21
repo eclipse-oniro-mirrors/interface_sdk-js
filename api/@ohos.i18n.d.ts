@@ -1758,7 +1758,7 @@ declare namespace i18n {
    * @syscap SystemCapability.Global.I18n
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   export enum BilingualIndexMode {
     /**
@@ -1766,7 +1766,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     FULL = 0,
     /**
@@ -1774,7 +1774,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     COMPRESSED_EN = 1,
     /**
@@ -1782,7 +1782,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     COMPRESSED_LOCAL = 2
   }
@@ -1842,7 +1842,7 @@ declare namespace i18n {
      * @returns { boolean } true if bilingual index is supported, false otherwise.
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     static isBilingualIndexSupported(locale: Intl.Locale): boolean;
 
@@ -1855,7 +1855,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getBilingualIndexList(mode?: BilingualIndexMode): Array<string>;
 
@@ -1867,7 +1867,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getBilingualIndex(text: string): string;
   }
@@ -4656,7 +4656,7 @@ declare namespace i18n {
    * @syscap SystemCapability.Global.I18n
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   export function getCurrency(locale: Intl.Locale): Currency;
 
@@ -4666,7 +4666,7 @@ declare namespace i18n {
    * @syscap SystemCapability.Global.I18n
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   export class Currency {
     /**
@@ -4677,7 +4677,7 @@ declare namespace i18n {
      * @syscap SystemCapability.Global.I18n
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getISO4217Code(): string;
   }

@@ -1874,7 +1874,7 @@ export declare class ImageAttachment {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   readonly imageTag?: string;
 }
@@ -1969,7 +1969,7 @@ export declare interface ResourceImageAttachmentOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   imageTag?: string;
 }
@@ -2040,7 +2040,7 @@ export declare interface ImageAttachmentInterface {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   imageTag?: string;
 }

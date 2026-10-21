@@ -115,7 +115,7 @@ declare enum LayoutMode {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabVisibility {
 
@@ -126,7 +126,7 @@ declare enum TabVisibility {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   VISIBLE = 0,
 
@@ -137,7 +137,7 @@ declare enum TabVisibility {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   HIDDEN = 1
 }
@@ -606,7 +606,7 @@ declare class TabBarSymbol {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type TabBarBadgeType = number | ResourceStr;
 
@@ -617,7 +617,7 @@ declare type TabBarBadgeType = number | ResourceStr;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface TabBarBadgeStyle {
   /**
@@ -627,7 +627,7 @@ declare interface TabBarBadgeStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   value?: TabBarBadgeType;
 
@@ -639,7 +639,7 @@ declare interface TabBarBadgeStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxCount?: number;
 }
@@ -689,7 +689,7 @@ declare interface TabBarOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   badge?: TabBarBadgeStyle;
 }
@@ -1081,7 +1081,7 @@ declare class BottomTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   badge(badgeStyle:TabBarBadgeStyle): BottomTabBarStyle;
 }
@@ -1285,7 +1285,7 @@ declare class TabContentAttribute extends CommonMethod<TabContentAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   tabBarVisibility(visibility: TabVisibility, displayMode?: TabBarDisplayMode): TabContentAttribute;
 }

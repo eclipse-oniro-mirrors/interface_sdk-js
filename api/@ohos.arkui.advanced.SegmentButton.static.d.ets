@@ -283,7 +283,7 @@ declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 declare enum SegmentButtonInteractionMode {
   /**
@@ -291,7 +291,7 @@ declare enum SegmentButtonInteractionMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   FOLLOWING_DRAG = 0,
 
@@ -301,7 +301,7 @@ declare enum SegmentButtonInteractionMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   NORMAL_DRAG = 1
 }
@@ -573,7 +573,7 @@ interface CommonSegmentButtonOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   interactionMode?: SegmentButtonInteractionMode;
 }
@@ -1269,7 +1269,7 @@ declare class SegmentButtonOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   interactionMode?: SegmentButtonInteractionMode;
 

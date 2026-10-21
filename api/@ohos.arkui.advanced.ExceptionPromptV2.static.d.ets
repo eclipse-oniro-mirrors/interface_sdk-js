@@ -15,6 +15,28 @@
  */
 
 /**
+ * The **ExceptionPromptV2** component is used when an exception occurs and the exception content needs to be prompted.
+ * 
+ * This component is implemented based on 
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). 
+ * Compared with 
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), 
+ * state management V2 delivers enhanced capabilities for deep observation and management of data objects, 
+ * and is no longer limited to the component level. With state management V2, you can more flexibly control 
+ * the data and state of the exception prompt through this component, achieving more efficient UI refresh.
+ * 
+ * > **NOTE**
+ * >
+ * > - If [universal attributes]{@link common} and [universal events]{@link common} are set for **ExceptionPromptV2**, 
+ * > the compilation toolchain will generate an additional node \_\_Common\_\_ and mount the universal attributes or 
+ * > universal events on \_\_Common\_\_, rather than directly applying them to **ExceptionPromptV2** itself. 
+ * > This may cause the set universal attributes or universal events to not take effect or behave unexpectedly. 
+ * > Therefore, it is not recommended to set universal attributes and universal events on **ExceptionPromptV2**.
+ *
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
  * @file
  * @kit ArkUI
  */
@@ -267,7 +289,8 @@ declare type OnTipClickCallback = () => void;
 declare type OnActionTextClickCallback = () => void;
 
 /**
- * Declare struct ExceptionPromptV2 higher-order component.
+ * Defines an exception prompt component, which is used when there is an exception that needs to be prompted.
+ * 
  * The exception prompt component is used to show an error message when an error arises.
  * @struct { ExceptionPromptV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

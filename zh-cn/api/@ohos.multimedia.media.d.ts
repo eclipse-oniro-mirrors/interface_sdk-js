@@ -166,7 +166,7 @@ declare namespace media {
    * 同步方式创建音频播放实例。
    * 
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用
    * > [createAVPlayer]{@link media.createAVPlayer(callback: AsyncCallback<AVPlayer>)}替代。
    *
    * @returns { AudioPlayer } 返回AudioPlayer类实例，失败时返回null。可用于音频播放、暂停、停止等操作。
@@ -181,7 +181,7 @@ declare namespace media {
    * 创建音频录制的实例来控制音频的录制。一台设备只允许创建一个录制实例。
    * 
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用
    * > [createAVRecorder]{@link media.createAVRecorder(callback: AsyncCallback<AVRecorder>)}替代。
    *
    * @returns { AudioRecorder } 返回AudioRecorder类实例，失败时返回null。可用于录制音频媒体。
@@ -520,7 +520,7 @@ declare namespace media {
    * 异步方式创建视频播放实例，使用callback异步回调。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用
    * > [createAVPlayer]{@link media.createAVPlayer(callback: AsyncCallback<AVPlayer>)}替代。
    *
    * @param { AsyncCallback<VideoPlayer> } callback - 回调函数。创建VideoPlayer实例成功时，err为undefined，data为获取到的VideoPlayer实例，否则为错误
@@ -536,7 +536,7 @@ declare namespace media {
    * 异步方式创建视频播放实例，通过Promise获取返回值。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用[createAVPlayer]{@link media.createAVPlayer()}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[createAVPlayer]{@link media.createAVPlayer()}替代。
    *
    * @returns { Promise<VideoPlayer> } Promise对象。异步返回VideoPlayer实例，失败时返回null。可用于管理和播放视频媒体。
    * @syscap SystemCapability.Multimedia.Media.VideoPlayer
@@ -2512,7 +2512,7 @@ declare namespace media {
     preferredSubtitleLanguages?: Array<string>;
   }
     /**
-   * [AVPlayer]{@link @ohos.multimedia.media:media}的状态机，可通过state属性主动获取当前状态，也可通过监听
+   * [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}的状态机，可通过state属性主动获取当前状态，也可通过监听
    * [stateChange]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
    * 事件上报当前状态，状态机之间的切换规则，可参考[音频播放开发指导](docroot://media/media/using-avplayer-for-playback.md)。
    *
@@ -3162,8 +3162,8 @@ declare namespace media {
      * @param { int } fd - 资源句柄，通过
      *     [resourceManager.getRawFd]{@link @ohos.resourceManager:resourceManager.ResourceManager.getRawFd(path: string, callback: _AsyncCallback<RawFileDescriptor>)}
      *     获取。
-     * @param { long } offset - 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误，默认值:0。
-     * @param { long } length - 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误，默认值:0。
+     * @param { long } offset - 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕资源解析错误，默认值:0。单位为字节（Byte）。
+     * @param { long } length - 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕资源解析错误，默认值:0。单位为字节（Byte）。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -4039,7 +4039,7 @@ declare namespace media {
      *
      * @param { 'seekDone' } type - seek生效的事件回调类型，支持的事件：'seekDone'，除SEEK_CONTINUOUS外的
      *     [SeekMode]{@link @ohos.multimedia.media:media.SeekMode}每次调用seek后都会回调此事件。
-     * @param { Callback<int> } callback - 回调函数。seek生效的事件回调方法，只会上报用户请求的time位置。<br/>**视频播放：**
+     * @param { Callback<int> } callback - 回调函数。seek生效的事件回调方法，只会上报用户请求的time位置，单位为（ms）。<br/>**视频播放：**
      *     [SeekMode]{@link @ohos.multimedia.media:media.SeekMode}会造成实际跳转位置与用户设置产生偏差，精准位置需要通过currentTime获取，事件回调的time仅代表完
      *     成用户某一次请求。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
@@ -4147,7 +4147,7 @@ declare namespace media {
      * > - 在pause状态下，缓冲结束时播放器会上报timeUpdate事件。
      *
      * @param { 'timeUpdate' } type - 时间更新的回调类型，支持的事件：'timeUpdate'。
-     * @param { Callback<int> } callback - 回调函数。返回当前时间。
+     * @param { Callback<int> } callback - 回调函数。返回当前时间，单位为（ms）。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4173,7 +4173,7 @@ declare namespace media {
      * > 直播场景不支持durationUpdate上报。
      *
      * @param { 'durationUpdate' } type - 时长更新的回调类型，支持的事件：'durationUpdate'。
-     * @param { Callback<int> } callback - 回调函数。返回资源时长。
+     * @param { Callback<int> } callback - 回调函数。返回资源时长，单位为（ms）。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -4325,7 +4325,7 @@ declare namespace media {
     off(type: 'availableBitrates', callback?: Callback<Array<int>>): void;
 
     /**
-     * 监听[AVPlayer]{@link @ohos.multimedia.media:media}的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。如果此时
+     * 监听[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。如果此时
      * [AVPlayerState]{@link @ohos.multimedia.media:media.AVPlayerState}也切至error状态，用户需要通过
      * [reset()]{@link media.AVPlayer.reset(callback: AsyncCallback<void>)}或者
      * [release()]{@link media.AVPlayer.release(callback: AsyncCallback<void>)}退出播放操作。若调用
@@ -5355,7 +5355,7 @@ declare namespace media {
    * 媒体服务错误类型枚举。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 11开始废弃，建议使用[AVErrorCode]{@link media.AVErrorCode}替代。
+   * > 从API version 8开始支持，从API version 11开始废弃，建议使用[AVErrorCode]{@link media.AVErrorCode}替代。
    *
    * @syscap SystemCapability.Multimedia.Media.Core
    * @since 8 dynamiconly
@@ -6206,7 +6206,7 @@ declare namespace media {
    * 音频播放的状态机。可通过state属性获取当前状态。
    * 
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
    *
    * @unionmember { 'idle' } 音频播放空闲，dataload/reset成功后处于此状态。
    * @unionmember { 'playing' } 音频正在播放，play成功后处于此状态。
@@ -6224,7 +6224,7 @@ declare namespace media {
   /**
    * > **说明：**
    * >
-   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media}替代。
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}替代。
    * 
    * 音频播放管理类，用于管理和播放音频媒体。在调用AudioPlayer的方法前，需要先通过
    * [createAudioPlayer()]{@link @ohos.multimedia.media:media.createAudioPlayer}构建一个AudioPlayer实例。
@@ -6239,7 +6239,7 @@ declare namespace media {
      * 开始播放音频资源，需在'dataLoad'事件成功触发后，才能调用。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.play]{@link @ohos.multimedia.media:media.AVPlayer.play(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6253,7 +6253,7 @@ declare namespace media {
      * 暂停播放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.pause]{@link @ohos.multimedia.media:media.AVPlayer.pause(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6267,7 +6267,7 @@ declare namespace media {
      * 停止播放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.stop]{@link @ohos.multimedia.media:media.AVPlayer.stop(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6281,7 +6281,7 @@ declare namespace media {
      * 重置播放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 7开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 7开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.reset]{@link @ohos.multimedia.media:media.AVPlayer.reset(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6295,7 +6295,7 @@ declare namespace media {
      * 跳转到指定播放位置。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer.seek]{@link @ohos.multimedia.media:media.AVPlayer.seek}替代
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer.seek]{@link @ohos.multimedia.media:media.AVPlayer.seek}替代
      * > 。
      *
      * @param { number } timeMs - 指定的跳转时间节点，单位毫秒（ms），取值范围[0, duration]。
@@ -6310,7 +6310,7 @@ declare namespace media {
      * 设置音量。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.setVolume]{@link @ohos.multimedia.media:media.AVPlayer.setVolume}替代。
      *
      * @param { number } vol - 指定的相对音量大小，取值范围为[0.00-1.00]，1表示最大音量，即100%。
@@ -6325,7 +6325,7 @@ declare namespace media {
      * 释放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.release]{@link @ohos.multimedia.media:media.AVPlayer.release(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6339,7 +6339,7 @@ declare namespace media {
      * 获取音频轨道信息。需在'dataLoad'事件成功触发后，才能调用。通过回调函数获取返回值。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.getTrackDescription]{@link @ohos.multimedia.media:media.AVPlayer.getTrackDescription(callback: AsyncCallback<Array<MediaDescription>>)}
      * > 替代。
      *
@@ -6356,7 +6356,7 @@ declare namespace media {
      * 获取音频轨道信息。需在'dataLoad'事件成功触发后，才能调用。通过Promise获取返回值。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.getTrackDescription]{@link @ohos.multimedia.media:media.AVPlayer.getTrackDescription()}替代。
      *
      * @returns { Promise<Array<MediaDescription>> } 音频轨道信息MediaDescription数组Promise返回值。
@@ -6371,7 +6371,7 @@ declare namespace media {
      * 开始订阅音频缓存更新事件。仅网络播放支持该订阅事件。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('bufferingUpdate')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'bufferingUpdate', callback: OnBufferingUpdateHandler)}
      * > 替代。
      *
@@ -6488,7 +6488,7 @@ declare namespace media {
      * 开始订阅音频播放事件。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('stateChange')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
      * > 替代。
      *
@@ -6511,7 +6511,7 @@ declare namespace media {
      * 开始订阅音频播放时间更新事件。处于播放状态时，每隔1s上报一次该事件。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('timeUpdate')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'timeUpdate', callback: Callback<int>)}
      * > 替代。
      *
@@ -6528,7 +6528,7 @@ declare namespace media {
      * 监听音频焦点变化事件，参考[audio.InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}。
      * 
      * > **说明：**
-     * > > 从API version 9开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 9开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('audioInterrupt')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'audioInterrupt', callback: Callback<audio.InterruptEvent>)}
      * > 替代。
      *
@@ -6545,7 +6545,7 @@ declare namespace media {
      * 开始订阅音频播放错误事件，当上报error错误事件后，用户需处理error事件，退出播放操作。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('error')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'error', callback: ErrorCallback)}替
      * > 代。
      *
@@ -7509,7 +7509,7 @@ declare namespace media {
 
   /**
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 8开始废弃，建议使用[CodecMimeType]{@link media.CodecMimeType}替代。
+   * > 从API version 6开始支持，从API version 8开始废弃，建议使用[CodecMimeType]{@link media.CodecMimeType}替代。
    * 
    * 表示音频编码格式的枚举。
    *
@@ -7589,7 +7589,7 @@ declare namespace media {
 
   /**
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 8 开始废弃，建议使用[ContainerFormatType]{@link media.ContainerFormatType}替代。
+   * > 从API version 6开始支持，从API version 8 开始废弃，建议使用[ContainerFormatType]{@link media.ContainerFormatType}替代。
    * 
    * 表示音频封装格式的枚举。
    *
@@ -7909,7 +7909,7 @@ declare namespace media {
      * 录制准备，根据传入的配置参数初始化录制资源（包括编码器、采样率、声道数等），完成录制前的准备工作。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}
      * > 替代。
      *
@@ -7927,7 +7927,7 @@ declare namespace media {
      * 开始录制，需在'prepare'事件成功触发后，才能调用start方法。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7941,7 +7941,7 @@ declare namespace media {
      * 暂停录制，需要在'start'事件成功触发后，才能调用pause方法。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7955,7 +7955,7 @@ declare namespace media {
      * 恢复录制，需要在'pause'事件成功触发后，才能调用resume方法。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.resume]{@link media.AVRecorder#resume(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7969,7 +7969,7 @@ declare namespace media {
      * 停止录音。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.stop]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7983,7 +7983,7 @@ declare namespace media {
      * 释放录音资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.release]{@link media.AVRecorder#release(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7999,7 +7999,7 @@ declare namespace media {
      * 进行重置录音之前，需要先调用stop()停止录音。重置录音之后，需要调用prepare()设置录音参数项，才能再次进行录音。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.reset]{@link media.AVRecorder#reset(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -8013,7 +8013,7 @@ declare namespace media {
      * 开始订阅音频录制事件。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.on('stateChange')]{@link media.AVRecorder#on(type: 'stateChange', callback: OnAVRecorderStateChangeHandler)}
      * > 替代。
      *
@@ -8038,7 +8038,7 @@ declare namespace media {
      * 开始订阅音频录制错误事件，当上报error错误事件后，用户需处理error事件，退出录制操作。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.on('error')]{@link media.AVRecorder#on(type: 'error', callback: ErrorCallback)}
      * > 替代。
      *
@@ -8422,7 +8422,7 @@ declare namespace media {
    * 视频播放的状态机，可通过state属性获取当前状态。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
    *
    * @unionmember { 'idle' } 视频播放空闲。
    * @unionmember { 'prepared' } 视频播放准备。
@@ -8552,7 +8552,7 @@ declare namespace media {
    * 
    * > **说明：**
    * >
-   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}替代。
    *
    * @syscap SystemCapability.Multimedia.Media.VideoPlayer
    * @since 8 dynamiconly
@@ -10902,7 +10902,7 @@ declare namespace media {
      *
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     enableAEC?: boolean;
   }

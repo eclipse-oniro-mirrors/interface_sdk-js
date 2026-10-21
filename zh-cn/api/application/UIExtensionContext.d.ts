@@ -666,6 +666,7 @@ declare class UIExtensionContext extends ExtensionContext {
 
   /**
    * 启动一个UIServiceExtensionAbility。使用Promise异步回调。
+   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
    * 
    * > **说明：**
    * >
@@ -697,6 +698,7 @@ declare class UIExtensionContext extends ExtensionContext {
 
   /**
    * 连接到一个UIServiceExtensionAbility。使用Promise异步回调。
+   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
    * 
    * > **说明：**
    * >

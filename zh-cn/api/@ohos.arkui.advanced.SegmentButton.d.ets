@@ -366,7 +366,7 @@ declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SegmentButtonInteractionMode {
   /**
@@ -376,7 +376,7 @@ declare enum SegmentButtonInteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   FOLLOWING_DRAG = 0,
 
@@ -387,7 +387,7 @@ declare enum SegmentButtonInteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NORMAL_DRAG = 1
 }
@@ -806,7 +806,7 @@ interface CommonSegmentButtonOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   interactionMode?: SegmentButtonInteractionMode;
 }
@@ -1680,7 +1680,7 @@ declare class SegmentButtonOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   interactionMode?: SegmentButtonInteractionMode;
 
@@ -1803,17 +1803,17 @@ declare class SegmentButtonOptions {
 /**
  * 创建页签类分段按钮或胶囊类分段按钮。
  *
- * ## 子组件
+ * ###### 子组件
  *
  * 无
  *
- * ## 属性
+ * ###### 属性
  *
- * 不支持[通用属性](ts-component-general-attributes.md)。
+ * 不支持[通用属性]{@link CommonMethod}。
  *
- * ## 事件
+ * ###### 事件
  *
- * 不支持[通用事件](ts-component-general-events.md)。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

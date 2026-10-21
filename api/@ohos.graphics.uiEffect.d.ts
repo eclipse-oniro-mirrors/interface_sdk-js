@@ -553,7 +553,7 @@ declare namespace uiEffect {
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     mapColorByBrightness(colors: Array<Color>, positions: Array<double>): Filter;
   }
@@ -1540,7 +1540,7 @@ declare namespace uiEffect {
    * @unionmember { BrightnessBlender } Brightness blender
    * @unionmember { HdrBrightnessBlender } HDR-enabled brightness blender [since 20]
    * @unionmember { HdrDarkenBlender } HDR-adaptive darken blender [since 26.0.0]
-   * @unionmember { ColorfulBrightnessBlender } Hue-preserving brightening and darkening blender [since 26.2.0]
+   * @unionmember { ColorfulBrightnessBlender } Hue-preserving brightening and darkening blender [since 26.1.0]
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
@@ -1727,7 +1727,7 @@ declare namespace uiEffect {
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface ColorfulBrightnessBlenderOptions {
     /**
@@ -1742,7 +1742,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     darkenWeight?: double;
 
@@ -1758,7 +1758,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     vibrancyStrength?: double;
 
@@ -1774,7 +1774,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     lumaDiff?: double;
 
@@ -1789,7 +1789,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     hdrEnabled?: boolean;
 
@@ -1807,7 +1807,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     tintedColorPercent?: double;
   }
@@ -1824,7 +1824,7 @@ declare namespace uiEffect {
     * @systemapi
     * @stagemodelonly
     * @form
-    * @since 26.2.0 dynamiconly
+    * @since 26.1.0 dynamiconly
     */
   interface ColorfulBrightnessBlender {
     /**
@@ -1835,7 +1835,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     brightnessBlenderParam: BrightnessBlenderParam;
 
@@ -1847,7 +1847,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     options?: ColorfulBrightnessBlenderOptions;
   }
@@ -2440,7 +2440,7 @@ declare namespace uiEffect {
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
     options?: ColorfulBrightnessBlenderOptions): ColorfulBrightnessBlender;

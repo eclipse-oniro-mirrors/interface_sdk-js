@@ -5411,7 +5411,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getPlaceholderRegister(): PlaceholderRegister;
 
@@ -6215,7 +6215,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isWindowInfoInitialized(): boolean;
 
@@ -6663,6 +6663,35 @@ export class UIContext {
   setTextSelectionClearPolicy(policy: TextSelectionClearPolicy): void;
 
   /**
+   * Enables or disables the transPages configuration of the easy split (parallel view).
+   * When disabled, transition pages configured in transPages will participate in
+   * the right-push-left behavior instead of being fixed on the right side.
+   * This interface only takes effect in displace mode (shopping mode).
+   * The change takes effect on the next route transition, not on the current page.
+   * Default value is true (consistent with static configuration behavior).
+   *
+   * @param { boolean } enabled - true to enable transPages behavior (default), false to disable.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  setTransPageEnabled(enabled: boolean): void;
+ 
+  /**
+   * Checks whether the transPages configuration is currently enabled.
+   *
+   * @returns { boolean } Returns true if transPages behavior is enabled; returns false otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isTransPageEnabled(): boolean;
+
+  /**
    * Get object smart gesture controller.
    *
    * @returns { SmartGestureController } object smart gesture controller.
@@ -6691,7 +6720,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   applyDefaultImmersiveStrategy(...types: ImmersiveStrategy[]): void;
 }

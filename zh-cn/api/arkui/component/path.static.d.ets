@@ -84,7 +84,7 @@ export declare interface PathOptions {
 export declare interface PathAttribute extends CommonShapeMethod {
     /**
      * 设置符合
-     * [SVG路径描述规范]{@link Path}
+     * [SVG路径描述规范]{@link ./path#svg路径描述规范}
      * 的命令字符串，单位为px。
      * 像素单位转换方法请参考
      * [像素单位转换]{@link Length}。

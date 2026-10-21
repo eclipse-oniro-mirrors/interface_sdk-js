@@ -1662,7 +1662,7 @@ type OnContextMenuHideCallback = () => void;
  *     <br>Default value: See the default value of options.
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
 
@@ -1671,7 +1671,7 @@ type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: 
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum WebContextMenuItemId {
   /**
@@ -1679,7 +1679,7 @@ declare enum WebContextMenuItemId {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   MENU_COPY_LINK = 11
 }
@@ -1689,7 +1689,7 @@ declare enum WebContextMenuItemId {
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface WebContextMenuOptions {
   /**
@@ -1698,7 +1698,7 @@ declare interface WebContextMenuOptions {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enable?: boolean;
 }
@@ -3259,7 +3259,7 @@ declare class WebContextMenuParam {
    *     a Text Fragment link; **false** otherwise.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   shouldOfferLinkToText(): boolean;
 
@@ -3278,7 +3278,7 @@ declare class WebContextMenuParam {
    *     does not support link generation, an empty string is returned.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getTextFragmentGeneratedLink(): string;
 
@@ -3294,7 +3294,7 @@ declare class WebContextMenuParam {
    *     **false** otherwise.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isOverTextFragment(): boolean;
 }
@@ -3503,7 +3503,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   copyLinkToTextMenu(): void;
 
@@ -3522,7 +3522,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   removeFragments(): void;
 }
@@ -8351,7 +8351,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute } Returns the WebAttribute object to support chained calls.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
@@ -9257,8 +9257,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > - You can set the up, down, left, and right directions, or set the forward and backward nested scrolling modes to
    * > implement scrolling linkage with the parent component.
    * >
-   * > - Containers that support nested scrolling: [Grid]{@link ./grid}, [List]{@link ./list}, [Scroll]{@link ./scroll},
-   * > [Swiper]{@link ./swiper}, [Tabs]{@link ./tabs}, [WaterFlow]{@link ./water_flow}, [Refresh]{@link ./refresh} and
+   * > - Containers that support nested scrolling: [Grid]{@link Grid}, [List]{@link List}, [Scroll]{@link Scroll},
+   * > [Swiper]{@link Swiper}, [Tabs]{@link Tabs}, [WaterFlow]{@link WaterFlow}, [Refresh]{@link Refresh} and
    * > [bindSheet]{@link CommonMethod#bindSheet}.
    * >
    * > - Input sources that support nested scrolling: gestures, mouse device, and touchpad.
@@ -9542,7 +9542,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { Array<ExpandedMenuItemOptions> } expandedMenuOptions - Extended options of the custom context menu on
    *     selection.
    *     <br>The number of menu options, menu content size, and start icon size must be the same as those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @since 12 dynamiconly
@@ -9644,7 +9644,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *
    * @param { EditMenuOptions } editMenu - Custom text menu options for the Web component.
    *     <br>The number of menu items, the content size, and the icon size are consistent with those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    *     <br>Among the system-provided ID enum values ([TextMenuItemId]{@link TextMenuItemId}) in the menu, only CUT,
    *     COPY, PASTE, SELECT_ALL, TRANSLATE, SEARCH, and AI_WRITER are supported in the Web component.
    *     <br>In the onMenuItemClick function, the textRange parameter is meaningless in the Web component, and the value
@@ -10011,6 +10011,11 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   /**
    * Registers a callback for blank screen monitoring attribution. The callback is triggered when the Web component
    * monitors a blank screen and completes root cause attribution.
+   *
+   * > **NOTE**
+   * >
+   * > - This method must be used with [enableBlankScreenMonitor]{@link WebAttribute#enableBlankScreenMonitor}.
+   * > Otherwise, the blank screen monitor is disabled by default, and this callback is not triggered.
    *
    * @param { OnMonitorBlankScreenCallback } callback - Callback for blank screen monitoring attribution.
    * @returns { WebAttribute }
@@ -10422,7 +10427,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   caretColor(value: ResourceColor): WebAttribute;
 
@@ -10436,7 +10441,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
 
@@ -10451,7 +10456,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
 }
@@ -10742,7 +10747,7 @@ declare interface EmbedOptions {
    * @default false
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   supportTransformRotateAndSkew?: boolean;
 }
@@ -11211,7 +11216,7 @@ type OnAISessionCallback = (state: AISessionResultType, content: string) => void
  * @param { OnZoomChangeEvent } zoomChangeInfo - Details about the browser zoom factor change.
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
 
@@ -11220,7 +11225,7 @@ type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface OnZoomChangeEvent {
   /**
@@ -11228,7 +11233,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   oldZoomFactor: number;
 
@@ -11237,7 +11242,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
 }

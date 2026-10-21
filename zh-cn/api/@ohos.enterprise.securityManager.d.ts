@@ -1199,6 +1199,25 @@ declare namespace securityManager {
    * @since 26.0.1
    */
   function isWeakPinEnabled(): boolean;
+
+  /**
+   * 根据账号ID获取最近一次修改密码时间。同步返回时间。
+   * 企业可以通过该接口查询最近一次修改密码时间，用于密码策略审计和合规性检查。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 用户ID，必须大于等于0。
+   * @returns { number } 最近一次修改密码时间戳，单位为毫秒。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getPasswordLastChangedTime(accountId: number): number;
 }
 
 /*** if arkts dynamic */

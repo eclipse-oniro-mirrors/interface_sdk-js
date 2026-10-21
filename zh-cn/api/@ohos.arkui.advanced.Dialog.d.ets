@@ -18,13 +18,13 @@
  * 
  * > **说明：**
  * >
- * > - 该组件从API version 10开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
- * >
- * > - 该组件仅可在Stage模型下使用。
- * >
- * > - 如果Dialog设置[通用属性]{@link ./@internal/component/ets/common}和[通用事件]{@link ./@internal/component/ets/common}，编译工具链会额外生
+ * > - 如果Dialog设置[通用属性]{@link common}和[通用事件]{@link common}，编译工具链会额外生
  * > 成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Dialog本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Dialog设置通用属性和通用事件。
  *
+ * ###### 子组件
+ * 
+ * 无
+ * 
  * @file Dialog
  * @kit ArkUI
  */
@@ -550,7 +550,7 @@ export declare struct ConfirmDialog {
 }
 
 /**
- * 操作确认类弹出框，用于在触发一个将产生严重后果的不可逆操作（如删除、重置、取消编辑、停止等）时进行确认。
+ * 警告类弹出框，用于在触发一个将产生严重后果的不可逆操作（如删除、重置、取消编辑、停止等）时进行警告。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

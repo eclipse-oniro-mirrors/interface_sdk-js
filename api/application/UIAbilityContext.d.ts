@@ -49,7 +49,7 @@ import UIServiceExtensionConnectCallback from './UIServiceExtensionConnectCallba
 
 /**
  * UIAbilityContext provides the context environment for a [UIAbility]{@link ./../@ohos.app.ability.UIAbility} that needs to 
- * store its status. It inherits from [Context]{@link ./../app/context} and provides UIAbility-related configuration and APIs
+ * store its status. It inherits from [Context]{@link Context} and provides UIAbility-related configuration and APIs
  *  for operating UIAbility and ServiceExtensionAbility components. For example, you can use the APIs to start a 
  * UIAbility, terminate a UIAbility to which the UIAbilityContext belongs, and start, terminate, connect to, or 
  * disconnect from a ServiceExtensionAbility.
@@ -1550,7 +1550,7 @@ declare class UIAbilityContext extends Context {
    * @atomicservice
    * @since 12 dynamic
    * @since 23 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead UIAbilityContext#backToCallerAppWithResult(abilityResult: AbilityResult, requestCode: string)
    */
   backToCallerAbilityWithResult(abilityResult: AbilityResult, requestCode: string): Promise<void>;
@@ -2866,7 +2866,7 @@ declare class UIAbilityContext extends Context {
    * >
    * > If an atomic service calls this API, 
    * > [restartSelfAtomicService()]{@link ./../@ohos.app.ability.abilityManager:abilityManager.restartSelfAtomicService}, or 
-   * > [ApplicationContext.restartApp()]{@link ./application/ApplicationContext:ApplicationContext.restartApp} within 3 
+   * > [ApplicationContext.restartApp()]{@link ./ApplicationContext:ApplicationContext.restartApp} within 3 
    * > seconds after a successful call to this API, the system returns error code 16000064.
    * >
    * > If an application calls this API or 

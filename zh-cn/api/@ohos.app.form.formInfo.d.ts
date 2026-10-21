@@ -1000,7 +1000,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.key.form_edit_color_mode'
   }
@@ -2381,7 +2381,7 @@ declare namespace formInfo {
      */
     displayId: string;
     /**
-     * 自定义数据。
+     * 自定义数据。默认值为空。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -2428,7 +2428,7 @@ declare namespace formInfo {
      */
     displayId: string;
     /**
-     * 远端卡片使用方服务的自定义数据。
+     * 远端卡片使用方服务的自定义数据。默认值为空。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -2455,7 +2455,7 @@ declare namespace formInfo {
      */
     networkId: string;
     /**
-     * 	远端卡片使用方服务的服务Id。
+     * 	远端卡片使用方服务的服务标识。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi

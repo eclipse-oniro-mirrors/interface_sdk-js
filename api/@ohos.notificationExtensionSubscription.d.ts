@@ -304,7 +304,7 @@ declare namespace notificationExtensionSubscription {
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function subscribeNotification(priorityStrategy?: int): Promise<void>;
 
@@ -324,7 +324,7 @@ declare namespace notificationExtensionSubscription {
    * 	2.The application is disabled.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getUserGrantedBundleIcon(bundleName: string): Promise<image.PixelMap>;
  
@@ -347,7 +347,7 @@ declare namespace notificationExtensionSubscription {
    * @throws { BusinessError } 1600022 - The specified bundle is invaild.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    * @see [getUserGrantedEnabledBundles] {@link notificationExtensionSubscription#getUserGrantedEnabledBundles()}
    *		Obtains the list of apps for which the **Allow access to notifications on this device** switch is turned on.
    */

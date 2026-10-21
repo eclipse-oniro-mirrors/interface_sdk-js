@@ -1018,8 +1018,7 @@ declare namespace systemSoundManager {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    getMockHapticRingtonePlayer(
-      context: BaseContext, type: RingtoneType, ringtoneUri: string): Promise<RingtonePlayer | null>;
+    getMockHapticRingtonePlayer(context: BaseContext, type: RingtoneType, ringtoneUri: string): Promise<RingtonePlayer | null>;
 
     /**
      * 获取模拟触觉铃声播放器，根据指定的触觉文件URI播放振动文件及其对应的模拟触觉声音文件。使用Promise异步回调。
@@ -1243,7 +1242,7 @@ declare namespace systemSoundManager {
      * @param { Array<string> } uriList - 要打开的uri列表，不能超过1024个。
      * @returns { Promise<Array<[string, long, SystemSoundError]>> } Promise对象，Promise用于返回此操作的结果，返回Array内第一个参数uri，第二个参数fd，第三个参数
      *     为此uri打开的结果。
-     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @throws { BusinessError } 202 - Calleris not a system application.
      * @throws { BusinessError } 20700007 - Parameter is invalid, e.g. the length of uriList is too long.
      * @syscap SystemCapability.Multimedia.SystemSound.Core
      * @systemapi
@@ -1629,7 +1628,20 @@ declare namespace systemSoundManager {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    TEXT_MESSAGE_ESIM_CARD_1 = 23
+    TEXT_MESSAGE_ESIM_CARD_1 = 23,
+
+    /**
+     * 闹钟场景的振动。用于配置闹钟铃声的振动反馈。
+     * 该类型可与getToneHapticsSettings和setToneHapticsSettings配合使用，
+     * 用于读取或修改闹钟场景的振动设置。
+     * 值41表示触觉反馈配置的闹钟场景标识。
+     *
+     * @syscap SystemCapability.Multimedia.SystemSound.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ALARM = 41
   }
 
   /**

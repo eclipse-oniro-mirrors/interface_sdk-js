@@ -2047,7 +2047,7 @@ declare namespace bundleManager {
    * This API can be used to install only applications of the **enterprise_mdm** (MDM application) or
    * **enterprise_normal** (common enterprise application) distribution type. You can call the
    * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf} API to query the
-   * [BundleInfo]{@link ./bundleManager/BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
+   * [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
    * indicates the distribution type. Since API version 26.0.0, you are advised to use
    * [installForResult]{@link bundleManager.installForResult} to obtain more detailed error code return values.
    *
@@ -2085,7 +2085,7 @@ declare namespace bundleManager {
    * This API can be used to install only applications of the **enterprise_mdm** (MDM application) or
    * **enterprise_normal** (common enterprise application) distribution type. You can call the
    * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf} API to query the
-   * [BundleInfo]{@link ./bundleManager/BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
+   * [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
    * indicates the distribution type.
    *
    * > **NOTE**

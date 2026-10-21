@@ -1195,7 +1195,7 @@ declare abstract class SubscribaleAbstract {
 declare interface EnvPropsOptions {
   /**
    * Environment variable name. For details about the value range, see
-   * [Built-in Environment Variables](@link Environment).
+   * [Built-in Environment Variables]{@link Environment}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform
@@ -1260,7 +1260,7 @@ declare class Environment {
    * corresponding environment variable values. You are advised to call this API at application startup.
    *
    * @param { string } key - Environment variable name. For details about the value range, see
-   *     [Built-in Environment Variables](@link Environment).
+   *     [Built-in Environment Variables]{@link Environment}.
    * @param { S } value - Default value used if the value of the environment variable key is not found in AppStorage.
    * @returns { boolean } Returns **false** if the property corresponding to the key exists in AppStorage; creates a
    *     property with the key and the default value and returns **true** otherwise.
@@ -1283,7 +1283,7 @@ declare class Environment {
    * corresponding environment variable values. You are advised to call this API at application startup.
    *
    * @param { string } key - Environment variable name. For details about the value range, see
-   *     [Built-in Environment Variables](@link Environment).
+   *     [Built-in Environment Variables]{@link Environment}.
    * @param { S } value - Default value used if the value of the environment variable key is not found in AppStorage.
    * @returns { boolean } Returns **false** if the property corresponding to the key exists in AppStorage; creates a
    *     property with the key and the default value and returns **true** otherwise.
@@ -1638,8 +1638,8 @@ declare class LocalStorage {
    * > **NOTE**
    *
    * > Since API version 12, you can use
-   * > [getSharedLocalStorage](@link getSharedLocalStorage) in [UIContext]{@link @ohos.arkui.UIContext} to specify the
-   * > **LocalStorage** instance in the UI execution context.
+   * > [getSharedLocalStorage]{@link @ohos.arkui.UIContext:UIContext.getSharedLocalStorage} in 
+   * > [UIContext]{@link @ohos.arkui.UIContext} to specify the **LocalStorage** instance in the UI execution context.
    *
    * @returns { LocalStorage } **LocalStorage** instance shared across the current stage.
    * @syscap SystemCapability.ArkUI.ArkUI.Full

@@ -351,7 +351,7 @@ interface SaveButtonInterface {
 type SaveButtonCallback = (event: ClickEvent, result: SaveButtonOnClickResult, error?: BusinessError<void>) => void;
 
 /**
- * 不支持通用属性，除了继承[安全控件通用属性]{@link ./security_component}，还支持以下属性。
+ * 不支持通用属性，除了继承[安全控件通用属性]{@link ./security_component:SecurityComponentMethod}，还支持以下属性。
  * 不支持通用事件，仅支持以下事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -383,7 +383,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
    * @param { Resource } icon - 自定义图标资源信息，仅支持Resource类型的数据源。
    *     <br>可支持的图片格式：png、jpg、jpeg、bmp、svg、webp、gif和heif等，支持的图片格式范围见
-   *     [Image]{@link ./image}。当资源为非图片资源或不支持的格式时，图标显示为空白。<br/>从API版本26.0.0开始，
+   *     [Image]{@link ./image:Image}。当资源为非图片资源或不支持的格式时，图标显示为空白。<br/>从API版本26.0.0开始，
    *     支持Symbol格式的Resource类型的数据源。<br/>若应用不具备ohos.permission.CUSTOMIZE_SAVE_BUTTON权限，
    *     则自定义图标设置不生效，保存控件保持默认样式。
    * @returns { SaveButtonAttribute } 返回保存控件的属性。
