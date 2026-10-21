@@ -9359,7 +9359,7 @@ declare namespace audio {
      * @stagemodelonly
      * @since 26.2.0 dynamic&static
      */
-    getSoundCardInfoList(): Promise<Array<SoundCardInfo>>
+    getSoundCardInfoList(): Promise<Array<SoundCardInfo>>;
 
     /**
      * Queries whether the system supports the enhanced routing functions provided by this manager,
@@ -9824,7 +9824,7 @@ declare namespace audio {
        * @stagemodelonly
        * @since 26.2.0 dynamic&static
        */
-      ONBOARD = 0
+      ONBOARD = 0,
       /**
        * USB sound card.
        *
@@ -9897,7 +9897,7 @@ declare namespace audio {
      * @stagemodelonly
      * @since 26.2.0 dynamic&static
      */
-    cardId?: string
+    cardId?: string;
     /**
      * Sound card type.
      * Default value: The default is the onboard sound card type.
@@ -9906,7 +9906,7 @@ declare namespace audio {
      * @stagemodelonly
      * @since 26.2.0 dynamic&static
      */
-    cardType?: SoundCardType
+    cardType?: SoundCardType;
   }
 
   /**
