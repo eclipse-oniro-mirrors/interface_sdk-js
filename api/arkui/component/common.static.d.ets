@@ -7584,6 +7584,57 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     blurSnapshot?: BlurSnapshotOptions;
+    /**
+     * Title bar hover mode.
+     * - STANDARD: The title bar and content are arranged vertically without overlapping.
+     * - STACK: The title bar overlays on top of the content. Developers need to add padding to avoid occlusion.
+     * - SAFE_AREA_PADDING: The title bar is placed in the safe area padding region. The content expands
+     *   into the safe area, and the scroll content is clipped to the safe area.
+     * The default value is **SheetTitleBarHoverMode.STANDARD**.
+     * After {@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA} is successfully set via
+     * {@link UIContext.applyDefaultImmersiveStrategy}, the default value is
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * Enum of title bar hover modes.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * Standard mode: The title bar and content are arranged vertically without overlapping.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    STANDARD = 0,
+    /**
+     * Stack mode: The title bar overlays on top of the content.
+     * Developers need to add padding at the top of the content to avoid occlusion.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    STACK = 1,
+    /**
+     * Safe area padding mode: The title bar is placed in the safe area padding region.
+     * The content expands into the safe area, and the scroll content is clipped to the safe area.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.
