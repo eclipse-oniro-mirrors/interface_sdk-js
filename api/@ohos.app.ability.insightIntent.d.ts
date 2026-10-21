@@ -642,17 +642,6 @@ declare namespace insightIntent {
     intentName: string;
 
     /**
-     * Unique ID of an intent instance.
-     * The value should be an integer.
-     *
-     * @syscap SystemCapability.Ability.AbilityRuntime.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    instanceId: int;
-
-    /**
      * The caller bundle name of the intent.
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core

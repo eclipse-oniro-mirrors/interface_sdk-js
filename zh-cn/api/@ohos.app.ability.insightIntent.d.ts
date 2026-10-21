@@ -620,16 +620,6 @@ declare namespace insightIntent {
     intentName: string;
 
     /**
-     * 表示意图实例的唯一ID。该值应为整数。
-     *
-     * @syscap SystemCapability.Ability.AbilityRuntime.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.2.0 dynamic&static
-     */
-    instanceId: int;
-
-    /**
      * 表示意图调用方的应用包名。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core

@@ -50,6 +50,26 @@ declare class InsightIntentContext {
   instanceId: int;
 
   /**
+   * 调用方传入的工具调用ID，用于关联本次意图执行与测试步骤。当调用方未传入工具调用ID或传入空字符串时，该值为undefined。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  readonly toolCallId?: string;
+
+  /**
+   * 表示意图执行信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  readonly insightIntentExecutionInfo?: insightIntent.InsightIntentExecutionInfo;
+
+  /**
    * 启动UIAbility组件，仅支持启动本应用内的UIAbility组件。使用callback异步回调。
    *
    * @param { Want } want - 启动UIAbility组件的want信息。
@@ -132,22 +152,6 @@ declare class InsightIntentContext {
    * @since 23 dynamic&static
    */
   setReturnModeForUIExtensionAbility(returnMode: insightIntent.ReturnMode): void;
-
-  /**
-   * 获取意图执行信息。
-   *
-   * @param { int } instanceId - 意图实例ID，来自InsightIntentEntryExecutor.context.instanceId。
-   *     <br>该值应为整数。
-   * @returns { Promise<insightIntent.InsightIntentExecutionInfo> } - Promise对象，用于返回意图执行信息。
-   * @throws { BusinessError } 16000003 - The specified ID does not exist.
-   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
-   *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
-   * @syscap SystemCapability.Ability.AbilityRuntime.Core
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  getInsightIntentExecutionInfo(instanceId: int): Promise<insightIntent.InsightIntentExecutionInfo>;
 }
 
 export default InsightIntentContext;
