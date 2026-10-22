@@ -6997,7 +6997,7 @@ declare namespace media {
    * 
    * > **NOTE**
    * >
-   * > > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
+   * > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
    * > provided by the camera module, see [Camera Management]{@link @ohos.multimedia.camera:camera}.
    *
    * @syscap SystemCapability.Multimedia.Media.AVRecorder
