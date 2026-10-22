@@ -25781,6 +25781,11 @@ declare class CommonMethod<T> {
   /**
   * Tips control
   *
+  * > **NOTE**
+  * >
+  * > When the [enabled]{@link CommonMethod#enabled} universal attribute of the component bound with **bindTips** is
+  * > set to **false**, the floating bubble can still be displayed.
+  *
   * @param { TipsMessageType } message
   * @param { TipsOptions } [options]
   * @returns { T }
@@ -25811,6 +25816,13 @@ declare class CommonMethod<T> {
 
   /**
    * Menu control
+   *
+   * > **NOTE**
+   * >
+   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20
+   * >   only if the input parameter type of **content** is Array&lt;MenuElement&gt;.
+   * > - Multi-level menus cannot be displayed using **bindMenu** in **CustomBuilder**. Use the Menu component instead.
+   * > - **bindMenu** can be configured to display in subwindows by setting the **showInSubWindow** property in MenuOptions.
    *
    * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
    *     action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 7 - 10]
@@ -25843,6 +25855,12 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
+   *
    * @param { CustomBuilder } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu, Long pressing with a mouse device
    *     is not supported.
@@ -25858,6 +25876,12 @@ declare class CommonMethod<T> {
   /**
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByResponseType** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
    *
    * @param { CustomBuilder | Array<MenuElement> } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu. Long pressing with a mouse device
@@ -25877,6 +25901,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | undefined } content - Indicates the content of context menu. Undefined
    *     means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25893,6 +25922,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | Array<MenuElement> | undefined } content - Indicates the content of
    *     context menu. Undefined means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25908,6 +25942,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShown settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShown - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -25930,6 +25969,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShow settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByIsShow** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShow - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:

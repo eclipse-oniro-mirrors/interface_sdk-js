@@ -24369,7 +24369,7 @@ declare class CommonMethod<T> {
   geometryTransition(id: string, options?: GeometryTransitionOptions): T;
 
   /**
-   * Tips control
+   * Tips控制。
    *
    * @param { TipsMessageType } message
    * @param { TipsOptions } [options]
@@ -24383,7 +24383,7 @@ declare class CommonMethod<T> {
   bindTips(message: TipsMessageType, options?: TipsOptions): T;
 
   /**
-   * Popup control
+   * Popup控制。
    *
    * @param { boolean } show
    * @param { PopupOptions } popup
@@ -24392,7 +24392,7 @@ declare class CommonMethod<T> {
    * @since 7
    */
   /**
-   * Popup control
+   * Popup控制。
    *
    * @param { boolean } show
    * @param { PopupOptions | CustomPopupOptions } popup
@@ -24401,7 +24401,7 @@ declare class CommonMethod<T> {
    * @since 8
    */
   /**
-   * Popup control
+   * Popup控制。
    * <p><strong>NOTE</strong>:
    * <br>The popup can be displayed only after the entire page is fully constructed. Therefore, to avoid incorrect
    * display positions and shapes, do not set this parameter to true while the page is still being constructed.
