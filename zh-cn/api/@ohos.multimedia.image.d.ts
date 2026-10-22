@@ -5937,6 +5937,75 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixelsFromAreaSync(area: PositionArea): void;
 
     /**
+     * 将缓冲区内指定像素格式的像素数据写入PixelMap的指定区域。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。使用Promise异步回调。
+     *
+     * 所需的最小缓冲区大小计算公式为：
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * sourcePixelFormat的每像素字节数。
+     * 其中PositionArea.stride的值必须大于或等于PositionArea.region.size.width乘以sourcePixelFormat的每像素字节数。
+     * 
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需将YUV格式的像素数据写入同一YUV格式的PixelMap，请使用{@link writePixelsFromArea}。
+     *
+     * @param { PositionArea } area - 写入的区域数据。<br>数据将从[PositionArea]{@link image.PositionArea}.pixels拷贝至
+     *     [PositionArea]{@link image.PositionArea}.region指定的区域。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * 将缓冲区内指定像素格式的像素数据写入PixelMap的指定区域。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。同步返回结果。
+     *
+     * 所需的最小缓冲区大小计算公式为：
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * sourcePixelFormat的每像素字节数。
+     * 其中PositionArea.stride的值必须大于或等于PositionArea.region.size.width乘以sourcePixelFormat的每像素字节数。
+     * 
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需将YUV格式的像素数据写入同一YUV格式的PixelMap，请使用{@link writePixelsFromAreaSync}。
+     *
+     * @param { PositionArea } area - 写入的区域数据。<br>数据将从[PositionArea]{@link image.PositionArea}.pixels拷贝至
+     *     [PositionArea]{@link image.PositionArea}.region指定的区域。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat): void;
+
+    /**
      * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。使用Promise异步回调。
      *
      * > **说明：**
@@ -6055,6 +6124,67 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @since 26.0.0 dynamic&static
      */
     writeAllPixelsFromBufferSync(src: ArrayBuffer): void;
+
+    /**
+     * 将缓冲区内指定像素格式的像素数据写入整个PixelMap。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。使用Promise异步回调。
+     *
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需写入与当前PixelMap像素格式相同的源数据（包括YUV格式），请使用{@link writeAllPixelsFromBuffer}。
+     * > - 如需写入具有自定义行跨距或偏移量的源数据，请使用{@link writePixelsFromArea}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，该缓冲区内的像素数据会被拷贝至PixelMap。
+     *     缓冲区内的像素数据必须是整个PixelMap的像素数据，且不包含内存对齐填充字节。
+     *     所需的最小缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    writeAllPixelsFromBuffer(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * 将缓冲区内指定像素格式的像素数据写入整个PixelMap。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。同步返回结果。
+     *
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需写入与当前PixelMap像素格式相同的源数据（包括YUV格式），请使用{@link writeAllPixelsFromBufferSync}。
+     * > - 如需写入具有自定义行跨距或偏移量的源数据，请使用{@link writePixelsFromAreaSync}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，该缓冲区内的像素数据会被拷贝至PixelMap。
+     *     缓冲区内的像素数据必须是整个PixelMap的像素数据，且不包含内存对齐填充字节。
+     *     所需的最小缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    writeAllPixelsFromBufferSync(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): void;
 
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
