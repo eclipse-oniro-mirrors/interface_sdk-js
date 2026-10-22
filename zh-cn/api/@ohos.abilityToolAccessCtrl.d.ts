@@ -747,6 +747,89 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * 任务标识。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  enum ControlAppStatus {
+    /**
+     * 允许控制权限。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    ALLOW = 0x01,
+
+    /**
+     * 控制权限被拒绝。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    DENY = 0x02
+  }
+
+  /**
+   * 应用的相关信息。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface AppInfo {
+    /**
+     * 应用的包名。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    bundleName: string;
+    /**
+     * 应用的分身索引。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    index: number;
+  }
+
+  /**
+   * 应用的相关信息。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  interface ControlAppStatusResult {
+    /**
+     * 应用信息。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    appInfo: AppInfo;
+
+    /**
+     * 控制权限状态。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.2.0 dynamiconly
+     */
+    status: ControlAppStatus;
+  }
+
+  /**
    * 根据指定的操作查询工具权限。
    * 该函数用于检查权限查询中指定的CLI命令或API的权限状态。
    * 对于每个操作，它返回权限状态、授权状态以及是否需要用户对话框。
@@ -964,6 +1047,47 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.2.0 dynamiconly
    */
   export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketOpions: TicketOpions): Promise<TicketQueryResult>;
+
+  /**
+   * 查询指定应用的控制权限状态。
+   * 此函数检查输入列表中的每个应用程序是否被允许或拒绝
+   * 被外部工具控制。结果列表与输入顺序相对应。
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { AppInfo[] } appInfo - 应用信息列表。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise用于返回${ControlAppStatusResult[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
+
+  /**
+   * 向用户请求指定应用的控制权限。该函数会弹出一个用户对话框，获取对每个应用的控制授权决  。返回结果反映用户对每个应用的允许或拒绝决策。
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { Context } context - 用于显示用户对话框的上下文对象。
+   * @param { AppInfo[] } appInfo - 应用信息列表。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise用于返回${ControlAppStatusResult[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
+   *     bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.2.0 dynamiconly
+   */
+  export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
+    Promise<ControlAppStatusResult[]>;
 }
 
 export default abilityToolAccessCtrl;
