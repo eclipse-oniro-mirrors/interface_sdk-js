@@ -1868,7 +1868,11 @@ declare namespace applicationManager {
    * @param { number } duration - 豁免时长。
    *     <br>单位为：秒。取值应＞0。
    * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -1887,7 +1891,11 @@ declare namespace applicationManager {
    * @param { StandbyResourceType } resourceType - 资源类型。
    * @param { string } bundleName - 要为其释放资源豁免的应用包名。
    * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
