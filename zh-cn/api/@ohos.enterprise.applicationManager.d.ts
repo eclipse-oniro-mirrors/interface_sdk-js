@@ -22,6 +22,7 @@ import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
 import common from './@ohos.enterprise.common';
 import statistics from './@ohos.net.statistics';
+import formInfo from './@ohos.app.form.formInfo';
 
 /**
  * 本模块提供应用管理能力，包括管理应用运行禁止名单、应用运行允许名单、开机自启动应用名单、保活应用名单、不可关停应用名单、后台防冻结应用名单、允许发送通知应用名单、允许跨设备应用名单等。适用于企业设备管理场景，可实现应用运行权限管控、开
@@ -302,6 +303,60 @@ declare namespace applicationManager {
      * @since 26.0.1
      */
     NETWORK = 1
+  }
+
+  /**
+   * 卡片信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  interface FormInfo {
+    /**
+     * 卡片所属应用包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    bundleName: string;
+
+    /**
+     * 卡片所属应用模块名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    moduleName: string;
+
+    /**
+     * 卡片所属应用组件名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    abilityName: string;
+
+    /**
+     * 卡片名称。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    name: string;
+
+    /**
+     * 卡片尺寸
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    dimension: formInfo.FormDimension;
   }
 
   /**
@@ -1906,6 +1961,28 @@ declare namespace applicationManager {
    * @since 26.0.1
    */
   function releaseExemptionResource(resourceType: StandbyResourceType, bundleName: string): void;
+
+  /**
+   * 卡片加桌。
+   *
+   * @permission ohos.permission.ENTERPRISE_REQUEST_PUBLISH_FORM
+   * @param { FormInfo } formInfo - 卡片信息。
+   * @returns { string } 卡片ID。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201047 - Form count limit reached or insufficient home screen space to add forms.
+   * @throws { BusinessError } 9201049 - The form does not exist.
+   * @throws { BusinessError } 9201050 - The form type is not supported.
+   * @throws { BusinessError } 9201051 - Failed to add the form to the desktop.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function publishFormToDesktop(formInfo: FormInfo): string;
 }
 
 export default applicationManager;
