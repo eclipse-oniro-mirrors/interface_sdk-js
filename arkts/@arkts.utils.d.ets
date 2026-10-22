@@ -18,7 +18,27 @@
  * @kit ArkTS
  */
 
+import collections from './@arkts.collections';
 import lang from './@arkts.lang';
+
+/**
+ * Integer ArkTS typed arrays that support atomic element operations.
+ *
+ * @unionmember { collections.Int8Array }
+ * @unionmember { collections.Uint8Array }
+ * @unionmember { collections.Int16Array }
+ * @unionmember { collections.Uint16Array }
+ * @unionmember { collections.Int32Array }
+ * @unionmember { collections.Uint32Array }
+ * @syscap SystemCapability.Utils.Lang
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamiconly
+ */
+type AtomicIntegerArray = collections.Int8Array | collections.Uint8Array |
+  collections.Int16Array | collections.Uint16Array |
+  collections.Int32Array | collections.Uint32Array;
 
 /**
  *
@@ -28,6 +48,199 @@ import lang from './@arkts.lang';
  * @since 12 dynamiconly
  */
 declare namespace utils {
+  /**
+   * Provides atomic operations for ArkTS integer typed arrays backed by an ArkTS ArrayBuffer.
+   * Unlike the ECMAScript built-in Atomics object, this class is exposed through the utils module and provides
+   * only static methods for ArkTS typed arrays.
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamiconly
+   */
+  class Atomics {
+    /**
+     * Atomically adds a value and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Value to add.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static add(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * Atomically applies bitwise AND and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Value used in the bitwise AND operation.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static and(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * Atomically replaces a matching value and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } expectedValue - Value to compare with the target element.
+     * @param { number } replacementValue - Value stored when the comparison succeeds.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static compareExchange(typedArray: AtomicIntegerArray, index: number, expectedValue: number,
+      replacementValue: number): number;
+    /**
+     * Atomically replaces a value and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Replacement value.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static exchange(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * Returns whether atomic operations of the specified byte size are lock-free.
+     *
+     * @param { number } size - Size of the atomic operation, in bytes.
+     * @returns { boolean } Returns true if atomic operations of the specified size are lock-free; otherwise false.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static isLockFree(size: number): boolean;
+    /**
+     * Atomically loads and returns a value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @returns { number } Value of the target element.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static load(typedArray: AtomicIntegerArray, index: number): number;
+    /**
+     * Atomically applies bitwise OR and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Value used in the bitwise OR operation.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static or(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * Atomically stores a value and returns the converted stored value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Value to store.
+     * @returns { number } Converted value stored in the target element.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static store(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * Atomically subtracts a value and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Value to subtract.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static sub(typedArray: AtomicIntegerArray, index: number, value: number): number;
+    /**
+     * Waits while the selected Int32 element equals the expected value.
+     *
+     * @param { collections.Int32Array } typedArray - Int32Array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Expected value.
+     * @param { number } [timeout] - Maximum wait time, in milliseconds. The default value is positive infinity.
+     * @returns { 'ok' | 'not-equal' | 'timed-out' } Result of the wait operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static wait(typedArray: collections.Int32Array, index: number, value: number,
+      timeout?: number): 'ok' | 'not-equal' | 'timed-out';
+    /**
+     * Notifies waiters on the selected Int32 element and returns the number notified.
+     *
+     * @param { collections.Int32Array } typedArray - Int32Array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } [count] - Maximum number of waiters to notify. By default, all waiters are notified.
+     * @returns { number } Number of waiters notified.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static notify(typedArray: collections.Int32Array, index: number, count?: number): number;
+    /**
+     * Atomically applies bitwise XOR and returns the previous value.
+     *
+     * @param { AtomicIntegerArray } typedArray - Integer typed array containing the target element.
+     * @param { number } index - Index of the target element.
+     * @param { number } value - Value used in the bitwise XOR operation.
+     * @returns { number } Value of the element before the operation.
+     * @throws { BusinessError } 10200001 - The value of index is out of range.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.2.0 dynamiconly
+     */
+    static xor(typedArray: AtomicIntegerArray, index: number, value: number): number;
+  }
   /**
    * Asynchronous lock.
    *
