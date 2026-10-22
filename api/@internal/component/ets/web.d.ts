@@ -10012,6 +10012,11 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * Registers a callback for blank screen monitoring attribution. The callback is triggered when the Web component
    * monitors a blank screen and completes root cause attribution.
    *
+   * > **NOTE**
+   * >
+   * > - This method must be used with [enableBlankScreenMonitor]{@link WebAttribute#enableBlankScreenMonitor}.
+   * > Otherwise, the blank screen monitor is disabled by default, and this callback is not triggered.
+   *
    * @param { OnMonitorBlankScreenCallback } callback - Callback for blank screen monitoring attribution.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core

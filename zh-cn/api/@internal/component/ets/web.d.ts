@@ -6329,7 +6329,7 @@ declare interface BlankScreenDetectionEventInfo {
 type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 
 /**
- * 枚举白屏归因的具体原因，从网络层、资源层、渲染与JS层、内核与进程层、容器层标识白屏问题的根因。
+ * 白屏归因的具体原因，从网络层、资源层、渲染与JS层、内核与进程层、容器层标识白屏问题的根因，帮助开发者快速定位白屏问题来源，提升页面加载问题的排查效率和用户体验。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
@@ -6409,7 +6409,7 @@ declare enum BlankScreenReason {
    */
   PROXY_ERROR = 109,
   /**
-   * 发生其他网络错误。
+   * 其他网络错误。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6547,7 +6547,7 @@ declare enum BlankScreenReason {
 }
 
 /**
- * 提供监测到白屏并完成根因归因时的事件信息，包括页面URL、归因原因和附加详情。
+ * 提供监测到白屏并完成根因归因时的事件信息，包括页面URL、归因原因和附加详情。适用于需要监控页面白屏问题并分析根因的场景，提升白屏问题的定位效率和用户体验。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
@@ -6555,7 +6555,7 @@ declare enum BlankScreenReason {
  */
 declare interface MonitoredBlankScreenEventInfo {
   /**
-   * 监测到白屏时，正在加载页面的URL。
+   * 监测到白屏时，页面的url。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6564,7 +6564,7 @@ declare interface MonitoredBlankScreenEventInfo {
   url: string;
 
   /**
-   * 白屏归因原因。
+   * 本次白屏的归因原因。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6573,7 +6573,7 @@ declare interface MonitoredBlankScreenEventInfo {
   reason: BlankScreenReason;
 
   /**
-   * 白屏归因原因的附加信息。
+   * 白屏归因原因的附加信息，JSON格式的字符串，包含根因归因报告的详细内容。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6583,9 +6583,9 @@ declare interface MonitoredBlankScreenEventInfo {
 }
 
 /**
- * 监测到白屏并完成根因归因时触发的回调。
+ * 监测到白屏并完成根因归因时触发此回调。
  *
- * @param { MonitoredBlankScreenEventInfo } event - 监测到白屏并完成归因时的事件信息。
+ * @param { MonitoredBlankScreenEventInfo } event - 监测到白屏并完成归因时的详细信息。
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
  * @since 26.0.1 dynamic
@@ -9123,9 +9123,13 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onDetectedBlankScreen(callback: OnDetectBlankScreenCallback): WebAttribute;
 
   /**
-   * 注册白屏监控归因回调。Web组件监测到白屏并完成根因归因时，触发该回调。
+   * Web组件监测到白屏并完成根因归因时触发此回调。
    *
-   * @param { OnMonitorBlankScreenCallback } callback - 白屏监控归因回调。
+   * > **说明：**
+   * >
+   * > - 需配合enableBlankScreenMonitor使用。未开启白屏监控时，不会触发本回调。
+   *
+   * @param { OnMonitorBlankScreenCallback } callback - 监测到白屏并完成根因归因时触发。事件对象包含页面URL、白屏根因、归因详情等诊断信息。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -9154,7 +9158,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig): WebAttribute;
 
   /**
-   * 设置是否开启白屏监控。开启白屏监控后，监测到白屏时会触发onMonitoredBlankScreen回调。
+   * 设置是否开启白屏监控。开启白屏监控后，监测到白屏时会触发回调onMonitoredBlankScreen。
    *
    * @param { boolean } enable - 是否开启白屏监控。true表示开启，false表示关闭。
    * @returns { WebAttribute }
