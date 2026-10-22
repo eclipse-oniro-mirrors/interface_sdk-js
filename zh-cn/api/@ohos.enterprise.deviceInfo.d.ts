@@ -198,6 +198,121 @@ declare namespace deviceInfo {
    * @since 12
    */
   function getDeviceInfo(admin: Want, label: string): string;
+
+  /**
+   * 获取设备补丁信息。
+   *
+   * @permission ohos.permission.ENTERPRISE_GET_DEVICE_INFO
+   * @returns { Promise<Array<PatchInfo>> } Promise 形式返回补丁信息。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getPatchInfo(): Promise<Array<PatchInfo>>;
+
+  /**
+   * 设备补丁信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PatchInfo {
+    /**
+     * 补丁名称。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    name: string;
+
+    /**
+     * 补丁安装程序的用户名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    accountName: string;
+
+    /**
+     * 安装时间戳。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    installTime: number;
+
+    /**
+     * 补丁说明。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    description: PatchDescription;
+  }
+
+  /**
+   * 补丁描述信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PatchDescription {
+    /**
+     * 描述标题。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    headers: Array<string>;
+
+    /**
+     * 说明正文项。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bodies: Array<PatchDescriptionBody>;
+  }
+
+  /**
+   * 补丁描述体。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PatchDescriptionBody {
+    /**
+     * 描述正文标题。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    title: string;
+
+    /**
+     * 描述正文内容。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    contents: Array<string>;
+  }
 }
 
 export default deviceInfo;
