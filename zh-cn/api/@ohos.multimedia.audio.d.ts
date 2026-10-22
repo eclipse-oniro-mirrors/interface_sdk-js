@@ -15239,59 +15239,102 @@ declare namespace audio {
   }
 
   /**
+   * 枚举声卡类型。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  enum SoundCardType {
+    /**
+     * 板载声卡。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ONBOARD = 0,
+    /**
+     * USB声卡。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    USB = 1
+  }
+
+  /**
    * 描述声卡信息。
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.2.0 dynamic&static
    */
   interface SoundCardInfo {
     /**
      * 声卡名称。
+     * 最大长度为256。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     name: string;
     /**
      * 声卡厂商。
+     * 最大长度为128。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     vendor: string;
     /**
      * 声卡型号。
+     * 最大长度为128。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     model: string;
     /**
      * 声卡总线地址。
+     * 最大长度为256。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     busAddress: string;
     /**
      * 声卡驱动信息。
+     * 最大长度为128。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     driver: string;
+    /**
+     * 声卡ID。
+     * 最大长度为128。默认值：默认使用板载声卡的声卡Id。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    cardId?: string;
+    /**
+     * 声卡类型。
+     * 默认值：默认是板载声卡类型。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    cardType?: SoundCardType;
   }
 
   /**
@@ -15320,6 +15363,24 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSoundCardInfo(): Promise<SoundCardInfo>;
+    /**
+     * 获取声卡信息列表，包括板载声卡和USB声卡。使用Promise异步回调返回查询结果。
+     * 使用场景：应用需要获取设备上所有声卡信息，包括板载声卡和USB声卡，用于资产管理与监控等场景。
+     *
+     * 使用约束：
+     * - 应用必须申请ohos.permission.GET_AUDIO_ADAPTER_INFO权限。
+     * -此接口仅支持PC设备。非PC设备调用该接口，返回错误码801。
+     *
+     * @permission ohos.permission.GET_AUDIO_ADAPTER_INFO
+     * @returns { Promise<Array<SoundCardInfo>> } Promise用于返回声卡信息列表。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     * The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - The current device model does not support this function.
+     * @syscap SystemCapability.Multimedia.Audio.DeviceEnhance
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getSoundCardInfoList(): Promise<Array<SoundCardInfo>>;
 
     /**
      * 查询系统是否支持当前管理器提供的增强路由能力。
