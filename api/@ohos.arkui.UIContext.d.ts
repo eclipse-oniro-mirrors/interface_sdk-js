@@ -39,7 +39,9 @@ import type observer from './@ohos.arkui.observer';
 import dialog from './@ohos.arkui.dialog';
 import { SimpleAnimatorOptions } from './@ohos.animator';
 
-import type { Callback, AsyncCallback } from './@ohos.base';
+import type { Callback, AsyncCallback, ErrorCallback } from './@ohos.base';
+ 
+import type Want from './@ohos.app.ability.Want';
 
 import { MeasureOptions } from './@ohos.measure';
 
@@ -53,6 +55,109 @@ import image from './@ohos.multimedia.image';
 import type common from './@ohos.app.ability.common';
 
 import type pointer from './@ohos.multimodalInput.pointer';
+
+/**
+ * Options for creating a modal UIExtension.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+export interface ModalUIExtensionOptions {
+  /**
+   * DPI follow strategy for the modal UIExtension.
+   *
+   * @default DpiFollowStrategy.FOLLOW_UI_EXTENSION_ABILITY_DPI
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  dpiFollowStrategy?: DpiFollowStrategy;
+ 
+  /**
+   * Window mode follow strategy for the modal UIExtension.
+   *
+   * @default WindowModeFollowStrategy.FOLLOW_UI_EXTENSION_ABILITY_WINDOW_MODE
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  windowModeFollowStrategy?: WindowModeFollowStrategy;
+ 
+  /**
+   * Transition effect played when the modal UIExtension is shown or closed.
+   *
+   * @default TransitionEffect.IDENTITY
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  transition?: TransitionEffect;
+}
+ 
+/**
+ * Lifecycle callbacks for a modal UIExtension.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+export interface ModalUIExtensionCallback {
+  /**
+   * Callback invoked after the UIExtensionAbility connection is established.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onRemoteReady?: Callback<UIExtensionProxy>;
+ 
+  /**
+   * Callback invoked when data is received from the UIExtensionAbility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onReceive?: ReceiveCallback;
+ 
+  /**
+   * Callback invoked when an error occurs in the UIExtensionAbility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onError?: ErrorCallback;
+ 
+  /**
+   * Callback invoked when the UIExtensionAbility is terminated.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onTerminated?: Callback<TerminationInfo>;
+ 
+  /**
+   * Callback invoked after the UIExtensionAbility draws its first frame.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onDrawReady?: Callback<void>;
+}
 
 /**
  * Provides APIs for registering custom fonts.
@@ -5093,6 +5198,39 @@ export class ResolvedUIContext extends UIContext {
  * @since 10 dynamic
  */
 export class UIContext {
+
+  /**
+   * Creates and displays a modal UIExtension.
+   *
+   * The returned session ID can be passed to
+   * [closeModalUIExtension]{@link UIContext#closeModalUIExtension} to close the modal UIExtension. If no
+   * **transition** is specified, the UIExtension is displayed without an animation.
+   *
+   * @param { Want } want - Want used to start the UIExtensionAbility.
+   * @param { ModalUIExtensionOptions } [options] - Options used to create the modal UIExtension.
+   * @param { ModalUIExtensionCallback } [callback] - Lifecycle callbacks for the modal UIExtension.
+   * @returns { number } Session ID of the modal UIExtension. Returns 0 if creation fails.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  createModalUIExtension(want: Want, options?: ModalUIExtensionOptions, callback?: ModalUIExtensionCallback): number;
+ 
+  /**
+   * Closes a modal UIExtension.
+   *
+   * If a transition effect was specified when the modal UIExtension was created, its exit transition is played before
+   * the UIExtension is closed. Invalid, closed, or closing session IDs are silently ignored.
+   *
+   * @param { number } sessionId - Session ID returned by
+   *     [createModalUIExtension]{@link UIContext#createModalUIExtension}.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  closeModalUIExtension(sessionId: number): void;
 
   /**
    * Construct a **UIContext** object.
