@@ -156,8 +156,6 @@ declare interface DistortionComponentOptions {
  * DistortionComponent（空间形变组件）是一种容器型视效组件，可对其子组件施加二维平面上的空间形变，模拟透视投影、镜头桶形/枕形畸变以及边角拉伸等视觉效果。通过改变四个角点的
  * 归一化坐标与四条边的桶形扭曲系数，组件内容能够产生贴近三维空间的扭曲、凸起、凹陷或错切感。
  *
- * 支持[通用事件]{@link common}。
- * 
  * >  **说明：**
  * > 
  * > - 空间扭曲感的形变视效支持动画，需在[animateTo]{@link @ohos.arkui.UIContext:UIContext.animateTo}动画接口闭包中修改distortion相关参数，才能实现参数的平滑过渡动画；
@@ -185,6 +183,8 @@ interface DistortionComponentInterface {
 /**
  * Defines the DistortionComponent attribute functions
  *
+ * 支持[通用事件]{@link common}。
+ * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
