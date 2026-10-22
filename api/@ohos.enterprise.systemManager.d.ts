@@ -800,6 +800,24 @@ declare namespace systemManager {
   }
 
   /**
+   * Enumerates audio volume types.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.2.0
+   */
+  export enum AudioVolumeType {
+    /**
+     * media volume type.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.2.0
+     */
+    STREAM_MUSIC = 1
+  }
+
+  /**
    * Sets the Network Time Protocol (NTP) time server. After successful configuration, the system will use the specified
    * NTP server for time synchronization to calibrate the system time. This API is suitable for scenarios where
    * enterprise devices require unified time synchronization, ensuring that device time remains consistent with standard
@@ -1759,6 +1777,42 @@ declare namespace systemManager {
    * @since 26.0.1
    */
   function getLocalHotaDomain(): string;
+
+  /**
+   * Set the volume degree for a special volume type.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { AudioVolumeType } volumeType - Volume type.
+   * @param { number } degree - Volume degree. The value must be greater than or equal to 0 and less than or equal to 100.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.2.0
+   */
+  function setVolumeDegree(volumeType: AudioVolumeType, degree: number): void;
+
+  /**
+   * Get the volume degree for a special volume type.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { AudioVolumeType } volumeType - Volume type.
+   * @returns { number } degree - Returns the volume degree.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.2.0
+   */
+  function getVolumeDegree(volumeType: AudioVolumeType): number;
 }
 
 export default systemManager;
