@@ -83,7 +83,7 @@ export declare enum SecurityComponentRoleType {
  *
  * This module is mainly used in the following scenarios:
  * - Set layout, size, text, icon, color, border, and interaction-related attributes for security components
- * such as [PasteButton]{@link ./pasteButton} and [SaveButton]{@link ./saveButton}.
+ * such as [PasteButton]{@link ./pasteButton:PasteButton} and [SaveButton]{@link ./saveButton:SaveButton}.
  * - Adjust the display effect and interaction experience of security components while ensuring compliance with
  * the security component specifications. For specific constraints,
  * see [Constraints](docroot://security/AccessToken/security-component-overview.md#constraints).
@@ -488,14 +488,14 @@ export declare interface SecurityComponentMethod {
   align(alignType: Alignment | undefined): this;
   /**
    * Sets the alignment rules for child components within a relative container. This API takes effect only when the
-   * parent container is [RelativeContainer]{@link ./relativeContainer}. In the horizontal direction, **start** and
-   * **end** in LocalizedAlignRuleOptions replace **left** and **right** in AlignRuleOption respectively, allowing the
-   * layout to be mirrored in RTL mode. You are advised to use LocalizedAlignRuleOptions preferentially.
+   * parent container is [RelativeContainer]{@link ./relativeContainer:RelativeContainer}. In the horizontal direction,
+   * **start** and **end** in LocalizedAlignRuleOptions replace **left** and **right** in AlignRuleOption respectively,
+   * allowing the layout to be mirrored in RTL mode. You are advised to use LocalizedAlignRuleOptions preferentially.
    *
    * @param { AlignRuleOption | LocalizedAlignRuleOptions | undefined } alignRule - Alignment rule configuration object
    *     that defines anchor alignment options (**top**, **bottom**, **left** or **start**, **right** or **end**, and
    *     **center**). Specifies the alignment position and method of the security component in
-   *     [RelativeContainer]{@link ./relativeContainer}.
+   *     [RelativeContainer]{@link ./relativeContainer:RelativeContainer}.
    *     <br>When set to **undefined**, this attribute does not take effect.
    * @returns { SecurityComponentMethod } Returns the attribute of the security component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -517,10 +517,10 @@ export declare interface SecurityComponentMethod {
   id(id: string | undefined): this;
   /**
    * Sets the parameters of the chain in which the component is the head. This API takes effect only when the parent
-   * container is [RelativeContainer]{@link ./relativeContainer}.
+   * container is [RelativeContainer]{@link ./relativeContainer:RelativeContainer}.
    *
    * @param { Axis | undefined } direction - Direction of the chain layout. Specifies the arrangement direction of the
-   *     chain headed by this component in the [RelativeContainer]{@link ./relativeContainer}.
+   *     chain headed by this component in the [RelativeContainer]{@link ./relativeContainer:RelativeContainer}.
    *     <br>When set to **undefined**, this attribute does not take effect.
    * @param { ChainStyle | undefined } style - Style of the chain layout. Controls how child components are distributed
    *     within the chain, such as evenly distributed, aligned at both ends, or compactly arranged. For specific values

@@ -210,7 +210,7 @@ interface PasteButtonInterface {
 type PasteButtonCallback = (event: ClickEvent, result: PasteButtonOnClickResult, error?: BusinessError<void>) => void;
 
 /**
- * 不支持通用属性，仅继承[安全控件通用属性]{@link ./security_component}。
+ * 不支持通用属性，仅继承[安全控件通用属性]{@link ./security_component:SecurityComponentMethod}。
  *
  * 不支持通用事件，仅支持以下事件。
  *
