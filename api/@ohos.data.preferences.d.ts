@@ -230,17 +230,25 @@ declare namespace preferences {
     storageType?: StorageType | null | undefined;
 
     /**
-     * Cache size of the **Preferences** instance, in KB. This parameter is optional. It specifies the map file size
-     * for the GSKV storage mode. The value ranges from 256 to 1112784, or 0. The value 0 indicates that no map file
-     * is generated and cross-process sharing is not supported. If this parameter is not specified, the default value
-     * 1112784 KB is used. This parameter takes effect only when the storage type is GSKV. It is ignored when the
-     * storage type is XML.
+     * Initial cache file size, in KB. This parameter is optional. It indicates the initial inter-process shared cache
+     * file size of the current **Preferences** instance, and takes effect only when the storage mode is set to
+     * **GSKV**.
+     * The value can be 0 or within the range of [256, 1112784]. If this parameter is not specified, the system
+     * automatically
+     * initializes the cache file as needed. If this parameter is set to 0, the initial cache file size is 0, the cache
+     * file of this **Preferences** instance will not grow, and this **Preferences** instance does not support
+     * cross-process access. If this parameter is set to a valid value greater than 0, the initial cache file size is
+     * the configured value, and the cache file size of this **Preferences** instance will still grow as needed.
+     * The configuration value can be dynamically switched when the **Preferences** instance is disconnected and
+     * reconnected.
+     * Unit: kb.  Value constraint: The value can be 0. Value range: [256,1112784]. Default value: 1112784.
      *
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @stagemodelonly
      * @atomicservice
      * @since 26.2.0 dynamic&static
      */
-    cacheSize?: int;
+    sharedMapSize?: long;
   }
 
   /**

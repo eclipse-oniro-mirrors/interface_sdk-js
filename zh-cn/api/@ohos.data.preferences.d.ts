@@ -216,15 +216,20 @@ declare namespace preferences {
     storageType?: StorageType | null | undefined;
 
     /**
-     * Preferences实例的缓存大小，单位为KB。为可选参数。表示GSKV存储模式下的map文件大小。
-     * 取值范围为[256, 1112784]或0。值为0时表示不生成map文件，且不支持进程间共享。
-     * 当此参数不填时，默认使用1112784KB。此参数仅在GSKV存储模式下生效，XML存储模式下静默忽略。
+     * 初始缓存文件大小，单位为KB。为可选参数。表示当前Preferences实例的初始跨进程共享缓存文件大小，
+     * 仅在存储模式设置为**GSKV**时生效。
+     * 取值可以为0或[256, 1112784]范围内的值。不指定此参数时，系统按需自动初始化缓存文件。
+     * 设置为0时，初始缓存文件大小为0，该Preferences实例的缓存文件不会增长，且不支持跨进程访问。
+     * 设置为大于0的有效值时，初始缓存文件大小为配置值，该Preferences实例的缓存文件大小仍会按需增长。
+     * 配置值可在Preferences实例断开连接后重新连接时动态切换。
+     * 单位：KB。取值约束：值可以为0。取值范围：[256,1112784]。默认值：1112784。
      *
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @stagemodelonly
      * @atomicservice
      * @since 26.2.0 dynamic&static
      */
-    cacheSize?: int;
+    sharedMapSize?: long;
   }
 
   /**
