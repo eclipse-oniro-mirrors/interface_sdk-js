@@ -1168,6 +1168,78 @@ declare namespace abilityAccessCtrl {
      * @since 26.0.0 dynamic&static
      */
     queryStatusByTokenID(tokenIDList: Array<int>): Promise<Array<PermissionStatusInfo>>;
+    /**
+     * 设置控制方应用对目标应用的自动化控制开关，
+     * 返回每个目标应用的结果。该开关状态包含允许和禁止。
+     *
+     * @permission ohos.permission.GRANT_SENSITIVE_PERMISSIONS
+     * @param { int } controllerTokenID - 控制方应用的身份标识，参数值大于0。
+     *     <br>取值限定为整数。
+     * @param { Array<AutomationControlTargetParam> } targetList - 被控制目标应用列表及其自动化控制开关状态。
+     *     参数列表最多1024个。
+     *     <br>最大长度为1024且不能为空。
+     * @returns { Promise<Array<AutomationControlSetResult>> } Promise用于返回每个目标应用的结果。
+     *     与targetList的顺序相同。
+     * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
+     *     permission "ohos.permission.GRANT_SENSITIVE_PERMISSIONS".
+     * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
+     * @throws { BusinessError } 12100001 - Invalid parameter. The controllerTokenID is 0, or the targetList is empty or
+     *     exceeds 1024 entries.
+     * @throws { BusinessError } 12100002 - The specified controller tokenID does not exist, or the corresponding
+     *     process is not an application process.
+     * @throws { BusinessError } 12100006 - The application specified by the controller tokenID is not allowed to
+     *     perform automation control operations.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    setAutomationControlStatus(
+      controllerTokenID: int,
+      targetList: Array<AutomationControlTargetParam>
+    ): Promise<Array<AutomationControlSetResult>>;
+    /**
+     * 查询指定应用的自动化控制目标应用的信息。返回目标应用列表及其状态。
+     *
+     * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
+     * @param { int } controllerTokenID - 控制方应用的Token ID。
+     *     <br>取值限定为整数。
+     * @returns { Promise<Array<AutomationControlTargetResult>> } Promise用于返回目标应用及其
+     *     自动化控制状态。
+     * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
+     *     permission "ohos.permission.GET_SENSITIVE_PERMISSIONS".
+     * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
+     * @throws { BusinessError } 12100002 - The specified controller tokenID does not exist, or the corresponding
+     *     process is not an application process.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getAutomationControlTargets(controllerTokenID: int): Promise<Array<AutomationControlTargetResult>>;
+    /**
+     * 查询对目标应用有自动化控制能力的控制方应用。
+     * 返回控制方应用信息列表。
+     *
+     * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
+     * @param { int } targetTokenID - 目标被控制应用的Token ID。
+     *     <br>取值限定为整数。
+     * @returns { Promise<Array<AutomationControlControllerInfo>> } Promise用于返回控制方应用的列表，这些应用可
+     *     对指定的目标应用进行自动化控制。
+     * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
+     *     permission "ohos.permission.GET_SENSITIVE_PERMISSIONS".
+     * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
+     * @throws { BusinessError } 12100002 - The specified target tokenID does not exist, or the corresponding process is
+     *     not an application process.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    getAutomationControlControllers(targetTokenID: int): Promise<Array<AutomationControlControllerInfo>>;
   }
   /**
    * 表示授权状态的枚举。
@@ -1657,6 +1729,158 @@ declare namespace abilityAccessCtrl {
      * @since 26.0.0 dynamic&static
      */
     grantTimestamp?: long;
+  }
+  /**
+   * 自动化控制开关状态值。
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export enum AutomationControlStatus {
+    /**
+     * 关闭自动化控制权限
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    DISABLED = 0,
+    /**
+     * 授予自动化控制权限。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ENABLED = 1
+  }
+  /**
+   * 设置目标应用自动化控制状态结果的枚举。
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export enum AutomationControlSetResult {
+    /**
+     * 成功。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    SUCCESS = 0,
+    /**
+     * 指定的目标应用token ID不存在。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    TOKEN_ID_NOT_EXIST = 1
+  }
+  /**
+   * 表示目标应用及其自动化控制状态。
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface AutomationControlTargetParam {
+    /**
+     * 目标被控制应用的Token ID。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    targetTokenID: int;
+    /**
+     * 自动化控制状态。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    status: AutomationControlStatus;
+  }
+  /**
+   * 针对指定的控制方应用，对应的被自动化控制应用的信息和控制状态。
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface AutomationControlTargetResult {
+    /**
+     * 目标被控制应用的Token ID。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    targetTokenID: int;
+    /**
+     * 自动化控制状态。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    status: AutomationControlStatus;
+    /**
+     * 目标被控制应用的包名。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    bundleName: string;
+  }
+  /**
+   * 对目标应用具有自动化控制权限的控制方应用信息。
+   *
+   * @syscap SystemCapability.Security.AccessToken
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface AutomationControlControllerInfo {
+    /**
+     * 控制方应用的身份标识。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    controllerTokenID: int;
+    /**
+     * 控制方应用的包名。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    bundleName: string;
   }
 }
 export { Permissions };
