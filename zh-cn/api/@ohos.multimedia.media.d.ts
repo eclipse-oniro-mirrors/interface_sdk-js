@@ -2512,7 +2512,7 @@ declare namespace media {
     preferredSubtitleLanguages?: Array<string>;
   }
     /**
-   * [AVPlayer]{@link @ohos.multimedia.media:media}的状态机，可通过state属性主动获取当前状态，也可通过监听
+   * [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}的状态机，可通过state属性主动获取当前状态，也可通过监听
    * [stateChange]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
    * 事件上报当前状态，状态机之间的切换规则，可参考[音频播放开发指导](docroot://media/media/using-avplayer-for-playback.md)。
    *
@@ -4325,7 +4325,7 @@ declare namespace media {
     off(type: 'availableBitrates', callback?: Callback<Array<int>>): void;
 
     /**
-     * 监听[AVPlayer]{@link @ohos.multimedia.media:media}的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。如果此时
+     * 监听[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。如果此时
      * [AVPlayerState]{@link @ohos.multimedia.media:media.AVPlayerState}也切至error状态，用户需要通过
      * [reset()]{@link media.AVPlayer.reset(callback: AsyncCallback<void>)}或者
      * [release()]{@link media.AVPlayer.release(callback: AsyncCallback<void>)}退出播放操作。若调用
@@ -8552,7 +8552,7 @@ declare namespace media {
    * 
    * > **说明：**
    * >
-   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}替代。
    *
    * @syscap SystemCapability.Multimedia.Media.VideoPlayer
    * @since 8 dynamiconly
