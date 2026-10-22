@@ -6528,6 +6528,8 @@ declare namespace media {
      * @since 23 static
      */
     enableCameraPostprocessing?: boolean;
+
+    disableMedia?: MediaType;
   }
 
   /**
