@@ -8485,8 +8485,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * >
    * > - 可以设置上下左右四个方向，或者设置向前、向后两个方向的嵌套滚动模式，实现与父组件的滚动联动。
    * >
-   * > - 支持嵌套滚动的容器：[Grid]{@link ./grid}、[List]{@link ./list}、[Scroll]{@link ./scroll}、[Swiper]{@link ./swiper}、
-   * > [Tabs]{@link ./tabs}、[WaterFlow]{@link ./water_flow}、[Refresh]{@link ./refresh}、
+   * > - 支持嵌套滚动的容器：[Grid]{@link Grid}、[List]{@link List}、[Scroll]{@link Scroll}、[Swiper]{@link Swiper}、
+   * > [Tabs]{@link Tabs}、[WaterFlow]{@link WaterFlow}、[Refresh]{@link Refresh}、
    * > [bindSheet]{@link CommonMethod#bindSheet}。
    * >
    * > - 支持嵌套滚动的输入事件：使用手势、鼠标、触控板。
@@ -8742,7 +8742,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > 本接口在与[editMenuOptions]{@link WebAttribute#editMenuOptions}同时使用时，本接口不生效。
    *
    * @param { Array<ExpandedMenuItemOptions> } expandedMenuOptions - 扩展菜单选项。<br/>菜单项数量，及菜单的content大小、startIcon图标尺寸，与
-   *     ArkUI [Menu]{@link ./menu}组件保持一致。
+   *     ArkUI [Menu]{@link Menu}组件保持一致。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @since 12 dynamiconly
@@ -8825,7 +8825,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * selectionMenuOptions<sup>(deprecated)</sup>不生效。
    *
    * @param { EditMenuOptions } editMenu - Web自定义文本菜单选项。
-   *     <br>菜单项数量，及菜单的content大小、icon图标尺寸，与ArkUI [Menu]{@link ./menu}组件保持一致。
+   *     <br>菜单项数量，及菜单的content大小、icon图标尺寸，与ArkUI [Menu]{@link Menu}组件保持一致。
    *     <br>菜单中系统自带的id枚举值（[TextMenuItemId]{@link TextMenuItemId}）在Web中仅支持CUT、COPY、PASTE、SELECT_ALL、TRANSLATE、SEARCH、
    *     AI_WRITER七项。
    *     <br>onMenuItemClick函数中textRange参数在Web中无意义，传入值为-1。
