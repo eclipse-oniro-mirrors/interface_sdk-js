@@ -698,6 +698,28 @@ declare class ApplicationContext extends Context {
   setFont(font: string): void;
   
   /**
+   * Sets the font for this application. This API can be called only on the main thread.
+   *
+   * > **NOTE**
+   * >
+   * > Before calling this API, ensure that the window has been created and the page corresponding to the UIAbility has
+   * > been loaded (using the
+   * > [loadContent]{@link @ohos.window:window.WindowStage.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)} API in the
+   * > [onWindowStageCreate()]{@link ./../@ohos.app.ability.UIAbility:UIAbility.onWindowStageCreate} lifecycle).
+   *
+   * @param { string } font - Font, which can be registered by calling
+   *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}.
+   * @param { boolean } enableAnimation - Whether using animation during this setting,
+   *     using animation if true or not using animation if false.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.2.0 dynamic&static
+   */
+  setFont(font: string, enableAnimation: boolean): void;
+
+  /**
   * Enables delayed exit of the current process. This API uses a Promise asynchronous callback. It can be
   * called only on the main thread.
   * Normally, after the last UIAbility in an application process exits, the process exits. After this API
