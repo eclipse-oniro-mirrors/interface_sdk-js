@@ -622,7 +622,6 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    *     given index.
    * @returns { this } The WaterFlow attribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @unpublished
    * @stagemodelonly
    * @since 26.2.0 static
    */

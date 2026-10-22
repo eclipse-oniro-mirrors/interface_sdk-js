@@ -1322,7 +1322,6 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *     given index.
    * @returns { this } The List attribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @unpublished
    * @stagemodelonly
    * @since 26.2.0 static
    */
