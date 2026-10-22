@@ -1661,7 +1661,7 @@ declare namespace dlpPermission {
      * >
      * > 该接口由[MDM](docroot://mdm/mdm-kit-intro.md)配置使能，且使能场景为企业设备。其他设备（如消费者终端设备）无需关注该接口，如若调用该接口，则返回值为false。
      *
-     * @returns { Promise<boolean> } Pomise对象。返回true表示当前系统提供加密保护特性，返回false表示不提供加密保护特性。
+     * @returns { Promise<boolean> } Promise对象。返回true表示当前系统提供加密保护特性，返回false表示不提供加密保护特性。
      * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
      * @syscap SystemCapability.Security.DataLossPrevention
