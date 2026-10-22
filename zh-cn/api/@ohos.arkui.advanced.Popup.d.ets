@@ -189,7 +189,7 @@ export interface PopupIconOptions {
   /**
    * 设置图标宽度。单位：vp。
    * 
-   * 默认值：32VP
+   * 默认值：32vp
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -202,7 +202,7 @@ export interface PopupIconOptions {
   /**
    * 设置图标高度。单位：vp。
    * 
-   * 默认值：32VP
+   * 默认值：32vp
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -358,7 +358,7 @@ export interface PopupOptions {
    * **说明：** 
    * 
    * 1. 在使用引用资源类型时，规定其参数类型要与属性方法本身类型一致。
-   * 2. maxWidth是数字类型，支持float和integer，例如`$r('app.float.maxWidth')`、`$r('app.integer.maxWidth')`。
+   * 2. maxWidth是[Dimension]{@link Dimension}类型，支持数字类型和百分比字符串类型。数字类型支持float和integer，例如`$r('app.float.maxWidth')`、`$r('app.integer.maxWidth')`；百分比字符串，例如'50%'。
    * 3. 当类型为Resource时，如果未设置单位，默认单位为px。
    * 
    * 默认值：400vp

@@ -24866,7 +24866,7 @@ declare class CommonMethod<T> {
    * >
    * > - 本模块为系统接口。
    *
-   * @param { SpatialEffectParams | undefined } params - 空间效果参数。
+   * @param { SpatialEffectParams | undefined } params - 空间效果参数。如果该参数设置为undefined，则移除空间效果。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
