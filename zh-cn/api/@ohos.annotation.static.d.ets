@@ -96,7 +96,7 @@ export enum SuppressWarningsType {
 export @interface SuppressWarnings {
 
   /**
-   * 支持告警消除的规则集合，用于指定需要抑制的告警类型。 
+   * 支持告警消除的规则集合，用于指定需要抑制的告警类型。
    * 可通过数组传入多个规则同时抑制多种告警，数组至少包含一个元素。
    * 可选取值参见[SuppressWarningsType]{@link SuppressWarningsType}。
    * 建议仅在明确告警不影响应用功能或已做兼容性处理时使用，避免掩盖潜在问题。

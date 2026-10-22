@@ -116,7 +116,7 @@ export @interface SuppressWarnings {
    * For details about the options, see [SuppressWarningsType](#suppresswarningstype23).
    * You are advised to use this parameter only after confirming that the warning
    * does not affect app functions or compatibility processing has been performed.
-   * This prevents potential problems from being covered up. 
+   * This prevents potential problems from being covered up.
    *
    * @syscap SystemCapability.Base
    * @stagemodelonly
