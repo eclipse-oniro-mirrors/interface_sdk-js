@@ -26302,7 +26302,12 @@ declare class CommonMethod<T> {
   /**
    * Applies a spatial effect to component.
    *
-   * @param { SpatialEffectParams | undefined } params - Spatial effect parameters.
+   * This effect takes effect only on the child components of **DepthComponent** and only when the related parameters
+   * are correctly set. It is not supported on the **Web**, **XComponent**, **RichEditor**, **RichText**, **Video**,
+   * **Component3D**, or **EmbeddedComponent** components.
+   *
+   * @param { SpatialEffectParams | undefined } params - Spatial effect parameters. If this parameter is set to
+   * **undefined**, the spatial effect is removed.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
