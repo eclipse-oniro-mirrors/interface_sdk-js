@@ -4641,7 +4641,25 @@ declare namespace window {
      * @since 20 dynamic
      * @since 23 static
      */
-    SCROLL_SHOT_ABORT = 4
+    SCROLL_SHOT_ABORT = 4,
+
+    /**
+     * 小艺指关节圈选截屏事件
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CELIA_SNAP_START = 5,
+
+    /**
+     * 小艺双指长按识屏事件。
+     *
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CELIA_EYE_START = 6
   }
 
   /**
