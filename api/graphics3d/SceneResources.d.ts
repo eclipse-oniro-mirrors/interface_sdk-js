@@ -21,6 +21,8 @@
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
+
+import image from '../@ohos.multimedia.image';
 import { Vec2, Vec3, Vec4, Aabb, Quaternion } from './SceneTypes';
 import { Callback } from '../@ohos.base';
 
@@ -1288,6 +1290,29 @@ export interface ImageStream extends Image {
    * @since 26.0.0 dynamic&static
    */
   readonly surfaceId: string;
+}
+
+/**
+ * render target object, used for offscreen rendering
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.2.0 dynamic&static
+ */
+export interface RenderTarget extends Image {
+  /**
+   * get a pixel map object from RenderTarget
+   * 
+   * @returns { Promise<image.PixelMap> } Promise used to return a pixel map
+   * @throws { BusinessError } 25601006 - - Possible Cause:
+   *     -- try to get a PixelMap from a destroyed RenderTarget
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  getPixelMap(): Promise<image.PixelMap>;
 }
 
 /**
