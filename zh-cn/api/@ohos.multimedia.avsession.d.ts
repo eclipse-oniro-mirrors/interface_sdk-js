@@ -7182,6 +7182,18 @@ declare namespace avSession {
      * @since 24 dynamic&static
      */
     hiPlayDeviceInfo?: HiPlayDeviceInfo;
+
+    /**
+     * 分布式设备的蓝牙静态MAC地址、仅在分布式设备上报蓝牙MAC时可用。
+     * 需要申请权限Ohos.permission.USE_BLUETOOTH。
+     * 默认值：""。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVCast
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    brMacAddress?: string;
   }
 
   /**

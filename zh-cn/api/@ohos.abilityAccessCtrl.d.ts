@@ -53,6 +53,7 @@ import type _Context from './application/Context';
 import type _PermissionRequestResult from './security/PermissionRequestResult';
 
 /**
+ * 提供应用程序的权限校验和管理能力，支持应用在访问受保护资源前进行权限状态判断、运行时授权申请、设置页授权引导和权限状态变化监听。
  *
  * @syscap SystemCapability.Security.AccessToken
  * @FaAndStageModel

@@ -71,6 +71,9 @@ import type _Context from './application/Context';
 import type _PermissionRequestResult from './security/PermissionRequestResult';
 
 /**
+ * Provides permission verification and management capabilities for apps, supporting permission status checks before
+ * accessing protected resources, runtime authorization requests, settings page authorization guidance, and permission
+ * status change monitoring.
  *
  * @syscap SystemCapability.Security.AccessToken
  * @FaAndStageModel

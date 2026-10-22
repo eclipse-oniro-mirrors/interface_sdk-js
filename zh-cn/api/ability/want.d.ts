@@ -106,7 +106,7 @@ export declare interface Want {
   /**
    * 表示WantParams，由开发者自行决定传入的键值对。默认会携带以下key值：
    * 
-   * ohos.aafwk.callerPid 表示拉起方的pid。
+   * ohos.aafwk.param.callerPid 表示拉起方的pid。
    * 
    * ohos.aafwk.param.callerToken 表示拉起方的token。
    * 

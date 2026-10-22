@@ -116,6 +116,24 @@ export {
 export { SceneLoadParams } from './graphics3d/Scene';
 
 /**
+ * Export scene
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.2.0 dynamic&static
+ */
+export { RenderTargetParameters } from './graphics3d/Scene';
+
+/**
+ * Export SceneResources
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.2.0 dynamic&static
+ */
+export { RenderTarget } from './graphics3d/SceneResources';
+
+/**
  * Export scene types
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @since 26.0.0 dynamic&static
