@@ -109,7 +109,8 @@ declare namespace adminManager {
      * automatically start upon device startup and can be restarted after the component process dies.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_NORMAL = 0x00,
@@ -120,7 +121,8 @@ declare namespace adminManager {
      * automatically start upon device startup and can be restarted after the component process dies.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_SUPER = 0x01,
