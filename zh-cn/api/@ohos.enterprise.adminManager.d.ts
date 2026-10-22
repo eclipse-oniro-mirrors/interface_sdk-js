@@ -105,7 +105,8 @@ declare namespace adminManager {
      * 件进程死亡后能重新拉起。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_NORMAL = 0x00,
@@ -115,7 +116,8 @@ declare namespace adminManager {
      * 组件进程死亡后能重新拉起。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_SUPER = 0x01,
