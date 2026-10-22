@@ -1291,9 +1291,10 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the stage model, see
+   *     <br>For details about the application context of the FA model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
-   *     UIAbility in the stage model.
+   *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { ContinuousTaskRequest } request - Request information of a continuous task, including the main type and
    *     subtype.
    * @returns { Promise<int> } Promise used to return the continuous task ID.
