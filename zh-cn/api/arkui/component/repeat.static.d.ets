@@ -344,6 +344,18 @@ export interface RepeatAttribute<T> extends DynamicNode {
   setRepeatOptions<T>(arr: RepeatArray<T>): this;
 
   /**
+   * 设置Repeat选项。
+   *
+   * @param { RepeatArray<T> } arr - 数据源数组
+   * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。
+   * @returns { this } RepeatAttribute实例
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 staticonly
+   */
+  setRepeatOptions<T>(arr: RepeatArray<T>, options?: RepeatOptions): this;
+
+  /**
    * 通知Repeat已完成属性设置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -351,6 +363,28 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @since 26.0.1 staticonly
    */
   applyAttributesFinish(): void;
+}
+
+/**
+* 创建Repeat组件时的配置项。
+*
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export interface RepeatOptions {
+  /**
+   * 动画过程中Repeat更新时，是否允许复用子组件。仅在Repeat的父容器组件为List、Grid、WaterFlow时生效。
+   * Repeat与动画一起使用时，Repeat自身的复用能力会与动画产生冲突，导致动画效果异常。此时可将该参数设置为false，动画过程中Repeat更新时将不复用子组件，从而达到适配动画的效果。
+   * true：动画过程中允许复用子组件。
+   * false：动画过程中不允许复用子组件。
+   *
+   * @default - Repeat的父容器为List时为false，为Grid或WaterFlow时为true。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  allowReuseInAnimation?: boolean;
 }
 
 /**
@@ -365,6 +399,20 @@ export interface RepeatAttribute<T> extends DynamicNode {
  */
 @ComponentBuilder
 export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
+
+/**
+* 创建带有选项的Repeat。
+*
+ * @param { RepeatArray<T> } arr - The Data Source.
+ * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。
+ * @returns { RepeatAttribute<T> }
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ * @noninterop
+ */
+@ComponentBuilder
+export declare function Repeat<T>(arr: RepeatArray<T>, options?: RepeatOptions): RepeatAttribute<T>;
 
 /**
   * 定义Repeat组件。需要在组件属性设置开始时调用setRepeatOptions，并在组件属性设置结束时调用applyAttributeFinish。

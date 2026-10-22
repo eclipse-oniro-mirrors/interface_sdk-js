@@ -461,9 +461,43 @@ declare class RepeatAttribute<T> extends DynamicNode<RepeatAttribute<T>> {
 declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
 
 /**
+ * Defines the options for creating a **Repeat** component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+interface RepeatOptions {
+  /**
+   * Whether to allow child components to be reused during the animation when the **Repeat** component is updated.
+   * This parameter takes effect only when the parent container of **Repeat** is a **List**, **Grid**, or
+   * **WaterFlow** component.
+   * When **Repeat** is used together with animations, the reuse capability of **Repeat** may conflict with the
+   * animations, causing abnormal animation effects. In this case, you can set this parameter to **false**. In this
+   * way, **Repeat** does not reuse child components when it is updated during the animation, thereby adapting to the
+   * animations.
+   * **true**: Allow child components to be reused during the animation.
+   * **false**: Do not allow child components to be reused during the animation.
+   * if the parent container of **Repeat** is a **List** component; **true** if it is a
+   * **Grid** or **WaterFlow** component.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  allowReuseInAnimation?: boolean;
+}
+
+/**
  * Indicates the type of Repeat.
  *
- * @param { RepeatArray<T> } arr - The Data Source
+ * @param { RepeatArray<T> } arr - The Data Source.
+ * @param { RepeatOptions } [options] - Options for creating the **Repeat** component. [since 26.2.0]
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -472,7 +506,7 @@ declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
  * @atomicservice
  * @since 18 dynamic
  */
-declare type RepeatInterface = <T>(arr: RepeatArray<T>) => RepeatAttribute<T>;
+declare type RepeatInterface = <T>(arr: RepeatArray<T>, options?: RepeatOptions) => RepeatAttribute<T>;
 
 /**
  * Defines Repeat Component, and Add More Array Type.
