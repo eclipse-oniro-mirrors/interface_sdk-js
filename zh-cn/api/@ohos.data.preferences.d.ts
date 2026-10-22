@@ -214,6 +214,17 @@ declare namespace preferences {
      * @since 23 static
      */
     storageType?: StorageType | null | undefined;
+
+    /**
+     * Preferences实例的缓存大小，单位为KB。为可选参数。表示GSKV存储模式下的map文件大小。
+     * 取值范围为[256, 1112784]或0。值为0时表示不生成map文件，且不支持进程间共享。
+     * 当此参数不填时，默认使用1112784KB。此参数仅在GSKV存储模式下生效，XML存储模式下静默忽略。
+     *
+     * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    cacheSize?: int;
   }
 
   /**

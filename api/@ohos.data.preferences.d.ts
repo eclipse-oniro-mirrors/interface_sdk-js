@@ -228,6 +228,19 @@ declare namespace preferences {
      * @since 23 static
      */
     storageType?: StorageType | null | undefined;
+
+    /**
+     * Cache size of the **Preferences** instance, in KB. This parameter is optional. It specifies the map file size
+     * for the GSKV storage mode. The value ranges from 256 to 1112784, or 0. The value 0 indicates that no map file
+     * is generated and cross-process sharing is not supported. If this parameter is not specified, the default value
+     * 1112784 KB is used. This parameter takes effect only when the storage type is GSKV. It is ignored when the
+     * storage type is XML.
+     *
+     * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    cacheSize?: int;
   }
 
   /**
