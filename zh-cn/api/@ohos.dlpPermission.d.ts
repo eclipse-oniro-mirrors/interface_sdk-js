@@ -2031,7 +2031,7 @@ declare namespace dlpPermission {
      *     大长度为4096字节，超过最大长度返回19100001错误码。
      * @param { number } [userId] - 为其配置受控应用列表的用户ID。
      *     <br>若参数未指定，则默认使用当前用户。
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 19100001 - Invalid parameter value.
@@ -2055,8 +2055,7 @@ declare namespace dlpPermission {
      * > 设置的受企业DLP控制的应用程序列表。
      *
      * @permission ohos.permission.DLP_POLICY_MANAGER
-     * @returns { Promise<Array<string>> } Promise that returns the appIdentifiers of controlled application
-     *     for the current user.
+     * @returns { Promise<Array<string>> } Promise对象，返回当前用户受企业DLP控制的应用程序列表。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
