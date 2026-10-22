@@ -9809,37 +9809,37 @@ declare namespace audio {
     readonly muted?: boolean;
   }
 
-    /**
+  /**
    * Enumerates sound card types.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @stagemodelonly
    * @since 26.2.0 dynamic&static
    */
-    enum SoundCardType {
-      /**
-       * Onboard sound card.
-       *
-       * @syscap SystemCapability.Multimedia.Audio.Core
-       * @stagemodelonly
-       * @since 26.2.0 dynamic&static
-       */
-      ONBOARD = 0,
-      /**
-       * USB sound card.
-       *
-       * @syscap SystemCapability.Multimedia.Audio.Core
-       * @stagemodelonly
-       * @since 26.2.0 dynamic&static
-       */
-      USB = 1
-    }
+  enum SoundCardType {
+    /**
+     * Onboard sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ONBOARD = 0,
+  
+    /**
+     * USB sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    USB = 1
+  }
 
   /**
    * Describes sound card information.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
    */
@@ -9848,7 +9848,6 @@ declare namespace audio {
      * Sound card name.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -9857,7 +9856,6 @@ declare namespace audio {
      * Sound card vendor.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -9866,7 +9864,6 @@ declare namespace audio {
      * Sound card model.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -9875,7 +9872,6 @@ declare namespace audio {
      * Sound card bus address.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -9884,7 +9880,6 @@ declare namespace audio {
      * Sound card driver.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
