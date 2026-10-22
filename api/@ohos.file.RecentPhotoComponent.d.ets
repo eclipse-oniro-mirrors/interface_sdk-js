@@ -34,7 +34,7 @@
  */
 
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
-import { BaseItemInfo, PickerColorMode } from '@ohos.file.PhotoPickerComponent';
+import { BaseItemInfo, PickerColorMode, ErrorCallback } from '@ohos.file.PhotoPickerComponent';
 
 /**
  * RecentPhotoComponent({ recentPhotoOptions?: RecentPhotoOptions, onRecentPhotoCheckResult?:
@@ -85,6 +85,16 @@ export declare struct RecentPhotoComponent {
    * @since 13 dynamic
    */
   onRecentPhotoCheckInfo?: RecentPhotoCheckInfoCallback;
+
+  /**
+   * Callback when an error occurs in the RecentPhotoComponent.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  onError?: ErrorCallback;
 }
 
 /**
@@ -131,12 +141,13 @@ export type RecentPhotoCheckInfoCallback = (recentPhotoExists: boolean, info: Re
  */
 export declare class RecentPhotoOptions {
   /**
-   * Time period for displaying the latest image sorted by creation time, in seconds. The longest duration you can set
-   * is 1 day (86400s).
+   * Time range for displaying the recent images or videos, measured in seconds. After setting, the system shows
+   * the latest image sorted by creation time taken within the specified time from the current moment. The longest
+   * duration you can set is 2147483647 (INT_MAX) seconds.
    *
-   * If the value is less than or equal to 0, greater than 86400, or not set, the most recent photos over the longest
-   * period of up to one day is displayed by default. If there is no image or video in the specified period, the
-   * component is not displayed.
+   * If the value is set to Number.POSITIVE_INFINITY, the system shows the latest one within the INT_MAX range.
+   * If the value is less than or equal to 0, greater than INT_MAX, or not set, the system uses 1 day by default.
+   * If there are no images or videos within the set time range, the component does not show anything.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -192,6 +203,45 @@ export declare class RecentPhotoOptions {
    * @since 20 dynamic
    */
   colorMode?: PickerColorMode;
+
+  /**
+   * Whether to keep the component alive after click.
+   * true: component will not be destroyed after click.
+   * false: component will be destroyed after click (default).
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  isPersistAfterClick?: boolean;
+
+  /**
+   * Media asset filter, with a maximum length of 50 items. If the limit is exceeded, only the first 50 items are
+   * used.
+   * **NOTE**
+   * 1. When this filter is applied, other filters become invalid.
+   * 2. When setting multiple conditions, enclose the filter conditions in parentheses to prevent conflicts with
+   *    internal filter items.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  assetFilter?: Array<photoAccessHelper.OperationItem>;
+
+  /**
+   * Whether to show the badge on the displayed photo.
+   * true: show the badge info, such as moving photo badge and video duration (default).
+   * false: do not show any badge; only the photo thumbnail is displayed.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  isShowBadge?: boolean;
 }
 
 /**
