@@ -364,6 +364,24 @@ export enum LightType {
    * @since 23 static
    */
   SPOT = 2,
+
+  /**
+   * The enumerated value corresponding to the point light source type is added.
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  POINT = 3,
+
+  /**
+   * Rect light.
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  RECT = 4
 }
 
 /**
@@ -483,6 +501,79 @@ export interface SpotLight extends Light {
  * @since 23 static
  */
 export interface DirectionalLight extends Light {
+}
+
+/**
+ * Point light.
+ *
+ * A point light emits light uniformly in all directions from a single point in space.
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.2.0 dynamic&static
+ */
+export interface PointLight extends Light {
+  /**
+   * Maximum distance that the point light affects. Beyond this range, the light intensity is zero.
+   * The unit is the scene unit (such as cm, m, and km) in the world coordinate system.
+   * The value must be greater than 0. If this parameter is not set, a safe range is calculated automatically
+   * based on the light intensity.
+   * The value must be greater than 0. Default value: Refer to the calculated value of intensity.
+   *
+   * @default need to be decided
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  range?: double;
+}
+
+/**
+ * Rectangular area light.
+ *
+ * A rect light emits light from a rectangular area, simulating soft area lighting effects
+ * from one side of the rectangle by default. When twoSided is enabled, light is emitted from both sides.
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.2.0 dynamic&static
+ */
+export interface RectLight extends Light {
+  /**
+   * Width of the rectangular light emitting surface. The unit is the scene unit (such as cm, m, and km)
+   * in the world coordinate system.
+   * Default value: Default value: 1.
+   *
+   * @default 1.0
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  width?: double;
+
+  /**
+   * Height of the rectangular light emitting surface. The unit is the scene unit (such as cm, m, and km)
+   * in the world coordinate system.
+   * The value must be greater than 0.
+   *
+   * @default 1.0
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  height?: double;
+
+  /**
+   * Whether the rect light emits light from both sides of the rectangle. true if two-sided, false otherwise.
+   * When set to false, light is emitted only from the front side (determined by the node's rotation).
+   * Default value: Default value: false.
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  twoSided?: boolean;
 }
 
 /**

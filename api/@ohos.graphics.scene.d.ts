@@ -146,3 +146,11 @@ export { ShadowAlgorithmType } from './graphics3d/SceneTypes';
  * @since 26.0.0 dynamic&static
  */
 export { SoftShadowConfig, PCFConfig } from './graphics3d/Scene';
+
+/**
+ * Export scene
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * stagemodelonly
+ * @since 26.2.0 dynamic&static
+ */
+export { PointLight, RectLight } from './graphics3d/SceneNodes';
