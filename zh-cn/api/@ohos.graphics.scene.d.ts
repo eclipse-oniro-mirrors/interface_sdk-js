@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D场景模块导出
+ * @file ArkGraphics 3D模块
  * @kit ArkGraphics3D
  */
 

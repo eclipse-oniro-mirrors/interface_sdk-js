@@ -7791,7 +7791,7 @@ declare interface ForegroundEffectOptions {
 declare interface PickerTextStyle {
 
   /**
-   * Define the text color of picker.
+   * 选择器文本颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7800,7 +7800,7 @@ declare interface PickerTextStyle {
    * @since 10
    */
   /**
-   * Font color.
+   * 文本颜色，用于自定义选择器中文字的颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7812,8 +7812,8 @@ declare interface PickerTextStyle {
   color?: ResourceColor;
 
   /**
-   * Define the text font of picker.
-   * Only support size and weight.
+   * 选择器文本字体样式。
+   * 仅支持size和weight。
    *
    * @type { ?Font }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7822,7 +7822,7 @@ declare interface PickerTextStyle {
    * @since 10
    */
   /**
-   * Text style.
+   * 文本样式，包括字体大小、字体粗细、字体族等属性。
    *
    * @type { ?Font }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7835,7 +7835,7 @@ declare interface PickerTextStyle {
 }
 
 /**
- * Provide an interface for the button style of picker
+ * 提供选择器按钮样式的接口。
  *
  * @interface PickerDialogButtonStyle
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7847,7 +7847,7 @@ declare interface PickerTextStyle {
 declare interface PickerDialogButtonStyle {
 
   /**
-   * Describes the button style.
+   * 描述按钮样式。
    *
    * @type { ?ButtonType }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7859,7 +7859,7 @@ declare interface PickerDialogButtonStyle {
   type?: ButtonType;
 
   /**
-   * Describes the button style.
+   * 描述按钮样式。
    *
    * @type { ?ButtonStyleMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7871,7 +7871,7 @@ declare interface PickerDialogButtonStyle {
   style?: ButtonStyleMode;
 
   /**
-   * Describes the button role.
+   * 描述按钮角色。
    *
    * @type { ?ButtonRole }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7883,7 +7883,7 @@ declare interface PickerDialogButtonStyle {
   role?: ButtonRole;
 
   /**
-   * Describes the button text size.
+   * 描述按钮文本大小。
    *
    * @type { ?Length }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7895,7 +7895,7 @@ declare interface PickerDialogButtonStyle {
   fontSize?: Length;
 
   /**
-   * Describes the button text color.
+   * 描述按钮文本颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7907,7 +7907,7 @@ declare interface PickerDialogButtonStyle {
   fontColor?: ResourceColor;
 
   /**
-   * Describes the button font weight.
+   * 描述按钮字体粗细。
    *
    * @type { ?(FontWeight | number | string) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7919,7 +7919,7 @@ declare interface PickerDialogButtonStyle {
   fontWeight?: FontWeight | number | string;
 
   /**
-   * Describes the button font style.
+   * 描述按钮字体样式。
    *
    * @type { ?FontStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7931,7 +7931,7 @@ declare interface PickerDialogButtonStyle {
   fontStyle?: FontStyle;
 
   /**
-   * Describes the button font family.
+   * 描述按钮字体族。
    *
    * @type { ?(Resource | string) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7943,7 +7943,7 @@ declare interface PickerDialogButtonStyle {
   fontFamily?: Resource | string;
 
   /**
-   * Describes the button background color.
+   * 描述按钮背景颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7955,7 +7955,7 @@ declare interface PickerDialogButtonStyle {
   backgroundColor?: ResourceColor;
 
   /**
-   * Describes the button border radius.
+   * 圆角半径，用于设置按钮的圆角大小。
    *
    * @type { ?(Length | BorderRadiuses) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7967,7 +7967,7 @@ declare interface PickerDialogButtonStyle {
   borderRadius?: Length | BorderRadiuses;
 
   /**
-   * Define whether the button default to responding to the Enter key
+   * 控制弹出弹窗后，Enter键是否默认由该按钮响应。
    *
    * @type { ?boolean }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14225,6 +14225,71 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.0 dynamic
    */
   blurSnapshot?: BlurSnapshotOptions;
+
+  /**
+   * 标题栏悬浮模式。
+   * 
+   * - STANDARD：标题栏与内容上下排布，无重叠。
+   * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+   * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+   * 滚动内容裁剪到安全区域。
+   * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过{@link UIContext.applyDefaultImmersiveStrategy}
+   * 成功设置{@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA}后，默认值为
+   * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare enum SheetTitleBarHoverMode {
+  /**
+   * 标准模式：标题栏与内容上下排布，无重叠。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  STANDARD = 0,
+
+  /**
+   * 堆叠模式：标题栏悬浮于内容之上。
+   * 开发者需要在内容顶部添加padding以避免遮挡。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  STACK = 1,
+
+  /**
+   * 安全区域填充模式：标题栏放置在安全区域padding区域。
+   * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  SAFE_AREA_PADDING = 2
 }
 
 /**
@@ -16996,7 +17061,7 @@ declare enum AvailableLayoutArea {
 }
 
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -17007,7 +17072,7 @@ declare enum AvailableLayoutArea {
 declare class ContentTransitionEffect {
 
   /**
-   * When the content changes, there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @type { ContentTransitionEffect }
    * @static
@@ -17020,7 +17085,7 @@ declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes, there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @type { ContentTransitionEffect }
    * @static
@@ -19907,7 +19972,7 @@ declare class CommonMethod<T> {
    * >
    * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
-   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，width设置auto表示自适应子组件。
+   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，width设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -19947,7 +20012,7 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，height设置auto表示自适应子组件。
+   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，height设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -20258,7 +20323,7 @@ declare class CommonMethod<T> {
   layoutWeight(value: number | string): T;
 
   /**
-   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link RelativeContainer}时生效。
+   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link ./relative_container}时生效。
    *
    * > **说明：**
    * >
@@ -21067,9 +21132,9 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Sets the border image of the component.
+   * 设置组件的边框图片。
    *
-   * @param { BorderImageOption } value - 
+   * @param { BorderImageOption } value - 边框图片或边框渐变。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform
@@ -23013,9 +23078,9 @@ declare class CommonMethod<T> {
    * > 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取**flexShrink**属性时，如果该节点未设置**flexShrink**属性，默认返回**1**（与Flex容器的默认值一致，但与Column和Row容器的默认值**0**不同）。
    *
    * @param { number } value - 设置父容器压缩尺寸分配给此属性所在组件的比例。
-   *     <br>取值限定为整数，父容器为 [Column]{@link Column} 、[Row]{@link Row}时， 取值范围[0,+∞).
+   *     <br>取值限定为整数，父容器为 [Column]{@link ./column} 、[Row]{@link ./row}时， 取值范围[0,+∞).
    *     <br/>
-   *     父容器为[Flex]{@link Flex}时，默认值：1
+   *     父容器为[Flex]{@link ./flex}时，默认值：1
    *     <br/>[constraintSize]{@link constraintSize}限制组件的尺寸范围.
    *     Column和Row即使设置了constraintSize，在未设置主轴尺寸width/height/size时仍遵守默认布局行为，在主轴上自适应子组件尺寸，此时flexShrink不生效.<br/>设置异常值时，该属性为
    *     默认值。
@@ -23047,7 +23112,7 @@ declare class CommonMethod<T> {
   /**
    * 子组件在父容器交叉轴的对齐格式。
    *
-   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row}, or
+   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row}, or
    *     [GridRow]{@link GridRow})布局容器中的alignItems设置。<br/>[GridCol]{@link
    *     GridCol}可以绑定alignSelf属性来改变它自身在交叉轴方向上的布局。<br/>默认值：ItemAlign.Auto
    * @returns { T } 返回当前组件。
@@ -23079,7 +23144,7 @@ declare class CommonMethod<T> {
    * 设置当前组件在Row/Column/Flex(单行)容器中显示的优先级，优先级由数值的整数部分决定，整数部分越大优先级越高。
    * 适用于响应式布局中根据父容器空间动态显示/隐藏子组件的场景。例如，在不同屏幕尺寸下优先显示重要内容，隐藏次要内容。
    *
-   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link Row}/[Column]{@link
+   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link ./row}/[Column]{@link
    *     Column}/[Flex(单行)]{@link Flex}容器组件中生效。<br>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用（如在Flex容器中根据空间大小动态显示内容）。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。
    *     <br/> 小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。例如：0.5和1.0优先级相同（均不大于1）；1.5和1.9优先级相同（整数部分均为1）；2.0和2.9优先级相同（整数部分均为2），且高于1.x的优先级。
    *     <br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
@@ -23229,14 +23294,14 @@ declare class CommonMethod<T> {
    * > **说明：**
    * >
    * > - position对位置的影响作用在组件的尺寸测量完成之后。
-   * > - 当父组件为[Row]{@link Row}、[Column]{@link Column}或[Flex]{@link
+   * > - 当父组件为[Row]{@link ./row}、[Column]{@link ./column}或[Flex]{@link
    * Flex}时，设置position的子组件不占位。在上述场景中，如果父组件包含的所有子组件均设置了position，此时父组件尺寸无法通过其他子组件确定，将基于尺寸(0, 0)进行布局测算。
    * > -
    * Position类型基于父组件内容区左上角确定位置；Edges类型基于父组件内容区四边确定位置，top/left/right/bottom分别为组件各边距离父组件内容区相应边的边距，通过边距来确定组件相对于父组件内容区的位置；Lo
    * calizedEdges类型基于父组件内容区四边确定位置，支持镜像模式。
    * > - 本属性适用于置顶显示、悬浮按钮等组件在父组件中位置固定的场景。
    * > - 本属性不支持在宽高为零的布局组件上设置。
-   * > - 当父组件为[RelativeContainer]{@link RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
+   * > - 当父组件为[RelativeContainer]{@link ./relative_container}，且子组件设置了alignRules属性时，子组件的position属性不生效。
    * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
    *
    * @param { Position } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
@@ -23341,7 +23406,7 @@ declare class CommonMethod<T> {
   }): T;
 
   /**
-   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link RelativeContainer}时生效，支持[attributeModifier]{@link
+   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link ./relative_container}时生效，支持[attributeModifier]{@link
    * attributeModifier}动态设置属性方法。
    *
    * @param { AlignRuleOption } value - 指定设置在相对布局组件中子组件的对齐规则。
@@ -24878,27 +24943,6 @@ declare class CommonMethod<T> {
   keyboardShortcut(value: string | FunctionKey, keys: Array<ModifierKey>, action?: () => void): T;
 
   /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置是否启用无障碍分组。
-   *
-   * @param { boolean } value - 设置无障碍分组，默认值为false。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
    * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
    * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
@@ -24915,9 +24959,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityGroup(value: boolean): T;
 
@@ -24949,27 +24993,6 @@ declare class CommonMethod<T> {
   accessibilityGroup(isGroup: boolean, accessibilityOptions: AccessibilityOptions): T;
 
   /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍文本。
-   *
-   * @param { string } value - 设置无障碍文本，默认值为""。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
    *
    * @param { string } value - 无障碍文本，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。
@@ -24981,9 +25004,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityText(value: string): T;
 
@@ -25155,27 +25178,6 @@ declare class CommonMethod<T> {
   accessibilityDescription(description: Resource): T;
 
   /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * 设置无障碍重要性。该属性用于控制组件是否可被无障碍辅助服务所识别。
-   *
-   * @param { string } value - 设置无障碍重要性，默认值为auto。
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * 设置无障碍重要性。该属性用于控制某个组件是否可被无障碍辅助服务所识别。
    *
    * @param { string } value - 无障碍重要性，用于控制某个组件是否可被无障碍辅助服务所识别。<br/>支持的值为：<br/>
@@ -25189,9 +25191,9 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @form [since 12]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   accessibilityLevel(value: string): T;
 
@@ -30193,7 +30195,7 @@ declare enum HoverModeAreaType {
 }
 
 /**
- * Defines a range of dates.
+ * 日期区间，用于描述起止日期区间。
  *
  * @interface DateRange
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30205,7 +30207,7 @@ declare enum HoverModeAreaType {
 declare interface DateRange {
 
   /**
-   * Defines the start date of the date range.
+   * 设置日期区间的开始日期，应不晚于结束日期。不传入、日期格式错误、日期超出系统支持范围或start晚于end时，该日期区间无效。
    *
    * @type { ?Date }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30217,7 +30219,7 @@ declare interface DateRange {
   start?: Date;
 
   /**
-   * Defines the end date of the date range.
+   * 设置日期区间的结束日期。不传入、日期格式错误、日期超出系统支持范围或end早于start时，该日期区间无效。
    *
    * @type { ?Date }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

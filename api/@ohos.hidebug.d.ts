@@ -176,7 +176,7 @@ declare namespace hidebug {
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
    * @deprecated since 9
-   * @useinstead hidebug.dumpJsHeapData
+   * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpHeapData(filename: string): void;
 

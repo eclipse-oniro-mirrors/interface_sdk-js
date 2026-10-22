@@ -10424,8 +10424,8 @@ declare namespace media {
      * Whether to enable video encoding policy to quality stable encoding.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
-     * @systemapi [since 18 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @systemapi [since 18 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 18 dynamic
      * @since 23 static
      */
@@ -10437,7 +10437,7 @@ declare namespace media {
     *
     * @syscap SystemCapability.Multimedia.Media.AVRecorder
     * @stagemodelonly
-    * @since 26.2.0 dynamic&static
+    * @since 26.0.1 dynamic&static
     */
     sqrFactor?: int;
  

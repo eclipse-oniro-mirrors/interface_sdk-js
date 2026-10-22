@@ -2660,7 +2660,16 @@ declare namespace backgroundTaskManager {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    SYSTEM_CANCEL_NOT_USE_USB = 16
+    SYSTEM_CANCEL_NOT_USE_USB = 16,
+
+    /**
+     * 申请USB类型长时任务，但是USB设备已经被占用。
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_CANCEL_USB_ALREADY_OCCUPIED = 17
   }
 
   /**
@@ -2863,7 +2872,16 @@ declare namespace backgroundTaskManager {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    SYSTEM_SUSPEND_USB_NOT_USED = 20
+    SYSTEM_SUSPEND_USB_NOT_USED = 20,
+
+    /**
+     * 申请USB类型长时任务，但是USB设备已经被占用。
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_SUSPEND_USB_ALREADY_OCCUPIED = 21
   }
 
   /**

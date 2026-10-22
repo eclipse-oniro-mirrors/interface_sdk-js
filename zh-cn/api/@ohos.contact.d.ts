@@ -1510,8 +1510,20 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead Contact.significantDates
      */
     events?: Event[];
+
+    /**
+     * 联系人的生日、周年纪念等重要日期列表。从API version 26.2.0开始，建议使用该版本。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    significantDates?: SignificantDate[];
 
     /**
      * 联系人的群组列表。添加或更新联系人时，仅支持关联到已有群组，不支持创建新群组。
@@ -1873,6 +1885,8 @@ declare namespace contact {
    * @syscap SystemCapability.Applications.ContactsData
    * @atomicservice [since 11]
    * @since 7
+   * @deprecated since 26.2.0
+   * @useinstead contact.SignificantDate
    */
   class Event {
     /**
@@ -1881,6 +1895,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly CUSTOM_LABEL: 0;
 
@@ -1890,6 +1906,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateType.DATE_TYPE_ANNIVERSARY
      */
     static readonly EVENT_ANNIVERSARY: 1;
 
@@ -1899,6 +1917,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly EVENT_OTHER: 2;
 
@@ -1908,6 +1928,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateType.DATE_TYPE_BIRTHDAY
      */
     static readonly EVENT_BIRTHDAY: 3;
 
@@ -1917,6 +1939,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateType.DATE_TYPE_OTHER
      */
     static readonly INVALID_LABEL_ID: -1;
 
@@ -1926,6 +1950,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateValue
      */
     eventDate: string;
 
@@ -1935,6 +1961,8 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateName
      */
     labelName?: string;
 
@@ -1944,8 +1972,100 @@ declare namespace contact {
      * @syscap SystemCapability.Applications.ContactsData
      * @atomicservice [since 11]
      * @since 7
+     * @deprecated since 26.2.0
+     * @useinstead SignificantDate.dateType
      */
     labelId?: number;
+  }
+
+  /**
+   * 联系人重要日期类。
+   *
+   * @syscap SystemCapability.Applications.ContactsData
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0
+   */
+  class SignificantDate {
+    /**
+     * 重要日期类型。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    dateType: SignificantDateType;
+
+    /**
+     * 重要日期取值。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    dateValue: string;
+
+    /**
+     * 重要日期类型名称。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    dateName?: string;
+  }
+
+  /**
+   * 联系人重要日期类型枚举。
+   *
+   * @syscap SystemCapability.Applications.ContactsData
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0
+   */
+  enum SignificantDateType {
+    /**
+     * 其他日期类型。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    DATE_TYPE_OTHER = 0,
+
+    /**
+     * 生日日期类型。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    DATE_TYPE_BIRTHDAY = 1,
+
+    /**
+     * 农历生日日期类型。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    DATE_TYPE_LUNAR_BIRTHDAY = 2,
+
+    /**
+     * 周年纪念日期类型。
+     *
+     * @syscap SystemCapability.Applications.ContactsData
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0
+     */
+    DATE_TYPE_ANNIVERSARY = 3
   }
 
   /**

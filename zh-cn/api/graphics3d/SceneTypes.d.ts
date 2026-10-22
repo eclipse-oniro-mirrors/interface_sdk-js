@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D场景通用类型声明
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -508,7 +508,7 @@ export enum ShadowAlgorithmType {
 }
 
 /**
- * 自定义几何类型，继承自GeometryDefinition。
+ * 自定义几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -679,7 +679,7 @@ export declare class CustomGeometry extends GeometryDefinition {
 }
 
 /**
- * 立方体几何类型，继承自GeometryDefinition。
+ * 立方体几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -709,7 +709,7 @@ export declare class CubeGeometry extends GeometryDefinition {
 }
 
 /**
- * 平面几何类型，继承自GeometryDefinition。
+ * 平面几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -739,7 +739,7 @@ export declare class PlaneGeometry extends GeometryDefinition {
 }
 
 /**
- * 球体几何类型，继承自GeometryDefinition。
+ * 球体几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -789,14 +789,14 @@ export declare class SphereGeometry extends GeometryDefinition {
 }
 
 /**
- * 圆柱体几何类型，继承自GeometryDefinition。
+ * 圆柱体几何类型，继承自[GeometryDefinition]{@link GeometryDefinition}。
  *
  * > **说明：**
  * >
  * > 开发者需保证参数radius，height，segmentCount设置正确，否则无法创建圆柱体并可能引发不可预期的行为。
  *
  * 以radius=0.5，height=1，segmentCount=20为例，生成圆柱体的网格以及UV布局如下：
- * <br>![](docroot://reference/apis-arkgraphics3d/figures/cylinder.png
+ * <br>![](docroot://reference/apis-arkgraphics3d/figures/cylinder.png)
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D

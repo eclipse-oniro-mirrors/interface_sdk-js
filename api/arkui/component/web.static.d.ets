@@ -4816,6 +4816,267 @@ export declare interface BlankScreenDetectionEventInfo {
  */
 export type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 /**
+ * Enumerates the reasons for blank screen attribution, identifying the root cause of the blank screen issue across
+ * the network layer, resource layer, rendering and JavaScript layer, kernel and process layer, and container layer.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare enum BlankScreenReason {
+    /**
+     * DNS resolution failed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    DNS_RESOLVE_FAILED = 101,
+    /**
+     * Main document loading timed out.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    REQUEST_TIMED_OUT = 102,
+    /**
+     * The connection was refused.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CONNECTION_REFUSED = 103,
+    /**
+     * The connection was reset.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CONNECTION_RESET = 104,
+    /**
+     * An SSL error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    SSL_ERROR = 105,
+    /**
+     * A certificate error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CERT_ERROR = 106,
+    /**
+     * The network is disconnected.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    INTERNET_DISCONNECTED = 107,
+    /**
+     * A redirect loop occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    REDIRECT_LOOP = 108,
+    /**
+     * A proxy error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    PROXY_ERROR = 109,
+    /**
+     * Another network error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    OTHER_NETWORK_ERROR = 199,
+    /**
+     * The main document is empty.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MAIN_DOC_EMPTY = 201,
+    /**
+     * An HTTP 4xx error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    HTTP_4XX_ERROR = 202,
+    /**
+     * An HTTP 5xx error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    HTTP_5XX_ERROR = 203,
+    /**
+     * Failed to load the JavaScript global bundle.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    JS_GLOBAL_BUNDLE_LOAD_FAILED = 210,
+    /**
+     * Failed to load CSS.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CSS_LOAD_FAILED = 211,
+    /**
+     * Failed to load multiple resources.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MULTI_RESOURCE_LOAD_FAILED = 212,
+    /**
+     * The request was blocked by CORS.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CORS_BLOCKED = 213,
+    /**
+     * The request was blocked by CSP.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CSP_BLOCKED = 214,
+    /**
+     * Mixed content was blocked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MIXED_CONTENT_BLOCKED = 215,
+    /**
+     * A JavaScript runtime error occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    JS_RUNTIME_ERROR = 301,
+    /**
+     * No first contentful paint occurred.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    NO_FIRST_CONTENTFUL_PAINT = 312,
+    /**
+     * The renderer process crashed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    RENDERER_CRASHED = 401,
+    /**
+     * The renderer process was killed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    RENDERER_KILLED = 402,
+    /**
+     * The GPU process crashed.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    GPU_PROCESS_CRASHED = 403,
+    /**
+     * The GPU process watchdog timed out.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    GPU_PROCESS_WATCHDOG_TIMEOUT = 404,
+    /**
+     * The web view has zero size.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    WEB_VIEW_ZERO_SIZE = 501
+}
+/**
+ * Provides the event information for blank screen monitoring attribution, including the page URL, the attribution
+ * reason, and additional details.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare interface MonitoredBlankScreenEventInfo {
+    /**
+     * URL of the page that is loading when the white screen is monitored.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    url: string;
+    /**
+     * Blank screen reason.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    reason: BlankScreenReason;
+    /**
+     * Extra message for blank screen reason.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    extraMsg: string;
+}
+/**
+ * Defines a callback triggered when the Web component monitors a blank screen and completes root cause attribution.
+ *
+ * @param { MonitoredBlankScreenEventInfo } event - Event information for blank screen monitoring attribution.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export type OnMonitorBlankScreenCallback = (event: MonitoredBlankScreenEventInfo) => void;
+/**
  * Callback with the selected text after the text selection content changes.
  *
  * @param { string } selectionText - the selected text after the text selection content changes.
@@ -6584,6 +6845,17 @@ export declare interface WebAttribute extends CommonMethod {
      */
     default onDetectedBlankScreen(callback: OnDetectBlankScreenCallback | undefined): this;
     /**
+     * Registers a callback for blank screen monitoring attribution. The callback is triggered when the Web component
+     * monitors a blank screen and completes root cause attribution.
+     *
+     * @param { OnMonitorBlankScreenCallback | undefined } callback - Callback for blank screen monitoring attribution.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback | undefined): this;
+    /**
      * The options for blank screen detection.
      *
      * @param { BlankScreenDetectionConfig | undefined } detectConfig - the strategy config for detection.
@@ -6592,6 +6864,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig | undefined): this;
+    /**
+     * Enables or disables the blank screen monitor. When the monitor is enabled, the onMonitoredBlankScreen callback
+     * will be triggered after blank screen is monitored.
+     *
+     * @param { boolean | undefined } enable - Whether to enable the blank screen monitor. The value **true** means to
+     *     enable the monitor, and **false** means to disable it.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default enableBlankScreenMonitor(enable: boolean | undefined): this;
     /**
      * Set whether to enable the back-to-top feature for web component when the status bar is touched.
      *

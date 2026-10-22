@@ -139,7 +139,7 @@ declare class EllipseAttribute extends CommonShapeMethod<EllipseAttribute> {}
 /**
  * 椭圆绘制组件。该组件通过设置宽度和高度属性绘制椭圆形状，在给定的矩形区域内渲染椭圆轮廓和填充区域。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 无
  *

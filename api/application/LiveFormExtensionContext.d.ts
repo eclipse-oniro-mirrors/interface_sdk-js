@@ -26,7 +26,7 @@ import type { ConnectOptions } from '../ability/connectOptions';
 
 /**
  * **LiveFormExtensionContext**, inherited from 
- * [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}, is the context of 
+ * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}, is the context of 
  * [LiveFormExtensionAbility]{@link @ohos.app.form.LiveFormExtensionAbility}.
  * 
  * @syscap SystemCapability.Ability.Form

@@ -603,7 +603,52 @@ declare namespace vibrator {
      * @since 18 dynamic
      * @since 23 static
      */
-    EFFECT_NOTICE_WARNING = 'haptic.notice.warning'
+    EFFECT_NOTICE_WARNING = 'haptic.notice.warning',
+
+    /**
+     * 输入法键盘的振动效果。强度为1（最小强度）。
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH1 = 'haptic.grade.normal.strength1',
+
+    /**
+     * 输入法键盘的振动效果。强度为2。
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH2 = 'haptic.grade.normal.strength2',
+
+    /**
+     * 输入法键盘的振动效果。强度为3（中等强度）。
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH3 = 'haptic.grade.normal.strength3',
+
+    /**
+     * 输入法键盘的振动效果。强度为4。
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH4 = 'haptic.grade.normal.strength4',
+
+    /**
+     * 输入法键盘的振动效果。强度为5（最大强度）。
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    EFFECT_IME_STRENGTH5 = 'haptic.grade.normal.strength5'
   }
 
   /**
@@ -1390,6 +1435,15 @@ declare namespace vibrator {
     isHdHapticSupported: boolean;
 
     /**
+     * 是否支持振动强度调节。true表示支持振动强度调节，false表示不支持振动强度调节。默认值：false。
+     *
+     * @syscap SystemCapability.Sensors.MiscDevice
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    isSupportIntensity?: boolean;
+
+    /**
      * 是否为本地设备。true表示本地设备，可直接触发振动；false表示远程设备，需在分布式场景下使用。
      *
      * @syscap SystemCapability.Sensors.MiscDevice
@@ -1403,12 +1457,12 @@ declare namespace vibrator {
   /**
    * 查询一个或所有设备的马达信息列表。适用于在触发振动前查询设备马达能力和多马达设备的马达ID，以便选择合适的马达触发振动。
    * 不传param时查询所有设备马达信息；传入VibratorInfoParam可查询指定设备或马达。返回VibratorInfo数组，包含deviceId、vibratorId、deviceName、
-   * isHdHapticSupported、isLocalVibrator等属性，
+   * isHdHapticSupported、isSupportIntensity、isLocalVibrator等属性，
    * 可用于startVibration (#vibratorstartvibration9)和stopVibration (#vibratorstopvibration19)中指定马达和设备。
    *
    * @param { VibratorInfoParam } [param] - 指出需要查询的设备和马达信息。不传param时默认查询所有设备所有马达的信息。deviceId默认值为-1（查询全部设备），vibratorId默认值为0（查询该
    *     设备的全部马达）。
-   * @returns { Array<VibratorInfo> } 马达设备的信息数组。每个元素包含deviceId、vibratorId、deviceName、isHdHapticSupported、isLocalVibrator等属性，可
+   * @returns { Array<VibratorInfo> } 马达设备的信息数组。每个元素包含deviceId、vibratorId、deviceName、isHdHapticSupported、isSupportIntensity、isLocalVibrator等属性，可
    *     用于选择合适的马达触发振动或判断设备振动能力。
    * @syscap SystemCapability.Sensors.MiscDevice
    * @crossplatform [since 22]

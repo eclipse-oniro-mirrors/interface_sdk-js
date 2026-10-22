@@ -30,6 +30,7 @@ import type Want from './@ohos.app.ability.Want';
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
  * @since 11 dynamic
+ * @since 26.0.1 static
  */
 export default class VpnExtensionAbility {
   /**
@@ -38,6 +39,7 @@ export default class VpnExtensionAbility {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   context: VpnExtensionContext;
 
@@ -52,6 +54,7 @@ export default class VpnExtensionAbility {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   onCreate(want: Want): void;
 
@@ -61,6 +64,7 @@ export default class VpnExtensionAbility {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 11 dynamic
+   * @since 26.0.1 static
    */
   onDestroy(): void;
 }

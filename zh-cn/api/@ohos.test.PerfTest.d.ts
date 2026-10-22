@@ -47,9 +47,9 @@ import { Callback } from './@ohos.base';
  * >
  * >
  * > 3. 应用启动时延（APP_START_RESPONSE_TIME/APP_START_COMPLETE_TIME）数据采集说明如下：
- * > - 应用启动时延数据受系统打点上报限制，开始时间为点击事件上报时间点，
+ * > - 应用启动时延数据受系统打点上报限制，与端到端用户感知时延存在差异。开始时间为点击事件上报时间点，
  * >   响应时延结束时间为点击后系统响应首帧的上屏时间点（首帧显示在屏幕上的时间点），
- * >   完成时延结束时间为应用启动后的首帧上屏时间点，与端到端用户感知时延存在差异。
+ * >   完成时延结束时间为应用启动后的首帧上屏时间点。
  * >
  * > - 应用启动时延数据采集支持的场景：桌面点击应用图标启动、Dock栏点击应用图标启动、
  * >   应用中心点击应用图标启动。
@@ -58,8 +58,8 @@ import { Callback } from './@ohos.base';
  * >
  * >
  * > 4. 页面切换时延（PAGE_SWITCH_COMPLETE_TIME）数据采集说明如下：
- * > - 页面切换时延计算受系统打点上报限制，开始时间为点击事件上报时间点，
- * >   完成时延结束时间为页面切换后的首帧上屏时间点，与端到端用户感知时延存在差异。
+ * > - 页面切换时延计算受系统打点上报限制，与端到端用户感知时延存在差异。开始时间为点击事件上报时间点，
+ * >   完成时延结束时间为页面切换后的首帧上屏时间点。
  * >
  * > - 页面切换时延数据采集支持的场景：Router、Navigation控件内的页面切换。
  * >
@@ -372,7 +372,7 @@ declare class PerfTest {
    * [getMeasureResult]{@link getMeasureResult}获取采集到的测量结果数据。
    *
    * @returns { Promise<void> }
-   * Promise对象。无返回结果的Promise对象。
+   * Promise对象，无返回结果。
    * @throws { BusinessError } 32400002 - Internal error. Possible causes: 1. IPC connection failed. 2. The object does not exist.
    * @throws { BusinessError } 32400004 - Failed to execute the callback. Possible causes:
    * 1. An exception is thrown in the callback. 2. Callback execution timed out.
@@ -388,7 +388,7 @@ declare class PerfTest {
   run(): Promise<void>;
 
   /**
-   * 获取指定性能指标的测量数据。需要在run()执行完成后调用，否则无法获取到有效的测量数据。
+   * 获取指定性能指标的测量数据。需要在[run()]{@link PerfTest#run}执行完成后调用，否则无法获取到有效的测量数据。
    *
    * @param { PerfMetric } metric - 指定要查询的性能指标。
    * @returns { PerfMeasureResult } - 指定性能指标对应的测量结果，包含各轮测量数据值及

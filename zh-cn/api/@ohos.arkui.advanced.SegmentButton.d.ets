@@ -1803,17 +1803,17 @@ declare class SegmentButtonOptions {
 /**
  * 创建页签类分段按钮或胶囊类分段按钮。
  *
- * ## 子组件
+ * ###### 子组件
  *
  * 无
  *
- * ## 属性
+ * ###### 属性
  *
- * 不支持[通用属性](ts-component-general-attributes.md)。
+ * 不支持[通用属性]{@link CommonMethod}。
  *
- * ## 事件
+ * ###### 事件
  *
- * 不支持[通用事件](ts-component-general-events.md)。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -550,7 +550,16 @@ declare namespace sendablePhotoAccessHelper {
      * @systemapi
      * @since 12 dynamiconly
      */
-    SMART = 4096
+    SMART = 4096,
+    /**
+     * Share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    SHARE = 8192
   }
 
   /**
@@ -692,6 +701,15 @@ declare namespace sendablePhotoAccessHelper {
      * @since 12 dynamiconly
      */
     HIGHLIGHT_SUGGESTIONS = 4105,
+    /**
+     * Share album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    SHARE = 8193,
     /**
      * Any album.
      *

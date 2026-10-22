@@ -6795,5 +6795,33 @@ declare enum ImmersiveStrategy {
    * @atomicservice
    * @since 26.2.0 dynamic
    */
-  AVOID_FLOAT_NAV = 1
+  AVOID_FLOAT_NAV = 1,
+
+  /**
+   * Expand the title area of bindSheet as safe area for the content region.
+   *
+   * > **NOTE**
+   * >
+   * > When this strategy is applied via {@link UIContext.applyDefaultImmersiveStrategy},
+   * > bindSheet's {@link SheetOptions.titleBarHoverMode} defaults to
+   * > {@link SheetTitleBarHoverMode.SAFE_AREA_PADDING}.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  BIND_SHEET_EXPAND_SAFE_AREA = 7,
+
+  /**
+   * Expands the TitleBar and ToolBar of Navigation/NavDestination as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  NAVIGATION_EXPAND_SAFE_AREA = 8
 }

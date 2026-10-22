@@ -150,7 +150,8 @@ declare class Stack<T> {
   forEach(callbackFn: (value: T, index?: number, stack?: Stack<T>) => void, thisArg?: Object): void;
 
   /**
-   * 按照从栈底到栈顶的顺序遍历Stack实例对象中每一个元素，对每个元素执行回调函数。
+   * 按照从栈底到栈顶的顺序遍历Stack实例对象中每一个元素，对每个元素执行回调函数。回调函数依次接收value、index和Stack参数，
+   * 其中index从0开始递增，Stack参数默认指向当前实例。
    *
    * @param { StackForEachCb } callbackFn - 遍历每个元素时执行的回调函数。
    * @syscap SystemCapability.Utils.Lang

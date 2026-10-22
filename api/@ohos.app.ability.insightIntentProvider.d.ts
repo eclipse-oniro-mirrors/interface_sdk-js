@@ -125,6 +125,61 @@ declare namespace insightIntentProvider {
    * @since 26.0.0 static
    */
   function sendIntentResult<T>(instanceId: int, result: insightIntent.IntentResult<T>): Promise<void>;
+
+  /**
+   * Defines an onWillInsightIntentExecuteCallBackFn function.
+   *
+   * @param { insightIntent.InsightIntentExecutionInfo } executionInfo - The insight intent execute information.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  type OnWillInsightIntentExecuteCallBackFn = (executionInfo: insightIntent.InsightIntentExecutionInfo) => void;
+
+  /**
+   * Insight intent Execution callback.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  interface InsightIntentExecutionCallBack {
+    /**
+     * Called before insight intent execute.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.2.0 dynamic&static
+     */
+    onWillInsightIntentExecuteCallBack?: OnWillInsightIntentExecuteCallBackFn;
+  }
+
+  /**
+   * Registers a listener for insight intent execute.
+   *
+   * @param { InsightIntentExecutionCallBack } callback - The insight intent execution callback.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  function onWillInsightIntentExecute(callback: InsightIntentExecutionCallBack): void;
+
+  /**
+   * unregisters a listener for insight intent execute.
+   *
+   * @param { InsightIntentExecutionCallBack } [callback] - The insight intent execution callback.
+   *     If a defined callback is passed in, the listener for that callback is unregistered.
+   *     If no value is passed in, all the listeners for insight intent execute are unregistered.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic&static
+   */
+  function offWillInsightIntentExecute(callback?: InsightIntentExecutionCallBack): void;
 }
 
 export default insightIntentProvider;

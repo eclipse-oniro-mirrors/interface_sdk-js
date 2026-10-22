@@ -150,7 +150,7 @@ declare class EllipseAttribute extends CommonShapeMethod<EllipseAttribute> {}
  * The **Ellipse** component is used to draw an ellipse. It draws an ellipse shape by setting the width and height
  * attributes, rendering the ellipse outline and fill area within a given rectangular region.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * None
  *

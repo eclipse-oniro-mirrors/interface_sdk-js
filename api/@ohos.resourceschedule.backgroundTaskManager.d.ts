@@ -2821,7 +2821,16 @@ declare namespace backgroundTaskManager {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    SYSTEM_CANCEL_NOT_USE_USB = 16
+    SYSTEM_CANCEL_NOT_USE_USB = 16,
+
+    /**
+     * A continuous task of the **USB_CONNECTION** type is requested, but the USB device is already occupied.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_CANCEL_USB_ALREADY_OCCUPIED = 17
   }
 
   /**
@@ -3028,7 +3037,16 @@ declare namespace backgroundTaskManager {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    SYSTEM_SUSPEND_USB_NOT_USED = 20
+    SYSTEM_SUSPEND_USB_NOT_USED = 20,
+
+    /**
+     * A continuous task of the **USB_CONNECTION** type is requested, but the USB device is already occupied.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_SUSPEND_USB_ALREADY_OCCUPIED = 21
   }
 
   /**

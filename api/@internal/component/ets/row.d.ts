@@ -176,7 +176,7 @@ interface RowInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * The [universal events]{@link CommonMethod} are supported.
  *
@@ -290,7 +290,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
  * > If no width or height is set for the **Row** component, it adapts to the size of child components in the main axis
  * > or cross axis direction.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Supported
  *

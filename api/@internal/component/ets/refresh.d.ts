@@ -175,13 +175,17 @@ interface RefreshOptions {
   friction?: number | string;
 
   /**
-   * Custom text displayed at the bottom of the refreshing area.
+   * Custom text displayed at the bottom of the refreshing area. If this parameter is not set, the text is not
+   * displayed.
    * NOTE
    * When setting the text, follow the constraints on the **Text** components. If you are using **builder** or
    * **refreshingContent** to customize the content displayed in the refreshing area, the text set with
    * **promptText** will not be displayed.
    * When **promptText** is set and effective, the refreshOffset attribute defaults to 96 vp.
    * The maximum font scale factor for the custom text, as specified by maxFontScale, is 2.
+   * The maximum number of lines of the custom text is 1, and the excess part is truncated with an ellipsis (...).
+   * If a multi-line prompt is required, customize the refresh area display content through the **builder** or
+   * **refreshingContent** parameter.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -194,6 +198,9 @@ interface RefreshOptions {
   /**
    * Custom content in the refreshing area.
    * NOTE
+   * When this parameter is set together with the **refreshingContent** parameter, this parameter does not take
+   * effect. When this parameter is used to customize the refresh area display content, **promptText** is not
+   * displayed.
    * In API version 10 and earlier versions, there is a height limit of 64 vp on custom components. This restriction
    * is removed since API version 11.
    * When a custom component is set with a fixed height, it will be displayed below the refreshing area at that fixed
@@ -219,7 +226,8 @@ interface RefreshOptions {
    * Custom content in the refreshing area.
    * NOTE
    * If this parameter and the **builder** parameter are set at the same time, the **builder** parameter does not
-   * take effect.
+   * take effect. When this parameter is used to customize the refresh area display content, **promptText** is not
+   * displayed.
    * When a custom component is set with a fixed height, it will be displayed below the refreshing area at that fixed
    * height; when the custom component does not have a height set, its height will adapt to the height of the refreshing
    * area, which may result in the height of the custom component changing to 0 along with the refreshing area. To
@@ -239,7 +247,10 @@ interface RefreshOptions {
 
 /**
  * **Refresh** is a container component that provides the pull-to-refresh interaction. It is suitable for scenarios
- * where users need to trigger data updates, such as list data refresh and page content update.
+ * where users need to trigger data updates, such as list data refresh and page content update. It supports custom
+ * refresh area display content and text, setting the pull-down offset and drag coefficient, controlling the maximum
+ * pull-down distance, and more. It can flexibly adapt to the pull-to-refresh requirements of different apps,
+ * delivering a consistent and smooth refresh experience.
  *
  * > **NOTE**
  * >
@@ -384,11 +395,11 @@ declare class RefreshAttribute extends CommonMethod<RefreshAttribute> {
   pullToRefresh(value: boolean): RefreshAttribute;
 
   /**
-   * Sets whether to enable the pull-up-to-cancel gesture for refreshing operations.
+   * Sets whether to cancel refresh when swiping up.
    *
-   * @param { boolean | undefined } enabled - Whether to enable the pull-up-to-cancel gesture for refreshing operations.
-   *     <br>**true**: Enable the pull-up-to-cancel gesture. **false**: Disable the pull-up-to-cancel gesture.<br>
-   *     **undefined**: Enable the pull-up-to-cancel gesture.
+   * @param { boolean | undefined } enabled - Whether to cancel refresh when swiping up.<br>The value **true**
+   *     indicates cancel refresh, and **false** indicates not cancel refresh.<br>Default value: **true**. If the
+   *     value is **undefined**, the default value is used.
    * @returns { RefreshAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -478,7 +489,10 @@ declare class RefreshAttribute extends CommonMethod<RefreshAttribute> {
 
 /**
  * **Refresh** is a container component that provides the pull-to-refresh interaction. It is suitable for scenarios
- * where users need to trigger data updates, such as list data refresh and page content update.
+ * where users need to trigger data updates, such as list data refresh and page content update. It supports custom
+ * refresh area display content and text, setting the pull-down offset and drag coefficient, controlling the maximum
+ * pull-down distance, and more. It can flexibly adapt to the pull-to-refresh requirements of different apps,
+ * delivering a consistent and smooth refresh experience.
  *
  * > **NOTE**
  * >

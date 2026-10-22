@@ -1178,6 +1178,17 @@ export declare struct ChipGroup {
   onChange?: Callback<Array<number>>;
 
   /**
+   * Register the callback of ChipItems.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  onItemsChange?: Callback<ChipGroupItemOptions[]>;
+
+  /**
    * Used to customize a builder. To display custom content on the rightmost side of the component, configure the
    * **suffix** attribute. When using the **suffix** attribute, reference the [IconGroupSuffix]{@link IconGroupSuffix}
    * API.

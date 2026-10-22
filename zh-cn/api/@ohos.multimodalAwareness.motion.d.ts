@@ -429,7 +429,6 @@ declare namespace motion {
    * @param { Callback<OperatingHandStatus> } callback - 回调函数，返回操作手状态信息。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br> 1. The hardware does not support the capability;
    *     <br> 2. The chip does not support the capability;
@@ -455,7 +454,6 @@ declare namespace motion {
    *     <br>若不填，则取消当前监听该事件的所有回调函数。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br> 1. The hardware does not support the capability;
    *     <br> 2. The chip does not support the capability;

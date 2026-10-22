@@ -326,6 +326,16 @@ declare interface PageIntentDecoratorInfo extends IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   navDestinationName?: string;
+
+  /**
+   * 表示该意图所需的权限。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  permissions?: string[];
 }
 
 /**
@@ -353,6 +363,15 @@ export declare const InsightIntentPage: ((intentInfo: PageIntentDecoratorInfo) =
  * @since 20 dynamiconly
  */
 declare interface FunctionIntentDecoratorInfo extends IntentDecoratorInfo {
+  /**
+   * 表示该意图所需的权限。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  permissions?: string[];
 }
 
 /**
@@ -426,6 +445,16 @@ declare interface EntryIntentDecoratorInfo extends IntentDecoratorInfo {
    * @since 20 dynamic
    */
   executeMode?: insightIntent.ExecuteMode[];
+
+  /**
+   * 表示该意图所需的权限。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  permissions?: string[];
 }
 
 /**

@@ -98,6 +98,16 @@ declare namespace cliManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * 表示任务ID，用于任务归因。取值须为[startTask]{@link @ohos.app.agent.taskManager:taskManager#startTask}中指定的任务ID。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
@@ -237,6 +247,16 @@ declare namespace cliManager {
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * 表示任务ID，用于任务归因。取值须为[startTask]{@link @ohos.app.agent.taskManager:taskManager#startTask}中指定的任务ID。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
