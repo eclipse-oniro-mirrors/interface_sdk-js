@@ -421,7 +421,6 @@ export {
   BackPressActionProposal, BaseGestureHandlingProposal, ClickActionProposal, GestureHandlingResolution, NoneActionProposal, PageSwitchActionProposal, ScrollActionProposal, SelectActionProposal, SmartGestureController, TargetedGestureProposal,
   LazyVWaterFlowLayout, LazyVWaterFlowLayoutAttribute, LazyWaterFlowLayoutAttribute,
   SelectionContainer, SelectionContainerAttribute, SelectionContainerInstance, SelectionContainerTextJoinStyle, SelectionContainerMenuOptions, SelectionContainerEditMenuOptions, OnMenuItemClickWithTextCallback, SelectionContainerOptions, SelectionContainerController,
-  DatePickerComponent, DatePickerComponentOptions, DisplayMode, DateMode, TimeFormat, DatePickerComponentResult,
   ComposeListItemV2, ContentItemV2, ContentItemV2Options, IconTypeV2, OperateButtonV2,
   OperateButtonV2Options, OperateCheckV2, OperateCheckV2Options, OperateIconV2, OperateIconV2Options,
   OperateItemV2, OperateItemV2Options,
@@ -431,6 +430,7 @@ export {
   EditableTitleBarMenuItemV2Options, EditableSaveButtonV2, EditableSaveButtonV2Options, EditableTitleBarStyleV2,
   EditableTitleBarStyleV2Options,
   MarginTypeV2, PromptOptionsV2, PromptOptionsV2Config, ExceptionPromptV2,
-  SwipeRefresherV2, CallbackParamV2, NodeParamV2, TreeControllerV2, TreeListenerV2, TreeListenerManagerV2, TreeViewV2, CustomKeyboardContinueFeature,
+  SwipeRefresherV2, CallbackParamV2, NodeParamV2, TreeControllerV2, TreeListenerV2, TreeListenerManagerV2, TreeViewV2,
+  DatePickerComponent, DatePickerComponentOptions, DisplayMode, DateMode, TimeFormat, DatePickerComponentResult, CustomKeyboardContinueFeature,
   BackgroundLuminanceSamplingConfigs, LuminanceSampler
 };
