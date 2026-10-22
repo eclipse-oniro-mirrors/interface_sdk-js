@@ -577,7 +577,7 @@ export interface RectLight extends Light {
 }
 
 /**
- * Camera node, which inherits from Node.
+ * Camera node, which inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Camera
