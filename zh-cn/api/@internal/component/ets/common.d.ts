@@ -28032,8 +28032,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * 设置滚动条的宽度，不支持百分比设置。宽度设置后，滚动条正常状态和按压状态宽度均为滚动条的宽度值。如果滚动条的宽度超过滚动组件主轴方向的可视尺寸，则滚动条的宽度会变为默认值4vp。
    *
-   * @param { number | string } value  - 滚动条的宽度。<br/>默认值：4<br/>单位：vp <br/>取值范围：设置为小于0的值时，按默认值
-   *     4vp处理。设置为0时，不显示滚动条。
+   * @param { number | string } value  - 滚动条的宽度。<br/>单位：vp <br/>取值范围：[0, +∞)。设置为小于0的值时，按4vp处理，
+   *     儿童智能表则恢复至5vp。设置为0时，不显示滚动条。
    * @returns { T }
    *    返回当前滚动组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28049,8 +28049,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * 未通过该接口设置时，滚动条的宽度为4vp。
    *
-   * @param { number | string | Resource } value - 滚动条的宽度。<br/>默认值：4<br/>单位：vp <br/>取值范围：设置为小于0的值
-   *     时，按默认值4vp处理。设置为0时，不显示滚动条。
+   * @param { number | string | Resource } value - 滚动条的宽度。<br/>单位：vp <br/>取值范围：[0, +∞)。设置为小于0的值时，
+   *     按4vp处理，儿童智能表则恢复至5vp。设置为0时，不显示滚动条。
    * @returns { T }
    *    返回当前滚动组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
