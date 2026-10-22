@@ -139,7 +139,7 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { BackgroundMode } bgMode - Background mode requested.
    * @param { WantAgent } wantAgent - Notification parameter, which is used to specify the target page that is
@@ -157,7 +157,7 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { BackgroundMode } bgMode - Background mode requested.
    * @param { WantAgent } wantAgent - Notification parameter, which is used to specify the target page that is
@@ -174,7 +174,7 @@ declare namespace backgroundTaskManager {
    * Requests to cancel a continuous task. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -188,7 +188,7 @@ declare namespace backgroundTaskManager {
    * Requests to cancel a continuous task. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
