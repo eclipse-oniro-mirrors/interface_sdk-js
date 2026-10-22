@@ -8595,7 +8595,7 @@ declare namespace drawing {
   }
 
   /**
-   * Defines the interpolation mode for sprite sheet frame animation.
+   * Interpolation mode enum for sprite sheet frame animation.
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -8604,7 +8604,7 @@ declare namespace drawing {
    */
   enum AtlasInterpolationMode {
     /**
-     * No interpolation. Each frame is displayed independently as a discrete step.
+     * No interpolation. Each frame is displayed independently.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -8634,7 +8634,6 @@ declare namespace drawing {
   interface AtlasImage {
     /**
      * Sprite sheet atlas image.
-     * Created through the image module as a PixelMap instance.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
