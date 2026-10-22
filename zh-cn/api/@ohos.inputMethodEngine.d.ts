@@ -1116,7 +1116,7 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 输入法面板不支持创建子窗口。例如：不支持使用window.createWindow[设置应用子窗口](docroot://windowmanager/application-window-fa.md#设置应用子窗口)、
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
-     * <br> > 、[CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
+     * <br> > 、[CustomDialog]{@link CustomDialogController}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
      * <br> > [弹出框]{@link @ohos.arkui.advanced.Dialog}、
      * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}或设置
      * <br> > showInSubwindow为false。
@@ -1144,7 +1144,7 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 输入法面板不支持创建子窗口。例如：不支持使用window.createWindow[设置应用子窗口](docroot://windowmanager/application-window-fa.md#设置应用子窗口)、
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
-     * <br> > 、[CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
+     * <br> > 、[CustomDialog]{@link CustomDialogController}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
      * <br> > [弹出框]{@link @ohos.arkui.advanced.Dialog}、
      * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}或设置
      * <br> > showInSubwindow为false。
