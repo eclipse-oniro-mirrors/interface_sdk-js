@@ -970,7 +970,7 @@ declare namespace inputMethodEngine {
      * <br> > [window.createWindow](docroot://windowmanager/application-window-fa.md#setting-the-child-window-of-an-application),
      * <br> >
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)},
-     * <br> > and [CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller}. You are advised to adopt
+     * <br> > and [CustomDialog]{@link CustomDialogController}. You are advised to adopt
      * <br> > alternative solutions to sub-windows, such as using a [dialog box]{@link @ohos.arkui.advanced.Dialog} or
      * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}, or
      * <br> > set **showInSubwindow** to **false**.
@@ -1003,7 +1003,7 @@ declare namespace inputMethodEngine {
      * <br> > [window.createWindow](docroot://windowmanager/application-window-fa.md#setting-the-child-window-of-an-application),
      * <br> >
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)},
-     * <br> > and [CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller}. You are advised to adopt
+     * <br> > and [CustomDialog]{@link CustomDialogController}. You are advised to adopt
      * <br> > alternative solutions to sub-windows, such as using a [dialog box]{@link @ohos.arkui.advanced.Dialog} or
      * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}, or
      * <br> > set **showInSubwindow** to **false**.
