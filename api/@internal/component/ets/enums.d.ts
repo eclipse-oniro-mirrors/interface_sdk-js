@@ -6798,9 +6798,20 @@ declare enum ImmersiveStrategy {
   AVOID_FLOAT_NAV = 1,
 
   /**
+   * Avoid the window control buttons, which are the close, minimize and zoom buttons.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  AVOID_WINDOW_CONTROLS = 6,
+
+  /**
    * Expand the title area of bindSheet as safe area for the content region.
    *
-   * > **NOTE**
+  * > **NOTE**
    * >
    * > When this strategy is applied via {@link UIContext.applyDefaultImmersiveStrategy},
    * > bindSheet's {@link SheetOptions.titleBarHoverMode} defaults to
