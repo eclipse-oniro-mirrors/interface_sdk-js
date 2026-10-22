@@ -49,7 +49,7 @@ import UIServiceExtensionConnectCallback from './UIServiceExtensionConnectCallba
 
 /**
  * UIAbilityContext provides the context environment for a [UIAbility]{@link ./../@ohos.app.ability.UIAbility} that needs to 
- * store its status. It inherits from [Context]{@link Context} and provides UIAbility-related configuration and APIs
+ * store its status. It inherits from [Context]{@link ./Context:Context} and provides UIAbility-related configuration and APIs
  *  for operating UIAbility and ServiceExtensionAbility components. For example, you can use the APIs to start a 
  * UIAbility, terminate a UIAbility to which the UIAbilityContext belongs, and start, terminate, connect to, or 
  * disconnect from a ServiceExtensionAbility.
