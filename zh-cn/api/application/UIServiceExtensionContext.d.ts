@@ -89,6 +89,8 @@ declare class UIServiceExtensionContext extends ExtensionContext {
    * 步回调。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -112,6 +114,7 @@ declare class UIServiceExtensionContext extends ExtensionContext {
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     . Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -135,6 +138,7 @@ declare class UIServiceExtensionContext extends ExtensionContext {
    * @param { AbilityStartCallback } abilityStartCallback - 拉起UIExtensionAbility执行结果的回调。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
    *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
