@@ -2672,7 +2672,7 @@ declare namespace media {
     preferredSubtitleLanguages?: Array<string>;
   }
     /**
-   * Describes the state of the [AVPlayer]{@link @ohos.multimedia.media:media}. Your application can proactively obtain 
+   * Describes the state of the [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}. Your application can proactively obtain 
    * the AVPlayer state through the **state** property or obtain the reported AVPlayer state by subscribing to the 
    * [stateChange]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
    * event. For details about the rules for state transition, see 
@@ -3423,10 +3423,10 @@ declare namespace media {
      * @param { int } fd - Resource handle, which is obtained by calling
      *     [resourceManager.getRawFd]{@link @ohos.resourceManager:resourceManager.ResourceManager.getRawFd(path: string, callback: _AsyncCallback<RawFileDescriptor>)}.
      * @param { long } offset - Resource offset, which needs to be entered based on the preset asset information. An
-     *     invalid value causes a failure to parse subtitle assets. The default value is **0**.unit:Byte.
+     *     invalid value causes a failure to parse subtitle assets. The default value is **0**. Unit:Byte.
      * @param { long } length - Resource length, which needs to be entered based on the preset asset information. The
      *     default value is the remaining bytes from the offset in the file. An invalid value causes a failure to parse
-     *     subtitle assets. The default value is **0**.
+     *     subtitle assets. The default value is **0**. Unit:Byte.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -4369,7 +4369,7 @@ declare namespace media {
      *     requested by the user.<br>For video playback, [SeekMode]{@link @ohos.multimedia.media:media.SeekMode} may
      *     cause the actual position to be different from that requested by the user. The exact position can be obtained
      *     from the **currentTime** property. The time in this callback only means that the requested seek operation is
-     *     complete.
+     *     complete. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4493,7 +4493,7 @@ declare namespace media {
      * > - In the **pause** state, the player reports the timeUpdate event when the buffering ends.
      *
      * @param { 'timeUpdate' } type - Event type, which is **'timeUpdate'** in this case.
-     * @param { Callback<int> } callback - Callback used to return the current time.
+     * @param { Callback<int> } callback - Callback used to return the current time. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4523,7 +4523,7 @@ declare namespace media {
      * > The **durationUpdate** event is not supported in live streaming scenarios.
      *
      * @param { 'durationUpdate' } type - Event type, which is **'durationUpdate'** in this case.
-     * @param { Callback<int> } callback - Callback used to return the resource duration.
+     * @param { Callback<int> } callback - Callback used to return the resource duration. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -4697,7 +4697,7 @@ declare namespace media {
     off(type: 'availableBitrates', callback?: Callback<Array<int>>): void;
 
     /**
-     * Subscribes to [AVPlayer]{@link @ohos.multimedia.media:media} errors. This event is used only for error prompt and
+     * Subscribes to [AVPlayer]{@link @ohos.multimedia.media:media.avplayer} errors. This event is used only for error prompt and
      * does not require the user to stop playback control. If the 
      * [AVPlayerState]{@link @ohos.multimedia.media:media.AVPlayerState} is also switched to error, call 
      * [reset()]{@link media.AVPlayer.reset(callback: AsyncCallback<void>)} or 
@@ -7035,7 +7035,7 @@ declare namespace media {
    * 
    * > **NOTE**
    * >
-   * > > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
+   * > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
    * > provided by the camera module, see [Camera Management]{@link @ohos.multimedia.camera:camera}.
    *
    * @syscap SystemCapability.Multimedia.Media.AVRecorder
