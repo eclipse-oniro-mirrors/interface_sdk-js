@@ -403,9 +403,41 @@ declare class RepeatAttribute<T> extends DynamicNode<RepeatAttribute<T>> {
 declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
 
 /**
+ * 创建Repeat组件时的配置项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+interface RepeatOptions {
+  /**
+   * 动画过程中Repeat更新时，是否允许复用子组件。仅在Repeat的父容器组件为List、Grid、WaterFlow时生效。
+   * 
+   * Repeat与动画一起使用时，Repeat自身的复用能力会与动画产生冲突，导致动画效果异常。此时可将该参数设置为false，动画过程中Repeat更新时将不复用子组件，从而达到适配动画的效果。
+   * 
+   * true：动画过程中允许复用子组件。
+   * 
+   * false：动画过程中不允许复用子组件。
+   * 
+   * 默认值：Repeat的父容器为List时为false，为Grid或WaterFlow时为true
+   * 
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  allowReuseInAnimation?: boolean;
+}
+
+/**
  * Repeat接口类型。
  *
  * @param { RepeatArray<T> } arr - 数据源，为`RepeatArray<T>`类型的数组，由开发者决定数据类型。
+ * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。[since 26.2.0]
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -414,7 +446,7 @@ declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
  * @atomicservice
  * @since 18 dynamic
  */
-declare type RepeatInterface = <T>(arr: RepeatArray<T>) => RepeatAttribute<T>;
+declare type RepeatInterface = <T>(arr: RepeatArray<T>, options?: RepeatOptions) => RepeatAttribute<T>;
 
 /**
  * Repeat基于数组类型数据来进行循环渲染，一般与滚动容器组件配合使用。

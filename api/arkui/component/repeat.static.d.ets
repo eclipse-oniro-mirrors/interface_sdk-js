@@ -297,6 +297,19 @@ export interface RepeatAttribute<T> extends DynamicNode {
   setRepeatOptions<T>(arr: RepeatArray<T>): this;
 
   /**
+   * Sets Repeat options.
+   *
+   * @param { RepeatArray<T> } arr - Data source array.
+   * @param { RepeatOptions } [options] - The options for creating the Repeat component.
+   * @returns { this } RepeatAttribute instance
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.2.0 staticonly
+   */
+  setRepeatOptions<T>(arr: RepeatArray<T>, options?: RepeatOptions): this;
+
+  /**
    * Notify the Repeat has finished setting up its attributes.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -305,6 +318,34 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @since 26.0.1 staticonly
    */
   applyAttributesFinish(): void;
+}
+
+/**
+ * Defines the options of the Repeat component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export interface RepeatOptions {
+  /**
+   * Indicates whether to allow child components to be reused during the animation when Repeat is updated.
+   * This parameter takes effect only when the parent container of Repeat is List, Grid, or WaterFlow.
+   *
+   * When Repeat is used together with animations, the reuse capability of Repeat may conflict with the animations,
+   * causing abnormal animation effects. In this case, you can set this parameter to false, so that Repeat does not
+   * reuse child components when it is updated during the animation, adapting to the animations.
+   *
+   * true: Allow child components to be reused during the animation.
+   *
+   * false: Do not allow child components to be reused during the animation.
+   *
+   * @default - false if the parent container of Repeat is List; true if it is Grid or WaterFlow.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  allowReuseInAnimation?: boolean;
 }
 
 /**
@@ -319,6 +360,20 @@ export interface RepeatAttribute<T> extends DynamicNode {
  */
 @ComponentBuilder
 export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
+
+/**
+ * Enter the value to obtain the Repeat with options.
+ *
+ * @param { RepeatArray<T> } arr - The Data Source.
+ * @param { RepeatOptions } [options] - The options for creating the Repeat component.
+ * @returns { RepeatAttribute<T> }
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ * @noninterop
+ */
+@ComponentBuilder
+export declare function Repeat<T>(arr: RepeatArray<T>, options?: RepeatOptions): RepeatAttribute<T>;
 
 /**
  * Defines type for memory optimization strategy.
