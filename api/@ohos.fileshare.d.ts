@@ -306,6 +306,74 @@ declare namespace fileShare {
   }
 
   /**
+   * Enumerates the status of the URI permission granted by user.
+   *
+   * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export enum GrantStatus {
+    /**
+     * The URI permission is not granted.
+     *
+     * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    DENIED = -1,
+
+    /**
+     * The URI permission is granted.
+     *
+     * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    GRANTED = 0,
+  }
+
+  /**
+   * Indicates the URI permission status information of the application.
+   *
+   * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface PermissionStatusInfo {
+    /**
+     * Token ID of the application.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    tokenID: int;
+
+    /**
+     * Policy information of the URI permission.
+     *
+     * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    policyInfo: PolicyInfo;
+
+    /**
+     * URI permission authorization status.
+     *
+     * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    grantStatus: GrantStatus;
+  }
+
+  /**
    * Provides grant uri permission for app
    *
    * @permission ohos.permission.WRITE_MEDIA
@@ -599,6 +667,80 @@ declare namespace fileShare {
    * @since 26.0.0 dynamic&static
    */
   function revokeSharedDirectoryPermission(): Promise<void>;
+
+  /**
+   * Get the status of URIs permission for applications.
+   *
+   * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
+   * @param { Array<int> } tokenIDList - List of token IDs of the applications.
+   *     <br>The value should be an array of integers.
+   * @returns { Promise<Array<PermissionStatusInfo>> } Promise used to return {Array<PermissionStatusInfo>}
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 13900001 - Operation not permitted.
+   * @throws { BusinessError } 13900011 - Out of memory
+   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function getStatusByPermission(tokenIDList: Array<int>): Promise<Array<PermissionStatusInfo>>;
+
+  /**
+   * Grant the URIs permission by user.
+   *
+   * @permission ohos.permission.GRANT_SENSITIVE_PERMISSIONS
+   * @param { int } tokenID - Token ID of the application.
+   *     <br>The value should be an integer.
+   * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 13900001 - Operation not permitted.
+   * @throws { BusinessError } 13900011 - Out of memory
+   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function grantPermissionByUser(tokenID: int, policies: Array<PolicyInfo>): Promise<void>;
+
+  /**
+   * Revoke the URIs permission by user.
+   *
+   * @permission ohos.permission.REVOKE_SENSITIVE_PERMISSIONS
+   * @param { int } tokenID - Token ID of the application.
+   *     <br>The value should be an integer.
+   * @param { Array<PolicyInfo> } policies - Policy information to revoke permission on URIs.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 13900001 - Operation not permitted.
+   * @throws { BusinessError } 13900011 - Out of memory
+   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function revokePermissionByUser(tokenID: int, policies: Array<PolicyInfo>): Promise<void>;
 }
 
 export default fileShare;
