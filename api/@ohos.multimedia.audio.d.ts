@@ -9765,84 +9765,84 @@ declare namespace audio {
     readonly muted?: boolean;
   }
 
-    /**
+  /**
    * Enumerates sound card types.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @stagemodelonly
    * @since 26.2.0 dynamic&static
    */
-    enum SoundCardType {
-      /**
-       * Onboard sound card.
-       *
-       * @syscap SystemCapability.Multimedia.Audio.Core
-       * @stagemodelonly
-       * @since 26.2.0 dynamic&static
-       */
-      ONBOARD = 0,
-      /**
-       * USB sound card.
-       *
-       * @syscap SystemCapability.Multimedia.Audio.Core
-       * @stagemodelonly
-       * @since 26.2.0 dynamic&static
-       */
-      USB = 1
-    }
+  enum SoundCardType {
+    /**
+     * Onboard sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ONBOARD = 0,
+  
+    /**
+     * USB sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    USB = 1
+  }
 
   /**
    * Describes sound card information.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.2.0 dynamic&static
    */
   interface SoundCardInfo {
     /**
      * Sound card name.
+     * The maximum length is 256.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     name: string;
     /**
      * Sound card vendor.
+     * The maximum length is 128.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     vendor: string;
     /**
      * Sound card model.
+     * The maximum length is 128.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     model: string;
     /**
      * Sound card bus address.
+     * The maximum length is 256.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     busAddress: string;
     /**
      * Sound card driver.
+     * The maximum length is 128.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.2.0 dynamic&static
      */
     driver: string;
     /**
