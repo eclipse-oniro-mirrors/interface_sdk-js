@@ -240,7 +240,18 @@ declare namespace adminManager {
      * @stagemodelonly
      * @since 26.0.0
      */
-    MANAGED_EVENT_POLICIES_CHANGED = 11
+    MANAGED_EVENT_POLICIES_CHANGED = 11,
+
+    /**
+     * 密码认证失败事件。
+     *
+     * **起始版本**：26.2.0
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.2.0
+     */
+    MANAGED_EVENT_ON_PASSWORD_FAILED = 13
   }
 
   /**
