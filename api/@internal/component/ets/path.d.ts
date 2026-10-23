@@ -71,7 +71,7 @@ declare interface PathOptions {
 
   /**
    * Command string for path drawing, complying with the
-   * [SVG Path Syntax]{@link ./path#svg-path-syntax}, in px.
+   * [SVG Path Syntax]{@link svg-path-syntax}, in px.
    *
    * Default value: empty string
    *
@@ -156,19 +156,17 @@ interface PathInterface {
 declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
   /**
    * Sets the command string that complies with the
-   * [SVG Path Syntax]{@link ./path#svg-path-syntax}, in px.
+   * [SVG Path Syntax]{@link svg-path-syntax}, in px.
    * The command string determines the drawing shape and trajectory of the path. This attribute can be dynamically set
    * using [attributeModifier]{@link CommonMethod#attributeModifier}. For details about the pixel unit conversion
    * method, see [Pixel Units]{@link ./common}.
    *
    * @param { string } value - Command string for path drawing. It must comply with the
-   *     [SVG Path Syntax]{@link ./path#svg-path-syntax}, in
-   *     px.
+   *     [SVG Path Syntax]{@link svg-path-syntax}, in px.
    *     <br>Default value: empty string
    *     <br>Abnormal values **undefined** and **null** are processed as the default value. [since 7 - 19]
    * @param { ResourceStr } value - Command string for path drawing. It must comply with the
-   *     [SVG Path Syntax]{@link ./path#svg-path-syntax}, in
-   *     px.
+   *     [SVG Path Syntax]{@link svg-path-syntax}, in px.
    *     <br>Default value: empty string
    *     <br>Abnormal values **undefined** and **null** are processed as the default value. [since 20]
    * @returns { PathAttribute }

@@ -16,6 +16,17 @@
 /**
  * ChipGroup组件提供操作块群组能力，支持单选或多选模式，可自定义样式、图标和间距，支持选中状态管理和事件回调。
  * 适用于文件分类、资源筛选、标签选择、内容分组等多种场景，帮助开发者快速实现选择功能，提供统一的视觉和交互体验。
+ *
+ * > **说明：**
+ * >
+ * > - 如果ChipGroup设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
+ * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ChipGroup本身。
+ * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ChipGroup设置通用属性和通用事件。
+ *
+ * ###### 子组件
+ *
+ * 无
+ *
  * @file
  * @kit ArkUI
  */
@@ -873,9 +884,13 @@ export declare struct IconGroupSuffix {
  *
  * > **说明：**
  * >
- * > - 如果ChipGroup设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
- * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ChipGroup本身。
- * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ChipGroup设置通用属性和通用事件。
+ * > 1. 对于**selectedIndexes**和**multiple**接口，当**multiple**设置为**false**时，若未传入
+ * > **selectedIndexes**，默认选中第一个Chip。若传入的**selectedIndexes**包含多个元素，默认选中第一个索引处的Chip。
+ * >
+ * > 2. 使用**suffix**接口时，必须导入**IconGroupSuffix**接口。若未传入，**suffix**为空。
+ * >
+ * > 3. 图标填充颜色（**fillColor**和**activatedFillColor**）应与字体颜色（**fontColor**）保持一致。
+ * > 若需要不同的颜色，请在传入[ChipGroupItemOptions]{@link ChipGroupItemOptions}时使用**prefixSymbol**。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

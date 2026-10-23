@@ -18,6 +18,20 @@
  * customizable styles, icons, and spacing, as well as selected state management and event callbacks. It is suitable for
  * various scenarios such as file categorization, resource filtering, tag selection, and content grouping, helping
  * developers quickly implement selection functionality while delivering a consistent visual and interactive experience.
+ *
+ * > **NOTE**
+ * >
+ * > - If the **ChipGroup** component has [universal attributes]{@link CommonMethod} or
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **ChipGroup** component itself. As a result, the configured universal attributes and universal
+ * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
+ * > with the **ChipGroup** component.
+ *
+ * ###### Child Components
+ *
+ * None
+ *
  * @file
  * @kit ArkUI
  */

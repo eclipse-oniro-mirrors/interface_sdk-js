@@ -20,7 +20,20 @@
  * is suitable for tab switching scenarios, the single-selection capsule segmented button is suitable for single-
  * selection switching scenarios, and the multi-selection capsule segmented button is suitable for multi-selection
  * filtering scenarios.
- * @file api/@ohos.arkui.advanced.SegmentedButton.d.ts
+ *
+ * ###### Child Components
+ *
+ * None
+ *
+ * ###### Attributes
+ *
+ * The [universal attributes]{@link CommonMethod} are not supported.
+ *
+ * ###### Events
+ *
+ * The [universal events]{@link CommonMethod} are not supported.
+ *
+ * @file
  * @kit ArkUI
  */
 

@@ -16,12 +16,6 @@
 /**
  * The **ProgressButton** component is a text-based download button with a progress indicator that shows the download
  * progress.
- * @file
- * @kit ArkUI
- */
-
-/**
- * Creates a **ProgressButton** component.
  *
  * > **NOTE**
  * >
@@ -31,6 +25,13 @@
  * > rather than the **ProgressButton** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **ProgressButton** component.
+ *
+ * @file
+ * @kit ArkUI
+ */
+
+/**
+ * Creates a **ProgressButton** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
