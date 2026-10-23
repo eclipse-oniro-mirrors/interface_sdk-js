@@ -857,7 +857,7 @@ declare namespace mechanicManager {
    */
   export interface RotationAxesStatus {
     /**
-     * 是否启用偏航轴
+     * 是否启用了偏航轴，true表示已启用，false表示已禁用。
      * @type { boolean }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -867,7 +867,7 @@ declare namespace mechanicManager {
     yawEnabled: boolean;
 
     /**
-     * 是否启用滚动轴
+     * 是否启用了横滚轴，true表示已启用，false表示已禁用。
      * @type { boolean }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -877,7 +877,7 @@ declare namespace mechanicManager {
     rollEnabled: boolean;
 
     /**
-     * 是否使能俯仰轴
+     * 是否启用了俯仰轴，true表示已启用，false表示已禁用。
      * @type { boolean }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
