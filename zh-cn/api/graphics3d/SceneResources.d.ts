@@ -251,7 +251,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * 仅对阴影进行绘制，当材质开启Blend属性，与背景融合模拟透明材质效果。
+   * 仅对阴影进行绘制，当材质开启[Blend]{@link Blend}属性，与背景融合模拟透明材质效果。
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi

@@ -657,7 +657,7 @@ export declare class Scene {
 
   /**
    * 通过传入的资源路径加载资源，使用Promise异步回调。
-   * 调用后，应该在Scene使用完毕时调用destroy释放资源，否则可能导致资源泄漏。
+   * 调用后，应该在Scene使用完毕时调用destroy[destroy]{@link destroy}释放资源，否则可能导致资源泄漏。
    *
    * @param { ResourceStr } [uri] - 待加载的模型文件资源路径，默认值为undefined。
    * @returns { Promise<Scene> } Promise对象，返回场景对象。
