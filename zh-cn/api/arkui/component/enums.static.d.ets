@@ -5334,7 +5334,7 @@ export declare enum EdgeLightPosition {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum ImmersiveStrategy {
   /**
@@ -5350,7 +5350,7 @@ export declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   BIND_SHEET_EXPAND_SAFE_AREA = 7,
 }

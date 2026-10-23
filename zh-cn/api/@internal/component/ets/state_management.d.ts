@@ -122,6 +122,7 @@ declare class Storage {
    *
    * @param { string } key - 要获取的存储key名称。
    * @returns { string | undefined } key对应的值；key不存在时返回undefined。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @FaAndStageModel
    * @since 7 dynamic

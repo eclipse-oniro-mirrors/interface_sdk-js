@@ -35,7 +35,7 @@ import { BusinessError } from '../@ohos.base';
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export interface RenderTargetParameters extends SceneResourceParameters {
   /**
@@ -44,7 +44,7 @@ export interface RenderTargetParameters extends SceneResourceParameters {
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static 
+   * @since 26.1.0 dynamic&static 
    */
   size: Vec2;
 }
@@ -893,7 +893,7 @@ export declare class Scene {
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   snapshot(cameras: Camera[], params: RenderTargetParameters[]): Promise<RenderTarget[]>;
 }

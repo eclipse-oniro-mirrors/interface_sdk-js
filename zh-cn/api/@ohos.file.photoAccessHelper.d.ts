@@ -743,7 +743,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     FEATURED_SINGLE_PET = 18
   }
@@ -18560,7 +18560,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface DirtyDataResultInfo {
     /**
@@ -18570,7 +18570,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     elapsedTime: int;
     /**
@@ -18580,7 +18580,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     profit: int;
     /**
@@ -18589,7 +18589,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     errorMsg: string;
   }
@@ -18600,7 +18600,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface IntervalInfo {
     /**
@@ -18610,7 +18610,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     intervalIndex: int;
     /**
@@ -18620,7 +18620,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     beginTime: int;
     /**
@@ -18630,7 +18630,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     endTime: int;
   }
@@ -18641,7 +18641,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface CleanupSize {
     /**
@@ -18651,7 +18651,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     intervalIndex: int;
     /**
@@ -18661,7 +18661,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     revenue: int;
   }

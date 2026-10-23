@@ -471,7 +471,7 @@ declare namespace url {
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     class URLUtil {
         /**
@@ -484,7 +484,7 @@ declare namespace url {
          * @stagemodelonly
          * @crossplatform
          * @atomicservice
-         * @since 26.2.0 dynamiconly
+         * @since 26.1.0 dynamiconly
          */
         static toString(urlParams: URLParams): string;
     }

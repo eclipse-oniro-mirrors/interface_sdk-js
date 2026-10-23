@@ -744,7 +744,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     FEATURED_SINGLE_PET = 18
   }
@@ -9764,12 +9764,12 @@ declare namespace photoAccessHelper {
   export class RecentPhotoOptions {
     /**
      * Time range for displaying the recent images or videos, measured in seconds. After setting, the system shows
-     * images or videos taken within the specified time from the current moment. The longest duration you can set is 1
-     * day (86400s).
+     * the latest image sorted by creation time taken within the specified time from the current moment. The longest
+     * duration you can set is 2147483647 (INT_MAX) seconds.
      *
-     * If the value is less than or equal to 0, greater than 86400, or not set, the system uses the longest duration (1
-     * day) by default. If there are no images or videos within the set time range, the component does not show
-     * anything.
+     * If the value is set to Number.POSITIVE_INFINITY, the system shows the latest one within the INT_MAX range.
+     * If the value is less than or equal to 0, greater than INT_MAX, or not set, the system uses 1 day by default.
+     * If there are no images or videos within the set time range, the component does not show anything.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
@@ -18995,7 +18995,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface DirtyDataResultInfo {
     /**
@@ -19005,7 +19005,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     elapsedTime: int;
     /**
@@ -19015,7 +19015,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     profit: int;
     /**
@@ -19024,7 +19024,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     errorMsg: string;
   }
@@ -19035,7 +19035,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface IntervalInfo {
     /**
@@ -19045,7 +19045,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     intervalIndex: int;
     /**
@@ -19055,7 +19055,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     beginTime: int;
     /**
@@ -19065,7 +19065,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     endTime: int;
   }
@@ -19076,7 +19076,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface CleanupSize {
     /**
@@ -19086,7 +19086,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     intervalIndex: int;
     /**
@@ -19096,7 +19096,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     revenue: int;
   }

@@ -1116,7 +1116,7 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 输入法面板不支持创建子窗口。例如：不支持使用window.createWindow[设置应用子窗口](docroot://windowmanager/application-window-fa.md#设置应用子窗口)、
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
-     * <br> > 、[CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
+     * <br> > 、[CustomDialog]{@link CustomDialogController}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
      * <br> > [弹出框]{@link @ohos.arkui.advanced.Dialog}、
      * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}或设置
      * <br> > showInSubwindow为false。
@@ -1144,7 +1144,7 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 输入法面板不支持创建子窗口。例如：不支持使用window.createWindow[设置应用子窗口](docroot://windowmanager/application-window-fa.md#设置应用子窗口)、
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
-     * <br> > 、[CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
+     * <br> > 、[CustomDialog]{@link CustomDialogController}等接口创建子窗口弹窗。建议开发者采用非子窗的替代方案，如
      * <br> > [弹出框]{@link @ohos.arkui.advanced.Dialog}、
      * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}或设置
      * <br> > showInSubwindow为false。
@@ -2656,6 +2656,90 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     offAttachOptionsDidChange(callback?: Callback<AttachOptions>): void;
+
+    /**
+     * 获取光标前指定长度的富文本。该接口使用promise返回结果。
+     * <br>
+     * <br> > **注意**
+     * <br>
+     * <br> >如果输入法应用当前绑定的编辑框是ArkUI富文本组件，则富文本返回内容。如果绑定的组件不是ArkUI富文本组件，则会桥接到文本实现。
+     * <br>
+     * <br> >最大可获取的富文本总长度为128KB，超过这个限制将请求失败。
+     *
+     * @param { int } length - 文本长度，不能小于0。
+     *     <br>取值应为[0,4096]内的整数。
+     * @returns { Promise<InputMethodRichText> } Promise用于返回指定长度的光标前富文本。
+     * @throws { BusinessError } 12800003 - 输入法客户端错误。可能原因：
+     *     1.编辑框没有焦点。2.当前输入法应用没有绑定编辑框。
+     *     3.ipc由于传输数据量过大或其他原因导致失败。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getLeftRichText(length: int): Promise<InputMethodRichText>;
+
+    /**
+     * 获取光标前指定长度的富文本。
+     * <br>
+     * <br> > **注意**
+     * <br>
+     * <br> >如果输入法应用当前绑定的编辑框是ArkUI富文本组件，则富文本返回内容。如果绑定的组件不是ArkUI富文本组件，则会桥接到文本实现。
+     * <br>
+     * <br> >最大可获取的富文本总长度为128KB，超过这个限制将请求失败。
+     *
+     * @param { int } length - 文本长度，不能小于0。
+     *     <br>取值应为[0,4096]内的整数。
+     * @returns { InputMethodRichText } 光标前指定长度的富文本。
+     * @throws { BusinessError } 12800003 - 输入法客户端错误。可能原因：
+     *     1.编辑框没有焦点。2.当前输入法应用没有绑定编辑框。
+     *     3.ipc由于传输数据量过大或其他原因导致失败。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getLeftRichTextSync(length: int): InputMethodRichText;
+
+    /**
+     * 获取光标后指定长度的富文本。该接口使用promise返回结果。
+     * <br>
+     * <br> > **注意**
+     * <br>
+     * <br> >如果输入法应用当前绑定的编辑框是ArkUI富文本组件，则富文本返回内容。如果绑定的组件不是ArkUI富文本组件，则会桥接到文本实现。
+     * <br>
+     * <br> >最大可获取的富文本总长度为128KB，超过这个限制将请求失败。
+     *
+     * @param { int } length - 文本长度，不能小于0。
+     *     <br>取值应为[0,4096]内的整数。
+     * @returns { Promise<InputMethodRichText> } Promise用于返回指定长度的光标后富文本。
+     * @throws { BusinessError } 12800003 - 输入法客户端错误。可能原因：
+     *     1.编辑框没有焦点。2.当前输入法应用没有绑定编辑框。
+     *     3.ipc由于传输数据量过大或其他原因导致失败。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getRightRichText(length: int): Promise<InputMethodRichText>;
+
+    /**
+     * 获取光标后指定长度的富文本。
+     * <br>
+     * <br> > **注意**
+     * <br>
+     * <br> >如果输入法应用当前绑定的编辑框是ArkUI富文本组件，则富文本返回内容。如果绑定的组件不是ArkUI富文本组件，则会桥接到文本实现。
+     * <br>
+     * <br> >最大可获取的富文本总长度为128KB，超过这个限制将请求失败。
+     *
+     * @param { int } length - 文本长度，不能小于0。
+     *     <br>取值应为[0,4096]内的整数。
+     * @returns { InputMethodRichText } 光标后指定长度的富文本。
+     * @throws { BusinessError } 12800003 - 输入法客户端错误。可能原因：
+     *     1.编辑框没有焦点。2.当前输入法应用没有绑定编辑框。
+     *     3.ipc由于传输数据量过大或其他原因导致失败。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getRightRichTextSync(length: int): InputMethodRichText;
   }
 
   /**
@@ -4778,6 +4862,130 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     CHARACTERS
+  }
+
+  /**
+   * 定义富文本。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface InputMethodRichText {
+    /**
+     * 从富文本中提取纯文本。
+     *
+     * @returns { string } 从富文本中提取的纯文本。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getString(): string;
+
+    /**
+     * 获取组成富文本的span。
+     *
+     * @returns { Array<RichTextSpan> } 组成富文本的span数组。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getSpans(): Array<RichTextSpan>;
+  }
+
+  /**
+   * 定义富文本中的跨度。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface RichTextSpan {
+    /**
+     * 获取span的类型。
+     *
+     * @returns { SpanType } span的类型。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getType(): SpanType;
+
+    /**
+     * 获取span的内容。
+     * <br>
+     * <br> > **注意**
+     * <br>
+     * <br> >如果span类型为图片，则内容为图片插入ArkUI富文本组件时携带的标签信息。
+     *
+     * @returns { string } span的内容。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getContent(): string;
+
+    /**
+     * 获取富文本中span的范围。
+     *
+     * @returns { Range } 富文本中span的范围，由开始和结束位置表示。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getRange(): Range;
+  }
+
+  /**
+   * 枚举，富文本中span的类型。<br>
+   * <br>
+   * |名称|值|描述|
+   * | -------- | -- | -------- |
+   * | TEXT | 0 |纯文本。|
+   * |图像|1|图像.|
+   * |符号|2|符号.|
+   * |自定义|3|自定义.|
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum SpanType {
+    /**
+     * 纯文本。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TEXT = 0,
+
+    /**
+     * 图片。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    IMAGE = 1,
+
+    /**
+     * 符号。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SYMBOL = 2,
+
+    /**
+     * 自定义。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CUSTOM = 3
   }
 }
 

@@ -2038,7 +2038,7 @@ declare namespace ble {
      * @throws { BusinessError } 2901003 - The connection is not established.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     refreshServices(): Promise<void>;
 

@@ -1093,7 +1093,7 @@ export type OnContextMenuHideCallback = () => void;
  *     <br>Default value: For details.
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
 /**
@@ -1101,7 +1101,7 @@ export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, opt
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum WebContextMenuItemId {
     /**
@@ -1109,7 +1109,7 @@ export declare enum WebContextMenuItemId {
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     MENU_COPY_LINK = 11
 }
@@ -1118,7 +1118,7 @@ export declare enum WebContextMenuItemId {
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface WebContextMenuOptions {
     /**
@@ -1127,7 +1127,7 @@ export declare interface WebContextMenuOptions {
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     enable?: boolean;
 }
@@ -2246,7 +2246,7 @@ export declare class WebContextMenuParam {
      * @returns { boolean } Return whether can generate a Text Fragment link.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     shouldOfferLinkToText(): boolean;
     /**
@@ -2255,7 +2255,7 @@ export declare class WebContextMenuParam {
      * @returns { string } Return the Text Fragment link URL, or return null if not available.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     getTextFragmentGeneratedLink(): string;
     /**
@@ -2264,7 +2264,7 @@ export declare class WebContextMenuParam {
      * @returns { boolean } Return whether has a Text Fragment highlight.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     isOverTextFragment(): boolean;
 }
@@ -2376,7 +2376,7 @@ export declare class WebContextMenuResult {
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     copyLinkToTextMenu(): void;
     /**
@@ -2384,7 +2384,7 @@ export declare class WebContextMenuResult {
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     removeFragments(): void;
 }
@@ -5815,7 +5815,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default onContextMenuUpdate(callback: OnContextMenuUpdateCallback | undefined): this;
   /**
@@ -7137,7 +7137,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default caretColor(value: ResourceColor | undefined): this;
 
@@ -7150,7 +7150,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
 
@@ -7165,7 +7165,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @returns { WebAttribute }
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default flingSpeedLimit(speedLimit: double | undefined): this;
 }
@@ -7339,7 +7339,7 @@ export declare interface EmbedOptions {
      * @default false
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     supportTransformRotateAndSkew?: boolean;
 }
@@ -7826,7 +7826,7 @@ export type OnAISessionCallback = (state: AISessionResultType, content: string) 
  * @param { OnZoomChangeEvent } zoomChangeInfo - callback information of onZoomChange.
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
 
@@ -7835,7 +7835,7 @@ export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface OnZoomChangeEvent {
   /**
@@ -7843,7 +7843,7 @@ export declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   oldZoomFactor: double;
 
@@ -7852,7 +7852,7 @@ export declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   newZoomFactor: double;
 }

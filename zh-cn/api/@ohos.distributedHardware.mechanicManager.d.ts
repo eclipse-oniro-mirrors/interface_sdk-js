@@ -563,7 +563,7 @@ declare namespace mechanicManager {
    * @syscap SystemCapability.Mechanic.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function onBatteryLevelChange(mechId: int, callback: Callback<BatteryLevelInfo>): void;
 
@@ -580,7 +580,7 @@ declare namespace mechanicManager {
    * @syscap SystemCapability.Mechanic.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function offBatteryLevelChange(mechId: int, callback?: Callback<BatteryLevelInfo>): void;
 
@@ -596,7 +596,7 @@ declare namespace mechanicManager {
    * @syscap SystemCapability.Mechanic.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getDeviceAdsorbState(mechId: int): AdsorbState;
 
@@ -1278,7 +1278,7 @@ declare namespace mechanicManager {
      *
      * @syscap SystemCapability.Mechanic.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     POCKET_GIMBAL_CAMERA_DEVICE = 3
   }
@@ -1670,7 +1670,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     HEAD_TURN_TO_BASE = 11,
 
@@ -1680,7 +1680,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     BASE_TURN_TO_HEAD = 12,
 
@@ -1690,7 +1690,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     FRONT_TO_BACK_FLIP = 13,
 
@@ -1987,7 +1987,7 @@ declare namespace mechanicManager {
    * @syscap SystemCapability.Mechanic.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum AdsorbState {
     /**
@@ -1996,7 +1996,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     UNKNOWN = -1,
 
@@ -2006,7 +2006,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ADSORBED = 0,
 
@@ -2016,7 +2016,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     UNADSORBED = 1
   }
@@ -2028,7 +2028,7 @@ declare namespace mechanicManager {
    * @syscap SystemCapability.Mechanic.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface BatteryLevelInfo {
     /**
@@ -2041,7 +2041,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     mechId: int;
 
@@ -2052,7 +2052,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     batteryLevel: int;
 
@@ -2062,7 +2062,7 @@ declare namespace mechanicManager {
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     isCharging: boolean;
   }

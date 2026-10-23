@@ -138,7 +138,7 @@ export class ConnectOptions<T extends object> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   ignoreReadOnlyProperties?: boolean;
 }

@@ -377,7 +377,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface FileEntity extends IntentEntity {
     /**
@@ -386,7 +386,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     entityId: 'OHOS_FILE_ENTITY';
 
@@ -396,7 +396,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     uris: Array<string>;
 
@@ -413,7 +413,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     flags?: int;
   }
@@ -606,7 +606,7 @@ declare namespace insightIntent {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface InsightIntentExecutionInfo {
     /**
@@ -615,7 +615,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     intentName: string;
 
@@ -625,7 +625,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     instanceId: int;
 
@@ -635,7 +635,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     callerBundleName: string;
 
@@ -645,7 +645,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     callerTokenId: string;
 
@@ -655,7 +655,7 @@ declare namespace insightIntent {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     callerUid: int;
   }

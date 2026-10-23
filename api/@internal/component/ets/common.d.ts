@@ -1476,7 +1476,7 @@ declare const Watch: (value: string) => PropertyDecorator;
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderDecoratorConfig {
   /**
@@ -1489,7 +1489,7 @@ declare interface BuilderDecoratorConfig {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isPlaceholder: boolean;
 }
@@ -1504,7 +1504,7 @@ declare interface BuilderDecoratorConfig {
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodDecorator;
 
@@ -1512,7 +1512,7 @@ declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodD
  * Defining Builder MethodDecorator
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
- * @type { MethodDecorator & BuilderMethodDecorator } [since 26.2.0]
+ * @type { MethodDecorator & BuilderMethodDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1550,7 +1550,7 @@ declare const LocalBuilder: MethodDecorator;
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface VersionCondition {
   /**
@@ -1563,7 +1563,7 @@ declare interface VersionCondition {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   minApiVersion?: number | string;
 
@@ -1577,7 +1577,7 @@ declare interface VersionCondition {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxApiVersion?: number | string;
 }
@@ -1592,7 +1592,7 @@ declare interface VersionCondition {
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type StylesVersionDecorator = (versionCondition: VersionCondition) => MethodDecorator;
 
@@ -1603,7 +1603,7 @@ declare type StylesVersionDecorator = (versionCondition: VersionCondition) => Me
  * consistency. 
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
- * @type { MethodDecorator & StylesVersionDecorator } [since 26.2.0]
+ * @type { MethodDecorator & StylesVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -9021,7 +9021,7 @@ declare enum SafeAreaEdge {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SafeAreaInsetAlignment {
   /**
@@ -9034,7 +9034,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   START = 0,
 
@@ -9046,7 +9046,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   CENTER = 1,
 
@@ -9060,7 +9060,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   END = 2
 }
@@ -9073,7 +9073,7 @@ declare enum SafeAreaInsetAlignment {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetEdgeConfig {
   /**
@@ -9089,7 +9089,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   content: CustomBuilder;
 
@@ -9105,7 +9105,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   spacing?: LengthMetrics;
 
@@ -9119,7 +9119,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   alignment?: SafeAreaInsetAlignment;
 }
@@ -9132,7 +9132,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetOptions {
   /**
@@ -9146,7 +9146,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   top?: SafeAreaInsetEdgeConfig;
 
@@ -9162,7 +9162,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   end?: SafeAreaInsetEdgeConfig;
 
@@ -9177,7 +9177,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   bottom?: SafeAreaInsetEdgeConfig;
 
@@ -9193,7 +9193,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   start?: SafeAreaInsetEdgeConfig;
 }
@@ -14733,7 +14733,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   maskExtraHeight?: LengthMetrics;
 
@@ -14750,7 +14750,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   maskColor?: ResourceColor;
 
@@ -14762,7 +14762,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   effectiveDistance?: LengthMetrics;
 }
@@ -14808,7 +14808,7 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SAFE_AREA_PADDING = 2
 }
@@ -18773,7 +18773,7 @@ declare class TouchResult {
  */
 declare interface DepthVector3 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18784,7 +18784,7 @@ declare interface DepthVector3 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18795,7 +18795,7 @@ declare interface DepthVector3 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18817,7 +18817,7 @@ declare interface DepthVector3 {
  */
 declare interface DepthVector4 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18829,7 +18829,7 @@ declare interface DepthVector4 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18840,7 +18840,7 @@ declare interface DepthVector4 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18851,7 +18851,7 @@ declare interface DepthVector4 {
   z: double;
 
   /**
-   * W component.
+   * W component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -21042,7 +21042,7 @@ declare class CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   safeAreaInset(options?: SafeAreaInsetOptions): T;
 
@@ -25781,6 +25781,11 @@ declare class CommonMethod<T> {
   /**
   * Tips control
   *
+  * > **NOTE**
+  * >
+  * > When the [enabled]{@link CommonMethod#enabled} universal attribute of the component bound with **bindTips** is
+  * > set to **false**, the floating bubble can still be displayed.
+  *
   * @param { TipsMessageType } message
   * @param { TipsOptions } [options]
   * @returns { T }
@@ -25811,6 +25816,13 @@ declare class CommonMethod<T> {
 
   /**
    * Menu control
+   *
+   * > **NOTE**
+   * >
+   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20
+   * >   only if the input parameter type of **content** is Array&lt;MenuElement&gt;.
+   * > - Multi-level menus cannot be displayed using **bindMenu** in **CustomBuilder**. Use the Menu component instead.
+   * > - **bindMenu** can be configured to display in subwindows by setting the **showInSubWindow** property in MenuOptions.
    *
    * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
    *     action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 7 - 10]
@@ -25843,6 +25855,12 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
+   *
    * @param { CustomBuilder } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu, Long pressing with a mouse device
    *     is not supported.
@@ -25858,6 +25876,12 @@ declare class CommonMethod<T> {
   /**
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByResponseType** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
    *
    * @param { CustomBuilder | Array<MenuElement> } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu. Long pressing with a mouse device
@@ -25877,6 +25901,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | undefined } content - Indicates the content of context menu. Undefined
    *     means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25893,6 +25922,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | Array<MenuElement> | undefined } content - Indicates the content of
    *     context menu. Undefined means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25908,6 +25942,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShown settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShown - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -25930,6 +25969,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShow settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByIsShow** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShow - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -30165,8 +30209,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
    *    pressed.
-   *    <br>Default value: For API versions earlier than 26.2.0,the defalut value is false.
-   *    For API versions 26.2.0 and later, the defalut value is true when the scrollable component scrolls
+   *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+   *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
    *    horizontally,false otherwise.
    * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30538,7 +30582,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }

@@ -1028,7 +1028,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.key.form_edit_color_mode'
   }

@@ -3916,7 +3916,7 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getActiveNotification(hashCode: string): Promise<NotificationRequest>;
 

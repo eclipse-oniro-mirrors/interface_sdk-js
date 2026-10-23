@@ -27,7 +27,7 @@ import nearlinkConstant from '@ohos.nearlink.constant';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
+ * @atomicservice [since 26.1.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
@@ -56,7 +56,7 @@ declare namespace scan {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -79,7 +79,7 @@ declare namespace scan {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [startScan]{@link scan.startScan(filters: ScanFilters[] | null, options?: ScanOptions): Promise<void>} 发起星闪扫描。
@@ -101,7 +101,7 @@ declare namespace scan {
    *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offDeviceFound]{@link scan.offDeviceFound(callback?: Callback<ScanResults[]>): void} 取消订阅星闪扫描结果。
@@ -121,7 +121,7 @@ declare namespace scan {
    *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [onDeviceFound]{@link scan.onDeviceFound(callback: Callback<ScanResults[]>): void} 订阅星闪扫描结果。
@@ -133,7 +133,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -143,7 +143,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -154,7 +154,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -164,7 +164,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -174,7 +174,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -184,7 +184,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -194,7 +194,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -205,7 +205,7 @@ declare namespace scan {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     frameType?: nearlinkConstant.FrameType;
   }
@@ -215,7 +215,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -225,7 +225,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -236,7 +236,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -247,7 +247,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -258,7 +258,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -269,7 +269,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -281,7 +281,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -293,7 +293,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -303,7 +303,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -315,7 +315,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -327,7 +327,7 @@ declare namespace scan {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     frameType?: nearlinkConstant.FrameType;
   }
@@ -337,7 +337,7 @@ declare namespace scan {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -347,7 +347,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -357,7 +357,7 @@ declare namespace scan {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -368,7 +368,7 @@ declare namespace scan {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */

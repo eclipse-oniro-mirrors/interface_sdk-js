@@ -580,7 +580,7 @@ interface WaterFlowInterface {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
 
@@ -780,7 +780,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): WaterFlowAttribute;
 
@@ -1044,7 +1044,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollPlaceholder(provider?: PlaceholderProvider): WaterFlowAttribute;
 }

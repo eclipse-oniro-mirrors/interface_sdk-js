@@ -1547,7 +1547,7 @@ type OnContextMenuHideCallback = () => void;
  *     <br>默认值：见options的默认值。
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
 
@@ -1556,7 +1556,7 @@ type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: 
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum WebContextMenuItemId {
   /**
@@ -1564,7 +1564,7 @@ declare enum WebContextMenuItemId {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   MENU_COPY_LINK = 11
 }
@@ -1574,7 +1574,7 @@ declare enum WebContextMenuItemId {
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface WebContextMenuOptions {
   /**
@@ -1583,7 +1583,7 @@ declare interface WebContextMenuOptions {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enable?: boolean;
 }
@@ -3007,7 +3007,7 @@ declare class WebContextMenuParam {
    * @returns { boolean } **true**表示当前选中文本可用于生成Text Fragment链接；**false**表示不可用。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   shouldOfferLinkToText(): boolean;
 
@@ -3019,7 +3019,7 @@ declare class WebContextMenuParam {
    * @returns { string } 包含**#:~:text=**片段、符合W3C Text Fragments规范的Text Fragment链接URL。若当前选中文本不支持链接生成，返回空字符串。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getTextFragmentGeneratedLink(): string;
 
@@ -3031,7 +3031,7 @@ declare class WebContextMenuParam {
    * @returns { boolean } **true**表示当前页面存在Text Fragment高亮；**false**表示不存在。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isOverTextFragment(): boolean;
 }
@@ -3221,7 +3221,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   copyLinkToTextMenu(): void;
 
@@ -3236,7 +3236,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   removeFragments(): void;
 }
@@ -6329,7 +6329,7 @@ declare interface BlankScreenDetectionEventInfo {
 type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 
 /**
- * 枚举白屏归因的具体原因，从网络层、资源层、渲染与JS层、内核与进程层、容器层标识白屏问题的根因。
+ * 白屏归因的具体原因，从网络层、资源层、渲染与JS层、内核与进程层、容器层标识白屏问题的根因，帮助开发者快速定位白屏问题来源，提升页面加载问题的排查效率和用户体验。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
@@ -6409,7 +6409,7 @@ declare enum BlankScreenReason {
    */
   PROXY_ERROR = 109,
   /**
-   * 发生其他网络错误。
+   * 其他网络错误。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6547,7 +6547,7 @@ declare enum BlankScreenReason {
 }
 
 /**
- * 提供监测到白屏并完成根因归因时的事件信息，包括页面URL、归因原因和附加详情。
+ * 提供监测到白屏并完成根因归因时的事件信息，包括页面URL、归因原因和附加详情。适用于需要监控页面白屏问题并分析根因的场景，提升白屏问题的定位效率和用户体验。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
@@ -6555,7 +6555,7 @@ declare enum BlankScreenReason {
  */
 declare interface MonitoredBlankScreenEventInfo {
   /**
-   * 监测到白屏时，正在加载页面的URL。
+   * 监测到白屏时，页面的url。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6564,7 +6564,7 @@ declare interface MonitoredBlankScreenEventInfo {
   url: string;
 
   /**
-   * 白屏归因原因。
+   * 本次白屏的归因原因。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6573,7 +6573,7 @@ declare interface MonitoredBlankScreenEventInfo {
   reason: BlankScreenReason;
 
   /**
-   * 白屏归因原因的附加信息。
+   * 白屏归因原因的附加信息，JSON格式的字符串，包含根因归因报告的详细内容。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -6583,9 +6583,9 @@ declare interface MonitoredBlankScreenEventInfo {
 }
 
 /**
- * 监测到白屏并完成根因归因时触发的回调。
+ * 监测到白屏并完成根因归因时触发此回调。
  *
- * @param { MonitoredBlankScreenEventInfo } event - 监测到白屏并完成归因时的事件信息。
+ * @param { MonitoredBlankScreenEventInfo } event - 监测到白屏并完成归因时的详细信息。
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
  * @since 26.0.1 dynamic
@@ -7667,7 +7667,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute } 返回WebAttribute对象，支持链式调用。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
@@ -9123,9 +9123,13 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onDetectedBlankScreen(callback: OnDetectBlankScreenCallback): WebAttribute;
 
   /**
-   * 注册白屏监控归因回调。Web组件监测到白屏并完成根因归因时，触发该回调。
+   * Web组件监测到白屏并完成根因归因时触发此回调。
    *
-   * @param { OnMonitorBlankScreenCallback } callback - 白屏监控归因回调。
+   * > **说明：**
+   * >
+   * > - 需配合enableBlankScreenMonitor使用。未开启白屏监控时，不会触发本回调。
+   *
+   * @param { OnMonitorBlankScreenCallback } callback - 监测到白屏并完成根因归因时触发。事件对象包含页面URL、白屏根因、归因详情等诊断信息。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -9154,7 +9158,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig): WebAttribute;
 
   /**
-   * 设置是否开启白屏监控。开启白屏监控后，监测到白屏时会触发onMonitoredBlankScreen回调。
+   * 设置是否开启白屏监控。开启白屏监控后，监测到白屏时会触发回调onMonitoredBlankScreen。
    *
    * @param { boolean } enable - 是否开启白屏监控。true表示开启，false表示关闭。
    * @returns { WebAttribute }
@@ -9465,7 +9469,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   caretColor(value: ResourceColor): WebAttribute;
 
@@ -9477,7 +9481,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
 
@@ -9492,7 +9496,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
 }
@@ -9769,7 +9773,7 @@ declare interface EmbedOptions {
    * @default false
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   supportTransformRotateAndSkew?: boolean;
 }
@@ -10224,7 +10228,7 @@ type OnAISessionCallback = (state: AISessionResultType, content: string) => void
  * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
 
@@ -10233,7 +10237,7 @@ type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface OnZoomChangeEvent {
   /**
@@ -10241,7 +10245,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   oldZoomFactor: number;
 
@@ -10250,7 +10254,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
 }

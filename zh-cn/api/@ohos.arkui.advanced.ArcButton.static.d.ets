@@ -15,19 +15,21 @@
  */
 
 /**
- * 弧形按钮组件提供强调、普通、警告等样式按钮，推荐用于圆形屏幕的设备。
+ * 弧形按钮组件提供强调、常规、自定义等样式按钮，推荐用于圆形屏幕的设备。
  * 
  * > **说明：**
  * >
- * > - 本模块同时支持ArkTS-Dyn、ArkTS-Sta。
- * 
  * > - 该组件支持在Phone、PC/2in1、Tablet、TV、Wearable设备上使用。API version 22及以前版本，在Phone、PC/2in1、Tablet、TV上使用会编译告警，但可以正常运行。
  * 
- * ###### ArcButtonAttribute
+ * ###### 子组件
+ * 
+ * 无
+ * 
+ * ###### 属性
  * 
  * 不支持[通用属性]{@link common}
  * 
- * ###### ArcButtonAttribute
+ * ###### 事件
  * 
  * 通用事件支持[点击事件]{@link common}和[触摸事件]{@link common}。
  *
@@ -544,8 +546,6 @@ export declare class ArcButtonOptions {
   constructor(options: CommonArcButtonOptions);
 }
 /**
- * ArcButton({ options: ArcButtonOptions })
- * 
  * 创建ArcButton实例，入参是弧形按钮配置选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle

@@ -133,7 +133,7 @@ declare namespace insightIntentProvider {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   type OnWillInsightIntentExecuteCallBackFn = (executionInfo: insightIntent.InsightIntentExecutionInfo) => void;
 
@@ -143,7 +143,7 @@ declare namespace insightIntentProvider {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface InsightIntentExecutionCallBack {
     /**
@@ -152,7 +152,7 @@ declare namespace insightIntentProvider {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     onWillInsightIntentExecuteCallBack?: OnWillInsightIntentExecuteCallBackFn;
   }
@@ -164,7 +164,7 @@ declare namespace insightIntentProvider {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function onWillInsightIntentExecute(callback: InsightIntentExecutionCallBack): void;
 
@@ -177,7 +177,7 @@ declare namespace insightIntentProvider {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function offWillInsightIntentExecute(callback?: InsightIntentExecutionCallBack): void;
 }

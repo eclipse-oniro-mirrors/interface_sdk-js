@@ -159,7 +159,7 @@ declare namespace uiObserver {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     ABOUT_TO_APPEAR = 10,
  
@@ -168,7 +168,7 @@ declare namespace uiObserver {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     ABOUT_TO_DISAPPEAR = 11,
 

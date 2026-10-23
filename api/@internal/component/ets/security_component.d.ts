@@ -83,7 +83,7 @@ declare enum SecurityComponentRoleType {
  *
  * This module is mainly used in the following scenarios:
  * - Set layout, size, text, icon, color, border, and interaction-related attributes for security components
- * such as [PasteButton]{@link ./paste_button} and [SaveButton]{@link ./save_button}.
+ * such as [PasteButton]{@link ./paste_button:PasteButton} and [SaveButton]{@link ./save_button:SaveButton}.
  * - Adjust the display effect and interaction experience of security components while ensuring compliance with
  * the security component specifications. For specific constraints,
  * see [Constraints](docroot://security/AccessToken/security-component-overview.md#constraints).
@@ -667,11 +667,11 @@ declare class SecurityComponentMethod<T> {
 
   /**
    * Sets the alignment rules for child components within a relative container. This API takes effect only when the
-   * parent container is [RelativeContainer]{@link ./relative_container}.
+   * parent container is [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    *
    * @param { AlignRuleOption } alignRule - Alignment rule configuration object that defines anchor alignment options (
    *     **top**, **bottom**, **left**, **right**, and **center**). Specifies the alignment position and method of the
-   *     security component in [RelativeContainer]{@link ./relative_container}.
+   *     security component in [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    * @returns { T } Attribute of the security component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -682,7 +682,7 @@ declare class SecurityComponentMethod<T> {
 
   /**
    * Sets the alignment rules for child components within a relative container. This API takes effect only when the
-   * parent container is [RelativeContainer]{@link ./relative_container}. In the horizontal direction, this method
+   * parent container is [RelativeContainer]{@link ./relative_container:RelativeContainer}. In the horizontal direction, this method
    * replaces **left** and **right** in the [alignRules]{@link SecurityComponentMethod.alignRules} above with **start**
    * and **end**, respectively, allowing the layout to be mirrored in RTL mode. You are advised to use this method
    * preferentially.
@@ -690,7 +690,7 @@ declare class SecurityComponentMethod<T> {
    * @param { LocalizedAlignRuleOptions } alignRule - Alignment rule configuration object that uses **start** and
    *     **end** in place of **left** and **right** to support RTL layout mirroring. Includes anchor alignment settings
    *     for **top**, **bottom**, **start**, **end**, and **center**, specifying the alignment position and method of
-   *     the security component within [RelativeContainer]{@link ./relative_container}.
+   *     the security component within [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    * @returns { T } Attribute of the security component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -714,10 +714,10 @@ declare class SecurityComponentMethod<T> {
 
   /**
    * Sets the parameters of the chain in which the component is the head. This API takes effect only when the parent
-   * container is [RelativeContainer]{@link ./relative_container}.
+   * container is [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    *
    * @param { Axis } direction - Direction of the chain layout. Specifies the arrangement direction of the chain headed
-   *     by this component in the [RelativeContainer]{@link ./relative_container}.
+   *     by this component in the [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    * @param { ChainStyle } style - Style of the chain layout. Controls how child components are distributed within the
    *     chain, such as evenly distributed, aligned at both ends, or compactly arranged. For specific values and
    *     effects, see [ChainStyle]{@link ChainStyle}.

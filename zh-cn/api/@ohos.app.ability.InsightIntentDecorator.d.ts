@@ -333,7 +333,7 @@ declare interface PageIntentDecoratorInfo extends IntentDecoratorInfo {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   permissions?: string[];
 }
@@ -369,7 +369,7 @@ declare interface FunctionIntentDecoratorInfo extends IntentDecoratorInfo {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   permissions?: string[];
 }
@@ -452,7 +452,7 @@ declare interface EntryIntentDecoratorInfo extends IntentDecoratorInfo {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   permissions?: string[];
 }

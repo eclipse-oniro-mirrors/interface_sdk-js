@@ -976,7 +976,6 @@ declare namespace observer {
    * @param { Callback<VoIPCallStateInfo> } callback - Indicates the callback for
    *     getting the VoIP call state information.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 8800001 - Invalid parameter value.
    * @throws { BusinessError } 8800002 - Service connection failed.
    * @throws { BusinessError } 8800003 - System internal error.
    * @syscap SystemCapability.Telephony.StateRegistry
@@ -992,7 +991,6 @@ declare namespace observer {
    * @param { Callback<VoIPCallStateInfo> } [callback] - Indicates the callback for
    *     getting the VoIP call state information.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 8800001 - Invalid parameter value.
    * @throws { BusinessError } 8800002 - Service connection failed.
    * @throws { BusinessError } 8800003 - System internal error.
    * @syscap SystemCapability.Telephony.StateRegistry

@@ -25,7 +25,7 @@
  *
  * @syscap SystemCapability.Ability.AgentRuntime.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 declare namespace taskManager {
   /**
@@ -33,7 +33,7 @@ declare namespace taskManager {
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum TaskPriority {
     /**
@@ -41,7 +41,7 @@ declare namespace taskManager {
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     LOW = 100,
     /**
@@ -49,7 +49,7 @@ declare namespace taskManager {
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     MEDIUM = 200,
     /**
@@ -57,7 +57,7 @@ declare namespace taskManager {
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     HIGH = 300,
   }
@@ -77,7 +77,7 @@ declare namespace taskManager {
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function startTask(taskId: string, priority?: TaskPriority): Promise<void>;
 
@@ -92,7 +92,7 @@ declare namespace taskManager {
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function finishTask(taskId: string): Promise<void>;
 }
