@@ -34,6 +34,7 @@ import type ApplicationStateChangeCallback from '../@ohos.app.ability.Applicatio
 /*** if arkts static */
 import ApplicationStateChangeCallback from '../@ohos.app.ability.ApplicationStateChangeCallback';
 /*** endif */
+import AppProcessStateObserver from '../@ohos.app.ability.AppProcessStateObserver';
 import systemConfiguration from '../@ohos.app.ability.systemConfiguration';
 import UIAbility from '../@ohos.app.ability.UIAbility';
 
@@ -353,6 +354,37 @@ declare class ApplicationContext extends Context {
    * @since 23 static
    */
   offApplicationStateChange(callback?: ApplicationStateChangeCallback): void;
+
+  /**
+   * Registers a listener for process state changes within the application, including process
+   * creation and termination. It can be called only on the main thread.
+   *
+   * @param { AppProcessStateObserver } observer - Observer triggered when a process is created or
+   *     destroyed within the application.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  onAppProcessStateChange(observer: AppProcessStateObserver): void;
+
+  /**
+   * Unregisters the listener for process state changes within the application. It can be called
+   * only on the main thread.
+   *
+   * @param { AppProcessStateObserver } [observer] - Observer registered by calling
+   *     [ApplicationContext.onAppProcessStateChange]{@link ApplicationContext#onAppProcessStateChange}.
+   *     If a defined observer is passed in, the listener for that observer is unregistered. If
+   *     no value is passed in, all the listeners registered by current process are unregistered.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - If the observer does not exist
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  offAppProcessStateChange(observer?: AppProcessStateObserver): void;
 
   /**
    * Obtains the information about running processes. This API uses a promise to return the result.
