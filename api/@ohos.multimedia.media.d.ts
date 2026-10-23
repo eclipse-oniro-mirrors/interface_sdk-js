@@ -1215,7 +1215,7 @@ declare namespace media {
      * Obtains the cover of the audio album. This API uses an asynchronous callback to return the result.
      *
      * @param { AsyncCallback<image.PixelMap> } callback - Callback used to return the album cover.
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1228,7 +1228,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<image.PixelMap | undefined> } callback - Callback used to return the album cover.
      *     to return when fetchAlbumCover completed.
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform
