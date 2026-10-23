@@ -32,7 +32,7 @@ import type { Callback } from './@ohos.base';
 declare namespace mechanicManager {
 
   /**
-   * Subscribes to device attachment state change events.
+   * 注册连接状态变化事件的回调监听
    * @param { 'attachStateChange' } type Event type.
    * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -42,7 +42,7 @@ declare namespace mechanicManager {
   function on(type: 'attachStateChange', callback: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * Subscribes to device attachment state change events.
+   * 注册连接状态变化事件的回调监听
    * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -51,7 +51,7 @@ declare namespace mechanicManager {
   function onAttachStateChange(callback: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * Unsubscribes from device attachment state change events.
+   * 取消注册连接状态变化事件的回调监听
    * @param { 'attachStateChange' } type Event type.
    * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -61,7 +61,7 @@ declare namespace mechanicManager {
   function off(type: 'attachStateChange', callback?: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * Unsubscribes from device attachment state change events.
+   * 取消注册连接状态变化事件的回调监听
    * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -510,7 +510,7 @@ declare namespace mechanicManager {
    *
    * @param { MechDeviceType } [mechDeviceType]  - 关联的设备类型
    *     <br>默认值:如果未提供该参数，则代表所有类型设备，只要支持其中一种以上则返回支持
-   * @returns { boolean } Returns whether control is supported.
+   * @returns { boolean } 当前设备是否支持某类设备的机械体设备控制
    * @syscap SystemCapability.Mechanic.Core
    * @since 26.0.0 dynamic&static
    */
@@ -990,7 +990,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Tracking event callback info.
+   * 跟踪事件信息
    *
    * @typedef TrackingEventInfo
    * @syscap SystemCapability.Mechanic.Core
@@ -1027,7 +1027,7 @@ declare namespace mechanicManager {
     state: AttachState;
 
     /**
-     * Mechanical device information.
+     * 机械体设备信息
      * @type { MechInfo }
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
@@ -1240,7 +1240,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Enumerates the mechanical device types.
+   * 机械体设备类型的枚举
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
    * @since 20 dynamic
@@ -1284,7 +1284,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Device attach states.
+   * 设备连接状态的枚举
    *
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
