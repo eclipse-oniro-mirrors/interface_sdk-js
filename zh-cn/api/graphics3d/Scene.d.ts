@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块作为ArkGraphics 3D基础模块，提供场景加载参数等数据类型和场景加载等方法。
+ *
  * @file
  * @kit ArkGraphics3D
  */

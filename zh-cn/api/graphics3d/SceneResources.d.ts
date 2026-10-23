@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中常用的基本资源类型。
+ *
  * @file
  * @kit ArkGraphics3D
  */
