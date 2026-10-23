@@ -508,6 +508,18 @@ declare namespace vpnExtension {
      */
     blockedApplications?: Array<string>;
 
+    /**
+     * Whether local network (LAN) traffic is routed through the VPN.
+     * When set to false, traffic to local network addresses (for example, 10.0.0.0/8,
+     * 172.16.0.0/12 and 192.168.0.0/16) bypasses the VPN and is sent directly over the
+     * physical network interface. The default value is false.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    isLocalNetworkRouted?: boolean;
   }
 }
 export default vpnExtension;
