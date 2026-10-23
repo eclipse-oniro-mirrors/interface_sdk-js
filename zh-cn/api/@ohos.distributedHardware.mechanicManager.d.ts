@@ -32,7 +32,7 @@ import type { Callback } from './@ohos.base';
 declare namespace mechanicManager {
 
   /**
-   * 注册连接状态变化事件的回调监听
+   * 注册连接状态变化事件的回调监听，等待连接状态变化。使用callback异步回调。
    * @param { 'attachStateChange' } type Event type.
    * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -42,7 +42,7 @@ declare namespace mechanicManager {
   function on(type: 'attachStateChange', callback: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * 注册连接状态变化事件的回调监听
+   * 注册连接状态变化事件的回调监听，等待连接状态变化。使用callback异步回调。
    * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -51,7 +51,7 @@ declare namespace mechanicManager {
   function onAttachStateChange(callback: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * 取消注册连接状态变化事件的回调监听
+   * 取消注册连接状态变化事件的回调监听。使用callback异步回调。
    * @param { 'attachStateChange' } type Event type.
    * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -61,7 +61,7 @@ declare namespace mechanicManager {
   function off(type: 'attachStateChange', callback?: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * 取消注册连接状态变化事件的回调监听
+   * 取消注册连接状态变化事件的回调监听。使用callback异步回调。
    * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
