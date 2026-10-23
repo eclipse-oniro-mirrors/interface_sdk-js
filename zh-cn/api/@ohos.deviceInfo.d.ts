@@ -711,8 +711,8 @@ declare namespace deviceInfo {
   const kernelVersion: string;
 
   /**
-   * 获取系统时间。
-   * 例如：'2026-01-01 08:00:00'。
+   * 获取系统安装UTC时间戳。
+   * 例如：1790784000000。
    * 
    * @syscap SystemCapability.Startup.SystemInfo
    * @stagemodelonly

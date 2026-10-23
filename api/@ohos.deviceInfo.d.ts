@@ -736,9 +736,8 @@ declare namespace deviceInfo {
    */
   const kernelVersion: string;
   /**
-   * Obtain the system install time.
-   * The value is in the format of 'yyyy-MM-dd HH:mm:ss'.
-   * Example: '2026-01-01 08:00:00'.
+   * Obtains the system installation UTC timestamp.
+   * Example: 1790784000000.
    *
    * @syscap SystemCapability.Startup.SystemInfo
    * @stagemodelonly
