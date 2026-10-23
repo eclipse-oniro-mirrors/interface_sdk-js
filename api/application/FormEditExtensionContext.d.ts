@@ -75,7 +75,7 @@ declare class FormEditExtensionContext extends UIExtensionContext {
 	 * Sets the background color for the FormEditExtensionAbility.
 	 *
 	 * @param { string } color - Background color to set. The value is a hexadecimal RGB or ARGB color code and is case
-	 *     insensitive, for example, **#00FF00** or **#FF00FF00**. It can also be a resource string.
+	 *     insensitive, for example, **#00FF00** or **#FF00FF00**.
 	 * @returns { Promise<void> } Promise that returns no value.
 	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
 	 * @syscap SystemCapability.Ability.Form
