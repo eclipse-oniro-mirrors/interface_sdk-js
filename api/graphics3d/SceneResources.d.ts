@@ -515,7 +515,7 @@ export interface MaterialProperty {
 
   /**
    * Texture sampler, with the default value set to LINEAR for magnification, minification, and mipmaps,
-   * and to REPEAT for U, V, and W directions.
+   * and to REPEAT for U and V directions.
    *
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D
