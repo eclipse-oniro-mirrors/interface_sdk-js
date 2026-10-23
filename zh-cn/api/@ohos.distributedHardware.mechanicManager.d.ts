@@ -887,7 +887,7 @@ declare namespace mechanicManager {
     pitchEnabled: boolean;
 
     /**
-     * 偏航轴是否限位
+     * 偏航轴限位状态
      * @type { ?RotationAxisLimited } RotationAxisLimited
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -897,7 +897,7 @@ declare namespace mechanicManager {
     yawLimited?: RotationAxisLimited;
 
     /**
-     * Whether the roll axis is limited.
+     * 横滚轴限位状态
      * @type { ?RotationAxisLimited }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -907,7 +907,7 @@ declare namespace mechanicManager {
     rollLimited?: RotationAxisLimited;
 
     /**
-     * Whether the pitch axis is limited.
+     * 俯仰轴限位状态
      * @type { ?RotationAxisLimited }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
