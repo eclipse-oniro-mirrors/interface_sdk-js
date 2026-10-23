@@ -646,7 +646,8 @@ declare namespace calendarManager {
     startTime: number;
 
     /**
-     * 日程结束时间，需要13位时间戳。全天日程时，该字段转换为传入日期24:00对应的时间戳。当调用getEvents()查询日程时，默认查询到此字段。
+     * 日程结束时间，需要13位时间戳。全天日程时，该字段转换为传入日期24:00对应的时间戳。
+     * 当调用[getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>}查询日程时，默认查询到此字段。
      *
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice [since 11]
