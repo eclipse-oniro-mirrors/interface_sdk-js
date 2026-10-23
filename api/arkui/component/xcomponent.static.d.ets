@@ -123,6 +123,31 @@ export declare interface SurfaceConfig {
 }
 
 /**
+ * Defines the extra flags for XComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum XComponentExtraFlag {
+  /**
+   * Enables the RenderService to create a solid color layer for the XComponent.
+   * The size of the solid color layer matches the XComponent's own dimensions,
+   * and the color is determined by the XComponent's backgroundColor property.
+   * If backgroundColor is not set, the default solid color is black.
+   * Once this flag is set, it cannot be updated.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  ENABLE_SOLID_COLOR = 0x01
+}
+
+
+/**
  * Sets the HDR type of the XComponent.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -452,6 +477,21 @@ export declare interface XComponentAttribute extends CommonMethod {
    * @since 24 static
    */
   default hdrBrightness(brightness: double | undefined, type?: HdrType): this;
+  /**
+   * Sets the extra flag for the XComponent.
+   * This API is intended for system shell applications only.
+   * If an invalid enum value is passed, the setting does not take effect.
+   * Once the flag is set successfully, it cannot be updated.
+   *
+   * @param { int } flag - Extra flag to set for the XComponent.
+   *     <br>The value should be an integer.
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default setExtraFlag(flag: int): this;
   /**
    * Sets the buffer queue count for the XComponent.
    * Only takes effect for XComponent of type SURFACE or TEXTURE.
