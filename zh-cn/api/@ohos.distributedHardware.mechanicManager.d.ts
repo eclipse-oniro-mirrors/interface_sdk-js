@@ -510,7 +510,7 @@ declare namespace mechanicManager {
    *
    * @param { MechDeviceType } [mechDeviceType]  - 关联的设备类型
    *     <br>默认值:如果未提供该参数，则代表所有类型设备，只要支持其中一种以上则返回支持
-   * @returns { boolean } 当前设备是否支持某类设备的机械体设备控制
+   * @returns { boolean } 当前设备是否支持某类设备的机械体设备控制。true表示支持，false表示不支持。
    * @syscap SystemCapability.Mechanic.Core
    * @since 26.0.0 dynamic&static
    */
