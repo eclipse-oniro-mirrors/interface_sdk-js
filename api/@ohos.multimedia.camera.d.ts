@@ -7249,15 +7249,6 @@ declare namespace camera {
   }
 
   /**
-   * **PhotoSession** inherits from [Session]{@link camera.Session}, [Flash]{@link camera.Flash}, 
-   * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
-   * [Zoom]{@link camera.Zoom}, [ColorManagement]{@link camera.ColorManagement}, 
-   * [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, [Macro]{@link camera.Macro}, 
-   * [ManualExposure]{@link camera.ManualExposure}, 
-   * [ManualFocus]{@link camera.ManualFocus}, 
-   * [ManualIso]{@link camera.ManualIso}, 
-   * [OIS]{@link camera.OIS}, and 
-   * [Aperture]{@link camera.Aperture}.
    * 
    * It implements a photo session, which provides operations on the flash, exposure, white balance, focus, zoom, color 
    * space, macro mode, manual exposure, manual focus, manual ISO setting, optical image stabilization (OIS), and 
@@ -7918,16 +7909,6 @@ declare namespace camera {
   }
 
   /**
-   * VideoSession inherits from [Session]{@link camera.Session}, [Flash]{@link camera.Flash}, 
-   * [AutoExposure]{@link camera.AutoExposure}, [WhiteBalance]{@link camera.WhiteBalance}, [Focus]{@link camera.Focus}, 
-   * [Zoom]{@link camera.Zoom}, [Stabilization]{@link camera.Stabilization}, 
-   * [ColorManagement]{@link camera.ColorManagement}, [AutoDeviceSwitch]{@link camera.AutoDeviceSwitch}, 
-   * [Macro]{@link camera.Macro}, [ControlCenter]{@link camera.ControlCenter}, 
-   * [ManualExposure]{@link camera.ManualExposure}, 
-   * [ManualFocus]{@link camera.ManualFocus}, 
-   * [ManualIso]{@link camera.ManualIso}, 
-   * [OIS]{@link camera.OIS}, and 
-   * [Aperture]{@link camera.Aperture}.
    * 
    * It implements a video session, which provides operations on the flash, exposure, white balance, focus, zoom, video 
    * stabilization, color space, macro mode and controller, manual exposure, manual focus, manual ISO, optical image 
