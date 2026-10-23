@@ -276,7 +276,7 @@ declare namespace notificationExtensionSubscription {
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function subscribeNotification(priorityStrategy?: int): Promise<void>;
 
@@ -294,7 +294,7 @@ declare namespace notificationExtensionSubscription {
    * @throws { BusinessError } 1600022 - The specified bundle is invaild. Possible cause: 1.The application is not in the list. 2.The application is disabled.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getUserGrantedBundleIcon(bundleName: string): Promise<image.PixelMap>;
  
@@ -316,7 +316,7 @@ declare namespace notificationExtensionSubscription {
    * @throws { BusinessError } 1600022 - The specified bundle is invaild.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    * @see [getUserGrantedEnabledBundles] {@link notificationExtensionSubscription#getUserGrantedEnabledBundles()}
    *		获取本应用中“已获取的本机通知”通知开关开启的应用列表。
    */

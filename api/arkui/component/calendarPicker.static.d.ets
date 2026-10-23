@@ -59,63 +59,63 @@ export declare enum CalendarAlign {
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum CalendarFirstDayOfWeek {
   /**
    * Follows the system region.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   LOCAL = 0,
   /**
    * Monday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   MON = 1,
   /**
    * Tuesday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   TUE = 2,
   /**
    * Wednesday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   WED = 3,
   /**
    * Thursday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   THU = 4,
   /**
    * Friday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   FRI = 5,
   /**
    * Saturday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   SAT = 6,
   /**
    * Sunday.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   SUN = 7
 }
@@ -240,7 +240,7 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default firstDayOfWeek(value: CalendarFirstDayOfWeek | undefined): this;
   /**
@@ -462,7 +462,7 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @default CalendarFirstDayOfWeek.LOCAL
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   firstDayOfWeek?: CalendarFirstDayOfWeek;
 }

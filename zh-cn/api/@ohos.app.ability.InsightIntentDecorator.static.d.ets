@@ -325,7 +325,7 @@ export @interface InsightIntentPage {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -500,7 +500,7 @@ export @interface InsightIntentFunctionMethod {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -755,7 +755,7 @@ export @interface InsightIntentEntry {
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 

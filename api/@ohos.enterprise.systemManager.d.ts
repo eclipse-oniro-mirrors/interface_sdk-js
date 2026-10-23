@@ -804,7 +804,7 @@ declare namespace systemManager {
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   export enum AudioVolumeType {
     /**
@@ -812,7 +812,7 @@ declare namespace systemManager {
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     STREAM_MUSIC = 1
   }
@@ -1792,7 +1792,7 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   function setVolumeDegree(volumeType: AudioVolumeType, degree: number): void;
 
@@ -1810,7 +1810,7 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   function getVolumeDegree(volumeType: AudioVolumeType): number;
 }

@@ -121,7 +121,7 @@ export declare enum ScrollAlign {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export enum FastScrollMode {
   /**
@@ -129,7 +129,7 @@ export enum FastScrollMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   NONE = 0,
 
@@ -140,7 +140,7 @@ export enum FastScrollMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   SKIP_MEASURE = 1,
 
@@ -151,7 +151,7 @@ export enum FastScrollMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   SKIP_CREATE_AND_MEASURE = 2
 }
@@ -230,7 +230,7 @@ export declare interface ScrollToIndexOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   fastScroll?: FastScrollMode;
 }
@@ -646,7 +646,7 @@ export declare class Scroller {
    * @throws { BusinessError } 100004 - 控制器未绑定到组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   getScrollState(): ScrollState;
 }

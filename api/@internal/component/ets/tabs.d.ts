@@ -1061,7 +1061,7 @@ interface FloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxWidth?: Length;
 
@@ -1072,7 +1072,7 @@ interface FloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: Position | Edges | LocalizedEdges;
 }
@@ -1084,7 +1084,7 @@ interface FloatingTabBarStyle {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 interface TopFloatingTabBarStyle {
   /**
@@ -1094,7 +1094,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   barWidth?: Length;
   /**
@@ -1104,7 +1104,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   barSideMargin?: Length;
   /**
@@ -1114,7 +1114,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   barTopMargin?: Length;
   /**
@@ -1124,7 +1124,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maskColor?: ResourceColor;
   /**
@@ -1134,7 +1134,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maskHeight?: Length;
   /**
@@ -1144,7 +1144,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxWidth?: Length;
   /**
@@ -1154,7 +1154,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: Position | Edges | LocalizedEdges;
 }
@@ -1338,7 +1338,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   TOP = 3,
 }
@@ -1455,7 +1455,7 @@ declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   TOP_TABBAR = 2,
 }
@@ -2254,7 +2254,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   topBarFloatingStyle(style: Optional<TopFloatingTabBarStyle>): TabsAttribute;
 
@@ -2546,7 +2546,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   sidebarFooter(footer: Optional<ComponentContent>): TabsAttribute;
 
@@ -2559,7 +2559,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   sidebarBottomBar(bottomBar: Optional<ComponentContent>): TabsAttribute;
 }

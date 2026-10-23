@@ -409,7 +409,7 @@ declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 interface RepeatOptions {
   /**
@@ -428,7 +428,7 @@ interface RepeatOptions {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   allowReuseInAnimation?: boolean;
 }
@@ -437,7 +437,7 @@ interface RepeatOptions {
  * Repeat接口类型。
  *
  * @param { RepeatArray<T> } arr - 数据源，为`RepeatArray<T>`类型的数组，由开发者决定数据类型。
- * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。[since 26.2.0]
+ * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。[since 26.1.0]
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

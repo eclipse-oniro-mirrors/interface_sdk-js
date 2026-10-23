@@ -187,7 +187,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     taskIdentity?: TaskIdentity;
   }
@@ -563,7 +563,7 @@ declare namespace abilityToolAccessCtrl {
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface TicketParams {
 
@@ -573,7 +573,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     ticketExpireTimeMs?: long;
   }
@@ -583,7 +583,7 @@ declare namespace abilityToolAccessCtrl {
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface TicketQueryResult {
 
@@ -592,7 +592,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     permissionResults: PermissionInfo[];
 
@@ -601,7 +601,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     ticket: string;
   }
@@ -761,7 +761,7 @@ declare namespace abilityToolAccessCtrl {
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   enum ControlAppStatus {
     /**
@@ -769,7 +769,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     ALLOW = 0x01,
 
@@ -778,7 +778,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     DENY = 0x02
   }
@@ -789,7 +789,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface TaskIdentity {
     /**
@@ -798,7 +798,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     taskAttributes: string;
     /**
@@ -807,7 +807,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     identity: string;
 
@@ -817,7 +817,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     challenge: string;
   }
@@ -828,7 +828,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   enum ExecuteType {
     /**
@@ -837,7 +837,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     INSTANT = 0x01,
     /**
@@ -846,7 +846,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     DELAYED = 0x02
   }
@@ -857,7 +857,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface TaskIdentityInfo {
     /**
@@ -866,7 +866,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     taskId: string;
     /**
@@ -876,7 +876,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     taskExpireTime: number;
     /**
@@ -885,7 +885,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     executeType: ExecuteType;
     /**
@@ -894,7 +894,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     allowScreenLockExecution: boolean;
     /**
@@ -903,7 +903,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     authToken?: Uint8Array;
     /**
@@ -913,7 +913,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     allowableDuration?: number;
   }
@@ -924,7 +924,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface AppInfo {
     /**
@@ -933,7 +933,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     bundleName: string;
     /**
@@ -942,7 +942,7 @@ declare namespace abilityToolAccessCtrl {
      * @syscap SystemCapability.Security.Asset
      * @systemapi
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     index: number;
   }
@@ -952,7 +952,7 @@ declare namespace abilityToolAccessCtrl {
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface ControlAppStatusResult {
     /**
@@ -960,7 +960,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     appInfo: AppInfo;
 
@@ -969,7 +969,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     status: ControlAppStatus;
   }
@@ -1189,7 +1189,7 @@ declare namespace abilityToolAccessCtrl {
    *     is locked.
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketParams: TicketParams): Promise<TicketQueryResult>;
 
@@ -1210,7 +1210,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export function generateTaskIdentity(taskIdentityInfo: TaskIdentityInfo): Promise<TaskIdentity>;
 
@@ -1231,7 +1231,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export function revokeTaskIdentity(taskId: string[]): Promise<void>;
 
@@ -1251,7 +1251,7 @@ declare namespace abilityToolAccessCtrl {
    *     resource access failure, etc.
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
 
@@ -1271,7 +1271,7 @@ declare namespace abilityToolAccessCtrl {
    *     resource access failure, etc.
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
     Promise<ControlAppStatusResult[]>;
@@ -1292,7 +1292,7 @@ declare namespace abilityToolAccessCtrl {
    * @syscap SystemCapability.Security.Asset
    * @systemapi
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export function generateTaskChallenge(taskIdentityInfo: TaskIdentityInfo): Promise<Uint8Array>;
 }

@@ -467,7 +467,7 @@ export declare interface XComponentAttribute extends CommonMethod {
    * @returns { XComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default bufferQueueCount(count: int): this;
   /**

@@ -681,7 +681,7 @@ export declare struct ChipGroup {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   onItemsChange?: Callback<ChipGroupItemOptions[]>;
 

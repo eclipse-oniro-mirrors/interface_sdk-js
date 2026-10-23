@@ -1044,7 +1044,7 @@ export enum AccessibilityEventType {
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   TYPE_PAGE_STATE_PRE_UPDATE = 74
 }

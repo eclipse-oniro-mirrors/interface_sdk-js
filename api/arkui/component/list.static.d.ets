@@ -1323,7 +1323,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @returns { this } The List attribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default scrollPlaceholder(provider: PlaceholderProvider | undefined): this;
 

@@ -477,7 +477,7 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @returns { this } The WaterFlow attribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 
@@ -623,7 +623,7 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @returns { this } The WaterFlow attribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default scrollPlaceholder(provider: PlaceholderProvider | undefined): this;
 

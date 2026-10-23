@@ -35,7 +35,7 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 export declare enum SegmentButtonV2InteractionMode {
   /**
@@ -45,7 +45,7 @@ export declare enum SegmentButtonV2InteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   FOLLOWING_DRAG = 0,
 
@@ -56,7 +56,7 @@ export declare enum SegmentButtonV2InteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NORMAL_DRAG = 1
 }
@@ -1169,7 +1169,7 @@ export declare struct TabSegmentButtonV2 {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   @Param
   readonly interactionMode?: SegmentButtonV2InteractionMode;
@@ -1905,7 +1905,7 @@ export declare struct CapsuleSegmentButtonV2 {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   @Param
   readonly interactionMode?: SegmentButtonV2InteractionMode;

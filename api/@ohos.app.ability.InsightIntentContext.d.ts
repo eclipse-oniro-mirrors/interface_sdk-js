@@ -166,7 +166,7 @@ declare class InsightIntentContext {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   getInsightIntentExecutionInfo(instanceId: int): Promise<insightIntent.InsightIntentExecutionInfo>;
 }

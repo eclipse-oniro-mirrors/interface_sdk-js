@@ -132,7 +132,7 @@ export declare interface LazyVGridLayoutAttribute extends LazyGridLayoutAttribut
    * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default columnsTemplate(template: ItemFillPolicy | undefined): this;
 

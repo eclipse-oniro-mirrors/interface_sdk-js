@@ -1877,7 +1877,7 @@ declare namespace util {
      * safe Base64 encoding.
      *
      * @param { Uint8Array } src - Uint8Array object to encode. [since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - Uint8Array object to encode. [since 26.2.0]
+     * @param { Uint8Array | collections.Uint8Array } src - Uint8Array object to encode. [since 26.1.0]
      * @param { Type } [options] - Encoding format.<br>The following values are available:<br>- **util.Type.BASIC** (
      *     default): Base64 encoding. The return value does not contain carriage return characters or newline
      *     characters.<br>- **util.Type.MIME**: Base64 encoding. If the return value exceeds 76 characters, a line break
@@ -1937,7 +1937,7 @@ declare namespace util {
      * Encodes the input content into a string. This API uses a promise to return the result.
      *
      * @param { Uint8Array } src - Uint8Array object to encode. [since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - Uint8Array object to encode. [since 26.2.0]
+     * @param { Uint8Array | collections.Uint8Array } src - Uint8Array object to encode. [since 26.1.0]
      * @param { Type } [options] - Encoding format.<br>The following values are available:<br>- **util.Type.BASIC** (
      *     default): Base64 encoding. The return value does not contain carriage return characters or newline
      *     characters.<br>- **util.Type.MIME**: Base64 encoding. Each line of the return value contains a maximum of 76
@@ -2814,7 +2814,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static getGlobalHandleCount(): number;
   }

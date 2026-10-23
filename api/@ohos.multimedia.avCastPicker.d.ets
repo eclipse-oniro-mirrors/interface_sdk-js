@@ -114,7 +114,7 @@ declare struct AVCastPicker {
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   @Prop
   isIndependent?: boolean;

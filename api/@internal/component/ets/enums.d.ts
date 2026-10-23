@@ -6765,7 +6765,7 @@ declare enum OperateIntention {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum ImmersiveStrategy {
 
@@ -6782,7 +6782,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   AVOID_CUTOUT = 0,
 
@@ -6793,7 +6793,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   AVOID_FLOAT_NAV = 1,
 
@@ -6804,7 +6804,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   AVOID_WINDOW_CONTROLS = 6,
 
@@ -6821,7 +6821,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   BIND_SHEET_EXPAND_SAFE_AREA = 7,
 
@@ -6832,7 +6832,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NAVIGATION_EXPAND_SAFE_AREA = 8
 }

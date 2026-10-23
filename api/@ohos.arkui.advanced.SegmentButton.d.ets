@@ -389,7 +389,7 @@ declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SegmentButtonInteractionMode {
   /**
@@ -399,7 +399,7 @@ declare enum SegmentButtonInteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   FOLLOWING_DRAG = 0,
 
@@ -411,7 +411,7 @@ declare enum SegmentButtonInteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NORMAL_DRAG = 1
 }
@@ -847,7 +847,7 @@ interface CommonSegmentButtonOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   interactionMode?: SegmentButtonInteractionMode;
 }
@@ -1756,7 +1756,7 @@ declare class SegmentButtonOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   interactionMode?: SegmentButtonInteractionMode;
 

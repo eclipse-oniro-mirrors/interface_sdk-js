@@ -8554,7 +8554,7 @@ declare enum SafeAreaEdge {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SafeAreaInsetAlignment {
   /**
@@ -8566,7 +8566,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   START = 0,
 
@@ -8578,7 +8578,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   CENTER = 1,
 
@@ -8591,7 +8591,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   END = 2
 }
@@ -8604,7 +8604,7 @@ declare enum SafeAreaInsetAlignment {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetEdgeConfig {
   /**
@@ -8620,7 +8620,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   content: CustomBuilder;
 
@@ -8635,7 +8635,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   spacing?: LengthMetrics;
 
@@ -8649,7 +8649,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   alignment?: SafeAreaInsetAlignment;
 }
@@ -8662,7 +8662,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetOptions {
   /**
@@ -8675,7 +8675,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   top?: SafeAreaInsetEdgeConfig;
 
@@ -8689,7 +8689,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   end?: SafeAreaInsetEdgeConfig;
 
@@ -8703,7 +8703,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   bottom?: SafeAreaInsetEdgeConfig;
 
@@ -8717,7 +8717,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   start?: SafeAreaInsetEdgeConfig;
 }
@@ -14287,7 +14287,7 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SAFE_AREA_PADDING = 2
 }
@@ -20403,7 +20403,7 @@ declare class CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   safeAreaInset(options?: SafeAreaInsetOptions): T;
 
@@ -28252,7 +28252,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * 设置是否支持左键拖动滚动。
    * 
    * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-   *    <br>默认值：API版本26.2.0下的版本默认值为 false。API版本26.2.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+   *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
    * @returns { T } 当前滚动组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28598,7 +28598,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
