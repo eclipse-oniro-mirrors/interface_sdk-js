@@ -14,6 +14,10 @@
  */
 
 /**
+ * This module provides the types and operation methods of scene resource nodes in ArkGraphics 3D.
+ * SceneNode is the basic building unit of a 3D scene. It allows developers to manage objects in a scene
+ * through a hierarchical structure, implementing efficient scene organization and interaction control.
+ *
  * @file
  * @kit ArkGraphics3D
  */
