@@ -32,7 +32,7 @@ import type { Callback } from './@ohos.base';
 declare namespace mechanicManager {
 
   /**
-   * Subscribes to device attachment state change events.
+   * 注册连接状态变化事件的回调监听，等待连接状态变化。使用callback异步回调。
    * @param { 'attachStateChange' } type Event type.
    * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -42,7 +42,7 @@ declare namespace mechanicManager {
   function on(type: 'attachStateChange', callback: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * Subscribes to device attachment state change events.
+   * 注册连接状态变化事件的回调监听，等待连接状态变化。使用callback异步回调。
    * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -51,7 +51,7 @@ declare namespace mechanicManager {
   function onAttachStateChange(callback: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * Unsubscribes from device attachment state change events.
+   * 取消注册连接状态变化事件的回调监听。使用callback异步回调。
    * @param { 'attachStateChange' } type Event type.
    * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -61,7 +61,7 @@ declare namespace mechanicManager {
   function off(type: 'attachStateChange', callback?: Callback<AttachStateChangeInfo>): void;
 
   /**
-   * Unsubscribes from device attachment state change events.
+   * 取消注册连接状态变化事件的回调监听。使用callback异步回调。
    * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -120,7 +120,7 @@ declare namespace mechanicManager {
   function getCameraTrackingEnabled(): boolean;
 
   /**
-   * Subscribes to tracking events.
+   * 注册跟踪状态变化事件的回调监听。使用callback异步回调。
    * @param { 'trackingStateChange' } type Event type.
    * @param { Callback<TrackingEventInfo> } callback Callback used to return the tracking event information.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -130,7 +130,7 @@ declare namespace mechanicManager {
   function on(type: 'trackingStateChange', callback: Callback<TrackingEventInfo>): void;
 
   /**
-   * Subscribes to tracking events.
+   * 注册跟踪状态变化事件的回调监听。使用callback异步回调。
    * @param { Callback<TrackingEventInfo> } callback Callback used to return the tracking event information.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -319,8 +319,7 @@ declare namespace mechanicManager {
 
 
   /**
-   * Register a listener for axis state changes.
-   * The status of the rotation axis changes dynamically, which needs to be monitored.
+   * 注册旋转轴状态变化事件的回调监听。使用callback异步回调。
    *
    * @param { 'rotationAxesStatusChange' } type - Event type.
    * @param { Callback<RotationAxesStateChangeInfo> } callback - Rotate axis state changes callback.
@@ -333,8 +332,7 @@ declare namespace mechanicManager {
   function on(type: 'rotationAxesStatusChange', callback: Callback<RotationAxesStateChangeInfo>): void;
 
   /**
-   * Register a listener for axis state changes.
-   * The status of the rotation axis changes dynamically, which needs to be monitored.
+   * 注册旋转轴状态变化事件的回调监听。使用callback异步回调。
    *
    * @param { Callback<RotationAxesStateChangeInfo> } callback - Rotate axis state changes callback.
    * @throws { BusinessError } 202 - Not system application.
@@ -346,7 +344,7 @@ declare namespace mechanicManager {
   function onRotationAxesStatusChange(callback: Callback<RotationAxesStateChangeInfo>): void;
 
   /**
-   * Unregister a listener for axis state changes.
+   * 取消注册旋转轴状态变化事件的回调监听。使用callback异步回调。
    *
    * @param { 'rotationAxesStatusChange' } type - Event type.
    * @param { Callback<RotationAxesStateChangeInfo> } [callback] - Rotate axis state changes callback.
@@ -359,7 +357,7 @@ declare namespace mechanicManager {
   function off(type: 'rotationAxesStatusChange', callback?: Callback<RotationAxesStateChangeInfo>): void;
 
   /**
-   * Unregister a listener for axis state changes.
+   * 取消注册旋转轴状态变化事件的回调监听。使用callback异步回调。
    *
    * @param { Callback<RotationAxesStateChangeInfo> } [callback] - Rotate axis state changes callback.
    * @throws { BusinessError } 202 - Not system application.
@@ -371,7 +369,7 @@ declare namespace mechanicManager {
   function offRotationAxesStatusChange(callback?: Callback<RotationAxesStateChangeInfo>): void;
 
   /**
-   * Searching for a specified target.
+   * 旋转机械体一周搜索目标。使用Promise异步回调。
    *
    * @param { TargetInfo } target - Target infomation.
    * @param { SearchParams } params - Parameters to use when searching.
@@ -510,7 +508,7 @@ declare namespace mechanicManager {
    *
    * @param { MechDeviceType } [mechDeviceType]  - 关联的设备类型
    *     <br>默认值:如果未提供该参数，则代表所有类型设备，只要支持其中一种以上则返回支持
-   * @returns { boolean } Returns whether control is supported.
+   * @returns { boolean } 当前设备是否支持某类设备的机械体设备控制。true表示支持，false表示不支持。
    * @syscap SystemCapability.Mechanic.Core
    * @since 26.0.0 dynamic&static
    */
@@ -642,7 +640,7 @@ declare namespace mechanicManager {
 
 
   /**
-   * The rotion angles, relative to the current position.
+   * 相对当前位置的旋转角度
    * @typedef RotationAngles
    * @syscap SystemCapability.Mechanic.Core
    * @systemapi
@@ -685,7 +683,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Absolute euler angles relative to the home position.
+   * 相对于初始位置的绝对欧拉角
    *
    * @typedef EulerAngles
    * @syscap SystemCapability.Mechanic.Core
@@ -782,8 +780,8 @@ declare namespace mechanicManager {
    */
   export interface RotationLimits {
     /**
-     * Maximum yaw rotation angles in the negative direction, ranging from -2*Math.PI to 0, measured in radians.
-     * If the value is less than or equal to -2*Math.PI, there is no restriction.
+     * 最大偏航旋转角度（负方向），范围为[-2*Math.PI， 0]，以弧度为单位
+     * 如果值小于或等于 -2*Math.PI，则没有限制。
      * @type { double }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -793,8 +791,8 @@ declare namespace mechanicManager {
     negativeYawMax: double;
 
     /**
-     * Maximum yaw rotation angles in the positive direction, ranging from 0 to 2*Math.PI, measured in radians.
-     * If the value is greater than or equal to 2*Math.PI, there is no restriction.
+     * 最大偏航旋转角度（正方向），范围为[0， 2*Math.PI]，以弧度为单位。
+     * 如果值大于或等于 2*Math.PI，则没有限制。
      * @type { double }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -804,8 +802,8 @@ declare namespace mechanicManager {
     positiveYawMax: double;
 
     /**
-     * Maximum roll rotation angles in the negative direction, ranging from -2*Math.PI to 0, measured in radians.
-     * If the value is less than or equal to -2*Math.PI, there is no restriction.
+     * 最大横滚旋转角度（负方向），范围为[-2*Math.PI, 0]，以弧度为单位。
+     * 如果值小于或等于 -2*Math.PI，则没有限制。
      * @type { double }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -815,8 +813,8 @@ declare namespace mechanicManager {
     negativeRollMax: double;
 
     /**
-     * Maximum roll rotation angles in the positive direction, ranging from 0 to 2*Math.PI, measured in radians.
-     * If the value is greater than or equal to 2*Math.PI, there is no restriction.
+     * 最大横滚旋转角度（正方向），范围为[0， 2*Math.PI]，以弧度为单位。
+     * 如果值大于或等于 2*Math.PI，则没有限制。
      * @type { double }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -826,8 +824,8 @@ declare namespace mechanicManager {
     positiveRollMax: double;
 
     /**
-     * Maximum pitch rotation angles in the negative direction, ranging from -2*Math.PI to 0, measured in radians.
-     * If the value is less than or equal to -2*Math.PI, there is no restriction.
+     * 最大俯仰旋转角度（负方向），范围为[-2*Math.PI， 0]，以弧度为单位。
+     * 如果值小于或等于 -2*Math.PI，则没有限制。
      * @type { double }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -837,8 +835,8 @@ declare namespace mechanicManager {
     negativePitchMax: double;
 
     /**
-     * Maximum pitch rotation angles in the positive direction, ranging from 0 to 2*Math.PI, measured in radians.
-     * If the value is greater than or equal to 2*Math.PI, there is no restriction.
+     * 最大俯仰旋转角度（正方向），范围为[0， 2*Math.PI]，以弧度为单位。
+     * 如果值大于或等于 2*Math.PI，则没有限制。
      * @type { double }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -849,7 +847,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Rotation axes status
+   * 旋转轴状态
    *
    * @typedef RotationAxesStatus
    * @syscap SystemCapability.Mechanic.Core
@@ -859,7 +857,7 @@ declare namespace mechanicManager {
    */
   export interface RotationAxesStatus {
     /**
-     * 是否启用偏航轴
+     * 是否启用了偏航轴，true表示已启用，false表示已禁用。
      * @type { boolean }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -869,7 +867,7 @@ declare namespace mechanicManager {
     yawEnabled: boolean;
 
     /**
-     * 是否启用滚动轴
+     * 是否启用了横滚轴，true表示已启用，false表示已禁用。
      * @type { boolean }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -879,7 +877,7 @@ declare namespace mechanicManager {
     rollEnabled: boolean;
 
     /**
-     * 是否使能俯仰轴
+     * 是否启用了俯仰轴，true表示已启用，false表示已禁用。
      * @type { boolean }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -889,7 +887,7 @@ declare namespace mechanicManager {
     pitchEnabled: boolean;
 
     /**
-     * 偏航轴是否限位
+     * 偏航轴限位状态
      * @type { ?RotationAxisLimited } RotationAxisLimited
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -899,7 +897,7 @@ declare namespace mechanicManager {
     yawLimited?: RotationAxisLimited;
 
     /**
-     * Whether the roll axis is limited.
+     * 横滚轴限位状态
      * @type { ?RotationAxisLimited }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -909,7 +907,7 @@ declare namespace mechanicManager {
     rollLimited?: RotationAxisLimited;
 
     /**
-     * Whether the pitch axis is limited.
+     * 俯仰轴限位状态
      * @type { ?RotationAxisLimited }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -990,7 +988,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Tracking event callback info.
+   * 跟踪事件信息
    *
    * @typedef TrackingEventInfo
    * @syscap SystemCapability.Mechanic.Core
@@ -1027,7 +1025,7 @@ declare namespace mechanicManager {
     state: AttachState;
 
     /**
-     * Mechanical device information.
+     * 机械体设备信息
      * @type { MechInfo }
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
@@ -1037,7 +1035,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Target information.
+   * 搜索目标的相关信息
    *
    * @typedef TargetInfo
    * @syscap SystemCapability.Mechanic.Core
@@ -1058,7 +1056,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Parameters for target searching.
+   * 指定搜索的方向
    *
    * @typedef SearchParams
    * @syscap SystemCapability.Mechanic.Core
@@ -1069,7 +1067,7 @@ declare namespace mechanicManager {
   export interface SearchParams {
 
     /**
-     * Search direction.
+     * 搜索的方向
      * @type { SearchDirection }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -1080,7 +1078,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Search result.
+   * 显示搜索命令的执行结果
    *
    * @typedef SearchResult
    * @syscap SystemCapability.Mechanic.Core
@@ -1090,7 +1088,7 @@ declare namespace mechanicManager {
    */
   export interface SearchResult {
     /**
-    * Search result. Returns the number of targets found.0 means not found.
+    * 搜索到的目标数量
      * @type { int }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -1166,7 +1164,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Rotation execution results.
+   * 旋转执行结果的枚举
    *
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
@@ -1176,7 +1174,7 @@ declare namespace mechanicManager {
    */
   export enum Result {
     /**
-     * Rotation completed.
+     * 执行完成
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -1185,7 +1183,7 @@ declare namespace mechanicManager {
     COMPLETED = 0,
 
     /**
-     * Rotation was interrupted.
+     * 执行被打断
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -1194,7 +1192,7 @@ declare namespace mechanicManager {
     INTERRUPTED = 1,
 
     /**
-     * Device reached limitation.
+     * 执行受最大旋转角度限制
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -1203,7 +1201,7 @@ declare namespace mechanicManager {
     LIMITED = 2,
 
     /**
-     * Rotation time out.
+     * 执行超时
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -1230,7 +1228,7 @@ declare namespace mechanicManager {
     TERMINATE_CLIFF = 5,
 
     /**
-     * Rotation failed due to system error.
+     * 系统错误
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -1240,7 +1238,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Enumerates the mechanical device types.
+   * 机械体设备类型的枚举
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
    * @since 20 dynamic
@@ -1284,7 +1282,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Device attach states.
+   * 设备连接状态的枚举
    *
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
@@ -1354,7 +1352,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Target type.
+   * 目标人脸信息的枚举
    *
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
@@ -1364,7 +1362,7 @@ declare namespace mechanicManager {
    */
   export enum TargetType {
     /**
-     * human Face type.
+     * 目标人脸信息
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 21 dynamic
@@ -1374,7 +1372,7 @@ declare namespace mechanicManager {
   }
 
   /**
-   * Search direction.
+   * 系统默认的搜索方向
    *
    * @enum { int }
    * @syscap SystemCapability.Mechanic.Core
@@ -1384,7 +1382,7 @@ declare namespace mechanicManager {
    */
   export enum SearchDirection {
     /**
-     * System Default Direction.
+     * 系统默认方向
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 21 dynamic
@@ -1393,7 +1391,7 @@ declare namespace mechanicManager {
     DEFAULT = 0,
 
     /**
-     * Leftward direction. Also indicates clockwise direction.
+     * 左向，即顺时针方向。
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 21 dynamic
@@ -1402,7 +1400,7 @@ declare namespace mechanicManager {
     LEFTWARD = 1,
 
     /**
-     * Rightward direction. Also indicates the counterclockwise direction.
+     * 右向，即逆时针方向。
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 21 dynamic
