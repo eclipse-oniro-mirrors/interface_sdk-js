@@ -19,7 +19,8 @@
  *
  * > **说明：**
  * >
- * > 使用本模块的接口前，需先通过[RenderContext.loadPlugin]{@link ./Scene:RenderContext.loadPlugin}加载群组模拟插件[BoidsSimPlugin]{@link BoidsSimPlugin}。
+ * > 使用本模块的接口前，
+ * > 需先通过[RenderContext.loadPlugin]{@link ./Scene:RenderContext.loadPlugin}加载群组模拟插件[BoidsSimPlugin]{@link BoidsSimPlugin}。
  *
  * @file
  * @kit ArkGraphics3D
