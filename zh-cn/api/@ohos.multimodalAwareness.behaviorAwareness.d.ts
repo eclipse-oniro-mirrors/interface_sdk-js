@@ -24,7 +24,7 @@ import { Callback } from './@ohos.base';
  * **behaviorAwareness** 本模块提供 MSDP 设备状态感知能力，支持用户行为数据采集、序列模式聚类、感知事件判断。
  *
  * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
- * @since 26.2.0
+ * @since 26.1.0
  * @stagemodelonly
  * @systemapi
  */
@@ -36,7 +36,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -50,7 +50,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -68,7 +68,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -116,7 +116,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -162,7 +162,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -180,7 +180,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { number }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -208,7 +208,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { number }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -230,7 +230,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -250,7 +250,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -268,7 +268,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -279,7 +279,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ENTER = 'enter',
     /**
@@ -288,7 +288,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EXIT = 'exit',
   }
@@ -298,7 +298,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -316,7 +316,7 @@ declare namespace behaviorAwareness {
    *
    * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -331,7 +331,7 @@ declare namespace behaviorAwareness {
    * 时间类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -352,7 +352,7 @@ declare namespace behaviorAwareness {
    * 位置类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -371,7 +371,7 @@ declare namespace behaviorAwareness {
    * 系统事件类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -402,7 +402,7 @@ declare namespace behaviorAwareness {
    * 系统控制类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -427,7 +427,7 @@ declare namespace behaviorAwareness {
    * Event 事件数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -450,7 +450,7 @@ declare namespace behaviorAwareness {
    * Action 动作数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -471,7 +471,7 @@ declare namespace behaviorAwareness {
    * 习惯感知领域 payload。HABIT_AWARENESS 领域的具体数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -489,7 +489,7 @@ declare namespace behaviorAwareness {
    *
    * @template T - payload 类型，支持 BehaviorAwarenessPayload 或其他自定义类型。
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -510,7 +510,7 @@ declare namespace behaviorAwareness {
    * 订阅选项。定义订阅的过滤条件。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -525,7 +525,7 @@ declare namespace behaviorAwareness {
    * 反馈数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -556,7 +556,7 @@ declare namespace behaviorAwareness {
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -580,7 +580,7 @@ declare namespace behaviorAwareness {
    * @throws { BusinessError } 32500001 - Service exception.
    * @throws { BusinessError } 32500003 - Unsubscription failed.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */
@@ -600,7 +600,7 @@ declare namespace behaviorAwareness {
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
+   * @since 26.1.0
    * @stagemodelonly
    * @systemapi
    */

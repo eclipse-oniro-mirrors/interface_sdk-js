@@ -4196,7 +4196,7 @@ export declare enum SafeAreaEdge {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum SafeAreaInsetAlignment {
     /**
@@ -4207,7 +4207,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     START = 0,
 
@@ -4217,7 +4217,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     CENTER = 1,
 
@@ -4229,7 +4229,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     END = 2
 }
@@ -4240,7 +4240,7 @@ export declare enum SafeAreaInsetAlignment {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetEdgeConfig {
     /**
@@ -4254,7 +4254,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     content: CustomBuilder;
 
@@ -4268,7 +4268,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     spacing?: LengthMetrics;
 
@@ -4280,7 +4280,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     alignment?: SafeAreaInsetAlignment;
 }
@@ -4291,7 +4291,7 @@ export declare interface SafeAreaInsetEdgeConfig {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetOptions {
     /**
@@ -4302,7 +4302,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     top?: SafeAreaInsetEdgeConfig;
 
@@ -4315,7 +4315,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     end?: SafeAreaInsetEdgeConfig;
 
@@ -4327,7 +4327,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     bottom?: SafeAreaInsetEdgeConfig;
 
@@ -4340,7 +4340,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     start?: SafeAreaInsetEdgeConfig;
 }
@@ -7597,7 +7597,7 @@ export declare interface SheetOptions extends BindOptions {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     titleBarHoverMode?: SheetTitleBarHoverMode;
 }
@@ -7606,7 +7606,7 @@ export declare interface SheetOptions extends BindOptions {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum SheetTitleBarHoverMode {
     /**
@@ -7614,7 +7614,7 @@ export declare enum SheetTitleBarHoverMode {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     STANDARD = 0,
     /**
@@ -7623,7 +7623,7 @@ export declare enum SheetTitleBarHoverMode {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     STACK = 1,
     /**
@@ -7632,7 +7632,7 @@ export declare enum SheetTitleBarHoverMode {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     SAFE_AREA_PADDING = 2
 }
@@ -11230,7 +11230,7 @@ export declare interface CommonMethod {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
@@ -15077,8 +15077,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *
      * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
      *    pressed.
-     *    <br>Default value: For API versions earlier than 26.2.0,the defalut value is false.
-     *    For API versions 26.2.0 and later, the defalut value is true when the scrollable component scrolls
+     *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+     *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
      *    horizontally,false otherwise.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15195,7 +15195,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }

@@ -4699,7 +4699,7 @@ declare namespace webview {
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         setZoomFactor(zoomFactor: double): void;
 
@@ -4712,7 +4712,7 @@ declare namespace webview {
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         getZoomFactor(): double;
     }

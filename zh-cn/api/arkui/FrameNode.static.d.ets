@@ -466,7 +466,7 @@ export declare class FrameNode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
 
@@ -479,7 +479,7 @@ export declare class FrameNode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   dispatchKeyEvent(event: KeyEvent): boolean;
 

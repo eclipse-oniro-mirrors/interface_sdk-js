@@ -305,7 +305,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @unpublished
    * @stagemodelonly
-   * @since 26.2.0 staticonly
+   * @since 26.1.0 staticonly
    */
   setRepeatOptions<T>(arr: RepeatArray<T>, options?: RepeatOptions): this;
 
@@ -325,7 +325,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export interface RepeatOptions {
   /**
@@ -343,7 +343,7 @@ export interface RepeatOptions {
    * @default - false if the parent container of Repeat is List; true if it is Grid or WaterFlow.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   allowReuseInAnimation?: boolean;
 }
@@ -369,7 +369,7 @@ export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  * @noninterop
  */
 @ComponentBuilder

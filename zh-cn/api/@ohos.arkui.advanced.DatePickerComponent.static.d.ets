@@ -368,7 +368,7 @@ export declare class DateOptions extends CommonOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   hideYear?: boolean;
 }

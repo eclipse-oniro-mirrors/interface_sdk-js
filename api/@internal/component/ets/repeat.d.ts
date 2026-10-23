@@ -467,7 +467,7 @@ declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 interface RepeatOptions {
   /**
@@ -488,7 +488,7 @@ interface RepeatOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   allowReuseInAnimation?: boolean;
 }
@@ -497,7 +497,7 @@ interface RepeatOptions {
  * Indicates the type of Repeat.
  *
  * @param { RepeatArray<T> } arr - The Data Source.
- * @param { RepeatOptions } [options] - Options for creating the **Repeat** component. [since 26.2.0]
+ * @param { RepeatOptions } [options] - Options for creating the **Repeat** component. [since 26.1.0]
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

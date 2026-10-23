@@ -6611,7 +6611,7 @@ declare enum OperateIntention {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum ImmersiveStrategy {
 
@@ -6628,7 +6628,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   BIND_SHEET_EXPAND_SAFE_AREA = 7,
 }

@@ -3312,7 +3312,7 @@ export declare enum KeyCode {
    *
    * @syscap SystemCapability.MultimodalInput.Input.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   KEYCODE_DESKTOP = 3245
 

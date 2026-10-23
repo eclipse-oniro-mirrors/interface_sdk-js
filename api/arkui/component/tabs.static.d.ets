@@ -1689,7 +1689,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default sidebarFooter(footer: ComponentContentBase | undefined): this;
  
@@ -1700,7 +1700,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default sidebarBottomBar(bottomBar: ComponentContentBase | undefined): this;
 }

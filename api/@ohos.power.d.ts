@@ -146,7 +146,7 @@ declare namespace power {
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
-   *     1. Not allowed to turn off the screen during the exam. [since 26.2.0]
+   *     1. Not allowed to turn off the screen during the exam. [since 26.1.0]
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 19]
    * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]

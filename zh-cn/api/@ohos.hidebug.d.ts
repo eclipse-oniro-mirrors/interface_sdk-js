@@ -205,7 +205,7 @@ declare namespace hidebug {
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
    * @since 26.0.1 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string) : void;
@@ -224,7 +224,7 @@ declare namespace hidebug {
    * @atomicservice
    * @since 24 dynamic
    * @since 26.0.1 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string, needClean : boolean) : void;

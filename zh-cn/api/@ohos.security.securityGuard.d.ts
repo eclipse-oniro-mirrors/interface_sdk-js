@@ -458,7 +458,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface AuthEventInfo {
     /**
@@ -467,7 +467,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     eventId: number;
 
@@ -477,7 +477,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     version: string;
 
@@ -487,7 +487,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     content: string;
 
@@ -497,7 +497,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     clientStatus?: AuthClientStatus[];
   }
@@ -508,7 +508,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface AuthClientStatus {
     /**
@@ -517,7 +517,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     clientId: string;
 
@@ -527,7 +527,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     isDegraded: boolean;
   }
@@ -538,7 +538,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface AuthClientInfo {
     /**
@@ -547,7 +547,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     clientId: string;
 
@@ -557,7 +557,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     bundleName: string;
 
@@ -567,7 +567,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     subscribedEvents: number[];
 
@@ -577,7 +577,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     defaultTimeoutStrategy: AuthStrategy;
 
@@ -588,7 +588,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     defaultTimeoutMs: number;
   }
@@ -599,7 +599,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface ClientAuthResult {
     /**
@@ -608,7 +608,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     clientId: string;
 
@@ -618,7 +618,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     authStrategy: AuthStrategy;
   }
@@ -629,7 +629,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface AuthResult {
     /**
@@ -638,7 +638,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     mergedAuthStrategy: AuthStrategy;
 
@@ -648,7 +648,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     clientAuthResult: ClientAuthResult[];
   }
@@ -659,7 +659,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   enum AuthStrategy {
     /**
@@ -668,7 +668,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     ALLOW = 0,
 
@@ -678,7 +678,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     DENY = 1,
 
@@ -688,7 +688,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     TIMEOUT = 2
   }
@@ -699,7 +699,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface AuthProviderCallback {
     /**
@@ -710,7 +710,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     onClientStatusChanged: (clientInfos: AuthClientInfo[]) => void;
   }
@@ -721,7 +721,7 @@ declare namespace securityGuard {
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   interface AuthProvider {
     /**
@@ -740,7 +740,7 @@ declare namespace securityGuard {
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     requestAuthResult(event: AuthEventInfo): Promise<AuthResult>;
   }
@@ -766,7 +766,7 @@ declare namespace securityGuard {
    * @systemapi Hide this for inner system use.
    * @see [destroyAuthProvider]{@link securityAudit.destroyAuthProvider} Destroys an **AuthProvider** session.
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   function createAuthProvider(callback: AuthProviderCallback, serviceId: string): AuthProvider;
 
@@ -785,7 +785,7 @@ declare namespace securityGuard {
    * @systemapi Hide this for inner system use.
    * @see [createAuthProvider]{@link securityAudit.createAuthProvider} 创建 AuthProvider 会话。
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   function destroyAuthProvider(provider: AuthProvider): void;
 }

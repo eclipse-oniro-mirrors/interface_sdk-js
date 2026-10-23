@@ -34,7 +34,7 @@ import lang from './@arkts.lang';
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamiconly
+ * @since 26.1.0 dynamiconly
  */
 type AtomicIntegerArray = collections.Int8Array | collections.Uint8Array |
   collections.Int16Array | collections.Uint16Array |
@@ -57,7 +57,7 @@ declare namespace utils {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   class Atomics {
     /**
@@ -72,7 +72,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static add(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
@@ -87,7 +87,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static and(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
@@ -103,7 +103,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static compareExchange(typedArray: AtomicIntegerArray, index: number, expectedValue: number,
       replacementValue: number): number;
@@ -119,7 +119,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static exchange(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
@@ -131,7 +131,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static isLockFree(size: number): boolean;
     /**
@@ -145,7 +145,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static load(typedArray: AtomicIntegerArray, index: number): number;
     /**
@@ -160,7 +160,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static or(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
@@ -175,7 +175,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static store(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
@@ -190,7 +190,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static sub(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
@@ -206,7 +206,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static wait(typedArray: collections.Int32Array, index: number, value: number,
       timeout?: number): 'ok' | 'not-equal' | 'timed-out';
@@ -222,7 +222,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static notify(typedArray: collections.Int32Array, index: number, count?: number): number;
     /**
@@ -237,7 +237,7 @@ declare namespace utils {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static xor(typedArray: AtomicIntegerArray, index: number, value: number): number;
   }

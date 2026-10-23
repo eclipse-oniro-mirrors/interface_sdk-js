@@ -1056,7 +1056,7 @@ export declare struct ChipGroup {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onItemsChange?: Callback<ChipGroupItemOptions[]>;
 

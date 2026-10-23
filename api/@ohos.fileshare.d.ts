@@ -310,7 +310,7 @@ declare namespace fileShare {
    *
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum GrantStatus {
     /**
@@ -318,7 +318,7 @@ declare namespace fileShare {
      *
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DENIED = -1,
 
@@ -327,7 +327,7 @@ declare namespace fileShare {
      *
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     GRANTED = 0,
   }
@@ -338,7 +338,7 @@ declare namespace fileShare {
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface PermissionStatusInfo {
     /**
@@ -348,7 +348,7 @@ declare namespace fileShare {
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     tokenID: int;
 
@@ -358,7 +358,7 @@ declare namespace fileShare {
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     policyInfo: PolicyInfo;
 
@@ -368,7 +368,7 @@ declare namespace fileShare {
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     grantStatus: GrantStatus;
   }
@@ -688,7 +688,7 @@ declare namespace fileShare {
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getStatusByPermission(tokenIDList: Array<int>): Promise<Array<PermissionStatusInfo>>;
 
@@ -713,7 +713,7 @@ declare namespace fileShare {
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function grantPermissionByUser(tokenID: int, policies: Array<PolicyInfo>): Promise<void>;
 
@@ -738,7 +738,7 @@ declare namespace fileShare {
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function revokePermissionByUser(tokenID: int, policies: Array<PolicyInfo>): Promise<void>;
 }

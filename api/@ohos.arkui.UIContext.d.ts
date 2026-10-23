@@ -5411,7 +5411,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getPlaceholderRegister(): PlaceholderRegister;
 
@@ -6215,7 +6215,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isWindowInfoInitialized(): boolean;
 
@@ -6675,7 +6675,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   setTransPageEnabled(enabled: boolean): void;
  
@@ -6687,7 +6687,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isTransPageEnabled(): boolean;
 
@@ -6720,7 +6720,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   applyDefaultImmersiveStrategy(...types: ImmersiveStrategy[]): void;
 }

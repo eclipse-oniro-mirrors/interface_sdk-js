@@ -370,7 +370,7 @@ export enum LightType {
    *
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   POINT = 3,
 
@@ -379,7 +379,7 @@ export enum LightType {
    *
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   RECT = 4
 }
@@ -510,7 +510,7 @@ export interface DirectionalLight extends Light {
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export interface PointLight extends Light {
   /**
@@ -523,7 +523,7 @@ export interface PointLight extends Light {
    * @default need to be decided
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   range?: double;
 }
@@ -536,7 +536,7 @@ export interface PointLight extends Light {
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export interface RectLight extends Light {
   /**
@@ -547,7 +547,7 @@ export interface RectLight extends Light {
    * @default 1.0
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   width?: double;
 
@@ -559,7 +559,7 @@ export interface RectLight extends Light {
    * @default 1.0
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   height?: double;
 
@@ -571,7 +571,7 @@ export interface RectLight extends Light {
    * @default false
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   twoSided?: boolean;
 }

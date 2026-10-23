@@ -1298,7 +1298,7 @@ export interface ImageStream extends Image {
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export interface RenderTarget extends Image {
   /**
@@ -1310,7 +1310,7 @@ export interface RenderTarget extends Image {
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   getPixelMap(): Promise<image.PixelMap>;
 }

@@ -3822,7 +3822,7 @@ export declare class UIContext {
    * @returns { PlaceholderRegister } The scroll placeholder registry of this UI instance.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   getPlaceholderRegister(): PlaceholderRegister;
 
@@ -4393,7 +4393,7 @@ export declare class UIContext {
    *     returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   isWindowInfoInitialized(): boolean;
 
@@ -4758,7 +4758,7 @@ export declare class UIContext {
    * @param { boolean } enabled - true to enable transPages behavior (default), false to disable.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   setTransPageEnabled(enabled: boolean): void;
  
@@ -4768,7 +4768,7 @@ export declare class UIContext {
    * @returns { boolean } Returns true if transPages behavior is enabled; returns false otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   isTransPageEnabled(): boolean;
 
@@ -4798,7 +4798,7 @@ export declare class UIContext {
    *     immersive strategies.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   applyDefaultImmersiveStrategy(...types: ImmersiveStrategy[]): void;
 }

@@ -2674,7 +2674,7 @@ declare namespace inputMethodEngine {
      *     3.ipc由于传输数据量过大或其他原因导致失败。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getLeftRichText(length: int): Promise<InputMethodRichText>;
 
@@ -2695,7 +2695,7 @@ declare namespace inputMethodEngine {
      *     3.ipc由于传输数据量过大或其他原因导致失败。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getLeftRichTextSync(length: int): InputMethodRichText;
 
@@ -2716,7 +2716,7 @@ declare namespace inputMethodEngine {
      *     3.ipc由于传输数据量过大或其他原因导致失败。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getRightRichText(length: int): Promise<InputMethodRichText>;
 
@@ -2737,7 +2737,7 @@ declare namespace inputMethodEngine {
      *     3.ipc由于传输数据量过大或其他原因导致失败。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getRightRichTextSync(length: int): InputMethodRichText;
   }
@@ -4869,7 +4869,7 @@ declare namespace inputMethodEngine {
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface InputMethodRichText {
     /**
@@ -4878,7 +4878,7 @@ declare namespace inputMethodEngine {
      * @returns { string } 从富文本中提取的纯文本。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getString(): string;
 
@@ -4888,7 +4888,7 @@ declare namespace inputMethodEngine {
      * @returns { Array<RichTextSpan> } 组成富文本的span数组。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getSpans(): Array<RichTextSpan>;
   }
@@ -4898,7 +4898,7 @@ declare namespace inputMethodEngine {
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface RichTextSpan {
     /**
@@ -4907,7 +4907,7 @@ declare namespace inputMethodEngine {
      * @returns { SpanType } span的类型。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getType(): SpanType;
 
@@ -4921,7 +4921,7 @@ declare namespace inputMethodEngine {
      * @returns { string } span的内容。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getContent(): string;
 
@@ -4931,7 +4931,7 @@ declare namespace inputMethodEngine {
      * @returns { Range } 富文本中span的范围，由开始和结束位置表示。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getRange(): Range;
   }
@@ -4948,7 +4948,7 @@ declare namespace inputMethodEngine {
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum SpanType {
     /**
@@ -4956,7 +4956,7 @@ declare namespace inputMethodEngine {
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     TEXT = 0,
 
@@ -4965,7 +4965,7 @@ declare namespace inputMethodEngine {
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     IMAGE = 1,
 
@@ -4974,7 +4974,7 @@ declare namespace inputMethodEngine {
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SYMBOL = 2,
 
@@ -4983,7 +4983,7 @@ declare namespace inputMethodEngine {
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     CUSTOM = 3
   }

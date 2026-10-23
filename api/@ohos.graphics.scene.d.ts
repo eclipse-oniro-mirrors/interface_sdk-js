@@ -120,7 +120,7 @@ export { SceneLoadParams } from './graphics3d/Scene';
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export { RenderTargetParameters } from './graphics3d/Scene';
 
@@ -129,7 +129,7 @@ export { RenderTargetParameters } from './graphics3d/Scene';
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export { RenderTarget } from './graphics3d/SceneResources';
 
@@ -151,6 +151,6 @@ export { SoftShadowConfig, PCFConfig } from './graphics3d/Scene';
  * Export scene
  * @syscap SystemCapability.ArkUi.Graphics3D
  * stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 export { PointLight, RectLight } from './graphics3d/SceneNodes';

@@ -78,7 +78,7 @@ declare class FormEditExtensionContext extends UIExtensionContext {
 	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
 	 * @syscap SystemCapability.Ability.Form
 	 * @stagemodelonly
-	 * @since 26.2.0 dynamic&static
+	 * @since 26.1.0 dynamic&static
 	 */
 	setWindowBackgroundColor(color: string): Promise<void>;
 }

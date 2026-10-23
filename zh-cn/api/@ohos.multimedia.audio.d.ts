@@ -12143,7 +12143,7 @@ declare namespace audio {
      * @throws { BusinessError } 6800103 - 当前状态下不允许操作。
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     standby(on: boolean): Promise<void>;
   }
@@ -12526,7 +12526,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     actualUsingAppTokenId?: int;
   }
@@ -12609,7 +12609,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     actualUsingAppTokenId?: int;
   }
@@ -15368,7 +15368,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   enum SoundCardType {
     /**
@@ -15376,7 +15376,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ONBOARD = 0,
     /**
@@ -15384,7 +15384,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     USB = 1
   }
@@ -15394,7 +15394,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface SoundCardInfo {
     /**
@@ -15403,7 +15403,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     name: string;
     /**
@@ -15412,7 +15412,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     vendor: string;
     /**
@@ -15421,7 +15421,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     model: string;
     /**
@@ -15430,7 +15430,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     busAddress: string;
     /**
@@ -15439,7 +15439,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     driver: string;
     /**
@@ -15448,7 +15448,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     cardId?: string;
     /**
@@ -15457,7 +15457,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     cardType?: SoundCardType;
   }
@@ -15503,7 +15503,7 @@ declare namespace audio {
      * @throws { BusinessError } 801 - The current device model does not support this function.
      * @syscap SystemCapability.Multimedia.Audio.DeviceEnhance
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     getSoundCardInfoList(): Promise<Array<SoundCardInfo>>;
 

@@ -30,7 +30,7 @@
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface ScrollSnapOffsetProvider {
   /**
@@ -46,7 +46,7 @@ declare interface ScrollSnapOffsetProvider {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   calculateApproachOffset(velocity: number, decayOffset: number): number;
 
@@ -63,7 +63,7 @@ declare interface ScrollSnapOffsetProvider {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   calculateSnapOffset(velocity: number): number;
 }

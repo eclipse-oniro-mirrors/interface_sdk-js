@@ -351,7 +351,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 staticonly
+   * @since 26.1.0 staticonly
    */
   setRepeatOptions<T>(arr: RepeatArray<T>, options?: RepeatOptions): this;
 
@@ -370,7 +370,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export interface RepeatOptions {
   /**
@@ -382,7 +382,7 @@ export interface RepeatOptions {
    * @default - Repeat的父容器为List时为false，为Grid或WaterFlow时为true。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   allowReuseInAnimation?: boolean;
 }
@@ -408,7 +408,7 @@ export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  * @noninterop
  */
 @ComponentBuilder
