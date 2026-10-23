@@ -2558,7 +2558,6 @@ declare namespace window {
    * 窗口矩形（窗口位置及窗口大小）变化返回的值及变化原因。
    *
    * @syscap SystemCapability.Window.SessionManager
-   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    * @since 23 static
@@ -2568,7 +2567,6 @@ declare namespace window {
      * 窗口矩形变化后的值。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2579,7 +2577,6 @@ declare namespace window {
      * 窗口矩形变化的原因。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2704,7 +2701,6 @@ declare namespace window {
    * 窗口矩形（窗口位置及窗口大小）变化的原因。
    *
    * @syscap SystemCapability.Window.SessionManager
-   * @crossplatform [since 26.0.1]
    * @atomicservice
    * @since 12 dynamic
    * @since 23 static
@@ -2714,7 +2710,6 @@ declare namespace window {
      * 默认值。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2725,7 +2720,6 @@ declare namespace window {
      * 窗口最大化。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2736,7 +2730,6 @@ declare namespace window {
      * 窗口恢复到上一次的状态。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2747,7 +2740,6 @@ declare namespace window {
      * 窗口拖拽移动。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2758,7 +2750,6 @@ declare namespace window {
      * 窗口拖拽缩放。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2769,7 +2760,6 @@ declare namespace window {
      * 窗口开始拖拽缩放。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -2780,7 +2770,6 @@ declare namespace window {
      * 窗口结束拖拽缩放。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      * @since 23 static
@@ -8744,7 +8733,6 @@ declare namespace window {
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *      Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @since 20 dynamic
      */
     on(type: 'windowStatusDidChange', callback: Callback<WindowStatusType>): void;
@@ -8758,7 +8746,6 @@ declare namespace window {
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *      Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @since 23 static
      */
     onWindowStatusDidChange(callback: Callback<WindowStatusType>): void;
@@ -8774,7 +8761,6 @@ declare namespace window {
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *      Possible cause: The window is not created.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @since 20 dynamic
      */
     off(type: 'windowStatusDidChange', callback?: Callback<WindowStatusType>): void;
@@ -8789,7 +8775,6 @@ declare namespace window {
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *      Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @since 23 static
      */
     offWindowStatusDidChange(callback?: Callback<WindowStatusType>): void;
@@ -11921,7 +11906,6 @@ declare namespace window {
      *      Possible cause: The window is not created or destroyed.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      */
@@ -11937,7 +11921,6 @@ declare namespace window {
      *      Possible cause: The window is not created or destroyed.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @since 23 static
      */
     onWindowRectChange(callback: Callback<RectChangeOptions>): void;
@@ -11956,7 +11939,6 @@ declare namespace window {
      *      Possible cause: The window is not created.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @atomicservice
      * @since 12 dynamic
      */
@@ -11973,7 +11955,6 @@ declare namespace window {
      *      Possible cause: The window is not created or destroyed.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
-     * @crossplatform [since 26.0.1]
      * @since 23 static
      */
     offWindowRectChange(callback?: Callback<RectChangeOptions>): void;
@@ -13800,8 +13781,10 @@ declare namespace window {
      *     1. When called on a main window, the parameter should not only contain SPLIT.
      *     2. When called on a sub window, the parameter should not contain SPLIT.
      * @syscap SystemCapability.Window.SessionManager
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @StageModelOnly
+     * @atomicservice
+     * @since 15 dynamic
+     * @since 23 static
      */
     setSupportedWindowModes(supportedWindowModes: Array<bundleManager.SupportWindowMode>): Promise<void>;
 
@@ -13866,8 +13849,8 @@ declare namespace window {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have
      *     the permission required or a non-system application calls the API. [since 26.0.0]
      * @syscap SystemCapability.Window.SessionManager
-     * @systemapi [since 22 - 24]
-     * @publciapi [since 26.0.0]
+     * @systemapi Hide this for inner system use. [since 22 - 24]
+     * @publicapi [since 26.0.0]
      * @stagemodelonly
      * @since 22 dynamic
      * @since 23 static
@@ -13890,7 +13873,7 @@ declare namespace window {
      *     2. Internal task error.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally.
      * @syscap SystemCapability.Window.SessionManager
-     * @systemapi [since 22 - 24]
+     * @systemapi Hide this for inner system use. [since 22 - 24]
      * @publicapi [since 26.0.0]
      * @stagemodelonly
      * @since 22 dynamic

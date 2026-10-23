@@ -1297,7 +1297,8 @@ declare namespace PiPWindow {
      * @throws { BusinessError } 401 - Params error. Possible causes: Callback is already registered.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
-     * @throws { BusinessError } 1300014 - PiP internal error.
+     * @throws { BusinessError } 1300014 - PiP internal error. Possible cause:
+     *     The PiP controller has been destroyed.
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 15 dynamic
@@ -1310,7 +1311,8 @@ declare namespace PiPWindow {
      * @param { Callback<PiPWindowSize> } callback - Callback used to return the picture-in-picture window size.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
-     * @throws { BusinessError } 1300014 - PiP internal error.
+     * @throws { BusinessError } 1300014 - PiP internal error. Possible cause:
+     *     The PiP controller has been destroyed.
      * @syscap SystemCapability.Window.SessionManager
      * @since 26.0.0 static
      */
@@ -1369,7 +1371,7 @@ declare namespace PiPWindow {
      *     True indicates that the pip is onscreen, and vice verse.
      * @throws { BusinessError } 801 - Capability not supported.
      *     function onActiveStatusChange(callback) can not work correctly due to limited device capabilities.
-     * @throws { BusinessError } 1300014 - PiP internal error.Possible cause:
+     * @throws { BusinessError } 1300014 - PiP internal error. Possible cause:
      *     The PiP controller has been destroyed.
      * @syscap SystemCapability.Window.SessionManager
      * @since 26.0.0 static

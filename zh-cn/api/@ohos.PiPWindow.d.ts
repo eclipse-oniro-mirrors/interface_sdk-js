@@ -1218,7 +1218,7 @@ declare namespace PiPWindow {
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
      * @throws { BusinessError } 1300014 - PiP internal error. Possible cause:
-    *     <br>The PiP controller has been destroyed.
+     *     The PiP controller has been destroyed.
      * @syscap SystemCapability.Window.SessionManager
      * @since 26.0.0 static
      */
@@ -1272,7 +1272,8 @@ declare namespace PiPWindow {
      *     <br>画中画显示状态变化回调函数
      * @throws { BusinessError } 801 - Capability not supported.
      *     function onActiveStatusChange(callback) can not work correctly due to limited device capabilities.
-     * @throws { BusinessError } 1300014 - PiP internal error.
+     * @throws { BusinessError } 1300014 - PiP internal error. Possible cause:
+     *     The PiP controller has been destroyed.
      * @syscap SystemCapability.Window.SessionManager
      * @since 26.0.0 static
      */
