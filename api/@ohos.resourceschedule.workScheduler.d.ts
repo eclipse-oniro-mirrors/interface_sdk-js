@@ -211,6 +211,20 @@ declare namespace workScheduler {
      * @since 23 static
      */
     earliestStartTime?: int;
+    /**
+     * Whether the task is performance-sensitive. This parameter has strict restrictions, and the system
+     * will limit the running duration, running frequency, and total running duration of the entire system.
+     * - **true**: Indicates that the task is performance-sensitive.
+     * When this parameter is set to true, the isCharging and isDeepIdle parameters must be set to true.
+     * For a periodic task, the repeatCycleTime parameter must be greater than or equal to 24 hours.
+     * - **false**: Indicates that the task is not performance-sensitive.
+     * Default value: false.
+     * 
+     * @syscap SystemCapability.ResourceSchedule.WorkScheduler
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    isPerformanceSensitive?: boolean;
   }
 
   /**
