@@ -15,6 +15,12 @@
 */
 
 /**
+ * DatePickerComponent组件用于选择日期（年月日）和时间（时分秒）。
+ *
+ * > **说明：**
+ * >
+ * > - 该组件接口仅可在Stage模型下使用。
+ *
  * @file
  * @kit ArkUI
  */
@@ -451,11 +457,7 @@ export declare class DatePickerComponentOptions {
 }
 
 /**
- * DatePickerComponent组件用于选择日期（年月日）和时间（时分秒）。
- *
- * > **说明：**
- * >
- * > - 该组件接口仅可在Stage模型下使用。
+ * 定义日期时间选择器组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
