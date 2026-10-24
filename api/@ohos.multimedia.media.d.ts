@@ -3030,6 +3030,37 @@ declare namespace media {
   }
 
   /**
+   * Enumeration definition of executable playback control instructions,
+   * This interface is used by the application to query whether the corresponding playback control operation can be
+   * performed on the media asset after Prepare() is complete.
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVPlayer
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum PlaybackCommand {  
+    /**
+     * Definition of Enumerated Values of the Seek Operation
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_SEEK = 0,
+    /**
+     * Operation value for adjusting the playback rate
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_RATE = 1
+  }
+
+  /**
    * AVPlayer is a playback management class. It provides APIs to manage and play media assets. Before calling any API 
    * in AVPlayer, you must use 
    * [createAVPlayer()]{@link @ohos.multimedia.media:media.createAVPlayer(callback: AsyncCallback<AVPlayer>)} to create 
@@ -3801,6 +3832,24 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getMediaSources(): Array<MediaSource | undefined>;
+
+    /**
+     * Queries whether a specified playback control command can be executed under the current playback source.
+     * The function can be called only after Prepare() is successfully executed.
+     *
+     * @param { PlaybackCommand } command - Enumerated value of the playback control instruction to be queried.
+     *     <br>Value constraint: See Enumeration PlaybackCommand.
+     * @returns { Promise<boolean> } Promise used to return the result.
+     *     The value **true** indicates that the command can be executed.
+     *     The value **false** indicates that the command cannot be executed.
+     * @throws { BusinessError } 5400102 - Operation not allowed.
+     *     If this function is invoked before Prepare(), it is returned.
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    checkSupportPlaybackCommand(command: PlaybackCommand): Promise<boolean>;
 
     /**
      * URL of the media asset. It can be set only when the AVPlayer is in the idle state. 
@@ -9813,6 +9862,16 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     MD_KEY_TRACK_REFERENCE_TYPE = 'track_ref_type',
+
+    /**
+     * Key for obtaining whether the track can be played normally
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    MD_KEY_TRACK_PLAYABLE = 'is_playable'
   }
 
   /**
