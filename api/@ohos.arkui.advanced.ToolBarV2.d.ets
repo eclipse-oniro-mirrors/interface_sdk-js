@@ -20,7 +20,7 @@
 
 import { SymbolGlyphModifier, DividerModifier } from './@ohos.arkui.modifier';
 import { ColorMetrics, LengthMetrics } from './@ohos.arkui.node';
-import { uiMaterial } from './@ohos.arkui.uiMaterial';
+import uiMaterial from './@ohos.arkui.uiMaterial';
 /**
  * Enumerates the states of the toolbar item.
  * 
