@@ -219,7 +219,7 @@ declare namespace workScheduler {
      * For a periodic task, the repeatCycleTime parameter must be greater than or equal to 24 hours.
      * - **false**: Indicates that the task is not performance-sensitive.
      * Default value: false.
-     * 
+     *
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
