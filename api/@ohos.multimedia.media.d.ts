@@ -11082,6 +11082,33 @@ declare namespace media {
   }
 
   /**
+   * Scene enumeration definition for automatically pausing screen capture
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum AVScreenCaptureAutoPauseCaptureScene {  
+    /**
+     * No scene is set; screen capture will not be automatically paused in any scenario.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_NONE = 0,
+
+    /**
+     * Scene for screen fold state changes.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_SCREEN_FOLD_STATE_CHANGE = 1 << 0
+  }
+
+  /**
    * Provides the media AVScreenCaptureStrategy definition.
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11155,7 +11182,22 @@ declare namespace media {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-      enableHDR?: boolean;
+    enableHDR?: boolean;
+
+    /**
+     * Sets the set of scenes that automatically pause screen content capture.
+     * When the capture session is running, if any of the scenarios in the scenario set occurs, the system automatically
+     * pauses the collection of screen content. You can use the OH_AVScreenCapture_ResumeScreenCapture() function to
+     * restore the data.
+     * image content acquisition is not automatically paused by default.
+     * Default value: If this parameter is not set.
+     * <br>You can use the OH_AVScreenCapture_ResumeScreenCapture() function to restore data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
   }
 
   /**
