@@ -14,6 +14,12 @@
  */
 
 /**
+ * The **DatePickerComponent** is used to select dates (year, month, and day) and times (hour, minute, and second).
+ *
+ * ###### Child Components
+ *
+ * None
+ *
  * @file
  * @kit ArkUI
  */
@@ -662,11 +668,7 @@ export declare class DatePickerComponentOptions {
 }
 
 /**
- * The **DatePickerComponent** is used to select dates (year, month, and day) and times (hour, minute, and second).
- *
- * ###### Child Components
- *
- * None
+ * Defines a date and time picker component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

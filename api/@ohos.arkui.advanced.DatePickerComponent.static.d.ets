@@ -15,6 +15,12 @@
 */
 
 /**
+ * DatePickerComponent component is used to select date (year, month, day) and time (hour, minute, second).
+ *
+ * > **Description:**
+ * >
+ * > - This component interface can only be used in Stage model.
+ *
  * @file
  * @kit ArkUI
  */
@@ -466,11 +472,7 @@ export declare class DatePickerComponentOptions {
 }
 
 /**
- * DatePickerComponent component is used to select date (year, month, day) and time (hour, minute, second).
- *
- * > **Description:**
- * >
- * > - This component interface can only be used in Stage model.
+ * Defines a date and time picker component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
