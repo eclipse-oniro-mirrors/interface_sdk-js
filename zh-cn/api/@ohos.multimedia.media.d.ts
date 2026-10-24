@@ -2810,7 +2810,7 @@ declare namespace media {
    * @syscap SystemCapability.Multimedia.Media.AVPlayer
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   enum PlaybackCommand {  
     /**
@@ -2819,7 +2819,7 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     PLAYBACK_COMMAND_SEEK = 0,
     /**
@@ -2828,7 +2828,7 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     PLAYBACK_COMMAND_RATE = 1
   }
@@ -3558,7 +3558,7 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     checkSupportPlaybackCommand(command: PlaybackCommand): Promise<boolean>;
 
@@ -9639,7 +9639,7 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     MD_KEY_TRACK_PLAYABLE = 'is_playable'
   }
