@@ -14,14 +14,14 @@
  */
 
 /**
- * @file Sets filter criteria of publishers for subscribing to desired notifications
+ * @file NotificationSubscribeInfo
  * @kit NotificationKit
  */
 
 import type notificationManager from '../@ohos.notificationManager';
 
 /**
- * 通知发布者的信息。
+ * 通知订阅者的信息。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -30,7 +30,7 @@ import type notificationManager from '../@ohos.notificationManager';
  */
 export interface NotificationSubscribeInfo {
   /**
-   * 应用Bundle名称。 不传递该参数时，默认订阅所有应用的通知。
+   * 应用Bundle名称。不传递该参数时，默认订阅所有应用的通知。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -40,7 +40,7 @@ export interface NotificationSubscribeInfo {
   bundleNames?: Array<string>;
 
   /**
-   * 用户ID。 不传递该参数时，默认订阅当前用户ID的通知。
+   * 用户ID。不传递该参数时，默认订阅当前用户ID的通知。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -50,7 +50,7 @@ export interface NotificationSubscribeInfo {
   userId?: int;
 
   /**
-   * 设备类型。不传递该参数时，默认订阅当前设备的通知。根据[设备信息]{@link ./../@ohos.deviceInfo:deviceInfo}获取。
+   * 设备类型。不传递该参数时，默认订阅当前设备的通知。根据[设备信息]{@link @ohos.deviceInfo:deviceInfo}获取。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -60,7 +60,7 @@ export interface NotificationSubscribeInfo {
   deviceType?: string;
 
   /**
-   * 通知渠道类型。 不传递该参数时，默认订阅所有渠道类型的通知。
+   * [通知渠道](docroot://notification/notification-glossary.md#notification-slot通知渠道)类型。 不传递该参数时，默认订阅所有渠道类型的通知。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -71,12 +71,12 @@ export interface NotificationSubscribeInfo {
 
   /**
    * 通知过滤范围。默认值为0。取值范围包括：
-   * 
+   *
    * - 0：不进行任何过滤，订阅全部通知。 
-   * - 1：将渠道类型为[SOCIAL_COMMUNICATION]{@link ./../@ohos.notificationManager:notificationManager.SlotType}且
-   * [userInput]{@link notificationActionButton:NotificationActionButton}为空的通知过滤掉。
-   * - 2：将渠道类型为[SOCIAL_COMMUNICATION]{@link ./../@ohos.notificationManager:notificationManager.SlotType}且
-   * [userInput]{@link notificationActionButton:NotificationActionButton}不为空的通知过滤掉。
+   * - 1：将渠道类型为[SOCIAL_COMMUNICATION]{@link @ohos.notificationManager:notificationManager.SlotType}且
+   * [userInput]{@link ./notificationActionButton:NotificationActionButton}为空的通知过滤掉。
+   * - 2：将渠道类型为[SOCIAL_COMMUNICATION]{@link @ohos.notificationManager:notificationManager.SlotType}且
+   * [userInput]{@link ./notificationActionButton:NotificationActionButton}不为空的通知过滤掉。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -96,7 +96,7 @@ export interface NotificationSubscribeInfo {
   voiceContentOptions?: VoiceContentOptions;
 
   /**
-   * 实况通知图片配置项。
+   * [实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)图片配置项。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -107,6 +107,7 @@ export interface NotificationSubscribeInfo {
 
   /**
    * 是否启用通知分类。
+   *
    * - true：表示启用。
    * - false：表示禁用。默认值为false。
    *
@@ -116,12 +117,14 @@ export interface NotificationSubscribeInfo {
    * @since 26.0.0 dynamic&static
    */
   enableClassification?: boolean;
- 
+
   /**
    * 是否启用订阅时的静默重放。
+   *
    * - true：表示启用。
    * - false：表示禁用。默认值为false。
-   * 启用后，首次订阅时会以静默方式重新推送历史通知，不会出现响铃和振动提醒。
+   *
+   * 启用后，首次订阅时会以静默方式重新推送历史通知，不会出现铃声和振动提醒。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -129,30 +132,6 @@ export interface NotificationSubscribeInfo {
    * @since 26.0.0 dynamic&static
    */
   needSilentReplayOnSubscribe?: boolean;
-}
-
-/**
- * 实况通知图片配置项。
- *
- * @syscap SystemCapability.Notification.Notification
- * @systemapi
- * @stagemodelonly
- * @since 26.0.0 dynamic&static
- */
-export interface PictureOptions {
-  /**
-   * 订阅普通实况类型通知中
-   * [NotificationLiveViewContent]{@link ./notification/notificationContent:NotificationLiveViewContent}的extraInfo中的
-   * 图片信息。入参为extraInfo中需要解析为pixelMap格式的图片文件名的Key。<br>当应用发布普通实况类型通知时，通过
-   * [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume}将解析后的图片信息回调给订阅者，
-   * 解析后的图片信息存放于NotificationLiveViewContent的pictureInfo内。
-   *
-   * @syscap SystemCapability.Notification.Notification
-   * @systemapi
-   * @stagemodelonly
-   * @since 26.0.0 dynamic&static
-   */
-  preparseLiveViewPicList?: string[];
 }
 
 /**
@@ -165,10 +144,11 @@ export interface PictureOptions {
  */
 export interface VoiceContentOptions {
   /**
-   * 是否订阅通知语音播报内容。
+   * 是否订阅通知语音播报内容。 
+   *
    * - true：订阅。
    * - false：不订阅。默认值为false。
-   * 
+   *
    * @default false
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -176,4 +156,28 @@ export interface VoiceContentOptions {
    * @since 26.0.0 dynamic&static
    */
   enabled?: boolean;
+}
+
+/**
+ * 实况通知图片配置项。
+ *
+ * @syscap SystemCapability.Notification.Notification
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.0 dynamic&static
+ */
+export interface PictureOptions {
+  /**
+   * 订阅普通实况类型通知中[NotificationLiveViewContent]{@link ./notificationContent:NotificationLiveViewContent}的extraInfo中的图片信息。入
+   * 参为extraInfo中需要解析为pixelMap格式的图片文件名的Key。
+   *
+   * 当应用发布普通实况类型通知时，通过[onConsume]{@link ./notificationSubscriber:NotificationSubscriber.onConsume}将解析后的图片信息回调给订阅者，解析后的图片
+   * 信息存放于NotificationLiveViewContent的pictureInfo内。
+   *
+   * @syscap SystemCapability.Notification.Notification
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  preparseLiveViewPicList?: string[];
 }
