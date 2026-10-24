@@ -350,6 +350,23 @@ export declare class CommonOptions {
   selected?: Date;
 
   /**
+   * 选中日期或时间。
+   *
+   * **说明：**
+   *
+   * > 优先级高于[selected]{@link CommonOptions}；同时设置时，**selected** 不生效。
+   * > 当[hideYear]{@link DateOptions}为**true**时，可省略year（或传undefined），表示年份列选中"----"选项。
+   *
+   * 默认值：当前系统日期或时间。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  extendSelected?: Date | DatePickerComponentResult;
+
+  /**
    * 设置是否启用循环模式。
    *
    * - true：启用循环模式，支持滚动到边界时继续循环选择。
