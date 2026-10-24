@@ -709,6 +709,16 @@ declare namespace deviceInfo {
    * @since 26.0.1 dynamic
    */
   const kernelVersion: string;
+
+  /**
+   * 获取系统安装UTC时间戳。
+   * 例如：1790784000000。
+   * 
+   * @syscap SystemCapability.Startup.SystemInfo
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  const installTime: string;
 }
 
 export default deviceInfo;

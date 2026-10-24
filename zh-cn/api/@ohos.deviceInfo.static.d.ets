@@ -890,5 +890,16 @@ declare namespace deviceInfo {
      * @since 26.0.1 static
      */
     const kernelVersion: string;
+
+    /**
+     * 获取系统安装时间。
+     * 格式为'yyyy-MM-dd HH:mm:ss'。
+     * 示例：'2026-01-01 08:00:00'。
+     * 
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    get installTime(): string;
 }
 export default deviceInfo;

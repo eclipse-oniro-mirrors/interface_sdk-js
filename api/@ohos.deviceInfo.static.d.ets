@@ -768,5 +768,15 @@ declare namespace deviceInfo {
      * @since 26.0.1 static
      */
     get kernelVersion(): string;
+
+    /**
+     * Obtains the system installation UTC timestamp.
+     * Example: 1790784000000.
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    get installTime(): string;
 }
 export default deviceInfo;
