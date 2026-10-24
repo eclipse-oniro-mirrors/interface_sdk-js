@@ -22,7 +22,7 @@
 
 import { BackgroundBlurStyleOptions, BackgroundEffectOptions, BlurStyle, Callback, CommonMethod, TranslateOptions, DividerStyle, Bindable } from './common';
 import { EdgeEffect, PageFlipMode, Curve } from "./enums";
-import { Dimension, Length, ResourceColor, ResourceStr } from "./units";
+import { Dimension, Length, ResourceColor, ResourceStr, Position, Edges, LocalizedEdges } from "./units";
 import { ComponentContentBase } from '../ComponentContent';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, ICurve } from "./common";
@@ -626,6 +626,96 @@ export interface FloatingTabBarStyle {
    * @since 26.0.0 static
    */
   systemMaterial?: uiMaterial.ImmersiveMaterial;
+
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxWidth?: Length;
+
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offset?: Position | Edges | LocalizedEdges;
+}
+
+/**
+ * Provides an interface for the options for the top floating tab bar style.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface TopFloatingTabBarStyle {
+  /**
+   * The bar width.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  barWidth?: Length;
+
+  /**
+   * The width of the left and right margins of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  barSideMargin?: Length;
+
+  /**
+   * The distance between the bar and the top of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  barTopMargin?: Length;
+
+  /**
+   * The color of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maskColor?: ResourceColor;
+
+  /**
+   * The height of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maskHeight?: Length;
+
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxWidth?: Length;
+
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offset?: Position | Edges | LocalizedEdges;
 }
 
 /**
@@ -757,7 +847,17 @@ export declare enum TabBarStyle {
    * @stagemodelonly
    * @since 26.0.1 static
    */
-  SIDEBAR_ADAPTABLE = 2
+  SIDEBAR_ADAPTABLE = 2,
+
+  /**
+   * The top floating tab bar style. The tab bar is always displayed at the top in a floating form.
+   * The **BarPosition** setting is ignored when this style is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP = 3
 }
 
 /**
@@ -874,7 +974,16 @@ export declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @since 26.0.1 static
    */
-  SIDEBAR = 1
+  SIDEBAR = 1,
+
+  /**
+   * The tab bar is displayed as a top floating bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP_TABBAR = 2
 }
 
 /**
@@ -1440,6 +1549,18 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default barFloatingStyle(style: FloatingTabBarStyle | undefined): this;
+
+  /**
+   * Enable top floating style for bar. This is effective only when **barStyle** is set to
+   * **TabBarStyle.TOP** or **TabBarStyle.TOP_ADAPTABLE**.
+   *
+   * @param { TopFloatingTabBarStyle | undefined } style - top floating style for bar
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default topBarFloatingStyle(style: TopFloatingTabBarStyle | undefined): this;
 
   /**
    * Sets the display style of the tab bar.
