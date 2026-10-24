@@ -59,7 +59,7 @@ declare class InsightIntentContext {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   readonly toolCallId?: string;
 
