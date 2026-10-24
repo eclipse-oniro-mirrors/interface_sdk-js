@@ -1597,6 +1597,21 @@ declare interface VersionCondition {
 declare type StylesVersionDecorator = (versionCondition: VersionCondition) => MethodDecorator;
 
 /**
+ * Define Extend Decorator type with version control.
+ *
+ * @param { any } value
+ * @param { VersionCondition } versionCondition
+ * @returns { MethodDecorator } Extend decorator
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCondition) => MethodDecorator;
+
+/**
  * The @Styles decorator is used to extract multiple style settings into a method, which can be directly called at the 
  * component declaration site to define and reuse custom styles. It is suitable for scenarios where multiple components 
  * need to share the same styles, reducing repetitive code and improving the efficiency of maintaining style 
@@ -1620,6 +1635,8 @@ declare const Styles: MethodDecorator & StylesVersionDecorator;
  * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing 
  * style code duplication.
  *
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1] 
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1628,7 +1645,8 @@ declare const Styles: MethodDecorator & StylesVersionDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Extend: MethodDecorator & ((value: any) => MethodDecorator);
+declare const Extend: MethodDecorator
+  & ((value: any) => MethodDecorator) & ExtendVersionDecorator;
 
 /**
  * The @AnimatableExtend decorator is used to customize animatable property methods.
