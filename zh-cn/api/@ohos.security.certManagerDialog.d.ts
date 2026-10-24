@@ -732,6 +732,87 @@ declare namespace certificateManagerDialog {
      */
     abilityName: string;
   }
+
+  /**
+   * 安装证书对话框请求参数。
+   *
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface InstallCertificateRequest {
+ 
+    /**
+     * 安装的证书类型。目前支持**CA_CERT**、**CREDENTIAL_USER**和
+     * **CREDENTIAL_SYSTEM**。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    certType: CertificateType;
+ 
+    /**
+     * 待安装证书的使用范围。**当前用户**和
+     * **NOT_Specific**目前支持。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    certScope: CertificateScope;
+ 
+    /**
+     * 证书数据。大小不能超过8KB。<br>certType为CA_CERT时，证书数据必须为PEM或DER格式。<br>certType为CREDENTIAL_USER或CREDENTIAL_SYSTEM时，必须为P12编码格式。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    cert: Uint8Array;
+ 
+    /**
+     * 密钥库文件的密码。该参数仅当certType取值为CREDENTIAL_USER或CREDENTIAL_SYSTEM时有效，如果指定了keystorePwd参数，则对话框中无需用户输入密码。
+     * 最大长度为128。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    keystorePwd?: string;
+  }
+ 
+  /**
+   * 打开证书管理安装证书对话框。证书安装成功后，
+   * 返回证书的唯一标识符。应用程序可以使用该标识符来使用证书。
+   * 使用Promise异步回调。
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER
+   * @param { common.Context } context - 应用程序的上下文。
+   * @param { InstallCertificateRequest } request - 安装证书对话框的请求参数。
+   * @returns { Promise<string> } Promise用于返回证书URI。最大长度256字节。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
+   * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
+   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @throws { BusinessError } 29700002 - The user cancels the installation operation.
+   * @throws { BusinessError } 29700003 - The user install certificate failed in the certificate manager dialog, such as
+   *     the certificate is in an invalid format.
+   * @throws { BusinessError } 29700004 - For security purposes, the current device does not support this API.
+   *     You can use the [supportsCACertDialog]{@link certificateManagerDialog.supportsCACertDialog} to determine
+   *     whether the device supports opening the dialog box for installing a CA certificate with certType set to CA.
+   * @throws { BusinessError } 29700005 - The operation does not comply with the device security policy, such as the
+   *     device does not allow users to manage the CA certificate of the global user.
+   * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @throws { BusinessError } 29700008 - The keystore file password is incorrect.
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function openInstallCertificateDialog(context: common.Context, request: InstallCertificateRequest): Promise<string>;
 }
 
 export default certificateManagerDialog;

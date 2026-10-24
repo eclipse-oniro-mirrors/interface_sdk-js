@@ -757,6 +757,90 @@ declare namespace certificateManagerDialog {
      */
     abilityName: string;
   }
+
+  /**
+   * The request parameter of the install certificate dialog box.
+   *
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  export interface InstallCertificateRequest {
+ 
+    /**
+     * Type of the certificate to install. **CA_CERT**, **CREDENTIAL_USER**, and
+     *     **CREDENTIAL_SYSTEM** are currently supported.
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    certType: CertificateType;
+ 
+    /**
+     * Usage scope of the certificate to install. **CURRENT_USER** and
+     *     **NOT_SPECIFIED** are currently supported.
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    certScope: CertificateScope;
+ 
+    /**
+     * Certificate data. The size cannot exceed 8 KB. <br>When certificateType is set to CA_CERT, the certificate data
+     * must be in PEM or DER format. <br>When certType is set to CREDENTIAL_USER or CREDENTIAL_SYSTEM, the encoding
+     * format must be P12.
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    cert: Uint8Array;
+ 
+    /**
+     * Password of the keystore file. This parameter is valid only when certType is set to CREDENTIAL_USER or
+     * CREDENTIAL_SYSTEM. If keystorePwd is specified, the user does not need to enter the password in the dialog box.
+     * The maximum length is 128.
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    keystorePwd?: string;
+  }
+ 
+  /**
+   * Opens the Certificate Management Install Certificate dialog box. After the certificate is successfully installed,
+   * the unique identifier of the certificate is returned. Applications can use the identifier to use the certificate.
+   * Use Promise asynchronous callback.
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER
+   * @param { common.Context } context - Context of the application.
+   * @param { InstallCertificateRequest } request - The request parameter of the install certificate dialog box.
+   * @returns { Promise<string> } Promise used to return the certificate URI. The value contains up to 256 bytes.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
+   * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
+   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @throws { BusinessError } 29700002 - The user cancels the installation operation.
+   * @throws { BusinessError } 29700003 - The user install certificate failed in the certificate manager dialog, such as
+   *     the certificate is in an invalid format.
+   * @throws { BusinessError } 29700004 - For security purposes, the current device does not support this API.
+   *     You can use the [supportsCACertDialog]{@link certificateManagerDialog.supportsCACertDialog} to determine
+   *     whether the device supports opening the dialog box for installing a CA certificate with certType set to CA.
+   * @throws { BusinessError } 29700005 - The operation does not comply with the device security policy, such as the
+   *     device does not allow users to manage the CA certificate of the global user.
+   * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @throws { BusinessError } 29700008 - The keystore file password is incorrect.
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  function openInstallCertificateDialog(context: common.Context, request: InstallCertificateRequest): Promise<string>;
 }
 
 export default certificateManagerDialog;
