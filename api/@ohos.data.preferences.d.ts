@@ -244,7 +244,6 @@ declare namespace preferences {
      * Unit: kb.  Value constraint: The value can be 0. Value range: [256,1112784]. Default value: 1112784.
      *
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
-     * @stagemodelonly
      * @atomicservice
      * @since 26.1.0 dynamic&static
      */
