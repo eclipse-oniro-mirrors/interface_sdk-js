@@ -10836,6 +10836,33 @@ declare namespace media {
   }
 
   /**
+   * 自动暂停屏幕录制的场景枚举定义。
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum AVScreenCaptureAutoPauseCaptureScene {
+    /**
+     * 不设置任何场景，在任何场景下都不会自动暂停屏幕录制。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_NONE = 0,
+
+    /**
+     * 屏幕折叠状态发生变化的场景。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_SCREEN_FOLD_STATE_CHANGE = 1 << 0
+  }
+
+  /**
    * 录屏策略。
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -10905,6 +10932,18 @@ declare namespace media {
      * @since 26.1.0 dynamic&static
      */
     enableAEC?: boolean;
+
+    /**
+     * 设置自动暂停屏幕内容采集的场景集合。<br>
+     * 当采集会话运行过程中，若场景集合中的任一场景发生，系统将自动暂停屏幕内容采集。<br>
+     * 可通过OH_AVScreenCapture_ResumeScreenCapture()接口恢复屏幕内容采集。<br>
+     * 默认不自动暂停屏幕内容采集（即不设置该参数时的默认行为）。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
   }
 
   /**
