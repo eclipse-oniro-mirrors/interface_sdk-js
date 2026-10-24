@@ -1727,6 +1727,25 @@ declare namespace securityManager {
    * @since 26.0.1
    */
   function isWeakPinEnabled(): boolean;
+
+  /**
+   * Obtains the last password change time based on the account ID. This API returns the time synchronously.
+   * Enterprises can use this API to query the last password change time for password policy audit and compliance check.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @returns { number } Last password change timestamp, in milliseconds.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getPasswordLastChangedTime(accountId: number): number;
 }
 
 /*** if arkts dynamic */
