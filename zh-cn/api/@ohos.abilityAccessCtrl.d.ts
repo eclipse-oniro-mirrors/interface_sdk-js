@@ -1176,7 +1176,6 @@ declare namespace abilityAccessCtrl {
      * @param { int } controllerTokenID - 控制方应用的身份标识，参数值大于0。
      *     <br>取值限定为整数。
      * @param { Array<AutomationControlTargetParam> } targetList - 被控制目标应用列表及其自动化控制开关状态。
-     *     参数列表最多1024个。
      *     <br>最大长度为1024且不能为空。
      * @returns { Promise<Array<AutomationControlSetResult>> } Promise用于返回每个目标应用的结果。
      *     与targetList的顺序相同。
