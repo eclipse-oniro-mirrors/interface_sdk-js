@@ -2017,6 +2017,58 @@ declare namespace certificateManager {
    * @since 26.0.0 dynamic&static
    */
   function importUkeyCertificate(keyUri: string, cert: Uint8Array, ukeyInfo: UkeyInfo): Promise<void>;
+ 
+  /**
+   * 表示证书管理配置项。
+   *
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamiconly
+   */
+  export interface ConfigItem {
+    /**
+     * 配置项名称。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    name: string;
+ 
+    /**
+     * 配置项值。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    value: string;
+  }
+ 
+  /**
+   * 查询证书管理系统配置信息。
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER
+   * @param { Array<string> } configNames - 证书管理配置项名称。
+   *     <br>最大长度为16且不能为空。
+   * @returns { Promise<Array<ConfigItem>> } 返回配置数据的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     <br> The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17500011 - The input parameters validation failed.
+   *     <br> Possible causes: The length of configNames exceeds the limit, or the array is empty,
+   *     or the array element value is invalid.
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
+   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamiconly
+   */
+  function getCertManagerConfig(configNames: Array<string>) : Promise<Array<ConfigItem>>;
 }
 
 export default certificateManager;

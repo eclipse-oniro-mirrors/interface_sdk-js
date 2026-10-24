@@ -2079,6 +2079,58 @@ declare namespace certificateManager {
    * @since 26.0.0 dynamic&static
    */
   function importUkeyCertificate(keyUri: string, cert: Uint8Array, ukeyInfo: UkeyInfo): Promise<void>;
+
+  /**
+   * Represents a certificate management configuration item.
+   *
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamiconly
+   */
+  export interface ConfigItem {
+    /**
+     * Configuration item name.
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    name: string;
+ 
+    /**
+     * Configuration item value.
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    value: string;
+  }
+ 
+  /**
+   * Queries the certificate management system configuration information.
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER
+   * @param { Array<string> } configNames - Certificate management configuration item names.
+   *     <br>The maximum length is 16 bytes and cannot be empty.
+   * @returns { Promise<Array<ConfigItem>> } Promise used to return the config data.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     <br> The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17500011 - The input parameters validation failed.
+   *     <br> Possible causes: The length of configNames exceeds the limit, or the array is empty,
+   *     or the array element value is invalid.
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
+   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamiconly
+   */
+  function getCertManagerConfig(configNames: Array<string>) : Promise<Array<ConfigItem>>;
 }
 
 export default certificateManager;
