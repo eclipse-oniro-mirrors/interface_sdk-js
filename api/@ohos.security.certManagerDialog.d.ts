@@ -116,6 +116,15 @@ declare namespace certificateManagerDialog {
     ERROR_NO_AVAILABLE_CERTIFICATE = 29700007,
 
     /**
+     * The password is incorrect.
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    ERROR_PASSWORD_IS_INCORRECT = 29700008,
+
+    /**
      * The operation in the certificate management dialog box timed out.
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
