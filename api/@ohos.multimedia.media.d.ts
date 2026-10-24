@@ -11146,6 +11146,16 @@ declare namespace media {
      * @since 26.1.0 dynamic&static
      */
     enableAEC?: boolean;
+
+    /**
+     * Sets whether to output videos in HDR vivid format.
+     * Default value: The default value is false, indicating that videos in SDR format are output.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+      enableHDR?: boolean;
   }
 
   /**
