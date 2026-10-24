@@ -120,7 +120,7 @@ declare namespace certificateManagerDialog {
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ERROR_PASSWORD_IS_INCORRECT = 29700008,
 
@@ -772,7 +772,7 @@ declare namespace certificateManagerDialog {
    *
    * @syscap SystemCapability.Security.CertificateManagerDialog
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface InstallCertificateRequest {
  
@@ -782,7 +782,7 @@ declare namespace certificateManagerDialog {
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     certType: CertificateType;
  
@@ -792,7 +792,7 @@ declare namespace certificateManagerDialog {
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     certScope: CertificateScope;
  
@@ -803,7 +803,7 @@ declare namespace certificateManagerDialog {
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     cert: Uint8Array;
  
@@ -814,7 +814,7 @@ declare namespace certificateManagerDialog {
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     keystorePwd?: string;
   }
@@ -847,7 +847,7 @@ declare namespace certificateManagerDialog {
    * @throws { BusinessError } 29700008 - The keystore file password is incorrect.
    * @syscap SystemCapability.Security.CertificateManagerDialog
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function openInstallCertificateDialog(context: common.Context, request: InstallCertificateRequest): Promise<string>;
 }
