@@ -2093,7 +2093,7 @@ export declare class AdvancedToolBarV2Modifier {
  * The toolbar is used to display action options for the current screen content. It is displayed at the bottom of the
  * screen and is suitable for scenarios where quick action entries need to be provided to users. A maximum of five
  * entries can be displayed at the bottom. Any excess entries are collapsed into a "More" item, which is displayed on
- * the far right. It is suitable for scenarios where quick operations on the current page content are needed, helping 
+ * the far right. It is suitable for scenarios where quick operations on the current page content are needed, helping
  * users quickly access common functions and improving operation efficiency.<br />
  * ToolbarV2 supports configuring advanced toolbar items via `AdvancedToolbarV2Item` (which extends `ToolBarV2Item`).
  * A toolbar with configured advanced items is more flexible, allowing you to customize titles, overflow
