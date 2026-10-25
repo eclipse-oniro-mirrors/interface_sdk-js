@@ -23,7 +23,7 @@ import { ColorMetrics, LengthMetrics } from './@ohos.arkui.node';
 import uiMaterial from './@ohos.arkui.uiMaterial';
 /**
  * Enumerates the states of the toolbar item.
- * 
+ *
  * | Name      | Value| Description             |
  * | -------- | - | --------------- |
  * | ENABLE   | 1 | The toolbar item is enabled. |
@@ -35,7 +35,7 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export declare enum ToolBarV2ItemState {
   /**
    * Enable type.
@@ -77,12 +77,12 @@ export declare enum ToolBarV2ItemState {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 @ObservedV2
 export class ToolBarV2SymbolGlyph {
   /**
    * Icon symbol of the toolbar item in normal state.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -95,11 +95,11 @@ export class ToolBarV2SymbolGlyph {
   normal: SymbolGlyphModifier;
   /**
    * Icon symbol of the toolbar item in activated state.
-   * 
+   *
    * Default value:
-   * 
+   *
    * **fontColor**: **$r('sys.color.icon_emphasize')**, **fontSize**: **24vp**
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -131,7 +131,7 @@ export class ToolBarV2SymbolGlyph {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export interface ToolBarV2SymbolGlyphOptions {
   /**
    * Modifier of toolbarV2's normal symbol.
@@ -163,13 +163,13 @@ export interface ToolBarV2SymbolGlyphOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  * @class ToolBarV2ItemText
+ * @class ToolBarV2ItemText
  */
 @ObservedV2
 export declare class ToolBarV2ItemText {
   /**
    * Text of the toolbar item.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -182,9 +182,9 @@ export declare class ToolBarV2ItemText {
   text: ResourceStr;
   /**
    * Font color of the toolbar item.
-   * 
+   *
    * Default value: **$r('sys.color.font_primary')**.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -197,9 +197,9 @@ export declare class ToolBarV2ItemText {
   color?: ColorMetrics;
   /**
    * Font color of the toolbar item in the activated state.
-   * 
+   *
    * </div>Default value: **$r('sys.color.font_emphasize')**.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -231,7 +231,7 @@ export declare class ToolBarV2ItemText {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export interface ToolBarV2ItemTextOptions {
   /**
    * Text of the toolbar item.
@@ -245,7 +245,7 @@ export interface ToolBarV2ItemTextOptions {
   text: ResourceStr;
   /**
    * Font color of the toolbar item.
-   * 
+   *
    * Default value: **$r('sys.color.font_primary')**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -257,7 +257,7 @@ export interface ToolBarV2ItemTextOptions {
   color?: ColorMetrics;
   /**
    * Font color of the toolbar item in the activated state.
-   * 
+   *
    * Default value: **$r('sys.color.font_emphasize')**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -279,7 +279,7 @@ export interface ToolBarV2ItemTextOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2SymbolGlyph;
 
 /**
@@ -290,13 +290,13 @@ export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2Symbol
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  * @class ToolBarV2ItemImage
+ * @class ToolBarV2ItemImage
  */
 @ObservedV2
 export declare class ToolBarV2ItemImage {
   /**
    * Icon of the toolbar item.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -309,9 +309,9 @@ export declare class ToolBarV2ItemImage {
   src: ResourceStr;
   /**
    * Color of the icon.
-   * 
+   *
    * Default value: **$r('sys.color.icon_primary')**.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -324,9 +324,9 @@ export declare class ToolBarV2ItemImage {
   color?: ColorMetrics;
   /**
    * Color of the icon when the toolbar item is activated.
-   * 
+   *
    * Default value: **$r('sys.color.icon_emphasize')**.
-   * 
+   *
    * Decorator: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -358,7 +358,7 @@ export declare class ToolBarV2ItemImage {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export interface ToolBarV2ItemImageOptions {
   /**
    * Icon of the toolbar item.
@@ -372,7 +372,7 @@ export interface ToolBarV2ItemImageOptions {
   src: ResourceStr;
   /**
    * Color of the icon.
-   * 
+   *
    * Default value: **$r('sys.color.icon_primary')**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -384,7 +384,7 @@ export interface ToolBarV2ItemImageOptions {
   color?: ColorMetrics;
   /**
    * Color of the icon when the toolbar item is activated.
-   * 
+   *
    * Default value: **$r('sys.color.icon_emphasize')**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -404,7 +404,7 @@ export interface ToolBarV2ItemImageOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  * @class ToolBarV2Item
+ * @class ToolBarV2Item
  */
 @ObservedV2
 export declare class ToolBarV2Item {
@@ -507,7 +507,7 @@ export declare class ToolBarV2Item {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export interface ToolBarV2ItemOptions {
   /**
    * Text of the toolbar item.
@@ -521,7 +521,7 @@ export interface ToolBarV2ItemOptions {
   content: ToolBarV2ItemText;
   /**
    * Click event of the toolbar item.
-   * 
+   *
    * By default, there is no click event.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -533,7 +533,7 @@ export interface ToolBarV2ItemOptions {
   action?: ToolBarV2ItemAction;
   /**
    * Icon of the toolbar item.
-   * 
+   *
    * By default, there is no icon.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -545,7 +545,7 @@ export interface ToolBarV2ItemOptions {
   icon?: ToolBarV2ItemIconType;
   /**
    * State of the toolbar item.
-   * 
+   *
    * Default value: **ToolBarV2ItemState.ENABLE**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -556,12 +556,12 @@ export interface ToolBarV2ItemOptions {
    */
   state?: ToolBarV2ItemState;
   /**
-   * Accessibility text, that is, accessible label name, of the toolbar item. If a component does not contain text 
-   * information, it will not be announced by the screen reader when selected. In this case, the screen reader user 
-   * cannot know which component is selected. To solve this problem, you can set accessibility text for components 
-   * without text information. When such a component is selected, the screen reader announces the specified 
+   * Accessibility text, that is, accessible label name, of the toolbar item. If a component does not contain text
+   * information, it will not be announced by the screen reader when selected. In this case, the screen reader user
+   * cannot know which component is selected. To solve this problem, you can set accessibility text for components
+   * without text information. When such a component is selected, the screen reader announces the specified
    * accessibility text, informing the user which component is selected.
-   * 
+   *
    * Default value: value of **content**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -572,12 +572,12 @@ export interface ToolBarV2ItemOptions {
    */
   accessibilityText?: ResourceStr;
   /**
-   * Accessible description of the toolbar item. You can provide comprehensive text explanations to help users 
-   * understand the operation they are about to perform and its potential consequences, especially when these cannot be 
-   * inferred from the component's attributes and accessibility text alone. If a component contains both text 
-   * information and the accessible description, the text is announced first and then the accessible description, when 
+   * Accessible description of the toolbar item. You can provide comprehensive text explanations to help users
+   * understand the operation they are about to perform and its potential consequences, especially when these cannot be
+   * inferred from the component's attributes and accessibility text alone. If a component contains both text
+   * information and the accessible description, the text is announced first and then the accessible description, when
    * the component is selected.
-   * 
+   *
    * Default value: **"Double-tap to activate"**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -588,20 +588,20 @@ export interface ToolBarV2ItemOptions {
    */
   accessibilityDescription?: ResourceStr;
   /**
-   * Accessibility level of the toolbar item, which controls whether the current item can be recognized by the 
+   * Accessibility level of the toolbar item, which controls whether the current item can be recognized by the
    * accessibility service.
-   * 
+   *
    * </div>Supported values:
-   * 
+   *
    * **"auto"**: The current value is converted to **"yes"**.
-   * 
+   *
    * **"yes"**: The current component can be recognized by the accessibility service.
-   * 
+   *
    * **"no"**: The current component cannot be recognized by the accessibility service.
-   * 
-   * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by the 
+   *
+   * **"no-hide-descendants"**: The current component and all its child components cannot be recognized by the
    * accessibility service.
-   * 
+   *
    * Default value: **"auto"**
    *
    * @default "auto"
@@ -623,12 +623,12 @@ export interface ToolBarV2ItemOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export type ToolBarV2ItemAction = (index: number) => void;
 
 /**
- * Provides methods for setting the toolbar height (**height**), background color (**backgroundColor**), left and right 
- * padding (**padding**, which takes effect only when the number of items is fewer than five), and whether to display 
+ * Provides methods for setting the toolbar height (**height**), background color (**backgroundColor**), left and right
+ * padding (**padding**, which takes effect only when the number of items is fewer than five), and whether to display
  * the pressed state effect (**stateEffect**).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -636,10 +636,10 @@ export type ToolBarV2ItemAction = (index: number) => void;
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 export declare class ToolBarV2Modifier {
   /**
-   * Sets the height of the toolbar. This method can be called for custom drawing. This height does not include the 
+   * Sets the height of the toolbar. This method can be called for custom drawing. This height does not include the
    * divider height.
    *
    * @param { LengthMetrics } height - toolBarV2's height.
@@ -2091,31 +2091,31 @@ export declare class AdvancedToolBarV2Modifier {
 
 /**
  * The toolbar is used to display action options for the current screen content. It is displayed at the bottom of the
- * screen and is suitable for scenarios where quick action entries need to be provided to users. A maximum of five 
- * entries can be displayed at the bottom. Any excess entries are collapsed into a "More" item, which is displayed on 
+ * screen and is suitable for scenarios where quick action entries need to be provided to users. A maximum of five
+ * entries can be displayed at the bottom. Any excess entries are collapsed into a "More" item, which is displayed on
  * the far right. It is suitable for scenarios where quick operations on the current page content are needed, helping 
  * users quickly access common functions and improving operation efficiency.<br />
  * ToolbarV2 supports configuring advanced toolbar items via `AdvancedToolbarV2Item` (which extends `ToolBarV2Item`).
  * A toolbar with configured advanced items is more flexible, allowing you to customize titles, overflow
  * menus, item grouping, and more.
- * This component is implemented based on 
- * [state management (V2)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). 
- * Compared with 
- * [state management (V1)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), state 
- * management (V2) enhances the deep observation and management capabilities of data objects, no longer limited to the 
- * component level. With state management (V2), developers can more flexibly control the data and state of the toolbar 
+ * This component is implemented based on
+ * [state management (V2)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2).
+ * Compared with
+ * [state management (V1)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), state
+ * management (V2) enhances the deep observation and management capabilities of data objects, no longer limited to the
+ * component level. With state management (V2), developers can more flexibly control the data and state of the toolbar
  * through this component, achieving more efficient UI refresh.
  * <br>
- * 
+ *
  * > **NOTE**
  * >
  * > - This component can be used only in the stage model.
  * >
- * > - If [universal attributes]{@link ./@internal/component/ets/common} and 
- * > [universal events]{@link ./@internal/component/ets/common} are set for **ToolBarV2**, the compilation toolchain 
+ * > - If [universal attributes]{@link ./@internal/component/ets/common} and
+ * > [universal events]{@link ./@internal/component/ets/common} are set for **ToolBarV2**, the compilation toolchain
  * > will generate an additional node \_\_Common\_\_ and attach the universal attributes or universal events to \_\
  * > _Common\_\_, rather than directly applying them to **ToolBarV2** itself. This may cause the universal attributes or
- * > universal events set by the developer to not take effect or behave unexpectedly. Therefore, setting universal 
+ * > universal events set by the developer to not take effect or behave unexpectedly. Therefore, setting universal
  * > attributes and universal events for **ToolBarV2** is not recommended.
  * >
  * > - When the system switches between light and dark modes, the toolbar background color does not automatically follow
@@ -2126,7 +2126,7 @@ export declare class AdvancedToolBarV2Modifier {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
-  */
+ */
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
