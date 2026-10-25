@@ -188,7 +188,7 @@ import pluginComponentManager, { PluginComponentTemplate } from '@ohos.pluginCom
 import prompt from '@ohos.prompt';
 import promptAction, { LevelMode, ImmersiveMode, LevelOrder } from '@ohos.promptAction';
 import dialog, { 
-    DialogBaseAlignment, DialogButtonOrientation, DialogState, DialogResult, DialogDismissal, DialogBaseController
+    DialogBaseAlignment, DialogButtonOrientation, DialogState, DialogResult, DialogDismissal, DialogBaseController, HandednessFollowMode
   } from '@ohos.arkui.dialog';
 import router from '@ohos.router';
 import screen from '@ohos.screen';
@@ -359,7 +359,7 @@ export {
   LengthMetrics, LengthUnit, ColorMetrics, BackgroundBlur, ContentBlur, ForegroundBlur, LengthMetricsUnit, LayoutConstraint, ComponentContent, ReactiveComponentContent, NodeContent, Content, Edges,
   componentSnapshot, componentUtils, curves, display, dragController, dragInteraction, floatingBall, floatView,
   font, inspector, matrix4, mediaquery, performanceMonitor, pluginComponentManager, PluginComponentTemplate, prompt, promptAction, router,
-  dialog, DialogBaseAlignment, DialogButtonOrientation, DialogState, DialogResult, DialogDismissal, DialogBaseController, DialogPresenter,
+  dialog, DialogBaseAlignment, DialogButtonOrientation, DialogState, DialogResult, DialogDismissal, DialogBaseController, HandednessFollowMode, DialogPresenter,
   LevelMode, ImmersiveMode, LevelOrder, AtomicServiceWeb, OnMessageEvent, OnErrorReceiveEvent, OnHttpErrorReceiveEvent, OnPageBeginEvent, OnPageEndEvent,
   AtomicServiceWebController, OnLoadInterceptEvent, OnProgressChangeEvent, OnLoadInterceptCallback, WebHeader,
   screen, screenshot, uiAppearance, uiExtensionHost, uiObserver, window, windowAnimationManager, CustomContentDialog, PopoverDialog, PopoverOptions,

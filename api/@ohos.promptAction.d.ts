@@ -783,6 +783,23 @@ declare namespace promptAction {
      * @since 26.0.0 dynamic
      */
     edgeLightMode?: EdgeLightMode;
+
+    /**
+     * Whether and how the dialog adapts to the handedness.
+     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+     * triggers it (the last interacted component); falls back to the current layout
+     * when no trigger component exists.
+     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+     * the device, distinguished from the operating hand) reported by the awareness
+     * platform; falls back to the current layout when unavailable.
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    adaptToHandedness?: HandednessFollowMode;
   }
   /**
    * Enumerates states of the custom dialog box.
@@ -1313,6 +1330,23 @@ declare namespace promptAction {
      * @since 26.0.0 dynamic
      */
     edgeLightMode?: EdgeLightMode;
+
+    /**
+     * Whether and how the dialog adapts to the handedness.
+     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+     * triggers it (the last interacted component); falls back to the current layout
+     * when no trigger component exists.
+     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+     * the device, distinguished from the operating hand) reported by the awareness
+     * platform; falls back to the current layout when unavailable.
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    adaptToHandedness?: HandednessFollowMode;
   }
   /**
    * Extends [BaseDialogOptions](#basedialogoptions11) to provide enhanced customization capabilities for the dialog box.
@@ -1866,6 +1900,23 @@ declare namespace promptAction {
      * @since 26.0.0 dynamic
      */
     edgeLightMode?: EdgeLightMode;
+
+    /**
+     * Whether and how the dialog adapts to the handedness.
+     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+     * triggers it (the last interacted component); falls back to the current layout
+     * when no trigger component exists.
+     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+     * the device, distinguished from the operating hand) reported by the awareness
+     * platform; falls back to the current layout when unavailable.
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    adaptToHandedness?: HandednessFollowMode;
   }
   /**
    * Creates and displays a toast.
