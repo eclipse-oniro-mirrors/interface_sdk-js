@@ -23967,6 +23967,38 @@ declare class CommonMethod<T> {
   shadow(options: Optional<ShadowOptions | ShadowStyle>): T;
 
   /**
+   * 设置组件的阴影形状。阴影按指定形状渲染。
+   *
+   * 此接口与 [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} 属性配合使用。组件大小变化时阴影形状会重新计算。
+   *
+   * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - 阴影形状。
+   *     当值类型为 {@link CircleShape}、{@link EllipseShape}、
+   *     {@link PathShape} 或 {@link RectShape} 时，阴影渲染为对应形状。
+   *     当值为 **undefined** 时，清除阴影形状。
+   * @returns { T } 当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): T;
+
+  /**
+   * 设置[阴影]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}不填充时的裁切方式。
+   * 仅在 [ShadowOptions#fill]{@link ShadowOptions#fill} 设为 **false** 时生效。
+   *
+   * @param { ShadowClipMode | undefined } mode - 阴影裁切方式。
+   * @returns { T } 当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowClipMode(mode: ShadowClipMode | undefined): T;
+
+  /**
    * 为组件添加边缘流光效果。边缘流光效果会在组件的边缘创建发光效果，从指定位置开始并沿边缘延伸，此效果可以增强组件的视觉吸引力并突出显示重要组件。
    * 
    * > **说明：**

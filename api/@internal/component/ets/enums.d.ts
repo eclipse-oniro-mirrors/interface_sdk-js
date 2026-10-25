@@ -6836,3 +6836,36 @@ declare enum ImmersiveStrategy {
    */
   NAVIGATION_EXPAND_SAFE_AREA = 8
 }
+
+/**
+ * Enumerates the clip modes for the shadow when it is not filled.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum ShadowClipMode {
+  /**
+   * Clip the shadow by the default shape (priority order: shadowShape > clipShape > component bounds).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DEFAULT_SHAPE = 0,
+
+  /**
+   * Clip the shadow by the component bounds.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BOUNDS_SHAPE = 1,
+}

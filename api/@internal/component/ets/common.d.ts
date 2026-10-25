@@ -25325,6 +25325,39 @@ declare class CommonMethod<T> {
   shadow(options: Optional<ShadowOptions | ShadowStyle>): T;
 
   /**
+   * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+   *
+   * This API works with the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} attribute.
+   * The shadow shape is recalculated when the component size changes.
+   *
+   * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+   *     When the value type is {@link CircleShape}, {@link EllipseShape},
+   *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+   *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): T;
+
+  /**
+   * Sets the clip mode for the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} when it is
+   * not filled. This API takes effect only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+   *
+   * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowClipMode(mode: ShadowClipMode | undefined): T;
+
+  /**
    * Sets the edge light effect for the component.
    * 
    * <p><strong>NOTE</strong>:
