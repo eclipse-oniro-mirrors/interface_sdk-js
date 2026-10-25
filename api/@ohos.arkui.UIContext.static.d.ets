@@ -1398,6 +1398,110 @@ export const enum NodeRenderState {
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
 
 /**
+ * Enumerates the types of sensitive input events observed by **UIObserver**.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * Touch event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  TOUCH = 0,
+
+  /**
+   * Mouse event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  MOUSE = 1,
+
+  /**
+   * Key event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  KEY = 2
+}
+
+/**
+ * Describes a sensitive input event observed by **UIObserver**.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * Whether the system identifies the input as trusted GUI agent input.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  isAgent: boolean;
+
+  /**
+   * Type of the input event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * Touch event information. This property is available only when **type** is
+   * **NodeSensitiveInputEventType.TOUCH**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * Mouse event information. This property is available only when **type** is
+   * **NodeSensitiveInputEventType.MOUSE**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * Key event information. This property is available only when **type** is
+   * **NodeSensitiveInputEventType.KEY**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * Defines the callback type for listening for sensitive input events on a specific node in **UIObserver**.
+ *
+ * @param { NodeSensitiveInputInfo } info - Sensitive input event information.
+ * @param { FrameNode } [node] - Node that receives the input event.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
+
+/**
  * This is an enumeration type representing the gesture callback phases to be triggered, corresponding to
  * the action callbacks defined in gesture.d.ts. Therefore, not all gesture types have all the following
  * phase definitions. For example, SwipeGesture only has one callback named onAction, so it also only has
@@ -2191,6 +2295,32 @@ export declare class UIObserver {
    * @since 26.0.0 static
    */
   offNodeRenderState(nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * Registers a callback for touch, mouse, and key input attempts received by the specified node itself. The callback
+   * is invoked before application input callbacks. Trusted GUI agent input triggers this callback even when delivery
+   * is denied. Input received by a descendant does not trigger a listener registered on its parent. Registration with
+   * an invalid node does not take effect.
+   *
+   * @param { NodeIdentity } nodeIdentity - Identity of the target node.
+   * @param { NodeSensitiveInputCallback } callback - Callback invoked when the target node receives an input attempt.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * Unregisters a sensitive input listener from the specified node.
+   *
+   * @param { NodeIdentity } nodeIdentity - Identity of the target node.
+   * @param { NodeSensitiveInputCallback } [callback] - Callback to unregister. If omitted, all sensitive input
+   *     listeners registered for the specified node are unregistered.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * Removes a callback function that was previously registered with 'onNavDestinationSizeChangeByUniqueId()'.

@@ -5137,6 +5137,33 @@ export declare enum RawInputEventType {
 }
 
 /**
+ * Agent输入事件的管控模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare enum AgentControlMode {
+  /**
+   * 允许系统可信Agent输入事件分发到组件。默认值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  ALLOW = 0,
+
+  /**
+   * 阻止系统可信Agent输入事件分发到组件，不影响未被识别为Agent输入的事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  DENY = 1
+}
+
+/**
  * 组件的智慧手势响应优先级枚举。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

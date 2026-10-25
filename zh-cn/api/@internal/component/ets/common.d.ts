@@ -20278,6 +20278,18 @@ declare class CommonMethod<T> {
   hitTestBehavior(value: HitTestMode): T;
 
   /**
+   * 设置当前组件处理系统可信GUI Agent输入事件的方式。未设置该属性时，使用**AgentControlMode.ALLOW**。
+   * 该属性不影响系统未识别为Agent输入的事件。
+   *
+   * @param { AgentControlMode } value - 系统可信Agent输入事件的管控模式。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 dynamic
+   */
+  agentControlMode(value: AgentControlMode): T;
+
+  /**
    * 当前组件通过设置回调，可自定义触摸测试并控制触摸测试中的子节点行为。
    *
    * > **说明：**
