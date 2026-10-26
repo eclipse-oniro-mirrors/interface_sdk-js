@@ -6632,3 +6632,36 @@ declare enum ImmersiveStrategy {
    */
   BIND_SHEET_EXPAND_SAFE_AREA = 7,
 }
+
+/**
+ * 阴影不填充时的裁切方式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum ShadowClipMode {
+  /**
+   * 按默认形状裁切（优先级顺序：shadowShape > clipShape > 控件 bounds）。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DEFAULT_SHAPE = 0,
+
+  /**
+   * 按控件 bounds 范围裁切。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BOUNDS_SHAPE = 1,
+}
