@@ -187,9 +187,6 @@ export interface DeviceResponse {
    * If the value fails to be obtained,
    * **-1** is returned, which does not affect the overall return status of the **getInfo** API.
    *
-   * **Model constraint:** This API can be used only in the FA model.
-   * **Since version**: 26.0.0
-   * Example: 0
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
    * @famodelonly
@@ -205,9 +202,6 @@ export interface DeviceResponse {
    * If the value fails to be obtained, **-1** is returned,
    * which does not affect the overall return status of the **getInfo** API.
    *
-   * **Model constraint:** This API can be used only in the FA model.
-   * **Since version**: 26.0.0
-   * Example: 0
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
    * @famodelonly
