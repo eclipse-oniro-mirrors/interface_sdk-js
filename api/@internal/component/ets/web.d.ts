@@ -10448,11 +10448,12 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   /**
    * Sets the maximum fling speed for the Web component.
    *
-   * The value configured through this TypeScript API takes precedence over values configured through other APIs.
+   * The value configured through this TypeScript API takes precedence over the front-end viewport max-fling-speed-x/y.
    *
-   * @param { number } speedLimit - Maximum fling speed, in vp/s. If the value is less than or equal to 0,
-   *     {@code NaN}, {@code +Infinity}, or {@code -Infinity}, the default value is used: 9000 vp/s on PCs and
-   *     17000 vp/s on non-PC devices.
+   * @param { number } speedLimit - Maximum fling speed, in vp/s.
+   *     If a value outside this range is passed, the default value is used:
+   *     9000 vp/s on PCs and 17000 vp/s on non-PC devices.
+   *     <br>Value range: (0, +∞).
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
