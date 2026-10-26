@@ -653,8 +653,9 @@ declare class ApplicationContext extends Context {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { Want } want - Want information of the UIExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -697,7 +698,8 @@ declare class ApplicationContext extends Context {
    *     false otherwise.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -759,7 +761,8 @@ declare class ApplicationContext extends Context {
   * is started within the 10 seconds, the process will not exit.
   * 
   * @returns { Promise<void> } Promise object. No return result.
-  * @throws { BusinessError } 801 - Capability not supported.
+  * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+  *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
   * @throws { BusinessError } 16000050 - Internal error. Possible causes: Fail to connect system service.
   * @throws { BusinessError } 16000150 - The current process has no UIAbility, and this API cannot be called.
   * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -775,7 +778,8 @@ declare class ApplicationContext extends Context {
    * [ApplicationContext.enableDelayedProcessExit]{@link enableDelayedProcessExit}.
    *
    * @returns { Promise<void> } Promise object. No return result.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Fail to connect system service.
    * @throws { BusinessError } 16000150 - The current process has no UIAbility, and this API cannot be called.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -790,7 +794,8 @@ declare class ApplicationContext extends Context {
    *
    * @param { Want } want - Want parameter, which carries the information about the UIAbility to start.
    * @returns { Promise<void> } Promise object that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000008 - The crowdtesting application expires.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
