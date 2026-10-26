@@ -313,7 +313,7 @@ declare namespace connection {
   /**
    * Remove a paired remote device.
    *
-   * On API 26.2.0 and above, for a third-party application,
+   * On API 26.1.0 and above, for a third-party application,
    * a system confirmation dialog box is displayed before removing the pairing,
    * and the pairing is removed only after the user confirms the dialog box.
    *
@@ -327,13 +327,13 @@ declare namespace connection {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
-   * @throws { BusinessError } 2900013 - The user does not respond. [since 26.2.0]
-   * @throws { BusinessError } 2900014 - User refuse the action. [since 26.2.0]
-   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.2.0]
+   * @throws { BusinessError } 2900013 - The user does not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - User refuse the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi [since 10 - 26.1.0]
-   * @publicapi [since 26.2.0]
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
