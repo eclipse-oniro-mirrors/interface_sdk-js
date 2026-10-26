@@ -14521,6 +14521,32 @@ declare namespace photoAccessHelper {
      * @since 26.0.0 dynamic&static
      */
     operateAttribute(operation: AlbumOperation): void;
+
+    /**
+     * Absorbs the specified album into the current album. After the absorption, the current album inherits the
+     * information and assets of the input album, and the input album is deleted.
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Album } album - Album to be absorbed.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The input album is not a source album or auser album;
+     *     <br>2. The type of the input album does not match that of the current album;
+     *     <br>3. The current album is not hidden;
+     *     <br>4. This operation is not supported for this album type.
+     * @throws { BusinessError } 23800301 - Internal system error.It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The input album is not allowed to be absorbed.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    absorbAlbum(album: Album): void;
   }
 
   /**
@@ -18799,7 +18825,16 @@ declare namespace photoAccessHelper {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    CONTACT_INFO_ATTR = 'contact_info'
+    CONTACT_INFO_ATTR = 'contact_info',
+    /**
+     * The album hidden operation attribute.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    HIDDEN_ATTR = 'hidden'
   }
 
   /**
