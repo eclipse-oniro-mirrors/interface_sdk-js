@@ -11116,7 +11116,7 @@ declare namespace media {
    * 
    * @syscap SystemCapability.Multimedia.Media.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface RectangleRegion {
     /**
