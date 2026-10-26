@@ -10918,41 +10918,41 @@ declare namespace media {
   interface RectangleRegion {
     /**
      * 矩形区域相对于顶部边缘的偏移量。
-     * 单位为：像素。取值限定为整数。
+     * 单位为：像素。取值应为≥0的整数。
      * 
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     top: int;
 
     /**
      * 矩形区域相对于左边缘的偏移量。
-     * 单位为：像素。取值限定为整数。
+     * 单位为：像素。取值应为≥0的整数。
      * 
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     left: int;
 
     /**
      * 矩形区域的宽度。
-     * 单位为：像素。取值限定为整数。
+     * 单位为：像素。取值应为正整数。
      * 
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     width: int;
     
     /**
      * 矩形区域的高度。
-     * 单位为：像素。取值限定为整数。
+     * 单位为：像素。取值应为正整数。
      * 
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     height: int;
   }
@@ -11351,6 +11351,7 @@ declare namespace media {
      * 
      * 可在启动录屏前配置，也可以在录屏过程中更新区域。
      *
+     * @param { int } displayId - 指定录制区域的屏幕ID。<br>取值应为整数。取值约束：该值必须是当前系统中已存在的屏幕ID。
      * @param { RectangleRegion } area - 录制的矩形区域定义
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -11358,9 +11359,9 @@ declare namespace media {
      * @throws { BusinessError } 5400108 - The parameter check failed, parameter value out of range.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
-    setCaptureArea(area: RectangleRegion): Promise<void>;
+    setCaptureArea(displayId: int, area: RectangleRegion): Promise<void>;
 
     /**
      * 订阅录屏状态切换的事件，当状态发生的时候，会通过订阅的回调通知用户。
