@@ -591,6 +591,17 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
+
+    /**
+     * Whether to convert POST method to GET when following 301/302/303 redirect responses.
+     * Default value: false.
+     * 
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    followRedirectPostToGet?: boolean;
   }
 
   /**
