@@ -500,10 +500,12 @@ declare namespace relationalStore {
      * is opened. Normal operations such as deleting, restoring, and rebuilding the RDB store, as well as
      * primary/replica switchover and attach/detach mode switching, do not trigger the call stack output.
      *
+     * Default value: false.
+     *
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     dumpStackOnFileDel?: boolean;
 

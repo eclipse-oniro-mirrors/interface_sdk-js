@@ -435,24 +435,24 @@ declare namespace relationalStore {
     autoCleanDeviceDirtyData?: boolean
 
     /**
-     * 指定是否开启RDB数据库文件的删除打栈维测，用于定位数据库文件被非预期删除的问题。
+     * RDB存储是否开启dump-stack on文件删除开关，用于定位数据库文件被意外删除问题。
      *
-     * **true**：开启删除打栈。打开数据库后，当数据库文件（**db**、**wal**、**shm**）被文件接口直接删除时，文件系统输出该删除操作的调用栈。
+     * **true**：启用文件删除时转储堆栈功能。打开RDB存储后，文件系统输出直接删除数据库文件（**db**、**wal**、**shm**）时删除操作堆栈（通过文件接口）。
      *
-     * **false**（默认）：不开启删除打栈。
+     * **false**（默认）：删除文件时禁用dump-stack。
      *
-     * 该参数仅对主备数据库的**db**、**wal**、**shm**文件生效，journal、binlog等数据库辅助文件不生效。
+     * 该参数只对主备数据库的**db**、**wal**、**shm**文件生效，不包括数据库辅助文件（如日志文件和binlog文件）。
      *
-     * 该参数依赖设备文件系统的删除打栈能力。若文件系统不支持该能力，该参数不生效，且不影响数据库的正常打开。
+     * 该参数依赖于设备文件系统的dump-stack能力。如果文件系统不支持该能力，则该参数不生效，不影响打开RDB存储。
      *
-     * 该参数不持久化到元数据库，每次打开数据库时需重新配置。正常的删除、恢复、重建数据库，以及主备倒换、Attach/Detach模式切换等操作不会触发调用栈输出。
+     * 默认值：false。
      *
      * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     dumpStackOnFileDel?: boolean;
 
