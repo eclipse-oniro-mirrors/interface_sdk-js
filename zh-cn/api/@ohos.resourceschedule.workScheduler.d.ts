@@ -216,6 +216,7 @@ declare namespace workScheduler {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
+    isPerformanceSensitive?: boolean;
   }
 
   /**
