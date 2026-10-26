@@ -5967,7 +5967,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat): Promise<void>;
 
@@ -6001,7 +6001,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat): void;
 
@@ -6152,7 +6152,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     writeAllPixelsFromBuffer(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): Promise<void>;
 
@@ -6182,7 +6182,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     writeAllPixelsFromBufferSync(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): void;
 
