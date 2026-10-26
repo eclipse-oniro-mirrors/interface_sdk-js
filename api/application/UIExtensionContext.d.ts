@@ -63,7 +63,8 @@ declare class UIExtensionContext extends ExtensionContext {
    *     UIAbility to start.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the UIAbility is started, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -114,7 +115,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { StartOptions } options - Extra parameters used for starting the UIAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the UIAbility is started, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -162,7 +164,8 @@ declare class UIExtensionContext extends ExtensionContext {
    *     UIAbility to start.
    * @param { StartOptions } [options] - Extra parameters used for starting the UIAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -226,7 +229,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { OpenLinkOptions } [options] - Options of the URL.
    * @param { AsyncCallback<AbilityResult> } [callback] - Callback used to return the result.
    * @returns { Promise<void> } that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -274,7 +278,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - Want required for starting the UIAbility, which contains information such as the name of the
    *     UIAbility to start.
    * @param { AsyncCallback<AbilityResult> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -335,7 +340,8 @@ declare class UIExtensionContext extends ExtensionContext {
    *     UIAbility to start.
    * @param { StartOptions } options - Extra parameters used for starting the UIAbility.
    * @param { AsyncCallback<AbilityResult> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -394,7 +400,8 @@ declare class UIExtensionContext extends ExtensionContext {
    *     UIAbility to start.
    * @param { StartOptions } [options] - Extra parameters used for starting the UIAbility.
    * @returns { Promise<AbilityResult> } Promise used to return the exit result of the launched UIAbility.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -457,8 +464,9 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
    * @returns { Promise<AbilityResult> } Promise used to return the result.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -493,10 +501,9 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - The element name of the service ability
    * @param { ConnectOptions } connect - The remote object instance
    * @returns { long } Returns the number code of the ability connected
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. Possible cause:
-   *     target service extension ability is in cross-device and needed designated permission to be started, but
-   *     call ability do not have this permission.
-   * @throws { BusinessError } 202 - Not system application
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -536,7 +543,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @returns { long } Connection ID. The client can call
    *     [disconnectServiceExtensionAbility]{@link UIExtensionContext.disconnectServiceExtensionAbility(connection: long)}
    *     with this ID for disconnection.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -728,10 +736,12 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - Want for starting the UIServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -763,10 +773,12 @@ declare class UIExtensionContext extends ExtensionContext {
    * @returns { Promise<UIServiceProxy> } Promise used to return a
    *     [UIServiceProxy]{@link ./application/UIServiceProxy:UIServiceProxy} object when the UIServiceExtensionAbility is
    *     connected. This object can be used to send data to the UIServiceExtensionAbility.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -805,8 +817,9 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - Want information for starting the ServiceExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -845,8 +858,9 @@ declare class UIExtensionContext extends ExtensionContext {
    *     [getCreatedOsAccountsCount]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount(callback: AsyncCallback<int>)}
    *     .
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -886,7 +900,7 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { boolean } isForbidden - Whether the page started by the
    *     [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility} can be overlaid by the page of
    *     the user. **true** if the page can be overlaid, **false** otherwise.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -941,9 +955,11 @@ declare class UIExtensionContext extends ExtensionContext {
    *     launch, cross-user launch, distributed launch, instant installation, or on-demand loading. By default, the main
    *     application is launched unless specified otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
@@ -998,9 +1014,11 @@ declare class UIExtensionContext extends ExtensionContext {
    *     calling [getWindowProperties()](docroot://reference/apis-arkui/arkts-apis-window-Window.md#getwindowproperties9).
    * @param { Want } secondaryWant - Want information required for starting the second UIAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - Target UIAbility does not exist.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.

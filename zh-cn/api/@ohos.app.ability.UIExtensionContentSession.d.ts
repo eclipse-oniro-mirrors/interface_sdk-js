@@ -75,7 +75,7 @@ declare class UIExtensionContentSession {
    *
    * @param { object } data - 发送给UIExtensionComponent控件的数据参数。 [since 10 - 10]
    * @param { Record<string, Object> } data - 发送给UIExtensionComponent控件的数据参数。 [since 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -90,7 +90,7 @@ declare class UIExtensionContentSession {
    * 发送数据给UIExtensionComponent控件。
    *
    * @param { Record<string, RecordData> } data - 	发送给UIExtensionComponent控件的数据参数。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -103,7 +103,7 @@ declare class UIExtensionContentSession {
    * 设置从UIExtensionComponent控件接收数据的回调方法。使用callback异步回调。
    *
    * @param { function } callback - 回调函数，返回接收的数据。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -118,7 +118,7 @@ declare class UIExtensionContentSession {
    * 设置从UIExtensionComponent控件接收数据的回调方法。使用callback异步回调。
    *
    * @param { OnReceiveDataCallback } callback - 回调函数，返回接收的数据。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -131,7 +131,7 @@ declare class UIExtensionContentSession {
    * 设置从UIExtensionComponent控件接收数据带返回值的回调方法。使用callback异步回调。
    *
    * @param { function } callback - 回调函数，返回带返回值的接收的数据。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -146,7 +146,7 @@ declare class UIExtensionContentSession {
    * 设置从UIExtensionComponent控件接收数据带返回值的回调方法。使用callback异步回调。
    *
    * @param { OnReceiveDataForResultCallback } callback - 回调函数，返回带返回值的接收的数据。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -199,8 +199,9 @@ declare class UIExtensionContentSession {
    *
    * @param { Want } want - 启动Ability的want信息。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -237,8 +238,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } options - 启动Ability所携带的参数。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -273,8 +275,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } [options] - 启动Ability所携带的参数。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -306,8 +309,9 @@ declare class UIExtensionContentSession {
    *
    * @param { Want } want - 启动Ability的want信息。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动Ability成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -340,8 +344,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } options - 启动Ability所携带的参数。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动Ability成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -372,8 +377,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } [options] - 启动Ability所携带的参数。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -418,8 +424,9 @@ declare class UIExtensionContentSession {
    *
    * @param { Want } want - 启动Ability的want信息。
    * @param { AsyncCallback<AbilityResult> } callback - 回调函数。当Ability启动并终止成功，err为undefined，data为获取到的结果码和数据；否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -465,8 +472,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } options - 启动Ability所携带的参数。
    * @param { AsyncCallback<AbilityResult> } callback - 回调函数。当Ability启动并终止成功，err为undefined，data为获取到的结果码和数据；否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -510,8 +518,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } [options] - 启动Ability所携带的参数。
    * @returns { Promise<AbilityResult> } Promise对象，返回结果码和数据。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -594,7 +603,7 @@ declare class UIExtensionContentSession {
    * [loadContent()]{@link ./@ohos.app.ability.UIExtensionContentSession:UIExtensionContentSession.loadContent}调用生效后使用。
    *
    * @param { string } color - 需要设置的背景色，为十六进制RGB或ARGB颜色，不区分大小写，例如`#00FF00`或`#FF00FF00`。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -612,7 +621,8 @@ declare class UIExtensionContentSession {
    * @permission ohos.permission.PRIVACY_WINDOW
    * @param { boolean } isPrivacyMode - 表示是否开启隐私模式。true表示开启；false表示关闭。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -628,7 +638,8 @@ declare class UIExtensionContentSession {
    * @permission ohos.permission.PRIVACY_WINDOW
    * @param { boolean } isPrivacyMode - 表示是否开启隐私模式。true表示开启；false表示关闭。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -646,7 +657,7 @@ declare class UIExtensionContentSession {
    * @param { Record<string, Object> } wantParam - 表示启动UIExtensionAbility组件时传递的参数。
    * @param { AbilityStartCallback } abilityStartCallback - 表示启动UIExtensionAbility组件的执行结果。
    * @param { AsyncCallback<void> } callback - 回调函数。当接口调用成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 11 - 11]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -685,7 +696,7 @@ declare class UIExtensionContentSession {
    * @param { Record<string, Object> } wantParam - 表示启动UIExtensionAbility组件时传递的参数。
    * @param { AbilityStartCallback } abilityStartCallback - 表示启动UIExtensionAbility组件的执行结果。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 11 - 11]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -720,7 +731,7 @@ declare class UIExtensionContentSession {
    * 获取当前UIExtension对应的窗口对象，用于通知宽高、位置、避让信息等。
    *
    * @returns { uiExtensionHost.UIExtensionHostWindowProxy } 宿主应用窗口信息。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
