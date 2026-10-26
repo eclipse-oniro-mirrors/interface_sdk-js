@@ -269,6 +269,22 @@ export declare class CommonOptions {
   selected?: Date;
 
   /**
+   * Selected date or time.
+   *
+   * **Description:**
+   *
+   * > Takes priority over selected; when both are set, selected does not take effect.
+   * > When hideYear is true, year may be omitted (or undefined), indicating that the year column selects the "----"
+   * > option.
+   *
+   * Default value: current system date or time.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  extendSelected?: Date | DatePickerComponentResult;
+
+  /**
    * Sets whether to enable loop mode.
    *
    * - true: Enable loop mode.

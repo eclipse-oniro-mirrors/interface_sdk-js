@@ -401,6 +401,24 @@ export declare class CommonOptions {
   selected?: Date;
 
   /**
+   * Selected date or time.
+   *
+   * **Description:**
+   *
+   * > Takes priority over [selected]{@link CommonOptions}; when both are set, **selected** does not take effect.
+   * > When [hideYear]{@link DateOptions} is **true**, **year** may be omitted (or **undefined**), indicating that the
+   * > year column selects the "----" option.
+   *
+   * Default value: current system date or time.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  extendSelected?: Date | DatePickerComponentResult;
+
+  /**
    * Whether to enable loop mode.
    *
    * - **true**: Loop mode is enabled, allowing continuous cyclic selection when scrolling to the boundary.
