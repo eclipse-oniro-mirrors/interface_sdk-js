@@ -153,7 +153,7 @@ export interface SkillUri {
   readonly pathRegex: string;
 
   /**
-   * 标识与Want相匹配的数据类型，使用MIME（Multipurpose?Internet?Mail?Extensions）类型规范和
+   * 标识与Want相匹配的数据类型，使用MIME（Multipurpose Internet Mail Extensions）类型规范和
    * [UniformDataType]{@link ./../@ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}类型规范。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core

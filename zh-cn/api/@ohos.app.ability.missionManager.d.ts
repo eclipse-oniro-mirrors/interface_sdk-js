@@ -577,7 +577,7 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - 任务ID数组。
-   * @returns { Promise<Array<int>> } Promise对象，返回任务ID。
+   * @returns { Promise<Array<int>> } Promise对象，返回任务ID数组。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -671,7 +671,7 @@ declare namespace missionManager {
   export type MissionListener = _MissionListener;
 
   /**
-   * 任务的任务快照对象。
+   * 任务快照信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
