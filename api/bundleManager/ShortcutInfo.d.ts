@@ -245,7 +245,7 @@ export interface ShortcutWant {
    * @syscap SystemCapability.BundleManager.BundleFramework.Launcher
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   action?: string;
 
@@ -256,7 +256,7 @@ export interface ShortcutWant {
    * @syscap SystemCapability.BundleManager.BundleFramework.Launcher
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   uri?: string;
 
@@ -268,7 +268,7 @@ export interface ShortcutWant {
    * @syscap SystemCapability.BundleManager.BundleFramework.Launcher
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   flags?: int;
 }
