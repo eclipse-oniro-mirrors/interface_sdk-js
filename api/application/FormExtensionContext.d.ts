@@ -103,6 +103,7 @@ declare class FormExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly

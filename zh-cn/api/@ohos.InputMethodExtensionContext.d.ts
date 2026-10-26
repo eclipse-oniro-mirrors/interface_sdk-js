@@ -360,6 +360,7 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000008 - The crowdtesting application expires. [since 10]
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI. [since 10]
    * @throws { BusinessError } 16000055 - Installation-free timed out. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @systemapi
    * @stagemodelonly

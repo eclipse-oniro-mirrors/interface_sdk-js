@@ -488,6 +488,7 @@ declare class UIExtensionContext extends ExtensionContext {
    *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000070 - The extension cannot start the service.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -527,6 +528,7 @@ declare class UIExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16000070 - The extension cannot start the service.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 10 dynamic
@@ -698,6 +700,7 @@ declare class UIExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -733,6 +736,7 @@ declare class UIExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 14 dynamic
@@ -777,6 +781,7 @@ declare class UIExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -818,6 +823,7 @@ declare class UIExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
