@@ -413,7 +413,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     readonly isColorModeRefreshEnabled?: boolean;
   }
@@ -1654,7 +1654,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     readonly isColorModeRefreshEnabled?: boolean;
   }
