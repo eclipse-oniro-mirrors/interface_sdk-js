@@ -23,6 +23,19 @@
  * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
  * longer limited to the component level. With state management V2, you can control the data and states of the text
  * download button more flexibly through this component, achieving more efficient UI refresh.
+ *
+ * Device differences: When this API is used on wearable devices, the application runs abnormally, and the exception
+ * information indicates that the API is not defined. On other devices, this API can be called as normal.
+ *
+ * > **NOTE**
+ * >
+ * > - If the **ProgressButtonV2** component has [universal attributes]{@link CommonMethod} or
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **ProgressButtonV2** component itself. As a result, the configured universal attributes and
+ * > universal events may fail to take effect or behave as intended. For this reason, avoid using universal attributes
+ * > and events with the **ProgressButtonV2** component.
+ *
  * @file
  * @kit ArkUI
  */
