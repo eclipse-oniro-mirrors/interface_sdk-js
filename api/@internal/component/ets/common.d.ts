@@ -30227,7 +30227,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
    *    pressed.
-   *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+   *    <br>Default value: When setting it to undefined for the first time, use the default value. If it's set to undefined again 
+   *    later, keep the effect of the previous setting unchanged. For API versions earlier than 26.1.0,the defalut value is false.
    *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
    *    horizontally,false otherwise.
    * @returns { T } Current scrollable component.
