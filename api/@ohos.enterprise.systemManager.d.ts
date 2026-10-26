@@ -19,6 +19,7 @@
  */
 
 import type Want from './@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * This module provides system management capabilities, including NTP time server settings, OTA update policy

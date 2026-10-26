@@ -1040,6 +1040,68 @@ declare namespace adminManager {
    * @since 26.0.0
    */
   function enableSelfDeviceAdmin(admin: Want, credential: string): void;
+
+  /**
+   * 查询管理员信息
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_DEVICE_ADMIN
+   * @returns { Array<AdminInfo> } Returns the administrators information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getAdminInfos(): Array<AdminInfo>;
+
+  /**
+   * 查询自身是否是超级管理员应用
+   *
+   * @returns { boolean } 如果self是超级设备管理员，则返回true；如果self是不是超级管理员设备，则返回false。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function isSelfSuperAdmin(): boolean;
+
+  /**
+   * 企业管理员应用信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface AdminInfo {
+    /**
+     * 企业管理员类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    type: AdminType;
+
+    /**
+     * 企业管理员包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    bundleName: string;
+
+    /**
+     * 企业管理员包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    abilityName: string;
+  }
 }
 
 export default adminManager;
