@@ -1567,7 +1567,7 @@ export declare interface AccessibilityElement {
    */
   hotArea?: Rect;
   /**
-   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType} type of the element.
+   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link @global:AccessibilityRoleType} type of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
@@ -2618,7 +2618,7 @@ export interface ElementAttributeValues {
    */
   accessibilityNextFocusId?: long;
   /**
-   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType} of the element. The 
+   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link @global:AccessibilityRoleType} of the element. The 
    * default value is an empty string.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
