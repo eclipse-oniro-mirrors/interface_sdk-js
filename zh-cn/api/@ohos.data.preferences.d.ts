@@ -225,6 +225,7 @@ declare namespace preferences {
      * 单位：KB。取值约束：值可以为0。取值范围：[256,1112784]。默认值：1112784。
      *
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @stagemodelonly
      * @atomicservice
      * @since 26.1.0 dynamic&static
      */
