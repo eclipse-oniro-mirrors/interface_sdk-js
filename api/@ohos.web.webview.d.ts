@@ -6466,7 +6466,7 @@ declare namespace webview {
      *     Ensure that the WebviewController is associated with a Web component before calling this API.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     enableAutoReload(enable: boolean): void;
 
@@ -6479,7 +6479,7 @@ declare namespace webview {
      *     Ensure that the WebviewController is associated with a Web component before calling this API.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     isAutoReloadEnabled(): boolean;
 
