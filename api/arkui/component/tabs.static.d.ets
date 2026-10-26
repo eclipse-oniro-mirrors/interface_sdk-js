@@ -1703,6 +1703,16 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.2.0 static
    */
   default sidebarBottomBar(bottomBar: ComponentContentBase | undefined): this;
+
+  /**
+   * Sets whether to display the sidebar control button.
+   * @param { boolean | undefined } value - Whether to display the sidebar control button.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default showSidebarControlButton(value: boolean | undefined): this;
 }
 
 /**

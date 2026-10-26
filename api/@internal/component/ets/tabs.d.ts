@@ -2562,6 +2562,18 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.2.0 dynamic
    */
   sidebarBottomBar(bottomBar: Optional<ComponentContent>): TabsAttribute;
+
+  /**
+   * Sets whether to display the sidebar control button.
+   * @param { Optional<boolean> } value - Whether to display the sidebar control button.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  showSidebarControlButton(value: Optional<boolean>): TabsAttribute;
 }
 
 /**
