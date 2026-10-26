@@ -16522,6 +16522,34 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     unlockMetadataObjectTracking(): void;
+
+    /**
+     * Enable or disable in frame metadata delivery for encoder.
+     * > **NOTE**
+     * >
+     * > Before calling this method, check if the camera device supports the in frame metadata delivery for encoder
+     *   by calling {@link isInFrameMetadataForEncoderSupported}.
+     * @param { boolean } enable - Target state for in frame metadata delivery for encoder.
+     * @throws { BusinessError } 801 - Capability not supported. Check if the camera device supports the required
+     *     in frame metadata delivery for encoder by using capability query APIs.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    setInFrameMetadataForEncoderEnabled(enable: boolean): void;
+ 
+    /**
+     * Check if in frame metdata for encoder is supported.
+     *
+     * @returns { boolean } TRUE if the delivery of in frame metadata is supported; FALSE otherwise.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isInFrameMetadataForEncoderSupported(): boolean;
   }
 
   /**
