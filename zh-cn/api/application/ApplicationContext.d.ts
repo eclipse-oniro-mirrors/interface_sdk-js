@@ -25,6 +25,7 @@ import type ApplicationStateChangeCallback from '../@ohos.app.ability.Applicatio
 /*** endif */
 /*** if arkts static */
 import ApplicationStateChangeCallback from '../@ohos.app.ability.ApplicationStateChangeCallback';
+import AppProcessStateObserver from '../@ohos.app.ability.AppProcessStateObserver';
 /*** endif */
 import systemConfiguration from '../@ohos.app.ability.systemConfiguration';
 
@@ -311,6 +312,37 @@ declare class ApplicationContext extends Context {
    * @since 23 static
    */
   offApplicationStateChange(callback?: ApplicationStateChangeCallback): void;
+
+  /**
+   * 为应用程序中的进程状态更改注册侦听器，包括进程
+   * 创建和终止。它只能在主线程上调用。
+   *
+   * @param { AppProcessStateObserver } observer - 进程创建时触发的观察者或
+   *     在应用程序中销毁。
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  onAppProcessStateChange(observer: AppProcessStateObserver): void;
+
+  /**
+   * 为应用程序中的进程状态更改取消注册侦听器。它可以被称为
+   * 仅在主线程上。
+   *
+   * @param { AppProcessStateObserver } [observer] - 通过调用注册的观察者
+   *     [ApplicationContext.onAppProcessStateChange]{@link ApplicationContext#onAppProcessStateChange}.
+   *     如果传入了定义的观察者，则该观察者的侦听器将未注册。
+   *     如果没有传入值，则当前进程注册的所有监听器都将被取消注册。
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - If the observer does not exist
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  offAppProcessStateChange(observer?: AppProcessStateObserver): void;
 
   /**
    * 获取运行中的进程信息。使用Promise异步回调。
