@@ -14,6 +14,8 @@
  */
 
 /**
+ * This module provides the common basic resource types in ArkGraphics 3D.
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -256,7 +258,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * Draws only shadows. When the Blend property of the material is enabled,
+   * Draws only shadows. When the [Blend]{@link Blend} property of the material is enabled,
    * the material is blended with the background to simulate a transparent material effect.
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -513,7 +515,7 @@ export interface MaterialProperty {
 
   /**
    * Texture sampler, with the default value set to LINEAR for magnification, minification, and mipmaps,
-   * and to REPEAT for U, V, and W directions.
+   * and to REPEAT for U and V directions.
    *
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D

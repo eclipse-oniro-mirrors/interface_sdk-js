@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中常用的数据类型。
+ *
  * @file
  * @kit ArkGraphics3D
  */

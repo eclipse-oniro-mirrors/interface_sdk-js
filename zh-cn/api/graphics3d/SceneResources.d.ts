@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中常用的基本资源类型。
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -251,7 +253,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * 仅对阴影进行绘制，当材质开启Blend属性，与背景融合模拟透明材质效果。
+   * 仅对阴影进行绘制，当材质开启[Blend]{@link Blend}属性，与背景融合模拟透明材质效果。
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi
@@ -497,7 +499,7 @@ export interface MaterialProperty {
   factor: Vec4;
 
   /**
-   * 纹理贴图采样器，默认使用放大、缩小和mipmap过滤模式为线性过滤（LINEAR），纹理贴图U、V、W方向的寻址模式为重复（REPEAT）。
+   * 纹理贴图采样器，默认使用放大、缩小和mipmap过滤模式为线性过滤（LINEAR），纹理贴图U、V方向的寻址模式为重复（REPEAT）。
    * 
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D

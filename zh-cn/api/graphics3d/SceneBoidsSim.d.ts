@@ -14,6 +14,14 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中群组模拟动画的类型及操作方法。
+ * 群组模拟动画是通过分离、对齐、凝聚等规则驱动群体中的个体，使其展现出类似自然界中鸟群、鱼群运动特征的计算机动画方法。
+ *
+ * > **说明：**
+ * >
+ * > 使用本模块的接口前，
+ * > 需先通过[RenderContext.loadPlugin]{@link ./Scene:RenderContext.loadPlugin}加载群组模拟插件[BoidsSimPlugin]{@link BoidsSimPlugin}。
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -29,9 +37,9 @@ import { Vec3, Quaternion } from './SceneTypes';
  * >
  * > 模拟帧是指群组模拟中按固定时间步长执行的更新周期，类似Unity中的FixedUpdate。默认时间步长为16ms（约62.5FPS），模拟通过累积真实时间并按固定步长消耗来驱动。
  * > 下文部分参数的默认值基于该时间步长计算：
- * > - maxVelocityMag： 0.01 / 0.016 ≈ 0.625（m/s）。
- * > - maxAccelerationMag： maxVelocityMag / 0.016 ≈ 39.06（m/s²）。
- * > - maxTurnRate： π × 0.75 × 0.016 ≈ 0.0377（rad/模拟帧）。
+ * > - **maxVelocityMag：** 0.01 / 0.016 ≈ 0.625（m/s）。
+ * > - **maxAccelerationMag：** maxVelocityMag / 0.016 ≈ 39.06（m/s²）。
+ * > - **maxTurnRate：** π × 0.75 × 0.016 ≈ 0.0377（rad/模拟帧）。
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @systemapi

@@ -14,6 +14,8 @@
  */
 
 /**
+ * This module provides the common data types in ArkGraphics 3D.
+ *
  * @file
  * @kit ArkGraphics3D
  */
