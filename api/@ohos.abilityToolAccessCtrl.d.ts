@@ -925,7 +925,6 @@ declare namespace abilityToolAccessCtrl {
    * Information about an application.
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.1.0 dynamiconly
    */
@@ -934,7 +933,6 @@ declare namespace abilityToolAccessCtrl {
      * Bundle name of the application.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.1.0 dynamiconly
      */
@@ -943,7 +941,6 @@ declare namespace abilityToolAccessCtrl {
      * Index of the application.
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.1.0 dynamiconly
      */
