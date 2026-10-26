@@ -5864,6 +5864,68 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixelsFromAreaSync(area: PositionArea): void;
 
     /**
+     * Writes pixel data in the specified pixel format from a buffer to a certain area of the PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * The value of PositionArea.stride must be greater than or equal to PositionArea.region.size.width multiplied by
+     * the number of bytes per pixel of sourcePixelFormat. The minimum required buffer size is calculated as follows:
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * bytesPerPixel(sourcePixelFormat).
+     *
+     * @param { PositionArea } area - Area of the PixelMap to write the data.
+     *     Data will be copied from PositionArea.pixels to the PixelMap.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * Writes pixel data in the specified pixel format from a buffer to a certain area of the PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * The value of PositionArea.stride must be greater than or equal to PositionArea.region.size.width multiplied by
+     * the number of bytes per pixel of sourcePixelFormat. The minimum required buffer size is calculated as follows:
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * bytesPerPixel(sourcePixelFormat).
+     * This API returns the result synchronously.
+     *
+     * @param { PositionArea } area - Area of the PixelMap to write the data.
+     *     Data will be copied from PositionArea.pixels to the PixelMap.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat): void;
+
+    /**
      * Reads the pixels in the [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region buffer in the
      * BGRA_8888 format and writes the data to the area specified by
      * [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.pixels in this PixelMap object. This API uses a
@@ -5975,6 +6037,62 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @since 26.0.0 dynamic&static
      */
     writeAllPixelsFromBufferSync(src: ArrayBuffer): void;
+
+    /**
+     * Writes pixel data in the specified pixel format from a buffer to the entire PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * Source rows must be tightly packed without row padding. The minimum required buffer size is the PixelMap width
+     * multiplied by the PixelMap height and the number of bytes per pixel of sourcePixelFormat. To write source data
+     * with a customized row stride or offset, use {@link writePixelsFromArea} instead.
+     *
+     * @param { ArrayBuffer } src - Buffer that contains the source pixel data.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writeAllPixelsFromBuffer(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * Writes pixel data in the specified pixel format from a buffer to the entire PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * Source rows must be tightly packed without row padding. The minimum required buffer size is the PixelMap width
+     * multiplied by the PixelMap height and the number of bytes per pixel of sourcePixelFormat. To write source data
+     * with a customized row stride or offset, use {@link writePixelsFromAreaSync} instead.
+     * This API returns the result synchronously.
+     *
+     * @param { ArrayBuffer } src - Buffer that contains the source pixel data.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writeAllPixelsFromBufferSync(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): void;
 
     /**
      * Reads the pixels in the buffer based on the PixelMap's pixel format and writes the data to this PixelMap object.
