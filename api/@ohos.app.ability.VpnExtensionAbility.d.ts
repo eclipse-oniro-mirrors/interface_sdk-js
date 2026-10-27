@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Enhanced VPN Management
  * @kit NetworkKit
  */
 

@@ -14,7 +14,7 @@
  */
 
 /**
-  * @file
+  * @file 三方VPN能力
   * @kit NetworkKit
  */
 
