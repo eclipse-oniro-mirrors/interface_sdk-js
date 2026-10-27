@@ -249,9 +249,9 @@ declare namespace adminManager {
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
-     * @since 26.2.0
+     * @since 26.1.0
      */
-    MANAGED_EVENT_ON_PASSWORD_FAILED = 13
+    MANAGED_EVENT_PASSWORD_FAILED = 13
   }
 
   /**

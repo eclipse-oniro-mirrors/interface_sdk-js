@@ -35,7 +35,6 @@ import EnterpriseAdminExtensionContext from './application/EnterpriseAdminExtens
  * - Provides system account management event listening capabilities (account addition, switch, removal).
  * - Provides system-level event callbacks for Kiosk mode, key events, log collection, and system updates.
  * - Provides policy change event listening capabilities.
- * - Provides password authentication failure event listening capabilities.
  *
  * **Use cases:** Enterprise device administrator application development, enterprise application lifecycle management,
  * device security control, account management, and device O&M monitoring.
@@ -465,28 +464,16 @@ export default class EnterpriseAdminExtensionAbility {
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 
   /**
-   * Callback for the password authentication failure event. You can receive this callback only after you register the
-   * **MANAGED_EVENT_ON_PASSWORD_FAILED** event through the
+   * Callback for the password authentication failure event. This callback is triggered when password authentication fails.
+   * You should register the **MANAGED_EVENT_PASSWORD_FAILED** event through the
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
-   * API. In enterprise device management scenarios, when a user fails lock screen password authentication, the system
-   * notifies the device administrator application of the cumulative number of password authentication failures and
-   * the user ID. The device administrator application can report the event in this callback to notify the enterprise
-   * administrator, so that the enterprise administrator can monitor the authentication security status of the device.
+   * API.
    *
-   * **NOTE**
-   *
-   * > - After the subscription succeeds, if the user already has a cumulative password authentication failure count,
-   * > this callback is invoked immediately with the current count (which may not start from 1).
-   * > - Only lock screen password authentication failures are counted. Fingerprint and facial authentication results
-   * > do not affect the count, and unlocking the device with biometrics does not reset the count.
-   * > - The count is not reset after the device restarts. It is reset only after the password authentication
-   * > succeeds.
-   *
-   * @param { number } cumulativeFailedCount - Cumulative number of lock screen password authentication failures.
+   * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
    * @param { number } userId - ID of the user whose password authentication failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
 }

@@ -32,7 +32,6 @@ import EnterpriseAdminExtensionContext from './application/EnterpriseAdminExtens
  * - 提供系统账号管理事件监听能力（账号新增、切换、删除）。
  * - 提供Kiosk模式、按键事件、日志收集、系统更新等系统级事件回调。
  * - 提供策略变更事件监听能力。
- * - 提供密码认证失败事件监听能力。
  * 
  * **使用场景**：企业设备管理应用开发、企业应用生命周期管理、设备安全管控、账号管理、设备运维监控等。
  * 
@@ -373,23 +372,16 @@ export default class EnterpriseAdminExtensionAbility {
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 
   /**
-   * 密码认证失败事件回调。通过接口
+   * 密码认证失败事件回调。当密码认证失败时触发此回调。
+   * 需要通过接口
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
-   * 注册MANAGED_EVENT_ON_PASSWORD_FAILED事件才能收到此回调。企业设备管理场景下，设备管理应用订阅密码认证失败事件，
-   * 当用户锁屏密码认证失败时，系统会将密码认证累计失败次数和用户ID通知设备管理应用，设备管理应用可以在此回调函数中
-   * 进行事件上报，通知企业管理员，实现对企业设备安全认证状态的监控。
+   * 注册**MANAGED_EVENT_PASSWORD_FAILED**事件。
    *
-   * **说明：**
-   *
-   * > - 订阅成功后，若该用户已存在密码认证累计失败次数，会立即收到一次当前次数的通知（次数不一定从1开始）。
-   * > - 仅统计锁屏密码认证失败的次数，指纹、人脸等认证结果不影响该次数；使用指纹等方式解锁成功后，该次数不会重置。
-   * > - 设备重启后该次数不会重置，仅密码认证成功后重置。
-   *
-   * @param { number } cumulativeFailedCount - 锁屏密码认证累计失败次数。
+   * @param { number } cumulativeFailedCount - 密码认证失败的累计次数。
    * @param { number } userId - 发生密码认证失败的用户ID。
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
-   * @since 26.2.0
+   * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
 }
