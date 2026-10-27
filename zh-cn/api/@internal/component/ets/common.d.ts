@@ -113,6 +113,10 @@ declare interface ComponentOptions {
 /**
  * 全局复用池的持有类型。
  *
+ * 'shared'：\@Component/\@ComponentV2类的所有实例共享同一个复用池实例。适用于多个同类型组件实例间需要复用相同资源的场景，可最大化复用池利用率，减少内存占用。
+ * 'perInstance'：\@Component/\@ComponentV2的每个实例拥有独立的复用池实例。适用于需要隔离各组件实例复用资源的场景，避免不同实例间的复用资源相互影响。
+ *
+ * @group Custom Component Parameters
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -321,6 +325,11 @@ declare interface TextDecorationOptions {
  * > - 从API版本26.0.0开始，ComponentOptions中可以接受可选参数`reusePool`和`poolAccepts`，用于配置全局复用池，
  * > 开发指南参考：[全局复用：集中化的组件回收与复用](docroot://ui/state-management/arkts-global-reuse-pool.md)。
  *
+ * options：\@Component装饰器选项，用于配置组件冻结和全局复用。可通过freezeWhenInactive控制组件冻结（适用于页面路由、TabContent、LazyForEach、Navigation等组件非激活时
+ * 冻结UI刷新以减少不必要刷新、优化性能的场景），通过reusePool和poolAccepts配置全局复用池（适用于多个父组件共用同类可复用组件、通过if等切换时需跨父组件复用已回收实例的场景），具体属性详见
+ * ComponentOptions。缺省时关闭组件冻结和全局复用功能。
+ * ClassDecorator：类装饰器，开发者无需关注该返回值。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -342,6 +351,9 @@ declare const Component: ClassDecorator & ((options: ComponentOptions) => ClassD
  * > - 从API版本26.0.0开始，\@ComponentV2的[ComponentOptions]{@link ComponentOptions}参数支持
  * > 可选属性`reusePool`和`poolAccepts`，用于配置全局复用池，
  * > 开发指南参考：[全局复用：集中化的组件回收与复用](docroot://ui/state-management/arkts-global-reuse-pool.md)。
+ *
+ * options：\@ComponentV2装饰器选项。当需要开启组件冻结或全局复用功能时传入此参数进行自定义配置；缺省时关闭组件冻结和全局复用功能。
+ * ClassDecorator：类装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -408,6 +420,9 @@ declare interface EntryOptions {
 /**
  * \@Entry装饰的自定义组件将作为UI页面的入口，被框架识别为页面的根组件，适用于构建独立UI页面的场景。
  *
+ * 在单个UI页面中，仅允许存在一个由\@Entry装饰的自定义组件作为页面的入口。
+ *
+ * @group Custom Component Decorators
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -419,7 +434,7 @@ declare interface EntryOptions {
 declare const Entry: ClassDecorator & ((options?: LocalStorage | EntryOptions) => ClassDecorator);
 
 /**
- * \@Observed是类装饰器，用于状态管理V1中，观察嵌套类对象的属性变化。
+ * \@Observed是类装饰器，用于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中，观察嵌套类对象的属性变化。
  * 
  * 开发指南参考：[\@Observed装饰器和\@ObjectLink装饰器：嵌套类对象属性变化](docroot://ui/state-management/arkts-observed-and-objectlink.md)。
  *
@@ -434,7 +449,9 @@ declare const Entry: ClassDecorator & ((options?: LocalStorage | EntryOptions) =
 declare const Observed: ClassDecorator;
 
 /**
- * @ObservedV2是类装饰器，用于状态管理V2中。@ObservedV2与@Trace配套使用，装饰类以及类中的属性，使得被装饰的类和属性具有深度观测的能力。相较于状态管理V1的@Observed，
+ * @ObservedV2是类装饰器，用于[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中。
+ * @ObservedV2与[@Trace]{@link Trace}配套使用，装饰类以及类中的属性，使得被装饰的类和属性具有深度观测的能力。
+ * 相较于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)的[@Observed]{@link Observed}，
  * @ObservedV2提供了更细粒度的属性级深度观测能力，适用于需要精确追踪嵌套对象属性变化并驱动UI更新的场景，能够有效提升状态管理的性能和灵活性。
  *
  * 开发指南参考：[\@ObservedV2装饰器和\@Trace装饰器：类属性变化观测](docroot://ui/state-management/arkts-new-observedV2-and-trace.md)。
@@ -521,8 +538,9 @@ declare const BuilderParam: PropertyDecorator;
 declare const Local: PropertyDecorator;
 
 /**
- * @Param在状态管理V2中用于接收外部输入，实现父子组件之间的单向数据同步。适用于父组件需要向子组件单向传递状态数据的场景，能够简化组件间通信，保证数据流向清晰。@Param装饰的变量不允许在组件内部直接修改，
- * 如需子组件向父组件同步数据，请配合@Event使用。
+ * @Param在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中用于接收外部输入，实现父子组件之间的单向数据同步。
+ * 适用于父组件需要向子组件单向传递状态数据的场景，能够简化组件间通信，保证数据流向清晰。@Param装饰的变量不允许在组件内部直接修改，
+ * 如需子组件向父组件同步数据，请配合[@Event]{@link Event}使用。
  * 
  * 开发指南参考：[@Param：组件外部输入](docroot://ui/state-management/arkts-new-param.md)。
  *
@@ -700,6 +718,12 @@ declare interface ProvideOptions {
  * 
  * 开发指南参考：[@Provide装饰器和@Consume装饰器：与后代组件双向同步](docroot://ui/state-management/arkts-provide-and-consume.md)。
  *
+ * value：用于设置别名或允许重写的别名。
+ * <br>类型为string时，将直接作为别名，后代组件可通过该别名访问数据。
+ * <br>类型为ProvideOptions时，若设置了allowOverride，allowOverride的值将作为别名且该别名允许重写；若未设置allowOverride，则别名为变量名，不允许重写。
+ * <br>value缺省时别名为变量名，不允许重写。若此时定义同名\@Provide，运行时会报错。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -711,10 +735,17 @@ declare interface ProvideOptions {
 declare const Provide: PropertyDecorator & ((value: string | ProvideOptions) => PropertyDecorator);
 
 /**
- * @Provider和@Consumer搭配使用，用于状态管理V2中，实现跨组件层级的数据双向同步。@Provider装饰数据提供方，为子组件提供数据，适用于组件层级较深、需要跨多层组件共享状态且避免逐层传递数据的场景，
+ * @Provider和[@Consumer]{@link Consumer}搭配使用，
+ * 用于[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中，实现跨组件层级的数据双向同步。
+ * @Provider装饰数据提供方，为子组件提供数据，适用于组件层级较深、需要跨多层组件共享状态且避免逐层传递数据的场景，
  * 可简化状态管理流程，降低组件间的耦合度。
  *
  * 开发指南参考：[@Provider装饰器和@Consumer装饰器：跨组件层级双向同步](docroot://ui/state-management/arkts-new-provider-and-consumer.md)。
+ *
+ * 用于状态管理V2中，需与@Consumer搭配使用，实现跨组件层级的数据双向同步；装饰数据提供方，为子组件提供数据。
+ *
+ * aliasName：用于设置别名，作为\@Provider与\@Consumer之间数据双向同步的匹配标识，需与\@Consumer的别名一致；缺省时为变量名。
+ * PropertyDecorator：属性装饰器。开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1119,6 +1150,10 @@ declare enum SystemProperties {
  * > 从API version 20开始，支持跨BuilderNode配对@Provide/@Consume。在BuilderNode场景下，BuilderNode会在上树前构造节点，
  * > 所以BuilderNode内部定义的@Consume需要设置默认值，并在BuilderNode上树后，重新获取最近的@Provide数据，与之建立双向同步关系。
  *
+ * value：用于设置别名，缺省时默认为变量名。设置别名后，@Consume通过别名与@Provide装饰的变量进行匹配绑定；未设置别名时，通过变量名进行匹配绑定，实现跨组件层级的数据双向同步。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
+ *
+ * @group State Management V1 Decorators
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1136,6 +1171,9 @@ declare const Consume: PropertyDecorator & ((value: string) => PropertyDecorator
  * 将使用自身初始值，不进行数据同步。
  *
  * 开发指南参考：[@Provider装饰器和@Consumer装饰器：跨组件层级双向同步](docroot://ui/state-management/arkts-new-provider-and-consumer.md)。
+ *
+ * aliasName：用于设置别名，作为\@Consumer与\@Provider匹配的标识，需与\@Provider的别名一致；缺省时为变量名。
+ * PropertyDecorator：属性装饰器。开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1163,10 +1201,16 @@ declare const Consumer: (aliasName?: string) => PropertyDecorator;
 declare const Computed: MethodDecorator;
 
 /**
- * @StorageProp用于状态管理V1中，与AppStorage中对应的属性建立单向数据同步。AppStorage中对应属性的变化会同步到@StorageProp装饰的变量，
- * 但仅修改@StorageProp装饰的变量不会同步回AppStorage。适用于需要跨页面、跨Ability感知AppStorage全局状态变化且仅保持单向数据流的场景，可避免不必要的数据回写。
+ * @StorageProp用于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中，
+ * 与[AppStorage]{@link AppStorage}中对应的属性建立单向数据同步。AppStorage中对应属性的变化会同步到@StorageProp装饰的变量，
+ * 但仅修改@StorageProp装饰的变量不会同步回AppStorage。适用于需要跨页面、跨[Ability]{@link ability}感知AppStorage全局状态变化且仅保持单向数据流的场景，可避免不必要的数据回写。
  *
  * 开发指南参考：[AppStorage：应用全局的UI状态存储](docroot://ui/state-management/arkts-appstorage.md)。
+ *
+ * value：AppStorage中的属性键名，用于与该键名对应的属性建立单向数据同步。
+ * 若AppStorage中已存在该键名对应的属性，则\@StorageProp装饰变量的本地初始值将被AppStorage中对应属性的值覆盖；
+ * 若AppStorage中不存在该键名对应的属性，则使用\@StorageProp装饰变量的本地初始值在AppStorage中创建该属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1178,11 +1222,18 @@ declare const Computed: MethodDecorator;
 declare const StorageProp: (value: string) => PropertyDecorator;
 
 /**
- * @StorageLink是状态管理V1的装饰器，用于与AppStorage中指定键名的属性建立双向数据同步：当@StorageLink装饰的变量发生变化时，变更会同步到AppStorage中该键名对应的属性；
- * 当AppStorage中该键名对应的属性发生变化时，变更也会同步回@StorageLink装饰的变量。适用于需要跨页面、跨Ability共享AppStorage全局状态并与AppStorage保持双向数据同步的场景，
+ * @StorageLink是[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)的装饰器，
+ * 用于与[AppStorage]{@link AppStorage}中指定键名的属性建立双向数据同步：当@StorageLink装饰的变量发生变化时，变更会同步到AppStorage中该键名对应的属性；
+ * 当AppStorage中该键名对应的属性发生变化时，变更也会同步回@StorageLink装饰的变量。
+ * 适用于需要跨页面、跨[Ability]{@link ability}共享AppStorage全局状态并与AppStorage保持双向数据同步的场景，
  * 可避免逐层传递状态数据，保证数据一致性。
  *
  * 开发指南参考：[AppStorage：应用全局的UI状态存储](docroot://ui/state-management/arkts-appstorage.md)。
+ *
+ * value：AppStorage中的属性键名，用于与该键名对应的属性建立双向数据同步。
+ * 若AppStorage中已存在该键名对应的属性，则\@StorageLink装饰变量的本地初始值将被AppStorage中对应属性的值覆盖；
+ * 若AppStorage中不存在该键名对应的属性，则以\@StorageLink装饰变量的本地初始值在AppStorage中创建对应属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1194,9 +1245,13 @@ declare const StorageProp: (value: string) => PropertyDecorator;
 declare const StorageLink: (value: string) => PropertyDecorator;
 
 /**
- * @Watch装饰器用于状态管理V1中，监听状态变量的变化，并在变量变化时触发指定回调函数。适用于状态变量变化时需要自动执行联动逻辑、数据同步或计算衍生值的场景。
+ * @Watch装饰器用于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中，监听状态变量的变化，
+ * 并在变量变化时触发指定回调函数。适用于状态变量变化时需要自动执行联动逻辑、数据同步或计算衍生值的场景。
  *
  * 开发指南参考：[@Watch装饰器：状态变量更改通知](docroot://ui/state-management/arkts-watch.md)。
+ *
+ * value：监听状态变量变化的回调函数名，函数签名为`(propertyName: string) => void`，`propertyName`为变化的属性名。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1256,8 +1311,13 @@ declare const Styles: MethodDecorator;
 /**
  * \@Extend装饰器用于扩展指定组件的样式，支持在装饰的函数中统一定义多个样式属性，并可通过参数传递实现样式的灵活复用，适用于需要将相同样式应用到多个组件、减少样式代码重复的场景。
  *
- * 开发指南参考：[\@Extend装饰器：定义扩展组件样式（ArkTS-Dyn）](docroot://ui/state-management/arkts-extend.md)。
+ * 开发指南参考：[\@Extend装饰器：定义扩展组件样式](docroot://ui/state-management/arkts-extend.md)。
  *
+ * value：指定要扩展样式的目标内置UI组件类型（如Text、Column），传入组件的类型而非组件实例，不支持自定义组件。@Extend装饰器内定义的样式属性将绑定到该组件类型，使其可在该组件上以链式方式调用。
+ * MethodDecorator：方法装饰器，开发者无需关注该返回值。
+ *
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1]
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1266,7 +1326,8 @@ declare const Styles: MethodDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Extend: MethodDecorator & ((value: any) => MethodDecorator);
+declare const Extend: MethodDecorator
+  & ((value: any) => MethodDecorator) & ExtendVersionDecorator;
 
 /**
  * @AnimatableExtend装饰器用于自定义可动画的属性方法，该装饰器内定义的函数在动画过程中会被逐帧调用，直到动画结束。
@@ -1576,10 +1637,14 @@ declare const Sendable: ClassDecorator;
 declare const CustomDialog: ClassDecorator;
 
 /**
- * @LocalStorageLink在状态管理V1中使用，用于与LocalStorage中指定键名对应的属性建立双向数据同步：@LocalStorageLink装饰的变量与LocalStorage中对应属性任一方发生变化时，
+ * @LocalStorageLink在[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中使用，
+ * 用于与[LocalStorage]{@link LocalStorage}中指定键名对应的属性建立双向数据同步：@LocalStorageLink装饰的变量与LocalStorage中对应属性任一方发生变化时，
  * 变更均会同步到另一方。适用于需要在多个组件间共享UI状态并与LocalStorage保持数据实时同步的场景，可避免逐层传递数据，保证跨组件数据一致性。
  *
  * 开发指南参考：[LocalStorage：页面级UI状态存储](docroot://ui/state-management/arkts-localstorage.md)。
+ *
+ * value：LocalStorage中的属性键名，用于与该键名对应的属性建立双向数据同步。若LocalStorage中已存在该键名对应的属性，则\@LocalStorageLink装饰变量的本地初始值将被LocalStorage中对应属性的值覆盖；若LocalStorage中不存在该键名对应的属性，则使用\@LocalStorageLink装饰变量的本地初始值在LocalStorage中创建该属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1591,10 +1656,16 @@ declare const CustomDialog: ClassDecorator;
 declare const LocalStorageLink: (value: string) => PropertyDecorator;
 
 /**
- * @LocalStorageProp在状态管理V1中使用，用于与LocalStorage中指定键名对应的属性建立单向数据同步：LocalStorage中对应属性值的变更会同步到@LocalStorageProp装饰的变量，
+ * @LocalStorageProp在[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中使用，
+ * 用于与[LocalStorage]{@link LocalStorage}中指定键名对应的属性建立单向数据同步：LocalStorage中对应属性值的变更会同步到@LocalStorageProp装饰的变量，
  * 但仅修改@LocalStorageProp装饰的变量不会同步回LocalStorage。适用于需要在多个组件间共享LocalStorage且仅保持单向数据流的场景，可避免不必要的数据回写。
  *
  * 开发指南参考：[LocalStorage：页面级UI状态存储](docroot://ui/state-management/arkts-localstorage.md)。
+ *
+ * value：LocalStorage中的属性键名，用于与该键名对应的属性建立单向数据同步。
+ * 若LocalStorage中已存在该键名对应的属性，则\@LocalStorageProp装饰变量的本地初始值将被LocalStorage中对应属性的值覆盖；
+ * 若LocalStorage中不存在该键名对应的属性，则使用\@LocalStorageProp装饰变量的本地初始值在LocalStorage中创建该属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1667,6 +1738,10 @@ declare function getContext(component?: Object): Context;
  * 
  * 开发指南参考：[@Reusable装饰器：组件复用](docroot://ui/state-management/arkts-reusable.md)。
  *
+ * options：可复用自定义组件的参数，用于配置内存优化策略，缺省时无内存优化策略。
+ * 建议在组件频繁创建销毁的场景下配置该参数以获得内存优化效果。
+ *
+ * @group Component Extension Decorators
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1683,6 +1758,10 @@ declare const Reusable: ClassDecorator & ((options: ReusableOptions) => ClassDec
  * 开发指南参考：[\@ReusableV2装饰器：组件复用](docroot://ui/state-management/arkts-new-reusableV2.md)。
  * 
  * 组件复用的原理与适用场景参考：[组件复用最佳实践](https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-component-reuse)。
+ *
+ * options：可复用自定义组件的配置参数，用于配置内存优化策略，
+ * 在复用组件数量较多（例如同一页面中复用组件实例达到数十个以上）或设备内存有限、应用内存占用较高的场景下可配置此参数进行优化；缺省时无内存优化策略。
+ * ClassDecorator：类装饰器。开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -29365,14 +29444,19 @@ declare function wrapBuilder<Args extends Object[]>(builder: (...args: Args) => 
 declare type BuilderCallback<Args extends Object[] = any[]> = (...args: Args) => void;
 
 /**
+ * 使用`mutableBuilder`封装全局[\@Builder]{@link Builder}，以支持在运行时根据不同条件动态切换全局`@Builder`内容（如根据状态切换不同的UI构建逻辑）。
+ * 开发指南参考：[mutableBuilder：实现全局@Builder动态更新](docroot://ui/state-management/arkts-mutableBuilder.md)。
+ *
  * `mutableBuilder`是一个泛型函数，它返回一个`MutableBuilder`对象，只接受一个全局的`@Builder`函数作为其参数。
- * 
+ *
  * `mutableBuilder`函数返回的[MutableBuilder]{@link MutableBuilder}对象，其`builder`属性方法只能在自定义组件的`build`函数或`@Builder`装饰的函数内部被调用。
  *
- * @param { BuilderCallback } builder - `@Builder`装饰的全局函数，作为`mutableBuilder`封装的目标构建函数。该函数需符合`BuilderCallback`类型，即
- *     `(...args: Args) => void`，是一个无返回值的函数，其参数列表`...args`的类型由泛型`Args`指定。
- * @returns { MutableBuilder<Args> } `MutableBuilder<Args>`的实例，用于封装全局`@Builder`函数，并支持在运行时动态切换构建逻辑。该实例持有对全局`@Builder`函数的引
- *     用，可通过其`builder`属性调用被封装的构建函数，或通过重新赋值`mutableBuilder`函数返回的新实例动态切换构建逻辑。其`builder`属性方法只能在自定义组件内部使用。
+ * @param { BuilderCallback } builder - `@Builder`装饰的全局函数，作为`mutableBuilder`封装的目标构建函数。该函数需符合`BuilderCallback`类型，
+ *     即`(...args: Args) => void`，是一个无返回值的函数，其参数列表`...args`的类型由泛型`Args`指定。
+ * @returns { MutableBuilder<Args> } `MutableBuilder<Args>`的实例，用于封装全局`@Builder`函数，并支持在运行时动态切换构建逻辑。该实例持有对
+ *     全局`@Builder`函数的引用，可通过其`builder`属性调用被封装的构建函数，或通过重新赋值`mutableBuilder`函数返回的新实例动态切换构建逻辑。
+ *     其`builder`属性方法只能在自定义组件的`build`函数或`@Builder`装饰的函数内部被调用。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
  * @atomicservice

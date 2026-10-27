@@ -1630,10 +1630,16 @@ declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCond
 declare const Styles: MethodDecorator & StylesVersionDecorator;
 
 /**
- * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style 
- * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter 
- * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing 
+ * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style
+ * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter
+ * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing
  * style code duplication.
+ *
+ * value: Target built-in UI component type (such as **Text** and **Column**) for which the style is to be extended.
+ * Pass in the component type rather than a component instance. Custom components are not supported. The style
+ * attributes defined in the @Extend decorator will be bound to this component type, so that they can be called on the
+ * component in a chained manner.
+ * MethodDecorator: Method decorator. Developers do not need to pay attention to this return value.
  *
  * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1] 
  * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
