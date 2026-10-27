@@ -24,7 +24,7 @@
  * obtain the version information of the current application.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
- * @famodelonly [since 12]
+ * @famodelonly
  * @atomicservice [since 11]
  * @since 7 dynamiconly
  */
@@ -34,7 +34,7 @@ export interface AppVersionInfo {
    *
    * @default appName
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
-   * @famodelonly [since 12]
+   * @famodelonly
    * @atomicservice [since 11]
    * @since 7 dynamiconly
    */
@@ -45,7 +45,7 @@ export interface AppVersionInfo {
    *
    * @default versionCode
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
-   * @famodelonly [since 12]
+   * @famodelonly
    * @atomicservice [since 11]
    * @since 7 dynamiconly
    */
@@ -56,7 +56,7 @@ export interface AppVersionInfo {
    *
    * @default versionName
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
-   * @famodelonly [since 12]
+   * @famodelonly
    * @atomicservice [since 11]
    * @since 7 dynamiconly
    */
