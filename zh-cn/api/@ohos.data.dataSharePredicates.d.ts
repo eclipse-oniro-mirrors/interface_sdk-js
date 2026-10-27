@@ -555,9 +555,12 @@ declare namespace dataSharePredicates {
      * <br>
      * <br>目前仅关系型数据库及键值型数据库支持该谓词。
      *
-     * @param { string } field - Indicates the column name in the database table.
-     * @param { Array<ValueType> } value - Indicates the values to match with DataSharePredicates.
-     * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
+     * @param { string } field - 数据库表中的列名。
+     *     <br>field为undefined或null时，此次调用接口配置的谓词无效。
+     *     <br>当field为字符串'null'或'undefined'时，键值型数据库和关系型数据库接口使用该谓词时，可能匹配结果非预期或抛出异常。
+     * @param { Array<ValueType> } value - 以ValueType型数组形式指定的要匹配的值。
+     *     <br>value为undefined或null时，此次调用接口配置的谓词无效。
+     * @returns { DataSharePredicates } 返回与指定字段匹配的谓词。
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @stagemodelonly
      * @since 23 static
@@ -588,9 +591,12 @@ declare namespace dataSharePredicates {
      * <br>
      * <br>目前仅关系型数据库及键值型数据库支持该谓词。
      *
-     * @param { string } field - Indicates the column name in the database table.
-     * @param { Array<ValueType> } value - Indicates the values to match with DataSharePredicates.
-     * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
+     * @param { string } field - 数据库表中的列名。
+     *     <br>field为undefined或null时，此次调用接口配置的谓词无效。
+     *     <br>当field为字符串'null'或'undefined'时，键值型数据库和关系型数据库接口使用该谓词时，可能匹配结果非预期或抛出异常。
+     * @param { Array<ValueType> } value - 以ValueType型数组形式指定的要匹配的值。
+     *     <br>value为undefined或null时，此次调用接口配置的谓词无效。
+     * @returns { DataSharePredicates } 返回与指定字段匹配的谓词。
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @stagemodelonly
      * @since 23 static
