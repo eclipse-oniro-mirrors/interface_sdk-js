@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Description of the notification channel
+ * @file NotificationSlot
  * @kit NotificationKit
  */
 
@@ -26,8 +26,9 @@ import type notificationManager from '../@ohos.notificationManager';
 /*** endif */
 
 /**
- * The **NotificationSlot** module provides APIs for defining the notification slots. The notification reminder modes 
- * vary according to notification slots.
+ * Describes the [notification slot](docroot://notification/notification-glossary.md#notification-slot). Different 
+ * notification slots have different 
+ * [notification reminder modes](docroot://notification/notification-glossary.md#notification-reminder-mode).
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 7 dynamic
@@ -35,8 +36,8 @@ import type notificationManager from '../@ohos.notificationManager';
  */
 export interface NotificationSlot {
   /**
-   * Channel type.
-   * 
+   * Slot type.
+   *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamiconly
    * @deprecated since 11
@@ -45,7 +46,8 @@ export interface NotificationSlot {
   type?: notification.SlotType;
 
   /**
-   * Slot type. Different slot types have different notification reminder types.
+   * Slot type. Different slot types have different 
+   * [notification reminder modes](docroot://notification/notification-glossary.md#notification-reminder-mode).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -64,8 +66,8 @@ export interface NotificationSlot {
   level?: notification.SlotLevel;
 
   /**
-   * Notification level, which is used to describe the display priority and alert intensity of notifications of this
-   * channel type.
+   * Notification level, which is used to describe the display priority and alert intensity of notifications of this 
+   * slot type.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 20 dynamic
@@ -74,8 +76,7 @@ export interface NotificationSlot {
   notificationLevel?: notificationManager.SlotLevel;
 
   /**
-   * Description of the notification channel. The size cannot exceed 243 bytes, and the excess part will be
-   * truncated.
+   * Description of the notification slot. The size cannot exceed 243 bytes, and the excess part will be truncated.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -96,10 +97,11 @@ export interface NotificationSlot {
   badgeFlag?: boolean;
 
   /**
-   * Whether to bypass Do Not Disturb mode in the system. The default value is **false**.
+   * Whether to bypass [Do Not Disturb mode](docroot://notification/notification-glossary.md#do-not-disturb-mode) in the
+   * system. The default value is **false**.
    *
-   * - **true**: Bypass Do Not Disturb mode, and notifications will still be alerted in Do Not Disturb mode.
-   * - **false**: Do not bypass Do Not Disturb mode, and notifications will not be alerted in Do Not Disturb mode.
+   * - **true**: bypasses Do Not Disturb mode, and notifications are still reminded in Do Not Disturb mode.
+   * - **false**: does not bypass Do Not Disturb mode, and notifications are not reminded in Do Not Disturb mode.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -108,7 +110,7 @@ export interface NotificationSlot {
   bypassDnd?: boolean;
 
   /**
-   * Mode for displaying the notification on the lock screen. This is a reserved capability and is not supported
+   * Mode for displaying the notification on the lock screen. This is a reserved capability and is not supported 
    * currently.
    *
    * @syscap SystemCapability.Notification.Notification
@@ -130,9 +132,9 @@ export interface NotificationSlot {
   vibrationEnabled?: boolean;
 
   /**
-   * File name of the custom ringtone for notifications from this channel. The file is placed in the
-   * **resources/rawfile** directory, and formats such as M4A, AAC, MP3, OGG, WAV, FLAC, and AMR are supported. The
-   * size cannot exceed 243 bytes, and the excess part will be truncated.
+   * File name of the [customized ringtone](docroot://notification/notification-glossary.md#customized-ringtone) for 
+   * notifications of this slot. The file is stored in the resources/rawfile directory and supports formats such as m4a,
+   * aac, mp3, ogg, wav, flac, and amr. The size cannot exceed 243 bytes, and the excess part is truncated.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -171,10 +173,11 @@ export interface NotificationSlot {
   vibrationValues?: Array<long>;
 
   /**
-   * Whether to allow notifications of this slot type to be published.
+   * Whether to allow publishing notifications of this 
+   * [notification slot](docroot://notification/notification-glossary.md#notification-slot) type.
    *
-   * - **true**: yes.
-   * - **false**: no.
+   * - **true**: publishing notifications is allowed.
+   * - **false**: publishing notifications is prohibited.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
@@ -185,13 +188,13 @@ export interface NotificationSlot {
   /**
    * Reminder mode of the notification.
    *
-   * - Bit 0: sound alert. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 1: locking the screen. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 2: banner. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 3: turning on the screen. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 4: vibration. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 5: notification icon in the status bar. The value **0** means to enable the feature, and **1** means the
-   * opposite.
+   * - Bit 0: sound alert. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 1: locking the screen. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 2: banner. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 3: turning on the screen. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 4: vibration. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 5: notification icon in the status bar. The value **0** means the feature is disabled, and **1** means 
+   * enabled.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

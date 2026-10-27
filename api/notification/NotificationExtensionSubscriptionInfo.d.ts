@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Describes a notification extension subscription info
+ * @file NotificationExtensionSubscriptionInfo
  * @kit NotificationKit
  */
 
@@ -30,8 +30,8 @@ import type notificationExtensionSubscription from '../@ohos.notificationExtensi
  */
 export interface NotificationExtensionSubscriptionInfo {
   /**
-   * Unique identifier of the device. When **type** is set to **SubscribeType.BLUETOOTH**, the corresponding
-   * Bluetooth device address is specified. Example: "11:22:33:AA:BB:FF".
+   * Unique identifier of the device. When **type** is set to **SubscribeType.BLUETOOTH**, the corresponding Bluetooth 
+   * device address is specified. Example: "11:22:33:AA:BB:FF".
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
@@ -40,7 +40,7 @@ export interface NotificationExtensionSubscriptionInfo {
   addr: string;
 
   /**
-   * Subscription type, specifying the subscription method for notification extension. Currently, only
+   * Subscription type, specifying the subscription method for notification extension. Currently, only 
    * **SubscribeType.BLUETOOTH** is supported, indicating subscription to notifications via Bluetooth.
    *
    * @syscap SystemCapability.Notification.Notification

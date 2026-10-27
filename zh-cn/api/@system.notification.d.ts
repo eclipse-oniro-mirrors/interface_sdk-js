@@ -14,11 +14,12 @@
  */
 
 /**
- * @file
+ * @file 通知消息
  * @kit NotificationKit
  */
 
 /**
+ * 定义通知被点击后触发的行为。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 3 dynamiconly
@@ -54,6 +55,7 @@ export interface ActionResult {
 }
 
 /**
+ * 通知展示的相关参数选项，可设置通知标题、通知内容以及通知被点击后触发的行为。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 3 dynamiconly
@@ -70,7 +72,7 @@ export interface ShowNotificationOptions {
   contentTitle?: string;
 
   /**
-   * 通知内容。
+   * [通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
@@ -80,8 +82,6 @@ export interface ShowNotificationOptions {
 
   /**
    * 通知被点击后触发的行为。
-   * 
-   * 从API version 7开始不再维护。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
@@ -91,7 +91,7 @@ export interface ShowNotificationOptions {
 }
 
 /**
- * 提供通知管理的能力。
+ * Manages notifications.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 3 dynamiconly
@@ -102,7 +102,7 @@ declare class Notification {
   /**
    * 显示通知。
    *
-   * @param { ShowNotificationOptions } [options] - 通知标题。
+   * @param { ShowNotificationOptions } [options] - 通知展示的相关参数选项，可设置通知标题、通知内容以及通知被点击后触发的行为。
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
    * @deprecated since 7
