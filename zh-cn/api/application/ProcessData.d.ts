@@ -20,8 +20,8 @@
 
 /**
  * 进程数据的对象定义。使用接口
- * [appManager.on('applicationState')]{@link @ohos.app.ability.appManager:appManager.on(type: 'applicationState', observer: ApplicationStateObserver)}
- * 注册生命周期变化监听后，当应用或组件的生命周期变化时，系统通过[ApplicationStateObserver]{@link ./application/ApplicationStateObserver}的
+ * [appManager.on('applicationState')]{@link ./../@ohos.app.ability.appManager:appManager.on(type: 'applicationState', observer: ApplicationStateObserver)}
+ * 注册生命周期变化监听后，当应用或组件的生命周期变化时，系统通过[ApplicationStateObserver]{@link ApplicationStateObserver}的
  * [onProcessCreated](docroot://reference/apis-ability-kit/js-apis-inner-application-applicationStateObserver.md#applicationstateobserveronprocesscreated)
  * 等方法回调给开发者。
  *
