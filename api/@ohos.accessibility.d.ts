@@ -3346,7 +3346,7 @@ export declare interface UIAccessibilityElement {
   readonly componentType?: string;
   /**
    * Accessibility description of the element. This property can be set by using 
-   * [accessibilityDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityDescription}.
+   * [accessibilityDescription]{@link @global:CommonMethod#accessibilityDescription}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3366,7 +3366,7 @@ export declare interface UIAccessibilityElement {
   readonly editable?: boolean;
   /**
    * The error text displayed when the element is in an incorrect state. This property can be set by using 
-   * [showError]{@link ./@internal/component/ets/text_input:TextInputAttribute.showError}.
+   * [showError]{@link @global:TextInputAttribute#showError}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3386,7 +3386,7 @@ export declare interface UIAccessibilityElement {
   readonly focusable?: boolean;
   /**
    * Hint text when there is no input. This property can be set by using 
-   * [placeholder]{@link ./@internal/component/ets/text_input:TextInputOptions.placeholder}.
+   * [placeholder]{@link @global:TextInputOptions#placeholder}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3395,7 +3395,7 @@ export declare interface UIAccessibilityElement {
   readonly hintText?: string;
   /**
    * Unique ID of a component. This property can be set by using 
-   * [id]{@link ./@internal/component/ets/common:CommonMethod.id}.
+   * [id]{@link @global:CommonMethod#id}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3441,7 +3441,7 @@ export declare interface UIAccessibilityElement {
    * 
    * Default value: **false**.
    * 
-   * This property can be set by using [visibility]{@link ./@internal/component/ets/common:CommonMethod.visibility}.
+   * This property can be set by using [visibility]{@link @global:CommonMethod#visibility}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3517,7 +3517,8 @@ export declare interface UIAccessibilityElement {
    */
   readonly textLengthLimit?: int;
   /**
-   * Maximum value.
+   * The maximum value within the range of an element, applicable to value-based components such as sliders. The unit 
+   * is defined by the component and is usually a percentage.
    * 
    * Default value: **0**.
    *
@@ -3527,7 +3528,8 @@ export declare interface UIAccessibilityElement {
    */
   readonly valueMax?: double;
   /**
-   * Minimum value.
+   * The minimum value within the range of an element, applicable to value-based components such as sliders. The unit 
+   * is defined by the component and is usually a percentage.
    * 
    * Default value: **0**.
    *
@@ -3537,7 +3539,8 @@ export declare interface UIAccessibilityElement {
    */
   readonly valueMin?: double;
   /**
-   * Current value.
+   * Current value of the element. The value is within the range defined by valueMin and valueMax. The unit is defined 
+   * by the component, and is usually a percentage.
    * 
    * Default value: **0**.
    *
@@ -3559,7 +3562,7 @@ export declare interface UIAccessibilityElement {
   readonly offset?: double;
   /**
    * Accessibility text information of the element. This property can be set by using 
-   * [accessibilityText]{@link ./@internal/component/ets/common:CommonMethod.accessibilityText}.
+   * [accessibilityText]{@link @global:CommonMethod#accessibilityText}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3568,7 +3571,7 @@ export declare interface UIAccessibilityElement {
   readonly accessibilityText?: string;
   /**
    * Custom accessibility component type. This property can be set by using 
-   * [accessibilityRole]{@link ./@internal/component/ets/common:CommonMethod.accessibilityRole}.
+   * [accessibilityRole]{@link @global:CommonMethod#accessibilityRole}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3576,8 +3579,9 @@ export declare interface UIAccessibilityElement {
    */
   readonly accessibilityRole?: string;
   /**
-   * ID of the next component to gain focus. This property can be set by using 
-   * [accessibilityNextFocusId]{@link ./@internal/component/ets/common:CommonMethod.accessibilityNextFocusId}.
+   * ID of the next component to gain focus. The ID is the componentId of the target component, which is different from 
+   * the identifier attribute. This property can be set by using 
+   * [accessibilityNextFocusId]{@link @global:CommonMethod#accessibilityNextFocusId}.
    * 
    * Default value: **-1**.
    *
@@ -3587,7 +3591,8 @@ export declare interface UIAccessibilityElement {
    */
   readonly accessibilityNextFocusId?: long;
   /**
-   * ID of the previous component to gain focus.
+   * ID of the previous component to gain focus. The ID is the componentId of the target component, which is different from 
+   * the identifier attribute.
    * 
    * Default value: **-1**.
    *
@@ -3617,7 +3622,7 @@ export declare interface UIAccessibilityElement {
    * Default value: **false**.
    * 
    * This property can be set by using 
-   * [accessibilityGroup]{@link ./@internal/component/ets/common:CommonMethod.accessibilityGroup}.
+   * [accessibilityGroup]{@link @global:CommonMethod#accessibilityGroup}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3638,7 +3643,7 @@ export declare interface UIAccessibilityElement {
    * Default value: **'auto'**.
    * 
    * This property can be set by using 
-   * [accessibilityLevel]{@link ./@internal/component/ets/common:CommonMethod.accessibilityLevel}.
+   * [accessibilityLevel]{@link @global:CommonMethod#accessibilityLevel}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3671,20 +3676,20 @@ export declare interface UIAccessibilityElement {
    * @since 26.0.1 dynamic&static
    */
   readonly childrenIds?: Array<long>;
- 
+
   /**
    * Custom accessibility state announcement text of the element. This property can be set by using 
-   * [accessibilityStateDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityStateDescription}.
+   * [accessibilityStateDescription]{@link @global:CommonMethod#accessibilityStateDescription}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
   readonly accessibilityStateDescription?: string;
- 
+
   /**
    * List of custom actions supported by the element. This property can be set by using 
-   * [accessibilityCustomActions]{@link ./@internal/component/ets/common:CommonMethod.accessibilityCustomActions}.
+   * [accessibilityCustomActions]{@link @global:CommonMethod#accessibilityCustomActions}.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
