@@ -1961,7 +1961,17 @@ declare namespace camera {
      * @since 10 dynamic
      * @since 23 static
      */
-    TABLET = 0x11
+    TABLET = 0x11,
+
+    /**
+     * 眼镜。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    GLASSES = 0xA31
   }
 
   /**
@@ -7680,6 +7690,28 @@ declare namespace camera {
      * @since 24 dynamic&static
      */
     offExposureInfoChange(callback?: Callback<ExposureInfo>): void;
+
+    /**
+     * 订阅摄像头切换requeset事件回调。
+     *
+     * @param { Callback<CameraDevice> } callback - 用于获取目标相机设备的回调。
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
+
+    /**
+     * 取消订阅摄像头切换requeset事件回调。
+     *
+     * @param { Callback<CameraDevice> } [callback] - 用于获取目标相机设备的回调。
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
 
   /**
@@ -8469,6 +8501,28 @@ declare namespace camera {
      * @since 26.0.1 dynamic&static
      */
     disableColorCube(): void;
+
+    /**
+     * 订阅摄像头切换requeset事件回调。
+     *
+     * @param { Callback<CameraDevice> } callback - 用于获取目标相机设备的回调。
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
+
+    /**
+     * 取消订阅摄像头切换requeset事件回调。
+     *
+     * @param { Callback<CameraDevice> } [callback] - 用于获取目标相机设备的回调。
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
 
   /**
