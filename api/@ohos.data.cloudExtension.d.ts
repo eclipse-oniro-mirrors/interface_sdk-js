@@ -75,14 +75,14 @@ declare namespace cloudExtension {
   type CloudAssets = Array<CloudAsset>;
 
   /**
-   * Enumerates the types of the cloud data field. The specific type is determined by the parameter function.
+   * Enumerates the types of the cloud data field. The actual type of each API parameter varies depending on its function.
    *
    * @unionmember { null } The value is null.
    * @unionmember { long } The value is a 64-bit integer (int64_t).
    * @unionmember { double } The value is a floating-point number (float).
    * @unionmember { string } The value is a string.
    * @unionmember { boolean } The value is true or false.
-   * @unionmember { Uint8Array } The value is a Uint8 array.
+   * @unionmember { Uint8Array } The value is a Uint8Array.
    * @unionmember { CloudAsset } The value is of the cloud asset type.
    * @unionmember { CloudAssets } The value is an array of cloud assets.
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
@@ -133,8 +133,8 @@ declare namespace cloudExtension {
    */
   export interface ServiceInfo {
     /**
-     * Whether the cloud service is enabled. The value true means that the cloud service is enabled,
-     * and the value false means the opposite.
+     * Whether the cloud service is enabled. The value **true** means that the cloud service is enabled,
+     * and the value **false** means the opposite.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -174,7 +174,7 @@ declare namespace cloudExtension {
     remainingSpace: long;
 
     /**
-     * Current user ID of the device.
+     * Current user account ID of the device.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -215,7 +215,7 @@ declare namespace cloudExtension {
 
     /**
      * Whether the cloud service is enabled for the application.
-     * The value true means the cloud service is enabled; the value false means the opposite.
+     * The value **true** means the cloud service is enabled; the value **false** means the opposite.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -226,7 +226,7 @@ declare namespace cloudExtension {
 
     /**
      * Application twin ID.
-     * The value 0 indicates the application itself, and the twin ID increases in ascending order.
+     * The value **0** indicates the application itself, and the twin ID increases in ascending order.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -306,7 +306,7 @@ declare namespace cloudExtension {
     BLOB = 5,
 
     /**
-     * Asset. For details, see {@link relationalStore.Asset}.
+     * Asset.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -316,7 +316,7 @@ declare namespace cloudExtension {
     ASSET = 6,
 
     /**
-     * Assets. For details, see {@link relationalStore.Assets}.
+     * Assets.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -356,7 +356,7 @@ declare namespace cloudExtension {
     colName: string;
 
     /**
-     * Type of the field. For details, see {@link FieldType}.
+     * Type of the field.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -367,7 +367,7 @@ declare namespace cloudExtension {
 
     /**
      * Whether the current column is the primary key.
-     * The value true means the current column is the primary key; the value false means the opposite.
+     * The value **true** means the current column is the primary key; the value **false** means the opposite.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -378,7 +378,7 @@ declare namespace cloudExtension {
 
     /**
      * Whether the current column can be null.
-     * The value true means the current column can be null; the value false means the opposite.
+     * The value **true** means the current column can be null; the value **false** means the opposite.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -530,7 +530,7 @@ declare namespace cloudExtension {
 
     /**
      * Whether there is data to be queried on the server.
-     * The value true means there is data to be queried on the server; the value false means the opposite.
+     * The value **true** means there is data to be queried on the server; the value **false** means the opposite.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -540,7 +540,7 @@ declare namespace cloudExtension {
     hasMore: boolean;
 
     /**
-     * Array of data to be queried, which consists of the data value and ExtensionValue.
+     * Array of data to be queried, which consists of the actual data value and ExtensionValue.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -660,9 +660,7 @@ declare namespace cloudExtension {
    */
   export interface ExtensionValue {
     /**
-     * ID generated when data is inserted.
-     * An ID is generated for each row when data is first inserted to the cloud.
-     * The ID must be unique for each table.
+     * ID automatically generated by the system when data is inserted.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -814,7 +812,7 @@ declare namespace cloudExtension {
   }
 
   /**
-   * Represents the data sharing result.
+   * Represents the device-cloud sharing result.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
    * @systemapi
@@ -833,7 +831,7 @@ declare namespace cloudExtension {
     code: int;
 
     /**
-     * Detailed description of the error code. The default value is undefined.
+     * Detailed description of the error code. The default value is **undefined**.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -843,7 +841,7 @@ declare namespace cloudExtension {
     description?: string;
 
     /**
-     * Value returned. The specific type is specified by the T parameter. The default value is undefined.
+     * Value returned. The specific type is specified by the **T** parameter. The default value is **undefined**.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -868,8 +866,8 @@ declare namespace cloudExtension {
   function createShareServiceStub(instance: ShareCenter): Promise<rpc.RemoteObject>;
 
   /**
-   * Creates a RemoteObject instance based on a CloudService instance.
-   * The system uses this object to call the APIs of the CloudService instance.
+   * Creates a RemoteObject object based on the instance of the CloudService class.
+   * The system uses this object to call the implemented APIs of the CloudService class.
    * This API uses a promise to return the result.
    *
    * @param { CloudService } instance - Instance of the CloudService class.
@@ -919,10 +917,10 @@ declare namespace cloudExtension {
    */
   export interface CloudDB {
     /**
-     * Generates IDs for the data records inserted to the cloud database.
-     * The IDs are unique. This API uses a promise to return the result.
+     * Generates unique IDs for the data records inserted to the cloud database.
+     * This API uses a promise to return the result.
      *
-     * @param { int } count - Number of IDs to generate.
+     * @param { int } count - Number of IDs to generate. The value must be greater than or equal to 1.
      * @returns { Promise<Result<Array<string>>> } Promise used to return the generated IDs in Result.
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -954,7 +952,7 @@ declare namespace cloudExtension {
      * Updates data in the cloud. This API uses a promise to return the result.
      *
      * @param { string } table - Table name.
-     * @param { Array<Record<string, CloudType>> } values - Data to insert.
+     * @param { Array<Record<string, CloudType>> } values - Data to update.
      * @param { Array<Record<string, CloudType>> } extensions - Extended information about the current data.
      * @returns { Promise<Array<Result<Record<string, CloudType>>>> } Promise used to return the update result and
      *     updated data.
@@ -990,8 +988,8 @@ declare namespace cloudExtension {
      * Queries data in a cloud database table. This API uses a promise to return the result.
      *
      * @param { string } table - Table name.
-     * @param { Array<string> } fields - Name of the fields to query.
-     * @param { int } queryCount - Number of data records to query.
+     * @param { Array<string> } fields - Array of names for fields to query.
+     * @param { int } queryCount - Number of data records to query. The value must be greater than or equal to 1.
      * @param { string } queryCursor - Cursor for the query.
      * @returns { Promise<Result<CloudData>> } Promise used to return the data and operation result.
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
@@ -1015,7 +1013,8 @@ declare namespace cloudExtension {
     /**
      * Extends the lock period of the database. This API uses a promise to return the result.
      *
-     * @param { int } lockId - Lock ID.
+     * @param { int } lockId - ID of the lock whose period needs to be extended. The value is **lockId** in
+     *     **LockInfo** returned by the lock method.
      * @returns { Promise<Result<LockInfo>> } Promise used to return the lock ID and lock period.
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -1027,9 +1026,10 @@ declare namespace cloudExtension {
     /**
      * Unlocks a cloud database. This API uses a promise to return the result.
      *
-     * @param { int } lockId - Lock ID to release.
+     * @param { int } lockId - Lock ID. The value is the same as that of **lockId** in **LockInfo** returned
+     *     by the lock method.
      * @returns { Promise<Result<boolean>> } Promise used to return the result.
-     *     The value true means the operation is successful; the value false means the opposite.
+     * The value **true** means the operation is successful; the value **false** means the opposite.
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
      * @since 11 dynamic
@@ -1052,7 +1052,7 @@ declare namespace cloudExtension {
      *
      * @param { string } table - Table name.
      * @param { string } gid - Unique identifier generated for the data added to the cloud.
-     * @param { string } prefix - Asset prefix information.
+     * @param { string } prefix - Prefix of the asset download directory.
      * @param { Array<CloudAsset> } assets - Assets to download.
      * @returns { Promise<Array<Result<CloudAsset>>> } Promise used to return the asset download result,
      *     including the asset IDs and asset hash values.
@@ -1092,7 +1092,7 @@ declare namespace cloudExtension {
   export interface ShareCenter {
     /**
      * Shares data. This API uses a promise to return the result.
-     * The application that initiates the share, shared resource ID, participants of the share need to be specified.
+     * The application that initiates the share, shared resource ID, and participants of the share need to be specified.
      *
      * @param { int } userId - User ID.
      * @param { string } bundleName - Bundle name of the application.
@@ -1277,8 +1277,8 @@ declare namespace cloudExtension {
     /**
      * Obtains brief application information. This API uses a promise to return the result.
      *
-     * @returns { Promise<Record<string, AppBriefInfo>> } Promise used to return bundleName and AppBriefInfo,
-     *     in KV pairs.
+     * @returns { Promise<Record<string, AppBriefInfo>> } Promise used to return a key-value pair, where the
+     *     key is **bundleName** and the value is AppBriefInfo.
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
      * @since 11 dynamic
@@ -1299,7 +1299,7 @@ declare namespace cloudExtension {
     getAppSchema(bundleName: string): Promise<Result<AppSchema>>;
 
     /**
-     * Subscribes to data. This API uses a promise to return the result.
+     * Subscribes to the cloud database change notification. This API uses a promise to return the result.
      *
      * @param { Record<string, Array<Database>> } subInfo - Data to be subscribed to,
      *     in KV pairs of the application bundle name and database information.
@@ -1317,10 +1317,10 @@ declare namespace cloudExtension {
     ): Promise<Result<SubscribeInfo>>;
 
     /**
-     * Unsubscribes from data changes in the cloud. This API uses a promise to return the result.
+     * Unsubscribes from the cloud data change notification. This API uses a promise to return the result.
      *
      * @param { Record<string, Array<string>> } unsubscribeInfo - Data to be unsubscribed from,
-     *     in an array of KV pairs consisting of the application bundle name and database information.
+     *     in an array of KV pairs consisting of the application bundle name and database name.
      * @returns { Promise<int> } Promise used to return the result.
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Server
      * @systemapi
@@ -1346,7 +1346,6 @@ declare namespace cloudExtension {
     /**
      * Connects to an asset loader by obtaining a RemoteObject instance of AssetLoader,
      * which is created by using createAssetLoaderStub. This API uses a promise to return the result.
-     * You can use this API to connect to the asset loader.
      *
      * @param { string } bundleName - Bundle name of the application.
      * @param { Database } database - Database to connect.

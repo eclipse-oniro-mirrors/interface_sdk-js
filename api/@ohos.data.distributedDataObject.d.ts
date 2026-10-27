@@ -52,7 +52,7 @@ declare namespace distributedDataObject {
     storeName: string;
 
     /**
-     * Table to which the target asset is located in the RDB store.
+     * Table in which the target asset is located in the RDB store.
      *
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
      * @since 11 dynamic
@@ -128,7 +128,6 @@ declare namespace distributedDataObject {
 
   /**
    * Represents the information returned by the callback of save.
-   * .
    *
    * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
    * @since 9 dynamic
@@ -154,7 +153,7 @@ declare namespace distributedDataObject {
     version: int;
 
     /**
-     * ID of the device where the distributed data object is stored. The value local indicates a local device.
+     * ID of the device where the distributed data object is stored. The value **local** indicates a local device.
      *
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
      * @since 9 dynamic
@@ -182,7 +181,7 @@ declare namespace distributedDataObject {
   }
 
   /**
-   * Defines an observer for obtaining the data change of a distributed object.
+   * Defines the callback used to listen for data changes of a distributed data object.
    *
    * @param { string } sessionId - Session ID of the distributed data object, with a maximum length of 128 bytes. The
    *     value can contain only letters, digits, and underscores (_).
@@ -195,14 +194,14 @@ declare namespace distributedDataObject {
   type DataObserver = (sessionId: string, fields: Array<string>) => void;
 
   /**
-   * Defines an observer for obtaining the status change of a distributed object.
+   * Defines the callback used to listen for status changes of a distributed data object.
    *
    * @param { string } sessionId - Session ID of the distributed data object, with a maximum length of 128 bytes. The
    *     value can contain only letters, digits, and underscores (_).
    * @param { string } networkId - Network ID of the peer device, with a maximum of 255 bytes. The value must be a non-
    *     empty string.
-   * @param { string } status - Status of the distributed object. The value can be **online**, **offline**, or
-   *     **restore.**
+   * @param { string } status - Status of the distributed data object. Possible values are **'online'**,
+   *     **'offline'**, and **'restore'**.
    * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
    * @since 20 dynamic
    * @since 23 static
@@ -234,13 +233,13 @@ declare namespace distributedDataObject {
    */
   interface DistributedObject {
     /**
-     * Sets a session ID. For the devices in the collaboration state in a trusted network, data of the distributed 
-     * objects with the same session ID can be automatically synced across devices.
+     * Sets a session ID. When multiple devices in a trusted group network are in the collaborative state, data of
+     * the distributed data objects with the same session ID can be automatically synced across devices.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } sessionId - ID of a distributed data object on a trusted network. To remove a distributed data
      *     object from the network, set this parameter to "" or leave it empty.
-     * @returns { boolean } Returns true if the session ID is set successfully; returns false otherwise.
+     * @returns { boolean } **true** indicates that the **sessionId** is set successfully. <br>**false** indicates that the **sessionId** fails to be set.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -324,15 +323,16 @@ declare namespace distributedDataObject {
    */
   interface DataObject {
     /**
-     * Sets a session ID. This API uses an asynchronous callback to return the result. For the devices in the
-     * collaboration state in a trusted network, data of the distributed objects with the same session ID can be
-     * automatically synced across devices.
+     * Sets a session ID. This API uses an asynchronous callback to return the result. When multiple devices in a
+     * trusted group network are in the collaborative state, data of the distributed data objects with the same
+     * session ID is automatically synchronized.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param {string} sessionId - ID of a distributed data object on a trusted network. The value can contain only
-     *     letters, digits, and underscores (_), and cannot exceed 128 characters. If this parameter is set to "" or
-     *     null, the distributed data object exits the network.
-     * @param {AsyncCallback<void>} callback - Asynchronous callback invoked when the session ID is successfully set.
+     * @param {string} sessionId - ID of the distributed data object in the trusted group network. The length cannot
+     *     exceed 128 bytes, and it can contain only letters, digits, or underscores (_). An empty string ("") or null
+     *     indicates exiting the trusted group network.
+     * @param {AsyncCallback<void>} callback - Callback invoked when the session is joined. If the operation is
+     *     successful, **err** is **undefined**; otherwise, **err** is an error object.
      * @throws {BusinessError} 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
      *     2. The sessionId allows only letters, digits, and underscores(_), and cannot exceed 128 in length.
@@ -344,10 +344,11 @@ declare namespace distributedDataObject {
     setSessionId(sessionId: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Exits all sessions. This API uses an asynchronous callback to return the result.
+     * Exits all sessions joined. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC [since 9 - 19]
-     * @param {AsyncCallback<void>} callback - Callback invoked when the distributed data object exits all sessions.
+     * @param {AsyncCallback<void>} callback - Callback invoked when the session is exited. If the session is exited
+     *     successfully, **err** is **undefined**; otherwise, err is an error object.
      * @throws {BusinessError} 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 19]
      * @throws {BusinessError} 401 - Parameter error. Incorrect parameter types.
      * @throws {BusinessError} 15400001 - Failed to create the in-memory database.
@@ -358,15 +359,15 @@ declare namespace distributedDataObject {
     setSessionId(callback: AsyncCallback<void>): void;
 
     /**
-     * Sets a session ID or exits the distributed network. This API uses a promise to return the result. If this 
-     * parameter is set to "" or null, or left empty, the distributed data object exits the network. For the devices in
-     * the collaboration state in a trusted network, data of the distributed objects with the same session ID can be
-     * automatically synced across devices.
+     * Sets a session ID or exits the distributed network. This API uses a promise to return the result. If **""**,
+     * **null**, or no value is passed in, the distributed data object exits the distributed network. When multiple
+     * devices in a trusted group network are in the collaborative state, data of the distributed data objects with
+     * the same session ID is automatically synchronized.
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
-     * @param {string} sessionId - ID of a distributed data object on a trusted network. The value can contain only
-     *     letters, digits, and underscores (_), and cannot exceed 128 characters. If this parameter is set to "" or
-     *     null, or left empty, the distributed data object exits the network.
+     * @param {string} sessionId - Identifier of the distributed data object in the trusted group network. The value
+     *     cannot exceed 128 bytes and can contain only letters, digits, or underscores (_). An empty string, null,
+     *     or no value indicates exiting the distributed group network.
      * @returns {Promise<void>} Promise that returns no value.
      * @throws {BusinessError} 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
@@ -381,10 +382,10 @@ declare namespace distributedDataObject {
     /**
      * Subscribes to data changes of this distributed data object.
      *
-     * @param { 'change' } type - Event type. The value is **'change'**, which indicates data changes. sessionId
+     * @param { 'change' } type - Event type. The value is **'change'**, which indicates data changes.
      * @param { Function } callback - Callback used to return the changes of the distributed data object.
-     *     indicates the session ID of the distributed data object. fields indicates the changed properties of the
-     *     distributed data object.
+     *     **sessionId** indicates the session ID of the distributed data object. **fields** indicates the changed
+     *     properties of the distributed data object.
      * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
@@ -397,8 +398,8 @@ declare namespace distributedDataObject {
      *
      * @param { 'change' } type - Event type. The value is 'change', which indicates data changes.
      * @param { Function } callback - Callback to unregister. If this parameter is not specified, this API unsubscribes
-     *     from all callbacks for data changes of this distributed object. sessionId indicates the session ID of
-     *     the distributed data object. fields indicates the changed properties of the distributed data object.
+     *     from all callbacks for data changes of this distributed object. **sessionId** indicates the session ID of
+     *     the distributed data object. **fields** indicates the changed properties of the distributed data object.
      * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
@@ -411,9 +412,9 @@ declare namespace distributedDataObject {
      *
      * @param { 'status' } type - Event type. The value is 'status', which indicates the status change (online or
      *     offline) of the distributed object.
-     * @param { Function } callback - Callback used to return the status change. sessionId indicates the session
-     *     ID of the distributed data object. networkId identifies the device. status indicates the object status,
-     *     which can be online or offline.
+     * @param { Function } callback - Callback invoked when the object goes online or offline. **sessionId**:
+     *     **sessionId** of the object whose change is identified; **networkId**: network identifier of the peer
+     *     device; **status**: status indicating whether the object is 'online' or 'offline'.
      * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
@@ -429,10 +430,10 @@ declare namespace distributedDataObject {
      *
      * @param { 'status' } type - Event type. The value is 'status', which indicates the status change (online or
      *     offline) of the distributed object.
-     * @param { Function } callback - Callback to unregister. If this parameter is not specified, this API unsubscribes
-     *     from all callbacks for status changes of this distributed object. sessionId indicates the session ID
-     *     distributed data object. networkId identifies the distributed data object. status indicates the
-     *     indicates the object status, which can be online or offline.
+     * @param { Function } callback - Callback for the online/offline event to be deleted. If this parameter is not
+     *     set, all online/offline callbacks of the object are deleted. **sessionId**: **sessionId** of the object
+     *     whose change is identified; **networkId**: network identifier of the peer device; **status**: status of
+     *     the object, which is 'online' or 'offline'.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
@@ -445,11 +446,18 @@ declare namespace distributedDataObject {
 
     /**
      * Saves a distributed data object. This API uses an asynchronous callback to return the result.
+     * If the application is active, the saved data will not be released. When the application exits and restarts,
+     * the data saved on the device will be restored.
+     * The saved data will be released in the following cases:
+     * - The data is stored for more than 24 hours.
+     * - The application has been uninstalled.
+     * - Data is successfully restored.
      *
-     * @param { string } deviceId - ID of the device where the data is stored. The value local indicates a local
-     *     device.
-     * @param { AsyncCallback<SaveSuccessResponse> } callback - Callback used to return SaveSuccessResponse, which
-     *     contains information such as session ID, version, and device ID.
+     * @param { string } deviceId - ID of the device where the distributed data object is stored. The value **local**
+     *     indicates a local device.
+     * @param { AsyncCallback<SaveSuccessResponse> } callback - Callback invoked when the save succeeds. If the save
+     *     succeeds, **err** is **undefined** and **data** is **SaveSuccessResponse** (containing **sessionId**,
+     *     **version**, **deviceId**, and other information); otherwise, data is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
@@ -462,8 +470,14 @@ declare namespace distributedDataObject {
 
     /**
      * Saves a distributed data object. This API uses a promise to return the result.
+     * If the application is active, the saved data will not be released. When the application exits and restarts,
+     * the data saved on the device will be restored.
+     * The saved data will be released in the following cases:
+     * - The data is stored for more than 24 hours.
+     * - The application has been uninstalled.
+     * - Data is successfully restored.
      *
-     * @param { string } deviceId - ID of the device where the data is saved. The default value is local, which
+     * @param { string } deviceId - ID of the device where the distributed data object is stored. The value **local**
      *     indicates a local device.
      * @returns { Promise<SaveSuccessResponse> } Promise used to return SaveSuccessResponse, which contains
      *     information such as session ID, version, and device ID.
@@ -478,11 +492,13 @@ declare namespace distributedDataObject {
     save(deviceId: string): Promise<SaveSuccessResponse>;
 
     /**
-     * Revokes the data of this distributed data object saved. This API uses an asynchronous callback to return the
-     * result.
+     * Revokes the saved distributed data object. This API uses an asynchronous callback to return the result.
+     * If the object is saved on the local device, the data saved on all trusted devices will be deleted.
+     * If the object is stored on another device, the data on the local device will be deleted.
      *
-     * @param { AsyncCallback<RevokeSaveSuccessResponse> } callback - Callback used to return
-     *     RevokeSaveSuccessResponse, which contains the session ID.
+     * @param { AsyncCallback<RevokeSaveSuccessResponse> } callback - Callback function. If the save is revoked
+     *     successfully, **err** is **undefined** and **data** is **RevokeSaveSuccessResponse** (which contains the
+     *     **sessionId** information); otherwise, it is an error object.
      * @throws { BusinessError } 401 - Parameter error. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
      *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
@@ -493,7 +509,9 @@ declare namespace distributedDataObject {
     revokeSave(callback: AsyncCallback<RevokeSaveSuccessResponse>): void;
 
     /**
-     * Revokes the data of this distributed data object saved. This API uses a promise to return the result.
+     * Revokes the saved distributed data object. This API uses a promise to return the result.
+     * If the object is saved on the local device, the data saved on all trusted devices will be deleted.
+     * If the object is stored on another device, the data on the local device will be deleted.
      *
      * @returns { Promise<RevokeSaveSuccessResponse> } Promise used to return RevokeSaveSuccessResponse, which
      *     contains the session ID.
@@ -506,13 +524,19 @@ declare namespace distributedDataObject {
     revokeSave(): Promise<RevokeSaveSuccessResponse>;
 
     /**
-     * Binds joint assets. Currently, only the binding between an asset in a distributed data object and an asset in an 
-     * RDB store is supported. This API uses an asynchronous callback to return the result.
+     * Binds a single asset in a distributed data object to its corresponding database information. In the current
+     * version, only the binding between an asset in a distributed data object and a relational database is
+     * supported. This API uses an asynchronous callback to return the result.
+     * When an asset in a distributed data object and an asset in a relational database point to the same entity
+     * asset file, that is, the URIs of the two assets are the same, a conflict occurs. Such assets are called joint
+     * assets. To enable distributed data management to resolve the conflict of joint assets, the assets must be
+     * bound first. When the application exits the session, the binding relationship disappears.
      *
-     * @param { string } assetKey - Key of the joint asset in the distributed data object.
+     * @param { string } assetKey - Key of the asset to be bound in the distributed data object.
      * @param { BindInfo } bindInfo - Information about the joint asset in the RDB store, including the RDB store name,
      *     table name, primary key, column name, and asset name in the RDB store.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - Callback invoked when the database is bound successfully. The value
+     *     of **err** is **undefined** if the binding succeeds; otherwise, it is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
@@ -524,10 +548,15 @@ declare namespace distributedDataObject {
     bindAssetStore(assetKey: string, bindInfo: BindInfo, callback: AsyncCallback<void>): void;
 
     /**
-     * Binds joint assets. Currently, only the binding between an asset in a distributed data object and an asset in an 
-     * RDB store is supported. This API uses a promise to return the result.
+     * Binds a single asset in a distributed data object to its corresponding database information. Currently, only
+     * the binding between an asset in a distributed data object and a relational database is supported. This API
+     * uses a promise to return the result.
+     * When an asset in a distributed data object and an asset in a relational database point to the same entity
+     * asset file, that is, the URIs of the two assets are the same, a conflict occurs. Such assets are called joint
+     * assets. To enable distributed data management to resolve the conflict of joint assets, the assets must be
+     * bound first. When the application exits the session, the binding relationship disappears.
      *
-     * @param { string } assetKey - Key of the joint asset in the distributed data object.
+     * @param { string } assetKey - Key of the asset to be bound in the distributed data object.
      * @param { BindInfo } bindInfo - Information about the joint asset in the RDB store, including the RDB store name,
      *     table name, primary key, column name, and asset name in the RDB store.
      * @returns { Promise<void> } Promise that returns no value.
@@ -545,7 +574,7 @@ declare namespace distributedDataObject {
      * Subscribes to data changes of this distributed data object.
      *
      * @param { 'change' } type - Event type. The value is 'change', which indicates data changes.
-     * @param { DataObserver } callback - Callback used to listen for data changes of a distributed object.
+     * @param { DataObserver } callback - Callback for the data change event of the distributed data object.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
      * @since 20 dynamic
      */
@@ -561,7 +590,8 @@ declare namespace distributedDataObject {
     onChange(callback: DataObserver): void;
 
     /**
-     * Unsubscribes from data changes of this distributed object.
+     * When data change listening is no longer needed, use this API to remove the callback instance for data change
+     * listening of the distributed data object.
      *
      * @param { 'change' } type - Event type. The value is 'change', which indicates data changes.
      * @param { DataObserver } [callback] - Callback to unregister. If this parameter is not specified, this API
@@ -582,10 +612,10 @@ declare namespace distributedDataObject {
     offChange(callback?: DataObserver): void;
 
     /**
-     * Subscribes to the status changes of this distributed object.
+     * Subscribes to status changes of this distributed data object.
      *
-     * @param { 'status' } type - Event type. The value is 'status', which indicates the status changes of a
-     *     distributed object.
+     * @param { 'status' } type - Event type, which is fixed to 'status', indicating the status change event of the
+     *     distributed data object.
      * @param { StatusObserver } callback - Callback used to listen for status changes of a distributed object.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
      * @since 20 dynamic
@@ -603,10 +633,11 @@ declare namespace distributedDataObject {
     onStatus(callback: StatusObserver): void
 
     /**
-     * Unsubscribes from status changes of this distributed object.
+     * When status change listening of the distributed data object is no longer needed, use this API to remove the
+     * callback instance for status change listening of the distributed data object.
      *
-     * @param { 'status' } type - Event type. The value is 'status', which indicates the status changes of a
-     *     distributed object.
+     * @param { 'status' } type - Event type, fixed to 'status', indicating a status change event of the distributed
+     *     data object.
      * @param { StatusObserver } [callback] - Callback to unregister. If this parameter is not specified, this API
      *     unsubscribes from all callbacks for status changes of this distributed object.
      * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
@@ -667,10 +698,10 @@ declare namespace distributedDataObject {
     offProgressChanged(callback?: ProgressObserver): void;
 
     /**
-     * Sets the property information about a single asset in a distributed object. This API must be called before the 
-     * setSessionId API is called. This API uses a promise to return the result.
+     * Sets the property information about a single asset in a distributed data object. This API must be called before
+     * the setSessionId API is called. This API uses a promise to return the result.
      *
-     * @param { string } assetKey - Property name of the asset in the distributed object.
+     * @param { string } assetKey - Property name corresponding to the asset-type data in the distributed data object.
      * @param { string } uri - URI of the new asset to be set, indicating the distributed path for storing the asset.
      *     The value must correspond to an existing asset.
      * @returns { Promise<void> } Promise that returns no value.
@@ -685,14 +716,13 @@ declare namespace distributedDataObject {
     setAsset(assetKey: string, uri: string): Promise<void>;
 
     /**
-     * Sets the property information about multiple assets in a distributed object. This API must be called before the 
-     * setSessionId API is called. The number of values contained in the uris array ranges from 1 to 50.
-     * This API uses a promise to return the result.
+     * Sets the property information about multiple assets in a distributed data object. This API must be called
+     * before the setSessionId API is called. This API uses a promise to return the result.
      *
-     * @param { string } assetsKey - Property name of the assets in the distributed object.
+     * @param { string } assetsKey - Property name corresponding to the asset array type data in the distributed data object.
      * @param { Array<string> } uris - URIs of the new asset array to be set, indicating the distributed paths for
-     *     storing each element of the asset. The number of array elements ranges from 1 to 50. The URI of an element
-     *     must be the distributed path corresponding to an actual asset.
+     *     storing each element of the asset. The number of elements in the array ranges from 1 to 50. The element URI
+     *     must be the distributed path of an existing asset.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 15400002 - Parameter error. Possible causes:
      *     1. The assetsKey is invalid, such as "";
