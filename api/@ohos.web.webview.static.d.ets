@@ -4704,6 +4704,34 @@ declare namespace webview {
         static setSocketIdleTimeout(timeout: int): void;
 
         /**
+         * Removes the visited link records of the current application that changed at or after the specified
+         * time point, and notifies the completion via a callback.
+         *
+         * @param { Date } date - Start time point of the removal range. Records changed at or after this
+         * time point are removed.
+         * @param { Callback<void> } callback - Callback invoked when the removal completes.
+         * @throws { BusinessError } 17100001 - Init error.
+         * @static
+         * @syscap SystemCapability.Web.Webview.Core
+         * @since 26.2.0 static
+         */
+        static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+        /**
+         * Removes the visited link records of the current application that changed at or after the specified
+         * time point, and returns the result via a promise.
+         *
+         * @param { Date } date - Start time point of the removal range. Records changed at or after this
+         * time point are removed.
+         * @returns { Promise<void> } - A promise resolved after the removal completes.
+         * @throws { BusinessError } 17100001 - Init error.
+         * @static
+         * @syscap SystemCapability.Web.Webview.Core
+         * @since 26.2.0 static
+         */
+        static removeVisitedLinksSince(date: Date): Promise<void>;
+
+        /**
          * Set the WebSoftKeyboardBehaviorMode to decide whether the keyboard will be shown/hidden automatically
          * in particular situation, for example, when web is inactive or active.
          *

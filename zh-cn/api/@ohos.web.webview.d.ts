@@ -3748,6 +3748,48 @@ declare namespace webview {
     static setSocketIdleTimeout(timeout: number): void;
 
     /**
+     * 删除当前应用中指定时间点之后（含该时间点）发生变化的已访问链接记录，并通过回调通知完成。
+     * 当应用需要清理指定时间之后的用户浏览痕迹（如用户退出登录、隐私数据清理）时使用本方法。
+     * 调用本方法后，指定时间点起（含该时间点）的记录将从本地数据库中删除，删除完成后回调被调用。
+     *
+     * > **说明**
+     * >
+     * > - 本方法仅作用于当前应用的已访问链接记录。
+     * > - 本方法异步执行，不阻塞调用线程。
+     * > - 若指定时间点为未来时间或无匹配记录，删除操作以删除0条记录完成，回调仍会被触发。
+     * > - 本方法要求Web引擎可用，但不依赖任何存活的Web实例。
+     * > - 隐私模式下产生的已访问链接记录不写入数据库，无需通过本方法清理。
+     *
+     * @param { Date } date - 移除范围的起始时间点。该时间点之后（含该时间点）发生变化的记录将被删除。
+     * @param { Callback<void> } callback - 移除完成后的回调。仅通知完成，不携带数据与错误。
+     * @throws { BusinessError } 17100001 - Init error. Web引擎初始化失败时抛出。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @since 26.2.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+    /**
+     * 删除当前应用中指定时间点之后（含该时间点）发生变化的已访问链接记录，并通过Promise形式返回结果。
+     * 当应用需要清理指定时间之后的用户浏览痕迹（如用户退出登录、隐私数据清理）时使用本方法。
+     * 调用本方法后，指定时间点起（含该时间点）的记录将从本地数据库中删除，删除完成后Promise被resolve。
+     *
+     * > **说明**
+     * >
+     * > - 本方法仅作用于当前应用的已访问链接记录。
+     * > - 本方法异步执行，不阻塞调用线程。
+     * > - 若指定时间点为未来时间或无匹配记录，删除操作以删除0条记录完成，Promise仍会被resolve。
+     * > - 本方法要求Web引擎可用，但不依赖任何存活的Web实例。
+     * > - 隐私模式下产生的已访问链接记录不写入数据库，无需通过本方法清理。
+     *
+     * @param { Date } date - 移除范围的起始时间点。该时间点之后（含该时间点）发生变化的记录将被删除。
+     * @returns { Promise<void> } 移除完成后resolve的Promise。
+     * @throws { BusinessError } 17100001 - Init error. Web引擎初始化失败时抛出。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @since 26.2.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date): Promise<void>;
+
+    /**
      * 启用检查网站安全风险的功能，非法和欺诈网站是强制启用的，不能通过此功能禁用。
      * 
      * 本功能默认不生效，OpenHarmony只提供恶意网址拦截页WebUI，网址风险检测以及显示WebUI的功能由Vendor实现。推荐在WebContentsObserver中监听跳转

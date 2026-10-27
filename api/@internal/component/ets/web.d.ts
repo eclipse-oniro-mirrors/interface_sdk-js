@@ -10454,6 +10454,35 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.2.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
+
+  /**
+   * Sets whether to enable visited link persistence. When persistence is enabled, records of visited links
+   * are stored in the local database of the application.
+   * Use this attribute when you want users to distinguish visited links by link color after the application
+   * is restarted, for example in news or content aggregation applications.
+   * Once enabled, records of visited URLs are written to the local database and the visited link coloring is
+   * retained after the application restarts; once disabled, the records are kept in memory only and are lost
+   * when the application exits.
+   *
+   * > **NOTE**
+   * >
+   * > - Visited link records are retained for 30 days, with a maximum of 20000 entries. Expired or excessive
+   * > records are automatically cleaned up.
+   * > - Records are isolated per application and stored in the application sandbox directory.
+   * > - This attribute does not take effect when the Web component is created with **incognitoMode** enabled.
+   * > In this case, visited link records are kept in memory only and are not written to the database.
+   * > - By default, this attribute is disabled, and the visited link behavior is the same as the existing
+   * > behavior.
+   *
+   * @param { boolean } value - Whether to enable visited link persistence.
+   *     <br>The value **true** means to enable visited link persistence, and **false** means to disable it.
+   *     <br>The default value is **false**.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.2.0 dynamic
+   */
+  visitedLinkPersistEnabled(value: boolean): WebAttribute;
 }
 
 /**

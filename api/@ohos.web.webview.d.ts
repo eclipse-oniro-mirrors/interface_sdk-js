@@ -3998,6 +3998,61 @@ declare namespace webview {
     static setSocketIdleTimeout(timeout: number): void;
 
     /**
+     * Removes the visited link records of the current application that changed at or after the specified
+     * time point, and notifies the completion via a callback.
+     * Use this method when you need to clear user browsing traces after a specified time point, for example
+     * when the user signs out or performs privacy data cleanup.
+     * Once this method is called, records changed from the specified time point (inclusive) are deleted from
+     * the local database, and the callback is invoked after the deletion completes.
+     *
+     * > **NOTE**
+     * >
+     * > - This method applies only to the visited link records of the current application.
+     * > - This method is executed asynchronously and does not block the calling thread.
+     * > - If the specified time point is in the future or no records match, the deletion completes with zero
+     * > records deleted, and the callback is still invoked.
+     * > - This method requires the web engine to be available and does not depend on any live Web instance.
+     * > - Visited link records generated in privacy (incognito) mode are not written to the database and do
+     * > not need to be cleaned up through this method.
+     *
+     * @param { Date } date - Start time point of the removal range. Records changed at or after this time
+     * point are removed.
+     * @param { Callback<void> } callback - Callback invoked when the removal completes. It only notifies the
+     * completion and carries no data or error.
+     * @throws { BusinessError } 17100001 - Init error. Thrown when the web engine initialization fails.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @since 26.2.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+    /**
+     * Removes the visited link records of the current application that changed at or after the specified
+     * time point, and returns the result via a promise.
+     * Use this method when you need to clear user browsing traces after a specified time point, for example
+     * when the user signs out or performs privacy data cleanup.
+     * Once this method is called, records changed from the specified time point (inclusive) are deleted from
+     * the local database, and the promise is resolved after the deletion completes.
+     *
+     * > **NOTE**
+     * >
+     * > - This method applies only to the visited link records of the current application.
+     * > - This method is executed asynchronously and does not block the calling thread.
+     * > - If the specified time point is in the future or no records match, the deletion completes with zero
+     * > records deleted, and the promise is still resolved.
+     * > - This method requires the web engine to be available and does not depend on any live Web instance.
+     * > - Visited link records generated in privacy (incognito) mode are not written to the database and do
+     * > not need to be cleaned up through this method.
+     *
+     * @param { Date } date - Start time point of the removal range. Records changed at or after this time
+     * point are removed.
+     * @returns { Promise<void> } Promise resolved when the removal completes.
+     * @throws { BusinessError } 17100001 - Init error. Thrown when the web engine initialization fails.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @since 26.2.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date): Promise<void>;
+
+    /**
      * Enables the safe browsing feature. This feature is forcibly enabled and cannot be disabled for identified
      * untrusted websites.
      *
