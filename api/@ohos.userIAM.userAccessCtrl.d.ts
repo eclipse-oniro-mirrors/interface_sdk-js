@@ -59,9 +59,10 @@ declare namespace userAccessCtrl {
    * @returns { Promise<AuthToken> } Promise used to return the result. If the verification is successful, the
    *     parsed **AuthToken** data is returned, including the challenge value, authentication trust level,
    *     authentication type, and user ID. If the verification fails, the corresponding error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.

@@ -45,9 +45,10 @@ declare namespace userAccessCtrl {
    * @param { int } allowableDuration - 允许的认证有效时长。从AuthToken签发起允许使用的最大时间间隔，单位为毫秒。值需大于0且小于等于86400000（24小时）。用于校验令牌的时效性，防止过
    *     期令牌被使用。
    * @returns { Promise<AuthToken> } Promise对象，验证成功时返回解析后的AuthToken数据，包含挑战值、认证信任等级、认证类型、用户ID等详细信息；验证失败时抛出相应错误码。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
