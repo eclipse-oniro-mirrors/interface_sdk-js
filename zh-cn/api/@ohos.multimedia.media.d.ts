@@ -3222,6 +3222,7 @@ declare namespace media {
      * 获取播放过程信息，可以在prepared/playing/paused状态调用。使用Promise异步回调。
      *
      * @returns { Promise<PlaybackInfo> } Promise对象，返回播放器信息PlaybackInfo。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 12 dynamic
      * @since 23 static
@@ -3285,6 +3286,7 @@ declare namespace media {
      * 获取当前播放器的统计指标信息，可以在准备（prepared）/播放（playing）/暂停（paused）/完成（completed）/停止（stopped）状态调用。使用Promise异步回调。
      *
      * @returns { Promise<PlaybackMetrics> } Promise对象，返回当前播放器的指标信息PlaybackMetrics。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 dynamic&static
      */
@@ -3510,7 +3512,7 @@ declare namespace media {
      * 清空播放列表中的所有项目，当前正在播放的媒体将会立即终止。使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operation not allowed . Returned via promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned via promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
