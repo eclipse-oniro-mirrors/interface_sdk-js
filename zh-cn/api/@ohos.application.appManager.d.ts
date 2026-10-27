@@ -38,7 +38,7 @@ declare namespace appManager {
    * 注册全部应用程序状态观测器。
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
-   * @param { ApplicationStateObserver } observer - 表示程序状态观测器，用于观测应用的生命周期变化。
+   * @param { ApplicationStateObserver } observer - 表示应用程序状态观测器，用于观测应用的生命周期变化。
    * @returns { number } 已注册观测器的数字代码。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -52,8 +52,8 @@ declare namespace appManager {
    * 取消注册应用程序状态观测器。使用callback异步回调。
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
-   * @param { number } observerId - 表示观察者的编号代码。
-   * @param { AsyncCallback<void> } callback - 表示指定的callback回调方法。
+   * @param { number } observerId - 表示观测器的编号代码。
+   * @param { AsyncCallback<void> } callback - 取消注册的回调函数。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @since 8
@@ -66,7 +66,7 @@ declare namespace appManager {
    * 取消注册应用程序状态观测器。使用Promise异步回调。
    *
    * @permission ohos.permission.RUNNING_STATE_OBSERVER
-   * @param { number } observerId - 表示观察者的编号代码。
+   * @param { number } observerId - 表示观测器的编号代码。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -103,9 +103,9 @@ declare namespace appManager {
   function getForegroundApplications(): Promise<Array<AppStateData>>;
 
   /**
-   * 切断account进程。使用Promise异步回调。
+   * 根据Bundle名称和账号ID终止指定账号下的应用进程。使用Promise异步回调。
    *
-   * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS and ohos.permission.CLEAN_BACKGROUND_PROCESSES
+   * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS, ohos.permission.CLEAN_BACKGROUND_PROCESSES
    * @param { string } bundleName - 应用Bundle名称。
    * @param { number } accountId - 系统账号的账号ID，详情参考[getOsAccountCount]
    *     {@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount}。
@@ -119,13 +119,13 @@ declare namespace appManager {
   function killProcessWithAccount(bundleName: string, accountId: number): Promise<void>;
 
   /**
-   * 切断account进程。使用callback异步回调。
+   * 根据Bundle名称和账号ID终止指定账号下的应用进程。使用callback异步回调。
    *
    * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS and ohos.permission.CLEAN_BACKGROUND_PROCESSES
    * @param { string } bundleName - 应用Bundle名称。
    * @param { number } accountId - 系统账号的账号ID，详情参考[getOsAccountCount]
    *     {@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountCount}。
-   * @param { AsyncCallback<void> } callback - 回调函数，当切断account进程成功，err为undefined，否则为错误对象。
+   * @param { AsyncCallback<void> } callback - 回调函数，当终止指定账号下的应用进程成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @since 8
@@ -280,7 +280,7 @@ declare namespace appManager {
   /**
    * 获取当前应用程序可以使用的最大内存（RAM）值。使用Promise异步回调。
    *
-   * @returns { Promise<number> } 当前应用程序可以使用的最大内存（RAM）值，可根据此值进行错误处理或其他自定义处理，单位是M。使用Promise异步回调。
+   * @returns { Promise<number> } 当前应用程序可以使用的最大内存（RAM）值，可根据此值进行错误处理或其他自定义处理，单位是MB。使用Promise异步回调。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 7
    * @deprecated since 9
@@ -291,7 +291,7 @@ declare namespace appManager {
   /**
    * 获取当前应用程序可以使用的最大内存（RAM）值。使用callback异步回调。
    *
-   * @param { AsyncCallback<number> } callback - 获取当前应用程序可以使用的最大内存（RAM）值，可根据此值进行错误处理或其他自定义处理，单位是M。使用callback异步回调。
+   * @param { AsyncCallback<number> } callback - 获取当前应用程序可以使用的最大内存（RAM）值，可根据此值进行错误处理或其他自定义处理，单位是MB。使用callback异步回调。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 7
    * @deprecated since 9

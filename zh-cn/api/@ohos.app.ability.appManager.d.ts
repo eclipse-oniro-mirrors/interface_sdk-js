@@ -1021,7 +1021,7 @@ declare namespace appManager {
   function getForegroundApplications(): Promise<Array<AppStateData>>;
 
   /**
-   * 终止account进程。使用Promise异步回调。
+   * 终止指定系统账号下的应用进程。使用Promise异步回调。
    * 
    * > **说明：**
    * >
@@ -1048,7 +1048,7 @@ declare namespace appManager {
   function killProcessWithAccount(bundleName: string, accountId: int): Promise<void>;
 
   /**
-   * 终止account进程。使用Promise异步回调。
+   * 终止指定系统账号下的应用进程。使用Promise异步回调。
    * 
    * > **说明：**
    * >

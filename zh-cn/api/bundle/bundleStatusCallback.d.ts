@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// 应用状态发生变化时回调的信息，通过接口[innerBundleManager.on](js-apis-Bundle-InnerBundleManager-sys.md#innerbundlemanagerondeprecated)获取。
 
 /**
  * @file BundleStatusCallback
@@ -41,6 +42,8 @@ export interface BundleStatusCallback {
    * 获取应用安装时的信息。
    *
    * @permission ohos.permission.LISTEN_BUNDLE_CHANGE
+   * @param bundleName 应用包名。
+   * @param userId 用户ID。
    * @syscap SystemCapability.BundleManager.BundleFramework
    * @systemapi Hide this for inner system use
    * @since 8 dynamiconly
@@ -53,6 +56,8 @@ export interface BundleStatusCallback {
    * 获取应用更新时的信息。
    *
    * @permission ohos.permission.LISTEN_BUNDLE_CHANGE
+   * @param bundleName 应用包名。
+   * @param userId 用户ID。
    * @syscap SystemCapability.BundleManager.BundleFramework
    * @systemapi Hide this for inner system use
    * @since 8 dynamiconly
@@ -65,6 +70,8 @@ export interface BundleStatusCallback {
    * 获取应用卸载时的信息。
    *
    * @permission ohos.permission.LISTEN_BUNDLE_CHANGE
+   * @param bundleName 应用包名。
+   * @param userId 用户ID。
    * @syscap SystemCapability.BundleManager.BundleFramework
    * @systemapi Hide this for inner system use
    * @since 8 dynamiconly

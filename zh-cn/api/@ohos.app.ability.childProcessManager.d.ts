@@ -135,7 +135,7 @@ declare namespace childProcessManager {
    *
    * @param { string } srcEntry - 子进程源文件路径，只支持源文件放在entry类型的模块中，以src/main为根目录。例如子进程文件在entry模块下src/main/ets/process/
    *    DemoProcess.ets，则srcEntry为"./ets/process/DemoProcess.ets"。另外，需要确保子进程源文件被其它文件引用到，防止被构建工具优化掉。（详见下方示例代码）
-   * @param { StartMode } startMode - 子进程启动模式。从App自身进程Fork子进程，继承父进程资源，不能使用Binder IPC和其他进程通信，否则会导致子进程崩溃退出；
+   * @param { StartMode } startMode - 子进程启动模式。SELF_FORK（值为0）：从App自身进程Fork子进程，继承父进程资源，不能使用Binder IPC和其他进程通信，否则会导致子进程崩溃退出；
    *    APP_SPAWN_FORK（值为1）：从AppSpawn Fork子进程，不继承父进程资源，可使用Binder IPC和其他进程通信。
    * @param { AsyncCallback<int> } callback - 回调函数。当子进程启动成功，err为undefined，data为获取到的子进程pid；否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -229,9 +229,7 @@ declare namespace childProcessManager {
   function isNativeChildProcessSupported(): boolean;
 
   /**
-   * 获取当前应用的子进程信息。该接口使用promise返回
-   * 的结果。
-   * 返回的子进程包括通过创建的子进程
+   * 获取当前应用的所有子进程信息，使用Promise异步回调。包括通过以下方式启动的子进程：
    * [startChildProcess]{@link @ohos.app.ability.childProcessManager:childProcessManager.startChildProcess} (在
    * APP_SPAWN_FORK模式)，
    * [startArkChildProcess]{@link @ohos.app.ability.childProcessManager:childProcessManager.startArkChildProcess}，以及
