@@ -1790,5 +1790,46 @@ declare namespace formHost {
    * @since 26.0.1 dynamiconly
    */
   function unregisterFormHostService(serviceId: string): Promise<void>;
+
+  /**
+   * Subscribes to the event of requesting visible widget position and dimension.
+   * This API uses an asynchronous callback to return the result.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { formInfo.GetFormRectInfoCallback } callback - Callback function used by the widget host to process the
+   *     request and return the position and dimension of the widget relative to the upper-left corner of the screen.
+   *     The unit is vp.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16500060 - Service connection error.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function onGetVisibleFormRect(callback: formInfo.GetFormRectInfoCallback): void;
+
+  /**
+   * Meaning: deregistration to obtain the visible card area
+   * Application scenario: Callback of the area where the card is used to obtain the visible card is deregistered in the
+   * FMS.
+   * Effect: The FMS clears the callback record.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { formInfo.GetFormRectInfoCallback } [callback] - Callback function used by the widget host to process the
+   *     request and return the position and dimension of the widget relative to the upper-left corner of the screen.
+   *     The unit is vp.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function offGetVisibleFormRect(callback?: formInfo.GetFormRectInfoCallback): void;
 }
 export default formHost;
