@@ -15077,7 +15077,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *
      * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
      *    pressed.
-     *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+     *    <br>true: Supports dragging to scroll with the left mouse button pressed.
+     *    <br>false: Not support dragging to scroll with the left mouse button pressed.
+     *    <br>undefined: When the value is set to undefined, the defalut value is false.
+     *    <br>Default value: For API versions earlier than 26.1.0, the defalut value is false.
      *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
      *    horizontally,false otherwise.
      * @returns { this }

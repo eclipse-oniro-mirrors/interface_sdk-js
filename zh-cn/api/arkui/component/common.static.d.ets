@@ -15381,6 +15381,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持左键按下拖动滚动。
      * 
      * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
+     *    <br>true：支持鼠标左键按下拖动滚动。
+     *    <br>false：不支持鼠标左键按下拖动滚动。
+     *    <br>undefined：值为undefined时，按false处理。
      *    <br>默认值：API版本26.1.0下的版本默认值为false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为true，否则为false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
