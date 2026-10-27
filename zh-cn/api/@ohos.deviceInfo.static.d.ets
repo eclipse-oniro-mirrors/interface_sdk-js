@@ -155,7 +155,7 @@ declare namespace deviceInfo {
     get brand(): string;
 
     /**
-     * 设备品牌名称。
+     * 外部产品系列。
      * 
      * 示例：HUAWEI 
      * 
@@ -250,22 +250,6 @@ declare namespace deviceInfo {
      * @since 24 static
      */
     get hardwareModel(): string;
-
-    /**
-     * 硬件版本号。
-     * 
-     * 示例：<!--RP6-->TASA00CVN1<!--RP6End--> 
-     * 
-     * **ArkTs-Dyn起始版本：** 6
-     * 
-     * **ArkTs-Sta起始版本：** 20
-     *
-     * @returns { string }
-     * @syscap SystemCapability.Startup.SystemInfo
-     * @stagemodelonly
-     * @since 24 static
-     */
-    get hardwareProfile(): string;
 
     /**
      * 设备序列号SN(Serial Number)。
