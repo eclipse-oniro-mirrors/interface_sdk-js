@@ -78,6 +78,7 @@ declare class FormEditExtensionContext extends UIExtensionContext {
 	 *     insensitive, for example, **#00FF00** or **#FF00FF00**.
 	 * @returns { Promise<void> } Promise that returns no value.
 	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
+	 * @throws { BusinessError } 16501026 - Invalid color value.
 	 * @syscap SystemCapability.Ability.Form
 	 * @stagemodelonly
 	 * @since 26.1.0 dynamic&static
