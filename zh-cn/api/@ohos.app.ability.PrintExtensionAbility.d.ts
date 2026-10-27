@@ -25,8 +25,7 @@ import type Want from './@ohos.app.ability.Want';
 import type print from './@ohos.print';
 
 /**
- * 该模块提供打印扩展能力的调用接口。PrintExtensionAbility基于生命周期回调机制运行，系统在打印扩展连接、发现打印机、连接/断开打印机、查询打印机能力、启动/取消打印任务等场景下分别调用相应回调方法，开发者需在各回调中
- * 实现对应的打印扩展逻辑。
+ * 该模块提供打印扩展能力的调用接口。PrintExtensionAbility基于生命周期回调机制运行，系统在打印扩展连接、发现打印机、连接/断开打印机、查询打印机能力、启动/取消打印任务等场景下分别调用相应回调方法，开发者需在各回调中实现对应的打印扩展逻辑。
  *
  * @syscap SystemCapability.Print.PrintFramework
  * @systemapi Hide this for inner system use. [since 10 - 13]
