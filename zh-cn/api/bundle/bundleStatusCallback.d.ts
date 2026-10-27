@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// 应用状态发生变化时回调的信息，通过接口[innerBundleManager.on](js-apis-Bundle-InnerBundleManager-sys.md#innerbundlemanagerondeprecated)获取。
 
 /**
  * @file BundleStatusCallback
