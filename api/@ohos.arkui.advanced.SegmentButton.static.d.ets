@@ -989,7 +989,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    *
    * @param { int } start - The zero-based location in the array from which to start removing elements.
    *     <br>The value should be an integer.
-   * @param { int } deleteCount - The number of elements to remove.
+   * @param { int | undefined } deleteCount - The number of elements to remove.
    *     <br>The value should be an integer.
    * @param { SegmentButtonItemOptions[] } items - Elements to insert into the array in place of the deleted elements.
    * @returns { SegmentButtonItemOptions[] } Returns a SegmentButtonItemOptions array containing the deleted elements.
@@ -998,7 +998,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * @since 23 static
    * @noninterop
    */
-  splice(start: int, deleteCount: int, ...items: SegmentButtonItemOptions[]): SegmentButtonItemOptions[];
+  splice(start: int, deleteCount: int | undefined , ...items: SegmentButtonItemOptions[]): SegmentButtonItemOptions[];
 
   /**
    * The function used to create a SegmentButtonItemOptionsArray object.

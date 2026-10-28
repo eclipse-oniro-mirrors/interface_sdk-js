@@ -52,27 +52,29 @@ export namespace reflect {
     /**
      * Reads the value from the instance field.
      *
-     * @param { Object } thisObj - The target object as the `this` context.
+     * @param { Object } thisObj - The target object as the `this` context.[since 24 - 26.0.1]
+     * @param { Object | undefined } thisObj - The target object as the `this` context.[since 26.1.0]
      * @returns { Any } Returns the value read from the instance field.When thisobj is null, it returns null;
      *     when it is undefined, it returns undefined.
-     * @throws { TypeError } Throws - when `thisObj` is incompatible with the field.
+     * @throws { TypeError } Throws when `thisObj` is incompatible with the field.
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @since 24 staticonly
      */
-    getValue(thisObj: Object): Any;
+    getValue(thisObj: Object | undefined): Any;
 
     /**
      * Writes a value to the instance field.
      *
-     * @param { Object } thisObj - The target object as the `this` context.
+     * @param { Object } thisObj - The target object as the `this` context.[since 24 - 26.0.1]
+     * @param { Object | undefined } thisObj - The target object as the `this` context.[since 26.1.0]
      * @param { Any } value - The value to write.
-     * @throws { TypeError } Throws - when `thisObj` is incompatible with the field or the value type doesn't match.
+     * @throws { TypeError } Throws when `thisObj` is incompatible with the field or the value type doesn't match.
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @since 24 staticonly
      */
-    setValue(thisObj: Object, value: Any): void;
+    setValue(thisObj: Object | undefined, value: Any): void;
 }
 
 }

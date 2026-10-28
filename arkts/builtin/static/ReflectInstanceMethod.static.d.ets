@@ -102,7 +102,8 @@ namespace reflect {
     /**
      * Invokes this instance method.
      *
-     * @param { Object } thisObj - The this object used when invoking the method.
+     * @param { Object } thisObj - The this object used when invoking the method.[since 24 - 26.0.1]
+     * @param { Object | undefined } thisObj - The this object used when invoking the method.[since 26.1.0]
      * @param { FixedArray<Any> } [args] - args The argument array passed when invoking the method.
      * @returns { Any } The execution result of the method.
      * @throws { TypeError } Throws - when `thisObj` is incompatible with the method.
@@ -110,7 +111,7 @@ namespace reflect {
      * @stagemodelonly
      * @since 24 staticonly
      */
-    invoke(thisObj: Object, args?: FixedArray<Any>): Any;
+    invoke(thisObj: Object | undefined, args?: FixedArray<Any>): Any;
 }
 
 } 
