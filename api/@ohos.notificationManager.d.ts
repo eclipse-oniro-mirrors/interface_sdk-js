@@ -3778,7 +3778,7 @@ declare namespace notificationManager {
    * Disables the application from publishing notifications by adding the application bundle name to the permission 
    * control list. This function can be disabled as required.
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - Whether to enable the permission control list for publishing notifications (**true**:
    *     enabled; **false**: disabled).
    * @param { Array<string> } bundleList - Application list under the permission control list. The bundle name is used
@@ -3802,7 +3802,7 @@ declare namespace notificationManager {
    * Disables the application from publishing notifications by adding the application bundle name to the permission 
    * control list. This API uses a promise to return the result.
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - Whether to enable the notification permission control list. The value **true**
    *     indicates that the notification permission control list is enabled; **false** indicates the opposite.
    * @param { Array<string> } bundleList - Bundles under the permission control list. The bundle name is used to
