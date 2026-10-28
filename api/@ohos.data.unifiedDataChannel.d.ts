@@ -27,11 +27,25 @@ import { RecordData } from './@ohos.base';
 /*** endif */
 
 /**
- * As a part of the Unified Data Management Framework (UDMF), the **unifiedDataChannel** module provides unified data 
- * channels and standard data access interfaces for many-to-many data sharing across applications. It also provides 
- * definitions for uniform data types, such as text and image, to streamline data interaction between different 
- * applications and minimize the workload of data type adaptation. Although the UDMF does not parse user data, you are 
- * advised not to transfer sensitive personal data or privacy data due to low-level security of storage path.
+ * This module is a part of the Unified Data Management Framework (UDMF). It provides a standardized data channel for
+ * various many-to-many cross-application data sharing scenarios, and offers standardized data access and read APIs. It
+ * also provides standardized definitions for data types such as text and images, facilitating data exchange between
+ * different applications and reducing the workload of data type adaptation.
+ *
+ * **Design logic:** UDMF adopts a unified data model, encapsulating different types of data into UnifiedData objects.
+ * It identifies different data channel types (such as DATA_HUB and DRAG) through Intention to implement
+ * cross-application data sharing. A unique identifier key is generated when data is written, and data is queried by key
+ * or intention when read.
+ *
+ * When processing data, UDMF does not parse the content of user data, and the storage path has low security. Therefore,
+ * it is not recommended to transmit sensitive personal data or private data.
+ *
+ * > **NOTE**
+ * >
+ * > The initial APIs of this module are supported since API version 10. Newly added APIs will be marked with a
+ * superscript to indicate their earliest API version.
+ * >
+ * > The APIs of this module can be used only in the stage model.
  *
  * @syscap SystemCapability.DistributedDataManager.UDMF.Core
  * @stagemodelonly
@@ -42,7 +56,7 @@ import { RecordData } from './@ohos.base';
  */
 declare namespace unifiedDataChannel {
   /**
-   * Enumerates the options for using **UnifiedData** in a device.
+   * Enumerates the usage scope types supported by UDMF within a device.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -52,7 +66,7 @@ declare namespace unifiedDataChannel {
    */
   enum ShareOptions {
     /**
-     * **UnifiedData** can be used only in the same application of a device.
+     * Indicates that the data can be used within the same application on this device.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -62,7 +76,7 @@ declare namespace unifiedDataChannel {
      */
     IN_APP = 0,
     /**
-     * **UnifiedData** can be used across applications of a device.
+     * Indicates that the data can be used across applications on this device.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -74,11 +88,16 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Defines a function used to obtain a deferred **UnifiedData** object. Currently, it can be used only in the 
-   * pasteboard application of the same device.
+   * A deferred wrapper for UnifiedData that supports deferred data retrieval. When the data receiver requests a
+   * specific type of data, the system triggers this callback, and the data sender can dynamically generate the data in
+   * the callback instead of preparing all data in advance. Currently, only the same-device clipboard scenario is
+   * supported.
    *
-   * @param { string } type - Identifier of the deferred encapsulation.
-   * @returns { UnifiedData } **UnifiedData** object.
+   * @param { string } type - Identifier of the deferred data type, used to distinguish different types of data. For the
+   * values, see [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}. For
+   * example, 'general.plain-text' indicates the plain text type.
+   * @returns { UnifiedData } UnifiedData object that contains the data of the corresponding type and is returned when
+   * the deferred callback is triggered. It can be used for cross-application data sharing and transfer.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice
@@ -87,18 +106,18 @@ declare namespace unifiedDataChannel {
    */
   type GetDelayData = (type: string) => UnifiedData;
 
-    /**
-   * Enumerates the data field types allowed in a unified data record.
+  /**
+   * Represents the data field types allowed for a unified data record.
    *
    * @unionmember { int } Int.
    * @unionmember { long } Long.
    * @unionmember { double } Double.
    * @unionmember { string } String.
    * @unionmember { boolean } Boolean.
-   * @unionmember { image.PixelMap } The value is of the [image.PixelMap]{@link @ohos.multimedia.image:image} type.
-   * @unionmember { Want } [Want]{@link @ohos.app.ability.Want:Want}.
-   * @unionmember { ArrayBuffer } ArrayBuffer.
-   * @unionmember { object } Object.
+   * @unionmember { image.PixelMap } The [image.PixelMap]{@link @ohos.multimedia.image:image} type.
+   * @unionmember { Want } The [Want]{@link @ohos.app.ability.Want:Want} type.
+   * @unionmember { ArrayBuffer } The ArrayBuffer type.
+   * @unionmember { object } The object type.
    * @unionmember { null } Null.
    * @unionmember { undefined } Undefined.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -172,7 +191,7 @@ declare namespace unifiedDataChannel {
    * @atomicservice
    * @since 26.0.0 dynamic&static
    */
-  export const enum UriPermission {  
+  export const enum UriPermission {
     /**
      * No permissions granted.
      *
@@ -255,7 +274,7 @@ declare namespace unifiedDataChannel {
      */
     tag?: string;
     /**
-     * Timestamp when [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties} is generated. The default value is 
+     * Timestamp when [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties} is generated. The default value is
      * January 1, 1970 (UTC).
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -266,7 +285,7 @@ declare namespace unifiedDataChannel {
      */
     readonly timestamp?: Date;
     /**
-     * Range, in which [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties} can be used. The default value is 
+     * Range, in which [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties} can be used. The default value is
      * **CROSS_APP**.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -278,7 +297,7 @@ declare namespace unifiedDataChannel {
     shareOptions?: ShareOptions;
 
     /**
-     * Callback for obtaining the deferred data. Currently, it can be used only in the pasteboard application of the 
+     * Callback for obtaining the deferred data. Currently, it can be used only in the pasteboard application of the
      * same device. The default value is **undefined**.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -303,7 +322,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Provides APIs for encapsulating a set of data records.
+   * Represents the Unified Data Object of UDMF, which provides methods to encapsulate a group of data records.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -314,10 +333,11 @@ declare namespace unifiedDataChannel {
    */
   class UnifiedData {
     /**
-     * Defines a constructor used to create a **UnifiedData** object with a data record.
+     * Creates a unified data object that contains a data record. After the call is successful, a UnifiedData object
+     * containing the specified data record is returned.
      *
-     * @param { UnifiedRecord } record - Data record in the **UnifiedData** object. It is a **UnifiedRecord** object or
-     *     its child class object.
+     * @param { UnifiedRecord } record - Data record to add to the unified data object. The record is a UnifiedRecord
+     * object or an object of its subclass.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -330,7 +350,7 @@ declare namespace unifiedDataChannel {
      */
     constructor(record: UnifiedRecord);
     /**
-     * Defines a constructor used to create a **UnifiedData** object.
+     * Creates a unified data object.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -341,9 +361,11 @@ declare namespace unifiedDataChannel {
      */
     constructor();
     /**
-     * Adds a data record to this **UnifiedRecord** object.
+     * Adds a data record to the current unified data object. After the call is successful, the specified data record
+     * is added to the current unified data object.
      *
-     * @param { UnifiedRecord } record - Data record to add. It is a **UnifiedRecord** child class object.
+     * @param { UnifiedRecord } record - Data record to add to the unified data object. The record is a UnifiedRecord
+     * object or an object of its subclass.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -356,11 +378,13 @@ declare namespace unifiedDataChannel {
      */
     addRecord(record: UnifiedRecord): void;
     /**
-     * Obtains all data records from this **UnifiedData** object. The data obtained is of the **UnifiedRecord** type. 
-     * Before using the data, you need to use [getType]{@link unifiedDataChannel.UnifiedData.getTypes} to obtain the 
-     * data type and convert the data type to a child class.
+     * Obtains all data records in the current unified data object. The data obtained through this API is of the
+     * UnifiedRecord type. You need to obtain the data type through
+     * [getType]{@link unifiedDataChannel.UnifiedRecord.getType} and then convert it to a subclass before use.
      *
-     * @returns { Array<UnifiedRecord> } Records in the **UnifiedData** object obtained.
+     * @returns { Array<UnifiedRecord> } Array of all data records contained in the current unified data object. Each
+     * record can be converted to a specific subclass after its type is obtained through getType, for reading and
+     * processing various types of data in the unified data.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -371,16 +395,16 @@ declare namespace unifiedDataChannel {
     getRecords(): Array<UnifiedRecord>;
 
     /**
-     * Checks whether this **UnifiedData** object contains the specified data type, including the data types added by 
-     * using the [addEntry]{@link unifiedDataChannel.UnifiedRecord.addEntry} function.
-     * 
-     * For file types, if the type set of **UnifiedData** includes **general.jpeg**, calling the **hasType** API to 
-     * check for the **general.image** type will return **true**. This is because the **general.jpeg** type belongs to 
-     * the **general.image** type.
+     * Checks whether the current unified data object contains the specified data type. The check scope includes the
+     * data types added by using {@link unifiedDataChannel.UnifiedRecord.addEntry} function.
      *
-     * @param { string } type - Data type to check. For details, see
+     * For file types, if the type set of the UnifiedData object contains "general.jpeg", the result is true when
+     * hasType is called to check whether the type "general.image" is included (the type "general.jpeg" belongs to the
+     * type "general.image").
+     *
+     * @param { string } type - Data type to query. For details, see
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
-     * @returns { boolean } Returns **true** if the specified data type exists; returns **false** otherwise.
+     * @returns { boolean } Returns true if the specified data type exists; returns false otherwise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -394,11 +418,12 @@ declare namespace unifiedDataChannel {
     hasType(type: string): boolean;
 
     /**
-     * Obtains the types of all data records in this **UnifiedData** object.
+     * Obtains the types of all data records in the current unified data object.
      *
-     * @returns { Array<string> } Array of the
-     *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType} types
-     *     obtained.
+     * @returns { Array<string> } Array of
+     *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}, which
+     *     represents the set of data types of the current records. The element values include 'general.plain-text',
+     *     'general.hyperlink', 'openharmony.form', and so on.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -409,7 +434,8 @@ declare namespace unifiedDataChannel {
     getTypes(): Array<string>;
 
     /**
-     * UnifiedData properties.
+     * Properties of all data records in the current unified data object, including the timestamp, tag, paste scope, and
+     * some additional data.
      *
      * @returns { UnifiedDataProperties } Properties of all data records in a unified data. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -421,7 +447,8 @@ declare namespace unifiedDataChannel {
     get properties(): UnifiedDataProperties;
 
     /**
-     * UnifiedData properties.
+     * Properties of all data records in the current unified data object, including the timestamp, tag, paste scope, and
+     * some additional data.
      *
      * @param { UnifiedDataProperties } Properties of all data records in a unified data. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -434,7 +461,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Summarizes the data information of the **unifiedData** object, including the data type and size.
+   * Describes the data summary of a unified data object, including the data type and size.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -444,7 +471,9 @@ declare namespace unifiedDataChannel {
    */
   class Summary {
     /**
-     * A map for each type and data size, key is data type, value is the corresponding data size
+     * dictionary object whose key indicates the data type
+     * (see {@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}) and whose value is the total
+     * size (in bytes) of the records of that type in the unified data object.
      *
      * @returns { Record<string, long> } Type and size information of data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -456,7 +485,9 @@ declare namespace unifiedDataChannel {
     get summary(): Record<string, long>;
 
     /**
-     * A map for each type and data size, key is data type, value is the corresponding data size
+     * dictionary object whose key indicates the data type
+     * (see {@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}) and whose value is the total
+     * size (in bytes) of the records of that type in the unified data object.
      *
      * @param { Record<string, long> } Type and size information of data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -468,7 +499,7 @@ declare namespace unifiedDataChannel {
     set summary(value: Record<string, long>);
 
     /**
-     * Total data size of data in Bytes
+     * Total size (in bytes) of the records in the unified data object.
      *
      * @returns { long } Total size information of data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -480,7 +511,7 @@ declare namespace unifiedDataChannel {
     get totalSize(): long;
 
     /**
-     * Total data size of data in Bytes
+     * Total size (in bytes) of the records in the unified data object.
      *
      * @param { long } Total size information of data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -492,7 +523,9 @@ declare namespace unifiedDataChannel {
     set totalSize(value: long);
 
     /**
-     * Indicates the overview information of unifiedData.
+     * Mapping between all data types in the unified data object and the sizes of the records of each type, where the
+     * data size is in bytes. When the obtained unified data object is empty, the value of this overview attribute is
+     * empty.
      *
      * @returns { Record<string, long> } Key represents the data type, and value represents the corresponding data
      *     size. [since 23]
@@ -521,10 +554,11 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * An abstract definition of the data content supported by the UDMF. A **UnifiedRecord** object contains one or more 
-   * data records, for example, a text record, an image record, or an HTML record. Since API version 15, different 
-   * styles of the same content can be added to a **UnifiedRecord** object. Data users can obtain the corresponding 
-   * styles as required.
+   * An abstract definition of the data content supported by UDMF, called a data record. A unified data object contains
+   * one or more data records, for example, a text record, an image record, and an HTML record. Since API version 15,
+   * different data formats of the same content can be added to a data record (for example, the same text can be stored
+   * in plain text, HTML, or hyperlink formats at the same time). Data consumers can obtain the corresponding format
+   * through the getEntry method based on their service requirements.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -535,12 +569,11 @@ declare namespace unifiedDataChannel {
    */
   class UnifiedRecord {
     /**
-     * Obtains the type of this **UnfiedRecord**. The data obtained by 
-     * [getRecords]{@link unifiedDataChannel.UnifiedData.getRecords} from the **UnifiedData** object is a 
-     * **UnifiedRecord** object. You need to use this API to obtain the specific type of the record, convert the 
-     * **UnifiedRecord** object to its child class, and call the child class interfaces.
+     * Obtains the type of the current data record. Since the data obtained by calling [getRecords](#getrecords) from a
+     * unified data object is a UnifiedRecord object, you need to use this API to query the specific type of the record,
+     * and then convert the UnifiedRecord object to its subclass and call the subclass APIs.
      *
-     * @returns { string } Data type obtained. For details, see
+     * @returns { string } Specific data type corresponding to the current data record. For details, see
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -552,7 +585,7 @@ declare namespace unifiedDataChannel {
     getType(): string;
 
     /**
-     * Defines a constructor used to create a **UnfiedRecord** object.
+     * Creates a data record. After the call is successful, an empty UnifiedRecord object is returned.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -564,17 +597,19 @@ declare namespace unifiedDataChannel {
     constructor();
 
     /**
-     * Defines a constructor used to create a data record with the specified type and value.
-     * 
-     * If **value** is of the [image.PixelMap]{@link @ohos.multimedia.image:image} type, **type** must be the value of 
-     * **OPENHARMONY_PIXEL_MAP** in 
-     * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
-     * 
-     * If **value** is of the [Want]{@link @ohos.app.ability.Want:Want} type, **type** must be the value of 
-     * **OPENHARMONY_WANT** in 
+     * Creates a data record of the specified type and value. After the call is successful, a UnifiedRecord object
+     * containing the specified type and value is returned.<br/>When the parameter **value** is of the
+     * [image.PixelMap]{@link @ohos.multimedia.image:image} type, the parameter **type** must correspond to the value of
+     * OPENHARMONY_PIXEL_MAP in
      * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
      *
-     * @param { string } type - Type of the data record to create.
+     * When the parameter **value** is of the [Want]{@link @ohos.app.ability.Want:Want} type, the parameter
+     * **type** must correspond to the value of OPENHARMONY_WANT in
+     * [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
+     *
+     * @param { string } type - Type of the data record to create, used to identify the specific type of the data record.
+     *     For details about the values, see [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType},
+     *     for example, 'general.plain-text' and 'general.hyperlink'.
      * @param { ValueType } value - Value of the data record to create.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameter types;
@@ -589,9 +624,9 @@ declare namespace unifiedDataChannel {
     constructor(type: string, value: ValueType);
 
     /**
-     * Obtains the value of this data record.
+     * Obtains the value of the current data record.
      *
-     * @returns { ValueType } Value obtained.
+     * @returns { ValueType } Value corresponding to the current data record.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -602,13 +637,12 @@ declare namespace unifiedDataChannel {
     getValue(): ValueType;
 
     /**
-     * Obtains all the data types in the data record. This API can be called using the **UnifiedRecord** object to query
-     * all data types in the record, including the data types added using the 
-     * [addEntry]{@link unifiedDataChannel.UnifiedRecord.addEntry} function.
+     * Obtains the types of all data records in the current unified data object.
      *
      * @returns { Array<string> } Array of
-     *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}s obtained.
-     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}, which
+     *     represents the set of data types of the current records. The element values include 'general.plain-text',
+     *     'general.hyperlink', 'openharmony.form', and so on.
      * @stagemodelonly
      * @atomicservice
      * @since 15 dynamic
@@ -617,12 +651,13 @@ declare namespace unifiedDataChannel {
     getTypes(): Array<string>;
 
     /**
-     * Adds data of a specified data type and content to the current data record. You can use this API to add different 
-     * data types and contents to the same data.
+     * Adds a data entry with the specified data type and content to the current data record. The data type and content
+     * added through this method are different representations of the same content. After the call is successful, the
+     * specified data type and content are added to the current data record.
      *
-     * @param { string } type - Type of the data to add. For details, see
+     * @param { string } type - Data type to create. For details, see
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
-     * @param { ValueType } value - Value of the data to add.
+     * @param { ValueType } value - Value of the data to create.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -635,11 +670,11 @@ declare namespace unifiedDataChannel {
     addEntry(type: string, value: ValueType): void;
 
     /**
-     * Obtains data of the specified type from the data record.
+     * Obtains the data content in a data record by data type.
      *
      * @param { string } type - Type of the data to obtain. For details, see
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
-     * @returns { ValueType } Value obtained.
+     * @returns { ValueType } Value corresponding to the current data record.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
      *     <br>2.Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -652,9 +687,9 @@ declare namespace unifiedDataChannel {
     getEntry(type: string): ValueType;
 
     /**
-     * Obtains all the data in the current data record.
+     * Obtains the types and contents of all data in the current data record.
      *
-     * @returns { Record<string, ValueType> } Values and types obtained.
+     * @returns { Record<string, ValueType> } Types and contents corresponding to the current data record.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @atomicservice
@@ -665,9 +700,9 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the text data. It is a child class of [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and a base
-   * class of text data. You are advised to use the child class of **Text**, for example, 
-   * [PlainText]{@link unifiedDataChannel.PlainText}, [Hyperlink]{@link unifiedDataChannel.Hyperlink}, and 
+   * Represents text data. It is a subclass of [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and the base
+   * class of text data, used to describe text data. You are advised to use subclasses of Text, such as
+   * [PlainText]{@link unifiedDataChannel.PlainText}, [Hyperlink]{@link unifiedDataChannel.Hyperlink}, and
    * [HTML]{@link unifiedDataChannel.HTML}, to describe data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -679,18 +714,18 @@ declare namespace unifiedDataChannel {
    */
   class Text extends UnifiedRecord {
     /**
-     * A dictionary type object, where both the key and value are of the string type and are used to describe the text 
-     * content. For example, a data object with the following content can be created to describe a text file:
-     * 
+     * A dictionary object whose keys and values are both strings, used to describe the text content. For example, you
+     * can create a data object whose details are
+     *
      * {
-     * 
-     * "title":"Title of the file",
-     * 
-     * "content":"Content of the file"
-     * 
-     * }
-     * 
-     * The default value is an empty dictionary object.
+     *
+     * "title":"Title",
+     *
+     * "content":"Content"
+     *
+     *}
+     *
+     * to describe an article. This is an optional field, and the default value is an empty dictionary object.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -701,7 +736,18 @@ declare namespace unifiedDataChannel {
     details?: Record<string, string>;
 
     /**
-     * Indicates the details of unified text
+     * A dictionary object whose keys and values are both strings, used to describe the text content. For example, you
+     * can create a data object whose details are
+     *
+     * {
+     *
+     * "title":"Title",
+     *
+     * "content":"Content"
+     *
+     * }
+     *
+     * to describe an article. This is an optional field, and the default value is an empty dictionary object.
      *
      * @returns { Record<string, string> | undefined } the details of unified text [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -710,7 +756,18 @@ declare namespace unifiedDataChannel {
     get details(): Record<string, string> | undefined;
 
     /**
-     * Indicates the details of unified text
+     * A dictionary object whose keys and values are both strings, used to describe the text content. For example, you
+     * can create a data object whose details are
+     *
+     * {
+     *
+     * "title":"Title",
+     *
+     * "content":"Content"
+     *
+     * }
+     *
+     * to describe an article. This is an optional field, and the default value is an empty dictionary object.
      *
      * @param { Record<string, string> | undefined } the details of unified text [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -720,7 +777,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the plain text data. It is a child class of [Text]{@link unifiedDataChannel.Text}.
+   * A subclass of [Text]{@link unifiedDataChannel.Text} that describes plain text data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -731,7 +788,7 @@ declare namespace unifiedDataChannel {
    */
   class PlainText extends Text {
     /**
-     * Indicates the content of text
+     * Plain text content.
      *
      * @returns { string } the content of text [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -744,7 +801,7 @@ declare namespace unifiedDataChannel {
     get textContent(): string;
 
     /**
-     * Indicates the content of text
+     * Plain text content.
      *
      * @param { string } the content of text [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -757,7 +814,7 @@ declare namespace unifiedDataChannel {
     set textContent(value: string);
 
     /**
-     * Indicates the abstract of text
+     * Plain text abstract. This is an optional field, and the default value is an empty string.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -768,7 +825,7 @@ declare namespace unifiedDataChannel {
     abstract?: string;
 
     /**
-     * Indicates the abstract of text
+     * Plain text abstract. This is an optional field, and the default value is an empty string.
      *
      * @returns { string | undefined } the abstract of text
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -778,7 +835,7 @@ declare namespace unifiedDataChannel {
     get textAbstract(): string | undefined;
 
     /**
-     * Indicates the abstract of text
+     * Plain text abstract. This is an optional field, and the default value is an empty string.
      *
      * @param { string | undefined } the abstract of text
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -789,7 +846,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the hyperlink data. It is a child class of [Text]{@link unifiedDataChannel.Text}.
+   * A subclass of [Text]{@link unifiedDataChannel.Text} that describes hyperlink data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -800,7 +857,7 @@ declare namespace unifiedDataChannel {
    */
   class Hyperlink extends Text {
     /**
-     * Indicates the url of a link
+     * URL of the link.
      *
      * @returns { string } the url of a link [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -813,7 +870,7 @@ declare namespace unifiedDataChannel {
     get url(): string;
 
     /**
-     * Indicates the url of a link
+     * URL of the link.
      *
      * @param { string } the url of a link [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -826,7 +883,7 @@ declare namespace unifiedDataChannel {
     set url(value: string);
 
     /**
-     * Indicates the description of a link
+     * Description of the link content. This is an optional field, and the default value is an empty string.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -837,7 +894,7 @@ declare namespace unifiedDataChannel {
     description?: string;
 
     /**
-     * Indicates the description of a link
+     * Description of the link content. This is an optional field, and the default value is an empty string.
      *
      * @returns { string | undefined } the description of a link. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -846,7 +903,7 @@ declare namespace unifiedDataChannel {
     get description(): string | undefined;
 
     /**
-     * Indicates the description of a link
+     * Description of the link content. This is an optional field, and the default value is an empty string.
      *
      * @param { string | undefined } the description of a link [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -856,7 +913,8 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the HTML data. It is a child class of [Text]{@link unifiedDataChannel.Text}.
+   * The HTML type data, a subclass of [Text]{@link unifiedDataChannel.Text}, is used to describe HyperText Markup
+   * Language data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -867,7 +925,7 @@ declare namespace unifiedDataChannel {
    */
   class HTML extends Text {
     /**
-     * Indicates the content of html, with html tags
+     * Content in HTML format.
      *
      * @returns { string } the content of html. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -880,7 +938,7 @@ declare namespace unifiedDataChannel {
     get htmlContent(): string;
 
     /**
-     * Indicates the content of html, with html tags
+     * Content in HTML format.
      *
      * @param { string } the content of html. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -893,7 +951,8 @@ declare namespace unifiedDataChannel {
     set htmlContent(value: string);
 
     /**
-     * Plaintext without HTML tags. This parameter is optional. The default value is an empty string.
+     * Plain text content after HTML tags are removed. This is an optional field, and the default value is an empty
+     * string.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -904,7 +963,8 @@ declare namespace unifiedDataChannel {
     plainContent?: string;
 
     /**
-     * Indicates the plain content of html
+     * Plain text content after HTML tags are removed. This is an optional field, and the default value is an empty
+     * string.
      *
      * @returns { string | undefined } the plain content of html [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -913,16 +973,19 @@ declare namespace unifiedDataChannel {
     get plainContent(): string | undefined;
 
     /**
-     * Indicates the plain content of html
+     * Plain text content after HTML tags are removed. This is an optional field, and the default value is an empty
+     * string.
      *
-     * @param { string | undefined} the plain content of html [since 23]
+     * @param { string | undefined } the plain content of html [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @since 23 static
      */
     set plainContent(value: string | undefined);
 
     /**
-     * Defines URI authorization policies for drag intention.
+     * URI authorization policy used in drag-and-drop scenarios. The default value is READ (read-only authorization),
+     * which takes effect only in scenarios such as the img tag. It applies only to a single record and has the highest
+     * priority. For details about the policies, see {@link UriPermission}.
      *
      * @param { Array<UriPermission> | undefined } value - URI authorization policies.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -934,9 +997,9 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the file data. It is a child class of [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and a base
-   * class of the data of the file type. You are advised to use the child class of **File**, for example, 
-   * [Image]{@link unifiedDataChannel.Image}, [Video]{@link unifiedDataChannel.Video}, and 
+   * The File type data is a subclass of [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and the base class of
+   * file type data. It is used to describe file type data. You are advised to use subclasses of File, such as
+   * [Image]{@link unifiedDataChannel.Image}, [Video]{@link unifiedDataChannel.Video}, and
    * [Folder]{@link unifiedDataChannel.Folder}, to describe data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -948,18 +1011,18 @@ declare namespace unifiedDataChannel {
    */
   class File extends UnifiedRecord {
     /**
-     * A dictionary type object, where both the key and value are of the string type and are used to describe file 
-     * information. For example, a data object with the following content can be created to describe a file:
-     * 
+     * A dictionary object whose keys and values are both of the string type. It is used to describe file-related
+     * information. For example, you can create a data object with the following details to describe a file:
+     *
      * {
-     * 
-     * "name":"File name",
-     * 
-     * "type":"File type"
-     * 
-     * }
-     * 
-     * The default value is an empty dictionary object.
+     *
+     * "name":"file name",
+     *
+     * "type":"file type"
+     *
+     * }.
+     *
+     * This is an optional field, and the default value is an empty dictionary object.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -970,7 +1033,18 @@ declare namespace unifiedDataChannel {
     details?: Record<string, string>;
 
     /**
-     * Indicates the details of unified File
+     * A dictionary object whose keys and values are both of the string type. It is used to describe file-related
+     * information. For example, you can create a data object with the following details to describe a file:
+     *
+     * {
+     *
+     * "name":"file name",
+     *
+     * "type":"file type"
+     *
+     * }.
+     *
+     * This is an optional field, and the default value is an empty dictionary object.
      *
      * @returns { Record<string, string> | undefined } the details of unified File [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -979,7 +1053,18 @@ declare namespace unifiedDataChannel {
     get details(): Record<string, string> | undefined;
 
     /**
-     * Indicates the details of unified File
+     * A dictionary object whose keys and values are both of the string type. It is used to describe file-related
+     * information. For example, you can create a data object with the following details to describe a file:
+     *
+     * {
+     *
+     * "name":"file name",
+     *
+     * "type":"file type"
+     *
+     * }.
+     *
+     * This is an optional field, and the default value is an empty dictionary object.
      *
      * @param { Record<string, string> } the details of unified File. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -988,7 +1073,8 @@ declare namespace unifiedDataChannel {
     set details(value: Record<string, string> | undefined);
 
     /**
-     * Indicates the uri of file
+     * URI of a local file or a network file. The URI of a local file can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}
      *
      * @returns { string } the uri of file. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1001,7 +1087,8 @@ declare namespace unifiedDataChannel {
     get uri(): string;
 
     /**
-     * Indicates the uri of file
+     * URI of a local file or a network file. The URI of a local file can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}
      *
      * @param { string } the uri of file. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1014,7 +1101,9 @@ declare namespace unifiedDataChannel {
     set uri(value: string);
 
     /**
-     * Defines URI authorization policies for drag intention.
+     * URI authorization policy used in drag-and-drop scenarios. The default value is READ+WRITE+PERSIST
+     * (read + write + persistent authorization). It applies only to a single record and has the highest priority. For
+     * details about the policies, see {@link UriPermission}.
      *
      * @param { Array<UriPermission> | undefined } value - URI authorization policies.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1026,9 +1115,8 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the image data. It is a child class of [File]{@link unifiedDataChannel.File} and is used to describe 
-   * images.
-   *
+   * Represents image data. It is a subclass of [File]{@link unifiedDataChannel.File} and is used to describe an image
+   * file.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 14]
@@ -1038,7 +1126,8 @@ declare namespace unifiedDataChannel {
    */
   class Image extends File {
     /**
-     * Indicates the uri of image
+     * URI of the local image data or network image. The URI of the local image data can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @returns { string } the uri of image. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1051,7 +1140,8 @@ declare namespace unifiedDataChannel {
     get imageUri(): string;
 
     /**
-     * Indicates the uri of image
+     * URI of the local image data or network image. The URI of the local image data can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @param { string } the uri of image. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1065,8 +1155,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents video data. It is a child class of [File]{@link unifiedDataChannel.File} and is used to describe a video
-   * file.
+   * Video data, a subclass of [File]{@link unifiedDataChannel.File}, used to describe a video file.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1077,7 +1166,8 @@ declare namespace unifiedDataChannel {
    */
   class Video extends File {
     /**
-     * Indicates the uri of video
+     * URI of the local video data or network video. The URI of the local video data can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @returns { string } the uri of video. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1090,7 +1180,8 @@ declare namespace unifiedDataChannel {
     get videoUri(): string;
 
     /**
-     * Indicates the uri of video
+     * URI of the local video data or network video. The URI of the local video data can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @param { string } the uri of video. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1104,8 +1195,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents audio data. It is a child class of [File]{@link unifiedDataChannel.File} and is used to describe an 
-   * audio file.
+   * Audio data, a subclass of [File]{@link unifiedDataChannel.File}, used to describe an audio file.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1116,7 +1206,8 @@ declare namespace unifiedDataChannel {
    */
   class Audio extends File {
     /**
-     * Indicates the uri of audio
+     * URI of the local audio data or network audio data. The URI of the local audio data can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @returns { string } the uri of audio. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1129,7 +1220,8 @@ declare namespace unifiedDataChannel {
     get audioUri(): string;
 
     /**
-     * Indicates the uri of audio
+     * URI of the local audio data or network audio data. The URI of the local audio data can be obtained by calling
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @param { string } the uri of audio. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1143,8 +1235,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the folder data. It is a child class of [File]{@link unifiedDataChannel.File} and is used to describe a 
-   * folder.
+   * Folder type data, a subclass of [File]{@link unifiedDataChannel.File}, used to describe a folder.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1155,7 +1246,8 @@ declare namespace unifiedDataChannel {
    */
   class Folder extends File {
     /**
-     * Indicates the uri of folder
+     * URI of a local folder or a network folder. The URI of a local folder can be obtained by
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @returns { string } the uri of folder [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1168,7 +1260,8 @@ declare namespace unifiedDataChannel {
     get folderUri(): string;
 
     /**
-     * Indicates the uri of folder
+     * URI of a local folder or a network folder. The URI of a local folder can be obtained by
+     * [getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}.
      *
      * @param { string } the uri of folder [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1182,12 +1275,12 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents specific data types defined by OpenHarmony. It is a child class of 
-   * [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and a base class of OpenHarmony-specific data types. You 
-   * are advised to use the child class of **SystemDefinedRecord**, for example, 
-   * [SystemDefinedForm]{@link unifiedDataChannel.SystemDefinedForm}, 
-   * [SystemDefinedAppItem]{@link unifiedDataChannel.SystemDefinedAppItem}, and 
-   * [SystemDefinedPixelMap]{@link unifiedDataChannel.SystemDefinedPixelMap}, to describe OpenHarmony-specific data.
+   * SystemDefinedRecord is a subclass of [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and the base class of
+   * OpenHarmony system-specific data types. It is used to describe data types that circulate only within the OpenHarmony
+   * system. You are advised to use subclasses of SystemDefinedRecord, such as
+   * [SystemDefinedForm]{@link unifiedDataChannel.SystemDefinedForm},
+   * [SystemDefinedAppItem]{@link unifiedDataChannel.SystemDefinedAppItem}, and
+   * [SystemDefinedPixelMap]{@link unifiedDataChannel.SystemDefinedPixelMap}, to describe data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1195,10 +1288,10 @@ declare namespace unifiedDataChannel {
    * @since 10 dynamic
    * @since 23 static
    */
-    class SystemDefinedRecord extends UnifiedRecord {
+  class SystemDefinedRecord extends UnifiedRecord {
     /**
-     * A dictionary type object, where the key is of the string type, and the value can be a number, a string, or a Uint
-     * 8Array. The default value is an empty dictionary object.
+     * A dictionary object whose key is of the string type and whose value can be of the number, string, or Uint8Array
+     * (binary byte array) type. This is an optional field, and the default value is an empty dictionary object.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1208,7 +1301,8 @@ declare namespace unifiedDataChannel {
     details?: Record<string, int | long | double | string | Uint8Array>;
 
     /**
-     * Indicates the details of system defined data
+     * A dictionary object whose key is of the string type and whose value can be of the number, string, or Uint8Array
+     * (binary byte array) type. This is an optional field, and the default value is an empty dictionary object.
      *
      * @returns { Record<string, int | long | double | string | Uint8Array> | undefined } the details of system defined
      *     data [since 23]
@@ -1218,7 +1312,8 @@ declare namespace unifiedDataChannel {
     get details(): Record<string, int | long | double | string | Uint8Array> | undefined;
 
     /**
-     * Indicates the details of system defined data
+     * A dictionary object whose key is of the string type and whose value can be of the number, string, or Uint8Array
+     * (binary byte array) type. This is an optional field, and the default value is an empty dictionary object.
      *
      * @param { Record<string, int | long | double | string | Uint8Array> | undefined } the details of system defined
      *     data [since 23]
@@ -1229,7 +1324,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the service widget data defined by the system. It is a child class of 
+   * Represents the system-defined widget data, which is a subclass of
    * [SystemDefinedRecord]{@link unifiedDataChannel.SystemDefinedRecord}.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1240,7 +1335,7 @@ declare namespace unifiedDataChannel {
    */
   class SystemDefinedForm extends SystemDefinedRecord {
     /**
-     * Indicates the id of form
+     * Widget ID.
      *
      * @returns { int } the id of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1252,7 +1347,7 @@ declare namespace unifiedDataChannel {
     get formId(): int;
 
     /**
-     * Indicates the id of form
+     * Widget ID.
      *
      * @param { int } the id of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1264,7 +1359,7 @@ declare namespace unifiedDataChannel {
     set formId(value: int);
 
     /**
-     * Indicates the name of form
+     * Widget name.
      *
      * @returns { string } the name of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1276,7 +1371,7 @@ declare namespace unifiedDataChannel {
     get formName(): string;
 
     /**
-     * Indicates the name of form
+     * Widget name.
      *
      * @param { string } the name of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1288,7 +1383,7 @@ declare namespace unifiedDataChannel {
     set formName(value: string);
 
     /**
-     * Indicates the bundle name of form
+     * Name of the bundle to which the widget belongs.
      *
      * @returns { string } the bundle name of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1300,7 +1395,7 @@ declare namespace unifiedDataChannel {
     get bundleName(): string;
 
     /**
-     * Indicates the bundle name of form
+     * Name of the bundle to which the widget belongs.
      *
      * @param { string } the bundle name of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1312,7 +1407,7 @@ declare namespace unifiedDataChannel {
     set bundleName(value: string);
 
     /**
-     * Indicates the ability name of form
+     * Name of the ability corresponding to the widget.
      *
      * @returns { string } the ability name of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1324,7 +1419,7 @@ declare namespace unifiedDataChannel {
     get abilityName(): string;
 
     /**
-     * Indicates the ability name of form.
+     * Name of the ability corresponding to the widget.
      *
      * @param { string } the ability name of form [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1336,7 +1431,7 @@ declare namespace unifiedDataChannel {
     set abilityName(value: string);
 
     /**
-     * Indicates the module of form
+     * Name of the module to which the widget belongs.
      *
      * @returns { string } the module of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1348,7 +1443,7 @@ declare namespace unifiedDataChannel {
     get module(): string;
 
     /**
-     * Indicates the module of form
+     * Name of the module to which the widget belongs.
      *
      * @param { string } the module of form. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1361,7 +1456,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the data of the home screen icon defined by the system. It is a child class of 
+   * System-defined desktop icon data, which is a subclass of
    * [SystemDefinedRecord]{@link unifiedDataChannel.SystemDefinedRecord}.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1372,7 +1467,7 @@ declare namespace unifiedDataChannel {
    */
   class SystemDefinedAppItem extends SystemDefinedRecord {
     /**
-     * Indicates the app id
+     * Application ID corresponding to the icon.
      *
      * @returns { string } the app id. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1384,7 +1479,7 @@ declare namespace unifiedDataChannel {
     get appId(): string;
 
     /**
-     * Indicates the app id
+     * Application ID corresponding to the icon.
      *
      * @param { string } the app id. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1396,7 +1491,7 @@ declare namespace unifiedDataChannel {
     set appId(value: string);
 
     /**
-     * Indicates the app name
+     * Application name corresponding to the icon.
      *
      * @returns { string } the app name. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1408,7 +1503,7 @@ declare namespace unifiedDataChannel {
     get appName(): string;
 
     /**
-     * Indicates the app name
+     * Application name corresponding to the icon.
      *
      * @param { string } the app name. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1420,8 +1515,7 @@ declare namespace unifiedDataChannel {
     set appName(value: string);
 
     /**
-     * Indicates the id of app icon.
-     * This field can be sourced from BMS or customized as needed.
+     * Image ID of the icon.
      *
      * @returns { string } the id of app icon [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1433,8 +1527,7 @@ declare namespace unifiedDataChannel {
     get appIconId(): string;
 
     /**
-     * Indicates the id of app icon.
-     * This field can be sourced from BMS or customized as needed.
+     * Image ID of the icon.
      *
      * @param { string } the id of app icon [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1446,8 +1539,7 @@ declare namespace unifiedDataChannel {
     set appIconId(value: string);
 
     /**
-     * Indicates the id of app label.
-     * This field can be sourced from BMS or customized as needed.
+     * Label ID corresponding to the icon name.
      *
      * @returns { string } the id of app label [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1459,8 +1551,7 @@ declare namespace unifiedDataChannel {
     get appLabelId(): string;
 
     /**
-     * Indicates the id of app label.
-     * This field can be sourced from BMS or customized as needed.
+     * Label ID corresponding to the icon name.
      *
      * @param { string } the id of app label [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1472,7 +1563,7 @@ declare namespace unifiedDataChannel {
     set appLabelId(value: string);
 
     /**
-     * Indicates the bundle name of app
+     * Bundle name of the application corresponding to the icon.
      *
      * @returns { string } the bundle name of app. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1484,7 +1575,7 @@ declare namespace unifiedDataChannel {
     get bundleName(): string;
 
     /**
-     * Indicates the bundle name of app
+     * Bundle name of the application corresponding to the icon.
      *
      * @param { string } the bundle name of app. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1496,7 +1587,7 @@ declare namespace unifiedDataChannel {
     set bundleName(value: string);
 
     /**
-     * Indicates the ability name of app
+     * Ability name of the application corresponding to the icon.
      *
      * @returns { string } the ability name of app. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1508,7 +1599,7 @@ declare namespace unifiedDataChannel {
     get abilityName(): string;
 
     /**
-     * Indicates the ability name of app
+     * Ability name of the application corresponding to the icon.
      *
      * @param { string } the ability name of app. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1521,9 +1612,9 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the image data type corresponding to [PixelMap]{@link @ohos.multimedia.image:image} defined by the 
-   * system. It is a child class of [SystemDefinedRecord]{@link unifiedDataChannel.SystemDefinedRecord} and holds only 
-   * binary data of **PixelMap**.
+   * An image data type corresponding to the system-defined [PixelMap]{@link @ohos.multimedia.image:image} data type.
+   * It is a subclass of [SystemDefinedRecord]{@link unifiedDataChannel.SystemDefinedRecord} and stores only the binary
+   * data of a PixelMap.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1533,7 +1624,7 @@ declare namespace unifiedDataChannel {
    */
   class SystemDefinedPixelMap extends SystemDefinedRecord {
     /**
-     * Indicates the raw data of pixel map
+     * Binary data of the PixelMap object.
      *
      * @returns { Uint8Array } the raw data of pixel map. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1545,7 +1636,7 @@ declare namespace unifiedDataChannel {
     get rawData(): Uint8Array;
 
     /**
-     * Indicates the raw data of pixel map
+     * Binary data of the PixelMap object.
      *
      * @param { Uint8Array } the raw data of pixel map. [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1558,9 +1649,9 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the custom data type for applications only. It is a child class of 
-   * [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and a base class of custom data types of applications. 
-   * Applications can extend custom data types based on this class.
+   * ApplicationDefinedRecord is a subclass of [UnifiedRecord]{@link unifiedDataChannel.UnifiedRecord} and the base
+   * class of application-defined data types. It describes custom data types that circulate only within the application
+   * ecosystem. Applications can extend custom data types based on this class.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1570,8 +1661,7 @@ declare namespace unifiedDataChannel {
    */
   class ApplicationDefinedRecord extends UnifiedRecord {
     /**
-     * Indicates the type of data, should always be started with 'ApplicationDefined.', will
-     * return error otherwise
+     * Identifier of the application-defined type. It must start with 'ApplicationDefined'.
      *
      * @returns { string } the type of data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1583,8 +1673,7 @@ declare namespace unifiedDataChannel {
     get applicationDefinedType(): string;
 
     /**
-     * Indicates the type of data, should always be started with 'ApplicationDefined.', will
-     * return error otherwise
+     * Identifier of the application-defined type. It must start with 'ApplicationDefined'.
      *
      * @param { string } the type of data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1596,7 +1685,7 @@ declare namespace unifiedDataChannel {
     set applicationDefinedType(value: string);
 
     /**
-     * Indicates the raw data of application defined data
+     * Binary data of the application-defined data type.
      *
      * @returns { Uint8Array } the raw data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1608,7 +1697,7 @@ declare namespace unifiedDataChannel {
     get rawData(): Uint8Array;
 
     /**
-     * Indicates the raw data of application defined data
+     * Binary data of the application-defined data type.
      *
      * @param { Uint8Array } the raw data [since 23]
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1621,8 +1710,8 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Enumerates the data channel types supported by the UDMF. It is used to identify different service scenarios, to 
-   * which the UDMF data channels apply.
+   * Enumerates the data channels supported by UDMF. It is mainly used to identify the different business scenarios
+   * targeted by various UDMF data channels.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1634,6 +1723,8 @@ declare namespace unifiedDataChannel {
     /**
      * Public data channel.
      *
+     * **Applicable scenario:** Suitable for cross-application data sharing using UDMF in public data sharing scenarios.
+     *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @atomicservice [since 11]
@@ -1643,9 +1734,9 @@ declare namespace unifiedDataChannel {
     DATA_HUB = 'DataHub',
 
     /**
-     * Channel in which data can be dragged and dropped.
-     * 
-     * **Use scenario**: This API is used to share data across applications in drag-and-drop scenarios.
+     * Drag-and-drop data channel.
+     *
+     * **Applicable scenario:** Suitable for cross-application data sharing using UDMF in drag-and-drop scenarios.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @systemapi [since 12 - 13]
@@ -1657,9 +1748,9 @@ declare namespace unifiedDataChannel {
     DRAG = 'Drag',
 
     /**
-     * Data channel of the system sharing type.
-     * 
-     * **Use scenario**: This API is used to share data across applications in system sharing scenarios.
+     * System sharing data channel.
+     *
+     * **Applicable scenario:** Suitable for cross-application data sharing using UDMF in system sharing scenarios.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1669,9 +1760,9 @@ declare namespace unifiedDataChannel {
     SYSTEM_SHARE = 'SystemShare',
 
     /**
-     * Data channel of the picker type.
-     * 
-     * **Use scenario**: This API is used to share data across applications in the scenarios where a picker is used.
+     * Picker data channel.
+     *
+     * **Applicable scenario:** Suitable for cross-application data sharing using UDMF in picker scenarios.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1681,9 +1772,9 @@ declare namespace unifiedDataChannel {
     PICKER = 'Picker',
 
     /**
-     * Data channel of the menu type.
-     * 
-     * **Use scenario**: This API is used to share data across applications in the shortcut menu.
+     * Menu data channel.
+     *
+     * **Applicable scenario:** Suitable for cross-application data sharing using UDMF in right-click menu scenarios.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1694,7 +1785,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Enumerates the data visibility levels.
+   * Enumerates the visibility levels of data.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1704,7 +1795,7 @@ declare namespace unifiedDataChannel {
    */
   enum Visibility {
     /**
-     * Visible to all applications.
+     * Visibility level, visible to all applications.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1714,7 +1805,7 @@ declare namespace unifiedDataChannel {
     ALL,
 
     /**
-     * Visible only to the data provider.
+     * Visibility level, visible only to the data provider.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1725,9 +1816,9 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Defines the data operation performed by the UDMF. It includes three optional parameters: **intention**, **key**, 
-   * and **visibility**. The three parameters can be left unspecified. For details, see the parameter description of the
-   * specific API.
+   * The data operation APIs provided by UDMF include three optional parameters: intention, key, and visibility. If an
+   * API does not require these parameters, they can be left unspecified. For details, see the parameter description of
+   * the specific API.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1737,7 +1828,9 @@ declare namespace unifiedDataChannel {
    */
   interface Options {
     /**
-     * Type of the data channel related to the data operation.
+     * Data channel type related to the data operation. The value is an [Intention](#intention) enum, including DATA_HUB
+     * and DRAG. If not specified, the value is empty by default. For details about whether this parameter is mandatory,
+     * see the parameter description of the specific API.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1748,14 +1841,14 @@ declare namespace unifiedDataChannel {
     intention?: Intention;
 
     /**
-     * Unique identifier of the data object in the UDMF, which can be obtained from the value returned by 
+     * Unique identifier of the data object in UDMF. It can be obtained from the return value of
      * [insertData]{@link unifiedDataChannel.insertData(options: Options, data: UnifiedData, callback: AsyncCallback<string>)}.
-     * 
-     * The key consists of **udmf:/**, **intention**, **bundleName**, and **groupId** with a (/) in between, for example
-     * , **udmf://DataHub/com.ohos.test/0123456789**.
-     * 
-     * **udmf:/** is fixed, **DataHub** is an enum of **intention**, **com.ohos.test** is the bundle name, and 
-     * **0123456789** is a group ID randomly generated.
+     *
+     * If not specified, the value is empty by default. For details about whether this parameter is mandatory, see the
+     * parameter description of the specific API.<br>It consists of four parts: udmf:/, intention, bundleName, and
+     * groupId, which are connected by '/', for example, udmf://DataHub/com.ohos.test/0123456789.<br>Among them, udmf:/
+     * is fixed, DataHub is the value of the corresponding enum, com.ohos.test is the bundle name, and 0123456789 is the
+     * randomly generated groupId.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1766,8 +1859,10 @@ declare namespace unifiedDataChannel {
     key?: string;
 
     /**
-     * Data visibility level. This parameter is effective only when specified during data writing. If unspecified, the 
-     * default value **Visibility.ALL** is used.
+     * Visibility level of the data. It is available only for public data channels. The value is a
+     * [Visibility](#visibility20) enum. It takes effect only when specified during data writing. If not specified,
+     * the default value is Visibility.ALL.<br/>**Atomic service API:** This API is supported in atomic services since
+     * API version 20.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1779,7 +1874,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Enumerates the options for resolving file copy conflicts.
+   * Enumerates the optional policies for file copy conflicts.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1789,7 +1884,7 @@ declare namespace unifiedDataChannel {
    */
   enum FileConflictOptions {
     /**
-     * Overwrite the file with the same name in the destination directory.
+     * Overwrites the file when a file with the same name exists in the destination path.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1800,7 +1895,7 @@ declare namespace unifiedDataChannel {
     OVERWRITE = 0,
 
     /**
-     * Skip the file if there is a file with the same name in the destination directory.
+     * Skips the file when a file with the same name exists in the destination path.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1812,7 +1907,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Enumerates the progress indicator options.
+   * Enumerates the progress indicator options, which determine whether to use the system default progress display.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1822,7 +1917,7 @@ declare namespace unifiedDataChannel {
    */
   enum ProgressIndicator {
     /**
-     * Do not use the default progress indicator.
+     * Does not use the system default progress display.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1833,7 +1928,8 @@ declare namespace unifiedDataChannel {
     NONE = 0,
 
     /**
-     * Use the default progress indicator. If data is obtained within 500 ms, the default progress bar is not started.
+     * Uses the system default progress display. If data is obtained within 500 ms, the default progress bar will not be
+     * displayed.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1845,7 +1941,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Enumerates the status codes returned when data is obtained from the UDMF.
+   * Enumerates the status codes returned when obtaining data from UDMF.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1855,7 +1951,7 @@ declare namespace unifiedDataChannel {
    */
   enum ListenerStatus {
     /**
-     * The task is completed.
+     * Finished.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1866,7 +1962,7 @@ declare namespace unifiedDataChannel {
     FINISHED = 0,
 
     /**
-     * The task is being processed.
+     * Processing.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1877,7 +1973,7 @@ declare namespace unifiedDataChannel {
     PROCESSING = 1,
 
     /**
-     * The task is canceled.
+     * Canceled.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1888,7 +1984,7 @@ declare namespace unifiedDataChannel {
     CANCELED = 2,
 
     /**
-     * An internal error occurs.
+     * An internal error occurred.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1921,7 +2017,7 @@ declare namespace unifiedDataChannel {
     DATA_NOT_FOUND = 202,
 
     /**
-     * Failed to sync data.
+     * An error occurred during synchronization.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1932,7 +2028,7 @@ declare namespace unifiedDataChannel {
     SYNC_FAILED = 203,
 
     /**
-     * Failed to copy data.
+     * An error occurred during file copy.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1944,7 +2040,7 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Represents the progress information.
+   * Defines the data for progress reporting.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -1954,10 +2050,10 @@ declare namespace unifiedDataChannel {
    */
   interface ProgressInfo {
     /**
-     * Progress of the drag task, in percentage. 
-     * 
-     * The value is an integer ranging from -1 to 100. The value **-1** indicates a failure to obtain data, and the 
-     * value **100** indicates data is obtained.
+     * Progress percentage of the drag-and-drop task reported by the system.
+     *
+     * The value is an integer in the range [-1, 100], where -1 indicates that data acquisition failed this time, and
+     * 100 indicates that data acquisition is complete.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1968,7 +2064,7 @@ declare namespace unifiedDataChannel {
     progress: int;
 
     /**
-     * Status code of the drag task reported by the system.
+     * Status code of the drag-and-drop task reported by the system.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -1980,11 +2076,14 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Defines the callback used to return the data retrieval progress information and data obtained.
+   * Defines the listener callback used to obtain progress information and data.
    *
-   * @param { ProgressInfo } progressInfo - Progress information to report.
-   * @param { UnifiedData | null } data - Data obtained when the progress reaches 100. If the progress does not reach 10
-   *     0, **null** is returned.
+   * @param { ProgressInfo } progressInfo - Progress information reported for the drag-and-drop task, including the
+   *     progress status and progress percentage. It contains two fields: progress (progress percentage, ranging from -1
+   *     to 100) and status (task status code). A progress value of -1 indicates a failure to obtain data, and 100
+   *     indicates that data obtaining is complete.
+   * @param { UnifiedData | null } data - Data obtained when the progress reaches 100. Returns null when the progress
+   *     has not reached 100.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice
@@ -1994,11 +2093,8 @@ declare namespace unifiedDataChannel {
   type DataProgressListener = (progressInfo: ProgressInfo, data: UnifiedData | null) => void;
 
   /**
-   * Represents the parameters for obtaining data from UDMF, including the destination directory, option for resolving 
-   * file conflicts, and progress indicator type.
-   * 
-   * For details, see 
-   * [Obtaining Data Asynchronously Through Drag-and-Drop].
+   * Represents the parameters used to obtain data from UDMF, including the destination path, file conflict options, and
+   * progress bar type.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2008,7 +2104,7 @@ declare namespace unifiedDataChannel {
    */
   interface GetDataParams {
     /**
-     * Indicates whether to use default system progress indicator.
+     * Defines the progress bar indicator options, which determine whether to use the system default progress display.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2019,7 +2115,7 @@ declare namespace unifiedDataChannel {
     progressIndicator: ProgressIndicator;
 
     /**
-     * Indicates progress and data listener when getting unified data.
+     * Represents the progress and data listener used when obtaining unified data.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2030,7 +2126,12 @@ declare namespace unifiedDataChannel {
     dataProgressListener: DataProgressListener;
 
     /**
-     * Indicates the dest path uri where copy file will be copied to sandbox of application.
+     * Destination path for copying files. If file processing is not supported, this parameter does not need to be set
+     * and defaults to empty. If file processing is supported, it must be set to an existing directory. If the
+     * application involves complex file processing policies or needs to distinguish multi-path storage of files, it is
+     * recommended not to set this parameter and let the application complete the file copy processing on its own. When
+     * this parameter is not set, the obtained URI is the source path URI; when it is set, the obtained URI is the
+     * destination path URI.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2041,7 +2142,7 @@ declare namespace unifiedDataChannel {
     destUri?: string;
 
     /**
-     * Indicates file conflict options when dest path has file with same name.
+     * Defines the options for file copy conflicts. The default value is OVERWRITE.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2052,7 +2153,9 @@ declare namespace unifiedDataChannel {
     fileConflictOptions?: FileConflictOptions;
 
     /**
-     * Indicates the supported data information.
+     * efines the receiver's capability to accept data types and the number of data records. In lazy loading scenarios,
+     * the sender can generate and return more appropriate data content based on this information. It defaults to empty,
+     * indicating that the receiver's data acceptance capability is not provided.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2064,10 +2167,12 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Defines type and quantity of the data to load.
-   * 
-   * - Used by the **data sender** to define the data range that can be provided. This field is mandatory.
-   * - Used by the **data receiver** to define the expected data type and quantity. This field is optional.
+   * Describes the type and quantity of the data to be loaded.
+   *
+   * - Used on the **data sender** side to indicate the range of data that can actually be provided. This field must be
+   * set.
+   * - Used on the **data receiver** side to indicate the type and quantity of data expected to be loaded. This field
+   * can be set as needed.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2077,8 +2182,7 @@ declare namespace unifiedDataChannel {
    */
   interface DataLoadInfo {
     /**
-     * Represents the data type or supported types to load.
-     * <br>This parameter is mandatory when used by the data provider.
+     * Set of data types. The default value is an empty set.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2089,7 +2193,12 @@ declare namespace unifiedDataChannel {
     types?: Set<string>;
 
     /**
-     * Indicates the maximum number of data records to be loaded.
+     * Maximum number of data records expected or that can be provided. The default value is **0**, and the value range
+     * is [0, 2<sup>32</sup>-1]. If the value exceeds the range, the default value is used. If the value is a
+     * floating-point number, only the integer part is used. When used for drag-and-drop, this value is displayed as the
+     * badge count, with a maximum of 2<sup>31</sup>-1. If the value exceeds this maximum, the badge is not displayed.
+     * When used as the badge count, its priority is lower than that of the numberBadge method in
+     * [DragPreviewOptions]{@link DragPreviewOptions}
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2101,16 +2210,17 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Defines a handler for lazy data loading. The data sender can dynamically generate data based on the information 
-   * passed by the data receiver to implement more flexible and precise data interaction policies.
-   * 
-   * This API is a synchronous function and is applicable to simple service logic. If the service logic is complex and 
-   * the execution time lasts for more than 3s, you are advised to use the asynchronous handler 
+   * Defines the handler for delayed data loading. It allows the data sender to dynamically generate data based on the
+   * information passed in by the receiver, enabling more flexible and precise data interaction strategies.
+   * This handler is a synchronous function and is suitable for simple business logic. If the business logic is complex
+   * or takes a long time to execute (more than 3 seconds), use the asynchronous handler
    * [DelayedDataLoadHandler]{@link unifiedDataChannel.DelayedDataLoadHandler}.
    *
-   * @param { DataLoadInfo } acceptableInfo - Data type and quantity to receive. The default value is empty.
-   * @returns { UnifiedData | null } Returns **UnifiedData** or **null** when the processing function for lazy data
-   *     loading is triggered.
+   * @param { DataLoadInfo } acceptableInfo - Data types and quantity that the data receiver can accept. The default
+   *     value is empty.
+   * @returns { UnifiedData | null } UnifiedData object generated based on the receiver information when the delayed
+   *     handler is triggered, used for data transfer. If the data cannot be generated or generation fails, null is
+   *     returned.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice
@@ -2120,14 +2230,17 @@ declare namespace unifiedDataChannel {
   type DataLoadHandler = (acceptableInfo?: DataLoadInfo) => UnifiedData | null;
 
   /**
-   * Defines a handler for lazy data loading. The data sender can dynamically generate data based on the information 
-   * passed by the data receiver to implement more flexible and precise data interaction policies.
-   * 
-   * This API is an asynchronous function, which uses a promise to return the result. It does not block the main thread 
-   * and can be used to process time-consuming tasks with complex service logic.
+   * Defines the handler for delayed data loading. It allows the data sender to dynamically generate data based on the
+   * information passed in by the receiver, enabling a more flexible and precise data interaction strategy. The result
+   * is returned asynchronously through a promise.
    *
-   * @param { DataLoadInfo } [acceptableInfo] - Data type and quantity to receive. The default value is empty.
-   * @returns { Promise<UnifiedData | null> } Promise used to return the result.
+   * This handler is an asynchronous function that does not block the main thread. It can handle complex business logic
+   * and execute long-running tasks.
+   *
+   * @param { DataLoadInfo } [acceptableInfo] - Data types and quantity that the data receiver can accept. The default
+   *     value is empty.
+   * @returns { Promise<UnifiedData | null> } Promise object. When resolved, it returns the UnifiedData object generated
+   *     based on the receiver information, or null. When rejected, it returns the error information.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice
@@ -2137,10 +2250,10 @@ declare namespace unifiedDataChannel {
   type DelayedDataLoadHandler = (acceptableInfo?: DataLoadInfo) => Promise<UnifiedData | null>;
 
   /**
-   * Defines the data loading policy for the data sender in the lazy loading scenario.
-   * 
-   * If both **loadHandler** and **delayedDataLoadHandler** are passed, **delayedDataLoadHandler** is preferentially 
-   * used, and **loadHandler** does not take effect.
+   * Describes the data loading policy of the sender in delayed loading scenarios.
+
+   * When both loadHandler and delayedDataLoadHandler are passed in, delayedDataLoadHandler takes precedence and
+   * loadHandler does not take effect.
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2150,8 +2263,10 @@ declare namespace unifiedDataChannel {
    */
   interface DataLoadParams {
     /**
-     * Indicates the callback function for loading data.
-     *
+     * Handler used to load data in a delayed manner. This handler is a synchronous function and is suitable for
+     * processing simple service logic. If the function involves complex service logic and takes a long time to
+     * execute (more than 3s), you are advised to use
+     * [DelayedDataLoadHandler]{@link unifiedDataChannel.DelayedDataLoadHandler}.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @atomicservice
@@ -2161,7 +2276,7 @@ declare namespace unifiedDataChannel {
     loadHandler: DataLoadHandler;
 
     /**
-     * Indicates data loading information.
+     * Describes the data types and quantities that the current sender can generate.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2172,9 +2287,8 @@ declare namespace unifiedDataChannel {
     dataLoadInfo: DataLoadInfo;
 
     /**
-     * Indicates the callback function for deferred and non-blocking data loading.
-     * This handler is optional. If it is provided, it will take precedence over
-     * the synchronous DataLoadHandler (i.e., DataLoadHandler will be ignored).
+     * Asynchronous handler used to load data in a delayed manner. The default value is undefined. If this parameter is
+     * not set, only loadHandler is used.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -2186,20 +2300,20 @@ declare namespace unifiedDataChannel {
   }
 
   /**
-   * Writes data to the public data channel of the UDMF and generates a unique identifier for the data. This API uses
-   * an asynchronous callback to return the result.
-   *
-   * Implementation mechanism After receiving the UnifiedData object, the system verifies data integrity and serializes
+   * Writes data to the public data channel of the UDMF and generates a unique identifier for the data. This API uses an
+   * asynchronous callback to return the result.
+   * **Implementation mechanism** After receiving the UnifiedData object, the system verifies data integrity and serializes
    * the data for storage. It routes the data to the corresponding storage space based on the intention value and
    * generates a unique identifier key. The validity period of the data in the public data channel is managed by the
    * system, and the default policy is to automatically clear the data after the application exits.
    *
-   * @param { Options } options - Configuration for the data insertion operation. The **intention** field is mandatory (
-   *     the DRAG channel is not supported). If it is not specified, error code 401 will be returned. The settings of
-   *     other parameters do not affect the use of this API.
-   * @param { UnifiedData } data - Data to insert.
-   * @param { AsyncCallback<string> } callback - Callback used to return the key (unique identifier) of the data
-   *     inserted.
+   * @param { Options } options - Configuration parameters. The **intention** field is mandatory and does not support
+   *     **DRAG**. If it is not specified, error code 401 is returned. Whether other fields are specified does not
+   *     affect the use of this API.
+   * @param { UnifiedData } data - Unified data object to write or update, used to store data records and their
+   *     attribute information.
+   * @param { AsyncCallback<string> } callback - Callback invoked to return the unique identifier key of the data
+   *     written to the UDMF.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2215,11 +2329,11 @@ declare namespace unifiedDataChannel {
    * Writes data to the public data channel of UDMF and generates a unique identifier for the data. This API uses a
    * promise to return the result asynchronously.
    *
-   * @param { Options } options - Configuration for the data insertion operation. The **intention** field is mandatory (
-   *     the DRAG channel is not supported). If it is not specified, error code 401 will be returned. The settings of
-   *     other parameters do not affect the use of this API.
-   * @param { UnifiedData } data - Data to insert.
-   * @returns { Promise<string> } Promise used to return the key of the data inserted.
+   * @param { Options } options - Configuration options. The **intention** field is mandatory and does not support DRAG.
+   * If it is not specified, error code 401 is returned. Whether other fields are specified does not affect the use of
+   * this API
+   * @param { UnifiedData } data - Target data.
+   * @returns { Promise<string> } Promise used to return the unique identifier key of the data written to UDMF.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2232,14 +2346,15 @@ declare namespace unifiedDataChannel {
   function insertData(options: Options, data: UnifiedData): Promise<string>;
 
   /**
-   * Updates the data in the UDMF public data channel. This API uses an asynchronous callback to return the result.
+   * Updates the data in the public data channel that has been written to UDMF. This API uses an asynchronous callback
+   * to return the result.
    *
-   * @param { Options } options - Configuration for the data update operation. The **key** field is mandatory. If it is
-   *     not specified, error code 401 will be returned. Only the DATA_HUB channel of the **intention** parameter is
-   *     supported. The settings of other parameters do not affect the use of this API.
-   * @param { UnifiedData } data - Data to update.
+   * @param { Options } options - Configuration parameters. The **key** field is mandatory. If it is not specified,
+   *     error code 401 is returned. The **intention** parameter supports only DATA_HUB. Whether other fields are
+   *     specified does not affect the use of this API.
+   * @param { UnifiedData } data - Target data.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the data is updated successfully,
-   *     **err** is **undefined**. Otherwise, **err** is an error object.
+   *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2252,12 +2367,12 @@ declare namespace unifiedDataChannel {
   function updateData(options: Options, data: UnifiedData, callback: AsyncCallback<void>): void;
 
   /**
-   * Updates the data in the UDMF public data channel. This API uses a promise to return the result.
+   * Updates the data in the public data channel that has been written to UDMF. This API uses a promise to return the result.
    *
-   * @param { Options } options - Configuration for the data update operation. The **key** field is mandatory. If it is
-   *     not specified, error code 401 will be returned. Only the DATA_HUB channel of the **intention** parameter is
-   *     supported. The settings of other parameters do not affect the use of this API.
-   * @param { UnifiedData } data - Data to update.
+   * @param { Options } options - Configuration options. The **key** field is mandatory. If it is not specified, error
+   *     code 401 is returned. The **intention** parameter supports only DATA_HUB. Other fields do not affect the use of
+   *     this API.
+   * @param { UnifiedData } data - Target data.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
@@ -2273,15 +2388,13 @@ declare namespace unifiedDataChannel {
   /**
    * Queries data in the UDMF public data channel. This API uses an asynchronous callback to return the result.
    *
-   * @param { Options } options - Configuration for the data query operation. Both the **key** and **intention** are
-   *     optional (the DRAG channel of **intention** is not supported). The return value varies depending on the
-   *     parameters passed in.
-   * @param { AsyncCallback<Array<UnifiedData>> } callback - Callback used to return the queried data.<br>If only the
-   *     **key** is specified in **options**, the data corresponding to the key is returned.<br>If only the
-   *     **intention** is specified in **options**, all data in the **intention** is returned.<br>If both **intention**
-   *     and **key** are specified, the intersection of the two is returned, which is the result obtained when only
-   *     **key** is specified. If there is no intersection between the specified **intention** and **key**, an error
-   *     object is returned.
+   * @param { Options } options - Configuration options. Both key and intention are optional, and intention does not
+   *     support DRAG. Corresponding validation is performed based on the passed parameters to return different values.
+   * @param { AsyncCallback<Array<UnifiedData>> } callback - Callback invoked to return all the queried data.<br>If key
+   *     is specified in options, the data corresponding to the key is returned.<br>If intention is specified in
+   *     options, all data under the intention is returned.<br>If both intention and key are specified, the intersection
+   *     of the data queried by the two is returned, which is consistent with the result obtained when only key is
+   *     specified in options. If there is no intersection, an error is reported.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2294,17 +2407,16 @@ declare namespace unifiedDataChannel {
   function queryData(options: Options, callback: AsyncCallback<Array<UnifiedData>>): void;
 
   /**
-   * Queries data in the UDMF public data channel. This API uses a promise to return the result.
+   * Queries data in the UDMF public data channel. This API uses a promise to return the result asynchronously.
    *
-   * @param { Options } options - Configuration for the data query operation. Both the **key** and **intention** are
-   *     optional (the DRAG channel of **intention** is not supported). The return value varies depending on the
-   *     parameters passed in.
-   * @returns { Promise<Array<UnifiedData>> } Promise used to return the result queried.
-   *     <br>If only the **key** is specified in **options**, the data corresponding to the key is returned.
-   *     <br>If only the **intention** is specified in **options**, all data in the **intention** is returned.
-   *     <br>If both **intention** and **key** are specified, the intersection of the two is returned, which is the result
-   *     obtained when only **key** is specified. If there is no intersection between the specified **intention** and
-   *     **key**, an error object is returned.
+   * @param { Options } options - Configuration parameters. Both key and intention are optional, and the intention
+   *     parameter does not support DRAG. Corresponding verification is performed based on the passed parameters to
+   *     return different values.
+   * @returns { Promise<Array<UnifiedData>> } Promise object used to return all the queried data.<br>If key is specified
+   *     in options, the data corresponding to the key is returned.<br>If intention is specified in options, all data
+   *     under the intention is returned.<br>If both intention and key are specified, the intersection of the two query
+   *     results is returned, which is consistent with the result obtained when only key is specified in options. An
+   *     error is reported if there is no intersection.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2317,16 +2429,17 @@ declare namespace unifiedDataChannel {
   function queryData(options: Options): Promise<Array<UnifiedData>>;
 
   /**
-   * Deletes data from the UDMF public data channel. This API uses an asynchronous callback to return the result.
+   * Deletes data from the UDMF public data channel and returns the deleted data set. This API uses an asynchronous
+   * callback to return the result.
    *
-   * @param { Options } options - Configuration for the data deletion operation. Both the **key** and **intention** are
-   *     optional (only the DATA_HUB channel of **intention** is supported). The return value varies depending on the
-   *     parameters passed in.
-   * @param { AsyncCallback<Array<UnifiedData>> } callback - Callback used to return the data deleted.<br>If only the
-   *     **key** is specified in **options**, the data corresponding to the key deleted is returned.<br>If only the
-   *     **intention** is specified in **options**, all data in the **intention** deleted is returned.<br>If both
-   *     **intention** and **key** are specified, the intersection of the two deleted is returned. If there is no
-   *     intersection between the two, an error object is returned.
+   * @param { Options } options - Configuration parameters. Both key and intention are optional, and intention supports
+   *     only DATA_HUB. The corresponding verification is performed based on the passed parameters to return different
+   *     values.
+   * @param { AsyncCallback<Array<UnifiedData>> } callback - Callback invoked to return all the deleted data.<br>If key
+   *     is specified in options, the data corresponding to the key is deleted and returned.<br>If intention is
+   *     specified in options, all data under the intention is deleted and returned.<br>If both intention and key are
+   *     specified, the intersection of the two is deleted and returned, which is consistent with the result when only
+   *     key is specified in options; an error is reported if there is no intersection.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2339,16 +2452,16 @@ declare namespace unifiedDataChannel {
   function deleteData(options: Options, callback: AsyncCallback<Array<UnifiedData>>): void;
 
   /**
-   * Deletes data from the UDMF public data channel. This API uses a promise to return the result.
+   * Deletes data from the UDMF public data channel and returns the deleted data set. This API uses a promise to return
+   * the result asynchronously.
    *
-   * @param { Options } options - Configuration for the data deletion operation. Both the **key** and **intention** are
-   *     optional (only the DATA_HUB channel of **intention** is supported). The return value varies depending on the
-   *     parameters passed in.
-   * @returns { Promise<Array<UnifiedData>> } Promise used to return the data deleted.
-   *     <br>If only the **key** is specified in **options**, the data corresponding to the key deleted is returned.
-   *     <br>If only the **intention** is specified in **options**, all data in the **intention** deleted is returned.
-   *     <br>If both **intention** and **key** are specified, the intersection of the two deleted is returned. If there 
-   *     is no intersection between the two, an error object is returned.
+   * @param { Options } options - Configuration parameters. Both key and intention are optional, and intention supports
+   *     only DATA_HUB. The parameters are verified based on the values passed in to return different results.
+   * @returns { Promise<Array<UnifiedData>> } Promise used to return all deleted data.<br>If key is specified in
+   *     options, the data corresponding to key is deleted and returned.<br>If intention is specified in options, all
+   *     data under intention is deleted and returned.<br>If both intention and key are specified, the intersection of
+   *     the two data sets is deleted and returned, which is the same as the result when only key is specified in
+   *     options. An error is reported if there is no intersection.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -2361,14 +2474,16 @@ declare namespace unifiedDataChannel {
   function deleteData(options: Options): Promise<Array<UnifiedData>>;
 
   /**
-    * Sets the [ShareOptions]{@link unifiedDataChannel.ShareOptions} for the application data. Currently, only the drag-
-    * and-drop data channel is supported.
+    * Sets the usage scope of the data in the in-app drag-and-drop data channel, as defined by
+    * [ShareOptions]{@link unifiedDataChannel.ShareOptions}. Currently, only the DRAG data channel supports this
+    * management setting. After the call succeeds, the usage scope of the data in the in-app drag-and-drop data channel
+    * is set to the specified ShareOptions value.
     *
     * @permission ohos.permission.MANAGE_UDMF_APP_SHARE_OPTION [since 14]
-    * @param { Intention } intention - Type of the data channel. Currently, only the data channel of the **DRAG** type
-    *     is supported.
-    * @param { ShareOptions } shareOptions - Usage scope of the
-    *     [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties}.
+    * @param { Intention } intention - Data channel type related to the data operation. Currently, only the DRAG data
+    *     channel is supported.
+    * @param { ShareOptions } shareOptions - Usage scope of
+    *     [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties} within the device.
     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
     *     API. [since 12 - 13]
     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -2387,11 +2502,12 @@ declare namespace unifiedDataChannel {
    function setAppShareOptions(intention: Intention, shareOptions: ShareOptions): void;
 
    /**
-    * Removes the data control information set by [setAppShareOptions]{@link unifiedDataChannel.setAppShareOptions}.
-    *
+    * Clears the control information set by [setAppShareOptions]{@link unifiedDataChannel.setAppShareOptions}. After
+    * this API is called successfully, the control information set by setAppShareOptions is cleared, and the in-app
+    * drag-and-drop channel data is restored to the default usage scope.
     * @permission ohos.permission.MANAGE_UDMF_APP_SHARE_OPTION [since 14]
-    * @param { Intention } intention - Type of the data channel. Currently, only the data channel of the **DRAG** type
-    *     is supported.
+    * @param { Intention } intention - Data channel type related to the data operation. Currently, only the DRAG data
+    *     channel is supported.
     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
     *     API. [since 12 - 13]
     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -2409,15 +2525,17 @@ declare namespace unifiedDataChannel {
    function removeAppShareOptions(intention: Intention): void;
 
   /**
-    * Converts the provided data into a multi-style data structure, which is useful when the original data uses multiple
-    * records to represent different styles of the same data.
-    * 
-    * This API is used only when the following rules are met:
-    * 
-    * 1. The number of records in data is greater than 1.
-    * 2. The value of **unifiedData.properties.tag** is **records_to_entries_data_format**.
+    * Converts the passed-in data into a multi-style data structure. If the original data uses multiple records to carry
+    * different data formats of the same data, you can use this API to convert the original data into a multi-style
+    * data structure.
+    * The conversion is performed and the passed-in data is converted into a multi-style data structure when the
+    * following rules are met:
+    * 1. The number of records in the data is greater than 1.
+    * 2. The value of the tag in the properties of the data is "records_to_entries_data_format".
     *
-    * @param { UnifiedData } data - Data to convert.
+    * Otherwise, no action is taken.
+    *
+    * @param { UnifiedData } data - Unified data object to be converted into a multi-style data structure.
     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     <br>2.Incorrect parameter types;
    *     <br>3. Parameter verification failed.
