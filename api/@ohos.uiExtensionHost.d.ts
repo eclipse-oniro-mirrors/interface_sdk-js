@@ -246,8 +246,8 @@ declare namespace uiExtensionHost {
      * > **NOTE**
      * >
      * > - A non-secure window refers to any window that may obstruct the
-     * > [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component} or
-     * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}, such as global floating windows
+     * > [EmbeddedComponent]{@link EmbeddedComponent} or
+     * > [UIExtensionComponent]{@link UIExtensionComponent}, such as global floating windows
      * > , host subwindows, and dialog box windows created by the host application (excluding windows of these types
      * > created by system applications).
      * >
