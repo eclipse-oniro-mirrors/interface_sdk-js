@@ -255,7 +255,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @param { AsyncCallback<Preferences> } callback - Callback used to return the result. If the operation is successful
@@ -278,7 +278,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @param { AsyncCallback<Preferences> } callback - Callback used to return the result. If the operation is successful
@@ -306,7 +306,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @returns { Promise<Preferences> } Promise used to return the **Preferences** instance obtained.
@@ -327,7 +327,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Promise<Preferences> } Promise used to return the **Preferences** instance obtained.
@@ -353,7 +353,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API returns the result synchronously.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Preferences } **Preferences** instance obtained.
@@ -399,7 +399,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -426,7 +426,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -458,7 +458,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -484,7 +484,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -526,7 +526,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -563,7 +563,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -605,7 +605,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -641,7 +641,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -682,7 +682,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -717,7 +717,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
