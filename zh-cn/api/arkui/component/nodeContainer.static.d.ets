@@ -53,6 +53,7 @@ export declare interface NodeContainerAttribute extends CommonMethod {
    * @param { NodeController } controller - NodeContainer的控制器实例。
    * @returns { this } NodeContainerAttribute实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -75,11 +76,12 @@ export declare function NodeContainer(
 ): NodeContainerAttribute;
 
 /**
- * 定义NodeContainer组件。需要在组件属性设置开始时调用setNodeContainerOptions，并在组件属性设置结束时调用applyAttributeFinish。
+ * 定义NodeContainer组件。需要在组件属性设置开始时调用setNodeContainerOptions，并在组件属性设置结束时调用applyAttributesFinish。
  *
  * @param { CustomBuilderT<NodeContainerAttribute> } style - 用于设置NodeContainer属性的回调。
  * @returns { NodeContainerAttribute } NodeContainer属性实例。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
  * @since 26.0.1 staticonly
  */
