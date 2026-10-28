@@ -15,6 +15,24 @@
  */
 
 /**
+ * The advanced filter component allows users to filter data with multiple criteria combined. 
+ * It consists of a floating bar and filters therein. The floating bar can be expanded to reveal the filters, 
+ * which come in a multi-line collapsible or multi-line list style. For added convenience, 
+ * you can append an additional quick filter.
+ * 
+ * > **NOTE**
+ * >
+ * > - If the **Filter** component has [universal attributes]{@link common} and 
+ * > [universal events]{@link common} configured, the compiler toolchain automatically generates an additional 
+ * > \_\_Common\_\_ node and mounts the universal attributes and universal events on this node rather than 
+ * > the **Filter** component itself. As a result, the configured universal attributes and universal events 
+ * > may fail to take effect or behave as intended. For this reason, avoid using universal attributes 
+ * > and events with the **Filter** component.
+ * 
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
  * @file
  * @kit ArkUI
  */
@@ -122,6 +140,7 @@ declare type OnFilterChangedCallback = (filterResults: Array<FilterResult>) => v
 
 /**
  * Declare Filter.The Filter is used in scenarios where multi-dimensional filtering is required.
+ *
  * @struct { Filter }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

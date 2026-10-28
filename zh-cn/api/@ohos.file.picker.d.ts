@@ -197,7 +197,7 @@ declare namespace picker {
     /**
      *
      * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。
-     *     Stage模型的应用Context定义见[Context]{@link ./app/context}。
+     *     Stage模型的应用Context定义见[Context]{@link ./app/context:Context}。
      * @syscap SystemCapability.FileManagement.UserFileService
      * @since 12 dynamiconly
      * @deprecated since 18
@@ -884,7 +884,7 @@ declare namespace picker {
      * 创建DocumentViewPicker对象，推荐使用该构造函数，获取context参考
      * [getHostContext]{@link @ohos.arkui.UIContext:UIContext#getHostContext}。
      *
-     * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。Stage模型的应用Context定义见[Context]{@link ./app/context}。
+     * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。Stage模型的应用Context定义见[Context]{@link ./app/context:Context}。
      * @syscap SystemCapability.FileManagement.UserFileService
      * @atomicservice
      * @since 12 dynamic
@@ -900,7 +900,7 @@ declare namespace picker {
      * >
      * > 从API version 19开始，2in1和Tablet设备支持该方法。
      *
-     * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。Stage模型的应用Context定义见[Context]{@link ./app/context}。
+     * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。Stage模型的应用Context定义见[Context]{@link ./app/context:Context}。
      * @param { window.Window } window - 应用创建的窗口实例。
      * @syscap SystemCapability.FileManagement.UserFileService
      * @since 13 dynamic
@@ -1114,7 +1114,7 @@ declare namespace picker {
      * 创建AudioViewPicker对象，推荐使用该构造函数，获取context参考
      * [getHostContext]{@link @ohos.arkui.UIContext:UIContext#getHostContext}。
      *
-     * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。Stage模型的应用Context定义见[Context]{@link ./app/context}。
+     * @param { Context } context - 应用上下文（仅支持UIAbilityContext）。Stage模型的应用Context定义见[Context]{@link ./app/context:Context}。
      * @syscap SystemCapability.FileManagement.UserFileService
      * @atomicservice
      * @since 12 dynamic

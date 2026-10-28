@@ -42,12 +42,13 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, TipsAnchorType, InputEventInterceptAction, GestureShortcut, EdgeLightPosition } from "./enums";
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -4196,7 +4197,7 @@ export declare enum SafeAreaEdge {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum SafeAreaInsetAlignment {
     /**
@@ -4207,7 +4208,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     START = 0,
 
@@ -4217,7 +4218,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     CENTER = 1,
 
@@ -4229,7 +4230,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     END = 2
 }
@@ -4240,7 +4241,7 @@ export declare enum SafeAreaInsetAlignment {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetEdgeConfig {
     /**
@@ -4254,7 +4255,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     content: CustomBuilder;
 
@@ -4268,7 +4269,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     spacing?: LengthMetrics;
 
@@ -4280,7 +4281,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     alignment?: SafeAreaInsetAlignment;
 }
@@ -4291,7 +4292,7 @@ export declare interface SafeAreaInsetEdgeConfig {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetOptions {
     /**
@@ -4302,7 +4303,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     top?: SafeAreaInsetEdgeConfig;
 
@@ -4315,7 +4316,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     end?: SafeAreaInsetEdgeConfig;
 
@@ -4327,7 +4328,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     bottom?: SafeAreaInsetEdgeConfig;
 
@@ -4340,7 +4341,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     start?: SafeAreaInsetEdgeConfig;
 }
@@ -7584,6 +7585,57 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     blurSnapshot?: BlurSnapshotOptions;
+    /**
+     * Title bar hover mode.
+     * - STANDARD: The title bar and content are arranged vertically without overlapping.
+     * - STACK: The title bar overlays on top of the content. Developers need to add padding to avoid occlusion.
+     * - SAFE_AREA_PADDING: The title bar is placed in the safe area padding region. The content expands
+     *   into the safe area, and the scroll content is clipped to the safe area.
+     * The default value is **SheetTitleBarHoverMode.STANDARD**.
+     * After {@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA} is successfully set via
+     * {@link UIContext.applyDefaultImmersiveStrategy}, the default value is
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * Enum of title bar hover modes.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * Standard mode: The title bar and content are arranged vertically without overlapping.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STANDARD = 0,
+    /**
+     * Stack mode: The title bar overlays on top of the content.
+     * Developers need to add padding at the top of the content to avoid occlusion.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STACK = 1,
+    /**
+     * Safe area padding mode: The title bar is placed in the safe area padding region.
+     * The content expands into the safe area, and the scroll content is clipped to the safe area.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.
@@ -11179,7 +11231,7 @@ export declare interface CommonMethod {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
@@ -12845,6 +12897,33 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default shadow(value: ShadowOptions | ShadowStyle | undefined): this;
+    /**
+     * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+     *
+     * This API works with the [shadow]{@link CommonMethod#shadow} attribute. The shadow shape is recalculated
+     * when the component size changes.
+     *
+     * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+     *     When the value type is {@link CircleShape}, {@link EllipseShape},
+     *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+     *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): this;
+    /**
+     * Sets the clip mode for the [shadow]{@link CommonMethod#shadow} when it is not filled. This API takes effect
+     * only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+     *
+     * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowClipMode(mode: ShadowClipMode | undefined): this;
     /**
      * Sets the edge light effect for the component.
      *
@@ -15026,8 +15105,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *
      * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
      *    pressed.
-     *    <br>Default value: For API versions earlier than 26.2.0,the defalut value is false.
-     *    For API versions 26.2.0 and later, the defalut value is true when the scrollable component scrolls
+     *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+     *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
      *    horizontally,false otherwise.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15144,7 +15223,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }

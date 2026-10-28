@@ -14,15 +14,15 @@
  */
 
 /**
- * @file Sets filter criteria of publishers for subscribing to desired notifications
+ * @file NotificationSubscribeInfo
  * @kit NotificationKit
  */
 
 import type notificationManager from '../@ohos.notificationManager';
 
 /**
- * The **NotificationSubscribeInfo** module provides APIs for defining the information about the publisher for 
- * notification subscription.
+ * The **NotificationSubscribeInfo** module provides APIs for defining the information about the notification 
+ * subscriber.
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -31,8 +31,8 @@ import type notificationManager from '../@ohos.notificationManager';
  */
 export interface NotificationSubscribeInfo {
   /**
-   * Bundle names of the applications whose notifications to subscribe to. If this parameter is not specified, the 
-   * subscription defaults to notifications from all applications.
+   * Bundle names of the applications whose notifications are to be subscribed to. If this parameter is not specified, 
+   * the subscription defaults to notifications from all applications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -42,8 +42,7 @@ export interface NotificationSubscribeInfo {
   bundleNames?: Array<string>;
 
   /**
-   * User ID. If this parameter is not specified, the subscription defaults to notifications from the current user
-   * ID.
+   * User ID. If this parameter is not specified, the subscription defaults to notifications from the current user ID.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -53,8 +52,8 @@ export interface NotificationSubscribeInfo {
   userId?: int;
 
   /**
-   * Device type. If this parameter is not specified, the subscription defaults to notifications from the current
-   * device. The value is obtained based on [device information]{@link ./../@ohos.deviceInfo:deviceInfo}.
+   * Device type. If this parameter is not specified, the subscription defaults to notifications from the current 
+   * device. The value is obtained based on [device information]{@link @ohos.deviceInfo:deviceInfo}.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -64,8 +63,8 @@ export interface NotificationSubscribeInfo {
   deviceType?: string;
 
   /**
-   * Types of the notification slots. If this parameter is not specified, the subscription defaults to notifications of 
-   * all slot types.
+   * [Notification slot](docroot://notification/notification-glossary.md#notification-slot) type. If this parameter is 
+   * not passed, notifications of all slot types are subscribed to by default.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -76,13 +75,13 @@ export interface NotificationSubscribeInfo {
 
   /**
    * Notification filtering range. The default value is **0**. The options are as follows:
-   * 
+   *
    * - **0**: All notifications are included in the subscription.
    * - **1**: Filter out notifications whose slot type is 
-   * [SOCIAL_COMMUNICATION]{@link ./../@ohos.notificationManager:notificationManager.SlotType} and 
+   * [SOCIAL_COMMUNICATION]{@link @ohos.notificationManager:notificationManager.SlotType} and 
    * [userInput]{@link ./notificationActionButton:NotificationActionButton} is empty.
    * - **2**: Filter out notifications whose slot type is 
-   * [SOCIAL_COMMUNICATION]{@link ./../@ohos.notificationManager:notificationManager.SlotType} and 
+   * [SOCIAL_COMMUNICATION]{@link @ohos.notificationManager:notificationManager.SlotType} and 
    * [userInput]{@link ./notificationActionButton:NotificationActionButton} is not empty.
    *
    * @syscap SystemCapability.Notification.Notification
@@ -103,7 +102,8 @@ export interface NotificationSubscribeInfo {
   voiceContentOptions?: VoiceContentOptions;
 
   /**
-   * Image options of the live notification.
+   * [Live view notification](docroot://notification/notification-glossary.md#live-view-notification) image 
+   * configuration options.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -131,8 +131,8 @@ export interface NotificationSubscribeInfo {
    * - **true**: yes.
    * - **false**: no. The default value is **false**.
    *
-   * After this feature is enabled, historical notifications are silently re-pushed upon the first subscription,
-   * without ringing or vibration reminders.
+   * After this feature is enabled, historical notifications are silently re-pushed upon the first subscription, without
+   * ringing or vibration reminders.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -176,13 +176,14 @@ export interface VoiceContentOptions {
  */
 export interface PictureOptions {
   /**
-   * Subscribes to the image information in **extraInfo** of
-   * [NotificationLiveViewContent]{@link ./notification/notificationContent:NotificationLiveViewContent} in a common live
-   * notification. The input parameter is the **Key** of the image file name that needs to be parsed into the
-   * pixelMap format in **extraInfo**.<br>When the application publishes a common live notification, the parsed image
-   * information is called back to the subscriber through
-   * [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume} and stored in **pictureInfo** of
-   * **NotificationLiveViewContent**.
+   * Subscribes to the image information in **extraInfo** of 
+   * [NotificationLiveViewContent]{@link ./notificationContent:NotificationLiveViewContent} in a common live 
+   * notification. The input parameter is the **Key** of the image file name that needs to be parsed into the pixelMap 
+   * format in **extraInfo**.
+   *
+   * When the application publishes a common live notification, the parsed image information is called back to the 
+   * subscriber through [onConsume]{@link ./notificationSubscriber:NotificationSubscriber.onConsume} and stored in 
+   * **pictureInfo** of **NotificationLiveViewContent**.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

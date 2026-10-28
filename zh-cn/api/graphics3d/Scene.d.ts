@@ -14,7 +14,9 @@
  */
 
 /**
- * @file 3D场景声明
+ * 本模块作为ArkGraphics 3D基础模块，提供场景加载参数等数据类型。同时提供场景加载等方法。
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -171,7 +173,7 @@ export interface RaycastParameters {
 }
 
 /**
- * 用于创建可在共享RenderContext的多个场景（[Scene]{@link Scene}）中共享的渲染资源。
+ * 用于创建可在共享[RenderContext]{@link RenderContext}的多个场景（[Scene]{@link Scene}）中共享的渲染资源。
  *
  * @interface RenderResourceFactory
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -294,7 +296,7 @@ export interface CameraParameters {
 }
 
 /**
- * 特效参数配置，用于指定创建特效时所需的特效ID，作为createEffect接口的入参来创建特效对象。
+ * 特效参数配置，用于指定创建特效时所需的特效ID，作为[createEffect]{@link SceneResourceFactory.createEffect}接口的入参来创建特效对象。
  * 
  * @interface EffectParameters
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -314,7 +316,7 @@ export interface EffectParameters {
 }
 
 /**
- * 用于创建3D场景中资源的接口，例如相机、光源等，继承自RenderResourceFactory。
+ * 用于创建3D场景中资源的接口，例如相机、光源等，继承自[RenderResourceFactory]{@link RenderResourceFactory}。
  *
  * @extends RenderResourceFactory
  * @interface SceneResourceFactory
@@ -516,7 +518,7 @@ export declare abstract class SoftShadowConfig {
 }
 
 /**
- * PCF（Percentage Closer Filtering，百分比邻近过滤）软阴影配置类，继承自SoftShadowConfig。
+ * PCF（Percentage Closer Filtering，百分比邻近过滤）软阴影配置类，继承自[SoftShadowConfig]{@link SoftShadowConfig}。
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
@@ -657,9 +659,9 @@ export declare class Scene {
 
   /**
    * 通过传入的资源路径加载资源，使用Promise异步回调。
-   * 调用后，应该在Scene使用完毕时调用destroy释放资源，否则可能导致资源泄漏。
+   * 调用后，应该在Scene使用完毕时调用[destroy]{@link destroy}释放资源，否则可能导致资源泄漏。
    *
-   * @param { ResourceStr } [uri] - 待加载的模型文件资源路径，默认值为undefined。
+   * @param { ResourceStr } uri - 待加载的模型文件资源路径，默认值为undefined。
    * @returns { Promise<Scene> } Promise对象，返回场景对象。
    * @static
    * @syscap SystemCapability.ArkUi.Graphics3D

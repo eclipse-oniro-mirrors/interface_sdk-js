@@ -14,16 +14,40 @@
  */
 
 /**
- * @file 3D scene declarations
+ * As the basic module of ArkGraphics 3D, this module provides data types such as scene load parameters.
+ * It also provides basic methods such as scene loading methods.
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
-import { Shader, MaterialType, Material, Animation, Environment, Image, MeshResource, Sampler, SceneResource, Effect, ImageStream } from './SceneResources';
+import { Shader, MaterialType, Material, Animation, Environment, Image, MeshResource, Sampler, SceneResource, Effect, ImageStream, RenderTarget } from './SceneResources';
 import { Camera, LightType, Light, Node, NodeType, Geometry } from './SceneNodes';
 import { Position3, Color, GeometryDefinition, RenderingPipelineType, Vec2, Vec3, Vec4, ShadowAlgorithmType } from './SceneTypes';
+import { BusinessError } from '../@ohos.base';
+
+/**
+ * render target parameters object, used to decribe render target
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTargetParameters extends SceneResourceParameters {
+  /**
+   * the size of render target
+   * 
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static 
+   */
+  size: Vec2;
+}
 
 /**
  * Scene load parameters object, used to specify additional configuration options when loading 3D model resources.
@@ -176,7 +200,7 @@ export interface RaycastParameters {
 }
 
 /**
- * Creates rendering resources that can be shared in multiple scenes ([Scene]{@link Scene}) that share RenderContext.
+ * Creates rendering resources that can be shared in multiple scenes ([Scene]{@link Scene}) that share [RenderContext]{@link RenderContext}.
  *
  * @interface RenderResourceFactory
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -304,7 +328,7 @@ export interface CameraParameters {
 
 /**
  * Special effect parameter configuration, which is used to specify the special effect ID required for creating a special effect.
- * It is used as the input parameter of the createEffect API to create a special effect object.
+ * It is used as the input parameter of the [createEffect]{@link SceneResourceFactory.createEffect} API to create a special effect object.
  * 
  * @interface EffectParameters
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -325,7 +349,8 @@ export interface EffectParameters {
 }
 
 /**
- * Provides APIs for creating resources, such as cameras and light sources, used in 3D scenes. This class inherits from RenderResourceFactory.
+ * Provides APIs for creating resources, such as cameras and light sources, used in 3D scenes.
+ * This class inherits from [RenderResourceFactory]{@link RenderResourceFactory}.
  *
  * @extends RenderResourceFactory
  * @interface SceneResourceFactory
@@ -537,7 +562,7 @@ export declare abstract class SoftShadowConfig {
 }
 
 /**
- * Configuration class for soft shadows using the Percentage-Closer Filtering (PCF) algorithm.
+ * Defines the PCF (Percentage-Closer Filtering) soft shadow configuration class, which inherits from [SoftShadowConfig]{@link SoftShadowConfig}.
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
@@ -663,10 +688,11 @@ export declare class Scene {
   static getDefaultRenderContext(): RenderContext | null;
 
   /**
-   * Loads a resource by path.
-   * This API uses a promise to return the result.
+   * Loads resources through the passed resource path. This API uses a promise to return the result.
+   * After the call, you should call [destroy]{@link destroy} to release resources when the Scene is no longer used;
+   * otherwise, resource leakage may occur.
    *
-   * @param { ResourceStr } [uri] - Path of the model file resource to load. The default value is undefined.
+   * @param { ResourceStr } uri - Path of the model file resource to load. The default value is undefined.
    * @returns { Promise<Scene> } Promise used to return the Scene object created.
    * @static
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -845,4 +871,29 @@ export declare class Scene {
    * @since 23 dynamic&static
    */
   cloneNode(node: Node, parent: Node, name: string): Node | null;
+
+  /**
+   * take a snapshot for the current scene;
+   * 
+   * @param { Camera[] } cameras - the camera list used to render the snapshot.
+   * @param { RenderTargetParameters[] } params - the parameters for render target list.
+   * @returns { Promise<RenderTarget[]> } Promise used to return a list of render target
+   * @throws { BusinessError } 25603001 -- Possible Cause:
+   *     -- The number of elements in the camera array exceeds the limit
+   *     -- The number of elements in the camera array or RenderTargetParameters array is 0
+   *     -- Duplicate camera objects exist in the Camera array
+   *     -- The main camera is passed into the Camera array
+   *     -- The width or height of render target given in RenderTargetParameters is less than or equal to 0
+   * @throws { BusinessError } 25603002 -- Possible Cause:
+   *     -- The number of elements in the camera array and the RenderTargetParameters array is not the same
+   * @throws { BusinessError } 25601002 -- Possible Cause:
+   *     -- Use this api after scene is destroyed
+   * @throws { BusinessError } 25601004 -- Possible Cause:
+   *     -- No enough memory to allocate offscreen render targets
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  snapshot(cameras: Camera[], params: RenderTargetParameters[]): Promise<RenderTarget[]>;
 }

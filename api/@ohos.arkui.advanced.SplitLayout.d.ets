@@ -14,11 +14,6 @@
  */
 
 /**
- * @file
- * @kit ArkUI
- */
-
-/**
  * The **SplitLayout** component provides common page layout styles, mainly used to display combined layouts of images,
  * titles, and content containers. It is suitable for split display scenarios that require adaptation to different
  * screen sizes (such as detail pages, settings pages, etc.). It supports adaptation to different screen widths (three
@@ -31,6 +26,18 @@
  * > [universal events]{@link CommonMethod}. If set, the build toolchain will generate an additional
  * > \_\_Common\_\_ node and attach the universal attributes or universal events to \_\_Common\_\_ instead of directly
  * > applying them to **SplitLayout** itself, causing the configured attributes or events to not take effect.
+ *
+ * ###### Child Components
+ *
+ * None
+ *
+ * @file
+ * @kit ArkUI
+ */
+
+/**
+ * The **SplitLayout** component is a split layout component that supports adaptive layout and displays different
+ * layout styles at different widths.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

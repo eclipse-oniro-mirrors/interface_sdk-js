@@ -412,7 +412,7 @@ declare interface LocalizedBarrierStyle {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * > **NOTE**
  * >
@@ -520,7 +520,7 @@ declare class RelativeContainerAttribute extends CommonMethod<RelativeContainerA
  * > anchor. If **alignRules** does not set an anchor in a certain boundary direction (for example, neither **left** nor
  * > **right** anchor is set), the **margin** in that direction does not take effect.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Multiple child components are supported.
  *

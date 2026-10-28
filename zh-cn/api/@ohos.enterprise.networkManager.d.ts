@@ -685,6 +685,78 @@ declare namespace networkManager {
   }
 
   /**
+   * 共享路径的用户权限信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface UserPathInfo {
+    /**
+     * 用户名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    userName: string;
+
+    /**
+     * 用户对该共享路径的权限。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    userPermission: string;
+  }
+
+  /**
+   * 共享路径数据。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PathSharedData {
+    /**
+     * 共享路径名称。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    shareName: string;
+
+    /**
+     * 共享路径的URI。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    shareUri: string;
+
+    /**
+     * 用户路径信息列表，用于权限管理。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    userPathInfoList: Array<UserPathInfo>;
+
+    /**
+     * 允许访问该共享资源的最大用户数。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    shareLimit: number;
+  }
+
+  /**
    * 获取所有激活的有线网络接口。使用callback异步回调。
    *
    * @permission ohos.permission.ENTERPRISE_GET_NETWORK_INFO
@@ -1653,6 +1725,22 @@ declare namespace networkManager {
    * @since 23
    */
   function setEthernetConfig(admin: Want, networkInterface: string, config: InterfaceConfig): void;
+
+  /**
+   * 获取设备上通过网络领域共享的所有文件夹路径列表。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @returns { Array<PathSharedData> } 返回共享路径信息数组。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getSharedList(): Array<PathSharedData>;
 }
 
 export default networkManager;

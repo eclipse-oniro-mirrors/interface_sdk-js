@@ -14,15 +14,15 @@
  */
 
 /**
- * @file
+ * @file ExtensionAbility Context for Notification Subscription
  * @kit NotificationKit
  */
 
 import type ExtensionContext from './application/ExtensionContext';
 /**
- * The **NotificationSubscriberExtensionContext** module provides the context
- * for the **NotificationSubscriberExtensionAbility**.
- * 
+ * The **NotificationSubscriberExtensionContext** module provides the extension capability for 
+ * [notification subscription](docroot://notification/notification-glossary.md#notification-subscription) subscribers.
+ *
  * @syscap SystemCapability.Notification.Notification
  * @stagemodelonly
  * @since 22 dynamic

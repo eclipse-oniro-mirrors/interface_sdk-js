@@ -67,7 +67,7 @@ declare enum CalendarAlign {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum CalendarFirstDayOfWeek {
   /**
@@ -77,7 +77,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   LOCAL = 0,
   /**
@@ -87,7 +87,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   MON = 1,
   /**
@@ -97,7 +97,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   TUE = 2,
   /**
@@ -107,7 +107,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   WED = 3,
   /**
@@ -117,7 +117,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   THU = 4,
   /**
@@ -127,7 +127,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   FRI = 5,
   /**
@@ -137,7 +137,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SAT = 6,
   /**
@@ -147,7 +147,7 @@ declare enum CalendarFirstDayOfWeek {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SUN = 7
 }
@@ -455,7 +455,7 @@ declare class CalendarPickerAttribute extends CommonMethod<CalendarPickerAttribu
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   firstDayOfWeek(value: CalendarFirstDayOfWeek): CalendarPickerAttribute;
 }
@@ -840,9 +840,22 @@ declare interface CalendarDialogOptions extends CalendarOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   firstDayOfWeek?: CalendarFirstDayOfWeek;
+
+  /**
+   * 是否以及如何使对话框适配惯用手。
+   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
+   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
+   *
+   * @default HandednessFollowMode.NONE
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**

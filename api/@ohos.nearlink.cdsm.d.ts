@@ -26,7 +26,7 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
+ * @atomicservice [since 26.1.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
@@ -55,7 +55,7 @@ declare namespace cdsm {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -77,7 +77,7 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -93,7 +93,7 @@ declare namespace cdsm {
      * @throws { BusinessError } 36100099 - Operation failed.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -107,7 +107,7 @@ declare namespace cdsm {
      * @param { Callback<CdsmInfo> } callback - Callback used to return the CDSM information.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [offCdsmInfoChange]{@link cdsm.CdsmClient.offCdsmInfoChange(callback?: Callback<CdsmInfo>): void}
@@ -123,7 +123,7 @@ declare namespace cdsm {
      *     all callbacks used to listen for CDSM information change events are unregistered.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [onCdsmInfoChange]{@link cdsm.CdsmClient.onCdsmInfoChange(callback: Callback<CdsmInfo>): void} Subscribes to
@@ -137,7 +137,7 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -148,7 +148,7 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -160,7 +160,7 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -170,7 +170,7 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -180,7 +180,7 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -192,7 +192,7 @@ declare namespace cdsm {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -202,7 +202,7 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -212,7 +212,7 @@ declare namespace cdsm {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */

@@ -166,7 +166,7 @@ declare namespace media {
    * 同步方式创建音频播放实例。
    * 
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用
    * > [createAVPlayer]{@link media.createAVPlayer(callback: AsyncCallback<AVPlayer>)}替代。
    *
    * @returns { AudioPlayer } 返回AudioPlayer类实例，失败时返回null。可用于音频播放、暂停、停止等操作。
@@ -181,7 +181,7 @@ declare namespace media {
    * 创建音频录制的实例来控制音频的录制。一台设备只允许创建一个录制实例。
    * 
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用
    * > [createAVRecorder]{@link media.createAVRecorder(callback: AsyncCallback<AVRecorder>)}替代。
    *
    * @returns { AudioRecorder } 返回AudioRecorder类实例，失败时返回null。可用于录制音频媒体。
@@ -520,7 +520,7 @@ declare namespace media {
    * 异步方式创建视频播放实例，使用callback异步回调。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用
    * > [createAVPlayer]{@link media.createAVPlayer(callback: AsyncCallback<AVPlayer>)}替代。
    *
    * @param { AsyncCallback<VideoPlayer> } callback - 回调函数。创建VideoPlayer实例成功时，err为undefined，data为获取到的VideoPlayer实例，否则为错误
@@ -536,7 +536,7 @@ declare namespace media {
    * 异步方式创建视频播放实例，通过Promise获取返回值。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用[createAVPlayer]{@link media.createAVPlayer()}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[createAVPlayer]{@link media.createAVPlayer()}替代。
    *
    * @returns { Promise<VideoPlayer> } Promise对象。异步返回VideoPlayer实例，失败时返回null。可用于管理和播放视频媒体。
    * @syscap SystemCapability.Multimedia.Media.VideoPlayer
@@ -1100,7 +1100,7 @@ declare namespace media {
      * 获取音频专辑封面。使用callback异步回调。
      *
      * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当获取音频专辑封面成功，err为undefined，data为获取到的PixelMap实例，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -2512,7 +2512,7 @@ declare namespace media {
     preferredSubtitleLanguages?: Array<string>;
   }
     /**
-   * [AVPlayer]{@link @ohos.multimedia.media:media}的状态机，可通过state属性主动获取当前状态，也可通过监听
+   * [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}的状态机，可通过state属性主动获取当前状态，也可通过监听
    * [stateChange]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
    * 事件上报当前状态，状态机之间的切换规则，可参考[音频播放开发指导](docroot://media/media/using-avplayer-for-playback.md)。
    *
@@ -2801,6 +2801,36 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     details: Record<string, Object>;
+  }
+
+  /**
+   * 可执行的播控指令枚举定义，
+   * 用于应用在Prepare()完成后，查询该片源是否可以执行对应的播放控制操作；
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVPlayer
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum PlaybackCommand {  
+    /**
+     * SEEK操作枚举值定义
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_SEEK = 0,
+    /**
+     * 调整播放速率的操作值
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_RATE = 1
   }
 
   /**
@@ -3162,8 +3192,8 @@ declare namespace media {
      * @param { int } fd - 资源句柄，通过
      *     [resourceManager.getRawFd]{@link @ohos.resourceManager:resourceManager.ResourceManager.getRawFd(path: string, callback: _AsyncCallback<RawFileDescriptor>)}
      *     获取。
-     * @param { long } offset - 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误，默认值:0。
-     * @param { long } length - 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误，默认值:0。
+     * @param { long } offset - 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕资源解析错误，默认值:0。单位为字节（Byte）。
+     * @param { long } length - 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕资源解析错误，默认值:0。单位为字节（Byte）。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -3192,6 +3222,7 @@ declare namespace media {
      * 获取播放过程信息，可以在prepared/playing/paused状态调用。使用Promise异步回调。
      *
      * @returns { Promise<PlaybackInfo> } Promise对象，返回播放器信息PlaybackInfo。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 12 dynamic
      * @since 23 static
@@ -3255,6 +3286,7 @@ declare namespace media {
      * 获取当前播放器的统计指标信息，可以在准备（prepared）/播放（playing）/暂停（paused）/完成（completed）/停止（stopped）状态调用。使用Promise异步回调。
      *
      * @returns { Promise<PlaybackMetrics> } Promise对象，返回当前播放器的指标信息PlaybackMetrics。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 dynamic&static
      */
@@ -3480,7 +3512,7 @@ declare namespace media {
      * 清空播放列表中的所有项目，当前正在播放的媒体将会立即终止。使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operation not allowed . Returned via promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned via promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
@@ -3513,6 +3545,24 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getMediaSources(): Array<MediaSource | undefined>;
+
+    /**
+     * 查询当前播放源下是否可以执行指定的播控命令。
+     * 该函数必须在Prepare()执行成功后才能被调用。
+     *
+     * @param { PlaybackCommand } command - 需要查询的播控指令的枚举值。
+     *     <br>取值约束：请参阅枚举回放命令。
+     * @returns { Promise<boolean> } Promise用于返回结果。
+     *     **true**表示可以执行该命令。
+     *     **false**表示不允许执行该命令。
+     * @throws { BusinessError } 5400102 - Operation not allowed.
+     *     If this function is invoked before Prepare(), it is returned.
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    checkSupportPlaybackCommand(command: PlaybackCommand): Promise<boolean>;
 
     /**
      * 媒体URL，只允许在**idle**状态下设置。
@@ -4039,7 +4089,7 @@ declare namespace media {
      *
      * @param { 'seekDone' } type - seek生效的事件回调类型，支持的事件：'seekDone'，除SEEK_CONTINUOUS外的
      *     [SeekMode]{@link @ohos.multimedia.media:media.SeekMode}每次调用seek后都会回调此事件。
-     * @param { Callback<int> } callback - 回调函数。seek生效的事件回调方法，只会上报用户请求的time位置。<br/>**视频播放：**
+     * @param { Callback<int> } callback - 回调函数。seek生效的事件回调方法，只会上报用户请求的time位置，单位为（ms）。<br/>**视频播放：**
      *     [SeekMode]{@link @ohos.multimedia.media:media.SeekMode}会造成实际跳转位置与用户设置产生偏差，精准位置需要通过currentTime获取，事件回调的time仅代表完
      *     成用户某一次请求。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
@@ -4147,7 +4197,7 @@ declare namespace media {
      * > - 在pause状态下，缓冲结束时播放器会上报timeUpdate事件。
      *
      * @param { 'timeUpdate' } type - 时间更新的回调类型，支持的事件：'timeUpdate'。
-     * @param { Callback<int> } callback - 回调函数。返回当前时间。
+     * @param { Callback<int> } callback - 回调函数。返回当前时间，单位为（ms）。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4173,7 +4223,7 @@ declare namespace media {
      * > 直播场景不支持durationUpdate上报。
      *
      * @param { 'durationUpdate' } type - 时长更新的回调类型，支持的事件：'durationUpdate'。
-     * @param { Callback<int> } callback - 回调函数。返回资源时长。
+     * @param { Callback<int> } callback - 回调函数。返回资源时长，单位为（ms）。
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -4325,7 +4375,7 @@ declare namespace media {
     off(type: 'availableBitrates', callback?: Callback<Array<int>>): void;
 
     /**
-     * 监听[AVPlayer]{@link @ohos.multimedia.media:media}的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。如果此时
+     * 监听[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。如果此时
      * [AVPlayerState]{@link @ohos.multimedia.media:media.AVPlayerState}也切至error状态，用户需要通过
      * [reset()]{@link media.AVPlayer.reset(callback: AsyncCallback<void>)}或者
      * [release()]{@link media.AVPlayer.release(callback: AsyncCallback<void>)}退出播放操作。若调用
@@ -5355,7 +5405,7 @@ declare namespace media {
    * 媒体服务错误类型枚举。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 11开始废弃，建议使用[AVErrorCode]{@link media.AVErrorCode}替代。
+   * > 从API version 8开始支持，从API version 11开始废弃，建议使用[AVErrorCode]{@link media.AVErrorCode}替代。
    *
    * @syscap SystemCapability.Multimedia.Media.Core
    * @since 8 dynamiconly
@@ -6206,7 +6256,7 @@ declare namespace media {
    * 音频播放的状态机。可通过state属性获取当前状态。
    * 
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
    *
    * @unionmember { 'idle' } 音频播放空闲，dataload/reset成功后处于此状态。
    * @unionmember { 'playing' } 音频正在播放，play成功后处于此状态。
@@ -6224,7 +6274,7 @@ declare namespace media {
   /**
    * > **说明：**
    * >
-   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media}替代。
+   * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}替代。
    * 
    * 音频播放管理类，用于管理和播放音频媒体。在调用AudioPlayer的方法前，需要先通过
    * [createAudioPlayer()]{@link @ohos.multimedia.media:media.createAudioPlayer}构建一个AudioPlayer实例。
@@ -6239,7 +6289,7 @@ declare namespace media {
      * 开始播放音频资源，需在'dataLoad'事件成功触发后，才能调用。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.play]{@link @ohos.multimedia.media:media.AVPlayer.play(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6253,7 +6303,7 @@ declare namespace media {
      * 暂停播放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.pause]{@link @ohos.multimedia.media:media.AVPlayer.pause(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6267,7 +6317,7 @@ declare namespace media {
      * 停止播放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.stop]{@link @ohos.multimedia.media:media.AVPlayer.stop(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6281,7 +6331,7 @@ declare namespace media {
      * 重置播放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 7开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 7开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.reset]{@link @ohos.multimedia.media:media.AVPlayer.reset(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6295,7 +6345,7 @@ declare namespace media {
      * 跳转到指定播放位置。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer.seek]{@link @ohos.multimedia.media:media.AVPlayer.seek}替代
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVPlayer.seek]{@link @ohos.multimedia.media:media.AVPlayer.seek}替代
      * > 。
      *
      * @param { number } timeMs - 指定的跳转时间节点，单位毫秒（ms），取值范围[0, duration]。
@@ -6310,7 +6360,7 @@ declare namespace media {
      * 设置音量。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.setVolume]{@link @ohos.multimedia.media:media.AVPlayer.setVolume}替代。
      *
      * @param { number } vol - 指定的相对音量大小，取值范围为[0.00-1.00]，1表示最大音量，即100%。
@@ -6325,7 +6375,7 @@ declare namespace media {
      * 释放音频资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.release]{@link @ohos.multimedia.media:media.AVPlayer.release(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioPlayer
@@ -6339,7 +6389,7 @@ declare namespace media {
      * 获取音频轨道信息。需在'dataLoad'事件成功触发后，才能调用。通过回调函数获取返回值。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.getTrackDescription]{@link @ohos.multimedia.media:media.AVPlayer.getTrackDescription(callback: AsyncCallback<Array<MediaDescription>>)}
      * > 替代。
      *
@@ -6356,7 +6406,7 @@ declare namespace media {
      * 获取音频轨道信息。需在'dataLoad'事件成功触发后，才能调用。通过Promise获取返回值。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.getTrackDescription]{@link @ohos.multimedia.media:media.AVPlayer.getTrackDescription()}替代。
      *
      * @returns { Promise<Array<MediaDescription>> } 音频轨道信息MediaDescription数组Promise返回值。
@@ -6371,7 +6421,7 @@ declare namespace media {
      * 开始订阅音频缓存更新事件。仅网络播放支持该订阅事件。
      * 
      * > **说明：**
-     * > > 从API version 8开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 8开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('bufferingUpdate')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'bufferingUpdate', callback: OnBufferingUpdateHandler)}
      * > 替代。
      *
@@ -6488,7 +6538,7 @@ declare namespace media {
      * 开始订阅音频播放事件。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('stateChange')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
      * > 替代。
      *
@@ -6511,7 +6561,7 @@ declare namespace media {
      * 开始订阅音频播放时间更新事件。处于播放状态时，每隔1s上报一次该事件。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('timeUpdate')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'timeUpdate', callback: Callback<int>)}
      * > 替代。
      *
@@ -6528,7 +6578,7 @@ declare namespace media {
      * 监听音频焦点变化事件，参考[audio.InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}。
      * 
      * > **说明：**
-     * > > 从API version 9开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 9开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('audioInterrupt')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'audioInterrupt', callback: Callback<audio.InterruptEvent>)}
      * > 替代。
      *
@@ -6545,7 +6595,7 @@ declare namespace media {
      * 开始订阅音频播放错误事件，当上报error错误事件后，用户需处理error事件，退出播放操作。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVPlayer.on('error')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'error', callback: ErrorCallback)}替
      * > 代。
      *
@@ -6656,7 +6706,7 @@ declare namespace media {
      * @throws { BusinessError } 201 - Permission denied. Return by callback.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -6676,7 +6726,7 @@ declare namespace media {
      * @throws { BusinessError } 201 - Permission denied. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -6692,7 +6742,7 @@ declare namespace media {
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}之后调用。
      *
      * @param { AsyncCallback<AVRecorderConfig> } callback - 回调函数。获取实时配置的参数成功时，err为undefined，data为获取到的配置参数，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6707,7 +6757,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<AVRecorderConfig | undefined> } callback - 回调函数。获取实时配置的参数成功时，err为undefined，data为获取到的配置参数，
      *     否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6721,7 +6771,7 @@ declare namespace media {
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}之后调用。
      *
      * @returns { Promise<AVRecorderConfig> } Promise对象。返回实时配置参数。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6735,7 +6785,7 @@ declare namespace media {
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}之后调用。
      *
      * @returns { Promise<AVRecorderConfig | undefined> } Promise对象，返回实时配置参数。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6752,7 +6802,7 @@ declare namespace media {
      * [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}之间调用。
      *
      * @param { AsyncCallback<string> } callback - 回调函数。当获取surface成功，err为undefined，data为获取到的surfaceId，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6770,7 +6820,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<string | undefined> } callback - 回调函数。当获取surface成功，err为undefined，data为获取到的surfaceId，
      *     否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6787,7 +6837,7 @@ declare namespace media {
      * [start]{@link media.AVRecorder#start()}之间调用。
      *
      * @returns { Promise<string> } Promise对象，返回获取的surfaceId。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6804,7 +6854,7 @@ declare namespace media {
      * [start]{@link media.AVRecorder#start()}之间调用。
      *
      * @returns { Promise<string | undefined> } Promise对象，返回获取的surfaceId。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6820,7 +6870,7 @@ declare namespace media {
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6837,7 +6887,7 @@ declare namespace media {
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6955,7 +7005,7 @@ declare namespace media {
      * [getInputSurface]{@link media.AVRecorder#getInputSurface(callback: AsyncCallback<string>)}接口调用成功后，才能调用此接口。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。如果开始录制成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6971,7 +7021,7 @@ declare namespace media {
      * [getInputSurface]{@link media.AVRecorder#getInputSurface()}接口调用成功后，才能调用此接口。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6988,7 +7038,7 @@ declare namespace media {
      * 之后可以通过调用[resume]{@link media.AVRecorder#resume(callback: AsyncCallback<void>)}接口来恢复录制。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。如果暂停录制成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7004,7 +7054,7 @@ declare namespace media {
      * 之后可以通过调用[resume]{@link media.AVRecorder#resume()}接口来恢复录制。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7022,7 +7072,7 @@ declare namespace media {
      * [stop]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)}接口停止录制。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。如果恢复录制成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7038,7 +7088,7 @@ declare namespace media {
      * 之后可以再次调用[pause]{@link media.AVRecorder#pause()}接口暂停录制，或调用[stop]{@link media.AVRecorder#stop()}接口停止录制。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7060,7 +7110,7 @@ declare namespace media {
      * [getInputSurface]{@link media.AVRecorder#getInputSurface(callback: AsyncCallback<string>)}接口才能重新录制。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。如果停止录制成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7079,7 +7129,7 @@ declare namespace media {
      * [getInputSurface]{@link media.AVRecorder#getInputSurface()}接口才能重新录制。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7509,7 +7559,7 @@ declare namespace media {
 
   /**
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 8开始废弃，建议使用[CodecMimeType]{@link media.CodecMimeType}替代。
+   * > 从API version 6开始支持，从API version 8开始废弃，建议使用[CodecMimeType]{@link media.CodecMimeType}替代。
    * 
    * 表示音频编码格式的枚举。
    *
@@ -7589,7 +7639,7 @@ declare namespace media {
 
   /**
    * > **说明：**
-   * > > 从API version 6开始支持，从API version 8 开始废弃，建议使用[ContainerFormatType]{@link media.ContainerFormatType}替代。
+   * > 从API version 6开始支持，从API version 8 开始废弃，建议使用[ContainerFormatType]{@link media.ContainerFormatType}替代。
    * 
    * 表示音频封装格式的枚举。
    *
@@ -7909,7 +7959,7 @@ declare namespace media {
      * 录制准备，根据传入的配置参数初始化录制资源（包括编码器、采样率、声道数等），完成录制前的准备工作。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}
      * > 替代。
      *
@@ -7927,7 +7977,7 @@ declare namespace media {
      * 开始录制，需在'prepare'事件成功触发后，才能调用start方法。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7941,7 +7991,7 @@ declare namespace media {
      * 暂停录制，需要在'start'事件成功触发后，才能调用pause方法。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7955,7 +8005,7 @@ declare namespace media {
      * 恢复录制，需要在'pause'事件成功触发后，才能调用resume方法。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.resume]{@link media.AVRecorder#resume(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7969,7 +8019,7 @@ declare namespace media {
      * 停止录音。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.stop]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7983,7 +8033,7 @@ declare namespace media {
      * 释放录音资源。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.release]{@link media.AVRecorder#release(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -7999,7 +8049,7 @@ declare namespace media {
      * 进行重置录音之前，需要先调用stop()停止录音。重置录音之后，需要调用prepare()设置录音参数项，才能再次进行录音。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.reset]{@link media.AVRecorder#reset(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
@@ -8013,7 +8063,7 @@ declare namespace media {
      * 开始订阅音频录制事件。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.on('stateChange')]{@link media.AVRecorder#on(type: 'stateChange', callback: OnAVRecorderStateChangeHandler)}
      * > 替代。
      *
@@ -8038,7 +8088,7 @@ declare namespace media {
      * 开始订阅音频录制错误事件，当上报error错误事件后，用户需处理error事件，退出录制操作。
      * 
      * > **说明：**
-     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.on('error')]{@link media.AVRecorder#on(type: 'error', callback: ErrorCallback)}
      * > 替代。
      *
@@ -8422,7 +8472,7 @@ declare namespace media {
    * 视频播放的状态机，可通过state属性获取当前状态。
    * 
    * > **说明：**
-   * > > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayerState]{@link media.AVPlayerState}替代。
    *
    * @unionmember { 'idle' } 视频播放空闲。
    * @unionmember { 'prepared' } 视频播放准备。
@@ -8552,7 +8602,7 @@ declare namespace media {
    * 
    * > **说明：**
    * >
-   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}替代。
    *
    * @syscap SystemCapability.Multimedia.Media.VideoPlayer
    * @since 8 dynamiconly
@@ -9584,6 +9634,16 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     MD_KEY_TRACK_REFERENCE_TYPE = 'track_ref_type',
+
+    /**
+     * 提取该Track是否可以正常播放的键
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    MD_KEY_TRACK_PLAYABLE = 'is_playable'
   }
 
   /**
@@ -10246,12 +10306,24 @@ declare namespace media {
      * 视频录制是否选择稳定质量模式，选择视频录制时选填，enableStableQualityMode默认为false。设置为true时，启用视频编码策略以实现质量稳定的编码。
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
-     * @systemapi
+     * @systemapi [since 18 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 18 dynamic
      * @since 23 static
      */
-    enableStableQualityMode?: boolean
- 
+    enableStableQualityMode?: boolean;
+
+    /**
+     * 在StableQualityMode中设置质量参数。取值范围为【0,51】。
+     * 数值越小，输出码率越高，质量越好。
+     * 取值限定为整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Media.AVRecorder
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    sqrFactor?: boolean;
+
     /**
      * 视频录制是否启用B帧编码。true表示启用B帧编码（仅在视频编码格式为H.265且设备硬件支持的情况下生效），false表示不启用B帧编码。<br>该参数为视频录制场景下的可选项，默认值为false。
      *
@@ -10836,6 +10908,33 @@ declare namespace media {
   }
 
   /**
+   * 自动暂停屏幕录制的场景枚举定义。
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum AVScreenCaptureAutoPauseCaptureScene {
+    /**
+     * 不设置任何场景，在任何场景下都不会自动暂停屏幕录制。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_NONE = 0,
+
+    /**
+     * 屏幕折叠状态发生变化的场景。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_SCREEN_FOLD_STATE_CHANGE = 1 << 0
+  }
+
+  /**
    * 录屏策略。
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -10902,9 +11001,71 @@ declare namespace media {
      *
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     enableAEC?: boolean;
+
+    /**
+     * 设置自动暂停屏幕内容采集的场景集合。<br>
+     * 当采集会话运行过程中，若场景集合中的任一场景发生，系统将自动暂停屏幕内容采集。<br>
+     * 可通过OH_AVScreenCapture_ResumeScreenCapture()接口恢复屏幕内容采集。<br>
+     * 默认不自动暂停屏幕内容采集（即不设置该参数时的默认行为）。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
+  }
+
+
+  /**
+   * 矩形区域的配置接口。矩形区域的位置从左上角开始，大小定义为矩形的长宽数据。
+   * 
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface RectangleRegion {
+    /**
+     * 矩形区域相对于顶部边缘的偏移量。
+     * 单位为：像素。取值应为≥0的整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * 矩形区域相对于左边缘的偏移量。
+     * 单位为：像素。取值应为≥0的整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * 矩形区域的宽度。
+     * 单位为：像素。取值应为正整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    width: int;
+    
+    /**
+     * 矩形区域的高度。
+     * 单位为：像素。取值应为正整数。
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    height: int;
   }
 
   /**
@@ -11295,6 +11456,23 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     setContentAutoRotation(enable: boolean): Promise<void>;
+
+    /**
+     * 用于屏幕录制模式下指定实际录制的区域。
+     * 
+     * 可在启动录屏前配置，也可以在录屏过程中更新区域。
+     *
+     * @param { int } displayId - 指定录制区域的屏幕ID。<br>取值应为整数。取值约束：该值必须是当前系统中已存在的屏幕ID。
+     * @param { RectangleRegion } area - 录制的矩形区域定义
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
+     * @throws { BusinessError } 5400108 - The parameter check failed, parameter value out of range.
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setCaptureArea(displayId: int, area: RectangleRegion): Promise<void>;
 
     /**
      * 订阅录屏状态切换的事件，当状态发生的时候，会通过订阅的回调通知用户。

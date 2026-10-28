@@ -14,7 +14,9 @@
  */
 
 /**
- * @file 3D scene common type declarations
+ * This module provides the common data types in ArkGraphics 3D.
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -517,7 +519,7 @@ export enum ShadowAlgorithmType {
 }
 
 /**
- * A custom geometry type that inherits from GeometryDefinition.
+ * A custom geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -688,7 +690,7 @@ export declare class CustomGeometry extends GeometryDefinition {
 }
 
 /**
- * A cube geometry type that inherits from GeometryDefinition.
+ * A cube geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -720,7 +722,7 @@ export declare class CubeGeometry extends GeometryDefinition {
 }
 
 /**
- * A plane geometry type that inherits from GeometryDefinition.
+ * A plane geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -752,7 +754,7 @@ export declare class PlaneGeometry extends GeometryDefinition {
 }
 
 /**
- * A sphere geometry type that inherits from GeometryDefinition.
+ * A sphere geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -806,7 +808,7 @@ export declare class SphereGeometry extends GeometryDefinition {
 }
 
 /**
- * A cylinder geometry type that inherits from GeometryDefinition.
+ * A cylinder geometry type that inherits from [GeometryDefinition]{@link GeometryDefinition}.
  *
  * > **NOTE**
  * >
@@ -814,7 +816,7 @@ export declare class SphereGeometry extends GeometryDefinition {
  * > Invalid values may prevent cylinder creation or cause undefined behavior.
  *
  * For example, with radius=0.5, height=1, and segmentCount=20, the mesh and UV layout of the generated cylinder are shown below.
- * <br>![](docroot://reference/apis-arkgraphics3d/figures/cylinder.png
+ * <br>![](docroot://reference/apis-arkgraphics3d/figures/cylinder.png)
  *
  * @extends GeometryDefinition
  * @syscap SystemCapability.ArkUi.Graphics3D

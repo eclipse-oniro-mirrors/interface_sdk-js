@@ -14,7 +14,9 @@
  */
 
 /**
- * @file 3D scene post-process settings type declarations
+ * This module provides image post-processing methods such as tone mapping in ArkGraphics 3D.
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -86,7 +88,8 @@ export interface ToneMappingSettings {
 }
 
 /**
- * Describes the settings for bloom effects. It is unavailable when RenderingPipelineType is set to FORWARD_LIGHTWEIGHT.
+ * Describes the settings for bloom effects.
+ * It is unavailable when [RenderingPipelineType]{@link ./SceneTypes:RenderingPipelineType} is set to FORWARD_LIGHTWEIGHT.
 * 
  * @typedef BloomSettings
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -172,7 +175,8 @@ export interface VignetteSettings {
 }
 
 /**
- * Describes the settings for color fringing. It is unavailable when RenderingPipelineType is set to FORWARD_LIGHTWEIGHT.
+ * Describes the settings for color fringing.
+ * It is unavailable when [RenderingPipelineType]{@link ./SceneTypes:RenderingPipelineType} is set to FORWARD_LIGHTWEIGHT.
  *
  * @typedef ColorFringeSettings
  * @syscap SystemCapability.ArkUi.Graphics3D
@@ -194,7 +198,8 @@ export interface ColorFringeSettings {
 
 /**
  * Post-processing settings, which are used to configure the image processing effect after camera rendering,
- * including tone mapping, bloom, vignetting, and chromatic aberration. This is used as the postProcess attribute of Camera.
+ * including tone mapping, bloom, vignetting, and chromatic aberration.
+ * This is used as the postProcess attribute of [Camera]{@link ./SceneNodes:Camera}.
  *
  * @typedef PostProcessSettings 
  * @syscap SystemCapability.ArkUi.Graphics3D

@@ -15,7 +15,7 @@
  */
 
 /**
- * @file
+ * @file NotificationInfo
  * @kit NotificationKit
  */
 
@@ -23,8 +23,11 @@ import type notificationManager from '../@ohos.notificationManager';
 import { NotificationExtensionContent } from './NotificationExtensionContent';
 
 /**
- * The **NotificationInfo** module describes the notification information delivered to the onReceiveMessage callback
- * of ExtensionAbility for notification subscriptions.
+ * Notification information in the 
+ * [onReceiveMessage]{@link @ohos.application.NotificationSubscriberExtensionAbility:NotificationSubscriberExtensionAbility#onReceiveMessage}
+ * callback of the 
+ * [notification subscription](docroot://notification/notification-glossary.md#notification-subscription) extension 
+ * ability.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 22 dynamic
@@ -41,8 +44,9 @@ export interface NotificationInfo {
   readonly hashCode: string;
 
   /**
-   * Notification slot type, which identifies the slot category of the notification (such as social communication and
-   * service reminder). Different slot types correspond to different reminder types.
+   * Type of the [notification slot](docroot://notification/notification-glossary.md#notification-slot), which 
+   * identifies the channel category to which the notification belongs (for example, social communication and service 
+   * reminder). Different slot types correspond to different reminder modes.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
@@ -51,14 +55,15 @@ export interface NotificationInfo {
   readonly notificationSlotType: notificationManager.SlotType;
 
   /**
-   * Notification content, which includes the title and body of the notification.
+   * [Notification content](docroot://notification/notification-glossary.md#notification-content), including the title 
+   * and body of the notification.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
    * @since 23 static
    */
   readonly content: NotificationExtensionContent;
-  
+
   /**
    * Bundle name of the application that creates the notification.
    *
@@ -78,7 +83,11 @@ export interface NotificationInfo {
   readonly appName?: string;
 
   /**
-   * Timestamp when the notification is published. Data format: timestamp. Unit: millisecond.
+   * Timestamp when the notification is published.
+   *
+   * Data format: timestamp.
+   *
+   * Unit: milliseconds.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic

@@ -14,12 +14,12 @@
  */
 
 /**
- *
- * @file
+ * @file Notification
  * @kit NotificationKit
  */
 
 /**
+ * Defines the action to be taken when the notification is clicked.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 3 dynamiconly
@@ -27,7 +27,7 @@
  */
 export interface ActionResult {
   /**
-   * Name of the application bundle to which the notification will be redirected after being clicked.
+   * Name of the application bundle to which the notification will be redirected after being tapped.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
@@ -36,7 +36,7 @@ export interface ActionResult {
   bundleName: string;
 
   /**
-   * Name of the application ability to which the notification will be redirected after being clicked.
+   * Name of the application ability to which the notification will be redirected after being tapped.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
@@ -55,6 +55,8 @@ export interface ActionResult {
 }
 
 /**
+ * Options for displaying the notification, including the notification title, notification content, and the action
+ * triggered when the notification is tapped.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 3 dynamiconly
@@ -71,7 +73,7 @@ export interface ShowNotificationOptions {
   contentTitle?: string;
 
   /**
-   * Notification content.
+   * [Notification content](docroot://notification/notification-glossary.md#notification-content).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
@@ -80,9 +82,7 @@ export interface ShowNotificationOptions {
   contentText?: string;
 
   /**
-   * Action triggered when the notification is clicked.
-   * 
-   * This API is deprecated since API version 7.
+   * Action triggered when the notification is tapped.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
@@ -101,9 +101,10 @@ export interface ShowNotificationOptions {
  */
 declare class Notification {
   /**
-   * Displays the notification.
+   * Displays a notification.
    *
-   * @param { ShowNotificationOptions } [options] - Notification title.
+   * @param { ShowNotificationOptions } [options] - Options for displaying the notification, including the
+   *     notification title, notification content, and the action triggered when the notification is tapped.
    * @syscap SystemCapability.Notification.Notification
    * @since 3 dynamiconly
    * @deprecated since 7

@@ -1476,7 +1476,7 @@ declare const Watch: (value: string) => PropertyDecorator;
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderDecoratorConfig {
   /**
@@ -1489,7 +1489,7 @@ declare interface BuilderDecoratorConfig {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isPlaceholder: boolean;
 }
@@ -1504,7 +1504,7 @@ declare interface BuilderDecoratorConfig {
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodDecorator;
 
@@ -1512,7 +1512,7 @@ declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodD
  * Defining Builder MethodDecorator
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
- * @type { MethodDecorator & BuilderMethodDecorator } [since 26.2.0]
+ * @type { MethodDecorator & BuilderMethodDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1550,7 +1550,7 @@ declare const LocalBuilder: MethodDecorator;
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface VersionCondition {
   /**
@@ -1563,7 +1563,7 @@ declare interface VersionCondition {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   minApiVersion?: number | string;
 
@@ -1577,7 +1577,7 @@ declare interface VersionCondition {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxApiVersion?: number | string;
 }
@@ -1592,9 +1592,24 @@ declare interface VersionCondition {
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type StylesVersionDecorator = (versionCondition: VersionCondition) => MethodDecorator;
+
+/**
+ * Define Extend Decorator type with version control.
+ *
+ * @param { any } value
+ * @param { VersionCondition } versionCondition
+ * @returns { MethodDecorator } Extend decorator
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCondition) => MethodDecorator;
 
 /**
  * The @Styles decorator is used to extract multiple style settings into a method, which can be directly called at the 
@@ -1603,7 +1618,7 @@ declare type StylesVersionDecorator = (versionCondition: VersionCondition) => Me
  * consistency. 
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
- * @type { MethodDecorator & StylesVersionDecorator } [since 26.2.0]
+ * @type { MethodDecorator & StylesVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1620,6 +1635,8 @@ declare const Styles: MethodDecorator & StylesVersionDecorator;
  * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing 
  * style code duplication.
  *
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1] 
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1628,7 +1645,8 @@ declare const Styles: MethodDecorator & StylesVersionDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Extend: MethodDecorator & ((value: any) => MethodDecorator);
+declare const Extend: MethodDecorator
+  & ((value: any) => MethodDecorator) & ExtendVersionDecorator;
 
 /**
  * The @AnimatableExtend decorator is used to customize animatable property methods.
@@ -9021,7 +9039,7 @@ declare enum SafeAreaEdge {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SafeAreaInsetAlignment {
   /**
@@ -9034,7 +9052,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   START = 0,
 
@@ -9046,7 +9064,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   CENTER = 1,
 
@@ -9060,7 +9078,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   END = 2
 }
@@ -9073,7 +9091,7 @@ declare enum SafeAreaInsetAlignment {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetEdgeConfig {
   /**
@@ -9089,7 +9107,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   content: CustomBuilder;
 
@@ -9105,7 +9123,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   spacing?: LengthMetrics;
 
@@ -9119,7 +9137,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   alignment?: SafeAreaInsetAlignment;
 }
@@ -9132,7 +9150,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetOptions {
   /**
@@ -9146,7 +9164,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   top?: SafeAreaInsetEdgeConfig;
 
@@ -9162,7 +9180,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   end?: SafeAreaInsetEdgeConfig;
 
@@ -9177,7 +9195,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   bottom?: SafeAreaInsetEdgeConfig;
 
@@ -9193,7 +9211,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   start?: SafeAreaInsetEdgeConfig;
 }
@@ -14631,16 +14649,20 @@ declare interface SheetOptions extends BindOptions {
 
   /**
    * Title bar hover mode.
-   * 
    * - STANDARD: The title bar and content are arranged vertically without overlapping.
    * - STACK: The title bar overlays on top of the content. Developers need to add padding to avoid occlusion.
-   * Default value: **SheetTitleBarHoverMode.STANDARD**.
+   * - SAFE_AREA_PADDING: The title bar is placed in the safe area padding region. The content expands
+   *   into the safe area, and the scroll content is clipped to the safe area.
+   * The default value is **SheetTitleBarHoverMode.STANDARD**.
+   * After {@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA} is successfully set via
+   * {@link UIContext.applyDefaultImmersiveStrategy}, the default value is
+   * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.0.1 dynamic
    */
   titleBarHoverMode?: SheetTitleBarHoverMode;
 
@@ -14729,7 +14751,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   maskExtraHeight?: LengthMetrics;
 
@@ -14746,7 +14768,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   maskColor?: ResourceColor;
 
@@ -14758,7 +14780,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   effectiveDistance?: LengthMetrics;
 }
@@ -14770,7 +14792,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.0.1 dynamiconly
+ * @since 26.0.1 dynamic
  */
 declare enum SheetTitleBarHoverMode {
   /**
@@ -14780,7 +14802,7 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.0.1 dynamic
    */
   STANDARD = 0,
 
@@ -14792,9 +14814,21 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.0.1 dynamiconly
+   * @since 26.0.1 dynamic
    */
-  STACK = 1
+  STACK = 1,
+
+  /**
+   * Safe area padding mode: The title bar is placed in the safe area padding region.
+   * The content expands into the safe area, and the scroll content is clipped to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SAFE_AREA_PADDING = 2
 }
 
 /**
@@ -18757,7 +18791,7 @@ declare class TouchResult {
  */
 declare interface DepthVector3 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18768,7 +18802,7 @@ declare interface DepthVector3 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18779,7 +18813,7 @@ declare interface DepthVector3 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18801,7 +18835,7 @@ declare interface DepthVector3 {
  */
 declare interface DepthVector4 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18813,7 +18847,7 @@ declare interface DepthVector4 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18824,7 +18858,7 @@ declare interface DepthVector4 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18835,7 +18869,7 @@ declare interface DepthVector4 {
   z: double;
 
   /**
-   * W component.
+   * W component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -20495,7 +20529,7 @@ declare class CommonMethod<T> {
    * >  - In the [AlphabetIndexer](./ts-container-alphabet-indexer.md) component, setting **width** to
    * >    **auto** means adapting to the width of the largest index item.
    * >
-   * >  - In the [Row]{@link Row}, [Column]{@link Column}, and [RelativeContainer]{@link RelativeContainer}
+   * >  - In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
    * >    components, setting width to auto means adapting to the child components.
    *
    * @param { Length } value - Width of the component to set.<br>Unit: vp<br>When a percentage is set, the
@@ -20537,7 +20571,7 @@ declare class CommonMethod<T> {
    *
    * >  **NOTE**
    * >
-   * >  In the [Row]{@link Row}, [Column]{@link Column}, and [RelativeContainer]{@link RelativeContainer}
+   * >  In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
    * >  components, setting **width** and **height** to **auto** means that the size adapts to the size of their
    * >  child components.
    *
@@ -20925,7 +20959,7 @@ declare class CommonMethod<T> {
   /**
    * Sets the weight of the component in a chain, which is used to re-lay out components that form the chain. This
    * attribute takes effect only when the parent container is
-   * [RelativeContainer]{@link RelativeContainer}.
+   * [RelativeContainer]{@link ./relative_container}.
    *
    * **NOTE**
    *
@@ -21026,7 +21060,7 @@ declare class CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   safeAreaInset(options?: SafeAreaInsetOptions): T;
 
@@ -24112,7 +24146,7 @@ declare class CommonMethod<T> {
    *     resides. The value 0 means the component does not participate in the allocation of remaining space and keeps
    *     its original size. When the value is greater than 0, the remaining space of the parent container is allocated
    *     proportionally; the larger the value, the more space is allocated.<br>Value range: [0, +∞)<br>Default value:
-   *     0<br>When the parent container is [Column]{@link Column} or [Row]{@link Row}, you need to set the size along
+   *     0<br>When the parent container is [Column]{@link ./column} or [Row]{@link ./row}, you need to set the size along
    *     the main axis (width/height/size); otherwise, the remaining space allocation effect of flexGrow may be
    *     affected.<br>[constraintSize]{@link constraintSize} restricts the size range of the component. When the
    *     component size after flexGrow expansion exceeds the maximum limit of constraintSize, it is constrained by
@@ -24147,10 +24181,10 @@ declare class CommonMethod<T> {
    *     attribute belongs when the parent container space is insufficient. The value 0 indicates that the component
    *     does not participate in compression; when the value is greater than 0, compression is performed
    *     proportionally, and a larger value indicates a larger compression amount.<br>When the parent container is
-   *     [Column]{@link Column} or [Row]{@link Row}, default value: 0, value range: [0, +∞).<br>When the parent
-   *     container is [Flex]{@link Flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
+   *     [Column]{@link ./column} or [Row]{@link ./row}, default value: 0, value range: [0, +∞).<br>When the parent
+   *     container is [Flex]{@link ./flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
    *     constraintSize} restricts the size range of the component. Even if [constraintSize]{@link constraintSize}
-   *     is set for [Column]{@link Column} and [Row]{@link Row}, when the main axis size (width/height/size) is not
+   *     is set for [Column]{@link ./column} and [Row]{@link ./row}, when the main axis size (width/height/size) is not
    *     set in the parent container, the default layout behavior is still followed, and the component size is
    *     adapted to the children on the main axis. In this case, flexShrink does not take effect.<br>When an
    *     exception value is set, this attribute uses the default value.
@@ -24196,7 +24230,7 @@ declare class CommonMethod<T> {
    * attribute is supported only by Flex, Column, Row, DynamicLayout, and GridRow containers.
    *
    * @param { ItemAlign } value - Alignment format of the child component on the cross axis of the parent container,
-   *     which overrides the alignItems setting in the [Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row},
+   *     which overrides the alignItems setting in the [Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row},
    *     DynamicLayout, and [GridRow]{@link GridRow} layout containers. Use it when a child
    *     component needs a different alignment from other child components in the parent container (typical scenarios:
    *     most child components in the parent container are center-aligned, but a specific child component needs top or
@@ -24241,7 +24275,7 @@ declare class CommonMethod<T> {
    *     range is [0, +∞).
    *     <br>Default value: **1**
    *     <br>**NOTE**<br>
-   *     Takes effect only in [Row]{@link Row}/[Column]{@link Column}/[Flex (single-line)]{@link Flex} container
+   *     Takes effect only in [Row]{@link ./row}/[Column]{@link ./column}/[Flex (single-line)]{@link Flex} container
    *     components.
    *     <br>Used when the container space is limited and the display order of components needs to be controlled or
    *     low-priority components need to be hidden (for example, dynamically displaying content based on the available
@@ -24426,7 +24460,7 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > - The effect of **position** on the position takes effect after the component's size measurement is complete.
-   * > - When the parent component is [Row]{@link Row}, [Column]{@link Column}, or [Flex]{@link Flex}, a child component
+   * > - When the parent component is [Row]{@link ./row}, [Column]{@link ./column}, or [Flex]{@link ./flex}, a child component
    * with **position** set does not occupy space. In this scenario, if all child components contained in the parent
    * component have **position** set, the parent component's size cannot be determined by other child components, and
    * layout measurement is performed based on the size (0, 0).
@@ -24440,7 +24474,7 @@ declare class CommonMethod<T> {
    * > - This attribute is applicable to scenarios where components such as top-displayed elements and floating buttons
    * have fixed positions within the parent component.
    * > - This attribute is not supported on layout components with zero width and height.
-   * > - When the parent component is [RelativeContainer]{@link RelativeContainer} and the child component has the
+   * > - When the parent component is [RelativeContainer]{@link ./relative_container} and the child component has the
    * [alignRules]{@link alignRules} attribute set, the child component's **position** attribute does not take effect.
    * > - If the parent component of the component where this attribute is located does not have a fixed width and
    * height, this component performs absolute positioning with reference to the first ancestor component that has a
@@ -24577,7 +24611,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the alignment rule for child components within the relative container. This attribute only takes effect when
-   * the parent container is [RelativeContainer]{@link RelativeContainer},
+   * the parent container is [RelativeContainer]{@link ./relative_container},
    * and supports dynamic configuration via [attributeModifier]{@link attributeModifier}.
    *
    * @param { AlignRuleOption } value - Alignment rules in the relative container.
@@ -24592,7 +24626,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the alignment rules in the relative container. This API is valid only when the container is
-   * [RelativeContainer]{@link RelativeContainer},.
+   * [RelativeContainer]{@link ./relative_container},.
    * This attribute replaces the original **left** and **right** directional parameters with **start** and **end** to
    * support proper mirroring in right-to-left (RTL) layout modes. It is recommended that you use this attribute for
    * configuring child component alignment rules in relative containers. This attribute supports dynamic configuration
@@ -25309,6 +25343,39 @@ declare class CommonMethod<T> {
   shadow(options: Optional<ShadowOptions | ShadowStyle>): T;
 
   /**
+   * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+   *
+   * This API works with the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} attribute.
+   * The shadow shape is recalculated when the component size changes.
+   *
+   * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+   *     When the value type is {@link CircleShape}, {@link EllipseShape},
+   *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+   *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): T;
+
+  /**
+   * Sets the clip mode for the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} when it is
+   * not filled. This API takes effect only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+   *
+   * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowClipMode(mode: ShadowClipMode | undefined): T;
+
+  /**
    * Sets the edge light effect for the component.
    * 
    * <p><strong>NOTE</strong>:
@@ -25765,6 +25832,11 @@ declare class CommonMethod<T> {
   /**
   * Tips control
   *
+  * > **NOTE**
+  * >
+  * > When the [enabled]{@link CommonMethod#enabled} universal attribute of the component bound with **bindTips** is
+  * > set to **false**, the floating bubble can still be displayed.
+  *
   * @param { TipsMessageType } message
   * @param { TipsOptions } [options]
   * @returns { T }
@@ -25795,6 +25867,13 @@ declare class CommonMethod<T> {
 
   /**
    * Menu control
+   *
+   * > **NOTE**
+   * >
+   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20
+   * >   only if the input parameter type of **content** is Array&lt;MenuElement&gt;.
+   * > - Multi-level menus cannot be displayed using **bindMenu** in **CustomBuilder**. Use the Menu component instead.
+   * > - **bindMenu** can be configured to display in subwindows by setting the **showInSubWindow** property in MenuOptions.
    *
    * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
    *     action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 7 - 10]
@@ -25827,6 +25906,12 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
+   *
    * @param { CustomBuilder } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu, Long pressing with a mouse device
    *     is not supported.
@@ -25842,6 +25927,12 @@ declare class CommonMethod<T> {
   /**
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByResponseType** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
    *
    * @param { CustomBuilder | Array<MenuElement> } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu. Long pressing with a mouse device
@@ -25861,6 +25952,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | undefined } content - Indicates the content of context menu. Undefined
    *     means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25877,6 +25973,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | Array<MenuElement> | undefined } content - Indicates the content of
    *     context menu. Undefined means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25892,6 +25993,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShown settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShown - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -25914,6 +26020,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShow settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByIsShow** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShow - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -26286,7 +26397,12 @@ declare class CommonMethod<T> {
   /**
    * Applies a spatial effect to component.
    *
-   * @param { SpatialEffectParams | undefined } params - Spatial effect parameters.
+   * This effect takes effect only on the child components of **DepthComponent** and only when the related parameters
+   * are correctly set. It is not supported on the **Web**, **XComponent**, **RichEditor**, **RichText**, **Video**,
+   * **Component3D**, or **EmbeddedComponent** components.
+   *
+   * @param { SpatialEffectParams | undefined } params - Spatial effect parameters. If this parameter is set to
+   * **undefined**, the spatial effect is removed.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -30144,8 +30260,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
    *    pressed.
-   *    <br>Default value: For API versions earlier than 26.2.0,the defalut value is false.
-   *    For API versions 26.2.0 and later, the defalut value is true when the scrollable component scrolls
+   *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+   *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
    *    horizontally,false otherwise.
    * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30517,7 +30633,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
@@ -30746,6 +30862,40 @@ declare interface ItemDragEventHandler {
 
 /**
  * Define DynamicNode.
+ *
+ * Drag sorting is used to implement manual sorting of list items or grid items,
+ * and is applicable to scenarios where users need to customize the order of items,
+ * such as to-do list sorting and playlist management. By using ForEach/LazyForEach/Repeat within a List
+ * or Grid component and setting the onMove event, drag sorting can be enabled when each iteration generates a ListItem
+ * or GridItem. After the drag is released, if the data position changes,
+ * the onMove event is triggered to report the start index and target index of the data movement. In the onMove event,
+ * the data source must be modified based on the reported start index and target index.
+ * Ensure that only the order of the data changes so that the placement animation can be executed properly.
+ *
+ * > **NOTE**
+ * >
+ * > - Supported since API version 12. If new content is added in later versions,
+ * > - a superscript is used to mark the earliest API version of the content.
+ * >
+ * > - Since API version 26.0.0, Grid supports onMove drag sorting. Currently,
+ * > - Grid supports onMove drag sorting only in scrollable scenarios.
+ * > - When a Grid contains GridItems spanning rows and columns,
+ * > - if the next GridItem to be placed cannot fully fit in the current row,
+ * > - the system searches downward row by row until it can be placed.
+ * > - Therefore, when drag sorting is performed in a Grid with GridItems spanning rows and columns,
+ * > - the new layout after dragging may contain some gaps.
+ * > - You can drag again to adjust the GridItem positions to fill the gaps.
+ * >
+ * > - When setting nodes spanning rows and columns in a Grid,
+ * > - use [GridLayoutOptions](ts-container-grid.md#gridlayoutoptions10).
+ * > - In the onMove event, the application should synchronously modify the corresponding irregular node information
+ * > - to keep it consistent with the new layout after dragging.
+ * > - For details, see
+ * > - [Example 4](#example-4-using-foreach-onmove-for-drag-sorting-in-grid-irregular-layout-and-setting-the-drag-event-callback),
+ * > - [Example 5](#example-5-using-lazyforeach-onmove-for-drag-sorting-in-grid-irregular-layout-and-setting-the-drag-event-callback)
+ * > - ,and [Example 6](#example-6-using-repeats-onmove-for-drag-sorting-in-grid-irregular-layout-and-setting-the-drag-event-callback).
+ * >
+ * > - The APIs of this module can be used only in the stage model.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

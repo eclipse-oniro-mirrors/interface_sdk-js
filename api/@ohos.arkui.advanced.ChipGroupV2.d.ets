@@ -25,6 +25,20 @@
  * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
  * longer limited to the component level. With state management V2, you can control component data and state more
  * flexibly, achieving more efficient UI refresh.
+ *
+ * > **NOTE**
+ * >
+ * > - If the **ChipGroupV2** component has [universal attributes]{@link CommonMethod} or
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **ChipGroupV2** component itself. As a result, the configured universal attributes and universal
+ * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
+ * > with the **ChipGroupV2** component.
+ *
+ * ###### Child Components
+ *
+ * No child component can be set.
+ *
  * @file
  * @kit ArkUI
  */
@@ -1467,6 +1481,18 @@ export declare struct ChipGroupV2 {
      */
     @Event
     onChange?: Callback<Array<number>>;
+
+    /**
+     * ChipGroupV2Items Change Callback Method.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    @Event
+    onItemsChange?: Callback<ChipGroupV2Items>;
 
     /**
      * Custom builder. To display custom content on the far right of the component, configure the **suffix** attribute.

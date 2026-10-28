@@ -24,276 +24,763 @@ import { Callback } from './@ohos.base';
  * **behaviorAwareness** 本模块提供 MSDP 设备状态感知能力，支持用户行为数据采集、序列模式聚类、感知事件判断。
  *
  * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
- * @since 26.2.0
- * @stagemodelonly
  * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
  */
-
 declare namespace behaviorAwareness {
 
   /**
    * 感知领域类型。用于区分不同的感知领域，每个领域有独立的 payload 结构。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum PerceptionDomain {
-    /** 习惯感知 */
-    HABIT_AWARENESS = 'habitAwareness',
+    /**
+     * 习惯感知领域类型能力。
+     * 用于识别用户日常使用习惯，例如应用使用习惯、设备操作习惯等。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    HABIT_AWARENESS = 'habitAwareness'
   }
 
   /**
    * 感知模式类型。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum PatternType {
-    /** 时间模式：时间 → 动作 */
+    /**
+     * 时间模式：基于时间触发动作的感知模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     TIME_PATTERN = 'timePattern',
-    /** 位置模式：位置 → 动作 */
+    /**
+     * 位置模式：基于地理位置触发动作组合的感知模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     LOCATION_PATTERN = 'locationPattern',
-    /** 动作序列模式：动作 → 动作 */
+    /**
+     * 事件序列模式：基于事件触发动作组合的感知模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     EVENT_PATTERN = 'eventPattern',
   }
 
   /**
-   * Event 类型枚举。
+   * 事件类型枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum EventType {
-    /** 时间点+每天 */
-    TIME_DAILY = 'timeDaily',
-    /** 时间点+每周 */
-    TIME_WEEKLY = 'timeWeekly',
-    /** 时间点+每月 */
-    TIME_MONTHLY = 'timeMonthly',
-    /** 时间点+法定工作日 */
-    TIME_WORKDAY = 'timeWorkday',
-    /** 到达位置 */
-    LOCATION_ARRIVE = 'locationArrive',
-    /** 打开应用 */
+    /**
+     * 每日时间点。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DAILY_TIME = 'dailyTime',
+    /**
+     * 每周时间点。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WEEKLY_TIME = 'weeklyTime',
+    /**
+     * 每月时间点。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    MONTHLY_TIME = 'monthlyTime',
+    /**
+     * 法定工作日时间点。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WORKDAY_TIME = 'workdayTime',
+    /**
+     * 位置信息，包含位置以及进出围栏状态。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    LOCATION = 'location',
+    /**
+     * 打开应用。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     APP_LAUNCH = 'appLaunch',
-    /** 退出应用 */
+    /**
+     * 退出应用。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     APP_EXIT = 'appExit',
-    /** 单次使用应用 */
+    /**
+     * 单次使用应用。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     APP_USAGE_SINGLE = 'appUsageSingle',
-    /** 当日使用应用 */
+    /**
+     * 当日使用应用。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     APP_USAGE_DAILY = 'appUsageDaily',
-    /** 关闭闹钟 */
+    /**
+     * 关闭闹钟。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     ALARM_DISMISS = 'alarmDismiss',
-    /** 开始充电 */
+    /**
+     * 开始充电。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     CHARGE_START = 'chargeStart',
-    /** 结束充电 */
+    /**
+     * 结束充电。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     CHARGE_END = 'chargeEnd',
-    /** 充满电 */
+    /**
+     * 充满电。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     CHARGE_FULL = 'chargeFull',
-    /** 电量高于指定值 */
+    /**
+     * 电量高于指定值。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     BATTERY_ABOVE = 'batteryAbove',
-    /** 电量低于指定值 */
+    /**
+     * 电量低于指定值。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     BATTERY_BELOW = 'batteryBelow',
-    /** 连接蓝牙 */
+    /**
+     * 连接蓝牙。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     BLUETOOTH_CONNECT = 'bluetoothConnect',
-    /** 断开蓝牙 */
+    /**
+     * 断开蓝牙。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     BLUETOOTH_DISCONNECT = 'bluetoothDisconnect',
-    /** 本机来电 */
+    /**
+     * 本机来电响铃。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     PHONE_RING = 'phoneRing',
   }
 
   /**
-   * Action 类型枚举。
+   * 动作类型枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum ActionType {
-    /** 关闭应用 */
+    /**
+     * 关闭应用。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     APP_CLOSE = 'appClose',
-    /** 打开应用 */
+    /**
+     * 打开应用。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     APP_OPEN = 'appOpen',
-    /** 护眼模式 */
+    /**
+     * 护眼模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     EYE_PROTECT_MODE = 'eyeProtectMode',
-    /** 深色模式 */
+    /**
+     * 深色模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     DARK_MODE = 'darkMode',
-    /** 个人热点 */
+    /**
+     * 个人热点。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     PERSONAL_HOTSPOT = 'personalHotspot',
-    /** 移动数据 */
+    /**
+     * 移动数据。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     MOBILE_DATA = 'mobileData',
-    /** 无线网络 */
+    /**
+     * 无线网络。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     WIFI = 'wifi',
-    /** 飞行模式 */
+    /**
+     * 飞行模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     AIRPLANE_MODE = 'airplaneMode',
-    /** 蓝牙 */
+    /**
+     * 蓝牙。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     BLUETOOTH = 'bluetooth',
-    /** NFC */
+    /**
+     * NFC。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     NFC = 'nfc',
-    /** 旋转锁定 */
+    /**
+     * 旋转锁定。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     ROTATION_LOCK = 'rotationLock',
-    /** 省电模式 */
+    /**
+     * 省电模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     POWER_SAVING = 'powerSaving',
-    /** 声音模式 */
+    /**
+     * 声音模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     SOUND_MODE = 'soundMode',
-    /** 屏幕亮度 */
+    /**
+     * 屏幕亮度。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     SCREEN_BRIGHTNESS = 'screenBrightness',
-    /** 音量 */
+    /**
+     * 音量。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     VOLUME = 'volume',
-    /** 关机 */
+    /**
+     * 关机。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     SHUTDOWN = 'shutdown',
-    /** 重启 */
+    /**
+     * 重启。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     REBOOT = 'reboot',
   }
 
   /**
    * 声音模式枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum SoundMode {
-    /** 振动 */
+    /**
+     * 振动模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     VIBRATE = 'vibrate',
-    /** 静音 */
+    /**
+     * 静音模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     SILENT = 'silent',
-    /** 响铃 */
+    /**
+     * 响铃模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     RING = 'ring',
   }
 
   /**
    * 蓝牙设备类型枚举。
    *
-   * @enum { number }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum BluetoothDeviceType {
-    /** 默认/未分类设备 */
+    /**
+     * 默认/未分类设备。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     DEFAULT = 0,
-    /** 车载设备 */
+    /**
+     * 车载设备。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     CAR = 1,
-    /** 耳机 */
+    /**
+     * 耳机。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     HEADSET = 2,
-    /** 助听器 */
+    /**
+     * 助听器。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     HEARING = 3,
-    /** 眼镜 */
+    /**
+     * 眼镜。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     GLASSES = 4,
-    /** 手表 */
+    /**
+     * 手表。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     WATCH = 5,
-    /** 音箱 */
+    /**
+     * 音箱。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     SPEAKER = 6,
-    /** 其他 */
+    /**
+     * 其他。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     OTHERS = 7,
   }
 
   /**
-   * 反馈类型枚举。
+   * 事件推送后用户反馈事件状态类型枚举。
    *
-   * @enum { number }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum FeedbackType {
-    /** 接受 */
-    ACCEPT = 1,
-    /** 忽略 */
-    IGNORE = 2,
-    /** 拒绝 */
-    REJECT = 3,
-    /** 编辑 */
-    EDIT = 4,
-    /** 未推送 */
-    NOT_PUSHED = 5,
+    /**
+     * 接受事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ACCEPT = 0,
+    /**
+     * 忽略事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    IGNORE = 1,
+    /**
+     * 拒绝事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    REJECT = 2,
+    /**
+     * 编辑事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    EDIT = 3,
+    /**
+     * 事件未推送。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NOT_PUSHED = 4
   }
 
   /**
    * 重复周期枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum RecurrenceType {
-    /** 每天 */
+    /**
+     * 每天。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     DAILY = 'daily',
-    /** 每周 */
+    /**
+     * 每周。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     WEEKLY = 'weekly',
-    /** 每月 */
+    /**
+     * 每月。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     MONTHLY = 'monthly',
-    /** 法定工作日 */
+    /**
+     * 法定工作日。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     WORKDAY = 'workday',
   }
 
   /**
    * 位置类型枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum LocationType {
-    /** 家 */
+    /**
+     * 家。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     HOME = 'home',
-    /** 公司 */
+    /**
+     * 公司。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     COMPANY = 'company',
-    /** 自定义 */
+    /**
+     * 自定义。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     CUSTOM = 'custom',
+  }
+
+  /**
+   * 位置状态类型枚举。用于区分进入或离开地理围栏。
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum LocationStatusType {
+    /**
+     * 进入地理围栏。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ENTER = 'enter',
+    /**
+     * 离开地理围栏。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    EXIT = 'exit',
   }
 
   /**
    * 操作目标枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum Operation {
-    /** 开启 */
+    /**
+     * 开启。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     ON = 'on',
-    /** 关闭 */
+    /**
+     * 关闭。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     OFF = 'off',
-    /** 切换 */
+    /**
+     * 切换。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     TOGGLE = 'toggle',
   }
 
   /**
    * 调节方向枚举。
    *
-   * @enum { string }
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export enum AdjustmentDirection {
-    /** 增大 */
+    /**
+     * 增大。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     UP = 'up',
-    /** 减小 */
+    /**
+     * 减小。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     DOWN = 'down',
   }
 
@@ -301,70 +788,241 @@ declare namespace behaviorAwareness {
    * 时间类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface TimeAttributes {
-    /** 判别字段，固定为 'time'。 */
+    /**
+     * 判别字段，固定为 'time'。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     kind: 'time';
-    /** 时间点（HH:mm 格式，如 "08:30"）。格式不合法时抛出 401 错误。 */
+    /**
+     * 时间点（HH:mm 格式，如 "08:30"）。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     timePoint: string;
-    /** 重复周期。 */
+    /**
+     * 重复周期。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     recurrence: RecurrenceType;
-    /** 星期几（周重复时有效）。取值范围：1-7，1 表示周一。不填时默认值为0，表示不设置。超出范围时抛出 401 错误。 */
-    dayOfWeek?: long;
-    /** 每月哪一天（月重复时有效）。取值范围：1-31。不填时默认值为0，表示不设置。超出范围时抛出 401 错误。 */
-    dayOfMonth?: long;
+    /**
+     * 星期几。
+     * 取值需为 [1,7] 范围内的整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dayOfWeek?: int;
+    /**
+     * 每月的第几天。
+     * 单位：天。取值需为 [1,31] 范围内的整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dayOfMonth?: int;
+  }
+
+  /**
+   * 地理坐标。
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface Coordinates {
+    /**
+     * 纬度。
+     * 单位：度。取值范围：[-90,90]。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    latitude: double;
+    /**
+     * 经度。
+     * 单位：度。取值范围：[-180,180]。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    longitude: double;
   }
 
   /**
    * 位置类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface LocationAttributes {
-    /** 判别字段，固定为 'location'。 */
+    /**
+     * 判别字段，固定为 'location'。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     kind: 'location';
-    /** 位置类型（预定义位置，可选）。 */
+    /**
+     * 位置类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     locationType?: LocationType;
-    /** 位置名称。 */
+    /**
+     * 位置名称。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     locationName?: string;
-    /** 经纬度坐标（必填，支持任意位置）。latitude 取值范围：-90~90；longitude 取值范围：-180~180。超出范围时抛出 401 错误。 */
-    coordinates: { latitude: double; longitude: double };
+    /**
+     * 地理坐标。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    coordinates: Coordinates;
   }
 
   /**
    * 系统事件类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface SystemEventAttributes {
-    /** 判别字段，固定为 'systemEvent'。 */
+    /**
+     * 判别字段，固定为 'systemEvent'。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     kind: 'systemEvent';
-    /** 应用包名（应用类事件）。 */
+    /**
+     * 应用包名。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     packageName?: string;
-    /** 应用名称。 */
+    /**
+     * 应用名称。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     appName?: string;
-    /** 应用 ID（应用类事件）。 */
+    /**
+     * 应用 ID（用于应用相关事件）。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     appId?: string;
-    /** 单次使用时长阈值（分钟，应用时长类事件）。不填时默认值为0。@unit min */
-    durationThreshold?: long;
-    /** 当日使用时长阈值（分钟，应用时长类事件）。不填时默认值为0。@unit min */
-    dailyDurationThreshold?: long;
-    /** 电量阈值（系统事件类）。不填时默认值为0。@unit % */
-    batteryThreshold?: long;
-    /** 电量百分比。取值范围：0-100。不填时默认值为0。超出范围时抛出 401 错误。@unit % */
-    level?: long;
-    /** 蓝牙设备类型（蓝牙类事件）。 */
+    /**
+     * 单次使用时长阈值。
+     * 单位：分钟。取值应为整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    durationThreshold?: int;
+    /**
+     * 当日使用时长阈值。
+     * 单位：分钟。取值需为 [0,1440] 范围内的整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dailyDurationThreshold?: int;
+    /**
+     * 电量阈值。
+     * 单位：百分比。取值需为 [0,100] 范围内的整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    batteryThreshold?: int;
+    /**
+     * 电量百分比。
+     * 单位：百分比。取值需为 [0,100] 范围内的整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    level?: int;
+    /**
+     * 蓝牙设备类型。
+     * 默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     bluetoothDeviceType?: BluetoothDeviceType;
-    /** 蓝牙设备名称。 */
+    /**
+     * 蓝牙设备名称。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     bluetoothDeviceName?: string;
   }
 
@@ -372,68 +1030,198 @@ declare namespace behaviorAwareness {
    * 系统控制类场景属性。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface SystemActionAttributes {
-    /** 判别字段，固定为 'systemAction'。 */
+    /**
+     * 判别字段，固定为 'systemAction'。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     kind: 'systemAction';
-    /** 操作目标（开/关/切换）。 */
+    /**
+     * 操作目标（开启/关闭/切换）。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     operation: Operation;
-    /** 应用包名（应用类操作）。 */
+    /**
+     * 应用包名。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     packageName?: string;
-    /** 应用名称。 */
+    /**
+     * 应用名称。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     appName?: string;
-    /** 调节方向（brightness/volume 增量调节时用）。 */
+    /**
+     * 调节方向。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     adjustment?: AdjustmentDirection;
-    /** 绝对值（brightness/volume 固定值时用）。取值范围：0-100。不填时默认值为0。超出范围时抛出 401 错误。@unit % */
-    value?: long;
-    /** 声音模式（soundMode 操作时用）。 */
+    /**
+     * 绝对值，表示亮度或音量的固定值。
+     * 单位：百分比。取值需为 [0,100] 范围内的整数。默认值：默认值为 0。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    value?: int;
+    /**
+     * 声音模式。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     soundMode?: SoundMode;
   }
 
   /**
-   * Event 事件数据。
+   * 事件数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface EventData {
-    /** Event ID。 */
+    /**
+     * 事件 ID。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     eventId: string;
-    /** Event 类型。 */
+    /**
+     * 事件类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     eventType: EventType;
-    /** Event 名称。 */
+    /**
+     * 事件名称。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     name: string;
-    /** 发生时间戳。@unit ms */
+    /**
+     * 发生时间戳。
+     * 单位：毫秒。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     timestamp: long;
-    /** 附加参数。 */
+    /**
+     * 附加参数。
+     * 默认值：无附加参数时的默认行为。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     params?: Record<string, string | int | boolean>;
-    /** 场景属性（根据 eventType 不同而不同，通过 kind 字段区分类型）。 */
+    /**
+     * 场景属性。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     attributes?: TimeAttributes | LocationAttributes | SystemEventAttributes;
   }
 
   /**
-   * Action 动作数据。
+   * 操作动作数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface ActionData {
-    /** Action ID。 */
+    /**
+     * 动作 ID（特定前缀格式）。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     actionId: string;
-    /** Action 类型。 */
+    /**
+     * 动作类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     actionType: ActionType;
-    /** Action 名称。 */
+    /**
+     * 动作名称。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     name: string;
-    /** 附加参数。 */
+    /**
+     * 附加参数。
+     * 默认值：无附加参数时的默认行为。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     params?: Record<string, string | int | boolean>;
-    /** 场景属性（根据 actionType 不同而不同）。 */
+    /**
+     * 场景属性。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     attributes?: SystemActionAttributes;
   }
 
@@ -441,38 +1229,95 @@ declare namespace behaviorAwareness {
    * 习惯感知领域 payload。HABIT_AWARENESS 领域的具体数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface BehaviorAwarenessPayload {
-    /** 感知模式类型。 */
+    /**
+     * 感知模式类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     patternType: PatternType;
-    /** 触发事件。当前只支持1个，便于扩展。 */
+    /**
+     * 触发事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     triggerEvent: EventData[];
-    /** 关联动作。当前只支持1个，便于扩展。 */
+    /**
+     * 关联动作。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     action: ActionData[];
   }
 
   /**
    * 感知事件数据。MSDP 融合感知聚类后生成的事件，推送给业务侧。
    *
-   * @template T - payload 类型，支持 BehaviorAwarenessPayload 或其他自定义类型。
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface PerceptionEvent<T = BehaviorAwarenessPayload> {
-    /** 感知事件唯一标识。 */
+    /**
+     * 感知事件唯一标识。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     perceptionEventId: string;
-    /** 感知领域类型。 */
+    /**
+     * 感知领域类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     domain: PerceptionDomain;
-    /** 置信度。取值范围：0-100，0 表示无置信度，100 表示完全确定。@unit % */
-    confidence: long;
-    /** 生成时间戳。@unit ms */
+    /**
+     * 置信度。值 0 表示无置信度，值 100 表示完全确定。
+     * 单位：百分比。取值需为 [0,100] 范围内的整数。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    confidence: int;
+    /**
+     * 生成时间戳。
+     * 单位：毫秒。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     generateTime: long;
-    /** 领域特定数据（每个 domain 的结构不同）。 */
+    /**
+     * 领域特定数据。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     payload: T;
   }
 
@@ -480,14 +1325,29 @@ declare namespace behaviorAwareness {
    * 订阅选项。定义订阅的过滤条件。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
-  export interface SubscribeOptions {
-    /** 感知领域类型（必填）。undefined 或 null 时抛出 401 错误。 */
+  export interface SubscribeInfo {
+    /**
+     * 感知领域类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     domain: PerceptionDomain;
-    /** 子类型过滤（可选，不填则订阅该领域下所有模式）。 */
+    /**
+     * 子类型过滤（可选。不指定时订阅该领域下所有模式。）。
+     * 默认值：不过滤，订阅该领域下所有子类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     patternTypes?: PatternType[];
   }
 
@@ -495,72 +1355,106 @@ declare namespace behaviorAwareness {
    * 反馈数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export interface FeedbackData {
-    /** 感知事件 ID。undefined 或 null 时抛出 401 错误。 */
+    /**
+     * 感知事件 ID。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     perceptionEventId: string;
-    /** 反馈类型。 */
+    /**
+     * 反馈类型。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     feedbackType: FeedbackType;
-    /** 反馈时间戳（毫秒）。@unit ms */
+    /**
+     * 反馈时间戳。
+     * 单位：毫秒。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
     feedbackTime: long;
   }
 
   /**
    * 发起订阅。业务侧向 MSDP 注册订阅关系，同时注册感知事件回调。
    *
-   * 当用户执行 Action 时，MSDP 从感知事件表过滤匹配项并通过 callback 实时推送。
-   * 同一订阅目标重复订阅时，后传入的 callback 覆盖之前的 callback。
+   * 当用户执行动作时，MSDP 从感知事件表过滤匹配项并通过回调实时推送。
+   * 同一订阅目标重复订阅时，后传入的回调覆盖之前的回调。
    *
-   * @param { SubscribeOptions } options - 订阅选项。如果为 undefined 或 null，抛出 401 错误。
-   * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } callback - 感知事件回调函数。
-   *                   需保存此回调引用，用于 offPerception 时传入。
-   *                   如果为 undefined 或 null，抛出 401 错误。
-   * @returns { Promise<void> } 异步返回，无返回值。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用使用系统接口；
-   *                           32500001 - 服务异常；
+   * @param { SubscribeInfo } info - 订阅选项。
+   * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } callback - 用于返回感知事件的回调。
+   * @returns { Promise<void> } 无返回值的 Promise。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export function onPerception(
-    options: SubscribeOptions,
+    info: SubscribeInfo,
     callback: Callback<PerceptionEvent<BehaviorAwarenessPayload>>
   ): Promise<void>;
 
   /**
    * 取消订阅。业务侧向 MSDP 注销订阅关系。
    *
-   * 如果传入 callback，则仅取消与该回调匹配的订阅；如果不传 callback，则取消当前包名下的所有订阅。
+   * 如果传入回调，则仅取消与该回调匹配的订阅；如果不传回调，则取消当前包名下的所有订阅。
    *
-   * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } [callback] - 可选，与 onPerception 时传入的回调函数需为同一引用。不传则取消所有订阅。
-   * @returns { Promise<void> } 异步返回，无返回值。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用使用系统接口；
-   *                           32500001 - 服务异常；
-   *                           32500003 - 取消订阅失败；
+   * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } [callback] - 用于返回感知事件的回调。
+   *     用于清除所有订阅的感知事件。
+   *     <br>默认值：不指定时，取消当前包的所有订阅。
+   * @returns { Promise<void> } 无返回值的 Promise。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500003 - Unsubscription failed.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export function offPerception(
     callback?: Callback<PerceptionEvent<BehaviorAwarenessPayload>>
   ): Promise<void>;
 
   /**
-   * 提交用户反馈。业务侧将用户对感知事件的反馈传递给 MSDP。
+   * 提交用户反馈。业务侧将用户反馈发送给 MSDP。
    *
-   * @param { FeedbackData } feedback - 反馈数据。如果为 undefined 或 null，抛出 401 错误。
-   * @returns { Promise<void> } 异步返回，无返回值。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用使用系统接口；
-   *                           32500001 - 服务异常；
+   * @param { FeedbackData } feedback - 反馈数据。
+   * @returns { Promise<void> } 无返回值的 Promise。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @since 26.2.0
-   * @stagemodelonly
    * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
    */
   export function submitFeedback(feedback: FeedbackData): Promise<void>;
 

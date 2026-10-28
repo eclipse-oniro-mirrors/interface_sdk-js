@@ -226,7 +226,7 @@ declare class AbilityStage {
    * > - 当[AbilityStage.onPrepareTerminationAsync]{@link AbilityStage.onPrepareTerminationAsync}实现时，本回调函数将不执行。
    *
    * @permission ohos.permission.PREPARE_APP_TERMINATE
-   * @returns { AbilityConstant.PrepareTermination } The user's choice.
+   * @returns { AbilityConstant.PrepareTermination } 用户的选择。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
@@ -245,7 +245,7 @@ declare class AbilityStage {
    * > - 若异步回调内发生crash，按超时处理，执行等待超过10秒未响应，应用将被强制关闭。
    *
    * @permission ohos.permission.PREPARE_APP_TERMINATE
-   * @returns { Promise<AbilityConstant.PrepareTermination> } Promise used to return the user's choice.
+   * @returns { Promise<AbilityConstant.PrepareTermination> } Promise对象，用于返回用户的选择。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice

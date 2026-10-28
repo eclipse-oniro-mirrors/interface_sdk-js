@@ -19,18 +19,12 @@
  * 
  * > **说明：**
  * >
- * > - 该组件仅可在Stage模型下使用。
- * >
- * > - 如果Dialog设置[通用属性]{@link ./@internal/component/ets/common}和[通用事件]{@link ./@internal/component/ets/common}，编译工具链会额外生
+ * > - 如果Dialog设置[通用属性]{@link common}和[通用事件]{@link common}，编译工具链会额外生
  * > 成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Dialog本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Dialog设置通用属性和通用事件。
- * 
+ *
  * ###### 子组件
  * 
  * 无
- * 
- * ###### DialogAttribute
- * 
- * 不支持[通用事件]{@link ./@internal/component/ets/common}。
  *
  * @file Dialog
  * @kit ArkUI
@@ -146,7 +140,7 @@ export declare class ButtonOptions {
   public textAlign?: TextAlign;
 }
 /**
- * 提示弹出框，即为带图形确认弹出框，必要时可通过图形化方式展现确认弹出框。
+ * 提示弹出框，用于提醒用户关注特定事项或进行确认操作。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -382,7 +376,7 @@ export declare struct SelectDialog {
   @Builder build(): void;
 }
 /**
- * 信息确认类弹出框，操作未正确执行（如网络错误、电池电量过低），或未正确操作时（如指纹录入），反馈的错误或提示信息。
+ * 信息确认类弹出框，用于在操作未正确执行（如网络错误、电池电量过低），或未正确操作时（如指纹录入）反馈错误或提示信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -496,7 +490,7 @@ export declare struct ConfirmDialog {
   @Builder build(): void;
 }
 /**
- * 操作确认类弹出框，触发一个将产生严重后果的不可逆操作时，如删除、重置、取消编辑、停止等。
+ * 警告类弹出框，用于在触发一个将产生严重后果的不可逆操作（如删除、重置、取消编辑、停止等）时进行警告。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -762,7 +756,7 @@ export declare struct CustomContentDialog {
   @Builder build(): void;
 }
 /**
- * 跟手弹出框，基于目标组件位置弹出，上文中的TipsDialog、SelectDialog、ConfirmDialog、AlertDialog、LoadingDialog、CustomContentDialog都可作为弹出框内容。
+ * 跟手弹出框，基于目标组件位置弹出，上述的TipsDialog、SelectDialog、ConfirmDialog、AlertDialog、LoadingDialog、CustomContentDialog都可作为弹出框内容。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

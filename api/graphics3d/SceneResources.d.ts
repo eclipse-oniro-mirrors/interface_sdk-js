@@ -14,13 +14,17 @@
  */
 
 /**
- * @file 3D scene resource type declarations
+ * This module provides the common basic resource types in ArkGraphics 3D.
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
+
+import image from '../@ohos.multimedia.image';
 import { Vec2, Vec3, Vec4, Aabb, Quaternion } from './SceneTypes';
 import { Callback } from '../@ohos.base';
 
@@ -178,7 +182,7 @@ export interface SceneResource {
 }
 
 /**
- * Shader resource, which inherits from SceneResource.
+ * Shader resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Shader
@@ -254,7 +258,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * Draws only shadows. When the Blend property of the material is enabled,
+   * Draws only shadows. When the [Blend]{@link Blend} property of the material is enabled,
    * the material is blended with the background to simulate a transparent material effect.
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -391,7 +395,7 @@ export interface RenderSort {
 }
 
 /**
- * Material resource, which inherits from SceneResource.
+ * Material resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Material
@@ -511,7 +515,7 @@ export interface MaterialProperty {
 
   /**
    * Texture sampler, with the default value set to LINEAR for magnification, minification, and mipmaps,
-   * and to REPEAT for U, V, and W directions.
+   * and to REPEAT for U and V directions.
    *
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -524,7 +528,7 @@ export interface MaterialProperty {
 /**
  * Material resource for creating realistic appearances, using the Metallic-Roughness model based on PBR.
  * It simulates the surface lighting and reflection effects of different materials like metal and plastic
- * by adjusting metallicity and roughness parameters. It inherits from Material.
+ * by adjusting metallicity and roughness parameters. It inherits from [Material]{@link Material}.
  * 
  * @extends Material
  * @interface MetallicRoughnessMaterial
@@ -643,7 +647,7 @@ export interface MetallicRoughnessMaterial extends Material {
 /**
  * Material that is not affected by lighting.
  * The shading value of the material is related only to the base color and is irrelevant to lighting conditions.
- * It inherits from Material.
+ * It inherits from [Material]{@link Material}.
  *
  * @extends Material
  * @interface UnlitMaterial
@@ -662,8 +666,8 @@ export interface UnlitMaterial extends Material {
 }
 
 /**
- * This material inherits from Material and draws only the surface shadows.
- * When the Blend property is enabled, the material can be blended with the background to simulate transparency.
+ * This material inherits from [Material]{@link Material} and draws only the surface shadows.
+ * When the [Blend]{@link Blend} property is enabled, the material can be blended with the background to simulate transparency.
  * 
  * @extends Material
  * @interface UnlitShadowAlphaMaterial
@@ -686,7 +690,7 @@ export interface UnlitShadowAlphaMaterial extends Material {
 }
 
 /**
- * Shader material, which inherits from Material.
+ * Shader material, which inherits from [Material]{@link Material}.
  *
  * @extends Material
  * @interface ShaderMaterial
@@ -707,7 +711,7 @@ export interface ShaderMaterial extends Material {
 }
 
 /**
- * Occlusion material: occludes other objects in the scene but does not occlude the environment. It is inherited from Material.
+ * Occlusion material: occludes other objects in the scene but does not occlude the environment. It is inherited from [Material]{@link Material}.
  *
  * @extends Material
  * @interface OcclusionMaterial
@@ -908,7 +912,7 @@ export interface Morpher {
 }
 
 /**
- * Mesh resource, which inherits from SceneResource.
+ * Mesh resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Mesh
@@ -951,7 +955,7 @@ export interface Mesh extends SceneResource {
 }
 
 /**
- * Mesh resource, which inherits from SceneResource.
+ * Mesh resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  *
  * @extends SceneResource
@@ -964,7 +968,7 @@ export interface MeshResource extends SceneResource {
 }
 
 /**
- * Animation resource, which inherits from SceneResource.
+ * Animation resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Animation
@@ -1149,7 +1153,7 @@ export enum EnvironmentBackgroundType {
 }
 
 /**
- * Environment resource, which inherits from SceneResource.
+ * Environment resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Environment
@@ -1240,7 +1244,7 @@ export interface Environment extends SceneResource {
 }
 
 /**
- * Image resource, which inherits from SceneResource.
+ * Image resource, which inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Image
@@ -1273,7 +1277,7 @@ export interface Image extends SceneResource {
 }
 
 /**
- * ImageStream resource.
+ * Image stream type, which inherits from [Image]{@link Image}.
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
@@ -1281,7 +1285,7 @@ export interface Image extends SceneResource {
  */
 export interface ImageStream extends Image {
   /**
-   * The surfaceId of the ImageStream.
+   * Strem ID, consisting of numeric characters. The value must be an integer greater than 0.
    *
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
@@ -1291,7 +1295,31 @@ export interface ImageStream extends Image {
 }
 
 /**
- * Effect resource, which inherits from SceneResource. It is obtained from the createEffect API.
+ * render target object, used for offscreen rendering
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTarget extends Image {
+  /**
+   * get a pixel map object from RenderTarget
+   * 
+   * @returns { Promise<image.PixelMap> } Promise used to return a pixel map
+   * @throws { BusinessError } 25601006 - - Possible Cause:
+   *     -- try to get a PixelMap from a destroyed RenderTarget
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  getPixelMap(): Promise<image.PixelMap>;
+}
+
+/**
+ * Effect resource, which inherits from [SceneResource]{@link SceneResource}.
+ * It is obtained from the [createEffect]{@link ./Scene:SceneResourceFactory.createEffect} API.
  *
  * @extends SceneResource
  * @interface Effect

@@ -313,6 +313,10 @@ declare namespace connection {
   /**
    * Remove a paired remote device.
    *
+   * On API 26.1.0 and above, for a third-party application,
+   * a system confirmation dialog box is displayed before removing the pairing,
+   * and the pairing is removed only after the user confirms the dialog box.
+   *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
    * @returns { Promise<void> } Returns the promise object.
@@ -323,9 +327,13 @@ declare namespace connection {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900013 - The user does not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - User refuse the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -1133,7 +1141,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getBleMacByBrMac(brMac: string): string;
 
@@ -1961,7 +1969,7 @@ declare namespace connection {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     transport?: BluetoothTransport;
   }

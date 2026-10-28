@@ -136,8 +136,7 @@ declare interface CheckBoxConfiguration extends CommonConfiguration<CheckBoxConf
  * >
  * > Since API version 11, the default style of the **Checkbox** component is changed from rounded square to circle.
  * >
- * > By default, this component has a [margin]{@link CommonMethod#margin} of {&nbsp;top: '14px',&nbsp;right: '14px',&
- * > nbsp;bottom: '14px',&nbsp;left: '14px' }.
+ * > By default, this component has a [margin]{@link CommonMethod#margin} of { top: '14px', right: '14px', bottom: '14px', left: '14px' }.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -443,8 +442,7 @@ declare class CheckboxAttribute extends CommonMethod<CheckboxAttribute> {
  * >
  * > Since API version 11, the default style of the **Checkbox** component is changed from rounded square to circle.
  * >
- * > By default, this component has a [margin]{@link CommonMethod#margin} of {&nbsp;top: '14px',&nbsp;right: '14px',&
- * > nbsp;bottom: '14px',&nbsp;left: '14px' }.
+ * > By default, this component has a [margin]{@link CommonMethod#margin} of { top: '14px', right: '14px', bottom: '14px', left: '14px' }.
  *
  * ###### Child Components
  *

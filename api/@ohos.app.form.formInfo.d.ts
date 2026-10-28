@@ -405,6 +405,17 @@ declare namespace formInfo {
      * @since 26.0.0 dynamic&static
      */
     isFontScaleFollowSystem?: boolean;
+
+    /**
+     * Indicates whether the form enable refresh upon switching between light and dark modes.
+     * Default value: The default value is false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**
@@ -1028,7 +1039,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.key.form_edit_color_mode'
   }
@@ -1635,6 +1646,17 @@ declare namespace formInfo {
      * @since 23 static
      */
     readonly extraData?: Record<string, Object>;
+
+    /**
+     * Indicates whether the form enable refresh upon switching between light and dark modes.
+     * Default value: The default value is false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**
@@ -2413,7 +2435,7 @@ declare namespace formInfo {
      */
     displayId: string;
     /**
-     * The custom data.
+     * The custom data. By default, no value is passed.
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -2469,7 +2491,7 @@ declare namespace formInfo {
      */
     customData?: Record<string, string>;
     /**
-     * The device Id of the peer form host service.
+     * The device Id of the peer form host service. By default, no value is passed.
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi

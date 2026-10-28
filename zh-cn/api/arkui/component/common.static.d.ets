@@ -42,12 +42,13 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, TipsAnchorType, InputEventInterceptAction, GestureShortcut, EdgeLightPosition } from "./enums";
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -1733,7 +1734,7 @@ export type Matrix4Transit = matrix4.Matrix4Transit;
  */
 export declare interface MotionPathOptions {
     /**
-     * 位移动画的运动路径，使用[SVG路径描述规范]{@link Path}。path中支持使
+     * 位移动画的运动路径，使用[SVG路径描述规范]{@link ./path#svg路径描述规范}。path中支持使
      * 用start和end进行起点和终点的替代，如：'Mstart.x start.y L50 50 Lend.x end.y Z'，更多说明请参考
      * [绘制路径](docroot://ui/ui-js-components-svg-path.md)。
      * 
@@ -4374,7 +4375,7 @@ export declare enum SafeAreaEdge {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare enum SafeAreaInsetAlignment {
     /**
@@ -4384,7 +4385,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     START = 0,
 
@@ -4394,7 +4395,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     CENTER = 1,
 
@@ -4405,7 +4406,7 @@ export declare enum SafeAreaInsetAlignment {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     END = 2
 }
@@ -4416,7 +4417,7 @@ export declare enum SafeAreaInsetAlignment {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetEdgeConfig {
     /**
@@ -4430,7 +4431,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     content: CustomBuilder;
 
@@ -4443,7 +4444,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     spacing?: LengthMetrics;
 
@@ -4455,7 +4456,7 @@ export declare interface SafeAreaInsetEdgeConfig {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     alignment?: SafeAreaInsetAlignment;
 }
@@ -4466,7 +4467,7 @@ export declare interface SafeAreaInsetEdgeConfig {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface SafeAreaInsetOptions {
     /**
@@ -4477,7 +4478,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     top?: SafeAreaInsetEdgeConfig;
 
@@ -4489,7 +4490,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     end?: SafeAreaInsetEdgeConfig;
 
@@ -4501,7 +4502,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     bottom?: SafeAreaInsetEdgeConfig;
 
@@ -4513,7 +4514,7 @@ export declare interface SafeAreaInsetOptions {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     start?: SafeAreaInsetEdgeConfig;
 }
@@ -7956,6 +7957,56 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * 标题栏悬浮模式。
+     * - STANDARD：标题栏与内容上下排布，无重叠。
+     * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+     * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+     * 滚动内容裁剪到安全区域。
+     * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过UIContext.applyDefaultImmersiveStrategy
+     * 成功设置ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA后，默认值为
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * 标准模式：标题栏与内容上下排布，无重叠。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STANDARD = 0,
+    /**
+     * 堆叠模式：标题栏悬浮于内容之上。
+     * 开发者需要在内容顶部添加padding以避免遮挡。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STACK = 1,
+    /**
+     * 安全区域填充模式：标题栏放置在安全区域padding区域。
+     * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.
@@ -9495,7 +9546,7 @@ export declare enum PreviewScaleMode {
     MAINTAIN = 2
 }
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -9503,7 +9554,7 @@ export declare enum PreviewScaleMode {
  */
 export declare class ContentTransitionEffect {
   /**
-   * When the content changes,there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9513,7 +9564,7 @@ export declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes,there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11519,7 +11570,7 @@ export declare interface CommonMethod {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
@@ -11798,9 +11849,9 @@ export declare interface CommonMethod {
      */
     default borderRadius(value: Length | BorderRadiuses | LocalizedBorderRadiuses | undefined, type?: RenderStrategy | undefined): this;
     /**
-     * Sets the border image of the component.
+     * 设置组件的边框图片。
      *
-     * @param { BorderImageOption | undefined } value - Border image or border gradient.
+     * @param { BorderImageOption | undefined } value - 边框图片或边框渐变。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13180,6 +13231,31 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default shadow(value: ShadowOptions | ShadowStyle | undefined): this;
+    /**
+     * 设置组件的阴影形状。阴影按指定形状渲染。
+     *
+     * 此接口与[shadow]{@link CommonMethod#shadow}属性配合使用。组件大小变化时阴影形状会重新计算。
+     *
+     * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - 阴影形状。
+     *     当值类型为 {@link CircleShape}、{@link EllipseShape}、
+     *     {@link PathShape} 或 {@link RectShape} 时，阴影渲染为对应形状。
+     *     当值为 **undefined** 时，清除阴影形状。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): this;
+    /**
+     * 设置[阴影]{@link CommonMethod#shadow}不填充时的裁切方式。仅在[ShadowOptions#fill]{@link ShadowOptions#fill}设为 **false** 时生效。
+     *
+     * @param { ShadowClipMode | undefined } mode - 阴影裁切方式。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowClipMode(mode: ShadowClipMode | undefined): this;
     /**
      * Sets the edge light effect for the component.
      *
@@ -15331,7 +15407,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持左键按下拖动滚动。
      * 
      * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-     *    <br>默认值：API版本26.2.0下的版本默认值为 false。API版本26.2.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+     *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15446,7 +15522,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }

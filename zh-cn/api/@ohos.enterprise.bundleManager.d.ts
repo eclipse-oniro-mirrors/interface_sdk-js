@@ -1968,7 +1968,7 @@ declare namespace bundleManager {
    * 
    * 此接口只能安装分发类型为enterprise_mdm（MDM应用）和enterprise_normal（普通企业应用）类型的应用，可以通过
    * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口查询应用自身的
-   * [BundleInfo]{@link ./bundleManager/BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。自API版本26.0.0起，建议使用
+   * [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。自API版本26.0.0起，建议使用
    * [installForResult]{@link bundleManager.installForResult}，以获取更详细的错误码返回值。
    * 
    * > **说明：**
@@ -1999,7 +1999,7 @@ declare namespace bundleManager {
    * 
    * 此接口只能安装分发类型为enterprise_mdm（MDM应用）和enterprise_normal（普通企业应用）类型的应用，可以通过
    * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口查询应用自身的
-   * [BundleInfo]{@link ./bundleManager/BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
+   * [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
    * 
    * > **说明：**
    * >
@@ -2213,6 +2213,135 @@ declare namespace bundleManager {
    * @since 26.0.0
    */
   function getInstalledBundleStorageStats(admin: Want, bundleNames: Array<string>, accountId: number): Promise<Array<BundleStorageStats>>;
+
+  /**
+   * 
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum DefaultApplicationType {
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BROWSER = 0,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    IMAGE = 1,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    AUDIO = 2,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VIDEO = 3,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PDF = 4,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    WORD = 5,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXCEL = 6,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PPT = 7,
+
+    /**
+     * 
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EMAIL = 8
+  }
+
+  /**
+   * 
+   *
+   * @permission ohos.permission.ENTERPRISE_INSTALL_BUNDLE
+   * @param { DefaultApplicationType } type - Type of the default application.
+   * @param { string } bundleName - Bundle name of the application.
+   * @param { string } abilityName - Name of the application ability.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDefaultApplication(type: DefaultApplicationType, bundleName: string, abilityName: string, accountId: number): void;
+
+  /**
+   * 
+   *
+   * @permission ohos.permission.ENTERPRISE_INSTALL_BUNDLE
+   * @param { DefaultApplicationType } type - Type of the default application.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @returns { string } Returns the bundle name of the default application.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDefaultApplicationBundleName(type: DefaultApplicationType, accountId: number): string;
 }
 
 export default bundleManager;

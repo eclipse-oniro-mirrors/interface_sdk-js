@@ -22,6 +22,19 @@
  * text-only, icon-only, and icon + text. It also provides capabilities such as accessibility reading, layout direction
  * mirroring, custom rounded corners, and property animation, making it suitable for scenarios where you need to quickly
  * build a segmented selection interface that complies with design specifications.
+ *
+ * ###### Child Components
+ *
+ * None
+ *
+ * ###### Attributes
+ *
+ * The [universal attributes]{@link CommonMethod} are not supported.
+ *
+ * ###### Events
+ *
+ * The [universal events]{@link CommonMethod} are not supported.
+ *
  * @file
  * @kit ArkUI
  */
@@ -388,7 +401,7 @@ declare type DimensionNoPercentage = PX | VP | FP | LPX | Resource;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SegmentButtonInteractionMode {
   /**
@@ -398,7 +411,7 @@ declare enum SegmentButtonInteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   FOLLOWING_DRAG = 0,
 
@@ -410,7 +423,7 @@ declare enum SegmentButtonInteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NORMAL_DRAG = 1
 }
@@ -846,7 +859,7 @@ interface CommonSegmentButtonOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   interactionMode?: SegmentButtonInteractionMode;
 }
@@ -1755,7 +1768,7 @@ declare class SegmentButtonOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   interactionMode?: SegmentButtonInteractionMode;
 

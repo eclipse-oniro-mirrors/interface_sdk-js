@@ -1123,6 +1123,34 @@ declare namespace webview {
   /**
    * 通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
    *
+   * ## 概述
+   *
+   * WebStorage提供对Web存储数据的管理能力，包括Web SQL数据库和HTML5 Web存储API，主要解决以下问题：
+   * - 跨Web组件的数据存储管理。
+   * - 存储空间配额和使用量的查询。
+   * - 存储数据的清理。
+   *
+   * ### 基本概念
+   *
+   * - **源（Origin）**：Web存储的数据隔离单位，相同源下的页面可以共享存储数据。
+   * - **配额（Quota）**：每个源允许使用的最大存储空间，以字节为单位。
+   * - **使用量（Usage）**：每个源当前已使用的存储空间，以字节为单位。
+   *
+   * ### 关键设计
+   *
+   * WebStorage采用统一管理的设计模式：
+   * 1. 每个应用中的所有Web组件共享一个WebStorage实例。
+   * 2. 通过源（origin）作为索引来区分和管理不同源的存储数据。
+   * 3. 支持同步和异步两种方式访问存储数据。
+   * 4. 支持隐私模式和非隐私模式下的数据分离管理。
+   *
+   * > **说明：**
+   * >
+   * > - 目前调用WebStorage下的方法，都需要先加载Web组件。
+   * >
+   * > - 本Class下的接口在ArkWeb内核升级到M132版本后因内核废弃Web SQL，对Web SQL数据库的管理失效。ArkWeb内核版本参考
+   * > ArkWeb简介[约束与限制](docroot://web/web-component-overview.md#约束与限制)。
+   *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -5955,6 +5983,46 @@ declare namespace webview {
     getSubframeErrorPageEnabled(): boolean;
 
     /**
+     * 设置是否启用错误页面的自动重载。
+     *
+     * 启用后，Web组件会在出现网络错误时自动重试加载，
+     * 使用重试退避序列：1s → 5s → 30s → 1min → 5min → 10min → 30min。
+     * 最多重试7次后停止。
+     *
+     * > **说明**
+     * >
+     * > - 只有网络错误才会触发自动重新加载。不包括以下内容：
+     * > 证书错误、SSL（安全套接字层）协议错误、身份验证错误、
+     * > POST请求、非HTTP(S)协议和客户端拦截的错误。
+     * > - 自动重新加载不会影响{@link onOverrideErrorPage}回调。
+     * > - 当触发自动重新加载时，{@link onErrorReceive}回调将被
+     * > 每次重试都会重新调用。
+     *
+     * @param { boolean } enable - 是否启用自动重载。值**true**启用它，
+     *     和**false**禁用它。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    enableAutoReload(enable: boolean): void;
+
+    /**
+     * 获取是否启用错误页面的自动重载。
+     *
+     * @returns { boolean } 是否使能自动重新加载。如果启用，则返回**true**，否则返回**false**。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isAutoReloadEnabled(): boolean;
+
+    /**
      * 根据指定的内存压力等级，主动清理Web组件占用的缓存。
      *
      * @param { PressureLevel } level - 需要清理内存的内存等级。
@@ -6363,7 +6431,7 @@ declare namespace webview {
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     setZoomFactor(zoomFactor: number): void;
 
@@ -6376,7 +6444,7 @@ declare namespace webview {
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
   }

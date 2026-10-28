@@ -14,6 +14,24 @@
   */
 
 /**
+ * 弧形滑动条组件，通常用于在圆形屏幕的穿戴设备中快速调节设置值，如音量调节、亮度调节等应用场景。
+ * 
+ * > **说明：**
+ * >
+ * > - 该组件支持在Phone、PC/2in1、Tablet、TV、Wearable设备上使用。API version 22及以前版本，在Phone、PC/2in1、Tablet、TV上使用会编译告警，但可以正常运行。
+ * 
+ * ###### 子组件
+ * 
+ * 无
+ * 
+ * ###### 属性
+ * 
+ * 不支持[通用属性]{@link common}。
+ * 
+ * ###### 事件
+ * 
+ * 不支持[通用事件]{@link common}。
+ * 
  * @file
  * @kit ArkUI
  */
@@ -356,7 +374,7 @@ interface ArcSliderStyleOptionsConstructorOptions {
    * 
    * 默认值：20
    * 
-   * 设置小于0的值时，按照默认值处理。
+   * 取值范围：[0, +∞)，异常值按默认值处理。
    * 
    * @Trace
    *
@@ -452,7 +470,7 @@ declare class ArcSliderStyleOptions {
    * 
    * 默认值：20
    * 
-   * 设置小于0的值时，按照默认值处理。
+   * 取值范围：[0, +∞)，异常值按默认值处理。
    * 
    * @Trace
    *
@@ -521,9 +539,9 @@ declare type ArcSliderEnlargeHandler = (isEnlarged: boolean) => void;
  */
 interface ArcSliderOptionsConstructorOptions {
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的数值信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderValueOptions]{@link ArcSliderValueOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -535,9 +553,9 @@ interface ArcSliderOptionsConstructorOptions {
   valueOptions?: ArcSliderValueOptions;
 
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的布局信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderLayoutOptions]{@link ArcSliderLayoutOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -630,9 +648,9 @@ interface ArcSliderOptionsConstructorOptions {
 @ObservedV2
 declare class ArcSliderOptions {
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的数值信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderValueOptions]{@link ArcSliderValueOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -645,9 +663,9 @@ declare class ArcSliderOptions {
   valueOptions?: ArcSliderValueOptions;
 
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的布局信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderLayoutOptions]{@link ArcSliderLayoutOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -747,13 +765,7 @@ declare class ArcSliderOptions {
 }
 
 /**
- * 弧形滑动条组件，通常用于在圆形屏幕的穿戴设备中快速调节设置值，如音量调节、亮度调节等应用场景。
- * 
- * > **说明：**
- * >
- * > -
- * >
- * > - 该组件支持在Phone、PC/2in1、Tablet、TV、Wearable设备上使用。API version 22及以前版本，在Phone、PC/2in1、Tablet、TV上使用会编译告警，但可以正常运行。
+ * 创建ArcSlider实例，入参是弧形滑动条配置选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @crossplatform

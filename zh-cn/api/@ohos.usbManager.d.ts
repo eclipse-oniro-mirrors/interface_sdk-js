@@ -45,11 +45,13 @@ import { AsyncCallback, Callback } from './@ohos.base';
  */
 declare namespace usbManager {
   /**
-   * 获取接入主设备的USB设备列表。调用成功后返回已连接设备的详细信息列表包括设备名称、厂商产品信息等。
+   * 获取接入主机的USB设备列表。调用成功后返回已连接设备的详细信息列表，包括设备名称、厂商产品信息等。
    * 
    * > **说明：**
    * >
    * > 三方应用无法通过getDevices()接口直接获取serial字段的设备序列号信息（该字段对三方应用不可用）。如需获取序列号，需要在申请设备访问权限后，自行发起控制传输获取。
+   * >
+   * > 如果设备已通过企业设备管理（EDM）限制策略管控USB（如禁用USB能力、设置USB设备可用名单、禁用特定USB设备类型等），获取的设备列表可能为空或仅包含被允许的设备。具体情况请参考[@ohos.enterprise.restrictions（限制类策略）]{@link @ohos.enterprise.restrictions:restrictions}和[@ohos.enterprise.usbManager（USB管理）]{@link @ohos.enterprise.usbManager:usbManager}。
    *
    * @returns { Array<Readonly<USBDevice>> } 设备信息列表。
    * @throws { BusinessError } 801 - Capability not supported. [since 18]
@@ -63,8 +65,8 @@ declare namespace usbManager {
    * 根据getDevices()返回的设备信息打开USB设备，调用成功后建立设备连接通道，可以进行后续的数据传输和设备控制操作。使用完后需要调用
    * [usbManager.closePipe]{@link usbManager.closePipe}关闭设备连接通道。如果USB服务异常，会返回`undefined`，注意需要对接口返回值做判空处理。
    * 
-   * 1. 调用[usbManager.getDevices]{@link usbManager.getDevices}获取设备信息以及USBDevice;
-   * 2. 调用[usbManager.requestRight]{@link usbManager.requestRight}请求使用该设备的权限。
+   * 1. 调用[usbManager.getDevices]{@link usbManager.getDevices}获取设备列表。
+   * 2. 调用[usbManager.requestRight]{@link usbManager.requestRight}获取设备访问权限。
    *
    * @param { USBDevice } device - USB设备信息，用[getDevices]{@link usbManager.getDevices}获取的busNum和devAddress确定设备，当前其他属性（如
    *     name、vendorId等）不参与设备匹配。
@@ -87,7 +89,7 @@ declare namespace usbManager {
   function connectDevice(device: USBDevice): Readonly<USBDevicePipe>;
 
   /**
-   * 判断是否有权访问该设备。
+   * 判断是否有权访问该设备。适用于在调用requestRight申请权限或connectDevice建立连接前，先确认应用是否已拥有该设备的访问权限，避免重复申请的场景。
    * 
    * 如果应用有权访问设备则返回true；无权访问设备则返回false。
    *
@@ -123,8 +125,8 @@ declare namespace usbManager {
   function requestRight(deviceName: string): Promise<boolean>;
 
   /**
-   * 移除应用访问设备的权限。系统应用默认拥有访问设备权限，调用此接口不会产生影响。
-   *
+   * 移除应用访问设备的权限。系统应用默认拥有访问设备权限，调用此接口不会产生影响。返回true表示权限移除成功；返回false则表示权限移除失败。
+   * 
    * @param { string } deviceName - 设备名称，来自[getDevices]{@link usbManager.getDevices}获取的设备列表USBDevice的name。
    * @returns { boolean } 返回权限移除结果。返回true表示权限移除成功；返回false则表示权限移除失败。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -411,7 +413,7 @@ declare namespace usbManager {
    *     call the API. [since 18]
    * @throws { BusinessError } 202 - Permission denied. Normal application do not have permission to use system api.
    * @throws { BusinessError } 801 - Capability not supported. [since 18]
-   * @throws { BusinessError } 14400004 Service exception. Possible causes:
+   * @throws { BusinessError } 14400004 - Service exception. Possible causes:
    *
    *     <br>1. No accessory is plugged in. [since 23] [staticonly]
    * @syscap SystemCapability.USB.USBManager
@@ -505,8 +507,9 @@ declare namespace usbManager {
   function addAccessoryRight(tokenId: int, accessory: USBAccessory): void;
 
   /**
-   * 声明对USB设备某个接口的控制权。调用成功后应用获得该接口的独占控制权可以进行数据传输等操作，其他程序无法访问该接口。使用完后需调用
-   * [releaseInterface]{@link usbManager.releaseInterface}释放该接口的控制权。
+   * 声明对USB设备某个接口的控制权。UsbManager获得独占权，可以通过UsbManager提供的接口进行数据传输等操作。如需声明独占接口，并感知其它应用声明冲突，请使用
+   * [usbManager.claimInterfaceExclusive]{@link usbManager.claimInterfaceExclusive(pipe: USBDevicePipe, iface: USBInterface, force?: boolean, onConflict?: Callback<InterfaceConflictInfo>)}。
+   * 使用完后需调用[releaseInterface]{@link usbManager.releaseInterface}释放该接口的控制权。
    * 
    * **使用场景**：在需要进行USB数据传输时，需要先声明接口控制权以独占访问该接口。例如，在USB存储设备读写、USB摄像头数据采集、USB串口通信等场景中，都需要先声明接口控制权。
    * 
@@ -578,7 +581,7 @@ declare namespace usbManager {
    *     <br>- 88080486：服务初始化中，请稍后重试。
    *     <br>- 88080488：无设备访问权限，请先调用[requestRight]{@link usbManager.requestRight}接口申请授权。
    *     <br>- -1：驱动异常。可能原因：1、设备连接不稳定或已断开；2、USB驱动加载失败；3、内核USB模块异常。
-   *     <br>- -17：I/O失败。可能原因：1.设备通信异常导致I/O操作失败；2.数据传输过程中发生中断。
+   *     <br>- -17：I/O（Input/Output）失败。可能原因：1.设备通信异常导致I/O操作失败；2.数据传输过程中发生中断。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *
    *     <br>1.Mandatory parameters are left unspecified.
@@ -592,7 +595,7 @@ declare namespace usbManager {
   function setConfiguration(pipe: USBDevicePipe, config: USBConfiguration): int;
 
   /**
-   * 设置设备接口。调用成功后接口将被切换到指定的备用设置，端点配置将随之改变以匹配传输类型要求。
+   * 设置设备接口。调用成功后系统会将接口切换到指定的替代设置，端点配置将随之改变以匹配传输类型要求。
    * 
    * > **说明：**
    * >
@@ -643,8 +646,8 @@ declare namespace usbManager {
   function getRawDescriptor(pipe: USBDevicePipe): Uint8Array;
 
   /**
-   * 获取文件描述符。如果USB服务异常，可能返回错误码，注意需要对接口返回值做判空或错误码检查处理。
-   *
+   * 获取文件描述符。该接口适用于需要通过文件描述符访问USB设备的场景，获取后可结合文件读写能力与设备进行数据交互。如果USB服务异常，会返回错误码，注意需要对接口返回值做错误码检查处理。
+   * 
    * @param { USBDevicePipe } pipe - 用于确定总线地址和设备地址，需要调用[connectDevice]{@link usbManager.connectDevice}获取。
    * @returns { int } 返回设备对应的文件描述符，失败返回其他错误码如下：
    *     <br>- 88080486：服务初始化中，请稍后重试。
@@ -685,7 +688,7 @@ declare namespace usbManager {
   function controlTransfer(pipe: USBDevicePipe, controlparam: USBControlParams, timeout?: number): Promise<number>;
 
   /**
-   * 控制传输。调用成功后完成控制命令的传输，返回传输或接收到的数据块大小。适用于需要与USB设备进行控制命令交互的场景，如获取设备描述符、设置设备地址、发送厂商自定义命令、配置HID设备特性等。使用Promise异步回调。
+   * 控制传输。调用成功后完成控制命令的传输，返回传输或接收到的数据块大小。适用于需要与USB设备进行控制命令交互的场景，如获取设备描述符、设置设备地址、发送厂商自定义命令、配置HID（Human Interface Device，人机接口设备）设备特性等。使用Promise异步回调。
    *
    * @param { USBDevicePipe } pipe - 用于确定总线地址和设备地址，需要调用[connectDevice]{@link usbManager.connectDevice}获取。
    * @param { USBDeviceRequestParams } requestparam - 控制传输参数，包含bmRequestType、bRequest、wValue、wIndex、wLength、data等字段，参数传参
@@ -745,8 +748,7 @@ declare namespace usbManager {
 
 
   /**
-   * 重置USB设备。适用于USB设备出现通信异常需要恢复的场景，如设备固件升级后需要重新初始化、设备状态异常需要恢复、调试过程中需要重置设备状态等。调用成功后设备将被重置为初始状态，此前设置的配置和接口设置将被清除，设备需要重新初始
-   * 化。
+   * 重置USB设备。适用于USB设备出现通信异常需要恢复的场景，如设备固件升级后需要重新初始化、设备状态异常需要恢复、调试过程中需要重置设备状态等。调用成功后系统会将设备重置为初始状态，并清除此前设置的配置和接口设置，设备需要重新初始化。
    * 
    * > **说明：**
    * >
@@ -760,7 +762,7 @@ declare namespace usbManager {
    * @returns { boolean } true表示重置设备成功，false表示重置设备失败。
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 14400001 - Access right denied. Call requestRight to get the USBDevicePipe access right first.
-   * @throws { BusinessError } 14400004 -Service exception. Possible causes: 1. No accessory is plugged in.
+   * @throws { BusinessError } 14400004 - Service exception. Possible causes: 1. No accessory is plugged in.
    * @throws { BusinessError } 14400008 - No such device(it may have been disconnected).
    * @throws { BusinessError } 14400010 - Other USB error. Possible causes:
    *
@@ -777,7 +779,7 @@ declare namespace usbManager {
   function resetUsbDevice(pipe: USBDevicePipe): boolean;
 
   /**
-   * 关闭设备连接通道。
+   * 关闭设备连接通道。适用于使用USBDevicePipe完成数据传输和设备控制操作后释放设备连接的场景。
    * 
    * 1. 调用[usbManager.getDevices]{@link usbManager.getDevices}获取设备列表；
    * 2. 调用[usbManager.requestRight]{@link usbManager.requestRight}获取设备请求权限；
@@ -799,7 +801,7 @@ declare namespace usbManager {
   function closePipe(pipe: USBDevicePipe): int;
 
   /**
-   * 检查应用是否有权访问USB配件。
+   * 检查应用是否有权访问USB配件。适用于在调用requestAccessoryRight申请权限或openAccessory打开配件前，先确认应用是否已拥有该配件访问权限的场景。
    * 
    * 需要调用[usbManager.getAccessoryList]{@link usbManager.getAccessoryList}获取配件列表，得到
    * [USBAccessory]{@link usbManager.USBAccessory}作为参数。
@@ -824,7 +826,7 @@ declare namespace usbManager {
   function hasAccessoryRight(accessory: USBAccessory): boolean;
 
   /**
-   * 为指定应用申请访问USB配件的访问权限。使用Promise异步回调。
+   * 为当前应用申请访问USB配件的权限。使用Promise异步回调。
    * 
    * 需要调用[usbManager.getAccessoryList]{@link usbManager.getAccessoryList}获取配件列表，得到
    * [USBAccessory]{@link usbManager.USBAccessory}作为参数。
@@ -873,7 +875,7 @@ declare namespace usbManager {
   function cancelAccessoryRight(accessory: USBAccessory): void;
 
   /**
-   * 获取当前已接入主机的USB配件列表。
+   * 获取当前已接入主机的USB配件列表。可作为调用requestAccessoryRight申请配件访问权限、openAccessory打开配件等后续操作的前置步骤。
    *
    * @returns { Array<Readonly<USBAccessory>> } 只读的USB配件列表。包含所有可用的USB配件信息。
    * @throws { BusinessError } 801 - Capability not supported. [since 18]
@@ -1063,7 +1065,7 @@ declare namespace usbManager {
     protocol: int;
 
     /**
-     * 设备类型。
+     * 接口类型（接口类代码），表示该接口所属的功能类别，取值遵循USB接口描述符规范。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 9 dynamic
@@ -1881,7 +1883,7 @@ declare namespace usbManager {
     version: string;
 
     /**
-     * 配件的SN号。
+     * 配件的序列号（SN）。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 14 dynamic
@@ -1944,7 +1946,7 @@ declare namespace usbManager {
     USB_TRANSFER_FREE_TRANSFER = 2,
 
     /**
-     * 传输将增加一个额外的数据包。
+     * 传输将增加一个额外的零长度数据包。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 18 dynamic
@@ -2115,7 +2117,7 @@ declare namespace usbManager {
     devPipe: USBDevicePipe;
 
     /**
-     * USB传输标志，用于控制传输行为。可选值包括：0（将短帧报告为错误）、1（自动释放传输缓冲区）、2（完成回调后自动释放传输资源）、3（传输增加一个额外的数据包）。
+     * USB传输标志，用于控制传输行为。可选值包括：0（将短帧报告为错误）、1（自动释放传输缓冲区）、2（完成回调后自动释放传输资源）、3（传输将增加一个额外的零长度数据包）。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 18 dynamic
@@ -2379,19 +2381,19 @@ declare namespace usbManager {
   }
 
   /**
-   * 独占方式声明USB设备接口。本接口在调用时检查指定的USB接口是否已被其他进程占用，避免声明时发生冲突。
+   * 以独占方式声明USB设备接口。本接口在调用时检查其他进程是否已占用指定的USB接口，避免声明时发生冲突。
    * 设置**force**为**true**时，操作系统会先从内核驱动程序中释放该接口，再将控制权授予调用方应用。
-   * 独占声明成功后，其他进程仍可通过[usbManager.claimInterface]{@link usbManager.claimInterface(pipe: USBDevicePipe, iface: USBInterface, force?: boolean)}声明同一接口；
-   * 可使用**onConflict**回调接收此类冲突通知。
+   * 独占声明成功后，其他进程仍可通过[usbManager.claimInterface]{@link usbManager.claimInterface(pipe: USBDevicePipe, iface: USBInterface, force?: boolean)}声明同一接口（即本接口的独占声明不会阻止其他进程的声明行为，与claimInterface声明成功后其他程序无法访问该接口的独占语义不同）；
+   * 可使用**onConflict**回调接收此类冲突通知。使用完后需调用[releaseInterface]{@link usbManager.releaseInterface}释放该接口的控制权。
+   *
+   * **使用场景**：适用于需要独占访问USB接口并及时感知其他进程访问冲突的场景（如多进程竞争使用同一USB接口）；若无需感知其他进程的冲突访问，直接使用[usbManager.claimInterface]{@link usbManager.claimInterface(pipe: USBDevicePipe, iface: USBInterface, force?: boolean)}即可。
    *
    * @param { USBDevicePipe } pipe - 总线地址和设备地址，通过调用[usbManager.connectDevice]{@link usbManager.connectDevice(device: USBDevice)}获取。
-   * @param { USBInterface } iface - 目标USB接口的索引。可以使用[usbManager.getDevices]{@link usbManager.getDevices()}获取设备信息，并根据ID识别USB接口。
-   * @param { boolean } [force] - 是否强制声明USB接口。默认值为**false**，表示不强制声明USB接口。可以根据需要设置该值。
-   *     <br>默认值：false。
-   * @param { Callback<InterfaceConflictInfo> } [onConflict] - 回调函数，返回独占声明成功后其他进程通过非互斥的
+   * @param { USBInterface } iface - 目标USB接口对象。可以使用[usbManager.getDevices]{@link usbManager.getDevices()}获取设备信息，并根据ID识别USB接口。
+   * @param { boolean } [force] - 是否强制声明USB接口。默认值为**false**，表示不强制声明USB接口。
+   * @param { Callback<InterfaceConflictInfo> } [onConflict] - 回调函数，返回独占声明成功后其他进程通过非独占的
    *     [usbManager.claimInterface]{@link usbManager.claimInterface(pipe: USBDevicePipe, iface: USBInterface, force?: boolean)}
    *     接口声明同一USB接口时的冲突信息。如果不指定此参数，则发生此类冲突时不发送通知。
-   *     <br>默认值：不触发回调。
    * @throws { BusinessError } 14400001 - Permission denied.
    * @throws { BusinessError } 14400004 - Service exception.
    * @throws { BusinessError } 14400007 - Resource busy. Possible cause:
@@ -2410,9 +2412,9 @@ declare namespace usbManager {
    * 描述当已独占声明的USB接口被其他进程以非独占方式声明时的冲突信息，通过调用
    * [usbManager.claimInterfaceExclusive]{@link usbManager.claimInterfaceExclusive(pipe: USBDevicePipe, iface: USBInterface, force?: boolean, onConflict?: Callback<InterfaceConflictInfo>)}独占声明接口后使用。
    *
-   * > **说明**
+   * > **说明：**
    * >
-   * > 此回调在其他进程调用非互斥的
+   * > 此回调在其他进程调用非独占的
    * > [usbManager.claimInterface]{@link usbManager.claimInterface(pipe: USBDevicePipe, iface: USBInterface, force?: boolean)}
    * > 接口声明同一USB接口时触发。独占持有方可通过此回调获知潜在的访问冲突。
    *

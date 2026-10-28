@@ -212,7 +212,7 @@ declare namespace insightIntentDriver {
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     toolCallId?: string;
   }
@@ -1020,12 +1020,15 @@ declare namespace insightIntentDriver {
     readonly subIntentInfoForConfiguration?: SubIntentInfoForConfiguration;
 
     /**
-     * The permissions required by the intent.
+     * Optional list of permissions required to invoke this intent.
+     * This is for caller-side query/reference only.
+     * The system does not enforce these permissions automatically.
+     * Permission validation must be implemented on the intent provider (server side).
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     readonly permissions?: string[];
   }

@@ -2489,7 +2489,7 @@ export enum AccessibilityEventType {
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   TYPE_PAGE_STATE_PRE_UPDATE = 74
 }
@@ -3182,7 +3182,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly componentType?: string;
   /**
-   * 元素的无障碍说明。组件可通过[accessibilityDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityDescription}设置该属性。
+   * 元素的无障碍说明。组件可通过[accessibilityDescription]{@link @global:CommonMethod#accessibilityDescription}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3200,7 +3200,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly editable?: boolean;
   /**
-   * 元素错误状态下提示的错误文本。组件可通过[showError]{@link ./@internal/component/ets/text_input:TextInputAttribute.showError}设置该属性。
+   * 元素错误状态下提示的错误文本。组件可通过[showError]{@link @global:TextInputAttribute#showError}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3218,7 +3218,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly focusable?: boolean;
   /**
-   * 无输入时的提示文本。组件可通过[placeholder]{@link ./@internal/component/ets/text_input:TextInputOptions.placeholder}设置该属性。
+   * 无输入时的提示文本。组件可通过[placeholder]{@link @global:TextInputOptions#placeholder}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3226,7 +3226,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly hintText?: string;
   /**
-   * 组件的唯一标识。组件可通过[id]{@link ./@internal/component/ets/common:CommonMethod.id}设置该属性。
+   * 组件的唯一标识。组件可通过[id]{@link @global:CommonMethod#id}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3268,7 +3268,7 @@ export declare interface UIAccessibilityElement {
    * 
    * 默认值：false。
    * 
-   * 组件可通过[visibility]{@link ./@internal/component/ets/common:CommonMethod.visibility}设置该属性。
+   * 组件可通过[visibility]{@link @global:CommonMethod#visibility}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3380,7 +3380,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly offset?: double;
   /**
-   * 元素的无障碍文本信息。组件可通过[accessibilityText]{@link ./@internal/component/ets/common:CommonMethod.accessibilityText}设置该属性。
+   * 元素的无障碍文本信息。组件可通过[accessibilityText]{@link @global:CommonMethod#accessibilityText}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3388,7 +3388,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly accessibilityText?: string;
   /**
-   * 自定义无障碍组件类型。组件可通过[accessibilityRole]{@link ./@internal/component/ets/common:CommonMethod.accessibilityRole}设置该属性。
+   * 自定义无障碍组件类型。组件可通过[accessibilityRole]{@link @global:CommonMethod#accessibilityRole}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3397,7 +3397,7 @@ export declare interface UIAccessibilityElement {
   readonly accessibilityRole?: string;
   /**
    * 下一个要获得焦点的组件的ID。该ID为目标组件的componentId，区别于identifier属性。组件可通过
-   * [accessibilityNextFocusId]{@link ./@internal/component/ets/common:CommonMethod.accessibilityNextFocusId}设置该属性。
+   * [accessibilityNextFocusId]{@link @global:CommonMethod#accessibilityNextFocusId}设置该属性。
    * 
    * 默认值：-1。
    *
@@ -3433,7 +3433,7 @@ export declare interface UIAccessibilityElement {
    * 
    * 默认值：false。
    * 
-   * 组件可通过[accessibilityGroup]{@link ./@internal/component/ets/common:CommonMethod.accessibilityGroup}设置该属性。
+   * 组件可通过[accessibilityGroup]{@link @global:CommonMethod#accessibilityGroup}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3451,7 +3451,7 @@ export declare interface UIAccessibilityElement {
    * 
    * 'no-hide-descendants'：当前组件及其所有子组件不可被辅助功能识别。默认值：'auto'。
    * 
-   * 组件可通过[accessibilityLevel]{@link ./@internal/component/ets/common:CommonMethod.accessibilityLevel}设置该属性。
+   * 组件可通过[accessibilityLevel]{@link @global:CommonMethod#accessibilityLevel}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3482,18 +3482,18 @@ export declare interface UIAccessibilityElement {
    * @since 26.0.1 dynamic&static
    */
   readonly childrenIds?: Array<long>;
- 
+
   /**
-   * 元素的自定义无障碍状态播报文本信息。组件可通过[accessibilityStateDescription]{@link ./@internal/component/ets/common:CommonMethod.accessibilityStateDescription}设置该属性。
+   * 元素的自定义无障碍状态播报文本信息。组件可通过[accessibilityStateDescription]{@link @global:CommonMethod#accessibilityStateDescription}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
   readonly accessibilityStateDescription?: string;
- 
+
   /**
-   * 元素支持的自定义操作列表。组件可通过[accessibilityCustomActions]{@link ./@internal/component/ets/common:CommonMethod.accessibilityCustomActions}设置该属性。
+   * 元素支持的自定义操作列表。组件可通过[accessibilityCustomActions]{@link @global:CommonMethod#accessibilityCustomActions}设置该属性。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly

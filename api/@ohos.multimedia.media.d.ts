@@ -1215,7 +1215,7 @@ declare namespace media {
      * Obtains the cover of the audio album. This API uses an asynchronous callback to return the result.
      *
      * @param { AsyncCallback<image.PixelMap> } callback - Callback used to return the album cover.
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1228,7 +1228,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<image.PixelMap | undefined> } callback - Callback used to return the album cover.
      *     to return when fetchAlbumCover completed.
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform
@@ -2672,7 +2672,7 @@ declare namespace media {
     preferredSubtitleLanguages?: Array<string>;
   }
     /**
-   * Describes the state of the [AVPlayer]{@link @ohos.multimedia.media:media}. Your application can proactively obtain 
+   * Describes the state of the [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}. Your application can proactively obtain 
    * the AVPlayer state through the **state** property or obtain the reported AVPlayer state by subscribing to the 
    * [stateChange]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
    * event. For details about the rules for state transition, see 
@@ -3027,6 +3027,37 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     details: Record<string, Object>;
+  }
+
+  /**
+   * Enumeration definition of executable playback control instructions,
+   * This interface is used by the application to query whether the corresponding playback control operation can be
+   * performed on the media asset after Prepare() is complete.
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVPlayer
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum PlaybackCommand {  
+    /**
+     * Definition of Enumerated Values of the Seek Operation
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_SEEK = 0,
+    /**
+     * Operation value for adjusting the playback rate
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_RATE = 1
   }
 
   /**
@@ -3423,10 +3454,10 @@ declare namespace media {
      * @param { int } fd - Resource handle, which is obtained by calling
      *     [resourceManager.getRawFd]{@link @ohos.resourceManager:resourceManager.ResourceManager.getRawFd(path: string, callback: _AsyncCallback<RawFileDescriptor>)}.
      * @param { long } offset - Resource offset, which needs to be entered based on the preset asset information. An
-     *     invalid value causes a failure to parse subtitle assets. The default value is **0**.unit:Byte.
+     *     invalid value causes a failure to parse subtitle assets. The default value is **0**. Unit:Byte.
      * @param { long } length - Resource length, which needs to be entered based on the preset asset information. The
      *     default value is the remaining bytes from the offset in the file. An invalid value causes a failure to parse
-     *     subtitle assets. The default value is **0**.
+     *     subtitle assets. The default value is **0**. Unit:Byte.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -3457,6 +3488,7 @@ declare namespace media {
      * paused state. This API uses a promise to return the result.
      *
      * @returns { Promise<PlaybackInfo> } Promise used to return **PlaybackInfo**.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise. 
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 12 dynamic
      * @since 23 static
@@ -3523,6 +3555,7 @@ declare namespace media {
      * playing, paused, completed, or stopped state. This API uses a promise to return the result.
      *
      * @returns { Promise<PlaybackMetrics> } Promise used to return the playback metrics of the current AVPlayer.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 dynamic&static
      */
@@ -3767,7 +3800,7 @@ declare namespace media {
      * Clears all the items in the player's playlist. Currently playing media will be terminated immediately.
      *
      * @returns { Promise<void> } Promise is used to return the result.
-     * @throws { BusinessError } 5400102 - operation not allowed . Returned via promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned via promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
@@ -3801,6 +3834,24 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getMediaSources(): Array<MediaSource | undefined>;
+
+    /**
+     * Queries whether a specified playback control command can be executed under the current playback source.
+     * The function can be called only after Prepare() is successfully executed.
+     *
+     * @param { PlaybackCommand } command - Enumerated value of the playback control instruction to be queried.
+     *     <br>Value constraint: See Enumeration PlaybackCommand.
+     * @returns { Promise<boolean> } Promise used to return the result.
+     *     The value **true** indicates that the command can be executed.
+     *     The value **false** indicates that the command cannot be executed.
+     * @throws { BusinessError } 5400102 - Operation not allowed.
+     *     If this function is invoked before Prepare(), it is returned.
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    checkSupportPlaybackCommand(command: PlaybackCommand): Promise<boolean>;
 
     /**
      * URL of the media asset. It can be set only when the AVPlayer is in the idle state. 
@@ -4369,7 +4420,7 @@ declare namespace media {
      *     requested by the user.<br>For video playback, [SeekMode]{@link @ohos.multimedia.media:media.SeekMode} may
      *     cause the actual position to be different from that requested by the user. The exact position can be obtained
      *     from the **currentTime** property. The time in this callback only means that the requested seek operation is
-     *     complete.
+     *     complete. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4493,7 +4544,7 @@ declare namespace media {
      * > - In the **pause** state, the player reports the timeUpdate event when the buffering ends.
      *
      * @param { 'timeUpdate' } type - Event type, which is **'timeUpdate'** in this case.
-     * @param { Callback<int> } callback - Callback used to return the current time.
+     * @param { Callback<int> } callback - Callback used to return the current time. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4523,7 +4574,7 @@ declare namespace media {
      * > The **durationUpdate** event is not supported in live streaming scenarios.
      *
      * @param { 'durationUpdate' } type - Event type, which is **'durationUpdate'** in this case.
-     * @param { Callback<int> } callback - Callback used to return the resource duration.
+     * @param { Callback<int> } callback - Callback used to return the resource duration. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -4697,7 +4748,7 @@ declare namespace media {
     off(type: 'availableBitrates', callback?: Callback<Array<int>>): void;
 
     /**
-     * Subscribes to [AVPlayer]{@link @ohos.multimedia.media:media} errors. This event is used only for error prompt and
+     * Subscribes to [AVPlayer]{@link @ohos.multimedia.media:media.avplayer} errors. This event is used only for error prompt and
      * does not require the user to stop playback control. If the 
      * [AVPlayerState]{@link @ohos.multimedia.media:media.AVPlayerState} is also switched to error, call 
      * [reset()]{@link media.AVPlayer.reset(callback: AsyncCallback<void>)} or 
@@ -6325,6 +6376,44 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getID(): string;
+
+    /**
+     * Set the audio and video feature filtering items of the MediaSource,
+     * After the user defines the audio and video filtering items of the MediaSource,
+     * When playing or downloading MediaSource data offline,
+     * Preferentially perform a corresponding operation in the filtering feature.
+     * 
+     * @param { TrackSelectionFilter } filter - Specifies the audio and video features of the pre-downloaded streaming
+     *     media.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setTrackSelectionFilter(filter: TrackSelectionFilter): void;
+
+    /**
+     * Sets the matching character string of the MediaSource during retrieval.
+     * After a resource corresponding to the MediaSource is cached to the local host, the resource is played again,
+     * The CDN path may change. As a result, the matching fails.
+     * You can set the matching character string to solve this problem.
+     * 
+     * @param { string } key - Key value set for the MediaSource to match in the loacl cache.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRetrieveKey(key: string): void;
+
+    /**
+     * Obtains the configured audio and video feature filtering values.
+     * 
+     * @returns { TrackSelectionFilter | undefined } If the TrackSelectionFilter object exists,
+     *     the TrackSelectionFilter object is returned. Otherwise, the TrackSelectionFilter object is returned.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getTrackSelectionFilter(): TrackSelectionFilter | undefined;
   }
 
   /**
@@ -6997,7 +7086,7 @@ declare namespace media {
    * 
    * > **NOTE**
    * >
-   * > > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
+   * > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
    * > provided by the camera module, see [Camera Management]{@link @ohos.multimedia.camera:camera}.
    *
    * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7017,7 +7106,7 @@ declare namespace media {
      * @throws { BusinessError } 201 - Permission denied. Return by callback.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -7036,7 +7125,7 @@ declare namespace media {
      * @throws { BusinessError } 201 - Permission denied. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -7056,7 +7145,7 @@ declare namespace media {
      * @param { AsyncCallback<AVRecorderConfig> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined** and **data** is the real-time configuration obtained; otherwise, **err**
      *     is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7073,7 +7162,7 @@ declare namespace media {
      *     If the operation is successful, **err** is **undefined** and **data** is the real-time configuration obtained
      *     ;
      *     otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7088,7 +7177,7 @@ declare namespace media {
      * called.
      *
      * @returns { Promise<AVRecorderConfig> } Promise used to return the real-time configuration.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7101,7 +7190,7 @@ declare namespace media {
      * This API can be called only after prepare() is called.
      *
      * @returns { Promise<AVRecorderConfig | undefined> } Promise used to return the real-time configuration.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7123,7 +7212,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined** and **data** is the surface ID obtained; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7143,7 +7232,7 @@ declare namespace media {
      * @param { AsyncCallback<string | undefined> } callback - Callback used to return the result.
      *     If the operation is successful, **err** is **undefined** and **data** is the surface ID obtained;
      *     otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7163,7 +7252,7 @@ declare namespace media {
      * is called.
      *
      * @returns { Promise<string> } Promise used to return the surface buffer obtained from the surface.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7181,7 +7270,7 @@ declare namespace media {
      * This API can be called only after the prepare() API is called.
      *
      * @returns { Promise<string | undefined> } Promise used to return the result.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7197,7 +7286,7 @@ declare namespace media {
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7214,7 +7303,7 @@ declare namespace media {
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7339,7 +7428,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7358,7 +7447,7 @@ declare namespace media {
      * called.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7378,7 +7467,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7395,7 +7484,7 @@ declare namespace media {
      * [resume()]{@link media.AVRecorder.resume()} to resume recording.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7414,7 +7503,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7430,7 +7519,7 @@ declare namespace media {
      * This API can be called only after the [pause()]{@link media.AVRecorder.pause()} API is called.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7456,7 +7545,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7478,7 +7567,7 @@ declare namespace media {
      * [getInputSurface()]{@link media.AVRecorder.getInputSurface()} again for re-recording.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -9775,6 +9864,16 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     MD_KEY_TRACK_REFERENCE_TYPE = 'track_ref_type',
+
+    /**
+     * Key for obtaining whether the track can be played normally
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    MD_KEY_TRACK_PLAYABLE = 'is_playable'
   }
 
   /**
@@ -11044,6 +11143,33 @@ declare namespace media {
   }
 
   /**
+   * Scene enumeration definition for automatically pausing screen capture
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum AVScreenCaptureAutoPauseCaptureScene {  
+    /**
+     * No scene is set; screen capture will not be automatically paused in any scenario.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_NONE = 0,
+
+    /**
+     * Scene for screen fold state changes.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_SCREEN_FOLD_STATE_CHANGE = 1 << 0
+  }
+
+  /**
    * Provides the media AVScreenCaptureStrategy definition.
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11105,9 +11231,84 @@ declare namespace media {
      * 
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     enableAEC?: boolean;
+
+    /**
+     * Sets whether to output videos in HDR vivid format.
+     * Default value: The default value is false, indicating that videos in SDR format are output.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    enableHDR?: boolean;
+
+    /**
+     * Sets the set of scenes that automatically pause screen content capture.
+     * When the capture session is running, if any of the scenarios in the scenario set occurs, the system automatically
+     * pauses the collection of screen content. You can use the OH_AVScreenCapture_ResumeScreenCapture() function to
+     * restore the data.
+     * image content acquisition is not automatically paused by default.
+     * Default value: If this parameter is not set.
+     * <br>You can use the OH_AVScreenCapture_ResumeScreenCapture() function to restore data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
+  }
+
+  /**
+   * This API is used to configure a rectangular area. The position of the rectangular region starts from the upper left
+   * corner, and the size is defined as the length and width of the rectangle.
+   * 
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface RectangleRegion {
+    /**
+     * Offset of the rectangle region to the top edge.
+     * Unit: Pixel. The value must be an integer greater than or equal to 0.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * Offset of the rectangle region to the left edge.
+     * Unit: Pixel. The value must be an integer greater than or equal to 0.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * Width of the rectangle region.
+     * Unit: Pixel. The value must be a positive integer.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    width: int;
+    
+    /**
+     * Height of the rectangle region.
+     * Unit: Pixel. The value must be a positive integer.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    height: int;
   }
 
   /**
@@ -11495,6 +11696,25 @@ declare namespace media {
     setContentAutoRotation(enable: boolean): Promise<void>;
 
     /**
+     * Used to specify the actual recording area in screen recording mode.
+     * 
+     * You can configure the area before starting screen recording or update the area during screen recording.
+     *
+     * @param { int } displayId - Specifies the screen ID of the recording area.
+     * <br>The value should be an integer. Value constraint: The value must be an existing screen ID in the current
+     * system.
+     * @param { RectangleRegion } area - Rectangular area definition for recording.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
+     * @throws { BusinessError } 5400108 - The parameter check failed, parameter value out of range.
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setCaptureArea(displayId: int, area: RectangleRegion): Promise<void>;
+
+    /**
      * Subscribes to screen capture state changes. An application can subscribe to only one screen capture state change 
      * event. When the application initiates multiple subscriptions to this event, the last subscription is applied.
      *
@@ -11706,7 +11926,7 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AVTranscoder
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     enableStableQualityMode?: boolean;
 
@@ -11718,7 +11938,7 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AVTranscoder
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     sqrFactor?: int;
   }

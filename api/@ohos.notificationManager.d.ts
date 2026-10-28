@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file NotificationManager
  * @kit NotificationKit
  */
 
@@ -68,43 +68,41 @@ import type UIAbilityContext from './application/UIAbilityContext';
 /*** endif */
 
 /**
- * This module provides notification management capabilities, allowing applications to manage the complete lifecycle
- * of notifications. This includes operations such as publishing, updating, and canceling notifications, creating and
- * querying notification slots, querying and requesting authorization status for notification capabilities, setting
- * application badges, and querying stored notifications in the notification center.
+ * This module provides notification management capabilities. Applications can use this module to implement the complete
+ * lifecycle management of notifications, including publishing, updating, and canceling notifications; creating and 
+ * querying [notification slots](docroot://notification/notification-glossary.md#notification-slot); querying and 
+ * requesting the authorization status of the notification capability; setting app badges; and querying existing 
+ * notifications in the [notification center](docroot://notification/notification-glossary.md#notification-center).
  *
  * **APIs used in combination**:
  *
- * The APIs of this module follow the following workflow of notifications: Authorization → Publishing → Cancellation →
+ * The APIs of this module follow the following workflow of notifications: Authorization → Publishing → Cancellation → 
  * Channel Management. The APIs are designed to be used in combination with one another.
  *
- * 1. **Authorization query and request process**: Before publishing a notification, first query the authorization
- * status of the notification capability through **isNotificationEnabled**. If the notification capability is not
+ * 1. **Authorization query and request process**: Before publishing a notification, first query the authorization 
+ * status of the notification capability through **isNotificationEnabled**. If the notification capability is not 
  * authorized, guide the user to enable the notification permission through **requestEnableNotification**.
- *
- * 2. **Notification publish and update process**: Publish a notification via the **publish** method, with the
- * notification content specified through **NotificationRequest**. If a newly published notification has the same ID
- * and tag as an existing one, the existing notification will be automatically updated. If the ID or tag differs, a
- * new notification will be created instead.
- *
- * 3. **Notification cancellation process**: Cancel a notification with a specified ID through **cancel**, cancel all
- * notifications of this application through **cancelAll**, and cancel notifications under a specified group through
+ * 2. **Notification publishing and updating process**: Publish a notification through **publish**, and specify the 
+ * [notification content](docroot://notification/notification-glossary.md#notification-content) through 
+ * **NotificationRequest**. If the ID and label of the newly published notification are the same as those of an 
+ * existing notification, the existing notification is automatically updated. If the ID or label of the newly published 
+ * notification differs from those of an existing notification, a new notification is created.
+ * 3. **Notification cancellation process**: Cancel a notification with a specified ID through **cancel**, cancel all 
+ * notifications of this application through **cancelAll**, and cancel notifications under a specified group through 
  * **cancelGroup**.
- *
- * 4. **Notification slot management process**: Create a notification slot through **addSlot**, query notification slot
- * configurations through **getSlot** / **getSlots**, and delete notification slots through
- * **removeSlot** / **removeAllSlots**. It is recommended to create the corresponding type of notification slot before
- * publishing a notification. In addition to using **addSlot** to create a notification slot, you can also carry the
- * **notificationSlotType** field in the NotificationRequest when publishing a notification. If a slot of the
- * corresponding type does not exist, it will be automatically created.
- *
- * 5. **Badge management process**: Set the badge number through **setBadgeNumber**, or when publishing a notification
- * through the **publish** API, carry the number of badges to be incremented in the **badgeNumber** field of
- * NotificationRequest.
- *
- * 6. **Stored notification query process**: Obtain the number of stored notifications for this application in the
- * notification center through **getActiveNotificationCount**, and obtain the details of stored notifications for this
- * application in the notification center through **getActiveNotifications**.
+ * 4. **Notification slot management process**: Create a notification slot through **addSlot**, query notification slot 
+ * configurations through **getSlot**\/**getSlots**, and delete notification slots through 
+ * **removeSlot**\/**removeAllSlots**. It is recommended to create the corresponding type of notification slot before 
+ * publishing a notification. In addition to using **addSlot** to create a notification slot, you can also carry the 
+ * **notificationSlotType** field in the 
+ * [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when publishing a notification. 
+ * If a slot of the corresponding type does not exist, it will be automatically created.
+ * 5. **Badge management process**: Set the badge number through **setBadgeNumber**, or when publishing a notification 
+ * through the **publish** API, carry the number of badges to be incremented in the **badgeNumber** field of 
+ * [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest}.
+ * 6. **Existing notification query process**: Obtain the number of existing notifications for this application in the 
+ * notification center through **getActiveNotificationCount**, and obtain the details of existing notifications for 
+ * this application in the notification center through **getActiveNotifications**.
  *
  * @syscap SystemCapability.Notification.Notification
  * @crossplatform [since 12]
@@ -116,10 +114,12 @@ declare namespace notificationManager {
   /**
    * Publishes a notification. This API uses an asynchronous callback to return the result.
    *
-   * After a notification is published, it will be displayed as a notification widget in the device's
-   * notification center, status bar, etc. If the ID and tag of the newly published notification are the
-   * same as those of an already published notification, the new notification will replace the original
-   * one, achieving a notification update effect.
+   * After a notification is published, it is displayed as a 
+   * [notification card](docroot://notification/notification-glossary.md#notification-card) in the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations on the device. If the ID and label of the newly published notification are the same as those of an 
+   * already published notification, the new notification replaces the original notification, achieving the effect of 
+   * updating the notification.
    *
    * @param { NotificationRequest } request - Content and related configuration of the notification to publish.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
@@ -147,22 +147,23 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 9 dynamic
    * @since 23 static
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)} checks whether 
-   *     notification is enabled for the specified application.
-   * @see [cancel]{@link notificationManager#cancel(id: int,label: string,callback: AsyncCallback<void>)} cancels a published
-   *     notification based on the notification ID and label. 
-   * @see [cancelAll]{@link notificationManager#cancelAll(callback: AsyncCallback<void>)} cancels all
-   *     notifications of this application.
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)}
+   *     checks whether notification is enabled for the specified application.
+   * @see [cancel]{@link notificationManager#cancel(id: int,label: string,callback: AsyncCallback<void>)}
+   *     cancels a published notification based on the notification ID and label.
+   * @see [cancelAll]{@link notificationManager#cancelAll(callback: AsyncCallback<void>)} cancels all notifications of this application.
    */
   function publish(request: NotificationRequest, callback: AsyncCallback<void>): void;
 
   /**
    * Publishes a notification. This API uses a promise to return the result.
-   * 
-   * After a notification is published, it will be displayed as a notification card in the device's notification
-   * center, status bar, and other locations. If the ID and tag of the newly published notification are the same
-   * as those of an already published notification, the new notification will replace the original one, achieving
-   * a notification update effect.
+   *
+   * After a notification is published, it is displayed as a 
+   * [notification card](docroot://notification/notification-glossary.md#notification-card) in the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations on the device. If the ID and label of the newly published notification are the same as those of an 
+   * already published notification, the new notification replaces the original notification, achieving the effect of 
+   * updating the notification.
    *
    * @param { NotificationRequest } request - Content and related configuration of the notification to publish.
    * @returns { Promise<void> } Promise that returns no value.
@@ -189,12 +190,9 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 9 dynamic
    * @since 23 static
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()} checks whether 
-   *     notification is enabled for the specified application.
-   * @see [cancel]{@link notificationManager#cancel(id: int,label?: string)} cancels a published
-   *     notification based on the notification ID and label. 
-   * @see [cancelAll]{@link notificationManager#cancelAll()} cancels all notifications of 
-   *     this application.
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()} checks whether notification is enabled for the specified application.
+   * @see [cancel]{@link notificationManager#cancel(id: int,label?: string)} cancels a published notification based on the notification ID and label.
+   * @see [cancelAll]{@link notificationManager#cancelAll()} cancels all notifications of this application.
    */
   function publish(request: NotificationRequest): Promise<void>;
 
@@ -283,7 +281,8 @@ declare namespace notificationManager {
   function publish(request: NotificationRequest, userId: int): Promise<void>;
 
   /**
-   * Publishes a notification through the reminder agent. This API uses an asynchronous callback to return the result.
+   * Publishes a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses
+   * an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { NotificationRequest } request - Content and related configuration of the notification to publish.
@@ -330,7 +329,8 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * Publishes a notification through the reminder agent. This API uses a promise to return the result.
+   * Publishes a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses
+   * a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { NotificationRequest } request - Content and related configuration of the notification to publish.
@@ -372,7 +372,8 @@ declare namespace notificationManager {
   function publishAsBundle(request: NotificationRequest, representativeBundle: string, userId: int): Promise<void>;
 
   /**
-   * Publishes a notification through the reminder agent. This API uses a promise to return the result.
+   * Publishes a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses
+   * a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { BundleOption } representativeBundle - Bundle information of the application whose notification function is
@@ -415,16 +416,18 @@ declare namespace notificationManager {
   /**
    * Cancels a notification with the specified ID. This API uses an asynchronous callback to return the result.
    *
-   * After cancellation, the corresponding notification will be removed from the notification center, status
-   * bar, etc., and will no longer be visible to the user.
+   * After cancellation, the corresponding notification is removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations, and is no longer visible to the user.
    *
-   * Compared with notificationManager.cancel(id, label, callback), which includes the label parameter,
-   * this API does not pass in a label and will cancel the notification matching the specified ID.
-   * When a notification is published with a non-empty label, the
-   * `notificationManager.cancel(id, label, callback)` API must be used to cancel it.
+   * Compared with [notificationManager.cancel(id, label, callback)]{@link notificationManager#cancel}, which includes 
+   * the label parameter, this API does not pass in a label and will cancel the notification matching the specified ID. 
+   * When a notification is published with a non-empty label, the `notificationManager.cancel(id, label, callback)` API 
+   * must be used to cancel it.
    *
-   * @param { int } id - Notification ID, used to identify the target notification. This value is
-   *     specified by the **id** field of NotificationRequest when a notification is published.
+   * @param { int } id - Notification ID, used to identify the target notification. This value is specified by the
+   *     **id** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when a
+   *     notification is published.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -439,30 +442,34 @@ declare namespace notificationManager {
    * @since 23 static
    * @see [publish]{@link notificationManager#publish(request: NotificationRequest,callback: AsyncCallback<void>)} publishes a notification.
    * @see [cancelAll]{@link notificationManager#cancelAll(callback: AsyncCallback<void>)} cancels all notifications of this application.
-   * @see [cancelGroup]{@link notificationManager#cancelGroup(groupName: string,callback: AsyncCallback<void,void>)} cancels notifications 
-   *     under a notification group of this application.
+   * @see [cancelGroup]{@link notificationManager#cancelGroup(groupName: string,callback: AsyncCallback<void,void>)}
+   *     cancels notifications under a notification group of this application.
    */
   function cancel(id: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Cancels a published notification based on the notification ID and label. This API uses an asynchronous callback to
+   * Cancels a published notification based on the notification ID and label. This API uses an asynchronous callback to 
    * return the result.
    *
-   * After cancellation, the corresponding notification will be removed from the notification center, status
-   * bar, and other locations, and will no longer be visible to the user. This is suitable for scenarios
-   * where a specific notification with a particular tag needs to be precisely canceled.
+   * After cancellation, the corresponding notification is removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations, and is no longer visible to the user. This is suitable for scenarios where a specific notification with 
+   * a particular label needs to be canceled precisely.
    *
-   * Compared with notificationManager.cancel(id, callback), which requires only the notification ID, this
-   * API additionally has the **label** parameter, allowing precise cancellation of notifications with the
-   * same ID but different labels.
+   * Compared with [notificationManager.cancel(id, callback)]{@link notificationManager#cancel}, which requires only the
+   * notification ID, this API additionally has the **label** parameter, allowing precise cancellation of notifications 
+   * with the same ID but different labels.
    *
-   * @param { int } id - Notification ID, used to identify the target notification. This value is
-   *     specified by the **id** field of NotificationRequest when a notification is published.
-   * @param { string } label - Notification label. This value is specified by the **label** field of
-   *     NotificationRequest during the notification publishment. If the **label** field is empty, the
-   *     published notification that matches the specified notification ID and has an empty label is
-   *     canceled. If the **label** field is not empty, the published notification that matches both the
-   *     specified notification ID and label is canceled.
+   * @param { int } id - Notification ID, used to identify the target notification. This value is specified by the
+   *     **id** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when a
+   *     notification is published.
+   * @param { string } label - Notification label. This value is specified by the **label** field in
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} during the notification
+   *     publishment.
+   *     <br> - If the **label** field is empty, the published notification that matches the specified notification ID
+   *     and has an empty label is canceled.
+   *     <br> - If the **label** field is not empty, the published notification that matches both the specified
+   *     notification ID and label is canceled.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -476,25 +483,29 @@ declare namespace notificationManager {
    * @since 23 static
    * @see [publish]{@link notificationManager#publish(request: NotificationRequest,callback: AsyncCallback<void>)} publishes a notification.
    * @see [cancelAll]{@link notificationManager#cancelAll(callback: AsyncCallback<void>)} cancels all notifications of this application.
-   * @see [cancelGroup]{@link notificationManager#cancelGroup(groupName: string,callback: AsyncCallback<void,void>)} cancels 
-   *     notifications under a notification group of this application.
+   * @see [cancelGroup]{@link notificationManager#cancelGroup(groupName: string,callback: AsyncCallback<void,void>)}
+   *     cancels notifications under a notification group of this application.
    */
   function cancel(id: int, label: string, callback: AsyncCallback<void>): void;
 
   /**
-   * Cancels a published notification based on the notification ID and label. This API uses a promise to
-   * return the result.
+   * Cancels a published notification based on the notification ID and label. This API uses a promise to return the 
+   * result.
    *
-   * After cancellation, the corresponding notification will be removed from the notification center, status
-   * bar, and other locations, and will no longer be visible to the user.
+   * After cancellation, the corresponding notification is removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations, and is no longer visible to the user.
    *
-   * @param { int } id - Notification ID, used to identify the target notification. This value is
-   *     specified by the id field of NotificationRequest when publishing a notification.
-   * @param { string } [label] - Notification label. The default value is empty. This value is specified
-   *     by the **label** field of NotificationRequest during the notification publishment. If the
-   *     **label** field is empty, the published notification that matches the specified notification ID
-   *     and has an empty label is canceled. If the **label** field is not empty, the published
-   *     notification that matches both the specified notification ID and label is canceled.
+   * @param { int } id - Notification ID, used to identify the target notification. This value is specified by the id
+   *     field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when publishing a
+   *     notification.
+   * @param { string } [label] - Notification label. The default value is empty. This value is specified by the
+   *     **label** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} during
+   *     the notification publishment.
+   *     <br> - If the **label** field is empty, the published notification that matches the specified notification ID
+   *     and has an empty label is canceled.
+   *     <br> - If the **label** field is not empty, the published notification that matches both the specified
+   *     notification ID and label is canceled.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -506,15 +517,14 @@ declare namespace notificationManager {
    * @since 9 dynamic
    * @since 23 static
    * @see [publish]{@link notificationManager#publish(request: NotificationRequest, callback: AsyncCallback<void>)} publishes a notification.
-   * @see [cancelAll]{@link notificationManager#cancelAll()} cancels all notifications of this application. 
-   * @see [cancelGroup]{@link notificationManager#cancelGroup(groupName: string)} cancels notifications
-   *     under a notification group of this application.
+   * @see [cancelAll]{@link notificationManager#cancelAll()} cancels all notifications of this application.
+   * @see [cancelGroup]{@link notificationManager#cancelGroup(groupName: string)} cancels notifications under a notification group of this application.
    */
   function cancel(id: int, label?: string): Promise<void>;
 
   /**
    * Cancels the notification of other applications of the user. This API uses a promise to return the result.
-   * 
+   *
    * The current application must have a proxy relationship with another application, or the 
    * **ohos.permission.NOTIFICATION_AGENT_CONTROLLER** permission is granted to the current application.
    *
@@ -538,8 +548,8 @@ declare namespace notificationManager {
   function cancel(representativeBundle: BundleOption, id: int): Promise<void>;
 
   /**
-   * Cancels a notification published through the reminder agent. This API uses an asynchronous callback to return the 
-   * result.
+   * Cancels a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses 
+   * an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { int } id - Notification ID.
@@ -570,7 +580,8 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * Cancels a notification published through the reminder agent. This API uses a promise to return the result.
+   * Cancels a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses a
+   * promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { int } id - Notification ID.
@@ -596,7 +607,8 @@ declare namespace notificationManager {
   function cancelAsBundle(id: int, representativeBundle: string, userId: int): Promise<void>;
 
   /**
-   * Cancels a notification published through the reminder agent. This API uses a promise to return the result.
+   * Cancels a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses a
+   * promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { BundleOption } representativeBundle - Bundle information of the application whose notification function is
@@ -624,9 +636,10 @@ declare namespace notificationManager {
   /**
    * Cancels all notifications of this application. This API uses an asynchronous callback to return the result.
    *
-   * After cancellation, all notifications of the current application will be removed from the notification
-   * center, status bar, and other locations, and will no longer be visible to the user. This is
-   * suitable for scenarios such as application exit or when the user manually clears all notifications.
+   * After cancellation, all notifications of the current application are removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations, and are no longer visible to the user. This is suitable for scenarios where the application exits or the
+   * user manually clears all notifications.
    *
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -640,17 +653,18 @@ declare namespace notificationManager {
    * @since 9 dynamic
    * @since 23 static
    * @see [publish]{@link notificationManager#publish(request: NotificationRequest, callback: AsyncCallback<void>)} publishes a notification.
-   * @see [cancel]{@link notificationManager#cancel(id: int, label: string, callback: AsyncCallback<void>)} cancels a published notification based 
-   *     on the notification ID and label.
+   * @see [cancel]{@link notificationManager#cancel(id: int, label: string, callback: AsyncCallback<void>)}
+   *     cancels a published notification based on the notification ID and label.
    */
   function cancelAll(callback: AsyncCallback<void>): void;
 
   /**
    * Cancels all notifications of this application. This API uses a promise to return the result.
    *
-   * After cancellation, all notifications of the current application will be removed from the notification
-   * center, status bar, and other locations, and will no longer be visible to the user. This is
-   * suitable for scenarios such as application exit or when the user manually clears all notifications.
+   * After cancellation, all notifications of the current application are removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center), status bar, and other 
+   * locations, and are no longer visible to the user. This is suitable for scenarios where the application exits or the
+   * user manually clears all notifications.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -666,7 +680,8 @@ declare namespace notificationManager {
   function cancelAll(): Promise<void>;
 
   /**
-   * Adds a notification slot. This API uses an asynchronous callback to return the result.
+   * Creates a [notification slot](docroot://notification/notification-glossary.md#notification-slot). This API uses an 
+   * asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { NotificationSlot } slot - Notification slot to add.
@@ -687,7 +702,8 @@ declare namespace notificationManager {
   function addSlot(slot: NotificationSlot, callback: AsyncCallback<void>): void;
 
   /**
-   * Adds a notification slot. This API uses a promise to return the result.
+   * Creates a [notification slot](docroot://notification/notification-glossary.md#notification-slot). This API uses a 
+   * promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { NotificationSlot } slot - Notification slot to add.
@@ -708,17 +724,18 @@ declare namespace notificationManager {
   function addSlot(slot: NotificationSlot): Promise<void>;
 
   /**
-   * Adds a notification slot of a specified type. This API uses an asynchronous callback to return the result.
+   * Creates a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of the specified 
+   * type. This API uses an asynchronous callback.
    *
-   * The notification slot NotificationSlot defines the reminder type (such as alert sound, vibration, and
-   * banner) and level of a notification. Before publishing a notification, the application needs to
-   * create a corresponding type of notification slot first, or the system will automatically create a
-   * corresponding type of notification slot when the notification is published. Only one notification
-   * slot of the same type can be created.
+   * The notification slot [NotificationSlot]{@link ./notification/notificationSlot:NotificationSlot} defines the 
+   * reminder mode (such as alert sound, vibration, and banner) and level of a notification. Before publishing a 
+   * notification, the application needs to create a corresponding type of notification slot first, or the system will 
+   * automatically create a corresponding type of notification slot when the notification is published. Only one 
+   * notification slot of the same type can be created.
    *
-   * @param { SlotType } type - Notification slot type to create. Different slot types correspond to
-   *     different default SlotLevel values, which affect the notification alert method. For example,
-   *     **SOCIAL_COMMUNICATION** corresponds to **LEVEL_HIGH** (status bar icon + banner + sound), and
+   * @param { SlotType } type - Notification slot type to create. Different slot types correspond to different default
+   *     [SlotLevel]{@link notificationManager.SlotLevel} values, which affect the notification reminder mode. For
+   *     example, **SOCIAL_COMMUNICATION** corresponds to **LEVEL_HIGH** (status bar icon + banner + sound), and
    *     **CONTENT_INFORMATION** corresponds to **LEVEL_MIN** (no status bar icon + no banner + no sound).
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -731,27 +748,27 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType,callback: AsyncCallback<NotificationSlot>)} obtains a 
-   *     notification slot of a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)} removes a 
-   *     notification slot of a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback<void>)} removes all
-   *     notification slots for this application.
+   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType,callback: AsyncCallback<NotificationSlot>)}
+   *     obtains a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)}
+   *     removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback<void>)} removes all notification slots for this application.
    */
   function addSlot(type: SlotType, callback: AsyncCallback<void>): void;
 
   /**
-   * Adds a notification slot of a specified type. This API uses a promise to return the result.
+   * Creates a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type. This API uses a promise to return the result.
    *
-   * The notification slot NotificationSlot defines the reminder type (such as alert sound, vibration, and
-   * banner) and level of a notification. Before publishing a notification, the application needs to
-   * create a corresponding type of notification slot first, or the system will automatically create a
-   * corresponding type of notification slot when the notification is published. Only one notification
-   * slot of the same type can be created.
+   * The notification slot [NotificationSlot]{@link ./notification/notificationSlot:NotificationSlot} defines the 
+   * reminder mode (such as alert sound, vibration, and banner) and level of a notification. Before publishing a 
+   * notification, the application needs to create a corresponding type of notification slot first, or the system will 
+   * automatically create a corresponding type of notification slot when the notification is published. Only one 
+   * notification slot of the same type can be created.
    *
-   * @param { SlotType } type - Notification slot type to create. Different slot types correspond to
-   *     different default SlotLevel values, which affect the notification alert method. For example,
-   *     **SOCIAL_COMMUNICATION** corresponds to **LEVEL_HIGH** (status bar icon + banner + sound), and
+   * @param { SlotType } type - Notification slot type to create. Different slot types correspond to different default
+   *     [SlotLevel]{@link notificationManager.SlotLevel} values, which affect the notification reminder mode. For
+   *     example, **SOCIAL_COMMUNICATION** corresponds to **LEVEL_HIGH** (status bar icon + banner + sound), and
    *     **CONTENT_INFORMATION** corresponds to **LEVEL_MIN** (no status bar icon + no banner + no sound).
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -763,17 +780,15 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotTyp)} obtains a notification
-   *     slot of a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification
-   *     slot of a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notificationslots 
-   *     for this application.
+   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotTyp)} obtains a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notificationslots for this application.
    */
   function addSlot(type: SlotType): Promise<void>;
 
   /**
-   * Adds an array of notification slots. This API uses an asynchronous callback to return the result.
+   * Creates multiple [notification slots](docroot://notification/notification-glossary.md#notification-slot). This API 
+   * uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<NotificationSlot> } slots - Notification slots to add. The number of elements in the array ranges
@@ -795,7 +810,8 @@ declare namespace notificationManager {
   function addSlots(slots: Array<NotificationSlot>, callback: AsyncCallback<void>): void;
 
   /**
-   * Adds an array of notification slots. This API uses a promise to return the result.
+   * Creates multiple [notification slots](docroot://notification/notification-glossary.md#notification-slot). This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<NotificationSlot> } slots - Notification slots to add. The number of elements in the array ranges
@@ -817,18 +833,18 @@ declare namespace notificationManager {
   function addSlots(slots: Array<NotificationSlot>): Promise<void>;
 
   /**
-   * Obtains a notification slot of a specified type. This API uses an asynchronous callback to return the result.
+   * Obtains a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type. This API uses an asynchronous callback to return the result.
    *
-   * This API is used to query the detailed configuration information of a created notification slot,
-   * including settings such as reminder method, level, and lock screen display. A corresponding type
-   * of notification slot must be created first through addSlot, otherwise the obtained result will be
-   * empty.
+   * This API is used to query the detailed configuration information of a created notification slot, including settings
+   * such as reminder mode, level, and lock screen display. A corresponding type of notification slot must be created 
+   * first through [addSlot]{@link notificationManager#addSlot}, otherwise the obtained result will be empty.
    *
-   * @param { SlotType } slotType - Notification slot type, such as social communication, service reminder,
+   * @param { SlotType } slotType - Type of the notification slot, for example, social communication, service reminder,
    *     and content consultation.
-   * @param { AsyncCallback<NotificationSlot> } callback - Callback used to return the result. If the
-   *     notification slot is obtained successfully, **err** is **undefined** and **data** is the obtained
-   *     **NotificationSlot**; otherwise, **err** is an error object.
+   * @param { AsyncCallback<NotificationSlot> } callback - Callback used to return the result. If the notification slot
+   *     is obtained successfully, **err** is **undefined** and **data** is the obtained **NotificationSlot**;
+   *     otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -836,24 +852,22 @@ declare namespace notificationManager {
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification 
-   *     slot of a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)} removes a notification slot of 
-   *     a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification slots
-   *     for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)}
+   *     removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification slots for this application.
    */
   function getSlot(slotType: SlotType, callback: AsyncCallback<NotificationSlot>): void;
 
   /**
-   * Obtains a notification slot of a specified type. This API uses an asynchronous callback to return the result.
+   * Obtains a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type. This API uses an asynchronous callback to return the result.
    *
-   * This API is used to query the detailed configuration information of a created notification slot,
-   * including settings such as reminder method, level, and lock screen display. A corresponding type
-   * of notification slot must be created first through addSlot, otherwise the obtained result will be
-   * empty.
+   * This API is used to query the detailed configuration information of a created notification slot, including settings
+   * such as reminder mode, level, and lock screen display. A corresponding type of notification slot must be created 
+   * first through [addSlot]{@link notificationManager#addSlot}, otherwise the obtained result will be empty.
    *
-   * @param { SlotType } slotType - Notification slot type, such as social communication, service reminder,
+   * @param { SlotType } slotType - Type of the notification slot, for example, social communication, service reminder,
    *     and content consultation.
    * @param { AsyncCallback<NotificationSlot|null> } callback - Callback used to return the result. If the
    *     notification slot is obtained successfully, **err** is **undefined** and **data** is the obtained
@@ -865,24 +879,22 @@ declare namespace notificationManager {
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification 
-   *     slot of a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)} removes a notification slot of 
-   *     a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification slots
-   *     for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)}
+   *     removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification slots for this application.
    */
   function getSlot(slotType: SlotType, callback: AsyncCallback<NotificationSlot|null>): void;
 
   /**
-   * Obtains a notification slot of a specified type. This API uses a promise to return the result.
+   * Obtains a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type. This API uses a promise to return the result.
    *
-   * This API is used to query the detailed configuration information of a created notification slot,
-   * including settings such as reminder method, level, and lock screen display. A corresponding type
-   * of notification slot must be created first through addSlot, otherwise the obtained result will be
-   * empty.
+   * This API is used to query the detailed configuration information of a created notification slot, including settings
+   * such as reminder mode, level, and lock screen display. A corresponding type of notification slot must be created 
+   * first through [addSlot]{@link notificationManager#addSlot}, otherwise the obtained result will be empty.
    *
-   * @param { SlotType } slotType - Notification slot type, such as social communication, service reminder,
+   * @param { SlotType } slotType - Type of the notification slot, for example, social communication, service reminder,
    *     and content consultation.
    * @returns { Promise<NotificationSlot> } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -893,22 +905,20 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification 
-   *     slot of a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all 
-   *     notification slots for this application.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification slots for this application.
    */
   function getSlot(slotType: SlotType): Promise<NotificationSlot>;
 
   /**
-   * Obtains a notification slot of a specified type. This API uses a promise to return the result.
+   * Obtains a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type. This API uses a promise to return the result.
    *
-   * This API is used to query the detailed configuration information of a created notification slot,
-   * including settings such as reminder method, level, and lock screen display. A corresponding type
-   * of notification slot must be created first through addSlot, otherwise the obtained result will be
-   * empty.
+   * This API is used to query the detailed configuration information of a created notification slot, including settings
+   * such as reminder mode, level, and lock screen display. A corresponding type of notification slot must be created 
+   * first through [addSlot]{@link notificationManager#addSlot}, otherwise the obtained result will be empty.
    *
-   * @param { SlotType } slotType - Notification slot type, such as social communication, service reminder,
+   * @param { SlotType } slotType - Type of the notification slot, for example, social communication, service reminder,
    *     and content consultation.
    * @returns { Promise<NotificationSlot|null> } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -918,26 +928,24 @@ declare namespace notificationManager {
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of 
-   *     a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of a 
-   *     specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification slots for 
-   *     this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification slots for this application.
    */
   function getSlot(slotType: SlotType): Promise<NotificationSlot|null>;
 
   /**
-   * Obtains all notification slots of this application. This API uses an asynchronous callback to return the result.
+   * Obtains all [notification slots](docroot://notification/notification-glossary.md#notification-slot) of the current 
+   * application. This API uses an asynchronous callback to return the result.
    *
-   * This API is used to batch query the configuration information of all notification slots created by the
-   * current application, including settings such as the type, reminder method, and level of each slot.
-   * This is suitable for scenarios where all slot configurations need to be viewed. The corresponding
-   * notification slots must be created through addSlot first; otherwise, the obtained result will be empty.
+   * This API is used to batch query the configuration information of all notification slots created by the current 
+   * application, including settings such as the type, reminder mode, and level of each slot. This is suitable for 
+   * scenarios where all slot configurations need to be viewed. The corresponding notification slots must be created 
+   * through [addSlot]{@link notificationManager#addSlot} first; otherwise, the obtained result will be empty.
    *
-   * @param { AsyncCallback<Array<NotificationSlot>> } callback - Callback used to return the result. If
-   *     the notification slots are obtained successfully, **err** is **undefined** and **data** is the
-   *     obtained **NotificationSlot** array. Otherwise, **err** is an error object.
+   * @param { AsyncCallback<Array<NotificationSlot>> } callback - Callback used to return the result. If the
+   *     notification slots are obtained successfully, **err** is **undefined** and **data** is the obtained
+   *     **NotificationSlot** array. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -946,36 +954,32 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of 
-   *     a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)} removes a notification slot of 
-   *     a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification 
-   *     slots for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)}
+   *     removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification slots for this application.
    */
   function getSlots(callback: AsyncCallback<Array<NotificationSlot>>): void;
 
   /**
-   * Obtains all notification slots of this application. This API uses a promise to return the result.
+   * Obtains all [notification slots](docroot://notification/notification-glossary.md#notification-slot) of the current 
+   * application. This API uses a promise to return the result.
    *
-   * This API is used to batch query the configuration information of all notification slots created by the
-   * current application, including settings such as the type, reminder method, and level of each slot.
-   * This is suitable for scenarios where all slot configurations need to be viewed. The corresponding
-   * notification slots must be created through addSlot first; otherwise, the obtained result will be empty.
+   * This API is used to batch query the configuration information of all notification slots created by the current 
+   * application, including settings such as the type, reminder mode, and level of each slot. This is suitable for 
+   * scenarios where all slot configurations need to be viewed. The corresponding notification slots must be created 
+   * through [addSlot]{@link notificationManager#addSlot} first; otherwise, the obtained result will be empty.
    *
-   * @returns { Promise<Array<NotificationSlot>> } Promise used to return the result.
+   * @returns { Promise<Array<NotificationSlot>> } Promise used to return the notification slot object array.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of 
-   *     a specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of 
-   *     a specified type for this application.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification 
-   *     slots for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of a specified type for this application.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification slots for this application.
    */
   function getSlots(): Promise<Array<NotificationSlot>>;
 
@@ -983,7 +987,7 @@ declare namespace notificationManager {
    * Obtains a list of applications that allow notifications. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @returns { Promise<Array<BundleOption>> } Returns a list of applications that allow notifications.
+   * @returns { Promise<Array<BundleOption>> } List of applications that allow notifications.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -997,12 +1001,13 @@ declare namespace notificationManager {
   function getAllNotificationEnabledBundles(): Promise<Array<BundleOption>>;
 
   /**
-   * Obtains the list of applications that are allowed to publish notifications by a specified user. This API uses a 
-   * promise to return the result.
+   * Obtains the list of applications that allow notifications for a specified user. This API uses a promise to return
+   * the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { int } userId - Target user.
-   * @returns { Promise<Array<BundleOption>> } Returns a list of applications that allow notifications.
+   * @param { int } userId - User for whom the list of applications that allow notifications is to be obtained.
+   *     <br>The value should be an integer.
+   * @returns { Promise<Array<BundleOption>> } List of applications that allow notifications.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -1016,18 +1021,17 @@ declare namespace notificationManager {
   function getAllNotificationEnabledBundles(userId: int): Promise<Array<BundleOption>>;
 
   /**
-   * Removes a notification slot of a specified type for this application. This API uses an asynchronous
-   * callback to return the result.
+   * Removes a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type for the current application. This API uses an asynchronous callback to return the result.
    *
-   * After deletion, the corresponding type of notification slot and its configuration will be permanently
-   * removed. When a notification of this type is published subsequently, the system will automatically
-   * create a default slot. Notifications already published through this slot are not affected and can
-   * still be viewed in the notification center. This is suitable for scenarios where a slot needs to be
-   * deleted and then recreated for reconfiguration.
+   * After deletion, the corresponding type of notification slot and its configuration will be permanently removed. When
+   * a notification of this type is published subsequently, the system will automatically create a default slot. 
+   * Notifications already published through this slot are not affected and can still be viewed in the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center). This is applicable to 
+   * scenarios where the slot needs to be deleted and then re-created for reconfiguration.
    *
-   * @param { SlotType } slotType - Notification slot type, such as social communication, service reminder,
-   *     and content consultation. The created slot type must be passed in; otherwise, the deletion
-   *     operation is invalid.
+   * @param { SlotType } slotType - Type of the notification slot, for example, social communication, service reminder,
+   *     and content consultation.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1038,27 +1042,26 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of 
-   *     a specified type.
-   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType,callback: AsyncCallback<NotificationSlot>)} obtains a 
-   *     notification slot of a specified type.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification 
-   *     slots for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of a specified type.
+   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType,callback: AsyncCallback<NotificationSlot>)}
+   *     obtains a notification slot of a specified type.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots(callback: AsyncCallback)} removes all notification slots for this application.
    */
   function removeSlot(slotType: SlotType, callback: AsyncCallback<void>): void;
 
   /**
-   * Removes a notification slot of a specified type for this application. This API uses a promise to return the result.
+   * Removes a [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type for the current application. This API uses a promise to return the result.
    *
-   * After deletion, the corresponding notification slot and its configuration will be permanently removed.
-   * When a notification of this type is published subsequently, the system will automatically create a
-   * default slot. Notifications already published through this slot are not affected and can still be
-   * viewed in the notification center. This is suitable for scenarios where a slot needs to be deleted
-   * and then recreated for reconfiguration.
+   * After deletion, the corresponding type of notification slot and its configuration will be permanently removed. When
+   * a notification of this type is published subsequently, the system will automatically create a default slot. 
+   * Notifications already published through this slot are not affected and can still be viewed in the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center). This is applicable to 
+   * scenarios where the slot needs to be deleted and then re-created for reconfiguration.
    *
-   * @param { SlotType } slotType - Notification slot type, such as social communication, service reminder,
-   *     and content consultation. The created slot type must be passed in; otherwise, the deletion
-   *     operation is invalid.
+   * @param { SlotType } slotType - Notification slot type, for example, social communication, service reminder, content
+   *     consultation, and so on. The slot type to be passed in must have been created; otherwise, the deletion
+   *     operation does not take effect.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -1068,23 +1071,21 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of 
-   *     a specified type.
-   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType)} obtains a notification slot of a 
-   *     specified type.
-   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification 
-   *     slots for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of a specified type.
+   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType)} obtains a notification slot of a specified type.
+   * @see [removeAllSlots]{@link notificationManager#removeAllSlots()} removes all notification slots for this application.
    */
   function removeSlot(slotType: SlotType): Promise<void>;
 
   /**
-   * Removes all notification slots for this application. This API uses an asynchronous callback to return the result.
+   * Removes all [notification slots](docroot://notification/notification-glossary.md#notification-slot) of the current 
+   * application. This API uses an asynchronous callback to return the result.
    *
-   * After deletion, all notification slots and their configurations of the current application will be
-   * permanently removed. When notifications are published subsequently, the system will automatically
-   * create slots of the corresponding types. Notifications already published through these slots are
-   * not affected and can still be viewed in the notification center. This is suitable for scenarios
-   * where all slot configurations need to be cleared at once.
+   * After deletion, all notification slots and their configurations of the current application will be permanently 
+   * removed. When notifications are published subsequently, the system will automatically create slots of the 
+   * corresponding type. Notifications already published through these slots are not affected and can still be viewed in
+   * the [notification center](docroot://notification/notification-glossary.md#notification-center). This API is 
+   * suitable for scenarios where all slot configurations need to be cleared at once.
    *
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -1096,23 +1097,23 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of 
-   *     a specified type.
-   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType,callback: AsyncCallback<NotificationSlot>)} obtains a notification slot of 
-   *     a specified type.
-   * @see [removeSlots]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)} removes all notification slots 
-   *     for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType,callback: AsyncCallback<void>)} adds a notification slot of a specified type.
+   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType,callback: AsyncCallback<NotificationSlot>)}
+   *     obtains a notification slot of a specified type.
+   * @see [removeSlots]{@link notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)}
+   *     removes all notification slots for this application.
    */
   function removeAllSlots(callback: AsyncCallback<void>): void;
 
   /**
-   * Removes all notification slots for this application. This API uses a promise to return the result.
+   * Removes all [notification slots](docroot://notification/notification-glossary.md#notification-slot) for this 
+   * application. This API uses a promise to return the result.
    *
-   * After deletion, all notification slots and their configurations of the current application will be
-   * permanently removed. When notifications are published subsequently, the system will automatically
-   * create slots of the corresponding types. Notifications already published through these slots are
-   * not affected and can still be viewed in the notification center. This is suitable for scenarios
-   * where all slot configurations need to be cleared at once.
+   * After deletion, all notification slots and their configurations of the current application will be permanently 
+   * removed. When notifications are published subsequently, the system will automatically create slots of the 
+   * corresponding type. Notifications already published through these slots are not affected and can still be viewed in
+   * the [notification center](docroot://notification/notification-glossary.md#notification-center). This API is 
+   * suitable for scenarios where all slot configurations need to be cleared at once.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -1121,12 +1122,9 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of 
-   *     a specified type.
-   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType)} obtains a notification slot of a 
-   *     specified type.
-   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification 
-   *     slot of a specified type for this application.
+   * @see [addSlot]{@link notificationManager#addSlot(slotType: SlotType)} adds a notification slot of a specified type.
+   * @see [getSlot]{@link notificationManager#getSlot(slotType: SlotType)} obtains a notification slot of a specified type.
+   * @see [removeSlot]{@link notificationManager#removeSlot(slotType: SlotType)} removes a notification slot of a specified type for this application.
    */
   function removeAllSlots(): Promise<void>;
 
@@ -1136,8 +1134,8 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { boolean } enable - Whether to enable the notification slot type. The value **true** means to enable the
-   *     notification slot type, and **false** means the opposite.
+   * @param { boolean } enable - Whether to enable the notification. The value **true** means to enable the
+   *     notification, and **false** means the opposite.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -1223,11 +1221,11 @@ declare namespace notificationManager {
   function isNotificationEnabled(bundle: BundleOption): Promise<boolean>;
 
   /**
-   * Queries the notification authorization status of the current application. This API uses an asynchronous
-   * callback to return the result.
+   * Checks the [notification authorization](docroot://notification/notification-glossary.md#notification-authorization)
+   * status of the current application. This API uses an asynchronous callback to return the result.
    *
-   * This API is used to check whether the current application is allowed to send notifications before
-   * publishing, preventing publish failures when notification authorization is disabled.
+   * This API is used to check whether the current application is allowed to send notifications before publishing, 
+   * preventing publish failures when notification authorization is disabled.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER [since 9 - 10]
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means that the
@@ -1252,11 +1250,11 @@ declare namespace notificationManager {
   function isNotificationEnabled(callback: AsyncCallback<boolean>): void;
 
   /**
-   * Queries the notification authorization status of the current application. This API uses a promise to
-   * return the result.
+   * Checks the [notification authorization](docroot://notification/notification-glossary.md#notification-authorization)
+   * status of the current application. This API uses a promise to return the result.
    *
-   * This API is used to check whether the current application is allowed to send notifications before
-   * publishing, preventing publish failures when notification authorization is disabled.
+   * This API is used to check whether the current application is allowed to send notifications before publishing, 
+   * preventing publish failures when notification authorization is disabled.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER [since 9 - 10]
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the notification is
@@ -1278,22 +1276,24 @@ declare namespace notificationManager {
   function isNotificationEnabled(): Promise<boolean>;
 
   /**
-   * Synchronously queries the notification authorization status of the current application.
+   * Synchronously checks the 
+   * [notification authorization](docroot://notification/notification-glossary.md#notification-authorization) status of 
+   * the current application.
    *
-   * This API is used to quickly check whether the current application is allowed to send notifications
-   * before publishing. It is synchronous and returns the result immediately after being called,
-   * suitable for scenarios where the enabled status needs to be obtained in a synchronous code flow.
+   * This API is used to quickly check whether the current application is allowed to send notifications before 
+   * publishing. It is synchronous and returns the result immediately after being called, suitable for scenarios where 
+   * the notification authorization status needs to be obtained in a synchronous code flow.
    *
-   * @returns { boolean } Result of the notification enabling status. The value **true** means that the notification is
-   *     enabled, and **false** means the opposite.
+   * @returns { boolean } Result of the notification authorization status. The value **true** means that publishing
+   *     notifications is allowed, and **false** means that publishing notifications is prohibited.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 12 dynamic
    * @since 23 static
-   * @see [requestEnableNotification]{@link notificationManager#requestEnableNotification(context: UIAbilityContext)} requests notification 
-   *     to be enabled for this application.
+   * @see [requestEnableNotification]{@link notificationManager#requestEnableNotification(context: UIAbilityContext)} 
+   *     requests notification to be enabled for this application.
    */
   function isNotificationEnabledSync(): boolean;
 
@@ -1348,8 +1348,8 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { boolean } enable - Whether to enable the notification slot type. The value **true** means to enable the
-   *     notification slot type, and **false** means the opposite.
+   * @param { boolean } enable - Whether to enable the notification badge. The value **true** means to enable the
+   *     notification badge, and **false** means the opposite.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -1373,8 +1373,8 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { boolean } enable - Whether to enable the notification slot type. The value **true** means to enable the
-   *     notification slot type, and **false** means the opposite.
+   * @param { boolean } enable - Whether to enable the notification badge. The value **true** means to enable the
+   *     notification badge, and **false** means the opposite.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -1422,8 +1422,8 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the badge is enabled
-   *     , and **false** means the opposite.
+   * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the badge is
+   *     enabled, and **false** means the opposite.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1441,11 +1441,10 @@ declare namespace notificationManager {
   function isBadgeDisplayed(bundle: BundleOption): Promise<boolean>;
 
   /**
-   * Sets the notification slot for a specified application. This API uses an asynchronous callback to return the 
-   * result.
-   * 
-   * Before setting a notification slot, create a slot through 
-   * [addSlot]{@link notificationManager.addSlot(slot: NotificationSlot, callback: AsyncCallback<void>)}.
+   * Sets the [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * application. This API uses an asynchronous callback to return the result.
+   *
+   * Before setting a notification slot, create a slot through [addSlot]{@link notificationManager#addSlot}.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1468,10 +1467,10 @@ declare namespace notificationManager {
   function setSlotByBundle(bundle: BundleOption, slot: NotificationSlot, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets the notification slot for a specified application. This API uses a promise to return the result.
-   * 
-   * Before setting a notification slot, create a slot through 
-   * [addSlot]{@link notificationManager.addSlot(slot: NotificationSlot, callback: AsyncCallback<void>)}.
+   * Sets the [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * application. This API uses a promise to return the result.
+   *
+   * Before setting a notification slot, create a slot through [addSlot]{@link notificationManager#addSlot}.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1494,8 +1493,8 @@ declare namespace notificationManager {
   function setSlotByBundle(bundle: BundleOption, slot: NotificationSlot): Promise<void>;
 
   /**
-   * Obtains the notification slots of a specified application. This API uses an asynchronous callback to return the 
-   * result.
+   * Obtains all [notification slots](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * application. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1517,10 +1516,10 @@ declare namespace notificationManager {
   function getSlotsByBundle(bundle: BundleOption, callback: AsyncCallback<Array<NotificationSlot>>): void;
 
   /**
-   * Obtains a notification slot of a specified application. This API uses a promise to return the result.
-   * 
-   * Before obtaining the notification slot, create a slot through 
-   * [addSlot]{@link notificationManager.addSlot(slot: NotificationSlot, callback: AsyncCallback<void>)}.
+   * Obtains the [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type for a specified application. This API uses a promise to return the result.
+   *
+   * Before obtaining the notification slot, create a slot through [addSlot]{@link notificationManager#addSlot}.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1543,11 +1542,11 @@ declare namespace notificationManager {
   function getSlotByBundle(bundle: BundleOption, slotType: SlotType): Promise<NotificationSlot>;
 
   /**
-   * Obtains a notification slot of a specified application. This API uses a promise to return the result.
+   * Obtains the [notification slot](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * type for a specified application. This API uses a promise to return the result.
    *
-   * Before obtaining the notification slot, create a slot through 
-   * [addSlot]{@link notificationManager.addSlot(slot: NotificationSlot, callback: AsyncCallback<void>)}.
-   * 
+   * Before obtaining the notification slot, create a slot through [addSlot]{@link notificationManager#addSlot}.
+   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { SlotType } slotType - Notification slot type.
@@ -1556,7 +1555,7 @@ declare namespace notificationManager {
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. [since 18]
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
@@ -1569,7 +1568,8 @@ declare namespace notificationManager {
   function getSlotByBundle(bundle: BundleOption, slotType: SlotType): Promise<NotificationSlot|null>;
 
   /**
-   * Obtains the notification slots of a specified application. This API uses a promise to return the result.
+   * Obtains all [notification slots](docroot://notification/notification-glossary.md#notification-slot) of a specified 
+   * application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1591,8 +1591,8 @@ declare namespace notificationManager {
   function getSlotsByBundle(bundle: BundleOption): Promise<Array<NotificationSlot>>;
 
   /**
-   * Obtains the number of notification slots of a specified application. This API uses an asynchronous callback to 
-   * return the result.
+   * Obtains the number of [notification slots](docroot://notification/notification-glossary.md#notification-slot) of a 
+   * specified application. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1614,7 +1614,8 @@ declare namespace notificationManager {
   function getSlotNumByBundle(bundle: BundleOption, callback: AsyncCallback<long>): void;
 
   /**
-   * Obtains the number of notification slots of a specified application. This API uses a promise to return the result.
+   * Obtains the number of [notification slots](docroot://notification/notification-glossary.md#notification-slot) of a 
+   * specified application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1675,9 +1676,9 @@ declare namespace notificationManager {
    * Obtains the number of active notifications of this application. This API uses an asynchronous callback to return 
    * the result.
    *
-   * This API is used to query the number of active notifications published by the current application in the
-   * notification center. This is suitable for scenarios where an unread notification count prompt needs to be
-   * displayed.
+   * This API is used to query the number of existing notifications published by the current application in the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center). This API is suitable 
+   * for scenarios where the unread notification count needs to be displayed.
    *
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined** and data is the obtained number of active notifications; otherwise, **err** is an
@@ -1690,35 +1691,35 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int,callback: AsyncCallback<void>)}  sets the 
-   *     notification badge number.
+   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int,callback: AsyncCallback<void>)} sets the notification badge number.
    */
   function getActiveNotificationCount(callback: AsyncCallback<long>): void;
 
   /**
    * Obtains the number of active notifications of this application. This API uses a promise to return the result.
    *
-   * This API is used to query the number of active notifications published by the current application in the
-   * notification center. This is suitable for scenarios where an unread notification count prompt needs to be
-   * displayed.
+   * This API is used to query the number of existing notifications published by the current application in the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center). This API is suitable 
+   * for scenarios where the unread notification count needs to be displayed.
    *
-   * @returns { Promise<long> } Promise used to return the result.
+   * @returns { Promise<long> } Promise used to return the number of existing notifications of the current application
+   *     in the notification center.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int)}  sets the 
-   *     notification badge number.
+   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int)} sets the notification badge number.
    */
   function getActiveNotificationCount(): Promise<long>;
 
   /**
    * Obtains the active notifications of this application. This API uses an asynchronous callback to return the result.
    *
-   * This API is used to query the detailed information list of all stored notifications of the current application in
-   * the notification center, including the ID, tag, content, and creation time of each notification.
+   * This API is used to query the detailed information list of all existing notifications of the current application in
+   * the [notification center](docroot://notification/notification-glossary.md#notification-center), including the ID, 
+   * label, content, and creation time of each notification.
    *
    * @param { AsyncCallback<Array<NotificationRequest>> } callback - Callback used to return the result. If the
    *     operation is successful, **err** is **undefined** and data is the obtained **NotificationRequest** array;
@@ -1731,32 +1732,32 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int,callback: AsyncCallback<void>)}  sets the notification 
-   *     badge number.
+   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int,callback: AsyncCallback<void>)} sets the notification badge number.
    */
   function getActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>): void;
 
   /**
    * Obtains the active notifications of this application. This API uses a promise to return the result.
    *
-   * This API is used to query the detailed information list of all stored notifications of the current application in
-   * the notification center, including the ID, tag, content, and creation time of each notification.
+   * This API is used to query the detailed information list of all existing notifications of the current application in
+   * the [notification center](docroot://notification/notification-glossary.md#notification-center), including the ID, 
+   * label, content, and creation time of each notification.
    *
-   * @returns { Promise<Array<NotificationRequest>> } Promise used to return the result.
+   * @returns { Promise<Array<NotificationRequest>> } Promise used to return the list of undeleted notifications of the
+   *     current application, including detailed information of each notification.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
    * @since 23 static
-   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int)}  sets the notification 
-   *     badge number.
+   * @see [setBadgeNumber]{@link notificationManager#setBadgeNumber(badgeNumber: int)} sets the notification badge number.
    */
   function getActiveNotifications(): Promise<Array<NotificationRequest>>;
 
   /**
-   * Obtains information about the common live view that matches the specified filter criteria. This API uses an 
-   * asynchronous callback to return the result.
+   * Obtains the [normal live view](docroot://notification/notification-glossary.md#normal-live-view) notification 
+   * information that meets the conditions. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { NotificationFilter } filter - Filter criteria for querying the common live view.
@@ -1772,8 +1773,8 @@ declare namespace notificationManager {
   function getActiveNotificationByFilter(filter: NotificationFilter, callback: AsyncCallback<NotificationRequest>): void;
 
   /**
-   * Obtains information about the common live view that matches the specified filter criteria. This API uses an 
-   * asynchronous callback to return the result.
+   * Obtains the [normal live view](docroot://notification/notification-glossary.md#normal-live-view) notification 
+   * information that meets the conditions. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { NotificationFilter } filter - Filter criteria for querying the common live view.
@@ -1789,8 +1790,8 @@ declare namespace notificationManager {
   function getActiveNotificationByFilter(filter: NotificationFilter, callback: AsyncCallback<NotificationRequest|null>): void;
 
   /**
-   * Obtains information about the common live view that matches the specified filter criteria. This API uses a promise 
-   * to return the result.
+   * Obtains the [normal live view](docroot://notification/notification-glossary.md#normal-live-view) notification 
+   * information that meets the conditions. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { NotificationFilter } filter - Filter criteria for querying the common live view.
@@ -1806,8 +1807,8 @@ declare namespace notificationManager {
   function getActiveNotificationByFilter(filter: NotificationFilter): Promise<NotificationRequest>;
 
   /**
-   * Obtains information about the common live view that matches the specified filter criteria. This API uses a promise 
-   * to return the result.
+   * Obtains the [normal live view](docroot://notification/notification-glossary.md#normal-live-view) notification 
+   * information that meets the conditions. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { NotificationFilter } filter - Filter criteria for querying the common live view.
@@ -1828,8 +1829,15 @@ declare namespace notificationManager {
    * return the result.
    *
    * @param { number } id - Notification ID, used to identify the target notification. This value is specified by the
-   *     **id** field of NotificationRequest when a notification is published.
-   * @param { string } [label] - Notification label. This parameter is left empty by default.
+   *     **id** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when a
+   *     notification is published.
+   * @param { string } [label] - Notification label. The default value is empty. This value is specified by the
+   *     **label** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} during
+   *     the notification publishment.
+   *     <br> - If the **label** field is empty, some information about the published notification that matches the
+   *     specified notification ID and has an empty label is obtained.
+   *     <br> - If the **label** field is not empty, some information about the published notification that matches both
+   *     the specified notification ID and label is obtained.
    * @returns { Promise<NotificationParameters> } Promise used to return some information about **wantAgent**.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
@@ -1847,8 +1855,15 @@ declare namespace notificationManager {
    * return the result.
    *
    * @param { int } id - Notification ID, used to identify the target notification. This value is specified by the
-   *     **id** field of NotificationRequest when a notification is published.
-   * @param { string } [label] - Notification label. This parameter is left empty by default.
+   *     **id** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when a
+   *     notification is published.
+   * @param { string } [label] - Notification label. The default value is empty. This value is specified by the
+   *     **label** field of [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} during
+   *     the notification publishment.
+   *     <br> - If the **label** field is empty, some information about the published notification that matches the
+   *     specified notification ID and has an empty label is obtained.
+   *     <br> - If the **label** field is not empty, some information about the published notification that matches both
+   *     the specified notification ID and label is obtained.
    * @returns { Promise<NotificationParameters | null> } Promise used to return some information about **wantAgent**.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
@@ -1864,14 +1879,16 @@ declare namespace notificationManager {
    * Cancels notifications under a notification group of this application. This API uses an asynchronous callback to 
    * return the result.
    *
-   * The notification group **groupName** is the group identifier specified through the **groupName** field of
-   * NotificationRequest when a notification is published. After cancellation, all notifications under this group
-   * will be removed from the notification center. This is suitable for scenarios where notifications need to be
-   * canceled in batches by service group.
+   * The notification group `groupName` is the group identifier specified by the `groupName` field of 
+   * [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when publishing a notification.
+   * After cancellation, all notifications under this group are removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center). This is suitable for 
+   * scenarios where notifications need to be canceled in batches by business group.
    *
    * @param { string } groupName - Name of the notification group, which is specified through
    *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when the notification is
    *     published.
+   *     <br>The size cannot exceed 202 bytes, and the excess part will be truncated.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1888,14 +1905,16 @@ declare namespace notificationManager {
   /**
    * Cancels notifications under a notification group of this application. This API uses a promise to return the result.
    *
-   * The notification group **groupName** is the group identifier specified through the **groupName** field of
-   * NotificationRequest when a notification is published. After cancellation, all notifications under this group
-   * will be removed from the notification center. This is suitable for scenarios where notifications need to be
-   * canceled in batches by service group.
+   * The notification group `groupName` is the group identifier specified by the `groupName` field of 
+   * [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when publishing a notification.
+   * After cancellation, all notifications under this group are removed from the 
+   * [notification center](docroot://notification/notification-glossary.md#notification-center). This is suitable for 
+   * scenarios where notifications need to be canceled in batches by business group.
    *
    * @param { string } groupName - Name of the notification group, which is specified through
    *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when the notification is
    *     published.
+   *     <br>The size cannot exceed 202 bytes, and the excess part will be truncated.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -1914,7 +1933,10 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { string } groupName - Name of the notification group.
+   * @param { string } groupName - Name of the notification group. This name must be specified through the
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} object when publishing a
+   *     notification.
+   *     <br>The size cannot exceed 202 bytes. The excess part will be truncated.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -1937,7 +1959,10 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { string } groupName - Name of the notification group.
+   * @param { string } groupName - Name of the notification group. This name must be specified through the
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} object when publishing a
+   *     notification.
+   *     <br>The size cannot exceed 202 bytes. The excess part will be truncated.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -1956,9 +1981,6 @@ declare namespace notificationManager {
 
   /**
    * Sets the DND time. This API uses an asynchronous callback to return the result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { DoNotDisturbDate } date - DND time to set.
@@ -1982,9 +2004,6 @@ declare namespace notificationManager {
   /**
    * Sets the DND time. This API uses a promise to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { DoNotDisturbDate } date - DND time to set.
    * @returns { Promise<void> } Promise that returns no value.
@@ -2006,9 +2025,6 @@ declare namespace notificationManager {
 
   /**
    * Sets the DND time for a specified user. This API uses an asynchronous callback to return the result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { DoNotDisturbDate } date - DND time to set.
@@ -2034,9 +2050,6 @@ declare namespace notificationManager {
   /**
    * Sets the DND time for a specified user. This API uses a promise to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { DoNotDisturbDate } date - DND time to set.
    * @param { int } userId - ID of the user for whom you want to set the DND time.
@@ -2061,9 +2074,6 @@ declare namespace notificationManager {
   /**
    * Obtains the DND time. This API uses an asynchronous callback to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { AsyncCallback<DoNotDisturbDate> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
@@ -2085,9 +2095,6 @@ declare namespace notificationManager {
   /**
    * Obtains the DND time. This API uses a promise to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<DoNotDisturbDate> } Promise used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
@@ -2106,9 +2113,6 @@ declare namespace notificationManager {
 
   /**
    * Obtains the DND time of a specified user. This API uses an asynchronous callback to return the result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { int } userId - User ID.
@@ -2133,9 +2137,6 @@ declare namespace notificationManager {
   /**
    * Obtains the DND time of a specified user. This API uses a promise to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { int } userId - User ID.
    * @returns { Promise<DoNotDisturbDate> } Promise used to return the result.
@@ -2159,9 +2160,6 @@ declare namespace notificationManager {
   /**
    * Checks whether DND mode is supported. This API uses an asynchronous callback to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means that DND
    *     mode is supported, and **false** means the opposite.
@@ -2182,9 +2180,6 @@ declare namespace notificationManager {
 
   /**
    * Checks whether DND mode is supported. This API uses a promise to return the result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that DND mode is
@@ -2242,11 +2237,11 @@ declare namespace notificationManager {
   function isSupportTemplate(templateName: string): Promise<boolean>;
 
   /**
-   * Requests notification to be enabled for this application. This API uses an asynchronous callback to return the 
+   * Requests notification authorization for this application. This API uses an asynchronous callback to return the 
    * result.
    *
-   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**; otherwise, **err** is an error object.
+   * @param { AsyncCallback<void> } callback - Callback function. If the application successfully requests notification
+   *     authorization, **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -2258,25 +2253,28 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 9 dynamiconly
    * @deprecated since 12
-   * @useinstead requestEnableNotification
+   * @useinstead requestEnableNotification(context: UIAbilityContext, callback: AsyncCallback<void>)
    */
   function requestEnableNotification(callback: AsyncCallback<void>): void;
 
   /**
-   * Requests notification to be enabled for this application. You can call this API to display a dialog box prompting 
-   * the user to enable notification for your application before publishing a notification. This API uses an 
-   * asynchronous callback to return the result.
-   * 
+   * An application must obtain user authorization before it can send notifications. Calling this API before publishing 
+   * a notification brings up the 
+   * [notification authorization](docroot://notification/notification-glossary.md#notification-authorization) dialog 
+   * box, allowing the user to choose whether to allow notifications to be sent. This API uses an asynchronous callback 
+   * to return the result.
+   *
    * > **NOTE**
    * >
    * > - This API can be called only after the application UI is loaded (that is, 
-   * > [loadContent]{@link @ohos.app.ability.UIExtensionContentSession:UIExtensionContentSession.loadContent} is 
+   * > [loadContent]{@link @ohos.app.ability.UIExtensionContentSession:UIExtensionContentSession#loadContent} is 
    * > successfully called).
    * >
    * > - When an application uses **requestEnableNotification()** to display a dialog box for notification authorization
-   * > and the user rejects the authorization, the application cannot use this API to open the dialog box again. However
-   * > , it can call [openNotificationSettingsWithResult]{@link notificationManager.openNotificationSettingsWithResult} 
-   * > to open the notification management dialog box.
+   * > and the user rejects the authorization, the application cannot use this API to open the dialog box again. 
+   * > However, it can call 
+   * > [openNotificationSettingsWithResult]{@link notificationManager#openNotificationSettingsWithResult} to open the 
+   * > notification management dialog box.
    *
    * @param { UIAbilityContext } context - Ability context bound to the notification dialog box.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
@@ -2293,19 +2291,20 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 10 dynamic
    * @since 23 static
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)} checks whether 
-   *     notification is enabled for a specified user.
-   * @see [openNotificationSettingsWithResult]{@link notificationManager#openNotificationSettingsWithResult(context: UIAbilityContext)}
-   *     Opens the notification settings page of the application, which is presented in a semi-modal 
-   *     window and can be used to set notification switches, notification reminder methods, etc.
-   * @see [openNotificationSettings]{@link notificationManager#openNotificationSettings(context: UIAbilityContext)} opens the 
-   *     notification settings page of the application, which is displayed in semi-modal mode and can be used to set the notification 
-   *     enabling and notification mode. 
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)}
+   *     checks whether notification is enabled for a specified user.
+   * @see
+   *     [openNotificationSettingsWithResult]{@link notificationManager#openNotificationSettingsWithResult(context: UIAbilityContext)}
+   *     Opens the notification settings page of the application, which is presented in a semi-modal window and can be 
+   *     used to set notification switches, notification reminder methods, etc.
+   * @see [openNotificationSettings]{@link notificationManager#openNotificationSettings(context: UIAbilityContext)}
+   *     opens the notification settings page of the application, which is displayed in semi-modal mode and can be used 
+   *     to set the notification enabling and notification mode.
    */
   function requestEnableNotification(context: UIAbilityContext, callback: AsyncCallback<void>): void;
 
   /**
-   * Requests notification to be enabled for this application. This API uses a promise to return the result.
+   * Requests notification authorization for this application. This API uses a promise to return the result.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -2317,25 +2316,28 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 9 dynamiconly
    * @deprecated since 12
-   * @useinstead requestEnableNotification
+   * @useinstead requestEnableNotification(context: UIAbilityContext)
    */
   function requestEnableNotification(): Promise<void>;
 
   /**
-   * Requests notification to be enabled for this application. You can call this API to display a dialog box prompting 
-   * the user to enable notification for your application before publishing a notification. This API uses a promise to 
-   * return the result.
-   * 
+   * An application must obtain user authorization before it can send notifications. Calling this API before publishing 
+   * a notification brings up the 
+   * [notification authorization](docroot://notification/notification-glossary.md#notification-authorization) dialog 
+   * box, allowing the user to choose whether to allow notifications to be sent. This API uses a promise to return the 
+   * result.
+   *
    * > **NOTE**
    * >
    * > - This API can be called only after the application UI is loaded (that is, 
-   * > [loadContent]{@link @ohos.app.ability.UIExtensionContentSession:UIExtensionContentSession.loadContent} is 
+   * > [loadContent]{@link @ohos.app.ability.UIExtensionContentSession:UIExtensionContentSession#loadContent} is 
    * > successfully called).
    * >
    * > - When an application uses **requestEnableNotification()** to display a dialog box for notification authorization
-   * > and the user rejects the authorization, the application cannot use this API to open the dialog box again. However
-   * > , it can call [openNotificationSettingsWithResult]{@link notificationManager.openNotificationSettingsWithResult} 
-   * > to open the notification management dialog box.
+   * > and the user rejects the authorization, the application cannot use this API to open the dialog box again. 
+   * > However, it can call 
+   * > [openNotificationSettingsWithResult]{@link notificationManager#openNotificationSettingsWithResult} to open the 
+   * > notification management dialog box.
    *
    * @param { UIAbilityContext } context - Ability context bound to the notification dialog box.
    * @returns { Promise<void> } Promise that returns no value.
@@ -2351,20 +2353,22 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 10 dynamic
    * @since 23 static
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)} checks whether 
-   *     notification is enabled for a specified user.
-   * @see [openNotificationSettingsWithResult]{@link notificationManager#openNotificationSettingsWithResult(context: UIAbilityContext)}
-   *     Opens the notification settings page of the application, which is presented in a semi-modal 
-   *     window and can be used to set notification switches, notification reminder methods, etc.
-   * @see [openNotificationSettings]{@link notificationManager#openNotificationSettings(context: UIAbilityContext)} opens the 
-   *     notification settings page of the application, which is displayed in semi-modal mode and can be used to set the notification 
-   *     enabling and notification mode. 
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)}
+   *     checks whether notification is enabled for a specified user.
+   * @see
+   *     [openNotificationSettingsWithResult]{@link notificationManager#openNotificationSettingsWithResult(context: UIAbilityContext)}
+   *     Opens the notification settings page of the application, which is presented in a semi-modal window and can be 
+   *     used to set notification switches, notification reminder methods, etc.
+   * @see [openNotificationSettings]{@link notificationManager#openNotificationSettings(context: UIAbilityContext)}
+   *     opens the notification settings page of the application, which is displayed in semi-modal mode and can be used 
+   *     to set the notification enabling and notification mode.
    */
   function requestEnableNotification(context: UIAbilityContext): Promise<void>;
 
   /**
-   * Sets whether to enable distributed notification on this device. This API uses an asynchronous callback to return 
-   * the result.
+   * Sets whether to enable 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification) on this 
+   * device. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - Whether to enable distributed notification. The value **true** means to enable
@@ -2389,7 +2393,9 @@ declare namespace notificationManager {
   function setDistributedEnable(enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether to enable distributed notification on this device. This API uses a promise to return the result.
+   * Sets whether to enable 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification) on this 
+   * device. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - Whether to enable distributed notification. The value **true** means to enable
@@ -2414,8 +2420,9 @@ declare namespace notificationManager {
   function setDistributedEnable(enable: boolean): Promise<void>;
 
   /**
-   * Checks whether the device supports cross-device notifications. This API uses an asynchronous callback to return the
-   * result.
+   * Checks whether the device supports 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) 
+   * notifications. This API uses an asynchronous callback to return the result.
    *
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means that the
    *     cross-device notification is supported; **false** means the opposite. If this API call fails, an error object
@@ -2435,7 +2442,9 @@ declare namespace notificationManager {
   function isDistributedEnabled(callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether the device supports cross-device notifications. This API uses a promise to return the result.
+   * Checks whether the device supports 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) 
+   * notifications. This API uses a promise to return the result.
    *
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the cross-device
    *     notification is supported; **false** means the opposite.
@@ -2452,14 +2461,16 @@ declare namespace notificationManager {
   function isDistributedEnabled(): Promise<boolean>;
 
   /**
-   * Sets whether to enable distributed notification for a specified application. This API uses an asynchronous callback
-   * to return the result.
+   * Sets whether to enable 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification) for a 
+   * specified application. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { boolean } enable - Whether to enable distributed notification. The value **true** means to enable
    *     distributed notification, and **false** means the opposite.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return whether the application supports distributed
+   *     notification.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -2480,8 +2491,9 @@ declare namespace notificationManager {
   function setDistributedEnableByBundle(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether to enable distributed notification for a specified application. This API uses a promise to return the 
-   * result.
+   * Sets whether to enable 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification) for a 
+   * specified application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle of the application.
@@ -2508,15 +2520,24 @@ declare namespace notificationManager {
   function setDistributedEnableByBundle(bundle: BundleOption, enable: boolean): Promise<void>;
 
   /**
-   * Sets whether a specified application enables cross-device collaboration. This API uses a promise to return the
-   * result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
+   * Sets whether a specified application supports 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration). This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { string } deviceType - Device type.
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
    * @param { boolean } enable - Whether a specified application enables cross-device collaboration. The value **true**
    *     indicates that the cross-device collaboration is enabled, and the value **false** indicates the opposite.
    * @returns { Promise<void> } Promise that returns no value.
@@ -2539,8 +2560,9 @@ declare namespace notificationManager {
   function setDistributedEnabledByBundle(bundle: BundleOption, deviceType: string, enable: boolean): Promise<void>;
 
   /**
-   * Checks whether distributed notification is enabled for a specified application. This API uses an asynchronous
-   * callback to return the result.
+   * Obtains whether an application supports 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification) based on the 
+   * application bundle. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle of the application.
@@ -2566,8 +2588,9 @@ declare namespace notificationManager {
   function isDistributedEnabledByBundle(bundle: BundleOption, callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether distributed notification is enabled for a specified application. This API uses a promise to return
-   * the result.
+   * Queries whether a specified application supports 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification). This API uses
+   * a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle of the application.
@@ -2593,15 +2616,24 @@ declare namespace notificationManager {
   function isDistributedEnabledByBundle(bundle: BundleOption): Promise<boolean>;
 
   /**
-   * Obtains whether a specified application enables cross-device collaboration. This API uses a promise to return the
-   * result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
+   * Obtains whether a specified application supports 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration). This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { string } deviceType - Device type.
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the cross-device
    *     collaboration is enabled, and the value **false** indicates the opposite.
    * @throws { BusinessError } 201 - Permission denied.
@@ -2623,15 +2655,25 @@ declare namespace notificationManager {
   function isDistributedEnabledByBundle(bundle: BundleOption, deviceType: string): Promise<boolean>;
 
   /**
-   * Sets whether applications enable cross-device collaboration. This API uses a promise to return the result.
-   *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
+   * Sets whether applications support 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) in 
+   * batches. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<DistributedBundleEnableInfo> } bundleEnableInfos - Applications to set.
    * @param { string } deviceType - Device type.
-   * @returns { Promise<void> } Promise that returns no result.
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -2650,13 +2692,21 @@ declare namespace notificationManager {
   /**
    * Sets a smart reminder for cross-device collaboration. This API uses a promise to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { string } deviceType - Device type.
-   * @param { boolean } enable - Indicates whether the specified application supports a smart reminder for cross-device
-   *     collaboration (**true**: enabled; **false**: disabled).
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
+   * @param { boolean } enable - Whether the application supports setting a smart reminder through cross-device
+   *     collaboration (**true**: supported; **false**: not supported).
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -2679,11 +2729,19 @@ declare namespace notificationManager {
   /**
    * Obtains a smart reminder for cross-device collaboration. This API uses a promise to return the result.
    *
-   * This API can be properly called on devices other than wearables and TVs. If it is called on wearables and TVs,
-   * error code 801 is returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { string } deviceType - Device type.
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
    * @returns { Promise<boolean> } Promise used to return the result (**true**: enabled; **false**: disabled).
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -2707,7 +2765,8 @@ declare namespace notificationManager {
    * Obtains the notification reminder type. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { AsyncCallback<DeviceRemindType> } callback - Callback used to return the result.
+   * @param { AsyncCallback<DeviceRemindType> } callback - Callback function used to obtain the
+   *     [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode).
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -2728,7 +2787,8 @@ declare namespace notificationManager {
    * Obtains the notification reminder type. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @returns { Promise<DeviceRemindType> } Promise used to return the result.
+   * @returns { Promise<DeviceRemindType> } Promise used to return the obtained
+   *     [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode).
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 801 - Capability not supported. [since 18]
@@ -2744,11 +2804,8 @@ declare namespace notificationManager {
   function getDeviceRemindType(): Promise<DeviceRemindType>;
 
   /**
-   * Sets the enabled status of a slot type for the specified application. This API uses an asynchronous callback to
+   * Sets the enabled status of a slot type for the specified application. This API uses an asynchronous callback to 
    * return the result.
-   *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -2782,16 +2839,14 @@ declare namespace notificationManager {
    * Sets the enabled status of a slot type for the specified application. This API uses an asynchronous callback to 
    * return the result.
    *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { SlotType } type - Notification slot type.
    * @param { boolean } enable - Whether to enable the notification slot type. The value **true** means to enable the
    *     notification slot type, and **false** means the opposite.
-   * @param { boolean } isForceControl - Whether the slot is affected by the notification authorization. The value
-   *     **true** means the slot is affected, and **false** means the opposite.
+   * @param { boolean } isForceControl - Whether the slot switch is affected by the
+   *     [notification authorization](docroot://notification/notification-glossary.md#notification-authorization) switch
+   *     (**false**: affected, **true**: not affected).
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -2817,10 +2872,8 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * Sets the enabled status of a slot type for the specified application. This API uses a promise to return the result.
-   *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
+   * Sets the enabled status of the specified notification slot type for the specified application. This API uses a 
+   * promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -2852,9 +2905,6 @@ declare namespace notificationManager {
    * Checks whether a notification slot type is enabled for the specified application. This API uses an asynchronous 
    * callback to return the result.
    *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
-   *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { SlotType } type - Notification slot type.
@@ -2877,11 +2927,8 @@ declare namespace notificationManager {
   function isNotificationSlotEnabled(bundle: BundleOption, type: SlotType, callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether a notification slot type is enabled for the specified application. This API uses a promise to return
-   * the result.
-   *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
+   * Obtains whether a notification slot type is enabled for the specified application. This API uses a promise to 
+   * return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -2905,14 +2952,15 @@ declare namespace notificationManager {
   function isNotificationSlotEnabled(bundle: BundleOption, type: SlotType): Promise<boolean>;
 
   /**
-   * Sets whether to enable the notification sync feature for devices where the application is not installed. This API
+   * Sets whether to enable the notification sync feature for devices where the application is not installed. This API 
    * uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { int } userId - User ID.
    * @param { boolean } enable - Whether to enable the notification sync feature. The value **true** means to enable the
    *     feature, and **false** means the opposite.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to set whether to enable the notification sync feature for
+   *     devices where the application is not installed.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -2931,14 +2979,15 @@ declare namespace notificationManager {
   function setSyncNotificationEnabledWithoutApp(userId: int, enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether to enable the notification sync feature for devices where the application is not installed. This API
+   * Sets whether to enable the notification sync feature for devices where the application is not installed. This API 
    * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { int } userId - User ID.
    * @param { boolean } enable - Whether to enable the notification sync feature. The value **true** means to enable the
    *     feature, and **false** means the opposite.
-   * @returns { Promise<void> } Promise used to return the result.
+   * @returns { Promise<void> } Promise used to return the result of setting whether to enable the notification sync
+   *     feature for devices where the application is not installed.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -2957,13 +3006,14 @@ declare namespace notificationManager {
   function setSyncNotificationEnabledWithoutApp(userId: int, enable: boolean): Promise<void>;
 
   /**
-   * Obtains whether the notification sync feature is enabled for devices where the application is not installed. This
+   * Obtains whether the notification sync feature is enabled for devices where the application is not installed. This 
    * API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { int } userId - User ID.
-   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means that the
-   *     notification sync feature is enabled, and **false** means the opposite.
+   * @param { AsyncCallback<boolean> } callback - Callback used to return whether the notification sync feature is
+   *     enabled for devices where the application is not installed. The value **true** means that the notification sync
+   *     feature is enabled, and **false** means the opposite.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -2982,13 +3032,14 @@ declare namespace notificationManager {
   function getSyncNotificationEnabledWithoutApp(userId: int, callback: AsyncCallback<boolean>): void;
 
   /**
-   * Obtains whether the notification sync feature is enabled for devices where the application is not installed. This
+   * Obtains whether the notification sync feature is enabled for devices where the application is not installed. This 
    * API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { int } userId - User ID.
-   * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that the notification
-   *     sync feature is enabled, and **false** means the opposite.
+   * @returns { Promise<boolean> } Promise used to return whether the notification sync feature is enabled for devices
+   *     where the application is not installed. The value **true** means that the notification sync feature is enabled,
+   *     and **false** means the opposite.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -3009,16 +3060,14 @@ declare namespace notificationManager {
   /**
    * Sets the notification badge number. This API uses an asynchronous callback to return the result.
    *
-   * A badge is a numeric identifier displayed in the upper right corner of an application's desktop icon, used to
-   * prompt the user about the number of unprocessed notifications. After setting, the desktop icon will display the
-   * corresponding badge number. This is suitable for scenarios where the number of pending messages needs to be
-   * prompted on the desktop icon, such as the number of unread messages and to-do items.
+   * A badge is a numeric identifier displayed in the upper right corner of an application's home-screen icon, used to 
+   * prompt the user about the number of unprocessed notifications. After setting, the home-screen icon will display the
+   * corresponding badge number. This is suitable for scenarios where the number of pending messages needs to be 
+   * prompted on the home-screen icon, such as the number of unread messages and to-do items.
    *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
-   *
-   * @param { int } badgeNumber - Notification badge number to set. If **badgeNumber** is set to a value less than or
-   *     equal to **0**, badges are cleared; if the value is greater than **99**, **99+** is displayed on the badge.
+   * @param { int } badgeNumber - Number of badges. When the badge number is less than or equal to 0, the badge is
+   *     cleared. When the value is greater than 99, the
+   *     [notification badge](docroot://notification/notification-glossary.md#notification-badge) displays 99+.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -3032,24 +3081,22 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 10 dynamic
    * @since 23 static
-   * @see [getActiveNotificationCount]{@link notificationManager#getActiveNotificationCount(callback: AsyncCallback<long>)} obtains the number of
-   *     active notifications of this application.
+   * @see [getActiveNotificationCount]{@link notificationManager#getActiveNotificationCount(callback: AsyncCallback<long>)} 
+   *     obtains the number of active notifications of this application.
    */
   function setBadgeNumber(badgeNumber: int, callback: AsyncCallback<void>): void;
 
   /**
    * Sets the notification badge number. This API uses a promise to return the result.
    *
-   * A badge is a numeric identifier displayed in the upper right corner of an application's desktop icon, used to
-   * prompt the user about the number of unprocessed notifications. After setting, the desktop icon will display the
-   * corresponding badge number. This is suitable for scenarios where the number of pending messages needs to be
-   * prompted on the desktop icon, such as the number of unread messages and to-do items.
+   * A badge is a numeric identifier displayed in the upper right corner of an application's home-screen icon, used to 
+   * prompt the user about the number of unprocessed notifications. After setting, the home-screen icon will display the
+   * corresponding badge number. This is suitable for scenarios where the number of pending messages needs to be 
+   * prompted on the home-screen icon, such as the number of unread messages and to-do items.
    *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
-   *
-   * @param { int } badgeNumber - Notification badge number to set. If **badgeNumber** is set to a value less than or
-   *     equal to **0**, badges are cleared; if the value is greater than **99**, **99+** is displayed on the badge.
+   * @param { int } badgeNumber - Number of badges. When the badge number is less than or equal to 0, the badge is
+   *     cleared. When the value is greater than 99, the
+   *     [notification badge](docroot://notification/notification-glossary.md#notification-badge) displays 99+.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -3062,19 +3109,15 @@ declare namespace notificationManager {
    * @crossplatform [since 12]
    * @since 10 dynamic
    * @since 23 static
-   * @see [getActiveNotificationCount]{@link notificationManager#getActiveNotificationCount()} obtains the number of
-   *     active notifications of this application.
+   * @see [getActiveNotificationCount]{@link notificationManager#getActiveNotificationCount()} obtains the number of active notifications of this application.
    */
   function setBadgeNumber(badgeNumber: int): Promise<void>;
 
   /**
    * Sets the badge count for other applications. This API uses a promise to return the result.
    *
-   * The current application must have a proxy relationship with another application, or the
+   * The current application must have a proxy relationship with another application, or the 
    * **ohos.permission.NOTIFICATION_AGENT_CONTROLLER** permission is granted to the current application.
-   *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
    *
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { int } badgeNumber - Notification badge number to set.
@@ -3100,15 +3143,11 @@ declare namespace notificationManager {
    * Subscribes to notification events. The notification service sends the notification information in the callback to 
    * the verification program. The verification program returns the verification result to determine whether to publish 
    * the notification, for example, controlling the publication frequency of marketing notifications.
-   * 
-   * Each [SlotType]{@link @ohos.notificationManager:notificationManager.SlotType} in the system can have only one 
-   * registrant.
    *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
+   * Each [SlotType]{@link notificationManager.SlotType} in the system can have only one registrant.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
-   * @param { 'checkNotification' } type - Event type. The value is fixed to **'checkNotification'**.
+   * @param { 'checkNotification' } type - Callback type. The value is fixed to **'checkNotification'**.
    * @param { function } callback - Pointer to the notification verification function.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -3140,16 +3179,14 @@ declare namespace notificationManager {
    * the verification program. The verification program returns the verification result to determine whether to publish 
    * the notification, for example, controlling the publication frequency of marketing notifications. This API uses a 
    * promise to return the result.
-   * 
-   * Each [SlotType]{@link @ohos.notificationManager:notificationManager.SlotType} in the system can have only one 
-   * registrant.
    *
-   * This API can be properly called on devices other than wearables. If it is called on wearables, error code 801 is
-   * returned.
+   * Each [SlotType]{@link notificationManager.SlotType} in the system can have only one registrant.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
-   * @param { 'checkNotification' } type - Event type. The value is fixed to **'checkNotification'**.
-   * @param { NotificationCheckRequest } checkRequest - Notification verification content.
+   * @param { 'checkNotification' } type - Callback type. The value is fixed to **'checkNotification'**.
+   * @param { NotificationCheckRequest } checkRequest -
+   *     [Notification request](docroot://notification/notification-glossary.md#notification-request) content to be
+   *     verified.
    * @param { function } callback - Pointer to the notification verification function.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3189,7 +3226,7 @@ declare namespace notificationManager {
    * Unsubscribes from notification events.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
-   * @param { 'checkNotification' } type - Event type. The value is fixed to **'checkNotification'**.
+   * @param { 'checkNotification' } type - Callback type. The value is fixed to **'checkNotification'**.
    * @param { function } [callback] - Pointer to the notification verification function.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -3222,7 +3259,8 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * Triggers a system live view notification. This API uses a promise to return the result.
+   * Triggers a [system live view](docroot://notification/notification-glossary.md#system-live-view). This API uses a 
+   * promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -3247,7 +3285,8 @@ declare namespace notificationManager {
   function triggerSystemLiveView(bundle: BundleOption, notificationId: int, buttonOptions: ButtonOptions): Promise<void>;
 
   /**
-   * Subscribes to the system live view notification. This API uses a promise to return the result.
+   * Subscribes to a [system live view](docroot://notification/notification-glossary.md#system-live-view). This API uses
+   * a promise to return the result.
    *
    * @param { SystemLiveViewSubscriber } subscriber - Subscriber of the system live view notification.
    * @returns { Promise<void> } Promise that returns no value.
@@ -3267,17 +3306,19 @@ declare namespace notificationManager {
   function subscribeSystemLiveView(subscriber: SystemLiveViewSubscriber): Promise<void>;
 
   /**
-   * Sets the slot flags for a specified application. This API uses a promise to return the result.
+   * Sets the [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode) 
+   * switch of a specified application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { long } slotFlags - Notification slot flags.<br>- Bit 0: sound alert. The value **0** means to disable the
-   *     feature, and **1** means the opposite.<br>- Bit 1: locking the screen. The value **0** means to disable the
-   *     feature, and **1** means the opposite.<br>- Bit 2: banner. The value **0** means to disable the feature, and
-   *     **1** means the opposite.<br>- Bit 3: turning on the screen. The value **0** means to disable the feature, and
-   *     **1** means the opposite.<br>- Bit 4: vibration. The value **0** means to disable the feature, and **1** means
-   *     the opposite.<br>- Bit 5: notification icon in the status bar. The value **0** means to disable the feature,
-   *     and **1** means the opposite.
+   * @param { long } slotFlags - Notification slot flags.
+   *     <br>- Bit 0: sound alert. The value **0** means to disable the feature, and **1** means the opposite.
+   *     <br>- Bit 1: locking the screen. The value **0** means to disable the feature, and **1** means the opposite.
+   *     <br>- Bit 2: banner. The value **0** means to disable the feature, and **1** means the opposite.
+   *     <br>- Bit 3: turning on the screen. The value **0** means to disable the feature, and **1** means the opposite.
+   *     <br>- Bit 4: vibration. The value **0** means to disable the feature, and **1** means the opposite.
+   *     <br>- Bit 5: notification icon in the status bar. The value **0** means to disable the feature, and **1** means
+   *     the opposite.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3296,7 +3337,8 @@ declare namespace notificationManager {
   function setSlotFlagsByBundle(bundle: BundleOption, slotFlags: long): Promise<void>;
 
   /**
-   * Obtains the notification slot flag of a specified application. This API uses a promise to return the result.
+   * Obtains the [notification slot](docroot://notification/notification-glossary.md#notification-slot) flag of a 
+   * specified application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -3306,8 +3348,8 @@ declare namespace notificationManager {
    *     <br>- Bit 2: banner. The value **0** means to disable the feature, and **1** means the opposite.
    *     <br>- Bit 3: turning on the screen. The value **0** means to disable the feature, and **1** means the opposite.
    *     <br>- Bit 4: vibration. The value **0** means to disable the feature, and **1** means the opposite.
-   *     <br>- Bit 5: notification icon in the status bar. The value **0** means to disable the feature, and **1** means the
-   *     opposite.
+   *     <br>- Bit 5: notification icon in the status bar. The value **0** means to disable the feature, and **1** means
+   *     the opposite.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -3325,21 +3367,22 @@ declare namespace notificationManager {
   function getSlotFlagsByBundle(bundle: BundleOption): Promise<long>;
 
   /**
-   * Obtains the notification settings of the application, including the switch statuses for
-   * lock screen notifications, banner notifications, desktop badges, vibration, and ringtone.
-   * This API uses a promise to return the result.
+   * Obtains the [notification setting](docroot://notification/notification-glossary.md#notification-setting) of the 
+   * application, including the switch states of lock screen notifications, banner notifications, home screen badges, 
+   * vibration, ringtone, and so on. This API uses a promise to return the result.
    *
-   * @returns { Promise<NotificationSetting> } Promise used to return the result.
+   * @returns { Promise<NotificationSetting> } Promise used to return the notification settings of this application.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
    * @syscap SystemCapability.Notification.Notification
    * @since 20 dynamic
    * @since 23 static
-   * @see [openNotificationSettings]{@link notificationManager#openNotificationSettings(context: UIAbilityContext)} opens the notification 
-   *     settings page of the application, which is displayed in semi-modal mode and can be used to set the notification enabling and notification mode. 
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()} Checks whether notification is enabled for the 
-   *     specified application.
+   * @see [openNotificationSettings]{@link notificationManager#openNotificationSettings(context: UIAbilityContext)}
+   *     opens the notification settings page of the application, which is displayed in semi-modal mode and can be used 
+   *     to set the notification enabling and notification mode.
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()}
+   *     Checks whether notification is enabled for the specified application.
    */
   function getNotificationSetting(): Promise<NotificationSetting>;
 
@@ -3371,7 +3414,8 @@ declare namespace notificationManager {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<DoNotDisturbProfile> } templates - Do Not Disturb profile.
    * @param { int } userId - ID of the target user.
-   * @returns { Promise<void> } Promise that returns no result.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -3415,7 +3459,8 @@ declare namespace notificationManager {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<DoNotDisturbProfile> } templates - Do Not Disturb profile.
    * @param { int } userId - ID of the target user.
-   * @returns { Promise<void> } Promise that returns no result.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -3436,8 +3481,9 @@ declare namespace notificationManager {
    * result.
    *
    * @permission ohos.permission.NOTIFICATION_AGENT_CONTROLLER
-   * @param { string } key - Additional configuration key. Currently, only **RING_TRUSTLIST_PKG** is supported,
-   *     indicating that the application supports custom ringtones.
+   * @param { string } key - Additional configuration key. Currently, only `RING_TRUSTLIST_PKG` is supported, indicating
+   *     that the application supports the use of
+   *     [customized ringtone](docroot://notification/notification-glossary.md#customized-ringtone).
    * @param { string } value - Additional configuration value. Example: [bundleName1,bundleName2].
    * @returns { Promise<int> } Promise used to return the result. **0** indicates successful; other values indicate
    *     failed.
@@ -3457,11 +3503,13 @@ declare namespace notificationManager {
   function setAdditionalConfig(key: string, value: string): Promise<int>;
 
   /**
-   * Sets the priority configuration of an application.
+   * Sets the priority configuration of an application, including the keyword-based priority notification recognition
+   * rules. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { string } value - Priority configuration of an application.
+   * @param { string } value - Priority function configuration of the application. The string length cannot exceed 3074
+   *     bytes. If the limit is exceeded, error code 401 is returned.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3477,7 +3525,8 @@ declare namespace notificationManager {
   function setBundlePriorityConfig(bundle: BundleOption, value: string): Promise<void>;
 
   /**
-   * Obtains the priority configuration of an application.
+   * Obtains the priority configuration of an application, including the keyword-based priority notification recognition
+   * rules. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -3496,8 +3545,9 @@ declare namespace notificationManager {
   function getBundlePriorityConfig(bundle: BundleOption): Promise<string>;
 
   /**
-   * Obtains whether the intelligent priority notification service is enabled. This API uses a promise to return the 
-   * result.
+   * Obtains the enabled status of the intelligent 
+   * [priority notification](docroot://notification/notification-glossary.md#priority-notification) service. This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<boolean> } Promise that contains the enabling status of the intelligent priority notification
@@ -3517,13 +3567,14 @@ declare namespace notificationManager {
   function isPriorityIntelligentEnabled(): Promise<boolean>;
 
   /**
-   * Sets the enabling status of the intelligent priority notification service. This API uses a promise to return the 
-   * result.
+   * Sets the enabled status of the intelligent service for 
+   * [priority notifications](docroot://notification/notification-glossary.md#priority-notification). This API uses a 
+   * promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { boolean } enable - Enabling status of the intelligent priority notification service.<br> - **true**: The
-   *     intelligent priority notification service is enabled.<br> - **false**: The intelligent priority notification
-   *     service is disabled.
+   * @param { boolean } enable - Enabling status of the intelligent priority notification service.
+   *     <br> - **true**: The intelligent priority notification service is enabled.
+   *     <br> - **false**: The intelligent priority notification service is disabled.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3538,7 +3589,7 @@ declare namespace notificationManager {
   function setPriorityIntelligentEnabled(enable: boolean): Promise<void>;
 
   /**
-   * Sets whether priority notifications are enabled for applications in batches. This API uses a promise to return the 
+   * Sets whether notification priority is enabled for applications in batches. This API uses a promise to return the 
    * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
@@ -3559,8 +3610,8 @@ declare namespace notificationManager {
   function setPriorityEnabledByBundles(switches: Map<BundleOption, boolean>): Promise<void>;
 
   /**
-   * Obtains whether priority notifications are enabled for applications in batches. This API uses a promise to return 
-   * the result.
+   * Obtains whether notification priority is enabled for applications in batches. This API uses a promise to return the
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<BundleOption> } bundles - Array of application bundles.
@@ -3580,7 +3631,7 @@ declare namespace notificationManager {
   function getPriorityEnabledByBundles(bundles: Array<BundleOption>): Promise<Map<BundleOption, boolean>>;
 
   /**
-   * Sets the application priority notification strategies in batches. This API uses a promise to return the result.
+   * Sets the application notification priority strategies in batches. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Map<BundleOption, long> } strategies - Key-value pair set of the application notification priority
@@ -3601,7 +3652,7 @@ declare namespace notificationManager {
   function setPriorityStrategyByBundles(strategies: Map<BundleOption, long>): Promise<void>;
 
   /**
-   * Obtains the application priority notification strategies in batches. This API uses a promise to return the result.
+   * Obtains the application notification priority strategies in batches. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<BundleOption> } bundles - Array of application bundles.
@@ -3621,14 +3672,16 @@ declare namespace notificationManager {
   function getPriorityStrategyByBundles(bundles: Array<BundleOption>): Promise<Map<BundleOption, long>>;
 
   /**
-   * Opens the notification settings page of the application, which is displayed in semi-modal mode and can be used to 
-   * set the notification enabling and notification mode. This API uses a promise to return the result.
+   * Brings up the [notification setting](docroot://notification/notification-glossary.md#notification-setting) page of 
+   * the application. The page is presented in semi-modal form and can be used to set the notification switch, 
+   * [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode), and so 
+   * on. This API uses a promise to return the result.
    *
-   * This is suitable for scenarios where users need to manually modify notification settings, such as
-   * a secondary request after a user denies authorization, or when the notification reminder method
-   * (vibration, ringtone, etc.) needs to be modified. When the requestEnableNotification dialog
-   * box is denied by the user, you can call this API to guide the user to the notification settings
-   * page to manually enable it.
+   * This is suitable for scenarios where users need to manually modify notification settings, such as a secondary 
+   * request after a user denies authorization, or when the notification reminder mode (vibration, ringtone, etc.) needs
+   * to be modified. When the [requestEnableNotification]{@link notificationManager#requestEnableNotification} dialog 
+   * box is denied by the user, you can call this API to guide the user to the notification settings page to manually 
+   * enable notifications.
    *
    * @param { UIAbilityContext } context - Ability context bound to the notification settings page.
    * @returns { Promise<void> } Promise that returns no value.
@@ -3640,26 +3693,30 @@ declare namespace notificationManager {
    * @stagemodelonly
    * @since 13 dynamic
    * @since 23 static
-   * @see [requestEnableNotification]{@link notificationManager#requestEnableNotification(context: UIAbilityContext)} requests notification 
-   *     to be enabled for this application.
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()} checks whether notification is 
-   *     enabled for the specified application.
-   * @see [getNotificationSetting]{@link notificationManager#getNotificationSetting()} obtains the notification settings
-   *     of the application, including the switch statuses for lock screen notifications, banner notifications, desktop badges, vibration, and ringtone. 
+   * @see [requestEnableNotification]{@link notificationManager#requestEnableNotification(context: UIAbilityContext)}
+   *     requests notification to be enabled for this application.
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()}
+   *     checks whether notification is enabled for the specified application.
+   * @see [getNotificationSetting]{@link notificationManager#getNotificationSetting()}
+   *     obtains the notification settings of the application, including the switch statuses for lock screen 
+   *     notifications, banner notifications, desktop badges, vibration, and ringtone.
    */
   function openNotificationSettings(context: UIAbilityContext): Promise<void>;
 
   /**
-   * Opens the notification settings page of the application, which is presented in a semi-modal window
-   * and can be used to set notification switches, notification reminder methods, etc. This API uses
-   * a promise to return the user-set status when the semi-modal window is closed.
+   * Brings up the [notification setting](docroot://notification/notification-glossary.md#notification-setting) page of 
+   * the application. The page is presented in semi-modal form and can be used to set the notification switch, 
+   * [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode), and so 
+   * on. This API uses a promise to return the result, and returns the status set by the user when the semi-modal window
+   * is closed.
    *
-   * Unlike openNotificationSettings, this API returns a NotificationSetting object when the semi-modal
-   * window is closed. You can determine whether the user has enabled the notification permission
-   * based on the returned result, thereby deciding subsequent logic.
+   * Unlike [openNotificationSettings]{@link notificationManager#openNotificationSettings}, this API returns a 
+   * [NotificationSetting]{@link notificationManager.NotificationSetting} object when the semi-modal window is closed. 
+   * You can determine whether the user has enabled the notification permission based on the returned result, thereby 
+   * deciding subsequent logic.
    *
    * @param { UIAbilityContext } context - Ability context bound to the notification settings page.
-   * @returns { Promise<NotificationSetting> } Promise used to return the result.
+   * @returns { Promise<NotificationSetting> } Promise used to return the notification settings of this application.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
@@ -3667,10 +3724,9 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.NotificationSettings
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
-   * @see [requestEnableNotification]{@link notificationManager#requestEnableNotification(context: UIAbilityContext)} requests notification 
-   *     to be enabled for this application.
-   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()} checks whether notification
-   *     is enabled for the specified application. 
+   * @see [requestEnableNotification]{@link notificationManager#requestEnableNotification(context: UIAbilityContext)} 
+   *     requests notification to be enabled for this application.
+   * @see [isNotificationEnabled]{@link notificationManager#isNotificationEnabled()} checks whether notification is enabled for the specified application.
    */
   function openNotificationSettingsWithResult(context: UIAbilityContext): Promise<NotificationSetting>;
 
@@ -3766,17 +3822,20 @@ declare namespace notificationManager {
   function disableNotificationFeature(disabled: boolean, bundleList: Array<string>, userId: int): Promise<void>;
 
   /**
-   * Sets the status of a device after it is successfully connected. Device status determines the notification mode of 
-   * the current device when a notification is published.
+   * Sets the status after device pairing succeeds. When a notification is published, the 
+   * [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode) of the 
+   * current device is determined based on the status of each device.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { string } deviceType - Device type. Currently, only **headset**, **liteWearable**, **wearable**,
    *     **glasses**, and **current** are supported.
-   * @param { long } status - Device status.<br>- Bit 0: whether the device is in use. The value **0** indicates that
-   *     the device is available; **1** indicates that the device is in use.<br>- Bit 1: whether the device user is the
-   *     owner. The value **0** indicates that the user is not the owner; **1** indicates the opposite.<br>- Bit 2:
-   *     whether the device is in the Do Not Disturb mode. The value **0** indicates that the device is not in the Do
-   *     Not Disturb mode; **1** indicates the opposite.
+   * @param { long } status - Device status.
+   *     <br>- Bit 0: whether the device is in use. The value **0** indicates that the device is available; **1**
+   *     indicates that the device is in use.
+   *     <br>- Bit 1: whether the device user is the owner. The value **0** indicates that the user is not the owner;
+   *     **1** indicates the opposite.
+   *     <br>- Bit 2: whether the device is in the Do Not Disturb mode. The value **0** indicates that the device is not
+   *     in the Do Not Disturb mode; **1** indicates the opposite.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3790,16 +3849,25 @@ declare namespace notificationManager {
   function setTargetDeviceStatus(deviceType: string, status: long): Promise<void>;
 
   /**
-   * Sets whether notifications of a specified slot can be sent to devices of a specified type through cross-device 
-   * collaboration. This API uses a promise to return the result.
+   * Sets whether notifications of a specified slot support 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) to devices
+   * of a specified type. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { SlotType } slot - Types of the notification slot.
-   * @param { string } deviceType - Device type.<br>Since API version 18, the following device types are supported:<br>-
-   *     **headset**: wearable audio device<br>- **liteWearable**: lite wearable<br>- **wearable**: wearable<br>Since
-   *     API version 20, the following device types are supported:<br>- **headset**: wearable audio device<br>-
-   *     **liteWearable**: lite wearable<br>- **wearable**: wearable<br>- **current**: current device<br>- **2in1**: PC<
-   *     br>- **tablet**: tablet
+   * @param { SlotType } slot - [Notification slot](docroot://notification/notification-glossary.md#notification-slot)
+   *     type.
+   * @param { string } deviceType - Device type.
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
    * @param { boolean } enabled - Whether to enable cross-device collaboration for notifications. The value **true**
    *     means to enable cross-device collaboration, and **false** means the opposite.
    * @returns { Promise<void> } Promise that returns no value.
@@ -3815,16 +3883,25 @@ declare namespace notificationManager {
   function setDistributedEnabledBySlot(slot: SlotType, deviceType: string, enabled: boolean): Promise<void>;
 
   /**
-   * Queries whether notifications of a specified slot can be sent to devices of a specified type. This API uses a 
-   * promise to return the result.
+   * Queries whether notifications of a specified slot support 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) to devices
+   * of a specified type. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { SlotType } slot - Types of the notification slot.
-   * @param { string } deviceType - Device type.<br>Since API version 18, the following device types are supported:<br>-
-   *     **headset**: wearable audio device<br>- **liteWearable**: lite wearable<br>- **wearable**: wearable<br>Since
-   *     API version 20, the following device types are supported:<br>- **headset**: wearable audio device<br>-
-   *     **liteWearable**: lite wearable<br>- **wearable**: wearable<br>- **current**: current device<br>- **2in1**: PC<
-   *     br>- **tablet**: tablet
+   * @param { SlotType } slot - [Notification slot](docroot://notification/notification-glossary.md#notification-slot)
+   *     type.
+   * @param { string } deviceType - Device type.
+   *     <br>Since API version 18, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>Since API version 20, the following device types are supported:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** means that cross-device
    *     collaboration is supported, and **false** means the opposite.
    * @throws { BusinessError } 201 - Permission denied.
@@ -3839,14 +3916,20 @@ declare namespace notificationManager {
   function isDistributedEnabledBySlot(slot: SlotType, deviceType: string): Promise<boolean>;
 
   /**
-   * Checks whether a device enables cross-device notification. This API uses a promise to return the result.
+   * Queries whether the device supports 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) 
+   * notifications. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { string } deviceType - Device type. The options are as follows:<br>- **headset**: wearable audio device<br>
-   *     - **liteWearable**: lite wearable<br>- **wearable**: wearable<br>- **current**: current device<br>- **2in1**:
-   *     PC<br>- **tablet**: tablet
-   * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the cross-device
-   *     notification is enabled, and the value **false** indicates the opposite.
+   * @param { string } deviceType - Device type. The options are as follows:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
+   * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the device
+   *     supports cross-device collaboration notifications, and **false** indicates the opposite.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @syscap SystemCapability.Notification.Notification
@@ -3857,17 +3940,22 @@ declare namespace notificationManager {
   function isDistributedEnabled(deviceType: string): Promise<boolean>;
 
   /**
-   * Sets whether the device of a specified type enables cross-device notification. This API uses a promise to return 
-   * the result.
+   * Sets whether the device supports 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) 
+   * notifications. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { boolean } enable - Whether the device of a specified type enables cross-device notification. The value
-   *     **true** indicates that the cross-device notification is enabled, and the value **false** indicates the
-   *     opposite.
-   * @param { string } deviceType - Device type. The options are as follows:<br>- **headset**: wearable audio device<br>
-   *     - **liteWearable**: lite wearable<br>- **wearable**: wearable<br>- **current**: current device<br>- **2in1**:
-   *     PC<br>- **tablet**: tablet
-   * @returns { Promise<void> } Promise that returns no result.
+   * @param { boolean } enable - Whether the device of a specified type enables cross-device collaboration notification.
+   *     The value **true** indicates that the cross-device collaboration notification is enabled, and the value
+   *     **false** indicates the opposite.
+   * @param { string } deviceType - Device type. The options are as follows:
+   *     <br>- **headset**: wearable audio device
+   *     <br>- **liteWearable**: lite wearable
+   *     <br>- **wearable**: wearable
+   *     <br>- **current**: current device
+   *     <br>- **2in1**: PC
+   *     <br>- **tablet**: tablet
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @syscap SystemCapability.Notification.Notification
@@ -3878,10 +3966,13 @@ declare namespace notificationManager {
   function setDistributedEnabled(enable: boolean, deviceType: string): Promise<void>;
 
   /**
-   * Obtains the device types that enable cross-device notification. This API uses a promise to return the result.
+   * Queries the device types that support 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) 
+   * notifications. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @returns { Promise<Array<string>> } Promise used to return the result.
+   * @returns { Promise<Array<string>> } Promise used to return the list of device types that support cross-device
+   *     collaboration notifications.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @syscap SystemCapability.Notification.Notification
@@ -3896,10 +3987,12 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { PriorityEnableStatus } enableStatus - Whether the priority notification for an application is enabled.<br>
-   *     - **DISABLE**: The priority notification is disabled.<br> - **ENABLE_BY_INTELLIGENT**: The priority
-   *     notification can be enabled through intelligent recognition, user keyword matching, or application rule
-   *     matching.<br> - **ENABLE**: The priority notification is enabled for all applications.
+   * @param { PriorityEnableStatus } enableStatus - Priority switch status of application notifications.
+   *     <br> - **DISABLE**: The notification cannot be set as a
+   *     [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   *     <br> - **ENABLE_BY_INTELLIGENT**: The notification can be set as a priority notification through intelligent
+   *     recognition, user keyword matching, application rule matching, and other methods.
+   *     <br> - **ENABLE**: All application notifications are set as priority notifications.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3937,9 +4030,11 @@ declare namespace notificationManager {
    * Checks whether the priority notification is enabled.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @returns { Promise<boolean> } Promise used to return the result.
-   *     <br> - **true**: The priority notification is enabled.
-   *     <br> - **false**: The priority notification is disabled.
+   * @returns { Promise<boolean> } Promise object that returns the enabled status of the notification priority master
+   *     switch.
+   *     <br> - **true**: allowed to be set as
+   *     [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   *     <br> - **false**: prohibited from being set as priority notification.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -3954,8 +4049,10 @@ declare namespace notificationManager {
    * Sets the enabling status of the priority notification.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { boolean } enable - Whether to enable the priority notification.<br> - **true**: The priority notification
-   *     is enabled.<br> - **false**: The priority notification is disabled.
+   * @param { boolean } enable - Whether all notifications are allowed to be set as priority notifications.
+   *     <br> - **true**: allows the notification to be set as a
+   *     [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   *     <br> - **false**: forbids the notification from being set as a priority notification.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3970,7 +4067,8 @@ declare namespace notificationManager {
   function setPriorityEnabled(enable: boolean): Promise<void>;
 
   /**
-   * Sets the enabling status of the silent reminder. This API uses a promise to return the result.
+   * Sets the switch status of [silent reminder](docroot://notification/notification-glossary.md#silent-reminder). This 
+   * API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -3992,7 +4090,8 @@ declare namespace notificationManager {
   function setSilentReminderEnabled(bundle: BundleOption, enabled: boolean): Promise<void>;
 
   /**
-   * Checks whether the silent reminder is enabled. This API uses a promise to return the result.
+   * Queries the switch status of [silent reminder](docroot://notification/notification-glossary.md#silent-reminder). 
+   * This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -4015,9 +4114,8 @@ declare namespace notificationManager {
    * Sets the notification switch state. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { string } switchName - Name of the notification switch. The value can be **DEAL** (aggregated
-   *     switch for transaction notifications) or **LOGISTICS** (aggregated switch for logistics
-   *     notifications).
+   * @param { string } switchName - Name of the notification switch. The value can be **DEAL** (aggregated switch for
+   *     transaction notifications) or **LOGISTICS** (aggregated switch for logistics notifications).
    * @param { boolean } switchState - Whether to enable the notification switch.
    *     <br> - **true**: enable.
    *     <br> - **false**: disable.
@@ -4041,9 +4139,8 @@ declare namespace notificationManager {
    * Obtains the notification switch state. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { string } switchName - Name of the notification switch. The value can be **DEAL** (aggregated
-   *     switch for transaction notifications) or **LOGISTICS** (aggregated switch for logistics
-   *     notifications).
+   * @param { string } switchName - Name of the notification switch. The value can be **DEAL** (aggregated switch for
+   *     transaction notifications) or **LOGISTICS** (aggregated switch for logistics notifications).
    * @param { int } userId - User ID.
    * @returns { Promise<SwitchState> } Promise used to return the notification switch state.
    * @throws { BusinessError } 201 - Permission denied.
@@ -4061,7 +4158,8 @@ declare namespace notificationManager {
   function getNotificationSwitch(switchName: string, userId: int): Promise<SwitchState>;
 
   /**
-   * Sets the custom ringtone information for an application. This API uses a promise to return the result.
+   * Sets the [customized ringtone](docroot://notification/notification-glossary.md#customized-ringtone) information of 
+   * an application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -4078,9 +4176,10 @@ declare namespace notificationManager {
    * @since 23 static
    */
   function setRingtoneInfoByBundle(bundle: BundleOption, ringtoneInfo: RingtoneInfo): Promise<void>;
- 
+
   /**
-   * Obtains the custom ringtone information of an application. This API uses a promise to return the result.
+   * Obtains the [customized ringtone](docroot://notification/notification-glossary.md#customized-ringtone) information 
+   * of an application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -4156,7 +4255,7 @@ declare namespace notificationManager {
   function setBadgeDisplayStatusByBundles(badges: Map<BundleOption, boolean>) : Promise<void>;
 
   /**
-   * Batch obtains the display statuses of application badges. This API uses a promise to return the result.
+   * Obtains the display statuses of application badges in batches. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { Array<BundleOption> } bundles - Bundles whose badge display statuses are to be obtained.
@@ -4211,10 +4310,10 @@ declare namespace notificationManager {
   /**
    * Obtains the badge number of this application. This API uses a promise to return the result.
    *
-   * This API is used to query the badge number displayed on the current application's desktop icon.
+   * This API is used to query the badge number displayed on the current application's home-screen icon.
    *
    * @returns { Promise<long> } Promise used to return the badge number. (The value is irrelevant to whether
-   *     notifications and home-screen badges of this application are enabled.)
+   *     notifications and home-screen icons of this application are enabled.)
    * @throws { BusinessError } 1600001 - Internal error.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
@@ -4226,9 +4325,11 @@ declare namespace notificationManager {
   function getBadgeNumber(): Promise<long>;
 
   /**
-   * Snoozes a notification. The notification will be reminded again after the specified time. Each
-   * setting will trigger only one reminder, and the reminder mode will be the same as that of the
-   * notification.<br>The notification will be deleted after the setting.
+   * Sets [notification snooze](docroot://notification/notification-glossary.md#notification-snooze). The notification 
+   * is reminded again after the specified time. Each setting triggers only one reminder, and the reminder mode is the 
+   * same as that of the notification.
+   *
+   * After the setting, the notification is deleted.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { string } hashCode - Unique ID of the notification to be snoozed.
@@ -4249,12 +4350,13 @@ declare namespace notificationManager {
   function snoozeNotification(hashCode: string, delayTime: long): Promise<void>;
 
   /**
-   * Sets the enabling state of geofencing. This API uses a promise to return the result.
+   * Sets the enabled status of the [geofence](docroot://notification/notification-glossary.md#geofence). This API uses 
+   * a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { boolean } enabled - Whether geofencing is enabled. The value **true** indicates that geofencing is enabled
-   *     , and the value **false** indicates the opposite.
-   * @returns { Promise<void> } Promise that returns no result.
+   * @param { boolean } enabled - Whether geofencing is enabled. The value **true** indicates that geofencing is
+   *     enabled, and the value **false** indicates the opposite.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -4268,7 +4370,8 @@ declare namespace notificationManager {
   function setGeofenceEnabled(enabled: boolean): Promise<void>;
 
   /**
-   * Checks whether geofencing is enabled. This API uses a promise to return the result.
+   * Checks whether the [geofence](docroot://notification/notification-glossary.md#geofence) feature is enabled. This 
+   * API uses a promise to return the result.
    *
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that geofencing is
    *     enabled, and the value **false** indicates the opposite.
@@ -4282,13 +4385,13 @@ declare namespace notificationManager {
   function isGeofenceEnabled(): Promise<boolean>;
 
   /**
-   * Obtains notification statistics of a specified list of applications in batches.
-   * This API uses a promise to return the result.
+   * Obtains notification statistics of a specified list of applications in batches. This API uses a promise to return 
+   * the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption[] } bundles - List of application bundle information.
-   * @returns { Promise<BundleNotificationStatistics[]> } Promise used to return the notification statistics
-   *     of a specified list of applications.
+   * @returns { Promise<BundleNotificationStatistics[]> } Promise used to return the notification statistics of a
+   *     specified list of applications.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -4301,16 +4404,17 @@ declare namespace notificationManager {
   function getNotificationStatisticsByBundle(bundles: BundleOption[]): Promise<BundleNotificationStatistics[]>;
 
   /**
-   * Checks whether a notification slot type is enabled for the specified applications in batch. This API uses a
-   * promise to return the result.
+   * Obtains the enabled state of a specified slot type for multiple applications in batches. This API uses a promise to
+   * return the result. All applications share the same slot type. Applications for which no slot has been created will 
+   * not be returned.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { Array<BundleOption> } bundles - Array of bundle information of the applications.
-   *     <br>The maximum length is 1000 and cannot be empty.
-   * @param { SlotType } type - Notification slot type. All bundles share the same slot type.
-   * @returns { Promise<Map<BundleOption, boolean>> } Promise used to return the result. The key is the bundle
-   *     information, and the value **true** means that the notification slot type is enabled, and **false** means the
-   *     opposite. Bundles whose slot has not been created will not appear in the result.
+   * @param { Array<BundleOption> } bundles - Array of application bundle information. The maximum length is 1000 and
+   *     cannot be empty.
+   * @param { SlotType } type - Slot type. All applications share the same slot type.
+   * @returns { Promise<Map<BundleOption, boolean>> } Promise used to return the batch query result. The key is the
+   *     application bundle information, and the value is the slot enabled state (**true**: enabled; **false**: disabled).
+   *     Applications for which no slot has been created will not be returned.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -4338,7 +4442,7 @@ declare namespace notificationManager {
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getActiveNotification(hashCode: string): Promise<NotificationRequest>;
 
@@ -4414,7 +4518,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Subscriber of the system live view notification.
+   * Defines the [system live view](docroot://notification/notification-glossary.md#system-live-view) subscriber.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -4434,7 +4538,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Describes the parameters of check notifications.
+   * Defines the [notification check](docroot://notification/notification-glossary.md#notification-check) parameters.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -4509,7 +4613,8 @@ declare namespace notificationManager {
     slotType: SlotType;
 
     /**
-     * Extra information about the live view.
+     * Additional information of the 
+     * [live view notification](docroot://notification/notification-glossary.md#live-view-notification).
      *
      * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
      * @syscap SystemCapability.Notification.Notification
@@ -4519,7 +4624,8 @@ declare namespace notificationManager {
     extraInfos?: Record<string, Object>;
 
     /**
-     * Extra information about the live view.
+     * Additional information of the
+     * [live view notification](docroot://notification/notification-glossary.md#live-view-notification).
      *
      * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
      * @syscap SystemCapability.Notification.Notification
@@ -4530,7 +4636,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Describes the result of check notifications.
+   * Defines the [notification check](docroot://notification/notification-glossary.md#notification-check) result.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -4540,9 +4646,9 @@ declare namespace notificationManager {
   export interface NotificationCheckResult {
     /**
      * Result code.
-     * 
+     *
      * **0**: display.
-     * 
+     *
      * **1**: no display.
      *
      * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
@@ -4566,7 +4672,8 @@ declare namespace notificationManager {
   }
 
   /**
-   * Describes the setting status of the notification mode switch.
+   * Defines the setting status of the 
+   * [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode) switch.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 20 dynamic
@@ -4575,7 +4682,7 @@ declare namespace notificationManager {
   export interface NotificationSetting {
     /**
      * Whether to enable vibration.
-     * 
+     *
      * - **true**: enable.
      * - **false**: disable.
      *
@@ -4586,8 +4693,8 @@ declare namespace notificationManager {
     vibrationEnabled: boolean;
 
     /**
-     * Whether to enable ringtone.
-     * 
+     * Whether to enable the sound.
+     *
      * - **true**: enable.
      * - **false**: disable.
      *
@@ -4598,8 +4705,8 @@ declare namespace notificationManager {
     soundEnabled: boolean;
 
     /**
-     * Whether to enable lock screen notification.
-     * 
+     * Whether to enable the lock screen notification.
+     *
      * - **true**: enable.
      * - **false**: disable.
      *
@@ -4610,8 +4717,8 @@ declare namespace notificationManager {
     lockScreenEnabled?: boolean;
 
     /**
-     * Whether to enable banner notification.
-     * 
+     * Whether to enable the banner notification.
+     *
      * - **true**: enable.
      * - **false**: disable.
      *
@@ -4622,10 +4729,11 @@ declare namespace notificationManager {
     bannerEnabled?: boolean;
 
     /**
-     * Whether to enable the display of notification badges.
-     * 
-     * - **true**: enable.
-     * - **false**: disable.
+     * Whether to enable the numeric display of the 
+     * [notification badge](docroot://notification/notification-glossary.md#notification-badge).
+     *
+     * - **true**: enabled.
+     * - **false**: disabled.
      *
      * @syscap SystemCapability.Notification.Notification
      * @stagemodelonly
@@ -4635,7 +4743,7 @@ declare namespace notificationManager {
 
     /**
      * Whether to enable the application notification.
-     * 
+     *
      * - **true**: enable.
      * - **false**: disable.
      *
@@ -4647,10 +4755,10 @@ declare namespace notificationManager {
   }
 
   /**
-   * Enumerates the notification slot types.
+   * Enumerates the [notification slot](docroot://notification/notification-glossary.md#notification-slot) types.
    *
-   * Different types correspond to different [SlotLevel]{@link notificationManager.SlotLevel} values,
-   * determining the reminder behavior of the notification.
+   * Different types correspond to different [SlotLevel]{@link notificationManager.SlotLevel} values, determining the 
+   * reminder behavior of the notification.
    *
    * @syscap SystemCapability.Notification.Notification
    * @atomicservice [since 12]
@@ -4659,8 +4767,7 @@ declare namespace notificationManager {
    */
   export enum SlotType {
     /**
-     * Unknown type. This type corresponds to the
-     * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_MIN**.
+     * Unknown type. This type corresponds to the [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_MIN**.
      *
      * @syscap SystemCapability.Notification.Notification
      * @atomicservice [since 12]
@@ -4670,8 +4777,8 @@ declare namespace notificationManager {
     UNKNOWN_TYPE = 0,
 
     /**
-     * Social communication. This type corresponds to the
-     * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_HIGH**.
+     * Social communication. This type corresponds to the [SlotLevel]{@link notificationManager.SlotLevel} of 
+     * **LEVEL_HIGH**.
      *
      * @syscap SystemCapability.Notification.Notification
      * @atomicservice [since 12]
@@ -4681,8 +4788,8 @@ declare namespace notificationManager {
     SOCIAL_COMMUNICATION = 1,
 
     /**
-     * Service information. This type corresponds to the
-     * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_HIGH**.
+     * Service information. This type corresponds to the [SlotLevel]{@link notificationManager.SlotLevel} of 
+     * **LEVEL_HIGH**.
      *
      * @syscap SystemCapability.Notification.Notification
      * @atomicservice [since 12]
@@ -4692,8 +4799,8 @@ declare namespace notificationManager {
     SERVICE_INFORMATION = 2,
 
     /**
-     * Content information. This type corresponds to the
-     * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_MIN**.
+     * Content information. This type corresponds to the [SlotLevel]{@link notificationManager.SlotLevel} of 
+     * **LEVEL_MIN**.
      *
      * @syscap SystemCapability.Notification.Notification
      * @atomicservice [since 12]
@@ -4703,9 +4810,9 @@ declare namespace notificationManager {
     CONTENT_INFORMATION = 3,
 
     /**
-     * Live view. A third-party application cannot directly create a notification of this type. Instead, after the
-     * system proxy creates a notification, the third-party application can release the notification with the same
-     * ID to update the specified content. This type corresponds to the
+     * Live view. A third-party application cannot directly create a notification of this type. Instead, after the 
+     * system agent creates a notification, the third-party application can release the notification with the same ID to
+     * update the specified content<!--RP1--><!--RP1End-->. This type corresponds to the 
      * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_DEFAULT**.
      *
      * @syscap SystemCapability.Notification.Notification
@@ -4716,8 +4823,8 @@ declare namespace notificationManager {
     LIVE_VIEW = 4,
 
     /**
-     * Customer service message. This type is used for messages between users and customer service
-     * providers. The messages must be initiated by users. This type corresponds to the
+     * Customer service message. This type is used for messages between users and customer service providers. The 
+     * messages must be initiated by users. This type corresponds to the 
      * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_DEFAULT**.
      *
      * @syscap SystemCapability.Notification.Notification
@@ -4728,7 +4835,7 @@ declare namespace notificationManager {
     CUSTOMER_SERVICE = 5,
 
     /**
-     * Emergency event. 
+     * Emergency event.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -4738,8 +4845,7 @@ declare namespace notificationManager {
     EMERGENCY_INFORMATION = 10,
 
     /**
-     * Other types. This type corresponds to the
-     * [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_MIN**.
+     * Other types. This type corresponds to the [SlotLevel]{@link notificationManager.SlotLevel} of **LEVEL_MIN**.
      *
      * @syscap SystemCapability.Notification.Notification
      * @atomicservice [since 12]
@@ -4750,7 +4856,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Enumerates the notification content types.
+   * Enumerates the [notification content types](docroot://notification/notification-glossary.md#content-type).
    *
    * @syscap SystemCapability.Notification.Notification
    * @crossplatform [since 12]
@@ -4813,9 +4919,10 @@ declare namespace notificationManager {
     NOTIFICATION_CONTENT_MULTILINE,
 
     /**
-     * System live view notification. A third-party application cannot directly create a notification of this type. After the 
-     * system proxy creates a system live view, the third-party application publishes a notification with the same ID to
-     * update the specified content.
+     * [System live view](docroot://notification/notification-glossary.md#system-live-view) type notification.
+     * Third-party applications are not supported to directly create this type of notification. After the system agent
+     * creates a system live view type notification, a third-party application can publish a notification with the same
+     * ID to update the specified content.
      *
      * @syscap SystemCapability.Notification.Notification
      * @atomicservice [since 12]
@@ -4838,8 +4945,9 @@ declare namespace notificationManager {
   /**
    * Enumerates the notification level.
    *
-   * This API is used to define the notification reminder behavior level of NotificationSlot, affecting how the
-   * notification is displayed in the status bar, whether to show banners and alert sounds, etc.
+   * This API is used to define the notification reminder behavior level of 
+   * [NotificationSlot]{@link ./notification/notificationSlot:NotificationSlot}, affecting how the notification is 
+   * displayed in the status bar, whether to show banners and alert sounds, etc.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
@@ -4856,7 +4964,7 @@ declare namespace notificationManager {
     LEVEL_NONE = 0,
 
     /**
-     * Notification is enabled, but the notification icon is not displayed in the status bar, with no alert tone and 
+     * Notification is enabled, but the notification icon is not displayed in the status bar, with no alert sound and 
      * banner.
      *
      * @syscap SystemCapability.Notification.Notification
@@ -4866,7 +4974,8 @@ declare namespace notificationManager {
     LEVEL_MIN = 1,
 
     /**
-     * Notification is enabled, and the notification icon is displayed in the status bar, with no alert tone and banner.
+     * Notification is enabled, and the notification icon is displayed in the status bar, with no alert sound and 
+     * banner.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 9 dynamic
@@ -4875,7 +4984,7 @@ declare namespace notificationManager {
     LEVEL_LOW = 2,
 
     /**
-     * Notification is enabled, and the notification icon is displayed in the status bar, with an alert tone but no 
+     * Notification is enabled, and the notification icon is displayed in the status bar, with an alert sound but no 
      * banner.
      *
      * @syscap SystemCapability.Notification.Notification
@@ -4885,7 +4994,8 @@ declare namespace notificationManager {
     LEVEL_DEFAULT = 3,
 
     /**
-     * Notification is enabled, and the notification icon is displayed in the status bar, with an alert tone and banner.
+     * Notification is enabled, and the notification icon is displayed in the status bar, with an alert sound and 
+     * banner.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 9 dynamic
@@ -4934,7 +5044,7 @@ declare namespace notificationManager {
     TYPE_DAILY = 2,
 
     /**
-     * DND at the specified time segment (with the hour, day, and month specified).
+     * DND at the specified time segment (accurate to month, day, and hour).
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5014,8 +5124,9 @@ declare namespace notificationManager {
     uid: int;
 
     /**
-     * Whether the application enables cross-device collaboration. The value **true** indicates that the cross-device 
-     * collaboration is enabled, and the value **false** indicates the opposite.
+     * Whether [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) 
+     * is supported. The value **true** indicates supported, and **false** indicates not supported. The default value is
+     * **false**.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5026,7 +5137,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Do Not Disturb profile.
+   * Defines the configuration information of the Do Not Disturb mode.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5035,7 +5146,7 @@ declare namespace notificationManager {
    */
   export interface DoNotDisturbProfile {
     /**
-     * ID of the Do Not Disturb profile.
+     * ID of the Do Not Disturb mode.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5045,7 +5156,8 @@ declare namespace notificationManager {
     id: long;
 
     /**
-     * Name of the Do Not Disturb profile.
+     * Name of the Do Not Disturb mode. The string length cannot exceed 202 bytes, and the excess part will be 
+     * truncated.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5055,7 +5167,7 @@ declare namespace notificationManager {
     name: string;
 
     /**
-     * Trustlist in Do Not Disturb profile.
+     * Trustlist of Do Not Disturb mode.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5066,7 +5178,8 @@ declare namespace notificationManager {
   }
 
   /**
-   * Describes the custom ringtone information.
+   * Describes the [customized ringtone](docroot://notification/notification-glossary.md#customized-ringtone) 
+   * information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5086,6 +5199,7 @@ declare namespace notificationManager {
 
     /**
      * Title of the ringtone.
+     * The size cannot exceed 202 bytes; otherwise, error code 401 is returned. The default value is empty.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5096,6 +5210,7 @@ declare namespace notificationManager {
 
     /**
      * File name of the ringtone.
+     * The size cannot exceed 202 bytes; otherwise, error code 401 is returned. The default value is empty.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5105,7 +5220,8 @@ declare namespace notificationManager {
     ringtoneFileName?: string;
 
     /**
-     * URI of the ringtone.
+     * URI of the ringtone. For supported resources, see [media.AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}.
+     * The size cannot exceed 202 bytes; otherwise, error code 401 is returned. The default value is empty.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5135,12 +5251,15 @@ declare namespace notificationManager {
     bundle: BundleOption;
 
     /**
-     * Notification reminder mode flags.<br>- bit0: sound prompt. The value **0** indicates disabled, and **1**
-     * indicates enabled. <br>- bit1: lock screen. The value **0** indicates disabled, and **1** indicates
-     * enabled. <br>- bit2: banner. The value **0** indicates disabled, and **1** indicates enabled. <br>- bit3:
-     * screen on. The value **0** indicates disabled, and **1** indicates enabled. <br>- bit4: vibration. The
-     * value **0** indicates disabled, and **1** indicates enabled. <br>- bit5: status bar notification icon. The
-     * value **0** indicates disabled, and **1** indicates enabled.
+     * Flag bits of the 
+     * [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode).
+     *
+     * - **bit0**: ringtone. **0** indicates disabled, and **1** indicates enabled. 
+     * - **bit1**: lock screen. **0** indicates disabled, and **1** indicates enabled. 
+     * - **bit2**: banner. **0** indicates disabled, and **1** indicates enabled. 
+     * - **bit3**: screen on. **0** indicates disabled, and **1** indicates enabled. 
+     * - **bit4**: vibration. **0** indicates disabled, and **1** indicates enabled. 
+     * - **bit5**: status bar notification icon. **0** indicates disabled, and **1** indicates enabled.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5150,8 +5269,8 @@ declare namespace notificationManager {
     reminderFlags: long;
 
     /**
-     * Whether the silent reminder is enabled. The value **true** indicates that the silent reminder is enabled, and 
-     * the value **false** indicates the opposite.
+     * Whether the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder) switch is enabled 
+     * (**true**: enabled, **false**: disabled).
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5162,7 +5281,8 @@ declare namespace notificationManager {
   }
 
   /**
-   * Defines the notification reminder type.
+   * Defines the 
+   * [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5330,7 +5450,7 @@ declare namespace notificationManager {
    */
   export enum PriorityNotificationType {
     /**
-     * Default.
+     * The notification priority type is default.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 23 dynamic&static
@@ -5338,7 +5458,7 @@ declare namespace notificationManager {
     OTHER = 'OTHER',
 
     /**
-     * Primary contact.
+     * The notification priority type is primary contact.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 23 dynamic&static
@@ -5346,7 +5466,7 @@ declare namespace notificationManager {
     PRIMARY_CONTACT = 'PRIMARY_CONTACT',
 
     /**
-     * Message that mentions me.
+     * The notification priority type is @me.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 23 dynamic&static
@@ -5354,7 +5474,7 @@ declare namespace notificationManager {
     AT_ME = 'AT_ME',
 
     /**
-     * Urgent message.
+     * The notification priority type is urgent message.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 23 dynamic&static
@@ -5362,7 +5482,7 @@ declare namespace notificationManager {
     URGENT_MESSAGE = 'URGENT_MESSAGE',
 
     /**
-     * Schedule reminder.
+     * The notification priority type is schedule reminder.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 23 dynamic&static
@@ -5370,7 +5490,7 @@ declare namespace notificationManager {
     SCHEDULE_REMINDER = 'SCHEDULE_REMINDER',
 
     /**
-     * Payment and repayment.
+     * Payment due.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5379,7 +5499,7 @@ declare namespace notificationManager {
     PAYMENT_DUE = 'PAYMENT_DUE',
 
     /**
-     * Account balance reminder.
+     * Transaction alert.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5406,7 +5526,7 @@ declare namespace notificationManager {
     MISS_CALL = 'MISS_CALL',
 
     /**
-     * Abnormal traveling.
+     * Travel alert.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5442,7 +5562,7 @@ declare namespace notificationManager {
     TRAFFIC_NOTICE = 'TRAFFIC_NOTICE',
 
     /**
-     * Key progress.
+     * Key progress notification.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5451,7 +5571,7 @@ declare namespace notificationManager {
     KEY_PROGRESS = 'KEY_PROGRESS',
 
     /**
-     * Important common event.
+     * Important public event.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5460,7 +5580,7 @@ declare namespace notificationManager {
     PUBLIC_EVENT = 'PUBLIC_EVENT',
 
     /**
-     * IoT warning.
+     * Early warning notification.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5469,7 +5589,7 @@ declare namespace notificationManager {
     IOT_WARNING = 'IOT_WARNING',
 
     /**
-     * Custom keyword.
+     * User-defined keyword.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5496,7 +5616,9 @@ declare namespace notificationManager {
     DISABLE = 0,
 
     /**
-     * The priority notification is enabled by intelligent recognition.
+     * The priority switch of the application notification is in the intelligent recognition state. It can be set to 
+     * [priority notification](docroot://notification/notification-glossary.md#priority-notification) through 
+     * intelligent recognition, user keyword matching, application rule matching, and other methods.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5505,7 +5627,7 @@ declare namespace notificationManager {
     ENABLE_BY_INTELLIGENT = 1,
 
     /**
-     * The priority notification is enabled for all applications.
+     * All application notifications are set as priority notifications.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5522,7 +5644,7 @@ declare namespace notificationManager {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  export enum PriorityStrategyStatus {  
+  export enum PriorityStrategyStatus {
     /**
      * Default priority strategy.
      *
@@ -5585,7 +5707,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Enumerates the custom ringtone types.
+   * Describes the [customized ringtone](docroot://notification/notification-glossary.md#customized-ringtone) type.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5652,7 +5774,9 @@ declare namespace notificationManager {
     bundle: BundleOption;
 
     /**
-     * Time when the app last published a notification.<br>Data format: timestamp.<br>Unit: millisecond.
+     * Time when the app last published a notification.
+     * Data format: timestamp.
+     * Unit: millisecond.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5717,7 +5841,7 @@ declare namespace notificationManager {
   export type NotificationBasicContent = _NotificationBasicContent;
 
   /**
-   * Describes the notification content.
+   * Defines the [notification content](docroot://notification/notification-glossary.md#notification-content).
    *
    * @syscap SystemCapability.Notification.Notification
    * @crossplatform [since 12]
@@ -5737,7 +5861,7 @@ declare namespace notificationManager {
   export type NotificationLongTextContent = _NotificationLongTextContent;
 
   /**
-   * Describes the common live view.
+   * Describes the [normal live view notification](docroot://notification/notification-glossary.md#normal-live-view).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5766,7 +5890,8 @@ declare namespace notificationManager {
   export type NotificationPictureContent = _NotificationPictureContent;
 
   /**
-   * Describes the system live view notification.
+   * Defines the [system live view](docroot://notification/notification-glossary.md#system-live-view) 
+   * [notification content](docroot://notification/notification-glossary.md#notification-content).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -5775,7 +5900,7 @@ declare namespace notificationManager {
   export type NotificationSystemLiveViewContent = _NotificationSystemLiveViewContent;
 
   /**
-   * Defines the notification flags.
+   * Describes the [notification flags](docroot://notification/notification-glossary.md#notification-flags).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5795,7 +5920,7 @@ declare namespace notificationManager {
   export type NotificationFlagStatus = _NotificationFlagStatus;
 
   /**
-   * Describes the notification request.
+   * Defines the [notification request](docroot://notification/notification-glossary.md#notification-request).
    *
    * @syscap SystemCapability.Notification.Notification
    * @crossplatform [since 12]
@@ -5805,7 +5930,8 @@ declare namespace notificationManager {
   export type NotificationRequest = _NotificationRequest;
 
   /**
-   * Describes the fields of notification intelligent unification information.
+   * Describes the information fields of notification 
+   * [smart aggregation](docroot://notification/notification-glossary.md#notification-smart-aggregation).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5815,7 +5941,7 @@ declare namespace notificationManager {
   export type UnifiedGroupInfo = _UnifiedGroupInfo;
 
   /**
-   * Describes the filter criteria for querying the live view.
+   * Describes the filter criteria for querying live view notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5844,7 +5970,7 @@ declare namespace notificationManager {
   export type DistributedOptions = _DistributedOptions;
 
   /**
-   * Describes the notification slot.
+   * Defines the [notification slot](docroot://notification/notification-glossary.md#notification-slot).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
@@ -5853,7 +5979,7 @@ declare namespace notificationManager {
   export type NotificationSlot = _NotificationSlot;
 
   /**
-   * Enumerates the statuses of the common live view.
+   * Describes the status of the [normal live view notification](docroot://notification/notification-glossary.md#normal-live-view).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5863,7 +5989,7 @@ declare namespace notificationManager {
   export type LiveViewStatus = _LiveViewStatus;
 
   /**
-   * Enumerates live view types.
+   * Describes the type of the [live view notification](docroot://notification/notification-glossary.md#live-view-notification).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5901,7 +6027,7 @@ declare namespace notificationManager {
   export type NotificationUserInput = _NotificationUserInput;
 
   /**
-   * Describes the notification capsule.
+   * Defines the [notification capsule](docroot://notification/notification-glossary.md#notification-capsule).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -5910,7 +6036,7 @@ declare namespace notificationManager {
   export type NotificationCapsule = _NotificationCapsule;
 
   /**
-   * Describes the notification button.
+   * Defines the [notification button](docroot://notification/notification-glossary.md#notification-button).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -5928,7 +6054,7 @@ declare namespace notificationManager {
   export type NotificationTime = _NotificationTime;
 
   /**
-   * Describes the notification progress.
+   * Defines the [notification progress](docroot://notification/notification-glossary.md#notification-progress).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -5937,7 +6063,7 @@ declare namespace notificationManager {
   export type NotificationProgress = _NotificationProgress;
 
   /**
-   * System notification button.
+   * Defines the system [notification button](docroot://notification/notification-glossary.md#notification-button).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5966,7 +6092,8 @@ declare namespace notificationManager {
   export type Trigger = _Trigger;
 
   /**
-   * Describes partial information about the **wantAgent** in the notification request.
+   * Describes part of the information about the wantAgent in the 
+   * [notification request](docroot://notification/notification-glossary.md#notification-request).
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -5975,7 +6102,7 @@ declare namespace notificationManager {
   export type NotificationParameters = _NotificationParameters;
 
   /**
-   * Defines the configuration of a geofence.
+   * Defines the configuration information of the [geofence](docroot://notification/notification-glossary.md#geofence).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5985,7 +6112,7 @@ declare namespace notificationManager {
   export type Geofence = _Geofence;
 
   /**
-   * Enumerates the coordinate systems of a geofence.
+   * Enumerates the coordinate system types of the [geofence](docroot://notification/notification-glossary.md#geofence).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5995,7 +6122,7 @@ declare namespace notificationManager {
   export type CoordinateSystemType = _CoordinateSystemType;
 
   /**
-   * Enumerates the event types of monitoring a geofence.
+   * Enumerates the monitoring event types of the [geofence](docroot://notification/notification-glossary.md#geofence).
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -6005,7 +6132,8 @@ declare namespace notificationManager {
   export type MonitorEvent = _MonitorEvent;
 
   /**
-   * Defines the custom group notification information.
+   * Defines the custom [group notification](docroot://notification/notification-glossary.md#group-notification) 
+   * information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

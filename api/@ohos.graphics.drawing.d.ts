@@ -8163,7 +8163,7 @@ declare namespace drawing {
      *
      * @param { ResourceColor } resourceColor - Color value of the **ResourceColor** type. (All four types of inputs are
      *     supported. The following provides 13 example inputs.) The fourth type of
-     *     [Resource]{@link ./@internal/component/ets/units:Resource} supports only the construction method
+     *     [Resource]{@link Resource} supports only the construction method
      *     **$r('belonging.type.name')**. Ensure that the resource has been defined in the
      *     **main/resources/base/element** directory. (The types **color**, **string**, and **integer** are available
      *     for the belonging **app**, whereas only the type **color** is available for the belonging **sys**.)
@@ -8595,7 +8595,7 @@ declare namespace drawing {
   }
 
   /**
-   * Defines the interpolation mode for sprite sheet frame animation.
+   * Interpolation mode enum for sprite sheet frame animation.
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -8604,7 +8604,7 @@ declare namespace drawing {
    */
   enum AtlasInterpolationMode {
     /**
-     * No interpolation. Each frame is displayed independently as a discrete step.
+     * No interpolation. Each frame is displayed independently.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -8634,7 +8634,6 @@ declare namespace drawing {
   interface AtlasImage {
     /**
      * Sprite sheet atlas image.
-     * Created through the image module as a PixelMap instance.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi

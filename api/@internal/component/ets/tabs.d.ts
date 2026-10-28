@@ -298,7 +298,7 @@ declare enum TabsCacheMode {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabsSidebarDisplayStyle {
   /**
@@ -309,7 +309,7 @@ declare enum TabsSidebarDisplayStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   EMBED = 0,
 
@@ -321,7 +321,7 @@ declare enum TabsSidebarDisplayStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   DISPLACE = 1
 }
@@ -496,7 +496,7 @@ declare class TabsController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   getBarDisplayMode(): TabBarDisplayMode;
 }
@@ -1054,6 +1054,109 @@ interface FloatingTabBarStyle {
    * @since 26.0.0 dynamic
    */
   systemMaterial?: UIMaterial.ImmersiveMaterial;
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxWidth?: Length;
+
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  offset?: Position | Edges | LocalizedEdges;
+}
+
+/**
+ * Provides an interface for the options for the top floating tab bar style.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+interface TopFloatingTabBarStyle {
+  /**
+   * The bar width.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  barWidth?: Length;
+  /**
+   * The width of the left and right margins of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  barSideMargin?: Length;
+  /**
+   * The distance between the bar and the top of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  barTopMargin?: Length;
+  /**
+   * The color of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maskColor?: ResourceColor;
+  /**
+   * The height of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maskHeight?: Length;
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxWidth?: Length;
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  offset?: Position | Edges | LocalizedEdges;
 }
 
 /**
@@ -1190,7 +1293,7 @@ declare type OnTabsContentDidScrollCallback = (selectedIndex: number, index: num
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabBarStyle {
   /**
@@ -1200,7 +1303,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   BOTTOM = 0,
 
@@ -1211,7 +1314,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   SIDEBAR = 1,
 
@@ -1223,9 +1326,21 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   SIDEBAR_ADAPTABLE = 2,
+
+  /**
+   * The top floating tab bar style. The tab bar is always displayed at the top in a floating form.
+   * The **BarPosition** setting is ignored when this style is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOP = 3,
 }
 
 /**
@@ -1238,7 +1353,7 @@ declare enum TabBarStyle {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare type TabsSidebarSearchFilterCallback = (tabIndex: number, text: string) => boolean;
 
@@ -1249,7 +1364,7 @@ declare type TabsSidebarSearchFilterCallback = (tabIndex: number, text: string) 
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare interface TabsSidebarSearchableOptions {
   /**
@@ -1259,7 +1374,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   searchText?: ResourceStr;
 
@@ -1270,7 +1385,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   placeholder?: ResourceStr;
 
@@ -1282,7 +1397,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   searchCallback?: (text: string) => void;
 
@@ -1293,7 +1408,7 @@ declare interface TabsSidebarSearchableOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   searchFilter?: TabsSidebarSearchFilterCallback;
 }
@@ -1308,7 +1423,7 @@ declare interface TabsSidebarSearchableOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare enum TabBarDisplayMode {
   /**
@@ -1318,7 +1433,7 @@ declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   BOTTOM_TABBAR = 0,
 
@@ -1329,9 +1444,20 @@ declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   SIDEBAR = 1,
+
+  /**
+   * The tab bar is displayed as a top floating bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOP_TABBAR = 2,
 }
 
 /**
@@ -1341,7 +1467,7 @@ declare enum TabBarDisplayMode {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.0.1 dynamic
  */
 declare interface TabsBreakpointType<T> {
   /**
@@ -1351,7 +1477,7 @@ declare interface TabsBreakpointType<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sm?: T;
 
@@ -1362,7 +1488,7 @@ declare interface TabsBreakpointType<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   md?: T;
 
@@ -1373,7 +1499,7 @@ declare interface TabsBreakpointType<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   lg?: T;
 }
@@ -2119,6 +2245,20 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
   barFloatingStyle(style: Optional<FloatingTabBarStyle>): TabsAttribute;
 
   /**
+   * Enable top floating style for bar. This is effective only when **barStyle** is set to
+   * **TabBarStyle.TOP** or **TabBarStyle.TOP_ADAPTABLE**.
+   *
+   * @param { Optional<FloatingTabBarStyle> } style - top floating style for bar
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  topBarFloatingStyle(style: Optional<TopFloatingTabBarStyle>): TabsAttribute;
+
+  /**
    * Sets the display style of the tab bar.
    *
    * @param { Optional<TabBarStyle> } style - Display style of the tab bar.
@@ -2128,7 +2268,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   barStyle(style: Optional<TabBarStyle>): TabsAttribute;
 
@@ -2144,7 +2284,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarPosition(position: Optional<BarPosition>): TabsAttribute;
 
@@ -2157,7 +2297,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarHeader(header: Optional<ComponentContent>): TabsAttribute;
 
@@ -2170,7 +2310,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSearchable(searchOptions?: TabsSidebarSearchableOptions): TabsAttribute;
 
@@ -2184,7 +2324,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   barDisplayModeBreakpoint(style: Optional<TabsBreakpointType<TabBarDisplayMode>>): TabsAttribute;
 
@@ -2197,7 +2337,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   onBarDisplayModeChange(callback: Optional<Callback<TabBarDisplayMode>>): TabsAttribute;
 
@@ -2210,7 +2350,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSelectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2223,7 +2363,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSelectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2236,7 +2376,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarUnselectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2249,7 +2389,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarUnselectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2262,7 +2402,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarSelectedBoardColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2277,7 +2417,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2296,7 +2436,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   minSidebarWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2315,7 +2455,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   maxSidebarWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2332,7 +2472,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   minContentWidth(value: Optional<Length>): TabsAttribute;
 
@@ -2347,7 +2487,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarBackgroundColor(value: Optional<ResourceColor>): TabsAttribute;
 
@@ -2362,7 +2502,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarBackgroundBlurStyle(value: Optional<BlurStyle>): TabsAttribute;
 
@@ -2379,7 +2519,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarDivider(value: Optional<DividerStyle>): TabsAttribute;
 
@@ -2393,7 +2533,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.0.1 dynamic
    */
   sidebarDisplayStyle(style: Optional<TabsSidebarDisplayStyle>): TabsAttribute;
 
@@ -2406,7 +2546,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   sidebarFooter(footer: Optional<ComponentContent>): TabsAttribute;
 
@@ -2419,7 +2559,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   sidebarBottomBar(bottomBar: Optional<ComponentContent>): TabsAttribute;
 }

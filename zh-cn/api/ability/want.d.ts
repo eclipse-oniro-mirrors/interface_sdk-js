@@ -20,7 +20,7 @@
 
 /**
  * Want是对象间信息传递的载体, 可以用于应用组件间的信息传递。 Want的使用场景之一是作为
- * [startAbility]{@link ./application/UIAbilityContext:UIAbilityContext.startAbility(want: Want, callback: AsyncCallback<void>)}
+ * [startAbility]{@link ./application/UIAbilityContext:UIAbilityContext.startAbility}
  * 的参数, 其包含了指定的启动目标, 以及启动时需携带的相关数据, 如bundleName和abilityName字段分别指明目标Ability所在应用的Bundle名称以及对应包内的Ability名称。当Ability A需要启动
  * Ability B并传入一些数据时, 可使用Want作为载体将这些数据传递给Ability B。
  *
@@ -106,7 +106,7 @@ export declare interface Want {
   /**
    * 表示WantParams，由开发者自行决定传入的键值对。默认会携带以下key值：
    * 
-   * ohos.aafwk.callerPid 表示拉起方的pid。
+   * ohos.aafwk.param.callerPid 表示拉起方的pid。
    * 
    * ohos.aafwk.param.callerToken 表示拉起方的token。
    * 

@@ -39,7 +39,7 @@ import type hdrCapability from './@ohos.graphics.hdrCapability';
 declare namespace avSession {
   /**
    * 创建会话对象，一个应用程序仅允许存在一个会话，重复创建会失败，结果通过callback异步回调方式返回。
-   * 
+   *
    * > **说明：**
    * >
    * > - 在业务执行阶段需要保持avsession对象存活，避免后台管控静音、设备选择异常、通知/锁屏/胶囊播控卡片显示异常等情况。
@@ -49,7 +49,7 @@ declare namespace avSession {
    * @param { AVSessionType } type - 会话类型。
    * @param { AsyncCallback<AVSession> } callback - 回调函数。回调返回会话实例对象，可用于获取会话ID，以及设置元数据、播放状态，发送按键事件等操作。
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @since 10 dynamic
@@ -59,7 +59,7 @@ declare namespace avSession {
 
   /**
    * 创建会话对象，一个应用进程仅允许存在一个会话，重复创建会失败，结果通过Promise异步回调方式返回。
-   * 
+   *
    * > **说明：**
    * >
    * > - 在业务执行阶段需要保持avsession对象存活，避免后台管控静音、设备选择异常、通知/锁屏/胶囊播控卡片显示异常等情况。
@@ -69,7 +69,7 @@ declare namespace avSession {
    * @param { AVSessionType } type - 会话类型。
    * @returns { Promise<AVSession> } Promise对象。回调返回会话实例对象，可用于获取会话ID，以及设置元数据、播放状态，发送按键事件等操作。
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @atomicservice [since 12]
@@ -80,7 +80,7 @@ declare namespace avSession {
 
   /**
    * 获取会话对象。使用Promise异步回调。
-   * 
+   *
    * 该接口可将当前进程已创建过的会话对象返回，如果没有创建过会话对象，该接口调用会失败并抛出异常。
    *
    * @param { Context } context - 需要使用UIAbilityContext，用于系统获取应用组件的相关信息。
@@ -99,7 +99,7 @@ declare namespace avSession {
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { AsyncCallback<Array<Readonly<AVSessionDescriptor>>> } callback - 回调函数。返回所有会话描述的只读对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -115,7 +115,7 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES [since 9 - 22]
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES or ohos.permission.MANAGE_MEDIA_RESOURCES_FOR_PUBLIC [since 23]
    * @returns { Promise<Array<Readonly<AVSessionDescriptor>>> } Promise对象。返回所有会话描述的只读对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App. [since 9 - 22]
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -132,7 +132,7 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { SessionCategory } category - 指定会话的类别。
    * @returns { Promise<Array<Readonly<AVSessionDescriptor>>> } Promise对象。返回对应类别的会话描述的只读对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -146,15 +146,16 @@ declare namespace avSession {
    * 获取根据userid查询对应音区的会话
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
-   * @param { int } userId - 用户userid
+   * @param { int } userId - 用户userid。
+   *     <br>取值限定为整数。
    * @returns { Promise<Array<Readonly<AVSessionDescriptor>>> } 返回对应音区的会话列表
    * @throws { BusinessError } 201 - permission denied
    * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 6600101 - Session service exception.
+   * @throws { BusinessError } 6700101 - Session service is not running.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getSessionDescriptorsForAudioZone(userId: int): Promise<Array<Readonly<AVSessionDescriptor>>>;
 
@@ -164,10 +165,11 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { int } maxSize - 指定获取描述符数量的最大值，可选范围是0-10。
    * @param { AsyncCallback<Array<Readonly<AVSessionDescriptor>>> } callback - 回调函数。返回所有会话描述的只读对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App
-   * @throws { BusinessError } 401 - parameter check failed. Possible causes: 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - parameter check failed. Possible causes: 1.Mandatory parameters are left
+   *     unspecified.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi Hide this for inner system use
@@ -182,10 +184,10 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { int } maxSize - 指定获取描述符数量的最大值，可选范围是0-10，不填则取默认值，默认值为3。
    * @returns { Promise<Array<Readonly<AVSessionDescriptor>>> } Promise对象。返回所有会话描述的只读对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi Hide this for inner system use
@@ -201,10 +203,10 @@ declare namespace avSession {
    * @param { int } maxSize - 指定获取歌曲列表数量的最大值，暂与获取歌单数量无关。
    * @param { int } maxAppSize - 指定获取歌曲列表所属应用数量的最大值，暂与获取歌单数量无关。
    * @param { AsyncCallback<Array<Readonly<AVQueueInfo>>> } callback - 回调函数。返回所有历史播放歌单的只读对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi Hide this for inner system use
@@ -221,7 +223,7 @@ declare namespace avSession {
    * @param { int } maxAppSize - 指定获取歌曲列表所属应用数量的最大值，暂与获取歌单数量无关。
    * @returns { Promise<Array<Readonly<AVQueueInfo>>> } Promise对象。返回所有历史播放歌单的只读对象。
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi Hide this for inner system use
@@ -237,10 +239,10 @@ declare namespace avSession {
    * @param { string } sessionId - 会话ID。
    * @param { AsyncCallback<AVSessionController> } callback - 回调函数。返回会话控制器实例，可查看会话ID，
    *     <br>并完成对会话发送命令及事件，获取元数据、播放状态信息等操作。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -272,17 +274,17 @@ declare namespace avSession {
 
   /**
    * 投播会话到指定设备列表。结果通过callback异步回调方式返回。
-   * 
+   *
    * 需要导入`ohos.multimedia.audio`模块获取AudioDeviceDescriptor的相关描述。
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { SessionToken | 'all' } session - 会话令牌。SessionToken表示单个token；字符串`'all'`指所有token。
    * @param { Array<audio.AudioDeviceDescriptor> } audioDevices - 媒体设备列表。
    * @param { AsyncCallback<void> } callback - 回调函数。当投播成功，err为undefined，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
    * @throws { BusinessError } 6600104 - The remote session connection failed.
@@ -298,7 +300,7 @@ declare namespace avSession {
    * @param { SessionToken } session - Specifies the sessionId which to send to remote.
    * @param { Array<audio.AudioDeviceDescriptor> } audioDevices - Specifies the audio devices to cast.
    * @param { AsyncCallback<void> } callback - The asyncCallback triggered when the command is executed successfully
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
@@ -311,20 +313,20 @@ declare namespace avSession {
 
   /**
    * 投播会话到指定设备列表。结果通过Promise异步回调方式返回。
-   * 
+   *
    * 调用此接口之前，需要导入`ohos.multimedia.audio`模块获取AudioDeviceDescriptor的相关描述。
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { SessionToken | 'all' } session - 会话令牌。SessionToken表示单个token；字符串`'all'`指所有token。
    * @param { Array<audio.AudioDeviceDescriptor> } audioDevices - 媒体设备列表。
    * @returns { Promise<void> } Promise对象。当投播成功，无返回结果，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
-   * @throws { BusinessError } 6600104 - The remote session  connection failed.
+   * @throws { BusinessError } 6600104 - The remote session connection failed.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @since 9 dynamic
@@ -337,11 +339,11 @@ declare namespace avSession {
    * @param { SessionToken } session - Specifies the sessionId which to send to remote.
    * @param { Array<audio.AudioDeviceDescriptor> } audioDevices - Specifies the audio devices to cast.
    * @returns { Promise<void> } void promise when executed successfully
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
-   * @throws { BusinessError } 6600104 - The remote session  connection failed.
+   * @throws { BusinessError } 6600104 - The remote session connection failed.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @since 23 static
@@ -353,11 +355,11 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { Array<audio.AudioDeviceDescriptor> } audioDevices - Specifies the audio devices to cast.
    * @returns { Promise<void> } void promise when executed successfully
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
-   * @throws { BusinessError } 6600104 - The remote session  connection failed.
+   * @throws { BusinessError } 6600104 - The remote session connection failed.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @since 23 static
@@ -371,10 +373,10 @@ declare namespace avSession {
    * @param { string } bundleName - 指定应用包名。
    * @param { string } assetId - 指定媒体ID。
    * @returns { Promise<void> } Promise对象。当播放成功，无返回结果，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -391,8 +393,8 @@ declare namespace avSession {
    * @param { string } assetId - Specifies the assetId to be started.
    * @param { CommandInfo } info - Specifies the specified command information.
    * @returns { Promise<void> } void promise when executed successfully
-   * @throws { BusinessError } 201 - permission denied
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -402,12 +404,39 @@ declare namespace avSession {
   function startAVPlayback(bundleName: string, assetId: string, info: CommandInfo): Promise<void>;
 
   /**
+   * 使用特定音频区域的命令信息启动媒体播放应用程序。
+   *
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 属于音频区域的用户ID。
+   *     <br>取值限定为整数。
+   * @param { string } bundleName - 指定要启动的bundleName。
+   * @param { string } assetId - 指定要启动的assetId。
+   * @param { CommandInfo } [info] - 指定命令信息。
+   * @param { ExtraInfo } [extraInfo] - 冷启动的扩展信息。
+   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 6700101 - Session service is not running.
+   * @syscap SystemCapability.Multimedia.AVSession.Manager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function startAVPlaybackForAudioZone(userId: int, bundleName: string, assetId: string,
+    info?: CommandInfo, extraInfo?: ExtraInfo): Promise<void>;
+
+  /**
    * 根据远端会话类型，获取远端分布式会话控制器。结果通过Promise异步回调方式返回。
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { DistributedSessionType } distributedSessionType - 远端会话类型。
    * @returns { Promise<Array<AVSessionController>> } Promise对象。返回对应类型的会话控制器实例列表，可查看会话ID，并完成对会话发送命令及事件，获取元数据、播放状态信息等操作。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600109 - The remote connection is not established.
@@ -421,7 +450,7 @@ declare namespace avSession {
   /**
    * 设备是否支持桌面歌词功能。使用Promise异步回调。
    *
-   * @returns { Promise<boolean> } - Promise对象。返回true表示设备支持桌面歌词功能；返回false表示设备不支持桌面歌词功能。
+   * @returns { Promise<boolean> } Promise对象。返回true表示设备支持桌面歌词功能；返回false表示设备不支持桌面歌词功能。
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @stagemodelonly
@@ -432,7 +461,6 @@ declare namespace avSession {
   /**
    * 桌面歌词状态。
    *
-   * @typedef DesktopLyricState
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @stagemodelonly
    * @since 23 dynamic&static
@@ -441,7 +469,6 @@ declare namespace avSession {
     /**
      * 桌面歌词位置是否锁定。true表示已锁定，false表示未锁定。若已锁定，桌面显示歌词后，固定当前位置，不可被拖拽。
      *
-     * @type { boolean } Boolean type. The value true means that desktop lyric is locked.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -452,7 +479,6 @@ declare namespace avSession {
   /**
    * 表示不同场景会话类别的枚举。
    *
-   * @enum { int }
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @since 22 dynamic
@@ -503,7 +529,6 @@ declare namespace avSession {
   /**
    * 会话令牌的信息。
    *
-   * @typedef SessionToken
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @since 9 dynamic
@@ -514,7 +539,6 @@ declare namespace avSession {
      * 会话ID。
      *
      * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
-     * @type { string }
      * @syscap SystemCapability.Multimedia.AVSession.Manager
      * @systemapi
      * @since 9 dynamic
@@ -526,7 +550,6 @@ declare namespace avSession {
      * 会话的进程ID。
      *
      * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
-     * @type { ?long }
      * @syscap SystemCapability.Multimedia.AVSession.Manager
      * @systemapi
      * @since 9 dynamic
@@ -538,7 +561,6 @@ declare namespace avSession {
      * 用户ID。
      *
      * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
-     * @type { ?long }
      * @syscap SystemCapability.Multimedia.AVSession.Manager
      * @systemapi
      * @since 9 dynamic
@@ -554,7 +576,7 @@ declare namespace avSession {
    * @param { function } callback - 回调函数。参数为会话相关描述。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -563,9 +585,10 @@ declare namespace avSession {
   function on(type: 'sessionCreate', callback: (session: AVSessionDescriptor) => void): void;
 
   /**
-   * Register session create callback
+   * 注册会话创建回调
+   *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES_FOR_PUBLIC
-   * @param { Callback<AVSessionDescriptor> } callback - 会话创建回调函数
+   * @param { Callback<AVSessionDescriptor> } callback - Used to handle ('sessionCreate' command)
    * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -580,7 +603,7 @@ declare namespace avSession {
    * @param { function } callback - 回调函数。参数为会话相关描述。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -589,7 +612,7 @@ declare namespace avSession {
   function on(type: 'sessionDestroy', callback: (session: AVSessionDescriptor) => void): void;
 
   /**
-   * Register session destroy callback
+   * 会话销毁监听回调
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES_FOR_PUBLIC
    * @param { Callback<AVSessionDescriptor> } callback - 会话销毁回调函数
    * @throws { BusinessError } 201 - permission denied.
@@ -606,7 +629,7 @@ declare namespace avSession {
    * @param { function } callback - 回调函数。参数为会话相关描述。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -633,7 +656,7 @@ declare namespace avSession {
    *     <br>该参数为会话相关描述，为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -657,7 +680,7 @@ declare namespace avSession {
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { Callback<Array<AVSessionDescriptor>> } callback - 回调函数。参数为允许在系统控制入口显示的会话信息列表。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -672,7 +695,7 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { Callback<Array<AVSessionDescriptor>> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
    *     <br>该参数为可选参数，若不填写该参数，则认为取消所有允许在系统控制入口显示的会话变更事件监听。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -689,7 +712,7 @@ declare namespace avSession {
    *     <br>该参数为会话相关描述，为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -698,7 +721,7 @@ declare namespace avSession {
   function off(type: 'sessionDestroy', callback?: (session: AVSessionDescriptor) => void): void;
 
   /**
-   * Unregister session destroy callback
+   * 取消会话销毁回调监听
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES_FOR_PUBLIC
    * @param { Callback<AVSessionDescriptor> } [callback] - 会话销毁回调函数
    * @throws { BusinessError } 201 - permission denied.
@@ -716,7 +739,7 @@ declare namespace avSession {
    *     <br>该参数为会话相关描述，为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
@@ -725,7 +748,7 @@ declare namespace avSession {
   function off(type: 'topSessionChange', callback?: (session: AVSessionDescriptor) => void): void;
 
   /**
-   * Unregister top session changed callback
+   * Top会话变化回调监听
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES_FOR_PUBLIC
    * @param { Callback<AVSessionDescriptor> } [callback] - Top会话变化回调函数
    * @throws { BusinessError } 201 - permission denied.
@@ -742,7 +765,7 @@ declare namespace avSession {
    * @param { function } callback - 回调函数。当监听事件注册成功，err为undefined，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @systemapi
@@ -769,7 +792,7 @@ declare namespace avSession {
    *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的服务死亡监听。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @systemapi
@@ -846,33 +869,94 @@ declare namespace avSession {
   function offDistributedSessionChange(distributedSessionType: DistributedSessionType, callback?: Callback<Array<AVSessionController>>): void;
 
   /**
-   * 注册音区会话变化回调
+   * 为特定音区注册会话创建回调。
    *
-   * @param { int } userId - 当前userId最终归属的音区
-   * @param { Callback<AVSessionDescriptor> } callback - 返回的会话列表
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 6600101 - Session service exception.
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 指定某个音区的用户ID。
+   *     <br>取值限定为整数。
+   * @param { Callback<AVSessionDescriptor> } callback - 用于处理（'sessionCreate'命令）。
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 6700101 - Session service is not running.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
-   * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
-  function onAudioZoneSessionChange(userId: int, callback: Callback<AVSessionDescriptor>): void;
+  function onSessionCreateForAudioZone(userId: int, callback: Callback<AVSessionDescriptor>): void;
 
   /**
-   * 取消注册音区对应的会话变化监听
+   * 取消注册特定音区的会话创建回调。
    *
-   * @param { int } userId - 用户id，归属某个音区
-   *     <br>用户userId 所归属的音区
-   * @param { Callback<AVSessionDescriptor> } [callback] - 返回对应音区的会话列表
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 6600101 - Session service exception.
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 指定属于音区的用户ID。
+   *     <br>取值限定为整数。
+   * @param { Callback<AVSessionDescriptor> } [callback] - Used to handle ('sessionCreate' command).
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 6700101 - Session service is not running.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
-   * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
-  function offAudioZoneSessionChange(userId: int, callback?: Callback<AVSessionDescriptor>): void;
+  function offSessionCreateForAudioZone(userId: int, callback?: Callback<AVSessionDescriptor>): void;
+
+  /**
+   * 注册特定音区的会话销毁回调。
+   *
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 属于音区的用户ID。
+   *     <br>取值限定为整数。
+   * @param { Callback<AVSessionDescriptor> } callback - 用于注销（'sessionDestroy'）命令的侦听器。
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 6700101 - Session service is not running.
+   * @syscap SystemCapability.Multimedia.AVSession.Manager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onSessionDestroyForAudioZone(userId: int, callback: Callback<AVSessionDescriptor>): void;
+
+  /**
+   * 取消注册特定音区的会话销毁回调。
+   *
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 属于音区的用户ID。
+   *     <br>取值限定为整数。
+   * @param { Callback<AVSessionDescriptor> } [callback] - Used to unregister listener for ('sessionDestroy') command.
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 6700101 - Session service is not running.
+   * @syscap SystemCapability.Multimedia.AVSession.Manager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offSessionDestroyForAudioZone(userId: int, callback?: Callback<AVSessionDescriptor>): void;
+
+  /**
+   * 注册特定音区的top会话更改回调。
+   *
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 属于音区的用户ID。
+   *     <br>取值限定为整数。
+   * @param { Callback<AVSessionDescriptor> } callback - 用于为（'topSessionChange'）命令注销侦听器。
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 6700101 - Session service is not running.
+   * @syscap SystemCapability.Multimedia.AVSession.Manager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onTopSessionChangeForAudioZone(userId: int, callback: Callback<AVSessionDescriptor>): void;
+
+  /**
+   * 取消注册特定音区的top会话更改回调。
+   *
+   * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
+   * @param { int } userId - 属于音区的用户ID。
+   *     <br>取值限定为整数。
+   * @param { Callback<AVSessionDescriptor> } [callback] - Used to unregister listener for ('topSessionChange') command.
+   * @throws { BusinessError } 201 - permission denied.
+   * @throws { BusinessError } 6700101 - Session service is not running.
+   * @syscap SystemCapability.Multimedia.AVSession.Manager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offTopSessionChangeForAudioZone(userId: int, callback?: Callback<AVSessionDescriptor>): void;
 
   /**
    * 发送按键事件给置顶会话。结果通过callback异步回调方式返回。
@@ -880,10 +964,10 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { KeyEvent } event - 按键事件。
    * @param { AsyncCallback<void> } callback - 回调函数。当事件发送成功，err为undefined，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600105 - Invalid session command.
    * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -899,7 +983,7 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { KeyEvent } event - 按键事件。
    * @returns { Promise<void> } Promise对象。当事件发送成功，无返回结果，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
    *     2.Parameter verification failed.
@@ -918,10 +1002,10 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { AVControlCommand } command - AVSession的相关命令和命令相关参数。
    * @param { AsyncCallback<void> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600105 - Invalid session command.
    * @throws { BusinessError } 6600107 - Too many commands or events.
@@ -965,7 +1049,7 @@ declare namespace avSession {
    * @param { string } command - 通用的控制命令
    * @param { ExtraInfo } args - 事件参数
    * @returns { Promise<string> } callback info for sync command
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600105 - Invalid session command.
@@ -983,10 +1067,10 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { AVControlCommand } command - AVSession的相关命令和命令相关参数。
    * @returns { Promise<void> } Promise对象。当命令发送成功，无返回结果，否则返回错误对象。
-   * @throws { BusinessError } 201 - permission denied
+   * @throws { BusinessError } 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600105 - Invalid session command.
    * @throws { BusinessError } 6600107 - Too many commands or events.
@@ -998,9 +1082,9 @@ declare namespace avSession {
   function sendSystemControlCommand(command: AVControlCommand): Promise<void>;
 
   /**
-   * 定义无参数的回调函数类型。
+   * 设置是否抢占当前AVSession对象。
+   * 在应用内多个模块复用一个会话时使用该接口进行抢占。
    *
-   * @typedef { function } NoParamCallback
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @since 22 dynamic
    * @since 23 static
@@ -1038,8 +1122,8 @@ declare namespace avSession {
     TYPE_LOCAL = 0,
 
     /**
-     * Cast+的镜像模式。 
-     * 
+     * Cast+的镜像模式。
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -1077,13 +1161,12 @@ declare namespace avSession {
      * @since 20 dynamic
      * @since 23 static
      */
-    TYPE_CAST_PLUS_AUDIO = 8,
+    TYPE_CAST_PLUS_AUDIO = 8
   }
 
   /**
    * 表示远端分布式设备支持的会话类型枚举。
    *
-   * @enum { int }
    * @syscap SystemCapability.Multimedia.AVSession.Manager
    * @systemapi
    * @since 18 dynamic
@@ -1140,7 +1223,7 @@ declare namespace avSession {
    * @param { AsyncCallback<void> } callback 回调函数。当命令发送成功并开始搜索，err为undefined，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1197,7 +1280,7 @@ declare namespace avSession {
    * @param { AsyncCallback<void> } callback 回调函数。当设置成功，err为undefined，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1212,7 +1295,7 @@ declare namespace avSession {
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
+   *     2.Parameter verification failed.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1227,7 +1310,7 @@ declare namespace avSession {
    * @param { function } callback 回调函数。当监听事件注册成功，err为undefined，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1251,7 +1334,7 @@ declare namespace avSession {
    * @param { function } callback 用于返回设备信息。
    * @throws { BusinessError } 202 - Not System App.
    * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1275,7 +1358,7 @@ declare namespace avSession {
    * @param { function } callback - 回调函数，参数deviceId是设备的ID。当监听事件注册成功，err为undefined，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 11 dynamic
@@ -1300,7 +1383,7 @@ declare namespace avSession {
    *     事件监听。
    * @throws { BusinessError } 202 - Not System App.
    * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types.
+   *     2.Incorrect parameter types.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 11 dynamic
@@ -1319,18 +1402,18 @@ declare namespace avSession {
 
   /**
    * 设备建立连接后，获取投播控制器。结果通过callback异步回调方式返回。
-   * 
+   *
    * 此功能在本端和远端都可以使用，通过该接口可以获取一个相同的控制器，进行投播音频的播放控制。
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { string } sessionId 用于指定要获取的投播控制器的sessionId。
    * @param { AsyncCallback<AVCastController> } callback - 回调函数，返回投播控制器实例。
-   * @throws {BusinessError} 201 - permission denied
+   * @throws {BusinessError} 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
-   * @throws {BusinessError} 6600101 - Session service exception
-   * @throws {BusinessError} 6600102 - session does not exist
+   *     2.Parameter verification failed.
+   * @throws {BusinessError} 6600101 - Session service exception.
+   * @throws {BusinessError} 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1343,10 +1426,10 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { string } sessionId Specifies the sessionId to get controller.
    * @param { AsyncCallback<AVCastController | undefined> } callback - async callback for the AVCastController.
-   * @throws { BusinessError } 201 - permission denied
+   * @throws {BusinessError} 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 6600101 - Session service exception
-   * @throws { BusinessError } 6600102 - session does not exist
+   * @throws {BusinessError} 6600101 - Session service exception.
+   * @throws {BusinessError} 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 23 static
@@ -1355,18 +1438,18 @@ declare namespace avSession {
 
   /**
    * 设备建立连接后，获取投播控制器。结果通过Promise方式返回。
-   * 
+   *
    * 此功能在本端和远端都可以使用，通过该接口可以获取一个相同的控制器，进行投播音频的播放控制。
    *
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { string } sessionId 用于指定要获取的投播控制器的sessionId。
    * @returns { Promise<AVCastController> } Promise对象。返回投播控制器实例。
-   * @throws {BusinessError} 201 - permission denied
+   * @throws {BusinessError} 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Parameter verification failed.
-   * @throws {BusinessError} 6600101 - server exception
-   * @throws {BusinessError} 6600102 - session does not exist
+   *     2.Parameter verification failed.
+   * @throws {BusinessError} 6600101 - Session service exception.
+   * @throws {BusinessError} 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1379,10 +1462,10 @@ declare namespace avSession {
    * @permission ohos.permission.MANAGE_MEDIA_RESOURCES
    * @param { string } sessionId Specifies the sessionId to get controller.
    * @returns { Promise<AVCastController | undefined> } Promise for the AVCastController
-   * @throws { BusinessError } 201 - permission denied
+   * @throws {BusinessError} 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 6600101 - server exception
-   * @throws { BusinessError } 6600102 - session does not exist
+   * @throws {BusinessError} 6600101 - Session service exception.
+   * @throws {BusinessError} 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 23 static
@@ -1396,12 +1479,12 @@ declare namespace avSession {
    * @param { SessionToken } session 会话令牌。SessionToken表示单个token。
    * @param { OutputDeviceInfo } device 设备相关信息。
    * @param { AsyncCallback<void> } callback 回调函数。当命令发送成功并启动投播，err为undefined，否则返回错误对象。
-   * @throws {BusinessError} 201 - permission denied
+   * @throws {BusinessError} 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
-   * @throws {BusinessError} 6600101 - Session service exception
-   * @throws {BusinessError} 6600108 - Device connecting failed
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
+   * @throws {BusinessError} 6600101 - Session service exception.
+   * @throws {BusinessError} 6600108 - Device connecting failed.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1416,12 +1499,12 @@ declare namespace avSession {
    * @param { SessionToken } session 会话令牌。SessionToken表示单个token。
    * @param { OutputDeviceInfo } device 设备相关信息。
    * @returns { Promise<void> } Promise对象。当命令发送成功并启动投播，无返回结果，否则返回错误对象。
-   * @throws {BusinessError} 201 - permission denied
+   * @throws {BusinessError} 201 - permission denied.
    * @throws { BusinessError } 202 - Not System App.
    * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
-   * @throws {BusinessError} 6600101 - Session service exception
-   * @throws {BusinessError} 6600108 - Device connecting failed
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
+   * @throws {BusinessError} 6600101 - Session service exception.
+   * @throws {BusinessError} 6600108 - Device connecting failed.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1436,8 +1519,8 @@ declare namespace avSession {
    * @param { AsyncCallback<void> } callback 回调函数。当成功结束投播，err为undefined，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
-   * @throws { BusinessError } 6600109 - The remote connection is not established
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
+   * @throws { BusinessError } 6600109 - The remote connection is not established.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1452,8 +1535,8 @@ declare namespace avSession {
    * @returns { Promise<void> } Promise对象。当成功结束投播，无返回结果，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-   * 2.Incorrect parameter types. 3.Parameter verification failed.
-   * @throws { BusinessError } 6600109 - The remote connection is not established
+   *     2.Incorrect parameter types. 3.Parameter verification failed.
+   * @throws { BusinessError } 6600109 - The remote connection is not established.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @systemapi
    * @since 10 dynamic
@@ -1469,7 +1552,7 @@ declare namespace avSession {
    * @returns { Promise<void> } Promise对象。当设备日志写入文件成功时，无返回结果，否则返回错误对象。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-   * 2. Incorrect parameter types.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -1500,7 +1583,7 @@ declare namespace avSession {
    * @param { Callback<DeviceLogEventCode> } callback - 回调函数，参数DeviceLogEventCode是当前设备日志返回值。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-   * 2. Incorrect parameter types.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -1529,7 +1612,7 @@ declare namespace avSession {
    *     会话的事件监听。
    * @throws { BusinessError } 202 - Not System App.
    * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-   * 2. Incorrect parameter types.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 6600101 - Session service exception.
    * @throws { BusinessError } 6600102 - The session does not exist.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -1685,7 +1768,7 @@ declare namespace avSession {
 
   /**
    * 当前会话支持的会话类型。
-   * 
+   *
    * 该类型可取的值为下表字符串。
    *
    * @unionmember { 'audio' } 音频
@@ -1704,9 +1787,10 @@ declare namespace avSession {
    * The general process funcation with an event and arguments.
    *
    * @param { string } event - 请求事件。
-   * @param { Record<string, Object> } args - arguments associated with event
+   * @param { Record<string, Object> } args - 请求事件。
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @since 23 static
+   * @since 26.0.1 dynamic
    */
   type EventProcess = (event: string, args: Record<string, Object>) => void;
 
@@ -1726,7 +1810,9 @@ declare namespace avSession {
    * @param { int } width - 视频宽度。
    *     取值范围为全体整数
    *     取值限定为整数。
-   * @param { int } height - video width
+   * @param { int } height - 视频宽度。
+   *     取值范围为全体整数
+   *     取值限定为整数。
    *     取值范围为全体整数
    *     取值限定为整数。
    * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1736,7 +1822,7 @@ declare namespace avSession {
 
   /**
    * 调用[avSession.createAVSession]{@link avSession.createAVSession}后，返回会话的实例，可以获得会话ID，完成设置元数据，播放状态信息等操作。
-   * 
+   *
    * > **说明：**
    * >
    * > - 本Interface首批接口从API version 10开始支持。
@@ -1783,7 +1869,7 @@ declare namespace avSession {
      * @param { AVMetadata } data 会话元数据。
      * @param { AsyncCallback<void> } callback - 回调函数。当元数据设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1814,7 +1900,7 @@ declare namespace avSession {
      * @param { CallMetadata } data - 通话会话元数据。
      * @param { AsyncCallback<void> } callback - 回调函数。当通话元数据设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types. 3.Parameter verification failed.
+     *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1829,7 +1915,7 @@ declare namespace avSession {
      * @param { CallMetadata } data - 通话会话元数据。
      * @returns { Promise<void> } Promise对象。当通话元数据设置成功，无返回结果，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types. 3.Parameter verification failed.
+     *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1844,7 +1930,7 @@ declare namespace avSession {
      * @param { AVPlaybackState } state 会话播放状态，包括状态、倍数、循环模式等信息。
      * @param { AsyncCallback<void> } callback - 回调函数。当播放状态设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1875,7 +1961,7 @@ declare namespace avSession {
      * @param { AVCallState } state - 通话状态。
      * @param { AsyncCallback<void> } callback - 回调函数。当通话元数据设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1890,7 +1976,7 @@ declare namespace avSession {
      * @param { AVCallState } state - 通话状态。
      * @returns { Promise<void> } Promise对象。当通话元数据设置成功，无返回结果，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1901,13 +1987,13 @@ declare namespace avSession {
 
     /**
      * 设置一个WantAgent用于拉起会话的Ability。结果通过callback异步回调方式返回。
-     * 
+     *
      * 通过点击播控组件可以跳转到对应的播放界面，默认跳转到[avSession.createAVSession]{@link avSession.createAVSession}接口传入的context所属的UIAbility界面。
      *
      * @param { WantAgent } ability - 应用的相关属性信息，如bundleName，abilityName，deviceId等。
      * @param { AsyncCallback<void> } callback - 回调函数。当Ability设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -1918,7 +2004,7 @@ declare namespace avSession {
 
     /**
      * 设置一个WantAgent用于拉起会话的Ability。结果通过Promise异步回调方式返回。
-     * 
+     *
      * 通过点击播控组件可以跳转到对应的播放界面，默认跳转到[avSession.createAVSession]{@link avSession.createAVSession}接口传入的context所属的UIAbility界面。
      *
      * @param { WantAgent } ability - 应用的相关属性信息，如bundleName，abilityName，deviceId等。
@@ -2000,7 +2086,7 @@ declare namespace avSession {
      * @param { Array<AVQueueItem> } items - 播放列表单项的队列，用以表示播放列表。
      * @param { AsyncCallback<void> } callback - 回调函数。当播放状态设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -2031,7 +2117,7 @@ declare namespace avSession {
      * @param { string } title - 播放列表名称字段。
      * @param { AsyncCallback<void> } callback - 回调函数。当播放状态设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -2080,6 +2166,7 @@ declare namespace avSession {
      *     <br>设置的应用自定义扩展参数
      * @param { AsyncCallback<void> } callback - The asyncCallback triggered when the command is executed successfully.
      *     <br>回调返回
+     *     <br>回调返回
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -2123,7 +2210,7 @@ declare namespace avSession {
      *
      * @param { Array<double> } speeds - 支持的播放倍速列表。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -2137,7 +2224,7 @@ declare namespace avSession {
      *
      * @param { Array<LoopMode> } loopModes - 支持的循环模式列表。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -2270,12 +2357,12 @@ declare namespace avSession {
 
     /**
      * 设置后台播放模式。使用promise异步回调。
-     * 
+     *
      * 建议与应用内"是否支持后台播放开关"关联。如未设置，'audio'类型会话默认值为ENABLE_BACKGROUND_PLAY；'video'类型会话默认值为DISABLE_BACKGROUND_PLAY。
      *
      * @param { BackgroundPlayMode } mode - 后台播放模式。
-     * @returns { Promise<void> }
-     Promise对象，无返回结果。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -2285,7 +2372,7 @@ declare namespace avSession {
 
     /**
      * 设置应用支持的控制类型列表。使用Promise异步回调。
-     * 
+     *
      * 设置优先显示在播控中心的控制类型列表，若未设置控制类型优先级，播控中心将根据[AVSessionType]{@link avSession.AVSessionType}显示，具体显示规则参考
      * [创建不同类型的会话](docroot://media/avsession/avsession-access-scene.md#创建不同类型的会话)。
      *
@@ -2328,8 +2415,8 @@ declare namespace avSession {
      * 设备建立连接后，获取投播控制器。结果通过callback异步回调方式返回。如果 avsession 未处于投播状态，则控制器将返回 null。
      *
      * @param { AsyncCallback<AVCastController> } callback - 回调函数，返回投播控制器实例。
-     * @throws {BusinessError} 6600102 - The session does not exist
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     * @throws {BusinessError} 6600102 - The session does not exist.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      */
@@ -2339,8 +2426,8 @@ declare namespace avSession {
      * Get the cast controller when the session is casted to remote device.
      * If the avsession is not under casting state, the controller will return undefined.
      * @param { AsyncCallback<AVCastController | undefined> } callback - async callback for the AVCastController.
-     * @throws {BusinessError} 6600102 - The session does not exist
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     * @throws {BusinessError} 6600102 - The session does not exist.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -2350,8 +2437,8 @@ declare namespace avSession {
      * 设备建立连接后，获取投播控制器。结果通过Promise异步回调方式返回。如果 avsession 未处于投播状态，则控制器将返回 null。
      *
      * @returns { Promise<AVCastController> } Promise对象。返回投播控制器实例。
-     * @throws {BusinessError} 6600102 - The session does not exist
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     * @throws {BusinessError} 6600102 - The session does not exist.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -2362,8 +2449,8 @@ declare namespace avSession {
      * Get the cast controller when the session is casted to remote device.
      * If the avsession is not under casting state, the controller will return undefined.
      * @returns { Promise<AVCastController | undefined> } Promise for the AVCastController
-     * @throws {BusinessError} 6600102 - The session does not exist
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     * @throws {BusinessError} 6600102 - The session does not exist.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 23 static
@@ -2423,7 +2510,7 @@ declare namespace avSession {
 
     /**
      * 设置播放命令监听事件。注册该监听，说明应用支持播放指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'play' } type - 事件回调类型，支持的事件为`'play'`，当播放命令被发送到会话时，触发该事件回调。
@@ -2440,7 +2527,7 @@ declare namespace avSession {
 
     /**
      * 设置播放命令监听事件。使用callback异步回调。
-     * 
+     *
      * 应用将通过回调接收控制器发送的[CommandInfo]{@link avSession.CommandInfo}信息。
      *
      * @param { Callback<CommandInfo> } callback - 回调函数。当监听事件注册成功，err为undefined，否则为错误对象。
@@ -2454,7 +2541,7 @@ declare namespace avSession {
 
     /**
      * 设置暂停命令监听事件。注册该监听，说明应用支持暂停指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'pause' } type - 事件回调类型，支持的事件为`'pause'`，当暂停命令被发送到会话时，触发该事件回调。
@@ -2486,7 +2573,7 @@ declare namespace avSession {
 
     /**
      * 设置停止命令监听事件。注册该监听，说明应用支持停止指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'stop' } type - 事件回调类型，支持的事件是`'stop'`，当停止命令被发送到会话时，触发该事件回调。
@@ -2518,7 +2605,7 @@ declare namespace avSession {
 
     /**
      * 设置播放下一首命令监听事件。注册该监听，说明应用支持下一首指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playNext' } type - 事件回调类型，支持的事件是`'playNext'`，当播放下一首命令被发送到会话时，触发该事件回调。
@@ -2535,7 +2622,7 @@ declare namespace avSession {
 
     /**
      * 设置播放下一首命令监听事件。使用callback异步回调。
-     * 
+     *
      * 应用将通过回调接收控制器发送的[CommandInfo]{@link avSession.CommandInfo}信息。
      *
      * @param { Callback<CommandInfo> } callback - 回调函数。当监听事件注册成功，err为undefined，否则为错误对象。
@@ -2549,7 +2636,7 @@ declare namespace avSession {
 
     /**
      * 设置播放上一首命令监听事件。注册该监听，说明应用支持上一首指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playPrevious' } type - 事件回调类型，支持的事件是`'playPrevious'`，当播放上一首命令被发送到会话时，触发该事件回调。
@@ -2566,7 +2653,7 @@ declare namespace avSession {
 
     /**
      * 设置播放上一首命令监听事件。使用callback异步回调。
-     * 
+     *
      * 应用将通过回调接收控制器发送的[CommandInfo]{@link avSession.CommandInfo}信息。
      *
      * @param { Callback<CommandInfo> } callback - 回调函数。当监听事件注册成功，err为undefined，否则为错误对象。
@@ -2581,7 +2668,7 @@ declare namespace avSession {
 
     /**
      * 设置快进命令监听事件。注册该监听，说明应用支持快进指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'fastForward' } type - 事件回调类型，支持的事件是 `'fastForward'`，当快进命令被发送到会话时，触发该事件回调。
@@ -2598,7 +2685,7 @@ declare namespace avSession {
 
     /**
      * 设置快进命令监听事件。使用callback异步回调。
-     * 
+     *
      * 应用将通过回调接收控制器发送的快进时间参数，以及对应的[CommandInfo]{@link avSession.CommandInfo}信息。
      *
      * @param { TwoParamCallback<long, CommandInfo> } callback - 回调函数。用于处理'fastForward'操作。
@@ -2612,7 +2699,7 @@ declare namespace avSession {
 
     /**
      * 设置快退命令监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'rewind' } type - 事件回调类型，支持的事件是`'rewind'`，当快退命令被发送到会话时，触发该事件回调。
@@ -2629,7 +2716,7 @@ declare namespace avSession {
 
     /**
      * 设置快退命令监听事件。使用callback异步回调。
-     * 
+     *
      * 应用将通过回调接收控制器发送的快退时间参数，以及对应的[CommandInfo]{@link avSession.CommandInfo}信息。
      *
      * @param { TwoParamCallback<long, CommandInfo> } callback - 回调函数。用于处理'rewind'操作。
@@ -2659,7 +2746,7 @@ declare namespace avSession {
 
     /**
      * 取消会话播放事件监听。使用callback异步回调。
-     * 
+     *
      * 指定callback，取消对应监听；未指定callback，则取消所有事件监听。
      *
      * @param { Callback<CommandInfo> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
@@ -2744,7 +2831,7 @@ declare namespace avSession {
 
     /**
      * 取消会话播放下一首事件监听。使用callback异步回调。
-     * 
+     *
      * 指定callback，取消对应监听；未指定callback，则取消所有事件监听。
      *
      * @param { Callback<CommandInfo> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
@@ -2775,7 +2862,7 @@ declare namespace avSession {
 
     /**
      * 取消会话播放上一首事件监听。使用callback异步回调。
-     * 
+     *
      * 指定callback，取消对应监听；未指定callback，则取消所有事件监听。
      *
      * @param { Callback<CommandInfo> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
@@ -2806,7 +2893,7 @@ declare namespace avSession {
 
     /**
      * 取消会话快进事件监听。使用callback异步回调。
-     * 
+     *
      * 指定callback，取消对应监听；未指定callback，则取消所有事件监听。
      *
      * @param { TwoParamCallback<long, CommandInfo> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
@@ -2837,7 +2924,7 @@ declare namespace avSession {
 
     /**
      * 取消会话快退事件监听。使用callback异步回调。
-     * 
+     *
      * 指定callback，取消对应监听；未指定callback，则取消所有事件监听。
      *
      * @param { TwoParamCallback<long, CommandInfo> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
@@ -2852,7 +2939,7 @@ declare namespace avSession {
 
     /**
      * 设置媒体ID播放监听事件。
-     * 
+     *
      * > **说明：**
      * >
      * > 从API version 11开始支持，从API version 20开始废弃。建议使用
@@ -2875,7 +2962,7 @@ declare namespace avSession {
 
     /**
      * 取消媒体ID播放事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
-     * 
+     *
      * > **说明：**
      * >
      * > 从API version 11开始支持，从API version 20开始废弃。建议使用
@@ -2899,7 +2986,7 @@ declare namespace avSession {
 
     /**
      * 设置指定资源id进行播放的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playWithAssetId' } type - 事件回调类型，支持的事件是`'playWithAssetId'`，当指定资源id进行播放时，触发该事件回调。
@@ -2926,8 +3013,7 @@ declare namespace avSession {
      * 取消指定资源id进行播放的事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'playWithAssetId' } type - 关闭对应的监听事件，支持的事件是`'playWithAssetId'`。
-     * @param { Callback<string> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
-     *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。参数assetId是媒体ID。
+     * @param { Callback<string> } [callback] - Callback used to handle the 'playWithAssetId' command.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -2949,7 +3035,7 @@ declare namespace avSession {
 
     /**
      * 设置跳转节点监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'seek' } type - 事件回调类型，支持事件`'seek'`：当跳转节点命令被发送到会话时，触发该事件。
@@ -3004,7 +3090,7 @@ declare namespace avSession {
 
     /**
      * 设置播放速率的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'setSpeed' } type - 事件回调类型，支持事件`'setSpeed'`：当设置播放速率的命令被发送到会话时，触发该事件。
@@ -3058,7 +3144,7 @@ declare namespace avSession {
 
     /**
      * 设置循环模式的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'setLoopMode' } type - 事件回调类型，支持事件`'setLoopMode'`：当设置循环模式的命令被发送到会话时，触发该事件。
@@ -3113,7 +3199,7 @@ declare namespace avSession {
 
     /**
      * 设置目标循环模式的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'setTargetLoopMode' } type - 事件回调类型，支持事件`'setTargetLoopMode'`。
@@ -3143,9 +3229,7 @@ declare namespace avSession {
      * 取消目标循环模式变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'setTargetLoopMode' } type - 关闭对应的监听事件，支持关闭事件`'setTargetLoopMode'`。
-     * @param { Callback<LoopMode> } [callback] - 回调函数，参数表示目标循环模式。
-     *     <br>- 当监听事件取消成功，err为undefined，否则返回错误对象。
-     *     <br>- 该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { Callback<LoopMode> } [callback] - Used to handle setTargetLoopMode command.The callback provides the {@link LoopMode}
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -3167,7 +3251,7 @@ declare namespace avSession {
 
     /**
      * 设置是否收藏的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'toggleFavorite' } type - 事件回调类型，支持事件`'toggleFavorite'`：当是否收藏的命令被发送到会话时，触发该事件。
@@ -3223,7 +3307,7 @@ declare namespace avSession {
 
     /**
      * 设置蓝牙/有线等外设接入的按键输入事件的监听，监听多媒体按键事件中播放、暂停、上下一首、快进、快退的指令。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'handleKeyEvent' } type - 事件回调类型，支持事件`'handleKeyEvent'`：当按键事件被发送到会话时，触发该事件。
@@ -3278,7 +3362,7 @@ declare namespace avSession {
     /**
      * 设置播放设备变化的监听事件。应用接入[multimedia.avCastPicker (投播组件)]{@link @ohos.multimedia.avCastPicker:AVCastPicker}，当用户通过组件切换设备
      * 时，会收到设备切换的回调。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'outputDeviceChange' } type - 事件回调类型，支持事件`'outputDeviceChange'`：当播放设备变化时，触发该事件。
@@ -3286,8 +3370,8 @@ declare namespace avSession {
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -3299,8 +3383,8 @@ declare namespace avSession {
      * @param { ConnectionEvent } callback - Used to handle output device changed.
      *     The callback provide the new device info {@link OutputDeviceInfo}
      *     and related connection state {@link ConnectionState}.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @since 23 static
      */
@@ -3315,8 +3399,8 @@ declare namespace avSession {
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -3328,8 +3412,8 @@ declare namespace avSession {
      * @param { ConnectionEvent } [callback] - Used to handle output device changed.
      *     The callback provide the new device info {@link OutputDeviceInfo}
      *     and related connection state {@link ConnectionState}.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @since 23 static
      */
@@ -3337,7 +3421,7 @@ declare namespace avSession {
 
     /**
      * 设置自定义控制命令变化的监听器。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'commonCommand' } type - 事件回调类型，支持事件`'commonCommand'`：当自定义控制命令变化时，触发该事件。
@@ -3396,7 +3480,7 @@ declare namespace avSession {
 
     /**
      * 设置播放列表其中某项被选中的监听事件，session端可以选择对这个单项歌曲进行播放。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'skipToQueueItem' } type - 事件回调类型，支持事件`'skipToQueueItem'`：当播放列表选中单项的命令被发送到会话时，触发该事件。
@@ -3452,7 +3536,7 @@ declare namespace avSession {
 
     /**
      * 设置通话接听的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'answer' } type - 事件回调类型，支持事件`'answer'`：当通话接听时，触发该事件。
@@ -3483,8 +3567,7 @@ declare namespace avSession {
      * 取消通话接听事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'answer' } type - 关闭对应的监听事件，支持的事件是`'answer'`。
-     * @param { Callback<void> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
-     *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { Callback<void> } [callback] - Used to handle ('answer') command
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
@@ -3507,7 +3590,7 @@ declare namespace avSession {
 
     /**
      * 设置通话挂断的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'hangUp' } type - 事件回调类型，支持事件`'hangUp'`：当通话挂断时，触发该事件。
@@ -3538,8 +3621,7 @@ declare namespace avSession {
      * 取消通话挂断事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'hangUp' } type - 关闭对应的监听事件，支持的事件是`'hangUp'`。
-     * @param { Callback<void> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
-     *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { Callback<void> } [callback] - Used to handle ('hangUp') command
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
@@ -3562,7 +3644,7 @@ declare namespace avSession {
 
     /**
      * 设置通话静音的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'toggleCallMute' } type - 事件回调类型，支持事件`'toggleCallMute'`：当通话静音或解除静音时，触发该事件。
@@ -3593,8 +3675,7 @@ declare namespace avSession {
      * 取消通话静音事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'toggleCallMute' } type - 关闭对应的监听事件，支持的事件是`'toggleCallMute'`。
-     * @param { Callback<void> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
-     *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { Callback<void> } [callback] - Used to handle ('toggleCallMute') command
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.2.Incorrect
      *     parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
@@ -3617,15 +3698,15 @@ declare namespace avSession {
 
     /**
      * 设置扩展屏投播显示设备变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castDisplayChange' } type - 事件回调类型，支持事件`'castDisplayChange'`：当扩展屏投播显示设备变化时触发事件。
      * @param { Callback<CastDisplayInfo> } callback - 回调函数。参数是扩展屏投播显示设备信息。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.ExtendedDisplayCast
      * @atomicservice
      * @since 12 dynamic
@@ -3635,8 +3716,8 @@ declare namespace avSession {
     /**
      * Register listener for cast display information changed.
      * @param { Callback<CastDisplayInfo> } callback - Callback used to return cast display information.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.ExtendedDisplayCast
      * @since 23 static
      */
@@ -3646,12 +3727,11 @@ declare namespace avSession {
      * 取消扩展屏投播显示设备变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'castDisplayChange' } type - 关闭对应的监听事件，支持的事件是`'castDisplayChange'`。
-     * @param { Callback<CastDisplayInfo> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会
-     *     话的事件监听。
+     * @param { Callback<CastDisplayInfo> } [callback] - Callback used to return cast display information.
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.ExtendedDisplayCast
      * @atomicservice
      * @since 12 dynamic
@@ -3661,8 +3741,8 @@ declare namespace avSession {
     /**
      * Unregister listener for cast display information changed.
      * @param { Callback<CastDisplayInfo> } [callback] - Callback used to return cast display information.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600102 - The session does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.ExtendedDisplayCast
      * @since 23 static
      */
@@ -3673,7 +3753,7 @@ declare namespace avSession {
      *
      * @param { 'customDataChange' } type - 事件回调类型，支持事件'customDataChange'，当媒体提供方发送自定义数据时，触发该事件。
      * @param { Callback<Record<string, Object>> } callback - 回调函数，用于接收自定义数据。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -3684,7 +3764,7 @@ declare namespace avSession {
     /**
      * Register listener for custom data sent from remote device.
      * @param { Callback<Record<string, Object>> } callback - Callback used to retrieve custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
@@ -3695,7 +3775,7 @@ declare namespace avSession {
      * Unsubscribes from custom data changes.
      * @param { 'customDataChange' } type Custom data type.
      * @param { Callback<Record<string, Object>> } [callback] Callback used to return the custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -3706,7 +3786,7 @@ declare namespace avSession {
     /**
      * Unsubscribes from custom data changes.
      * @param { Callback<Record<string, Object>> } [callback] - Callback used to return the custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
@@ -3719,6 +3799,7 @@ declare namespace avSession {
      * @param { Record<string, Object> } data 应用程序填充的自定义数据。服务端仅解析key为'customData'，且Object为string类型的对象。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 6600101 - Session service exception.
+     *     You are advised to:1.Scheduled retry.2.Destroy the current session or session controller and re-create it.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -3731,7 +3812,7 @@ declare namespace avSession {
      * 结束投播。结果通过callback异步回调方式返回。
      *
      * @param { AsyncCallback<void> } callback 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
-     * @throws { BusinessError } 6600109 - The remote connection is not established
+     * @throws { BusinessError } 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      * @since 23 static
@@ -3742,7 +3823,7 @@ declare namespace avSession {
      * 结束投播。结果通过Promise异步回调方式返回。
      *
      * @returns { Promise<void> } Promise对象。当成功结束投播，无返回结果，否则返回错误对象。
-     * @throws { BusinessError } 6600109 - The remote connection is not established
+     * @throws { BusinessError } 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -3777,7 +3858,7 @@ declare namespace avSession {
 
     /**
      * 禁用当前会话。结果通过callback异步回调方式返回。
-     * 
+     *
      * 禁用当前会话的功能，可通过[activate]{@link avSession.AVSession.activate()}恢复。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。当禁用会话成功，err为undefined，否则返回错误对象。
@@ -3882,10 +3963,9 @@ declare namespace avSession {
   }
 
   /**
-   * 在投播建立后，调用[avSession.AVSession.getAVCastController]{@link avSession.AVSession.getAVCastController}后，
-   * 返回会话控制器实例。控制器可查看会话ID，并可完成对会话发送命令及事件，
+   * 在投播建立后，调用[avSession.getAVCastController]{@link avSession.getAVCastController}后，返回会话控制器实例。控制器可查看会话ID，并可完成对会话发送命令及事件，
    * 获取会话元数据，播放状态信息等操作。
-   * 
+   *
    * > **说明：**
    * >
    * > - 本Interface首批接口从API version 10开始支持。
@@ -3903,8 +3983,8 @@ declare namespace avSession {
      * @param { AsyncCallback<void> } callback - 回调函数，返回当前设置结果。
      * @throws { BusinessError } 202 - Not System App.
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
-     * @throws { BusinessError } 6600109 - The remote connection is not established
+     *     2.Parameter verification failed.
+     * @throws { BusinessError } 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @systemapi
      * @since 10 dynamic
@@ -3919,8 +3999,8 @@ declare namespace avSession {
      * @returns { Promise<void> } Promise对象。返回设置结果。
      * @throws { BusinessError } 202 - Not System App.
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
-     * @throws { BusinessError } 6600109 - The remote connection is not established
+     *     2.Parameter verification failed.
+     * @throws { BusinessError } 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @systemapi
      * @since 10 dynamic
@@ -3932,7 +4012,7 @@ declare namespace avSession {
      * 获取当前的远端播放状态。结果通过callback异步回调方式返回。
      *
      * @param { AsyncCallback<AVPlaybackState> } callback - 回调函数，返回远端播放状态。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      * @since 23 static
@@ -3943,7 +4023,7 @@ declare namespace avSession {
      * 获取当前的远端播放状态。结果通过Promise异步回调方式返回。
      *
      * @returns { Promise<AVPlaybackState> } Promise对象。返回远端播放状态。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -3955,7 +4035,7 @@ declare namespace avSession {
      * 获取当前远端设备的解码方式。使用Promise异步回调。
      *
      * @returns { Promise<Array<DecoderType>> } Promise对象。返回远端设备所支持的解码能力列表。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -3972,7 +4052,7 @@ declare namespace avSession {
      *     <br>'OH_AVCODEC_MIMETYPE_VIDEO_HEVC'：VIDEO HEVC，
      *     <br>'OH_AVCODEC_MIMETYPE_AUDIO_VIVID'：AUDIO AV3A。
      * @returns { Promise<ResolutionLevel> } Promise对象。返回远端设备推荐的分辨率。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -3984,7 +4064,7 @@ declare namespace avSession {
      * 获取当前的远端设备所支持的HDR能力。使用Promise异步回调。
      *
      * @returns { Promise<Array<hdrCapability.HDRFormat>> } Promise对象。返回远端设备所支持的HDR能力。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -3996,7 +4076,7 @@ declare namespace avSession {
      * 获取当前的远端设备所支持倍速播放列表，仅支持使用cast+协议连接的设备。使用Promise异步回调。
      *
      * @returns { Promise<Array<double>> } Promise对象。返回远端设备所支持的倍速播放列表。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -4010,10 +4090,10 @@ declare namespace avSession {
      * @param { AVCastControlCommand } command 会话的相关命令和命令相关参数。
      * @param { AsyncCallback<void> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600105 - Invalid session command
-     * @throws { BusinessError } 6600109 - The remote connection is not established
+     *     2.Parameter verification failed.
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600105 - Invalid session command.
+     * @throws { BusinessError } 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      * @since 23 static
@@ -4027,9 +4107,9 @@ declare namespace avSession {
      * @returns { Promise<void> } Promise对象。当命令发送成功，无返回结果，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Parameter verification failed.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600105 - Invalid session command
-     * @throws { BusinessError } 6600109 - The remote connection is not established
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600105 - Invalid session command.
+     * @throws { BusinessError } 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4039,7 +4119,7 @@ declare namespace avSession {
 
     /**
      * 启动播放某个媒体资源。结果通过callback异步回调方式返回。
-     * 
+     *
      * > **说明：**
      * >
      * > 在音视频投播场景下，当应用程序顺序调用
@@ -4049,9 +4129,9 @@ declare namespace avSession {
      * @param { AVQueueItem } item 播放列表中单项的相关属性。
      * @param { AsyncCallback<void> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
      * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
-     * @throws {BusinessError} 6600101 - Session service exception
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     *     2.Parameter verification failed.
+     * @throws {BusinessError} 6600101 - Session service exception.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      * @since 23 static
@@ -4060,7 +4140,7 @@ declare namespace avSession {
 
     /**
      * 启动播放某个媒体资源。结果通过Promise异步回调方式返回。
-     * 
+     *
      * > **说明：**
      * >
      * > 在音视频投播场景下，当应用程序顺序调用
@@ -4071,8 +4151,8 @@ declare namespace avSession {
      * @returns { Promise<void> } Promise对象。当命令发送成功，无返回结果，否则返回错误对象。
      * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Parameter verification failed.
-     * @throws {BusinessError} 6600101 - Session service exception
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     * @throws {BusinessError} 6600101 - Session service exception.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4086,9 +4166,9 @@ declare namespace avSession {
      * @param { AVQueueItem } item 播放列表中单项的相关属性。
      * @param { AsyncCallback<void> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
      * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
-     * @throws {BusinessError} 6600101 - Session service exception
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     *     2.Parameter verification failed.
+     * @throws {BusinessError} 6600101 - Session service exception.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      * @since 23 static
@@ -4102,8 +4182,8 @@ declare namespace avSession {
      * @returns { Promise<void> } Promise对象。当命令发送成功，无返回结果，否则返回错误对象。
      * @throws {BusinessError} 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Parameter verification failed.
-     * @throws {BusinessError} 6600101 - Session service exception
-     * @throws {BusinessError} 6600109 - The remote connection is not established
+     * @throws {BusinessError} 6600101 - Session service exception.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4112,23 +4192,10 @@ declare namespace avSession {
     prepare(item: AVQueueItem): Promise<void>;
 
     /**
-     * 更新投播媒体信息
-     *
-     * @param { AVQueueItem } item - 媒体信息item
-     * @returns { Promise<void> } 通过promise回调成功
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600109 - The remote connection is not established
-     * @syscap SystemCapability.Multimedia.AVSession.AVCast
-     * @stagemodelonly
-     * @since 26.0.0 dynamic&static
-     */
-    update(item: AVQueueItem): Promise<void>;
-
-    /**
      * 获取当前投播的资源信息。结果通过callback异步回调方式返回。
      *
      * @param { AsyncCallback<AVQueueItem> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 10 dynamic
      * @since 23 static
@@ -4139,7 +4206,7 @@ declare namespace avSession {
      * 获取当前投播的资源信息。结果通过Promise异步回调方式返回。
      *
      * @returns { Promise<AVQueueItem> } Promise对象，返回当前的播放资源，否则返回错误对象。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4176,8 +4243,8 @@ declare namespace avSession {
      * @param { Uint8Array } response - 许可证响应。
      * @returns { Promise<void> } Promise对象，当处理许可证响应成功，无返回结果，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Parameter verification failed.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 12 dynamic
@@ -4192,6 +4259,7 @@ declare namespace avSession {
      *     <br>服务端仅解析key：string为'customData'，且Object为string类型的对象。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 6600101 - Session service exception.
+     *     You are advised to:1.Scheduled retry.2.Destroy the current session or session controller and re-create it.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 20 dynamic
@@ -4224,7 +4292,7 @@ declare namespace avSession {
 
     /**
      * 设置播放状态变化的监听事件。使用callback异步回调。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playbackStateChange' } type
@@ -4233,7 +4301,7 @@ declare namespace avSession {
      * @param { function } callback - 回调函数，参数state是变化后的播放状态。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @FaAndStageModel
      * @atomicservice [since 12]
@@ -4246,7 +4314,8 @@ declare namespace avSession {
      * @param { Array<string> } filter - The properties of {@link AVPlaybackState} that you cared about
      * @param { Callback<AVPlaybackState> } callback - The callback used to handle playback state changed event.
      *     The callback function provides the {@link AVPlaybackState} parameter.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception. 1. Required parameters are missing.
+     *     2. Provided parameters have invalid types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4256,7 +4325,8 @@ declare namespace avSession {
      * Register playback state changed callback
      * @param { Callback<AVPlaybackState> } callback - The callback used to handle playback state changed event.
      *     The callback function provides the {@link AVPlaybackState} parameter.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception. 1. Required parameters are missing.
+     *     2. Provided parameters have invalid types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4270,7 +4340,7 @@ declare namespace avSession {
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4281,7 +4351,7 @@ declare namespace avSession {
      * Unregister playback state changed callback
      * @param { Callback<AVPlaybackState> } [callback] - The callback used to handle playback state changed event.
      *     The callback function provides the {@link AVPlaybackState} parameter.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4289,14 +4359,14 @@ declare namespace avSession {
 
     /**
      * 设置投播当前播放媒体内容的监听事件。使用callback异步回调。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'mediaItemChange' } type 事件回调类型，支持事件`'mediaItemChange'`：当播放的媒体内容变化时，触发该事件。
      * @param { Callback<AVQueueItem> } callback 回调函数，参数AVQueueItem是当前正在播放的媒体内容。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4306,7 +4376,7 @@ declare namespace avSession {
     /**
      * Register listener for current media item playback events.
      * @param { Callback<AVQueueItem> } callback Callback used to listen for current item changed.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4318,7 +4388,7 @@ declare namespace avSession {
      * @param { 'mediaItemChange' } type 取消对应的监听事件，支持事件`'mediaItemChange'`。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4327,7 +4397,7 @@ declare namespace avSession {
 
     /**
      * Unregister listener for current media item playback events.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4335,14 +4405,14 @@ declare namespace avSession {
 
     /**
      * 设置播放下一首资源的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playNext' } type - 事件回调类型，支持事件`'playNext'`：当播放下一首状态变化时，触发该事件。
      * @param { Callback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4353,7 +4423,7 @@ declare namespace avSession {
      * Register playback command callback sent by remote side or media center.
      * Application needs update the new media resource when receive these commands by using playItem.
      * @param { NoParamCallback } callback - Used to handle 'playNext' command
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4365,7 +4435,7 @@ declare namespace avSession {
      * @param { 'playNext' } type - 取消对应的监听事件，支持事件`'playNext'`。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4375,7 +4445,7 @@ declare namespace avSession {
     /**
      * Unregister playback command callback sent by remote side or media center.
      * When canceling the callback, need to update the supported commands list.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4383,14 +4453,14 @@ declare namespace avSession {
 
     /**
      * 设置播放上一首资源的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playPrevious' } type - 事件回调类型，支持事件`'playPrevious'`：当播放上一首状态变化时，触发该事件。
      * @param { Callback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4401,7 +4471,7 @@ declare namespace avSession {
      * Register playback command callback sent by remote side or media center.
      * Application needs update the new media resource when receive these commands by using playItem.
      * @param { NoParamCallback } callback - Used to handle 'playPrevious' command
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4413,7 +4483,7 @@ declare namespace avSession {
      * @param { 'playPrevious' } type - 取消对应的监听事件，支持事件`'playPrevious'`。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4423,7 +4493,7 @@ declare namespace avSession {
     /**
      * Unregister playback command callback sent by remote side or media center.
      * When canceling the callback, need to update the supported commands list.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4431,14 +4501,14 @@ declare namespace avSession {
 
     /**
      * 设置请求播放的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'requestPlay' } type - 事件回调类型，支持事件`'requestPlay'`：当请求播放状态变化时，触发该事件。
      * @param { Callback<AVQueueItem> } callback - 回调函数，参数AVQueueItem是当前正在播放的媒体内容。当监听事件注册成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 11 dynamic
      */
@@ -4448,7 +4518,7 @@ declare namespace avSession {
      * Register requested playback command callback sent by remote side or media center.
      * The AVQueueItem may include the requested assetId, starting position and other configurations.
      * @param { Callback<AVQueueItem> } callback - Used to handle 'requestPlay' command
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4458,11 +4528,10 @@ declare namespace avSession {
      * 取消设置请求播放事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'requestPlay' } type - 取消对应的监听事件，支持事件`'requestPlay'`。
-     * @param { Callback<AVQueueItem> } [callback] - 回调函数，参数AVQueueItem是当前正在播放的媒体内容。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可
-     *     选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { Callback<AVQueueItem> } [callback] - Used to handle 'requestPlay' command
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 11 dynamic
      */
@@ -4471,7 +4540,7 @@ declare namespace avSession {
     /**
      * Unregister requested playback command callback sent by remote side or media center.
      * @param { Callback<AVQueueItem> } [callback] - Used to handle 'requestPlay' command
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4479,14 +4548,14 @@ declare namespace avSession {
 
     /**
      * 设置播放结束的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'endOfStream' } type - 事件回调类型，支持事件`'endOfStream'`：当资源播放结束时，触发该事件。
      * @param { Callback<void> } callback - 回调函数。当监听事件注册成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 11 dynamic
      */
@@ -4496,7 +4565,7 @@ declare namespace avSession {
      * Register endOfStream state callback.
      * Application needs update the new media resource when receive these commands by using playItem.
      * @param { NoParamCallback } callback - Used to handle 'endOfStream' command
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4506,10 +4575,10 @@ declare namespace avSession {
      * 取消设置播放结束事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
      * @param { 'endOfStream' } type - 取消对应的监听事件，支持事件`'endOfStream'`。
-     * @param { Callback<void> } [callback] - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { Callback<void> } [callback] - Used to handle 'endOfStream' command
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 11 dynamic
      */
@@ -4518,7 +4587,7 @@ declare namespace avSession {
     /**
      * Unregister endOfStream state callback.
      * @param { NoParamCallback } [callback] - Used to handle 'endOfStream' command
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4526,14 +4595,14 @@ declare namespace avSession {
 
     /**
      * 设置seek结束的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'seekDone' } type - 事件回调类型，支持事件`'seekDone'`：当seek结束时，触发该事件。
      * @param { Callback<int> } callback - 回调函数，返回seek后播放的位置。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4543,7 +4612,7 @@ declare namespace avSession {
     /**
      * Register listens for playback events.
      * @param { Callback<int> } callback - Callback used to listen for the playback seekDone event.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4555,7 +4624,7 @@ declare namespace avSession {
      * @param { 'seekDone' } type - 取消对应的监听事件，支持事件`'seekDone'`。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4564,7 +4633,7 @@ declare namespace avSession {
 
     /**
      * Unregister listens for playback events.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4572,13 +4641,13 @@ declare namespace avSession {
 
     /**
      * 会话支持的有效命令变化监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
-     * @param { 事件回调类型，支持事件`'validCommandChange'`：当检测到会话的合法命令发生改变时，触发该事件。 } type - 事件回调类型，支持事件`'validCommandChange'`：当检测到会话的合法命令发生改变时，触发该事件。
+     * @param { 'validCommandChange' } type - 'validCommandChange'
      * @param { Callback<Array<AVCastControlCommandType>> } callback - 回调函数。参数commands是有效命令的集合。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
+     *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -4601,11 +4670,11 @@ declare namespace avSession {
     /**
      * 取消会话有效命令变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
-     * @param { 取消对应的监听事件，支持事件`'validCommandChange'`。 } type - 取消对应的监听事件，支持事件`'validCommandChange'`。
-     * @param { Callback<Array<AVCastControlCommandType>> } [callback] - 回调函数。参数commands是有效命令的集合。
-     *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { 'validCommandChange' } type - 'validCommandChange'
+     * @param { Callback<Array<AVCastControlCommandType>> } [callback] - The callback used to handle the changes.
+     * The callback function provides an array of AVCastControlCommandType.
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
+     *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -4627,14 +4696,14 @@ declare namespace avSession {
 
     /**
      * 媒体控制器监听视频尺寸变化变化的事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'videoSizeChange' } type - 事件回调类型，支持事件`'videoSizeChange'`：当检测到会话的合法命令发生改变时，触发该事件。
      * @param { function } callback - 回调函数。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 12 dynamic
      */
@@ -4643,7 +4712,7 @@ declare namespace avSession {
     /**
      * Register listener for video size change event, used at remote side.
      * @param { VideoSizeEvent } callback - Callback used to return video size.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4654,8 +4723,8 @@ declare namespace avSession {
      *
      * @param { 'videoSizeChange' } type - 事件回调类型，支持事件`'videoSizeChange'`：当检测到会话的合法命令发生改变时，触发该事件。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 12 dynamic
      */
@@ -4663,7 +4732,7 @@ declare namespace avSession {
 
     /**
      * Unregister listener for video size change event, used at remote side.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4671,7 +4740,7 @@ declare namespace avSession {
 
     /**
      * 监听远端播放器的错误事件，该事件仅用于错误提示，不需要用户停止播控动作。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'error' } type 错误事件回调类型，支持的事件：'error'，用户操作和系统都会触发此事件。
@@ -4684,7 +4753,7 @@ declare namespace avSession {
      * @throws { BusinessError } 5400104 - Time out.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4700,7 +4769,7 @@ declare namespace avSession {
      * @throws { BusinessError } 5400104 - Time out.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4718,7 +4787,7 @@ declare namespace avSession {
      * @throws { BusinessError } 5400104 - Time out.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -4733,7 +4802,7 @@ declare namespace avSession {
      * @throws { BusinessError } 5400104 - Time out.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -4741,13 +4810,13 @@ declare namespace avSession {
 
     /**
      * 监听投播通用错误事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castControlGenericError' } type 错误事件回调类型，支持的事件：'castControlGenericError'。
      * @param { ErrorCallback } callback 投播通用错误事件回调方法。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @throws { BusinessError } 6611000 - The error code for cast control is unspecified.
      * @throws { BusinessError } 6611001 - An unspecified error occurs in the remote player.
      * @throws { BusinessError } 6611002 - The playback position falls behind the live window.
@@ -4756,10 +4825,11 @@ declare namespace avSession {
      * @throws { BusinessError } 6611100 - Cross-device data transmission is locked.
      * @throws { BusinessError } 6611101 - The specified seek mode is not supported.
      * @throws { BusinessError } 6611102 - The position to seek to is out of the range of the media asset
-     * or the specified seek mode is not supported.
+     *     or the specified seek mode is not supported.
      * @throws { BusinessError } 6611103 - The specified playback mode is not supported.
      * @throws { BusinessError } 6611104 - The specified playback speed is not supported.
-     * @throws { BusinessError } 6611105 - The action failed because either the media source device or the media sink device has been revoked.
+     * @throws { BusinessError } 6611105 - The action failed because either the media source device or the media sink
+     *     device has been revoked.
      * @throws { BusinessError } 6611106 - The parameter is invalid, for example, the url is illegal to play.
      * @throws { BusinessError } 6611107 - Allocation of memory failed.
      * @throws { BusinessError } 6611108 - Operation is not allowed.
@@ -4799,7 +4869,7 @@ declare namespace avSession {
      * @param { 'castControlGenericError' } type 取消对应的监听事件，支持的事件是'castControlGenericError'。
      * @param { ErrorCallback } callback 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 13 dynamic
@@ -4816,13 +4886,13 @@ declare namespace avSession {
 
     /**
      * 监听投播输入/输出的错误事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castControlIoError' } type 错误事件回调类型，支持的事件：'castControlIoError'。
      * @param { ErrorCallback } callback 投播输入/输出的错误事件回调方法。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @throws { BusinessError } 6612000 - An unspecified input/output error occurs.
      * @throws { BusinessError } 6612001 - Network connection failure.
      * @throws { BusinessError } 6612002 - Network timeout.
@@ -4830,7 +4900,8 @@ declare namespace avSession {
      * @throws { BusinessError } 6612004 - The HTTP server returns an unexpected HTTP response status code.
      * @throws { BusinessError } 6612005 - The file does not exist.
      * @throws { BusinessError } 6612006 - No permission is granted to perform the IO operation.
-     * @throws { BusinessError } 6612007 - Access to cleartext HTTP traffic is not allowed by the app's network security configuration.
+     * @throws { BusinessError } 6612007 - Access to cleartext HTTP traffic is not allowed by the app's network security
+     *     configuration.
      * @throws { BusinessError } 6612008 - Reading data out of the data bound.
      * @throws { BusinessError } 6612100 - The media does not contain any contents that can be played.
      * @throws { BusinessError } 6612101 - The media cannot be read, for example, because of dust or scratches.
@@ -4838,7 +4909,8 @@ declare namespace avSession {
      * @throws { BusinessError } 6612103 - The content using the validity interval has expired.
      * @throws { BusinessError } 6612104 - Using the requested content to play is not allowed.
      * @throws { BusinessError } 6612105 - The use of the allowed content cannot be verified.
-     * @throws { BusinessError } 6612106 - The number of times this content has been used as requested has reached the maximum allowed number of uses.
+     * @throws { BusinessError } 6612106 - The number of times this content has been used as requested has reached the
+     *     maximum allowed number of uses.
      * @throws { BusinessError } 6612107 - An error occurs when sending packet from source device to sink device.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -4879,7 +4951,7 @@ declare namespace avSession {
      * @param { 'castControlIoError' } type 取消对应的监听事件，支持的事件是'castControlIoError'。
      * @param { ErrorCallback } callback 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 13 dynamic
@@ -4896,18 +4968,19 @@ declare namespace avSession {
 
     /**
      * 监听投播解析的错误事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castControlParsingError' } type 错误事件回调类型，支持的事件：'castControlParsingError'。
      * @param { ErrorCallback } callback 投播解析的错误事件回调方法。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @throws { BusinessError } 6613000 - Unspecified error related to content parsing.
      * @throws { BusinessError } 6613001 - Parsing error associated with media container format bit streams.
      * @throws { BusinessError } 6613002 - Parsing error associated with the media manifest.
-     * @throws { BusinessError } 6613003 - An error occurs when attempting to extract a file with an unsupported media container format
-     * or an unsupported media container feature.
+     * @throws { BusinessError } 6613003 - An error occurs when attempting to extract a file with an unsupported media
+     *     container format
+     *     or an unsupported media container feature.
      * @throws { BusinessError } 6613004 - Unsupported feature in the media manifest.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -4936,7 +5009,7 @@ declare namespace avSession {
      * @param { 'castControlParsingError' } type 取消对应的监听事件，支持的事件是'castControlParsingError'。
      * @param { ErrorCallback } callback 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 13 dynamic
@@ -4953,13 +5026,13 @@ declare namespace avSession {
 
     /**
      * 监听投播解码的错误事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castControlDecodingError' } type 错误事件回调类型，支持的事件：'castControlDecodingError'。
      * @param { ErrorCallback } callback 投播解码的错误事件回调方法。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @throws { BusinessError } 6614000 - Unspecified decoding error.
      * @throws { BusinessError } 6614001 - Decoder initialization failed.
      * @throws { BusinessError } 6614002 - Decoder query failed.
@@ -4992,7 +5065,7 @@ declare namespace avSession {
      * @param { 'castControlDecodingError' } type 取消对应的监听事件，支持的事件是'castControlDecodingError'。
      * @param { ErrorCallback } callback 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 13 dynamic
@@ -5009,13 +5082,13 @@ declare namespace avSession {
 
     /**
      * 监听投播音频渲染器的错误事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castControlAudioRendererError' } type 错误事件回调类型，支持的事件：'castControlAudioRendererError'。
      * @param { ErrorCallback } callback 投播音频渲染器的错误事件回调方法。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @throws { BusinessError } 6615000 - Unspecified errors related to the audio renderer.
      * @throws { BusinessError } 6615001 - Initializing the audio renderer failed.
      * @throws { BusinessError } 6615002 - The audio renderer fails to write data.
@@ -5042,7 +5115,7 @@ declare namespace avSession {
      * @param { 'castControlAudioRendererError' } type 取消对应的监听事件，支持的事件是'castControlAudioRendererError'。
      * @param { ErrorCallback } callback 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 13 dynamic
@@ -5059,13 +5132,13 @@ declare namespace avSession {
 
     /**
      * 监听投播drm的错误事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'castControlDrmError' } type 错误事件回调类型，支持的事件：'castControlDrmError'。
      * @param { ErrorCallback } callback 投播drm的错误事件回调方法。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @throws { BusinessError } 6616000 - Unspecified error related to DRM.
      * @throws { BusinessError } 6616001 - The chosen DRM protection scheme is not supported by the device.
      * @throws { BusinessError } 6616002 - Device provisioning failed.
@@ -5106,7 +5179,7 @@ declare namespace avSession {
      * @param { 'castControlDrmError' } type 取消对应的监听事件，支持的事件是'castControlDrmError'。
      * @param { ErrorCallback } callback 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - Parameter check failed. 1. Mandatory parameters are left unspecified.
-     * 2. Incorrect parameter types.
+     *     2. Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 13 dynamic
@@ -5123,14 +5196,14 @@ declare namespace avSession {
 
     /**
      * 在线DRM资源投播时，设置许可证请求的事件监听。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'keyRequest' } type - 事件回调类型，支持事件`'keyRequest'`：当DRM资源播放需要许可证时，触发该事件。
      * @param { KeyRequestCallback } callback - 回调函数，媒体资源及许可证请求数据。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 12 dynamic
@@ -5140,7 +5213,7 @@ declare namespace avSession {
     /**
      * Register listener for drm key request.
      * @param { KeyRequestCallback } callback - Callback used to request drm key.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -5152,8 +5225,8 @@ declare namespace avSession {
      * @param { 'keyRequest' } type - 取消对应的监听事件，支持的事件是`'keyRequest'`。
      * @param { KeyRequestCallback } callback - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
+     *     2.Incorrect parameter types.
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 12 dynamic
@@ -5163,7 +5236,7 @@ declare namespace avSession {
     /**
      * Unregister listener for drm key request.
      * @param { KeyRequestCallback } [callback] - Callback used to request drm key.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -5174,7 +5247,7 @@ declare namespace avSession {
      *
      * @param { 'customDataChange' } type - 事件回调类型，支持'customDataChange'事件。媒体提供方发送自定义数据时触发。
      * @param { Callback<Record<string, Object>> } callback - 回调函数，用于接收自定义数据。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 20 dynamic
@@ -5184,7 +5257,7 @@ declare namespace avSession {
     /**
      * Register listener for custom data sent from remote device.
      * @param { Callback<Record<string, Object>> } callback - Callback used to retrieve custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -5195,7 +5268,7 @@ declare namespace avSession {
      *
      * @param { 'customDataChange' } type - 取消对应的监听事件，支持的事件是'customDataChange'。
      * @param { Callback<Record<string, Object>> } [callback] - 注册监听事件时的回调函数。该参数为可选参数，若不填写该参数，则认为取消会话所有与此事件相关的监听。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 20 dynamic
@@ -5205,7 +5278,7 @@ declare namespace avSession {
     /**
      * Unregister listener for custom data sent from remote device.
      * @param { Callback<Record<string, Object>> } [callback] - Callback used to retrieve custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
      */
@@ -5214,7 +5287,7 @@ declare namespace avSession {
 
   /**
    * 投播半模态对象，可拉起半模态窗口，选择投播设备。在使用前，需要创建AVCastPickerHelper实例。
-   * 
+   *
    * > **说明：**
    * >
    * > - 本Class首批接口从API version 14开始支持。
@@ -5234,7 +5307,7 @@ declare namespace avSession {
      *
      * @param { Context } context - 应用上下文（仅支持[UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}）。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
+     *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -5249,7 +5322,7 @@ declare namespace avSession {
      * @param { AVCastPickerOptions } [options] - AVCastPicker选择选项。无此参数时，以AVCastPickerOptions默认值拉起。
      * @returns { Promise<void> } Promise对象。当命令发送成功，无返回结果，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
+     *     2.Incorrect parameter types.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 14 dynamic
@@ -5270,13 +5343,13 @@ declare namespace avSession {
 
     /**
      * 设置半模态窗口变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
-     * @param { 事件回调类型，支持事件`'pickerStateChange'`：当半模态窗口变化时，触发该事件。 } type - 事件回调类型，支持事件`'pickerStateChange'`：当半模态窗口变化时，触发该事件。
+     * @param { 'pickerStateChange' } type - 'pickerStateChange'
      * @param { Callback<AVCastPickerState> } callback - 回调函数，参数state是变化后的半模态窗口状态。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
+     *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -5285,7 +5358,8 @@ declare namespace avSession {
     on(type: 'pickerStateChange', callback: Callback<AVCastPickerState>) : void;
 
     /**
-     * Register picker state change callback.
+     * 注册Picker状态变化监听。
+     *
      * @param { Callback<AVCastPickerState> } callback - The callback used to handle picker state changed event.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -5296,12 +5370,10 @@ declare namespace avSession {
     /**
      * 取消半模态窗口变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
-     * @param { 取消对应的监听事件，支持事件`'pickerStateChange'`。 } type - 取消对应的监听事件，支持事件`'pickerStateChange'`。
-     * @param { Callback<AVCastPickerState> } [callback] - 回调函数，参数state是变化后的半模态窗口状态。
-     *     <br>当监听事件取消成功，err为undefined，否则返回错误对象。
-     *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
+     * @param { 'pickerStateChange' } type - 'pickerStateChange'
+     * @param { Callback<AVCastPickerState> } [callback] - The callback used to handle picker state changed event.
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Incorrect parameter types.
+     *     2.Incorrect parameter types.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -5322,7 +5394,6 @@ declare namespace avSession {
   /**
    * 定义可弹出菜单的组件的位置。
    *
-   * @typedef MenuPosition
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 22 dynamic
@@ -5332,7 +5403,6 @@ declare namespace avSession {
     /**
      * 组件在X轴上的位置坐标。单位为vp。
      *
-     * @type { int }
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 22 dynamic
@@ -5343,7 +5413,6 @@ declare namespace avSession {
     /**
      * 组件在y轴上的位置坐标。单位为vp。
      *
-     * @type { int }
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 22 dynamic
@@ -5354,7 +5423,6 @@ declare namespace avSession {
     /**
      * 组件宽度。单位为vp。
      *
-     * @type { int }
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 22 dynamic
@@ -5365,7 +5433,6 @@ declare namespace avSession {
     /**
      * 组件高度。单位为vp。
      *
-     * @type { int }
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 22 dynamic
@@ -5377,7 +5444,6 @@ declare namespace avSession {
   /**
    * 拉起的投播组件包含的配置属性。
    *
-   * @typedef AVCastPickerOptions
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 14 dynamic
@@ -5386,10 +5452,9 @@ declare namespace avSession {
   interface AVCastPickerOptions {
     /**
      * 会话类型，默认值为audio。
-     * 
+     *
      * 当前仅支持的会话类型有audio和video。如果传入voice_call或video_call，将默认按照传入audio处理。
      *
-     * @type { ? AVSessionType }
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 14 dynamic
@@ -5521,7 +5586,6 @@ declare namespace avSession {
   /**
    * 表示投播设备支持的音频能力。
    *
-   * @typedef AudioCapabilities
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 20 dynamic
@@ -5531,8 +5595,6 @@ declare namespace avSession {
     /**
      * 音频能力参数的列表。
      *
-     * @type { Array<audio.AudioStreamInfo> }
-     * @readonly
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 20 dynamic
@@ -5617,7 +5679,6 @@ declare namespace avSession {
   /**
    * 枚举，表示当前媒体资源的金标，即应用媒体音源的特殊类型标识。
    *
-   * @enum { int }
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @since 11 dynamic
    * @since 23 static
@@ -5641,8 +5702,10 @@ declare namespace avSession {
    * @since 23 static
    */
   enum DecoderType {
+
     /**
      * Defination of avc codec type.
+     *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -5652,6 +5715,7 @@ declare namespace avSession {
 
     /**
      * Defination of hevc codec type.
+     *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -5661,6 +5725,7 @@ declare namespace avSession {
 
     /**
      * Defination of audio vivid codec type.
+     *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
      * @since 19 dynamic
@@ -5732,7 +5797,6 @@ declare namespace avSession {
   /**
    * 歌单（歌曲列表）的相关属性。
    *
-   * @interface AVQueueInfo
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @systemapi
    * @since 11 dynamic
@@ -5812,7 +5876,7 @@ declare namespace avSession {
     /**
      * 作为[setExtras]{@link avSession.AVSession.setExtras(extras: {[key: string]: Object})}接口，给REQUIRE_ABILITY_LIST键传入能力列
      * 表的值，用于通知系统当前应用支持URL投播功能。
-     * 
+     *
      * [setExtras]{@link avSession.AVSession.setExtras(extras: {[key: string]: Object})}接口传入入参
      * `{[avSession.ExtraKey.REQUIRE_ABILITY_LIST]: [avSession.ExtraKey.SUPPORT_URL_CASTING]}`表示当前应用支持投播功能。
      *
@@ -5837,7 +5901,7 @@ declare namespace avSession {
 
     /**
      * [AVMediaDescription]{@link avSession.AVMediaDescription}中extras属性可传入的键，值传入string类型。
-     * 
+     *
      * 用于DLNA投播场景下，在发送给对端的报文中，为CurrentURIMetaData标签添加内容。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -5849,7 +5913,7 @@ declare namespace avSession {
 
     /**
      * [AVMediaDescription]{@link avSession.AVMediaDescription}中extras属性可传入的键，值传入string类型。
-     * 
+     *
      * 用于DLNA投播场景下，在发送给对端的报文中，为DIDL-Lite标签添加内容。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -5871,7 +5935,7 @@ declare namespace avSession {
   interface AVMetadata {
     /**
      * 媒体ID。媒体信息的唯一标识，由应用自定义。
-     * 
+     *
      * - 该属性发生变化则其他元数据属性都将被刷新。
      * - 若该属性维持不变，且不设置相应的媒体元数据信息，那么将不会更新对应的媒体元数据信息。
      * - 当该属性设为空值时，调用[setAVMetadata]{@link avSession.AVSession.setAVMetadata(data: AVMetadata)}方法将失败，返回错误码6600101。
@@ -5933,9 +5997,9 @@ declare namespace avSession {
 
     /**
      * 歌单（歌曲列表）封面图。
-     * 
+     *
      * 图片的像素数据或者图片路径地址（本地路径或网络路径）。应用通过setAVMetadata设置图片数据。
-     * 
+     *
      * - 设置的数据类型为PixelMap时，通过getAVMetadata获取的将为PixelMap。
      * - 设置为url图片路径，获取的为url图片路径。
      *
@@ -5986,7 +6050,7 @@ declare namespace avSession {
 
     /**
      * 图片的像素数据或者图片路径地址（本地路径或网络路径）。应用通过setAVMetadata设置图片数据。
-     * 
+     *
      * - 设置的数据类型为PixelMap时，通过getAVMetadata获取的将为PixelMap。
      * - 设置为url图片路径，获取的为url图片路径。
      *
@@ -6037,9 +6101,9 @@ declare namespace avSession {
 
     /**
      * 媒体歌词内容。应用需将歌词内容拼接为一个字符串传入。
-     * 
+     *
      * 字符串长度需小于40960字节。
-     * 
+     *
      * **说明：** 系统支持简单版的LRC格式（Simple LRC format）的歌词文本内容。当传入的歌词内容不规范（例如：出现重复的时间戳等），将导致解析失败，并在系统中显示异常。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6050,7 +6114,7 @@ declare namespace avSession {
 
     /**
      * 单条媒体歌词内容。应用需将歌词内容拼接为一个字符串传入（不包含时间戳）。
-     * 
+     *
      * 字符串长度小于40960字节。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6110,11 +6174,11 @@ declare namespace avSession {
 
     /**
      * 快退支持的时间间隔。默认为SECONDS_15，即15秒。
-     * 
+     *
      * 系统会使用此值作为快退操作的时间间隔，而非skipIntervals的值。
-     * 
+     *
      * 若未设置此参数，快退操作的时间间隔仍会沿用skipIntervals的值。
-     * 
+     *
      * **起始版本**：26.0.0
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6125,11 +6189,11 @@ declare namespace avSession {
 
     /**
      * 快进支持的时间间隔。默认为SECONDS_15，即15秒。
-     * 
+     *
      * 系统会使用此值作为快进操作的时间间隔，而非skipIntervals的值。
-     * 
+     *
      * 若未设置此参数，快进操作的时间间隔仍会沿用skipIntervals的值。
-     * 
+     *
      * **起始版本**：26.0.0
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6141,7 +6205,6 @@ declare namespace avSession {
     /**
      * 媒体资源的金标类型，取值参考[DisplayTag]{@link avSession.DisplayTag}。
      *
-     * @type { ?int }
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @since 11 dynamic
      * @since 23 static
@@ -6160,7 +6223,7 @@ declare namespace avSession {
   interface AVMediaDescription {
     /**
      * 媒体ID。媒体信息的唯一标识，由应用自定义。
-     * 
+     *
      * - 该属性发生变化则其他元数据属性都将被刷新。
      * - 若该属性维持不变，且不设置相应的媒体元数据信息，那么将不会更新对应的媒体元数据信息。
      * - 当该属性设为空值时，调用[setAVMetadata]{@link avSession.AVSession.setAVMetadata(data: AVMetadata)}方法将失败，返回错误码6600101。
@@ -6203,14 +6266,14 @@ declare namespace avSession {
 
     /**
      * 设置播放列表媒体图片像素数据。
-     * 
+     *
      * 在使用了cast+协议的音视频投播场景下，该字段用于给对端设备设置媒体专辑封面。
-     * 
+     *
      * 当入参为string类型时：
-     * 
+     *
      * - 只支持使用网络URI设置封面，不支持本地URI。
      * - 其作用与albumCoverUri属性功能相同，且优先级高于albumCoverUri。
-     * 
+     *
      * 从API version 23开始，支持入参为image.PixelMap类型给对端设备设置媒体信息。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6221,10 +6284,10 @@ declare namespace avSession {
     mediaImage?: image.PixelMap | string;
     /**
      * 播放列表媒体额外字段。
-     * 
+     *
      * 从API版本26.0.0开始，DLNA投播场景下支持将[ExtraKey]{@link avSession.ExtraKey}中DLNA_CURRENT_URI_METADATA和DLNA_DIDL_LITE两个键的值传递给对
      * 端设备，键值对的值需传入符合XML格式的字符串。如传入入参`{[avSession.ExtraKey.DLNA_CURRENT_URI_METADATA]: '<xxtv>...</xxtv>'}`。
-     * 
+     *
      * - 非DLNA投播场景不生效。
      * - 非字符串类型不生效。
      * - 非XML格式会触发
@@ -6289,7 +6352,7 @@ declare namespace avSession {
 
     /**
      * 播放列表媒体歌词内容。
-     * 
+     *
      * 字符串长度需小于40960字节。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6409,7 +6472,7 @@ declare namespace avSession {
 
     /**
      * 媒体资源的金标类型，取值参考[DisplayTag]{@link avSession.DisplayTag}。
-     * 
+     *
      * 在使用了cast+协议的音频投播场景下，不支持使用该属性。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -6926,7 +6989,7 @@ declare namespace avSession {
      * @atomicservice
      * @since 26.0.0 dynamic&static
      */
-    DEVICE_TYPE_HIPLAY = 15,
+    DEVICE_TYPE_HIPLAY = 15
   }
 
   /**
@@ -6971,18 +7034,6 @@ declare namespace avSession {
      * @since 24 dynamic&static
      */
     castUid?: int;
-
-    /**
-     * 是否支持多设备连接能力。
-     * 取值限定为整数。
-     *
-     * @syscap SystemCapability.Multimedia.AVSession.AVCast
-     * @systemapi
-     * @stagemodelonly
-     * @atomicservice
-     * @since 26.0.1 dynamic&static
-     */
-    supportMultiDeviceMode?: int;
   }
 
   /**
@@ -7055,7 +7106,7 @@ declare namespace avSession {
 
     /**
      * 播放设备的网络ID。
-     * 
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7067,7 +7118,7 @@ declare namespace avSession {
 
     /**
      * 播放设备的IP地址。
-     * 
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7078,8 +7129,20 @@ declare namespace avSession {
     ipAddress?: string;
 
     /**
+     * 分布式设备的蓝牙静态MAC地址、仅在分布式设备上报蓝牙MAC时可用。
+     * 需要申请权限Ohos.permission.USE_BLUETOOTH。
+     * 默认值：""。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVCast
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    brMacAddress?: string;
+
+    /**
      * 播放设备提供商。
-     * 
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7091,9 +7154,9 @@ declare namespace avSession {
 
     /**
      * 播放设备支持的协议。
-     * 
+     *
      * 默认为TYPE_LOCAL,具体取值来自[ProtocolType]{@link avSession.ProtocolType}，可以是ProtocolType中的某个协议或者多个协议的组合。
-     * 
+     *
      * 设备仅支持一种协议，返回对应枚举值；设备支持多种协议，返回对应枚举值之和。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7125,7 +7188,7 @@ declare namespace avSession {
 
     /**
      * 播放设备是否可信。默认为0。0代表设备不可信，1代表设备可信。
-     * 
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7136,8 +7199,8 @@ declare namespace avSession {
     authenticationStatus?: int;
 
     /**
-     * 表示当前设备是否为旧版设备。 true表示是，false表示不是。 
-     * 
+     * 表示当前设备是否为旧版设备。 true表示是，false表示不是。
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7149,11 +7212,11 @@ declare namespace avSession {
 
     /**
      * 用于发现设备的介质类型。
-     * 
-     * 1：蓝牙低功耗（BLE），用于蓝牙设备的发现和链接。 
-     * 
+     *
+     * 1：蓝牙低功耗（BLE），用于蓝牙设备的发现和链接。
+     *
      * 2：受限应用协议（COAP），用于局域网内的设备发现。
-     * 
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -7266,7 +7329,7 @@ declare namespace avSession {
 
   /**
    * 表示session支持的快进快退时间间隔的枚举。
-   * 
+   *
    * | 名称                   | 值 | 说明                     |
    * | ---------------------- | -- | ----------------------- |
    * | SECONDS_10             | 10 | 时间为10秒。             |
@@ -7303,7 +7366,7 @@ declare namespace avSession {
 
   /**
    * 表示session支持的后台播放模式的枚举。
-   * 
+   *
    * | 名称                      | 值 | 说明                    |
    * | ------------------------- | - | ----------------------- |
    * | ENABLE_BACKGROUND_PLAY    | 0 | 支持后台播放。            |
@@ -7518,9 +7581,9 @@ declare namespace avSession {
 
     /**
      * 会话是否被激活。
-     * 
-     * true：已被激活。 
-     * 
+     *
+     * true：已被激活。
+     *
      * false：没有被激活。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -7532,10 +7595,10 @@ declare namespace avSession {
     isActive: boolean;
 
     /**
-     * 会话是否为最新的会话。 
-     * 
+     * 会话是否为最新的会话。
+     *
      * true：是最新的会话。
-     * 
+     *
      * false：不是最新的会话。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -7548,7 +7611,7 @@ declare namespace avSession {
 
     /**
      * 分布式设备相关信息。
-     * 
+     *
      * **系统接口：** 该接口为系统接口。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Manager
@@ -7559,12 +7622,13 @@ declare namespace avSession {
     outputDevice: OutputDeviceInfo;
 
     /**
-     * 当前会话所属的userId
+     * 当前会话所属的userId。
+     * 取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.AVSession.Manager
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     userId?: int;
   }
@@ -7587,7 +7651,7 @@ declare namespace avSession {
 
   /**
    * AVSessionController控制器可查看会话ID，并可完成对会话发送命令及事件，获取会话元数据，播放状态信息等操作。
-   * 
+   *
    * > **说明：**
    * >
    * > - 本Interface首批接口从API version 10开始支持。
@@ -7608,6 +7672,17 @@ declare namespace avSession {
      * @since 23 static
      */
     readonly sessionId: string;
+
+    /**
+     * 对应会话所属的userId。
+     * 取值限定为整数。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    readonly userId?: int;
 
     /**
      * 获取当前的远端播放状态。结果通过callback异步回调方式返回。
@@ -7831,7 +7906,7 @@ declare namespace avSession {
      * @param { int } itemId - 播放列表单项的ID值，用以表示选中的播放列表单项。
      * @param { AsyncCallback<void> } callback - 回调函数。当播放状态设置成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
@@ -7898,11 +7973,11 @@ declare namespace avSession {
 
     /**
      * 获取应用支持的播放倍速列表。使用Promise异步回调。
-     * 
+     *
      * 该列表通过[setSupportedPlaySpeeds]{@link avSession.AVSession.setSupportedPlaySpeeds}接口设置。如果应用未设置或者设置为空列表，则返回空列表。
      *
      * @returns { Promise<Array<double>> } Promise对象。返回支持的播放倍速列表。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -7913,11 +7988,11 @@ declare namespace avSession {
 
     /**
      * 获取应用支持的循环模式列表。使用Promise异步回调。
-     * 
+     *
      * 该列表通过[setSupportedLoopModes]{@link avSession.AVSession.setSupportedLoopModes}接口设置。如果应用未设置或者设置为空列表，则返回空列表。
      *
      * @returns { Promise<Array<LoopMode>> } Promise对象。返回支持的循环模式列表。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -7932,7 +8007,7 @@ declare namespace avSession {
      * @param { KeyEvent } event - 按键事件。
      * @param { AsyncCallback<void> } callback - 回调函数。当事件发送成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
@@ -8116,7 +8191,7 @@ declare namespace avSession {
 
     /**
      * 通过会话控制器发送命令到其对应的会话。结果通过callback异步回调方式返回。
-     * 
+     *
      * > **说明：**
      * >
      * > 媒体控制方在使用sendControlCommand命令前，需要确保控制对应的媒体会话注册了对应的监听，注册媒体会话相关监听的方法请参见接口
@@ -8126,7 +8201,7 @@ declare namespace avSession {
      * @param { AVControlCommand } command - 会话的相关命令和命令相关参数。
      * @param { AsyncCallback<void> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
@@ -8141,7 +8216,7 @@ declare namespace avSession {
 
     /**
      * 通过控制器发送命令到其对应的会话。结果通过Promise异步回调方式返回。
-     * 
+     *
      * > **说明：**
      * >
      * > 媒体控制方在使用sendControlCommand命令前，需要确保控制对应的媒体会话注册了对应的监听，注册媒体会话相关监听的方法请参见接口
@@ -8151,7 +8226,7 @@ declare namespace avSession {
      * @param { AVControlCommand } command - 会话的相关命令和命令相关参数。
      * @returns { Promise<void> } Promise对象。当命令发送成功，无返回结果，否则返回错误对象。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
-     * 2.Parameter verification failed.
+     *     2.Parameter verification failed.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
@@ -8248,6 +8323,7 @@ declare namespace avSession {
      * @param { Record<string, Object> } data - 应用程序填充的自定义数据。服务端仅解析key为'customData'，且Object为string类型的对象。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 6600101 - Session service exception.
+     *     You are advised to:1.Scheduled retry.2.Destroy the current session or session controller and re-create it.
      * @throws { BusinessError } 6600102 - The session does not exist.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -8496,10 +8572,11 @@ declare namespace avSession {
     /**
      * 获取应用通过[setMediaCenterControlType]{@link avSession.AVSession.setMediaCenterControlType}接口设置优先显示的控制类型列表。使用Promise异步
      * 回调。
-     * 
+     *
      * 如果应用未设置或者设置为空列表，则返回空列表。
      *
      * @returns { Promise<Array<AVMediaCenterControlType>> } Promise对象。返回应用希望优先显示的控制类型列表。
+     * @param { Callback<DesktopLyricState> } callback - a callback to receive desktop lyric state.
      * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
@@ -8510,7 +8587,7 @@ declare namespace avSession {
 
     /**
      * 注册控制类型列表变化的监听事件。使用callback异步回调。
-     * 
+     *
      * 其中控制类型列表由应用通过[setMediaCenterControlType]{@link avSession.AVSession.setMediaCenterControlType}接口设置。
      *
      * @param { Callback<Array<AVMediaCenterControlType>> } callback - 回调函数。返回变化后的控制类型列表。
@@ -8524,7 +8601,7 @@ declare namespace avSession {
 
     /**
      * 取消控制类型列表变化的监听事件。
-     * 
+     *
      * 取消后将不再对该事件进行监听。其中控制类型列表由应用通过[setMediaCenterControlType]{@link avSession.AVSession.setMediaCenterControlType}接口设置。
      *
      * @param { Callback<Array<AVMediaCenterControlType>> } [callback] - 回调函数。该参数为可选参数，若不填写该参数，则认为对所有控制类型列表变化事件取消监听。
@@ -8538,7 +8615,7 @@ declare namespace avSession {
 
     /**
      * 设置元数据变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'metadataChange' } type
@@ -8611,7 +8688,7 @@ declare namespace avSession {
 
     /**
      * 设置播放状态变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'playbackStateChange' } type
@@ -8683,10 +8760,10 @@ declare namespace avSession {
 
     /**
      * 设置通话元数据变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
-     * @param { 事件回调类型，支持事件`'callMetadataChange'`：当通话元数据变化时，触发该事件。 } type - 事件回调类型，支持事件`'callMetadataChange'`：当通话元数据变化时，触发该事件。
+     * @param { 'callMetadataChange' } type - 'callMetadataChange'
      * @param { Array<keyof CallMetadata> | 'all' } filter - 'all'表示关注通话元数据所有字段变化；Array<keyof CallMetadata> 表示关注Array中的字
      *     段变化。| 'all'。
      * @param { Callback<CallMetadata> } callback - 回调函数，参数callmetadata是变化后的通话元数据。
@@ -8729,7 +8806,7 @@ declare namespace avSession {
     /**
      * 取消设置通话元数据变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
-     * @param { 取消对应的监听事件，支持事件`'callMetadataChange'`。 } type - 取消对应的监听事件，支持事件`'callMetadataChange'`。
+     * @param { 'callMetadataChange' } type - 'callMetadataChange'
      * @param { Callback<CallMetadata> } callback - 回调函数，参数calldata是变化后的通话原数据。
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
@@ -8756,7 +8833,7 @@ declare namespace avSession {
 
     /**
      * 设置通话状态变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 事件回调类型，支持事件`'callStateChange'`：当通话状态变化时，触发该事件。 } type - 事件回调类型，支持事件`'callStateChange'`：当通话状态变化时，触发该事件。
@@ -8800,7 +8877,7 @@ declare namespace avSession {
     /**
      * 取消设置通话状态变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
-     * @param { 取消对应的监听事件，支持事件`'callStateChange'`。 } type - 取消对应的监听事件，支持事件`'callStateChange'`。
+     * @param { 'callStateChange' } type - 'callStateChange'
      * @param { Callback<AVCallState> } callback - 回调函数，参数callstate是变化后的通话状态。
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
@@ -8826,7 +8903,7 @@ declare namespace avSession {
 
     /**
      * 会话销毁的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'sessionDestroy' } type
@@ -8855,7 +8932,7 @@ declare namespace avSession {
     /**
      * 取消监听会话的销毁事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
-     * @param { 取消对应的监听事件，支持事件`'sessionDestroy'`。 } type - 取消对应的监听事件，支持事件`'sessionDestroy'`。
+     * @param { 'sessionDestroy' } type - 'sessionDestroy'
      * @param { function } callback - 回调函数。当监听事件取消成功，err为undefined，否则返回错误对象。
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
@@ -8881,7 +8958,7 @@ declare namespace avSession {
 
     /**
      * 会话的激活状态的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 事件回调类型，支持事件`'activeStateChange'`：当检测到会话的激活状态发生改变时，触发该事件。 } type - 事件回调类型，支持事件`'activeStateChange'`：当检测到会话的激活状态发生改变时，触发该事件。
@@ -8911,7 +8988,7 @@ declare namespace avSession {
     /**
      * 取消监听会话激活状态变化事件监听。指定callback，可取消对应监听；未指定callback，取消所有事件监听。
      *
-     * @param { 取消对应的监听事件，支持事件`'activeStateChange'`。 } type - 取消对应的监听事件，支持事件`'activeStateChange'`。
+     * @param { 'activeStateChange' } type - 'activeStateChange'
      * @param { function } callback - 回调函数。参数isActive表示会话是否被激活。true表示被激活，false表示禁用。
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
@@ -8938,10 +9015,10 @@ declare namespace avSession {
 
     /**
      * 会话支持的有效命令变化监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
-     * @param { 事件回调类型，支持事件`'validCommandChange'`：当检测到会话的合法命令发生改变时，触发该事件。 } type - 事件回调类型，支持事件`'validCommandChange'`：当检测到会话的合法命令发生改变时，触发该事件。
+     * @param { 'validCommandChange' } type - 'validCommandChange'
      * @param { function } callback - 回调函数。参数commands是有效命令的集合。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
@@ -8995,15 +9072,15 @@ declare namespace avSession {
 
     /**
      * 设置播放设备变化的监听事件。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'outputDeviceChange' } type - 事件回调类型，支持事件为`'outputDeviceChange'`：当播放设备变化时，触发该事件）。
      * @param { function } callback - 回调函数，参数device是设备相关信息。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600103 - The session controller does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -9015,8 +9092,8 @@ declare namespace avSession {
      * @param { ConnectionEvent } callback - Used to handle output device changed.
      *     The callback provide the new device info {@link OutputDeviceInfo}
      *     and related connection state {@link ConnectionState}.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600103 - The session controller does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @since 23 static
      */
@@ -9030,8 +9107,8 @@ declare namespace avSession {
      *     <br>该参数为可选参数，若不填写该参数，则认为取消所有相关会话的事件监听。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600103 - The session controller does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @atomicservice [since 12]
      * @since 10 dynamic
@@ -9043,8 +9120,8 @@ declare namespace avSession {
      * @param { ConnectionEvent } [callback] - Used to handle output device changed.
      *     The callback provide the new device info {@link OutputDeviceInfo}
      *     and related connection state {@link ConnectionState}.
-     * @throws { BusinessError } 6600101 - Session service exception
-     * @throws { BusinessError } 6600103 - The session controller does not exist
+     * @throws { BusinessError } 6600101 - Session service exception.
+     * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @since 23 static
      */
@@ -9052,10 +9129,10 @@ declare namespace avSession {
 
     /**
      * 媒体控制器设置会话自定义事件变化的监听器。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
-     * @param { 事件回调类型，支持事件`'sessionEvent'`：当会话事件变化时，触发该事件。 } type - 事件回调类型，支持事件`'sessionEvent'`：当会话事件变化时，触发该事件。
+     * @param { 'sessionEvent' } type - 'sessionEvent'
      * @param { function } callback - 回调函数，sessionEvent为变化的会话事件名，args为事件的参数。
      * @throws { BusinessError } 401 - parameter check failed. 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types.
@@ -9108,7 +9185,7 @@ declare namespace avSession {
 
     /**
      * 媒体控制器设置会话自定义播放列表变化的监听器。
-     * 
+     *
      * 每个指令支持注册多个回调，如果需要只执行最新监听，需要先注销旧的监听，否则新旧监听都会触发回调。
      *
      * @param { 'queueItemsChange' } type - 事件回调类型，支持事件`'queueItemsChange'`：当session修改播放列表时，触发该事件。
@@ -9275,7 +9352,7 @@ declare namespace avSession {
      *
      * @param { 'customDataChange' } type - 事件回调类型，支持事件'customDataChange'，当媒体提供方发送自定义数据时，触发该事件。
      * @param { Callback<Record<string, Object>> } callback - 回调函数，用于接收自定义数据。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -9286,7 +9363,7 @@ declare namespace avSession {
     /**
      * Register listener for custom data.
      * @param { Callback<Record<string, Object>> } callback - Callback used to retrieve custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
@@ -9298,7 +9375,7 @@ declare namespace avSession {
      *
      * @param { 'customDataChange' } type - 取消对应的监听事件，支持的事件是'customDataChange'。
      * @param { Callback<Record<string, Object>> } [callback] - 注册监听事件时的回调函数。该参数为可选参数，若不填写该参数，则认为取消会话所有与此事件相关的监听。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -9309,7 +9386,7 @@ declare namespace avSession {
     /**
      * Unregister listener for custom data.
      * @param { Callback<Record<string, Object>> } [callback] - Callback used to retrieve custom data.
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @since 23 static
@@ -9318,11 +9395,11 @@ declare namespace avSession {
 
     /**
      * 注册支持的播放倍速列表变化的监听事件。使用callback异步回调。
-     * 
+     *
      * 其中播放倍速列表由应用通过[setSupportedPlaySpeeds]{@link avSession.AVSession.setSupportedPlaySpeeds}接口设置。
      *
      * @param { Callback<Array<double>> } callback - 回调函数。返回变化后支持的播放倍速列表。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -9333,11 +9410,11 @@ declare namespace avSession {
 
     /**
      * 取消支持的播放倍速列表变化事件监听。
-     * 
+     *
      * 取消后将不再对该事件进行监听。其中播放倍速列表由应用通过[setSupportedPlaySpeeds]{@link avSession.AVSession.setSupportedPlaySpeeds}接口设置。
      *
      * @param { Callback<Array<double>> } [callback] - 回调函数。该参数为可选参数，若不填写该参数，则认为对所有支持的播放倍速列表变化事件取消监听。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -9348,11 +9425,11 @@ declare namespace avSession {
 
     /**
      * 注册支持的循环模式列表变化的监听事件。使用callback异步回调。
-     * 
+     *
      * 其中循环模式列表由应用通过[setSupportedLoopModes]{@link avSession.AVSession.setSupportedLoopModes}接口设置。
      *
      * @param { Callback<Array<LoopMode>> } callback - 回调函数。返回变化后支持的循环模式列表。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -9363,11 +9440,11 @@ declare namespace avSession {
 
     /**
      * 取消支持的循环模式列表变化事件监听。
-     * 
+     *
      * 取消后将不再对该事件进行监听。其中循环模式列表由应用通过[setSupportedLoopModes]{@link avSession.AVSession.setSupportedLoopModes}接口设置。
      *
-     * @param { Callback<Array<LoopMode>> } [callback] - 回调函数。该参数为可选参数，若不填写该参数，则认为对所有支持的循环模式列表变化事件取消监听。
-     * @throws { BusinessError } 6600101 - Session service exception
+     * @param { Callback<Array<double>> } [callback] - 回调函数。该参数为可选参数，若不填写该参数，则认为对所有支持的循环模式列表变化事件取消监听。
+     * @throws { BusinessError } 6600101 - Session service exception.
      * @throws { BusinessError } 6600103 - The session controller does not exist.
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @stagemodelonly
@@ -9558,7 +9635,7 @@ declare namespace avSession {
    */
   enum AVSessionErrorCode {
     /**
-     * 会话服务端异常。
+     *
      *
      * @syscap SystemCapability.Multimedia.AVSession.Core
      * @atomicservice [since 12]
@@ -10018,7 +10095,7 @@ declare namespace avSession {
     ERR_CODE_CAST_CONTROL_PARSING_CONTAINER_UNSUPPORTED = 6613003,
 
     /**
-     * 媒体清单中不支持此功能。
+     * 媒体清单中不支持的特性。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -10068,7 +10145,7 @@ declare namespace avSession {
     ERR_CODE_CAST_CONTROL_DECODING_FAILED = 6614003,
 
     /**
-     * 所需解码的内容格式超出设备能力导致失败。
+     * 设备的能力无法解码当前格式。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -10216,6 +10293,15 @@ declare namespace avSession {
      * @since 23 static
      */
     ERR_CODE_CAST_CONTROL_DRM_PROVIDE_KEY_RESPONSE_ERROR = 6616100,
+
+    /**
+     * 会话服务未运行。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.Manager
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ERR_CODE_SERVICE_NOT_RUNNING = 6700101
   }
 }
 

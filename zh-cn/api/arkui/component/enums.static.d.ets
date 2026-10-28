@@ -5328,3 +5328,56 @@ export declare enum EdgeLightPosition {
    */
   RIGHT = 7
 }
+
+/**
+ * 安全区域的沉浸式策略枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum ImmersiveStrategy {
+  /**
+   * 扩展bindSheet的标题区作为内容区的安全区。
+   *
+   * > **NOTE**
+   * >
+   * > 通过UIContext.applyDefaultImmersiveStrategy应用此策略后，
+   * > bindSheet的SheetOptions.titleBarHoverMode默认为
+   * > SheetTitleBarHoverMode.SAFE_AREA_PADDING。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 static
+   */
+  BIND_SHEET_EXPAND_SAFE_AREA = 7,
+}
+
+/**
+ * 阴影不填充时的裁切方式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum ShadowClipMode {
+    /**
+     * 按默认形状裁切（优先级顺序：shadowShape > clipShape > 控件 bounds）。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    DEFAULT_SHAPE = 0,
+
+    /**
+     * 按控件 bounds 范围裁切。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    BOUNDS_SHAPE = 1,
+}

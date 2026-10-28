@@ -16,6 +16,19 @@
 /**
  * 分段按钮组件用于创建页签型、单选或多选的胶囊型分段按钮，支持文本、图标、Symbol等多种选项类型及图文混合配置，可自定义字体、颜色、圆角等样式。页签型分段按钮适用于页签切换场景，单选胶囊型分段按钮适用于单选切换场景，多选胶囊型分段按
  * 钮适用于多选筛选场景。
+ *
+ * ###### 子组件
+ *
+ * 无
+ *
+ * ###### 属性
+ *
+ * 不支持[通用属性]{@link CommonMethod}。
+ *
+ * ###### 事件
+ *
+ * 不支持[通用事件]{@link CommonMethod}。
+ *
  * @file
  * @kit ArkUI
  */
@@ -35,7 +48,7 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 export declare enum SegmentButtonV2InteractionMode {
   /**
@@ -45,7 +58,7 @@ export declare enum SegmentButtonV2InteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   FOLLOWING_DRAG = 0,
 
@@ -56,7 +69,7 @@ export declare enum SegmentButtonV2InteractionMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NORMAL_DRAG = 1
 }
@@ -1169,7 +1182,7 @@ export declare struct TabSegmentButtonV2 {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   @Param
   readonly interactionMode?: SegmentButtonV2InteractionMode;
@@ -1193,7 +1206,7 @@ export declare struct TabSegmentButtonV2 {
   readonly enableStateAnimation?: boolean;
 
   /**
-   * Sets the build function of the segmented button.
+   * 页签型分段按钮构造方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1905,7 +1918,7 @@ export declare struct CapsuleSegmentButtonV2 {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   @Param
   readonly interactionMode?: SegmentButtonV2InteractionMode;
@@ -1929,7 +1942,7 @@ export declare struct CapsuleSegmentButtonV2 {
   readonly enableStateAnimation?: boolean;
 
   /**
-   * Sets the build function of the segmented button.
+   * 单选胶囊型分段按钮构造方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2531,7 +2544,7 @@ export declare struct MultiCapsuleSegmentButtonV2 {
   readonly languageDirection?: Direction;
 
   /**
-   * Sets the build function of the segmented button.
+   * 多选胶囊型分段按钮构造方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

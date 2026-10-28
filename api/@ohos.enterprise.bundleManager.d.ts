@@ -2047,7 +2047,7 @@ declare namespace bundleManager {
    * This API can be used to install only applications of the **enterprise_mdm** (MDM application) or
    * **enterprise_normal** (common enterprise application) distribution type. You can call the
    * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf} API to query the
-   * [BundleInfo]{@link ./bundleManager/BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
+   * [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
    * indicates the distribution type. Since API version 26.0.0, you are advised to use
    * [installForResult]{@link bundleManager.installForResult} to obtain more detailed error code return values.
    *
@@ -2085,7 +2085,7 @@ declare namespace bundleManager {
    * This API can be used to install only applications of the **enterprise_mdm** (MDM application) or
    * **enterprise_normal** (common enterprise application) distribution type. You can call the
    * [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf} API to query the
-   * [BundleInfo]{@link ./bundleManager/BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
+   * [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo} of an application, where **BundleInfo.appInfo.appDistributionType**
    * indicates the distribution type.
    *
    * > **NOTE**
@@ -2335,6 +2335,135 @@ declare namespace bundleManager {
    * @since 26.0.0
    */
   function getInstalledBundleStorageStats(admin: Want, bundleNames: Array<string>, accountId: number): Promise<Array<BundleStorageStats>>;
+
+  /**
+   * Enumerates the default application types.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum DefaultApplicationType {
+    /**
+     * Browser application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BROWSER = 0,
+
+    /**
+     * Image viewer application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    IMAGE = 1,
+
+    /**
+     * Audio player application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    AUDIO = 2,
+
+    /**
+     * Video player application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VIDEO = 3,
+
+    /**
+     * PDF viewer application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PDF = 4,
+
+    /**
+     * Word document application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    WORD = 5,
+
+    /**
+     * Excel document application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXCEL = 6,
+
+    /**
+     * PowerPoint document application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PPT = 7,
+
+    /**
+     * Email application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EMAIL = 8
+  }
+
+  /**
+   * Sets the default application for the specified type.
+   *
+   * @permission ohos.permission.ENTERPRISE_INSTALL_BUNDLE
+   * @param { DefaultApplicationType } type - Type of the default application.
+   * @param { string } bundleName - Bundle name of the application.
+   * @param { string } abilityName - Name of the application ability.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDefaultApplication(type: DefaultApplicationType, bundleName: string, abilityName: string, accountId: number): void;
+
+  /**
+   * Obtains the bundle name of the default application for the specified type.
+   *
+   * @permission ohos.permission.ENTERPRISE_INSTALL_BUNDLE
+   * @param { DefaultApplicationType } type - Type of the default application.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @returns { string } Returns the bundle name of the default application.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDefaultApplicationBundleName(type: DefaultApplicationType, accountId: number): string;
 }
 
 export default bundleManager;

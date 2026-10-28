@@ -146,8 +146,7 @@ interface LineInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} and
- * [common attributes for drawing components]{@link CommonMethod}, the following attributes are supported:
+ * The [universal attributes]{@link CommonMethod} and [common attributes for drawing components]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -216,7 +215,7 @@ declare class LineAttribute extends CommonShapeMethod<LineAttribute> {
  * > - The **Line** component does not support corners, so the **strokeLineJoin** and **strokeMiterLimit** attributes do
  * > not take effect.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * None
  *

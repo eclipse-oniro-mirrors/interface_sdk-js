@@ -130,7 +130,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - Target WantAgent object.
    * @param { AsyncCallback<Want> } callback - Callback used to return the Want.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -149,7 +149,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - Target WantAgent object.
    * @returns { Promise<Want> } Promise used to return the Want.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -222,8 +222,9 @@ declare namespace wantAgent {
    * @param { TriggerInfo } triggerInfo - Indicates the information required for triggering a WantAgent.
    * @param { Context } context - Indicates current context.
    * @returns { Promise<CompleteData> } Returns the CompleteData.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000020 - The context is not ability context.
    * @throws { BusinessError } 16000151 - Invalid wantAgent object.
    * @throws { BusinessError } 16000153 - The WantAgent has been canceled.
@@ -351,7 +352,7 @@ declare namespace wantAgent {
    *
    * @param { boolean } isMultithreadingSupported - Whether to enable the multithreading feature. The value
    *     <code>true</code> means to enable multithreading, and <code>false</code> means the opposite.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -371,7 +372,7 @@ declare namespace wantAgent {
    *
    * @param { LocalWantAgentInfo } info - Information about the local WantAgent object to create.
    * @returns { WantAgent } Returns the created WantAgent.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -385,7 +386,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - Indicates the WantAgent.
    * @returns { boolean } Returns true if the WantAgent is local.
-   * @throws { BusinessError } 202 - Not System app. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly

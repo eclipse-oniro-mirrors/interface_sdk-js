@@ -117,6 +117,46 @@ export declare enum ScrollAlign {
 }
 
 /**
+ * 枚举滚动到指定索引的快速滚动模式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export enum FastScrollMode {
+  /**
+   * 不启用快速滚动优化。在动画开始前创建并测量所有中间子组件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  NONE = 0,
+
+  /**
+   * 快速滚动优化，跳过中间子组件的测量。中间子组件会被创建但不会被测量。
+   * 该模式适用于List多列且ListItem和ListItemGroup同时存在的场景。
+   * 此时ListItem只占一行中的一列，但ListItemGroup会占满一整行，因此List需要创建所有中间子组件来获取这些子组件类型从而计算出目标索引的行位置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SKIP_MEASURE = 1,
+
+  /**
+   * 快速滚动优化，跳过中间子组件的创建和测量。中间子组件既不会被创建，也不会被测量。
+   * 该模式提供最大限度的优化性能。但该模式不适用于List多列且ListItem和ListItemGroup同时存在的场景。
+   * 在此场景下，请使用SKIP_MEASURE。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SKIP_CREATE_AND_MEASURE = 2
+}
+
+/**
  * 滑动偏移量对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -181,6 +221,18 @@ export declare interface ScrollToIndexOptions {
    * @since 23 static
    */
   extraOffset?: LengthMetrics;
+
+  /**
+   * 快速滚动模式，用于滚动到指定索引。
+   * 当设置为NONE以外的值时，滚动动画将估算目标位置并在动画过程中跳过一些中间子组件。
+   * 当scrollToIndex接口的smooth属性为true时，该参数才生效。
+   * 默认值：FastScrollMode.NONE。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  fastScroll?: FastScrollMode;
 }
 
 /**
@@ -594,7 +646,7 @@ export declare class Scroller {
    * @throws { BusinessError } 100004 - 控制器未绑定到组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   getScrollState(): ScrollState;
 }

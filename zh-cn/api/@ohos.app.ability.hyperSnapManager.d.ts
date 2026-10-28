@@ -224,5 +224,27 @@ declare namespace hyperSnapManager {
      * @since 26.0.1 dynamic&static
      */
     function getLastError(errType: HyperSnapErrorType): Promise<HyperSnapErrorInfo>;
+
+    /**
+     * 检查当前进程是否正在进行Hyper Snap初始化。
+     *
+     * 在Hyper Snap模板进程初始化阶段（包括预加载阶段和创建镜像阶段），
+     * 此方法返回**true**。一旦快照完成、失败或流程不是模板
+     * 过程，此方法返回**false**。
+     *
+     * > **说明**
+     * > 这对于应用程序区分正常冷启动和Hyper Snap模板非常有用
+     * > 进程初始化，允许他们相应地调整初始化逻辑。
+     *
+     * @returns { Promise<boolean> } Promise用于返回结果。
+     *     **true**表示当前进程正在进行Hyper Snap初始化。
+     *     **false**表示当前进程未进行Hyper Snap初始化
+     *     （快照已完成、失败或进程不是模板进程）。
+     * @throws { BusinessError } 16000050 - Connect to system service failed.
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    function isHyperSnapInitializing(): Promise<boolean>;
 }
 export default hyperSnapManager;

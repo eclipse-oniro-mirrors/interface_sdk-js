@@ -904,7 +904,7 @@ declare class UIAbility extends Ability {
    * > UIAbility.
    * >
    * > - Additionally, if the application or a third-party framework registers a listener for 
-   * > [window.WindowStage.on('windowStageClose')]{@link ./@ohos.windw:WindowStage.onWindowStageClose}
+   * > [window.WindowStage.on]{@link ./@ohos.window:WindowStage.on(eventType: 'windowStageClose', callback: Callback<void>)}
    * > , this callback function is not executed.
    * >
    * > - If an asynchronous callback crashes, it will be handled as a timeout. If the UIAbility does not respond within 

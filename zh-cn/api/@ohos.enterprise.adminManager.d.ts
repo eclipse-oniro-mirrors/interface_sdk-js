@@ -105,7 +105,8 @@ declare namespace adminManager {
      * 件进程死亡后能重新拉起。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_NORMAL = 0x00,
@@ -115,7 +116,8 @@ declare namespace adminManager {
      * 组件进程死亡后能重新拉起。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_SUPER = 0x01,
@@ -835,7 +837,7 @@ declare namespace adminManager {
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { string } bundleName - 被委托应用包名。被委托应用的分发类型需为enterprise_normal和enterprise_mdm，可以通过
    *     [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口查询应用自身的
-   *     [BundleInfo]{@link ./bundleManager/BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
+   *     [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
    * @param { Array<string> } policies -
    [委托策略列表](docroot://mdm/mdm-kit-appendix.md#可委托策略列表)。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -880,7 +882,7 @@ declare namespace adminManager {
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { string } bundleName - 被委托应用包名。被委托应用的分发类型需为enterprise_normal和enterprise_mdm，可以通过
    *     [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf}接口查询应用自身的
-   *     [BundleInfo]{@link ./bundleManager/BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
+   *     [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo}，其中BundleInfo.appInfo.appDistributionType为应用的分发类型。
    * @returns { Array<string> } 委托策略列表。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
@@ -1038,6 +1040,68 @@ declare namespace adminManager {
    * @since 26.0.0
    */
   function enableSelfDeviceAdmin(admin: Want, credential: string): void;
+
+  /**
+   * 查询管理员信息
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_DEVICE_ADMIN
+   * @returns { Array<AdminInfo> } Returns the administrators information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getAdminInfos(): Array<AdminInfo>;
+
+  /**
+   * 查询自身是否是超级管理员应用
+   *
+   * @returns { boolean } 如果self是超级设备管理员，则返回true；如果self是不是超级管理员设备，则返回false。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function isSelfSuperAdmin(): boolean;
+
+  /**
+   * 企业管理员应用信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface AdminInfo {
+    /**
+     * 企业管理员类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    type: AdminType;
+
+    /**
+     * 企业管理员包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    bundleName: string;
+
+    /**
+     * 企业管理员包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    abilityName: string;
+  }
 }
 
 export default adminManager;

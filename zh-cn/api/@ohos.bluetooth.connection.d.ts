@@ -333,12 +333,16 @@ declare namespace connection {
    */
   function cancelPairedDevice(deviceId: string, callback: AsyncCallback<void>): void;
 
-  /**
-   * 删除配对的远程设备。使用Promise异步回调。
+/**
+   * 删除已配对的远端设备。
+   *
+   * 删除行为因调用方的身份而异：
+   * 对于第三方应用，删除配对前会弹出系统确认对话框。
+   * 只有在用户确认对话框后，配对才会被移除。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 表示要删除的远程设备的地址，例如："XX:XX:XX:XX:XX:XX"。
-   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @param { string } deviceId - 设备ID。例如，“11:22:33:AA:BB:FF”。
+   * @returns { Promise<void> } 不会返回任何值的Promise。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
    * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -346,9 +350,13 @@ declare namespace connection {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900013 - The user does not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - User refuse the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -1237,7 +1245,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   function getBleMacByBrMac(brMac: string): string;
 

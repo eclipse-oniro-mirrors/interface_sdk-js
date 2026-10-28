@@ -6765,7 +6765,7 @@ declare enum OperateIntention {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum ImmersiveStrategy {
 
@@ -6782,7 +6782,7 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   AVOID_CUTOUT = 0,
 
@@ -6793,9 +6793,81 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   AVOID_FLOAT_NAV = 1,
+
+  /**
+   * Avoid the window control buttons, which are the close, minimize and zoom buttons.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  GRID_EXPAND_SAFE_AREA = 2,
+
+  /**
+   * Expands the clip content of the List component to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  LIST_EXPAND_SAFE_AREA = 3,
+
+  /**
+   * Expands the clip content of the Scroll component to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SCROLL_EXPAND_SAFE_AREA = 4,
+
+  /**
+   * Expands the clip content of the WaterFlow component to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  WATER_FLOW_EXPAND_SAFE_AREA = 5,
+
+  /**
+   * Avoid the window control buttons, which are the close, minimize and zoom buttons.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  AVOID_WINDOW_CONTROLS = 6,
+
+  /**
+   * Expand the title area of bindSheet as safe area for the content region.
+   *
+  * > **NOTE**
+   * >
+   * > When this strategy is applied via {@link UIContext.applyDefaultImmersiveStrategy},
+   * > bindSheet's {@link SheetOptions.titleBarHoverMode} defaults to
+   * > {@link SheetTitleBarHoverMode.SAFE_AREA_PADDING}.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BIND_SHEET_EXPAND_SAFE_AREA = 7,
 
   /**
    * Expands the TitleBar and ToolBar of Navigation/NavDestination as safe areas for the content region.
@@ -6804,7 +6876,40 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NAVIGATION_EXPAND_SAFE_AREA = 8
+}
+
+/**
+ * Enumerates the clip modes for the shadow when it is not filled.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum ShadowClipMode {
+  /**
+   * Clip the shadow by the default shape (priority order: shadowShape > clipShape > component bounds).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DEFAULT_SHAPE = 0,
+
+  /**
+   * Clip the shadow by the component bounds.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BOUNDS_SHAPE = 1,
 }

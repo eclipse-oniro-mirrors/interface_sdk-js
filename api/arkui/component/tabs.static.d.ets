@@ -22,7 +22,7 @@
 
 import { BackgroundBlurStyleOptions, BackgroundEffectOptions, BlurStyle, Callback, CommonMethod, TranslateOptions, DividerStyle, Bindable } from './common';
 import { EdgeEffect, PageFlipMode, Curve } from "./enums";
-import { Dimension, Length, ResourceColor, ResourceStr } from "./units";
+import { Dimension, Length, ResourceColor, ResourceStr, Position, Edges, LocalizedEdges } from "./units";
 import { ComponentContentBase } from '../ComponentContent';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, ICurve } from "./common";
@@ -317,7 +317,7 @@ export declare class TabsController {
    * @returns { TabBarDisplayMode } The current displayMode.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   getBarDisplayMode(): TabBarDisplayMode;
 }
@@ -626,6 +626,96 @@ export interface FloatingTabBarStyle {
    * @since 26.0.0 static
    */
   systemMaterial?: uiMaterial.ImmersiveMaterial;
+
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxWidth?: Length;
+
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offset?: Position | Edges | LocalizedEdges;
+}
+
+/**
+ * Provides an interface for the options for the top floating tab bar style.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface TopFloatingTabBarStyle {
+  /**
+   * The bar width.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  barWidth?: Length;
+
+  /**
+   * The width of the left and right margins of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  barSideMargin?: Length;
+
+  /**
+   * The distance between the bar and the top of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  barTopMargin?: Length;
+
+  /**
+   * The color of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maskColor?: ResourceColor;
+
+  /**
+   * The height of the mask.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maskHeight?: Length;
+
+  /**
+   * The maximum width of the bar. It cannot be set in precentage.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxWidth?: Length;
+
+  /**
+   * The offset of the bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offset?: Position | Edges | LocalizedEdges;
 }
 
 /**
@@ -728,7 +818,7 @@ export type OnTabsContentDidScrollCallback = (selectedIndex: int, index: int, po
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare enum TabBarStyle {
   /**
@@ -736,7 +826,7 @@ export declare enum TabBarStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   BOTTOM = 0,
 
@@ -745,7 +835,7 @@ export declare enum TabBarStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   SIDEBAR = 1,
 
@@ -755,9 +845,19 @@ export declare enum TabBarStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
-  SIDEBAR_ADAPTABLE = 2
+  SIDEBAR_ADAPTABLE = 2,
+
+  /**
+   * The top floating tab bar style. The tab bar is always displayed at the top in a floating form.
+   * The **BarPosition** setting is ignored when this style is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP = 3
 }
 
 /**
@@ -765,7 +865,7 @@ export declare enum TabBarStyle {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare enum TabsSidebarDisplayStyle {
   /**
@@ -774,7 +874,7 @@ export declare enum TabsSidebarDisplayStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   EMBED = 0,
  
@@ -784,7 +884,7 @@ export declare enum TabsSidebarDisplayStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   DISPLACE = 1,
 }
@@ -798,7 +898,7 @@ export declare enum TabsSidebarDisplayStyle {
  * @returns { boolean } Returns **true** if the tab matches the search criteria, **false** otherwise.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export type TabsSidebarSearchFilterCallback = (tabIndex: int, text: string) => boolean;
 
@@ -807,7 +907,7 @@ export type TabsSidebarSearchFilterCallback = (tabIndex: int, text: string) => b
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare interface TabsSidebarSearchableOptions {
   /**
@@ -815,7 +915,7 @@ export declare interface TabsSidebarSearchableOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   searchText?: ResourceStr;
 
@@ -824,7 +924,7 @@ export declare interface TabsSidebarSearchableOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   placeholder?: ResourceStr;
 
@@ -833,7 +933,7 @@ export declare interface TabsSidebarSearchableOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   searchCallback?: Callback<string>;
 
@@ -842,7 +942,7 @@ export declare interface TabsSidebarSearchableOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   searchFilter?: TabsSidebarSearchFilterCallback;
 }
@@ -855,7 +955,7 @@ export declare interface TabsSidebarSearchableOptions {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare enum TabBarDisplayMode {
   /**
@@ -863,7 +963,7 @@ export declare enum TabBarDisplayMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   BOTTOM_TABBAR = 0,
 
@@ -872,9 +972,18 @@ export declare enum TabBarDisplayMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
-  SIDEBAR = 1
+  SIDEBAR = 1,
+
+  /**
+   * The tab bar is displayed as a top floating bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP_TABBAR = 2
 }
 
 /**
@@ -882,7 +991,7 @@ export declare enum TabBarDisplayMode {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare interface TabsBreakpointType<T> {
   /**
@@ -890,7 +999,7 @@ export declare interface TabsBreakpointType<T> {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   sm?: T;
 
@@ -899,7 +1008,7 @@ export declare interface TabsBreakpointType<T> {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   md?: T;
 
@@ -908,7 +1017,7 @@ export declare interface TabsBreakpointType<T> {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   lg?: T;
 }
@@ -1442,6 +1551,18 @@ export declare interface TabsAttribute extends CommonMethod {
   default barFloatingStyle(style: FloatingTabBarStyle | undefined): this;
 
   /**
+   * Enable top floating style for bar. This is effective only when **barStyle** is set to
+   * **TabBarStyle.TOP** or **TabBarStyle.TOP_ADAPTABLE**.
+   *
+   * @param { TopFloatingTabBarStyle | undefined } style - top floating style for bar
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default topBarFloatingStyle(style: TopFloatingTabBarStyle | undefined): this;
+
+  /**
    * Sets the display style of the tab bar.
    *
    * @param { TabBarStyle | undefined } style - Display style of the tab bar.
@@ -1450,7 +1571,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default barStyle(style: TabBarStyle | undefined): this;
 
@@ -1464,7 +1585,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarPosition(position: BarPosition | undefined): this;
 
@@ -1475,7 +1596,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarHeader(header: ComponentContentBase | undefined): this;
 
@@ -1486,7 +1607,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarSearchable(searchOptions: TabsSidebarSearchableOptions | undefined): this;
 
@@ -1498,7 +1619,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default barDisplayModeBreakpoint(style: TabsBreakpointType<TabBarDisplayMode> | undefined): this;
 
@@ -1509,7 +1630,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default onBarDisplayModeChange(callback: Callback<TabBarDisplayMode> | undefined): this;
 
@@ -1520,7 +1641,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarSelectedIconColor(value: ResourceColor | undefined): TabsAttribute;
 
@@ -1531,7 +1652,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarSelectedTextColor(value: ResourceColor | undefined): TabsAttribute;
 
@@ -1542,7 +1663,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarUnselectedIconColor(value: ResourceColor | undefined): TabsAttribute;
 
@@ -1553,7 +1674,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarUnselectedTextColor(value: ResourceColor | undefined): TabsAttribute;
 
@@ -1564,7 +1685,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarSelectedBoardColor(value: ResourceColor | undefined): TabsAttribute;
 
@@ -1577,7 +1698,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarWidth(value: Length | undefined): this;
 
@@ -1594,7 +1715,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default minSidebarWidth(value: Length | undefined): this;
 
@@ -1611,7 +1732,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default maxSidebarWidth(value: Length | undefined): this;
 
@@ -1626,7 +1747,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default minContentWidth(value: Length | undefined): this;
 
@@ -1638,7 +1759,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarBackgroundColor(value: ResourceColor | undefined): this;
 
@@ -1651,7 +1772,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarBackgroundBlurStyle(value: BlurStyle | undefined): this;
 
@@ -1666,7 +1787,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarDivider(value: DividerStyle | undefined): this;
 
@@ -1678,7 +1799,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default sidebarDisplayStyle(style: TabsSidebarDisplayStyle | undefined): this;
 
@@ -1689,7 +1810,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default sidebarFooter(footer: ComponentContentBase | undefined): this;
  
@@ -1700,7 +1821,7 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } - the attribute of the tabs.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default sidebarBottomBar(bottomBar: ComponentContentBase | undefined): this;
 }

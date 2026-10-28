@@ -117,8 +117,7 @@ interface CircleInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod}, the
- * following attributes are supported:
+ * The [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -175,7 +174,7 @@ declare class CircleAttribute extends CommonShapeMethod<CircleAttribute> {
 /**
  * The **Circle** component is used to draw a circle.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * None
  *

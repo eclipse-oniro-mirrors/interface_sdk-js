@@ -219,7 +219,7 @@ declare namespace bundleManager {
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -884,6 +884,16 @@ declare namespace bundleManager {
      * @since 26.0.0 dynamic&static
      */
     MODULAR_OBJECT = 39,
+
+    /**
+     * [UkeyAuthExtensionAbility](docroot://reference/apis-device-certificate-kit/js-apis-UkeyAuthExtensionAbility.md):
+     * 为开发者提供接入自定义UKey认证界面的能力。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UKEY_AUTH = 40,
 
     /**
      * 不指定类型<!--Del-->，配合[queryExtensionAbilityInfo接口]{@link bundleManager.queryExtensionAbilityInfo}可以查询所有类型的

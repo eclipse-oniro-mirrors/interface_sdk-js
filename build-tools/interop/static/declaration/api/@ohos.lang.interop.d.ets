@@ -25,14 +25,14 @@
  */
 declare namespace st {
     /**
-     * A static type array interface.
+     * A static type array abstract class.
      *
-     * @interface Array
+     * @class Array
      * @template T
      * @syscap SystemCapability.ArkTS.ArkTS
      * @since 24
      */
-    interface Array<T> {
+    abstract class Array<T> {
         /**
          * Returns the length of the array.
          *
@@ -449,15 +449,15 @@ declare namespace st {
     }
 
     /**
-     * A static type map interface.
+     * A static type map abstract class.
      *
-     * @interface Map
+     * @class Map
      * @template K
      * @template V
      * @syscap SystemCapability.ArkTS.ArkTS
      * @since 24
      */
-    interface Map<K, V> {
+    abstract class Map<K, V> {
         /**
          * Returns the number of key-value pairs in the Map.
          *
@@ -583,14 +583,14 @@ declare namespace st {
     }
 
     /**
-     * A static type set interface.
+     * A static type set abstract class.
      *
-     * @interface Set
+     * @class Set
      * @template T
      * @syscap SystemCapability.ArkTS.ArkTS
      * @since 24
      */
-    interface Set<T> {
+    abstract class Set<T> {
         /**
          * Returns the number of values in the Set.
          *

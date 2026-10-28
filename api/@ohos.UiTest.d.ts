@@ -582,7 +582,7 @@ declare class UiDriver {
    *
    * @param { By } by - Attributes of the target component.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws {BusinessError} 401 - if the input parameters are invalid.
+   * @throws {BusinessError} 401 - [Async] if the input parameters are invalid.
    * @throws {BusinessError} 17000002 - The API does not support concurrent calls.
    * @throws {BusinessError} 17000003 - if the assertion failed.
    * @syscap SystemCapability.Test.UiTest
@@ -1400,7 +1400,7 @@ declare interface UIEventObserver {
    *
    * @param { 'toastShow' } type - Event type. The value is fixed at **'toastShow'**.
    * @param { Callback<UIElementInfo> } callback - Callback used to return the result.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -1413,7 +1413,7 @@ declare interface UIEventObserver {
    * Listen for toast show once
    *
    * @param { Callback<UIElementInfo> } callback - function, returns the monitored UIElementInfo.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @since 23 static
@@ -1426,7 +1426,7 @@ declare interface UIEventObserver {
    *
    * @param { 'dialogShow' } type - Event type. The value is fixed at **'dialogShow'**.
    * @param { Callback<UIElementInfo> } callback - Callback used to return the result.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -1439,7 +1439,7 @@ declare interface UIEventObserver {
    * Listen for dialog show once
    *
    * @param { Callback<UIElementInfo> } callback - function, returns the monitored UIElementInfo.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @since 23 static
@@ -1936,7 +1936,7 @@ declare class On {
    * @param { MatchPattern } [pattern] - Match pattern {@link MatchPattern} .
    *     <br>Default value: {@link MatchPattern.EQUALS}
    * @returns { On } - **On** object that matches the text attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -1952,7 +1952,7 @@ declare class On {
    *
    * @param { string } id - Component ID.
    * @returns { On } - **On** object that matches the ID attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -1968,7 +1968,7 @@ declare class On {
    *
    * @param { string } tp - Component type.
    * @returns { On } - **On** object that matches the type attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -1985,7 +1985,7 @@ declare class On {
    * @param { boolean } [b] - Clickable status of the component. The value **true** indicates that the component is clickable
    *     , and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the clickable attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2002,7 +2002,7 @@ declare class On {
    * @param { boolean } [b] - Long-clickable status of the component. The value **true** indicates that the component is long
    *     -clickable, and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the long-clickable attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2019,7 +2019,7 @@ declare class On {
    * @param { boolean } [b] - Whether the specified component is scrollable. The value **true** indicates that the component is
    *     scrollable, and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the scrollable attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2036,7 +2036,7 @@ declare class On {
    * @param { boolean } [b] - Enabled status of the component. The value **true** indicates that the component is enabled,
    *     and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the enabled attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2053,7 +2053,7 @@ declare class On {
    * @param { boolean } [b] - Focused status of the component. The value **true** indicates that the component is focused,
    *     and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the focused attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2070,7 +2070,7 @@ declare class On {
    * @param { boolean } [b] - Selected status of the component. The value **true** indicates that the component is selected,
    *     and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the selected attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2087,7 +2087,7 @@ declare class On {
    * @param { boolean } [b] - Checked status of the component. The value **true** indicates that the component is checked,
    *     and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the checked attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2104,7 +2104,7 @@ declare class On {
    * @param { boolean } [b] - Checkable status of the component. The value **true** indicates that the component is checkable
    *     , and **false** indicates the opposite. Default value: **true**
    * @returns { On } - **On** object that matches the checkable attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 10]
@@ -2120,7 +2120,7 @@ declare class On {
    *
    * @param { On } on - Information about the attribute component.
    * @returns { On } - **On** object.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -2151,7 +2151,7 @@ declare class On {
    *
    * @param { On } on - Information about the attribute component.
    * @returns { On } - **On** object.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -2182,7 +2182,7 @@ declare class On {
    *
    * @param { On } on - Information about the attribute component.
    * @returns { On } - **On** object.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -2213,7 +2213,7 @@ declare class On {
    *
    * @param { string } bundleName - Bundle name of the application window.
    * @returns { On } - **On** object.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -2248,7 +2248,7 @@ declare class On {
    * @param { MatchPattern } [pattern] - Match pattern {@link MatchPattern} .
    *     <br>Default value: {@link MatchPattern.EQUALS}
    * @returns { On } - **On** object.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2264,7 +2264,7 @@ declare class On {
    * @param { string } id - Component ID.
    * @param { MatchPattern } pattern - Text matching pattern {@link MatchPattern}.
    * @returns { On } - **On** object that matches the ID attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2280,7 +2280,7 @@ declare class On {
    * @param { string } tp - Component type.
    * @param { MatchPattern } pattern - Text matching pattern {@link MatchPattern}.
    * @returns { On } - **On** object that matches the type attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2297,7 +2297,7 @@ declare class On {
    * @param { MatchPattern } [pattern] - Match pattern{@link MatchPattern}.
    *     <br>Default value: {@link MatchPattern.EQUALS}
    * @returns { On } - **On** object that matches the **hint** attribute of the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice
@@ -2589,7 +2589,7 @@ declare class Component {
    *
    * @param { string } text - Input text. Currently, English, Chinese, and special characters are supported.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2614,7 +2614,7 @@ declare class Component {
    *     <br> If the input text contains Chinese characters or special characters or contains more than 200
    *     characters, the text is copied and pasted regardless of the value of {@link InputTextMode}.paste.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited device
    *     capabilities.
@@ -2655,7 +2655,7 @@ declare class Component {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2679,7 +2679,7 @@ declare class Component {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter
    *     verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2713,7 +2713,7 @@ declare class Component {
    *
    * @param { On } on - Attributes of the target component.
    * @returns { Promise<Component> } - Promise used to return the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2746,7 +2746,7 @@ declare class Component {
    *
    * @param { Component } target - Target component.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2765,7 +2765,7 @@ declare class Component {
    * @param { double } scale - Scale factor, which is a value greater than 1. If the input value is less than or equal
    *     to 1, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2784,7 +2784,7 @@ declare class Component {
    * @param { double } scale - Scale factor. The value range is (0, 1]. If the value is **0** or a negative number,
    *     error code 401 is returned.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2836,7 +2836,7 @@ declare class Component {
    *     default value is **80**. If the value is a negative
    *     number, error code 401 is returned.
    * @returns { Promise<Component> } - Promise used to return the target component.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2856,7 +2856,7 @@ declare class Component {
    *     <br>Unit: px
    *     <br>Default value: 80
    * @returns { Promise<Component | null> } the found result,or null if not found.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -2917,7 +2917,7 @@ declare class Driver {
    * @param { int } duration - Specified time, in ms. If the
    *     value is a negative number, error code 401 is returned.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -2934,7 +2934,7 @@ declare class Driver {
    *
    * @param { On } on - Attributes of the target {@link Component}.
    * @returns { Promise<Component> } - Promise used to return the {@link Component} or undefined.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -2949,7 +2949,7 @@ declare class Driver {
    *
    * @param { On } on - the attribute requirements of the target {@link Component}.
    * @returns { Promise<Component | null> } the first matched {@link Component} or undefined.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -2962,7 +2962,7 @@ declare class Driver {
    *
    * @param { WindowFilter } filter - Attributes of the target {@link UiWindow}.
    * @returns { Promise<UiWindow> } - Promise used to return the target {@link UiWindow}.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -2976,7 +2976,7 @@ declare class Driver {
    *
    * @param { WindowFilter } filter - the filter condition of the target {@link UiWindow}.
    * @returns { Promise<UiWindow | null> } the first matched {@link UiWindow} or undefined.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -2994,7 +2994,7 @@ declare class Driver {
    *     <br>Unit: ms
    *     <br>Value range: The value should be >= 0
    * @returns { Promise<Component> } the first matched {@link Component} or undefined.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3012,7 +3012,7 @@ declare class Driver {
    *     <br>Value range: The value should be >= 0
    *     <br>Unit: ms
    * @returns { Promise<Component | null> } the first matched {@link Component} or undefined.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3026,7 +3026,7 @@ declare class Driver {
    *
    * @param { On } on - Attributes of the target {@link Component}.
    * @returns { Promise<Array<Component>> } - Promise used to return the list of {@link Component}s.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3041,7 +3041,7 @@ declare class Driver {
    *
    * @param { On } on - the attribute requirements of the target {@link Component}.
    * @returns { Promise<Array<Component> | null> } the matched {@link Component}s list.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3055,7 +3055,7 @@ declare class Driver {
    *
    * @param { On } on - Attributes of the target {@link Component}.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000003 - Assertion failed.
@@ -3111,7 +3111,7 @@ declare class Driver {
    * The value is an integer greater than or equal to 0.
    *     For details, see [KeyCode]{@link @ohos.multimodalInput.keyCode:KeyCode}.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3134,7 +3134,7 @@ declare class Driver {
    * The value is an integer greater than or equal to 0.
    *     <br> **Note**: If the input **displayId** does not exist, the exception **401** is reported.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3158,7 +3158,7 @@ declare class Driver {
    *     For details, see [KeyCode]{@link @ohos.multimodalInput.keyCode:KeyCode}.
    *     <br>Default value: 0
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3184,7 +3184,7 @@ declare class Driver {
    * @param { int } [displayId] - Display ID. 
    * The default value is the default display ID of the device.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3204,7 +3204,7 @@ declare class Driver {
    * @param { int } y - Vertical coordinate of the target point, in pixels. The value is an integer greater than or
    *     equal to 0. If the value is out of range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3225,7 +3225,7 @@ declare class Driver {
    * @param { int } y - Vertical coordinate of the target point, in pixels. The value is an integer greater than or
    *     equal to 0. If the value is out of range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3247,7 +3247,7 @@ declare class Driver {
    * @param { int } y - Vertical coordinate of the target point, in pixels. The value is an integer greater than or
    *     equal to 0. If the value is out of range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3279,7 +3279,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3311,7 +3311,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3513,7 +3513,7 @@ declare class Driver {
    *     [sandbox path](docroot://file-management/app-sandbox-directory.md) of the current application.
    * @returns { Promise<boolean> } - Promise used to return whether the screenshot operation is successful.
    *     The value **true** indicates the screenshot operation is successful, and **false** indicates the opposite.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3537,7 +3537,7 @@ declare class Driver {
    * @returns { Promise<boolean> } Promise used to return whether the screenshot operation is successful. The value
    *     **true** indicates that the screen capture operation is successful, and the value **false** indicates the
    *     opposite.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3576,7 +3576,7 @@ declare class Driver {
    *
    * @param { DisplayRotation } rotation - Display rotation of the device.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *      2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3631,7 +3631,7 @@ declare class Driver {
    * @param { boolean } enabled - Whether the screen can be rotated. The value **true** indicates that the screen can be
    *     rotated, and **false** indicates the opposite.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3775,7 +3775,7 @@ declare class Driver {
    *     value is a negative number, error code 401 is returned.
    * @returns { Promise<boolean> } - Promise used to return whether all components on the current UI are idle. The value true
    *     indicates that all components on the current UI are idle, and false indicates the opposite.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3802,7 +3802,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3828,7 +3828,7 @@ declare class Driver {
    *     <br>Default value: 600
    * @returns { Promise<boolean> } - Promise used to return whether the operation is successful.
    *     The value **true** indicates that the operation is successful, and **false** indicates the opposite.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3850,7 +3850,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3877,7 +3877,7 @@ declare class Driver {
    * The value is an integer greater than or equal to 0.
    *     <br> **Note**: If the input **displayId** does not exist, the exception **401** is reported.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3902,7 +3902,7 @@ declare class Driver {
    *     For details, see [KeyCode]{@link @ohos.multimodalInput.keyCode:KeyCode}.
    *     <br>Default value: 0
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3918,7 +3918,7 @@ declare class Driver {
    *
    * @param { Point } p - Coordinates of the end point.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3948,7 +3948,7 @@ declare class Driver {
    *     For details, see [KeyCode]{@link @ohos.multimodalInput.keyCode:KeyCode}.
    *     <br>Default value: 0
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -3981,7 +3981,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 20
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4004,7 +4004,7 @@ declare class Driver {
    *     The default value is the entire screen.
    * @returns { Promise<boolean> } - Promise used to return whether the screenshot operation is successful.
    *     The value **true** indicates the screenshot operation is successful, and **false** indicates the opposite.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4043,7 +4043,7 @@ declare class Driver {
    *     For details, see [KeyCode]{@link @ohos.multimodalInput.keyCode:KeyCode}.
    *     <br>Default value: 0
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4068,7 +4068,7 @@ declare class Driver {
    *     For details, see [KeyCode]{@link @ohos.multimodalInput.keyCode:KeyCode}.
    *     <br>Default value: 0
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4095,7 +4095,7 @@ declare class Driver {
    *     The default value is 1500. If the value is less than 1500, error code 401 is thrown. If the value is **null**
    *     or **undefined**, the default value is used.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4120,7 +4120,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4145,7 +4145,7 @@ declare class Driver {
    *     <br>Throws error code 401 if negative.
    *     <br>Default value: 600
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4174,7 +4174,7 @@ declare class Driver {
    *     default value is 1500. If the value is less than 1500, error code 401 is thrown. If the value is **null**
    *     or **undefined**, the default value is used.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4215,7 +4215,7 @@ declare class Driver {
    * @param { Point } p - Coordinates of the end point.
    * @param { string } text - Input text. Currently, English, Chinese, and special characters are supported.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4241,7 +4241,7 @@ declare class Driver {
    *     <br> If the input text contains Chinese characters or special characters or contains more than 200
    *     characters, the text is copied and pasted regardless of the value of {@link InputTextMode}.paste.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 801 Capability not supported. function can not work correctly due to limited device
    *     capabilities.
@@ -4266,7 +4266,7 @@ declare class Driver {
    *     applicable to scenarios where multi-finger swipe gestures are simulated on the touchpad, for example,
    *     swiping up with three fingers to switch the task view.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000005 This operation is not supported.
@@ -4283,7 +4283,7 @@ declare class Driver {
    *
    * @param { Point } point - Coordinates of the clicked point.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4303,7 +4303,7 @@ declare class Driver {
    * the default value is used. 
    * If the value is out of the value range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4319,7 +4319,7 @@ declare class Driver {
    *
    * @param { Point } point - Coordinates of the double-clicked point.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4345,7 +4345,7 @@ declare class Driver {
    * If the value is **null** or **undefined**, the default value is used. 
    * If the value is out of the value range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4375,7 +4375,7 @@ declare class Driver {
    * If the value is **null** or **undefined**, the default value is used. 
    * If the value is out of the value range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
@@ -4732,7 +4732,7 @@ declare class UiWindow {
    * @param { int } y - Vertical coordinate of the target point, in pixels. The value is an integer greater than
    *     or equal to 0. If the value is out of range, error code 401 is thrown.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -4755,7 +4755,7 @@ declare class UiWindow {
    *     equal to 0. If the value is out of range, error code 401 is thrown.
    * @param { ResizeDirection } direction - Resize direction.
    * @returns { Promise<void> } - Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
@@ -4898,7 +4898,7 @@ declare class PointerMatrix {
    * @param { int } steps - Number of steps performed by a finger. The value is an integer ranging from 1 to 1000.
    *     If the value is out of range, error code 401 is thrown.
    * @returns { PointerMatrix } - **PointerMatrix** object created.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
@@ -4919,7 +4919,7 @@ declare class PointerMatrix {
    *     of steps set when the **PointerMatrix** object is constructed.
    * @param { Point } point - Coordinates of the action. It is recommended that the distance between adjacent coordinates be
    *     within the range of 10 px to 80 px.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Test.UiTest
    * @crossplatform [since 11]
