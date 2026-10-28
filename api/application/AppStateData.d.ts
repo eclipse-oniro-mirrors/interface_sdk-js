@@ -20,7 +20,7 @@
 
 /**
  * The module defines the application state information. Once an application state change listener is registered using
- * [on]{@link ./../@ohos.app.ability.appManager:appManager.on(type: 'applicationState', observer: ApplicationStateObserver)},
+ * [on]{@link @ohos.app.ability.appManager:appManager.on(type: 'applicationState', observer: ApplicationStateObserver)},
  *  the system triggers the
  * [onForegroundApplicationChanged](docroot://reference/apis-ability-kit/js-apis-inner-application-applicationStateObserver.md#applicationstateobserveronforegroundapplicationchanged)
  *  callback of [ApplicationStateObserver]{@link ApplicationStateObserver} to deliver notifications whenever
