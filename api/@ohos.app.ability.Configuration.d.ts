@@ -222,4 +222,15 @@ export interface Configuration {
    * @since 23 static
    */
   locale?: Intl.Locale;
+
+  /**
+   * Indicates whether the brand color has ever changed. true indicates that it has changed, and false indicates
+   * that it has not changed.
+   *
+   * @syscap SystemCapability.Ability.AbilityBase
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  hasBrandColorChanged?: boolean;
 }
