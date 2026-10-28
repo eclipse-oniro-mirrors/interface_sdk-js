@@ -15,7 +15,7 @@
 
 /**
  * @file
- * @kit Automatic Scene Configuration Kit
+ * @kit AutomaticSceneConfigurationKit
  * @fileName @ohos.customization.assessment.d.ts
  */
 
