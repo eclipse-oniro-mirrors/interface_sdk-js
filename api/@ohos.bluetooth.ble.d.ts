@@ -2416,7 +2416,7 @@ declare namespace ble {
   }
 
   /**
-   * Describes the parameters of the of the Gatt client's characteristic write request.
+   * Describes the parameters of the Gatt client's characteristic write request.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -2592,7 +2592,7 @@ declare namespace ble {
   }
 
   /**
-   * Describes the parameters of the Gatt client's characteristic write request.
+   * Describes the parameters of the Gatt client's descriptor write request.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -2625,7 +2625,7 @@ declare namespace ble {
      */
     transId: int;
     /**
-     * Indicates the byte offset of the start position for writing characteristic value
+     * Indicates the byte offset of the start position for writing descriptor value
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
@@ -2723,7 +2723,7 @@ declare namespace ble {
      */
     deviceId: string;
     /**
-     * The Id of the write request
+     * The Id of the read or write request
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
