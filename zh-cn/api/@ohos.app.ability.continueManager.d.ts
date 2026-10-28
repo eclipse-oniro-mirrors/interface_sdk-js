@@ -36,7 +36,7 @@ declare namespace continueManager {
   /**
    * 在应用快速拉起时，注册回调函数以获取快速拉起结果。使用callback异步回调。适用于跨设备应用迁移场景，如游戏进度从手机迁移到平板、视频播放跨端同步、文档编辑协作等需要保持应用状态连续的场景。
    *
-   * 说明：快速拉起功能支持在用户触发迁移、等待迁移数据返回的过程中，并行拉起应用，减小用户等待时间。在源端应用module.json5配置文件的continueType标签的取值中添加"_ContinueQuickStart"后缀，可以开启快速拉起功能。
+   * > 说明：快速拉起功能支持在用户触发迁移、等待迁移数据返回的过程中，并行拉起应用，减小用户等待时间。在源端应用module.json5配置文件的continueType标签的取值中添加"_ContinueQuickStart"后缀，可以开启快速拉起功能。
    *
    * @param { 'prepareContinue' } type - 固定值：prepareContinue。
    * @param { Context } context - Ability（应用组件）的Context。
@@ -52,7 +52,7 @@ declare namespace continueManager {
   /**
    * 在应用快速拉起时，注销回调函数，不再获取快速拉起结果。使用callback异步回调。适用于跨设备应用迁移完成或取消迁移后的回调清理场景，如应用迁移成功后清理监听、用户取消迁移操作时释放资源等。
    *
-   * 说明：快速拉起功能支持在用户触发迁移、等待迁移数据返回的过程中，并行拉起应用，减小用户等待时间。在源端应用module.json5配置文件的continueType标签的取值中添加"_ContinueQuickStart"后缀，可以开启快速拉起功能。
+   * > 说明：快速拉起功能支持在用户触发迁移、等待迁移数据返回的过程中，并行拉起应用，减小用户等待时间。在源端应用module.json5配置文件的continueType标签的取值中添加"_ContinueQuickStart"后缀，可以开启快速拉起功能。
    *
    * @param { 'prepareContinue' } type - 固定值：prepareContinue。若未填写，则注销所有已注册的回调；若已填写，则注销指定的回调函数。
    * @param { Context } context - Ability（应用组件）的Context。
