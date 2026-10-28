@@ -24,6 +24,7 @@ import { Size, Position, Edges, LengthMetrics, SizeT } from './Graphics';
 import { DrawContext } from './Graphics';
 import { ComponentContent, ReactiveComponentContent } from './ComponentContent';
 import { BusinessError } from '../@ohos.base';
+import { InputEventType } from './BuilderNode';
 
 /**
  * Describes the layout constraints of the component.
