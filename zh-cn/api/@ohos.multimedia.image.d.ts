@@ -5720,7 +5720,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -5866,7 +5866,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6072,7 +6072,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -6236,7 +6236,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6286,7 +6286,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 获取图像像素信息。同步返回结果。
      *
      * @returns { ImageInfo } 图像像素信息。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform
      * @form
@@ -6433,7 +6433,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6543,7 +6543,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @returns { PixelMap } 成功同步返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6659,7 +6659,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6682,7 +6682,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -6705,7 +6705,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { AntiAliasingLevel } level - 采用的缩放算法。该参数对于ASTC格式的PixelMap不生效。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6727,7 +6727,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<PixelMap> } Promise对象，返回缩放后的PixelMap。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6747,7 +6747,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { PixelMap } 成功同步返回缩放后的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6869,7 +6869,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6988,7 +6988,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -7089,7 +7089,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -7187,7 +7187,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -7391,7 +7391,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 设置PixelMap在跨线程传输后断开原线程的引用。适用于需要立即释放PixelMap的场景。
      *
      * @param { boolean } detached - true表示断开原线程引用，false表示不断开原线程引用。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
      * @since 23 static
@@ -7409,7 +7409,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { HdrMetadataValue } 返回元数据的值。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -7430,7 +7430,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.The length of the input parameter is too
      *     long.
      *     2.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980286 - Memory format not supported.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 13 dynamic
@@ -7446,7 +7446,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 该接口不会拷贝原图像的EXIF信息。
      *
      * @returns { PixelMap } 成功同步返回拷贝的PixelMap对象，失败抛出异常。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7468,7 +7468,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 该接口不会拷贝原图像的EXIF信息。
      *
      * @returns { Promise<PixelMap> } Promise对象，返回拷贝的PixelMap。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7494,7 +7494,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
