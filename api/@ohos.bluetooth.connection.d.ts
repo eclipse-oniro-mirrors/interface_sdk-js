@@ -1915,14 +1915,6 @@ declare namespace connection {
      * @since 23 static
      */
     deviceClass: DeviceClass;
-    /**
-     * The transport of the discovered device.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    transport?: BluetoothTransport;
   }
 
   /**
