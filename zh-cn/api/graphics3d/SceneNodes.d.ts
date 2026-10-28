@@ -362,6 +362,24 @@ export enum LightType {
    * @since 23 static
    */
   SPOT = 2,
+
+  /**
+   * 点光源类型
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  POINT = 3,
+
+  /**
+   * 矩形光类型。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  RECT = 4
 }
 
 /**
@@ -477,6 +495,75 @@ export interface SpotLight extends Light {
  * @since 23 static
  */
 export interface DirectionalLight extends Light {
+}
+
+/**
+ * 点光源类型，继承自[Light]{@link Light}。
+ * 
+ * 点光源从空间中的单个点向所有方向均匀发射光，强度随着距离光源位置的增加而衰减。
+ * 
+ * > **注意：**
+ * >
+ * > 点光源不支持阴影投射，设置[Light]{@link Light}的shadowEnabled属性不生效。
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface PointLight extends Light {
+  /**
+   * 点光源影响的最大距离，超过该范围光强为0。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0。若未设置此参数或取值小于等于0，系统自动计算一个经验值。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  range?: double;
+}
+
+/**
+ * 矩形区域光类型，继承自[Light]{@link Light}。
+ *
+ * 矩形光源从矩形区域发射光，模拟柔和的区域照明效果，强度随着距离的增加而衰减。
+ *
+ * > **注意：**
+ * >
+ * > 矩形面光源不支持阴影投射，设置[Light]{@link Light}的shadowEnabled属性不生效。此外，矩形面光源功耗较高、性能开销较大，建议优先使用[DirectionalLight]{@link DirectionalLight}等其他光源类型近似想要的渲染效果。
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RectLight extends Light {
+  /**
+   * 矩形发光面的宽度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认为1。
+   *
+   * @default 1.0
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  width?: double;
+
+  /**
+   * 矩形发光面的高度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认为1。
+   *
+   * @default 1.0
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  height?: double;
+
+  /**
+   * 矩形光源是否从矩形的两侧发光。若未设置，默认为false。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  twoSided?: boolean;
 }
 
 /**
