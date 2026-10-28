@@ -416,6 +416,17 @@ declare namespace formInfo {
      * @since 26.1.0 dynamic&static
      */
     readonly isColorModeRefreshEnabled?: boolean;
+
+    /**
+     * Obtains whether the form enable tint color.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    readonly enableTint?: boolean;
   }
 
   /**
