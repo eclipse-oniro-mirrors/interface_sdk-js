@@ -501,7 +501,7 @@ export interface DirectionalLight extends Light {
  * 
  * > **注意：**
  * >
- * > 点光源不支持阴影投射，设置[Light](#light)的shadowEnabled属性不生效。
+ * > 点光源不支持阴影投射，设置Light的shadowEnabled属性不生效。
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
@@ -525,7 +525,7 @@ export interface PointLight extends Light {
  *
  * > **注意：**
  * >
- * > 矩形面光源不支持阴影投射，设置[Light](#light)的shadowEnabled属性不生效。此外，矩形面光源功耗较高、性能开销较大，建议优先使用[DirectionalLight](#directionallight)等其他光源类型近似想要的渲染效果。
+ * > 矩形面光源不支持阴影投射，设置Light的shadowEnabled属性不生效。此外，矩形面光源功耗较高、性能开销较大，建议优先使用DirectionalLight等其他光源类型近似想要的渲染效果。
  * 
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
