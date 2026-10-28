@@ -7171,6 +7171,19 @@ declare namespace avSession {
      * @since 24 dynamic&static
      */
     hiPlayDeviceInfo?: HiPlayDeviceInfo;
+
+    /**
+     * Static Bluetooth MAC address of the distributed device. This parameter is available only when the distributed
+     * device reports the Bluetooth MAC address. Format example: "00:11:22:33:44:55".
+     * You need to apply for the Ohos.permission.USE_BLUETOOTH permission.
+     * Default value: "".
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVCast
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    brMacAddress?: string;
   }
 
   /**

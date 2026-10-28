@@ -9257,8 +9257,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > - You can set the up, down, left, and right directions, or set the forward and backward nested scrolling modes to
    * > implement scrolling linkage with the parent component.
    * >
-   * > - Containers that support nested scrolling: [Grid]{@link ./grid}, [List]{@link ./list}, [Scroll]{@link ./scroll},
-   * > [Swiper]{@link ./swiper}, [Tabs]{@link ./tabs}, [WaterFlow]{@link ./water_flow}, [Refresh]{@link ./refresh} and
+   * > - Containers that support nested scrolling: [Grid]{@link Grid}, [List]{@link List}, [Scroll]{@link Scroll},
+   * > [Swiper]{@link Swiper}, [Tabs]{@link Tabs}, [WaterFlow]{@link WaterFlow}, [Refresh]{@link Refresh} and
    * > [bindSheet]{@link CommonMethod#bindSheet}.
    * >
    * > - Input sources that support nested scrolling: gestures, mouse device, and touchpad.
@@ -9542,7 +9542,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { Array<ExpandedMenuItemOptions> } expandedMenuOptions - Extended options of the custom context menu on
    *     selection.
    *     <br>The number of menu options, menu content size, and start icon size must be the same as those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @since 12 dynamiconly
@@ -9644,7 +9644,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *
    * @param { EditMenuOptions } editMenu - Custom text menu options for the Web component.
    *     <br>The number of menu items, the content size, and the icon size are consistent with those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    *     <br>Among the system-provided ID enum values ([TextMenuItemId]{@link TextMenuItemId}) in the menu, only CUT,
    *     COPY, PASTE, SELECT_ALL, TRANSLATE, SEARCH, and AI_WRITER are supported in the Web component.
    *     <br>In the onMenuItemClick function, the textRange parameter is meaningless in the Web component, and the value

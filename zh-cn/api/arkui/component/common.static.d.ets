@@ -7956,6 +7956,56 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * 标题栏悬浮模式。
+     * - STANDARD：标题栏与内容上下排布，无重叠。
+     * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+     * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+     * 滚动内容裁剪到安全区域。
+     * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过UIContext.applyDefaultImmersiveStrategy
+     * 成功设置ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA后，默认值为
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * 标准模式：标题栏与内容上下排布，无重叠。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    STANDARD = 0,
+    /**
+     * 堆叠模式：标题栏悬浮于内容之上。
+     * 开发者需要在内容顶部添加padding以避免遮挡。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    STACK = 1,
+    /**
+     * 安全区域填充模式：标题栏放置在安全区域padding区域。
+     * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.2.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.

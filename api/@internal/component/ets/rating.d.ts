@@ -166,6 +166,10 @@ declare interface StarStyleOptions {
  * > - If the parent node of the **Rating** component has fixed dimensions, you must also specify the width and height
  * > for the **Rating** component, or set its parent node's [clip]{@link CommonMethod#clip(clip: Optional<boolean>)}
  * > attribute to **true**.
+ * >
+ * > - **Keyboard navigation**: **Tab** moves focus to or from the component; **Left/Right arrow** decreases or
+ * > increases the rating; **Home/End** sets the rating to the minimum or maximum value; **Space/Enter** confirms
+ * > the rating.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -512,6 +516,10 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
  * > - If the parent node of the **Rating** component has fixed dimensions, you must also specify the width and height
  * > for the **Rating** component, or set its parent node's [clip]{@link CommonMethod#clip(clip: Optional<boolean>)}
  * > attribute to **true**.
+ * >
+ * > - **Keyboard navigation**: **Tab** moves focus to or from the component; **Left/Right arrow** decreases or
+ * > increases the rating; **Home/End** sets the rating to the minimum or maximum value; **Space/Enter** confirms
+ * > the rating.
  *
  * ###### Child Components
  *

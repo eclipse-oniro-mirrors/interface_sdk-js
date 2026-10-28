@@ -251,11 +251,11 @@ declare namespace audio {
    * @param { AudioCapturerMicInConfig } config - 配置音频采集器。
    * @returns { Promise<AudioCapturer | null> } Promise对象，成功将返回音频采集器对象，失败时将返回包含错误信息的error对象。
    * @throws { BusinessError } 201 - Permission denied, including background recording.
-   * @throws { BusinessError } 202 - Caller is not a system application.
+   * @throws { BusinessError } 202 - Not system App.
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Capturer creation is not supported, may caused by following problems:
-   *     <br> 1. Source type is unsupported for this capturer, only {@link #SOURCE_TYPE_UNPROCESSED_VOICE_ASSISTANT}
-   *     and {@link #SOURCE_TYPE_VOICE_RECOGNITION} are supported currently.
+   *     <br> 1. Source type is unsupported for this capturer, only {@link #SOURCE_TYPE_UNPROCESSED_VOICE_ASSISTANT} is
+   *     supported currently.
    *     <br> 2. Echo reference signal's config is unsupported, echo reference's sampling rate and format must be the
    *     same as MicIn audio data currently.
    * @throws { BusinessError } 6800301 - Audio system internal error, such as system process crash.
@@ -392,11 +392,11 @@ declare namespace audio {
    * [isAudioLoopbackSupported]{@link @ohos.multimedia.audio:audio.AudioStreamManager.isAudioLoopbackSupported}查询系统返听能力。
    *
    *
-   * @permission ohos.permission.MICROPHONE [since 20 - 26.0.0]
+   * @permission ohos.permission.MICROPHONE [since 20 - 24]
    * @param { AudioLoopbackMode } mode - 音频返听模式。
    * @returns { Promise<AudioLoopback> } Promise对象，成功将返回音频返听器对象，异常将返回error对象。
-   * @throws { BusinessError } 201 - Permission denied. [since 20 - 26.0.0]
-   * @throws { BusinessError } 801 - Unsupported API. [since 20 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission denied. [since 20 - 24]
+   * @throws { BusinessError } 801 - Unsupported API. [since 20 - 24]
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
@@ -410,11 +410,11 @@ declare namespace audio {
    * 在使用createAudioLoopback接口之前，需先通过
    * [isAudioLoopbackSupported]{@link @ohos.multimedia.audio:audio.AudioStreamManager.isAudioLoopbackSupported}查询系统返听能力。
    *
-   * @permission ohos.permission.MICROPHONE [since 23 - 26.0.0]
+   * @permission ohos.permission.MICROPHONE [since 23 - 24]
    * @param { AudioLoopbackMode } mode - 音频回环模式。
    * @returns { Promise<AudioLoopback | null> } 用于返回 <b>AudioLoopback</b> 实例的 Promise，或在发生错误时返回 null。
-   * @throws { BusinessError } 201 - Permission denied. [since 23 - 26.0.0]
-   * @throws { BusinessError } 801 - Unsupported API. [since 23 - 26.0.0]
+   * @throws { BusinessError } 201 - Permission denied. [since 23 - 24]
+   * @throws { BusinessError } 801 - Unsupported API. [since 23 - 24]
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
@@ -2240,6 +2240,16 @@ declare namespace audio {
      * @since 23 static
      */
     rendererId?: int;
+    /**
+     * 保持首次设备选择不被清除。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    blockFirstOverrode?: boolean;
   }
 
   /**
@@ -4639,7 +4649,7 @@ declare namespace audio {
      *
      * @param { DeviceTypeArray } deviceTypes - [DeviceType]{@link @ohos.multimedia.audio:audio.DeviceType}数组。
      * @throws { BusinessError } 6800101 - Parameter verification failed, the param deviceTypes contains value
-     *     that is invalid enum or is not a device type introduced in API 20 onwards.
+     *     that is invalid enum or is not device type introduced in API 20 onwards.
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -6219,7 +6229,7 @@ declare namespace audio {
      *
      * @param { boolean } mute - 应用自身给系统音频模块上报的静音状态。true表示应用将当前流静音，false表示取消静音。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800103 - Operation not permitted at current state, there is no audio
+     * @throws { BusinessError } 6800103 - Operation not permit at current state, there is no audio
      *     capturer running.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
@@ -6417,7 +6427,7 @@ declare namespace audio {
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Not system App.
      * @throws { BusinessError } 6800101 - Parameter verification failed, including
-     *     volumeType or percentage param being out of range.
+     *     volumeType or percentage param begin out of range.
      * @throws { BusinessError } 6800301 - Crash or blocking occurs in system process.
      * @syscap SystemCapability.Multimedia.Audio.Volume
      * @systemapi
@@ -7141,6 +7151,50 @@ declare namespace audio {
      * @since 24 dynamic&static
      */
     getActiveStreamsVolumeInfo(): ActiveStreamsVolumeInfoArray;
+
+    /**
+     * 监听当前音量超过音量保护阈值的事件。
+     *
+     * @param { Callback<VolumeLimitExceededEvent> } callback - 用于获取音量限制事件的回调函数。
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onVolumeLimitExceeded(callback: Callback<VolumeLimitExceededEvent>): void;
+
+    /**
+     * 取消监听当前音量是否超过音量保护阈值。
+     *
+     * @param { Callback<VolumeLimitExceededEvent> } [callback] - 用于获取音量限制事件的回调函数。
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offVolumeLimitExceeded(callback?: Callback<VolumeLimitExceededEvent>): void;
+
+    /**
+     * 确认超出音量保护阈值的音量调节结果。
+     *
+     * @param { AudioVolumeType } volumeType - 音频音量类型，
+     *     不同的音量类型有不同的阈值，
+     *     volumeType用于标识当前音量类型的阈值。
+     * @param { boolean } result - 确认音量调节超出音量保护阈值，
+     *     false表示未超出。
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @throws { BusinessError } 6800301 - System error.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    confirmVolumeLimitExceeded(volumeType: AudioVolumeType, result: boolean): void;
   }
 
   /**
@@ -8751,7 +8805,7 @@ declare namespace audio {
      *
      * @param { AudioDeviceDescriptor } selectedAudioDevice - 音频设备描述。
      * @returns { boolean } 如果成功启用个性化空间化处理，则返回 true，否则返回 false。
-     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @throws { BusinessError } 202 - Not system App.
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Spatialization
      * @systemapi
@@ -8767,16 +8821,15 @@ declare namespace audio {
      * @param { AudioDeviceDescriptor } selectedAudioDevice - 音频设备描述。
      * @param { boolean } enable - 是否启用个性化空间化。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Caller is not a system application.
-     * @throws { BusinessError } 801 - Capability is not supported in this device.
+     * @throws { BusinessError } 201 - Permission denied. Return by promise.
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 801 - Capability not supported on the device.
      * @syscap SystemCapability.Multimedia.Audio.Spatialization
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    setPersonalizedSpatializationEnabled(selectedAudioDevice: AudioDeviceDescriptor,
-      enable: boolean): Promise<void>;
+    setPersonalizedSpatializationEnabled(selectedAudioDevice: AudioDeviceDescriptor, enable: boolean): Promise<void>;
 
     /**
      * 订阅由指定设备触发的个性化空间化状态变更事件。当状态发生变化时，已注册的客户端将收到回调通知。
@@ -8813,11 +8866,11 @@ declare namespace audio {
      * @param { AudioHRTFAnonymousDescriptor } hrtfDescriptor - 要下载的个性化HRTF数据描述符。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Caller is not a system application.
-     * @throws { BusinessError } 801 - Capability is not supported in this device.
-     * @throws { BusinessError } 6800101 - Parameter verification failed, hrtfDescriptor is invalid.
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 801 - Capability not supported on the device.
+     * @throws { BusinessError } 6800101 - Parameter verification failed, fd or length wrong.
      * @throws { BusinessError } 6800105 - Time out when saving HRTF on disk.
-     * @throws { BusinessError } 6800301 - System internal error, fail to save HRTF on disk, like service died.
+     * @throws { BusinessError } 6800301 - System error, fail to save HRTF on disk.
      * @syscap SystemCapability.Multimedia.Audio.Spatialization
      * @systemapi
      * @stagemodelonly
@@ -8955,7 +9008,7 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed. Possible causes:
      *                                 1. More than one effect property name of the same effect property category are in the input array.
      *                                 2. The input audioEffectProperties are not supported by the current device.
-     *                                 3. The name or catergory of the input audioEffectProperties is incorrect.
+     *                                 3. The name or category of the input audioEffectProperties is incorrect.
      * @throws { BusinessError } 6800301 - System error.
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @systemapi
@@ -10075,6 +10128,59 @@ declare namespace audio {
      * @since 26.0.1 dynamic&static
      */
     appUid?: int;
+  }
+
+  /**
+   * 描述音量超过阈值时的通知事件。
+   * 收到通知后，应用在继续调整音量前必须通过
+   * {@link #confirmVolumeLimitExceeded} 发送确认结果。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Volume
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface VolumeLimitExceededEvent {
+    /**
+     * 指示触发音量越限的进程的UID。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    uid: int;
+    /**
+     * 当前音量类型。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    volumeType: AudioVolumeType;
+    /**
+     * 当前音量等级。
+     *
+     * 取值范围在 {@link #getMinSystemVolume} 和 {@link #getMaxSystemVolume} 获取的值之间。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    currentVolume: int;
+    /**
+     * 当前音量类型的音量阈值。
+     *
+     * 取值范围在 {@link #getMinSystemVolume} 和 {@link #getMaxSystemVolume} 获取的值之间。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    volumeThreshold: int;
   }
 
   /**
@@ -11527,7 +11633,8 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @throws { BusinessError } 6800104 - Operation is not supported on this renderer,
      *     e.g. the stream usage of this renderer is not one of {@link StreamUsage#STREAM_USAGE_MUSIC},
-     *     {@link StreamUsage#STREAM_USAGE_MOVIE} or {@link StreamUsage#STREAM_USAGE_AUDIOBOOK}.
+     *     {@link StreamUsage#STREAM_USAGE_MOVIE} or {@link StreamUsage#STREAM_USAGE_AUDIOBOOK}, or this renderer
+     *     is routed through the high-resolution playback path.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @since 20 dynamic
      * @since 23 static
