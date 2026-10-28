@@ -11816,6 +11816,36 @@ declare namespace media {
   }
 
   /**
+   * Defines the HDR format of the target file.
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum DestHDRMode {  
+    /**
+     * The target file format is SDR.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    SDR = 0,
+    /**
+     * The target file format is HDR vivid only when the source file format is HDR vivid. In other cases, the target
+     * file format is SDR.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    AUTO_HDR_VIVID = 1
+  }
+
+  /**
    * Describes the video transcoding parameters.
    *
    * @syscap SystemCapability.Multimedia.Media.AVTranscoder
@@ -11941,6 +11971,39 @@ declare namespace media {
      * @since 26.1.0 dynamic&static
      */
     sqrFactor?: int;
+
+    /**
+     * Specifies the HDR format of the target file.
+     * Default value: SDR.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    destHDRMode?:DestHDRMode;
+
+    /**
+     * Time point from which the source file is transcoded. The unit is millisecond.
+     * Default value: The default value is the beginning of the source file.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    startTime?: int;
+
+    /**
+     * Specifies the time when the transcoding ends in the source file. The unit is millisecond.
+     * Default value: Default to end of source file.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    endTime?: int;
   }
 
   /**
