@@ -13,6 +13,11 @@
  * limitations under the License.
  */
 
+/**
+ * @file Notification
+ * @kit NotificationKit
+ */
+
 import { AsyncCallback } from './@ohos.base';
 import { NotificationActionButton } from './notification/notificationActionButton';
 import { NotificationBasicContent } from './notification/notificationContent';
@@ -34,8 +39,8 @@ import { NotificationTemplate } from './notification/notificationTemplate';
 import { NotificationUserInput } from './notification/notificationUserInput';
 
 /**
- * The **Notification** module provides notification management capabilities, covering notifications, notification slots
- * , notification subscription, notification enabled status, and notification badge status.
+ * The **Notification** module provides notification management capabilities, covering notifications, notification 
+ * slots, notification subscription, notification enabled status, and notification badge status.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 7
@@ -51,7 +56,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#publish
+   * @useinstead ohos.notificationManager/notificationManager#publish(request: NotificationRequest, callback: AsyncCallback<void>)
    */
   function publish(request: NotificationRequest, callback: AsyncCallback<void>): void;
 
@@ -63,7 +68,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#publish
+   * @useinstead ohos.notificationManager/notificationManager#publish(request: NotificationRequest)
    */
   function publish(request: NotificationRequest): Promise<void>;
 
@@ -78,7 +83,7 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#publish
+   * @useinstead ohos.notificationManager/notificationManager#publish(request: NotificationRequest, userId: int, callback: AsyncCallback<void>)
    */
   function publish(request: NotificationRequest, userId: number, callback: AsyncCallback<void>): void;
 
@@ -93,7 +98,7 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#publish
+   * @useinstead ohos.notificationManager/notificationManager#publish(request: NotificationRequest, userId: int)
    */
   function publish(request: NotificationRequest, userId: number): Promise<void>;
 
@@ -105,7 +110,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancel
+   * @useinstead ohos.notificationManager/notificationManager#cancel(id: int, callback: AsyncCallback<void>)
    */
   function cancel(id: number, callback: AsyncCallback<void>): void;
 
@@ -119,7 +124,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancel
+   * @useinstead ohos.notificationManager/notificationManager#cancel(id: int, label: string, callback: AsyncCallback<void>)
    */
   function cancel(id: number, label: string, callback: AsyncCallback<void>): void;
 
@@ -132,7 +137,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancel
+   * @useinstead ohos.notificationManager/notificationManager#cancel(id: int, label?: string)
    */
   function cancel(id: number, label?: string): Promise<void>;
 
@@ -143,7 +148,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancelAll
+   * @useinstead ohos.notificationManager/notificationManager#cancelAll(callback: AsyncCallback<void>)
    */
   function cancelAll(callback: AsyncCallback<void>): void;
 
@@ -154,7 +159,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancelAll
+   * @useinstead ohos.notificationManager/notificationManager#cancelAll()
    */
   function cancelAll(): Promise<void>;
 
@@ -168,7 +173,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#addSlot
+   * @useinstead ohos.notificationManager/notificationManager#addSlot(slot: NotificationSlot, callback: AsyncCallback<void>)
    */
   function addSlot(slot: NotificationSlot, callback: AsyncCallback<void>): void;
 
@@ -182,7 +187,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#addSlot
+   * @useinstead ohos.notificationManager/notificationManager#addSlot(slot: NotificationSlot)
    */
   function addSlot(slot: NotificationSlot): Promise<void>;
 
@@ -194,7 +199,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#addSlot
+   * @useinstead ohos.notificationManager/notificationManager#addSlot(type: SlotType, callback: AsyncCallback<void>)
    */
   function addSlot(type: SlotType, callback: AsyncCallback<void>): void;
 
@@ -206,7 +211,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#addSlot
+   * @useinstead ohos.notificationManager/notificationManager#addSlot(type: SlotType)
    */
   function addSlot(type: SlotType): Promise<void>;
 
@@ -220,7 +225,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#addSlots
+   * @useinstead ohos.notificationManager/notificationManager#addSlots(slots: Array<NotificationSlot>, callback: AsyncCallback<void>)
    */
   function addSlots(slots: Array<NotificationSlot>, callback: AsyncCallback<void>): void;
 
@@ -234,33 +239,35 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#addSlots
+   * @useinstead ohos.notificationManager/notificationManager#addSlots(slots: Array<NotificationSlot>)
    */
   function addSlots(slots: Array<NotificationSlot>): Promise<void>;
 
   /**
    * Obtains a notification slot of a specified type. This API uses an asynchronous callback to return the result.
    *
-   * @param { SlotType } slotType - Type of the notification slot, which can be used for social communication, service
-   *     information, content consultation, and other purposes.
+   * @param { SlotType } slotType -
+   *     [Notification slot](docroot://notification/notification-glossary.md#notification-slot) type, currently divided
+   *     into social communication, service reminder, content consultation, and other types.
    * @param { AsyncCallback<NotificationSlot> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlot
+   * @useinstead ohos.notificationManager/notificationManager#getSlot(slotType: SlotType, callback: AsyncCallback<NotificationSlot>)
    */
   function getSlot(slotType: SlotType, callback: AsyncCallback<NotificationSlot>): void;
 
   /**
    * Obtains a notification slot of a specified type. This API uses a promise to return the result.
    *
-   * @param { SlotType } slotType - Type of the notification slot, which can be used for social communication, service
-   *     information, content consultation, and other purposes.
+   * @param { SlotType } slotType - Type of the
+   *     [Notification slot](docroot://notification/notification-glossary.md#notification-slot), currently divided into
+   *     social communication, service reminder, content consultation, and other types.
    * @returns { Promise<NotificationSlot> } Promise used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlot
+   * @useinstead ohos.notificationManager/notificationManager#getSlot(slotType: SlotType)
    */
   function getSlot(slotType: SlotType): Promise<NotificationSlot>;
 
@@ -271,7 +278,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlots
+   * @useinstead ohos.notificationManager/notificationManager#getSlots(callback: AsyncCallback<Array<NotificationSlot>>)
    */
   function getSlots(callback: AsyncCallback<Array<NotificationSlot>>): void;
 
@@ -282,33 +289,35 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlots
+   * @useinstead ohos.notificationManager/notificationManager#getSlots()
    */
   function getSlots(): Promise<Array<NotificationSlot>>;
 
   /**
    * Removes a notification slot of a specified type. This API uses an asynchronous callback to return the result.
    *
-   * @param { SlotType } slotType - Type of the notification slot, which can be used for social communication, service
-   *     information, content consultation, and other purposes.
+   * @param { SlotType } slotType -
+   *     [Notification slot](docroot://notification/notification-glossary.md#notification-slot) type, currently divided
+   *     into social communication, service reminder, content consultation, and other types.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#removeSlot
+   * @useinstead ohos.notificationManager/notificationManager#removeSlot(slotType: SlotType, callback: AsyncCallback<void>)
    */
   function removeSlot(slotType: SlotType, callback: AsyncCallback<void>): void;
 
   /**
    * Removes a notification slot of a specified type. This API uses a promise to return the result.
    *
-   * @param { SlotType } slotType - Type of the notification slot, which can be used for social communication, service
-   *     information, content consultation, and other purposes.
+   * @param { SlotType } slotType - Type of the
+   *     [notification slot](docroot://notification/notification-glossary.md#notification-slot), currently divided into
+   *     social communication, service reminder, content consultation, and other types.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#removeSlot
+   * @useinstead ohos.notificationManager/notificationManager#removeSlot(slotType: SlotType)
    */
   function removeSlot(slotType: SlotType): Promise<void>;
 
@@ -319,7 +328,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#removeAllSlots
+   * @useinstead ohos.notificationManager/notificationManager#removeAllSlots(callback: AsyncCallback<void>)
    */
   function removeAllSlots(callback: AsyncCallback<void>): void;
 
@@ -330,7 +339,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#removeAllSlots
+   * @useinstead ohos.notificationManager/notificationManager#removeAllSlots()
    */
   function removeAllSlots(): Promise<void>;
 
@@ -496,8 +505,8 @@ declare namespace notification {
     LEVEL_LOW = 2,
 
     /**
-     * The notification feature is enabled, and the notification icon is displayed in the status bar, with an alert tone
-     * but no banner.
+     * The notification function is enabled, and the notification icon is displayed in the status bar, with an alert 
+     * tone but no banner.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 7
@@ -507,8 +516,8 @@ declare namespace notification {
     LEVEL_DEFAULT = 3,
 
     /**
-     * The notification feature is enabled, and the notification icon is displayed in the status bar, with an alert tone
-     * and banner.
+     * The notification function is enabled, and the notification icon is displayed in the status bar, with an alert 
+     * tone and banner.
      *
      * @syscap SystemCapability.Notification.Notification
      * @since 7
@@ -519,33 +528,36 @@ declare namespace notification {
   }
 
   /**
-   * Subscribes to notifications of all applications under this user.
-   * This API uses an asynchronous callback to return the result.
+   * Subscribes to notifications of all applications under this user. This API uses an asynchronous callback to return 
+   * the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#subscribe
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#subscribe(subscriber: NotificationSubscriber, callback: AsyncCallback<void>)
    */
   function subscribe(subscriber: NotificationSubscriber, callback: AsyncCallback<void>): void;
 
   /**
-   * Subscribes to a notification with the subscription information specified.
-   * This API uses an asynchronous callback to return the result.
+   * Subscribes to a notification with the subscription information specified. This API uses an asynchronous callback to
+   * return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @param { NotificationSubscribeInfo } info - Notification subscription information.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#subscribe
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#subscribe(subscriber: NotificationSubscriber, 
+   *     info: NotificationSubscribeInfo, callback: AsyncCallback<void>)
    */
   function subscribe(
     subscriber: NotificationSubscriber,
@@ -554,33 +566,35 @@ declare namespace notification {
   ): void;
 
   /**
-   * Subscribes to a notification with the subscription information specified.
-   * This API uses a promise to return the result.
+   * Subscribes to a notification with the subscription information specified. This API uses a promise to return the 
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
-   * @param { NotificationSubscribeInfo } [info] - Notification subscription information.
-   * This parameter is left empty by default.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
+   * @param { NotificationSubscribeInfo } [info] - Notification subscription information. This parameter is left empty
+   *     by default.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#subscribe
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#subscribe(subscriber: NotificationSubscriber, info?: NotificationSubscribeInfo)
    */
   function subscribe(subscriber: NotificationSubscriber, info?: NotificationSubscribeInfo): Promise<void>;
 
   /**
-   * Unsubscribes from a notification. This API uses an asynchronous callback to return the result.
+   * Unsubscribes from notifications. This API uses a callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#unsubscribe
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#unsubscribe(subscriber: NotificationSubscriber, callback: AsyncCallback<void>)
    */
   function unsubscribe(subscriber: NotificationSubscriber, callback: AsyncCallback<void>): void;
 
@@ -588,19 +602,20 @@ declare namespace notification {
    * Unsubscribes from a notification. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#unsubscribe
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#unsubscribe(subscriber: NotificationSubscriber)
    */
   function unsubscribe(subscriber: NotificationSubscriber): Promise<void>;
 
   /**
-   * Sets whether to enable notification for a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Sets whether to enable notification for a specified application. This API uses an asynchronous callback to return 
+   * the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -610,7 +625,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setNotificationEnable
+   * @useinstead ohos.notificationManager/notificationManager#setNotificationEnable(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>)
    */
   function enableNotification(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>): void;
 
@@ -625,13 +640,13 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setNotificationEnable
+   * @useinstead ohos.notificationManager/notificationManager#setNotificationEnable(bundle: BundleOption, enable: boolean)
    */
   function enableNotification(bundle: BundleOption, enable: boolean): Promise<void>;
 
   /**
-   * Checks whether notification is enabled for a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Checks whether notification is enabled for a specified application. This API uses an asynchronous callback to 
+   * return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -640,7 +655,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled(bundle: BundleOption, callback: AsyncCallback<boolean>)
    */
   function isNotificationEnabled(bundle: BundleOption, callback: AsyncCallback<boolean>): void;
 
@@ -654,13 +669,13 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled(bundle: BundleOption)
    */
   function isNotificationEnabled(bundle: BundleOption): Promise<boolean>;
 
   /**
-   * Checks whether notification is enabled for this application.
-   * This API uses an asynchronous callback to return the result.
+   * Checks whether notification is enabled for this application. This API uses an asynchronous callback to return the 
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result.
@@ -668,7 +683,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled(callback: AsyncCallback<boolean>)
    */
   function isNotificationEnabled(callback: AsyncCallback<boolean>): void;
 
@@ -681,7 +696,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled()
    */
   function isNotificationEnabled(): Promise<boolean>;
 
@@ -697,7 +712,7 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled(userId: int, callback: AsyncCallback<boolean>)
    */
   function isNotificationEnabled(userId: number, callback: AsyncCallback<boolean>): void;
 
@@ -712,45 +727,45 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isNotificationEnabled(userId: int)
    */
   function isNotificationEnabled(userId: number): Promise<boolean>;
 
   /**
-   * Sets whether to enable the notification badge for a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Sets whether to enable the notification badge for a specified application. This API uses an asynchronous callback 
+   * to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { boolean } enable - Whether to enable notification.
+   * @param { boolean } enable - Whether to enable notification badge.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#displayBadge
+   * @useinstead ohos.notificationManager/notificationManager#displayBadge(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>)
    */
   function displayBadge(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether to enable the notification badge for a specified application.
-   * This API uses a promise to return the result.
+   * Sets whether to enable the notification badge for a specified application. This API uses a promise to return the 
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
-   * @param { boolean } enable - Whether to enable notification.
+   * @param { boolean } enable - Whether to enable notification badge.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#displayBadge
+   * @useinstead ohos.notificationManager/notificationManager#displayBadge(bundle: BundleOption, enable: boolean)
    */
   function displayBadge(bundle: BundleOption, enable: boolean): Promise<void>;
 
   /**
-   * Checks whether the notification badge is enabled for a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Checks whether the notification badge is enabled for a specified application. This API uses an asynchronous 
+   * callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -759,13 +774,13 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isBadgeDisplayed
+   * @useinstead ohos.notificationManager/notificationManager#isBadgeDisplayed(bundle: BundleOption, callback: AsyncCallback<boolean>)
    */
   function isBadgeDisplayed(bundle: BundleOption, callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether the notification badge is enabled for a specified application.
-   * This API uses a promise to return the result.
+   * Checks whether the notification badge is enabled for a specified application. This API uses a promise to return the
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -774,13 +789,13 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isBadgeDisplayed
+   * @useinstead ohos.notificationManager/notificationManager#isBadgeDisplayed(bundle: BundleOption)
    */
   function isBadgeDisplayed(bundle: BundleOption): Promise<boolean>;
 
   /**
-   * Sets the notification slot for a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Sets the notification slot for a specified application. This API uses an asynchronous callback to return the 
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -790,7 +805,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setSlotByBundle
+   * @useinstead ohos.notificationManager/notificationManager#setSlotByBundle(bundle: BundleOption, slot: NotificationSlot, callback: AsyncCallback<void>)
    */
   function setSlotByBundle(bundle: BundleOption, slot: NotificationSlot, callback: AsyncCallback<void>): void;
 
@@ -800,18 +815,18 @@ declare namespace notification {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { NotificationSlot } slot - Notification slot.
-   * @returns { Promise<void> } the promise returned by the function.
+   * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setSlotByBundle
+   * @useinstead ohos.notificationManager/notificationManager#setSlotByBundle(bundle: BundleOption, slot: NotificationSlot)
    */
   function setSlotByBundle(bundle: BundleOption, slot: NotificationSlot): Promise<void>;
 
   /**
-   * Obtains the notification slots of a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Obtains the notification slots of a specified application. This API uses an asynchronous callback to return the 
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -820,7 +835,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlotsByBundle
+   * @useinstead ohos.notificationManager/notificationManager#getSlotsByBundle(bundle: BundleOption, callback: AsyncCallback<Array<NotificationSlot>>)
    */
   function getSlotsByBundle(bundle: BundleOption, callback: AsyncCallback<Array<NotificationSlot>>): void;
 
@@ -834,13 +849,13 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlotsByBundle
+   * @useinstead ohos.notificationManager/notificationManager#getSlotsByBundle(bundle: BundleOption)
    */
   function getSlotsByBundle(bundle: BundleOption): Promise<Array<NotificationSlot>>;
 
   /**
-   * Obtains the number of notification slots of a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Obtains the number of notification slots of a specified application. This API uses an asynchronous callback to 
+   * return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -849,13 +864,12 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlotNumByBundle
+   * @useinstead ohos.notificationManager/notificationManager#getSlotNumByBundle(bundle: BundleOption, callback: AsyncCallback<long>)
    */
   function getSlotNumByBundle(bundle: BundleOption, callback: AsyncCallback<number>): void;
 
   /**
    * Obtains the number of notification slots of a specified application. This API uses a promise to return the result.
-
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -864,7 +878,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getSlotNumByBundle
+   * @useinstead ohos.notificationManager/notificationManager#getSlotNumByBundle(bundle: BundleOption)
    */
   function getSlotNumByBundle(bundle: BundleOption): Promise<number>;
 
@@ -874,13 +888,14 @@ declare namespace notification {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { NotificationKey } notificationKey - Notification key.
-   * @param { RemoveReason } reason - Reason for deleting a notification.
+   * @param { RemoveReason } reason - Reason for notification deletion.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove(bundle: BundleOption, 
+   *     notificationKey: NotificationKey, reason: RemoveReason, callback: AsyncCallback<void>)
    */
   function remove(
     bundle: BundleOption,
@@ -895,13 +910,13 @@ declare namespace notification {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { NotificationKey } notificationKey - Notification key.
-   * @param { RemoveReason } reason - Reason for deleting a notification.
+   * @param { RemoveReason } reason - Reason for notification deletion.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove(bundle: BundleOption, notificationKey: NotificationKey, reason: RemoveReason)
    */
   function remove(bundle: BundleOption, notificationKey: NotificationKey, reason: RemoveReason): Promise<void>;
 
@@ -909,17 +924,17 @@ declare namespace notification {
    * Removes a notification for a specified bundle. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { string } hashCode - Unique notification ID. It is the value of **hashCode**
-   * in the [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} object of
-   * [SubscribeCallbackData]{@link ./notification/notificationSubscriber:SubscribeCallbackData} used in the
-   * [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume} callback.
-   * @param { RemoveReason } reason - Reason for deleting a notification.
+   * @param { string } hashCode - Unique notification ID. It is the value of **hashCode** in the
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} object of
+   *     [SubscribeCallbackData]{@link ./notification/notificationSubscriber:SubscribeCallbackData} used in the
+   *     [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume} callback.
+   * @param { RemoveReason } reason - Reason for notification deletion.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove(hashCode: string, reason: RemoveReason, callback: AsyncCallback<void>)
    */
   function remove(hashCode: string, reason: RemoveReason, callback: AsyncCallback<void>): void;
 
@@ -928,13 +943,13 @@ declare namespace notification {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { string } hashCode - Unique notification ID.
-   * @param { RemoveReason } reason - Reason for deleting a notification.
+   * @param { RemoveReason } reason - Reason for notification deletion.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#remove(hashCode: string, reason: RemoveReason)
    */
   function remove(hashCode: string, reason: RemoveReason): Promise<void>;
 
@@ -948,7 +963,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll(bundle: BundleOption, callback: AsyncCallback<void>)
    */
   function removeAll(bundle: BundleOption, callback: AsyncCallback<void>): void;
 
@@ -961,7 +976,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll(callback: AsyncCallback<void>)
    */
   function removeAll(callback: AsyncCallback<void>): void;
 
@@ -975,7 +990,7 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll(userId: int, callback: AsyncCallback<void>)
    */
   function removeAll(userId: number, callback: AsyncCallback<void>): void;
 
@@ -989,7 +1004,7 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll(userId: int)
    */
   function removeAll(userId: number): Promise<void>;
 
@@ -997,14 +1012,14 @@ declare namespace notification {
    * Removes all notifications for a specified application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { BundleOption } [bundle] - Bundle information of the application.
-   * By default, this parameter is left empty, indicating that all notifications will be removed.
+   * @param { BundleOption } [bundle] - Bundle information of the application. By default, this parameter is left empty,
+   *     indicating that all notifications will be removed.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll
+   * @useinstead ohos.notificationSubscribe/notificationSubscribe#removeAll(bundle?: BundleOption)
    */
   function removeAll(bundle?: BundleOption): Promise<void>;
 
@@ -1017,7 +1032,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getAllActiveNotifications
+   * @useinstead ohos.notificationManager/notificationManager#getAllActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>)
    */
   function getAllActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>): void;
 
@@ -1030,7 +1045,7 @@ declare namespace notification {
    * @systemapi
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getAllActiveNotifications
+   * @useinstead ohos.notificationManager/notificationManager#getAllActiveNotifications()
    */
   function getAllActiveNotifications(): Promise<Array<NotificationRequest>>;
 
@@ -1042,7 +1057,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getActiveNotificationCount
+   * @useinstead ohos.notificationManager/notificationManager#getActiveNotificationCount(callback: AsyncCallback<long>)
    */
   function getActiveNotificationCount(callback: AsyncCallback<number>): void;
 
@@ -1053,7 +1068,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getActiveNotificationCount
+   * @useinstead ohos.notificationManager/notificationManager#getActiveNotificationCount()
    */
   function getActiveNotificationCount(): Promise<number>;
 
@@ -1064,7 +1079,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getActiveNotifications
+   * @useinstead ohos.notificationManager/notificationManager#getActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>)
    */
   function getActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>): void;
 
@@ -1075,7 +1090,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getActiveNotifications
+   * @useinstead ohos.notificationManager/notificationManager#getActiveNotifications()
    */
   function getActiveNotifications(): Promise<Array<NotificationRequest>>;
 
@@ -1084,13 +1099,13 @@ declare namespace notification {
    * return the result.
    *
    * @param { string } groupName - Name of the notification group, which is specified through
-   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} when the
-   *     notification is published.
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest}
+   *     when the notification is published.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancelGroup
+   * @useinstead ohos.notificationManager/notificationManager#cancelGroup(groupName: string, callback: AsyncCallback<void>)
    */
   function cancelGroup(groupName: string, callback: AsyncCallback<void>): void;
 
@@ -1102,13 +1117,13 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#cancelGroup
+   * @useinstead ohos.notificationManager/notificationManager#cancelGroup(groupName: string)
    */
   function cancelGroup(groupName: string): Promise<void>;
 
   /**
-   * Removes notifications under a notification group of a specified application.
-   * This API uses an asynchronous callback to return the result.
+   * Removes notifications under a notification group of a specified application. This API uses an asynchronous callback
+   * to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1118,23 +1133,23 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#removeGroupByBundle
+   * @useinstead ohos.notificationManager/notificationManager#removeGroupByBundle(bundle: BundleOption, groupName: string, callback: AsyncCallback<void>)
    */
   function removeGroupByBundle(bundle: BundleOption, groupName: string, callback: AsyncCallback<void>): void;
 
   /**
-   * Removes notifications under a notification group of a specified application.
-   * This API uses a promise to return the result.
+   * Removes notifications under a notification group of a specified application. This API uses a promise to return the 
+   * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { string } groupName - Name of the notification group.
-   * @returns { Promise<void> } the promise returned by the function.
+   * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#removeGroupByBundle
+   * @useinstead ohos.notificationManager/notificationManager#removeGroupByBundle(bundle: BundleOption, groupName: string)
    */
   function removeGroupByBundle(bundle: BundleOption, groupName: string): Promise<void>;
 
@@ -1142,13 +1157,13 @@ declare namespace notification {
    * Sets the DND time. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { DoNotDisturbDate } date - DND time to set.
+   * @param { DoNotDisturbDate } date - DND time.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate(date: DoNotDisturbDate, callback: AsyncCallback<void>)
    */
   function setDoNotDisturbDate(date: DoNotDisturbDate, callback: AsyncCallback<void>): void;
 
@@ -1156,13 +1171,13 @@ declare namespace notification {
    * Sets the DND time. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { DoNotDisturbDate } date - DND time to set.
+   * @param { DoNotDisturbDate } date - DND time.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate(date: DoNotDisturbDate)
    */
   function setDoNotDisturbDate(date: DoNotDisturbDate): Promise<void>;
 
@@ -1170,14 +1185,14 @@ declare namespace notification {
    * Sets the DND time for a specified user. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { DoNotDisturbDate } date - DND time to set.
+   * @param { DoNotDisturbDate } date - DND time.
    * @param { number } userId - ID of the user for whom you want to set the DND time.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate(date: DoNotDisturbDate, userId: int, callback: AsyncCallback<void>)
    */
   function setDoNotDisturbDate(date: DoNotDisturbDate, userId: number, callback: AsyncCallback<void>): void;
 
@@ -1185,14 +1200,14 @@ declare namespace notification {
    * Sets the DND time for a specified user. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { DoNotDisturbDate } date - DND time to set.
+   * @param { DoNotDisturbDate } date - DND time.
    * @param { number } userId - ID of the user for whom you want to set the DND time.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#setDoNotDisturbDate(date: DoNotDisturbDate, userId: int)
    */
   function setDoNotDisturbDate(date: DoNotDisturbDate, userId: number): Promise<void>;
 
@@ -1200,12 +1215,12 @@ declare namespace notification {
    * Obtains the DND time. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { AsyncCallback<DoNotDisturbDate> } callback - Callback used to return the result.
+   * @param { AsyncCallback<DoNotDisturbDate> } callback - Callback invoked to return the DND time.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate(callback: AsyncCallback<DoNotDisturbDate>)
    */
   function getDoNotDisturbDate(callback: AsyncCallback<DoNotDisturbDate>): void;
 
@@ -1213,12 +1228,12 @@ declare namespace notification {
    * Obtains the DND time. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @returns { Promise<DoNotDisturbDate> } Promise used to return the result.
+   * @returns { Promise<DoNotDisturbDate> } Promise used to return the queried DND time.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate()
    */
   function getDoNotDisturbDate(): Promise<DoNotDisturbDate>;
 
@@ -1227,12 +1242,12 @@ declare namespace notification {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { number } userId - User ID.
-   * @param { AsyncCallback<DoNotDisturbDate> } callback - Callback used to return the result.
+   * @param { AsyncCallback<DoNotDisturbDate> } callback - Callback invoked to return the DND time.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate(userId: int, callback: AsyncCallback<DoNotDisturbDate>)
    */
   function getDoNotDisturbDate(userId: number, callback: AsyncCallback<DoNotDisturbDate>): void;
 
@@ -1241,12 +1256,12 @@ declare namespace notification {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { number } userId - User ID.
-   * @returns { Promise<DoNotDisturbDate> } Promise used to return the result.
+   * @returns { Promise<DoNotDisturbDate> } Promise used to return the queried DND time.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate
+   * @useinstead ohos.notificationManager/notificationManager#getDoNotDisturbDate(userId: int)
    */
   function getDoNotDisturbDate(userId: number): Promise<DoNotDisturbDate>;
 
@@ -1259,7 +1274,7 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isSupportDoNotDisturbMode
+   * @useinstead ohos.notificationManager/notificationManager#isSupportDoNotDisturbMode(callback: AsyncCallback<boolean>)
    */
   function supportDoNotDisturbMode(callback: AsyncCallback<boolean>): void;
 
@@ -1272,27 +1287,28 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isSupportDoNotDisturbMode
+   * @useinstead ohos.notificationManager/notificationManager#isSupportDoNotDisturbMode()
    */
   function supportDoNotDisturbMode(): Promise<boolean>;
 
   /**
-   * Checks whether a specified template is supported before using
-   * [NotificationTemplate]{@link ./notification/notificationTemplate:NotificationTemplate} to publish a notification.
-   * This API uses an asynchronous callback to return the result.
+   * Before publishing a notification using 
+   * [NotificationTemplate]{@link ./notification/notificationTemplate:NotificationTemplate}, you can call this API to 
+   * check whether the corresponding notification template is supported. This API uses an asynchronous callback to 
+   * return the result.
    *
    * @param { string } templateName - Template name. Currently, only **downloadTemplate** is supported.
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isSupportTemplate
+   * @useinstead ohos.notificationManager/notificationManager#isSupportTemplate(templateName: string, callback: AsyncCallback<boolean>)
    */
   function isSupportTemplate(templateName: string, callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether a specified template is supported before using
-   * [NotificationTemplate]{@link ./notification/notificationTemplate:NotificationTemplate} to publish a notification.
+   * Checks whether a specified template is supported before using 
+   * [NotificationTemplate]{@link ./notification/notificationTemplate:NotificationTemplate} to publish a notification. 
    * This API uses a promise to return the result.
    *
    * @param { string } templateName - Template name. Currently, only **downloadTemplate** is supported.
@@ -1300,7 +1316,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isSupportTemplate
+   * @useinstead ohos.notificationManager/notificationManager#isSupportTemplate(templateName: string)
    */
   function isSupportTemplate(templateName: string): Promise<boolean>;
 
@@ -1312,7 +1328,7 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#requestEnableNotification
+   * @useinstead ohos.notificationManager/notificationManager#requestEnableNotification(callback: AsyncCallback<void>)
    */
   function requestEnableNotification(callback: AsyncCallback<void>): void;
 
@@ -1323,13 +1339,14 @@ declare namespace notification {
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#requestEnableNotification
+   * @useinstead ohos.notificationManager/notificationManager#requestEnableNotification()
    */
   function requestEnableNotification(): Promise<void>;
 
   /**
-   * Sets whether this device supports distributed notifications.
-   * This API uses an asynchronous callback to return the result.
+   * Sets whether the device supports 
+   * [distributed notifications](docroot://notification/notification-glossary.md#distributed-notification). This API 
+   * uses a callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - Whether the device supports distributed notifications.
@@ -1338,12 +1355,14 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnable
+   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnable(enable: boolean, callback: AsyncCallback<void>)
    */
   function enableDistributed(enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether this device supports distributed notifications. This API uses a promise to return the result.
+   * Sets whether the device supports 
+   * [distributed notifications](docroot://notification/notification-glossary.md#distributed-notification). This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - Whether the device supports distributed notifications.
@@ -1352,36 +1371,40 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnable
+   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnable(enable: boolean)
    */
   function enableDistributed(enable: boolean): Promise<void>;
 
   /**
-   * Checks whether this device supports distributed notifications. This API uses an asynchronous callback to return the
-   * result.
+   * Checks whether the device supports 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification). This API uses
+   * a callback to return the result.
    *
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabled(callback: AsyncCallback<boolean>)
    */
   function isDistributedEnabled(callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether this device supports distributed notifications. This API uses a promise to return the result.
+   * Checks whether the device supports 
+   * [distributed notification](docroot://notification/notification-glossary.md#distributed-notification). This API uses
+   * a promise to return the result.
    *
    * @returns { Promise<boolean> } Promise used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabled
+   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabled()
    */
   function isDistributedEnabled(): Promise<boolean>;
 
   /**
-   * Sets whether a specified application supports distributed notifications.
-   * This API uses an asynchronous callback to return the result.
+   * Sets whether the specified application supports 
+   * [distributed notifications](docroot://notification/notification-glossary.md#distributed-notification). This API 
+   * uses a callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
@@ -1391,53 +1414,56 @@ declare namespace notification {
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnableByBundle
+   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnableByBundle(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>)
    */
   function enableDistributedByBundle(bundle: BundleOption, enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether a specified application supports distributed notifications.
-   * This API uses a promise to return the result.
+   * Sets whether the specified application supports 
+   * [distributed notifications](docroot://notification/notification-glossary.md#distributed-notification). This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { BundleOption } bundle - Application bundle.
+   * @param { BundleOption } bundle - Bundle of the application.
    * @param { boolean } enable - Whether the device supports distributed notifications.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnableByBundle
+   * @useinstead ohos.notificationManager/notificationManager#setDistributedEnableByBundle(bundle: BundleOption, enable: boolean)
    */
   function enableDistributedByBundle(bundle: BundleOption, enable: boolean): Promise<void>;
 
   /**
-   * Obtains whether an application supports distributed notifications based on the bundle.
-   * This API uses an asynchronous callback to return the result.
+   * Obtains whether the application supports 
+   * [distributed notifications](docroot://notification/notification-glossary.md#distributed-notification) based on the 
+   * application's bundle. This API uses a callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { BundleOption } bundle - Application bundle.
+   * @param { BundleOption } bundle - Bundle of the application.
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabledByBundle
+   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabledByBundle(bundle: BundleOption, callback: AsyncCallback<boolean>)
    */
   function isDistributedEnabledByBundle(bundle: BundleOption, callback: AsyncCallback<boolean>): void;
 
   /**
-   * Checks whether a specified application supports distributed notifications.
-   * This API uses an asynchronous callback to return the result.
+   * Queries whether the specified application supports 
+   * [distributed notifications](docroot://notification/notification-glossary.md#distributed-notification). This API 
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { BundleOption } bundle - Application bundle.
+   * @param { BundleOption } bundle - Bundle of the application.
    * @returns { Promise<boolean> } Promise used to return the result.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabledByBundle
+   * @useinstead ohos.notificationManager/notificationManager#isDistributedEnabledByBundle(bundle: BundleOption)
    */
   function isDistributedEnabledByBundle(bundle: BundleOption): Promise<boolean>;
 
@@ -1445,12 +1471,13 @@ declare namespace notification {
    * Obtains the notification reminder type. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { AsyncCallback<DeviceRemindType> } callback - Callback used to return the result.
+   * @param { AsyncCallback<DeviceRemindType> } callback - Callback invoked to return the
+   *     [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode).
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getDeviceRemindType
+   * @useinstead ohos.notificationManager/notificationManager#getDeviceRemindType(callback: AsyncCallback<DeviceRemindType>)
    */
   function getDeviceRemindType(callback: AsyncCallback<DeviceRemindType>): void;
 
@@ -1458,22 +1485,23 @@ declare namespace notification {
    * Obtains the notification reminder type. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @returns { Promise<DeviceRemindType> } Promise used to return the result.
+   * @returns { Promise<DeviceRemindType> } Promise used to return the result of obtaining the
+   *     [notification reminder mode](docroot://notification/notification-glossary.md#notification-reminder-mode).
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead ohos.notificationManager/notificationManager#getDeviceRemindType
+   * @useinstead ohos.notificationManager/notificationManager#getDeviceRemindType()
    */
   function getDeviceRemindType(): Promise<DeviceRemindType>;
 
   /**
-   * Describes the **BundleOption** information, that is, the bundle information of an application.
-   * 
+   * Describes the **BundleOption** information
+   *
    * @syscap SystemCapability.Notification.Notification
    * @since 7
    * @deprecated since 9
-   * @useinstead .ohos.notificationManager/notificationManager#BundleOption
+   * @useinstead ohos.notificationManager/notificationManager#BundleOption
    */
   export interface BundleOption {
     /**
@@ -1570,7 +1598,7 @@ declare namespace notification {
     TYPE_DAILY = 2,
 
     /**
-     * DND at the specified time segment (considering the year, month, day, hour, and minute).
+     * DND at the specified time segment (accurate to month, day, and hour).
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi

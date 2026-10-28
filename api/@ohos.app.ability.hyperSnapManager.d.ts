@@ -232,5 +232,27 @@ declare namespace hyperSnapManager {
      * @since 26.0.1 dynamic&static
      */
     function getLastError(errType: HyperSnapErrorType): Promise<HyperSnapErrorInfo>;
+
+    /**
+     * Checks whether the current process is undergoing Hyper Snap initialization.
+     * This API uses a promise to return the result.
+     *
+     * During the Hyper Snap template process initialization (including preloading and image creation phases),
+     * this method returns **true**. Once the snapshot is complete, fails, or the process is not a template
+     * process, this method returns **false**.
+     *
+     * This is useful for applications to distinguish between a normal cold start and a Hyper Snap template
+     * process initialization, allowing them to adjust their initialization logic accordingly.
+     *
+     * @returns { Promise<boolean> } Promise used to return the result.
+     *     The value **true** indicates the current process is undergoing Hyper Snap initialization,
+     *     and **false** indicates the current process is not undergoing Hyper Snap initialization
+     *     (snapshot completed, failed, or the process is not a template process).
+     * @throws { BusinessError } 16000050 - Connect to system service failed.
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    function isHyperSnapInitializing(): Promise<boolean>;
 }
 export default hyperSnapManager;

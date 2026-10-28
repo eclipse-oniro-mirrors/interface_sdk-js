@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Describes a NotificationTemplate instance
+ * @file NotificationTemplate
  * @kit NotificationKit
  */
 
@@ -27,8 +27,9 @@ import { RecordData } from '../@ohos.base';
  *
  * > **NOTE**
  * >
- * > The predefined system templates are supported. You only need to provide the template name and related data for
- * > the system to automatically render the notification style that complies with the specifications.
+ * > The predefined system templates are supported. You only need to provide the template name and related data for the 
+ * > system to automatically render the notification style that complies with the specifications.
+ * >
  * > Application scenario: Currently, only the upload and download scenarios are supported.
  *
  * @syscap SystemCapability.Notification.Notification
@@ -37,9 +38,9 @@ import { RecordData } from '../@ohos.base';
  */
 export interface NotificationTemplate {
   /**
-   * Template name. Currently, only the progress bar notification template indicating download progress is supported,
-   * with the value **downloadTemplate**. The string length cannot exceed 202 bytes; any excess will be truncated.
-   * It cannot be an empty string.
+   * Template name. Currently, only the progress bar notification template indicating download progress is supported, 
+   * with the value **downloadTemplate**. The string length cannot exceed 202 bytes; any excess will be truncated. It 
+   * cannot be an empty string.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 8 dynamic

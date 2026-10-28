@@ -1474,12 +1474,11 @@ declare namespace distributedDeviceManager {
     offDiscoverFailure(callback?: Callback<DiscoveryFailureResult>): void;
 
     /**
-     * 注册设备管理服务死亡回调，以便在服务死亡时通知应用。使用callback异步回调。
+     * 注册设备管理服务死亡回调，以便在服务死亡时通知应用程序。使用callback异步回调。
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'serviceDie' } type - 注册serviceDie回调，以便在devicemanager服务异常终止时通知应用程序，固定为serviceDie。
-     * @param { Callback<{}> } callback - 注册serviceDie的回调方法，当设备管理服务异常终止时触发该回调通知应用。
-     *     如果不传入callback参数，则不会注册回调。
+     * @param { Callback<{}> } [callback] - 注册serviceDie的回调方法，如果不传入该参数，无法收到死亡回调通知。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1490,7 +1489,7 @@ declare namespace distributedDeviceManager {
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 10 dynamic
      */
-    on(type: 'serviceDie', callback: Callback<{}>): void;
+    on(type: 'serviceDie', callback?: Callback<{}>): void;
 
     /**
      * 注册设备管理服务死亡回调，以便在服务死亡时通知应用。使用callback异步回调。

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file NotificationSubscribe模块
  * @kit NotificationKit
  */
 
@@ -41,7 +41,8 @@ import type { BadgeNumberCallbackData as _BadgeNumberCallbackData } from './noti
 /*** endif */
 
 /**
- * 本模块提供通知订阅、取消订阅、通知移除等，一般情况下，只有系统应用具有这些操作权限。
+ * 本模块提供[通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)、取消订阅、通知移除等，一般情况下，只有系统应用具有这
+ * 些操作权限。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -113,7 +114,8 @@ declare namespace notificationSubscribe {
    * 订阅当前用户下所有应用的通知。使用callback异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - 通知订阅对象。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)对象。
    * @param { AsyncCallback<void> } callback - 订阅动作回调函数。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -128,14 +130,15 @@ declare namespace notificationSubscribe {
    * @since 9 dynamic
    * @since 23 static
    * @deprecated since 26.0.0
-   * @useinstead subscribeNotification
+   * @useinstead subscribeNotification(subscriber: NotificationSubscriber)
    */
   function subscribe(subscriber: NotificationSubscriber, callback: AsyncCallback<void>): void;
 
   /**
-   * 订阅本应用的通知并指定订阅信息。使用Promise异步回调。
+   * 订阅本应用的通知。使用Promise异步回调。
    *
-   * @param { NotificationSubscriber } subscriber - 通知订阅对象。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)对象。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -155,7 +158,8 @@ declare namespace notificationSubscribe {
    * 订阅通知并指定订阅信息。使用callback异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - 通知订阅对象。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)对象。
    * @param { NotificationSubscribeInfo } info - 通知订阅信息。
    * @param { AsyncCallback<void> } callback - 订阅动作回调函数。
    * @throws { BusinessError } 201 - Permission denied.
@@ -171,7 +175,7 @@ declare namespace notificationSubscribe {
    * @since 9 dynamic
    * @since 23 static
    * @deprecated since 26.0.0
-   * @useinstead subscribeNotification
+   * @useinstead subscribeNotification(subscriber: NotificationSubscriber, info: NotificationSubscribeInfo)
    */
   function subscribe(
     subscriber: NotificationSubscriber,
@@ -183,8 +187,9 @@ declare namespace notificationSubscribe {
    * 订阅通知并指定订阅信息。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - 通知订阅对象。
-   * @param { NotificationSubscribeInfo } [info] - 通知订阅信息，默认为空（当为空时，表示订阅当前用户下所有应用的通知，否则表示订阅通知并指定订阅信息）。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)对象。
+   * @param { NotificationSubscribeInfo } [info] - 通知订阅信息，默认为空。当该参数为空时，表示订阅当前用户下所有应用的通知。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -199,7 +204,7 @@ declare namespace notificationSubscribe {
    * @since 9 dynamic
    * @since 23 static
    * @deprecated since 26.0.0
-   * @useinstead subscribeNotification
+   * @useinstead subscribeNotification(subscriber: NotificationSubscriber, info: NotificationSubscribeInfo)
    */
   function subscribe(subscriber: NotificationSubscriber, info?: NotificationSubscribeInfo): Promise<void>;
 
@@ -207,7 +212,8 @@ declare namespace notificationSubscribe {
    * 订阅通知；订阅后，通过订阅者中的回调函数接收新消息。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_SYSTEM_SUBSCRIBER
-   * @param { NotificationSubscriber } subscriber - 通知订阅者。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)者。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -226,8 +232,9 @@ declare namespace notificationSubscribe {
    * 订阅通知；订阅后，通过订阅者中的回调函数接收新消息。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_SYSTEM_SUBSCRIBER
-   * @param { NotificationSubscriber } subscriber - 通知订阅者。
-   * @param { NotificationSubscribeInfo } info - 通知订阅信息。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)者。
+   * @param { NotificationSubscribeInfo } info - 通知订阅信息，默认为空。当该参数为空时，表示订阅当前用户下所有应用的通知。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -246,7 +253,8 @@ declare namespace notificationSubscribe {
    * 取消订阅。使用callback异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER [since 9 - 19]
-   * @param { NotificationSubscriber } subscriber - 通知订阅对象。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)对象。
    * @param { AsyncCallback<void> } callback - 取消订阅动作回调函数。
    * @throws { BusinessError } 201 - Permission denied. [since 9 - 19]
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -266,7 +274,8 @@ declare namespace notificationSubscribe {
    * 取消订阅。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER [since 9 - 19]
-   * @param { NotificationSubscriber } subscriber - 通知订阅对象。
+   * @param { NotificationSubscriber } subscriber -
+   *     [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)对象。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied. [since 9 - 19]
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -413,7 +422,10 @@ declare namespace notificationSubscribe {
    * 批量删除指定通知。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { Array<String> } hashCodes - 通知唯一ID数组集合。
+   * @param { Array<String> } hashCodes - 通知唯一ID数组集合。可以通过
+   *     [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume}回调的入参
+   *     [SubscribeCallbackData]{@link ./notification/notificationSubscriber:SubscribeCallbackData}获取其内部
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest}对象中的hashCode。
    * @param { RemoveReason } reason - 通知删除原因。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied.
@@ -516,7 +528,7 @@ declare namespace notificationSubscribe {
    * 删除指定应用的所有通知。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { BundleOption } [bundle] - 指定应用的包信息。默认为空，表示删除所有通知。
+   * @param { BundleOption } [bundle] - 指定应用的包信息。默认为空。当该参数为空时，表示删除所有应用的通知。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -534,11 +546,15 @@ declare namespace notificationSubscribe {
   function removeAll(bundle?: BundleOption): Promise<void>;
 
   /**
-   * 触发指定通知的跨设备协同操作（例如通知跨设备点击跳转、通知跨设备快捷回复等）。使用Promise异步回调。
+   * 触发指定通知的[跨设备协同](docroot://notification/notification-glossary.md#cross-device-collaboration跨设备协同)操作（例如通知跨设备点击跳转、通知跨设备
+   * 快捷回复等）。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { string } hashcode - 通知唯一ID。
-   * @param { OperationInfo } [operationInfo] - 跨设备协同操作信息，默认为空。
+   * @param { string } hashcode - 通知唯一ID。可以通过
+   *     [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume}回调的入参
+   *     [SubscribeCallbackData]{@link ./notification/notificationSubscriber:SubscribeCallbackData}获取其内部
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest}对象中的hashCode。
+   * @param { OperationInfo } [operationInfo] - 跨设备协同操作信息，不传递该参数时，使用系统默认协同操作配置。
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -554,7 +570,7 @@ declare namespace notificationSubscribe {
   function distributeOperation(hashcode: string, operationInfo?: OperationInfo): Promise<void>;
 
   /**
-   * 跨设备协同操作信息。
+   * [跨设备协同](docroot://notification/notification-glossary.md#cross-device-collaboration跨设备协同)操作信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -586,11 +602,11 @@ declare namespace notificationSubscribe {
 
     /**
      * 用户点击操作类型。
-     * 
-     * - 0：用户点击非实况通知本体。
+     *
+     * - 0：用户点击非[实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)本体。
      * - 1：用户点击非实况通知按钮。
      * - 32：用户点击实况通知本体。
-     * - 33：用户点击实况通知辅助区
+     * - 33：用户点击实况通知辅助区。
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -621,7 +637,7 @@ declare namespace notificationSubscribe {
   export type BundleOption = _BundleOption;
 
   /**
-   * 通知发布者的信息。
+   * 通知订阅者的信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -631,7 +647,7 @@ declare namespace notificationSubscribe {
   export type NotificationSubscribeInfo = _NotificationSubscribeInfo;
 
   /**
-   * 作为订阅通知接口subscribe的入参，提供订阅者接收到新通知、取消通知等的回调方法。
+   * 提供订阅者接收到新通知、取消通知等的回调方法。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -641,7 +657,7 @@ declare namespace notificationSubscribe {
   export type NotificationSubscriber = _NotificationSubscriber;
 
   /**
-   * 携带系统属性值的通知信息。
+   * 返回携带系统属性值的通知信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -651,7 +667,7 @@ declare namespace notificationSubscribe {
   export type SubscribeCallbackData = _SubscribeCallbackData;
 
   /**
-   * 回调返回监听到的应用信息。
+   * 应用角标使能状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -661,7 +677,7 @@ declare namespace notificationSubscribe {
   export type EnabledNotificationCallbackData = _EnabledNotificationCallbackData;
 
   /**
-   * 回调返回监听到的静默提醒使能状态信息。
+   * 应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)开关状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -671,7 +687,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderCallbackData = _EnabledSilentReminderCallbackData;
 
   /**
-   * 注册应用通知静默提醒使能状态变化的回调函数类型。
+   * 注册应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)使能状态变化的回调函数类型。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -681,7 +697,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderChangedCallback = _EnabledSilentReminderChangedCallback;
 
   /**
-   * 返回通知优先级总开关状态。
+   * 通知优先级总开关状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -690,7 +706,7 @@ declare namespace notificationSubscribe {
   export type EnabledPriorityNotificationCallbackData = _EnabledPriorityNotificationCallbackData;
 
   /**
-   * 返回应用通知优先级开关状态。
+   * 应用通知优先级开关状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -699,7 +715,7 @@ declare namespace notificationSubscribe {
   export type EnabledPriorityNotificationByBundleCallbackData = _EnabledPriorityNotificationByBundleCallbackData;
 
   /**
-   * 回调返回监听到的应用信息。
+   * 应用角标数量变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -709,7 +725,7 @@ declare namespace notificationSubscribe {
   export type BadgeNumberCallbackData = _BadgeNumberCallbackData;
 
   /**
-   * 实况通知语音播报内容配置项。
+   * Describes the properties of the voice content options for notification subscription.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -717,9 +733,8 @@ declare namespace notificationSubscribe {
    * @since 26.0.0 dynamic&static
    */
   export type VoiceContentOptions = _VoiceContentOptions;
-
   /**
-   * 通知消息中语音播报内容定义。
+   * 通知语音播报内容。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -729,7 +744,7 @@ declare namespace notificationSubscribe {
   export type VoiceContent = _VoiceContent;
 
   /**
-   * 描述通知分类信息。
+   * 通知分类信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -737,10 +752,11 @@ declare namespace notificationSubscribe {
    * @since 26.0.0 dynamic&static
    */
   export type NotificationClassification = _NotificationClassification;
-  
+
   /**
-   * 注册由[notificationManager.setNotificationSwitch]{@link
-   * ./@ohos.notificationManager:notificationManager.setNotificationSwitch}接口设置的通知开关状态变化的回调函数类型。
+   * 注册由
+   * [notificationManager.setNotificationSwitch]{@link @ohos.notificationManager:notificationManager.setNotificationSwitch}
+   * 接口设置的通知开关状态变化的回调函数类型。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -750,7 +766,7 @@ declare namespace notificationSubscribe {
   export type NotificationSwitchChangedCallback = _NotificationSwitchChangedCallback;
 
   /**
-   * 描述通知开关状态变化的回调数据。
+   * 通知开关状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

@@ -6806,6 +6806,50 @@ declare enum ImmersiveStrategy {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
+  GRID_EXPAND_SAFE_AREA = 2,
+
+  /**
+   * Expands the clip content of the List component to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  LIST_EXPAND_SAFE_AREA = 3,
+
+  /**
+   * Expands the clip content of the Scroll component to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SCROLL_EXPAND_SAFE_AREA = 4,
+
+  /**
+   * Expands the clip content of the WaterFlow component to the safe area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  WATER_FLOW_EXPAND_SAFE_AREA = 5,
+
+  /**
+   * Avoid the window control buttons, which are the close, minimize and zoom buttons.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
   AVOID_WINDOW_CONTROLS = 6,
 
   /**

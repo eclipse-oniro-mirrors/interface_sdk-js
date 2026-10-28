@@ -376,7 +376,7 @@ export interface AbilityDelegator {
   /**
    * 获取应用Context。
    *
-   * @returns { Context } 应用[Context]{@link ./app/context}。
+   * @returns { Context } 应用[Context]{@link ../app/context}。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @crossplatform [since 10]
    * @atomicservice [since 11]
