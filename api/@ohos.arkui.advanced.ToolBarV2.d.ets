@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,7 @@
 
 import { SymbolGlyphModifier, DividerModifier } from './@ohos.arkui.modifier';
 import { ColorMetrics, LengthMetrics } from './@ohos.arkui.node';
+import uiMaterial from './@ohos.arkui.uiMaterial';
 /**
  * Enumerates the states of the toolbar item.
  *
@@ -693,11 +694,1410 @@ export declare class ToolBarV2Modifier {
 }
 
 /**
+ * Defines the placement position of a toolbar item within the toolbar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare enum ToolbarV2ItemPlacement {
+  /**
+   * Center area (default). Suitable for primary toolbar actions displayed in the main content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MAIN = 0,
+  /**
+   * Leading half-area. Suitable for primary actions placed before the main content.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  LEADING = 1,
+  /**
+   * Trailing half-area. Suitable for secondary or overflow actions placed after the main content.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TRAILING = 2
+}
+
+/**
+ * Defines the advanced toolbar item.
+ *
+ * Extends {@link ToolBarV2Item} with advanced layout capabilities such as
+ * custom builder, title configuration, placement, display priority,
+ * activated background color, item size, separator, text visibility,
+ * overflow menu, and item grouping.
+ *
+ * Items with the same non-empty `groupID` form a group. Group-level
+ * configuration (placement, spacing, container style) is read from the
+ * first item in the array that carries that `groupID`.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+@ObservedV2
+export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
+  /**
+   * Custom content builder for the toolbar item. When set, content and icon are ignored.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  builder?: CustomBuilder;
+  /**
+   * Define advanced toolbarV2 title settings. When not provided, no title is rendered.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  titleConfigs?: ToolbarV2TitleConfigs;
+  /**
+   * Placement position of the toolbar item.
+   * Default value: ToolbarV2ItemPlacement.MAIN.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  placement?: ToolbarV2ItemPlacement;
+  /**
+   * Display priority of the toolbar item in the layout container.
+   * Higher values indicate higher display priority.
+   * Value range: [0,10]. Default value: 1.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  displayPriority?: number;
+  /**
+   * Item background color in `ACTIVATE` status (activated background color).
+   * Only applies to icon-only items; icon+text items cannot set a background color.
+   * Defaults to transparent when not specified. Recommend using
+   * `$r('sys.color.comp_background_emphasize')` (HarmonyOS blue).
+   * Default value: Color.Transparent.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  activatedBackgroundColor?: ColorMetrics;
+  /**
+   * Unique identifier for the toolbar item.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  id?: string;
+  /**
+   * Item size (width × height) for the toolbar item.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  itemSize?: Size;
+  /**
+   * Whether to show a separator after this item.
+   * When true, a separator is rendered after this item (not after the last item in the toolbar).
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  isShowSeparator?: boolean;
+  /**
+   * Whether to display the text content of the toolbar item.
+   * When set to false, the text specified by `content` is not rendered in the toolbar,
+   * but `content` is still used for overflow menu identification.
+   * This is useful when an icon-only item still needs text identification in the overflow menu.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  isShowText?: boolean;
+  /**
+   * Whether to display the overflowMenu of the toolbar in this item.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  isShowOverflowMenu?: boolean;
+  /**
+   * Group identifier. Items sharing the same non-empty `groupID` are rendered
+   * as a visual group. Group-level configuration is read from the first item
+   * in the array that carries this `groupID`.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  groupID?: string;
+  /**
+   * Style configuration for the group that this item belongs to.
+   * Only the value on the first item (in array order) carrying a given `groupID`
+   * takes effect; values on subsequent items with the same `groupID` are ignored.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  groupStyle?: ToolbarV2ItemGroupStyle;
+  /**
+   * The constructor used to create a AdvancedToolbarV2Item object.
+   *
+   * @param { AdvancedToolbarV2ItemOptions } [options] - item info.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: AdvancedToolbarV2ItemOptions);
+}
+
+/**
+ * Declare the options of AdvancedToolbarV2Item.
+ *
+ * Extends {@link ToolBarV2ItemOptions} with advanced fields. `content` is
+ * inherited as a required field; use `isShowText` on the item to control
+ * whether the text is rendered.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface AdvancedToolbarV2ItemOptions extends ToolBarV2ItemOptions {
+  /**
+   * Custom content builder for the toolbar item. When set, content and icon are ignored.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  builder?: CustomBuilder;
+  /**
+   * Define advanced toolbarV2 title settings. When not provided, no title is rendered.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  titleConfigs?: ToolbarV2TitleConfigs;
+  /**
+   * Placement position of the toolbar item.
+   * Default value: ToolbarV2ItemPlacement.MAIN.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  placement?: ToolbarV2ItemPlacement;
+  /**
+   * Display priority of the toolbar item in the layout container.
+   * Higher values indicate higher display priority.
+   * The value range is [0, 10].
+   * Default value: 1.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayPriority?: number;
+  /**
+   * Item background color in `ACTIVATE` status (activated background color).
+   * Only applies to icon-only items; icon+text items cannot set a background color.
+   * Defaults to transparent when not specified. Recommend using `$r('sys.color.comp_background_emphasize')`.
+   * Default value: Color.Transparent.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  activatedBackgroundColor?: ColorMetrics;
+  /**
+   * Unique identifier for the toolbar item.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  id?: string;
+  /**
+   * Item size (width × height) for the toolbar item.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  itemSize?: Size;
+  /**
+   * Whether to show a separator after this item.
+   * When true, a separator is rendered after this item (not after the last item in the toolbar).
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isShowSeparator?: boolean;
+  /**
+   * Whether to display the text content of the toolbar item.
+   * When set to false, the text specified by `content` is not rendered in the toolbar,
+   * but `content` is still used for accessibility and overflow menu identification.
+   * This is useful when an icon-only item still needs text identification in the overflow menu.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isShowText?: boolean;
+  /**
+   * Whether to display the overflowMenu of the toolbar in this item.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isShowOverflowMenu?: boolean;
+  /**
+   * Group identifier. Items sharing the same non-empty `groupID` are rendered
+   * as a visual group.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  groupID?: string;
+  /**
+   * Style configuration for the group that this item belongs to.
+   * Only the value on the first item (in array order) carrying a given `groupID`
+   * takes effect; values on subsequent items with the same `groupID` are ignored.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  groupStyle?: ToolbarV2ItemGroupStyle;
+}
+
+/**
+ * Defines the toolbar background visibility.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare enum BarBackgroundVisibility {
+  /**
+   * Visible (default): the toolbar background is shown normally.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  VISIBLE = 0,
+  /**
+   * Hidden: the toolbar background is transparent.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  HIDDEN = 1
+}
+
+/**
+ * Toolbar padding configuration along the main axis.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ToolbarV2PaddingOptions {
+  /**
+   * Padding at the start of the main axis.
+   * When horizontal: left padding. When vertical: top padding.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mainAxisStart?: LengthMetrics;
+  /**
+   * Padding at the end of the main axis.
+   * When horizontal: right padding. When vertical: bottom padding.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mainAxisEnd?: LengthMetrics;
+}
+
+/**
+ * Style configuration for the overflow menu popup.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ToolbarV2OverflowMenuStyle {
+  /**
+   * Font configuration for overflow menu items.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  font?: Font;
+  /**
+   * Font color of overflow menu items.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  fontColor?: ColorMetrics;
+  /**
+   * Overflow menu corner radius.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  radius?: Dimension | BorderRadiuses;
+  /**
+   * Divider style between individual overflow menu items.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  menuItemDivider?: DividerStyleOptions;
+  /**
+   * Divider style between overflow menu item groups.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  menuItemGroupDivider?: DividerStyleOptions;
+}
+
+/**
+ * Defines the constructor options for ToolbarV2TitleStyle.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ToolbarV2TitleStyleOptions {
+  /**
+   * Font size of the title text.
+   * Default value: 20fp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  fontSize?: LengthMetrics;
+  /**
+   * Title text color.
+   * Default value: $r('sys.color.font_primary').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  fontColor?: ColorMetrics;
+  /**
+   * Font weight of the title text.
+   * Default value: FontWeight.Bold.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  fontWeight?: FontWeight;
+  /**
+   * Minimum width of the title.
+   * Default value: 48vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minLength?: LengthMetrics;
+}
+
+/**
+ * Title text style configuration.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+@ObservedV2
+export declare class ToolbarV2TitleStyle {
+  /**
+   * Font size of the title text.
+   * Default value: 20fp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  fontSize?: LengthMetrics;
+  /**
+   * Title text color.
+   * Default value: $r('sys.color.font_primary').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  fontColor?: ColorMetrics;
+  /**
+   * Font weight of the title text.
+   * Default value: FontWeight.Bold.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  fontWeight?: FontWeight;
+  /**
+   * Minimum width of the title.
+   * Default value: 48vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  minLength?: LengthMetrics;
+  /**
+   * Constructs a ToolbarV2TitleStyle instance.
+   *
+   * @param { ToolbarV2TitleStyleOptions } [options] - Constructor options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: ToolbarV2TitleStyleOptions);
+}
+
+/**
+ * Defines the constructor options for ToolbarV2TitleConfigs.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ToolbarV2TitleOptions {
+  /**
+   * Title text content. Required when constructing ToolbarV2TitleConfigs.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  content?: ResourceStr;
+  /**
+   * Placement position of the title within the toolbar.
+   * Reuses `ToolbarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
+   * Default value: ToolbarV2ItemPlacement.LEADING.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  placement?: ToolbarV2ItemPlacement;
+  /**
+   * Whether the title is visible.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  visible?: boolean;
+  /**
+   * Title text style.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  style?: ToolbarV2TitleStyle;
+}
+
+/**
+ * Title configuration. When not provided, no title is rendered.
+ *
+ * The title participates in layout at the same level as toolbar items.
+ * The title reuses `ToolbarV2ItemPlacement` (`LEADING` / `MAIN` / `TRAILING`)
+ * to determine the rendering area, and is arranged in the same area as items with the same placement.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+@ObservedV2
+export declare class ToolbarV2TitleConfigs {
+  /**
+   * Title text content. Required when constructing ToolbarV2TitleConfigs.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  content: ResourceStr;
+  /**
+   * Placement position of the title within the toolbar.
+   * Reuses `ToolbarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
+   * Default value: ToolbarV2ItemPlacement.LEADING.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  placement?: ToolbarV2ItemPlacement;
+  /**
+   * Whether the title is visible.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  visible?: boolean;
+  /**
+   * Title text style.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  style?: ToolbarV2TitleStyle;
+  /**
+   * Constructs a ToolbarV2TitleConfigs instance.
+   *
+   * @param { ToolbarV2TitleOptions } [options] - Constructor options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: ToolbarV2TitleOptions);
+}
+
+/**
+ * Defines the constructor options for ToolbarV2ItemGroupStyle.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ToolbarV2ItemGroupStyleOptions {
+  /**
+   * Placement position of the group within the toolbar.
+   * The group placement takes precedence over the placement of individual items within the group.
+   * Default value: ToolbarV2ItemPlacement.MAIN.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  placement?: ToolbarV2ItemPlacement;
+  /**
+   * Spacing between items within the group.
+   * Default value: 0vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  space?: LengthMetrics;
+  /**
+   * Background color of the group container.
+   * Default value: $r('sys.color.comp_background_primary').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  backgroundColor?: ColorMetrics;
+  /**
+   * Padding of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  padding?: ToolbarV2PaddingOptions;
+  /**
+   * Border radius of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderRadius?: LengthMetrics;
+  /**
+   * Border width of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderWidth?: LengthMetrics;
+  /**
+   * Border color of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderColor?: ColorMetrics;
+  /**
+   * Whether to show the press-state effect for items within the group.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  stateEffect?: boolean;
+}
+
+/**
+ * Defines the style configuration for toolbar item group.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+@ObservedV2
+export declare class ToolbarV2ItemGroupStyle {
+  /**
+   * Placement position of the group within the toolbar.
+   * The group placement takes precedence over the placement of individual items within the group.
+   * Default value: ToolbarV2ItemPlacement.MAIN.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  placement?: ToolbarV2ItemPlacement;
+  /**
+   * Spacing between items within the group.
+   * Default value: 0vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  space?: LengthMetrics;
+  /**
+   * Background color of the group container.
+   * Default value: $r('sys.color.comp_background_primary').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  backgroundColor?: ColorMetrics;
+  /**
+   * Padding of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  padding?: ToolbarV2PaddingOptions;
+  /**
+   * Border radius of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  borderRadius?: LengthMetrics;
+  /**
+   * Border width of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  borderWidth?: LengthMetrics;
+  /**
+   * Border color of the group container.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  borderColor?: ColorMetrics;
+  /**
+   * Whether to show the press-state effect for items within the group.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  stateEffect?: boolean;
+  /**
+   * Constructs a ToolbarV2ItemGroupStyle instance.
+   *
+   * @param { ToolbarV2ItemGroupStyleOptions } [options] - Constructor options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: ToolbarV2ItemGroupStyleOptions);
+}
+
+/**
+ * Defines the constructor options for ToolbarV2StyleConfigs.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ToolbarV2StyleOptions {
+  /**
+   * Toolbar padding. Each edge can be set independently.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  padding?: ToolbarV2PaddingOptions;
+  /**
+   * Whether the toolbar background is visible.
+   * Default value: BarBackgroundVisibility.VISIBLE.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  backgroundVisibility?: BarBackgroundVisibility;
+  /**
+   * Background color of the toolbar.
+   * Default value: $r('sys.color.comp_background_primary').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  backgroundColor?: ColorMetrics;
+  /**
+   * Background blur style of the toolbar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  backgroundBlurStyle?: BlurStyle;
+  /**
+   * Background material of the toolbar. Sets a system-styled material effect that influences
+   * the backgroundColor, border, shadow, and other visual attributes of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic
+   */
+  systemBackgroundMaterial?: uiMaterial.Material;
+  /**
+   * Spacing between item groups.
+   * Default value: 12vp, value range [8vp, 20vp], clamped to the boundary when out of range.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  groupSpace?: LengthMetrics;
+  /**
+   * Item size of the toolbar items.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  itemSize?: Size;
+  /**
+   * Font size of the toolbar item text.
+   * Default value: $r('sys.float.ohos_id_text_size_caption').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  fontSize?: LengthMetrics;
+  /**
+   * Border width of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderWidth?: LengthMetrics;
+  /**
+   * Border color of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderColor?: ColorMetrics;
+  /**
+   * Border radius of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderRadius?: LengthMetrics;
+  /**
+   * Whether to enable the state effect.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  stateEffect?: boolean;
+}
+
+/**
+ * Defines the style configuration for the toolbar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+@ObservedV2
+export declare class ToolbarV2StyleConfigs {
+  /**
+   * Toolbar padding. Each edge can be set independently.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  padding?: ToolbarV2PaddingOptions;
+  /**
+   * Whether the toolbar background is visible.
+   * Default value: BarBackgroundVisibility.VISIBLE.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  backgroundVisibility?: BarBackgroundVisibility;
+  /**
+   * Background color of the toolbar.
+   * Default value: $r('sys.color.comp_background_primary').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  backgroundColor?: ColorMetrics;
+  /**
+   * Background blur style of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  backgroundBlurStyle?: BlurStyle;
+  /**
+   * Background material of the toolbar. Sets a system-styled material effect that influences
+   * the backgroundColor, border, shadow, and other visual attributes of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  systemBackgroundMaterial?: uiMaterial.Material;
+  /**
+   * Spacing between item groups.
+   * Default value: 12vp, value range [8vp, 20vp], clamped to the boundary when out of range.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  groupSpace?: LengthMetrics;
+  /**
+   * Item size of the toolbar items.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  itemSize?: Size;
+  /**
+   * Font size of the toolbar item text.
+   * Default value: $r('sys.float.ohos_id_text_size_caption').
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  fontSize?: LengthMetrics;
+  /**
+   * Border width of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  borderWidth?: LengthMetrics;
+  /**
+   * Border color of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  borderColor?: ColorMetrics;
+  /**
+   * Border radius of the toolbar.
+   * Default value: undefined.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  borderRadius?: LengthMetrics;
+  /**
+   * Constructs a ToolbarV2StyleConfigs instance.
+   *
+   * @param { ToolbarV2StyleOptions } [options] - Constructor options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: ToolbarV2StyleOptions);
+}
+
+/**
+ * Advanced modifier for ToolBarV2. Merges layout attributes, style configs,
+ * and overflow menu style into a single modifier class.
+ *
+ * Uses chainable setter methods that accept original config objects.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+@ObservedV2
+export declare class AdvancedToolBarV2Modifier {
+  /**
+   * Sets the length of the toolbar along the layout direction.
+   *
+   * Horizontal: controls width. Vertical: controls height.
+   * Default value: '100%'.
+   *
+   * @param { LengthMetrics } value - The length value along the layout direction.
+   * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mainAxisLength(value: LengthMetrics): AdvancedToolBarV2Modifier;
+  /**
+   * Sets the breadth of the toolbar perpendicular to the layout direction.
+   *
+   * Horizontal: controls height. Vertical: controls width. When not set, the cross-axis is auto-sized by content.
+   *
+   * @param { LengthMetrics } value - The breadth value perpendicular to the layout direction.
+   * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  crossAxisLength(value: LengthMetrics): AdvancedToolBarV2Modifier;
+  /**
+   * Sets the layout direction of the toolbar.
+   *
+   * HORIZONTAL: items arranged in a row (default).
+   * VERTICAL: items arranged in a column.
+   *
+   * @param { Axis } value - The direction value.
+   * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  direction(value: Axis): AdvancedToolBarV2Modifier;
+  /**
+   * Sets the toolbar style configuration.
+   *
+   * Controls background, padding, groupSpace, border, and item active/disabled colors.
+   *
+   * @param { ToolbarV2StyleConfigs } styleConfigs - The style configuration object.
+   * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  style(styleConfigs: ToolbarV2StyleConfigs): AdvancedToolBarV2Modifier;
+  /**
+   * Sets the style configuration for the overflow menu popup.
+   *
+   * @param { ToolbarV2OverflowMenuStyle } menuStyle - The overflow menu style configuration object.
+   * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  overflowMenuStyle(menuStyle: ToolbarV2OverflowMenuStyle): AdvancedToolBarV2Modifier;
+}
+
+/**
  * The toolbar is used to display action options for the current screen content. It is displayed at the bottom of the
  * screen and is suitable for scenarios where quick action entries need to be provided to users. A maximum of five
  * entries can be displayed at the bottom. Any excess entries are collapsed into a "More" item, which is displayed on
  * the far right. It is suitable for scenarios where quick operations on the current page content are needed, helping
  * users quickly access common functions and improving operation efficiency.<br />
+ * ToolbarV2 supports configuring advanced toolbar items via `AdvancedToolbarV2Item` (which extends `ToolBarV2Item`).
+ * A toolbar with configured advanced items is more flexible, allowing you to customize titles, overflow
+ * menus, item grouping, and more.
  * This component is implemented based on
  * [state management (V2)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2).
  * Compared with
@@ -730,7 +2130,9 @@ export declare class ToolBarV2Modifier {
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
-   * Define toolbarV2 item list.
+   * Define toolbarV2 item list. Using ToolBarV2Item[] constitutes a simple toolbar.
+   * `AdvancedToolbarV2Item` (which extends `ToolBarV2Item`) can be used for advanced
+   * layout scenarios such as titles, overflow menus, and item grouping.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -742,7 +2144,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarList: ToolBarV2Item[];
   /**
-   * Define toolbarV2 activate item index, default is -1.
+   * Define toolbarV2 activate item index, default is -1. Which is only used for ToolBarV2Item.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -753,7 +2155,7 @@ export declare struct ToolBarV2 {
   @Param
   activatedIndex?: number;
   /**
-   * Define divider Modifier.
+   * Define toolbarV2 divider Modifier.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -774,4 +2176,16 @@ export declare struct ToolBarV2 {
    */
   @Param
   toolBarModifier?: ToolBarV2Modifier;
+  /**
+   * Define advanced toolbarV2 modifier. Merges layout attributes, style configs,
+   * and overflow menu style into a single modifier.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  @Param
+  advancedToolBarModifier?: AdvancedToolBarV2Modifier;
 }
