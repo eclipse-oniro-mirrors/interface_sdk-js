@@ -21,8 +21,8 @@ import type { AsyncCallback } from './@ohos.base';
 import cryptoFramework from './@ohos.security.cryptoFramework';
 
 /**
- * The certificate algorithm library framework provides certificate-related APIs. The **certFramework** module depends
- * on the basic algorithm capabilities of the Crypto framework. For details, see
+ * The **cert** module provides APIs for performing certificate operations. The **certFramework** module depends on
+ * the basic algorithm capabilities of the Crypto framework. For details, see
  * [cryptoFramework]{@link @ohos.security.cryptoFramework:cryptoFramework}.
  *
  * @syscap SystemCapability.Security.Cert
@@ -43,7 +43,7 @@ declare namespace cert {
    */
   enum CertResult {
     /**
-     * Invalid parameters.
+     * Invalid parameter.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -54,7 +54,7 @@ declare namespace cert {
     INVALID_PARAMS = 401,
 
     /**
-     * This operation is not supported.
+     * Unsupported operation.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -76,7 +76,7 @@ declare namespace cert {
     ERR_OUT_OF_MEMORY = 19020001,
 
     /**
-     * Runtime error.
+     * This error code is reported if an error occurs during running.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -98,7 +98,7 @@ declare namespace cert {
     ERR_PARAMETER_CHECK_FAILED = 19020003,
 
     /**
-     * Crypto operation error.
+     * An error occurs when the API of a third-party algorithm library is called.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -164,7 +164,7 @@ declare namespace cert {
     ERR_KEYUSAGE_NO_CERTSIGN = 19030006,
 
     /**
-     * The key cannot be used for a digital signature.
+     * The key cannot be used for digital signature.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -175,7 +175,7 @@ declare namespace cert {
     ERR_KEYUSAGE_NO_DIGITAL_SIGNATURE = 19030007,
 
     /**
-     * The password for the private key may be incorrect.
+     * The private key password may be incorrect.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -186,7 +186,7 @@ declare namespace cert {
     ERR_MAYBE_WRONG_PASSWORD = 19030008,
 
     /**
-     * Untrusted certificate.
+     * This error code is reported if the certificate is untrusted.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -196,7 +196,7 @@ declare namespace cert {
     ERR_CERT_UNTRUSTED = 19030009,
 
     /**
-     * The certificate has been revoked.
+     * This error code is reported if the certificate has been revoked.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -206,7 +206,7 @@ declare namespace cert {
     ERR_CERT_HAS_REVOKED = 19030010,
 
     /**
-     * Unsupported critical extension.
+     * This error code is reported if there is an unknown critical extension.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -216,7 +216,7 @@ declare namespace cert {
     ERR_UNKNOWN_CRITICAL_EXTENSION = 19030011,
 
     /**
-     * Hostname mismatch in the certificate.
+     * This error code is reported if the hostname is not matched.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -226,7 +226,7 @@ declare namespace cert {
     ERR_CERT_HOSTNAME_MISMATCH = 19030012,
 
     /**
-     * Email address mismatch in the certificate.
+     * The email address in the certificate is not matched.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -246,7 +246,7 @@ declare namespace cert {
     ERR_CERT_KEYUSAGE_MISMATCH = 19030014,
 
     /**
-     * Failed to obtain the certificate revocation list.
+     * This error code is reported if the attempt to obtain the CRL fails.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -256,7 +256,7 @@ declare namespace cert {
     ERR_CRL_NOT_FOUND = 19030015,
 
     /**
-     * The certificate revocation list has not taken effect.
+     * This error code is reported if the CRL has not taken effect.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -266,7 +266,7 @@ declare namespace cert {
     ERR_CRL_NOT_YET_VALID = 19030016,
 
     /**
-     * The certificate revocation list has expired.
+     * This error code is reported if the CRL has expired.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -276,7 +276,7 @@ declare namespace cert {
     ERR_CRL_HAS_EXPIRED = 19030017,
 
     /**
-     * Failed to verify the signature of the certificate revocation list.
+     * This error code is reported if the CRL signature verification fails.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -286,7 +286,7 @@ declare namespace cert {
     ERR_CRL_SIGNATURE_FAILURE = 19030018,
 
     /**
-     * Failed to find the issuer of the certificate revocation list.
+     * This error code is reported if the attempt to obtain the CRL issuer fails.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -296,7 +296,7 @@ declare namespace cert {
     ERR_CRL_ISSUER_NOT_FOUND = 19030019,
 
     /**
-     * Failed to obtain the OCSP response.
+     * This error code is reported if the attempt to obtain the Online Certificate Status Protocol (OCSP) response fails.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -306,7 +306,7 @@ declare namespace cert {
     ERR_OCSP_RESPONSE_NOT_FOUND = 19030020,
 
     /**
-     * Invalid OCSP response.
+     * This error code is reported if the OCSP response is invalid.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -316,7 +316,7 @@ declare namespace cert {
     ERR_OCSP_RESPONSE_INVALID = 19030021,
 
     /**
-     * Failed to verify the OCSP signature.
+     * This error code is reported if the OCSP signature verification fails.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -326,7 +326,7 @@ declare namespace cert {
     ERR_OCSP_SIGNATURE_FAILURE = 19030022,
 
     /**
-     * Unknown OCSP certificate status.
+     * This error code is reported if the OCSP certificate status is unknown.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -336,7 +336,7 @@ declare namespace cert {
     ERR_OCSP_CERT_STATUS_UNKNOWN = 19030023,
 
     /**
-     * Network connection timed out.
+     * This error code is reported if the network connection times out.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -357,7 +357,7 @@ declare namespace cert {
    */
   interface DataBlob {
     /**
-     * Indicates the content of the data blob.
+     * Data.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -379,7 +379,7 @@ declare namespace cert {
    */
   interface DataArray {
     /**
-     * Indicates the content of the data array.
+     * Data list.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -401,7 +401,7 @@ declare namespace cert {
    */
   enum EncodingFormat {
     /**
-     * Distinguished Encoding Rules (DER) format.
+     * DER.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -412,7 +412,7 @@ declare namespace cert {
     FORMAT_DER = 0,
 
     /**
-     * Privacy-Enhanced Mail (PEM) format.
+     * PEM.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -423,7 +423,7 @@ declare namespace cert {
     FORMAT_PEM = 1,
 
     /**
-     * PKCS #7 format.
+     * PKCS #7.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -489,7 +489,7 @@ declare namespace cert {
     CERT_ITEM_TYPE_SUBJECT_UNIQUE_ID = 3,
 
     /**
-     * Certificate extensions, each of which is identified by a unique object identifier (OID).
+     * Certificate extensions.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -501,7 +501,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the OID types of the certificate extensions that can be obtained.
+   * Enumerates certificate extension OID types.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform [since 11]
@@ -511,7 +511,7 @@ declare namespace cert {
    */
   enum ExtensionOidType {
     /**
-     * All object identifiers.
+     * All OIDs.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -522,7 +522,7 @@ declare namespace cert {
     EXTENSION_OID_TYPE_ALL = 0,
 
     /**
-     * Object identifier whose **critical** is **true**.
+     * OIDs whose **critical** is **true**.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -533,7 +533,7 @@ declare namespace cert {
     EXTENSION_OID_TYPE_CRITICAL = 1,
 
     /**
-     * Object identifier whose **critical** is **false**.
+     * OID whose **critical** is **false**.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -545,7 +545,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the entry types in certificate extensions that can be obtained.
+   * Enumerates certificate extension types.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform [since 11]
@@ -555,7 +555,7 @@ declare namespace cert {
    */
   enum ExtensionEntryType {
     /**
-     * Entire extension entry.
+     * Entire extension.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -566,7 +566,7 @@ declare namespace cert {
     EXTENSION_ENTRY_TYPE_ENTRY = 0,
 
     /**
-     * Critical attribute (**critical** flag) of the extension entry.
+     * **critical** attribute of the extension.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -577,7 +577,7 @@ declare namespace cert {
     EXTENSION_ENTRY_TYPE_ENTRY_CRITICAL = 1,
 
     /**
-     * Value (extension-specific data) of the extension entry.
+     * Value of the extension (extension-specific data).
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -631,7 +631,9 @@ declare namespace cert {
    */
   interface CertChainData {
     /**
-     * Certificate data.
+     * Certificate data, which is a combination of the certificate length (2 bytes) and data. For example,
+     * **08ABCDEFGH07ABCDEFG** indicates that the first certificate is an 8-byte certificate, followed by 8-byte
+     * certificate data. The second certificate is a 7-byte certificate, followed by 7-byte certificate data.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -641,7 +643,7 @@ declare namespace cert {
      */
     data: Uint8Array;
     /**
-     * Number of certificates contained in the input data.
+     * Number of certificates.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -651,7 +653,7 @@ declare namespace cert {
      */
     count: int;
     /**
-     * Certificate encoding format.
+     * Encoding format.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -663,7 +665,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the encoding formats.
+   * Enumerates the obtained encoding formats.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -698,8 +700,8 @@ declare namespace cert {
      * Verifies the certificate signature. This API uses an asynchronous callback to return the result.
      *
      * @param { cryptoFramework.PubKey } key - Public key used for signature verification.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If signature verification is
+     *     successful, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -734,9 +736,9 @@ declare namespace cert {
     /**
      * Obtains the serialized X.509 certificate data. This API uses an asynchronous callback to return the result.
      *
-     * @param { AsyncCallback<EncodingBlob> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the serialized X.509 certificate data obtained.
-     *     Otherwise, **err** is an error object.
+     * @param { AsyncCallback<EncodingBlob> } callback - Callback used to return the result. If the serialized X.509
+     *     certificate data is successfully obtained, **err** is **undefined**, and **data** is the serialized X.509
+     *     certificate data obtained. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -757,7 +759,7 @@ declare namespace cert {
     /**
      * Obtains the serialized X.509 certificate data. This API uses a promise to return the result.
      *
-     * @returns { Promise<EncodingBlob> } Promise used to return the serialized X.509 certificate data obtained.
+     * @returns { Promise<EncodingBlob> } Promise used to return the serialized X.509 certificate data.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -777,7 +779,7 @@ declare namespace cert {
     getEncoded(): Promise<EncodingBlob>;
 
     /**
-     * Obtains the public key of this X.509 certificate.
+     * Obtains the public key of the X.509 certificate.
      *
      * @returns { cryptoFramework.PubKey } Public key of the X.509 certificate obtained. This object is used only for
      *     **verify()** of **X509Cert**.
@@ -792,9 +794,9 @@ declare namespace cert {
     getPublicKey(): cryptoFramework.PubKey;
 
     /**
-     * Checks the validity period of this X.509 certificate.
+     * Checks the validity period of the X.509 certificate.
      *
-     * @param { string } date - Date in an ASN.1 time format, specifically UTCTime or GeneralizedTime.
+     * @param { string } date - Date, in **ASN.1 UTCTime** or **GeneralizedTime** format.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -856,16 +858,16 @@ declare namespace cert {
     getCertSerialNumber(): bigint;
 
     /**
-     * Obtains the issuer name of this X.509 certificate.
+     * Obtains the X.509 certificate issuer name.
      *
      * > **NOTE**
      * >
-     * > - The obtained X.509 certificate issuer name ends with a NUL terminator (value 0). Determine whether to remove
-     * > this terminator based on your business requirements.
-     * > - The obtained certificate issuer name is ASCII-encoded. When converted to a string, it is a distinguished name
-     * > string that starts with a slash (/) and uses slashes (/) to separate relative distinguished names.
+     * > - The obtained X.509 certificate issuer name ends with a null terminator (with the value of **0**). Determine
+     * > whether to remove the terminator based on service requirements.
+     * > - The obtained certificate issuer name is encoded in ASCII. After being converted into a string, the name starts
+     * > with a slash (/), followed by a string of distinguished names separated by slashes (/).
      *
-     * @returns { DataBlob } X.509 certificate issuer obtained.
+     * @returns { DataBlob } X.509 certificate issuer name obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -881,7 +883,7 @@ declare namespace cert {
     getIssuerName(): DataBlob;
 
     /**
-     * Obtains the issuer name of this X.509 certificate based on the encoding type.
+     * Obtains the X.509 certificate issuer name based on the encoding type.
      *
      * @param { EncodingType } encodingType - Encoding type.
      * @returns { string } Issuer name of an X.509 certificate, separated by commas (,).
@@ -902,22 +904,21 @@ declare namespace cert {
     getIssuerName(encodingType: EncodingType): string;
 
     /**
-     * Obtains the subject name of this X.509 certificate.
+     * Obtains the X.509 certificate subject name.
      *
      * > **NOTE**
      * >
-     * > - If the encodingType parameter is not set, the obtained certificate subject name ends with a
-     * > NUL terminator (value 0). Determine whether to remove this terminator based on your business requirements.
-     * > - If the encodingType parameter is not set, the obtained certificate subject name is ASCII-encoded. When
-     * > converted to a string, it is a distinguished name string that starts with a slash (/) and uses slashes (/) to
-     * > separate relative distinguished names.
-     * > - It is recommended to set the encodingType parameter to EncodingType.ENCODING_UTF8. The obtained certificate
-     * > subject name is a distinguished name string that uses commas (,) to separate relative distinguished names.
+     * > - If the encodingType parameter is not set, the obtained certificate subject name ends with a null terminator
+     * > (with the value of **0**). Determine whether to remove the terminator based on service requirements.
+     * > - If the encodingType parameter is not set, the obtained certificate subject name is encoded in ASCII. After
+     * > being converted into a string, the name starts with a slash (/), followed by a string of distinguished names
+     * > separated by slashes (/).
+     * > - You are advised to set **encodingType** to **EncodingType.ENCODING_UTF8**. In this case, the obtained
+     * > certificate subject name is a string of distinguished names separated by commas (,).
      *
-     * @param { EncodingType } [encodingType] - Encoding type. If this parameter is set, the subject name in UTF-8
-     *     format is to be obtained. If this parameter is not set, the subject name in ASCII encoding format is obtained
-     *     by default.<br>This parameter is available since API version 12. [since 12]
-     * @returns { DataBlob } Represents the subject name of an X.509 certificate.
+     * @param { EncodingType } [encodingType] - Encoding type. The value is UTF-8. If this parameter is not set, ASCII
+     *     encoding is used by default. This parameter can be set in versions later than API version 12. [since 12]
+     * @returns { DataBlob } Subject name of the X.509 certificate.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -936,10 +937,9 @@ declare namespace cert {
     getSubjectName(encodingType?: EncodingType): DataBlob;
 
     /**
-     * Obtains the start time of this X.509 certificate.
+     * Obtains the start time of the X.509 certificate.
      *
-     * @returns { string } Certificate start time obtained, in an ASN.1 time format, specifically UTCTime or
-     *     GeneralizedTime.
+     * @returns { string } X.509 certificate effective time, in **ASN.1 UTCTime** or **GeneralizedTime** format.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -955,10 +955,9 @@ declare namespace cert {
     getNotBeforeTime(): string;
 
     /**
-     * Obtains the expiration time of this X.509 certificate.
+     * Obtains the expiration time of the X.509 certificate.
      *
-     * @returns { string } Certificate expiration time obtained, in an ASN.1 time format, specifically UTCTime or
-     *     GeneralizedTime.
+     * @returns { string } X.509 certificate expiration time, in **ASN.1 UTCTime** or **GeneralizedTime** format.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -974,9 +973,9 @@ declare namespace cert {
     getNotAfterTime(): string;
 
     /**
-     * Obtains the signature data of this X.509 certificate.
+     * Obtains the signature data of the X.509 certificate.
      *
-     * @returns { DataBlob } Signature data obtained.
+     * @returns { DataBlob } Indicates the X.509 certificate signature data.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -992,9 +991,9 @@ declare namespace cert {
     getSignature(): DataBlob;
 
     /**
-     * Obtains the signing algorithm of this X.509 certificate.
+     * Obtains the name of the X.509 certificate signature algorithm.
      *
-     * @returns { string } X.509 certificate signing algorithm obtained.
+     * @returns { string } Name of the X.509 certificate signature algorithm obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1010,8 +1009,7 @@ declare namespace cert {
     getSignatureAlgName(): string;
 
     /**
-     * Obtains the object identifier (OID) of the X.509 certificate signing algorithm. OIDs are allocated by the
-     * International Organization for Standardization (ISO).
+     * Obtains the object identifier (OID) of the X.509 certificate signature algorithm. OIDs are allocated by the ISO.
      *
      * @returns { string } OID obtained. It will be truncated if the length exceeds 127 bytes.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -1029,9 +1027,9 @@ declare namespace cert {
     getSignatureAlgOid(): string;
 
     /**
-     * Obtains the signing algorithm parameters of this X.509 certificate.
+     * Obtains parameters of the X.509 certificate signature algorithm.
      *
-     * @returns { DataBlob } X.509 certificate signing algorithm parameters obtained.
+     * @returns { DataBlob } Parameters of the X.509 certificate signature algorithm obtained.
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
@@ -1050,7 +1048,7 @@ declare namespace cert {
     /**
      * Obtains the key usage of this X.509 certificate.
      *
-     * @returns { DataBlob } Key usage of the X.509 certificate obtained.
+     * @returns { DataBlob } Usage of the X.509 certificate key.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19030001 - Crypto operation error.
      * @syscap SystemCapability.Security.Cert
@@ -1080,7 +1078,7 @@ declare namespace cert {
     getExtKeyUsage(): DataArray;
 
     /**
-     * Obtains the basic constraints of this X.509 certificate.
+     * Obtains basic constraints on the X.509 certificate.
      *
      * @returns { int } Basic constraints obtained.
      * @syscap SystemCapability.Security.Cert
@@ -1092,13 +1090,13 @@ declare namespace cert {
     getBasicConstraints(): int;
 
     /**
-     * Obtains the Subject Alternative Names (SANs) of this X.509 certificate.
+     * Obtains the alternative subject names of the X.509 certificate.
      *
      * > **NOTE**
      * >
-     * > The obtained SANs contain a string terminator.
+     * > The obtained alternative subject names of the X.509 certificate contain a string terminator.
      *
-     * @returns { DataArray } SANs obtained.
+     * @returns { DataArray } Alternative subject names of the X.509 certificate obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1114,13 +1112,13 @@ declare namespace cert {
     getSubjectAltNames(): DataArray;
 
     /**
-     * Obtains the Issuer Alternative Names (IANs) of this X.509 certificate.
+     * Obtains the alternative issuer names of the X509 certificate.
      *
      * > **NOTE**
      * >
-     * > The obtained IANs contain a string terminator.
+     * > The obtained alternative issuer names of the X509 certificate contain a string terminator.
      *
-     * @returns { DataArray } IANs obtained.
+     * @returns { DataArray } Alternative issuer names of the X509 certificate obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1159,7 +1157,7 @@ declare namespace cert {
     getItem(itemType: CertItemType): DataBlob;
 
     /**
-     * Checks whether this certificate matches the specified parameters.
+     * Checks whether the certificate matches the input parameters.
      *
      * @param { X509CertMatchParameters } param - Parameters specified for matching the certificate.
      * @returns { boolean } Returns **true** if the certificate matches the parameters specified; returns **false**
@@ -1179,9 +1177,9 @@ declare namespace cert {
     match(param: X509CertMatchParameters): boolean;
 
     /**
-     * Obtains the CRL distribution points of this X.509 certificate.
+     * Obtains URIs of the CRL distribution points of the X.509 certificate.
      *
-     * @returns { DataArray } URIs of the CRL distribution points from this X.509 certificate obtained.
+     * @returns { DataArray } URIs of the distribution points for this X.509 CRL obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1197,7 +1195,7 @@ declare namespace cert {
     getCRLDistributionPoint(): DataArray;
 
     /**
-     * Obtains the X.500 distinguished name object of the X.509 certificate issuer.
+     * Obtains the X.500 distinguished name of the X.509 certificate issuer.
      *
      * @returns { X500DistinguishedName } X.500 distinguished name object.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -1215,7 +1213,7 @@ declare namespace cert {
     getIssuerX500DistinguishedName(): X500DistinguishedName;
 
     /**
-     * Obtains the X.500 distinguished name object of the X.509 certificate subject.
+     * Obtains the X.500 distinguished name of the X.509 certificate subject.
      *
      * @returns { X500DistinguishedName } X.500 distinguished name object.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -1274,7 +1272,7 @@ declare namespace cert {
     /**
      * Obtains the hash value of the data in DER format.
      *
-     * @returns { Uint8Array } Hash value obtained.
+     * @returns { Uint8Array } Hash value in DER format obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1292,7 +1290,7 @@ declare namespace cert {
     /**
      * Obtains the certificate extension object.
      *
-     * @returns { CertExtension } Certificate extensions object obtained.
+     * @returns { CertExtension } Certificate extension object.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1309,12 +1307,12 @@ declare namespace cert {
   }
 
   /**
-   * Creates an **X509Cert** instance. This API uses an asynchronous callback to return the result.
+   * Creates an X.509 certificate object. This API uses an asynchronous callback to return the result.
    *
    * @param { EncodingBlob } inStream - X.509 certificate serialization data.
-   * @param { AsyncCallback<X509Cert> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **data** is the **X509Cert** instance created. Otherwise, **err** is an error
-   *     object.
+   * @param { AsyncCallback<X509Cert> } callback - Callback used to return the result. If the X.509 certificate object is
+   *     successfully created, **err** is **undefined**, and **data** is the **X509Cert** instance obtained. Otherwise,
+   *     **err** is an error object.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -1331,10 +1329,10 @@ declare namespace cert {
   function createX509Cert(inStream: EncodingBlob, callback: AsyncCallback<X509Cert>): void;
 
   /**
-   * Creates an **X509Cert** instance. This API uses a promise to return the result.
+   * Creates an X.509 certificate object. This API uses a promise to return the result.
    *
    * @param { EncodingBlob } inStream - X.509 certificate serialization data.
-   * @returns { Promise<X509Cert> } Promise used to return the **X509Cert** instance created.
+   * @returns { Promise<X509Cert> } Promise that returns the **X509Cert** instance created.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -1361,9 +1359,9 @@ declare namespace cert {
    */
   interface CertExtension {
     /**
-     * Obtains the serialized data of the certificate extensions.
+     * Obtains the serialized data of a certificate extension.
      *
-     * @returns { EncodingBlob } Serialized data obtained.
+     * @returns { EncodingBlob } Serialized data of the obtained certificate extension.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1379,10 +1377,10 @@ declare namespace cert {
     getEncoded(): EncodingBlob;
 
     /**
-     * Obtains the OIDs of the certificate extensions.
+     * Obtains the OID list of a certificate extension.
      *
-     * @param { ExtensionOidType } valueType - Type of the OIDs to obtain.
-     * @returns { DataArray } OIDs obtained.
+     * @param { ExtensionOidType } valueType - Type of the OID to be obtained.
+     * @returns { DataArray } OID list of the obtained certificate extension.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1402,11 +1400,11 @@ declare namespace cert {
     getOidList(valueType: ExtensionOidType): DataArray;
 
     /**
-     * Obtains the value of a specific certificate extension entry by OID.
+     * Obtains the value of a certificate extension based on the OID.
      *
-     * @param { ExtensionEntryType } valueType - Type of the information to obtain.
-     * @param { DataBlob } oid - OID of the certificate extension to obtain.
-     * @returns { DataBlob } Certificate extension object information obtained.
+     * @param { ExtensionEntryType } valueType - Type of the extension information to be obtained.
+     * @param { DataBlob } oid - OID of the extension item to be obtained.
+     * @returns { DataBlob } Certificate extension data obtained.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1428,7 +1426,7 @@ declare namespace cert {
     /**
      * Checks whether the certificate is a CA certificate.
      *
-     * @returns { int } If the key usage extension contains the keyCertSign bit and the CA field in the basic
+     * @returns { int } If the key usage extension contains the **keyCertSign** bit and the **cA** field in the basic
      *     constraints is **true**, the certificate is a CA certificate. Returns **-1** if the certificate is not a CA
      *     certificate; returns the path length in the basic constraints otherwise. Returns **-2** if the certificate is
      *     a CA certificate but the path length is not specified in the basic constraints, which means the path length
@@ -1448,9 +1446,9 @@ declare namespace cert {
     checkCA(): int;
 
     /**
-     * Checks whether there is a critical extension that is not supported.
+     * Checks whether there is any critical extension that is not supported.
      *
-     * @returns { boolean } Returns **true** if an unsupported critical extension is found; returns **false** otherwise.
+     * @returns { boolean } Returns **true** if unsupported critical extension is found; returns **false** otherwise.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1470,9 +1468,9 @@ declare namespace cert {
    * Creates a certificate extension object. This API uses an asynchronous callback to return the result.
    *
    * @param { EncodingBlob } inStream - Serialized certificate extension data.
-   * @param { AsyncCallback<CertExtension> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **undefined**, and **data** is the **CertExtension** instance created. Otherwise,
-   *     **err** is an error object.
+   * @param { AsyncCallback<CertExtension> } callback - Callback used to return the result. If the certificate extension
+   *     object is successfully created, **err** is **undefined**, and **data** is the **CertExtension** instance
+   *     obtained. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -1492,7 +1490,7 @@ declare namespace cert {
    * Creates a certificate extension object. This API uses a promise to return the result.
    *
    * @param { EncodingBlob } inStream - Serialized certificate extension data.
-   * @returns { Promise<CertExtension> } Promise used to return the **CertExtension** instance created.
+   * @returns { Promise<CertExtension> } Promise that returns the **CertExtension** instance created.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -1649,12 +1647,11 @@ declare namespace cert {
    */
   interface X509CRLEntry {
     /**
-     * Obtains the serialized data of this revoked certificate entry. This API uses an asynchronous callback to return
-     * the result.
+     * Obtains the serialized data of a revoked certificate. This API uses an asynchronous callback to return the result.
      *
-     * @param { AsyncCallback<EncodingBlob> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the serialized data of the revoked certificate entry
-     *     obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<EncodingBlob> } callback - Callback used to return the result. If the serialized data of
+     *     the CRL entry is obtained successfully, **err** is **undefined**, and **data** is the serialized data of the
+     *     CRL entry obtained. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1673,10 +1670,9 @@ declare namespace cert {
     getEncoded(callback: AsyncCallback<EncodingBlob>): void;
 
     /**
-     * Obtains the serialized data of this revoked certificate entry. This API uses a promise to return the result.
+     * Obtains the serialized data of a revoked certificate. This API uses a promise to return the result.
      *
-     * @returns { Promise<EncodingBlob> } Promise used to return the serialized data of the revoked certificate entry
-     *     obtained.
+     * @returns { Promise<EncodingBlob> } Promise used to return the serialized data of the CRL entry.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1697,7 +1693,7 @@ declare namespace cert {
     /**
      * Obtains the serial number of this revoked certificate.
      *
-     * @returns { bigint } Serial number of the revoked certificate obtained.
+     * @returns { bigint } Serial number of a revoked certificate.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1713,13 +1709,13 @@ declare namespace cert {
     getSerialNumber(): bigint;
 
     /**
-     * Obtains the issuer name of the revoked certificate.
+     * Obtains the issuer name of a revoked certificate.
      *
      * > **NOTE**
      * >
-     * > The obtained issuer name of this revoked certificate contains a string terminator.
+     * > The obtained issuer name of the revoked certificate contains a string terminator.
      *
-     * @returns { DataBlob } Issuer name of the revoked certificate obtained.
+     * @returns { DataBlob } Issuer name of a revoked certificate.
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
@@ -1736,7 +1732,7 @@ declare namespace cert {
     getCertIssuer(): DataBlob;
 
     /**
-     * Obtains the issuer name of the revoked certificate based on the encoding type.
+     * Obtains the issuer name of a revoked certificate based on the encoding type.
      *
      * @param { EncodingType } encodingType - Encoding type.
      * @returns { string } Issuer name of the revoked certificate, separated by commas (,).
@@ -1758,7 +1754,7 @@ declare namespace cert {
     getCertIssuer(encodingType: EncodingType): string;
 
     /**
-     * Obtains the certificate's revocation date.
+     * Obtains the date when the certificate was revoked.
      *
      * @returns { string } The certificate revocation date obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -1776,7 +1772,7 @@ declare namespace cert {
     getRevocationDate(): string;
 
     /**
-     * Obtains the CRL entry extensions in DER format.
+     * Obtains the CRL extensions.
      *
      * @returns { DataBlob } X.509 CRL entry extensions obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -1794,9 +1790,9 @@ declare namespace cert {
     getExtensions(): DataBlob;
 
     /**
-     * Checks whether this CRL entry has extensions.
+     * Checks whether a CRL entry has extensions.
      *
-     * @returns { boolean } Returns **true** if the CRL entry has an extension; returns **false** otherwise.
+     * @returns { boolean } **true** is returned if the CRL entry has extensions; **false** is returned otherwise.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1812,9 +1808,9 @@ declare namespace cert {
     hasExtensions(): boolean;
 
     /**
-     * Obtains the distinguished name (DN) of the issuer of the revoked certificate.
+     * Obtains the X.500 distinguished name object of the issuer of a revoked certificate.
      *
-     * @returns { X500DistinguishedName } DN object obtained.
+     * @returns { X500DistinguishedName } X.500 distinguished name object.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1850,7 +1846,7 @@ declare namespace cert {
     /**
      * Obtains the hash value of the data in DER format.
      *
-     * @returns { Uint8Array } Hash value obtained.
+     * @returns { Uint8Array } Hash value in DER format obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -1866,9 +1862,9 @@ declare namespace cert {
     hashCode(): Uint8Array;
 
     /**
-     * Obtains the CRL entry extension object.
+     * Obtains the extension object of a CRL entry.
      *
-     * @returns { CertExtension } CRL entry extensions.
+     * @returns { CertExtension } Extension object of a CRL entry.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2257,14 +2253,14 @@ declare namespace cert {
     getSignature(): DataBlob;
 
     /**
-     * Obtains the signing algorithm of the X.509 CRL.
+     * Obtains the signature algorithm of the X.509 CRL.
      *
      * > **NOTE**
      * >
      * > This API is supported since API version 9 and deprecated since API version 11. Use
      * > [X509CRL.getSignatureAlgName()]{@link cert.X509CRL.getSignatureAlgName} instead.
      *
-     * @returns { string } Signing algorithm obtained.
+     * @returns { string } Signature algorithm name of the X.509 CRL obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2279,15 +2275,14 @@ declare namespace cert {
     getSignatureAlgName(): string;
 
     /**
-     * Obtains the OID of the X.509 CRL signing algorithm. OIDs are allocated by the International Organization for
-     * Standardization (ISO).
+     * Obtains the OID of the X.509 CRL signature algorithm. OIDs are allocated by the ISO.
      *
      * > **NOTE**
      * >
      * > This API is supported since API version 9 and deprecated since API version 11. Use
      * > [X509CRL.getSignatureAlgOid()]{@link cert.X509CRL.getSignatureAlgOid} instead.
      *
-     * @returns { string } OID of the X.509 CRL signing algorithm obtained.
+     * @returns { string } OID of the X.509 CRL signature algorithm obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2302,14 +2297,14 @@ declare namespace cert {
     getSignatureAlgOid(): string;
 
     /**
-     * Obtains the parameters of the X.509 CRL signing algorithm.
+     * Obtains the parameters of the X.509 CRL signature algorithm.
      *
      * > **NOTE**
      * >
      * > This API is supported since API version 9 and deprecated since API version 11. Use
      * > [X509CRL.getSignatureAlgParams()]{@link cert.X509CRL.getSignatureAlgParams} instead.
      *
-     * @returns { DataBlob } Algorithm parameters obtained.
+     * @returns { DataBlob } Parameters of the X.509 CRL signature algorithm obtained.
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
@@ -2374,7 +2369,7 @@ declare namespace cert {
   function createX509Crl(inStream: EncodingBlob): Promise<X509Crl>;
 
   /**
-   * Provides APIs for X.509 CRL operations.
+   * Provides APIs for operations on X.509 CRLs.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -2384,7 +2379,7 @@ declare namespace cert {
    */
   interface X509CRL {
     /**
-     * Checks whether an X.509 certificate is revoked.
+     * Checks whether the certificate is revoked.
      *
      * @param { X509Cert } cert - X.509 certificate to check.
      * @returns { boolean } Whether the certificate is revoked. The value **true** indicates that the certificate is
@@ -2416,9 +2411,9 @@ declare namespace cert {
     /**
      * Obtains the serialized X.509 CRL data. This API uses an asynchronous callback to return the result.
      *
-     * @param { AsyncCallback<EncodingBlob> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the serialized X.509 CRL data obtained. Otherwise,
-     *     **err** is an error object.
+     * @param { AsyncCallback<EncodingBlob> } callback - Callback used to return the result. If the serialized X.509 CRL
+     *     data is successfully obtained, **err** is **undefined**, and **data** is the serialized X.509 CRL data
+     *     obtained. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2439,7 +2434,7 @@ declare namespace cert {
     /**
      * Obtains the serialized X.509 CRL data. This API uses a promise to return the result.
      *
-     * @returns { Promise<EncodingBlob> } Promise used to return the serialized X.509 CRL data obtained.
+     * @returns { Promise<EncodingBlob> } Promise used to return the serialized X.509 CRL data.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2458,8 +2453,8 @@ declare namespace cert {
     getEncoded(): Promise<EncodingBlob>;
 
     /**
-     * Verifies the signature of the X.509 CRL. The RSA algorithm is supported. This API uses an asynchronous callback
-     * to return the result.
+     * Verifies the X.509 CRL signature. This API uses an asynchronous callback to return the result. RSA can be used
+     * for signature verification.
      *
      * @param { cryptoFramework.PubKey } key - Public key used for signature verification.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
@@ -2478,8 +2473,8 @@ declare namespace cert {
     verify(key: cryptoFramework.PubKey, callback: AsyncCallback<void>): void;
 
     /**
-     * Verifies the signature of the X.509 CRL. The RSA algorithm is supported. This API uses a promise to return the
-     * result.
+     * Verifies the X.509 CRL signature. This API uses a promise to return the result. RSA can be used for signature
+     * verification.
      *
      * @param { cryptoFramework.PubKey } key - Public key used for signature verification.
      * @returns { Promise<void> } Promise that returns no value.
@@ -2509,13 +2504,13 @@ declare namespace cert {
     getVersion(): int;
 
     /**
-     * Obtains the issuer of the X.509 CRL.
+     * Obtains the X.509 CRL issuer name.
      *
      * > **NOTE**
      * >
      * > The obtained X.509 CRL issuer name contains a string terminator.
      *
-     * @returns { DataBlob } Issuer of the X.509 CRL obtained.
+     * @returns { DataBlob } X.509 CRL issuer name obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2531,7 +2526,7 @@ declare namespace cert {
     getIssuerName(): DataBlob;
 
     /**
-     * Obtains the issuer name of an X.509 CRL based on the encoding type.
+     * Obtains the X.509 CRL issuer name based on the encoding type.
      *
      * @param { EncodingType } encodingType - Encoding type.
      * @returns { string } Issuer name of an X.509 CRL, separated by commas (,).
@@ -2552,10 +2547,9 @@ declare namespace cert {
     getIssuerName(encodingType: EncodingType): string;
 
     /**
-     * Obtains the last update date of this X.509 CRL.
+     * Obtains the last update date of the X.509 CRL.
      *
-     * @returns { string } Last update date of the X.509 CRL, in an ASN.1 time format, specifically UTCTime or
-     *     GeneralizedTime.
+     * @returns { string } Last update date of the X.509 CRL, in **ASN.1 UTCTime** or **GeneralizedTime** format.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2571,10 +2565,9 @@ declare namespace cert {
     getLastUpdate(): string;
 
     /**
-     * Obtains the next update date of this CRL.
+     * Obtains the date when the CRL will be updated the next time.
      *
-     * @returns { string } Next update date of the CRL, in an ASN.1 time format, specifically UTCTime or
-     *     GeneralizedTime.
+     * @returns { string } Next update date of the X.509 CRL, in **ASN.1 UTCTime** or **GeneralizedTime** format.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2590,10 +2583,10 @@ declare namespace cert {
     getNextUpdate(): string;
 
     /**
-     * Obtains the revoked certificate entry from the X.509 CRL based on the specified serial number.
+     * Obtains the revoked certificate based on the specified certificate serial number.
      *
      * @param { bigint } serialNumber - Serial number of the certificate.
-     * @returns { X509CRLEntry } Revoked certificate entry obtained.
+     * @returns { X509CRLEntry } CRL entry.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2609,10 +2602,10 @@ declare namespace cert {
     getRevokedCert(serialNumber: bigint): X509CRLEntry;
 
     /**
-     * Obtains the revoked certificate entry from the X.509 CRL based on the specified certificate.
+     * Obtains the revoked certificate based on the specified certificate object.
      *
      * @param { X509Cert } cert - Certificate based on which the revoked certificate is obtained.
-     * @returns { X509CRLEntry } Revoked certificate entry obtained.
+     * @returns { X509CRLEntry } CRL entry.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2628,11 +2621,10 @@ declare namespace cert {
     getRevokedCertWithCert(cert: X509Cert): X509CRLEntry;
 
     /**
-     * Obtains all the revoked certificate entries from the X.509 CRL. This API uses an asynchronous callback to return
-     * the result.
+     * Obtains revoked certificates. This API uses an asynchronous callback to return the result.
      *
-     * @param { AsyncCallback<Array<X509CRLEntry>> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the revoked certificate entries obtained. Otherwise,
+     * @param { AsyncCallback<Array<X509CRLEntry>> } callback - Callback used to return the result. If the revoked
+     *     certificates are obtained successfully, **err** is **undefined**, and **data** is the CRL obtained. Otherwise,
      *     **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -2648,9 +2640,9 @@ declare namespace cert {
     getRevokedCerts(callback: AsyncCallback<Array<X509CRLEntry>>): void;
 
     /**
-     * Obtains all the revoked certificate entries from the X.509 CRL. This API uses a promise to return the result.
+     * Obtains revoked certificates. This API uses a promise to return the result.
      *
-     * @returns { Promise<Array<X509CRLEntry>> } Promise used to return the revoked certificate entries obtained.
+     * @returns { Promise<Array<X509CRLEntry>> } Promise used to return the revoked certificates.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2665,7 +2657,7 @@ declare namespace cert {
     getRevokedCerts(): Promise<Array<X509CRLEntry>>;
 
     /**
-     * Obtains the DER-encoded CRL information, that is, **tbsCertList** from this CRL.
+     * Obtains the to be signed certificate list (**tbsCertList**) of this CRL.
      *
      * @returns { DataBlob } **tbsCertList** information obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -2701,9 +2693,9 @@ declare namespace cert {
     getSignature(): DataBlob;
 
     /**
-     * Obtains the signing algorithm of the X.509 CRL.
+     * Obtains the signature algorithm of the X.509 CRL.
      *
-     * @returns { string } Signing algorithm obtained.
+     * @returns { string } Signature algorithm name of the X.509 CRL obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2719,10 +2711,9 @@ declare namespace cert {
     getSignatureAlgName(): string;
 
     /**
-     * Obtains the OID of the X.509 CRL signing algorithm. OIDs are allocated by the International Organization for
-     * Standardization (ISO).
+     * Obtains the OID of the X.509 CRL signature algorithm. OIDs are allocated by the ISO.
      *
-     * @returns { string } OID of the X.509 CRL signing algorithm obtained.
+     * @returns { string } OID of the X.509 CRL signature algorithm obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2738,9 +2729,9 @@ declare namespace cert {
     getSignatureAlgOid(): string;
 
     /**
-     * Obtains the parameters of the X.509 CRL signing algorithm.
+     * Obtains the parameters of the X.509 CRL signature algorithm.
      *
-     * @returns { DataBlob } Algorithm parameters obtained.
+     * @returns { DataBlob } Parameters of the X.509 CRL signature algorithm obtained.
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
@@ -2757,9 +2748,9 @@ declare namespace cert {
     getSignatureAlgParams(): DataBlob;
 
     /**
-     * Obtains the CRL extensions data in DER format.
+     * Obtains CRL extensions, in DER format.
      *
-     * @returns { DataBlob } CRL extensions data in DER format obtained.
+     * @returns { DataBlob } CRL extensions, in DER format.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2795,9 +2786,9 @@ declare namespace cert {
     match(param: X509CRLMatchParameters): boolean;
 
     /**
-     * Obtains the distinguished name (DN) of the X.509 CRL issuer.
+     * Obtains the X.500 distinguished name object of the CRL issuer.
      *
-     * @returns { X500DistinguishedName } DN object obtained.
+     * @returns { X500DistinguishedName } X.500 distinguished name object.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2854,7 +2845,7 @@ declare namespace cert {
     /**
      * Obtains the hash value of the data in DER format.
      *
-     * @returns { Uint8Array } Hash value obtained.
+     * @returns { Uint8Array } Hash value in DER format obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2872,7 +2863,7 @@ declare namespace cert {
     /**
      * Obtains the CRL extension object.
      *
-     * @returns { CertExtension } CRL extensions object obtained.
+     * @returns { CertExtension } CRL extension object.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -2889,12 +2880,12 @@ declare namespace cert {
   }
 
   /**
-   * Creates an **X509CRL** instance. This API uses an asynchronous callback to return the result.
+   * Creates an X.509 CRL object. This API uses an asynchronous callback to return the result.
    *
    * @param { EncodingBlob } inStream - Serialized CRL data. The data length cannot exceed 8192 bytes.
-   * @param { AsyncCallback<X509CRL> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **data** is the **X509CRL** instance created. Otherwise, **err** is an error
-   *     object.
+   * @param { AsyncCallback<X509CRL> } callback - Callback used to return the result. If the X.509 CRL object is
+   *     successfully created, **err** is **undefined**, and **data** is the **X509CRL** instance obtained. Otherwise,
+   *     **err** is an error object.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -2910,10 +2901,10 @@ declare namespace cert {
   function createX509CRL(inStream: EncodingBlob, callback: AsyncCallback<X509CRL>): void;
 
   /**
-   * Creates an **X509CRL** instance. This API uses a promise to return the result.
+   * Creates an X.509 CRL object. This API uses a promise to return the result.
    *
    * @param { EncodingBlob } inStream - Serialized CRL data. The data length cannot exceed 8192 bytes.
-   * @returns { Promise<X509CRL> } Promise used to return the **X509CRL** instance created.
+   * @returns { Promise<X509CRL> } Promise that returns the **X509CRL** instance created.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -2938,13 +2929,13 @@ declare namespace cert {
    */
   enum CertRevocationFlag {
     /**
-     * OCSP check is preferred. This flag is valid only when CERT_REVOCATION_CRL_CHECK and CERT_REVOCATION_OCSP_CHECK
-     * are both set.
+     * OCSP check (preferred). This flag takes effect only when both **CERT_REVOCATION_CRL_CHECK** and
+     * **CERT_REVOCATION_OCSP_CHECK** are set.
      *
-     * - If this flag is set, OCSP check is performed first, and CRL check is performed if no OCSP response is found or
-     * a timeout occurs;
-     * - If this flag is not set, CRL check is performed first, and OCSP check is performed if no CRL is found or a
-     * timeout occurs.
+     * - After this flag is set, the OCSP check is performed first, and the CRL check is performed if no OCSP response
+     * is found or a timeout occurs;
+     * - If this flag is not set, the CRL check is performed first, and the OCSP check is performed if no CRL is found
+     * or a timeout occurs.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -2954,11 +2945,10 @@ declare namespace cert {
     CERT_REVOCATION_PREFER_OCSP = 0,
 
     /**
-     * Enables the CRL check. Checks the certificate status using a certificate revocation list.
-     *
-     * <br>First, the **crls** parameter of [X509CertRevokedParams]{@link cert.X509CertRevokedParams} is used. If no
-     * matching CRL is found and **allowDownloadCrl** of [X509CertRevokedParams]{@link cert.X509CertRevokedParams} is
-     * set to **true**, the CDP extension of the certificate is used to download the CRL.
+     * CRL check. Verify the certificate status based on a CRL. Match a CRL using the **crls** parameter of
+     * [X509CertRevokedParams]{@link cert.X509CertRevokedParams}. If no matching CRL is found and **allowDownloadCrl**
+     * of [X509CertRevokedParams]{@link cert.X509CertRevokedParams} is set to **true**, the CDP extension of the
+     * certificate is used to download the CRL.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -2968,7 +2958,7 @@ declare namespace cert {
     CERT_REVOCATION_CRL_CHECK = 1,
 
     /**
-     * Enables OCSP check. Checks the certificate status using the Online Certificate Status Protocol.
+     * OCSP check. Verify the certificate status based on the OCSP response.
      *
      * <br>First, the **ocspResponses** parameter of [X509CertRevokedParams]{@link cert.X509CertRevokedParams} is used.
      * If no matching OCSP response is found and **allowOcspCheckOnline** of
@@ -2977,10 +2967,10 @@ declare namespace cert {
      *
      * > **NOTE**
      * >
-     * > - Always verify the validity period of the OCSP response against the current system time, and allow a time
+     * > - Always use the current system time to verify the validity period of the OCSP response, and allow a time
      * > tolerance of ±5 minutes.
-     * > - The validity period of the OCSP signature certificate chain is always verified using the current system time.
-     * > - Allows ocsp response to be missing nonce and nextUpdate.
+     * > - Always use the current system time to verify the validity period of the OCSP signing certificate chain.
+     * > - Lack of **nonce** and **nextUpdate** is allowed.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -2990,7 +2980,7 @@ declare namespace cert {
     CERT_REVOCATION_OCSP_CHECK = 2,
 
     /**
-     * Checks the revocation status of all certificates.
+     * Revocation status check of all certificates.
      *
      * - If this flag is set, revocation check is performed on all certificates in the certificate chain
      * (skips self-signed certificates);
@@ -3006,7 +2996,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the OCSP digest algorithm.
+   * Enumerates OCSP digest algorithms.
    *
    * @syscap SystemCapability.Security.Cert
    * @stagemodelonly
@@ -3015,7 +3005,7 @@ declare namespace cert {
    */
   enum OcspDigest {
     /**
-     * SHA1 digest algorithm.
+     * SHA-1.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3025,7 +3015,7 @@ declare namespace cert {
     SHA1 = 0,
 
     /**
-     * SHA224 digest algorithm.
+     * SHA-224.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3035,7 +3025,7 @@ declare namespace cert {
     SHA224 = 1,
 
     /**
-     * SHA256 digest algorithm.
+     * SHA-256.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3045,7 +3035,7 @@ declare namespace cert {
     SHA256 = 2,
 
     /**
-     * SHA384 digest algorithm.
+     * SHA-384.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3055,7 +3045,7 @@ declare namespace cert {
     SHA384 = 3,
 
     /**
-     * SHA512 digest algorithm.
+     * SHA-512.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3066,7 +3056,7 @@ declare namespace cert {
   }
 
   /**
-   * Parameters for checking certificate revocation status.
+   * Enumerates the certificate revocation check parameters.
    *
    * @syscap SystemCapability.Security.Cert
    * @stagemodelonly
@@ -3075,8 +3065,8 @@ declare namespace cert {
    */
   interface X509CertRevokedParams {
     /**
-     * Revocation check flag. Array length range: [1,4]. The array must contain either CERT_REVOCATION_CRL_CHECK or
-     * CERT_REVOCATION_OCSP_CHECK.
+     * Certificate revocation check flags. Value range: [1, 4]. The array must contain **CERT_REVOCATION_CRL_CHECK** or
+     * **CERT_REVOCATION_OCSP_CHECK**.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3086,7 +3076,7 @@ declare namespace cert {
     revocationFlags: Array<CertRevocationFlag>;
 
     /**
-     * CRL list. Maximum count: 100.
+     * CRLs. Maximum number: 100.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3112,7 +3102,7 @@ declare namespace cert {
     allowDownloadCrl?: boolean;
 
     /**
-     * Preconfigured OCSP response data. Maximum count: 100.
+     * OCSP response data. Preset OCSP response data. Maximum number: 100.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3140,7 +3130,7 @@ declare namespace cert {
     allowOcspCheckOnline?: boolean;
 
     /**
-     * Digest algorithm used by OCSP requests. The default value is SHA256.
+     * Digest algorithm used for OCSP requests. The default value is SHA256.
      *
      * @default SHA256
      * @syscap SystemCapability.Security.Cert
@@ -3152,7 +3142,7 @@ declare namespace cert {
   }
 
   /**
-   * Parameters for certificate validation.
+   * Represents the parameters for certificate validation.
    *
    * @syscap SystemCapability.Security.Cert
    * @stagemodelonly
@@ -3161,8 +3151,8 @@ declare namespace cert {
    */
   interface CertValidationParams {
     /**
-     * Indicates the list of untrusted certificates. An intermediate certificate is used only to construct a certificate
-     * chain and is not used as a trust anchor. Maximum count: 100.
+     * Untrusted certificates. The intermediate certificates used only for building a certificate chain cannot be used as
+     * trust anchors. Maximum number: 100.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3172,10 +3162,10 @@ declare namespace cert {
     untrustedCerts?: Array<X509Cert>;
 
     /**
-     * Trust certificate list. Specifies the trusted root certificate or intermediate CA certificate as the trust anchor
-     * for validation. Maximum count: 100.
-     * <br>During verification, the certificate chain must trace back to a trusted certificate. You must set this
-     * parameter or set trustSystemCa to true.
+     * Trusted certificates. Trusted root certificates or intermediate CA certificates can be specified as trust anchors
+     * for verification. Maximum number: 100.
+     * <br>During verification, the certificate chain must trace back to a trusted certificate. Therefore, either this
+     * parameter or **trustSystemCa** must be set to **true**.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3185,9 +3175,10 @@ declare namespace cert {
     trustedCerts?: Array<X509Cert>;
 
     /**
-     * Whether to trust the system CA. The default value is **false**.
-     * - **true**: uses the system preset CA certificate library as a trust anchor;
-     * - **false**: does not use the system preset CA certificate library as a trust anchor.
+     * Whether to trust system CA certificates. The default value is **false**.
+     * - **true**: uses the system's prebuilt CA certificate store as a trust anchor. This parameter can be used to
+     * verify public website certificates. You do not need to manually configure the root certificate;
+     * - **false**: does not use the system's prebuilt CA certificate store as a trust anchor.
      *
      * @default false
      * @syscap SystemCapability.Security.Cert
@@ -3198,9 +3189,9 @@ declare namespace cert {
     trustSystemCa?: boolean;
 
     /**
-     * Whether to allow partial chain validation. The default value is **false**.
-     * - **true**: any certificate in the trusted certificates can be used as the trust anchor instead of the root
-     * certificate;
+     * Whether to allow partial certificate chain verification. The default value is **false**.
+     * - **true**: Any certificate in the trusted certificate list can be used as the trust anchor, and it is not
+     * necessary to trace back to the root certificate;
      * - **false**: the root certificate must be traced during certificate chain construction.
      *
      * @default false
@@ -3213,9 +3204,9 @@ declare namespace cert {
 
     /**
      * Whether to allow intermediate CA certificates to be downloaded from the network. The default value is **false**.
-     * - **true**: attempts to use the issuer address in the certificate AIA extension to download the issuer
-     * certificate when an intermediate certificate is missing in the certificate chain, resolving the incomplete
-     * certificate chain issue;
+     * - **true**: When the intermediate certificate is missing in the certificate chain, it is allowed to download the
+     * issuer certificate using the issuer address in the certificate AIA extension so that the certificate chain is
+     * complete;
      * - **false**: intermediate CA certificates cannot be downloaded from the network.
      * <br>The download address is obtained from the certificate AIA extension. Only HTTP is supported. To use the
      * network for download, you need to request the **ohos.permission.INTERNET** permission. For details about the
@@ -3230,7 +3221,7 @@ declare namespace cert {
     allowDownloadIntermediateCa?: boolean;
 
     /**
-     * Validation date, in the format of YYMMDDHHMMSSZ or YYYYMMDDHHMMSSZ. By default, the current system time is
+     * Verification date. The format is YYMMDDHHMMSSZ or YYYYMMDDHHMMSSZ. By default, the current system time is
      * used.
      * <br>Custom verification time is supported, which is applicable to scenarios such as offline verification of
      * historical signatures.
@@ -3243,8 +3234,8 @@ declare namespace cert {
     date?: string;
 
     /**
-     * Indicates whether to verify the date. true: Verify the validity period of the certificate and CRL. false: The
-     * validity period of the certificate and CRL is not verified.
+     * Whether to verify the date. The default value is **true**. **true**: The certificate and CRL validity periods are
+     * verified. **false**: The certificate and CRL validity periods are not verified.
      *
      * @default true
      * @syscap SystemCapability.Security.Cert
@@ -3255,7 +3246,7 @@ declare namespace cert {
     validateDate?: boolean;
 
     /**
-     * Allows specific validation errors to be ignored. Maximum count: 8.
+     * Whether to ignore specific verification errors. Maximum number: 8.
      * <br>The errors that can be ignored include: ERR_CERT_NOT_YET_VALID, ERR_CERT_HAS_EXPIRED,
      * ERR_UNKNOWN_CRITICAL_EXTENSION, ERR_CRL_NOT_FOUND, ERR_CRL_NOT_YET_VALID, ERR_CRL_HAS_EXPIRED,
      * ERR_OCSP_RESPONSE_NOT_FOUND, ERR_NETWORK_TIMEOUT.
@@ -3268,8 +3259,9 @@ declare namespace cert {
     ignoreErrs?: Array<CertResult>;
 
     /**
-     * List of hostnames. Verify that the certificate's subject alternative name (SAN) or common name (CN) contains the
-     * specified hostname. Maximum number: 100; maximum length of each host name: 128.
+     * Host names. This parameter is used to verify that the certificate's subject alternative name (SAN) or common name
+     * (CN) contains the specified host name. Maximum number: 100; maximum length of each host name: 128.
+     * This parameter is applicable to scenarios such as HTTPS.
      * <br>Verification is successful as long as one of the hostnames is matched.
      *
      * @syscap SystemCapability.Security.Cert
@@ -3280,8 +3272,8 @@ declare namespace cert {
     hostnames?: Array<string>;
 
     /**
-     * Email address list. Verify that the certificate contains the specified email address. The maximum number is 1.
-     * The maximum length of the email address is 128.
+     * Email addresses. This parameter is used to verify that the certificate contains the specified email address. A
+     * maximum of one email address is supported. The maximum length of the email address is 128.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3291,8 +3283,8 @@ declare namespace cert {
     emailAddresses?: Array<string>;
 
     /**
-     * Key usage list. Verify that the certificate's key usage extension includes the specified usage.
-     * Maximum count: 9.
+     * Key usages. This parameter is used to check whether the key usage extension of the certificate contains the
+     * specified usage. Maximum number: 9.
      * <br>The certificate must contain all specified key usages for verification to be successful.
      *
      * @syscap SystemCapability.Security.Cert
@@ -3305,9 +3297,9 @@ declare namespace cert {
     /**
      * User ID. Used to set the user identifier required for signature verification when verifying the SM2 certificate.
      * Maximum length: 128 characters.
-     * <br>The most commonly used value in the SM2 certificate scenario is
-     * [0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38].
-     * (The corresponding ASCII character string is 1234567812345678, 16 bytes.)
+     * <br>This parameter is commonly set to
+     * [0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38] for SM2
+     * certificates. (The corresponding ASCII character string is 1234567812345678, 16 bytes.)
      * Certificate revocation check is not supported after userId is set.
      *
      * @syscap SystemCapability.Security.Cert
@@ -3318,8 +3310,8 @@ declare namespace cert {
     userId?: Uint8Array;
 
     /**
-     * Indicates the certificate revocation check parameter. Used to check whether a certificate is revoked. The
-     * configuration includes the CRL list, OCSP response data, and whether online check is allowed.
+     * Certificate revocation check parameters, which are used to check whether a certificate is revoked. The parameters
+     * include the CRL list, OCSP response data, and whether to allow online check.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3330,7 +3322,7 @@ declare namespace cert {
   }
 
   /**
-   * Result of certificate validation.
+   * Represents the certificate verification result.
    *
    * @syscap SystemCapability.Security.Cert
    * @stagemodelonly
@@ -3339,9 +3331,9 @@ declare namespace cert {
    */
   interface CertValidationResult {
     /**
-     * Indicates the authenticated certificate chain. Upon successful authentication, the complete certificate chain is
-     * returned, from the end-entity certificate to the trust anchor. It can be used for subsequent certificate
-     * information query or other verification operations.
+     * Verified certificate chain. When the verification is successful, a complete certificate chain (from the end-entity
+     * certificate to the trust anchor) is returned. It can be used for subsequent certificate information query or
+     * other verification operations.
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3352,7 +3344,7 @@ declare namespace cert {
   }
 
   /**
-   * Provides APIs for certificate chain validator operations.
+   * Describes a certificate chain validator object.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform [since 11]
@@ -3362,7 +3354,7 @@ declare namespace cert {
    */
   interface CertChainValidator {
     /**
-     * Validates an X.509 certificate chain. This API uses an asynchronous callback to return the result.
+     * Verifies the X.509 certificate chain. This API uses an asynchronous callback to return the result.
      *
      * <br>Because the system time on the device is untrusted, the certificate chain validator does not verify the
      * certificate validity period. To check the validity period of a certificate, use the
@@ -3372,7 +3364,7 @@ declare namespace cert {
      * .
      *
      * @param { CertChainData } certChain - Serialized X.509 certificate chain data.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the verification is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -3399,7 +3391,7 @@ declare namespace cert {
     validate(certChain: CertChainData, callback: AsyncCallback<void>): void;
 
     /**
-     * Validates an X.509 certificate chain. This API uses a promise to return the result.
+     * Verifies the X.509 certificate chain. This API uses a promise to return the result.
      *
      * <br>Because the system time on the device is untrusted, the certificate chain validator does not verify the
      * certificate validity period. To check the validity period of a certificate, use the
@@ -3440,23 +3432,23 @@ declare namespace cert {
      *
      * <br>The certificate chain construction process complies with the following rules:
      * 1. Trusted anchor source: The trusted certificate list (trustedCerts) is always used as the trust anchor source.
-     * The preconfigured certificate is used as the trust anchor source only when trustSystemCa is set to true.
+     * The pre-configured certificate is used as the trust anchor source only when trustSystemCa is set to true.
      * 2. Issuer search sequence: The system searches for the issuer from the trust anchor source first. If the issuer
      * cannot be found, the system searches for the issuer in the untrusted certificate list (untrustedCerts). The
-     * intermediate CA certificate downloaded online is an untrusted certificate.
+     * intermediate CA certificate downloaded from the Internet is an untrusted certificate.
      * 3. Trust anchor locking: Once the issuer is found in the trust anchor source, the subsequent lookup process does
-     * not roll back to the untrusted certificate, that is, the subsequent certificates must come from the trust anchor
+     * not back track to the untrusted certificate, that is, the subsequent certificates must come from the trust anchor
      * source.
-     * 4. Construction completion conditions:
+     * 4. Build completion condition:
      * If partialChain is false (default value), the build is complete only when the root certificate (self-signed
      * certificate) is found.
      * If partialChain is true, the first time the issuer is found in the trust anchor source, the build is complete.
-     * 5. Follow-up verification: After the certificate chain is constructed, perform other verification operations,
+     * 5. Subsequent verification: After the certificate chain is constructed, perform other verification operations,
      * such as certificate signature verification and certificate revocation check.
      *
-     * @param { X509Cert } cert - Certificate to verify.
-     * @param { CertValidationParams } params - Certificate validation parameters.
-     * @returns { Promise<CertValidationResult> } Promise used to return the result of certificate validation.
+     * @param { X509Cert } cert - Certificate to be verified.
+     * @param { CertValidationParams } params - Parameters for certificate validation.
+     * @returns { Promise<CertValidationResult> } Promise used to return the verification result.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -3494,7 +3486,7 @@ declare namespace cert {
     validateCert(cert: X509Cert, params: CertValidationParams): Promise<CertValidationResult>;
 
     /**
-     * Algorithm used by the X.509 certificate chain validator.
+     * Algorithm of the X.509 certificate chain validator.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -3506,9 +3498,10 @@ declare namespace cert {
   }
 
   /**
-   * Creates a **CertChainValidator** object.
+   * Creates a certificate chain validator object.
    *
-   * @param { string } algorithm - Certificate chain validator algorithm. Currently, only **PKIX** is supported.
+   * @param { string } algorithm - Algorithm of the certificate chain validator obtained. Currently, only **PKIX** is
+   *     supported.
    * @returns { CertChainValidator } **CertChainValidator** object created.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
@@ -3530,8 +3523,8 @@ declare namespace cert {
   function createCertChainValidator(algorithm: string): CertChainValidator;
 
   /**
-   * Enumerates the types of GeneralName as defined in X.509, which can appear in Subject Alternative Name and other
-   * extensions.
+   * Enumerates the general name types defined in X.509. These types can be used in the subject alternative name and
+   * other extensions.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -3541,7 +3534,7 @@ declare namespace cert {
    */
   enum GeneralNameType {
     /**
-     * Indicates an otherName.
+     * Other name.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3552,7 +3545,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_OTHER_NAME = 0,
 
     /**
-     * Indicates an email address.
+     * Email address.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3563,7 +3556,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_RFC822_NAME = 1,
 
     /**
-     * Indicates a DNS name.
+     * DNS name.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3574,7 +3567,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_DNS_NAME = 2,
 
     /**
-     * Indicates an X.400 address.
+     * X.400 address.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3585,7 +3578,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_X400_ADDRESS = 3,
 
     /**
-     * Indicates a directory name.
+     * Directory name.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3596,7 +3589,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_DIRECTORY_NAME = 4,
 
     /**
-     * Indicates an Electronic Data Interchange (EDI) entity.
+     * Electronic Data Interchange (EDI) entity.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3607,7 +3600,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_EDI_PARTY_NAME = 5,
 
     /**
-     * Indicates a uniform resource identifier.
+     * Uniform Resource Identifier (URI).
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3618,7 +3611,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_UNIFORM_RESOURCE_ID = 6,
 
     /**
-     * Indicates an IP address.
+     * IP address.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3629,7 +3622,7 @@ declare namespace cert {
     GENERAL_NAME_TYPE_IP_ADDRESS = 7,
 
     /**
-     * Indicates a registered object identifier.
+     * Registered OID.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3641,7 +3634,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents an X.509 GeneralName as defined in RFC 5280, which can appear in Subject Alternative Name and other
+   * Represents an X.509 general name defined in RFC 5280, which can be used in the subject alternative name and other
    * extensions.
    *
    * @syscap SystemCapability.Security.Cert
@@ -3652,7 +3645,7 @@ declare namespace cert {
    */
   interface GeneralName {
     /**
-     * Type of the GeneralName.
+     * General name type.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3663,7 +3656,7 @@ declare namespace cert {
     type: GeneralNameType;
 
     /**
-     * DER-encoded value of the GeneralName.
+     * Value of **GeneralName** encoded in DER format.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3685,7 +3678,7 @@ declare namespace cert {
    */
   interface X509CertMatchParameters {
     /**
-     * Subject Alternative Names (SANs) of the certificate.
+     * Certificate subject alternative name (SAN).
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3718,8 +3711,7 @@ declare namespace cert {
     authorityKeyIdentifier?: Uint8Array;
 
     /**
-     * Minimum length of the certification path (chain of trust) that can be built from the certificate to a trusted
-     * root CA.
+     * Path length of the CA certificate.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3741,7 +3733,7 @@ declare namespace cert {
     x509Cert?: X509Cert;
 
     /**
-     * Certificate validity period.
+     * Certificate validity period, for example, **20231121074700Z**.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3763,7 +3755,7 @@ declare namespace cert {
     issuer?: Uint8Array;
 
     /**
-     * Extended key usage.
+     * Usage of the extended key.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3774,7 +3766,7 @@ declare namespace cert {
     extendedKeyUsage?: Array<string>;
 
     /**
-     * Constraints on the subject names that can be included in certificates.
+     * Specifies the name constraint entry to be matched against the type and value of any name constraint entry in the certificate's nameConstraints extension.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3840,7 +3832,7 @@ declare namespace cert {
     subject?: Uint8Array;
 
     /**
-     * Identifier of the public key of the certificate's subject.
+     * Public key identifier (Subject Key Identifier extension) of the certificate subject.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3873,8 +3865,8 @@ declare namespace cert {
     publicKeyAlgID?: string;
 
     /**
-     * Specifies the certificate private key. string indicates a private key in PEM format, and Uint8Array indicates a
-     * private key in DER format.
+     * Private key of the certificate. The value can be a string (indicating a PEM-encoded private key) or a
+     * Uint8Array (indicating a DER-encoded private key).
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3907,7 +3899,7 @@ declare namespace cert {
     issuer?: Array<Uint8Array>;
 
     /**
-     * Certificate object.
+     * Certificate object used to determine whether the certificate is in the CRL.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3918,7 +3910,7 @@ declare namespace cert {
     x509Cert?: X509Cert;
 
     /**
-     * CRL update time.
+     * CRL update time, for example, **20231121074700Z**.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3929,7 +3921,7 @@ declare namespace cert {
     updateDateTime?: string;
 
     /**
-     * Maximum value of the CRL number.
+     * Maximum CRL number.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3940,7 +3932,7 @@ declare namespace cert {
     maxCRL?: bigint;
 
     /**
-     * Minimum value of the CRL number.
+     * Minimum CRL number.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -3952,7 +3944,7 @@ declare namespace cert {
   }
 
   /**
-   * Provides APIs for locating certificates or CRLs in a **CertCRLCollection** object.
+   * Certificate and CRL collection.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -3965,7 +3957,7 @@ declare namespace cert {
      * Selects certificates that match the specified parameters. This API uses a promise to return the result.
      *
      * @param { X509CertMatchParameters } param - Parameters used to match the certificates.
-     * @returns { Promise<Array<X509Cert>> } Promise used to return the matched certificates.
+     * @returns { Promise<Array<X509Cert>> } Promise used to return an array of matched certificate objects.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -3985,9 +3977,9 @@ declare namespace cert {
      * result.
      *
      * @param { X509CertMatchParameters } param - Parameters used to match the certificates.
-     * @param { AsyncCallback<Array<X509Cert>> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the matched certificates obtained. Otherwise, **err**
-     *     is an error object.
+     * @param { AsyncCallback<Array<X509Cert>> } callback - Callback used to return the result. If the certificate objects
+     *     are successfully found, **err** is **undefined** and **data** is an array of matched certificate objects
+     *     obtained. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4025,9 +4017,9 @@ declare namespace cert {
      * Selects CRLs that match the specified parameters. This API uses an asynchronous callback to return the result.
      *
      * @param { X509CRLMatchParameters } param - Parameters used to match the CRLs.
-     * @param { AsyncCallback<Array<X509CRL>> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the matched CRLs obtained. Otherwise, **err** is an
-     *     error object.
+     * @param { AsyncCallback<Array<X509CRL>> } callback - Callback used to return the result. If the CRLs are successfully
+     *     found, **err** is **undefined** and **data** is an array of CRLs obtained. Otherwise, **err** is an error
+     *     object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4046,10 +4038,10 @@ declare namespace cert {
   /**
    * Creates an object for a collection of X.509 certificates and CRLs.
    *
-   * @param { Array<X509Cert> } certs - X.509 certificates.
-   * @param { Array<X509CRL> } [options] crls - Array of X509CRL. [since 11 - 11]
-   * @param { Array<X509CRL> } [crls] - Array of X509CRL.
-   * @returns { CertCRLCollection } **CertCRLCollection** object created.
+   * @param { Array<X509Cert> } certs - X.509 certificate array.
+   * @param { Array<X509CRL> } [options] crls - X.509 CRL array. [since 11 - 11]
+   * @param { Array<X509CRL> } [crls] - X.509 CRL array.
+   * @returns { CertCRLCollection } Certificate and CRL collection.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4064,7 +4056,7 @@ declare namespace cert {
   function createCertCRLCollection(certs: Array<X509Cert>, crls?: Array<X509CRL>): CertCRLCollection;
 
   /**
-   * Provides APIs for managing the X.509 certificate chain.
+   * Describes an X.509 certificate chain object.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -4074,9 +4066,9 @@ declare namespace cert {
    */
   interface X509CertChain {
     /**
-     * Obtains the X.509 certificate list.
+     * Obtains a list of X.509 certificates.
      *
-     * @returns { Array<X509Cert> } X.509 certificate list obtained.
+     * @returns { Array<X509Cert> } X.509 certificates.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4092,10 +4084,10 @@ declare namespace cert {
     getCertList(): Array<X509Cert>;
 
     /**
-     * Validates a certificate chain. This API uses a promise to return the result.
+     * Verifies the certificate chain. This API uses a promise to return the result.
      *
-     * @param { CertChainValidationParameters } param - Parameters for validating the X.509 certificate chain.
-     * @returns { Promise<CertChainValidationResult> } Promise used to return the certificate chain validation result.
+     * @param { CertChainValidationParameters } param - Parameters for verifying the X.509 certificate chain.
+     * @returns { Promise<CertChainValidationResult> } Promise used to return the certificate chain verification result.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4121,12 +4113,13 @@ declare namespace cert {
     validate(param: CertChainValidationParameters): Promise<CertChainValidationResult>;
 
     /**
-     * Validates a certificate chain. This API uses an asynchronous callback to return the result.
+     * Verifies a certificate chain using verification parameters. This API uses an asynchronous callback to return the
+     * result.
      *
-     * @param { CertChainValidationParameters } param - Parameters for validating the X.509 certificate chain.
-     * @param { AsyncCallback<CertChainValidationResult> } callback - Callback used to return the result. If the operation
-     *     is successful, **err** is **undefined**, and **data** is the certificate chain validation result obtained.
-     *     Otherwise, **err** is an error object.
+     * @param { CertChainValidationParameters } param - Parameters for verifying the X.509 certificate chain.
+     * @param { AsyncCallback<CertChainValidationResult> } callback - Callback used to return the result. If the
+     *     certificate chain is verified successfully, **err** is **undefined** and **data** is the obtained certificate
+     *     chain verification result. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4172,7 +4165,7 @@ declare namespace cert {
     /**
      * Obtains the hash value of the data in DER format.
      *
-     * @returns { Uint8Array } Hash value obtained.
+     * @returns { Uint8Array } Hash value in DER format obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -4189,10 +4182,10 @@ declare namespace cert {
   }
 
   /**
-   * Creates an **X509CertChain** instance. This API uses a promise to return the result.
+   * Creates an X.509 certificate chain object. This API uses a promise to return the result.
    *
    * @param { EncodingBlob } inStream - X.509 certificate serialization data.
-   * @returns { Promise<X509CertChain> } Promise used to return the **X509CertChain** instance created.
+   * @returns { Promise<X509CertChain> } Promise that returns the **X509CertChain** instance created.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4208,12 +4201,12 @@ declare namespace cert {
   function createX509CertChain(inStream: EncodingBlob): Promise<X509CertChain>;
 
   /**
-   * Creates an **X509CertChain** instance. This API uses an asynchronous callback to return the result.
+   * Creates an X.509 certificate chain object. This API uses an asynchronous callback to return the result.
    *
    * @param { EncodingBlob } inStream - X.509 certificate serialization data.
-   * @param { AsyncCallback<X509CertChain> } callback - Callback used to return the result. If the operation is
-   *     successful, **err** is **undefined**, and **data** is the **X509CertChain** instance created. Otherwise,
-   *     **err** is an error object.
+   * @param { AsyncCallback<X509CertChain> } callback - Callback used to return the result. If the X.509 certificate chain
+   *     object is successfully created, **err** is **undefined**, and **data** is the **X509CertChain** instance
+   *     obtained. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4232,8 +4225,8 @@ declare namespace cert {
    * Creates an X.509 certificate chain object based on the specified certificates. This API returns the result
    * synchronously.
    *
-   * @param { Array<X509Cert> } certs - Array of X.509 certificates.
-   * @returns { X509CertChain } **X509CertChain** object created.
+   * @param { Array<X509Cert> } certs - X.509 certificates.
+   * @returns { X509CertChain } X.509 certificate chain object.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4249,13 +4242,11 @@ declare namespace cert {
   function createX509CertChain(certs: Array<X509Cert>): X509CertChain;
 
   /**
-   * Builds an X.509 certificate chain with a CertChainBuildParameters object. This API uses a promise to return the
+   * Builds an X.509 certificate chain with a **CertChainBuildParameters** object. This API uses a promise to return the
    * result.
    *
-   * @param { CertChainBuildParameters } param - Object used to build the certificate chain.<br> The value of
-   *     **maxLength** in [CertChainBuildParameters]{@link cert.CertChainBuildParameters} must be less than the number
-   *     of certificates in the certificate set.
-   * @returns { Promise<CertChainBuildResult> } Promise used to return the **CertChainBuildResult** object created.
+   * @param { CertChainBuildParameters } param - Object used to build the certificate chain.
+   * @returns { Promise<CertChainBuildResult> } Promise that returns the **CertChainBuildResult** instance created.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4281,7 +4272,7 @@ declare namespace cert {
   function buildX509CertChain(param: CertChainBuildParameters): Promise<CertChainBuildResult>;
 
   /**
-   * Enumerates the encoding formats for certificate-related data.
+   * Enumerates the certificate data encoding formats.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -4291,7 +4282,7 @@ declare namespace cert {
    */
   enum EncodingBaseFormat {
     /**
-     * Privacy-Enhanced Mail (PEM) format.
+     * PEM.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4302,7 +4293,7 @@ declare namespace cert {
     PEM = 0,
 
     /**
-     * Distinguished Encoding Rules (DER) format.
+     * DER.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4314,7 +4305,7 @@ declare namespace cert {
   }
 
   /**
-   * P12(PKCS #12) data, which includes private key, certificate, and other certificates.
+   * Represents the PKCS #12 data, including the private key, certificate, and other certificates.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -4324,7 +4315,7 @@ declare namespace cert {
    */
   interface Pkcs12Data {
     /**
-     * Private key. **string** corresponds to PEM format, and **Uint8Array** corresponds to DER format.
+     * Private key. The string is in PEM format, and the Uint8Array data is in DER format.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4335,7 +4326,7 @@ declare namespace cert {
     privateKey?: string | Uint8Array;
 
     /**
-     * The certificate that matches the private key.
+     * Certificate that matches the private key.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4358,7 +4349,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents the configuration for parsing P12.
+   * Represents the configuration for parsing PKCS #12 files.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -4394,13 +4385,9 @@ declare namespace cert {
 
     /**
      * Format of the private key to be obtained. Currently, the PEM and DER formats are supported. If this parameter is
-     * not specified, the PEM format is used by default.
+     * not specified, the PEM format is used by default. Note: This parameter is valid only when **needsPrivateKey** is
+     * set to **true**.
      *
-     * > **NOTE**
-     * >
-     * > This parameter is valid only when **needsPrivateKey** is set to **true**.
-     *
-     * @default EncodingBaseFormat.PEM
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
      * @atomicservice
@@ -4435,11 +4422,11 @@ declare namespace cert {
   }
 
   /**
-   * Parses P12.
+   * Parse the PKCS #12 file.
    *
-   * @param { Uint8Array } data - Raw data of P12 file, in DER format.
-   * @param { Pkcs12ParsingConfig } config - Configuration for parsing the P12.
-   * @returns { Pkcs12Data } Indicates the parsed P12 data.
+   * @param { Uint8Array } data - Original data of the PKCS #12 file in DER format.
+   * @param { Pkcs12ParsingConfig } config - Configuration for parsing the PKCS #12 file.
+   * @returns { Pkcs12Data } Certificate, private key, and other certificates parsed from a PKCS #12 file.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4519,11 +4506,11 @@ declare namespace cert {
    * Creates an **X500DistinguishedName** object with a name in the form of a string. This API uses a promise to return
    * the result.
    *
-   * @param { string } nameStr - Name in a slash-separated format, each relative distinguished name is in the format of
-   *     **attribute=value**. Common attributes include **CN** (common name), **O** (organization name),
-   *     **OU** (organization unit), **C** (country/region), **ST** (province/state), and **L** (city/district).
-   *     For example, **\/CN=example.com/O=Example/C=CN**.
-   * @returns { Promise<X500DistinguishedName> } Promise used to return the **X500DistinguishedName** object created.
+   * @param { string } nameStr - Distinguishable names of the string type are separated by slashes (/). Each
+   *     distinguishable name is in the format of an attribute=a value. Common attributes include **CN** (common
+   *     name), **O** (organization name), **OU** (organization unit), **C** (country/region), **ST**
+   *     (province/state), and **L** (city/district). For example, **\/CN=example.com/O=Example/C=CN**.
+   * @returns { Promise<X500DistinguishedName> } Promise used to return the **X500DistinguishedName** instance obtained.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4553,7 +4540,7 @@ declare namespace cert {
    * result.
    *
    * @param { Uint8Array } nameDer - X.500 Distinguished Name in DER format.
-   * @returns { Promise<X500DistinguishedName> } Promise used to return the **X500DistinguishedName** object created.
+   * @returns { Promise<X500DistinguishedName> } Promise used to return the **X500DistinguishedName** instance obtained.
    * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4589,9 +4576,9 @@ declare namespace cert {
    */
   interface X500DistinguishedName {
     /**
-     * Obtains the DN in the form of a string.
+     * Obtains the distinguished name in the form of a string.
      *
-     * @returns { string } DN obtained as a string.
+     * @returns { string } Distinguished name obtained.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -4607,10 +4594,10 @@ declare namespace cert {
     getName(): string;
 
     /**
-     * Obtains RDN strings based on the specified encoding format.
+     * Obtains the string of the distinguished names based on the specified encoding type.
      *
      * @param { EncodingType } encodingType - Encoding format.
-     * @returns { string } RDN string. Multiple strings are separated by commas (,).
+     * @returns { string } String of the distinguished names separated by commas (,).
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -4628,10 +4615,10 @@ declare namespace cert {
     getName(encodingType: EncodingType): string;
 
     /**
-     * Obtains relative distinguished name (RDN) strings of the specified type.
+     * Obtains the string of the relative distinguished names (RDNs) of the specified types.
      *
-     * @param { string } type - Type of the RDNs to obtain. For example, **CN** and **OU**.
-     * @returns { Array<string> } Array of RDN strings.
+     * @param { string } type - RDN of the specified type. For example, **CN** and **OU**.
+     * @returns { Array<string> } RDN string array.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4653,9 +4640,9 @@ declare namespace cert {
     /**
      * Obtains an array of RDN strings based on the specified type and encoding format.
      *
-     * @param { string } type - Type of the RDNs to obtain. For example, **CN** and **OU**.
+     * @param { string } type - RDN of the specified type. For example, **CN** and **OU**.
      * @param { EncodingType } encodingType - Encoding format.
-     * @returns { Array<string> } Array of RDN strings.
+     * @returns { Array<string> } RDN string array.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -4672,9 +4659,9 @@ declare namespace cert {
     getName(type: string, encodingType: EncodingType): Array<string>;
 
     /**
-     * Obtains the DER-encoded data of the X.500 Distinguished Name.
+     * Obtains an X.500 distinguished name encoded in DER format.
      *
-     * @returns { EncodingBlob } DER-encoded X.500 Distinguished Name data obtained.
+     * @returns { EncodingBlob } X.500 distinguished name encoded in DER format.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -4726,9 +4713,9 @@ declare namespace cert {
     CAPubKey?: Uint8Array;
 
     /**
-     * Subject of the trusted CA certificate, in DER format. This parameter takes effect only when **CAPubKey** is set.
-     * The validation object is determined based on the **CAPubKey** type (self-signed or upper-level), and can be the
-     * subject or issuer of the root certificate.
+     * Subject name of the trusted CA certificate, in DER format. This parameter takes effect only when
+     * **CAPubKey** is set. The validation object is determined based on the CA public key type (self-signed or
+     * upper-level), and can be the subject or issuer name of the root certificate.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4772,10 +4759,10 @@ declare namespace cert {
     REVOCATION_CHECK_OPTION_PREFER_OCSP = 0,
 
     /**
-     * Obtain the CRL/OCSP response over the network. By default, it is disabled. Only the first CRL distribution point
-     * address can be obtained from the CDP extension of the certificate to check the certificate revocation status, or
-     * the first OCSP server address can be obtained from the AIA extension of the certificate to check the certificate
-     * revocation status. Moreover, only HTTP is supported. You must declare the ohos.permission.INTERNET permission.
+     * Obtain the CRL/OCSP response over the network. By default, it is disabled. The certificate revocation status can be
+     * checked by obtaining the first CRL distribution point address from the CDP extension or the first OCSP server
+     * address from the AIA extension. Moreover, only HTTP is supported. You must declare the
+     * ohos.permission.INTERNET permission.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4830,8 +4817,8 @@ declare namespace cert {
     REVOCATION_CHECK_OPTION_CHECK_INTERMEDIATE_CA_ONLINE = 4,
 
     /**
-     * If this capability is enabled, the system checks the revocation status of the leaf certificate based on the local
-     * CRL. This capability is disabled by default.
+     * If this option is enabled, the response of a local CRL is used to check the revocation status of the end entity
+     * certificate. This capability is disabled by default.
      *
      * > **NOTE**
      * >
@@ -4847,8 +4834,8 @@ declare namespace cert {
     REVOCATION_CHECK_OPTION_LOCAL_CRL_ONLY_CHECK_END_ENTITY_CERT = 5,
 
     /**
-     * If this capability is enabled, the system ignores the network unreachable error when obtaining the CRL or OCSP
-     * response over the network for revocation status check. This capability is disabled by default. By default, the
+     * If this option is enabled, the CRL/OCSP response obtained over the network is used to check the certificate
+     * revocation status, ignoring the unreachable network error. This capability is disabled by default. By default, the
      * network unreachable error may cause certificate chain validation failure.
      *
      * @syscap SystemCapability.Security.Cert
@@ -4893,7 +4880,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the purposes for which the key in the certificate is used.
+   * Enumerates the purposes, for which the key in the certificate is used.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -4947,7 +4934,7 @@ declare namespace cert {
     KEYUSAGE_DATA_ENCIPHERMENT = 3,
 
     /**
-     * The certificate holder can use the private key contained in the certificate to perform key agreement operations.
+     * The certificate public key can be used to perform key agreement operations.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4958,7 +4945,7 @@ declare namespace cert {
     KEYUSAGE_KEY_AGREEMENT = 4,
 
     /**
-     * The certificate holder can use the private key contained in the certificate to sign other certificates.
+     * The certificate public key can be used to sign other certificates.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4969,7 +4956,7 @@ declare namespace cert {
     KEYUSAGE_KEY_CERT_SIGN = 5,
 
     /**
-     * The certificate holder can use the private key contained in the certificate to sign CRLs.
+     * The certificate public key can be used to sign CRLs.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4980,7 +4967,7 @@ declare namespace cert {
     KEYUSAGE_CRL_SIGN = 6,
 
     /**
-     * The certificate holder can use the key to perform encryption operations only.
+     * The certificate holder can use the key to perform encryption only.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -4991,7 +4978,7 @@ declare namespace cert {
     KEYUSAGE_ENCIPHER_ONLY = 7,
 
     /**
-     * The certificate holder can use the key to perform decryption operations only.
+     * The certificate holder can use the key to perform decryption only.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5025,11 +5012,8 @@ declare namespace cert {
 
     /**
      * URI of the alternative server used to send OCSP requests. HTTP and HTTPS are supported. The specific
-     * configuration is determined via the negotiation with the server.
-     *
-     * > **NOTE**
-     * >
-     * > The URI takes effect only for the leaf certificate.
+     * configuration is determined via the negotiation with the server. Note: The current URI takes effect only for
+     * entity certificates.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5062,11 +5046,7 @@ declare namespace cert {
     ocspResponses?: Uint8Array;
 
     /**
-     * Address used to download the CRLs.
-     *
-     * > **NOTE**
-     * >
-     * > The URI takes effect only for the leaf certificate.
+     * Alternative address used to download the CRLs. Note: The current URI takes effect only for entity certificates.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5088,8 +5068,8 @@ declare namespace cert {
     options?: Array<RevocationCheckOptions>;
 
     /**
-     * Hash algorithm used to create a certificate ID during OCSP communication. The options **MD5**, **SHA1**,
-     * **SHA224**, **SHA256**, **SHA384**, and **SHA512** are supported. The default value is **SHA256**.
+     * Hash algorithm used to create a certificate ID during OCSP communication. The options include **MD5**, **SHA1**,
+     * **SHA224**, **SHA256**, **SHA384**, and **SHA512**. The default value is **SHA256**.
      *
      * @default SHA256
      * @syscap SystemCapability.Security.Cert
@@ -5112,7 +5092,7 @@ declare namespace cert {
    */
   interface CertChainValidationParameters {
     /**
-     * Date for checking certificate validity.
+     * Date used to check the validity of a certificate.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5134,8 +5114,9 @@ declare namespace cert {
     trustAnchors: Array<X509TrustAnchor>;
 
     /**
-     * Whether to use the prebuilt CA certificate to validate the certificate chain. **true** means yes; **false**
-     * otherwise.
+     * Whether to trust system CA certificates. The default value is **false**. **true**: Use the system's prebuilt CA
+     * certificate store as the trust anchor. **false**: Do not use the system's prebuilt CA certificate store as the
+     * trust anchor.
      *
      * @default false
      * @syscap SystemCapability.Security.Cert
@@ -5147,7 +5128,7 @@ declare namespace cert {
     trustSystemCa?: boolean;
 
     /**
-     * Whether to allow the application to download the missing intermediate CA certificate from the network.
+     * Whether to allow downloading the missing intermediate CA certificate from the network.
      * **true** means yes; **false** otherwise. The default value is **false**.
      * <br>The download address is obtained from the certificate AIA extension. Only HTTP is supported. To use the
      * network for download, you need to request the **ohos.permission.INTERNET** permission. For details about the
@@ -5162,7 +5143,7 @@ declare namespace cert {
     allowDownloadIntermediateCa?: boolean;
 
     /**
-     * CRL collections used to check whether the certificate is revoked.
+     * CRLs used to check whether a certificate is revoked.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5195,7 +5176,7 @@ declare namespace cert {
     policy?: ValidationPolicyType;
 
     /**
-     * Host name in the certificate to be verified. This parameter must be used together with **policy**.
+     * Host name in the certificate to be verified. This parameter must be used with **policy** together.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5251,7 +5232,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents the parameters for building a certificate chain.
+   * Defines the parameters for building a certificate chain.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5272,7 +5253,7 @@ declare namespace cert {
     certMatchParameters: X509CertMatchParameters;
 
     /**
-     * Maximum number of CA certificates in the certificate chain.
+     * Maximum number of CA certificates.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5283,7 +5264,7 @@ declare namespace cert {
     maxLength?: int;
 
     /**
-     * Parameters for certificate chain validation.
+     * Verification condition.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5295,7 +5276,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents the certificate chain build result.
+   * Represents the result of building a certificate chain.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5316,7 +5297,7 @@ declare namespace cert {
     readonly certChain: X509CertChain;
 
     /**
-     * Result of the certificate chain validation.
+     * Certificate chain validation result.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5349,7 +5330,7 @@ declare namespace cert {
     SIGNED_DATA = 0,
 
     /**
-     * Enveloped data, including authenticated enveloped data.
+     * Encapsulated data, including authenticated encapsulated data.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5371,7 +5352,7 @@ declare namespace cert {
    */
   enum CmsContentDataFormat {
     /**
-     * Binary.
+     * Binary data format.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5382,7 +5363,7 @@ declare namespace cert {
     BINARY = 0,
 
     /**
-     * Text.
+     * Text data format.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5404,7 +5385,7 @@ declare namespace cert {
    */
   enum CmsFormat {
     /**
-     * Privacy-Enhanced Mail (PEM) format.
+     * PEM format.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5415,7 +5396,7 @@ declare namespace cert {
     PEM = 0,
 
     /**
-     * Distinguished Encoding Rules (DER) format.
+     * DER.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5427,7 +5408,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents the private key information.
+   * Represents information about the private key.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5470,7 +5451,7 @@ declare namespace cert {
    */
   enum CmsRsaSignaturePadding {
     /**
-     * PKCS #1 padding mode.
+     * PKCS #1 v1.5 padding mode.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5516,12 +5497,8 @@ declare namespace cert {
 
     /**
      * Padding mode for an RSA signature. The default value is **PKCS1_PADDING**.
-     * <br>When **PKCS1_PSS_PADDING** is set, **mdName** must be set to **SHA256**, **SHA384**, or
-     * **SHA512**.
-     *
-     * > **NOTE**
-     * >
-     * > This parameter is valid only when the private key type of the signature is RSA.
+     * <br>When this parameter is set to **PKCS1_PSS_PADDING**, **mdName** must be set to **SHA256**, **SHA384**, or
+     * **SHA512**. Note: This parameter is valid only when the signer private key is an RSA key.
      *
      * @default CmsRsaSignaturePadding.PKCS1_PADDING
      * @syscap SystemCapability.Security.Cert
@@ -5557,7 +5534,7 @@ declare namespace cert {
     addAttr?: boolean;
 
     /**
-     * Whether to add the SMIME capability to the CMS object. The default value is **true**. **true**: yes; **false**:
+     * Whether to add the S/MIME capability for CMS objects. The default value is **true**. **true**: yes; **false**:
      * no.
      *
      * @default true
@@ -5615,7 +5592,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the content-encryption algorithms for CMS enveloped data.
+   * Enumerates the encryption algorithms for CMS-encapsulated data.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5625,7 +5602,7 @@ declare namespace cert {
    */
   enum CmsRecipientEncryptionAlgorithm {
     /**
-     * AES_128_CBC.
+     * AES-128-CBC.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5636,7 +5613,7 @@ declare namespace cert {
     AES_128_CBC = 0,
 
     /**
-     * AES_192_CBC.
+     * AES-192-CBC.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5647,7 +5624,7 @@ declare namespace cert {
     AES_192_CBC = 1,
 
     /**
-     * AES_256_CBC.
+     * AES-256-CBC.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5658,7 +5635,7 @@ declare namespace cert {
     AES_256_CBC = 2,
 
     /**
-     * AES_128_GCM.
+     * AES-128-GCM.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5669,7 +5646,7 @@ declare namespace cert {
     AES_128_GCM = 3,
 
     /**
-     * AES_192_GCM.
+     * AES-192-GCM.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5680,7 +5657,7 @@ declare namespace cert {
     AES_192_GCM = 4,
 
     /**
-     * AES_256_GCM.
+     * AES-256-GCM.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5692,7 +5669,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents KeyTrans recipient information for CMS enveloped data.
+   * Represents the recipient information for key transport encapsulated using CMS.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5714,7 +5691,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents KeyAgree recipient information for CMS enveloped data.
+   * Represents the recipient information for key agreement encapsulated using CMS.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5748,11 +5725,11 @@ declare namespace cert {
   }
 
   /**
-   * Represents recipient information for the CMS message.
-   *
+   * Represents the recipient information encapsulated using CMS.
+
    * > **NOTE**
    * >
-   * > At least one recipient needs to be set.
+   * > At least one recipient must be set.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -5762,7 +5739,7 @@ declare namespace cert {
    */
   interface CmsRecipientInfo {
     /**
-     * KeyTrans recipient information.
+     * Recipient information for key transport.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5772,7 +5749,7 @@ declare namespace cert {
      */
     keyTransInfo?: CmsKeyTransRecipientInfo;
     /**
-     * KeyAgree recipient information.
+     * Recipient information for key agreement.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -5806,7 +5783,7 @@ declare namespace cert {
     contentDataFormat?: CmsContentDataFormat;
 
     /**
-     * Format of the CMS message generated. The default value is **DER**.
+     * Format of the CMS data generated. The default value is **DER**.
      *
      * @default CmsFormat.DER
      * @syscap SystemCapability.Security.Cert
@@ -5832,7 +5809,7 @@ declare namespace cert {
   }
 
   /**
-   * Provides APIs for generating the messages in CMS format.
+   * Provide APIs for generating messages in CMS format.
    *
    * > **NOTE**
    * >
@@ -5848,11 +5825,16 @@ declare namespace cert {
    */
   interface CmsGenerator {
     /**
-     * Adds signer information to the CMS whose content type is **SIGNED_DATA**.
+     * Adds a signer to the CMS **SIGNED_DATA** structure.
+     *
+     * > **NOTE**
+     * >
+     * > OpenSSL does not support signature verification of self-signed certificates. Therefore, self-signed
+     * > certificates cannot be used as issuer certificates.
      *
      * @param { X509Cert } cert - X.509 certificate.
      * @param { PrivateKeyInfo } keyInfo - Private key information.
-     * @param { CmsSignerConfig } config - Signer configuration.
+     * @param { CmsSignerConfig } config - CMS signer configuration.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -5873,13 +5855,13 @@ declare namespace cert {
     addSigner(cert: X509Cert, keyInfo: PrivateKeyInfo, config: CmsSignerConfig): void;
 
     /**
-     * Adds a CMS certificate of the **SIGNED_DATA** content type, for example, the issuer certificate of a signing
+     * Adds a certificate for the CMS **SIGNED_DATA** structure, for example, the issuer certificate of a signing
      * certificate.
      *
-     * <br>If the **addSigner** API is not called and only the certificate is added, the generated CMS signed data
-     * contains only the certificate.
+     * <br>If the certificate is added without calling **addSigner**, the generated CMS signature data contains only the
+     * certificate information.
      *
-     * @param { X509Cert } cert - X.509 certificate to add.
+     * @param { X509Cert } cert - X.509 certificate to be added.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -5899,12 +5881,13 @@ declare namespace cert {
     addCert(cert: X509Cert): void;
 
     /**
-     * Sets the encryption algorithm for the CMS whose content type is **ENVELOPED_DATA**.
+     * Sets the encryption algorithm for CMS **ENVELOPED_DATA**.
      *
-     * <br>This method should be called immediately after the **CmsGenerator** of the **ENVELOPED_DATA** type is
-     * created. If this method is not called, AES_256_GCM is used as the encryption algorithm by default.
+     * <br>This API should be called immediately after a **CmsGenerator** object of the **ENVELOPED_DATA** type is
+     * created. If not, AES_256_GCM is used as the encryption algorithm by default.
      *
-     * @param { CmsRecipientEncryptionAlgorithm } algorithm - Encryption algorithm used by the CMS to encapsulate data.
+     * @param { CmsRecipientEncryptionAlgorithm } algorithm - Encryption algorithm used to encapsulate data based on
+     *     CMS.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -5922,12 +5905,11 @@ declare namespace cert {
     setRecipientEncryptionAlgorithm(algorithm: CmsRecipientEncryptionAlgorithm): void;
 
     /**
-     * Adds recipient information to a CMS with the content type of **ENVELOPED_DATA**. This API uses a promise to
-     * return the result.
+     * Adds recipient information to the CMS **ENVELOPED_DATA** structure. This API uses a promise to return the result.
      *
-     * <br>At least one recipient needs to be set.
+     * <br>At least one recipient must be set.
      *
-     * @param { CmsRecipientInfo } recipientInfo - Recipient information.
+     * @param { CmsRecipientInfo } recipientInfo - Recipient Information.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
@@ -5948,12 +5930,12 @@ declare namespace cert {
     addRecipientInfo(recipientInfo: CmsRecipientInfo): Promise<void>;
 
     /**
-     * Obtains the CMS message, for example, the CMS signed data or CMS enveloped data. This API uses a promise to
+     * Obtains the CMS data, for example, the CMS signature data or CMS encapsulated data. This API uses a promise to
      * return the result.
      *
-     * @param { Uint8Array } data - Data to be operated.
+     * @param { Uint8Array } data - CMS data to be operated.
      * @param { CmsGeneratorOptions } [options] - Configuration of the CMS operation.
-     * @returns { Promise<Uint8Array | string> } Promise used to return the CMS message.
+     * @returns { Promise<Uint8Array | string> } Promise used to return CMS messages.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -5973,12 +5955,12 @@ declare namespace cert {
     doFinal(data: Uint8Array, options?: CmsGeneratorOptions): Promise<Uint8Array | string>;
 
     /**
-     * Obtains the CMS message, for example, the CMS signed data or CMS enveloped data. This API returns the result
+     * Obtains the CMS message, for example, the CMS signature data or CMS encapsulated data. This API returns the result
      * synchronously.
      *
-     * @param { Uint8Array } data - Data to be operated.
+     * @param { Uint8Array } data - CMS data to be operated.
      * @param { CmsGeneratorOptions } [options] - Configuration of the CMS operation.
-     * @returns { Uint8Array | string } CMS message generated.
+     * @returns { Uint8Array | string } CMS message.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -5998,11 +5980,10 @@ declare namespace cert {
     doFinalSync(data: Uint8Array, options?: CmsGeneratorOptions): Uint8Array | string;
 
     /**
-     * Obtains the encrypted content data of the CMS whose content type is **ENVELOPED_DATA**. This API uses a promise
-     * to return the result.
+     * Obtains the encrypted data of the CMS **ENVELOPED_DATA** structure. This API uses a promise to return the result.
      *
-     * <br>Obtains the encrypted content data if the **CmsGenerator** of the **ENVELOPED_DATA** type is created and
-     * data separation is used to generate detached CMS enveloped data.
+     * <br>Obtains the encrypted data if a **CmsGenerator** object of the **ENVELOPED_DATA** type is created and data
+     * separation is used to generate CMS encapsulated data.
      *
      * @returns { Promise<Uint8Array> } Promise used to return the encrypted data.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
@@ -6023,7 +6004,7 @@ declare namespace cert {
   /**
    * Creates a **CmsGenerator** object.
    *
-   * @param { CmsContentType } contentType - CMS message type.
+   * @param { CmsContentType } contentType - CMS content type.
    * @returns { CmsGenerator } **CmsGenerator** object created.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
@@ -6044,7 +6025,7 @@ declare namespace cert {
   function createCmsGenerator(contentType: CmsContentType): CmsGenerator;
 
   /**
-   * Represents CMS verification configuration.
+   * CMS signature verification configuration.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -6054,11 +6035,7 @@ declare namespace cert {
    */
   interface CmsVerificationConfig {
     /**
-     * Trusted certificates.
-     *
-     * > **NOTE**
-     * >
-     * > You need to configure the trust certificates of all signers.
+     * Trust certificate. Note: You need to configure the trust certificates for all signers.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6069,7 +6046,7 @@ declare namespace cert {
     trustCerts: Array<X509Cert>;
 
     /**
-     * Signer certificates.
+     * Signer certificate. This parameter is left empty by default.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6080,8 +6057,8 @@ declare namespace cert {
     signerCerts?: Array<X509Cert>;
 
     /**
-     * Content data. If the detached mode is used, you need to specify the plaintext data. This parameter can be left
-     * empty in attached mode.
+     * Content data. If the detached mode is used, you need to specify the plaintext data. This parameter is optional in
+     * attached mode.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6105,7 +6082,7 @@ declare namespace cert {
   }
 
   /**
-   * Configuration used for decrypting CMS enveloped data.
+   * Represents configuration for decapsulation with CMS.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -6137,8 +6114,8 @@ declare namespace cert {
     cert?: X509Cert;
 
     /**
-     * Encrypted content data for detached CMS enveloped data, used when the CMS structure does not contain the
-     * encrypted content inline.
+     * Encrypted content data. If the CMS does not contain content data, you can specify the data. This parameter is left
+     * empty by default.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6149,9 +6126,8 @@ declare namespace cert {
     encryptedContentData?: Uint8Array;
 
     /**
-     * Format of the content.
+     * Format of the content. The default value is **CmsContentDataFormat.BINARY**.
      *
-     * @default CmsContentDataFormat.BINARY
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
      * @atomicservice
@@ -6172,7 +6148,7 @@ declare namespace cert {
    */
   enum CmsCertType {
     /**
-     * Signer certificates.
+     * Signer certificate.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6195,7 +6171,7 @@ declare namespace cert {
   }
 
   /**
-   * Provides APIs for parsing, verifying, and decrypting CMS messages.
+   * Provide APIs for parsing, verifying signatures, and decapsulating CMS messages.
    *
    * > **NOTE**
    * >
@@ -6211,12 +6187,12 @@ declare namespace cert {
    */
   interface CmsParser {
     /**
-     * Set the CMS message data. This API uses a promise to return the result.
+     * Sets CMS message data. This API uses a promise to return the result.
      *
      * > **NOTE**
      * >
-     * > CMS message in PEM and DER formats is supported. **string** corresponds to the PEM format, and **Uint8Array**
-     * > corresponds to the DER format.
+     * > CMS messages in PEM and DER formats are supported. The string is in PEM format, and the Uint8Array data is in
+     * > DER format.
      *
      * @param { Uint8Array | string } data - CMS message content.
      * @param { CmsFormat } cmsFormat - Input CMS format.
@@ -6257,7 +6233,7 @@ declare namespace cert {
     getContentType(): CmsContentType;
 
     /**
-     * Verifies the CMS message of the **SIGNED_DATA** content type. This API uses a promise to return the result.
+     * Verifies the CMS message of the signature data type. This API uses a promise to return the result.
      *
      * @param { CmsVerificationConfig } config - CMS signature verification configuration.
      * @returns { Promise<void> } Promise that returns no value.
@@ -6283,10 +6259,10 @@ declare namespace cert {
     verifySignedData(config: CmsVerificationConfig): Promise<void>;
 
     /**
-     * Obtains the content data from CMS message of the **SIGNED_DATA** type. This API uses a promise to return the
+     * Obtains the content data from the CMS message of the signature data type. This API uses a promise to return the
      * result.
      *
-     * @returns { Promise<Uint8Array> } Promise used to return the content data.
+     * @returns { Promise<Uint8Array> } Promise used to return CMS content data.
      * @throws { BusinessError } 19020001 - Memory malloc failed.
      * @throws { BusinessError } 19020002 - Runtime error. Possible causes:
      *     <br>1. Memory copy failed;
@@ -6302,8 +6278,8 @@ declare namespace cert {
     getContentData(): Promise<Uint8Array>;
 
     /**
-     * Obtains the certificate from CMS message of the **SIGNED_DATA** type by passing enumerated values. The signer
-     * certificates or all certificates can be obtained. This API uses a promise to return the result.
+     * Obtains the certificate from CMS messages of the signature data type by passing enumerated values. Currently, the
+     * signer certificate or all certificates can be obtained. This API uses a promise to return the result.
      *
      * @param { CmsCertType } type - Type of the certificate obtained from the CMS.
      * @returns { Promise<Array<X509Cert>> } Promise used to return a certificate set.
@@ -6324,7 +6300,7 @@ declare namespace cert {
     getCerts(type: CmsCertType): Promise<Array<X509Cert>>;
 
     /**
-     * Decrypts the CMS message of the **ENVELOPED_DATA** content type. This API uses a promise to return the result.
+     * Decrypts the CMS message of the enveloped data type. This API uses a promise to return the result.
      *
      * @param { CmsEnvelopedDecryptionConfig } config - CMS decryption configuration.
      * @returns { Promise<Uint8Array> } Promise used to return the decryption result.
@@ -6365,10 +6341,10 @@ declare namespace cert {
   function createCmsParser(): CmsParser;
 
   /**
-   * Defines the CSR attribute representation.
+   * Defines the CSR attribute.
    *
-   * <br>CSR attribute field. Currently, only string-type attribute fields are supported. The attribute value added to
-   * the CSR is encoded in UTF-8 format. The common type is challengePassword.
+   * <br>The CSR attribute field can only be set to a UTF-8 string currently. **type** is commonly set to
+   * **challengePassword**.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -6401,19 +6377,20 @@ declare namespace cert {
   }
 
   /**
-   * Configuration parameters for generating a CSR, including the subject name, digest algorithm, attribute,
-   * and output format.
+   * Describes the configuration parameters for generating a CSR, including the subject name, extension, message digest
+   * (MD) algorithm, and output format.
    *
    * > **NOTE**
    * >
-   * > - subject is an X500DistinguishedName object.
+   * > - **subject** is an object of the Name type defined by X509.
    * >
-   * > - mdName indicates the digest algorithm name. Currently, SHA1, SHA256, SHA384, and SHA512 are supported.
+   * > - **mdName** specifies the message digest algorithm. Currently, SHA-1, SHA-256, SHA-384, and SHA-512 are
+   * > supported.
    * >
-   * > - attributes is an optional parameter that specifies the attribute types and attribute values specified in
-   * > PKCS #9 to generate a CSR. For example, challengePassword.
+   * > - **attributes** is optional. You can specify the extension types and values defined in OpenSSL to generate a
+   * > CSR, for example, **challengePassword** and **keyUsage**.
    * >
-   * > - outFormat specifies the format of the output CSR. If the format is not specified, the PEM format is used by
+   * > - **outFormat** specifies the format of the CSR generated. If it is not specified, the PEM format is used by
    * > default.
    *
    * @syscap SystemCapability.Security.Cert
@@ -6435,7 +6412,7 @@ declare namespace cert {
     subject: X500DistinguishedName;
 
     /**
-     * Message digest algorithm name.
+     * MD algorithm name. Currently, SHA-1, SHA-256, SHA-384, and SHA-512 are supported.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6446,7 +6423,7 @@ declare namespace cert {
     mdName: string;
 
     /**
-     * A collection of attributes.
+     * Extension.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6457,9 +6434,8 @@ declare namespace cert {
     attributes?: Array<CsrAttribute>;
 
     /**
-     * Output format.
+     * Output type. The default value is **PEM**.
      *
-     * @default EncodingBaseFormat.PEM
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
      * @atomicservice
@@ -6470,7 +6446,8 @@ declare namespace cert {
   }
 
   /**
-   * Generates a CSR.
+   * Generates a CSR using the specified private key by passing configuration parameters such as the subject, extension,
+   * MD algorithm, and output format.
    *
    * @param { PrivateKeyInfo } keyInfo - Private key information.
    * @param { CsrGenerationConfig } config - Configuration for generating the CSR.
@@ -6539,7 +6516,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents PBES algorithm parameters. Currently, only PBES2 is supported.
+   * Enumerates PBES algorithm parameters. Currently, only PBES2 is supported.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -6549,8 +6526,7 @@ declare namespace cert {
    */
   interface PbesParams {
     /**
-     * Length of the salt value. The default value is **16**, and the minimum value is **8**.
-     * The value must be an integer greater than or equal to 8.
+     * Salt length. The default value is **16**, and the minimum value is **8**.
      *
      * @default 16
      * @syscap SystemCapability.Security.Cert
@@ -6563,7 +6539,6 @@ declare namespace cert {
 
     /**
      * Number of iterations. The default value is **2048**.
-     * The value must be a positive integer.
      *
      * @default 2048
      * @syscap SystemCapability.Security.Cert
@@ -6588,7 +6563,7 @@ declare namespace cert {
   }
 
   /**
-   * Enumerates the P12 MAC digest algorithms.
+   * Enumerates the PKCS #12 MAC digest algorithms.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -6632,7 +6607,7 @@ declare namespace cert {
   }
 
   /**
-   * Represents the configuration for creating .p12 files.
+   * Represents the configuration for creating a PKCS #12 file.
    *
    * @syscap SystemCapability.Security.Cert
    * @crossplatform
@@ -6642,7 +6617,7 @@ declare namespace cert {
    */
   interface Pkcs12CreationConfig {
     /**
-     * Password of the .p12 file. The minimum length is 4.
+     * Password of the PKCS #12 file. The minimum length is 4.
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform
@@ -6664,8 +6639,7 @@ declare namespace cert {
     keyEncParams?: PbesParams;
 
     /**
-     * Whether to encrypt the certificate. The default value is **true**. **true** means to encrypt the certificate;
-     * **false** otherwise.
+     * Whether to encrypt the certificate. The default value is **true**. **true**: yes; **false**: no.
      *
      * @default true
      * @syscap SystemCapability.Security.Cert
@@ -6688,8 +6662,7 @@ declare namespace cert {
     certEncParams?: PbesParams;
 
     /**
-     * Length of the salt value of the P12 MAC. The minimum value is **8**, and the default value is **16**.
-     * The value must be an integer greater than or equal to 8.
+     * Salt length of the PKCS #12 MAC algorithm. The minimum value is **8**, and the default value is **16**.
      *
      * @default 16
      * @syscap SystemCapability.Security.Cert
@@ -6701,8 +6674,7 @@ declare namespace cert {
     macSaltLen?: int;
 
     /**
-     * Number of P12 MAC iterations. The default value is **2048**.
-     * The value must be a positive integer.
+     * Number of iterations for the PKCS #12 MAC algorithm. The default value is **2048**.
      *
      * @default 2048
      * @syscap SystemCapability.Security.Cert
@@ -6714,7 +6686,7 @@ declare namespace cert {
     macIterations?: int;
 
     /**
-     * MAC digest algorithm for the P12. The default value is **SHA256**.
+     * PKCS #12 MAC digest algorithm. The default value is **SHA256**.
      *
      * @default Pkcs12MacDigestAlgorithm.SHA256
      * @syscap SystemCapability.Security.Cert
