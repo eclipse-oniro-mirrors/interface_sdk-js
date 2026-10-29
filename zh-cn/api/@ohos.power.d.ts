@@ -292,6 +292,74 @@ declare namespace power {
   function unregisterShutdownCallback(callback?: Callback<void>): void;
 
   /**
+   * 定义休眠事件回调接口。
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HibernateCallback {
+    /**
+     * 当设备即将进入休眠时调用的回调。
+     *
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onHibernate(): Promise<void>;
+
+    /**
+     * 当设备退出休眠时调用的回调。
+     *
+     * @param { boolean } hibernateResult - 表示休眠是否成功。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onWakeup(hibernateResult: boolean): Promise<void>;
+  }
+
+  /**
+   * 订阅设备进入或退出休眠的回调。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { HibernateCallback } callback - 回调对象，包含onHibernate和onWakeup方法。
+   *     onHibernate在进入休眠时调用，无参数；
+   *     onWakeup在退出休眠时调用，hibernateResult表示休眠是否成功。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900400 - Parameter error. Possible causes: The callback object is missing
+   *     onHibernate or onWakeup function members.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function registerHibernateCallback(callback: HibernateCallback): void;
+
+  /**
+   * 取消订阅设备进入或退出休眠的回调。所有已注册的休眠回调都会被移除。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unregisterHibernateCallback(): void;
+
+  /**
    * 按场景名称查询电源配置值。例如，在系统电源管理应用中需要读取特定场景的电源配置参数时使用。
    *
    * @permission ohos.permission.POWER_CONFIG
