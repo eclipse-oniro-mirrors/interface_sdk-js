@@ -629,7 +629,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-    SUPER_PRIVACY = 53
+    SUPER_PRIVACY = 53,
+     
+    /**
+     * Once disabled, the parent control bundle cannot be enabled.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+     PARENT_CONTROL = 54
   }
 
   /**
