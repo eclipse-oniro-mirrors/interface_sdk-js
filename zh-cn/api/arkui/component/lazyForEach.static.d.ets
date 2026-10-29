@@ -684,6 +684,7 @@ export interface LazyForEachAttribute extends DynamicNode {
    * @param { KeyGeneratorFunc<T> } [keyGenerator] - 密钥生成器函数
    * @returns { this } LazyForEachAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -700,6 +701,7 @@ export interface LazyForEachAttribute extends DynamicNode {
    * @param { LazyForEachOptions } [options] - LazyForEach可选参数选项。
    * @returns { this } LazyForEachAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -712,6 +714,7 @@ export interface LazyForEachAttribute extends DynamicNode {
      * 通知LazyForEach已完成属性设置。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -784,11 +787,12 @@ export declare function LazyForEach<T = Any>(dataSource: IDataSource<T>,
 
 /**
  * 定义LazyForEach组件。它需要在组件属性设置开始时调用setLazyForEachOptions。
- * 并且它需要在组件属性设置结束时调用applyAttributeFinish。
+ * 并且它需要在组件属性设置结束时调用applyAttributesFinish。
  *
  * @param { CustomBuilderT<LazyForEachAttribute> } style - 回调来设置LazyForEach的属性
  * @returns { LazyForEachAttribute } LazyForEach的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
  * @since 26.0.1 staticonly
  */

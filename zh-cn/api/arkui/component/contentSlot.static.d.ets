@@ -88,7 +88,7 @@ export declare function ContentSlot(
 ): ContentSlotAttribute;
 
 /**
- * 定义ContentSlot组件。需要在组件属性设置开始时调用setContentSlotOptions，并在组件属性设置结束时调用applyAttributeFinish。
+ * 定义ContentSlot组件。需要在组件属性设置开始时调用setContentSlotOptions，并在组件属性设置结束时调用applyAttributesFinish。
  *
  * @param { CustomBuilderT<ContentSlotAttribute> } style - 用于设置ContentSlot属性的回调。
  * @returns { ContentSlotAttribute } ContentSlot属性对象。
