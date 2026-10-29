@@ -63,6 +63,23 @@ declare namespace brightness {
    * @since 23 static
    */
   function setValue(value: int, continuous: boolean): void;
+
+  /**
+   * 设置指定屏幕的亮度。用于连续调节亮度的场景，在连续调节亮度过程中，设置continuous为true可减少不必要的系统亮度刷新，结束时设置continuous为false恢复正常刷新模式，从而提升连续调节时的流畅度。
+   *
+   * @param { int } value - 亮度的值。
+   *     <br>取值范围：[0,255]。
+   * @param { boolean } continuous - 亮度调节是否连续。true表示亮度调节连续，false表示亮度调节不连续。
+   * @param { int } displayId - 屏幕ID。
+   *     <br>取值范围：[0,10000]。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4700101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.DisplayPowerManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function setValue(value: int, continuous: boolean, displayId: int): void;
 }
 
 export default brightness;
