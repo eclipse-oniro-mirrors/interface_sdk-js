@@ -160,7 +160,6 @@ declare type Dimension = PX | VP | FP | LPX | Percentage | Resource;
  * @unionmember { string } String type.
  * @unionmember { Resource } String referenced from system or app resources.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
  * @crossplatform [since 10]
  * @form [since 9]
  * @atomicservice [since 11]

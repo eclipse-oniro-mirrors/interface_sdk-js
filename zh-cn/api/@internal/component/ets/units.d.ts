@@ -152,7 +152,6 @@ declare type Dimension = PX | VP | FP | LPX | Percentage | Resource;
  * @unionmember { string } 字符串类型。
  * @unionmember { Resource } 资源引用类型，引入系统资源或者应用资源中的字符串。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
  * @crossplatform [since 10]
  * @form [since 9]
  * @atomicservice [since 11]
