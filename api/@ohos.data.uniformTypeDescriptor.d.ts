@@ -2540,7 +2540,9 @@ declare namespace uniformTypeDescriptor {
    * @param { string } [belongsTo] - ID of the uniform data type, to which the data type to be obtained belongs. This
    *     parameter has no default value. If it is not specified, the  [uniform data type ID] is queried based on the
    *     MIME name.
-   * @returns { Array<string> }Uniform data type IDs that match the specified MIME type and **belongsTo** (if specified). If no match is found, the data types dynamically generated based on the rules specified by the input parameters are returned.
+   * @returns { Array<string> }Uniform data type IDs that match the specified MIME type and **belongsTo**
+   *     (if specified). If no match is found, the data types dynamically generated based on the rules specified
+   *     by the input parameters are returned.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 20]
