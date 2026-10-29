@@ -14,9 +14,7 @@
  */
 
 /**
- 打印扩展能力
- * @file
- 打印扩展能力
+ * @file 打印扩展能力
  * @kit BasicServicesKit
  */
 
@@ -57,8 +55,7 @@ declare class PrintExtensionAbility {
   onCreate(want: Want): void;
 
   /**
-   * 开始发现打印机时调用。开发者可在此回调中实现自己的打印机发现逻辑，可通过 [addPrinterToDiscovery]{@link @ohos.print:print.addPrinterToDiscovery} 将发现的打印机
-   * 信息上报给系统。
+   * 开始发现打印机时调用。开发者可在此回调中实现自己的打印机发现逻辑，可通过 [addPrinterToDiscovery]{@link ./@ohos.print:print.addPrinterToDiscovery} 将发现的打印机信息上报给系统。
    *
    * @syscap SystemCapability.Print.PrintFramework
    * @stagemodelonly
@@ -116,8 +113,7 @@ declare class PrintExtensionAbility {
   /**
    * 取消已开始的打印任务时调用。开发者应在此回调中实现取消打印任务的逻辑，停止正在进行的打印操作并清理相关资源。
    *
-   * @param { print.PrintJob } jobInfo - 表示打印任务的信息，包含任务ID、打印机ID、文档信息等详细配置和状态，需为已通过onStartPrintJob启动的打印任务，
-   *     用于取消打印任务时定位目标任务。
+   * @param { print.PrintJob } jobInfo - 表示打印任务的信息，包含任务ID、打印机ID、文档信息等详细配置和状态，需为已通过onStartPrintJob启动的打印任务，用于取消打印任务时定位目标任务。
    * @throws { BusinessError } 202 - not system application [since 10 - 23]
    * @syscap SystemCapability.Print.PrintFramework
    * @systemapi Hide this for inner system use. [since 10 - 23]
@@ -132,8 +128,8 @@ declare class PrintExtensionAbility {
    * 请求打印机支持的能力特性（如色彩模式、双面打印模式、纸张尺寸等）时调用，例如在打印设置界面中用户选择打印机后，系统需要获取该打印机支持的能力信息时触发此回调。
    * 开发者应在此回调中根据printerId查询并返回对应打印机的能力信息（print.PrinterCapability）。
    *
-   * @param { int } printerId - 表示打印机ID，应为已连接的打印机，取值于打印机发现流程上报的有效打印机标识。
-   * @returns { print.PrinterCapability } printer capability.
+   * @param { int } printerId - 表示打印机ID，取值于打印机发现流程上报的有效打印机标识。
+   * @returns { print.PrinterCapability } 表示打印机支持的能力信息，用于描述打印机的各项功能特性，如色彩模式、双面打印模式、支持的纸张尺寸等。
    * @throws { BusinessError } 202 - not system application [since 10 - 23]
    * @syscap SystemCapability.Print.PrintFramework
    * @systemapi Hide this for inner system use. [since 10 - 23]
