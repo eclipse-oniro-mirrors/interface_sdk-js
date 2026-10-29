@@ -3830,18 +3830,6 @@ declare namespace photoAccessHelper {
   }
 
   /**
-   * Represents the configuration for saving images or videos to the media library, including the file name, file type,
-   * and other related parameters.
-   *
-   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-   * @stagemodelonly
-   * @atomicservice
-   * @since 23 dynamic
-   * @since 26.0.0 static
-   */
-  interface CreationSetting {  }
-
-  /**
    * Enumerates the log modes of video files.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
