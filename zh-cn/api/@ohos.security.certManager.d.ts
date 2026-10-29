@@ -2024,7 +2024,7 @@ declare namespace certificateManager {
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export interface ConfigItem {
     /**
@@ -2033,7 +2033,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     name: string;
  
@@ -2043,7 +2043,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     value: string;
   }
@@ -2066,7 +2066,7 @@ declare namespace certificateManager {
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function getCertManagerConfig(configNames: Array<string>) : Promise<Array<ConfigItem>>;
 }
