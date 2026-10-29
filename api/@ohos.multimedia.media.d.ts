@@ -4089,7 +4089,7 @@ declare namespace media {
      * **Use scenario**: It is used to render the window for video playback (not involved in audio-only playback 
      * scenarios).
      * 
-     * [Create a surface ID through XComponent]{@link ./@internal/component/ets/xcomponent:XComponentController.getXComponentSurfaceId}.
+     * [Create a surface ID through XComponent]{@link @global:XComponentController.getXComponentSurfaceId}.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
@@ -8981,7 +8981,7 @@ declare namespace media {
      * > be set for video streams without audio. Otherwise, the calling of **prepare** fails.
      *
      * @param {string} surfaceId - Surface ID, which is obtained from the **XComponent**. For details about how to
-     *     obtain it, see [XComponent]{@link ./@internal/component/ets/xcomponent}.
+     *     obtain it, see [XComponent]{@link @global:XComponent}.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the setting is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
@@ -8999,7 +8999,7 @@ declare namespace media {
      * > be set for video streams without audio. Otherwise, the calling of **prepare** fails.
      *
      * @param {string} surfaceId - Surface ID, which is obtained from the **XComponent**. For details about how to
-     *     obtain it, see [XComponent]{@link ./@internal/component/ets/xcomponent}.
+     *     obtain it, see [XComponent]{@link @global:XComponent}.
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly

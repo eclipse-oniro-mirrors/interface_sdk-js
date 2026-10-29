@@ -3787,9 +3787,7 @@ declare namespace media {
      * 
      * **使用示例**：
      * 
-     * 通过
-     * [getXComponentSurfaceId]{@link ./@internal/component/ets/xcomponent:XComponentController.getXComponentSurfaceId}接
-     * 口创建surfaceId。
+     * 通过[getXComponentSurfaceId]{@link @global:XComponentController.getXComponentSurfaceId}接口创建surfaceId。
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
@@ -8621,7 +8619,7 @@ declare namespace media {
      * > [AVPlayer.surfaceId](docroot://reference/apis-media-kit/arkts-apis-media-AVPlayer.md#属性)替代。
      *
      * @param {string} surfaceId - 指定SurfaceId，应从XComponent组件获取，获取方式请参考
-     *     [XComponent]{@link ./@internal/component/ets/xcomponent}。
+     *     [XComponent]{@link @global:XComponent}。
      * @param { AsyncCallback<void> } callback - 回调函数。当设置SurfaceId成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly
@@ -8640,7 +8638,7 @@ declare namespace media {
      * > [AVPlayer.surfaceId](docroot://reference/apis-media-kit/arkts-apis-media-AVPlayer.md#属性)替代。
      *
      * @param {string} surfaceId - 指定SurfaceId，应从XComponent组件获取，获取方式请参考
-     *     [XComponent]{@link ./@internal/component/ets/xcomponent}。
+     *     [XComponent]{@link @global:XComponent}。
      * @returns { Promise<void> } 设置SurfaceId的Promise返回值。
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly
