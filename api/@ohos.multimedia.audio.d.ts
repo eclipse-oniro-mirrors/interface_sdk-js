@@ -9070,6 +9070,82 @@ declare namespace audio {
   }
 
   /**
+   * Enumerates the reasons for noise reduction mode change.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  enum NoiseReductionModeChangeReason {
+    /**
+     * The noise reduction mode is changed due to manual switchover on the system recording control panel UX.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    USER_SETTING_BY_SYSTEM_RECORD_CONTROLLER = 0,
+
+    /**
+     * The application calls AudioCapturer.setNoiseReductionMode to set the noise reduction mode. Users may not be aware
+     * of the calling setting.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    APP_SETTING = 1,
+
+    /**
+     * The noise reduction mode is changed due to the change of the audio input device.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    DEVICE_CHANGE = 2,
+
+    /**
+     * The noise reduction mode is changed due to concurrent recording stream conflicts.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    STREAM_CONCURRENCY = 3,
+  }
+
+  /**
+   * Indicates the change information about the noise reduction mode.
+   * This interface is used as the callback parameter of {@link #onNoiseReductionModeChanged}.
+   * Application scenario: When the NR mode of a recording stream changes, this data structure carries the latest NR
+   * mode and change reason.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.2.0 dynamic&static
+   */
+  interface NoiseReductionModeChangeInfo {
+    /**
+     * The reason for the noise reduction mode change.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    reason: NoiseReductionModeChangeReason;
+
+    /**
+     * Current noise reduction mode. The default value is {@link NoiseReductionMode#FIDELITY}.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    noiseReductionMode: NoiseReductionMode;
+  }
+
+  /**
    * Implements audio collaborative management.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
@@ -13595,11 +13671,20 @@ declare namespace audio {
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
 
     /**
-     * Sets noise reduction mode for current audio capturer.
-     * The supported mode should be obtained by {@link #getSupportedNoiseReductionModes}.
-     * The actual effect may vary from different audio devices, and will be invalid when there are multiple
-     * recording streams running simultaneously.
-     * The mode can only be changed in created and stopped state.
+     * Sets the noise reduction mode of the current recording stream. You are advised to call
+     * [getSupportedNoiseReductionModes]{@link audio.AudioCapturer.getSupportedNoiseReductionModes} to obtain the
+     * NR mode supported by the current recording stream, and then call this API to set the NR mode.
+     *
+     * > **NOTE**
+     * >
+     * > - Currently, only the recording streams created by
+     * > [SourceType.SOURCE_TYPE_VOICE_MESSAGE]{@link @ohos.multimedia.audio:audio.SourceType} can be used to set
+     * > the noise reduction mode. Other stream types may be supported in the future.
+     * >
+     * > - The noise reduction effect is affected by the device platform, audio device, and recording concurrency.
+     * > This interface can be invoked only when recording is not started after the recording stream is created
+     * > or when recording is stopped. The call throws an exception when the recording stream is running or has
+     * > been released.
      *
      * @param { NoiseReductionMode } noiseReductionMode - The noise reduction mode to set.
      * @throws { BusinessError } 6800101 - Parameter verification failed.
@@ -13626,11 +13711,11 @@ declare namespace audio {
     getNoiseReductionMode(): NoiseReductionMode;
 
     /**
-     * Gets all the supported noise reduction modes for current device platform.
-     * Currently the noise reduction effect is only supported when using
-     * {@link SourceType#SOURCE_TYPE_VOICE_MESSAGE}, other supported usage may be extened later.
-     * The supported modes will only consider the audio format and device platform,
-     * audio input device and stream concurrency will not be considered.
+     * Obtains the recording noise reduction mode supported by the current device.
+     * The application can call {@link #setNoiseReductionMode} to set the noise reduction mode to be switched.
+     * The NR modes in some scenarios can be set only by the system. These modes are not returned by this API.
+     * The application can sense the noise reduction mode currently selected by the system through
+     * {@link #getNoiseReductionMode} and {@link #onNoiseReductionModeChanged}.
      *
      * @returns { Array<NoiseReductionMode> } The supported noise reduction mode array, at least
      *     {@link NoiseReductionMode#FIDELITY} is supported.
@@ -13640,6 +13725,47 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSupportedNoiseReductionModes(): Array<NoiseReductionMode>;
+
+    /**
+     * Subscribes to the noise reduction mode change event, which is triggered when the noise reduction mode
+     * is changed for the audio capturer.
+     * The change may be triggered by the user through the system record controller panel, by the application calling
+     * {@link #setNoiseReductionMode}, or by the system adjusting the mode due to device changes or
+     * stream concurrency. For details, see {@link NoiseReductionModeChangeReason}.
+     * Application scenario: Applies to scenarios where applications need to detect noise reduction mode changes in real
+     * time, such as
+     * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE} live broadcast,
+     * [SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC} recording,
+     * [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER} recording,
+     * [SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION} VoIP, and
+     * [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE} voice messages. After detecting the noise
+     * reduction mode change, an application can determine whether to disable the noise reduction algorithm superimposed
+     * by the application based on the actual situation to achieve the best E2E overall noise reduction experience.
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } callback - Callback used to return the noise reduction mode
+     *     change information.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    onNoiseReductionModeChanged(callback: Callback<NoiseReductionModeChangeInfo>): void;
+
+    /**
+     * Unsubscribe from the NR mode change event.
+     * Application scenario: This interface is invoked when the application no longer needs to detect the NR mode
+     * change.
+     * Constraint: If the callback parameter is transferred, only the registered callback that matches the callback
+     * instance is canceled. If the callback parameter is not transferred, all registered NR mode change callbacks are
+     * canceled.
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } [callback] - Callback function, which is used to cancel
+     *     subscription. If this parameter is not specified, all registered callbacks are canceled.
+     * <br>Default value: Default behavior: Cancel all registered noise reduction mode change callbacks by default.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.2.0 dynamic&static
+     */
+    offNoiseReductionModeChanged(callback?: Callback<NoiseReductionModeChangeInfo>): void;
   }
 
   /**
