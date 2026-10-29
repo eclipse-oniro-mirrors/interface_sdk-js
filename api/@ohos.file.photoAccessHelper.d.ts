@@ -3772,14 +3772,6 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     LOCAL_ENHANCEMENT_STATUS = 'local_enhancement_status',
-    /**
-     * total size of assets, read only
-     *
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @since 19 dynamic
-     */
-    SUM_SIZE = 'sum(size)',
   }
 
   /**
