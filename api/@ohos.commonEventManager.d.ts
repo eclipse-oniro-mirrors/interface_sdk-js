@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Common Event
  * @kit BasicServicesKit
  */
 
@@ -25,51 +25,51 @@ import { CommonEventSubscribeInfo as _CommonEventSubscribeInfo } from './commonE
 import { CommonEventPublishData as _CommonEventPublishData } from './commonEvent/commonEventPublishData';
 
 /**
- * This module provides APIs to publish, subscribe to, and unsubscribe from common events. This module provides a
- * system-level event notification mechanism that allows an app to send notifications to other apps that have
- * subscribed to the event when the system status changes (such as power-on completion, battery level change, and
- * screen on/off) or a custom service event occurs. This mechanism enables transferring information across components
- * and apps.
+ * This module provides APIs to publish, subscribe to, and unsubscribe from common events. This module provides a system
+ * -level event notification mechanism that allows an app to send notifications to other apps that have subscribed to 
+ * the event when the system status changes (such as power-on completion, battery level change, and screen on/off) or a 
+ * custom service event occurs. This mechanism enables transferring information across components and apps.
  *
  * The key concepts involved in this module are as follows:
- * - Unordered common events: common events that CES forwards regardless of whether subscribers receive the events and
- * when they subscribe to the events.
- * - Ordered common events: common events that CES forwards based on the subscriber priority. CES preferentially
- * forwards an ordered common event to the subscriber with higher priority, waits until the subscriber receives the
- * event, and then forwards the events to the subscriber with lower priority. Subscribers with the same priority
- * receive common events in a random order.
- * - Sticky common events: common events that can be sent to a subscriber before or after they initiate a
- * subscription. Only system apps or services can send sticky common events.
+ *
+ * - [Unordered common events](docroot://basic-services/common-event/common-event-glossary.md#unordered-common-event): 
+ * common events that CES forwards regardless of whether subscribers receive the events and when they subscribe to the 
+ * events.
+ * - [Ordered common events](docroot://basic-services/common-event/common-event-glossary.md#ordered-common-event): 
+ * common events that CES forwards based on the subscriber priority. CES preferentially forwards an ordered common event
+ * to the subscriber with higher priority, waits until the subscriber receives the event, and then forwards the events 
+ * to the subscriber with lower priority. Subscribers with the same priority receive common events in a random order.
+ * - [Sticky common events](docroot://basic-services/common-event/common-event-glossary.md#sticky-common-event): common 
+ * events that can be sent to a subscriber before or after they initiate a subscription.
  *
  * **APIs used in combination**
  *
- * The event communication of this module involves three processes: subscription, publishing, and ordered event. The
- * subscription process and publishing process are associated through the event name. The publisher and subscriber do
+ * The event communication of this module involves three processes: subscription, publishing, and ordered event. The 
+ * subscription process and publishing process are associated through the event name. The publisher and subscriber do 
  * not need to be aware of each other.
  *
- * **Subscription process: Create a subscriber, subscribe to an event, receive the event, and cancel the
- * subscription.**
+ * **Subscription process: Create a subscriber, subscribe to an event, receive the event, and cancel the subscription.**
  *
- * 1. Configure the subscriber information, declare the name of the event to be subscribed to, and set the
- * subscription priority, publisher permission, and package name as required.
+ * 1. Configure the subscriber information, declare the name of the event to be subscribed to, and set the subscription 
+ * priority, publisher permission, and package name as required.
  * 2. Create a subscriber object using **commonEventManager.createSubscriberSync**.
- * 3. Subscribe to an event using **commonEventManager.subscribe**. When an event is published, use a callback to
+ * 3. Subscribe to an event using **commonEventManager.subscribe**. When an event is published, use a callback to 
  * receive **CommonEventData**, and process the event data in the callback.
  * 4. Unsubscribe from the event using **commonEventManager.unsubscribe** when it is no longer needed.
  *
  * **Publishing process: Publish an event (carrying data and attributes as required).**
  *
  * 1. Simple publishing: Publish an event by specifying only the event name using **commonEventManager.publish**.
- * 2. Publishing with data and attributes: Configure attributes such as code, data, parameters, and **isOrdered**
- * using **CommonEventPublishData**, and then call **publish** to publish the event.
+ * 2. Publishing with data and attributes: Configure attributes such as code, data, parameters, and **isOrdered** using 
+ * **CommonEventPublishData**, and then call **publish** to publish the event.
  *
  * **Ordered event process: Deliver the event by priority by collaborating with the subscriber.**
  *
- * 1. Set **isOrdered** to **true** using **CommonEventPublishData** and call **publish** to publish ordered events.
+ * 1. Set **isOrdered** to **true** using **CommonEventPublishData** and call **publish** to publish ordered events. 
  * Events are delivered in sequence based on the subscriber priority.
- * 2. The subscriber with a higher priority receives the event first, who can modify the code and data in the callback
+ * 2. The subscriber with a higher priority receives the event first, who can modify the code and data in the callback 
  * using methods such as **setCodeAndData** for subsequent subscribers to receive.
- * 3. After the processing is complete, call **finishCommonEvent** to deliver the event to the subscriber with the
+ * 3. After the processing is complete, call **finishCommonEvent** to deliver the event to the subscriber with the 
  * next highest priority. To stop delivering the event, call **abortCommonEvent** to mark the event as aborted.
  *
  * @syscap SystemCapability.Notification.CommonEvent
@@ -82,10 +82,11 @@ declare namespace commonEventManager {
   /**
    * Publishes a common event. This API uses an asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the common event is
-   *     successfully published, **err** is **undefined**; if the event fails to be published, **err** is an error
-   *     object.
+   * @param { string } event - Common event to publish. For details, see
+   *     [System Common Events]{@link commonEventManager}. The value can contain a maximum of 254 bytes. Excess content
+   *     will be truncated.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the common event is successfully
+   *     published, **err** is **undefined**; if the event fails to be published, **err** is an error object.
    * @throws { BusinessError } 1500003 - The common event sending frequency too high. [since 20]
    * @throws { BusinessError } 1500007 - Failed to send the message to the common event service.
    * @throws { BusinessError } 1500008 - Failed to initialize the common event service.
@@ -101,11 +102,12 @@ declare namespace commonEventManager {
   /**
    * Publishes a common event. This API uses an asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
+   * @param { string } event - Common event to publish. For details, see
+   *     [System Common Events]{@link commonEventManager}. The value can contain a maximum of 254 bytes. Excess content
+   *     will be truncated.
    * @param { CommonEventPublishData } options - Properties of the common event to publish.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the common event is
-   *     successfully published, **err** is **undefined**; if the event fails to be published, **err** is an error
-   *     object.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the common event is successfully
+   *     published, **err** is **undefined**; if the event fails to be published, **err** is an error object.
    * @throws { BusinessError } 1500003 - The common event sending frequency too high. [since 20]
    * @throws { BusinessError } 1500007 - Failed to send the message to the common event service.
    * @throws { BusinessError } 1500008 - Failed to initialize the common event service.
@@ -121,7 +123,9 @@ declare namespace commonEventManager {
   /**
    * Publishes a common event to a specified user. This API uses an asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
+   * @param { string } event - Common event to publish. For details, see
+   *     [System Common Events (System API)]{@link commonEventManager}. The value can contain a maximum of 254 bytes.
+   *     Excess content will be truncated.
    * @param { int } userId - ID of the user who will receive the common event.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -142,7 +146,9 @@ declare namespace commonEventManager {
    * Publishes a common event to a specified user and specifies the information to be published. This API uses an 
    * asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
+   * @param { string } event - Common event to publish. For details, see
+   *     [System Common Events (System API)]{@link commonEventManager}. The value can contain a maximum of 254 bytes.
+   *     Excess content will be truncated.
    * @param { int } userId - ID of the user who will receive the common event.
    * @param { CommonEventPublishData } options - Properties of the common event to publish.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
@@ -169,10 +175,9 @@ declare namespace commonEventManager {
    * Creates a subscriber. This API uses an asynchronous callback to return the result.
    *
    * @param { CommonEventSubscribeInfo } subscribeInfo - Subscriber information.
-   * @param { AsyncCallback<CommonEventSubscriber> } callback - Callback used to receive the created subscriber
-   *     object. When a common event subscriber is successfully created, **err** is **undefined** and **data** is
-   *     the **CommonEventSubscriber** object created. If the subscriber fails to be created, **err** is an error
-   *     object.
+   * @param { AsyncCallback<CommonEventSubscriber> } callback - Callback used to receive the created subscriber object.
+   *     When a common event subscriber is successfully created, **err** is **undefined** and **data** is the
+   *     **CommonEventSubscriber** object created. If the subscriber fails to be created, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -220,8 +225,8 @@ declare namespace commonEventManager {
    *
    * @param { CommonEventSubscriber } subscriber - Subscriber object.
    * @param { AsyncCallback<CommonEventData> } callback - Callback used to return the result. When a common event is
-   *     successfully subscribed to, the common event data is returned by **data** when the event is triggered. If
-   *     the subscription fails, **err** is an error object.
+   *     successfully subscribed to, the common event data is returned by **data** when the event is triggered. If the
+   *     subscription fails, **err** is an error object.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1500007 - Failed to send the message to the common event service.
    * @throws { BusinessError } 1500008 - Failed to initialize the common event service.
@@ -235,11 +240,10 @@ declare namespace commonEventManager {
   function subscribe(subscriber: CommonEventSubscriber, callback: AsyncCallback<CommonEventData>): void;
 
   /**
-   * Subscribes to a common event. This API uses a promise to return the result, indicating subscription success or 
-   * failure.
+   * Subscribes to a common event. This API uses a promise to return the result.
    *
    * @param { CommonEventSubscriber } subscriber - Subscriber object.
-   * @param { Callback<CommonEventData> } callback - Callback to be invoked when a common event is subscribed to.
+   * @param { Callback<CommonEventData> } callback - Callback used to return the common event data.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1500007 - Failed to send the message to the common event service.
@@ -257,9 +261,9 @@ declare namespace commonEventManager {
    * Unsubscribes from a common event. This API uses an asynchronous callback to return the result.
    *
    * @param { CommonEventSubscriber } subscriber - Subscriber object.
-   * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If the common event is
-   *     successfully unsubscribed from, **err** is **undefined**; if the unsubscription fails, **err** is an error
-   *     object. If this parameter is not passed, the subscription is canceled by default and no result is returned.
+   * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If the common event is successfully
+   *     unsubscribed from, **err** is **undefined**; if the unsubscription fails, **err** is an error object. If this
+   *     parameter is not passed, the subscription is canceled by default and no result is returned.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -274,10 +278,14 @@ declare namespace commonEventManager {
   function unsubscribe(subscriber: CommonEventSubscriber, callback?: AsyncCallback<void>): void;
 
   /**
-   * Removes a sticky common event. This API uses an asynchronous callback to return the result.
+   * Removes a 
+   * [sticky common event](docroot://basic-services/common-event/common-event-glossary.md#sticky-common-event). This API
+   * uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.COMMONEVENT_STICKY
-   * @param { string } event - Sticky common event to remove.
+   * @param { string } event - Sticky common event to remove. For details, see
+   *     [System Common Events (System API)]{@link commonEventManager}. The value can contain a maximum of 254 bytes.
+   *     Excess content will be truncated.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the sticky common event is
    *     successfully removed, **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -296,10 +304,14 @@ declare namespace commonEventManager {
   function removeStickyCommonEvent(event: string, callback: AsyncCallback<void>): void;
 
   /**
-   * Removes a sticky common event that has been published. This API uses a promise to return the result.
+   * Removes a published 
+   * [sticky common event](docroot://basic-services/common-event/common-event-glossary.md#sticky-common-event). This API
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.COMMONEVENT_STICKY
-   * @param { string } event - Sticky common event to remove.
+   * @param { string } event - Sticky common event to remove. For details, see
+   *     [System Common Events (System API)]{@link commonEventManager}. The value can contain a maximum of 254 bytes.
+   *     Excess content will be truncated.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -317,9 +329,12 @@ declare namespace commonEventManager {
   function removeStickyCommonEvent(event: string): Promise<void>;
 
   /**
-   * Enables or disables static subscription for an app. This API uses an asynchronous callback to return the result.
+   * Enables or disables a 
+   * [static subscription](docroot://basic-services/common-event/common-event-glossary.md#static-subscription) event for
+   * the app. This API uses an asynchronous callback to return the result.
    *
-   * @param { boolean } enable - Whether static subscription is enabled.<br> **true**: enabled; **false**: disabled.
+   * @param { boolean } enable - Whether static subscription is enabled.
+   *     <br> **true**: enabled; **false**: disabled.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -336,9 +351,12 @@ declare namespace commonEventManager {
   function setStaticSubscriberState(enable: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Enables or disables static subscription for an app. This API uses a promise to return the result.
+   * Enables or disables a 
+   * [static subscription](docroot://basic-services/common-event/common-event-glossary.md#static-subscription) event for
+   * the app. This API uses a promise to return the result.
    *
-   * @param { boolean } enable - Whether static subscription is enabled.<br> **true**: enabled; **false**: disabled.
+   * @param { boolean } enable - Whether static subscription is enabled.
+   *     <br> **true**: enabled; **false**: disabled.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -354,13 +372,13 @@ declare namespace commonEventManager {
   function setStaticSubscriberState(enable: boolean): Promise<void>;
 
   /**
-   * Enables or disables static subscription to a common event for the current app. This API uses a promise to
-   * return the result.
+   * Enables a [static subscription](docroot://basic-services/common-event/common-event-glossary.md#static-subscription)
+   * common event for the app. This API uses a promise to return the result.
    *
-   * @param { boolean } enable - Whether static subscription is enabled.<br> **true**: enabled; **false**: disabled.
-   * @param { Array<string> } events - List of common event names to be set. By default, the list is empty,
-   *     indicating that the status of all common events subscribed to in static mode by the current app is to be
-   *     set.
+   * @param { boolean } enable - Whether static subscription is enabled.
+   *     <br> **true**: enabled; **false**: disabled.
+   * @param { Array<string> } events - List of common event names to be set. By default, the list is empty, indicating
+   *     that the status of all common events subscribed to in static mode by the current app is to be set.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -393,8 +411,9 @@ declare namespace commonEventManager {
   function setStaticSubscriberState(enable: boolean, events: Array<string>): Promise<void>;
 
   /**
-   * System common events are events published by system services or system apps. Subscribing to these common
-   * events requires specific permissions and event values.
+   * [System common events](docroot://basic-services/common-event/common-event-glossary.md#system-common-event) refer to
+   * events released by system services or system apps. Subscribing to these common events requires specific permissions
+   * and event values. For details, see [System Common Events]{@link commonEventManager}.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]

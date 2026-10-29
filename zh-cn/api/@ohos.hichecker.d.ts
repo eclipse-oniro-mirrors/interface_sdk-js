@@ -188,7 +188,10 @@ declare namespace hichecker {
    * 添加一条或多条规则到系统，系统根据添加的规则进行检测或反馈，当有相应规则触发时可在hilog中grep HiChecker查看运行信息。
    *
    * @param { bigint } rule - 需要添加的规则。
-   * @throws { BusinessError } 401 - the parameter check failed, only one bigint type parameter is needed
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiChecker
    * @since 9 dynamic
    * @since 23 static
@@ -199,7 +202,10 @@ declare namespace hichecker {
    * 删除一条或多条规则，删除的规则后续将不再生效。
    *
    * @param { bigint } rule - 需要删除的规则。
-   * @throws { BusinessError } 401 - the parameter check failed, only one bigint type parameter is needed
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiChecker
    * @since 9 dynamic
    * @since 23 static
@@ -211,7 +217,10 @@ declare namespace hichecker {
    *
    * @param { bigint } rule - 需要查询的规则。
    * @returns { boolean } 查询结果。true 表示规则已添加；false 表示规则未添加。
-   * @throws { BusinessError } 401 - the parameter check failed, only one bigint type parameter is needed
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiChecker
    * @since 9 dynamic
    * @since 23 static

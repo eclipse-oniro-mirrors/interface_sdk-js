@@ -49,7 +49,7 @@ declare namespace quickFixManager {
     readonly moduleName: string;
 
     /**
-     * 指示hap的哈希值。
+     * 指示HAP的哈希值。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.QuickFix
      * @systemapi
@@ -180,7 +180,7 @@ declare namespace quickFixManager {
   /**
    * 撤销快速修复的接口，使用callback方式返回结果。
    *
-   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED and ohos.permission.INSTALL_BUNDLE
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED，ohos.permission.INSTALL_BUNDLE
    * @param { string } bundleName - 需要撤销补丁的应用Bundle名称。
    * @param { AsyncCallback<void> } callback - 回调函数。当撤销快速修复成功时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - The application does not have permission to call the interface.

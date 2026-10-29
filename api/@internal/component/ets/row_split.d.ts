@@ -44,7 +44,7 @@ interface RowSplitInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * > **NOTE**
  * >
@@ -96,7 +96,7 @@ declare class RowSplitAttribute extends CommonMethod<RowSplitAttribute> {
  * adjustment of child component widths, such as the left and right panes of a file manager and the two-column layout of
  * a settings page. Through draggable dividers, users can flexibly adjust the width of each area.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Supported
  *

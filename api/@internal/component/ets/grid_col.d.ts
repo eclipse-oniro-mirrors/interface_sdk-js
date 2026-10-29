@@ -232,7 +232,7 @@ interface GridColInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * The [universal events]{@link CommonMethod} are supported.
  *
@@ -310,7 +310,7 @@ declare class GridColAttribute extends CommonMethod<GridColAttribute> {
  * offset, and sorting. Using the **GridCol** component enables quick implementation of responsive layouts, simplifying
  * multi-device adaptation development.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * This component can contain only one child component.
  *

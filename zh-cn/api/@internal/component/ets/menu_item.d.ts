@@ -247,7 +247,7 @@ declare class MenuItemAttribute extends CommonMethod<MenuItemAttribute> {
   labelFontColor(value: ResourceColor): MenuItemAttribute;
 
   /**
-   * Create the submenu for custom menu item.
+   * 设置子菜单内容构建器。
    *
    * @param { CustomBuilder } builder - Indicates the builder function for submenu.
    * @returns { MenuItemAttribute }

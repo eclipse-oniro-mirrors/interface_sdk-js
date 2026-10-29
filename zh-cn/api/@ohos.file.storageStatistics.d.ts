@@ -746,6 +746,108 @@ declare namespace storageStatistics {
    * @since 24 dynamic&static
    */
   function getSystemDataSize(): Promise<long>;
+
+  /**
+   * 异步获取应用存储数据的空间大小（单位为Byte），使用Promise异步回调。
+   *
+   * @permission ohos.permission.STORAGE_MANAGER
+   * @param { string } packageName - 应用包名。
+   * @param { BundleStatsOptions } [option] - 获取应用存储空间信息的选项。
+   * @returns { Promise<BundleStats> } Promise对象，返回应用存储数据的空间大小（单位为Byte）。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 13600001 - IPC error.
+   * @throws { BusinessError } 13600008 - No such object.
+   * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getBundleStats(packageName: string, option?: BundleStatsOptions): Promise<BundleStats>;
+
+  /**
+   * 枚举，应用存储空间统计信息的标志。
+   *
+   * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  export enum GetBundleStatsFlag {
+    /**
+     * 获取应用的全部数据大小。
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    GET_BUNDLE_WITH_ALL_SIZE = 0x00000000,
+
+    /**
+     * 不包含应用安装文件大小。
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    GET_BUNDLE_WITHOUT_INSTALL_SIZE = 0x00000001,
+
+    /**
+     * 不包含应用文件存储大小。
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    GET_BUNDLE_WITHOUT_DATA_SIZE = 0x00000002,
+
+    /**
+     * 不包含应用缓存文件大小。
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    GET_BUNDLE_WITHOUT_CACHE_SIZE = 0x00000004
+
+  }
+
+  /**
+   * 获取应用存储空间信息的选项。
+   *
+   * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  export interface BundleStatsOptions {
+    /**
+     *分身应用的索引号，取值范围为大于等于0的整数，默认值为0（表示未分身的主应用）。传入不满足范围的值时返回错误码401。分身应用索引号在分身创建时默认占用从1开始且
+     * 当前未被占用的最小索引号，并赋值给该应用的
+     * [BundleResourceInfo]{@link ./bundleManager/BundleResourceInfo:BundleResourceInfo}的appIndex属性，后续可以通过调用
+     * [getBundleResourceInfo]{@link @ohos.bundle.bundleResourceManager:bundleResourceManager.getBundleResourceInfo(bundleName: string, resourceFlags?: int, appIndex?: int)}
+     * 接口获得。
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    index?: int;
+    /**
+     * 应用存储空间统计信息的标志，用于指定统计范围。默认值是GET_BUNDLE_WITH_ALL_SIZE。
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    statFlag?: GetBundleStatsFlag;
+  }
 }
 
 export default storageStatistics;

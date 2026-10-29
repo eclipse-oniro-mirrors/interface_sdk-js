@@ -14,6 +14,24 @@
 */
 
 /**
+ * A dialog is a modal window that temporarily displays information that requires user attention or actions that need to
+ * be performed, while preserving the current context.
+ * Users must complete the interaction before exiting this modal state.
+ * 
+ * > **NOTE**
+ * >
+ * > - If the **Dialog** component has [universal attributes]{@link common} and [universal events]{@link common}
+ * > configured,
+ * > the compiler toolchain automatically generates an additional \_\_Common\_\_ node and mounts the universal
+ * > attributes and universal events on this node rather than the **Dialog** component itself.
+ * > As a result, the configured universal attributes and universal events may fail to take effect or behave as
+ * > intended. For this reason,
+ * > avoid using universal attributes and events with the **Dialog** component.
+ * 
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
  * @file Dialog
  * @kit ArkUI
  */
@@ -139,11 +157,6 @@ export declare class ButtonOptions {
   textAlign?: TextAlign;
 }
 /**
- * TipsDialog({controller: CustomDialogController, imageRes: ResourceStr | PixelMap, imageSize?: SizeOptions, title?:
- * ResourceStr, content?: ResourceStr, checkTips?: ResourceStr, isChecked?: boolean, checkAction?: (isChecked: boolean)
- * => void, onCheckedChange?: Callback\<boolean>, primaryButton?: ButtonOptions, secondaryButton?: ButtonOptions, theme?
- * : Theme | CustomTheme, themeColorMode?: ThemeColorMode})
- *
  * Defines a tip dialog box used to remind users to pay attention to specific matters or perform confirmation
  * operations.
  *
@@ -322,10 +335,6 @@ export declare struct TipsDialog {
 }
 
 /**
- * SelectDialog({controller: CustomDialogController, title: ResourceStr, content?: ResourceStr, selectedIndex?: number,
- * confirm?: ButtonOptions, radioContent: Array&lt;SheetInfo&gt;, theme?: Theme | CustomTheme, themeColorMode?:
- * ThemeColorMode})
- *
  * Displays a dialog box from which the user can select options presented in a list or grid.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -437,10 +446,6 @@ export declare struct SelectDialog {
 }
 
 /**
- * ConfirmDialog({controller: CustomDialogController, title: ResourceStr, content?: ResourceStr, checkTips?:
- * ResourceStr, isChecked?: boolean, onCheckedChange?: Callback\<boolean>, primaryButton?: ButtonOptions,
- * secondaryButton?: ButtonOptions, theme?: Theme | CustomTheme, themeColorMode?: ThemeColorMode})
- *
  * Defines a confirmation dialog box used to provide error feedback or prompt information when an operation is not
  * correctly executed (for example, a network error or low battery level) or when an incorrect operation is performed (
  * for example, fingerprint enrollment).
@@ -579,12 +584,8 @@ export declare struct ConfirmDialog {
 }
 
 /**
- * AlertDialog({controller: CustomDialogController, primaryTitle?: ResourceStr, secondaryTitle?: ResourceStr, content:
- * ResourceStr, primaryButton?: ButtonOptions, secondaryButton?: ButtonOptions, theme?: Theme | CustomTheme,
- * themeColorMode?: ThemeColorMode})
- *
- * Defines an alert dialog box used to warn the user when triggering an irreversible operation that will have serious
- * consequences (such as deletion, reset, cancel editing, stop, etc.).
+ * Defines an alert dialog box used to warn the user when triggering an irreversible operation that will have 
+ * serious consequences (such as deletion, reset, cancel editing, stop, etc.).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -697,9 +698,6 @@ export declare struct AlertDialog {
 }
 
 /**
- * LoadingDialog({Controller: CustomDialogController, content?: ResourceStr, theme?: Theme | CustomTheme, themeColorMode
- * ?: ThemeColorMode})
- *
  * Displays a loading dialog box to inform the user of the operation progress.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -759,10 +757,6 @@ export declare struct LoadingDialog {
 }
 
 /**
- * CustomContentDialog({controller: CustomDialogController, contentBuilder: () => void, primaryTitle?: ResourceStr,
- * secondaryTitle?: ResourceStr, localizedContentAreaPadding?: LocalizedPadding, contentAreaPadding?: Padding, buttons?:
- * ButtonOptions[], theme?: Theme | CustomTheme, themeColorMode?: ThemeColorMode})
- *
  * Displays a dialog box that contains custom content and operation area.
  *
  * > **NOTE**
@@ -895,20 +889,9 @@ export declare struct CustomContentDialog {
 }
 
 /**
- * A dialog is a modal window that temporarily displays information that requires user attention or actions that need to
- * be performed, while preserving the current context. Users must complete the interaction before exiting this modal
- * state.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **Dialog** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **Dialog** component itself. As a result, the configured universal attributes and universal events
- * > may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events with
- * > the **Dialog** component.
+ * Defines a follow-hand dialog box that pops up based on the position of the target component. 
+ * The aforementioned **TipsDialog**, **SelectDialog**, **ConfirmDialog**, **AlertDialog**, **LoadingDialog**, 
+ * and **CustomContentDialog** can all serve as the content of the dialog box.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -1521,7 +1521,7 @@ declare interface RichEditorImageSpanResult {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }
@@ -1823,7 +1823,7 @@ declare interface RichEditorImageSpanOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }
@@ -1902,7 +1902,7 @@ declare interface RichEditorBuilderSpanOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderSpanInfo {
   /**
@@ -1914,7 +1914,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   id?: string;
 
@@ -1926,7 +1926,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: number;
 }
@@ -1943,7 +1943,7 @@ declare interface BuilderSpanInfo {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface RichEditorBuilderSpan {
   /**
@@ -1953,7 +1953,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   builder: CustomBuilder;
 
@@ -1965,7 +1965,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onAttach?: Callback<BuilderSpanInfo>;
 
@@ -1984,7 +1984,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onDetach?: Callback<BuilderSpanInfo>;
 
@@ -1996,7 +1996,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -2998,7 +2998,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): number;
 
@@ -3111,7 +3111,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo>;
 

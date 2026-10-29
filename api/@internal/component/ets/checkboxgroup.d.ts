@@ -170,8 +170,7 @@ interface CheckboxGroupInterface {
 }
 
 /**
- * Defines a CheckboxGroup callback when onChange.
- * Anonymous Object Rectification.
+ * Defines the callback invoked when the selection status of the checkbox group changes.
  *
  * @typedef { function } OnCheckboxGroupChangeCallback
  * @param { CheckboxGroupResult } value - checkbox group result

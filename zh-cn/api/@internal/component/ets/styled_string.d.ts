@@ -2286,7 +2286,7 @@ declare class ImageAttachment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   readonly imageTag?: string;
 }
@@ -2421,7 +2421,7 @@ declare interface ResourceImageAttachmentOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }
@@ -2526,7 +2526,7 @@ declare interface ImageAttachmentInterface {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }

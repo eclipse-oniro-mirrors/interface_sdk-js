@@ -1466,7 +1466,7 @@ declare namespace osAccount {
      *     limit. [since 24]
      * @throws { BusinessError } 12300024 - The specified OS account ID already exists.
      *     Suggested solutions: Use a different ID, or remove the existing OS account with
-     *     the same ID and try again. [since 26.2.0]
+     *     the same ID and try again. [since 26.1.0]
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 7 dynamic
@@ -1531,7 +1531,7 @@ declare namespace osAccount {
      *     limit. [since 24]
      * @throws { BusinessError } 12300024 - The specified OS account ID already exists.
      *     Suggested solutions: Use a different ID, or remove the existing OS account with
-     *     the same ID and try again. [since 26.2.0]
+     *     the same ID and try again. [since 26.1.0]
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
@@ -3196,7 +3196,7 @@ declare namespace osAccount {
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     localId?: int;
   }

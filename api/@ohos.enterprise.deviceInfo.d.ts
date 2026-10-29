@@ -218,6 +218,121 @@ declare namespace deviceInfo {
    * @since 12
    */
   function getDeviceInfo(admin: Want, label: string): string;
+
+  /**
+   * Obtains the device patch information.
+   *
+   * @permission ohos.permission.ENTERPRISE_GET_DEVICE_INFO
+   * @returns { Promise<Array<PatchInfo>> } Promise used to return patch information.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getPatchInfo(): Promise<Array<PatchInfo>>;
+ 
+  /**
+   * Indicates the device patch information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PatchInfo {
+    /**
+     * Patch name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    name: string;
+ 
+    /**
+     * User name of the patch installer.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    accountName: string;
+ 
+    /**
+     * Installation timestamp.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    installTime: number;
+ 
+    /**
+     * Patch description.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    description: PatchDescription;
+  }
+ 
+  /**
+   * Indicates the patch description.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PatchDescription {
+    /**
+     * Description headers.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    headers: Array<string>;
+ 
+    /**
+     * Description body items.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bodies: Array<PatchDescriptionBody>;
+  }
+ 
+  /**
+   * Indicates the patch description body.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PatchDescriptionBody {
+    /**
+     * Description body title.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    title: string;
+ 
+    /**
+     * Description body contents.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    contents: Array<string>;
+  }
 }
 
 export default deviceInfo;

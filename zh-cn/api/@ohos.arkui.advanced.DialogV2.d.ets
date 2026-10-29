@@ -14,7 +14,9 @@
 */
 
 /**
- * 弹出框是一种模态窗口，用于在保持当前上下文环境时，临时展示用户需关注的信息或待处理的操作，用户在弹出框内完成交互。模态弹出框需要用户进行交互才能够退出模态模式。DialogV2提供了提示、选择、确认、警告、加载等多种类型的弹出框，适用于确认删除、显示加载进度、用户选择项、重要提示等场景，帮助开发者简化模态对话框的实现，提供一致的用户交互体验。
+ * 弹出框是一种模态窗口，用于在保持当前上下文环境时，临时展示用户需关注的信息或待处理的操作，用户在弹出框内完成交互。
+ * 模态弹出框需要用户进行交互才能够退出模态模式。DialogV2提供了提示、选择、确认、警告、加载等多种类型的弹出框，适用于确认删除、显示加载进度、用户选择项、重要提示等场景，
+ * 帮助开发者简化模态对话框的实现，提供一致的用户交互体验。
  * 
  * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
  * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
@@ -22,12 +24,13 @@
  * 
  * > **说明：**
  * >
- * > - 该组件仅可在Stage模型下使用。
- * >
- * > - 如果DialogV2设置[通用属性]{@link ./@internal/component/ets/common}和[通用事件]{@link ./@internal/component/ets/common}，编译工具链会额
- * > 外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到DialogV2本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议DialogV2设置通用属性和通用事
- * > 件。
+ * > - 如果DialogV2设置[通用属性]{@link common}和[通用事件]{@link common}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，
+ * > 而不是直接应用到DialogV2本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议DialogV2设置通用属性和通用事件。
  *
+ * ###### 子组件
+ * 
+ * 无
+ * 
  * @file
  * @kit ArkUI
  */
@@ -686,7 +689,7 @@ export declare struct ConfirmDialogV2 {
 }
 
 /**
- * 操作确认类弹出框。当触发一个将产生严重后果的不可逆操作时，如删除、重置、取消编辑、停止等，会触发该类弹出框提示。
+ * 警告弹出框。当触发一个将产生严重后果的不可逆操作时，如删除、重置、取消编辑、停止等，会触发该类弹出框提示。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -875,8 +878,8 @@ export declare struct CustomContentDialogV2 {
 }
 
 /**
- * 跟手弹出框，基于目标组件位置弹出，上述的TipsDialogV2、SelectDialogV2、ConfirmDialogV2、AlertDialogV2、
- * LoadingDialogV2、CustomContentDialogV2都可作为弹出框内容。适用于需要跟随目标组件位置显示的场景，如工具提示、操作引导等。
+ * 跟手弹出框，基于目标组件位置弹出，上文中的TipsDialogV2、SelectDialogV2、ConfirmDialogV2、AlertDialogV2、LoadingDialogV2、CustomContentDialogV2
+ * 都可作为弹出框内容。适用于需要跟随目标组件位置显示的场景，如工具提示、操作引导等。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

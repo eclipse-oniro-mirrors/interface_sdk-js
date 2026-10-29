@@ -21,6 +21,10 @@
 /**
  * 定义WithEnv组件的属性功能。
  *
+ * 不支持[通用属性]{@link CommonMethod}。
+ *
+ * 不支持[通用事件]{@link CommonMethod}。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -83,7 +87,7 @@ export declare type WithEnvInterface = () => WithEnvAttribute;
  * >
  * > - WithEnv嵌套时，同名环境变量按最近作用域生效。
  *
- * ## 子组件
+ * ###### 子组件
  *
  * 支持单个子组件。
  *

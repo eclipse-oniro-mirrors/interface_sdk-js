@@ -41,7 +41,7 @@ interface RowSplitInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 支持[通用事件]{@link CommonMethod}。
  *
@@ -74,7 +74,7 @@ declare class RowSplitAttribute extends CommonMethod<RowSplitAttribute> {
 /**
  * 将子组件横向布局，并在每个子组件之间插入纵向分割线。适用于需要横向多区域布局且支持动态调整子组件宽度的场景，如文件管理器的左右分栏、设置页面的双栏布局等。通过可拖拽的分割线，用户可以灵活调整各区域宽度。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含子组件。
  * 

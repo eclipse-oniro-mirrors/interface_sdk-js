@@ -108,7 +108,7 @@ declare namespace cliManager {
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     taskId?: string;
   }
@@ -278,7 +278,7 @@ declare namespace cliManager {
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     taskId?: string;
   }

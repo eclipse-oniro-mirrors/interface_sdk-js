@@ -19,21 +19,17 @@
  * 
  * > **说明：**
  * >
- * > - 本模块同时支持ArkTS-Dyn、ArkTS-Sta。
- * >
- * > -
- * >
  * > - 该组件支持在Phone、PC/2in1、Tablet、TV、Wearable设备上使用。API version 22及以前版本，在Phone、PC/2in1、Tablet、TV上使用会编译告警，但可以正常运行。
  * 
  * ###### 子组件
  * 
  * 无
  * 
- * ###### ArcSliderAttribute
+ * ###### 属性
  * 
  * 不支持[通用属性]{@link common}。
  * 
- * ###### ArcSliderAttribute
+ * ###### 事件
  * 
  * 不支持[通用事件]{@link common}。
  *
@@ -587,9 +583,7 @@ export declare class ArcSliderOptions {
 }
 
 /**
- * ArcSlider({ options: ArcSliderOptions })
- * 
- * 创建ArcSlider实例，入参是弧形进度条配置选项。
+ * 创建ArcSlider实例，入参是弧形滑动条配置选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @since 23 static

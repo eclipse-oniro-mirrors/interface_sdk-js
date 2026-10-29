@@ -215,13 +215,13 @@ declare namespace relationalStore {
     status?: AssetStatus;
 
     /**
-     * 业务侧扩展。
-     * 默认值：空字符串。
+     * 资产的扩展信息，由业务侧自定义。端侧不限制长度；云侧长度上限为512字节，超出时截断保留前512字节。
+     * 默认值为空字符串。
      *
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     extension?: string;
   }
@@ -433,6 +433,28 @@ declare namespace relationalStore {
      * @since 26.0.0 dynamic&static
      */
     autoCleanDeviceDirtyData?: boolean
+
+    /**
+     * RDB存储是否开启dump-stack on文件删除开关，用于定位数据库文件被意外删除问题。
+     *
+     * **true**：启用文件删除时转储堆栈功能。打开RDB存储后，文件系统输出直接删除数据库文件（**db**、**wal**、**shm**）时删除操作堆栈（通过文件接口）。
+     *
+     * **false**（默认）：删除文件时禁用dump-stack。
+     *
+     * 该参数只对主备数据库的**db**、**wal**、**shm**文件生效，不包括数据库辅助文件（如日志文件和binlog文件）。
+     *
+     * 该参数依赖于设备文件系统的dump-stack能力。如果文件系统不支持该能力，则该参数不生效，不影响打开RDB存储。
+     *
+     * 默认值：false。
+     *
+     * **系统接口：** 此接口为系统接口。
+     *
+     * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dumpStackOnFileDel?: boolean;
 
     /**
      * 指定数据库是否支持搜索，true表示支持搜索，false表示不支持搜索，默认不支持搜索。
@@ -1788,7 +1810,7 @@ declare namespace relationalStore {
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     fullSync?: boolean;
   }

@@ -186,6 +186,8 @@ declare interface RadioStyle {
  * >
  * > Since API version 12, the default indicator type for the **Radio** component changes from
  * > **RadioIndicatorType.DOT** to **RadioIndicatorType.TICK**.
+ * >
+ * > By default, this component has a [margin]{@link CommonMethod#margin} of { top: '14px', right: '14px', bottom: '14px', left: '14px' }.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -417,6 +419,8 @@ declare interface RadioConfiguration extends CommonConfiguration<RadioConfigurat
  * >
  * > Since API version 12, the default indicator type for the **Radio** component changes from
  * > **RadioIndicatorType.DOT** to **RadioIndicatorType.TICK**.
+ * >
+ * > By default, this component has a [margin]{@link CommonMethod#margin} of { top: '14px', right: '14px', bottom: '14px', left: '14px' }.
  *
  * ###### Child Components
  *

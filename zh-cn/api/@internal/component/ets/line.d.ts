@@ -127,8 +127,7 @@ interface LineInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}以及[图形绘制通用属性](docroot://reference/apis-arkui/arkui-ts/ts-drawing-components-common.md)外，还支持以下
- * 属性：
+ * 支持[通用属性]{@link CommonMethod}以及[图形绘制通用属性](docroot://reference/apis-arkui/arkui-ts/ts-drawing-components-common.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -184,7 +183,7 @@ declare class LineAttribute extends CommonShapeMethod<LineAttribute> {
  * >
  * > - Line组件不支持拐角，strokeLineJoin和strokeMiterLimit属性设置无效。
  *
- * ## 子组件
+ * ###### 子组件
  * 
  * 无
  *

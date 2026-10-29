@@ -186,6 +186,87 @@ declare namespace securityManager {
   }
 
   /**
+   * 添加凭证信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface AddCredentialInfo {
+    /**
+     * 认证插件信息。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    pluginInfo: string;
+
+    /**
+     * 认证令牌。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    authToken?: Uint8Array;
+  }
+
+  /**
+   * 移除凭证信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface RemoveCredentialInfo {
+    /**
+     * 凭据ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    credentialId: Uint8Array;
+
+    /**
+     * 认证令牌。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    authToken?: Uint8Array;
+  }
+
+  /**
+   * 用户扩展凭据信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface UserExtCredentialInfo {
+    /**
+     * 凭据ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    credentialId: Uint8Array;
+
+    /**
+     * 认证插件信息。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    pluginInfo: string;
+  }
+
+  /**
    * 处理口令数据使用的加密算法。
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -210,6 +291,42 @@ declare namespace securityManager {
      * @since 26.0.0 dynamic&static
      */
     SCRYPT_HKDF_SM4 = 1
+  }
+
+  /**
+   * DLS策略
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum DeviceSecurityLevelPolicy {
+    /**
+     * 禁止切换DSL等级
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    DEFAULT_ENFORCED = 0,
+
+    /**
+     * 允许切换DSL1
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    ALLOW_BALANCED = 1,
+
+    /**
+     * 允许切换DSL2，禁止切换到DSL1
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    ALLOW_FLEXIBLE = 2,
   }
 
   /**
@@ -1165,6 +1282,226 @@ declare namespace securityManager {
   function isScreenLockDisabledForAccount(admin: Want): boolean;
 
   /**
+   * 设备DSL切换策略
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { DeviceSecurityLevelPolicy } level - DSL切换策略
+   *     <br>Value range:[0, +∞)
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setDeviceSecurityLevelPolicy(level: DeviceSecurityLevelPolicy): void;
+
+  /**
+   * 查询DSL切换策略
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @returns { DeviceSecurityLevelPolicy } 返回DSL切换策略
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getDeviceSecurityLevelPolicy(): DeviceSecurityLevelPolicy;
+
+  /**
+   * 开启指定用户的凭据变更会话
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 系统账号ID。
+   *     <br>取值范围:[0, +∞)
+   * @returns { Promise<Uint8Array> } Promise用于返回挑战值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function openSession(accountId: number): Promise<Uint8Array>;
+
+  /**
+   * 关闭指定用户的凭据变更会话
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 系统账号ID。
+   *     <br>取值范围:[0, +∞)
+   *     <br>Value range:[0, +∞)
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function closeSession(accountId: number): void;
+
+  /**
+   * 添加扩展用户认证凭据
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { AddCredentialInfo } info - 添加用户凭据所需信息。
+   * @param { number } accountId - 系统账号ID。
+   *     <br>取值范围:[0, +∞)
+   * @returns { Promise<Uint8Array> } Promise用于返回凭证ID。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201052 - USB key session timed out.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function addUserExtendCredential(info: AddCredentialInfo, accountId: number): Promise<Uint8Array>;
+
+  /**
+   * 移除扩展用户认证凭据
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { RemoveCredentialInfo } info - 移除用户凭据所需信息。
+   * @param { number } accountId - 用户ID，取值范围：大于等于0。
+   *     accountId可以通过getOsAccountLocalId等接口来获取。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201052 - USB key session timed out.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function removeUserExtendCredential(info: RemoveCredentialInfo, accountId: number): void;
+
+  /**
+   * 查询指定用户安装的扩展用户凭据
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 系统账号ID。
+   *     <br>取值范围:[0, +∞)
+   * @returns { Promise<UserExtCredentialInfo[]> } 用于返回UserExtCredentialInfo的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getUserExtendCredential(accountId: number): Promise<UserExtCredentialInfo[]>;
+
+  /**
+   * 设置解锁策略
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { UnlockPolicy } policy - 解锁策略。
+   * @param { number } accountId - 系统账号ID。
+   *     <br>取值范围:[0, +∞)
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setUnlockPolicy(policy: UnlockPolicy, accountId: number): void;
+
+  /**
+   * 查询解锁策略
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 系统账号ID。
+   *     <br>取值范围:[0, +∞)
+   * @returns { UnlockPolicy } 返回解锁策略
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getUnlockPolicy(accountId: number): UnlockPolicy;
+
+  /**
+   * 解锁认证策略
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum UnlockPolicy {
+    /**
+     * 默认认证方式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    DEFAULT = 0,
+
+    /**
+     * 仅设备关联认证
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXTENDED_AUTH_ONLY = 1,
+
+    /**
+     * 设备关联认证和其他认证方式组合认证
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXTENDED_AUTH_REQUIRED = 2
+  }
+
+  /**
    * 使能弱密码库。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
@@ -1199,6 +1536,25 @@ declare namespace securityManager {
    * @since 26.0.1
    */
   function isWeakPinEnabled(): boolean;
+
+  /**
+   * 根据账号ID获取最近一次修改密码时间。同步返回时间。
+   * 企业可以通过该接口查询最近一次修改密码时间，用于密码策略审计和合规性检查。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 用户ID，必须大于等于0。
+   * @returns { number } 最近一次修改密码时间戳，单位为毫秒。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getPasswordLastChangedTime(accountId: number): number;
 }
 
 /*** if arkts dynamic */

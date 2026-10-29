@@ -19,8 +19,8 @@
  */
 
 /**
- * Supports the following **WithEnv**-specific attributes.
- * 
+ * The [universal attributes]{@link CommonMethod} are not supported.
+ *
  * The [universal events]{@link CommonMethod} are not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -99,6 +99,10 @@ export declare type WithEnvInterface = () => WithEnvAttribute;
  * > - System environment variable keys can be set through [env]{@link WithEnvAttribute#env}. They are stored in
  * > [WritableEnvKey]{@link WritableEnvKey}.
  * > - When **WithEnv** is nested, the nearest scope takes effect for environment variables with the same name.
+ *
+ * ###### Child Components
+ *
+ * This component supports only one child component.
  *
  * @type { WithEnvInterface }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

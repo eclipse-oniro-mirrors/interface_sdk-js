@@ -291,10 +291,10 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
  *
  * ![scrollBar1](figures/scrollBar1.gif)
  *
- * ###### Example 2: Implementing a ScrollBar Component Without Child Components
+ * ###### 示例2（不设置子节点）
  *
- * This example illustrates the style of a **ScrollBar** component without child components. The
- * [scrollBarColor]{@link ScrollBarAttribute#scrollBarColor} attribute is added since API version 20.
+ * 该示例为ScrollBar组件没有子节点时的滚动条样式。从API version 20开始，可通过
+ * [scrollBarColor]{@link ScrollBarAttribute#scrollBarColor}设置滚动条颜色。
  *
  * ```ts
  * import { ColorMetrics } from '@kit.ArkUI'
@@ -336,11 +336,11 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
  *
  * ![en-us_image_scrollbar](figures/image-scrollbar.gif)
  *
- * ###### Example 3: Enabling Nested Scrolling
+ * ###### 示例3（支持嵌套滚动）
  *
- * This example demonstrates how to enable nested scrolling for a **ScrollBar** component using the
- * [enableNestedScroll]{@link ScrollBarAttribute#enableNestedScroll} attribute. This feature is available from API
- * version 20.
+ * 从API version 14开始，可通过[enableNestedScroll]{@link ScrollBarAttribute#enableNestedScroll}属性使ScrollBar组件
+ * 支持嵌套滚动。本示例同时使用从API version 20开始支持的[scrollBarColor]{@link ScrollBarAttribute#scrollBarColor}
+ * 属性设置滚动条颜色。
  *
  * ```ts
  * import { ColorMetrics } from '@kit.ArkUI'

@@ -237,7 +237,7 @@ declare namespace relationalStore {
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     extension?: string;
   }
@@ -479,6 +479,35 @@ declare namespace relationalStore {
      * @since 26.0.0 dynamic&static
      */
     autoCleanDeviceDirtyData?: boolean
+
+    /**
+     * Specifies whether to enable dump-stack on file deletion for the RDB store, which is used to locate issues
+     * where database files are unexpectedly deleted.
+     *
+     * **true**: enable dump-stack on file deletion. After the RDB store is opened, the file system outputs the call
+     * stack of the deletion operation when the database files (**db**, **wal**, and **shm**) are directly deleted
+     * through file interfaces.
+     *
+     * **false** (default): disable dump-stack on file deletion.
+     *
+     * This parameter takes effect only for the **db**, **wal**, and **shm** files of both primary and replica
+     * databases. Database auxiliary files such as journal and binlog files are not included.
+     *
+     * This parameter depends on the dump-stack capability of the device file system. If the file system does not
+     * support this capability, this parameter does not take effect and opening the RDB store is not affected.
+     *
+     * This parameter is not persisted to the metadata database and needs to be configured each time the RDB store
+     * is opened. Normal operations such as deleting, restoring, and rebuilding the RDB store, as well as
+     * primary/replica switchover and attach/detach mode switching, do not trigger the call stack output.
+     *
+     * Default value: false.
+     *
+     * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dumpStackOnFileDel?: boolean;
 
     /**
      * Specifies whether data can be searched.
@@ -1906,7 +1935,7 @@ declare namespace relationalStore {
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     fullSync?: boolean;
   }
@@ -9427,7 +9456,7 @@ declare namespace relationalStore {
    * Currently, **getRdbStore()** does not support multi-thread concurrent operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @param { AsyncCallback<RdbStore> } callback - Callback invoked to return the RDB store obtained.
@@ -9474,7 +9503,7 @@ declare namespace relationalStore {
    * Currently, **getRdbStore()** does not support multi-thread concurrent operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @returns { Promise<RdbStore> } Promise used to return the **RdbStore** object.
@@ -9541,7 +9570,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the RDB store to delete.
    * @param { AsyncCallback<void> } callback - Callback invoked to return the result.
@@ -9569,7 +9598,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @param { AsyncCallback<void> } callback - Callback invoked to return the result.
@@ -9598,7 +9627,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the RDB store to delete.
    * @returns { Promise<void> } Promise that returns no value.
@@ -9626,7 +9655,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @returns { Promise<void> } Promise that returns no value.

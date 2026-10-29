@@ -209,24 +209,6 @@ declare namespace cloudSync {
    */
   enum SyncType {
     /**
-     * 正常同步。
-     *
-     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamic&static
-     */
-    NORMAL = 0,
-    /**
-     * 强制同步。
-     *
-     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamic&static
-     */
-    FORCE = 1,
-    /**
      * 强制缩略图同步。
      *
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -234,7 +216,7 @@ declare namespace cloudSync {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    FORCE_THM = 2
+    FORCE_THM = 0,
   }
 
   /**

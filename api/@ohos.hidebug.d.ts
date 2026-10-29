@@ -176,7 +176,7 @@ declare namespace hidebug {
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
    * @deprecated since 9
-   * @useinstead hidebug.dumpJsHeapData
+   * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpHeapData(filename: string): void;
 
@@ -187,7 +187,10 @@ declare namespace hidebug {
    *
    * @param { string } filename - Custom file name of the sampling data. The .json file is generated in the **files**
    *     directory of the application based on the specified file name. The maximum length of a string is 128.
-   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
    * @since 23 static
@@ -216,11 +219,14 @@ declare namespace hidebug {
    * @param { string } filename - User-defined name of the VM heap data output file. The .heapsnapshot file is generated
    *     in the **files** directory of the application based on the specified file name. The maximum length of a string
    *     is 128 bytes.
-   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
    * @since 26.0.1 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string) : void;
@@ -242,7 +248,7 @@ declare namespace hidebug {
    * @atomicservice
    * @since 24 dynamic
    * @since 26.0.1 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string, needClean : boolean) : void;
@@ -255,9 +261,10 @@ declare namespace hidebug {
    * @param { int } fd - File descriptor to which data is written by the API.
    * @param { Array<string> } args - Parameter list of the **Dump** API of the system service. The maximum length of a
    *     string is 254 characters. The excess part will be truncated.
-   * @throws {BusinessError} 401 - The parameter check failed, Possible causes:
-   *     1.The parameter type error.
-   *     2.The args parameter is not string array.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws {BusinessError} 11400101 - ServiceId invalid. The system ability does not exist.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
@@ -925,10 +932,10 @@ declare namespace hidebug {
    *     the application, convert the path by referring to
    *     Mappings Between Application Sandbox Paths and Physical Paths.
    *     )
-   * @throws { BusinessError } 401 - Invalid argument, Possible causes:
-   *     1.The limit parameter is too small
-   *     2.The parameter is not within the enumeration type
-   *     3.The parameter type error or parameter order error
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11400102 - Capture trace already enabled.
    * @throws { BusinessError } 11400103 - No write permission on the file.
    * @throws { BusinessError } 11400104 - Abnormal trace status.
@@ -1061,9 +1068,10 @@ declare namespace hidebug {
    *     <br>**"ark.gc.gc-bytes-freed"**: memory freed by GC of the current thread, in bytes.
    *     <br> **"ark.gc.fullgc-longtime-count"**: number of longtime full GC times triggered by the current thread.
    * @returns { long } System GC statistics returned based on the input parameters.
-   * @throws { BusinessError } 401 - Possible causes:
-   *     1. Invalid parameter, a string parameter required.
-   *     2. Invalid parameter, unknown property.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
    * @since 23 static
@@ -1097,10 +1105,10 @@ declare namespace hidebug {
    *     application smoothness problems.
    *     <br>The value **true** means to enable external debugging logs, and false means the opposite.
    *     <br>
-   * @throws { BusinessError } 401 - Invalid argument, Possible causes:
-   *     1.The limit parameter is too small
-   *     2.The parameter is not in the specified type
-   *     3.The parameter type error or parameter order error
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11400104 - Set limit failed due to remote exception
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @atomicservice

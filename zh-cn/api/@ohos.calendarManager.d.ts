@@ -32,7 +32,7 @@ declare namespace calendarManager {
   /**
    * 根据上下文获取CalendarManager对象，用于管理日历。
    *
-   * @param { Context } context - 应用上下文Context。
+   * @param { Context } context - 应用上下文Context，Stage模型的应用Context定义见Context。
    * @returns { CalendarManager } 返回创建的CalendarManager对象。
    * @syscap SystemCapability.Applications.CalendarData
    * @StageModelOnly
@@ -266,7 +266,8 @@ declare namespace calendarManager {
     /**
      * 创建日程，入参Event不填日程id、instanceStartTime和instanceEndTime，使用Promise异步回调。
      *
-     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 23]
+     * @permission ohos.permission.WRITE_CALENDAR [since 10-20]
+     * @permission ohos.permission.WRITE_CALENDAR or ohos.permission.WRITE_WHOLE_CALENDAR [since 21]
      * @param { Event } event - Event对象。
      * @returns { Promise<number> } Promise对象，返回日程的id，id大于0。
      * @throws { BusinessError } 201 - 权限校验失败。 [since 23]
@@ -508,7 +509,9 @@ declare namespace calendarManager {
     queryEventInstances(start: number, end: number, ids?: number[], eventKey?: (keyof Event)[]): Promise<Event[]>;
 	
 	/**
-     * Opens the event edit page.
+     * 通过日程id获取Calendar下符合查看或编辑条件的日程实例，使用Promise异步回调。
+     * 使用该接口，系统日历可以进行查看和编辑日程。
+     * 
      * @param { number } id - 传入的日程id为整数，表示日历中已存在的日程id，是日程的唯一标识符。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 23900001 - 参数值错误。
@@ -643,7 +646,8 @@ declare namespace calendarManager {
     startTime: number;
 
     /**
-     * 日程结束时间，需要13位时间戳。全天日程时，该字段转换为传入日期24:00对应的时间戳。       * 
+     * 日程结束时间，需要13位时间戳。全天日程时，该字段转换为传入日期24:00对应的时间戳。
+     * 当调用[getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>}查询日程时，默认查询到此字段。
      *
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice [since 11]
@@ -708,7 +712,7 @@ declare namespace calendarManager {
     description?: string;
 
     /**
-     * <!--RP1-->日程服务。不填时，默认没有一键服务。暂不支持此功能。<!--RP1End-->   
+     * 日程服务。不填时，默认没有一键服务。
      *
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice [since 11]
@@ -848,6 +852,8 @@ declare namespace calendarManager {
 
   /**
    * 日程过滤器，查询日程时进行筛选过滤，获取符合条件的日程。
+   * 通过[filterById()]{@link calendarManager.EventFilter.filterById}、[filterByTime()]{@link calendarManager.EventFilter.filterByTime}、
+   * [filterByTitle()]{@link calendarManager.EventFilter.filterByTitle}任一方法获取日程过滤器，传入getEvents()过滤。
    *
    * @syscap SystemCapability.Applications.CalendarData
    * @since 10

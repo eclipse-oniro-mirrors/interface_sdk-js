@@ -15,7 +15,7 @@
 
 /**
  * The **DataShareResultSet** module provides APIs for accessing the result set obtained from the database. You can
- * access the values in the specified rows or the value of the specified data type.
+ * access the values in the specified rows or the values of the specified data type.
  *
  * @file DataShare Result Set
  * @kit ArkData
@@ -39,21 +39,21 @@
  *     let context = this.context;
  *     dataShare.createDataShareHelper(context, uri, (err:BusinessError, data:dataShare.DataShareHelper) => {
  *       if (err != undefined) {
- *         console.error("createDataShareHelper fail, error message : " + err);
+ *         console.error(`Failed to create DataShareHelper. Code: ${err.code}, message: ${err.message}`);
  *       } else {
  *         console.info("createDataShareHelper end, data : " + data);
  *         dataShareHelper = data;
  *       }
  *       let columns = ["*"];
- *       let da = new dataSharePredicates.DataSharePredicates();
+ *       let predicates = new dataSharePredicates.DataSharePredicates();
  *       let resultSet: DataShareResultSet | undefined = undefined;
- *       da.equalTo("name0", "ZhangSan");
+ *       predicates.equalTo("name0", "ZhangSan");
  *       if (dataShareHelper != undefined) {
- *         (dataShareHelper as dataShare.DataShareHelper).query(uri, da, columns).then((data: DataShareResultSet) => {
+ *         (dataShareHelper as dataShare.DataShareHelper).query(uri, predicates, columns).then((data: DataShareResultSet) => {
  *           console.info("query end, data : " + data);
  *           resultSet = data;
  *         }).catch((err: BusinessError) => {
- *           console.error("query fail, error message : " + err);
+ *           console.error(`Failed to query. Code: ${err.code}, message: ${err.message}`);
  *         });
  *       }
  *     });
@@ -252,7 +252,7 @@ export default interface DataShareResultSet {
   /**
    * Moves to the specified row in the result set.
    *
-   * @param { int } position - Position to move to, starting from 0.
+   * @param { int } position - Target position to move to, starting from 0, in the range [0, rowCount-1].
    * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -268,7 +268,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the Blob type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Specified column index, starting from 0, with a value range of [0, columnCount-1].
    * @returns { Uint8Array } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -284,7 +284,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the string type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Index of the specified column, starting from 0, in the range [0, columnCount-1].
    * @returns { string } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -300,7 +300,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the long type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
+   * @param { int } columnIndex - Index of the specified column, starting from 0, in the value range [0, columnCount-1].
    * @returns { long } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -317,8 +317,8 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the double type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Index of the target column, starting from 0.
-   * @returns { double  } Value obtained.
+   * @param { int } columnIndex - Index of the specified column, starting from 0, in the range [0, columnCount-1].
+   * @returns { double } Value obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
    * @stagemodelonly
@@ -360,7 +360,7 @@ export default interface DataShareResultSet {
    *
    * The column index is passed in as an input parameter.
    *
-   * @param { int } columnIndex - Column index.
+   * @param { int } columnIndex - Index of the specified column in the result set, starting from 0, in the range [0, columnCount-1].
    * @returns { string } Column name obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi
@@ -376,7 +376,7 @@ export default interface DataShareResultSet {
    * If the specified column or key is empty or the value is not of the DataType type, you need to determine whether to
    * throw an exception.
    *
-   * @param { int } columnIndex - Column index.
+   * @param { int } columnIndex - Index of the specified column in the result set, starting from 0, in the range [0, columnCount-1].
    * @returns { DataType } Data type obtained.
    * @syscap SystemCapability.DistributedDataManager.DataShare.Core
    * @systemapi

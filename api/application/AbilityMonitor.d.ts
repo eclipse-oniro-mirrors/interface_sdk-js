@@ -23,7 +23,7 @@ import UIAbility from '../@ohos.app.ability.UIAbility';
 /**
  * The module provides the capability of listening for lifecycle state changes of a specified
  * [UIAbility]{@link @ohos.app.ability.UIAbility}. You can use AbilityMonitor as an input parameter of
- * [abilityDelegator.addAbilityMonitor]{@link ./application/AbilityDelegator:AbilityDelegator.addAbilityMonitor(monitor: AbilityMonitor, callback: AsyncCallback<void>)}
+ * [abilityDelegator.addAbilityMonitor]{@link ./application/AbilityDelegator:AbilityDelegator.addAbilityMonitor}
  *  to register a listener.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core

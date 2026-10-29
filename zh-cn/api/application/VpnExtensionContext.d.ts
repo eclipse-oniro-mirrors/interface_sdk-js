@@ -14,7 +14,7 @@
  */
 
 /**
-  * @file 
+  * @file VPN扩展上下文
   * @kit NetworkKit
  */
 

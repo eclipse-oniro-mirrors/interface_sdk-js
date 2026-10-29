@@ -705,7 +705,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.0
      */
-    OPEN_FILE_BOOST = 10
+    OPEN_FILE_BOOST = 10,
+
+    /**
+     * 自由多窗模式是一种支持用户在移动设备上进行多任务处理的交互方式。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FREE_WINDOW = 14
   }
 
   /**

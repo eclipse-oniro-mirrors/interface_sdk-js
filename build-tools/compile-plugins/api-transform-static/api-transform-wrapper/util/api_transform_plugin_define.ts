@@ -28,8 +28,6 @@ export const SINGLE_SETTER_BY_KIND: Partial<Record<arkts.Es2pandaAstNodeType, st
   [arkts.Es2pandaAstNodeType.AST_NODE_TYPE_CLASS_PROPERTY]: 'setValue',
   // 表达式语句：foo 作为独立语句
   [arkts.Es2pandaAstNodeType.AST_NODE_TYPE_EXPRESSION_STATEMENT]: 'setExpression',
-  // await 表达式：await foo()
-  [arkts.Es2pandaAstNodeType.AST_NODE_TYPE_AWAIT_EXPRESSION]: 'setArgument',
   // 一元运算：!foo、-foo、+foo 等
   [arkts.Es2pandaAstNodeType.AST_NODE_TYPE_UNARY_EXPRESSION]: 'setArgument',
   // ETS 前缀断言：foo!（非空断言）

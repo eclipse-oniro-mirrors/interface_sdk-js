@@ -109,7 +109,7 @@ interface StackInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * The [universal events]{@link CommonMethod} are supported.
  *
@@ -197,7 +197,7 @@ declare class StackAttribute extends CommonMethod<StackAttribute> {
  * > - The general attribute [align]{@link CommonMethod#align(value: Alignment)} supports the mirroring capability on
  * > this component.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Supported.
  *

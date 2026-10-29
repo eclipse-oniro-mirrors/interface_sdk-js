@@ -328,7 +328,7 @@ declare class FlexAttribute extends CommonMethod<FlexAttribute> {
  * > attribute and the maximum and minimum lengths passed by the parent container, with the **constraintSize** attribute
  * > taking higher priority.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * This component can contain child components.
  *

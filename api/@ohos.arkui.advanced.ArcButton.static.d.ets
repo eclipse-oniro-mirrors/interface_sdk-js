@@ -15,6 +15,27 @@
  */
 
 /**
+  * The arc button component provides emphasized, normal, and custom style buttons, and is recommended 
+  * for devices with circular screens.
+  * 
+  * > **NOTE**
+  * >
+  * > - This component can be used on phones, PCs, 2-in-1 devices, tablets, TVs, and wearables. 
+  * > In API version 22 and earlier versions, a compilation warning will be reported when this component is 
+  * > used on phones, PCs, 2-in-1 devices, tablets, and TVs, but the component can still run properly.
+ *
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
+ * ###### Attributes
+ * 
+ * The [universal attributes]{@link common} are not supported.
+ * 
+ * ###### Events
+ * 
+ * Among the universal events, the [click event]{@link common} and [touch event]{@link common} are supported.
+ * 
  * @file Defines the arc button component
  * @kit ArkUI
  */
@@ -527,7 +548,7 @@ export declare class ArcButtonOptions {
   constructor(options: CommonArcButtonOptions);
 }
 /**
- * Declare Component ArcButton
+ * Creates an instance of **ArcButton** with configuration parameters.
  *
  * @struct { ArcButton }
  * @syscap SystemCapability.ArkUI.ArkUI.Circle

@@ -772,7 +772,7 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
    * @returns { this } Grid属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 

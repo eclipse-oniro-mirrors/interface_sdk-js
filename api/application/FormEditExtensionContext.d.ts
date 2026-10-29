@@ -72,15 +72,16 @@ declare class FormEditExtensionContext extends UIExtensionContext {
      startUIAbility(want: Want): Promise<void>;
 
 	/**
-	 * Sets the background color for the FormEditExtensionAbility.
+	 * Sets the background color for the FormEditExtensionAbility.This API uses a promise to return the result.
 	 *
 	 * @param { string } color - Background color to set. The value is a hexadecimal RGB or ARGB color code and is case
-	 *     insensitive, for example, **#00FF00** or **#FF00FF00**. It can also be a resource string.
+	 *     insensitive, for example, **#00FF00** or **#FF00FF00**.
 	 * @returns { Promise<void> } Promise that returns no value.
 	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
+	 * @throws { BusinessError } 16501026 - Invalid color value.
 	 * @syscap SystemCapability.Ability.Form
 	 * @stagemodelonly
-	 * @since 26.2.0 dynamic&static
+	 * @since 26.1.0 dynamic&static
 	 */
 	setWindowBackgroundColor(color: string): Promise<void>;
 }

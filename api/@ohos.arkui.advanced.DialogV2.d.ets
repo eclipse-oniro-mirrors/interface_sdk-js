@@ -14,6 +14,32 @@
 */
 
 /**
+ * The dialog box is a modal window that commands attention while retaining the current context. 
+ * It is frequently used to draw the user's attention to vital information or prompt the user to complete a specific
+ * task.
+ * As all modal windows, this component requires the user to interact before exiting.
+ * 
+ * This component is implemented based on
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2).
+ * Compared with
+ * [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1),
+ * V2 offers a higher level of observation and management over data objects beyond the component level. 
+ * You can now more easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
+ * 
+ * > **NOTE**
+ * >
+ * > - If the **DialogV2** component has [universal attributes]{@link common} and [universal events]{@link common}
+ * > configured,
+ * > the compiler toolchain automatically generates an additional \_\_Common\_\_ node and mounts the universal
+ * > attributes and universal events
+ * > on this node rather than the **DialogV2** component itself. As a result, the configured universal attributes and
+ * > universal events may fail to take effect or behave as intended.
+ * > For this reason, avoid using universal attributes and events with the **DialogV2** component.
+ * 
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
  * @file
  * @kit ArkUI
  */
@@ -352,26 +378,7 @@ export declare interface AdvancedDialogV2ButtonOptions {
 export declare type AdvancedDialogV2OnCheckedChange = (checked: boolean) => void;
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays an image-attached confirmation dialog box.
  *
  * @struct { TipsDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -533,26 +540,7 @@ export declare struct TipsDialogV2 {
 }
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays a dialog box from which the user can select items presented in a list or grid.
  *
  * @struct { SelectDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -627,26 +615,9 @@ export declare struct SelectDialogV2 {
 }
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays an error dialog box that informs the user of an operational error (for example, a network error or low
+ * battery level)
+ * or an incorrect operation (for example, fingerprint enrollment).
  *
  * @struct { ConfirmDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -745,26 +716,8 @@ export declare struct ConfirmDialogV2 {
 }
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays an alert dialog box to prompt the user to confirm an action that is irreversible and may cause serious
+ * consequences, such as deletion, reset, editing cancellation, and stop.
  *
  * @struct { AlertDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -839,26 +792,7 @@ export declare struct AlertDialogV2 {
 }
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays a loading dialog box to inform the user of the operation progress.
  *
  * @struct { LoadingDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -884,26 +818,7 @@ export declare struct LoadingDialogV2 {
 }
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays a dialog box that contains custom content and operation area.
  *
  * @struct { CustomContentDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -976,26 +891,9 @@ export declare struct CustomContentDialogV2 {
 }
 
 /**
- * The dialog box is a modal window that commands attention while retaining the current context. It is frequently used
- * to draw the user's attention to vital information or prompt the user to complete a specific task. As all modal
- * windows, this component requires the user to interact before exiting.
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), V2
- * offers a higher level of observation and management over data objects beyond the component level. You can now more
- * easily manage dialog box data and states with greater flexibility, leading to faster UI updates.
- *
- * > **NOTE**
- * >
- * > - This component can be used only in the stage model.
- * >
- * > - If the **DialogV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
- * > rather than the **DialogV2** component itself. As a result, the configured universal attributes and universal
- * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
- * > with the **DialogV2** component.
+ * Displays a popover dialog box that is positioned relative to the target component. 
+ * This dialog box can contain a variety of content types, including: TipsDialogV2, SelectDialogV2, ConfirmDialogV2,
+ * AlertDialogV2, LoadingDialogV2, and CustomContentDialogV2.
  *
  * @struct { PopoverDialogV2 }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

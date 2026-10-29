@@ -113,6 +113,10 @@ declare interface ComponentOptions {
 /**
  * 全局复用池的持有类型。
  *
+ * 'shared'：\@Component/\@ComponentV2类的所有实例共享同一个复用池实例。适用于多个同类型组件实例间需要复用相同资源的场景，可最大化复用池利用率，减少内存占用。
+ * 'perInstance'：\@Component/\@ComponentV2的每个实例拥有独立的复用池实例。适用于需要隔离各组件实例复用资源的场景，避免不同实例间的复用资源相互影响。
+ *
+ * @group Custom Component Parameters
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -321,6 +325,11 @@ declare interface TextDecorationOptions {
  * > - 从API版本26.0.0开始，ComponentOptions中可以接受可选参数`reusePool`和`poolAccepts`，用于配置全局复用池，
  * > 开发指南参考：[全局复用：集中化的组件回收与复用](docroot://ui/state-management/arkts-global-reuse-pool.md)。
  *
+ * options：\@Component装饰器选项，用于配置组件冻结和全局复用。可通过freezeWhenInactive控制组件冻结（适用于页面路由、TabContent、LazyForEach、Navigation等组件非激活时
+ * 冻结UI刷新以减少不必要刷新、优化性能的场景），通过reusePool和poolAccepts配置全局复用池（适用于多个父组件共用同类可复用组件、通过if等切换时需跨父组件复用已回收实例的场景），具体属性详见
+ * ComponentOptions。缺省时关闭组件冻结和全局复用功能。
+ * ClassDecorator：类装饰器，开发者无需关注该返回值。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -342,6 +351,9 @@ declare const Component: ClassDecorator & ((options: ComponentOptions) => ClassD
  * > - 从API版本26.0.0开始，\@ComponentV2的[ComponentOptions]{@link ComponentOptions}参数支持
  * > 可选属性`reusePool`和`poolAccepts`，用于配置全局复用池，
  * > 开发指南参考：[全局复用：集中化的组件回收与复用](docroot://ui/state-management/arkts-global-reuse-pool.md)。
+ *
+ * options：\@ComponentV2装饰器选项。当需要开启组件冻结或全局复用功能时传入此参数进行自定义配置；缺省时关闭组件冻结和全局复用功能。
+ * ClassDecorator：类装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -408,6 +420,9 @@ declare interface EntryOptions {
 /**
  * \@Entry装饰的自定义组件将作为UI页面的入口，被框架识别为页面的根组件，适用于构建独立UI页面的场景。
  *
+ * 在单个UI页面中，仅允许存在一个由\@Entry装饰的自定义组件作为页面的入口。
+ *
+ * @group Custom Component Decorators
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -419,7 +434,7 @@ declare interface EntryOptions {
 declare const Entry: ClassDecorator & ((options?: LocalStorage | EntryOptions) => ClassDecorator);
 
 /**
- * \@Observed是类装饰器，用于状态管理V1中，观察嵌套类对象的属性变化。
+ * \@Observed是类装饰器，用于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中，观察嵌套类对象的属性变化。
  * 
  * 开发指南参考：[\@Observed装饰器和\@ObjectLink装饰器：嵌套类对象属性变化](docroot://ui/state-management/arkts-observed-and-objectlink.md)。
  *
@@ -434,7 +449,9 @@ declare const Entry: ClassDecorator & ((options?: LocalStorage | EntryOptions) =
 declare const Observed: ClassDecorator;
 
 /**
- * @ObservedV2是类装饰器，用于状态管理V2中。@ObservedV2与@Trace配套使用，装饰类以及类中的属性，使得被装饰的类和属性具有深度观测的能力。相较于状态管理V1的@Observed，
+ * @ObservedV2是类装饰器，用于[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中。
+ * @ObservedV2与[@Trace]{@link Trace}配套使用，装饰类以及类中的属性，使得被装饰的类和属性具有深度观测的能力。
+ * 相较于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)的[@Observed]{@link Observed}，
  * @ObservedV2提供了更细粒度的属性级深度观测能力，适用于需要精确追踪嵌套对象属性变化并驱动UI更新的场景，能够有效提升状态管理的性能和灵活性。
  *
  * 开发指南参考：[\@ObservedV2装饰器和\@Trace装饰器：类属性变化观测](docroot://ui/state-management/arkts-new-observedV2-and-trace.md)。
@@ -521,8 +538,9 @@ declare const BuilderParam: PropertyDecorator;
 declare const Local: PropertyDecorator;
 
 /**
- * @Param在状态管理V2中用于接收外部输入，实现父子组件之间的单向数据同步。适用于父组件需要向子组件单向传递状态数据的场景，能够简化组件间通信，保证数据流向清晰。@Param装饰的变量不允许在组件内部直接修改，
- * 如需子组件向父组件同步数据，请配合@Event使用。
+ * @Param在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中用于接收外部输入，实现父子组件之间的单向数据同步。
+ * 适用于父组件需要向子组件单向传递状态数据的场景，能够简化组件间通信，保证数据流向清晰。@Param装饰的变量不允许在组件内部直接修改，
+ * 如需子组件向父组件同步数据，请配合[@Event]{@link Event}使用。
  * 
  * 开发指南参考：[@Param：组件外部输入](docroot://ui/state-management/arkts-new-param.md)。
  *
@@ -700,6 +718,12 @@ declare interface ProvideOptions {
  * 
  * 开发指南参考：[@Provide装饰器和@Consume装饰器：与后代组件双向同步](docroot://ui/state-management/arkts-provide-and-consume.md)。
  *
+ * value：用于设置别名或允许重写的别名。
+ * <br>类型为string时，将直接作为别名，后代组件可通过该别名访问数据。
+ * <br>类型为ProvideOptions时，若设置了allowOverride，allowOverride的值将作为别名且该别名允许重写；若未设置allowOverride，则别名为变量名，不允许重写。
+ * <br>value缺省时别名为变量名，不允许重写。若此时定义同名\@Provide，运行时会报错。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -711,10 +735,17 @@ declare interface ProvideOptions {
 declare const Provide: PropertyDecorator & ((value: string | ProvideOptions) => PropertyDecorator);
 
 /**
- * @Provider和@Consumer搭配使用，用于状态管理V2中，实现跨组件层级的数据双向同步。@Provider装饰数据提供方，为子组件提供数据，适用于组件层级较深、需要跨多层组件共享状态且避免逐层传递数据的场景，
+ * @Provider和[@Consumer]{@link Consumer}搭配使用，
+ * 用于[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中，实现跨组件层级的数据双向同步。
+ * @Provider装饰数据提供方，为子组件提供数据，适用于组件层级较深、需要跨多层组件共享状态且避免逐层传递数据的场景，
  * 可简化状态管理流程，降低组件间的耦合度。
  *
  * 开发指南参考：[@Provider装饰器和@Consumer装饰器：跨组件层级双向同步](docroot://ui/state-management/arkts-new-provider-and-consumer.md)。
+ *
+ * 用于状态管理V2中，需与@Consumer搭配使用，实现跨组件层级的数据双向同步；装饰数据提供方，为子组件提供数据。
+ *
+ * aliasName：用于设置别名，作为\@Provider与\@Consumer之间数据双向同步的匹配标识，需与\@Consumer的别名一致；缺省时为变量名。
+ * PropertyDecorator：属性装饰器。开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1119,6 +1150,10 @@ declare enum SystemProperties {
  * > 从API version 20开始，支持跨BuilderNode配对@Provide/@Consume。在BuilderNode场景下，BuilderNode会在上树前构造节点，
  * > 所以BuilderNode内部定义的@Consume需要设置默认值，并在BuilderNode上树后，重新获取最近的@Provide数据，与之建立双向同步关系。
  *
+ * value：用于设置别名，缺省时默认为变量名。设置别名后，@Consume通过别名与@Provide装饰的变量进行匹配绑定；未设置别名时，通过变量名进行匹配绑定，实现跨组件层级的数据双向同步。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
+ *
+ * @group State Management V1 Decorators
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1136,6 +1171,9 @@ declare const Consume: PropertyDecorator & ((value: string) => PropertyDecorator
  * 将使用自身初始值，不进行数据同步。
  *
  * 开发指南参考：[@Provider装饰器和@Consumer装饰器：跨组件层级双向同步](docroot://ui/state-management/arkts-new-provider-and-consumer.md)。
+ *
+ * aliasName：用于设置别名，作为\@Consumer与\@Provider匹配的标识，需与\@Provider的别名一致；缺省时为变量名。
+ * PropertyDecorator：属性装饰器。开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1163,10 +1201,16 @@ declare const Consumer: (aliasName?: string) => PropertyDecorator;
 declare const Computed: MethodDecorator;
 
 /**
- * @StorageProp用于状态管理V1中，与AppStorage中对应的属性建立单向数据同步。AppStorage中对应属性的变化会同步到@StorageProp装饰的变量，
- * 但仅修改@StorageProp装饰的变量不会同步回AppStorage。适用于需要跨页面、跨Ability感知AppStorage全局状态变化且仅保持单向数据流的场景，可避免不必要的数据回写。
+ * @StorageProp用于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中，
+ * 与[AppStorage]{@link AppStorage}中对应的属性建立单向数据同步。AppStorage中对应属性的变化会同步到@StorageProp装饰的变量，
+ * 但仅修改@StorageProp装饰的变量不会同步回AppStorage。适用于需要跨页面、跨[Ability]{@link ability}感知AppStorage全局状态变化且仅保持单向数据流的场景，可避免不必要的数据回写。
  *
  * 开发指南参考：[AppStorage：应用全局的UI状态存储](docroot://ui/state-management/arkts-appstorage.md)。
+ *
+ * value：AppStorage中的属性键名，用于与该键名对应的属性建立单向数据同步。
+ * 若AppStorage中已存在该键名对应的属性，则\@StorageProp装饰变量的本地初始值将被AppStorage中对应属性的值覆盖；
+ * 若AppStorage中不存在该键名对应的属性，则使用\@StorageProp装饰变量的本地初始值在AppStorage中创建该属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1178,11 +1222,18 @@ declare const Computed: MethodDecorator;
 declare const StorageProp: (value: string) => PropertyDecorator;
 
 /**
- * @StorageLink是状态管理V1的装饰器，用于与AppStorage中指定键名的属性建立双向数据同步：当@StorageLink装饰的变量发生变化时，变更会同步到AppStorage中该键名对应的属性；
- * 当AppStorage中该键名对应的属性发生变化时，变更也会同步回@StorageLink装饰的变量。适用于需要跨页面、跨Ability共享AppStorage全局状态并与AppStorage保持双向数据同步的场景，
+ * @StorageLink是[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)的装饰器，
+ * 用于与[AppStorage]{@link AppStorage}中指定键名的属性建立双向数据同步：当@StorageLink装饰的变量发生变化时，变更会同步到AppStorage中该键名对应的属性；
+ * 当AppStorage中该键名对应的属性发生变化时，变更也会同步回@StorageLink装饰的变量。
+ * 适用于需要跨页面、跨[Ability]{@link ability}共享AppStorage全局状态并与AppStorage保持双向数据同步的场景，
  * 可避免逐层传递状态数据，保证数据一致性。
  *
  * 开发指南参考：[AppStorage：应用全局的UI状态存储](docroot://ui/state-management/arkts-appstorage.md)。
+ *
+ * value：AppStorage中的属性键名，用于与该键名对应的属性建立双向数据同步。
+ * 若AppStorage中已存在该键名对应的属性，则\@StorageLink装饰变量的本地初始值将被AppStorage中对应属性的值覆盖；
+ * 若AppStorage中不存在该键名对应的属性，则以\@StorageLink装饰变量的本地初始值在AppStorage中创建对应属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1194,9 +1245,13 @@ declare const StorageProp: (value: string) => PropertyDecorator;
 declare const StorageLink: (value: string) => PropertyDecorator;
 
 /**
- * @Watch装饰器用于状态管理V1中，监听状态变量的变化，并在变量变化时触发指定回调函数。适用于状态变量变化时需要自动执行联动逻辑、数据同步或计算衍生值的场景。
+ * @Watch装饰器用于[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中，监听状态变量的变化，
+ * 并在变量变化时触发指定回调函数。适用于状态变量变化时需要自动执行联动逻辑、数据同步或计算衍生值的场景。
  *
  * 开发指南参考：[@Watch装饰器：状态变量更改通知](docroot://ui/state-management/arkts-watch.md)。
+ *
+ * value：监听状态变量变化的回调函数名，函数签名为`(propertyName: string) => void`，`propertyName`为变化的属性名。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1256,8 +1311,13 @@ declare const Styles: MethodDecorator;
 /**
  * \@Extend装饰器用于扩展指定组件的样式，支持在装饰的函数中统一定义多个样式属性，并可通过参数传递实现样式的灵活复用，适用于需要将相同样式应用到多个组件、减少样式代码重复的场景。
  *
- * 开发指南参考：[\@Extend装饰器：定义扩展组件样式（ArkTS-Dyn）](docroot://ui/state-management/arkts-extend.md)。
+ * 开发指南参考：[\@Extend装饰器：定义扩展组件样式](docroot://ui/state-management/arkts-extend.md)。
  *
+ * value：指定要扩展样式的目标内置UI组件类型（如Text、Column），传入组件的类型而非组件实例，不支持自定义组件。@Extend装饰器内定义的样式属性将绑定到该组件类型，使其可在该组件上以链式方式调用。
+ * MethodDecorator：方法装饰器，开发者无需关注该返回值。
+ *
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1]
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1266,7 +1326,8 @@ declare const Styles: MethodDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Extend: MethodDecorator & ((value: any) => MethodDecorator);
+declare const Extend: MethodDecorator
+  & ((value: any) => MethodDecorator) & ExtendVersionDecorator;
 
 /**
  * @AnimatableExtend装饰器用于自定义可动画的属性方法，该装饰器内定义的函数在动画过程中会被逐帧调用，直到动画结束。
@@ -1576,10 +1637,14 @@ declare const Sendable: ClassDecorator;
 declare const CustomDialog: ClassDecorator;
 
 /**
- * @LocalStorageLink在状态管理V1中使用，用于与LocalStorage中指定键名对应的属性建立双向数据同步：@LocalStorageLink装饰的变量与LocalStorage中对应属性任一方发生变化时，
+ * @LocalStorageLink在[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中使用，
+ * 用于与[LocalStorage]{@link LocalStorage}中指定键名对应的属性建立双向数据同步：@LocalStorageLink装饰的变量与LocalStorage中对应属性任一方发生变化时，
  * 变更均会同步到另一方。适用于需要在多个组件间共享UI状态并与LocalStorage保持数据实时同步的场景，可避免逐层传递数据，保证跨组件数据一致性。
  *
  * 开发指南参考：[LocalStorage：页面级UI状态存储](docroot://ui/state-management/arkts-localstorage.md)。
+ *
+ * value：LocalStorage中的属性键名，用于与该键名对应的属性建立双向数据同步。若LocalStorage中已存在该键名对应的属性，则\@LocalStorageLink装饰变量的本地初始值将被LocalStorage中对应属性的值覆盖；若LocalStorage中不存在该键名对应的属性，则使用\@LocalStorageLink装饰变量的本地初始值在LocalStorage中创建该属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1591,10 +1656,16 @@ declare const CustomDialog: ClassDecorator;
 declare const LocalStorageLink: (value: string) => PropertyDecorator;
 
 /**
- * @LocalStorageProp在状态管理V1中使用，用于与LocalStorage中指定键名对应的属性建立单向数据同步：LocalStorage中对应属性值的变更会同步到@LocalStorageProp装饰的变量，
+ * @LocalStorageProp在[状态管理V1](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)中使用，
+ * 用于与[LocalStorage]{@link LocalStorage}中指定键名对应的属性建立单向数据同步：LocalStorage中对应属性值的变更会同步到@LocalStorageProp装饰的变量，
  * 但仅修改@LocalStorageProp装饰的变量不会同步回LocalStorage。适用于需要在多个组件间共享LocalStorage且仅保持单向数据流的场景，可避免不必要的数据回写。
  *
  * 开发指南参考：[LocalStorage：页面级UI状态存储](docroot://ui/state-management/arkts-localstorage.md)。
+ *
+ * value：LocalStorage中的属性键名，用于与该键名对应的属性建立单向数据同步。
+ * 若LocalStorage中已存在该键名对应的属性，则\@LocalStorageProp装饰变量的本地初始值将被LocalStorage中对应属性的值覆盖；
+ * 若LocalStorage中不存在该键名对应的属性，则使用\@LocalStorageProp装饰变量的本地初始值在LocalStorage中创建该属性。
+ * PropertyDecorator：属性装饰器，开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1667,6 +1738,10 @@ declare function getContext(component?: Object): Context;
  * 
  * 开发指南参考：[@Reusable装饰器：组件复用](docroot://ui/state-management/arkts-reusable.md)。
  *
+ * options：可复用自定义组件的参数，用于配置内存优化策略，缺省时无内存优化策略。
+ * 建议在组件频繁创建销毁的场景下配置该参数以获得内存优化效果。
+ *
+ * @group Component Extension Decorators
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -1683,6 +1758,10 @@ declare const Reusable: ClassDecorator & ((options: ReusableOptions) => ClassDec
  * 开发指南参考：[\@ReusableV2装饰器：组件复用](docroot://ui/state-management/arkts-new-reusableV2.md)。
  * 
  * 组件复用的原理与适用场景参考：[组件复用最佳实践](https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-component-reuse)。
+ *
+ * options：可复用自定义组件的配置参数，用于配置内存优化策略，
+ * 在复用组件数量较多（例如同一页面中复用组件实例达到数十个以上）或设备内存有限、应用内存占用较高的场景下可配置此参数进行优化；缺省时无内存优化策略。
+ * ClassDecorator：类装饰器。开发者无需关注该返回值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -7791,7 +7870,7 @@ declare interface ForegroundEffectOptions {
 declare interface PickerTextStyle {
 
   /**
-   * Define the text color of picker.
+   * 选择器文本颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7800,7 +7879,7 @@ declare interface PickerTextStyle {
    * @since 10
    */
   /**
-   * Font color.
+   * 文本颜色，用于自定义选择器中文字的颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7812,8 +7891,8 @@ declare interface PickerTextStyle {
   color?: ResourceColor;
 
   /**
-   * Define the text font of picker.
-   * Only support size and weight.
+   * 选择器文本字体样式。
+   * 仅支持size和weight。
    *
    * @type { ?Font }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7822,7 +7901,7 @@ declare interface PickerTextStyle {
    * @since 10
    */
   /**
-   * Text style.
+   * 文本样式，包括字体大小、字体粗细、字体族等属性。
    *
    * @type { ?Font }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7835,7 +7914,7 @@ declare interface PickerTextStyle {
 }
 
 /**
- * Provide an interface for the button style of picker
+ * 提供选择器按钮样式的接口。
  *
  * @interface PickerDialogButtonStyle
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7847,7 +7926,7 @@ declare interface PickerTextStyle {
 declare interface PickerDialogButtonStyle {
 
   /**
-   * Describes the button style.
+   * 描述按钮样式。
    *
    * @type { ?ButtonType }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7859,7 +7938,7 @@ declare interface PickerDialogButtonStyle {
   type?: ButtonType;
 
   /**
-   * Describes the button style.
+   * 描述按钮样式。
    *
    * @type { ?ButtonStyleMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7871,7 +7950,7 @@ declare interface PickerDialogButtonStyle {
   style?: ButtonStyleMode;
 
   /**
-   * Describes the button role.
+   * 描述按钮角色。
    *
    * @type { ?ButtonRole }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7883,7 +7962,7 @@ declare interface PickerDialogButtonStyle {
   role?: ButtonRole;
 
   /**
-   * Describes the button text size.
+   * 描述按钮文本大小。
    *
    * @type { ?Length }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7895,7 +7974,7 @@ declare interface PickerDialogButtonStyle {
   fontSize?: Length;
 
   /**
-   * Describes the button text color.
+   * 描述按钮文本颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7907,7 +7986,7 @@ declare interface PickerDialogButtonStyle {
   fontColor?: ResourceColor;
 
   /**
-   * Describes the button font weight.
+   * 描述按钮字体粗细。
    *
    * @type { ?(FontWeight | number | string) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7919,7 +7998,7 @@ declare interface PickerDialogButtonStyle {
   fontWeight?: FontWeight | number | string;
 
   /**
-   * Describes the button font style.
+   * 描述按钮字体样式。
    *
    * @type { ?FontStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7931,7 +8010,7 @@ declare interface PickerDialogButtonStyle {
   fontStyle?: FontStyle;
 
   /**
-   * Describes the button font family.
+   * 描述按钮字体族。
    *
    * @type { ?(Resource | string) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7943,7 +8022,7 @@ declare interface PickerDialogButtonStyle {
   fontFamily?: Resource | string;
 
   /**
-   * Describes the button background color.
+   * 描述按钮背景颜色。
    *
    * @type { ?ResourceColor }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7955,7 +8034,7 @@ declare interface PickerDialogButtonStyle {
   backgroundColor?: ResourceColor;
 
   /**
-   * Describes the button border radius.
+   * 圆角半径，用于设置按钮的圆角大小。
    *
    * @type { ?(Length | BorderRadiuses) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -7967,7 +8046,7 @@ declare interface PickerDialogButtonStyle {
   borderRadius?: Length | BorderRadiuses;
 
   /**
-   * Define whether the button default to responding to the Enter key
+   * 控制弹出弹窗后，Enter键是否默认由该按钮响应。
    *
    * @type { ?boolean }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8554,7 +8633,7 @@ declare enum SafeAreaEdge {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SafeAreaInsetAlignment {
   /**
@@ -8566,7 +8645,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   START = 0,
 
@@ -8578,7 +8657,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   CENTER = 1,
 
@@ -8591,7 +8670,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   END = 2
 }
@@ -8604,7 +8683,7 @@ declare enum SafeAreaInsetAlignment {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetEdgeConfig {
   /**
@@ -8620,7 +8699,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   content: CustomBuilder;
 
@@ -8635,7 +8714,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   spacing?: LengthMetrics;
 
@@ -8649,7 +8728,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   alignment?: SafeAreaInsetAlignment;
 }
@@ -8662,7 +8741,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetOptions {
   /**
@@ -8675,7 +8754,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   top?: SafeAreaInsetEdgeConfig;
 
@@ -8689,7 +8768,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   end?: SafeAreaInsetEdgeConfig;
 
@@ -8703,7 +8782,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   bottom?: SafeAreaInsetEdgeConfig;
 
@@ -8717,7 +8796,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   start?: SafeAreaInsetEdgeConfig;
 }
@@ -14225,6 +14304,71 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.0 dynamic
    */
   blurSnapshot?: BlurSnapshotOptions;
+
+  /**
+   * 标题栏悬浮模式。
+   * 
+   * - STANDARD：标题栏与内容上下排布，无重叠。
+   * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+   * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+   * 滚动内容裁剪到安全区域。
+   * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过{@link UIContext.applyDefaultImmersiveStrategy}
+   * 成功设置{@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA}后，默认值为
+   * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare enum SheetTitleBarHoverMode {
+  /**
+   * 标准模式：标题栏与内容上下排布，无重叠。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  STANDARD = 0,
+
+  /**
+   * 堆叠模式：标题栏悬浮于内容之上。
+   * 开发者需要在内容顶部添加padding以避免遮挡。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  STACK = 1,
+
+  /**
+   * 安全区域填充模式：标题栏放置在安全区域padding区域。
+   * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SAFE_AREA_PADDING = 2
 }
 
 /**
@@ -16996,7 +17140,7 @@ declare enum AvailableLayoutArea {
 }
 
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -17007,7 +17151,7 @@ declare enum AvailableLayoutArea {
 declare class ContentTransitionEffect {
 
   /**
-   * When the content changes, there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @type { ContentTransitionEffect }
    * @static
@@ -17020,7 +17164,7 @@ declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes, there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @type { ContentTransitionEffect }
    * @static
@@ -19907,7 +20051,7 @@ declare class CommonMethod<T> {
    * >
    * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
-   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，width设置auto表示自适应子组件。
+   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，width设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -19947,7 +20091,7 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[Row]{@link Row}、[Column]{@link Column}、[RelativeContainer]{@link RelativeContainer}组件中，height设置auto表示自适应子组件。
+   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，height设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -20258,7 +20402,7 @@ declare class CommonMethod<T> {
   layoutWeight(value: number | string): T;
 
   /**
-   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link RelativeContainer}时生效。
+   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link ./relative_container}时生效。
    *
    * > **说明：**
    * >
@@ -20338,7 +20482,7 @@ declare class CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   safeAreaInset(options?: SafeAreaInsetOptions): T;
 
@@ -21067,9 +21211,9 @@ declare class CommonMethod<T> {
    * @since 10
    */
   /**
-   * Sets the border image of the component.
+   * 设置组件的边框图片。
    *
-   * @param { BorderImageOption } value - 
+   * @param { BorderImageOption } value - 边框图片或边框渐变。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform
@@ -23013,9 +23157,9 @@ declare class CommonMethod<T> {
    * > 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取**flexShrink**属性时，如果该节点未设置**flexShrink**属性，默认返回**1**（与Flex容器的默认值一致，但与Column和Row容器的默认值**0**不同）。
    *
    * @param { number } value - 设置父容器压缩尺寸分配给此属性所在组件的比例。
-   *     <br>取值限定为整数，父容器为 [Column]{@link Column} 、[Row]{@link Row}时， 取值范围[0,+∞).
+   *     <br>取值限定为整数，父容器为 [Column]{@link ./column} 、[Row]{@link ./row}时， 取值范围[0,+∞).
    *     <br/>
-   *     父容器为[Flex]{@link Flex}时，默认值：1
+   *     父容器为[Flex]{@link ./flex}时，默认值：1
    *     <br/>[constraintSize]{@link constraintSize}限制组件的尺寸范围.
    *     Column和Row即使设置了constraintSize，在未设置主轴尺寸width/height/size时仍遵守默认布局行为，在主轴上自适应子组件尺寸，此时flexShrink不生效.<br/>设置异常值时，该属性为
    *     默认值。
@@ -23047,7 +23191,7 @@ declare class CommonMethod<T> {
   /**
    * 子组件在父容器交叉轴的对齐格式。
    *
-   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link Flex}, [Column]{@link Column}, [Row]{@link Row}, or
+   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row}, or
    *     [GridRow]{@link GridRow})布局容器中的alignItems设置。<br/>[GridCol]{@link
    *     GridCol}可以绑定alignSelf属性来改变它自身在交叉轴方向上的布局。<br/>默认值：ItemAlign.Auto
    * @returns { T } 返回当前组件。
@@ -23079,7 +23223,7 @@ declare class CommonMethod<T> {
    * 设置当前组件在Row/Column/Flex(单行)容器中显示的优先级，优先级由数值的整数部分决定，整数部分越大优先级越高。
    * 适用于响应式布局中根据父容器空间动态显示/隐藏子组件的场景。例如，在不同屏幕尺寸下优先显示重要内容，隐藏次要内容。
    *
-   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link Row}/[Column]{@link
+   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link ./row}/[Column]{@link
    *     Column}/[Flex(单行)]{@link Flex}容器组件中生效。<br>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用（如在Flex容器中根据空间大小动态显示内容）。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。
    *     <br/> 小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。例如：0.5和1.0优先级相同（均不大于1）；1.5和1.9优先级相同（整数部分均为1）；2.0和2.9优先级相同（整数部分均为2），且高于1.x的优先级。
    *     <br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
@@ -23229,14 +23373,14 @@ declare class CommonMethod<T> {
    * > **说明：**
    * >
    * > - position对位置的影响作用在组件的尺寸测量完成之后。
-   * > - 当父组件为[Row]{@link Row}、[Column]{@link Column}或[Flex]{@link
+   * > - 当父组件为[Row]{@link ./row}、[Column]{@link ./column}或[Flex]{@link
    * Flex}时，设置position的子组件不占位。在上述场景中，如果父组件包含的所有子组件均设置了position，此时父组件尺寸无法通过其他子组件确定，将基于尺寸(0, 0)进行布局测算。
    * > -
    * Position类型基于父组件内容区左上角确定位置；Edges类型基于父组件内容区四边确定位置，top/left/right/bottom分别为组件各边距离父组件内容区相应边的边距，通过边距来确定组件相对于父组件内容区的位置；Lo
    * calizedEdges类型基于父组件内容区四边确定位置，支持镜像模式。
    * > - 本属性适用于置顶显示、悬浮按钮等组件在父组件中位置固定的场景。
    * > - 本属性不支持在宽高为零的布局组件上设置。
-   * > - 当父组件为[RelativeContainer]{@link RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
+   * > - 当父组件为[RelativeContainer]{@link ./relative_container}，且子组件设置了alignRules属性时，子组件的position属性不生效。
    * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
    *
    * @param { Position } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
@@ -23341,7 +23485,7 @@ declare class CommonMethod<T> {
   }): T;
 
   /**
-   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link RelativeContainer}时生效，支持[attributeModifier]{@link
+   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link ./relative_container}时生效，支持[attributeModifier]{@link
    * attributeModifier}动态设置属性方法。
    *
    * @param { AlignRuleOption } value - 指定设置在相对布局组件中子组件的对齐规则。
@@ -23902,6 +24046,38 @@ declare class CommonMethod<T> {
   shadow(options: Optional<ShadowOptions | ShadowStyle>): T;
 
   /**
+   * 设置组件的阴影形状。阴影按指定形状渲染。
+   *
+   * 此接口与 [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} 属性配合使用。组件大小变化时阴影形状会重新计算。
+   *
+   * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - 阴影形状。
+   *     当值类型为 {@link CircleShape}、{@link EllipseShape}、
+   *     {@link PathShape} 或 {@link RectShape} 时，阴影渲染为对应形状。
+   *     当值为 **undefined** 时，清除阴影形状。
+   * @returns { T } 当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): T;
+
+  /**
+   * 设置[阴影]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}不填充时的裁切方式。
+   * 仅在 [ShadowOptions#fill]{@link ShadowOptions#fill} 设为 **false** 时生效。
+   *
+   * @param { ShadowClipMode | undefined } mode - 阴影裁切方式。
+   * @returns { T } 当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowClipMode(mode: ShadowClipMode | undefined): T;
+
+  /**
    * 为组件添加边缘流光效果。边缘流光效果会在组件的边缘创建发光效果，从指定位置开始并沿边缘延伸，此效果可以增强组件的视觉吸引力并突出显示重要组件。
    * 
    * > **说明：**
@@ -24304,7 +24480,7 @@ declare class CommonMethod<T> {
   geometryTransition(id: string, options?: GeometryTransitionOptions): T;
 
   /**
-   * Tips control
+   * Tips控制。
    *
    * @param { TipsMessageType } message
    * @param { TipsOptions } [options]
@@ -24318,7 +24494,7 @@ declare class CommonMethod<T> {
   bindTips(message: TipsMessageType, options?: TipsOptions): T;
 
   /**
-   * Popup control
+   * Popup控制。
    *
    * @param { boolean } show
    * @param { PopupOptions } popup
@@ -24327,7 +24503,7 @@ declare class CommonMethod<T> {
    * @since 7
    */
   /**
-   * Popup control
+   * Popup控制。
    *
    * @param { boolean } show
    * @param { PopupOptions | CustomPopupOptions } popup
@@ -24336,7 +24512,7 @@ declare class CommonMethod<T> {
    * @since 8
    */
   /**
-   * Popup control
+   * Popup控制。
    * <p><strong>NOTE</strong>:
    * <br>The popup can be displayed only after the entire page is fully constructed. Therefore, to avoid incorrect
    * display positions and shapes, do not set this parameter to true while the page is still being constructed.
@@ -24801,7 +24977,7 @@ declare class CommonMethod<T> {
    * >
    * > - 本模块为系统接口。
    *
-   * @param { SpatialEffectParams | undefined } params - 空间效果参数。
+   * @param { SpatialEffectParams | undefined } params - 空间效果参数。如果该参数设置为undefined，则移除空间效果。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -27967,7 +28143,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * 设置滚动条的宽度，不支持百分比设置。宽度设置后，滚动条正常状态和按压状态宽度均为滚动条的宽度值。如果滚动条的宽度超过滚动组件主轴方向的可视尺寸，则滚动条的宽度会变为默认值4vp。
    *
-   * @param { number | string } value  - 滚动条的宽度。
+   * @param { number | string } value  - 滚动条的宽度。<br/>单位：vp <br/>取值范围：[0, +∞)。设置为小于0的值时，按4vp处理，
+   *     儿童智能表则恢复至5vp。设置为0时，不显示滚动条。
    * @returns { T }
    *    返回当前滚动组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27983,7 +28160,8 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * 未通过该接口设置时，滚动条的宽度为4vp。
    *
-   * @param { number | string | Resource } value - 滚动条的宽度。
+   * @param { number | string | Resource } value - 滚动条的宽度。<br/>单位：vp <br/>取值范围：[0, +∞)。设置为小于0的值时，
+   *     按4vp处理，儿童智能表则恢复至5vp。设置为0时，不显示滚动条。
    * @returns { T }
    *    返回当前滚动组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28185,7 +28363,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * 设置是否支持左键拖动滚动。
    * 
    * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-   *    <br>默认值：API版本26.2.0下的版本默认值为 false。API版本26.2.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+   *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
    * @returns { T } 当前滚动组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28445,7 +28623,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * 设置滚动容器的内容层裁剪区域。
    *
-   * 从API版本26.0.0开始，内容层裁剪区域内的子组件支持正常显示。API版本26.0.0以前的版本，当List、Grid和WaterFlow组件的内容层裁剪区域大于组件自身时，完全在组件区域外但在裁剪区域内的子组件默认不会显示。
+   * 从API版本26.0.0开始，内容层裁剪区域内的子组件支持正常显示。API版本26.0.0以前的版本，当List组件的内容层裁剪区域大于组件自身时，完全在组件区域外但在裁剪区域内的子组件默认不会显示。
    * 若需要显示，可将组件的cachedCount属性的show参数设置为true。但由于cachedCount属性设置的预加载子组件仅在空闲时隙执行，在组件大小变化、数据更新等场景下可能存在更新不及时导致闪烁的问题。
    *
    * @param { ContentClipMode | RectShape } clip - 裁剪只针对滚动容器的内容，即其子节点，背景不受影响。通过RectShape传入自定义矩形区域时仅支持设置宽高和相对于组件左上角的
@@ -28531,7 +28709,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
@@ -29266,14 +29444,19 @@ declare function wrapBuilder<Args extends Object[]>(builder: (...args: Args) => 
 declare type BuilderCallback<Args extends Object[] = any[]> = (...args: Args) => void;
 
 /**
+ * 使用`mutableBuilder`封装全局[\@Builder]{@link Builder}，以支持在运行时根据不同条件动态切换全局`@Builder`内容（如根据状态切换不同的UI构建逻辑）。
+ * 开发指南参考：[mutableBuilder：实现全局@Builder动态更新](docroot://ui/state-management/arkts-mutableBuilder.md)。
+ *
  * `mutableBuilder`是一个泛型函数，它返回一个`MutableBuilder`对象，只接受一个全局的`@Builder`函数作为其参数。
- * 
+ *
  * `mutableBuilder`函数返回的[MutableBuilder]{@link MutableBuilder}对象，其`builder`属性方法只能在自定义组件的`build`函数或`@Builder`装饰的函数内部被调用。
  *
- * @param { BuilderCallback } builder - `@Builder`装饰的全局函数，作为`mutableBuilder`封装的目标构建函数。该函数需符合`BuilderCallback`类型，即
- *     `(...args: Args) => void`，是一个无返回值的函数，其参数列表`...args`的类型由泛型`Args`指定。
- * @returns { MutableBuilder<Args> } `MutableBuilder<Args>`的实例，用于封装全局`@Builder`函数，并支持在运行时动态切换构建逻辑。该实例持有对全局`@Builder`函数的引
- *     用，可通过其`builder`属性调用被封装的构建函数，或通过重新赋值`mutableBuilder`函数返回的新实例动态切换构建逻辑。其`builder`属性方法只能在自定义组件内部使用。
+ * @param { BuilderCallback } builder - `@Builder`装饰的全局函数，作为`mutableBuilder`封装的目标构建函数。该函数需符合`BuilderCallback`类型，
+ *     即`(...args: Args) => void`，是一个无返回值的函数，其参数列表`...args`的类型由泛型`Args`指定。
+ * @returns { MutableBuilder<Args> } `MutableBuilder<Args>`的实例，用于封装全局`@Builder`函数，并支持在运行时动态切换构建逻辑。该实例持有对
+ *     全局`@Builder`函数的引用，可通过其`builder`属性调用被封装的构建函数，或通过重新赋值`mutableBuilder`函数返回的新实例动态切换构建逻辑。
+ *     其`builder`属性方法只能在自定义组件的`build`函数或`@Builder`装饰的函数内部被调用。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
@@ -30130,7 +30313,7 @@ declare enum HoverModeAreaType {
 }
 
 /**
- * Defines a range of dates.
+ * 日期区间，用于描述起止日期区间。
  *
  * @interface DateRange
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30142,7 +30325,7 @@ declare enum HoverModeAreaType {
 declare interface DateRange {
 
   /**
-   * Defines the start date of the date range.
+   * 设置日期区间的开始日期，应不晚于结束日期。不传入、日期格式错误、日期超出系统支持范围或start晚于end时，该日期区间无效。
    *
    * @type { ?Date }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30154,7 +30337,7 @@ declare interface DateRange {
   start?: Date;
 
   /**
-   * Defines the end date of the date range.
+   * 设置日期区间的结束日期。不传入、日期格式错误、日期超出系统支持范围或end早于start时，该日期区间无效。
    *
    * @type { ?Date }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

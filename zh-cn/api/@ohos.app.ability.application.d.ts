@@ -148,8 +148,9 @@ declare namespace application {
    * @param { string } bundleName - 表示应用包名。取值为空字符串时，默认取当前应用的包名。
    * @param { string } moduleName - 表示应用模块名。
    * @returns { Promise<Context> } Promise对象。返回创建的Context。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2.Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -184,8 +185,9 @@ declare namespace application {
    * @param { string } hostBundleName - 表示安装插件的应用包名。
    * @returns { Promise<Context> } Promise对象。返回创建的Context，返回的Context中的属性processName和config与入参Context中的属性processName和config的值相
    *     同。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -209,8 +211,9 @@ declare namespace application {
    * @param { Context } context - 表示应用上下文。
    * @param { string } bundleName - 表示应用包名。
    * @returns { Promise<Context> } Promise对象。返回创建的Context。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2.Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -274,7 +277,8 @@ declare namespace application {
    *
    * @param { boolean } insertToHead - 表示是否将当前进程放入备选主控进程链表的表头。true表示放入表头，false表示放入表尾。
    * @returns { Promise<void> } Promise对象。无返回结果。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000115 - The current process cannot be set as a candidate master process.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -288,7 +292,8 @@ declare namespace application {
    * 该接口在PC/2in1、Tablet中可正常调用，在其他设备类型中返回801错误码。
    *
    * @returns { Promise<void> } Promise对象。无返回结果。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000116 - The current process is already a master process and does not support cancellation.
    * @throws { BusinessError } 16000117 - The current process is not a candidate master process and does not support
    *     cancellation.
@@ -304,7 +309,8 @@ declare namespace application {
    * 该接口仅在2in1、Tablet设备中可正常调用，在其他设备中返回801错误码。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000118 - Not a master process.
    * @throws { BusinessError } 16000119 - Cannot exit because there is an unfinished request.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

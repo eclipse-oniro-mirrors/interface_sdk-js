@@ -176,7 +176,10 @@ declare namespace hidebug {
    * 关闭的调用方式，否则会接口调用异常。
    *
    * @param { string } filename - 用户自定义的采样结果输出的文件名，将在应用的`files`目录下生成以该参数命名的json文件。string长度的最大值为128。
-   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
    * @since 23 static
@@ -201,11 +204,14 @@ declare namespace hidebug {
    * > 由于虚拟机堆导出极其耗时，且该接口为同步接口，建议不要在上架版本中调用该接口，以避免应用冻屏，影响用户体验。
    *
    * @param { string } filename - 用户自定义的虚拟机堆数据转储输出的文件名，将在应用的`files`目录下生成以该参数命名的heapsnapshot文件。string长度的最大值为128字节。
-   * @throws {BusinessError} 401 - The parameter check failed, Parameter type error.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
    * @since 26.0.1 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string) : void;
@@ -224,7 +230,7 @@ declare namespace hidebug {
    * @atomicservice
    * @since 24 dynamic
    * @since 26.0.1 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpJsHeapData(filename : string, needClean : boolean) : void;
@@ -236,9 +242,10 @@ declare namespace hidebug {
    * @param { int } serviceid - 系统服务ID，用于标识要获取信息的系统服务。取值由系统定义，取值范围[0, 255]。传入无效值时返回错误码401。
    * @param { int } fd - 文件描述符，接口会向该fd写入数据。传入无效文件描述符时返回错误码401。
    * @param { Array<string> } args - 系统服务的dump接口参数列表。string长度的最大值为254，超出部分将会被截断。
-   * @throws {BusinessError} 401 - The parameter check failed, Possible causes:
-   *     1.The parameter type error.
-   *     2.The args parameter is not string array.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws {BusinessError} 11400101 - ServiceId invalid. The system ability does not exist.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 9 dynamic
@@ -872,10 +879,10 @@ declare namespace hidebug {
    * @param { int } limitSize - 开启trace文件大小限制，单位为Byte，取值范围（0, 500MB]。超出范围时返回错误码401。
    * @returns { string } 返回trace文件名路径（接口返回真实物理路径，若应用内需要访问，请参考
    *     应用沙箱路径和真实物理路径的对应关系进行路径转换）。
-   * @throws { BusinessError } 401 - Invalid argument, Possible causes:
-   *     1.The limit parameter is too small
-   *     2.The parameter is not within the enumeration type
-   *     3.The parameter type error or parameter order error
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11400102 - Capture trace already enabled.
    * @throws { BusinessError } 11400103 - No write permission on the file.
    * @throws { BusinessError } 11400104 - Abnormal trace status.
@@ -993,9 +1000,10 @@ declare namespace hidebug {
    *     时，以ms为单位。<br/>"ark.gc.gc-bytes-allocated"：当前线程Ark虚拟机已分配的内存大小，以B为单位。<br/>"ark.gc.gc-bytes-freed"：当前线程GC成功回收的内存，以
    *     B为单位。<br/> "ark.gc.fullgc-longtime-count "：当前线程超长fullGC次数。
    * @returns { long } 系统GC统计信息，根据传入的参数，返回相应的信息。
-   * @throws { BusinessError } 401 - Possible causes:
-   *     1. Invalid parameter, a string parameter required.
-   *     2. Invalid parameter, unknown property.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
    * @since 23 static
@@ -1018,10 +1026,10 @@ declare namespace hidebug {
    *     `[85, 95]`（分配给JS堆内存上限的85%~95%）<br/>- fd类型：`[10, 10000]`<br/>- thread类型：`[1, 1000]`。超出范围会导致功能失效。
    * @param { boolean } enableDebugLog - 是否启用外部调试日志。外部调试日志请仅在灰度版本（正式版本发布之前，先向一小部分用户推出的测试版本）中启用，因为收集调试日志会占用大量的cpu资源和内存资源，
    *     可能会引起应用流畅性问题。<br/>true：启用外部调试日志。<br/>false：禁用外部调试日志。
-   * @throws { BusinessError } 401 - Invalid argument, Possible causes:
-   *     1.The limit parameter is too small
-   *     2.The parameter is not in the specified type
-   *     3.The parameter type error or parameter order error
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11400104 - Set limit failed due to remote exception
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @atomicservice

@@ -219,7 +219,7 @@ declare namespace bundleManager {
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -286,14 +286,11 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SANDBOX_CLONE = 0x00100000,
     /**
-     * 用于获取任意设备安装的应用的bundle信息。
-     * 它只在
-     * [getAllAppCloneBundleInfo]{@link bundleManager.getAllAppCloneBundleInfo}
-     * 和
-     * [getAllBundleInfo]{@link bundleManager.getAllBundleInfo}
-     * 和
+     * 用于获取任一设备模式下已安装的应用的bundleInfo。它仅在
+     * [getAllAppCloneBundleInfo]{@link bundleManager.getAllAppCloneBundleInfo}、
+     * [getAllBundleInfo]{@link bundleManager.getAllBundleInfo}和
      * [getAllBundleInfoInstances]{@link bundleManager.getAllBundleInfoInstances}
-     * API。
+     * 接口中生效。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi

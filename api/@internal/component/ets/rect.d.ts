@@ -265,8 +265,7 @@ interface RectInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod}, the
- * following attributes are supported:
+ * The [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -370,7 +369,7 @@ declare class RectAttribute extends CommonShapeMethod<RectAttribute> {
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
  * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class to update constructor parameters.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * None
  *

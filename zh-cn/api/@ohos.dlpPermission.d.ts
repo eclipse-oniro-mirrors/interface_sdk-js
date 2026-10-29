@@ -19,6 +19,7 @@
 import type { AsyncCallback, Callback } from './@ohos.base';
 import type common from './@ohos.app.ability.common';
 import type Want from './@ohos.app.ability.Want';
+import window from './@ohos.window';
 /**
  * 数据防泄露（Data Loss Prevention，简称为DLP）是系统级的数据防泄露解决方案，提供跨设备文件的权限管理、加密存储、授权访问等能力。DLP通过加密技术对敏感文件进行保护，生成.dlp格式的加密文件（称为DLP文件）。
  * 当打开DLP文件时，系统会自动创建隔离的DLP沙箱环境，确保文件内容不会泄露到非授权环境。
@@ -632,7 +633,7 @@ declare namespace dlpPermission {
      * @throws { BusinessError } 19100017 - The displayName field is missing in the want parameter.
      * @syscap SystemCapability.Security.DataLossPrevention
      * @StageModelOnly
-     * @since 26.2.0
+     * @since 26.1.0
      */
     function startDLPManagerForResult(context: common.Context, want: Want, window: window.Window): Promise<DLPManagerResult>;
     /**
@@ -796,10 +797,9 @@ declare namespace dlpPermission {
      *
      * @permission ohos.permission.ACCESS_DLP_FILE
      * @param { string } bundleName - 应用包名。最小7字节，最大128字节。超出范围时抛出错误码401。
-     * @param { number } userId - 当前的用户ID，通过账号子系统获取的系统账号ID，默认主用户ID：100。<br>取值范围为[0, 2<sup>31</sup>-1]，超出范围将被截断。当userId小于0
-     *     时，输出错误日志，函数停止运行。
-     * @param { number } appIndex - DLP沙箱号，即installDLPSandbox接口调用成功后的返回值，用于标识已安装的DLP沙箱。取值范围为[1000, 1100]。当appIndex小于0时，输出错误
-     *     日志，函数停止运行。
+     * @param { number } userId - 当前的用户ID，通过账号子系统获取的系统账号ID，默认主用户ID：100。<br>取值范围为[0, 2<sup>31</sup>-1]，超出范围将被截断。当传入参数值
+     *     小于0时，输出错误日志。
+     * @param { number } appIndex - DLP沙箱号，即installDLPSandbox接口调用成功后的返回值，用于标识已安装的DLP沙箱。取值范围为[1000, 1100]，超出范围时输出错误日志。
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -824,10 +824,9 @@ declare namespace dlpPermission {
      *
      * @permission ohos.permission.ACCESS_DLP_FILE
      * @param { string } bundleName - 应用包名。最小7字节，最大128字节。超出范围时抛出错误码401。
-     * @param { number } userId - 当前的用户ID，通过账号子系统获取的系统账号ID，默认主用户ID：100。取值范围为[0, 2<sup>31</sup>-1]，超出范围将被截断。当userId小于0
-     *     时，输出错误日志，函数停止运行。
-     * @param { number } appIndex - DLP沙箱号，即installDLPSandbox接口调用成功后的返回值，用于标识已安装的DLP沙箱。取值范围为[1000, 1100]。当appIndex小于0时，输出错误
-     *     日志，函数停止运行。
+     * @param { number } userId - 当前的用户ID，通过账号子系统获取的系统账号ID，默认主用户ID：100。取值范围为[0, 2<sup>31</sup>-1]，超出范围将被截断。当传入参数值小于0
+     *     时，输出错误日志。
+     * @param { number } appIndex - DLP沙箱号，即installDLPSandbox接口调用成功后的返回值，用于标识已安装的DLP沙箱。取值范围为[1000, 1100]，超出范围时输出错误日志。
      * @param { AsyncCallback<void> } callback - 回调函数。当卸载DLP沙箱成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -858,7 +857,7 @@ declare namespace dlpPermission {
          */
         bundleName: string;
         /**
-         * 表示DLP沙箱应用索引。
+         * 表示DLP沙箱应用索引。取值范围为[1000, 1100]，超出范围时输出错误日志。
          *
          * @syscap SystemCapability.Security.DataLossPrevention
          * @systemapi Hide this for inner system use.
@@ -1660,7 +1659,7 @@ declare namespace dlpPermission {
      * >
      * > 该接口由[MDM](docroot://mdm/mdm-kit-intro.md)配置使能，且使能场景为企业设备。其他设备（如消费者终端设备）无需关注该接口，如若调用该接口，则返回值为false。
      *
-     * @returns { Promise<boolean> } Pomise对象。返回true表示当前系统提供加密保护特性，返回false表示不提供加密保护特性。
+     * @returns { Promise<boolean> } Promise对象。返回true表示当前系统提供加密保护特性，返回false表示不提供加密保护特性。
      * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
      * @syscap SystemCapability.Security.DataLossPrevention
@@ -2030,7 +2029,7 @@ declare namespace dlpPermission {
      *     大长度为4096字节，超过最大长度返回19100001错误码。
      * @param { number } [userId] - 为其配置受控应用列表的用户ID。
      *     <br>若参数未指定，则默认使用当前用户。
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 19100001 - Invalid parameter value.
@@ -2054,8 +2053,7 @@ declare namespace dlpPermission {
      * > 设置的受企业DLP控制的应用程序列表。
      *
      * @permission ohos.permission.DLP_POLICY_MANAGER
-     * @returns { Promise<Array<string>> } Promise that returns the appIdentifiers of controlled application
-     *     for the current user.
+     * @returns { Promise<Array<string>> } Promise对象，返回当前用户受企业DLP控制的应用程序列表。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 19100011 - The system ability works abnormally.

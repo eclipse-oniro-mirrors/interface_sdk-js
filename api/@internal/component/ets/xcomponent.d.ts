@@ -491,6 +491,30 @@ declare interface NativeXComponentParameters {
 }
 
 /**
+ * Defines the extra flags for XComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum XComponentExtraFlag {
+  /**
+   * Enables the RenderService to create a solid color layer for the XComponent.
+   * The size of the solid color layer matches the XComponent's own dimensions,
+   * and the color is determined by the XComponent's backgroundColor property.
+   * If backgroundColor is not set, the default solid color is black.
+   * Once this flag is set, it cannot be updated.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  ENABLE_SOLID_COLOR = 0x01
+}
+
+/**
  * Enumerates the high dynamic range rendering types of HDR content.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -792,6 +816,21 @@ declare class XComponentAttribute extends CommonMethod<XComponentAttribute> {
   enableTransparentLayer(enabled: boolean): XComponentAttribute;
 
   /**
+   * Sets the extra flag for the XComponent.
+   * This API is intended for system shell applications only.
+   * If an invalid enum value is passed, the setting does not take effect.
+   * Once the flag is set successfully, it cannot be updated.
+   *
+   * @param { number } flag - Extra flag to set for the XComponent.
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  setExtraFlag(flag: number): XComponentAttribute;
+
+  /**
    * Sets the buffer queue count for the XComponent.
    * Only takes effect for XComponent of type SURFACE or TEXTURE.
    * If the value is greater than 5, it is clamped to 5;
@@ -806,7 +845,7 @@ declare class XComponentAttribute extends CommonMethod<XComponentAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   bufferQueueCount(count: number): XComponentAttribute;
 }

@@ -79,7 +79,7 @@ declare enum SecurityComponentRoleType {
 
 /**
  * 安全控件通用属性模块，提供安全控件的布局、尺寸、文字、图标、颜色、边框和交互等通用属性的统一配置能力。
- * - 为[PasteButton]{@link ./paste_button}、[SaveButton]{@link ./save_button}等安全控件统一设置布局、尺寸、文字、图标、颜色、边框和交互相关属性。
+ * - 为[PasteButton]{@link ./paste_button:PasteButton}、[SaveButton]{@link ./save_button:SaveButton}等安全控件统一设置布局、尺寸、文字、图标、颜色、边框和交互相关属性。
  * - 在满足安全控件规范的前提下，调整安全控件显示效果和交互体验。具体约束请参见[约束与限制](docroot://security/AccessToken/security-component-overview.md#约束与限制)。
  * - 通过链式调用方式复用安全控件通用属性能力。
  *
@@ -571,10 +571,10 @@ declare class SecurityComponentMethod<T> {
   enabled(respond: boolean): T;
 
   /**
-   * 设置在相对容器中子组件的对齐规则，仅当父容器为[RelativeContainer]{@link ./relative_container}时生效。
+   * 设置在相对容器中子组件的对齐规则，仅当父容器为[RelativeContainer]{@link ./relative_container:RelativeContainer}时生效。
    *
    * @param { AlignRuleOption } alignRule - 对齐规则配置对象，包含top、bottom、left、right、center等锚点对齐配置，
-   *      用于指定安全控件在[RelativeContainer]{@link ./relative_container}中的对齐位置和方式。
+   *      用于指定安全控件在[RelativeContainer]{@link ./relative_container:RelativeContainer}中的对齐位置和方式。
    * @returns { T } 安全控件的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -584,12 +584,12 @@ declare class SecurityComponentMethod<T> {
   alignRules(alignRule: AlignRuleOption): T;
 
   /**
-   * 设置在相对容器中子组件的对齐规则，仅当父容器为[RelativeContainer]{@link ./relative_container}时生效。
+   * 设置在相对容器中子组件的对齐规则，仅当父容器为[RelativeContainer]{@link ./relative_container:RelativeContainer}时生效。
    * 该方法水平方向上以start和end分别替代上述[alignRules]{@link SecurityComponentMethod.alignRules}的left和right，
    * 以便在RTL模式下能镜像显示，建议优先使用该方法。
    *
    * @param { LocalizedAlignRuleOptions } alignRule - 对齐规则配置对象，使用start和end替代left和right以支持RTL布局镜像。包含top、bottom、start、end、center等
-   *     锚点对齐配置，用于指定安全控件在[RelativeContainer]{@link ./relative_container}中的对齐位置和方式。
+   *     锚点对齐配置，用于指定安全控件在[RelativeContainer]{@link ./relative_container:RelativeContainer}中的对齐位置和方式。
    * @returns { T } 安全控件的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -612,9 +612,9 @@ declare class SecurityComponentMethod<T> {
   id(id: string): T;
 
   /**
-   * 设置以该组件为链头所构成的链式布局的参数（包括链的方向和样式），仅当父容器为[RelativeContainer]{@link ./relative_container}时生效。
+   * 设置以该组件为链头所构成的链式布局的参数（包括链的方向和样式），仅当父容器为[RelativeContainer]{@link ./relative_container:RelativeContainer}时生效。
    *
-   * @param { Axis } direction - 链式布局的方向，用于指定以该组件为链头的链在[RelativeContainer]{@link ./relative_container}中的排列方向。
+   * @param { Axis } direction - 链式布局的方向，用于指定以该组件为链头的链在[RelativeContainer]{@link ./relative_container:RelativeContainer}中的排列方向。
    * @param { ChainStyle } style - 链式布局的样式，用于控制链内子组件的分布方式，如均匀分布、两端对齐或紧凑排列等，具体取值及效果请参考[ChainStyle]{@link ChainStyle}。
    * @returns { T } 安全控件的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full

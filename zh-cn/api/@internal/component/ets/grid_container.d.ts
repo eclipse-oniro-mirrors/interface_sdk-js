@@ -192,7 +192,7 @@ declare class GridContainerAttribute extends ColumnAttribute {}
  * >
  * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link ./grid_col}、[GridRow]{@link ./grid_row}。
  *
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含子组件。
  *

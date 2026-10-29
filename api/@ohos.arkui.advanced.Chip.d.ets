@@ -17,6 +17,20 @@
  * The **Chip** component is used for tag display and interaction scenarios. It supports custom styles, icons, activated
  * states, and other features, and is applicable to scenarios such as search box history and email recipient lists,
  * enabling you to quickly implement tag creation, deletion, and interaction.
+ *
+ * > **NOTE**
+ * >
+ * > - If the **Chip** component has [universal attributes]{@link CommonMethod} or
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **Chip** component itself. As a result, the configured universal attributes and universal
+ * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
+ * > with the **Chip** component.
+ *
+ * ###### Child Components
+ *
+ * None
+ *
  * @file
  * @kit ArkUI
  */

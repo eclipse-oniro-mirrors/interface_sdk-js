@@ -135,8 +135,7 @@ interface PolylineInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod}, the
- * following attributes are supported:
+ * The [universal attributes]{@link CommonMethod} and [universal drawing attributes]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -176,7 +175,7 @@ declare class PolylineAttribute extends CommonShapeMethod<PolylineAttribute> {
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
  * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class since API version 20.
  *
- * ## Child Components
+ * ###### Child Components
  *
  * None
  *

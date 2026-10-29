@@ -14,6 +14,8 @@
  */
 
 /**
+ * This module provides the common basic resource types in ArkGraphics 3D.
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -21,6 +23,8 @@
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
+
+import image from '../@ohos.multimedia.image';
 import { Vec2, Vec3, Vec4, Aabb, Quaternion } from './SceneTypes';
 import { Callback } from '../@ohos.base';
 
@@ -254,7 +258,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * Draws only shadows. When the Blend property of the material is enabled,
+   * Draws only shadows. When the [Blend]{@link Blend} property of the material is enabled,
    * the material is blended with the background to simulate a transparent material effect.
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -511,7 +515,7 @@ export interface MaterialProperty {
 
   /**
    * Texture sampler, with the default value set to LINEAR for magnification, minification, and mipmaps,
-   * and to REPEAT for U, V, and W directions.
+   * and to REPEAT for U and V directions.
    *
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -1288,6 +1292,29 @@ export interface ImageStream extends Image {
    * @since 26.0.0 dynamic&static
    */
   readonly surfaceId: string;
+}
+
+/**
+ * render target object, used for offscreen rendering
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTarget extends Image {
+  /**
+   * get a pixel map object from RenderTarget
+   * 
+   * @returns { Promise<image.PixelMap> } Promise used to return a pixel map
+   * @throws { BusinessError } 25601006 - - Possible Cause:
+   *     -- try to get a PixelMap from a destroyed RenderTarget
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  getPixelMap(): Promise<image.PixelMap>;
 }
 
 /**

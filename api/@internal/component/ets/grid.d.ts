@@ -483,7 +483,7 @@ declare type OnGridScrollIndexCallback = (first: number, last: number) => void;
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
 
@@ -1167,7 +1167,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): GridAttribute;
 
@@ -1445,7 +1445,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollPlaceholder(provider?: PlaceholderProvider): GridAttribute;
 }

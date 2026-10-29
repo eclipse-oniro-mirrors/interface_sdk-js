@@ -535,10 +535,6 @@ interface ListItemInterface {
   /**
    * 创建ListItem组件。
    *
-   * > **说明：**
-   * >
-   * > 从API version 7开始支持，从API version 10开始废弃。
-   *
    * @param { string } value
    * @returns { ListItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

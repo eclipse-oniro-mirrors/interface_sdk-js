@@ -722,10 +722,10 @@ declare namespace companionDeviceAuth {
    * @param { Uint8Array } templateId - ID of the target template. Unique ID of the template whose service scope is to
    *     be updated, which can be obtained through
    *     [getTemplateStatus]{@link companionDeviceAuth.StatusMonitor.getTemplateStatus}.
-   * @param { int[] } enabledBusinessIds - ID set of services supported by the template. It indicates the list of
-   *     service scenarios to be enabled, such as [DEFAULT] and [Service ID for unlocking the screen]. Different service
-   *     IDs correspond to different authentication scenarios. You can configure the service IDs based on service
-   *     requirements.
+   * @param { int[] } enabledBusinessIds - Set of business IDs supported by the template. That is, list of business
+   *     scenarios to enable, for example, **[BusinessId.DEFAULT]**. Different business IDs correspond to different
+   *     authentication scenarios, and applications can configure them based on business requirements (vendor-defined
+   *     business IDs must be ≥ 10000).
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.

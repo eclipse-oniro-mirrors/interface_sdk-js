@@ -168,7 +168,7 @@ declare namespace uiObserver {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     ABOUT_TO_APPEAR = 10,
  
@@ -179,7 +179,7 @@ declare namespace uiObserver {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     ABOUT_TO_DISAPPEAR = 11,
 

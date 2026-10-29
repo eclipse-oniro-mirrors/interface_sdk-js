@@ -954,7 +954,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   strokeWidth(width: Optional<LengthMetrics>): TextAttribute;
 
@@ -968,7 +968,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   strokeColor(color: Optional<ResourceColor>): TextAttribute;
 
@@ -983,7 +983,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   strokeJoinStyle(strokeJoinStyle: StrokeJoinStyle | undefined): TextAttribute;
 

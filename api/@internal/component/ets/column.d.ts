@@ -195,7 +195,7 @@ interface ColumnInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  * 
  * The [universal events]{@link CommonMethod} are supported.
  *
@@ -296,7 +296,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
  * > If no height or width is set for the **Column** component, it adapts to the size of child components in the main
  * > axis (vertical direction) or cross axis (horizontal direction).
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Supported
  *

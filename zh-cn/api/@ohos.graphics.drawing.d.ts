@@ -8016,7 +8016,7 @@ declare namespace drawing {
   }
 
   /**
-   * 定义精灵图序列帧动画的插值模式。
+   * 精灵图集序列帧动画的插值模式枚举。
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -8025,7 +8025,7 @@ declare namespace drawing {
    */
   enum AtlasInterpolationMode {
     /**
-     * 无插值。每一帧作为独立步骤单独显示。
+     * 无插值。每帧独立显示。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -8045,7 +8045,7 @@ declare namespace drawing {
   }
 
   /**
-   * 定义精灵图序列帧动画的图集帧参数。
+   * 定义精灵图集序列帧动画的图集帧参数。
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -8055,7 +8055,6 @@ declare namespace drawing {
   interface AtlasImage {
     /**
      * 精灵图集图片。
-     * 通过image模块创建，为PixelMap实例。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -8095,7 +8094,7 @@ declare namespace drawing {
     cols: int;
 
     /**
-     * 单帧的宽度。
+     * 单帧的宽度，单位为px。
      * 取值范围为[1, 8192]，超出范围的值将在内部被截断。
      *
      * @syscap SystemCapability.Graphics.Drawing
@@ -8106,7 +8105,7 @@ declare namespace drawing {
     frameWidth: double;
 
     /**
-     * 单帧的高度。
+     * 单帧的高度，单位为px。
      * 取值范围为[1, 8192]，超出范围的值将在内部被截断。
      *
      * @syscap SystemCapability.Graphics.Drawing
@@ -8117,7 +8116,7 @@ declare namespace drawing {
     frameHeight: double;
 
     /**
-     * 帧之间的间距，用于防止帧边界处的纹理渗透。
+     * 帧之间的间距，单位为px，用于防止帧边界处的纹理渗透。
      * 取值范围为[0, 64]，超出范围的值将在内部被截断。
      *
      * @syscap SystemCapability.Graphics.Drawing

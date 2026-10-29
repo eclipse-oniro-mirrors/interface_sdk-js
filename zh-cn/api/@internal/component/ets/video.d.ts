@@ -774,9 +774,9 @@ interface VideoInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
- * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

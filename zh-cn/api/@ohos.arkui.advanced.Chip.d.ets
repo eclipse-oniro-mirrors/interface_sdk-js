@@ -21,6 +21,11 @@
  * > - 如果Chip设置[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}，
  * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Chip本身。
  * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Chip设置通用属性和通用事件。
+ *
+ * ###### 子组件
+ *
+ * 无
+ *
  * @file
  * @kit ArkUI
  */
@@ -1244,10 +1249,6 @@ export interface ChipOptions {
 
 /**
  * 创建Chip组件。
- *
- * ## 子组件
- *
- * 无
  *
  * @param { ChipOptions } options - 定义Chip组件的参数，包括尺寸、启用状态、激活态、前缀/后缀图标、文本内容、背景颜色、圆角、无障碍属性等，用于自定义Chip组件的样式和行为。
  * @syscap SystemCapability.ArkUI.ArkUI.Full

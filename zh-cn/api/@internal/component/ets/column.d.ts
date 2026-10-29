@@ -168,7 +168,7 @@ interface ColumnInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 支持[通用事件]{@link CommonMethod}。
  *
@@ -244,7 +244,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
  * >
  * > Column未设置高度或宽度时，在主轴（垂直方向）或交叉轴（水平方向）方向上自适应子组件大小。
  *
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含子组件。
  *

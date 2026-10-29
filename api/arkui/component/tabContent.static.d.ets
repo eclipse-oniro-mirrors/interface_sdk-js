@@ -100,7 +100,7 @@ export declare enum LayoutMode {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.0.1 static
  */
 export declare enum TabVisibility {
  
@@ -109,7 +109,7 @@ export declare enum TabVisibility {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   VISIBLE = 0,
  
@@ -118,7 +118,7 @@ export declare enum TabVisibility {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   HIDDEN = 1
 }
@@ -451,7 +451,7 @@ export declare class TabBarSymbol {
  * @unionmember { ResourceStr }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
 export type TabBarBadgeType = int | ResourceStr;
 
@@ -460,7 +460,7 @@ export type TabBarBadgeType = int | ResourceStr;
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
 export declare interface TabBarBadgeStyle {
 
@@ -469,7 +469,7 @@ export declare interface TabBarBadgeStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   value?: TabBarBadgeType;
 
@@ -479,7 +479,7 @@ export declare interface TabBarBadgeStyle {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   maxCount?: int;
 }
@@ -524,7 +524,7 @@ export declare interface TabBarOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   badge?: TabBarBadgeStyle;
 }
@@ -795,7 +795,7 @@ export declare class BottomTabBarStyle {
    * @returns { BottomTabBarStyle } the style of the bottom tab bar.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   badge(badgeStyle:TabBarBadgeStyle): BottomTabBarStyle;
 }
@@ -902,7 +902,7 @@ export declare interface TabContentAttribute extends CommonMethod {
    * @returns { TabContentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.0.1 static
    */
   default tabBarVisibility(visibility: TabVisibility, displayMode: TabBarDisplayMode | undefined): this;
 }

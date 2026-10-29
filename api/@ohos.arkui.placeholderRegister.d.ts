@@ -26,7 +26,7 @@
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 export interface PlaceholderOptions {
   /**
@@ -39,7 +39,7 @@ export interface PlaceholderOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   id?: string;
 
@@ -52,7 +52,7 @@ export interface PlaceholderOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   size?: SizeOptions;
 }
@@ -71,7 +71,7 @@ export interface PlaceholderOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 export type PlaceholderProvider = (index: number) => PlaceholderOptions | undefined;
 
@@ -86,7 +86,7 @@ export type PlaceholderProvider = (index: number) => PlaceholderOptions | undefi
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 export class PlaceholderRegister {
   /**
@@ -115,7 +115,7 @@ export class PlaceholderRegister {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   register(id: string, builder: WrappedBuilder<[]>): void;
 
@@ -132,7 +132,7 @@ export class PlaceholderRegister {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   unregister(id: string): void;
 
@@ -149,7 +149,7 @@ export class PlaceholderRegister {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isRegistered(id: string): boolean;
 }

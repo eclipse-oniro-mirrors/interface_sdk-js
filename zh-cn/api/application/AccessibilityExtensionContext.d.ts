@@ -918,6 +918,24 @@ export declare interface AccessibilityElement {
    */
   screenRect?: Rect;
   /**
+   * 窗口在X轴方向上的缩放比例。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  windowScaleX?: double;
+  /**
+   * 窗口在Y轴方向上的缩放比例。
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  windowScaleY?: double;
+  /**
    * 元素是否可滚动。true表示元素可滚动，false表示不可滚动。当与accessibilityScrollable取值冲突时，以accessibilityScrollable为准。
    * 
    * 默认值：false。
@@ -1080,7 +1098,7 @@ export declare interface AccessibilityElement {
    */
   hotArea?: Rect;
   /**
-   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType}类型所对应。
+   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link @global:AccessibilityRoleType}类型所对应。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
@@ -2187,7 +2205,7 @@ export interface ElementAttributeValues {
    */
   hotArea: Rect;
   /**
-   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType}类型对应。默认值为空。
+   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link @global:AccessibilityRoleType}类型对应。默认值为空。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @since 18 dynamiconly

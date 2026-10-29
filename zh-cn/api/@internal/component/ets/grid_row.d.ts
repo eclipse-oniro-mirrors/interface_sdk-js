@@ -540,9 +540,9 @@ interface GridRowInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
- * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -599,7 +599,7 @@ declare class GridRowAttribute extends CommonMethod<GridRowAttribute> {
  * 
  * 支持根据设备尺寸和断点动态调整列数与间距，实现响应式布局。
  *
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含GridCol子组件。
  *

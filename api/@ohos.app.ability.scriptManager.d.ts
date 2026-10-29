@@ -68,7 +68,7 @@ declare namespace scriptManager {
    * @systemapi
    * @stagemodelonly
    * @atomicservice
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   readonly toolCallId?: string;
 

@@ -117,7 +117,7 @@ interface RowInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 支持[通用事件]{@link CommonMethod}。
  *
@@ -194,7 +194,7 @@ declare class RowAttribute extends CommonMethod<RowAttribute> {
  * >
  * > Row未设置宽度或高度时，在主轴或交叉轴方向上自适应子组件大小。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含子组件。
  *

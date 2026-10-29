@@ -48,7 +48,7 @@ interface DividerInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * The [universal events]{@link CommonMethod} are supported.
  *
@@ -149,7 +149,7 @@ declare class DividerAttribute extends CommonMethod<DividerAttribute> {
  * > If the divider appears with inconsistent thickness or becomes invisible, follow the instructions in
  * > [FAQs](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-pixelRoundForComponent.md#faqs).
  *
- * ## Child Components
+ * ###### Child Components
  *
  * Not supported
  *

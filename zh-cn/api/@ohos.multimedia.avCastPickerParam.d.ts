@@ -59,7 +59,7 @@ export declare enum AVCastPickerState {
  */
 export declare enum AVCastPickerStyle {
   /**
-   * The picker shows in a panel style.
+   * 面板样式。
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 12 dynamic
@@ -68,7 +68,7 @@ export declare enum AVCastPickerStyle {
   STYLE_PANEL = 0,
 
   /**
-   * The picker shows in a menu style.
+   * 菜单样式。
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 12 dynamic
@@ -88,7 +88,8 @@ export declare enum AVCastPickerStyle {
  */
 export declare enum AVCastPickerColorMode {
   /**
-   * Auto mode which follows the definition of system.
+   * 跟随系统模式。
+   *
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 12 dynamic
@@ -97,7 +98,8 @@ export declare enum AVCastPickerColorMode {
   AUTO = 0,
 
   /**
-   * Dark mode.
+   * 深色模式。
+   *
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 12 dynamic
@@ -106,7 +108,8 @@ export declare enum AVCastPickerColorMode {
   DARK = 1,
 
   /**
-   * Light mode.
+   * 浅色模式。
+   *
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 12 dynamic

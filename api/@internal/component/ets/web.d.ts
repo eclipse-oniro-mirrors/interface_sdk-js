@@ -1662,7 +1662,7 @@ type OnContextMenuHideCallback = () => void;
  *     <br>Default value: See the default value of options.
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
 
@@ -1671,7 +1671,7 @@ type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: 
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum WebContextMenuItemId {
   /**
@@ -1679,7 +1679,7 @@ declare enum WebContextMenuItemId {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   MENU_COPY_LINK = 11
 }
@@ -1689,7 +1689,7 @@ declare enum WebContextMenuItemId {
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface WebContextMenuOptions {
   /**
@@ -1698,7 +1698,7 @@ declare interface WebContextMenuOptions {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enable?: boolean;
 }
@@ -1880,6 +1880,15 @@ declare enum RenderProcessNotRespondingReason {
  *
  * For sample code, see [onShowFileSelector]{@link WebAttribute#onShowFileSelector}.
  *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this component are supported since API version 8.
+ * >  Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The initial APIs of this class are supported since API version 9.
+ * >
+ * > - The sample effect is subject to the actual device.
+ *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 11]
  * @atomicservice [since 11]
@@ -1921,6 +1930,14 @@ declare class FileSelectorParam {
 
   /**
    * Obtains the file filtering type.
+   *
+   * > **NOTE**
+   * >
+   * > Correspondence with getMimeTypes and getAcceptableFileTypes: getAcceptType and getMimeTypes correspond to the
+   * > accept attribute of the HTML input tag, and getAcceptableFileTypes corresponds to the types attribute of the
+   * > options parameter of the HTML showOpenFilePicker, showDirectoryPicker, and showSaveFilePicker interfaces.
+   * > According to HTML specifications, the accept attribute and the types attribute are mutually exclusive and should
+   * > not be used at the same time.
    *
    * @returns { Array<string> } Array of file filter types, containing type information used to limit the selectable
    *     file range in the file selector. The elements are extensions (such as '.png'), corresponding to the HTML accept
@@ -3259,7 +3276,7 @@ declare class WebContextMenuParam {
    *     a Text Fragment link; **false** otherwise.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   shouldOfferLinkToText(): boolean;
 
@@ -3278,7 +3295,7 @@ declare class WebContextMenuParam {
    *     does not support link generation, an empty string is returned.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getTextFragmentGeneratedLink(): string;
 
@@ -3294,7 +3311,7 @@ declare class WebContextMenuParam {
    *     **false** otherwise.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isOverTextFragment(): boolean;
 }
@@ -3416,6 +3433,13 @@ declare class WebContextMenuResult {
   /**
    * Performs the redo operation, which re-executes the revoked operation.
    *
+   * **Coordination**
+   *
+   * - Used together with the undo() method. After undo() is called, redo() can be used to re-execute the revoked
+   *   operation.
+   *
+   * - If the user has not performed an undo operation, the redo() method cannot be used.
+   *
    * > **NOTE**
    * >
    * > After the operation is complete, [closeContextMenu]{@link WebContextMenuResult#closeContextMenu} should be called
@@ -3428,6 +3452,13 @@ declare class WebContextMenuResult {
 
   /**
    * Performs the undo operation, which undoes the last editing operation.
+   *
+   * **Coordination**
+   *
+   * - Used together with the redo() method. After undo() is called, redo() can be used to re-execute the revoked
+   *   operation.
+   *
+   * - If the user has not performed an undo operation, the redo() method cannot be used.
    *
    * > **NOTE**
    * >
@@ -3503,7 +3534,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   copyLinkToTextMenu(): void;
 
@@ -3522,7 +3553,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   removeFragments(): void;
 }
@@ -4764,6 +4795,13 @@ declare interface IntelligentTrackingPreventionDetails {
 interface WebInterface {
   /**
    * Sets Value.
+   *
+   * > **NOTE**
+   * >
+   * > - Transition animation is not supported.
+   * >
+   * > - To ensure the independence and performance isolation of Web components, multiple Web components on the same
+   *     page must be bound to different WebviewController instances.
    *
    * @param { WebOptions } value - Define web options.
    * @returns { WebAttribute }
@@ -7318,8 +7356,49 @@ declare enum WebKeyboardAppearanceMode {
 }
 
 /**
- * Defines the Web attribute functions.
- * 
+ * The supported universal attributes include [aspectRatio]{@link CommonMethod#aspectRatio},
+ * [backdropBlur]{@link CommonMethod#backdropBlur}, [backgroundColor]{@link CommonMethod#backgroundColor},
+ * [bindContentCover]{@link CommonMethod#bindContentCover}, [bindContextMenu]{@link CommonMethod#bindContextMenu},
+ * [bindMenu]{@link CommonMethod#bindMenu}, [bindSheet]{@link CommonMethod#bindSheet},
+ * [borderColor]{@link CommonMethod#borderColor}, [borderRadius]{@link CommonMethod#borderRadius},
+ * [borderStyle]{@link CommonMethod#borderStyle}, [borderWidth]{@link CommonMethod#borderWidth},
+ * [clip]{@link CommonMethod#clip}, [constraintSize]{@link CommonMethod#constraintSize},
+ * [defaultFocus]{@link CommonMethod#defaultFocus}, [focusable]{@link CommonMethod#focusable},
+ * [tabIndex]{@link CommonMethod#tabIndex}, [groupDefaultFocus]{@link CommonMethod#groupDefaultFocus},
+ * [displayPriority]{@link CommonMethod#displayPriority}, [enabled]{@link CommonMethod#enabled},
+ * [flexBasis]{@link CommonMethod#flexBasis}, [flexShrink]{@link CommonMethod#flexShrink},
+ * [layoutWeight]{@link CommonMethod#layoutWeight}, [id]{@link CommonMethod#id},
+ * [gridOffset]{@link CommonMethod#gridOffset}, [gridSpan]{@link CommonMethod#gridSpan},
+ * [useSizeType]{@link CommonMethod#useSizeType}, [height]{@link CommonMethod#height},
+ * [touchable]{@link CommonMethod#touchable}, [margin]{@link CommonMethod#margin},
+ * [markAnchor]{@link CommonMethod#markAnchor}, [offset]{@link CommonMethod#offset},
+ * [width]{@link CommonMethod#width}, [zIndex]{@link CommonMethod#zIndex},
+ * [visibility]{@link CommonMethod#visibility}, [scale]{@link CommonMethod#scale},
+ * [translate]{@link CommonMethod#translate}, [responseRegion]{@link CommonMethod#responseRegion},
+ * [size]{@link CommonMethod#size}, [opacity]{@link CommonMethod#opacity},
+ * [shadow]{@link CommonMethod#shadow}, [sharedTransition]{@link CommonMethod#sharedTransition},
+ * [transition]{@link CommonMethod#transition}, [position]{@link CommonMethod#position}, and
+ * [direction]{@link CommonMethod#direction}.
+ *
+ * The following universal events are supported: [onAppear]{@link CommonMethod#onAppear},
+ * [onDisAppear]{@link CommonMethod#onDisAppear}, [onBlur]{@link CommonMethod#onBlur},
+ * [onFocus]{@link CommonMethod#onFocus}, [onDragEnd]{@link CommonMethod#onDragEnd},
+ * [onDragEnter]{@link CommonMethod#onDragEnter}, [onDragStart]{@link CommonMethod#onDragStart},
+ * [onDragMove]{@link CommonMethod#onDragMove}, [onDragLeave]{@link CommonMethod#onDragLeave},
+ * [onDrop]{@link CommonMethod#onDrop}, [onHover]{@link CommonMethod#onHover}, [onMouse]{@link CommonMethod#onMouse},
+ * [onKeyEvent]{@link CommonMethod#onKeyEvent}, [onTouch]{@link CommonMethod#onTouch},
+ * [onVisibleAreaChange]{@link CommonMethod#onVisibleAreaChange}.
+ *
+ * ## Overview
+ *
+ * Web component attributes are used to configure the web page loading behavior, security policies, runtime environment,
+ * and interaction capabilities of the **Web** component through chain calls in the ArkUI declarative syntax. They serve
+ * as the primary entry point for customizing **Web** component behavior. For general style and layout attributes (such
+ * as size, margin, background, and visibility), see [Size Settings]{@link CommonMethod}. This chapter describes only
+ * attributes specific to the **Web** component. For runtime dynamic control capabilities (such as loading URLs,
+ * navigating forward/backward, registering/unregistering JS objects, running JavaScript, and injecting CSS), use them
+ * together with [WebviewController]{@link @ohos.web.webview:webview.WebviewController}.
+ *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
  * @atomicservice [since 11]
@@ -8351,7 +8430,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute } Returns the WebAttribute object to support chained calls.
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
@@ -9257,8 +9336,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > - You can set the up, down, left, and right directions, or set the forward and backward nested scrolling modes to
    * > implement scrolling linkage with the parent component.
    * >
-   * > - Containers that support nested scrolling: [Grid]{@link ./grid}, [List]{@link ./list}, [Scroll]{@link ./scroll},
-   * > [Swiper]{@link ./swiper}, [Tabs]{@link ./tabs}, [WaterFlow]{@link ./water_flow}, [Refresh]{@link ./refresh} and
+   * > - Containers that support nested scrolling: [Grid]{@link Grid}, [List]{@link List}, [Scroll]{@link Scroll},
+   * > [Swiper]{@link Swiper}, [Tabs]{@link Tabs}, [WaterFlow]{@link WaterFlow}, [Refresh]{@link Refresh} and
    * > [bindSheet]{@link CommonMethod#bindSheet}.
    * >
    * > - Input sources that support nested scrolling: gestures, mouse device, and touchpad.
@@ -9542,7 +9621,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { Array<ExpandedMenuItemOptions> } expandedMenuOptions - Extended options of the custom context menu on
    *     selection.
    *     <br>The number of menu options, menu content size, and start icon size must be the same as those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @since 12 dynamiconly
@@ -9644,7 +9723,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *
    * @param { EditMenuOptions } editMenu - Custom text menu options for the Web component.
    *     <br>The number of menu items, the content size, and the icon size are consistent with those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    *     <br>Among the system-provided ID enum values ([TextMenuItemId]{@link TextMenuItemId}) in the menu, only CUT,
    *     COPY, PASTE, SELECT_ALL, TRANSLATE, SEARCH, and AI_WRITER are supported in the Web component.
    *     <br>In the onMenuItemClick function, the textRange parameter is meaningless in the Web component, and the value
@@ -10011,6 +10090,11 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   /**
    * Registers a callback for blank screen monitoring attribution. The callback is triggered when the Web component
    * monitors a blank screen and completes root cause attribution.
+   *
+   * > **NOTE**
+   * >
+   * > - This method must be used with [enableBlankScreenMonitor]{@link WebAttribute#enableBlankScreenMonitor}.
+   * > Otherwise, the blank screen monitor is disabled by default, and this callback is not triggered.
    *
    * @param { OnMonitorBlankScreenCallback } callback - Callback for blank screen monitoring attribution.
    * @returns { WebAttribute }
@@ -10422,7 +10506,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   caretColor(value: ResourceColor): WebAttribute;
 
@@ -10436,31 +10520,29 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
 
   /**
    * Sets the maximum fling speed for the Web component.
    *
-   * The value configured through this TypeScript API takes precedence over values configured through other APIs.
+   * The value configured through this TypeScript API takes precedence over the front-end viewport max-fling-speed-x/y.
    *
-   * @param { number } speedLimit - Maximum fling speed, in vp/s. If the value is less than or equal to 0,
-   *     {@code NaN}, {@code +Infinity}, or {@code -Infinity}, the default value is used: 9000 vp/s on PCs and
-   *     17000 vp/s on non-PC devices.
+   * @param { number } speedLimit - Maximum fling speed, in vp/s.
+   *     If a value outside this range is passed, the default value is used:
+   *     9000 vp/s on PCs and 17000 vp/s on non-PC devices.
+   *     <br>Value range: (0, +∞).
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
 }
 
 /**
  * Defines Web Component.
- * 
- * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
- * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
  *
  * <p><strong>API Note</strong>:
  *
@@ -10470,6 +10552,15 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
  * <p>When the white screen duration is long due to complex web page parsing,
  * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
  * </p>
+ *
+ * ## Required Permissions
+ *
+ * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+ * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
+ *
+ * ## Child Components
+ *
+ * Not supported
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -10742,7 +10833,7 @@ declare interface EmbedOptions {
    * @default false
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   supportTransformRotateAndSkew?: boolean;
 }
@@ -11211,7 +11302,7 @@ type OnAISessionCallback = (state: AISessionResultType, content: string) => void
  * @param { OnZoomChangeEvent } zoomChangeInfo - Details about the browser zoom factor change.
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
 
@@ -11220,7 +11311,7 @@ type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface OnZoomChangeEvent {
   /**
@@ -11228,7 +11319,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   oldZoomFactor: number;
 
@@ -11237,7 +11328,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
 }
