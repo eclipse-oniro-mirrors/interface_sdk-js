@@ -9402,7 +9402,7 @@ declare namespace relationalStore {
    * Currently, **getRdbStore()** does not support multi-thread concurrent operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @param { AsyncCallback<RdbStore> } callback - Callback invoked to return the RDB store obtained.
@@ -9449,7 +9449,7 @@ declare namespace relationalStore {
    * Currently, **getRdbStore()** does not support multi-thread concurrent operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @returns { Promise<RdbStore> } Promise used to return the **RdbStore** object.
@@ -9516,7 +9516,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the RDB store to delete.
    * @param { AsyncCallback<void> } callback - Callback invoked to return the result.
@@ -9544,7 +9544,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @param { AsyncCallback<void> } callback - Callback invoked to return the result.
@@ -9573,7 +9573,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the RDB store to delete.
    * @returns { Promise<void> } Promise that returns no value.
@@ -9601,7 +9601,7 @@ declare namespace relationalStore {
    * closed.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @returns { Promise<void> } Promise that returns no value.
