@@ -3733,7 +3733,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     reportPlaybackCaptureUserAllowed(streamId: long, allowed: boolean): Promise<void>;
   }
