@@ -13831,20 +13831,6 @@ declare namespace photoAccessHelper {
      * @since 26.1.0 dynamic&static
      */
     setTitleByFile(name: string): void;
-
-    /**
-     * Set recentShow state of the asset.
-     *
-     * @param { boolean } isRencentShow - the new recentShow state of the asset
-     * @throws { BusinessError } 202 - Called by non-system application
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - System inner fail
-     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @since 18 dynamic
-     */
-    setIsRecentShow(isRencentShow: boolean): void;
   }
 
   /**
