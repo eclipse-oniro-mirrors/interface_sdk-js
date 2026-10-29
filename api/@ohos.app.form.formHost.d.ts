@@ -1825,6 +1825,7 @@ declare namespace formHost {
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
