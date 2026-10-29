@@ -19,6 +19,7 @@ import shutil
 import optparse
 import json
 from pathlib import Path
+from sdk_copy_dependencies import record
 
 
 def copy_files(options):
@@ -90,6 +91,7 @@ def parse_args(args):
     parser.add_option('--ispublic', help='whether or not sdk build public')
     parser.add_option('--name', help='module label name')
     parser.add_option('--output', help='output path')
+    parser.add_option('--depfile')
     options, _ = parser.parse_args(args)
     options.input = os.path.realpath(options.input)
     return options
@@ -106,6 +108,7 @@ def main(argv):
 
     # 更新输出文件夹的修改时间，防止后续编译工具误认为文件未修改而跳过编译
     os.utime(options.output)
+    record(options.depfile, options.output, [options.input, options.remove] + result)
     return 0
 
 
