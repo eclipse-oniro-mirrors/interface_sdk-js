@@ -59,10 +59,10 @@ declare namespace http {
   /**
    * 创建一个HTTP请求，里面包括发起请求、中断请求、订阅/取消订阅HTTP Response Header事件。当发起多个HTTP请求时，需为每个HTTP请求创建对应HttpRequest对象。每一个HttpRequest对象对应一
    * 个HTTP请求。
-   * 
+   *
    * > **说明：**
    * >
-   * > 当该请求使用完毕时，需调用destroy方法释放资源，否则会出现内存泄露问题。
+   * > 当该请求使用完毕时，需调用destroy方法释放资源，否则会出现内存泄漏问题。
    *
    * @returns { HttpRequest } 返回一个HttpRequest对象，里面包括request、requestInStream、requestSync、enableAutoCookie、destroy、on和off方
    *     法。
@@ -97,26 +97,26 @@ declare namespace http {
 
     /**
      * 发送请求的额外数据，默认无此字段。自API version 26开始，建议优先使用body和queryParams字段。
-     * 
+     *
      * **说明：** 没有额外数据时，避免添加该参数；若必须添加，请填写undefined或者null，避免直接传入"。
-     * 
+     *
      * 1. 当HTTP请求为POST、PUT、DELETE等方法时，此字段为HTTP请求的content，以UTF-8编码形式作为请求体。
-     * 
+     *
      * 示例如下：
-     * 
+     *
      * (1) 当'content-Type'为'application/x-www-form-urlencoded'时，请求提交的信息主体数据必须在key和value进行URL转码后（encodeURIComponent/
      * encodeURI），按照键值对"key1=value1&key2=value2&key3=value3"的方式进行编码，该字段对应的类型通常为String。
-     * 
+     *
      * (2) 当'content-Type'为'text/xml'时，该字段对应的类型通常为String。
-     * 
+     *
      * (3) 当'content-Type'为'application/json'时，该字段对应的类型通常为Object。
-     * 
+     *
      * (4) 当'content-Type'为'application/octet-stream'时，该字段对应的类型通常为ArrayBuffer。
-     * 
+     *
      * (5) 当'content-Type'为'multipart/form-data'且需上传的字段为文件时，该字段对应的类型通常为ArrayBuffer。
-     * 
+     *
      * 以上信息仅供参考，并可能根据具体情况有所不同。
-     * 
+     *
      * 2. 当HTTP请求为GET、OPTIONS、TRACE、CONNECT等方法时，此字段为HTTP请求参数的补充。开发者需传入Encode编码后的string类型参数，Object类型的参数无需预编码，参数内容会拼接到URL中进行发送。ArrayBuffer类型的参数不会做拼接处理。
      *
      * @type {?string | Object | ArrayBuffer} [since 6 - 10]
@@ -128,6 +128,15 @@ declare namespace http {
      * @since 23 static
      */
     extraData?: string | Object | ArrayBuffer;
+
+    /**
+     * Additional data of the request.
+     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    extraData?: string | RecordData | ArrayBuffer;
 
     /**
      * 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。当指定其类型为Object时，最大长度为65536字符数。
@@ -163,11 +172,11 @@ declare namespace http {
     priority?: int;
 
     /**
-     * HTTP请求头字段。当请求方式为"POST" "PUT" "DELETE" 或者""时，默认{'content-Type': 'application/json'}， 否则默认{'content-Type': '
+     * HTTP请求头字段。当请求方式为"POST"、"PUT"、"DELETE"或者""时，默认{'content-Type': 'application/json'}， 否则默认{'content-Type': '
      * application/x-www-form-urlencoded'}。
-     * 
-     * 如果head中包含number类型的字段，最大支持int64的整数。
-     * 
+     *
+     * 如果header中包含number类型的字段，最大支持int64的整数。
+     *
      * header字段支持JSON格式如 [完整示例](docroot://reference/apis-network-kit/js-apis-http.md#完整示例) 和Record<string, string>格式输入。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -179,8 +188,17 @@ declare namespace http {
     header?: Object;
 
     /**
+     * HTTP request header. default is 'content-type': 'application/json'
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @FaAndStageModel
+     * @since 26.0.1 static
+     */
+    header?: Record<string, string>;
+
+    /**
      * 读取超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。
-     * 
+     *
      * 设置为0表示不会出现超时情况。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -216,7 +234,7 @@ declare namespace http {
 
     /**
      * HTTP代理配置，该项不配置时默认使用系统代理。
-     * 
+     *
      * - 当usingProxy为布尔类型true时，使用默认网络代理，为false时，不使用代理。
      * - 当usingProxy为HttpProxy类型时，使用指定网络代理。从API version 22开始，HttpProxy支持指定username和password字段。
      * - 从API version 26.0.0开始，当usingSocks5Proxy被正确配置时，usingProxy项不生效。
@@ -234,7 +252,7 @@ declare namespace http {
     /**
      * 如果设置了此参数且证书有效，系统将使用用户指定的CA证书和系统预设的CA证书；否则仅使用系统预设的CA证书。CA证书路径为沙箱映射路径（开发者可通过
      * [UIAbilityContext]{@link @ohos.app.ability.common:common.UIAbilityContext}提供的能力获取应用沙箱路径）。目前仅支持后缀名为.pem的文本格式证书。
-     * 
+     *
      * 系统预设CA证书位置：/etc/ssl/certs/cacert.pem。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -342,7 +360,7 @@ declare namespace http {
 
     /**
      * 响应消息的最大字节限制。
-     * 
+     *
      * 默认值为5*1024*1024，以Byte为单位。最大值为100*1024*1024，以Byte为单位。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -457,7 +475,7 @@ declare namespace http {
 
     /**
      * HTTP请求是否复用连接。默认值为true，表示复用已有的连接；设置为false时，每次请求将建立新的连接，不再复用已有连接。本字段可与inactivityMs字段搭配使用，自定义连接超时关闭时间。
-     * 
+     *
      * - 连接复用是指在完成一次HTTP请求后，底层的TCP连接不会被立即关闭，而是保持在连接池中，后续的HTTP请求如果目标地址相同，可以重用该连接，从而减少TCP握手和TLS握手的开销，提高性能。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -469,7 +487,7 @@ declare namespace http {
 
     /**
      * 连接池中的连接最大空闲时间，超过该时间后连接将被关闭。单位为毫秒（ms），默认配置值为118秒。系统内部比较时间时会先计算连接空闲时间的差值，然后向下取整到秒，再与配置的值进行比较。
-     * 
+     *
      * - 取值范围是(0, 2147483647]，传入小于等于0的数值时系统使用默认值118秒。当reuseConnections配置为false时，该参数不生效。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -481,7 +499,7 @@ declare namespace http {
 
     /**
      * SOCKS5代理配置，该项不配置时不启动SOCKS5代理。
-     * 
+     *
      * 当该项被正确配置时，如果同时配置了usingProxy，usingProxy不生效。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -504,7 +522,7 @@ declare namespace http {
 
     /**
      * 附加到URL中的请求参数。
-     * 
+     *
      * - 支持string和QueryParamObject两种形式：string会按原样拼接到URL（不重复编码）；QueryParamObject会由系统自动编码并序列化。
      * - 使用string时不需要携带前导`?`，多个参数用`&`分隔。
      * - 当queryParams与extraData同时配置时，queryParams优先，extraData中的URL参数补充逻辑会被忽略。
@@ -519,7 +537,7 @@ declare namespace http {
 
     /**
      * HTTP请求体内容。设置该字段后，框架会优先将该字段作为请求体发送。
-     * 
+     *
      * - 支持string、Object、ArrayBuffer三种类型：string按原值发送，Object会序列化后发送，ArrayBuffer按二进制发送。
      * - 当body与extraData同时配置时，body优先，extraData会被忽略。
      * - 可与任意请求方法搭配使用，用于显式指定请求体。
@@ -531,6 +549,84 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
+
+    /**
+     * 跟踪301/302/303重定向响应时，是否将POST方法转换为GET方法。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    followRedirectPostToGet?: boolean;
+
+    /**
+     * SSL服务器主机名验证所需的主机名。
+     * sslServerHostnameVerify的默认值为true。当sslServerHostnameVerify配置为false时，域名
+     * 已禁用验证。
+     * 该场景下，使用IP地址连接时，忽略证书域名校验。
+     * 默认值：真实的。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    sslServerHostnameVerification?: boolean;
+
+    /**
+     * 是否启用证书吊销状态校验。
+     * 默认值：false。
+     * <br>true:TLS握手时进行证书吊销检查。使用OCSP或CRL检查
+     * 检查证书是否被吊销。如果检查不通过，则终止TLS连接。
+     * false：不进行证书吊销检查。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    enableCertRevocationCheck?: boolean;
+
+    /**
+     * 低限速阈值（单位：字节/秒）。
+     * 如果传输速度低于该值的时间超过lowSpeedTime，
+     * 转移就会中止。
+     * 取值限定为整数。
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    lowSpeedLimit?: int;
+
+    /**
+     * 低速持续时间阈值，单位为毫秒。
+     * 如果传输速度低于lowSpeedLimit的时间超过该值，
+     * 转移就会中止。
+     * 取值限定为整数。
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    lowSpeedTime?: int;
+
+    /**
+     * Use specific network to send this HTTP request and receive the correponding response.
+     * Activate the target network and create the netHandle in advace.
+     * @type { ?connection.NetHandle }
+     * @syscap SystemCapability.Communication.NetStack
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 22 static
+     */
+    netHandler?: connection.NetHandle;
   }
 
   /**
@@ -575,7 +671,7 @@ declare namespace http {
   export type TlsOptions = 'system' | TlsConfig;
 
   /**
-   * X509证书
+   * X509证书对象。
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
@@ -584,7 +680,7 @@ declare namespace http {
   export type X509Cert = cert.X509Cert;
 
   /**
-   * {@link ValidationCallback}的验证上下文
+   * 验证远端服务器身份时的证书上下文信息，作为{@link ValidationCallback}的参数传入。
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
@@ -592,7 +688,7 @@ declare namespace http {
    */
   export interface ValidationContext {
     /**
-     * 证书的PEM格式的原始数据
+     * PEM格式的证书原始数据。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -601,7 +697,7 @@ declare namespace http {
     pemCerts: string[];
 
     /**
-     * X509证书链
+     * X509证书链。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -610,7 +706,7 @@ declare namespace http {
     x509Certs: X509Cert[];
 
     /**
-     * 此请求的主机
+     * 本次请求的目标主机名。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -619,7 +715,7 @@ declare namespace http {
     host: string;
 
     /**
-     * 此请求连接到的真实IP
+     * 本次请求实际连接的IP地址。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -632,7 +728,8 @@ declare namespace http {
    * 自定义远程验证。
    * 该API使用Promise异步返回结果。
    *
-   * @param { ValidationContext } context - Certificate context.
+   * @param { ValidationContext } context - Certificate verification context, which contains information such as the
+   *     certificate chain, host name, and IP address.
    * @returns { boolean | Promise<boolean> } Returns a boolean value indicating whether the validation is successful.
    *     Promise used to return the result. The value true indicates valid, and false indicates invalid.
    * @syscap SystemCapability.Communication.NetStack
@@ -670,24 +767,23 @@ declare namespace http {
   /**
    * 安全通信协议。
    *
-   * @unionmember { 'TLS' } TLS protocol. The value is fixed to **TLS**.
-   * @unionmember { 'TLCP' } TLCP protocol. The value is fixed to **TLCP**.
-   *     <br>**NOTE**
-   *     <br>(1) The certificate supports the following string specifications:
-   *     <br> - UTF8String (English character set)
+   * @unionmember { 'TLS' } 表示使用TLS安全通信协议，值固定为'TLS'字符串。
+   * @unionmember { 'TLCP' } 表示使用TLCP安全通信协议，值固定为'TLCP'字符串。
+   *     <br>**说明**：
+   *     <br>（1）证书支持字符串的规格：
+   *     <br> - UTF8String（英文字符集）
    *     <br> - PrintableString
    *     <br>  - IA5String
-   *     <br>Supported since API Version 22:
+   *     <br>从API version 22开始支持：
    *     <br> - TeletexString
-   *     <br>(2) The certificate supports the following extended specifications:
-   *     <br> - BasicConstraints (OID 2.5.29.19)
-   *     <br> - KeyUsage (OID2.5.29.15)
-   *     <br> - SubjectKeyIdentifier (OID2.5.29.14)
-   *     <br> - AuthorityKeyIdentifier (OID2.5.29.35)
-   *     <br>Supported since API Version 22:
-   *     <br> - SubjectAltName (OID 2.5.29.17)
-   *     <br> - ExtendedKeyUsage (OID 2.5.29.37)
-   *     <br>
+   *     <br>（2）证书支持扩展的规格：
+   *     <br> - BasicConstraints（OID 2.5.29.19）
+   *     <br> - KeyUsage（OID2.5.29.15）
+   *     <br> - SubjectKeyIdentifier（OID2.5.29.14）
+   *     <br> - AuthorityKeyIdentifier（OID2.5.29.35）
+   *     <br>从API version 22开始支持：
+   *     <br> - SubjectAltName（OID 2.5.29.17）
+   *     <br> - ExtendedKeyUsage（OID 2.5.29.37）
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
    * @since 20 dynamic
@@ -734,6 +830,16 @@ declare namespace http {
   /**
    * 用于构造URL查询参数的键值对象类型。
    *
+   * **说明：**
+   *
+   * (1) 对象的每个属性名作为URL参数的key，属性值作为参数值。例如`{ scene: 'demo', page: 1 }`会序列化为`scene=demo&page=1`。
+   *
+   * (2) 当属性值为数组时，会展开为同名多参数。例如`{ tag: ['a', 'b'] }`会序列化为`tag=a&tag=b`。
+   *
+   * (3) key和value由系统自动进行URL编码，开发者应传入原始未编码内容。
+   *
+   * (4) 如需严格控制参数顺序或重复键顺序，建议直接使用queryParams的string形式。
+   *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @crossplatform
@@ -760,7 +866,8 @@ declare namespace http {
    */
   export enum InterceptorType {
     /**
-     * 在初始HTTP请求组装完成后进行拦截。
+     * 在初始HTTP请求组装完成后拦截。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -769,7 +876,8 @@ declare namespace http {
     INITIAL_REQUEST = 'INITIAL_REQUEST',
 
     /**
-     * 在初始HTTP请求组装完成后进行拦截。
+     * 当收到重定向响应时拦截。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -778,7 +886,8 @@ declare namespace http {
     REDIRECTION = 'REDIRECTION',
 
     /**
-     * Intercept after we checked the HTTP cache.
+     * 在检查并且命中HTTP缓存时拦截。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -787,7 +896,8 @@ declare namespace http {
     CACHE_CHECKED = 'READ_CACHE',
 
     /**
-     * Intercept when we perform network connection, such as TLS and TCP.
+     * 在网络请求将要发出前拦截。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -796,7 +906,8 @@ declare namespace http {
     NETWORK_CONNECT = 'CONNECT_NETWORK',
 
     /**
-     * Intercept when we get the final HTTP response.
+     * 在获取最终HTTP响应时拦截。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -816,7 +927,7 @@ declare namespace http {
    */
   export interface HttpRequestContext {
     /**
-     * The URL of an HTTP request interceptor. It can be modified in an interceptor.
+     * HTTP拦截器从HTTP请求中获取到的URL，支持在拦截器中进行修改。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -826,7 +937,8 @@ declare namespace http {
     url: string;
 
     /**
-     * The header of an HTTP request interceptor. It can be modified in an interceptor.
+     * HTTP拦截器从HTTP请求中获取到的请求头，支持在拦截器中进行修改。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -835,7 +947,8 @@ declare namespace http {
     header: Object;
 
     /**
-     * The header of an HTTP request interceptor. It can be modified in an interceptor.
+     * HTTP拦截器从HTTP请求中获取到的请求体，支持在拦截器中进行修改。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -864,7 +977,8 @@ declare namespace http {
    */
   export interface HttpInterceptor {
     /**
-     * The type of this interceptor. It defines when this intercptor would be called.
+     * 拦截器类型，定义此拦截器何时被调用。
+     *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
      * @since 22 dynamic
@@ -875,8 +989,8 @@ declare namespace http {
     /**
      * 拦截HTTP处理过程并进行所需的更改。
      *
-     * @param { HttpRequestContext } reqContext - the context of the target HTTP request.
-     * @param { HttpResponse } rspContext - the context of the target HTTP response.
+     * @param { HttpRequestContext } reqContext - 经过HTTP拦截器的请求参数的上下文。
+     * @param { HttpResponse } rspContext - 经过HTTP拦截器的返回结果的上下文。
      * @returns { Promise<ChainContinue> } 继续HTTP处理或终止并返回HTTP响应。
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -963,7 +1077,7 @@ declare namespace http {
    */
   export interface Credential {
     /**
-     * Username of credential. Default is ''.
+     * 用于身份验证的用户名。默认值为''。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -972,7 +1086,7 @@ declare namespace http {
      */
     username: string;
     /**
-     * Password of credential. Default is ''.
+     * 用于身份验证的密码。默认值为''。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1042,10 +1156,8 @@ declare namespace http {
    * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256' } 表示值的类型为字符串，可取'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256'。
    * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384' } 表示值的类型为字符串，可取'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384'。
    * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384' } 表示值的类型为字符串，可取'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384'。
-   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256' } 表示值的类型为字符串，可取'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY13
-   *     05_SHA256'。
-   * @unionmember { 'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256' } 表示值的类型为字符串，可取'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-   *     _SHA256'。
+   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256' } 表示值的类型为字符串，可取'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256'。
+   * @unionmember { 'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256' } 表示值的类型为字符串，可取'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256'。
    * @unionmember { 'TLS_RSA_WITH_AES_128_GCM_SHA256' } 表示值的类型为字符串，可取'TLS_RSA_WITH_AES_128_GCM_SHA256'。
    * @unionmember { 'TLS_RSA_WITH_AES_256_GCM_SHA384' } 表示值的类型为字符串，可取'TLS_RSA_WITH_AES_256_GCM_SHA384'。
    * @syscap SystemCapability.Communication.NetStack
@@ -1087,7 +1199,6 @@ declare namespace http {
    *
    * @unionmember { TlsV12CipherSuite } 表示值的类型为[TlsV11CipherSuite]{@link http.TlsV11CipherSuite}。
    * @unionmember { TlsV13SpecificCipherSuite } 表示值的类型为[TlsV13SpecificCipherSuite]{@link http.TlsV13SpecificCipherSuite}
-   *     。
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
    * @since 18 dynamic
@@ -1100,7 +1211,6 @@ declare namespace http {
    *
    * @unionmember { TlsV11CipherSuite } 表示值的类型为[TlsV11CipherSuite]{@link http.TlsV11CipherSuite}。
    * @unionmember { TlsV12SpecificCipherSuite } 表示值的类型为[TlsV12SpecificCipherSuite]{@link http.TlsV12SpecificCipherSuite}
-   *     。
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
    * @since 18 dynamic
@@ -1236,6 +1346,14 @@ declare namespace http {
      * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
+
+    /**
+     * This parameter sets a mime part's body content from memory data.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    data?: string | RecordData | ArrayBuffer;
 
     /**
      * 此参数将文件路径指向的文件内容设置为表单数据，如果未指定data内容，则必须设置filePath。
@@ -1413,16 +1531,16 @@ declare namespace http {
    */
   export interface HttpRequest {
     /**
-     * 根据URL地址，发起HTTP网络请求，使用callback方式作为异步方法。
-     * 
+     * 根据URL地址，发起HTTP网络请求，使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > (1) 此接口仅支持接收5MB以内的数据，如果需要接收超过5MB的数据，则需主动在[HttpRequestOptions]{@link http.HttpRequestOptions}的maxLimit中进行设置，或者使用
      * > [requestInStream]{@link http.HttpRequest.requestInStream(url: string, callback: AsyncCallback<int>)}接口发起流式请求。自
      * > API version 23开始，本接口支持的最大接收数据量为50MB，API version 23之前仍为5MB，超过5MB会接收失败。
-     * 
+     *
      * > (2) 如需传入cookies，请开发者自行在参数options中添加。
-     * 
+     *
      * > (3) 若URL包含中文或其他语言，需先调用encodeURL(URL)编码，再发起请求。
      *
      * @permission ohos.permission.INTERNET
@@ -1461,8 +1579,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1472,16 +1589,16 @@ declare namespace http {
     request(url: string, callback: AsyncCallback<HttpResponse>): void;
 
     /**
-     * 根据URL地址和相关配置项，发起HTTP网络请求，使用callback方式作为异步方法。
-     * 
+     * 根据URL地址和相关配置项，发起HTTP网络请求，使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > (1) 此接口仅支持接收5MB以内的数据，如果需要接收超过5MB的数据，则需主动在[HttpRequestOptions]{@link http.HttpRequestOptions}的maxLimit中进行设置，或者使用
      * > [requestInStream]{@link http.HttpRequest.requestInStream(url: string, callback: AsyncCallback<int>)}接口发起流式请求。自
      * > API version 23开始，本接口支持的最大接收数据量为50MB，API version 23之前仍为5MB，超过5MB会接收失败。
-     * 
+     *
      * > (2) 如需传入cookies，请开发者自行在参数options中添加。
-     * 
+     *
      * > (3) 若URL包含中文或其他语言，需先调用encodeURL(URL)编码，再发起请求。
      *
      * @permission ohos.permission.INTERNET
@@ -1522,8 +1639,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1533,16 +1649,16 @@ declare namespace http {
     request(url: string, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): void;
 
     /**
-     * 根据URL地址，发起HTTP网络请求，使用Promise方式作为异步方法。
-     * 
+     * 根据URL地址，发起HTTP网络请求，使用Promise异步回调。
+     *
      * > **说明：**
      * >
      * > (1) 此接口仅支持接收5MB以内的数据，如果需要接收超过5MB的数据，则需主动在[HttpRequestOptions]{@link http.HttpRequestOptions}的maxLimit中进行设置，或者使用
      * > [requestInStream]{@link http.HttpRequest.requestInStream(url: string, callback: AsyncCallback<int>)}接口发起流式请求。自
      * > API version 23开始，本接口支持的最大接收数据量为50MB，API version 23之前仍为5MB，超过5MB会接收失败。
-     * 
+     *
      * > (2) 如需传入cookies，请开发者自行在参数options中添加。
-     * 
+     *
      * > (3) 若URL包含中文或其他语言，需先调用encodeURL(URL)编码，再发起请求。
      *
      * @permission ohos.permission.INTERNET
@@ -1582,8 +1698,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1594,15 +1709,15 @@ declare namespace http {
 
     /**
      * 根据URL地址、相关配置项（可选），发起HTTP网络请求，同步返回响应结果。
-     * 
+     *
      * > **说明：**
      * >
      * > (1) 此接口仅支持接收50MB以内的数据，如果需要接收超过50MB的数据，则需主动在[HttpRequestOptions]{@link http.HttpRequestOptions}的maxLimit中进行设置。
-     * 
+     *
      * > (2) 如需传入cookies，请开发者自行在参数options中添加。
-     * 
+     *
      * > (3) 若URL包含中文或其他语言，需先调用encodeURL(URL)编码，再发起请求。
-     * 
+     *
      * > (4) 此接口为同步接口，会阻塞当前线程直到返回HTTP请求响应结果或错误码。
      *
      * @permission ohos.permission.INTERNET
@@ -1651,7 +1766,7 @@ declare namespace http {
     requestSync(url: string, options?: HttpRequestOptions): HttpResponse;
 
     /**
-     * 根据URL地址，发起HTTP网络请求并返回流式响应，使用callback方式作为异步方法。
+     * 根据URL地址，发起HTTP网络请求并返回流式响应，使用callback异步回调。
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - 发起网络请求的URL地址。
@@ -1690,8 +1805,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -1701,7 +1815,7 @@ declare namespace http {
     requestInStream(url: string, callback: AsyncCallback<int>): void;
 
     /**
-     * 根据URL地址和相关配置项，发起HTTP网络请求并返回流式响应，使用callback方式作为异步方法。
+     * 根据URL地址和相关配置项，发起HTTP网络请求并返回流式响应，使用callback异步回调。
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - 发起网络请求的URL地址。
@@ -1741,8 +1855,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -1752,12 +1865,12 @@ declare namespace http {
     requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallback<int>): void;
 
     /**
-     * 根据URL地址，发起HTTP网络请求并返回流式响应，使用Promise方式作为异步方法。
+     * 根据URL地址，发起HTTP网络请求并返回流式响应，使用Promise异步回调。
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - 发起网络请求的URL地址。
      * @param { HttpRequestOptions } [options] - 参考[HttpRequestOptions]{@link http.HttpRequestOptions}。
-     * @returns { Promise<int> } 以Promise形式返回发起请求的结果，具体含义见[ResponseCode]{@link http.ResponseCode}。
+     * @returns { Promise<int> } Promise对象，返回发起请求的结果，具体含义见[ResponseCode]{@link http.ResponseCode}。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300001 - Unsupported protocol.
@@ -1791,8 +1904,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -1884,7 +1996,7 @@ declare namespace http {
     offHeadersReceive(callback?: Callback<Record<string, string>>): void;
 
     /**
-     * 订阅HTTP Response Header 事件，只能触发一次。触发之后，订阅器就会被移除。使用callback方式作为异步方法。
+     * 订阅HTTP Response Header 事件，只能触发一次。触发之后，订阅器就会被移除。使用callback异步回调。
      *
      * @param { "headersReceive" } type - 订阅事件，固定为'headersReceive'。headersReceive：响应头接收事件。
      * @param { Callback<Object> } callback - 回调函数。返回HTTP响应头对象。
@@ -2100,17 +2212,17 @@ declare namespace http {
 
     /**
      * 设置是否自动携带和共享Cookie，用于在同一个HttpRequest实例的多次请求之间自动复用服务端下发的Cookie。
-     * 
+     *
      * > **说明：**
      * >
      * > (1) 默认值为false，表示默认不自动携带Cookie。
-     * 
+     *
      * > (2) 当配置由false切换为true后，会在后续调用request接口发起请求时生效，并自动共享Cookie。
-     * 
+     *
      * > (3) 当配置由true切换为false时，会清空当前实例内保存的Cookie共享状态。
-     * 
+     *
      * > (4) 关于重定向场景的Cookie处理：通过header字段手动配置的Cookie在发生重定向时不会自动发送给重定向后的目标主机，仅服务端通过Set-Cookie下发的Cookie会根据域名规则自动携带。
-     * 
+     *
      * > (5) 关于跨域Cookie携带规则：Cookie的自动携带仅在相同域名或相同子域名之间生效，不同域名之间不支持Cookie的自动携带。
      *
      * @param { boolean } enable - 是否自动携带Cookie。true表示开启，false表示关闭。
@@ -2701,7 +2813,7 @@ declare namespace http {
    */
   export enum HttpDataType {
     /**
-     * The returned type is string.
+     * 字符串类型。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2712,7 +2824,7 @@ declare namespace http {
     STRING = 0,
 
     /**
-     * The returned type is Object.
+     * 对象类型。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2723,7 +2835,7 @@ declare namespace http {
     OBJECT = 1,
 
     /**
-     * The returned type is ArrayBuffer.
+     * 二进制数组类型。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2746,12 +2858,12 @@ declare namespace http {
   export interface HttpResponse {
     /**
      * HTTP请求根据响应头中content-type类型返回对应的响应格式内容，若HttpRequestOptions无expectDataType字段，按如下规则返回：
-     * 
+     *
      * - application/json：返回JSON格式的字符串。
      * - application/octet-stream：ArrayBuffer。
      * - image：ArrayBuffer。
      * - 其他：string。
-     * 
+     *
      * 若HttpRequestOption有expectDataType字段，开发者需传入与服务器返回类型相同的数据类型。
      *
      * @syscap SystemCapability.Communication.NetStack
@@ -2761,6 +2873,15 @@ declare namespace http {
      * @since 23 static
      */
     result: string | Object | ArrayBuffer;
+
+    /**
+     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
+     * If {@link HttpRequestOptions#expectDataType} is set, the system preferentially returns this parameter.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @since 26.0.1 static
+     */
+    result: string | RecordData | ArrayBuffer;
 
     /**
      * 返回值类型。
@@ -2786,7 +2907,7 @@ declare namespace http {
 
     /**
      * 发起HTTP请求返回来的响应头。当前返回的是JSON格式字符串，如需具体字段内容，需开发者自行解析。常见字段及解析方式如下：
-     * 
+     *
      * - content-type：header['content-type']。
      * - status-line：header['status-line']。
      * - date：header.date/header['date']。
@@ -2799,6 +2920,15 @@ declare namespace http {
      * @since 23 static
      */
     header: Object;
+
+    /**
+     * All headers in the response from the server.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @FaAndStageModel
+     * @since 26.0.1 static
+     */
+    header: Record<string, string>;
 
     /**
      * 服务器返回的原始cookies。开发者可自行处理。
@@ -2829,6 +2959,35 @@ declare namespace http {
      * @since 26.0.1 static
      */
     connectionExtraInfo?: ConnectionExtraInfo;
+  }
+
+  /**
+   * 定义HTTP请求的HttpResponseMetadata。
+   *
+   * @syscap SystemCapability.Communication.NetStack
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface HttpResponseMetadata {
+    /**
+     * HTTP请求的结果码。如果回调函数执行成功，则返回中定义的返回码。
+     * 将返回[ResponseCode]{@link http.ResponseCode}。否则，将在
+     * **err**AsyncCallback中的字段**。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    responseCode: ResponseCode;
+
+    /**
+     * 服务器响应中的所有标头。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    header: Record<string, string>;
   }
 
   /**
@@ -2950,6 +3109,28 @@ declare namespace http {
      * @since 26.0.1 static
      */
     redirectCount: int;
+
+    /**
+     * HTTP请求链路实际发送的总字节数，包括请求行、请求头和
+     * 请求体。单位为字节。
+     * 单位为：字节。取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    sentTotalBytes?: int;
+
+    /**
+     * HTTP请求链路实际接收的总字节数，包括状态行、响应头、
+     * 和响应体。单位为字节。
+     * 单位为：字节。取值限定为整数。
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    receivedTotalBytes?: int;
   }
 
   /**
@@ -2962,7 +3143,7 @@ declare namespace http {
    */
   export interface PerformanceTiming {
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到DNS解析完成耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到DNS解析完成耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -2972,7 +3153,7 @@ declare namespace http {
     dnsTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到TCP连接完成耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到TCP连接完成耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -2982,7 +3163,7 @@ declare namespace http {
     tcpTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到TLS连接完成耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到TLS连接完成耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -2992,7 +3173,7 @@ declare namespace http {
     tlsTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到开始发送第一个字节的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到开始发送第一个字节的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3002,7 +3183,7 @@ declare namespace http {
     firstSendTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到接收第一个字节的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到接收第一个字节的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3012,7 +3193,7 @@ declare namespace http {
     firstReceiveTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到完成请求的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到完成请求的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3022,7 +3203,7 @@ declare namespace http {
     totalFinishTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到完成所有重定向步骤的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到完成所有重定向步骤的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3032,7 +3213,7 @@ declare namespace http {
     redirectTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到header解析完成的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到header解析完成的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3042,7 +3223,7 @@ declare namespace http {
     responseHeaderTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到body解析完成的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求到body解析完成的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3052,7 +3233,7 @@ declare namespace http {
     responseBodyTiming: double;
 
     /**
-     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求回调到应用程序的耗时。
+     * 从[request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}请求回调到应用程序的耗时。单位为毫秒(ms)。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3152,12 +3333,12 @@ declare namespace http {
    * - **`ETag`**：用于资源版本标识，客户端可以使用`If-None-Match`请求头来验证资源是否已更改。
    * - **`Last-Modified`**：指定资源最后修改时间，客户端可以使用`If-Modified-Since`请求头来验证资源是否已更改。
    * - **`Vary`**：指定哪些请求头的值会影响缓存的响应，用于区分不同的缓存版本。
-   * 
+   *
    * 使用这些关键字时，服务器端需要正确配置响应头，客户端则需要根据这些响应头来决定是否使用缓存的资源，以及如何验证资源是否是最新的。正确的缓存策略可以显著提高应用的性能和用户体验。
    *
    * **如何设置Cache-Control头**
    * `Cache-Control`为通用报头，但通常是在服务器端进行的，允许定义一个响应资源应该何时、如何被缓存以及缓存多长时间。以下是一些常用的`Cache-Control`指令及其含义：
-   * 
+   *
    * - **`no-cache`**：表示在使用缓存前，必须先去源服务器校验资源的有效性。如果资源未变更，则响应状态码为304(Not Modified)，不发送资源内容，使用缓存中的资源。如果资源已经过期，则响应状态码为200(OK
    * )，并发送资源内容。
    * - **`no-store`**：表示不允许缓存资源，每次请求都必须从服务器获取资源。
@@ -3177,7 +3358,7 @@ declare namespace http {
    */
   export interface HttpResponseCache {
     /**
-     * 将缓存中的数据写入文件系统，以便在下一个HTTP请求中访问所有缓存数据，使用callback方式作为异步方法。缓存数据包括：响应头(header)、响应体(result)、cookies、请求时间(requestTime)和响
+     * 将缓存中的数据写入文件系统，以便在下一个HTTP请求中访问所有缓存数据，使用callback异步回调。缓存数据包括：响应头(header)、响应体(result)、cookies、请求时间(requestTime)和响
      * 应时间(responseTime)。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。返回写入结果。当写入成功时，err为undefined，否则为错误对象。
@@ -3190,7 +3371,7 @@ declare namespace http {
     flush(callback: AsyncCallback<void>): void;
 
     /**
-     * 将缓存中的数据写入文件系统，以便在下一个HTTP请求中访问所有缓存数据，使用Promise方式作为异步方法。
+     * 将缓存中的数据写入文件系统，以便在下一个HTTP请求中访问所有缓存数据，使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @syscap SystemCapability.Communication.NetStack
@@ -3202,7 +3383,7 @@ declare namespace http {
     flush(): Promise<void>;
 
     /**
-     * 禁用缓存并删除其中的数据，使用callback方式作为异步方法。
+     * 禁用缓存并删除其中的数据，使用callback异步回调。
      *
      * @param { AsyncCallback<void> } callback - 回调函数。当删除成功时，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Communication.NetStack
@@ -3214,7 +3395,7 @@ declare namespace http {
     delete(callback: AsyncCallback<void>): void;
 
     /**
-     * 禁用缓存并删除其中的数据，使用Promise方式作为异步方法。
+     * 禁用缓存并删除其中的数据，使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @syscap SystemCapability.Communication.NetStack

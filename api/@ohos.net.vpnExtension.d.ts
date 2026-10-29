@@ -86,8 +86,9 @@ declare namespace vpnExtension {
    * Enables the VPN extension ability. This API uses a promise to return the result.
    *
    * @param { Want } want - Want information.
-   *     <br> Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for
-   *     the first time.
+   *     <br>
+   *     Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for the
+   *     first time.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -210,11 +211,12 @@ declare namespace vpnExtension {
    * Enables the VPN extension ability. This API uses a promise to return the result.
    *
    * @param { Want } want - Want information.
-   *     <br> Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for
-   *     the first time.
-   * @param { boolean } [systemProxyKeepalive] - Optional. Whether to enable system proxy keepalive mode
-   *     When set to true, the VPN extension will survive when the main process is killed,
-   *     and the VPN will be displayed in system settings for management.
+   *     <br>
+   *     Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for the
+   *     first time.
+   * @param { boolean } [systemProxyKeepalive] - Optional. Whether to enable system proxy keepalive mode When set to
+   *     true, the VPN extension will survive when the main process is killed, and the VPN will be displayed in system
+   *     settings for management.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
@@ -224,14 +226,13 @@ declare namespace vpnExtension {
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function startVpnExtensionAbility(want: Want, systemProxyKeepalive?: boolean): Promise<void>;
 
   /**
-   * Reconnects to an existing VPN extension ability.
-   * Used when the main process restarts and needs to reconnect to the VPN extension
-   * that was started with systemProxyKeepalive enabled.
+   * Reconnects to an existing VPN extension ability. Used when the main process restarts and needs to reconnect to the
+   * VPN extension that was started with systemProxyKeepalive enabled.
    *
    * @param { Want } want - Indicates the want info of the VPN extension to reconnect.
    * @returns { Promise<VpnConnection> } Promise used to return ${VpnConnection}.
@@ -241,7 +242,7 @@ declare namespace vpnExtension {
    * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function connectToVpnExtension(want: Want): Promise<VpnConnection>;
 
@@ -267,8 +268,9 @@ declare namespace vpnExtension {
      * >
      * > If this API is called multiple times, only the last callback takes effect.
      *
-     * @param { Callback<boolean> } callback - Callback used to return the user authorization result. The value **true**
-     *     indicates that the user agrees to the authorization, and the value **false** indicates the opposite.
+     * @param { Callback<boolean> } callback - Callback used to return the authorization result. The value **true**
+     *     indicates that the user agrees to the authorization, and the value **false** indicates that the user rejects
+     *     the authorization.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -342,7 +344,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 2200003 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     updateVpnConfig(config: VpnConfig): Promise<int>;
 
@@ -356,7 +358,7 @@ declare namespace vpnExtension {
      * >
      * > Currently, the multi-VPN capability of the system supports only IPv4.
      *
-     * @returns { Promise<string> } Promise used to return the result.
+     * @returns { Promise<string> } Promise used to return the **vpnId**.
      * @throws { BusinessError } 19900001 - Invalid parameter value.
      * @throws { BusinessError } 19900002 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
@@ -398,7 +400,7 @@ declare namespace vpnExtension {
      * @throws { BusinessError } 2203004 - Invalid socket file descriptor.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     protectSync(socketFd: int): void;
 
@@ -478,8 +480,9 @@ declare namespace vpnExtension {
     routes?: Array<RouteInfo>;
 
     /**
-     * IP address of the DNS server. After the IP address is configured, when the VPN is active and proxy-enabled
-     * applications access the Internet, the configured DNS server will be used for DNS queries.
+     * DNS server address information. After the DNS server address is configured, the proxied applications use the
+     * configured DNS server for DNS queries when accessing the network while the VPN is started. A maximum of 64 DNS
+     * server addresses can be configured.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -497,7 +500,7 @@ declare namespace vpnExtension {
     searchDomains?: Array<string>;
 
     /**
-     * Maximum transmission unit (MTU), in bytes. The value range is [576,1500].
+     * Maximum transmission unit (MTU) value, in bytes. Value range: [576, 1500].
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -506,10 +509,10 @@ declare namespace vpnExtension {
     mtu?: int;
 
     /**
-     * Whether IPv4 is supported. The value **true** indicates that the IPv4 is supported, and the value **false**
-     * indicates the opposite. The default value is **true**.
+     * Whether IPv4 is supported. The value **true** indicates support, and **false** indicates not supported. The
+     * default value is **true**.
      *
-     * Note: If the IPv4 is supported, you need to configure IPv4 addresses in **addresses**.
+     * **Note**: If IPv4 is supported, an IPv4 IP address must be configured in **addresses**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -518,10 +521,10 @@ declare namespace vpnExtension {
     isIPv4Accepted?: boolean;
 
     /**
-     * Whether IPv6 is supported. The value **true** indicates that the IPV6 is supported, and the value **false**
-     * indicates the opposite. The default value is **false**.
+     * Whether IPv6 is supported. The value **true** indicates support, and **false** indicates not supported. The
+     * default value is **false**.
      *
-     * Note: If the IPv6 is supported, you need to configure IPv6 addresses in **addresses**.
+     * **Note**: If IPv6 is supported, an IPv6 IP address must be configured in **addresses**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -530,8 +533,8 @@ declare namespace vpnExtension {
     isIPv6Accepted?: boolean;
 
     /**
-     * Whether the built-in VPN is supported. The value **true** indicates that the built-in VPN is supported, and the
-     * value **false** indicates the opposite. The default value is **false**.
+     * Whether the built-in VPN is supported. The value **true** indicates support, and **false** indicates not
+     * supported. The default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -540,8 +543,8 @@ declare namespace vpnExtension {
     isInternal?: boolean;
 
     /**
-     * Whether the blocking mode is used. The value **true** indicates that the blocking mode is used, and the value
-     * **false** indicates the opposite. The default value is **false**.
+     * Whether the blocking mode is used. The value **true** indicates the blocking mode, and **false** indicates the
+     * non-blocking mode. The default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -569,7 +572,7 @@ declare namespace vpnExtension {
      * **routes**. Before API version 23, a maximum of 64 blocked application bundle names can be configured. Since API
      * version 23, a maximum of 256 blocked application bundle names can be configured.
      *
-     * **Note**: Configure either **trustedApplications** or **blockedApplications** as they are mutually exclusive. Defaults to an empty array if not specified.
+     * **Note**: Configure either **trustedApplications** or **blockedApplications** as they are mutually exclusive.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -578,27 +581,24 @@ declare namespace vpnExtension {
     blockedApplications?: Array<string>;
 
     /**
-     * Whether local network (LAN) traffic is routed through the VPN.
-     * When set to false, traffic to local network addresses (for example, 10.0.0.0/8,
-     * 172.16.0.0/12 and 192.168.0.0/16) bypasses the VPN and is sent directly over the
-     * physical network interface. The default value is false.
-     * Default value: false.
+     * Whether local network (LAN) traffic is routed through the VPN. When set to false, traffic to local network
+     * addresses (for example, 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16) bypasses the VPN and is sent directly over
+     * the physical network interface. The default value is false. Default value: false.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     isLocalNetworkRouted?: boolean;
 
     /**
-     * Whether to force the VPN to send and receive IPv6 DNS requests.
-     * When set to true, the VPN initiates IPv6 DNS resolution and accepts IPv6 DNS
-     * responses even if the current network does not support IPv6. The default value is false.
-     * Default value: false.
+     * Whether to force the VPN to send and receive IPv6 DNS requests. When set to true, the VPN initiates IPv6 DNS
+     * resolution and accepts IPv6 DNS responses even if the current network does not support IPv6. The default value is
+     * false. Default value: false.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     isForceIPv6Dns?: boolean;
   }

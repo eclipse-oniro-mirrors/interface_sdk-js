@@ -44,7 +44,7 @@ declare namespace mdns {
    * Adds an MDNS service. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { LocalServiceInfo } serviceInfo - MDNS service information.
@@ -68,11 +68,11 @@ declare namespace mdns {
    * Adds an MDNS service. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { LocalServiceInfo } serviceInfo - MDNS service information.
-   * @returns { Promise<LocalServiceInfo> } Promise used to return the result.
+   * @returns { Promise<LocalServiceInfo> } Promise used to return the added MDNS service information.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -90,7 +90,7 @@ declare namespace mdns {
    * Removes an MDNS service. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { LocalServiceInfo } serviceInfo - MDNS service information.
@@ -114,11 +114,11 @@ declare namespace mdns {
    * Removes an MDNS service. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { LocalServiceInfo } serviceInfo - MDNS service information.
-   * @returns { Promise<LocalServiceInfo> } Promise used to return the result.
+   * @returns { Promise<LocalServiceInfo> } Promise used to return the removed MDNS service information.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -136,12 +136,12 @@ declare namespace mdns {
    * Creates a **DiscoveryService** object, which is used to discover MDNS services of the specified type.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } serviceType - MDNS service type.
-   * @returns { DiscoveryService } **DiscoveryService** object obtained based on the specified **serviceType** and
-   *     **context**.
+   * @returns { DiscoveryService } Discovery service object based on the specified service type (**serviceType**) and
+   *     **Context**.
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.MDNS
    * @atomicservice [since 11]
@@ -154,12 +154,13 @@ declare namespace mdns {
    * Resolves an MDNS service. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { LocalServiceInfo } serviceInfo - MDNS service information.
-   * @param { AsyncCallback<LocalServiceInfo> } callback - Callback used to return the result. If the operation is
-   *     successful, **error** is **undefined** and **data** is the MDNS service information.
+   * @param { AsyncCallback<LocalServiceInfo> } callback - Callback used to return the result. If the removal is
+   *     successful, **error** is **undefined** and **data** is the parsed MDNS service information; otherwise,
+   *     **error** is an error object.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -178,11 +179,11 @@ declare namespace mdns {
    * Resolves an MDNS service. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
    *     <br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.
    * @param { LocalServiceInfo } serviceInfo - MDNS service information.
-   * @returns { Promise<LocalServiceInfo> } Promise used to return the result.
+   * @returns { Promise<LocalServiceInfo> } Promise used to return the resolved MDNS service information.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -206,7 +207,7 @@ declare namespace mdns {
    */
   export interface DiscoveryService {
     /**
-     * Enables listening for **discoveryStart** events.
+     * Subscribes to the notification for starting to listen for MDNS services.
      *
      * @param { 'discoveryStart' } type - Event type. This field has a fixed value of **discoveryStart**.
      *     <br>**discoveryStart**: event of starting discovery of MDNS services on the LAN.
@@ -286,8 +287,8 @@ declare namespace mdns {
     /**
      * Disables listening for **discoveryStop** events.
      *
-     * @param { 'discoveryStop' } type - Event type. This field has a fixed value of **discoveryStop**.
-     *     <br>**discoveryStop**: event of stopping discovery of MDNS services on the LAN.
+     * @param { 'discoveryStop' } type - Event to unsubscribe from, which is fixed to **'discoveryStop'**.
+     *     <br>**discoveryStop**: event of stopping discovery of MDNS services on the local area network.
      * @param { Callback<{ serviceInfo: LocalServiceInfo, errorCode?: MdnsError }> } callback - Callback used to return
      *     the MDNS service and error information. You can pass the callback of the **on** function if you want to
      *     cancel listening for a certain type of events. If you do not pass the callback, you will cancel listening for
@@ -457,7 +458,7 @@ declare namespace mdns {
      */
     serviceName: string;
     /**
-     * Service port number. The value range is [0, 65535].
+     * Port number of the MDNS service. The value ranges from 0 to 65535.
      *
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice [since 11]

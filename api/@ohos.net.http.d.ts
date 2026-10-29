@@ -49,7 +49,7 @@ declare namespace http {
   type HttpProxy = connection.HttpProxy;
 
   /**
-   * Socks5 Proxy Configuration Information.
+   * Defines the SOCKS5 proxy configuration information.
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
@@ -67,7 +67,7 @@ declare namespace http {
    * >
    * > When the request is no longer needed, call destroy() to release resources. Otherwise, memory leaks may occur.
    *
-   * @returns { HttpRequest } An **HttpRequest** object, which contains the **request**, **requestInStream**,
+   * @returns { HttpRequest } **HttpRequest** object that includes the **request**, **requestInStream**,
    *     **requestSync**, **enableAutoCookie**, **destroy**, **on**, and **off** methods.
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
@@ -141,8 +141,36 @@ declare namespace http {
     extraData?: string | Object | ArrayBuffer;
 
     /**
-     * Additional data of the request.
-     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
+     * Additional data for sending a request. This parameter is not used by default. Since API version 26, you are
+     * advised to use the **body** and **queryParams** parameters preferentially.
+     *
+     * **Note**: Do not add this parameter if no extra data is available. If this parameter must be added, set it to
+     * **undefined** or **null**. Do not pass the parameter as "".
+     *
+     * - If the HTTP request uses a POST, PUT, or DELETE method, this field serves as the content of the HTTP request
+     * and is encoded in UTF-8 format.
+     *
+     * Example:
+     *
+     * (1) If **content-Type** is **application/x-www-form-urlencoded**, the data in the request body must be encoded in
+     * the format of **key1=value1&key2=value2&key3=value3** after URL transcoding (**encodeURIComponent/encodeURI**)
+     * and this field is usually in the String format.
+     *
+     * (2) If **content-Type** is **text/xml**, this field is usually in the String format.
+     *
+     * (3) If **content-Type** is **application/json**, this field is usually in the Object format.
+     *
+     * (4) If **content-Type** is **application/octet-stream**, this field is usually in the ArrayBuffer format.
+     *
+     * (5) If **content-Type** is **multipart/form-data** and the content to be uploaded is a file, this field is
+     * usually in the ArrayBuffer format.
+     *
+     * The preceding information is for reference only and may vary according to the actual situation.
+     *
+     * - If the HTTP request uses the GET, OPTIONS, TRACE, or CONNECT method, this parameter serves as a supplement
+     * to HTTP request parameters. Parameters of the string type need to be encoded before being passed to the HTTP
+     * request. Parameters of the object type do not need to be precoded and will be directly concatenated to the URL.
+     * Parameters of the ArrayBuffer type will not be concatenated to the URL.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 26.0.1 static
@@ -176,8 +204,8 @@ declare namespace http {
     usingCache?: boolean;
 
     /**
-     * Priority of concurrent HTTP/HTTPS requests. A larger value indicates a higher priority. The value range is
-     * [1, 1000]. The default value is **1**.
+     * Priority of HTTP/HTTPS requests. A larger value indicates a higher priority. The value range is [1,1000], and the
+     * default value is **1**. If the value is out of range, the default value will be used.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -188,8 +216,9 @@ declare namespace http {
     priority?: int;
 
     /**
-     * HTTP request header. If the request method is POST, PUT, DELETE, or null, the default value is {'content-Type': '
-     * application/json'}. Otherwise, the default value is {'content-Type': 'application/x-www-form-urlencoded'}.
+     * HTTP request header. If the request method is POST, PUT, DELETE, or null,
+     * the default value is {'content-Type': ' application/json'}.
+     * Otherwise, the default value is {'content-Type': 'application/x-www-form-urlencoded'}.
      *
      * If the header contains fields of numeric type, the maximum value must be an int64 integer.
      *
@@ -205,7 +234,11 @@ declare namespace http {
     header?: Object;
 
     /**
-     * HTTP request header. default is 'content-type': 'application/json'
+     * HTTP request header field. When the request method is "POST", "PUT", "DELETE", or "", the default is
+     * {'content-Type': 'application/json'}; otherwise, the default is
+     * {'content-Type': 'application/x-www-form-urlencoded'}.
+     *
+     * If header contains a field of the number type, the maximum supported value is an int64 integer.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @FaAndStageModel
@@ -214,9 +247,10 @@ declare namespace http {
     header?: Record<string, string>;
 
     /**
-     * Read timeout duration. The default value is **60000**, in ms. The input value must be an uint32_t integer.
+     * Read timeout, in milliseconds (ms), with a default value of 60000 ms. The value passed in must be an integer
+     * within the uint32_t range.
      *
-     * The value **0** indicates no timeout.
+     * Setting it to 0 means no timeout occurs.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -227,7 +261,7 @@ declare namespace http {
     readTimeout?: int;
 
     /**
-     * Connection timeout interval. The default value is **60000**, in ms. The input value must be an uint32_t integer.
+     * Connection timeout interval. The default value is **60000**, in ms. The input value must be a uint32_t integer.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -238,7 +272,11 @@ declare namespace http {
     connectTimeout?: int;
 
     /**
-     * Protocol. The default value is automatically specified by the system.
+     * Protocol version used by the HTTP request. If not specified, the system automatically negotiates the most
+     * suitable protocol version. If HTTP3 is specified, due to the security restrictions of the HTTP3 protocol, TLS
+     * version 1.3 must be specified through [TlsConfig]{@link http.TlsConfig} and the target domain must support the
+     * HTTP3 protocol to enable HTTP3; otherwise, a downgrade is negotiated.
+     *
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -249,12 +287,14 @@ declare namespace http {
     usingProtocol?: HttpProtocol;
 
     /**
-     * HTTP proxy configuration. If this item is not configured, the system proxy is used by default.
+     * HTTP proxy configuration. If this parameter is not configured, the system proxy is used by default.
      *
-     * - If **usingProxy** is set to **true**, the default network proxy is used. If **usingProxy** is set to **false**,
-     * no proxy is used.
-     * - If **usingProxy** is of the **HttpProxy** type, the specified network proxy is used. The HttpProxy supports the
-     * **username** and **password** fields from API version 22.
+     * - When **usingProxy** is of the boolean type and set to **true**, the default network proxy is used. When set
+     * to **false**, no proxy is used.
+     * - When **usingProxy** is of the HttpProxy type, the specified network proxy is used. Since API version 22,
+     * HttpProxy supports specifying the **username** and **password** fields.
+     * - Since API version 26.0.0, when **usingSocks5Proxy** is correctly configured, the **usingProxy** parameter
+     * does not take effect.
      *
      * @type {?boolean | HttpProxy} [since 10 - 10]
      * @type { ?(boolean | HttpProxy) } [since 11]
@@ -267,12 +307,13 @@ declare namespace http {
     usingProxy?: boolean | HttpProxy;
 
     /**
-     * CA certificate data. If this parameter is set and the certificate is valid, the system uses the specified CA
-     * certificate and the preset CA certificate. Otherwise, the system uses only the preset CA certificate. The CA
-     * certificate path is the sandbox mapping path, which can be obtained by using **UIAbilityContext** APIs.
-     * Currently, only **.pem** certificates are supported.
+     * If this parameter is set and the certificate is valid, the system uses the user-specified CA certificate and the
+     * system-preset CA certificate. Otherwise, only the system-preset CA certificate is used. The CA certificate path
+     * is a sandbox mapping path (you can obtain the application sandbox path through the capabilities provided by
+     * [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}). Currently, only text-format
+     * certificates with the .pem extension are supported.
      *
-     * The preset CA certificate is available at **\/etc/ssl/certs/cacert.pem**.
+     * System-preset CA certificate location: **\/etc/ssl/certs/cacert.pem**.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -388,9 +429,9 @@ declare namespace http {
     dnsServers?: Array<string>;
 
     /**
-     * Maximum number of bytes in a response.
+     * Maximum byte limit of the response message.
      *
-     * The default value is 5*1024*1024, in bytes. The maximum value is **100*1024*1024**.
+     * The default value is **5*1024*1024**, in bytes. The maximum value is **100*1024*1024**, in bytes.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -522,8 +563,6 @@ declare namespace http {
      * immediately closed. Instead, it remains in the connection pool. If subsequent HTTP requests have the same target
      * address, the connection can be reused, reducing the overhead of TCP and TLS handshakes and improving performance.
      *
-     * **Since**: 26.0.0
-     *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -539,8 +578,6 @@ declare namespace http {
      * - The value range is (0, 2147483647]. If a value less than or equal to 0 is passed, the system uses the default
      * value 118s. This parameter does not take effect when **reuseConnections** is set to **false**.
      *
-     * **Since**: 26.0.0
-     *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -549,8 +586,8 @@ declare namespace http {
     inactivityMs?: int;
 
     /**
-     * Specifies the use of a SOCKS5 proxy. Note that this configuration takes precedence over usingProxy.
-     * It is recommended not to configure both simultaneously.
+     * SOCKS5 proxy configuration. If this parameter is not configured, the SOCKS5 proxy is not started. When this
+     * parameter is correctly configured, if **usingProxy** is also configured, **usingProxy** does not take effect.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -560,11 +597,13 @@ declare namespace http {
     usingSocks5Proxy?: Socks5Proxy;
 
     /**
-     * Indicates whether to enable partial chain verification.
-     * The default value is true when SslType is set to TLS, and false when SslType is set to TLCP.
-     * If set to false, the certificate chain must verify up to a trusted root CA.
-     * If set to true, the verification succeeds if the chain builds to a trusted intermediate CA,
-     * without requiring a path to a trusted root CA.
+     * Whether to allow the use of an intermediate CA certificate in the trust store as a trust anchor during
+     * certificate chain verification. When this parameter set to **false**, the certificate chain must be verified step
+     * by step up to a trusted root CA certificate. When set to **true**, if an intermediate CA certificate exists in
+     * the trust store, the certificate chain verification can be considered passed when it reaches this intermediate
+     * CA, without needing to trace back to the root CA certificate. When [SslType]{@link http.SslType} uses the default
+     * value or is set to TLS, the default value is **true**; when [SslType]{@link http.SslType} is set to TLCP, the
+     * default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -582,8 +621,6 @@ declare namespace http {
      * - If both **queryParams** and **extraData** are configured, **queryParams** takes precedence, and the URL
      * parameter supplementation logic in **extraData** is ignored.
      *
-     * **Since**: 26.0.0
-     *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
@@ -600,8 +637,6 @@ declare namespace http {
      * - If both **body** and **extraData** are configured, **body** takes precedence and **extraData** will be ignored.
      * - This field can be used with any request method to explicitly specify the request body.
      *
-     * **Since**: 26.0.0
-     *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
@@ -611,70 +646,62 @@ declare namespace http {
     body?: string | Object | ArrayBuffer;
 
     /**
-     * Whether to convert POST method to GET when following 301/302/303 redirect responses.
-     * Default value: false.
+     * Whether to convert POST method to GET when following 301/302/303 redirect responses. Default value: false.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     followRedirectPostToGet?: boolean;
 
     /**
-     * The host name required for SSL server host name verification.
-     * The default value of sslServerHostnameVerify is true. When sslServerHostnameVerify is set to false, domain name
-     * verification is disabled.
-     * In this scenario, the certificate domain name verification is ignored when the IP address is used for connection.
-     * Default value: true.
+     * The host name required for SSL server host name verification. The default value of sslServerHostnameVerify is
+     * true. When sslServerHostnameVerify is set to false, domain name verification is disabled. In this scenario, the
+     * certificate domain name verification is ignored when the IP address is used for connection. Default value: true.
      * .
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     sslServerHostnameVerification?: boolean;
 
     /**
-     * Indicates whether to enable certificate revocation status verification.
-     * Default value: false.
+     * Indicates whether to enable certificate revocation status verification. Default value: false.
      * <br>true: The certificate revocation check is performed during the TLS handshake. The OCSP or CRL check is used
-     * to check whether the certificate is revoked. If the check fails, the TLS connection is terminated.
-     * false: The certificate revocation check is not performed.
+     * to check whether the certificate is revoked. If the check fails, the TLS connection is terminated. false: The
+     * certificate revocation check is not performed.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     enableCertRevocationCheck?: boolean;
 
     /**
-     * Low speed limit threshold in bytes per second.
-     * If the transfer speed is lower than this value for longer than lowSpeedTime,
-     * the transfer will be aborted.
-     * The value should be an integer.
+     * Low speed limit threshold in bytes per second. If the transfer speed is lower than this value for longer than
+     * lowSpeedTime, the transfer will be aborted. The value should be an integer.
      *
      * @type { ?int }
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     lowSpeedLimit?: int;
 
     /**
-     * Low speed duration threshold in milliseconds.
-     * If the transfer speed is lower than lowSpeedLimit for longer than this value,
-     * the transfer will be aborted.
-     * The value should be an integer.
+     * Low speed duration threshold in milliseconds. If the transfer speed is lower than lowSpeedLimit for longer than
+     * this value, the transfer will be aborted. The value should be an integer.
      *
      * @type { ?int }
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     lowSpeedTime?: int;
 
@@ -733,7 +760,7 @@ declare namespace http {
   export type TlsOptions = 'system' | TlsConfig;
 
   /**
-   * X509 certificate.
+   * X509 certificate object.
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
@@ -742,7 +769,8 @@ declare namespace http {
   export type X509Cert = cert.X509Cert;
 
   /**
-   * The validation context of {@link ValidationCallback}
+   * Certificate context information used when verifying the identity of the remote server, which is passed in as a
+   * parameter of [ValidationCallback]{@link ValidationCallback}.
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
@@ -750,7 +778,7 @@ declare namespace http {
    */
   export interface ValidationContext {
     /**
-     * The raw data which in PEM format of certificate.
+     * Raw certificate data in PEM format.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -759,7 +787,7 @@ declare namespace http {
     pemCerts: string[];
 
     /**
-     * X509 certificate chain.
+     * X.509 certificate chain.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -768,7 +796,7 @@ declare namespace http {
     x509Certs: X509Cert[];
 
     /**
-     * The host of this request.
+     * Target host name of this request.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -777,7 +805,7 @@ declare namespace http {
     host: string;
 
     /**
-     * The real IP which this request connect to.
+     * IP address actually connected for this request.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -787,10 +815,11 @@ declare namespace http {
   }
 
   /**
-   * Self defined remote validation.
-   * This API uses a promise to return the result.
+   * Defines a custom callback for remote server identity verification. Developers can use this callback to implement
+   * custom certificate verification logic, supporting synchronous or asynchronous return of the verification result.
    *
-   * @param { ValidationContext } context - Certificate context.
+   * @param { ValidationContext } context - Certificate verification context, which contains information such as the
+   *     certificate chain, host name, and IP address.
    * @returns { boolean | Promise<boolean> } Returns a boolean value indicating whether the validation is successful.
    *     Promise used to return the result. The value true indicates valid, and false indicates invalid.
    * @syscap SystemCapability.Communication.NetStack
@@ -932,7 +961,7 @@ declare namespace http {
    */
   export enum InterceptorType {
     /**
-     * Intercept after the initial HTTP request is assembled.
+     * Intercepts after the initial HTTP request is assembled.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -942,7 +971,7 @@ declare namespace http {
     INITIAL_REQUEST = 'INITIAL_REQUEST',
 
     /**
-     * Intercept when we get a redirection responsed and is going to send another request.
+     * Intercepts when a redirection response is received.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -952,7 +981,7 @@ declare namespace http {
     REDIRECTION = 'REDIRECTION',
 
     /**
-     * Intercept after we checked the HTTP cache.
+     * Intercepts when the HTTP cache is checked and hit.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -962,7 +991,7 @@ declare namespace http {
     CACHE_CHECKED = 'READ_CACHE',
 
     /**
-     * Intercept when we perform network connection, such as TLS and TCP.
+     * Intercepts before the network request is sent.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -972,7 +1001,7 @@ declare namespace http {
     NETWORK_CONNECT = 'CONNECT_NETWORK',
 
     /**
-     * Intercept when we get the final HTTP response.
+     * Intercepts when the final HTTP response is obtained.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -994,7 +1023,7 @@ declare namespace http {
    */
   export interface HttpRequestContext {
     /**
-     * The URL of an HTTP request interceptor. It can be modified in an interceptor.
+     * URL obtained by the HTTP interceptor from the HTTP request, which can be modified in the interceptor.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1004,7 +1033,7 @@ declare namespace http {
     url: string;
 
     /**
-     * The header of an HTTP request interceptor. It can be modified in an interceptor.
+     * Request header obtained by the HTTP interceptor from the HTTP request, which can be modified in the interceptor.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1014,7 +1043,7 @@ declare namespace http {
     header: Object;
 
     /**
-     * The header of an HTTP request interceptor. It can be modified in an interceptor.
+     * Request body obtained by the HTTP interceptor from the HTTP request, which can be modified in the interceptor.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1026,6 +1055,7 @@ declare namespace http {
 
   /**
    * Specifies whether to continue to process the interceptor chain.
+   *
    *
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
@@ -1044,7 +1074,7 @@ declare namespace http {
    */
   export interface HttpInterceptor {
     /**
-     * The type of this interceptor. It defines when this intercptor would be called.
+     * Interceptor type, which defines when the interceptor is called.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1056,8 +1086,8 @@ declare namespace http {
     /**
      * Intercepts the HTTP processing and modifies it as required.
      *
-     * @param { HttpRequestContext } reqContext - the context of the target HTTP request.
-     * @param { HttpResponse } rspContext - the context of the target HTTP response.
+     * @param { HttpRequestContext } reqContext - Context of the request parameters passed through the HTTP interceptor.
+     * @param { HttpResponse } rspContext - Context of the return result passed through the HTTP interceptor.
      * @returns { Promise<ChainContinue> } Continues the HTTP processing or stops and returns an HTTP response.
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1153,7 +1183,7 @@ declare namespace http {
    */
   export interface Credential {
     /**
-     * Username of credential. Default is ''.
+     * Username used for authentication. The default value is ''.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1162,7 +1192,7 @@ declare namespace http {
      */
     username: string;
     /**
-     * Password of credential. Default is ''.
+     * Password used for authentication. The default value is ''.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @atomicservice
@@ -1231,18 +1261,18 @@ declare namespace http {
   /**
    * Enumerates cipher suites supported by TLS 1.2 or later.
    *
-   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256' } Supported cipher suite: TLS_ECDHE_ECDSA_WITH_AES_128
-   *     _GCM_SHA256. The value is a string.
-   * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256' } Supported cipher suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA
-   *     256. The value is a string.
-   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384' } Supported cipher suite: TLS_ECDHE_ECDSA_WITH_AES_256
-   *     _GCM_SHA384. The value is a string.
-   * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384' } Supported cipher suite: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA
-   *     384. The value is a string.
+   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256' } Supported cipher suite:
+   *     TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256. The value is a string.
+   * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256' } Supported cipher suite:
+   *     TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256. The value is a string.
+   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384' } Supported cipher suite:
+   *     TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384. The value is a string.
+   * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384' } Supported cipher suite:
+   *     TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384. The value is a string.
    * @unionmember { 'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256' } Supported cipher suite:
    *     TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256. The value is a string.
-   * @unionmember { 'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256' } Supported cipher suite: TLS_ECDHE_RSA_WITH_CHACHA20
-   *     _POLY1305_SHA256. The value is a string.
+   * @unionmember { 'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256' } Supported cipher suite:
+   *     TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256. The value is a string.
    * @unionmember { 'TLS_RSA_WITH_AES_128_GCM_SHA256' } Supported cipher suite: TLS_RSA_WITH_AES_128_GCM_SHA256. The
    *     value is a string.
    * @unionmember { 'TLS_RSA_WITH_AES_256_GCM_SHA384' } Supported cipher suite: TLS_RSA_WITH_AES_256_GCM_SHA384. The
@@ -1257,12 +1287,12 @@ declare namespace http {
   /**
    * Enumerates cipher suites supported by TLS 1.0 or later.
    *
-   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA' } Supported cipher suite: TLS_ECDHE_ECDSA_WITH_AES_128
-   *     _CBC_SHA. The value is a string.
+   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA' } Supported cipher suite:
+   *     TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA. The value is a string.
    * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA' } Supported cipher suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA.
    *     The value is a string.
-   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA' } Supported cipher suite: TLS_ECDHE_ECDSA_WITH_AES_256
-   *     _CBC_SHA. The value is a string.
+   * @unionmember { 'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA' } Supported cipher suite:
+   *     TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA. The value is a string.
    * @unionmember { 'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA' } Supported cipher suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.
    *     The value is a string.
    * @unionmember { 'TLS_RSA_WITH_AES_128_CBC_SHA' } Supported cipher suite: TLS_RSA_WITH_AES_128_CBC_SHA. The value is
@@ -1443,7 +1473,7 @@ declare namespace http {
     data?: string | Object | ArrayBuffer;
 
     /**
-     * This parameter sets a mime part's body content from memory data.
+     * Form data content.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 26.0.1 static
@@ -1628,7 +1658,7 @@ declare namespace http {
    */
   export interface HttpRequest {
     /**
-     * Initiates an HTTP request to a given URL. This API uses an asynchronous callback to return the result.
+     * Initiates an HTTP network request to a given URL. This API uses an asynchronous callback to return the result.
      *
      * > **NOTE**
      * >
@@ -1645,7 +1675,7 @@ declare namespace http {
      * > HTTP request.
      *
      * @permission ohos.permission.INTERNET
-     * @param { string } url - URL for initiating an HTTP request.
+     * @param { string } url - URL for initiating the network request. Example: https://www.test.com
      * @param { AsyncCallback<HttpResponse> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
@@ -1680,8 +1710,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1691,8 +1720,8 @@ declare namespace http {
     request(url: string, callback: AsyncCallback<HttpResponse>): void;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to
-     * return the result.
+     * Initiates an HTTP network request to a given URL with the specified options. This API uses an asynchronous
+     * callback to return the result.
      *
      * > **NOTE**
      * >
@@ -1748,8 +1777,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1759,8 +1787,7 @@ declare namespace http {
     request(url: string, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): void;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses a promise to return the
-     * result.
+     * Initiates an HTTP network request to a given URL. This API uses a promise to return the result.
      *
      * > **NOTE**
      * >
@@ -1780,7 +1807,7 @@ declare namespace http {
      * @param { string } url - URL for initiating an HTTP request.
      * @param { HttpRequestOptions } [options] - Request options. For details, see
      *     [HttpRequestOptions]{@link http.HttpRequestOptions}.
-     * @returns { Promise<HttpResponse> } Promise used to return the result.
+     * @returns { Promise<HttpResponse> } Promise used to return the response result of the request.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300001 - Unsupported protocol.
@@ -1814,8 +1841,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1839,8 +1865,6 @@ declare namespace http {
      * > HTTP request.
      *
      * > (4) This API is synchronous and blocks the current thread until an HTTP response or error code is returned.
-     *
-     * **Required permission**: ohos.permission.INTERNET
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - URL for initiating an HTTP request.
@@ -1889,13 +1913,14 @@ declare namespace http {
     requestSync(url: string, options?: HttpRequestOptions): HttpResponse;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to
-     * return the result, which is a streaming response.
+     * Initiates an HTTP network request to a given URL and returns a streaming response. This API uses an asynchronous
+     * callback to return the result.
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - URL for initiating an HTTP request.
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the request is successful,
-     *     **err** is **undefined**, and the HTTP result code is returned. Otherwise, **err** is an error object.
+     *     **err** is **undefined**, and the HTTP request response error code is returned. For details about the
+     *     meaning, see [ResponseCode]{@link http.ResponseCode}. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300001 - Unsupported protocol.
@@ -1929,8 +1954,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -1940,16 +1964,16 @@ declare namespace http {
     requestInStream(url: string, callback: AsyncCallback<int>): void;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses an asynchronous callback to
-     * return the result, which is a streaming response.
+     * Initiates an HTTP network request to a given URL with the specified options and returns a streaming response.
+     * This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - URL for initiating an HTTP request.
      * @param { HttpRequestOptions } options - Request options. For details, see
      *     [HttpRequestOptions]{@link http.HttpRequestOptions}.
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the request is successful,
-     *     **err** is **undefined**, and the [HTTP result code]{@link http.ResponseCode} is returned. Otherwise, **err**
-     *     is an error object.
+     *     **err** is **undefined**, and the HTTP request response error code is returned. For details about the
+     *     meaning, see [ResponseCode]{@link http.ResponseCode}. Otherwise, an error object is returned.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300001 - Unsupported protocol.
@@ -1983,8 +2007,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -1994,14 +2017,15 @@ declare namespace http {
     requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallback<int>): void;
 
     /**
-     * Initiates an HTTP request containing specified options to a given URL. This API uses a promise to return the
-     * result, which is a streaming response.
+     * Initiates an HTTP network request to a given URL and returns a streaming response. This API uses a promise to
+     * return the result.
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - URL for initiating an HTTP request.
      * @param { HttpRequestOptions } [options] - Request options. For details, see
      *     [HttpRequestOptions]{@link http.HttpRequestOptions}.
-     * @returns { Promise<int> } Promise used to return the [result]{@link http.ResponseCode}.
+     * @returns { Promise<int> } Promise used to return the result of initiating the request. For details, see
+     *     [ResponseCode]{@link http.ResponseCode}.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300001 - Unsupported protocol.
@@ -2035,8 +2059,7 @@ declare namespace http {
      * @throws { BusinessError } 2300999 - Internal error.
      * @throws { BusinessError } 2300998 - It is not allowed to access this domain. [since 12]
      * @throws { BusinessError } 2300997 - Cleartext traffic not permitted. [since 18]
-     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global
-     *     interceptor. [since 26.0.0]
+     * @throws { BusinessError } 2300996 - The request was intercepted by the HTTP global interceptor. [since 26.0.0]
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -2136,10 +2159,11 @@ declare namespace http {
     offHeadersReceive(callback?: Callback<Record<string, string>>): void;
 
     /**
-     * Registers a one-time observer for HTTP Response Header events. Once triggered, the observer will be removed. This
-     * API uses an asynchronous callback to return the result.
+     * Subscribes to the HTTP Response Header event, which triggers only once. After it is triggered, the subscriber is
+     * removed. This API uses an asynchronous callback to return the result.
      *
-     * @param { "headersReceive" } type - Event type. The value is **headersReceive**.
+     * @param { "headersReceive" } type - Subscription event. The value is fixed to **'headersReceive'**, which
+     *     indicates the response header receive event.
      * @param { Callback<Object> } callback - Callback used to return the HTTP response header.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2163,9 +2187,9 @@ declare namespace http {
      * Registers an observer for events indicating receiving of HTTP streaming responses.
      *
      * @param { "dataReceive" } type - Event type. The value is **dataReceive**.
-     * @param { Callback<ArrayBuffer> } callback - Callback used to return the result. If the operation is successful,
-     *     **error** is **undefined**, and **data** is the received HTTP streaming data of the ArrayBuffer type.
-     *     Otherwise, **error** is an error object.
+     * @param { Callback<ArrayBuffer> } callback - Callback used to return the result. If the subscription is
+     *     successful, **err** is **undefined** and data is the received HTTP streaming data of the ArrayBuffer type.
+     *     Otherwise, the value is an error object.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 18]
      * @atomicservice [since 15]
@@ -2371,13 +2395,20 @@ declare namespace http {
      *
      * > **NOTE**
      * >
-     * > (1) The default value is **false**, indicating that cookies are not automatically carried.
-     *
-     * > (2) If the value is changed from **false** to **true**, the setting takes effect when the **request** API is
-     * > called to initiate a request, and cookies are automatically shared.
-     *
-     * > (3) If the value is changed from **true** to **false**, the cookie sharing status stored in the current
-     * > instance is cleared.
+     * > (1) The default value is **false**, which means cookies are not automatically carried by default.
+     * >
+     * > (2) When the configuration is switched from **false** to **true**, it takes effect in subsequent requests
+     * > initiated by calling the **request** API, and cookies are automatically shared.
+     * >
+     * > (3) When the configuration is switched from **true** to **false**, the cookie sharing state saved in the
+     * > current instance is cleared.
+     * >
+     * > (4) Cookie handling in redirection scenarios: Cookies manually configured through the **header** field are
+     * > not automatically sent to the target host after redirection. Only cookies delivered by the server through
+     * > **Set-Cookie** are automatically carried based on domain name rules.
+     * >
+     * > (5) Cross-domain cookie carrying rules: Automatic cookie carrying takes effect only between the same domain
+     * > name or the same subdomain. Automatic cookie carrying is not supported between different domain names.
      *
      * @param { boolean } enable - Whether to automatically carry cookies. **true**: yes; **false**: no.
      * @syscap SystemCapability.Communication.NetStack
@@ -2399,7 +2430,7 @@ declare namespace http {
    */
   export enum RequestMethod {
     /**
-     * Describes the communication options of the target resource.
+     * Describes the communication options for the target resource.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2410,8 +2441,8 @@ declare namespace http {
     OPTIONS = "OPTIONS",
 
     /**
-     * Requests the representation of the specified resource. The GET request should only retrieve data and should not
-     * contain the request content.
+     * Requests a representation of the specified resource. Requests using **GET** should only retrieve data and should
+     * not contain a request body.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2422,7 +2453,7 @@ declare namespace http {
     GET = "GET",
 
     /**
-     * Requests the same response (but does not have a response body) as the GET request.
+     * Requests or a response identical to that of a **GET** request, but without the response body.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2433,7 +2464,7 @@ declare namespace http {
     HEAD = "HEAD",
 
     /**
-     * Submits an entity to a specified resource, which usually causes a status change on the server.
+     * Submits an entity to the specified resource, often causing a change in state on the server.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2444,7 +2475,7 @@ declare namespace http {
     POST = "POST",
 
     /**
-     * Replaces all current representations of the target resource with the requested content.
+     * Replaces all current representations of the target resource with the request content.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2466,7 +2497,7 @@ declare namespace http {
     DELETE = "DELETE",
 
     /**
-     * Performs a message loopback test along the path to the target resource.
+     * Performs a message loop-back test along the path to the target resource.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2488,9 +2519,7 @@ declare namespace http {
     CONNECT = "CONNECT",
 
     /**
-     * Modifies a resource partially.
-     *
-     * **Since**: 26.0.0
+     * Applies partial modifications to a resource.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -2980,7 +3009,7 @@ declare namespace http {
    */
   export enum HttpDataType {
     /**
-     * The returned type is string.
+     * String type.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2991,7 +3020,7 @@ declare namespace http {
     STRING = 0,
 
     /**
-     * The returned type is Object.
+     * Object type.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -3002,7 +3031,7 @@ declare namespace http {
     OBJECT = 1,
 
     /**
-     * The returned type is ArrayBuffer.
+     * Binary array type.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -3044,8 +3073,14 @@ declare namespace http {
     result: string | Object | ArrayBuffer;
 
     /**
-     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
-     * If {@link HttpRequestOptions#expectDataType} is set, the system preferentially returns this parameter.
+     * Response content returned based on **Content-type** in the response header. If **HttpRequestOptions** does not
+     * contain the **expectDataType** field, the response content is returned according to the following rules:
+     * - application/json: string in JSON format
+     * - application/octet-stream: ArrayBuffer
+     * - image: ArrayBuffer
+     * - Others: string
+     * If **HttpRequestOptions** contains the **expectDataType** field, the response content must be of the same type as
+     * the data returned by the server.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 26.0.1 static
@@ -3094,7 +3129,12 @@ declare namespace http {
     header: Object;
 
     /**
-     * All headers in the response from the server.
+     * Response header. The return value is a string in JSON format. If you want to use specific content in the
+     * response, you need to implement parsing of that content. Common fields and parsing methods are as follows:
+     * - content-type: header['content-type']
+     * - status-line: header['status-line']
+     * - date: header.date/header['date']
+     * - server: header.server/header['server']
      *
      * @syscap SystemCapability.Communication.NetStack
      * @FaAndStageModel
@@ -3138,7 +3178,7 @@ declare namespace http {
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface HttpResponseMetadata {
     /**
@@ -3148,7 +3188,7 @@ declare namespace http {
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     responseCode: ResponseCode;
 
@@ -3157,7 +3197,7 @@ declare namespace http {
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     header: Record<string, string>;
   }
@@ -3173,8 +3213,8 @@ declare namespace http {
   export interface ConnectionExtraInfo {
     /**
      * HTTP version used in the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}, for example, 'HTTP
-     * /1.0', 'HTTP/1.1', 'HTTP/2', 'HTTP/2 over TLS', 'HTTP/3', or 'Unknown/Non-HTTP'.
+     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}, for example,
+     * 'HTTP/1.0', 'HTTP/1.1', 'HTTP/2', 'HTTP/2 over TLS', 'HTTP/3', or 'Unknown/Non-HTTP'.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -3285,33 +3325,27 @@ declare namespace http {
 
     /**
      * Total number of bytes actually sent over the HTTP request link, including the request line, request header, and
-     * request body. The unit is byte.
-     * Unit: Byte.
-     * .
-     * . The value should be an integer.
+     * request body. The unit is byte. Unit: Byte. . . The value should be an integer.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     sentTotalBytes?: int;
 
     /**
      * Total number of bytes actually received over the HTTP request link, including the status line, response header,
-     * and response body. The unit is byte.
-     * Unit: Byte.
-     * .
-     * . The value should be an integer.
+     * and response body. The unit is byte. Unit: Byte. . . The value should be an integer.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     receivedTotalBytes?: int;
   }
 
   /**
-   * Configures the timing for performance tracing, in ms.
+   * Defines the performance timing (unit: ms).
    *
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 12]
@@ -3320,9 +3354,8 @@ declare namespace http {
    */
   export interface PerformanceTiming {
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the DNS resolution is complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to DNS resolution completion. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3332,9 +3365,8 @@ declare namespace http {
     dnsTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the TCP connection is complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to TCP connection completion. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3344,9 +3376,8 @@ declare namespace http {
     tcpTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the TLS connection is complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to TLS connection completion. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3356,9 +3387,8 @@ declare namespace http {
     tlsTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the first byte is sent.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to the start of sending the first byte. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3368,9 +3398,8 @@ declare namespace http {
     firstSendTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the first byte is received.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to receiving the first byte. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3380,9 +3409,8 @@ declare namespace http {
     firstReceiveTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the request is complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to request completion. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3392,9 +3420,8 @@ declare namespace http {
     totalFinishTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when all redirection steps are complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to completion of all redirect steps. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3404,9 +3431,8 @@ declare namespace http {
     redirectTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the header resolution is complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to header parsing completion. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3416,9 +3442,8 @@ declare namespace http {
     responseHeaderTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when the body resolution is complete.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * to body parsing completion. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3428,9 +3453,8 @@ declare namespace http {
     responseBodyTiming: double;
 
     /**
-     * Duration from the time when the
-     * [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)} is sent to the time
-     * when a callback is returned to the application.
+     * Time elapsed from [request]{@link http.HttpRequest.request(url: string, callback: AsyncCallback<HttpResponse>)}
+     * callback to the application. Unit: millisecond (ms).
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3451,7 +3475,7 @@ declare namespace http {
    */
   export interface DataReceiveProgressInfo {
     /**
-     * Amount of data that has been received, in bytes.
+     * Amount of data received, in bytes.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3461,7 +3485,7 @@ declare namespace http {
      */
     receiveSize: int;
     /**
-     * Amount of data to be received, in bytes.
+     * Total amount of data to be received, in bytes.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3483,7 +3507,7 @@ declare namespace http {
    */
   export interface DataSendProgressInfo {
     /**
-     * Amount of data to be sent each time, in bytes.
+     * Amount of data sent each time, in bytes.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3493,7 +3517,7 @@ declare namespace http {
      */
     sendSize: int;
     /**
-     * Amount of data to be sent, in bytes.
+     * Total amount of data to be sent, in bytes.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -3509,8 +3533,9 @@ declare namespace http {
    * [flush]{@link http.HttpResponseCache.flush(callback: AsyncCallback<void>)} and
    * [delete]{@link http.HttpResponseCache.delete(callback: AsyncCallback<void>)} in the object.
    *
-   * @param { int } cacheSize - Cache size. The maximum value is 10*1024*1024 (10 MB). The maximum value is used by
-   *     default.
+   * @param { int } cacheSize - Response cache size, in bytes. The value range is from 1*1024*1024 to 10*1024*1024, that
+   *     is, from 1 MB to 10 MB. The default value is 10 MB. If the value exceeds 10 MB, it is set to 10 MB; if the
+   *     value is less than 1 MB, it is set to 1 MB.
    * @returns { HttpResponseCache } Object that stores the response to the HTTP request.
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 10]
@@ -3540,9 +3565,9 @@ declare namespace http {
    * determines whether to use the cached resource and how to verify whether the resource is the latest based on the
    * response header. Correct cache policies help to improve application performance and user experience.
    *
-   * **How to Set the Cache-Control Header**
-   * `Cache-Control` is a common header, but it is usually used on the server. It allows you to define when, how, and
-   * how long a response should be cached. The following are some common `Cache-Control` directives:
+   * **How to Set the Cache-Control Header** `Cache-Control` is a common header, but it is usually used on the server.
+   * It allows you to define when, how, and how long a response should be cached. The following are some common
+   * `Cache-Control` directives:
    *
    * - **`no-cache`**: indicates that the response can be stored in the cache, but it must be verified with the origin
    * server before each reuse. If the resource remains unchanged, the response status code is 304 (Not Modified). In
@@ -3570,11 +3595,11 @@ declare namespace http {
    */
   export interface HttpResponseCache {
     /**
-     * Flushes data in the cache to the file system so that the cached data can be accessed in the next HTTP request.
-     * This API uses an asynchronous callback to return the result. Cached data includes the response header (header),
-     * response body (result), cookies, request time (requestTime), and response time (responseTime).
+     * Writes the data in the cache to the file system so that all cached data can be accessed in the next HTTP request.
+     * This API uses an asynchronous callback to return the result. The cached data includes the response header,
+     * response body (**result**), cookies, request time (**requestTime**), and response time (**responseTime**).
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.  If the operation is successful,
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -3585,7 +3610,7 @@ declare namespace http {
     flush(callback: AsyncCallback<void>): void;
 
     /**
-     * Flushes data in the cache to the file system so that the cached data can be accessed in the next HTTP request.
+     * Writes the data in the cache to the file system so that all cached data can be accessed in the next HTTP request.
      * This API uses a promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value.

@@ -117,7 +117,6 @@ declare namespace connection {
    * > - [NetHandle]{@link connection.NetHandle} is the unique identifier of the network. If no network is available,
    * > **0** is returned. It can be used by [getNetCapabilities]{@link connection.getNetCapabilities} to query more
    * > network information.
-   * > **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<NetHandle> } callback - Callback used to return the result. When the network handle of the
@@ -152,7 +151,6 @@ declare namespace connection {
    * > - [NetHandle]{@link connection.NetHandle} is the unique identifier of the network. If no network is available,
    * > **0** is returned. It can be used by [getNetCapabilities]{@link connection.getNetCapabilities} to query more
    * > network information.
-   * > **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<NetHandle> } Promise used to return the network handle of the default network.
@@ -184,7 +182,6 @@ declare namespace connection {
    * > - [NetHandle]{@link connection.NetHandle} is the unique identifier of the network. If no network is available,
    * > **0** is returned. It can be used by [getNetCapabilities]{@link connection.getNetCapabilities} to query more
    * > network information.
-   * > **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { NetHandle } Network handle of the default network.
@@ -201,14 +198,14 @@ declare namespace connection {
   /**
    * Obtains the list of all connected networks. This API uses an asynchronous callback to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<Array<NetHandle>> } callback - Callback used to return the result. If the list of all
    *     connected networks is obtained successfully, **error** is **undefined** and **data** is the list of activated
    *     networks. Otherwise, **error** is an error object.
-   *     <br> Note: If Wi-Fi and cellular data are both enabled, and no application specifies the use of cellular data,
-   *     only Wi-Fi is activated. In this case, only the **NetHandle** of Wi-Fi is returned. The NetHandle of Wi-Fi and
+   *     <br>
+   *     Note: If Wi-Fi and cellular data are both enabled, and no application specifies the use of cellular data, only
+   *     Wi-Fi is activated. In this case, only the **NetHandle** of Wi-Fi is returned. The NetHandle of Wi-Fi and
    *     cellular data can be obtained at the same time only when a specific application enables the cellular network.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
@@ -223,7 +220,6 @@ declare namespace connection {
   /**
    * Obtains the list of all connected networks. This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<Array<NetHandle>> } Promise used to return the list of activated networks.
@@ -239,7 +235,6 @@ declare namespace connection {
   /**
    * Obtains the list of all connected networks. This API returns the result synchronously.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Array<NetHandle> } List of all connected networks.
@@ -257,7 +252,6 @@ declare namespace connection {
    * name, link information, route information, network address, and maximum transmission unit. This API uses an
    * asynchronous callback to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -280,7 +274,6 @@ declare namespace connection {
    * name, link information, route information, network address, and maximum transmission unit. This API uses a promise
    * to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Handle of the data network.
@@ -301,7 +294,6 @@ declare namespace connection {
    * name, link information, route information, network address, and maximum transmission unit. This API returns the
    * result synchronously.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -322,7 +314,6 @@ declare namespace connection {
    * downlink bandwidth, specific network capabilities, and network type. This API uses an asynchronous callback to
    * return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -345,7 +336,6 @@ declare namespace connection {
    * Obtains the network capability set of the data network specified by **NetHandle**, including the uplink and
    * downlink bandwidth, specific network capabilities, and network type. This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -366,7 +356,6 @@ declare namespace connection {
    * Obtains the network capability information of the data network specified by **NetHandle**, including the uplink and
    * downlink bandwidth, specific network capabilities, and network type. This API returns the result synchronously.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -430,7 +419,6 @@ declare namespace connection {
    * Obtains the extended attributes of the network specified by **netHandle** to determine its security level. This API
    * uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -449,7 +437,6 @@ declare namespace connection {
    * Obtains the extended attributes of the network specified by **netHandle** to determine its security level. This API
    * returns the result synchronously.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -469,7 +456,6 @@ declare namespace connection {
    * is not metered, whereas that over cellular networks is. This API uses an asynchronous callback to return the
    * result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** indicates that
@@ -488,7 +474,6 @@ declare namespace connection {
    * Checks whether the data traffic over the current default network is metered. For example, data traffic over Wi-Fi
    * is not metered, whereas that over cellular networks is. This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the data traffic
@@ -506,7 +491,6 @@ declare namespace connection {
    * Checks whether the data traffic over the current network is metered. For example, data traffic over Wi-Fi is not
    * metered, whereas that over cellular networks is. This API returns the result synchronously.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { boolean } Boolean value indicating whether data traffic over the current network is metered. The value
@@ -525,7 +509,6 @@ declare namespace connection {
    * is an available network, [getDefaultNet]{@link connection.getDefaultNet} can be used to obtain the default network
    * handle.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<boolean> } callback - Callback used to return whether there is an available network. The
@@ -546,7 +529,6 @@ declare namespace connection {
    * available network, [getDefaultNet]{@link connection.getDefaultNet} can be used to obtain the default network
    * handle.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<boolean> } Promise used to return whether there is an available network. The value **true**
@@ -564,7 +546,6 @@ declare namespace connection {
   /**
    * Checks whether there is an available network. This API returns the result synchronously.
    *
-   * **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { boolean } Whether there is an available network. The value **true** indicates that a network is
@@ -579,7 +560,7 @@ declare namespace connection {
   function hasDefaultNetSync(): boolean;
 
   /**
-   * Enables the airplane mode. This API uses an asynchronous callback to return the result.
+   * Enables airplane mode. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
@@ -654,7 +635,6 @@ declare namespace connection {
    * > This API is used by the browser to connect to the portal network. After the network authentication is successful,
    * > the browser reports the network connection success to the network management module. The network management
    * > module then triggers network detection and updates the network status.
-   * > **Permission required**: ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle. For details, see [NetHandle]{@link connection.NetHandle}.
@@ -675,11 +655,10 @@ declare namespace connection {
    * Reports that the network is available to the network management module. This API uses a promise to return the
    * result.
    *
-   * **Permission required**: ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle. For details, see [NetHandle]{@link connection.NetHandle}.
-   * @returns { Promise<void> } The promise returned by the function.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -695,7 +674,6 @@ declare namespace connection {
    * Reports the network unavailability to the network management module. This API uses an asynchronous callback to
    * return the result.
    *
-   * **Permission required**: ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle. For details, see [NetHandle]{@link connection.NetHandle}.
@@ -715,11 +693,10 @@ declare namespace connection {
   /**
    * Reports the network unavailability to the network management module. This API uses a promise to return the result.
    *
-   * **Permission required**: ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle.
-   * @returns { Promise<void> } The promise returned by the function.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -832,6 +809,15 @@ declare namespace connection {
    * Binds an application to the network specified by **netHandle**, so that the application can access the external
    * network only through this network. This API uses an asynchronous callback to return the result.
    *
+   * > **NOTE**
+   * >
+   * > When the application no longer uses the network or the network is unavailable, you need to unbind the
+   * > application from the specified network to prevent the application from failing to access the Internet.
+   * >
+   * > To unbind the application from the specified network, call
+   * > [setAppNet]{@link connection.setAppNet(netHandle: NetHandle, callback: AsyncCallback<void>)} and pass a
+   * > **NetHandle** object with **netId** set to **0**. For details, see the following example.
+   *
    * @permission ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the application is successfully
@@ -851,6 +837,15 @@ declare namespace connection {
    * Binds an application to the network specified by **netHandle**, so that the application can access the external
    * network only through this network. This API uses a promise to return the result. This API uses a promise to return
    * the result.
+   *
+   * > **NOTE**
+   * >
+   * > When the application no longer uses the network or the network is unavailable, you need to unbind the
+   * > application from the specified network to prevent the application from failing to access the Internet.
+   * >
+   * > To unbind the application from the specified network, call
+   * > [setAppNet]{@link connection.setAppNet(netHandle: NetHandle)} and pass a
+   * > **NetHandle** object with **netId** set to **0**. For details, see the following example.
    *
    * @permission ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle.
@@ -872,12 +867,9 @@ declare namespace connection {
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { string } ifaceName - the name of the interface to set up.
    *     <br>Value range:(0,1024]
-   *     <br>Name of the actual network adapter to be started
-   *     If the network adapter exists, try to up the network adapter.
-   *     If the network adapter does not exist or does not meet the up condition, the network adapter fails to be up.
-   *     The network adapter exists in the kernel, and the network adapter meets the up condition.
-   *     None
-   *     None
+   *     <br>Name of the actual network adapter to be started If the network adapter exists, try to up the network
+   *     adapter. If the network adapter does not exist or does not meet the up condition, the network adapter fails to
+   *     be up. The network adapter exists in the kernel, and the network adapter meets the up condition. None None
    * @returns { Promise<void> } the promise returned by the function.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -898,9 +890,10 @@ declare namespace connection {
    * >
    * > - If the global proxy is set, the global proxy configuration is returned.
    * >
-   * > - If [setAppNet]{@link connection.setAppNet} is used to bind the application to the network specified by
-   * > [NetHandle]{@link connection.NetHandle}, the HTTP proxy configuration of this network is returned. In other
-   * > cases, the HTTP proxy configuration of the default network is returned.
+   * > - If [setAppNet]{@link connection.setAppNet(netHandle: NetHandle, callback: AsyncCallback<void>)}
+   * > is used to bind the application to the network specified by [NetHandle]{@link connection.NetHandle},
+   * > the HTTP proxy configuration of this network is returned. In other cases,
+   * > the HTTP proxy configuration of the default network is returned.
    *
    * @param { AsyncCallback<HttpProxy> } callback - Callback used to return the result. If the global HTTP proxy
    *     configuration of the network is obtained successfully, **error** is **undefined** and **data** is the global
@@ -920,9 +913,9 @@ declare namespace connection {
    * >
    * > - If the global proxy is set, the global proxy configuration is returned.
    * >
-   * > - If [setAppNet]{@link connection.setAppNet} is used to bind the application to the network specified by
-   * > [NetHandle]{@link connection.NetHandle}, the HTTP proxy configuration of this network is returned. In other
-   * > cases, the HTTP proxy configuration of the default network is returned.
+   * > - If [setAppNet]{@link connection.setAppNet(netHandle: NetHandle)} is used to bind the application to the
+   * > network specified by [NetHandle]{@link connection.NetHandle}, the HTTP proxy configuration of this network
+   * > is returned. In other cases, the HTTP proxy configuration of the default network is returned.
    *
    * @returns { Promise<HttpProxy> } Promise used to return the result.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
@@ -954,7 +947,7 @@ declare namespace connection {
   /**
    * Obtains the global network proxy configuration information. This API uses a promise to return the result.
    *
-   * @returns { Promise<HttpProxy> } Promise used to return the result.
+   * @returns { Promise<HttpProxy> } Promise used to return the global proxy configuration information of the network.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -984,8 +977,7 @@ declare namespace connection {
   function setAppHttpProxy(httpProxy: HttpProxy): void;
 
   /**
-   * Sets the global network HTTP proxy configuration information. This API uses an asynchronous callback to return the
-   * result.
+   * Sets the global HTTP proxy configuration information. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { HttpProxy } httpProxy - Global HTTP proxy configuration of the network.
@@ -1006,7 +998,7 @@ declare namespace connection {
   function setGlobalHttpProxy(httpProxy: HttpProxy, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets the global network HTTP proxy configuration information. This API uses a promise to return the result.
+   * Sets the global HTTP proxy configuration information. This API uses a promise to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { HttpProxy } httpProxy - Global HTTP proxy configuration of the network.
@@ -1025,8 +1017,8 @@ declare namespace connection {
   function setGlobalHttpProxy(httpProxy: HttpProxy): Promise<void>;
 
   /**
-   * Notifies the system that global proxy re-authentication is required.
-   * Upon receiving the notification, the system will reprocess the global proxy's authentication status.
+   * Notifies the system that global proxy re-authentication is required. Upon receiving the notification, the system
+   * will reprocess the global proxy's authentication status.
    *
    * @permission ohos.permission.INTERNET
    * @returns { Promise<HttpProxy> } the promise returned by the function.
@@ -1167,8 +1159,11 @@ declare namespace connection {
    * > **NOTE**
    * >
    * > You can call [removeCustomDnsRule]{@link connection.removeCustomDnsRule} to delete a custom DNS rule or call
-   * > [clearCustomDnsRules]{@link connection.clearCustomDnsRules} to delete all custom DNS rules of the current
-   * > application.
+   * > [clearCustomDnsRules]{@link connection.clearCustomDnsRules(callback: AsyncCallback<void>)} to delete all
+   * > custom DNS rules of the current application.
+   * >
+   * > After a custom DNS rule is added by calling this API, it takes effect persistently, and there is no need to add
+   * > the same rule repeatedly. When it is no longer needed, you can delete it using the methods described above.
    *
    * @permission ohos.permission.INTERNET
    * @param { string } host - Name of the custom host.
@@ -1194,8 +1189,11 @@ declare namespace connection {
    * > **NOTE**
    * >
    * > You can call [removeCustomDnsRule]{@link connection.removeCustomDnsRule} to delete a custom DNS rule or call
-   * > [clearCustomDnsRules]{@link connection.clearCustomDnsRules} to delete all custom DNS rules of the current
+   * > [clearCustomDnsRules]{@link connection.clearCustomDnsRules()} to delete all custom DNS rules of the current
    * > application.
+   * >
+   * > After a custom DNS rule is added by calling this API, it takes effect persistently, and there is no need to add
+   * > the same rule repeatedly. When it is no longer needed, you can delete it using the methods described above.
    *
    * @permission ohos.permission.INTERNET
    * @param { string } host - Name of the custom host.
@@ -1219,7 +1217,11 @@ declare namespace connection {
    *
    * > **NOTE**
    * >
-   * > You can call [addCustomDnsRule]{@link connection.addCustomDnsRule} to add a custom rule.
+   * > Before deletion, ensure that no thread is currently using the custom rule to avoid conflicts.
+   * >
+   * > You can call
+   * > [addCustomDnsRule]{@link connection.addCustomDnsRule(host: string, ip: Array<string>, callback: AsyncCallback<void>)}
+   * > to add a custom rule.
    *
    * @permission ohos.permission.INTERNET
    * @param { string } host - Name of the host for which DNS rules are to be deleted.
@@ -1243,7 +1245,10 @@ declare namespace connection {
    *
    * > **NOTE**
    * >
-   * > You can call [addCustomDnsRule]{@link connection.addCustomDnsRule} to add a custom rule.
+   * > Before deletion, ensure that no thread is currently using the custom rule to avoid conflicts.
+   * >
+   * > You can call [addCustomDnsRule]{@link connection.addCustomDnsRule(host: string, ip: Array<string>)} to
+   * > add a custom rule.
    *
    * @permission ohos.permission.INTERNET
    * @param { string } host - Name of the host for which DNS rules are to be deleted.
@@ -1264,6 +1269,12 @@ declare namespace connection {
    * Removes all custom DNS rules of the current application. This API uses an asynchronous callback to return the
    * result.
    *
+   * > **NOTE**
+   * >
+   * > Before deletion, ensure that no thread is currently using the existing custom rules to avoid conflicts.
+   * >
+   * > You can call [addCustomDnsRule]{@link connection.addCustomDnsRule(host: string, ip: Array<string>, callback: AsyncCallback<void>)} to add a custom rule.
+   *
    * @permission ohos.permission.INTERNET
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If all the DNS rules are removed
    *     successfully, **error** is **undefined**. Otherwise, **error** is an error object.
@@ -1281,6 +1292,12 @@ declare namespace connection {
   /**
    * Removes all custom DNS rules of the current application. This API uses a promise to return the result.
    *
+   * > **NOTE**
+   * >
+   * > Before deletion, ensure that no thread is currently using the existing custom rules to avoid conflicts.
+   * >
+   * > You can call [addCustomDnsRule]{@link connection.addCustomDnsRule(host: string, ip: Array<string>)} to add a custom rule.
+   *
    * @permission ohos.permission.INTERNET
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1294,7 +1311,7 @@ declare namespace connection {
   function clearCustomDnsRules(): Promise<void>;
 
   /**
-   * Resets the network settings to the factory defaults. This API uses a promise to return the result.
+   * Resets network settings to factory defaults. This API uses a promise to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @returns { Promise<void> } Promise that returns no value.
@@ -1323,7 +1340,6 @@ declare namespace connection {
    * >
    * > - When protocol is set to PROTO_TYPE_UDP, if no UID is found based on the local and remote parameters, the UID is
    * > filtered based on the local parameter and the matched UID is returned.
-   * > **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { ProtocolType } protocol - Type of a network protocol.
@@ -1356,7 +1372,6 @@ declare namespace connection {
    * >
    * > - When protocol is set to PROTO_TYPE_UDP, if no UID is found based on the local and remote parameters, the UID is
    * > filtered based on the local parameter and the matched UID is returned.
-   * > **Required permission**: ohos.permission.GET_NETWORK_INFO
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { ProtocolType } protocol - Type of a network protocol.
@@ -1587,8 +1602,8 @@ declare namespace connection {
    * > End-->, the caller needs to apply for both **ohos.permission.APPROXIMATELY_LOCATION** and
    * > **ohos.permission.LOCATION**.
    *
-   * @permission ohos.permission.INTERNET and ohos.permission.ACCESS_NET_TRACE_INFO and
-   *     ohos.permission.LOCATION and ohos.permission.APPROXIMATELY_LOCATION
+   * @permission ohos.permission.INTERNET and ohos.permission.ACCESS_NET_TRACE_INFO and ohos.permission.LOCATION and
+   *     ohos.permission.APPROXIMATELY_LOCATION
    * @param { string } destination - Target domain name or IP address, for example, www.example.com or 8.8.8.8.
    * @param { TraceRouteOptions } [option] - Options for route tracing. If this parameter is not specified, the default
    *     configuration is used.
@@ -1641,9 +1656,67 @@ declare namespace connection {
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function renewDhcp(netHandle: NetHandle): void;
+
+  /**
+   * Register the event listener for changing the application proxy information.
+   *
+   * > **NOTE**
+   * > After an application invokes this API to complete subscription, the application proxy configuration changes.
+   * (Enable or disable the proxy, modify the proxy address, port, and bypass list.), the system immediately triggers a
+   * callback to push the latest complete proxy information to the application. The application can update its network
+   * proxy logic within the callback. The update takes effect in real time without cold startup or network switchover.
+   *
+   * @param { Callback<HttpProxy> } callback - Callback for returning results.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onAppHttpProxy(callback: Callback<HttpProxy>): void;
+
+  /**
+   * Unsubscribe from the `AppHttpProxy` event.
+   *
+   * @param { Callback<HttpProxy> } [callback] - Callback of the returned result.
+   *     <br>Default value: Undefiend.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offAppHttpProxy(callback?: Callback<HttpProxy>): void;
+
+  /**
+   * Registers the listener for changing the default proxy information.
+   *
+   * > **NOTE**
+   * > After an application invokes this interface,
+   * > After the subscription is complete, the system agent configuration changes. (Enable or disable proxy, modify
+   * proxy)
+   * > Address, port, and bypass list.) * *. The system immediately triggers the callback and pushes the latest full
+   * proxy.
+   * > Information about the application. An application can update its network proxy logic in a callback. The update
+   * takes effect on
+   * > Real-time, no cold start or network switchover required.
+   *
+   * @param { Callback<HttpProxy> } callback - Callback for returning results.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onDefaultHttpProxy(callback: Callback<HttpProxy>): void;
+
+  /**
+   * Unsubscribe from the `defaultHttpProxy` event.
+   *
+   * @param { Callback<HttpProxy> } [callback] - Callback of the returned result.
+   *     <br>Default value: Undefiend.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offDefaultHttpProxy(callback?: Callback<HttpProxy>): void;
 
   /**
    * Describes the information about the TCP and UDP ports that are currently listened for by the system.
@@ -2002,8 +2075,8 @@ declare namespace connection {
      *
      * @param { 'netBlockStatusChange' } type - Event type. This field has a fixed value of **netBlockStatusChange**.
      *     <br>**netBlockStatusChange**: event indicating a change in the network blocking status.
-     * @param { Callback<{ netHandle: NetHandle, blocked: boolean }> } callback - Callback used to return the
-     *     result. [since 8 - 10]
+     * @param { Callback<{ netHandle: NetHandle, blocked: boolean }> } callback - Callback used to return the result.
+     *     [since 8 - 10]
      * @param { Callback<NetBlockStatusInfo> } callback - Callback used to return the result. [since 11]
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 8 dynamic
@@ -2130,7 +2203,6 @@ declare namespace connection {
      * > **NOTE**
      * >
      * > After using the **register** API, you need to call **unregister** to deregister the listener.
-     * > **Required permission**: ohos.permission.GET_NETWORK_INFO
      *
      * @permission ohos.permission.GET_NETWORK_INFO
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If a listener for network status
@@ -2705,7 +2777,7 @@ declare namespace connection {
   }
 
   /**
-   * Enumerates the proxy modes. This API uses a promise to return the result.
+   * Enumerates the proxy modes.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use. Only used for system app.
@@ -2735,7 +2807,7 @@ declare namespace connection {
   }
 
   /**
-   * Socks5 DNS strategy
+   * Defines the DNS query strategy configuration of the SOCKS5 proxy.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
@@ -2744,7 +2816,7 @@ declare namespace connection {
    */
   export enum Socks5DnsStrategy {
     /**
-     * System DNS mode.
+     * When the SOCKS5 proxy is used, the system performs DNS resolution.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -2754,7 +2826,7 @@ declare namespace connection {
     SYSTEM_MODE = 0,
 
     /**
-     * Proxy DNS mode.
+     * When the SOCKS5 proxy is used, the proxy server performs DNS resolution.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -2831,8 +2903,8 @@ declare namespace connection {
 
     /**
      * Whether IPv4 is available on the current network. **true**: IPv4 is available when the IPv4 address is valid and
-     * the default IPv4 route exists. **false**: IPv4 is unavailable when the IPv4 address is invalid or the default IPv
-     * 4 route does not exist.
+     * the default IPv4 route exists. **false**: IPv4 is unavailable when the IPv4 address is invalid or the default
+     * IPv4 route does not exist.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -2842,8 +2914,8 @@ declare namespace connection {
     isIPv4LinkValid?: boolean;
     /**
      * Whether IPv6 is available on the current network. **true**: IPv6 is available when the IPv6 address is valid and
-     * the default IPv6 route exists. **false**: IPv6 is unavailable when the IPv6 address is invalid or the default IPv
-     * 6 route does not exist.
+     * the default IPv6 route exists. **false**: IPv6 is unavailable when the IPv6 address is invalid or the default
+     * IPv6 route does not exist.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3081,7 +3153,7 @@ declare namespace connection {
   }
 
   /**
-   * Socks5 Proxy Configuration Information.
+   * Defines the SOCKS5 proxy configuration.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
@@ -3090,7 +3162,9 @@ declare namespace connection {
    */
   export interface Socks5Proxy {
     /**
-     * Proxy server host name.
+     * Host name of the proxy server.
+     *
+     * Note: If this parameter is set to an empty string, no SOCKS5 proxy is configured.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3100,7 +3174,9 @@ declare namespace connection {
     host: string;
 
     /**
-     * Host port.
+     * Host port. Value range: [0, 65535]
+     *
+     * Note: If the parameter value is not within the preceding range, no SOCKS5 proxy is configured.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3110,7 +3186,9 @@ declare namespace connection {
     port: int;
 
     /**
-     * Proxy username.
+     * Name of the user who uses the proxy.
+     *
+     * Note: This parameter takes effect only when the password parameter is set.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3120,7 +3198,9 @@ declare namespace connection {
     username?: string;
 
     /**
-     * Proxy password.
+     * Password of the user who uses the proxy.
+     *
+     * Note: The setting takes effect only when the username parameter is set.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3130,8 +3210,10 @@ declare namespace connection {
     password?: string;
 
     /**
-     * DNS resolution strategy.
-     * Determines whether the client or the proxy server resolves the domain name.
+     * Whether the system or the proxy server performs DNS resolution.
+     *
+     * Note: If this parameter is not specified, the proxy server performs DNS resolution if the host name has the
+     * **socks5h://** prefix, and the system performs DNS resolution otherwise.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3141,7 +3223,23 @@ declare namespace connection {
     dnsStrategy?: Socks5DnsStrategy;
 
     /**
-     * Exclusion list for proxy servers.
+     * List of the names of hosts that do not use a proxy. Host names can be domain names, IP addresses, or wildcards.
+     * The detailed matching rules are as follows:
+     *
+     * - Domain name matching:
+     *  - Exact match: The host name of the proxy server exactly matches any host name in the list.
+     *  - Partial match: The host name of the proxy server contains any host name in the list.
+     *
+     * For example, if **"example.com"** is set in the host name list, "example.com", "www.example.com", and
+     * "example.com:80" will be matched, but "www.myexample.com" and "myexample.com.org" will not be matched.
+     *
+     * - IP address matching: The host name of the proxy server exactly matches any IP address in the list.
+     * - Both the domain name and IP address are added to the list for matching.
+     * - A single asterisk (*) is the only valid wildcard. If the list contains only wildcards, the wildcards match all
+     * host names; that is, the HTTP proxy is disabled. A wildcard can only be added independently. It cannot be added
+     * to the list together with other domain names or IP addresses. Otherwise, the wildcard does not take effect.
+     * - Host names are case insensitive.
+     * 6. Protocol prefixes such as http, https, socks5, and socks5h are not considered during host name matching.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3335,10 +3433,10 @@ declare namespace connection {
     lossRate: int;
 
     /**
-     * Round-trip time (RTT), in milliseconds. Multiple probe packets are sent to the target host. The number of probe
-     * packets is determined by the **duration** parameter in the [queryProbeResult]{@link connection.queryProbeResult}
-     * API. The array elements are the minimum, average, maximum, and standard deviation of the RTTs of these probe
-     * packets, respectively.
+     * Round-trip time (RTT), in milliseconds. When multiple probe packets are sent to the target host, the number of
+     * probe packets is determined by the **duration** parameter in the
+     * [queryProbeResult]{@link connection.queryProbeResult} API. The array elements are the minimum, average, maximum,
+     * and standard deviation of the RTTs of these probe packets, respectively.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @stagemodelonly
@@ -3347,64 +3445,6 @@ declare namespace connection {
      */
     rtt: int[];
   }
-
-  /**
-   * Register the event listener for changing the application proxy information.
-   *
-   * > **NOTE**
-   * > After an application invokes this API to complete subscription, the application proxy configuration changes.
-   * (Enable or disable the proxy, modify the proxy address, port, and bypass list.), the system immediately triggers a
-   * callback to push the latest complete proxy information to the application. The application can update its network
-   * proxy logic within the callback. The update takes effect in real time without cold startup or network switchover.
-   *
-   * @param { Callback<HttpProxy> } callback - Callback for returning results.
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function onAppHttpProxy(callback: Callback<HttpProxy>): void;
-
-  /**
-   * Unsubscribe from the `AppHttpProxy` event.
-   *
-   * @param { Callback<HttpProxy> } [callback] - Callback of the returned result.
-   *     <br>Default value: Undefiend.
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function offAppHttpProxy(callback?: Callback<HttpProxy>): void;
-
-  /**
-   * Registers the listener for changing the default proxy information.
-   *
-   * > **NOTE**
-   * > After an application invokes this interface,
-   * > After the subscription is complete, the system agent configuration changes. (Enable or disable proxy, modify
-   * proxy)
-   * > Address, port, and bypass list.) * *. The system immediately triggers the callback and pushes the latest full
-   * proxy.
-   * > Information about the application. An application can update its network proxy logic in a callback. The update
-   * takes effect on
-   * > Real-time, no cold start or network switchover required.
-   *
-   * @param { Callback<HttpProxy> } callback - Callback for returning results.
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function onDefaultHttpProxy(callback: Callback<HttpProxy>): void;
-
-  /**
-   * Unsubscribe from the `defaultHttpProxy` event.
-   *
-   * @param { Callback<HttpProxy> } [callback] - Callback of the returned result.
-   *     <br>Default value: Undefiend.
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function offDefaultHttpProxy(callback?: Callback<HttpProxy>): void;
 
 }
 

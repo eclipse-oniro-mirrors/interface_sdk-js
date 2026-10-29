@@ -73,8 +73,8 @@ declare namespace statistics {
    * is called. This API uses a promise to return the result.
    *
    * @param { string } nic - NIC name.
-   * @returns { Promise<long> } Promise used to return the total downlink traffic (in bytes) of the specified NIC from
-   *     the last startup to the current moment.
+   * @returns { Promise<long> } Promise used to return the total downlink traffic of the specified network card from the
+   *     last boot to the time of interface call (unit: bytes).
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -111,8 +111,8 @@ declare namespace statistics {
    * called. This API uses a promise to return the result.
    *
    * @param { string } nic - NIC name.
-   * @returns { Promise<long> } Promise used to return the total uplink traffic (in bytes) of the specified NIC from the
-   *     last startup to the time when the API is called.
+   * @returns { Promise<long> } Promise used to return the total uplink traffic of the specified network card from the
+   *     last boot to the time of interface call (in bytes).
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -157,8 +157,8 @@ declare namespace statistics {
    * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
    * > Otherwise, error code 2103012 will be thrown.
    *
-   * @returns { Promise<long> } Promise used to return the total downlink traffic (in bytes) of the specified NIC from
-   *     the last startup to the time when the API is called.
+   * @returns { Promise<long> } Promise used to return the total downlink traffic of the specified network card from the
+   *     last boot to the time of interface call (in bytes).
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -202,8 +202,8 @@ declare namespace statistics {
    * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
    * > Otherwise, error code 2103012 will be thrown.
    *
-   * @returns { Promise<long> } Promise used to return the total uplink traffic (in bytes) consumed on the cellular
-   *     network since the last startup to the current moment.
+   * @returns { Promise<long> } Promise used to return the total uplink traffic consumed on the cellular network from
+   *     the last boot to now (in bytes).
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -216,8 +216,8 @@ declare namespace statistics {
   function getCellularTxBytes(): Promise<long>;
 
   /**
-   * Obtains the total downlink traffic (in bytes) of all NICs from the last startup to the time when this API is
-   * called. This API uses an asynchronous callback to return the result.
+   * Obtains the total downlink traffic of all network cards from the last boot to the time of interface call (in
+   * bytes). This API uses an asynchronous callback to return the result.
    *
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the traffic data is successfully
    *     obtained, **error** is **undefined**; otherwise, it is an error object.
@@ -236,8 +236,8 @@ declare namespace statistics {
    * Obtains the total downlink traffic (in bytes) of all NICs from the last startup to the time when this API is
    * called. This API uses a promise to return the result.
    *
-   * @returns { Promise<long> } Promise used to return the total downlink traffic (in bytes) of all NICs from the last
-   *     startup to the current moment.
+   * @returns { Promise<long> } Promise used to return the total downlink traffic of all network cards from the last
+   *     boot to the present (in bytes).
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -270,7 +270,7 @@ declare namespace statistics {
    * Obtains the total uplink traffic (in bytes) of all NICs from the last startup to the time when this API is called.
    * This API uses a promise to return the result.
    *
-   * @returns { Promise<long> } Promise used to return the real-time uplink traffic (in bytes) of all NICs.
+   * @returns { Promise<long> } Promise used to return the real-time uplink traffic of all network cards (in bytes).
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -318,8 +318,8 @@ declare namespace statistics {
    *
    * @permission ohos.permission.GET_NETWORK_STATS [since 26.0.0]
    * @param { int } uid - Application UID.
-   * @returns { Promise<long> } Promise used to return the total downlink traffic (in bytes) of the specified
-   *     application from the last startup to the current moment.
+   * @returns { Promise<long> } Promise used to return the total downlink traffic of the specified application from the
+   *     last boot to the present (in bytes).
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -369,8 +369,8 @@ declare namespace statistics {
    *
    * @permission ohos.permission.GET_NETWORK_STATS [since 26.0.0]
    * @param { int } uid - Application UID.
-   * @returns { Promise<long> } Promise used to return the total uplink traffic (in bytes) of the specified application
-   *     from the last startup to the time when the API is called.
+   * @returns { Promise<long> } Promise used to return the total uplink traffic of the specified application from the
+   *     last boot to the time of interface call (in bytes).
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -421,10 +421,11 @@ declare namespace statistics {
    * Unsubscribes from traffic change events. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_STATS
-   * @param { 'netStatsChange' } type - Event type. This field has a fixed value of **netStatsChange**.
-   * @param { Callback<{ iface: string, uid?: int }> } callback - Callback invoked when the traffic
-   *     changes. [since 10 - 10]
-   * @param { Callback<NetStatsChangeInfo> } callback - Callback invoked when the traffic changes. [since 11]
+   * @param { 'netStatsChange' } type - Unsubscribe event, fixed to **'netStatsChange'**.
+   * @param { Callback<{ iface: string, uid?: int }> } callback - Callback invoked when the traffic changes. [since 10 -
+   *     10]
+   * @param { Callback<NetStatsChangeInfo> } callback - Callback for the netStatsChange event, which is registered
+   *     through **on('netStatsChange')**. [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -452,8 +453,11 @@ declare namespace statistics {
   function offNetStatsChange(callback?: Callback<NetStatsChangeInfo>): void;
 
   /**
-   * Obtains the historical data traffic of the specified NIC. This API uses an asynchronous callback to return the
-   * result.
+   * Obtains the historical traffic information of the specified network interface. This API uses an asynchronous
+   * callback to return the result. Based on the network interface name and time range specified in **ifaceInfo**, the
+   * system reads the transmitted and received bytes and packets of the network interface in the corresponding period
+   * from the statistics database and returns them through the callback. If the network interface name is invalid or no
+   * statistics are available in the period, all-zero statistics are returned.
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { IfaceInfo } ifaceInfo - NIC information. For details, see [IfaceInfo]{@link statistics.IfaceInfo}.
@@ -475,15 +479,16 @@ declare namespace statistics {
   function getTrafficStatsByIface(ifaceInfo: IfaceInfo, callback: AsyncCallback<NetStatsInfo>): void;
 
   /**
-   * Obtains the historical data traffic of the specified NIC. This API uses a promise to return the result.
-   *
-   * | Name   | Type                     | Mandatory| Description                                               |
-   * | --------- | ------------------------- | ---- | --------------------------------------------------- |
-   * | ifaceInfo | [IfaceInfo]{@link statistics.IfaceInfo} | Yes  | NIC information. For details, see [IfaceInfo]{@link statistics.IfaceInfo}.|
+   * Obtains the historical traffic information of the specified network interface. This API uses a promise to return
+   * the result. Based on the network interface name and time range specified in **ifaceInfo**, the system reads the
+   * transmitted and received bytes and packets of the network interface in the corresponding period from the statistics
+   * database and returns them in a promise. If the network interface name is invalid or no statistics are available in
+   * the period, all-zero statistics are returned.
    *
    * @permission ohos.permission.GET_NETWORK_STATS
-   * @param { IfaceInfo } ifaceInfo - Detailed query content. See {@link IfaceInfo}.
-   * @returns { Promise<NetStatsInfo> } The promise returned by the function.
+   * @param { IfaceInfo } ifaceInfo - NIC information. For details, see [IfaceInfo]{@link statistics.IfaceInfo}.
+   * @returns { Promise<NetStatsInfo> } Promise used to return the historical traffic information of the network
+   *     interface.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -499,14 +504,17 @@ declare namespace statistics {
   function getTrafficStatsByIface(ifaceInfo: IfaceInfo): Promise<NetStatsInfo>;
 
   /**
-   * Obtains the historical data traffic of the specified application. This API uses an asynchronous callback to return
-   * the result.
+   * Obtains the historical traffic information of the specified application. This API uses an asynchronous callback to
+   * return the result. Based on the application UID, network interface, and time range specified in **uidInfo**, the
+   * system reads the transmitted and received bytes and packets of the application in the corresponding period from the
+   * statistics database and returns them through the callback. If the application has no traffic records in the
+   * specified period, all-zero statistics are returned.
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { UidInfo } uidInfo - Application information. For details, see [UidInfo]{@link statistics.UidInfo}.
-   * @param { AsyncCallback<NetStatsInfo> } callback - Callback used to return the result. If the operation is
-   *     successful, **error** is **undefined** and **statsInfo** is the historical traffic statistics of the
-   *     application. Otherwise, **error** is an error object.
+   * @param { AsyncCallback<NetStatsInfo> } callback - Callback used to return the application historical traffic
+   *     information. If the operation is successful, **err** is **undefined** and **data** is the obtained application
+   *     historical traffic information. Otherwise, err is an error object.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -522,12 +530,15 @@ declare namespace statistics {
   function getTrafficStatsByUid(uidInfo: UidInfo, callback: AsyncCallback<NetStatsInfo>): void;
 
   /**
-   * Obtains the historical data traffic of the specified application. This API uses a promise to return the result.
+   * Obtains the historical traffic information of the specified application. This API uses a promise to return the
+   * result. Based on the application UID, network interface, and time range specified in **uidInfo**, the system reads
+   * the transmitted and received bytes and packet counts of the application within the corresponding period from the
+   * statistics database and returns them in a promise. If the application has no traffic records within the specified
+   * period, all-zero statistics are returned.
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { UidInfo } uidInfo - Application information. For details, see [UidInfo]{@link statistics.UidInfo}.
-   * @returns { Promise<NetStatsInfo> } Promise used to return the result, which is the historical traffic statistics of
-   *     the specified NIC.
+   * @returns { Promise<NetStatsInfo> } Promise used to return the application historical traffic information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -573,7 +584,7 @@ declare namespace statistics {
    * > be queried after the socket is closed.
    *
    * @param { int } sockfd - FD of the socket to query.
-   * @returns { Promise<long> } Promise used to return the downlink traffic (in bytes) of the socket.
+   * @returns { Promise<long> } Promise used to return the downlink traffic of the socket (in bytes).
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
@@ -597,7 +608,7 @@ declare namespace statistics {
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the uplink traffic of the socket
    *     is obtained successfully, **error** is **undefined**; otherwise, it is an error object.
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
@@ -615,9 +626,9 @@ declare namespace statistics {
    * > be queried after the socket is closed.
    *
    * @param { int } sockfd - FD of the socket to query.
-   * @returns { Promise<long> } Promise used to return the uplink traffic (in bytes) of the socket.
+   * @returns { Promise<long> } Promise used to return the uplink traffic of the socket (in bytes).
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
@@ -627,8 +638,11 @@ declare namespace statistics {
   function getSockfdTxBytes(sockfd: int): Promise<long>;
 
   /**
-   * Sets traffic calibration data. You can use this API to set traffic data during traffic calibration. This API uses a
-   * promise to return the result.
+   * Sets traffic calibration data. During traffic calibration, you can use this API to set the related traffic data.
+   * The API writes the remaining traffic (**remainTraffic**) and the total traffic of the plan (**totalTraffic**)
+   * corresponding to **simId** into the system traffic statistics database for subsequent traffic statistics and
+   * calibration calculation. The calibration result takes effect on the data returned by subsequent query APIs. This
+   * API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { int } simId - SIM card ID.
@@ -730,60 +744,57 @@ declare namespace statistics {
   function updateIfacesStats(iface: string, start: int, end: int, stats: NetStatsInfo): Promise<void>;
 
   /**
-   * Obtains the total downlink traffic (in bytes) of each network bearer type from the
-   * last startup to the time when this API is called.
+   * Obtains the total downlink traffic (in bytes) of each network bearer type from the last startup to the time when
+   * this API is called.
    *
    * > **NOTE**
    * >
    * > - Currently, only the downlink traffic of the cellular and Wi-Fi bearer types can
-   * be obtained.
+   * >   be obtained.
    * > - The sum of the traffic of each bearer type may not be equal to the result of
-   * [getAllRxBytes]{@link statistics.getAllRxBytes}. The latter counts all NICs and
-   * includes interface traffic of bearer types other than cellular and Wi-Fi.
+   * >   [getAllRxBytes]{@link statistics.getAllRxBytes}. The latter counts all NICs and includes interface traffic of
+   * >   bearer types other than cellular and Wi-Fi.
    *
-   * @returns { Promise<NetBytesByBearType> } Promise used to return the downlink
-   *     traffic indexed by bearer type.
+   * @returns { Promise<NetBytesByBearType> } Promise used to return the downlink traffic indexed by bearer type.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getRxBytesByBearType(): Promise<NetBytesByBearType>;
 
   /**
-   * Obtains the total uplink traffic (in bytes) of each network bearer type from the
-   * last startup to the time when this API is called.
+   * Obtains the total uplink traffic (in bytes) of each network bearer type from the last startup to the time when this
+   * API is called.
    *
    * > **NOTE**
    * >
    * > - Currently, only the uplink traffic of the cellular and Wi-Fi bearer types can
-   *   be obtained.
+   * >   be obtained.
    * > - The sum of the traffic of each bearer type may not be equal to the result of
-   *   [getAllTxBytes]{@link statistics.getAllTxBytes}. The latter counts all NICs and
-   *   includes interface traffic of bearer types other than cellular and Wi-Fi.
+   * >   [getAllTxBytes]{@link statistics.getAllTxBytes}. The latter counts all NICs and
+   * >   includes interface traffic of bearer types other than cellular and Wi-Fi.
    *
-   * @returns { Promise<NetBytesByBearType> } Promise used to return the uplink
-   *     traffic indexed by bearer type.
+   * @returns { Promise<NetBytesByBearType> } Promise used to return the uplink traffic indexed by bearer type.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getTxBytesByBearType(): Promise<NetBytesByBearType>;
 
   /**
-   * A collection of traffic (in bytes) indexed by
-   * [NetBearType]{@link statistics.NetBearType}.
+   * A collection of traffic (in bytes) indexed by [NetBearType]{@link statistics.NetBearType}.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export type NetBytesByBearType = Partial<Record<NetBearType, long>>;
 
@@ -837,7 +848,7 @@ declare namespace statistics {
    */
   export interface UidInfo {
     /**
-     * NIC information, including the NIC name and query time range.
+     * Network interface and time parameter information to query.
      *
      * @syscap SystemCapability.Communication.NetManager.Core
      * @systemapi Hide this for inner system use.
@@ -913,7 +924,7 @@ declare namespace statistics {
   }
 
   /**
-   * Defines the NIC status and usage of an application.
+   * NIC name and application UID reported in a traffic change event.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
@@ -942,37 +953,12 @@ declare namespace statistics {
   }
 
   /**
-   * An {@link NetStatsInfo} array with start time and end time.
+   * Defines the historical traffic statistics of the specified application.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
    */
-  export type NetStatsInfoSequence = {
-    /**
-     * Start time for querying traffic.
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     */
-    startTime: int;
-    /**
-     * End time for querying traffic.
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     */
-    endTime: int;
-    /**
-     * Detailed information of statistics.
-     * @type { NetStatsInfo }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     */
-    info: NetStatsInfo;
-  }[]
+  export type NetStatsInfoSequence = {  }[]
 
   /**
    * Array of {@link NetStatsInfoSequenceItem}.
@@ -1018,6 +1004,7 @@ declare namespace statistics {
   }
 
   /**
+   * Defines the historical traffic statistics of all applications.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
@@ -1093,14 +1080,16 @@ declare namespace statistics {
   }
 
   /**
-   * Obtains the traffic statistics of all applications on the specified network within the specified period. This API
-   * uses a promise to return the result.
+   * Obtains the traffic usage details of all applications on the specified network within the specified period. This
+   * API uses a promise to return the result. Based on the network type, time range, and **simId** in **networkInfo**,
+   * the system aggregates the historical traffic data of each application (by UID) on the network from the statistics
+   * database and returns **UidNetStatsInfo** in a promise. The **simId** takes effect only when the network type is
+   * cellular (**BEARER_CELLULAR**).
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { NetworkInfo } networkInfo - Network information. For details, see
    *     [NetworkInfo]{@link statistics.NetworkInfo}.
-   * @returns { Promise<UidNetStatsInfo> } Promise used to return the result, which is the historical traffic statistics
-   *     of all applications.
+   * @returns { Promise<UidNetStatsInfo> } Promise used to return all application historical traffic information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -1115,15 +1104,18 @@ declare namespace statistics {
    */
   function getTrafficStatsByNetwork(networkInfo: NetworkInfo): Promise<UidNetStatsInfo>;
   /**
-   * Obtains the traffic statistics of the specified application on the specified network within the specified period.
-   * This method uses a promise to return the result.
+   * Obtains the traffic usage details of the application on the specified network within the specified period. This API
+   * uses a promise to return the result. Based on the UID and the network type, time range, and **simId** in
+   * **networkInfo**, the system reads the historical traffic data of the application on the specified network from the
+   * statistics database, returns a **NetStatsInfoSequence** sequence by time period, and returns it in a promise. The
+   * **simId** takes effect only when the network type is cellular (**BEARER_CELLULAR**).
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { int } uid - Application UID.
    * @param { NetworkInfo } networkInfo - Network information. For details, see
    *     [NetworkInfo]{@link statistics.NetworkInfo}.
-   * @returns { Promise<NetStatsInfoSequence> } Promise used to return the result, which is the historical traffic
-   *     statistics of the application.
+   * @returns { Promise<NetStatsInfoSequence> } Promise used to return the application historical traffic statistics
+   *     information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -1298,6 +1290,7 @@ declare namespace statistics {
      */
     info: NetStatsInfo;
   }[];
+
 
 }
 

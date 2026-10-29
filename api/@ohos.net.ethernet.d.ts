@@ -40,7 +40,7 @@ declare namespace ethernet {
   type HttpProxy = connection.HttpProxy;
 
   /**
-   * Obtains the information about a specified network interface. This API uses an asynchronous callback to return the
+   * Obtains the configuration of the specified network interface. This API uses an asynchronous callback to return the
    * result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
@@ -56,18 +56,18 @@ declare namespace ethernet {
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 9 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
   function getIfaceConfig(iface: string, callback: AsyncCallback<InterfaceConfiguration>): void;
 
   /**
-   * Obtains the information about a specified network interface. This API uses a promise to return the result.
+   * Obtains the configuration of the specified network interface. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { string } iface - Network interface.
-   * @returns { Promise<InterfaceConfiguration> } Promise used to return the result.
+   * @returns { Promise<InterfaceConfiguration> } Promise used to return the interface information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 9 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
@@ -77,14 +77,14 @@ declare namespace ethernet {
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 9 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
   function getIfaceConfig(iface: string): Promise<InterfaceConfiguration>;
 
   /**
-   * Sets the network interface configuration information. This API uses an asynchronous callback to return the result.
+   * Sets the network interface configuration. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { string } iface - Interface name.
@@ -94,7 +94,7 @@ declare namespace ethernet {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201004 - Invalid Ethernet profile.
@@ -109,17 +109,16 @@ declare namespace ethernet {
   function setIfaceConfig(iface: string, ic: InterfaceConfiguration, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets the network interface configuration information. This API uses a promise to return the result.
+   * Sets the network interface configuration. This API uses a promise to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { string } iface - Interface name.
    * @param { InterfaceConfiguration } ic - Network interface configuration to set.
-   * @returns { Promise<void> } Promise used to return the result. If the operation is successful, the return result is
-   *     empty. If the operation fails, an error code is returned.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201004 - Invalid Ethernet profile.
@@ -134,7 +133,7 @@ declare namespace ethernet {
   function setIfaceConfig(iface: string, ic: InterfaceConfiguration): Promise<void>;
 
   /**
-   * Checks whether the interface is activated. This API uses an asynchronous callback to return the result.
+   * Checks whether the interface is active. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { string } iface - Interface name. If this parameter is left empty, the API checks for any active network
@@ -157,14 +156,13 @@ declare namespace ethernet {
   function isIfaceActive(iface: string, callback: AsyncCallback<int>): void;
 
   /**
-   * Checks whether the interface is activated. This API uses a promise to return the result.
+   * Checks whether the interface is active. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { string } iface - Interface name. If this parameter is left empty, the API checks for any active network
    *     interface.
-   * @returns { Promise<int> } Promise used to return the result. The value **1** means that the network interface is
-   *     active, **0** means that the network interface is inactive, and any other value means that an error has
-   *     occurred.
+   * @returns { Promise<int> } Promise used to return the result. 1 if activated; 0 if not activated; otherwise, an
+   *     error code indicating the failure to obtain the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -180,7 +178,7 @@ declare namespace ethernet {
   function isIfaceActive(iface: string): Promise<int>;
 
   /**
-   * Obtains the active network interface. This API uses an asynchronous callback to return the result.
+   * Obtains the active network interfaces. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<Array<string>> } callback - Callback used to return the result.
@@ -196,10 +194,11 @@ declare namespace ethernet {
   function getAllActiveIfaces(callback: AsyncCallback<Array<string>>): void;
 
   /**
-   * Obtains the active network interface. This API uses a promise to return the result.
+   * Obtains the active network interfaces. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
-   * @returns { Promise<Array<string>> } Promise used to return the result.
+   * @returns { Promise<Array<string>> } Promise used to return the result. The return value is the corresponding API
+   *     name.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
@@ -212,19 +211,20 @@ declare namespace ethernet {
   function getAllActiveIfaces(): Promise<Array<string>>;
 
   /**
-   * Registers the observer for NIC hot swap events. This API uses an asynchronous callback to return the result.
+   * Registers a listener for network card hot-swap events. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { 'interfaceStateChange' } type - Event type. The value is **interfaceStateChange**.
-   * @param { Callback<{ iface: string, active: boolean }> } callback - Callback used to return the
-   *     result. [since 10 - 10]
-   * @param { Callback<InterfaceStateInfo> } callback - Callback used to return the result. [since 11]
+   * @param { Callback<{ iface: string, active: boolean }> } callback - Callback used to return the result. [since 10 -
+   *     10]
+   * @param { Callback<InterfaceStateInfo> } callback - Callback invoked to return the Ethernet card status information.
+   *     [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 10 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 10 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 10 dynamic
    */
   function on(type: 'interfaceStateChange', callback: Callback<InterfaceStateInfo>): void;
@@ -233,31 +233,33 @@ declare namespace ethernet {
    * Register a callback for the ethernet interface active state change.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
-   * @param { Callback<InterfaceStateInfo> } callback - Including iface Indicates the ethernet interface,
-   *     and active Indicates whether the interface is active.
+   * @param { Callback<InterfaceStateInfo> } callback - Including iface Indicates the ethernet interface, and active
+   *     Indicates whether the interface is active.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 26.0.1 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 26.0.1 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 26.0.1 static
    */
   function onInterfaceStateChange(callback: Callback<InterfaceStateInfo>): void;
 
   /**
-   * Unregisters the observer for NIC hot swap events. This API uses an asynchronous callback to return the result.
+   * Unregisters the listener for network card hot-swap events. This API uses an asynchronous callback to return the
+   * result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { 'interfaceStateChange' } type - Event type. The value is **interfaceStateChange**.
-   * @param { Callback<{ iface: string, active: boolean }> } callback - Callback used to return the
-   *     result. [since 10 - 10]
-   * @param { Callback<InterfaceStateInfo> } callback - Callback used to return the result. [since 11]
+   * @param { Callback<{ iface: string, active: boolean }> } callback - Callback used to return the result. [since 10 -
+   *     10]
+   * @param { Callback<InterfaceStateInfo> } callback - Callback invoked to return the Ethernet card status information.
+   *     [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 10 - 26.0.1]
    * @throws { BusinessError } 401 - Parameter error.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 10 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 10 dynamic
    */
   function off(type: 'interfaceStateChange', callback?: Callback<InterfaceStateInfo>): void;
@@ -266,24 +268,25 @@ declare namespace ethernet {
    * Unregister a callback from the ethernet interface active state change.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
-   * @param { Callback<InterfaceStateInfo> } [callback] - Including iface Indicates the ethernet interface,
-   *     and active Indicates whether the interface is active.
+   * @param { Callback<InterfaceStateInfo> } [callback] - Including iface Indicates the ethernet interface, and active
+   *     Indicates whether the interface is active.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.[since 26.0.1 - 26.0.1]
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 26.0.1 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 26.0.1 static
    */
   function offInterfaceStateChange(callback?: Callback<InterfaceStateInfo>): void;
 
   /**
-   * Obtains the names and MAC addresses of all Ethernet NICs. This API uses a promise to return the result.
+   * Obtains the names of all Ethernet NICs and the MAC address information of the corresponding NICs. This API uses a
+   * promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_ETHERNET_LOCAL_MAC
    *
    * @permission ohos.permission.GET_ETHERNET_LOCAL_MAC
-   * @returns { Promise<Array<MacAddressInfo>> } Promise used to return the result.
+   * @returns { Promise<Array<MacAddressInfo>> } Promise used to return the names of all Ethernet NICs and the
+   *     corresponding MAC address information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
    * @throws { BusinessError } 2201005 - Device information does not exist.
@@ -294,8 +297,8 @@ declare namespace ethernet {
   function getMacAddress(): Promise<Array<MacAddressInfo>>;
 
   /**
-   * Obtains the device information (such as the vendor name, product name, and maximum connection rate) of the local
-   * Ethernet NIC. This API uses a promise to return the result.
+   * Obtains the device information of the local Ethernet card (such as vendor name, product name, maximum connection
+   * rate, etc.). This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<Array<EthernetDeviceInfos>> } Promise used to return the result. If the operation is successful,
@@ -305,7 +308,7 @@ declare namespace ethernet {
    * @throws { BusinessError } 2201005 - Device information does not exist.
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 20 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 20 dynamic
    * @since 26.0.1 static
    */
@@ -367,7 +370,7 @@ declare namespace ethernet {
    *
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 9 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 9 dynamic
    * @since 26.0.1 static
    */
@@ -377,7 +380,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -389,7 +392,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -402,7 +405,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -415,7 +418,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -428,7 +431,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -441,7 +444,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 9 dynamic
      * @since 26.0.1 static
      */
@@ -452,7 +455,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 9 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 10 dynamic
      * @since 26.0.1 static
      */
@@ -548,7 +551,7 @@ declare namespace ethernet {
    */
   export interface MacAddressInfo {
     /**
-     * Name of the Ethernet NIC.
+     * Ethernet NIC name, for example, "eth0". It can be obtained through [getMacAddress]{@link ethernet.getMacAddress}.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @since 14 dynamic
@@ -557,7 +560,7 @@ declare namespace ethernet {
     iface: string;
 
     /**
-     * MAC address of the Ethernet NIC.
+     * MAC address information of the Ethernet NIC, in the format of "XX:XX:XX:XX:XX:XX".
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @since 14 dynamic
@@ -571,7 +574,7 @@ declare namespace ethernet {
    *
    * @syscap SystemCapability.Communication.NetManager.Ethernet
    * @systemapi [since 20 - 26.0.1]
-   * @publicapi [since 26.2.0]
+   * @publicapi [since 26.1.0]
    * @since 20 dynamic
    * @since 26.0.1 static
    */
@@ -581,7 +584,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -592,7 +595,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -603,7 +606,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -614,7 +617,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -625,7 +628,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -636,7 +639,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -647,7 +650,7 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @since 20 dynamic
      * @since 26.0.1 static
      */
@@ -658,9 +661,9 @@ declare namespace ethernet {
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @systemapi [since 20 - 26.0.1]
-     * @publicapi [since 26.2.0]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     linkId: string;
   }

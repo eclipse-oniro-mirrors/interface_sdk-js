@@ -65,7 +65,7 @@ declare namespace networkSecurity {
    */
   export interface CertBlob {
     /**
-     * Certificate type.
+     * Certificate encoding type.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 11 dynamic
@@ -87,10 +87,18 @@ declare namespace networkSecurity {
    * Verifies the certificate passed by the application using the preset CA certificate and the CA certificate installed
    * by the user in the certificate management. This API uses a promise to return the result.
    *
+   * > **NOTE**
+   * >
+   * > The preceding error codes indicate errors that may occur during certificate verification.
+   * >
+   * > **NOTE**
+   * >
+   * > Be sure to replace the certificate data in the example with the actual certificate data.
+   *
    * @param { CertBlob } cert - Certificate to be verified.
-   * @param { CertBlob } [caCert] - Custom CA certificate.
-   * @returns { Promise<int> } Promise used to return the result. The value **0** indicates that the certificate
-   *     verification is successful, and a non-0 value indicates that the verification has failed.
+   * @param { CertBlob } [caCert] - Custom CA certificate passed in.
+   * @returns { Promise<int> } Promise used to return a number indicating the certificate verification result. The value
+   *     **0** indicates that the certificate verification is successful; otherwise, the verification fails.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2305001 - Unspecified error.
    * @throws { BusinessError } 2305002 - Unable to get issuer certificate.
@@ -119,10 +127,19 @@ declare namespace networkSecurity {
    * Verifies the certificate passed by the application using the preset CA certificate and the CA certificate installed
    * by the user in the certificate management. This API returns the result synchronously.
    *
+   * > **NOTE**
+   * >
+   * > The preceding error codes indicate errors that may occur during certificate verification.
+   * >
+   * > **NOTE**
+   * >
+   * > Be sure to replace the certificate data in the example with the actual certificate data.
+   *
    * @param { CertBlob } cert - Certificate to be verified.
-   * @param { CertBlob } [caCert] - Custom CA certificate.
-   * @returns { int } Certificate verification result. The value **0** indicates that the certificate verification is
-   *     successful, and a non-0 value indicates that the verification has failed.
+   * @param { CertBlob } [caCert] - Custom CA certificate passed in.
+   * @returns { int } Indicates the result of certificate verification. If the certificate verification succeeds, **0**
+   *     is returned; otherwise, the verification fails.
+   *
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2305001 - Unspecified error.
    * @throws { BusinessError } 2305002 - Unable to get issuer certificate.
@@ -148,13 +165,27 @@ declare namespace networkSecurity {
   export function certVerificationSync(cert: CertBlob, caCert?: CertBlob): int;
 
   /**
-   * Verifies the server certificate chain and returns a sorted chain.
+   * Passes in an array of certificates, verifies the certificate chain, and builds a sorted certificate chain. The
+   * system uses the preset CA certificates in certificate management and the CA certificates installed by users to
+   * verify the passed-in certificates. This API uses a promise to return the result asynchronously.
    *
-   * @param { CertBlob[] } cert - Certificate chain to be verified.
-   * @param { CertBlob } [caCert] - Incoming custom CA cert.
-   * @param { string } [hostname] - Hostname to be verified.
-   * @returns { Promise<CertBlob[]> } Returns a promise that resolves to the sorted certificate chain
-   *     (ordered from leaf to root) if verification succeeds.
+   * > **NOTE**
+   * >
+   * > These error codes correspond to various failures in the certificate verification process.
+   * >
+   * > **NOTE**
+   * >
+   * > Be sure to replace the certificate data in the example with the actual certificate content.
+   *
+   * @param { CertBlob[] } cert - Array of certificates to verify. The first element must be the end-entity certificate,
+   *     and the remaining elements are intermediate certificates.
+   * @param { CertBlob } [caCert] - Custom CA certificate. If this parameter is not passed in, the preset CA
+   *     certificates of the system are used.
+   * @param { string } [hostname] - Host name to verify, used to check whether the host name in the certificate matches.
+   *     If this parameter is not passed in, host name verification is skipped.
+   * @returns { Promise<CertBlob[]> } Promise used to return the sorted certificate chain array, in the order from the
+   *     leaf node to the root node.
+   *
    * @throws { BusinessError } 2305001 - Unspecified error.
    * @throws { BusinessError } 2305002 - Unable to get issuer certificate.
    * @throws { BusinessError } 2305004 - Unable to decrypt certificate signature.

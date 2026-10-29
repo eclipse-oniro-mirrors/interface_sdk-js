@@ -14,8 +14,8 @@
  */
 
 /**
-  * @file VPN扩展上下文
-  * @kit NetworkKit
+ * @file VPN Extension Context
+ * @kit NetworkKit
  */
 
 import ExtensionContext from './ExtensionContext';
