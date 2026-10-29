@@ -20,11 +20,11 @@
  *
  * ###### 属性
  *
- * 不支持[通用属性]{@link ./@internal/component/ets/common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  *
  * ###### 事件
  *
- * 不支持[通用事件]{@link ./@internal/component/ets/common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @file Defines the fullScreen launch component
  * @kit ArkUI
@@ -51,8 +51,8 @@ import { Callback, ErrorCallback } from '@ohos.base';
  * > - 当需要在该组件中实现可嵌入式运行的原子化服务，
  * > 必须继承自[EmbeddableUIAbility]{@link @ohos.app.ability.EmbeddableUIAbility:EmbeddableUIAbility}。否则，系统无法保证原子化服务功能正常。
  * >
- * > - 如果FullScreenLaunchComponent设置[通用属性]{@link ./@internal/component/ets/common}和
- * > [通用事件]{@link ./@internal/component/ets/common}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到
+ * > - 如果FullScreenLaunchComponent设置[通用属性]{@link CommonMethod}和
+ * > [通用事件]{@link CommonMethod}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到
  * > FullScreenLaunchComponent本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议FullScreenLaunchComponent设置通用属性和通用事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

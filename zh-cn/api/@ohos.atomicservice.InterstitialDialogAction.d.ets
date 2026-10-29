@@ -19,11 +19,11 @@
  * 
  * ###### 属性
  * 
- * 不支持[通用属性]{@link ./@internal/component/ets/common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  * 
  * ###### 事件
  * 
- * 不支持[通用事件]{@link ./@internal/component/ets/common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @file This section describes the interfaces used by InterstitialDialogAction
  * @kit ArkUI
