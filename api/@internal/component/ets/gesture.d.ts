@@ -1656,7 +1656,7 @@ declare class PanGestureOptions {
    *     **PanDirection.All**
    *     <br>**distance**: minimum pan distance to trigger the gesture, in vp.<br>Default value: **8** for the stylus
    *     and **5** for other input sources.
-   *     <br>**NOTE**<br>If a pan gesture and a [tab]{@link ./tabs} swipe occur at the same time, set **distance** to
+   *     <br>**NOTE**<br>If a pan gesture and a [tab]{@link @global:Tabs} swipe occur at the same time, set **distance** to
    *     **1** to make the gesture more easily recognizable.<br>If the value specified is less than **0**, the default
    *     value is used.<br>To avoid slow response and lagging during scrolling, set a reasonable pan distance.<br>When
    *     the [scale]{@link CommonMethod#scale(value: ScaleOptions)} attribute is applied to the component, the actual
@@ -1686,7 +1686,7 @@ declare class PanGestureOptions {
    * [Reducing the Pan Distance for Gesture Recognition](https://developer.huawei.com/consumer/en/doc/best-practices/bpta-application-latency-optimization-cases#section1116134115286).
    *
    * @param { number } value - Minimum pan distance to trigger the gesture, in vp.<br>Default value: **8** for the
-   *     stylus and **5** for other input sources.<br>**NOTE**<br>If a pan gesture and a [tab]{@link ./tabs} swipe occur
+   *     stylus and **5** for other input sources.<br>**NOTE**<br>If a pan gesture and a [tab]{@link @global:Tabs} swipe occur
    *     at the same time, set **distance** to **1** to make the gesture more easily recognizable.<br>If the value
    *     specified is less than **0**, the default value is used.<br>To avoid slow response and lagging during
    *     scrolling, set a reasonable pan distance.<br>When the [scale]{@link CommonMethod#scale(value: ScaleOptions)}
@@ -1760,7 +1760,7 @@ interface PanGestureInterface extends GestureInterface<PanGestureInterface> {
    *     <br>Default value: **PanDirection.All**
    *     <br> - **distance**: minimum pan distance to trigger the gesture, in vp.<br>Value range: [0, +∞)
    *     <br>Default value: **8** for the stylus and **5** for other input sources.
-   *     <br>**NOTE**<br>If a pan gesture and a [tab]{@link ./tabs} swipe occur at the same time,
+   *     <br>**NOTE**<br>If a pan gesture and a [tab]{@link @global:Tabs} swipe occur at the same time,
    *     set **distance** to **1** to make the gesture more easily recognizable.<br>If the value specified is less
    *     than **0**, the default value is used.<br>When the [scale]{@link CommonMethod#scale(value: ScaleOptions)}
    *     attribute is applied to the component, the actual pan distance is adjusted based on the **scale** ratio.
@@ -2616,7 +2616,7 @@ interface PanGestureHandlerOptions extends BaseHandlerOptions {
    * 
    * **NOTE**
    * 
-   * If a pan gesture and a [tab]{@link ./tabs} swipe occur at the same time, set **distance** to **1** to make the 
+   * If a pan gesture and a [tab]{@link @global:Tabs} swipe occur at the same time, set **distance** to **1** to make the 
    * gesture more easily recognizable.
    * 
    * Value range: [0, +∞). If the value specified is less than 0, the default value is used.
@@ -2639,7 +2639,7 @@ interface PanGestureHandlerOptions extends BaseHandlerOptions {
    * 
    * **NOTE**
    * 
-   * If a pan gesture and a [tab]{@link ./tabs} swipe occur at the same time, set the **distanceMap** value of the 
+   * If a pan gesture and a [tab]{@link @global:Tabs} swipe occur at the same time, set the **distanceMap** value of the 
    * corresponding input source to **1** to make the gesture more easily recognizable.
    * 
    * Value range: [0, +∞). If the value specified is less than 0, the default value is used.
