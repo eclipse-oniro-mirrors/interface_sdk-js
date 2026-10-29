@@ -109,7 +109,7 @@ declare namespace calendarManager {
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported.
-	   * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
+     * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -131,7 +131,7 @@ declare namespace calendarManager {
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported.
-	   * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
+     * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -324,7 +324,7 @@ declare namespace calendarManager {
      * @param { Event } event - Event object.
      * @param { AsyncCallback<number> } callback - Callback used to return the event ID. The event ID is the unique
      * identifier of an event and is the auto-increment primary key of the database. If the value is less than 0,
-	   * the event creation fails; if the value is greater than 0, the event creation succeeds.
+	 * the event creation fails; if the value is greater than 0, the event creation succeeds.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
@@ -346,7 +346,7 @@ declare namespace calendarManager {
      * @param { Event[] } events - Array of Event objects.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
-	   * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
+     * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -365,7 +365,7 @@ declare namespace calendarManager {
      * @param { Event[] } events - Array of Event objects.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
-	   * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1] 
+     * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1] 
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
      *	   <br>2. null pointer error;
@@ -404,7 +404,7 @@ declare namespace calendarManager {
      *
      * @param { number[] } ids - Array of event IDs.
      * @returns { Promise<void> } Promise that returns no value.
-	   * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
+     * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
      */
@@ -581,24 +581,24 @@ declare namespace calendarManager {
     queryEventInstances(start: number, end: number, ids?: number[], eventKey?: (keyof Event)[]): Promise<Event[]>;
 
     /**
-	   * Obtains the event instance that meets the viewing or editing condition in a calendar based on the event ID. 
+     * Obtains the event instance that meets the viewing or editing condition in a calendar based on the event ID. 
      * This API uses a promise to return the result.
      * 
      * This API can be used to view and edit calendar events in the system calendar.
-	   * @param { number } id - The ID of the event to be edited.
-	   * @returns { Promise<void> } the promise returned by the function.
-	   * @throws { BusinessError } 23900001 - Parameter value error.
+     * @param { number } id - The ID of the event to be edited.
+     * @returns { Promise<void> } the promise returned by the function.
+     * @throws { BusinessError } 23900001 - Parameter value error.
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900005 - This event cannot be edited.
-	   * @syscap SystemCapability.Applications.CalendarData
-	   * @stagemodelonly
-	   * @atomicservice
+     * @syscap SystemCapability.Applications.CalendarData
+     * @stagemodelonly
+     * @atomicservice
      * @since 26.0.0
-	   */
+     */
 	  openEventEditPage(id: number): Promise<void>;
   }
 
- /**
+  /**
    * Describes the calendar account information.
    *
    * @syscap SystemCapability.Applications.CalendarData
@@ -723,7 +723,7 @@ declare namespace calendarManager {
     /**
      * Start time of an event. The value is a 13-digit timestamp. For an all-day event, this field is converted to 
      * timestamp corresponding to 00:00 of the specified date.
-* When [getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>} 
+     * When [getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>} 
      * is called to query events, this field is queried by default.
      *
      * @syscap SystemCapability.Applications.CalendarData
@@ -735,7 +735,7 @@ declare namespace calendarManager {
     /**
      * End time of an event. The value is a 13-digit timestamp. For an all-day event, this field is converted to 
      * timestamp corresponding to 00:00 of the specified date.
-* When [getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>} 
+     * When [getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>} 
      * is called to query events, this field is queried by default.
      *
      * @syscap SystemCapability.Applications.CalendarData
@@ -827,7 +827,8 @@ declare namespace calendarManager {
     identifier?: string;
 
     /**
-     * Unique ID of an event, with a maximum of 5,000 characters. If this parameter is not specified, the default value is null.
+     * Whether it is a lunar calendar event. The value true means that the event is a lunar calendar event, and false means the opposite. 
+     * The default value is false.
      *
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice
@@ -849,8 +850,8 @@ declare namespace calendarManager {
     instanceStartTime?: number;
 
     /**
-     * End time of an event instance, which must be a 13-digit timestamp. The default value is undefined. This parameter is not required when 
-	   * [addEvent()]{@link calendarManager.Calendar.addEvent(event: Event, callback: AsyncCallback<number>)}
+     * End time of an event instance, which must be a 13-digit timestamp. The default value is undefined. This parameter is not required when
+     * [addEvent()]{@link calendarManager.Calendar.addEvent(event: Event, callback: AsyncCallback<number>)}
      * or [addEvents()]{@link calendarManager.Calendar.addEvents(events: Event[], callback: AsyncCallback<void>)} is called to create an event or
      * [getEvents()]{@link calendarManager.Calendar.getEvents(eventFilter?: EventFilter, eventKey?: (keyof Event)[]): Promise<Event[]>}
      * is called to query an event.
