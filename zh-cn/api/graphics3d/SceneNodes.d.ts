@@ -569,6 +569,8 @@ export interface RectLight extends Light {
 /**
  * 相机类型，Camera继承自[Node]{@link Node}。
  *
+ * 场景中可包含多个相机，其中负责将场景渲染到屏幕（Component3D控件）上的相机称为主相机（main camera）。引擎遍历场景中的相机，将第一个enabled属性为true的相机作为主相机。主相机的渲染结果直接呈现给用户，其余相机可用于离屏渲染等用途。
+ *
  * @extends Node
  * @interface Camera
  * @syscap SystemCapability.ArkUi.Graphics3D
