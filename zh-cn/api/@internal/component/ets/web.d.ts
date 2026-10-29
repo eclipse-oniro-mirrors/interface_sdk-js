@@ -1794,6 +1794,12 @@ declare class FileSelectorParam {
   /**
    * 获取文件过滤类型。
    *
+   * > **说明：**
+   * >
+   * > 与getMimeTypes和getAcceptableFileTypes的对应关系：getAcceptType和getMimeTypes对应HTML input标签的accept属性，
+   * > getAcceptableFileTypes对应HTML showOpenFilePicker、showDirectoryPicker、showSaveFilePicker接口参数options的types属性。
+   * > 根据HTML规范，accept属性与types属性为互斥关系，不应同时使用。
+   *
    * @returns { Array<string> } 返回文件过滤类型数组，包含用于限制文件选择器可选文件范围的类型信息。元素为扩展名（如'.png'），对应HTML accept属性。
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -3149,6 +3155,10 @@ declare class WebContextMenuResult {
   /**
    * 执行重做操作，重新执行被撤销的操作。
    * 
+   * **配合关系：**
+   * - 与undo()方法配合使用，调用undo()后，可以通过redo()重新执行被撤销的操作。
+   * - 如果用户未执行过撤销操作，则无法使用redo()方法。
+   *
    * > **说明：**
    * >
    * > 完成操作后，应调用[closeContextMenu]{@link WebContextMenuResult#closeContextMenu}关闭菜单，未调用可能导致菜单资源未正确释放。
@@ -3161,6 +3171,10 @@ declare class WebContextMenuResult {
   /**
    * 执行撤销操作，撤销上一次的编辑操作。
    * 
+   * **配合关系：**
+   * - 与redo()方法配合使用，调用undo()后，可以通过redo()重新执行被撤销的操作。
+   * - 如果用户未执行过撤销操作，则无法使用redo()方法。
+   *
    * > **说明：**
    * >
    * > 完成操作后，应调用[closeContextMenu]{@link WebContextMenuResult#closeContextMenu}关闭菜单，未调用可能导致菜单资源未正确释放。

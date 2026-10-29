@@ -3433,6 +3433,13 @@ declare class WebContextMenuResult {
   /**
    * Performs the redo operation, which re-executes the revoked operation.
    *
+   * **Coordination**
+   *
+   * - Used together with the undo() method. After undo() is called, redo() can be used to re-execute the revoked
+   *   operation.
+   *
+   * - If the user has not performed an undo operation, the redo() method cannot be used.
+   *
    * > **NOTE**
    * >
    * > After the operation is complete, [closeContextMenu]{@link WebContextMenuResult#closeContextMenu} should be called
@@ -3445,6 +3452,13 @@ declare class WebContextMenuResult {
 
   /**
    * Performs the undo operation, which undoes the last editing operation.
+   *
+   * **Coordination**
+   *
+   * - Used together with the redo() method. After undo() is called, redo() can be used to re-execute the revoked
+   *   operation.
+   *
+   * - If the user has not performed an undo operation, the redo() method cannot be used.
    *
    * > **NOTE**
    * >
