@@ -224,6 +224,42 @@ declare namespace applicationManager {
   }
 
   /**
+   * 主窗口状态信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface MainWindowStates {
+    /**
+     * 应用进程ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    pid: number;
+
+    /**
+     * 应用包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bundleName: string;
+
+    /**
+     * 主窗口状态。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    state: WindowState;
+  }
+
+  /**
    * 应用窗口状态。
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -1911,6 +1947,22 @@ declare namespace applicationManager {
    * @since 26.0.0
    */
   function getApplicationWindowStates(admin: Want, bundleName: string, appIndex: number): Array<WindowStateInfo>;
+
+  /**
+   * 获取当前设备上所有主窗口的状态信息列表。state字段可用于过滤前台应用。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @returns { Array<MainWindowStates> } 返回主窗口状态信息的数组。
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllMainWindowStates(): Array<MainWindowStates>;
 
   /**
    * 为指定的应用申请备用资源豁免。申请成功后，即使设备进入待机模式，指定的应用程序也可以使用豁免的资源（如网络访问）。
