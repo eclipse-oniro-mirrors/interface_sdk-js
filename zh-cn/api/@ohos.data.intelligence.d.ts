@@ -33,6 +33,10 @@ declare namespace intelligence {
    *
    * @param { ModelConfig } config - 嵌入模型的配置信息。
    * @returns { Promise<TextEmbedding> } Promise对象，返回文本嵌入模型，用于文本向量化。
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
@@ -47,6 +51,10 @@ declare namespace intelligence {
    *
    * @param { ModelConfig } config - 嵌入模型的配置信息。
    * @returns { Promise<ImageEmbedding> } Promise对象，返回图像嵌入模型，用于图像向量化。
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
@@ -337,6 +345,10 @@ declare namespace intelligence {
    * @param { string } text - 待分块的文本。单个文本长度上限为100000个字符。超出长度时抛出异常。
    * @param { SplitConfig } config - 文本分块的配置信息。
    * @returns { Promise<Array<string>> } Promise对象，返回分块结果的数组。
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
