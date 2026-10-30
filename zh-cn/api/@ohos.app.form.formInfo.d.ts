@@ -480,6 +480,20 @@ declare namespace formInfo {
      * @since 26.1.0 dynamiconly
      */
     readonly enableTint?: boolean;
+
+    /**
+     * 表示卡片是否使能深浅色模式切换触发刷新，默认值为false。
+     *
+     * - true：使能。
+     * 
+     * - false：不使能。
+     * 
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**
@@ -1624,6 +1638,20 @@ declare namespace formInfo {
      * @since 23 static
      */
     readonly extraData?: Record<string, Object>;
+
+    /**
+     * 表示卡片是否使能深浅色模式切换触发刷新，默认值为false。
+     *
+     * - true：使能。
+     * 
+     * - false：不使能。
+     * 
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**
