@@ -11734,7 +11734,6 @@ declare namespace media {
      *
      * @param { 'error' } type - Event type, which is **'error'** in this case.
      * @param { ErrorCallback } callback - Callback invoked when the event is triggered.
-     * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 5400103 - IO error. Return by ErrorCallback.
      * @throws { BusinessError } 5400105 - Service died. Return by ErrorCallback.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11784,7 +11783,6 @@ declare namespace media {
      * When the application initiates multiple subscriptions to this event, the last subscription is applied.
      *
      * @param { ErrorCallback } callback - Callback invoked when the event is triggered.
-     * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 5400103 - IO error. Return by ErrorCallback.
      * @throws { BusinessError } 5400105 - Service died. Return by ErrorCallback.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
