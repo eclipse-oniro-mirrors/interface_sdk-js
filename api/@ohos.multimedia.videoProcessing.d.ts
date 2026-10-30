@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Provides the capability of video quality processing.
+ * @file Video Processing
  * @kit MediaKit
  */
 
