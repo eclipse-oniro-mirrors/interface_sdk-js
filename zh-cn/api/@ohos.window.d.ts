@@ -1104,6 +1104,15 @@ declare namespace window {
     layoutMeasureDuration: long;
 
     /**
+     * 当前帧的开始时间戳（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @since 22 dynamic
+     * @since 23 static
+     */
+    vsyncTimestamp: long;
+
+    /**
      * 渲染该帧并将其发送至显示子系统所需的总耗时（单位：纳秒）。
      *
      * @syscap SystemCapability.Window.SessionManager

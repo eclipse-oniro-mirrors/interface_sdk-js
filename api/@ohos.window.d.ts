@@ -1121,6 +1121,15 @@ declare namespace window {
     layoutMeasureDuration: long;
 
     /**
+     * Timestamp marking the start of the current frame, in nanoseconds.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @since 22 dynamic
+     * @since 23 static
+     */
+    vsyncTimestamp: long;
+
+    /**
      * Total duration required to render this frame and send it to the display subsystem.
      * Unit: nanosecond.
      *
