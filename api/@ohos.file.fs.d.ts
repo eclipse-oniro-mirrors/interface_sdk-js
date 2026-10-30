@@ -5245,6 +5245,7 @@ declare interface Stat {
    * @throws { BusinessError } 13900005 - I/O error
    * @throws { BusinessError } 13900042 - Unknown error
    * @syscap SystemCapability.FileManagement.File.FileIO
+   * @stagemodelonly
    * @since 26.1.0 dynamic
    */
   readonly blocks?: number;
